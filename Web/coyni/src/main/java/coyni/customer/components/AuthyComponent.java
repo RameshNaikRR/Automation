@@ -22,7 +22,7 @@ public class AuthyComponent extends  BrowserFunctions{
 
 	private static String prevCode = "";
 
-	public String getTwoFactorCode(String securityKey) {
+	private String getTwoFactorCode(String securityKey) {
 		Totp totp = new Totp(securityKey); // 2FA secret key
 		String twoFactorCode = totp.now(); // Generated 2FA code here
 		while (prevCode.equals(twoFactorCode)) {
@@ -47,15 +47,15 @@ public class AuthyComponent extends  BrowserFunctions{
 	}	
 	
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "autentication heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
 	}
 	
 	public void verifyMessage(String expMessage) {
-		new CommonFunctions().verifyLabelText(lblMessage, "sucess/failure message", expMessage);
+		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
 	
 	public void clickGoBack() {
-		click(lnkGoBack, "back option");
+		click(lnkGoBack, "Back Option");
 	}
 	
 }

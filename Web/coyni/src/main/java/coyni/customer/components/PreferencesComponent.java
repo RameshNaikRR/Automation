@@ -11,26 +11,26 @@ public class PreferencesComponent extends BrowserFunctions {
 	
 	private By drpDwnDefaultAccount =By.cssSelector("");
 	
-	private By txtLocalCurrency = By.cssSelector("");
+	private By txtLocalCurrency = By.cssSelector("");  //
 	
 	private By btnSave =By.cssSelector("");
 	
 	public void selectTimeZone(String timeZone) {
-		click(drpDwnTimeZone, "time zone dropDown");
-		new CommonFunctions().selectCustomDropDown(timeZone, "time Zone");
+		click(drpDwnTimeZone, "Time Zone DropDown");
+		new CommonFunctions().selectCustomDropDown(timeZone, "Time Zone");
 	}
 	
 	public void selectDefaultAccount(String defaultAccount) {
-		click(drpDwnDefaultAccount, "default account dropDown");
-		new CommonFunctions().selectCustomDropDown(defaultAccount, "default account");
+		click(drpDwnDefaultAccount, "Default Account DropDown");
+		new CommonFunctions().selectCustomDropDown(defaultAccount, "Default Account");
 	}
 	
 	public void verifyLocalCurrency(String expCurrency) {
-		new CommonFunctions().verifyLabelText(txtLocalCurrency, "local currency", expCurrency);
+		new CommonFunctions().verifyLabelText(txtLocalCurrency, "Local Currency", expCurrency);
 	}
 
    public void clickSave() {
-	   click(btnSave, "click save");
+	   click(btnSave, "Click Save");
    }
 
 

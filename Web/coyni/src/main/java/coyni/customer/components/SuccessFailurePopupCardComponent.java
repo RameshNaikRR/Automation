@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
-public class SuccessFailurePopupCard  extends BrowserFunctions{
+public class SuccessFailurePopupCardComponent  extends BrowserFunctions{
 
 	
 	private By imgSuccessFailure = By.cssSelector("");
@@ -16,19 +16,21 @@ public class SuccessFailurePopupCard  extends BrowserFunctions{
 	
 	private By heading = By.cssSelector("");
 	
+	
+	//DOUBT
 	public void verifyImage(String expImage) {
-		//
+		new CommonFunctions().verifyLabelText(imgSuccessFailure, "expImage", expImage);
 	}
 
 	public void verifyMessge(String expMessage) {
-		new CommonFunctions().verifyLabelText(lblMessage, "message", expMessage);
+		new CommonFunctions().verifyLabelText(lblMessage, "Message", expMessage);
 	}
 	
 	public void clickDone() {
-		   click(btnDone, "click done");
+		   click(btnDone, "Click Done");
 	   }
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "autentication heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
 	}
 
 

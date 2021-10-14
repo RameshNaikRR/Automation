@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class Paginator extends BrowserFunctions {
+public class PaginatorComponent extends BrowserFunctions {
 	
 	private By btnPrev = By.cssSelector("");
 	private By btnNext = By.cssSelector("");
@@ -37,8 +37,6 @@ public class Paginator extends BrowserFunctions {
 		if(!flag) {
 			ExtentTestManager.setFailMessageInReport("Unable to click on Page number "+pageNumber+" and available page numbers are "+ pagenumList);
 		}
-		ExtentTestManager.setInfoMessageInReport("Clicked on Page Number"+pageNumber);
-		
 	}
 	
 

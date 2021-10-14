@@ -26,50 +26,40 @@ public class CustomerMenuComponent extends BrowserFunctions {
 	private By lnkChangePassword = By.cssSelector("");
 	
 	public void verifyUserName(String userName) {
-		new CommonFunctions().verifyLabelText(lblUserName, "username",userName );
+		new CommonFunctions().verifyLabelText(lblUserName, "UserName",userName );
 	}
 	
 	public void verifyAccountStatus(String accStatus) {
-		new CommonFunctions().verifyLabelText(lblAccountStatus, "account status", accStatus);
+		new CommonFunctions().verifyLabelText(lblAccountStatus, "Account Status", accStatus);
 	}
 	
 	public void clickRequests() {
-		click(lnkRequests, "click requests");
+		click(lnkRequests, "Click Requests");
 	}
 	
 	public void clickUserDetails() {
-		click(lnkUserDetails, "click UserDetails");
+		click(lnkUserDetails, "Click UserDetails");
 	}
 
 	public void clickPaymentMethods() {
-		click(lnkPaymentMethods, "click paymentMethods");
+		click(lnkPaymentMethods, "Click PaymentMethods");
 	}
 	
 	public void clickPreferences() {
-		click(lnkPreferences, "click preferences");
+		click(lnkPreferences, "Click Preferences");
 	}
 	
 	public void clickAccountLimits() {
-		click(lnkAccountLimits, "click account limits");
+		click(lnkAccountLimits, "Click Account Limits");
 	}
 	
 	public void clickAgreements() {
-		click(lnkAgreements, "click agreements");
+		click(lnkAgreements, "Click Agreements");
 	}
 	
 	public void clickChangePassword() {
-		click(lnkChangePassword, "click change password");
+		click(lnkChangePassword, "Click Change Password");
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 

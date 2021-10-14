@@ -24,8 +24,8 @@ public class EntriesComponent extends BrowserFunctions {
 		new CommonFunctions().selectCustomDropDown(entries, "entries");
 	}
 	
-	public List<String> getEntriesText() {
-	return getDropDownOptions(optionsEntries, "Entries options");
+	public String getEntriesText() {
+	return getText(optionsEntries, "Options Entries");
 	}
 
 

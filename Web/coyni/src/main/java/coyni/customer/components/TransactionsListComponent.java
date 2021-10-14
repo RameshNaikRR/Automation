@@ -23,8 +23,19 @@ public class TransactionsListComponent extends BrowserFunctions {
 	return new EntriesComponent();
 	}
 	
-	public Paginator paginator() {
-	return new Paginator();
+	public PaginatorComponent paginatorComponent() {
+	return new PaginatorComponent();
+	}
+    
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
+	}
+
+	public DatePickerComponent datePickerComponent() {
+		   return new DatePickerComponent();
+	   }
+	public AppliedFiltersComponent appliedFiltersComponent() {
+		return new AppliedFiltersComponent();
 	}
 
 
