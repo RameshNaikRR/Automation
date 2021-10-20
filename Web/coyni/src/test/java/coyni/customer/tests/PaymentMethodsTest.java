@@ -13,22 +13,24 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
     public class PaymentMethodsTest{
 	 CustomerProfilePage customerProfilePage;
+	 NavigationMenuPage navigationMenuPage;
 	
     @BeforeTest
  
    public void init() {
    customerProfilePage = new CustomerProfilePage();
-   
+   navigationMenuPage = new NavigationMenuPage();
    
    }
     
     @Test
     @Parameters({"strParams"})
-    public void testExternalBankAccount(String strParams) {    	try {
+    public void testExternalBankAccount(String strParams) {    
+    	try {
     	 Map<String, String> data = Runner.getKeywordParameters(strParams);
     	customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
     	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
-    	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLrnmore();
+    	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
     	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
     	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
     	
@@ -121,5 +123,43 @@ import ilabs.api.reporting.ExtentTestManager;
 		   ExtentTestManager.setFailMessageInReport("test AddDebitCardWith Invalid Data is failed due to exception " +  e);
 	   }
    }
+    
+    @Test
+    @Parameters
+	public void testEditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.customerMenuComponent().clickPaymentMethods();
+			customerProfilePage.paymentMethodsComponent().cardsComponent().clickEdit(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().fillCardExpiry(data.get("cardExpiry"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().fillCVVorCVC("cvvOrCVC");
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().fillAddress1(data.get("address1"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().fillAddress2(data.get("address2"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().selectState(data.get("state"));
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().clickSave();
+			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().successFailurePopupCardComponent().clickClose();
+		} catch (Exception e) {
+			
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+			
+		}
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void testDeleteCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.customerMenuComponent().clickPaymentMethods();
+			customerProfilePage.paymentMethodsComponent().cardsComponent().clickDelete(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup().clickOnRemove();
+			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().clickClose();
+			
+			
+		} catch (Exception e) {
+			
+		}
+	}
    }
  

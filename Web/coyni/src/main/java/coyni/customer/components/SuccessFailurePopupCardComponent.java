@@ -15,6 +15,7 @@ public class SuccessFailurePopupCardComponent  extends BrowserFunctions{
 	private By btnDone =By.cssSelector("");
 	
 	private By heading = By.cssSelector("");
+	private By btnClose = By.cssSelector("");
 	
 	
 	//DOUBT
@@ -31,6 +32,9 @@ public class SuccessFailurePopupCardComponent  extends BrowserFunctions{
 	   }
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
+	}
+	public void clickClose() {
+		click(btnClose, "Close");
 	}
 
 

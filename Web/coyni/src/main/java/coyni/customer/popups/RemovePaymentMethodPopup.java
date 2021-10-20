@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.SuccessFailurePopupCardComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class RemovePaymentMethodPopup extends BrowserFunctions {
@@ -15,6 +16,10 @@ public class RemovePaymentMethodPopup extends BrowserFunctions {
     public String getRemoveMessage() {
      return	getText(lblmsg, "Succesfully Removed");
     }
+    public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
+		return  new SuccessFailurePopupCardComponent();
+	}
+
 }
 
 

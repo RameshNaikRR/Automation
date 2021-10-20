@@ -14,30 +14,33 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions{
 	private By lnkConvert = By.cssSelector("");
 	private By btnDelete = By.cssSelector("");
 	
-	public void VerifyErrorMessage(String ErrorMessage) {
+	public void verifyErrorMessage(String ErrorMessage) {
 	  	  new CommonFunctions().verifyLabelText(lblErrorMessage, ErrorMessage, "ErrorMessage");
 	      }
 	
-	public void enterMessage(String Message) {
+	public void fillMessage(String Message) {
 		enterText(txtMessage, Message, "Message");
 		
 	}
 	
-	public void enterAmount(String Amount) {
+	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
 		
 	}
 	
-	public void clickOnNext() {
+	public void clickNext() {
 		click(btnNext, "Click Next");
 	}
 	
-	public void clickOnConvertLink() {
+	public void clickConvertLink() {
 		click(lnkConvert, "Click Convert");
 	}
 	
-	public void clickOnDelete() {
+	public void clickDelete() {
 		click(btnDelete, "Click Delete");
+	}
+	public WithdrawConfirmPopup withdrawConfirmPopup() {
+		return new WithdrawConfirmPopup();
 	}
 	
 }

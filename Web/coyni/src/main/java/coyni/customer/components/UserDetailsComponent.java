@@ -93,6 +93,9 @@ public class UserDetailsComponent extends BrowserFunctions{
     public ToastComponent toastComponent() {
     	return new ToastComponent();
     }
+    public NotificationsComponent notificationsComponent() {
+    	return new NotificationsComponent();
+    }
    
     }
 

@@ -2,6 +2,7 @@ package coyni.customer.components;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.popups.RemovePaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -40,6 +41,9 @@ public class CardsComponent extends BrowserFunctions {
     //DOUBT
     public void clickDelete(String cardNumber) {
     	click(iconDelete, "Delete icon");
+    }
+    public RemovePaymentMethodPopup removePaymentMethodPopup() {
+    	return new RemovePaymentMethodPopup();
     }
 
 

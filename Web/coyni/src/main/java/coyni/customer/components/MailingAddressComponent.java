@@ -47,6 +47,9 @@ public class MailingAddressComponent extends BrowserFunctions {
 	public void clickSave() {
 		click(btnSave, "click save");
 	}
+	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
+		return  new SuccessFailurePopupCardComponent();
+	}
 
 
 

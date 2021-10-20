@@ -19,4 +19,8 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions{
 	public void clickOnGiftCard() {
 		click(btnGiftCard, "Click GiftCard");
 	}
+
+	public WithdrawToBankAccountSelectBankPopup withdrawToBankAccountSelectBankPopup() {
+		return new WithdrawToBankAccountSelectBankPopup();
+	}
 }
