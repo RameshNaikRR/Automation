@@ -21,13 +21,13 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	private By lblCreditErrorMessage = By.cssSelector("");
 	private By lbldebitErrorMessage = By.cssSelector("");
 	
-	public void clickOnBank() {
+	public void clickBank() {
 		click(radBtnBank,"Click Bank" );
 	}
-	public void clickOnDebit() {
+	public void clickDebit() {
 		click(radBtnDebit,"Click Debit" );
 	}
-	public void clickOnCredit() {
+	public void clickCredit() {
 		click(radBtnCredit,"Click Credit" );
 	}
 	public void deleteBank() {
@@ -45,10 +45,10 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	public void editCredit() {
 		click(btnEditCredit,"Click EditCredit" );
 	}
-	public void clickOnNext() {
+	public void clickNext() {
 		click(btnNext,"Click Next" );
 	}
-   public void clickOnLinkAddNewPayment() {
+   public void clickLinkAddNewPayment() {
 	   click(lnkAddNewPayment, "Click AddNewPayment");
    }
    public void VerifyBankErrorMessage(String BankErrorMessage) {
@@ -60,5 +60,10 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
    public void VerifydebitErrorMessage(String DebitErrorMessage) {
 	    new CommonFunctions().verifyLabelText(lbldebitErrorMessage, DebitErrorMessage, "DebitErrorMessage");
    }
+   public BuyCoyniTokensPopup buyCoyniTokensPopup() {
+	   return new BuyCoyniTokensPopup();
+   }
+   
+   
    
 }

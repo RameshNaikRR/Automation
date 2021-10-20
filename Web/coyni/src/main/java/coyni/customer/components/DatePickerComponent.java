@@ -102,7 +102,7 @@ public class DatePickerComponent {
 		return dpToDate.getMonth().toString();
 	}
 
-	public void setYear(String date) throws InterruptedException {
+	public void setDateWithYear(String date) throws InterruptedException {
 		String year = date.split("/")[2];
 		System.out.println(year);
 		String temp = date;

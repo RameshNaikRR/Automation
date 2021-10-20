@@ -2,7 +2,9 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
-
+import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.ToastComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class LoginPage extends BrowserFunctions{
@@ -25,10 +27,10 @@ public class LoginPage extends BrowserFunctions{
 	public void fillPassword(String password) {
 		enterText(txtPassword, password, "Password");
 	}
-	public void clickForgotEmail(String Email) {
+	public void clickForgotEmail() {
 		click(lnkForgotEmail, "ForgotEmail");
 	}
-    public void clickForgotPassword(String ForgotPassword) {
+    public void clickForgotPassword() {
     	click(lnkForgotPassword, "ForgotPassword");
     }
 	public void clickNext() {
@@ -45,12 +47,12 @@ public class LoginPage extends BrowserFunctions{
 		 enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
 	}
 	public  void verifyHeading(String expHeading) {
-//		new CommonFunctions().verifyLabelText(heading, "autentication heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "autentication heading", expHeading);
 	}
 	
-//	public ToastComponent toastComponent() {
-//		return new ToastComponent();}
-//  public AuthyComponent authyComponent() {
-//    return new AuthyComponent();}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();}
+  public AuthyComponent authyComponent() {
+    return new AuthyComponent();}
 
 }

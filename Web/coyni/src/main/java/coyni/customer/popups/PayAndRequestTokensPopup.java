@@ -18,35 +18,42 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By btnNext = By.cssSelector("");
 	
 	
-	public void clickOnPay() {
+	public void clickPay() {
 	 click(btnPay, "Click Pay");
 		
 	}
-    public void clickOnRequest() {
+    public void clickRequest() {
      click(btnRequest, "Click Request");
     }
-    public void enterAmount(String amount) {
+    public void fillAmount(String amount) {
      enterText(txtAmount, amount, "amount");	
     }
     
-    public void enterRecipientAddress(String RecipientAddress) {
+    public void fillRecipientAddress(String RecipientAddress) {
     	enterText(txtRecipientsAddress, RecipientAddress,"RecipientAddress");
     	
     }
-    public void clickOnPasteLink() {
+    public void clickPasteLink() {
     	click(lnkPaste, "Click Paste");
     }
 
-    public void enterRecipientMessage(String RecipientMessage) {
+    public void fillRecipientMessage(String RecipientMessage) {
     	enterText(txtRecipientMessage, RecipientMessage, "RecipientMessage" );
     }
-    public void clickOnNext() {
+    public void clickNext() {
     	click(btnNext, "Click Next");
     }
     public void VerifyErrorMessage(String ErrorMessage) {
-  	  new CommonFunctions().verifyLabelText(lblErrorMessage, ErrorMessage, "ErrorMessage");
+  	  new CommonFunctions().verifyLabelText(lblErrorMessage, "ErrorMessage", ErrorMessage);
       }
-    public String getRequestAccountHolderName() {
-     return	getText(lblAccountHolderName, "Account Holder Name");
+    public void verifyAccountHolderName(String expAccountHolderName) {
+     new CommonFunctions().verifyLabelText(lblAccountHolderName, "Account holder Name", expAccountHolderName);
+    }
+    
+    public RequestingAccountHolderPopup requestingAccountHolderPopup() {
+    	return new RequestingAccountHolderPopup();
+    }
+    public PayingAccountHolderNamePopup payingAccountHolderNamePopup() {
+    	return new PayingAccountHolderNamePopup();
     }
 }

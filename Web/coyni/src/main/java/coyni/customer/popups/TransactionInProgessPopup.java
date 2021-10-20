@@ -10,10 +10,10 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 	private By btnDone = By.cssSelector("");
 	private By lnkLearnmore = By.cssSelector("");
 	
-	public void clickOnCopyLink() {
+	public void clickCopyLink() {
 		click(lnkCopy, "Click Copy");
 	}
-	public void clickOnDone() {
+	public void clickDone() {
 		click(btnDone, "Click Done");
 	}
 	public void lnkLearnmore() {

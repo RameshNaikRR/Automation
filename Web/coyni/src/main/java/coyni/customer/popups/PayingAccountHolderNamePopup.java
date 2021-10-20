@@ -2,6 +2,8 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.SuccessFailurePopupCardComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class PayingAccountHolderNamePopup extends BrowserFunctions {
@@ -16,7 +18,14 @@ public class PayingAccountHolderNamePopup extends BrowserFunctions {
        public String getProcessingFee() {
     	 return  getText(lblProcessingFee,"Processing Fee");
        }
-       public void clickOnConfirmPay() {
+       public void clickPay() {
     	   click(btnConfirmPay, "click confirm pay");
+       }
+       public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
+   		return new SuccessFailurePopupCardComponent();
+   	}
+     
+       public AuthyComponent authyComponent() {
+    	   return new AuthyComponent();
        }
 }

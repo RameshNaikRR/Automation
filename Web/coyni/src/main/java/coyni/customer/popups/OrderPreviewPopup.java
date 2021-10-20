@@ -8,8 +8,11 @@ public class OrderPreviewPopup extends BrowserFunctions {
 	
 	private By btnConfirm = By.cssSelector("");
 	
-	public void clickOnConfirm() {
+	public void clickConfirm() {
 		click(btnConfirm, "Click Confirm");
+	}
+	public TransactionInProgessPopup transactionInProgessPopup() {
+		return new TransactionInProgessPopup();
 	}
 
 }
