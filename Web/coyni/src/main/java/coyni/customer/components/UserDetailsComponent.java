@@ -93,7 +93,7 @@ public class UserDetailsComponent extends BrowserFunctions{
     public ToastComponent toastComponent() {
     	return new ToastComponent();
     }
+   
+    }
 
 
-
-}

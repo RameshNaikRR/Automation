@@ -17,7 +17,7 @@ public class EditPhoneNumberPopup extends BrowserFunctions {
 	public void VerifyOldNumber(String OldNumber) {
 	    new CommonFunctions().verifyLabelText(txtOldNumber, OldNumber, "OldNumber");
    }
-	public void enterNewNumber(String NewNumber) {
+	public void fillNewNumber(String NewNumber) {
 		waitForElement(txtNewNumber, waittime, WaitForElement.visibility);
 		enterText(txtNewNumber, NewNumber, "NewNumber");
 	}

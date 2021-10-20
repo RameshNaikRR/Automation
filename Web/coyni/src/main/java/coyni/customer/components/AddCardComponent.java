@@ -16,6 +16,7 @@ public class AddCardComponent extends BrowserFunctions{
 	private By txtCardExp =By.cssSelector("");
 	
 	private By txtCVVorCVC =By.cssSelector("");
+	private By lblErrorMsg = By.cssSelector(" ");
 
     public void fillNameOnCard(String nameOnCard) {
     	enterText(txtNameOnCard, nameOnCard, "Name On Card");
@@ -32,13 +33,17 @@ public class AddCardComponent extends BrowserFunctions{
     public void fillCVVorCVC(String cvvOrCvc) {
     	enterText(txtCVVorCVC, cvvOrCvc, "CVV or CVC");
     }
+    public void verifylblErrorMsg(String expErrorMsg) {
+    	new CommonFunctions().verifyLabelText(lblErrorMsg, "Error Message", expErrorMsg);
+    	
+    }
+    
   
-    /*
     public MailingAddressComponent mailingAddressComponent() {
     	return new MailingAddressComponent();
     }
 
-*/
+
 
 
 

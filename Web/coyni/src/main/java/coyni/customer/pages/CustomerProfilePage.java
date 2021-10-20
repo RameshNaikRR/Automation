@@ -2,7 +2,9 @@ package coyni.customer.pages;
 
 import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
+import coyni.customer.components.PaymentMethodsComponent;
 import coyni.customer.components.PreferencesComponent;
+import coyni.customer.components.ToastComponent;
 import coyni.customer.components.UserDetailsComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -15,23 +17,20 @@ public class CustomerProfilePage extends BrowserFunctions{
  	}
 	
 
-	// public  PaymentMethodsComponent paymentMethodsComponent() {
-	// return new PaymentMethodsComponent();
-	// }
+	public  PaymentMethodsComponent paymentMethodsComponent() {
+    return new PaymentMethodsComponent();
+    }
 	 public  PreferencesComponent preferencesComponent() {
      return new PreferencesComponent();
      }
-	public  ChangePasswordComponent changePasswordComponent() {
+	 public ToastComponent toastComponent() {
+	 return new ToastComponent();
+	 }
+	 public  ChangePasswordComponent changePasswordComponent() {
 	 return new ChangePasswordComponent();
 	 }
   
-
-
-
-
-
-
-	
+  
 }
     
 	

@@ -2,6 +2,13 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.TokenAccountActivityComponent;
+import coyni.customer.components.TokenPaidOrdersDetailsComponent;
+import coyni.customer.components.TokensPurchasedDetailsComponent;
+import coyni.customer.components.TokensReceivedDetailsComponent;
+import coyni.customer.components.TokensSentDetailsComponent;
+import coyni.customer.components.TokensWithdrawnDetailsComponent;
+import coyni.customer.components.TransactionsListComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class TokenAccountPage extends BrowserFunctions{
@@ -26,19 +33,19 @@ public class TokenAccountPage extends BrowserFunctions{
 		click(btnWithdrawToUSD, "WithdrawToUSD");
 		
 	}
- //public void TokenAccountActivityComponent tokenAccountActivityComponent() {
- //	return new TokenAccountActivityComponent() }
- //public void TransactionsListComponent transactionsListComponent() {
- // return new TransactionsListComponent() }
- // public void TokensSentDetailsComponent tokensSentDetailsComponent() {
- // return new TokensSentDetailsComponent() }
- // public void TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
- // return new TokensReceivedDetailsComponent() }
- // public void TokensPurchasedDetails tokensPurchasedDetails() {
- // return new TokensPurchasedDetails() }
- //	public void TokensWithdrawnDetails okensWithdrawnDetails() {
- // return new TokensWithdrawnDetails();}
- // public void TokenPaidOrdersDetails tokenPaidOrdersDetails() {
- // return new TokenPaidOrdersDetails(); }
+ public  TokenAccountActivityComponent tokenAccountActivityComponent() {
+ 	return new TokenAccountActivityComponent(); }
+ public TransactionsListComponent transactionsListComponent() {
+  return new TransactionsListComponent(); }
+  public  TokensSentDetailsComponent tokensSentDetailsComponent() {
+  return new TokensSentDetailsComponent(); }
+  public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
+  return new TokensReceivedDetailsComponent(); }
+  public  TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
+  return new TokensPurchasedDetailsComponent() ;}
+ 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
+  return new TokensWithdrawnDetailsComponent();}
+  public  TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
+  return new TokenPaidOrdersDetailsComponent(); }
 	
  }

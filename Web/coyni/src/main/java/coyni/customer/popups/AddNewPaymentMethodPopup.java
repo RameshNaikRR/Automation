@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AddCardComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
@@ -13,15 +14,15 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
   private By lblDebitCardCount = By.cssSelector("");
   private By lblCreditCardCount = By.cssSelector("");
   
-  public void addExternalBankAccount() {
+  public void clickaddExternalBankAccount() {
 	  click(btnExternalBankAccount, "Click ExternaBankAccount");
 	  
   }
-  public void addNewDebitCard() {
+  public void clickDebitCard() {
 	  click(btnDebitCard, "Click DebitCard");
 	  
   }
-  public void addNewCreditCard() {
+  public void clickCreditCard() {
 	click(btnCreditCard, "Click CreditCard"); 
   }
   
@@ -35,5 +36,12 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
    public String getCreditCardCount() {
 	  return getText(lblCreditCardCount, "Credit Card Count");
    }
+   public AddCardComponent addCardComponent() {
+	   return new AddCardComponent();
+   }
+   public PreAuthorizationPopup preAuthorizationPopup() {
+	   return new PreAuthorizationPopup();
+   }
+    
   
 }

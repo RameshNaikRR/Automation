@@ -2,7 +2,9 @@ package coyni.customer.components;
 
 import org.openqa.selenium.By;
 
-
+import coyni.customer.popups.AddExternalBankAccountPopup;
+import coyni.customer.popups.AddNewPaymentMethodPopup;
+import coyni.customer.popups.PreAuthorizationPopup;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class PaymentMethodsComponent extends BrowserFunctions {
@@ -26,15 +28,20 @@ public class PaymentMethodsComponent extends BrowserFunctions {
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
 	}
-	/*
+
 	 public BankAccountsComponent bankAccountsComponent(){
 	 return new BankAccountsComponent();
 
 	 }
- 
 	 
-	 */
-
-
+	public AddNewPaymentMethodPopup addNewPaymentMethodPopup() {
+    return new AddNewPaymentMethodPopup();
+	}
+	public AddExternalBankAccountPopup addExternalBankAccountPopup() {
+	    return new AddExternalBankAccountPopup();
+	   }
+	public PreAuthorizationPopup preAuthorizationPopup() {
+		return new PreAuthorizationPopup();
+	}
 
 }

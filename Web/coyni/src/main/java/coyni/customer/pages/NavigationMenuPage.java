@@ -2,6 +2,8 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.CustomerMenuComponent;
+import coyni.customer.components.MyQRCodeComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class NavigationMenuPage extends BrowserFunctions {
@@ -43,10 +45,10 @@ public class NavigationMenuPage extends BrowserFunctions {
 	   click(ImgNotifications, "ImageNotifications");
    }
    
-//   public void CustomerMenuComponent customerMenuComponent() {
-//	   return new CustomerMenuComponent();}
-   //  public void MyQRCodeComponent myQRCodeComponent() {
-    //	return new MyQRCodeComponent();}
+     public  CustomerMenuComponent customerMenuComponent() {
+      return new CustomerMenuComponent();}
+      public  MyQRCodeComponent myQRCodeComponent() {
+   	return new MyQRCodeComponent();}
     }
 	   
    

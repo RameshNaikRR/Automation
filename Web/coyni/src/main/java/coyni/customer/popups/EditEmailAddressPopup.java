@@ -12,10 +12,10 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	private By txtNewEmailAddress = By.cssSelector("");
 	private By btnSendcode = By.cssSelector("");
 	
-	public void VerifyOldEmailAddress(String EmailAddress) {
+	public void verifyOldEmailAddress(String EmailAddress) {
 	    new CommonFunctions().verifyLabelText(txtOldEmailAddress, EmailAddress, "EmailAddress");
    }
-	public void EnterNewEmailAddress(String newNumber) {
+	public void  fillNewEmailAddress(String newNumber) {
 		waitForElement(txtNewEmailAddress, waittime, WaitForElement.visibility);
 		enterText(txtNewEmailAddress, newNumber, "NewNumber");
 	}
