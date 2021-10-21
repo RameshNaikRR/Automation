@@ -1,13 +1,17 @@
 package coyni.customer.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.pages.LoginPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -23,7 +27,7 @@ public class LoginTest {
 	 
 	 @Test
 	 @Parameters({"strParams"})
-	 public void TestLogin(String strParams) {
+	 public void testLogin(String strParams) {
 		 try {
 			 Map<String, String> data = Runner.getKeywordParameters(strParams);
 			 loginPage.verifyHeading(data.get("loginHeading"));
@@ -49,7 +53,13 @@ public class LoginTest {
 			 loginPage.fillEmail(data.get("email"));
 			 loginPage.fillPassword(data.get("password"));
 			 loginPage.clickNext();
-			 //verify error message ?
+			 if (!data.get("invalidAttempts").isEmpty()) {
+	                loginPage.validateRemainingAttempts(data.get("invalidAttempts"));
+	            }
+	            if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+	            Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 		 }
 		 catch (Exception e) {
 	            ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
@@ -66,7 +76,7 @@ public class LoginTest {
 			 loginPage.verifyHeading(data.get("ForgotEmailHeading"));
 			 loginPage.fillPhoneNumber(data.get("phoneNumber"));
 			 loginPage.clickBackToLogin();
-	         //we can automate upto phone number verification
+	         //we can automate up to phone number verification
 		 }
 		 catch (Exception e) {
 			 ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);
@@ -82,8 +92,8 @@ public class LoginTest {
 			 loginPage.clickForgotPassword();
 			 loginPage.verifyHeading(data.get("ForgotPasswordHeading"));
 			 loginPage.fillEmail(data.get("email"));
-			 loginPage.clickBackToLogin();
-	         //	we can automate upto email verification
+			 loginPage.clickNext();
+	         //	we can automate up to email verification
 		 }
 		 catch (Exception e) {
 			 ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
