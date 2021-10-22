@@ -62,7 +62,7 @@ public class LoginTest {
 	            Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 		 }
 		 catch (Exception e) {
-	            ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+	            ExtentTestManager.setFailMessageInReport("Login test with Invalid credentials failed due to exception " + e);
 	        }
 	 }
 
@@ -73,10 +73,23 @@ public class LoginTest {
 			 Map<String, String> data = Runner.getKeywordParameters(strParams);
 			 loginPage.verifyHeading(data.get("loginHeading"));
 			 loginPage.clickForgotEmail();
-			 loginPage.verifyHeading(data.get("ForgotEmailHeading"));
+			 loginPage.verifyHeading(data.get("ForgotHeading"));
 			 loginPage.fillPhoneNumber(data.get("phoneNumber"));
+			 loginPage.clickNext();
+			 loginPage.fillFirstName(data.get("firstName"));
+			 loginPage.fillLastName(data.get("lastName"));
+			 loginPage.clickNext();
+			 loginPage.verifyHeading(data.get("verificationHeading"));//
+			 loginPage.fillVerificationInput(data.get("code"));
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+			 loginPage.clickResend();
+			 loginPage.verifyResendMessage(data.get("resendMessage"));
+			 loginPage.clickGoBack();
+			 loginPage.verifyHeading(data.get("forgotHeading"));
 			 loginPage.clickBackToLogin();
-	         //we can automate up to phone number verification
+			 loginPage.verifyHeading(data.get("loginHeading"));
 		 }
 		 catch (Exception e) {
 			 ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);
@@ -85,20 +98,98 @@ public class LoginTest {
 
 	 @Test
 	 @Parameters({"strParams"})
+	 public void testForgotEmailWithInvalidPhonenumber(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.clickForgotEmail();
+			 loginPage.verifyHeading(data.get("ForgotHeading"));
+			 loginPage.fillPhoneNumber(data.get("phoneNumber"));
+			 loginPage.clickNext();
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+		 }
+		 catch (Exception e) {
+			 ExtentTestManager.setFailMessageInReport("Forgot email with invalid phone number test failed due to exception " + e);
+		 }
+	 }
+	 
+	 
+	 @Test
+	 @Parameters({"strParams"})
+	 public void testForgotEmailWithInvalidFirstAndLastName(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.clickForgotEmail();
+			 loginPage.verifyHeading(data.get("ForgotHeading"));
+			 loginPage.fillPhoneNumber(data.get("phoneNumber"));
+			 loginPage.clickNext();
+			 loginPage.fillFirstName(data.get("firstName"));
+			 loginPage.fillLastName(data.get("lastName"));
+			 loginPage.clickNext();
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+			 
+		 }
+		 catch (Exception e) {
+			 ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);
+		 }
+	 }
+	 
+	 
+	 
+	 @Test
+	 @Parameters({"strParams"})
 	 public void testForgotPassword(String strParams) {
 		 try {
 			 Map<String, String> data = Runner.getKeywordParameters(strParams);
 			 loginPage.verifyHeading(data.get("loginHeading"));
 			 loginPage.clickForgotPassword();
-			 loginPage.verifyHeading(data.get("ForgotPasswordHeading"));
+			 loginPage.verifyHeading(data.get("forgotHeading"));
 			 loginPage.fillEmail(data.get("email"));
 			 loginPage.clickNext();
-	         //	we can automate up to email verification
+			 loginPage.verifyHeading(data.get("verificationHeading"));
+			 loginPage.verifyEmail(data.get("email")+".");
+			 loginPage.fillVerificationInput(data.get("code"));
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+			 loginPage.clickResend();
+			 loginPage.verifyResendMessage(data.get("resendMessage"));
+			 loginPage.clickGoBack();
+			 loginPage.verifyHeading(data.get("forgotHeading"));
+			 loginPage.clickBackToLogin();
+			 loginPage.verifyHeading(data.get("loginHeading"));
+	         
 		 }
 		 catch (Exception e) {
 			 ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
 		 }
 	 }
+	 
+	 @Test
+	 @Parameters({"strParams"})
+	 public void testForgotPasswordWithInvalidEmail(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.clickForgotPassword();
+			 loginPage.verifyHeading(data.get("forgotHeading"));
+			 loginPage.fillEmail(data.get("email"));
+			 loginPage.clickNext();
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+	            }
+		 }
+		 catch (Exception e) {
+			 ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
+		 }
+	 }
+	 
+	 
 	 
 	 @Test
 	 @Parameters({"strParams"})
@@ -108,6 +199,7 @@ public class LoginTest {
 			 loginPage.verifyHeading(data.get("loginHeading"));
 			 loginPage.clickSignUp();
 			 loginPage.verifyHeading(data.get("createAccountHeading"));
+	
 		 }
 		 catch(Exception e) {
 			 ExtentTestManager.setFailMessageInReport("SignIn test failed due to exception" + e);
