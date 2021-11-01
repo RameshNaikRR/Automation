@@ -45,7 +45,7 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFormErrorMessage(String expErrMsg) {
+	public void validateFormErrorMessage(String expErrMsg,String expcolour) {
 		try {
 			By errorMsgs = By.cssSelector("span.error");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
@@ -56,6 +56,7 @@ public class CommonFunctions {
 			} else {
 				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
 			}
+			getcssValue(expcolour);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}

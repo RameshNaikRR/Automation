@@ -68,7 +68,7 @@ public class HomeTest extends BrowserFunctions {
                 homePage.validateRemainingAttempts(homePageData.get("invalidAttempts"));
             }
             if (!homePageData.get("errMessage").isEmpty()) {
-            	new CommonFunctions().validateFormErrorMessage(homePageData.get("errMessage"));
+            	new CommonFunctions().validateFormErrorMessage(homePageData.get("errMessage"),homePageData.get("colour"));
 	        }
 		}
 		catch(Exception e){
