@@ -45,7 +45,7 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFormErrorMessage(String expErrMsg) {
+	public void validateFormErrorMessage(String expErrMsg,String expcolour) {
 		try {
 			By errorMsgs = By.cssSelector("span.error");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
@@ -56,10 +56,49 @@ public class CommonFunctions {
 			} else {
 				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
 			}
+			 getcssValue(expcolour);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}
 	}
+	
+	public void validateTextfieldIcon(String message) {
+		try {
+			By passFailImg =By.cssSelector(".business-login-inner-icon");
+			String imgClass = objBrowserFunctions.getAttributeValue(passFailImg, "class", "Imgclass");
+             message =message.toLowerCase();
+			if (imgClass.contains(message)) {
+				ExtentTestManager.setPassMessageInReport(message+" icon is displayed ");
+			}else {
+				ExtentTestManager.setFailMessageInReport(message+" icon is not  displayed ");
+			}
+			
+		}
+		catch( Exception e) {
+			ExtentTestManager.setFailMessageInReport("validate text field icon failed due to exception " + e);
+		}
+		}
+		
+		
+	
+	public void getcssValue(String expcolour) {
+		try {
+			By txterror = By.cssSelector("input.error");
+			String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
+			ExtentTestManager.setInfoMessageInReport(value);
+
+			if (value.equalsIgnoreCase(expcolour)) {
+				ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
+			}else {
+				ExtentTestManager.setFailMessageInReport("Text field border not changed to red colour");
+			}
+			
+		}catch( Exception e) {
+			ExtentTestManager.setFailMessageInReport("getcssValue failed due to exception " + e);
+		}
+		
+	}
+	
 	
 	
 }
