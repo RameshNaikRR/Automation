@@ -57,7 +57,7 @@ public class LoginTest {
 	                loginPage.validateRemainingAttempts(data.get("invalidAttempts"));
 	            }
 	            if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 	            Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 		 }
@@ -82,7 +82,7 @@ public class LoginTest {
 			 loginPage.verifyHeading(data.get("verificationHeading"));//
 			 loginPage.fillVerificationInput(data.get("code"));
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 			 loginPage.clickResend();
 			 loginPage.verifyResendMessage(data.get("resendMessage"));
@@ -107,7 +107,7 @@ public class LoginTest {
 			 loginPage.fillPhoneNumber(data.get("phoneNumber"));
 			 loginPage.clickNext();
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 		 }
 		 catch (Exception e) {
@@ -130,7 +130,7 @@ public class LoginTest {
 			 loginPage.fillLastName(data.get("lastName"));
 			 loginPage.clickNext();
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 			 
 		 }
@@ -155,7 +155,7 @@ public class LoginTest {
 			 loginPage.verifyEmail(data.get("email")+".");
 			 loginPage.fillVerificationInput(data.get("code"));
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 			 loginPage.clickResend();
 			 loginPage.verifyResendMessage(data.get("resendMessage"));
@@ -181,7 +181,7 @@ public class LoginTest {
 			 loginPage.fillEmail(data.get("email"));
 			 loginPage.clickNext();
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 	            }
 		 }
 		 catch (Exception e) {

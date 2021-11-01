@@ -110,7 +110,7 @@ import ilabs.api.reporting.ExtentTestManager;
             customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().verifyCountry(data.get("Country"));
 			if (!data.get("errMessage").isEmpty()) {
 				
-				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickSave();
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
@@ -143,7 +143,7 @@ import ilabs.api.reporting.ExtentTestManager;
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
 			if (!data.get("errMessage").isEmpty()) 
 			{
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().clickDone();
 		}catch (Exception e) {
@@ -169,7 +169,7 @@ import ilabs.api.reporting.ExtentTestManager;
     	if (!data.get("errMessage").isEmpty())
     	{
     		
-    		new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+    		new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
     	}
     	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickSave();
     	customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
@@ -200,7 +200,7 @@ import ilabs.api.reporting.ExtentTestManager;
     	customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
     	if (!data.get("errMessage").isEmpty()) 
     	{
-    		 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+    		 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
     	}
     	customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().clickDone();
 
