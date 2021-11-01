@@ -120,6 +120,7 @@ public class HomePage extends BrowserFunctions {
     	  List<WebElement> str= getElementsList(SignUpElements, "elementsList");
     	  for(int i=0; i<str.size() ; i++) {
     		  robot.keyPress(KeyEvent.VK_TAB);
+    		  robot.keyRelease(KeyEvent.VK_TAB);
     		  String focus =str.get(i).getAttribute("focus");
     		  if (focus.equals("true")) {
     			  
