@@ -110,7 +110,7 @@ public class CommonFunctions {
 			}
 		}
 		catch(Exception e) {
-			ExtentTestManager.setFailMessageInReport("element View failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(" element View failed due to exception " + e);
 		}
 		
 	}
