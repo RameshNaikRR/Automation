@@ -98,5 +98,46 @@ public class CommonFunctions {
 		}
 		
 	}
+
 	
+	public void elementView(By ele, String eleName) {
+		try {
+			if(objBrowserFunctions.getElement(ele, eleName).isDisplayed()) {
+				ExtentTestManager.setPassMessageInReport(eleName + " is displayed ");
+			}
+			else {
+				ExtentTestManager.setFailMessageInReport(eleName + " is not displayed ");
+			}
+		}
+		catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("element View failed due to exception " + e);
+		}
+		
+	}
+	
+	public void verifyMouseHoverAction(By ele,String eleName ,String backGround, String border) {
+		try {
+			Thread.sleep(2000);
+			String initialBackGroundColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(backGround);
+			String initialBorderColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(border);
+			ExtentTestManager.setInfoMessageInReport(initialBackGroundColor);
+			ExtentTestManager.setInfoMessageInReport(initialBorderColor);
+			objBrowserFunctions.moveToElement(ele, eleName);
+			Thread.sleep(2000);
+			String finalBackGroundColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(backGround);
+			String finalBorderColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(border);
+			ExtentTestManager.setInfoMessageInReport(finalBackGroundColor);
+			ExtentTestManager.setInfoMessageInReport(finalBorderColor);
+			if(!initialBackGroundColor.equalsIgnoreCase(finalBackGroundColor)&& !initialBorderColor.equalsIgnoreCase(finalBorderColor)) {
+				ExtentTestManager.setPassMessageInReport("Border color and Background color is changed");
+			}
+			else {
+				ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
+			}
+		}
+		catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport(" verify mouse hover action test failed due to exception "+ e);
+		}
+	}
 }
+

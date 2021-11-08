@@ -4,18 +4,20 @@ import org.openqa.selenium.By;
 
 import coyni.customer.components.CustomerMenuComponent;
 import coyni.customer.components.MyQRCodeComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class NavigationMenuPage extends BrowserFunctions {
 	
-	private By lnkExportFiles = By.cssSelector(".dashboard-menu-items>.icon-external");
-	private By lnkGetHelp = By.cssSelector(".dashboard-menu-items>.icon-help");
-	private By lblUserNameMenu = By.cssSelector(".internal-header__bolder>span");
-	private By lblAccountId = By.cssSelector("span>small[class *= 'account-number']");
+	private By lnkExportFiles = By.cssSelector("");
+	private By lnkGetHelp = By.cssSelector("");
+	private By lblUserNameMenu = By.cssSelector("");
+	private By lblAccountId = By.cssSelector("");
 	private By lnkTokenAccount = By.cssSelector(" ");
 	private By ImgQRcode = By.cssSelector(" ");
 	private By lblUserNameHead = By.cssSelector(" ");
 	private By ImgNotifications = By.cssSelector(" ");
+	private By imgUser = By.cssSelector("");
 
     
 	public void clickExportFilesMenu() {
@@ -49,7 +51,19 @@ public class NavigationMenuPage extends BrowserFunctions {
       return new CustomerMenuComponent();}
       public  MyQRCodeComponent myQRCodeComponent() {
    	return new MyQRCodeComponent();}
-    }
+  
+
+public void verifyAccountIDView() {
+	new CommonFunctions().elementView(lblAccountId, "Account ID");
+} 
+
+public void verifyUserImageView() {
+	new CommonFunctions().elementView(imgUser, "User Image");
+}
+public void verifyQRCodeView() {
+	new CommonFunctions().elementView(ImgQRcode, "QR code");
+}
+}
 	   
    
 	   
