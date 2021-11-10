@@ -38,26 +38,25 @@ public class CustomerProfileTest {
 		changePasswordComponent = new ChangePasswordComponent();
 	}
 
-	
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testUserDetailsView(String strParams) {
-	try {
-		customerProfilePage.customerMenuComponent().clickUserDetails();
-		customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-		customerProfilePage.userDetailsComponent().verifyUserNameView();
-		customerProfilePage.userDetailsComponent().verifyAccountStatusView();
-		customerProfilePage.userDetailsComponent().verifyAccountIDView();
-		customerProfilePage.userDetailsComponent().verifyPhoneNumberView();
-		customerProfilePage.userDetailsComponent().verifyEmailView();
-		customerProfilePage.userDetailsComponent().verifyAddressView();
-	}catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
-	}	
+		try {
+			customerProfilePage.customerMenuComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
+			customerProfilePage.userDetailsComponent().verifyUserNameView();
+			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
+			customerProfilePage.userDetailsComponent().verifyAccountIDView();
+			customerProfilePage.userDetailsComponent().verifyPhoneNumberView();
+			customerProfilePage.userDetailsComponent().verifyEmailView();
+			customerProfilePage.userDetailsComponent().verifyAddressView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+		}
 	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testEditImageView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -67,15 +66,12 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("Heading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
-			
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Edit Image view failed due to exception " + e);
 		}
 	}
-	
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testUserDetailsImage(String strParams) {
@@ -179,7 +175,50 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}
 	}
-	@Test                               //added
+
+	// DOUBT
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testUpdatePreferences(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.preferencesComponent().selectTimeZone("Time Zone");
+			customerProfilePage.preferencesComponent().selectDefaultAccount("Default Account");
+			customerProfilePage.preferencesComponent().verifyLocalCurrency("Local Currency");
+			customerProfilePage.preferencesComponent().clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Preferences is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testDropDown(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.preferencesComponent().selectTimeZone("Time Zone");
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Preferences is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testPreferencesDisplayed(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.preferencesComponent().VerifyClickOnAccountDetails();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testPreferencesDisplayed is failed due to Exception " + e);
+		}
+
+	}
+
+	@Test // added
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {
 		try {
@@ -200,8 +239,8 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
 		}
 	}
-	
-	@Test                            //added
+
+	@Test // added
 	@Parameters({ "strParams" })
 	public void testChangePasswordInvalidCredentials(String strParams) {
 		try {
@@ -214,32 +253,31 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("currentPassword"));
 			customerProfilePage.changePasswordComponent().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
-                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
-            }
-			
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+			}
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test change password with invalis  credentials failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"test change password with invalis  credentials failed due to exception " + e);
 		}
-		}
-	
-	@Test                             //added
+	}
+
+	@Test // added
 	@Parameters({ "strParams" })
 	public void testChangePasswordInvalidAuthyCredentials(String strParams) {
 		try {
-			
+
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerMenuComponent.clickChangePassword();
 			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("invalidAuthyOtp"));
 			if (!data.get("errMessage").isEmpty()) {
-                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
-            }
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test change password with invalis Authy credentials failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"test change password with invalis Authy credentials failed due to exception " + e);
 		}
-		}
+	}
 
 }
-
-
-
