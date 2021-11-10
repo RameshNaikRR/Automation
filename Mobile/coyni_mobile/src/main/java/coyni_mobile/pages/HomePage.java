@@ -6,20 +6,31 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class HomePage extends MobileFunctions {
+	private By btnGetStarted = MobileBy.xpath("");
+	private By btnLogIn = MobileBy.xpath("");
+	private By btnBusiness = MobileBy.xpath("");
+	private By btnPersonal = MobileBy.xpath("");
 
-    private By btnSignIn =  MobileBy.xpath("//*[contains(@resource-id, 'tvSignIn')]");
-    private By btnGetStarted = MobileBy.xpath("//*[contains(@resource-id, 'cvGetStarted')]");
-    private By lnkSignup = MobileBy.xpath("//*[text()='Sign up']");
+	public void clickGetStarted() {
+		click(btnGetStarted, "Get Started ");
+	}
 
-    public void clickSignIn(){
-        click(btnSignIn, "Sign In button");
-    }
+	public void clickLogIn() {
+		click(btnLogIn, "Login ");
+	}
 
-    public CreateAnAccountPage clickGetStarted(){
-        click(btnGetStarted, "Get Started Button");
-        return new CreateAnAccountPage();
-    }
+	public void clickBusiness() {
+		click(btnBusiness, "Business ");
+	}
 
+	public void clickPersonal() {
+		click(btnPersonal, "Personal ");
+	}
 
+	public CreateAnAccountPage createAnAccountPage() {
+
+		return new CreateAnAccountPage();
+
+	}
 
 }
