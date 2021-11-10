@@ -2,12 +2,15 @@ package coyni.customer.components;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.popups.AccountProfileImagePopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class UserDetailsComponent extends BrowserFunctions{
 	
-	private By editUserImage =By.cssSelector("");
+	private By lblUserDetailsHeading =By.cssSelector("");
+	
+	private By btnEditUserImage =By.cssSelector("");
 	
 	private By lnkRemoveImage = By.cssSelector("");
 	
@@ -37,8 +40,12 @@ public class UserDetailsComponent extends BrowserFunctions{
     
     private By iconEditAddress =By.cssSelector("");
     
+    private By lblAccountID =By.cssSelector("");
+    
+    private By lblPhoneNumber =By.cssSelector("");
+    
     public void clickEditUserImage() {
-    	click(editUserImage, "Edit User Image");
+    	click(btnEditUserImage, "Edit User Image");
     }
     public void clickRemoveImage() {
     	click(lnkRemoveImage, "Remove Image");
@@ -85,8 +92,37 @@ public class UserDetailsComponent extends BrowserFunctions{
     }
     public void clickIconEditAddress() {
     	click(iconEditAddress, "Click Edit Address Icon");
+    	
     }
+    public void verifyUserDetailsView() {
+		new CommonFunctions().elementView(lblUserDetailsHeading, " User Details ");
+	}
 
+    public void verifyUserNameView() {
+    	new CommonFunctions().elementView(lblUserName, "User Name ");
+    }
+    public void verifyAccountStatusView() {
+    	new CommonFunctions().elementView(lblAccountStatus, "Account Status");
+    }
+    
+    public void verifyAccountIDView() {
+    	new CommonFunctions().elementView(lblAccountID, "Account ID ");
+    }
+    public void verifyPhoneNumberView() {
+    	new CommonFunctions().elementView(lblPhoneNumber, "Phone Number ");
+    }
+    public void verifyEmailView() {
+    	new CommonFunctions().elementView(lblEmail, "Email ");
+    }
+    
+    public void verifyAddressView() {
+    	new CommonFunctions().elementView(lblAddress, "Address ");
+    }
+    
+    public void verifyEditImageView() {
+    	new CommonFunctions().elementView(btnEditUserImage, "Edit user Image");
+    }
+    
     public MailingAddressComponent mailingAddressComponent() {
     	return new MailingAddressComponent();
     }
@@ -96,7 +132,9 @@ public class UserDetailsComponent extends BrowserFunctions{
     public NotificationsComponent notificationsComponent() {
     	return new NotificationsComponent();
     }
-   
+   public AccountProfileImagePopup accountProfileImagePopup() {
+	   return new AccountProfileImagePopup();
+   }
     }
 
 

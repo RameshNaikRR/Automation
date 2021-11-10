@@ -193,7 +193,7 @@ public class LoginTest {
 	 
 	 @Test
 	 @Parameters({"strParams"})
-	 public void testSignIn(String strParams) {
+	 public void testSignUp(String strParams) {
 		 try {
 			 Map<String, String> data = Runner.getKeywordParameters(strParams);
 			 loginPage.verifyHeading(data.get("loginHeading"));
@@ -205,6 +205,26 @@ public class LoginTest {
 			 ExtentTestManager.setFailMessageInReport("SignIn test failed due to exception" + e);
 			 
 		 }
+	 }
+	 
+	 @Test
+	 @Parameters({"strParams"})
+	 public void testLoginWithInvalidAuthy(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.fillEmail(data.get("email"));
+			 loginPage.fillPassword(data.get("password"));
+			 loginPage.clickNext();
+			 loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			 loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"));
+			 if (!data.get("errMessage").isEmpty()) {
+	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+	            }
+		 }
+		 catch (Exception e) {
+	            ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+	        }
 	 }
 	 
 }

@@ -54,6 +54,21 @@ public class AuthyComponent extends  BrowserFunctions{
 		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
 	
+	
+	public void fillAuthyInputInvalid(String code) {
+		
+		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
+		int noOfInputs = inputs.size();
+		if (noOfInputs == 6) {
+			for (int i = 0; i < noOfInputs; i++) {
+				inputs.get(i).sendKeys(code.charAt(i) + "");
+			}
+			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
+		}
+		//
+	}
+	
+	
 	public void clickGoBack() {
 		click(lnkGoBack, "Back Option");
 	}

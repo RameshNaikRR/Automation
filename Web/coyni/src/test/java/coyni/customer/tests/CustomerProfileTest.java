@@ -29,6 +29,44 @@ public class CustomerProfileTest {
 		editEmailAddressPopup = new EditEmailAddressPopup();
 	}
 
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testUserDetailsView(String strParams) {
+	try {
+		customerProfilePage.customerMenuComponent().clickUserDetails();
+		customerProfilePage.userDetailsComponent().verifyUserDetailsView();
+		customerProfilePage.userDetailsComponent().verifyUserNameView();
+		customerProfilePage.userDetailsComponent().verifyAccountStatusView();
+		customerProfilePage.userDetailsComponent().verifyAccountIDView();
+		customerProfilePage.userDetailsComponent().verifyPhoneNumberView();
+		customerProfilePage.userDetailsComponent().verifyEmailView();
+		customerProfilePage.userDetailsComponent().verifyAddressView();
+	}catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+	}	
+	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testEditImageView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.customerMenuComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyEditImageView();
+			customerProfilePage.userDetailsComponent().clickEditUserImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("Heading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Edit Image view failed due to exception " + e);
+		}
+	}
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testUserDetailsImage(String strParams) {
