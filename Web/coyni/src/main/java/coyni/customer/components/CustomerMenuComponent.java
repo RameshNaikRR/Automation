@@ -61,7 +61,9 @@ public class CustomerMenuComponent extends BrowserFunctions {
 		click(lnkChangePassword, "Click Change Password");
 	}
 
-
+	public  ChangePasswordComponent changePasswordComponent() {   //added
+		 return new ChangePasswordComponent();
+		 }
 
 
 

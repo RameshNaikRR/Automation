@@ -6,11 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
 import coyni.customer.pages.CustomerProfilePage;
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.customer.popups.EditEmailAddressPopup;
 import coyni.customer.popups.EditPhoneNumberPopup;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -19,6 +22,9 @@ public class CustomerProfileTest {
 	NavigationMenuPage navigationMenuPage;
 	EditPhoneNumberPopup editPhoneNumberPopup;
 	EditEmailAddressPopup editEmailAddressPopup;
+	CustomerMenuComponent customerMenuComponent;
+	AuthyComponent authyComponent;
+	ChangePasswordComponent changePasswordComponent;
 
 	@BeforeTest
 	public void init() {
@@ -27,6 +33,9 @@ public class CustomerProfileTest {
 		navigationMenuPage = new NavigationMenuPage();
 		editPhoneNumberPopup = new EditPhoneNumberPopup();
 		editEmailAddressPopup = new EditEmailAddressPopup();
+		customerMenuComponent = new CustomerMenuComponent();
+		authyComponent = new AuthyComponent();
+		changePasswordComponent = new ChangePasswordComponent();
 	}
 
 	
@@ -170,5 +179,67 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}
 	}
+	@Test                               //added
+	@Parameters({ "strParams" })
+	public void testChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerMenuComponent.clickChangePassword();
+			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.changePasswordComponent().verifyHeading("heading");
+			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().clickSave();
+			if (!data.get("successMsg").isEmpty()) {
+				customerProfilePage.changePasswordComponent().verifyUpdatePassword(data.get("successMsg"));
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
+		}
+	}
+	
+	@Test                            //added
+	@Parameters({ "strParams" })
+	public void testChangePasswordInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerMenuComponent.clickChangePassword();
+			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().clickSave();
+			if (!data.get("errMessage").isEmpty()) {
+                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+            }
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test change password with invalis  credentials failed due to exception " + e);
+		}
+		}
+	
+	@Test                             //added
+	@Parameters({ "strParams" })
+	public void testChangePasswordInvalidAuthyCredentials(String strParams) {
+		try {
+			
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerMenuComponent.clickChangePassword();
+			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("invalidAuthyOtp"));
+			if (!data.get("errMessage").isEmpty()) {
+                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+            }
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test change password with invalis Authy credentials failed due to exception " + e);
+		}
+		}
 
 }
+
+
+
