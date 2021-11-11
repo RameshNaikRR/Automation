@@ -2,10 +2,19 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class FiltersComponent extends MobileFunctions {
+
+	private By lblFilter = MobileBy.xpath("");
+	private By btnFilters = MobileBy.xpath("");
+	private By lblTransactionType = MobileBy.xpath("");
+	private By lblTransactionSubType = MobileBy.xpath("");
+	private By lblTransactionStatus = MobileBy.xpath("");
+	private By lblTransactionAmount = MobileBy.xpath("");
+	private By lblDate = MobileBy.xpath("");
 
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnBuyToken = MobileBy.xpath(" ");
@@ -35,6 +44,9 @@ public class FiltersComponent extends MobileFunctions {
 
 	private By txtTransactionAmountFrom = MobileBy.xpath(" ");
 	private By txtTransactionAmountTo = MobileBy.xpath(" ");
+
+	private By btnResetAllFilters = MobileBy.xpath("");
+	private By applyFilter = MobileBy.xpath("");
 
 	public void clickPayRequest() {
 		click(btnPayRequest, "Click Pay Request");
@@ -135,6 +147,60 @@ public class FiltersComponent extends MobileFunctions {
 
 	public void fillTransactionAmountTo(String ToAmount) {
 		enterText(txtTransactionAmountTo, ToAmount, "To Amount");
+	}
+
+	public void clickFiltersIcon() {
+		click(btnFilters, "Filters Button");
+
+	}
+
+	public void clickResetAllFilters() {
+		click(btnResetAllFilters, "Reset All Filters");
+	}
+
+	public void clickAppliedFilters() {
+		click(applyFilter, "Applied Filters");
+
+	}
+
+	public void verifyResetAllFiltersView() {
+		new CommonFunctions().elementView(btnResetAllFilters, "ResetAllFilters");
+
+	}
+
+	public void verifyFiltersIconView() {
+		new CommonFunctions().elementView(btnFilters, "Filter");
+
+	}
+
+	public void verifyLabelFilterView() {
+		new CommonFunctions().elementView(lblFilter, "Label Filter");
+
+	}
+
+	public void verifyLabelTransactionTypeView() {
+		new CommonFunctions().elementView(lblTransactionType, "Label TransactionType");
+
+	}
+
+	public void verifyLabelTransactionSubTypeView() {
+		new CommonFunctions().elementView(lblTransactionSubType, "Label TransactionSubType");
+
+	}
+
+	public void verifyLabelTransactionStatusView() {
+		new CommonFunctions().elementView(lblTransactionStatus, "Label TransactionStatus");
+
+	}
+
+	public void verifyLabelTransactionAmountView() {
+		new CommonFunctions().elementView(lblTransactionAmount, "Label TransactionAmount");
+
+	}
+
+	public void verifyLabelDateView() {
+		new CommonFunctions().elementView(lblDate, "Label Date");
+
 	}
 
 }
