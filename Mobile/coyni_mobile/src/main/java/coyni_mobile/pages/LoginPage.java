@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -46,6 +47,10 @@ public class LoginPage extends MobileFunctions {
 
 	public RetrieveEmailPage retrieveEmailPage() {
 		return new RetrieveEmailPage();
+	}
+
+	public void verifyLoginView() {
+		new CommonFunctions().elementView(btnLogin, "Login page");
 	}
 
 }

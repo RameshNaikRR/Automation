@@ -2,8 +2,8 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomeComponent;
-import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -26,7 +26,7 @@ public class TokenAccountPage extends MobileFunctions {
 	   public String getAvailableBalance() {
 		   return getText(lblAvailableBalance);//doubt 
 	   }
-	   public void clickNotifications() {
+	   public void clickNotificationsIcon() {
 		   click(iconNotifications,"Notifications");
 	   }
 	   public void btnPayRequest() {
@@ -61,6 +61,10 @@ public class TokenAccountPage extends MobileFunctions {
 	   }
 	   public WithDrawToUSDPage withDrawToUSDPage() {
 		   return new WithDrawToUSDPage();
+	   }
+	   
+	   public NotificationComponent notificationComponent() {
+		   return new NotificationComponent();
 	   }
 	   }
 	
