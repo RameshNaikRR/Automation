@@ -59,7 +59,7 @@ public class CustomerProfilePage extends MobileFunctions {
    public void clickLogOut() {
 	   click(btnLogOut, "Click LogOut");
    }
-   public void verifyUserNameView() {
+   public void verifyProfilePageView() {
 	   new CommonFunctions().elementView(lblUserName, "UserName");
    }
    

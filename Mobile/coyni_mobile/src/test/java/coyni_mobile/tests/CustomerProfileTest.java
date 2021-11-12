@@ -33,21 +33,38 @@ public class CustomerProfileTest {
 		customerProfilePage.userDetailsPage().verifyEditUserImageView();
 		customerProfilePage.userDetailsPage().navigationComponent().verifyBackView();
 		customerProfilePage.userDetailsPage().navigationComponent().clickBack();
-		customerProfilePage.verifyUserNameView();
-		customerProfilePage.clickUserDetails();
-		customerProfilePage.userDetailsPage().clickEditUserImage();
-		customerProfilePage.userDetailsPage().verifyChooseFromLibraryView();
-		customerProfilePage.userDetailsPage().verifyEditUserImageView();
-		customerProfilePage.userDetailsPage().clickChooseFromLibrary();
-		customerProfilePage.userDetailsPage().chooseFromLibraryPopup().verifyDoneView();
-		customerProfilePage.userDetailsPage().chooseFromLibraryPopup().navigationComponent().verifyCloseView();
-		customerProfilePage.userDetailsPage().chooseFromLibraryPopup().ClickImage();
-		customerProfilePage.userDetailsPage().chooseFromLibraryPopup().clickDone();
-		
+		customerProfilePage.verifyProfilePageView();
 		
 		}catch(Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test user details view failed due to exception " + e );
 		}
 	}
 	
+	@Test
+	@Parameters({"strParams"})
+	public void testEditImageView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.clickUserDetails();
+			customerProfilePage.userDetailsPage().clickEditUserImage();
+			customerProfilePage.userDetailsPage().editUserImagePopup().verifyChooseFromLibraryView();
+			customerProfilePage.userDetailsPage().editUserImagePopup().verifyTakeAPhotoView();
+			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyLibraryView();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent().verifyCloseView();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyDoneView();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickImage();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickDone();
+			customerProfilePage.userDetailsPage().verifyHeading(data.get("heading"));
+			//Navigation userDetailsPage - ChooseFromLibraryPopup
+			customerProfilePage.userDetailsPage().clickEditUserImage();
+			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
+			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsPage().verifyHeading(data.get("heading"));
+			
+			
+			}catch(Exception e) {
+				ExtentTestManager.setFailMessageInReport("Test user details view failed due to exception " + e );
+			}
+		}
 }

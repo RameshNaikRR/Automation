@@ -11,7 +11,7 @@ public class ChooseFromLibraryPopup extends MobileFunctions{
 	private By btnDone =MobileBy.xpath("");
 	private By imgSelectPhoto =MobileBy.xpath("");
 	
-	public void ClickImage() {
+	public void clickImage() {
 		click(imgSelectPhoto, "Click Image");
 	}
 	
@@ -21,6 +21,12 @@ public class ChooseFromLibraryPopup extends MobileFunctions{
 	public void verifyDoneView() {
 		new CommonFunctions().elementView(btnDone, " Done ");
 	}
+	
+	public void verifyLibraryView() {
+		new CommonFunctions().elementView(btnDone, " Done ");
+	}
+	
+	
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();	
 		}

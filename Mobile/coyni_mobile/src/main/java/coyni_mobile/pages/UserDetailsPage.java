@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.ChooseFromLibraryPopup;
 import coyni_mobile.components.EditProfileComponent;
+import coyni_mobile.components.EditUserImagePopup;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -15,8 +16,7 @@ public class UserDetailsPage extends MobileFunctions {
 
 	private By heading =MobileBy.xpath("");
 	private By btnEditUserImage = MobileBy.xpath("");
-	private By lnkChooseFromLibrary =MobileBy.xpath("");
-	private By lnkTakeAPhoto =MobileBy.xpath("");
+	
 	private By lnkEditEmail = MobileBy.xpath("");
 	private By lnkEditPhoneNumber = MobileBy.xpath("");
 	private By lnkEditAddress = MobileBy.xpath("");
@@ -30,18 +30,7 @@ public class UserDetailsPage extends MobileFunctions {
 	public void clickEditUserImage() {
 		click(btnEditUserImage, "click Edit User Image");
 	}
-	public void clickChooseFromLibrary() {
-		click(lnkChooseFromLibrary, "Click Choose From Library");
-	}
-	public void clickTakeAphoto() {
-		click(lnkTakeAPhoto, "Click Take A Photo");
-	}
-	public void verifyChooseFromLibraryView() {
-		new CommonFunctions().elementView(lnkChooseFromLibrary, "Choose From Library");
-	}
-	public void verifyTakeAPhoto() {
-		new CommonFunctions().elementView(lnkTakeAPhoto	,"Take A Photo" );
-	}
+	
 
 	public void clickEditEmail() {
 		click(lnkEditEmail, "click Edit Email");
@@ -59,9 +48,7 @@ public class UserDetailsPage extends MobileFunctions {
 		return new EditProfileComponent();
 	}
 
-	public ChooseFromLibraryPopup chooseFromLibraryPopup() {
-		return new ChooseFromLibraryPopup();
-	}
+
 
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
@@ -69,6 +56,10 @@ public class UserDetailsPage extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 	return new NavigationComponent();	
+	}
+	
+	public EditUserImagePopup editUserImagePopup() {
+		return new EditUserImagePopup();
 	}
 	
 }
