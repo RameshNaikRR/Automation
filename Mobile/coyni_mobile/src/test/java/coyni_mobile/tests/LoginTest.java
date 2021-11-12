@@ -37,10 +37,10 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailOtp(loginData.get("emailOtpHeading"));
-			loginPage.forgotPasswordPage().verifyEmail(loginData.get("labelEmail"));
-			loginPage.forgotPasswordPage().clickResend();
-			loginPage.forgotPasswordPage().clickClose();
+			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+			loginPage.forgotPasswordPage().navigationComponent().clickClose();
 			loginPage.verifyLoginView();
 
 		} catch (Exception e) {
@@ -78,8 +78,8 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailOtp(loginData.get("emailOtpHeading"));
-			loginPage.forgotPasswordPage().fillInputBoxes(loginData.get(""));
+			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("invalidOtp"));
 			if (!loginData.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
 			}

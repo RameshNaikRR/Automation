@@ -30,6 +30,10 @@ public class TokenAccountTest {
 
 	}
 
+	// private By viewDot= MobileBy.xpath("");
+
+	String s1 = "demi";
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testNotification(String strParams) {
@@ -37,9 +41,16 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().clickNotifications();
+			tokenAccountPage.notificationComponent().viewNotification();
+			// tokenAccountPage.notificationComponent().clickNotifications();
+			tokenAccountPage.notificationComponent().readDot(); // Dot message //read and delete
+			tokenAccountPage.notificationComponent().viewPay();
+			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().viewRequest();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickBack();
+			tokenAccountPage.notificationComponent().readDot(); // dot Read
+			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Notification faield due to exception " + e);
@@ -53,7 +64,8 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().clickPay();
+			tokenAccountPage.notificationComponent().viewPay();
+			tokenAccountPage.notificationComponent().clickPay(data.get("senderName"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Notification pay faield due to exception " + e);
@@ -66,8 +78,9 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().clickNotifications();
-			tokenAccountPage.notificationComponent().clickDeny();
+			tokenAccountPage.notificationComponent().viewDeny();
+			tokenAccountPage.notificationComponent().clickDeny(data.get("senderName"));
+			tokenAccountPage.notificationComponent().verifyDenyHeading(data.get("denyHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Notification Deny faield due to exception " + e);
@@ -82,7 +95,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickRemainder();
+			tokenAccountPage.notificationComponent().clickRemainder(data.get("senderName"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Request Remainder  faield due to exception " + e);
@@ -97,7 +110,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickCancel();
+			tokenAccountPage.notificationComponent().clickCancel(data.get("senderName"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Request cancel  faield due to exception " + e);
@@ -112,7 +125,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickPay();
+			tokenAccountPage.notificationComponent().clickPay(data.get("senderName"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Request Pay  faield due to exception " + e);
 		}
@@ -126,7 +139,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickDeny();
+			tokenAccountPage.notificationComponent().clickDeny(data.get("senderName"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Request Deny  faield due to exception " + e);
 		}
@@ -207,6 +220,21 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testDateRange failed due to exception " + e);
 		}
 
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testCrossIcon(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			transactionPage.FiltersComponent().navigationComponent().clickClose();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
+		}
 	}
 
 }

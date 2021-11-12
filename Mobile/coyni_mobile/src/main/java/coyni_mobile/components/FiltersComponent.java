@@ -203,4 +203,8 @@ public class FiltersComponent extends MobileFunctions {
 
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 }
