@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -21,14 +22,14 @@ public class CustomerProfilePage extends MobileFunctions {
     private By btnLogOut =MobileBy.xpath("");
     
     
-    public void verifyUserName() {
-    	//
+    public void verifyUserName(String expUserName) {
+    	new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);
     }
-    public void verifyAccountID() {
-    	//
+    public void verifyAccountID(String expAccountID) {
+    	new CommonFunctions().verifyLabelText(lblAccountID, "Account ID", expAccountID);
     }
-   public void verifyAccountStatus() {
-	   
+   public void verifyAccountStatus(String expStatus) {
+	   new CommonFunctions().verifyLabelText(lblAccountStatus, "Account Status", expStatus);
    }
    public void clickUserDetails() {
 	   click(lnkUserDetails	, " Click User Details");
@@ -58,23 +59,14 @@ public class CustomerProfilePage extends MobileFunctions {
    public void clickLogOut() {
 	   click(btnLogOut, "Click LogOut");
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   public void verifyUserNameView() {
+	   new CommonFunctions().elementView(lblUserName, "UserName");
+   }
+   
+   public void verifyUserDetailsView() {
+		new CommonFunctions().elementView(lnkUserDetails, "User Details");
+	}
+public UserDetailsPage userDetailsPage() {
+	return new UserDetailsPage();
+}
 }
