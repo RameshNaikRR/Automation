@@ -18,11 +18,42 @@ public class UserDetailsPage extends MobileFunctions {
 	private By btnEditUserImage = MobileBy.xpath("");
 	
 	private By lnkEditEmail = MobileBy.xpath("");
+	private By lblEmailTitle =MobileBy.xpath("");
+	private By lblExistingEmail =MobileBy.xpath("");
 	private By lnkEditPhoneNumber = MobileBy.xpath("");
+	private By lblAddressTitle =MobileBy.xpath("");
+	private By lblExistingAddress =MobileBy.xpath("");
 	private By lnkEditAddress = MobileBy.xpath("");
+	private By lblPhoneNumberTitle =MobileBy.xpath("");
+	private By lblExistingPhonenumber =MobileBy.xpath("");
+	
 
+	public void verifyPhoneNumberTitleView() {
+		new CommonFunctions().elementView(lblPhoneNumberTitle, "PhoneNumber Title");
+	}
+	public void verifyExistingPhoneNumberView() {
+		new CommonFunctions().elementView(lblExistingPhonenumber, "Existing PhoneNumber");
+	}
+	public void verifyEditPhoneNumberArrowView() {
+		new CommonFunctions().elementView(lnkEditPhoneNumber, "Edit PhoneNumber Arrow");
+	}
+	
+	
+	
+	public void verifyEmailTitleView() {
+		new CommonFunctions().elementView(lblEmailTitle, "Email Title");
+	}
+	public void verifyExistingEmailView() {
+		new CommonFunctions().elementView(lblExistingEmail, "Existing Email");
+	}
+	public void verifyEditEmailArrowView() {
+		new CommonFunctions().elementView(lnkEditEmail, "Edit Email Arrow");
+	}
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
+	}
+	public void verifyUserDetailsPageview() {
+		new CommonFunctions().elementView(heading, "User Details Page");
 	}
 	public void verifyEditUserImageView() {
 		new CommonFunctions().elementView(btnEditUserImage, "Edit Image");
@@ -40,6 +71,15 @@ public class UserDetailsPage extends MobileFunctions {
 		click(lnkEditPhoneNumber, "click Edit Phone Number");
 	}
 
+	public void verifyAddressTitleView() {
+		new CommonFunctions().elementView(lblAddressTitle, "Address Title");
+	}
+	public void verifyExistingAddressView() {
+		new CommonFunctions().elementView(lblExistingAddress, "Existing Address");
+	}
+	public void verifyEditAddressArrowView() {
+		new CommonFunctions().elementView(lnkEditAddress, "Edit Address Arrow");
+	}
 	public void clickEditAddress() {
 		click(lnkEditAddress, "click Edit Address");
 	}

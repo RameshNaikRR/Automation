@@ -2,10 +2,11 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class MallingAddressComponent extends MobileFunctions{
+public class MailingAddressComponent extends MobileFunctions{
 	
 	private By txtAddressLine1 = MobileBy.xpath("");
 	private By txtAddressLine2 = MobileBy.xpath("");
@@ -24,17 +25,33 @@ public class MallingAddressComponent extends MobileFunctions{
 	public void fillCity(String city) {
 		enterText(txtCity, city, "City");
 	}
-//	public void selectDropDown() {   ----pending?
-//		selectDropDown();
-//	}
+	public void selectState() {  
+		//
+	}
 	public void fillZipCode(String zipCode) {
 		enterText(txtZipCode, zipCode, "ZipCode");
 	}
-//	public void verifyCountry() {------pending?
-//		getText(lblCountry);
-//	}
+	public void verifyCountry(String expCountry) {
+		new CommonFunctions().verifyLabelText(lblCountry, "Country", expCountry);
+	}
 	public void clickAddCard() {
 		click(btnAddCard, "Add Card");
 	}
-
+   public void verifyAddressLine1View() {
+	   new CommonFunctions().elementView(txtAddressLine1, "Address line1 text field");
+   }
+	
+   public void verifyAddressLine2View() {
+	   new CommonFunctions().elementView(txtAddressLine2, "Address line2  text field");
+   }
+   public void verifyCityView() {
+	   new CommonFunctions().elementView(txtCity, "City text field");
+   }
+   public void verifyStateView() {
+	   new CommonFunctions().elementView(drpDwnState, "State dropdown");
+   }
+   public void verifyZipCodeView() {
+	   new CommonFunctions().elementView(txtZipCode, "ZipCode  text field");
+   }
+	
 }
