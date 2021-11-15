@@ -16,13 +16,13 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions{
 	
-	private By txtEmail = By.name("");
-	private By txtPassword = By.name("");
-	private By lnkForgotEmail = By.name(" ");
-	private By lnkForgotPassword = By.name("");
-	private By btnNext = By.name("");
-	private By lnkSignUp = By.name(" ");
-	private By heading = By.name("");
+	private By txtEmail = By.name("email");
+	private By txtPassword = By.name("password");
+	private By lnkForgotEmail = By.xpath("//span[text()='Forgot Email?']");
+	private By lnkForgotPassword = By.xpath("//span[text()='Forgot Password?']");
+	private By btnNext = By.xpath("//button[text()='Next']");
+	private By lnkSignUp = By.xpath("//span[text()='Sign Up']");
+	private By heading = By.cssSelector(".business-login__title");
 	private By lnkBackToLogin = By.name(" ");
 	private By txtPhoneNumber = By.name("");
 	private By lblerrorMsg =By.cssSelector("");

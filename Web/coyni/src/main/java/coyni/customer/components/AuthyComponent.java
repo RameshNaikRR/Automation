@@ -14,11 +14,11 @@ public class AuthyComponent extends  BrowserFunctions{
 
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
 	
-	private By heading = By.cssSelector("");
+	private By heading = By.cssSelector(".VerifyYourIdentity_two_step_sub__14Irv>div:first-of-type");
 	
-	private By lblMessage = By.cssSelector("");
+	private By lblMessage = By.cssSelector("span[class*='VerifyYourIdentity_two_step']");
 	
-	private By lnkGoBack = By.cssSelector("");
+	private By lnkGoBack = By.cssSelector("//div[text()='Go Back']");
 
 	private static String prevCode = "";
 
