@@ -8,11 +8,25 @@ import coyni.customer.components.PaymentMethodsComponent;
 import coyni.customer.components.PreferencesComponent;
 import coyni.customer.components.ToastComponent;
 import coyni.customer.components.UserDetailsComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class CustomerProfilePage extends BrowserFunctions{
+	private By imageImg = By.cssSelector(" ");
+	private By lblAccountId = By.cssSelector(" ");
+	private By lblAccountUser = By.cssSelector(" ");
 	
 	
+	
+	public void verifyViewImage() {
+		new CommonFunctions().elementView(imageImg, "imageImg");
+	}
+	public void verifyViewAccountId() {
+		new CommonFunctions().elementView(lblAccountId, "AccountId");
+	}
+	public void verifyViewAccountUser() {
+		new CommonFunctions().elementView(lblAccountUser, "AccountUser");
+	}
 	
 	public  CustomerMenuComponent    customerMenuComponent() {
 	return new CustomerMenuComponent();

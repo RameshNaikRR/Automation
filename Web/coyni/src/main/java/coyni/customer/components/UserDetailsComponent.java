@@ -2,15 +2,12 @@ package coyni.customer.components;
 
 import org.openqa.selenium.By;
 
-import coyni.customer.popups.AccountProfileImagePopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class UserDetailsComponent extends BrowserFunctions{
 	
-	private By lblUserDetailsHeading =By.cssSelector("");
-	
-	private By btnEditUserImage =By.cssSelector("");
+	private By editUserImage =By.cssSelector("");
 	
 	private By lnkRemoveImage = By.cssSelector("");
 	
@@ -39,13 +36,38 @@ public class UserDetailsComponent extends BrowserFunctions{
     private By iconEditPhNum =By.cssSelector("");
     
     private By iconEditAddress =By.cssSelector("");
+    private By userImg = By.cssSelector(" ");
+    private By accountId = By.cssSelector(" ");
+    private By lblPhoneNum = By.cssSelector(" ");
+    private By lblEmailAddress = By.cssSelector("");
+    private By lblAccountAddress = By.cssSelector(" ");
     
-    private By lblAccountID =By.cssSelector("");
+  
+    public void verifyViewuserImg() {
+    	new CommonFunctions().elementView(editUserImage, "UserImg");
+    }
+    public void verifyViewUserName() {
+    	new CommonFunctions().elementView(lblUserName, "UserName");
+    }
+    public void verifyviewAccountId() {
+    	new CommonFunctions().elementView(accountId, "accountId");
+    }
+    public void verifyViewAccountStatus() {
+    	new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
+    }
+    public void verifyViewPhoneNum() {
+    	new CommonFunctions().elementView(lblPhoneNum, "PhoneNum");
+    }
+    public void verifyViewEmailAddress() {
+    	new CommonFunctions().elementView(lblEmailAddress, "EmailAddress");
+    }
+    public void verifyViewAccountAddress() {
+    	new CommonFunctions().elementView(lblAccountAddress, "AccountAddress");
+    }
     
-    private By lblPhoneNumber =By.cssSelector("");
     
     public void clickEditUserImage() {
-    	click(btnEditUserImage, "Edit User Image");
+    	click(editUserImage, "Edit User Image");
     }
     public void clickRemoveImage() {
     	click(lnkRemoveImage, "Remove Image");
@@ -92,37 +114,9 @@ public class UserDetailsComponent extends BrowserFunctions{
     }
     public void clickIconEditAddress() {
     	click(iconEditAddress, "Click Edit Address Icon");
-    	
     }
-    public void verifyUserDetailsView() {
-		new CommonFunctions().elementView(lblUserDetailsHeading, " User Details ");
-	}
+   
 
-    public void verifyUserNameView() {
-    	new CommonFunctions().elementView(lblUserName, "User Name ");
-    }
-    public void verifyAccountStatusView() {
-    	new CommonFunctions().elementView(lblAccountStatus, "Account Status");
-    }
-    
-    public void verifyAccountIDView() {
-    	new CommonFunctions().elementView(lblAccountID, "Account ID ");
-    }
-    public void verifyPhoneNumberView() {
-    	new CommonFunctions().elementView(lblPhoneNumber, "Phone Number ");
-    }
-    public void verifyEmailView() {
-    	new CommonFunctions().elementView(lblEmail, "Email ");
-    }
-    
-    public void verifyAddressView() {
-    	new CommonFunctions().elementView(lblAddress, "Address ");
-    }
-    
-    public void verifyEditImageView() {
-    	new CommonFunctions().elementView(btnEditUserImage, "Edit user Image");
-    }
-    
     public MailingAddressComponent mailingAddressComponent() {
     	return new MailingAddressComponent();
     }
@@ -132,9 +126,7 @@ public class UserDetailsComponent extends BrowserFunctions{
     public NotificationsComponent notificationsComponent() {
     	return new NotificationsComponent();
     }
-   public AccountProfileImagePopup accountProfileImagePopup() {
-	   return new AccountProfileImagePopup();
-   }
+   
     }
 
 

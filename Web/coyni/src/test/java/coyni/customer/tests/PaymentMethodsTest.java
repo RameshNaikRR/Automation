@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import coyni.customer.pages.CustomerProfilePage;
 import coyni.customer.pages.NavigationMenuPage;
+import coyni.customer.pages.TokenAccountPage;
 import coyni.customer.popups.AddNewPaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -15,7 +16,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class PaymentMethodsTest{
 	CustomerProfilePage customerProfilePage;
 	NavigationMenuPage navigationMenuPage;
-
+    TokenAccountPage tokenAccountPage;
 	@BeforeTest
     public void init() {
 		customerProfilePage = new CustomerProfilePage();
@@ -38,13 +39,18 @@ public class PaymentMethodsTest{
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " +e);
 		}
 	} 
+	
 
 	@Test
 	@Parameters({"strParams"})
 	public void testAddDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardNumber(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().verifyCardType(data.get(" "));
@@ -96,7 +102,11 @@ public class PaymentMethodsTest{
 	public void testAddDebitCardWihInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardExpiry(data.get("expiryDate"));
@@ -125,7 +135,11 @@ public class PaymentMethodsTest{
 	public void testDebitAuthiWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardExpiry(data.get("expiryDate"));

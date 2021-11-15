@@ -9,6 +9,8 @@ import coyni.customer.components.TokensReceivedDetailsComponent;
 import coyni.customer.components.TokensSentDetailsComponent;
 import coyni.customer.components.TokensWithdrawnDetailsComponent;
 import coyni.customer.components.TransactionsListComponent;
+import coyni.customer.components.UserDetailsComponent;
+import coyni.customer.components.UserNameDropDownComponent;
 import coyni.customer.popups.BuyCoyniTokensPaymentMethodPopup;
 import coyni.customer.popups.PayAndRequestTokensPopup;
 import coyni.customer.popups.WithdrawCoyniToUSDPopup;
@@ -20,12 +22,14 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnPayRequestToken = By.name(" ");
 	private By btnBuyTokens = By.name(" ");
 	private By btnWithdrawToUSD = By.name(" ");
-
+    private By dropDownUserName = By.name(" ");
 	public String getAvailableBalance() {
 		return getText(lblAvailableBalance, "Available Balance");
 
 	}
-
+    public void clickUserName() {
+    	click(dropDownUserName, "UserName");
+    }
 	public void clickPayRequestToken() {
 		click(btnPayRequestToken, "PayRequestToken");
 	}
@@ -64,7 +68,9 @@ public class TokenAccountPage extends BrowserFunctions {
 	public TokensSentDetailsComponent tokensSentDetailsComponent() {
 		return new TokensSentDetailsComponent();
 	}
-
+    public UserNameDropDownComponent userNameDropDownComponent() {
+    	return new UserNameDropDownComponent();
+    }
 	public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
 		return new TokensReceivedDetailsComponent();
 	}
@@ -80,7 +86,9 @@ public class TokenAccountPage extends BrowserFunctions {
 	public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
 		return new TokenPaidOrdersDetailsComponent();
 	}
-
+  public NavigationMenuPage navigationMenuPage() {
+	  return new NavigationMenuPage();
+  }
 	public PayAndRequestTokensPopup payAndRequestTokensPopup() {
 		return new PayAndRequestTokensPopup();
 	}
