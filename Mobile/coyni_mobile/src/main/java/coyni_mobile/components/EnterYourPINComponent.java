@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.pages.EditAddressPage;
 import coyni_mobile.pages.EditEmailPage;
 import coyni_mobile.pages.EditPhoneNumberPage;
+import coyni_mobile.pages.EnableFaceIDpage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -34,7 +35,12 @@ public class EnterYourPINComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 	}
 
-
+public  EnableFaceIDpage enableFaceIDpage() {
+	return new EnableFaceIDpage();
+}
+public ForgotPinComponent forgotPinComponent() {
+	return new ForgotPinComponent();
+}
 public EditEmailPage editEmailPage() {
 	return new EditEmailPage();
 }

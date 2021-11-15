@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomeComponent;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -21,11 +22,14 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnIssueCard = MobileBy.xpath(" ");
 
 	public void verifyUserName(String userName) {
-		// new CommonFunctions().verifyLabelText(lblUserName, "userName", userName);
+	 new CommonFunctions().verifyLabelText(lblUserName, "userName", userName);
 	}
 
 	public String getAvailableBalance() {
 		return getText(lblAvailableBalance);// doubt
+	}
+	public void verifyAvailableBalanceView() {
+		new CommonFunctions().elementView(lblAvailableBalance, "AvailableBalance");
 	}
 
 	public void clickNotificationsIcon() {

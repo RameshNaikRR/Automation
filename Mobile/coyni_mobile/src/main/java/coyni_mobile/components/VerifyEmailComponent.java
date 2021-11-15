@@ -11,15 +11,18 @@ public class VerifyEmailComponent extends MobileFunctions{
 	private By lblEmail = MobileBy.xpath("");
 	private By lnkResend = MobileBy.xpath("");
 	private By txtInputBoxes = MobileBy.xpath("");
-	private By verifyEmailHeading = MobileBy.xpath("");
+	private By lblverifyEmail = MobileBy.xpath("");
+	
 	
 	public void verifyEmail(String expEmail) {
 		new CommonFunctions().verifyLabelText(lblEmail, "Exp Email", expEmail);
 	}
-	
-	public void verifyEmailOtpHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(verifyEmailHeading, "Verify Email Otp Screen ", expHeading);
+	public void verifyEmailview() {
+		new CommonFunctions().elementView(lblverifyEmail, "verifyEmail");
 	}
+//	public void verifyEmailOtpHeading(String expHeading) {
+//		new CommonFunctions().verifyLabelText(verifyEmailHeading, "Verify Email Otp Screen ", expHeading);
+//}
 
 	public void clickResend() {
 		click(lnkResend, "Resend");
