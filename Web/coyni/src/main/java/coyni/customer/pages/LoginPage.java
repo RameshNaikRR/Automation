@@ -23,15 +23,15 @@ public class LoginPage extends BrowserFunctions{
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//span[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title");
-	private By lnkBackToLogin = By.name(" ");
-	private By txtPhoneNumber = By.name("");
-	private By lblerrorMsg =By.cssSelector("");
-	private By txtFirstName =By.cssSelector("");
-	private By txtLastName =By.cssSelector("");
-	private By lblPhoneNumber =By.cssSelector("");
+	private By lnkBackToLogin = By.className("pl-1");
+	private By txtPhoneNumber = By.id("Phone-Number");
+	private By lblerrorMsg =By.cssSelector("span.error");
+	private By txtFirstName =By.name("first_name");
+	private By txtLastName =By.name("last_name");
+	private By lblPhoneNumber =By.cssSelector(".text-base");
 	private By lblEmail =By.cssSelector("");
-	private By lnkResend =By.cssSelector("");
-	private By lnkGoBack =By.cssSelector("");
+	private By lnkResend =By.xpath("//div[contains(text(),'Resend')]");
+	private By lnkGoBack =By.className("mt-3");
 	private By txtOTP=By.cssSelector("");
 	
 	public void fillEmail(String userName) {
@@ -48,7 +48,12 @@ public class LoginPage extends BrowserFunctions{
     	click(lnkForgotPassword, "ForgotPassword");
     }
 	public void clickNext() {
-		click(btnNext, "Next");
+		if(getElement(btnNext, "Enabled").isEnabled()) {
+			click(btnNext, "Next");
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("Next button is Disabled" );
+			}
 	}
 	public void clickSignUp() {
 		click(lnkSignUp, "SignUp");
