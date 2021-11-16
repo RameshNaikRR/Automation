@@ -7,16 +7,16 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AddCardComponent extends BrowserFunctions{
 	
-	private By txtNameOnCard =By.cssSelector("");
+	private By txtNameOnCard =By.id("name-on-card");
 	
-	private By txtCardNumber = By.cssSelector("");
+	private By txtCardNumber = By.name("cardNumber");
 	
-	private By lblCardType =By.cssSelector("");
+	private By lblCardType =By.name("");
 	
-	private By txtCardExp =By.cssSelector("");
+	private By txtCardExp =By.name("expiryDate");
 	
-	private By txtCVVorCVC =By.cssSelector("");
-	private By lblErrorMsg = By.cssSelector(" ");
+	private By txtCVVorCVC =By.name("cvv");
+	private By lblErrorMsg = By.cssSelector("span.text-crd5 ");
 
     public void fillNameOnCard(String nameOnCard) {
     	enterText(txtNameOnCard, nameOnCard, "Name On Card");

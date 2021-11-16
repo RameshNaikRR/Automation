@@ -6,19 +6,20 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class MailingAddressComponent extends BrowserFunctions {
-	private By txtAddress1 = By.cssSelector("");
+	
+	private By txtAddress1 = By.name("addressLine1");
 
-	private By txtAddresss2 = By.cssSelector("");
+	private By txtAddresss2 = By.name("addressLine2");
 
-	private By txtCity = By.cssSelector("");
+	private By txtCity = By.name("city");
 
-	private By drpDwnState = By.cssSelector("");
+	private By drpDwnState = By.xpath("//div[text()='State']/following-sibling::div");
 
-	private By txtZipCode = By.cssSelector("");
+	private By txtZipCode = By.name("zipCode");
 
 	private By txtCountry = By.cssSelector("");
 
-	private By btnSave = By.cssSelector("");
+	private By btnSave = By.xpath("//button[text()='Next']");
 
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
