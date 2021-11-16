@@ -7,12 +7,12 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	
-  private By btnExternalBankAccount = By.cssSelector("");
-  private By btnDebitCard = By.cssSelector("");
-  private By btnCreditCard = By.cssSelector("");
-  private By lblExternalBankAccountCount = By.cssSelector("");
-  private By lblDebitCardCount = By.cssSelector("");
-  private By lblCreditCardCount = By.cssSelector("");
+  private By btnExternalBankAccount = By.xpath("//span[text()='Bank Account']");
+  private By btnDebitCard = By.xpath("//span[text()='Debit Card']");
+  private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
+  private By lblExternalBankAccountCount = By.xpath("(//span[@class='count'])[1]");
+  private By lblDebitCardCount = By.xpath("(//span[@class='count'])[2]");
+  private By lblCreditCardCount = By.xpath("(//span[@class='count'])[3]");
   
   public void clickaddExternalBankAccount() {
 	  click(btnExternalBankAccount, "Click ExternaBankAccount");

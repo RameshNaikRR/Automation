@@ -8,12 +8,12 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class CardsComponent extends BrowserFunctions {
 	
-	private By lblCardNumber = By.cssSelector("");
+	private By lblCardNumber = By.cssSelector(".text-base.font-semibold.text-cgy4");
 	private By lblCardBrand  = By.cssSelector("");
-	private By lblCardType = By.cssSelector("");
-	private By iconEdit = By.cssSelector("");
-	private By iconDelete = By.cssSelector("");
-	private By lblAddress = By.cssSelector("");
+	private By lblCardType = By.cssSelector(".icon-mastercard");
+	private By iconEdit = By.cssSelector(".icon-edit.PaymentMethod_action_icon__3z0Dn");
+	private By iconDelete = By.cssSelector(".icon-trash.PaymentMethod_action_icon__3z0Dn");
+	private By lblAddress = By.cssSelector(".relative.mt-4");
 	private By lblExpired = By.cssSelector("");
 	
 	
