@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -66,7 +67,7 @@ public class LoginPage extends BrowserFunctions{
 		 enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
 	}
 	public  void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "autentication heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Login heading", expHeading);
 	}
 	
 	public void fillFirstName(String firstName) {
@@ -119,9 +120,15 @@ public class LoginPage extends BrowserFunctions{
 	}
 	
 	
+	
+	
+	
 	public ToastComponent toastComponent() {
 		return new ToastComponent();}
   public AuthyComponent authyComponent() {
     return new AuthyComponent();}
 
+  public PhoneVerificationComponent phoneVerificationComponent() {
+	  return new PhoneVerificationComponent();
+  }
 }

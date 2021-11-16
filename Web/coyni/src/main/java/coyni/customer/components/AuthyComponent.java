@@ -73,4 +73,24 @@ public class AuthyComponent extends  BrowserFunctions{
 		click(lnkGoBack, "Back Option");
 	}
 	
+	public void verifyLogin(){
+		waitForCondition(e -> e.getCurrentUrl().contains("getstarted"), "Waiting for url to contain token-account");
+		String pageURL = getPageURL();
+		if(pageURL.contains("token-account")||pageURL.contains("getstarted")) {
+			ExtentTestManager.setPassMessageInReport("Login success");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Login failed. Page url "+pageURL+" does not contains token-account");
+		}
+	}
+
+public void verifyLoginWithInvalidPin(){
+		
+		String pageURL = getPageURL();
+		if(pageURL.contains("token-account")||pageURL.contains("getstarted")) {
+			ExtentTestManager.setInfoMessageInReport("Login success with invalid pin");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Login failed with invalid pin");
+		}
+	}
 }
+

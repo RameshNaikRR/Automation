@@ -34,10 +34,12 @@ public class LoginTest {
 			 loginPage.fillEmail(data.get("email"));
 			 loginPage.fillPassword(data.get("password"));
 			 loginPage.clickNext();
+			 Thread.sleep(2000);
 			 loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			 loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			 Thread.sleep(500);
 			 loginPage.authyComponent().verifyMessage(data.get("message"));
-			 //verify login ?
+			 loginPage.authyComponent().verifyLogin();
 		 }
 		 catch (Exception e) {
 	            ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
@@ -248,12 +250,60 @@ public class LoginTest {
 			 loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			 loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"));
 			 if (!data.get("errMessage").isEmpty()) {
-	                new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"));
+				    Thread.sleep(2000);
+	                loginPage.authyComponent().verifyMessage(data.get("errMessage"));
 	            }
+			 Thread.sleep(2000);
+			 loginPage.authyComponent().verifyLoginWithInvalidPin();
 		 }
 		 catch (Exception e) {
 	            ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 	        }
 	 }
 	 
+	 @Test
+	 @Parameters({"strParams"})
+	 public void testLoginWithPhoneNumber(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.fillEmail(data.get("email"));
+			 loginPage.fillPassword(data.get("password"));
+			 loginPage.clickNext();
+			 loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
+			 loginPage.phoneVerificationComponent().fillpin(data.get("code"));
+			 loginPage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
+			 loginPage.phoneVerificationComponent().clickResend();
+			 loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+			 for(int i=0;i<=3;i++) {
+				 Thread.sleep(5000);
+				 loginPage.phoneVerificationComponent().clickResend();
+				 loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+			 }
+		 }
+		 catch (Exception e) {
+	            ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
+	        }
+	 }
+	 @Test
+	 @Parameters({"strParams"})
+	 public void testLoginWithPhoneNumberPin(String strParams) {
+		 try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 loginPage.verifyHeading(data.get("loginHeading"));
+			 loginPage.fillEmail(data.get("email"));
+			 loginPage.fillPassword(data.get("password"));
+			 loginPage.clickNext();
+			 loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
+			 loginPage.phoneVerificationComponent().fillpin(data.get("code")); 
+			 if (!data.get("errMessage").isEmpty()) {
+	                loginPage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
+	            }
+			 Thread.sleep(2000);
+			 loginPage.phoneVerificationComponent().verifyLoginWithInvalidPin();
+		 }
+		 catch (Exception e) {
+	            ExtentTestManager.setFailMessageInReport("test login with phone number pin failed due to exception " + e);
+	        }
+	 }
 }
