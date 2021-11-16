@@ -14,7 +14,7 @@ public class CommonFunctions {
 	BrowserFunctions objBrowserFunctions = new BrowserFunctions();
 	
 	public void verifyLabelText(By label, String labelName, String expText){
-		objBrowserFunctions.waitForElement(label, BrowserFunctions.waittime, WaitForElement.presence);
+		objBrowserFunctions.waitForCondition(e->e.findElement(label).isDisplayed(), labelName+ " is displayed");
 		String actText = objBrowserFunctions.getText(label, labelName).trim().replace("\n", "").replace(",", "");
 		if (expText.equalsIgnoreCase(actText)){
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));

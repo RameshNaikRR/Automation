@@ -51,6 +51,7 @@ public class AuthyComponent extends  BrowserFunctions{
 	}
 	
 	public void verifyMessage(String expMessage) {
+		waitForCondition(e->e.findElement(lblMessage).getText().contains("Verification"), "verification message is displayed");
 		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
 	
