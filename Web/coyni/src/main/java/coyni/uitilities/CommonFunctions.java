@@ -48,7 +48,7 @@ public class CommonFunctions {
 
 	public void validateFormErrorMessage(String expErrMsg,String expcolour) {
 		try {
-			By errorMsgs = By.cssSelector("span.error");
+			By errorMsgs = By.cssSelector("span.text-crd5");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 			boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
@@ -84,7 +84,7 @@ public class CommonFunctions {
 	
 	public void getcssValue(String expcolour) {
 		try {
-			By txterror = By.cssSelector("input.error");
+			By txterror = By.cssSelector("div[class *= 'FormField_error']");
 			String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
 			ExtentTestManager.setInfoMessageInReport(value);
 

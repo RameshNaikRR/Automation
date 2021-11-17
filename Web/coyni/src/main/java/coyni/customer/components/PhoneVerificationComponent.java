@@ -12,8 +12,8 @@ import ilabs.api.reporting.ExtentTestManager;
 public class PhoneVerificationComponent extends BrowserFunctions {
 
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	private By heading = By.cssSelector("");
-	private By lblMessage = By.cssSelector("");
+	private By heading = By.cssSelector(".SmsValidationTwillo_phone_validation_sub__3YUB7>div:first-of-type");
+	private By lblMessage = By.cssSelector("span[class*='SmsValidationTwillo_phone_validation__verification']");
 	private By lnkResend =By.cssSelector("");
 	private By lnkGoBack = By.cssSelector("//div[text()='Go Back']");
 

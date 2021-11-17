@@ -1,5 +1,8 @@
 package coyni.customer.pages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +16,7 @@ import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions{
@@ -23,7 +27,7 @@ public class LoginPage extends BrowserFunctions{
 	private By lnkForgotPassword = By.xpath("//span[text()='Forgot Password?']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//span[text()='Sign Up']");
-	private By heading = By.cssSelector(".business-login__title");
+	private By heading = By.cssSelector(".business-login__title,.title");
 	private By lnkBackToLogin = By.className("pl-1");
 	private By txtPhoneNumber = By.id("Phone-Number");
 	private By lblerrorMsg =By.cssSelector("span.error");
@@ -34,6 +38,7 @@ public class LoginPage extends BrowserFunctions{
 	private By lnkResend =By.xpath("//div[contains(text(),'Resend')]");
 	private By lnkGoBack =By.className("mt-3");
 	private By txtOTP=By.cssSelector("");
+	private By iconeye =By.cssSelector(".icon-button");
 	
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
@@ -59,6 +64,9 @@ public class LoginPage extends BrowserFunctions{
 	public void clickSignUp() {
 		click(lnkSignUp, "SignUp");
 	}
+	public void clickeyeIcon() {
+		click(iconeye, "eye icon");
+	}
 
 	public void clickBackToLogin() {
 		 click(lnkBackToLogin, "BackToLogin");
@@ -83,7 +91,30 @@ public class LoginPage extends BrowserFunctions{
 	public void clickGoBack() {
 		click(lnkGoBack, "click goback");
 	}
-	
+	public void verifySignUpView() {
+		new CommonFunctions().elementView(lnkSignUp, "Sign up");
+	}
+	public void verifyEmailView() {
+		new CommonFunctions().elementView(txtEmail, "Email");
+	}
+	public void verifyPasswordView() {
+		new CommonFunctions().elementView(txtPassword, "Password");
+	}
+	public void verifyForgotEmailView() {
+		new CommonFunctions().elementView(lnkForgotEmail, "Forgot Email");
+	}
+	public void verifyForgotPasswordView() {
+		new CommonFunctions().elementView(lnkForgotPassword, "Forgot Password");
+	}
+	public void verifyPasswordMaskedView(String attribute,String password) {
+		String attributeValue = getAttributeValue(txtPassword, attribute, password);
+		if(attributeValue.contains("password")) {
+  		  
+  		  ExtentTestManager.setInfoMessageInReport(password+" masked with black circles");
+  		} else {
+  			ExtentTestManager.setInfoMessageInReport(password+" not masked with black circles");
+	}
+	}
 	
 	public void fillVerificationInput(String code) {
 		List<WebElement> inputs = getElementsList(txtOTP, "OTP boxes");
@@ -119,7 +150,11 @@ public class LoginPage extends BrowserFunctions{
 		}
 	}
 	
-	
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		 robot.keyPress(KeyEvent.VK_TAB);
+		  robot.keyRelease(KeyEvent.VK_TAB);
+	}
 	
 	
 	

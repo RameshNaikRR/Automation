@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ToastComponent extends BrowserFunctions {
 
-	private By title = By.cssSelector("");
-	private By message = By.cssSelector("");
+	private By title = By.cssSelector(".title");
+	private By message = By.cssSelector(".message");
 	private By btnClose = By.cssSelector("");
 
 	/**

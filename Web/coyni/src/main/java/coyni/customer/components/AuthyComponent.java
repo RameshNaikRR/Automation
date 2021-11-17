@@ -56,7 +56,7 @@ public class AuthyComponent extends  BrowserFunctions{
 	}
 	
 	
-	public void fillAuthyInputInvalid(String code) {
+	public void fillAuthyInputInvalid(String code,String character) {
 		
 		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
 		int noOfInputs = inputs.size();
@@ -64,7 +64,7 @@ public class AuthyComponent extends  BrowserFunctions{
 			for (int i = 0; i < noOfInputs; i++) {
 				inputs.get(i).sendKeys(code.charAt(i) + "");
 			}
-			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
+			ExtentTestManager.setPassMessageInReport(character + " entered in text field");
 		}
 		//
 	}
@@ -88,9 +88,9 @@ public void verifyLoginWithInvalidPin(){
 		
 		String pageURL = getPageURL();
 		if(pageURL.contains("token-account")||pageURL.contains("getstarted")) {
-			ExtentTestManager.setInfoMessageInReport("Login success with invalid pin");
+			ExtentTestManager.setFailMessageInReport("Login success with invalid pin");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("Login failed with invalid pin");
+			ExtentTestManager.setPassMessageInReport("Login failed with invalid pin");
 		}
 	}
 }
