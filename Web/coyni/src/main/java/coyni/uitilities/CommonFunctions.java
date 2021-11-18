@@ -12,17 +12,18 @@ import ilabs.web.actions.WaitForElement;
 public class CommonFunctions {
 
 	BrowserFunctions objBrowserFunctions = new BrowserFunctions();
-	
-	public void verifyLabelText(By label, String labelName, String expText){
-		objBrowserFunctions.waitForCondition(e->e.findElement(label).isDisplayed(), labelName+ " is displayed");
+
+	public void verifyLabelText(By label, String labelName, String expText) {
+		objBrowserFunctions.waitForCondition(e -> e.findElement(label).isDisplayed(), labelName + " is displayed");
 		String actText = objBrowserFunctions.getText(label, labelName).trim().replace("\n", "").replace(",", "");
-		if (expText.equalsIgnoreCase(actText)){
+		if (expText.equalsIgnoreCase(actText)) {
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
 		} else {
-			ExtentTestManager.setFailMessageInReport(String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
+			ExtentTestManager.setFailMessageInReport(
+					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
 	}
-	
+
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
 			By options = By.cssSelector("");
@@ -46,7 +47,7 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFormErrorMessage(String expErrMsg,String expcolour) {
+	public void validateFormErrorMessage(String expErrMsg, String expcolour) {
 		try {
 			By errorMsgs = By.cssSelector("span.text-crd5");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
@@ -62,26 +63,23 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}
 	}
-	
+
 	public void validateTextfieldIcon(String message) {
 		try {
-			By passFailImg =By.cssSelector(".business-login-inner-icon");
+			By passFailImg = By.cssSelector(".business-login-inner-icon");
 			String imgClass = objBrowserFunctions.getAttributeValue(passFailImg, "class", "Imgclass");
-             message =message.toLowerCase();
+			message = message.toLowerCase();
 			if (imgClass.contains(message)) {
-				ExtentTestManager.setPassMessageInReport(message+" icon is displayed ");
-			}else {
-				ExtentTestManager.setFailMessageInReport(message+" icon is not  displayed ");
+				ExtentTestManager.setPassMessageInReport(message + " icon is displayed ");
+			} else {
+				ExtentTestManager.setFailMessageInReport(message + " icon is not  displayed ");
 			}
-			
-		}
-		catch( Exception e) {
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate text field icon failed due to exception " + e);
 		}
-		}
-		
-		
-	
+	}
+
 	public void getcssValue(String expcolour) {
 		try {
 			By txterror = By.cssSelector("div[class *= 'FormField_error']");
@@ -90,33 +88,30 @@ public class CommonFunctions {
 
 			if (value.equalsIgnoreCase(expcolour)) {
 				ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
-			}else {
+			} else {
 				ExtentTestManager.setFailMessageInReport("Text field border not changed to red colour");
 			}
-			
-		}catch( Exception e) {
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("getcssValue failed due to exception " + e);
 		}
-		
+
 	}
 
-	
 	public void elementView(By ele, String eleName) {
 		try {
-			if(objBrowserFunctions.getElement(ele, eleName).isDisplayed()) {
+			if (objBrowserFunctions.getElement(ele, eleName).isDisplayed()) {
 				ExtentTestManager.setPassMessageInReport(eleName + " is displayed ");
-			}
-			else {
+			} else {
 				ExtentTestManager.setFailMessageInReport(eleName + " is not displayed ");
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" element View failed due to exception " + e);
 		}
-		
+
 	}
-	
-	public void verifyMouseHoverAction(By ele,String eleName ,String backGround, String border) {
+
+	public void verifyMouseHoverAction(By ele, String eleName, String backGround, String border) {
 		try {
 			Thread.sleep(2000);
 			String initialBackGroundColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(backGround);
@@ -129,16 +124,32 @@ public class CommonFunctions {
 			String finalBorderColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(border);
 			ExtentTestManager.setInfoMessageInReport(finalBackGroundColor);
 			ExtentTestManager.setInfoMessageInReport(finalBorderColor);
-			if(!initialBackGroundColor.equalsIgnoreCase(finalBackGroundColor)&& !initialBorderColor.equalsIgnoreCase(finalBorderColor)) {
+			if (!initialBackGroundColor.equalsIgnoreCase(finalBackGroundColor)
+					|| !initialBorderColor.equalsIgnoreCase(finalBorderColor)) {
 				ExtentTestManager.setPassMessageInReport("Border color and Background color is changed");
-			}
-			else {
+			} else {
 				ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
 			}
-		}
-		catch(Exception e) {
-			ExtentTestManager.setFailMessageInReport(" verify mouse hover action test failed due to exception "+ e);
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" verify mouse hover action test failed due to exception " + e);
 		}
 	}
-}
 
+	public void verifyCursorAction(By ele, String eleName) {
+
+		try {
+			String text = objBrowserFunctions.getElement(ele, eleName).getCssValue("cursor");
+			if (text.equalsIgnoreCase("pointer")) {
+				ExtentTestManager.setPassMessageInReport("Hand symbol is displayed when mouse hover on " + eleName);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("Hand symbol is not displayed when mouse hover on " + eleName);
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" verify mouse hover action test failed due to exception " + e);
+		}
+
+	}
+}

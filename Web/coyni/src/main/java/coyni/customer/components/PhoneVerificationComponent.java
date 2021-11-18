@@ -14,11 +14,15 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
 	private By heading = By.cssSelector(".SmsValidationTwillo_phone_validation_sub__3YUB7>div:first-of-type");
 	private By lblMessage = By.cssSelector("span[class*='SmsValidationTwillo_phone_validation__verification']");
-	private By lnkResend =By.cssSelector("");
+	private By lnkResend =By.xpath("//div[contains(text(),'Resend')]");
 	private By lnkGoBack = By.cssSelector("//div[text()='Go Back']");
+	private By lblPhoneNumber =  By.cssSelector(".ml-2");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "PhoneNumber Verification Heading", expHeading);
+	}
+	public void verifyPhoneNumber(String expPhonenumber) {
+		new CommonFunctions().verifyLabelText(lblPhoneNumber, "exp phonenumber", expPhonenumber);
 	}
 
 	public void fillpin(String code) {

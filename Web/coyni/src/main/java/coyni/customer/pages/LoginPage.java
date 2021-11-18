@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.ForgotEmailComponent;
 import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
@@ -19,8 +20,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class LoginPage extends BrowserFunctions{
-	
+public class LoginPage extends BrowserFunctions {
+
 	private By txtEmail = By.name("email");
 	private By txtPassword = By.name("password");
 	private By lnkForgotEmail = By.xpath("//span[text()='Forgot Email?']");
@@ -28,18 +29,14 @@ public class LoginPage extends BrowserFunctions{
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//span[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
-	private By lnkBackToLogin = By.className("pl-1");
-	private By txtPhoneNumber = By.id("Phone-Number");
-	private By lblerrorMsg =By.cssSelector("span.error");
-	private By txtFirstName =By.name("first_name");
-	private By txtLastName =By.name("last_name");
-	private By lblPhoneNumber =By.cssSelector(".text-base");
-	private By lblEmail =By.cssSelector("");
-	private By lnkResend =By.xpath("//div[contains(text(),'Resend')]");
-	private By lnkGoBack =By.className("mt-3");
-	private By txtOTP=By.cssSelector("");
-	private By iconeye =By.cssSelector(".icon-button");
-	
+
+	private By lblerrorMsg = By.cssSelector("span.error");
+
+	private By lblEmail = By.cssSelector("");
+
+	private By txtOTP = By.cssSelector("");
+	private By iconeye = By.cssSelector(".icon-button");
+
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
 	}
@@ -47,75 +44,65 @@ public class LoginPage extends BrowserFunctions{
 	public void fillPassword(String password) {
 		enterText(txtPassword, password, "Password");
 	}
+
 	public void clickForgotEmail() {
 		click(lnkForgotEmail, "ForgotEmail");
 	}
-    public void clickForgotPassword() {
-    	click(lnkForgotPassword, "ForgotPassword");
-    }
-	public void clickNext() {
-		if(getElement(btnNext, "Enabled").isEnabled()) {
-			click(btnNext, "Next");
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("Next button is Disabled" );
-			}
+
+	public void clickForgotPassword() {
+		click(lnkForgotPassword, "ForgotPassword");
 	}
+
+	public void clickNext() {
+		if (getElement(btnNext, "Enabled").isEnabled()) {
+			click(btnNext, "Next");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
+		}
+	}
+
 	public void clickSignUp() {
 		click(lnkSignUp, "SignUp");
 	}
+
 	public void clickeyeIcon() {
 		click(iconeye, "eye icon");
 	}
 
-	public void clickBackToLogin() {
-		 click(lnkBackToLogin, "BackToLogin");
-		 }
-	public void fillPhoneNumber(String PhoneNumber) {
-		 enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
-	}
-	public  void verifyHeading(String expHeading) {
+	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Login heading", expHeading);
 	}
-	
-	public void fillFirstName(String firstName) {
-		enterText(txtFirstName, firstName, "firstName");
-	}
-	public void fillLastName(String lastName) {
-		enterText(txtLastName, lastName, "lastName");
-	}
-	
-	public void clickResend() {
-		click(lnkResend, "click send");
-	}
-	public void clickGoBack() {
-		click(lnkGoBack, "click goback");
-	}
+
 	public void verifySignUpView() {
 		new CommonFunctions().elementView(lnkSignUp, "Sign up");
 	}
+
 	public void verifyEmailView() {
 		new CommonFunctions().elementView(txtEmail, "Email");
 	}
+
 	public void verifyPasswordView() {
 		new CommonFunctions().elementView(txtPassword, "Password");
 	}
+
 	public void verifyForgotEmailView() {
 		new CommonFunctions().elementView(lnkForgotEmail, "Forgot Email");
 	}
+
 	public void verifyForgotPasswordView() {
 		new CommonFunctions().elementView(lnkForgotPassword, "Forgot Password");
 	}
-	public void verifyPasswordMaskedView(String attribute,String password) {
+
+	public void verifyPasswordMaskedView(String attribute, String password) {
 		String attributeValue = getAttributeValue(txtPassword, attribute, password);
-		if(attributeValue.contains("password")) {
-  		  
-  		  ExtentTestManager.setInfoMessageInReport(password+" masked with black circles");
-  		} else {
-  			ExtentTestManager.setInfoMessageInReport(password+" not masked with black circles");
+		if (attributeValue.contains("password")) {
+
+			ExtentTestManager.setInfoMessageInReport(password + " masked with black circles");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
+		}
 	}
-	}
-	
+
 	public void fillVerificationInput(String code) {
 		List<WebElement> inputs = getElementsList(txtOTP, "OTP boxes");
 		int noOfInputs = inputs.size();
@@ -124,21 +111,13 @@ public class LoginPage extends BrowserFunctions{
 				inputs.get(i).sendKeys(code.charAt(i) + "");
 			}
 		}
-	
+
 	}
-	
-	public void verifyPhoneNumber(String expPhonenumber) {
-		new CommonFunctions().verifyLabelText(lblPhoneNumber, "exp phonenumber", expPhonenumber);
-	}
-	
-	public void verifyResendMessage(String expResendMsg) {
-		new CommonFunctions().verifyLabelText(lnkResend, "exp resend Msg", expResendMsg);
-	}
-	
+
 	public void verifyEmail(String expEmail) {
 		new CommonFunctions().verifyLabelText(lblEmail, "exp email", expEmail);
 	}
-	
+
 	public void validateRemainingAttempts(String expAttempts) {
 		Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
 		String text = getText(lblerrorMsg, "error message").replaceAll("[^0-9]", "");
@@ -149,21 +128,26 @@ public class LoginPage extends BrowserFunctions{
 					+ expAttempts + " but actual are " + text);
 		}
 	}
-	
+
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
-		 robot.keyPress(KeyEvent.VK_TAB);
-		  robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
-	
-	
-	
-	public ToastComponent toastComponent() {
-		return new ToastComponent();}
-  public AuthyComponent authyComponent() {
-    return new AuthyComponent();}
 
-  public PhoneVerificationComponent phoneVerificationComponent() {
-	  return new PhoneVerificationComponent();
-  }
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
+	}
+
+	public ForgotEmailComponent forgotEmailComponent() {
+		return new ForgotEmailComponent();
+	}
 }
