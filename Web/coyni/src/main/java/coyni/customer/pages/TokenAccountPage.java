@@ -14,22 +14,34 @@ import coyni.customer.components.UserNameDropDownComponent;
 import coyni.customer.popups.BuyCoyniTokensPaymentMethodPopup;
 import coyni.customer.popups.PayAndRequestTokensPopup;
 import coyni.customer.popups.WithdrawCoyniToUSDPopup;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class TokenAccountPage extends BrowserFunctions {
 
-	private By lblAvailableBalance = By.name(" ");
-	private By btnPayRequestToken = By.name(" ");
-	private By btnBuyTokens = By.name(" ");
-	private By btnWithdrawToUSD = By.name(" ");
-    private By dropDownUserName = By.name(" ");
+	// added
+	private By btnTokenAccount = By.id("token-dashboard");
+	private By lblTotalFunds = By.cssSelector(".text-6xl");
+	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
+	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
+	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
+	private By btnPay = By.xpath("//button[text()='Pay']");
+	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]");
+	// private By dropDownUserName = By.cssSelector(".down-arrow");
+
+	public void clickTokenAccount() {
+		click(btnTokenAccount, "Token Account");
+	}
+
 	public String getAvailableBalance() {
-		return getText(lblAvailableBalance, "Available Balance");
+		return getText(lblTotalFunds, "Available Balance");
 
 	}
-    public void clickUserName() {
-    	click(dropDownUserName, "UserName");
-    }
+
+//	public void clickUserName() {
+//		click(dropDownUserName, "UserName");
+//	}
+
 	public void clickPayRequestToken() {
 		click(btnPayRequestToken, "PayRequestToken");
 	}
@@ -42,20 +54,31 @@ public class TokenAccountPage extends BrowserFunctions {
 		click(btnWithdrawToUSD, "WithdrawToUSD");
 
 	}
-// public  TokenAccountActivityComponent tokenAccountActivityComponent() {
-// 	return new TokenAccountActivityComponent(); }
-// public TransactionsListComponent transactionsListComponent() {
-//  return new TransactionsListComponent(); }
-//  public  TokensSentDetailsComponent tokensSentDetailsComponent() {
-//  return new TokensSentDetailsComponent(); }
-//  public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
-//  return new TokensReceivedDetailsComponent(); }
-//  public  TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
-//  return new TokensPurchasedDetailsComponent() ;}
-// 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
-//  return new TokensWithdrawnDetailsComponent();}
-//  public  TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
-//  return new TokenPaidOrdersDetailsComponent(); }
+
+	// added
+	public void verifyPay() {
+		new CommonFunctions().elementView(btnPay, "Pay is verified");
+	}
+
+	// added
+	public void verifyLabelYourTransactions() {
+
+		new CommonFunctions().elementView(lblYourTransactions, "Your Transactions");
+	}
+	// public TokenAccountActivityComponent tokenAccountActivityComponent() {
+//	 	return new TokenAccountActivityComponent(); }
+	// public TransactionsListComponent transactionsListComponent() {
+	// return new TransactionsListComponent(); }
+	// public TokensSentDetailsComponent tokensSentDetailsComponent() {
+	// return new TokensSentDetailsComponent(); }
+	// public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
+	// return new TokensReceivedDetailsComponent(); }
+	// public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
+	// return new TokensPurchasedDetailsComponent() ;}
+//	 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
+	// return new TokensWithdrawnDetailsComponent();}
+	// public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
+	// return new TokenPaidOrdersDetailsComponent(); }
 
 	public TokenAccountActivityComponent tokenAccountActivityComponent() {
 		return new TokenAccountActivityComponent();
@@ -68,9 +91,11 @@ public class TokenAccountPage extends BrowserFunctions {
 	public TokensSentDetailsComponent tokensSentDetailsComponent() {
 		return new TokensSentDetailsComponent();
 	}
-    public UserNameDropDownComponent userNameDropDownComponent() {
-    	return new UserNameDropDownComponent();
-    }
+
+	public UserNameDropDownComponent userNameDropDownComponent() {
+		return new UserNameDropDownComponent();
+	}
+
 	public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
 		return new TokensReceivedDetailsComponent();
 	}
@@ -86,9 +111,11 @@ public class TokenAccountPage extends BrowserFunctions {
 	public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
 		return new TokenPaidOrdersDetailsComponent();
 	}
-  public NavigationMenuPage navigationMenuPage() {
-	  return new NavigationMenuPage();
-  }
+
+	public NavigationMenuPage navigationMenuPage() {
+		return new NavigationMenuPage();
+	}
+
 	public PayAndRequestTokensPopup payAndRequestTokensPopup() {
 		return new PayAndRequestTokensPopup();
 	}

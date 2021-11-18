@@ -2,8 +2,13 @@ package coyni.customer.components;
 
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 public class ToastComponent extends BrowserFunctions {
 
@@ -17,7 +22,8 @@ public class ToastComponent extends BrowserFunctions {
 	 * @param expTitle is error or success
 	 */
 	public void verifyToastTitle(String expTitle) {
-		this.waitForCondition(ExpectedConditions.not(ExpectedConditions.textToBe(title,"")), "toast title not to be empty");
+		this.waitForCondition(ExpectedConditions.not(ExpectedConditions.textToBe(title, "")),
+				"toast title not to be empty");
 		String actTitle = getText(title, "toast title");
 		String actMessage = getText(message, "toast message");
 		if (actTitle.toLowerCase().contains(expTitle.toLowerCase())) {
@@ -44,6 +50,7 @@ public class ToastComponent extends BrowserFunctions {
 	 * @param expMessage is either full or partial message
 	 */
 	public void verifyToast(String expTitle, String expMessage) {
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 		verifyToastTitle(expTitle);
 		verifyToastMessage(expMessage);
 	}

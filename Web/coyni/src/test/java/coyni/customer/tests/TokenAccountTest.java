@@ -185,7 +185,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testView(String strParams) {
 		try {
@@ -202,7 +202,7 @@ public class TokenAccountTest {
 
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testAccountBalanceUpdatedView(String strParams) {
 		try {
@@ -215,7 +215,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testCrossIcons(String strParams) {
 		try {
@@ -234,7 +234,7 @@ public class TokenAccountTest {
 
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testNoFundsAvailable(String strParams) {
 		try {
@@ -247,7 +247,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testPayFieldsWithInvalidData(String strParams) {
 		try {
@@ -322,7 +322,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
+	@Test// added P
 	@Parameters({ "strParams" })
 	public void testPayTransactionsWithInvalidAccountAddress(String strParams) {
 		try {
@@ -342,7 +342,7 @@ public class TokenAccountTest {
 	}
 
 	// DOUBT --
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testTryAgain(String strParams) {
 		try {

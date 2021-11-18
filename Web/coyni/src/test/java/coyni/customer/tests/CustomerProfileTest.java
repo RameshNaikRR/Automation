@@ -167,14 +167,72 @@ public class CustomerProfileTest {
 	public void testNotifications(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyBellIconMouseHoverAction(data.get("background"), strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}
 	}
+
+	// added
+//	@Test
+//	public void testNotificationsViewPayAndDeny() {
+//
+//		try {
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyPay();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDeny();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager
+//					.setFailMessageInReport(" testNotificationsViewPayAndDeny is failed due to Exception " + e);
+//		}
+//
+//	}
+//added
+//	@Test
+//	public void testNotificationsPay() {
+//		try {
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+	// customerProfilePage.useDetailsComPonent().notificationsComponent().
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(" testPay is failed due to Exception " + e);
+//		}
+//	}
+////added
+//	@Test
+//	public void testNotificationsDeny() {
+//		try {
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(" testDeny is failed due to Exception " + e);
+//		}
+//
+//	}
+////added
+//	@Test
+//	public void testNotificationsRemove() {
+//		try {
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
+//		}
+//
+//	}
 
 	// DOUBT
 	@Test // added
@@ -193,10 +251,10 @@ public class CustomerProfileTest {
 	}
 
 	@Test // added
-	@Parameters({ "strParams" })
+	// @Parameters({ "strParams" })
 	public void testDropDown(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.preferencesComponent().selectTimeZone("Time Zone");
 
 		} catch (Exception e) {
