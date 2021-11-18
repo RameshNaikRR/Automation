@@ -272,53 +272,29 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
 			loginPage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
-			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-			loginPage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
-			loginPage.phoneVerificationComponent().clickResend();
-			loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
-			for (int i = 0; i <= 3; i++) {
-				Thread.sleep(5000);
-				loginPage.phoneVerificationComponent().clickResend();
-				loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+			//loginPage.phoneVerificationComponent().fillpin(data.get("code"));
+			String[] msg = data.get("errMessage").split(",");
+			for (int i = 0; i < msg.length; i++) {
+				if (!data.get("errMessage").isEmpty()) {
+					loginPage.phoneVerificationComponent().fillpin(data.get("code"));
+					loginPage.phoneVerificationComponent().verifyMessage(msg[i]);
+				} else {
+					for (int j = 0; j <= 1; j++) {
+					Thread.sleep(5000);
+					loginPage.phoneVerificationComponent().clickGoBack();
+					// loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+				}
+					
+				}
+
 			}
-			
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
-	
+
 		}
 	}
-	
-	
-	@Test
-	@Parameters({ "strParams" })
-	public void testForgotEmailWithinvalidPhoneNumber(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.clickForgotEmail();
-			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
-			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
-			loginPage.clickNext();
-			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
-			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-			loginPage.clickNext();
-			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			loginPage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
-			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-			if (!data.get("errMessage").isEmpty()) {
-				loginPage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
-			}
-			Thread.sleep(2000);
-			loginPage.phoneVerificationComponent().verifyLoginWithInvalidPin();
-	
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
-	
-		}
-	}
-	
-	
+
 	
 	
 	

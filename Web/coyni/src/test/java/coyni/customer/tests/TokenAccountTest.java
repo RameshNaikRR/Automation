@@ -25,26 +25,34 @@ public class TokenAccountTest {
 	@Test
 	public void testAvailableBalance() {
 		try {
+			tokenAccountPage.clickTokenAccount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test available balance failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testAvailableBalance is failed due to exception " + e);
 		}
 	}
 
+	// added
 	@Test
 	public void testPayAndRequestTokens() {
+		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickPayRequestToken();
+		tokenAccountPage.verifyPay();
 	}
 
+	// added
 	@Test
 	public void testBuyTokens() {
+		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickBuyTokens();
 	}
 
+	// added
 	@Test
 	public void testWithdrawToUSD() {
+		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickWithdrawToUSD();
 	}
 
@@ -322,7 +330,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test// added P
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testPayTransactionsWithInvalidAccountAddress(String strParams) {
 		try {
