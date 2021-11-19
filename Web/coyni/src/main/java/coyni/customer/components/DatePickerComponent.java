@@ -1,7 +1,6 @@
 package coyni.customer.components;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -9,13 +8,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import ilabs.WebFramework.DriverFactory;
-import ilabs.api.reporting.ExtentTestManager;
 
 public class DatePickerComponent {
 

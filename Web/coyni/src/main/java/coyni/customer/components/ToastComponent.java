@@ -1,14 +1,14 @@
 package coyni.customer.components;
 
-import ilabs.WebFramework.BrowserFunctions;
-import ilabs.api.reporting.ExtentTestManager;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+
+import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ToastComponent extends BrowserFunctions {
 

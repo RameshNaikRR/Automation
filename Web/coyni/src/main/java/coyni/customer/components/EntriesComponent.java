@@ -1,7 +1,5 @@
 package coyni.customer.components;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;

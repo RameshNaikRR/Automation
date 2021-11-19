@@ -12,10 +12,11 @@ public class SuccessFailurePopupCardComponent  extends BrowserFunctions{
 	
 	private By lblMessage = By.cssSelector("");
 	
-	private By btnDone =By.cssSelector("");
+	private By btnDone =By.xpath("//button[text()='Done']");
 	
-	private By heading = By.cssSelector("");
-	private By btnClose = By.cssSelector("");
+	private By heading = By.xpath("//h1[text()='Pre-Authorization Failed']");
+	private By btnClose = By.xpath("//button[text()='Close']");
+	private By btnAddBankAccount = By.xpath("//button[text()='Add Bank Account']");
 	
 	
 	//DOUBT
@@ -36,8 +37,15 @@ public class SuccessFailurePopupCardComponent  extends BrowserFunctions{
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
+	public void verifyAddBankAccountview() {
+		new CommonFunctions().elementView(btnAddBankAccount, "AddBankAccount");
+		
+	}
+	public void verifyheadingview() {
+		new CommonFunctions().elementView(heading, "heading");	
 
 
 
 
+}
 }

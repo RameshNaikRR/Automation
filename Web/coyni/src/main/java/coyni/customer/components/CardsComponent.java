@@ -34,8 +34,8 @@ public class CardsComponent extends BrowserFunctions {
     public void verifyCardExpired(String cardNumber ,String expExpired) {
     	new CommonFunctions().verifyLabelText(lblExpired, "Expired", expExpired);
     }
-    //DOUBT 
-    public void clickEdit(String cardNumber) {
+    
+    public void clickEdit() {
     	click(iconEdit, "Edit icon");
     }
     //DOUBT
@@ -47,7 +47,9 @@ public class CardsComponent extends BrowserFunctions {
     }
 
 
-
+public EditandDeleteComponent editDeleteComponent() {
+	return new  EditandDeleteComponent();
+}
 
 	
     

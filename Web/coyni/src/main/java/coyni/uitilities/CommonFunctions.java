@@ -130,7 +130,7 @@ public class CommonFunctions {
 			} else {
 				ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
 			}
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" verify mouse hover action test failed due to exception " + e);
 		}
@@ -142,8 +142,7 @@ public class CommonFunctions {
 			String text = objBrowserFunctions.getElement(ele, eleName).getCssValue("cursor");
 			if (text.equalsIgnoreCase("pointer")) {
 				ExtentTestManager.setPassMessageInReport("Hand symbol is displayed when mouse hover on " + eleName);
-			}
-			else {
+			} else {
 				ExtentTestManager.setPassMessageInReport("Hand symbol is not displayed when mouse hover on " + eleName);
 			}
 
@@ -152,4 +151,22 @@ public class CommonFunctions {
 		}
 
 	}
+
+	public void validateFormErrorMessage(String expErrMsg) {
+		try {
+			By errorMsgs = By.cssSelector("span.text-crd5");
+			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+			boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+			if (status) {
+				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
+		}
+	}
+
 }

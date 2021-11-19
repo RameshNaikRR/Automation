@@ -1,8 +1,6 @@
 package coyni.customer.components;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
-import ilabs.web.actions.WaitForElement;
 
 public class ChangePasswordComponent extends BrowserFunctions {
 
