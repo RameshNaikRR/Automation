@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile.pages.HomePage;
+import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.LoginPage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.Runner;
@@ -16,11 +17,13 @@ public class LoginTest {
 
 	LoginPage loginPage;
 	HomePage homePage;
+	LandingPage landingPage;
 
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
+		landingPage = new LandingPage();
 	}
 
 
@@ -153,7 +156,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().fillEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
+		//	loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().fillInputBoxes(loginData.get("Input"));//enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
 
@@ -222,7 +225,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().fillEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
+			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().fillInputBoxes(loginData.get("Input"));//enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
 
@@ -252,6 +255,47 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test User Not Having Any ID On app level failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPassword(String strParams) {
+		try {
+
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailOtpHeading(loginData.get("emailOtpHeading"));;
+			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordInvalidEmailCredentials(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+			}
+			loginPage.forgotPasswordPage().clickNext();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
 
