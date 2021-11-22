@@ -18,7 +18,7 @@ public class AuthyComponent extends  BrowserFunctions{
 	
 	private By lblMessage = By.cssSelector("span[class*='VerifyYourIdentity_two_step']");
 	
-	private By lnkGoBack = By.cssSelector("//div[text()='Go Back']");
+	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 
 	private static String prevCode = "";
 

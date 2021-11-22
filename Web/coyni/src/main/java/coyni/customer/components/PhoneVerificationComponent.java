@@ -12,14 +12,14 @@ import ilabs.api.reporting.ExtentTestManager;
 public class PhoneVerificationComponent extends BrowserFunctions {
 
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	private By heading = By.cssSelector(".SmsValidationTwillo_phone_validation_sub__3YUB7>div:first-of-type");
-	private By lblMessage = By.cssSelector("span[class*='SmsValidationTwillo_phone_validation__verification']");
+	private By heading = By.cssSelector("div[class *= 'SmsValidation_phone_validation_sub']>div:first-of-type,div[class *= 'SmsValidationTwillo_phone_validation_sub']>div:first-of-type");
+	private By lblMessage = By.cssSelector("span[class*='SmsValidationTwillo_phone_validation__verification'],span[class*='SmsValidation_phone_validation__verification']");
 	private By lnkResend =By.xpath("//div[contains(text(),'Resend')]");
-	private By lnkGoBack = By.cssSelector("//div[text()='Go Back']");
+	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 	private By lblPhoneNumber =  By.cssSelector(".ml-2");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "PhoneNumber Verification Heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Phone Number Verification Heading", expHeading);
 	}
 	public void verifyPhoneNumber(String expPhonenumber) {
 		new CommonFunctions().verifyLabelText(lblPhoneNumber, "exp phonenumber", expPhonenumber);
@@ -31,13 +31,14 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 		int noOfInputs = inputs.size();
 		if (noOfInputs == 6) {
 			for (int i = 0; i < noOfInputs; i++) {
-				inputs.get(i).sendKeys(code.charAt(i) + "");
+				inputs.get(i).sendKeys(code.charAt(i) + "");  
 			}
-			ExtentTestManager.setPassMessageInReport("Verification pin Code entered");
+			ExtentTestManager.setPassMessageInReport("verification entered in text field");
 		}
 		//
 	}
 	public void verifyMessage(String expMessage) {
+		waitForCondition(e->e.findElement(lblMessage).getText().contains("Verification"), "verification message is displayed");
 		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
 	public void clickResend() {

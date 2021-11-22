@@ -40,6 +40,8 @@ public class LoginTest {
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickNext();
+			loginPage.authyComponent().clickGoBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test view failed due to exception " + e);
 		}
@@ -123,8 +125,11 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
-			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-			loginPage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
+			String[] msg = data.get("errMessage").split(",");
+			for(int i=0;i<msg.length;i++) {
+				loginPage.phoneVerificationComponent().fillpin(data.get("code"));
+				loginPage.phoneVerificationComponent().verifyMessage(msg[i]);	
+			}
 			loginPage.phoneVerificationComponent().clickResend();
 			loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
 			for (int i = 0; i <= 3; i++) {
@@ -157,7 +162,6 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("test login with invalid phone Otp failed due to exception " + e);
 		}
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmail(String strParams) {
