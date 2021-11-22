@@ -129,7 +129,7 @@ public class PaymentMethodsTest{
 				if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"),data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"),data.get("colour"),data.get("elementName"));
 			}
 			
 		}catch (Exception e) {

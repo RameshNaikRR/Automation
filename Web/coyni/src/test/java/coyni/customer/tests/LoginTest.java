@@ -78,7 +78,7 @@ public class LoginTest {
 //	                loginPage.validateRemainingAttempts(data.get("invalidAttempts"));
 //	            }
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			} else if (!data.get("toastMessage").isEmpty()) {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
@@ -199,7 +199,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager
@@ -223,7 +223,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -314,7 +314,7 @@ public class LoginTest {
 			loginPage.verifyEmail(data.get("email") + ".");
 			loginPage.fillVerificationInput(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 //			loginPage.clickResend();
 //			loginPage.verifyResendMessage(data.get("resendMessage"));
@@ -339,7 +339,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 
 		} catch (Exception e) {

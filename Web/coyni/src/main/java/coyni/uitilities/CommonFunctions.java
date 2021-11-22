@@ -47,18 +47,18 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFormErrorMessage(String expErrMsg, String expcolour) {
+	public void validateFormErrorMessage(String expErrMsg,String expcolour,String elementName) {
 		try {
 			By errorMsgs = By.cssSelector("span.text-crd5");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 			boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
 			if (status) {
-				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  "+elementName );
 			} else {
-				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for "+ elementName);
 			}
-			getcssValue(expcolour);
+			verifyTextBoxBorderColor(expcolour);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}
@@ -80,7 +80,7 @@ public class CommonFunctions {
 		}
 	}
 
-	public void getcssValue(String expcolour) {
+	public void verifyTextBoxBorderColor(String expcolour) {
 		try {
 			By txterror = By.cssSelector("div[class *= 'FormField_error']");
 			String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");

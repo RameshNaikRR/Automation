@@ -42,7 +42,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -75,7 +75,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -105,7 +105,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+			//	new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -136,7 +136,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -167,7 +167,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -203,7 +203,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+			//	new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -231,7 +231,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+			//	new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}
@@ -260,7 +260,7 @@ public class HomeTest {
 				homePage.validateRemainingAttempts(data.get("invalidAttempts"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "");
 			}
 
 		}

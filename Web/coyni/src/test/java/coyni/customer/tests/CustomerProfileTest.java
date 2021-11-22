@@ -311,7 +311,7 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("currentPassword"));
 			customerProfilePage.changePasswordComponent().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -330,7 +330,7 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("invalidAuthyOtp"));
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
