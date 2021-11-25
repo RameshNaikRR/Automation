@@ -265,6 +265,7 @@ public class LoginTest {
 		try {
 
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
@@ -272,10 +273,10 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			;
-			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+//			//loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			Thread.sleep(2000);
+			loginPage.forgotPasswordPage().verifyEmailComponent().clickClose();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 
 		} catch (Exception e) {
@@ -292,10 +293,39 @@ public class LoginTest {
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
 			if (!loginData.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
 			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordInvalidOTPCredentials(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent()
+					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+
+			String[] msg = loginData.get("errMessage").split(",");
+			for (int i = 0; i < msg.length; i++) {
+				if (!loginData.get("errMessage").isEmpty()) {
+					loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+					loginPage.forgotPasswordPage().verifyEmailComponent().verifyOTPErrorMessage(msg[i]);
+				} else {
+					loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+				}
+			}
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);

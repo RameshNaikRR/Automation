@@ -11,10 +11,10 @@ import io.appium.java_client.MobileBy;
 
 public class ForgotPasswordPage extends MobileFunctions {
 
-	private By forgotHeading = MobileBy.xpath("");
-	private By txtEmail = MobileBy.xpath("");
-	private By btnClose = MobileBy.xpath("");
-	private By btnNext = MobileBy.xpath("");
+	private By forgotHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'llClose')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(forgotHeading, "Forgot Password ", expHeading);

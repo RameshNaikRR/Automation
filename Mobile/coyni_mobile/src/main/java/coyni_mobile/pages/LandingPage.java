@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 public class LandingPage extends MobileFunctions {
 
 	private By btnGetStarted = MobileBy.xpath("");
-	private By btnLogin = MobileBy.xpath("");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'layoutLogin')]");
 
 	public void clickGetStarted() {
 		click(btnGetStarted, "Get Started");

@@ -39,7 +39,7 @@ public class CommonFunctions {
 
 	public void validateFormErrorMessage(String expErrMsg) {
 		try {
-			By errorMsgs = MobileBy.xpath("");
+			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
 					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
