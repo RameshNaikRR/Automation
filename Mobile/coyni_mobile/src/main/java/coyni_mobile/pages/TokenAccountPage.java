@@ -11,7 +11,7 @@ import io.appium.java_client.MobileBy;
 public class TokenAccountPage extends MobileFunctions {
 
 	private By lblUserName = MobileBy.xpath(" ");
-	private By lblAvailableBalance = MobileBy.xpath(" ");
+	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
 	private By iconNotifications = MobileBy.xpath(" ");
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnScan = MobileBy.xpath(" ");

@@ -13,15 +13,15 @@ import io.appium.java_client.MobileBy;
 
 public class LoginPage extends MobileFunctions {
 
-	private By txtEmail = MobileBy.xpath("");
-	private By txtPassword = MobileBy.xpath("");
-	private By lnkRetriveEmail = MobileBy.xpath("");
-	private By lnkForgotPassword = MobileBy.xpath("");
-	private By chkBxRememberMe = MobileBy.xpath("");
-	private By btnLogin = MobileBy.xpath("");
-	private By lblCoyni = MobileBy.xpath(" ");
-	private By btnCross = MobileBy.xpath(" ");
-	private By iconFace = MobileBy.xpath(" ");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
+	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
+	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]");
+	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')]");
+	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
+	private By btnCross = MobileBy.xpath("");
+	private By iconFace = MobileBy.xpath("");
 	
 	
 	public void clickFace() {
@@ -34,6 +34,7 @@ public class LoginPage extends MobileFunctions {
     	return new FaceIDnotAvailableComponent();
     }
 	public void fillEmail(String email) {
+		click(txtEmail, "email");
 		enterText(txtEmail, email, "Email ");
 	}
 	public void clickCross() {
@@ -55,6 +56,7 @@ public class LoginPage extends MobileFunctions {
 	
 
 	public void fillPassword(String password) {
+		click(txtPassword, "password");
 		enterText(txtPassword, password, "password ");
 	}
 
@@ -81,6 +83,11 @@ public class LoginPage extends MobileFunctions {
 	public void ViewCoyni() {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
 	}
+	public void clickNext() {
+		
+	}
+		
+	
 	public FaceIDDisabledComponent faceIDDisabledComponent() {
 		return new FaceIDDisabledComponent();
 	}

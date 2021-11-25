@@ -27,12 +27,12 @@ public class LoginTest {
 	}
 
 	@Test
-	@Parameters({ "strParams" })
+	@Parameters({"strParams"})
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 
-			homePage.clickLogIn();
+			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
@@ -47,7 +47,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 
-		} catch (Exception e) {
+		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
@@ -114,25 +114,26 @@ public class LoginTest {
 	}
 
 	@Test
-	@Parameters({ "strParams" })
+	@Parameters({"strParams"})
 
-	public void testLoginWithInvalidCredentials(String strParams) {
+	public  void testLoginWithInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			homePage.clickLogIn();
+			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickRememberMe();
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
-			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
+			//loginPage.clickTab();
+//			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+//			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
+//			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+//			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),loginData.get("elementName"));
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
@@ -294,9 +295,9 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
-			}
+//			if (!loginData.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+//			}
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -374,19 +375,19 @@ public class LoginTest {
 			loginPage.clickForgotEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
-			}
-
-			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
-			}
-
-			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
-			}
+//			if (!loginData.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+//			}
+//
+//			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+//			if (!loginData.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+//			}
+//
+//			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+//			if (!loginData.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+//			}
 
 			Thread.sleep(2000);
 

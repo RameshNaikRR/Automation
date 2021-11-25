@@ -37,16 +37,16 @@ public class CommonFunctions {
 
 	}
 
-	public void validateFormErrorMessage(String expErrMsg) {
+	public void validateFormErrorMessage(String expErrMsg,String elementName) {
 		try {
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
 					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
 			if (status) {
-				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed for "+ elementName);
 			} else {
-				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for "+ elementName);
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
