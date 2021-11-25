@@ -26,10 +26,8 @@ public class LoginTest {
 		landingPage = new LandingPage();
 	}
 
-
-
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
@@ -49,12 +47,13 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 
 	public void testLoginEnableFaceId(String strParams) {
 		try {
@@ -77,26 +76,23 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickCancel();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-
-
-
 
 	@Test
 	@Parameters
 	public void testLoginNavigationView(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			//navigation   Home Page -login Page
+			// navigation Home Page -login Page
 			homePage.clickLogIn();
 			loginPage.VerifyLoginPageView();
 			loginPage.navigationComponent().verifyCloseView();
 			loginPage.navigationComponent().clickClose();
 			homePage.verifyCoyniView();
-			//navigation LoginPage - Enter Your PIN Component
+			// navigation LoginPage - Enter Your PIN Component
 			homePage.clickLogIn();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
@@ -105,22 +101,22 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().navigationComponent().verifyCloseView();
 			loginPage.enterYourPINComponent().navigationComponent().clickClose();
 			loginPage.VerifyLoginPageView();
-			//navigation LoginPage - Forgot Your PIN Component
+			// navigation LoginPage - Forgot Your PIN Component
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickClose();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-		}catch (Exception e){
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test LoginNavigation view failed due to Exception " + e);
 		}
 	}
 
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 
-	public  void testLoginWithInvalidCredentials(String strParams) {
+	public void testLoginWithInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			homePage.clickLogIn();
@@ -136,13 +132,13 @@ public class LoginTest {
 			if (!loginData.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
 
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testForgotPin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
@@ -156,17 +152,19 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().fillEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-		//	loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().fillInputBoxes(loginData.get("Input"));//enter wrong pin
+			// loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+					.fillInputBoxes(loginData.get("Input"));// enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Password Page is failed due to Exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
-	public void testDisableFaceIDTouchID(String strParams){
+	@Parameters({ "strParams" })
+	public void testDisableFaceIDTouchID(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			loginPage.faceIDDisabledComponent().verifyOkView();
@@ -181,12 +179,13 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Disable FaceID TouchID is failed due to Exception " + e);
 		}
 
 	}
-	//when user clicks on Enable Face id button
+
+	// when user clicks on Enable Face id button
 	public void testEnableFaceId(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
@@ -203,12 +202,12 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyCancelView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickCancel();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Disable FaceID TouchID is failed due to Exception " + e);
 		}
 
 	}
-   
+
 	@Test
 	@Parameters
 	public void testDisableFaceIDTouchIDForgotpin(String strParams) {
@@ -225,18 +224,19 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().fillEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().fillInputBoxes(loginData.get("Input"));//enter wrong pin
+			// loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+					.fillInputBoxes(loginData.get("Input"));// enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
 
-
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Disable FaceID TouchID is failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters
-	public void testUserHavingPINEnableOnAppLevel(String strParams){
+	public void testUserHavingPINEnableOnAppLevel(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			homePage.clickLogIn();
@@ -253,11 +253,12 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyAvailableBalanceView();
-		}catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test User Not Having Any ID On app level failed due to Exception " + e);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test User Not Having Any ID On app level failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPassword(String strParams) {
@@ -269,7 +270,9 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailOtpHeading(loginData.get("emailOtpHeading"));;
+			loginPage.forgotPasswordPage().verifyEmailComponent()
+					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			;
 			loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
@@ -279,7 +282,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordInvalidEmailCredentials(String strParams) {
@@ -297,6 +300,124 @@ public class LoginTest {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmail(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			landingPage.clickLogin();
+			Thread.sleep(5000);
+			// loginPage.retrieveEmailPage().clickRetrieveEmail();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			Thread.sleep(2000);
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
+			// loginPage.retrieveEmailPage().verifyRegisteredPhoneNum(loginData.get("verifyPhoneNumber"));
+			// loginPage.retrieveEmailPage().fillInputBoxes(loginData.get("code"));
+			loginPage.retrieveEmailPage().clickResend();
+			loginPage.retrieveEmailPage().clickClose();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithEmptyCredentials(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			landingPage.clickLogin();
+			Thread.sleep(5000);
+			// loginPage.retrieveEmailPage().clickRetrieveEmail();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+			}
+
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+			}
+
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+			}
+
+			Thread.sleep(2000);
+
+			loginPage.retrieveEmailPage().clickNext();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			landingPage.clickLogin();
+			Thread.sleep(5000);
+			// loginPage.retrieveEmailPage().clickRetrieveEmail();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			Thread.sleep(2000);
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().verifyTryAgain(loginData.get("tryAgain"));
+			loginPage.retrieveEmailPage().clickTryAgain();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidFirstAndLastName(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			landingPage.clickLogin();
+			Thread.sleep(5000);
+			// loginPage.retrieveEmailPage().clickRetrieveEmail();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			Thread.sleep(2000);
+			loginPage.retrieveEmailPage().clickCloseIcon();
+			loginPage.retrieveEmailPage().ViewCoyni();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+
 	}
 
 }
