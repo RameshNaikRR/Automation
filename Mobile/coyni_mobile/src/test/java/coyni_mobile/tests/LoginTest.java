@@ -270,11 +270,12 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-//			//loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
 			Thread.sleep(2000);
 			loginPage.forgotPasswordPage().verifyEmailComponent().clickClose();
@@ -285,6 +286,8 @@ public class LoginTest {
 		}
 	}
 
+	//private By popHeading = MobileBy.xpath("//*[contains(@resource-id,'textTV')]");
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordInvalidEmailCredentials(String strParams) {
@@ -293,10 +296,16 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-//			if (!loginData.get("errMessage").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"));
+			Thread.sleep(2000);
+			if (!loginData.get("errMessage").isEmpty()) {
+
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"), loginData.get("elementName"));
+			} 
+//			else if (mobileFunctions.getElement(popHeading, "pop heading").isDisplayed()) {
+//				loginPage.forgotPasswordPage().verifyPopErrMessa(loginData.get("popUpContent"));
 //			}
 
 		} catch (Exception e) {
@@ -311,27 +320,39 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-
-			String[] msg = loginData.get("errMessage").split(",");
-			for (int i = 0; i < msg.length; i++) {
-				if (!loginData.get("errMessage").isEmpty()) {
-					loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-					loginPage.forgotPasswordPage().verifyEmailComponent().verifyOTPErrorMessage(msg[i]);
-				} else {
-					loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-				}
+			Thread.sleep(2000);
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			
+			//String[] msg = loginData.get("errMessage").split(",");
+		//	for (int i = 0; i <=6; i++) {
+			//	loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+				//loginPage.forgotPasswordPage().verifyEmailComponent().verifyOTPErrorMessage(msg[i]);
+		//	}
+			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+		//loginPage.forgotPasswordPage().verifyEmailComponent().verifyResentMsg(loginData.get("resendMessage"));
+			for (int i = 0; i <=2; i++) {
+				Thread.sleep(5000);
+				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+				//loginPage.forgotPasswordPage().verifyEmailComponent()
+				//		.verifyResentMsg(loginData.get("resendMessage"));
 			}
+//
+		//loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
+					
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
+
 
 	// added P
 	@Test

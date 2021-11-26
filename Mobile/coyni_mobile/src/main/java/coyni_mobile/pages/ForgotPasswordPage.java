@@ -15,9 +15,26 @@ public class ForgotPasswordPage extends MobileFunctions {
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'llClose')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By contentForgot = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+
+	private By popErrorMessage = MobileBy.xpath("//*[contains(@resource-id,'textTV')]");  //
+	private By popHeading = MobileBy.xpath("//*[@text='Coyni']");
+	
+	public void verifyPopEHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(popHeading, "PopUp Heading ", expHeading);
+	}
+	
+	
+	public void verifyPopErrMessa(String expHeading) {
+		new CommonFunctions().verifyLabelText(popErrorMessage, "User data not found ", expHeading);
+	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(forgotHeading, "Forgot Password ", expHeading);
+	}
+
+	public void verifyContentHeading(String expContent) {
+		new CommonFunctions().verifyLabelText(contentForgot, "Forgot Content ", expContent);
 	}
 
 	public void fillEmail(String email) {
