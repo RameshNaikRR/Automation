@@ -1,6 +1,9 @@
 package coyni_mobile.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -12,7 +15,8 @@ public class RetrieveEmailPage extends MobileFunctions {
 	// added p
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
 	private By retrieveheading = MobileBy.xpath("//*[@text='Retrieve Email']");
-	private By lblPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'hintTV')]");
+	// private By lblPhoneNumber =
+	// MobileBy.xpath("//*[contains(@resource-id,'hintTV')]");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'reFirstNameET')]");
 	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'reLastNameET')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')]");
@@ -20,31 +24,27 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By closeIcon = MobileBy.xpath("//*[contains(@resource-id,'imgREClose')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
-	private By registeredPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
-
-//		public void clickRetrieveEmail() {
-//			click(lnkRetriveEmail, "Retrieve Email");
-//		}
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(retrieveheading, "Retrieve Email Heading ", expHeading);
 
 	}
 
-	public void verifyPhoneNumber(String expPhoneNumber) {
-		new CommonFunctions().elementView(lblPhoneNumber, expPhoneNumber);
-
+	public void clickOk() {
+		click(btnOk, "Ok");
 	}
+
+//		public void verifyPhoneNumber(String expPhoneNumber) {
+//			new CommonFunctions().elementView(lblPhoneNumber, expPhoneNumber);
+	//
+//		}
 
 	public void verifyPhone(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingPhoneNumber, "Phone Heading", expHeading);
-	}
-
-	public void verifyRegisteredPhoneNum(String expHeading) {
-		new CommonFunctions().verifyLabelText(registeredPhoneNumber, "Reg PhoneNum", expHeading);
 	}
 
 	public void fillFirstName(String firstName) {
@@ -94,8 +94,18 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	// DOUBT
+	MobileFunctions functions = new MobileFunctions();
+
 	public void fillInputBoxes(String code) {
-		enterText(txtInputBoxes, code, "Input Box ");
+		List<WebElement> elementList = functions.getElementList(txtInputBoxes, "code");
+		int elements = elementList.size();
+		if (elements == 6) {
+			for (int i = 0; i < elements; i++) {
+				elementList.get(i).sendKeys(code.charAt(i) + " ");
+				;
+			}
+			ExtentTestManager.setPassMessageInReport("Verification Text Entered");
+		}
 
 	}
 
