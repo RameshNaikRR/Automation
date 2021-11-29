@@ -18,8 +18,8 @@ public class LoginPage extends MobileFunctions {
 
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
-	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]");
-	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')]");
+	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')]");
+	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]");
 	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]");
 	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
