@@ -13,7 +13,7 @@ import io.appium.java_client.MobileBy;
 public class EnterYourPINComponent extends MobileFunctions {
 	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
-	private By lnkForgotPin = MobileBy.xpath("");
+	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
 	private By lblErrorMsg = MobileBy.xpath("");
 
 	private By getOneNumberOfPin(char num) {

@@ -7,23 +7,20 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class NavigationComponent extends MobileFunctions {
-	private By btnBack = MobileBy.xpath("");
-	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-
+	private By btnBack =MobileBy.xpath("//*[contains(@resource-id,'Back')]");
+	private By btnClose =MobileBy.xpath("//*[contains(@resource-id,'imgClose') or contains(@resource-id,'imgFPClose') or contains(@resource-id,'imgBack')]"); 
+	
 	public void clickBack() {
-		click(btnBack, "click Back");
+		click(btnBack, "Back");
 	}
-
 	public void clickClose() {
-		click(btnClose, "click Close");
+		click(btnClose, "Close");
 	}
-
-	public void verifyBackView() {
-		new CommonFunctions().elementView(btnBack, "Back Icon");
-	}
-
-	public void verifyCloseView() {
-		new CommonFunctions().elementView(btnClose, "Close Icon");
-	}
-
+     public void verifyBackView() {
+    	 new CommonFunctions().elementView(btnBack, "Back Icon");
+     }
+     public void verifyCloseView() {
+    	 new CommonFunctions().elementView(btnClose, "Close Icon");
+     }
+	
 }

@@ -20,5 +20,8 @@ public class LandingPage extends MobileFunctions {
 		new CommonFunctions().elementView(btnLogin, "Login");
 		click(btnLogin, "login");
 	}
+	 public void verifyLandingPage() {
+		 new CommonFunctions().elementView(btnGetStarted, "Landing Page ");
+	 }
 
 }

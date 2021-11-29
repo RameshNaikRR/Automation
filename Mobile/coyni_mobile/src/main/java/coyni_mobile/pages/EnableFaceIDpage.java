@@ -9,7 +9,7 @@ import io.appium.java_client.MobileBy;
 public class EnableFaceIDpage extends MobileFunctions {
 	
 	private By btnNotNow = MobileBy.xpath("//*[contains(@resource-id, 'layoutNotnow')]");
-	private By lnkDontRemindMeAgain = MobileBy.xpath(" ");
+	private By lnkDontRemindMeAgain = MobileBy.xpath("//*[contains(@resource-id, 'dontRemindTouchTV')]");
 	private By btnEnableFaceId = MobileBy.xpath("//*[contains(@resource-id, 'enableTouchCV')]");
 	private By lblEnableFaceId = MobileBy.xpath("(//*[@text='Enable Touch ID'])[1]");
 	private By lblEnableFaceIDtouchID = MobileBy.xpath(" ");
@@ -21,6 +21,15 @@ public class EnableFaceIDpage extends MobileFunctions {
 	public void clickEnableFaceId() {
 		click(btnEnableFaceId, "Enable Face Id");
 		
+	}
+	public void verifyEnableFaceIDButtonView() {
+		new CommonFunctions().elementView(btnEnableFaceId, "Enable Face ID Button");
+	}
+	public void verifyNotNowButtonView() {
+		new CommonFunctions().elementView(btnNotNow, "Not Now");
+	}
+	public void verifyDontRemindButtonView() {
+		new CommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again link ");
 	}
 	public void clickSettigs() {
 		click(btnSettings, "Settings");

@@ -5,12 +5,14 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomeComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class TokenAccountPage extends MobileFunctions {
 
-	private By lblUserName = MobileBy.xpath(" ");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id, 'tvUserName')]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
 	private By iconNotifications = MobileBy.xpath(" ");
 	private By btnPayRequest = MobileBy.xpath(" ");
@@ -21,8 +23,12 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnHome = MobileBy.xpath(" ");
 	private By btnIssueCard = MobileBy.xpath(" ");
 
-	public void verifyUserName(String userName) {
-	 new CommonFunctions().verifyLabelText(lblUserName, "userName", userName);
+	public void verifyLogin() {
+	 if(getElement(lblUserName, "UserName").isDisplayed()) {
+		 ExtentTestManager.setPassMessageInReport("Login success");
+	 }else {
+		 ExtentTestManager.setPassMessageInReport("Login failed");
+	 }
 	}
 
 	public String getAvailableBalance() {
