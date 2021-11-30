@@ -53,12 +53,12 @@ public class PaymentMethodsTest{
 	        tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
 		    customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
 		    customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+		    Thread.sleep(2000);
 		    if(card.equalsIgnoreCase("credit")) {
 		    	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();  
 	        } else {
 	        	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();  
 	        }
-            customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 	      	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardNumber(data.get("cardNumber"));
 	      	Thread.sleep(3000);
@@ -70,6 +70,7 @@ public class PaymentMethodsTest{
      		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
     		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillZipCode(data.get("zipCode"));
     		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().selectState(data.get("state"));
+    		
     //      customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().verifyCountry(data.get("country"));
 	        customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickSave();
 	        Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
@@ -84,26 +85,31 @@ public class PaymentMethodsTest{
 	@Test
 	@Parameters({"strParams"})
 	public void testAddDebitCard(String strParams) {
-		testAddCard(strParams, "credit" );
+		testAddCard(strParams, "debit" );
 	}
 	@Test
 	@Parameters({"strParams"})
 	public void testAddCreditCard(String strParams) {
-		testAddCard(strParams, "debit" );
+		testAddCard(strParams, "credit" );
 	}
   
 	
 
 	@Test
 	@Parameters({"strParams"})
-	public void testAddCardWihInvalidData(String strParams) {
+	public void testAddCardWihInvalidData(String strParams,String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
 			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
 			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
-		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			Thread.sleep(2000);
+		    if(card.equalsIgnoreCase("credit")) {
+		    	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();  
+	        } else {
+	        	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();  
+	        }
 		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 	      	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardNumber(data.get("cardNumber"));
 	      	 Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
@@ -124,7 +130,7 @@ public class PaymentMethodsTest{
     	    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().selectState(data.get("state"));
     	    }
             customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickTab();
-            customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().backandCrossIconComponent().clickCross();
+           // customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().backandCrossIconComponent().clickCross();
 			
 				if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
@@ -136,10 +142,21 @@ public class PaymentMethodsTest{
 			ExtentTestManager.setFailMessageInReport("test AddDebitCardWith Invalid Data is failed due to exception " +  e);
 		}
 	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testCreditCardWithInvalidData(String strParams) {
+		testAddCardWihInvalidData(strParams, "credit" );
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void testDebitCardWithInvalidData(String strParams) {
+		testAddCardWihInvalidData(strParams, "debit" );
+	}
 
 	@Test
 	@Parameters({"strParams"})
-	public void testCardAuthiWithInvalidData(String strParams) {
+	public void testCardAuthiWithInvalidData(String strParams,String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			navigationMenuPage.clickTokenAccountMenu();
@@ -147,25 +164,31 @@ public class PaymentMethodsTest{
 			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
 			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
 			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
-		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			 if(card.equalsIgnoreCase("credit")) {
+			    	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();  
+		        } else {
+		        	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();  
+		     }
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardNumber(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCardExpiry(data.get("cardExpiry"));
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().validateCardBrand(data.get("cardType"));
+			//customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().validateCardBrand(data.get("cardType"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().fillCVVorCVC(data.get("cvvNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillAddress1(data.get("address1"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillAddress2(data.get("address2"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().selectState(data.get("state"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillZipCode(data.get("zipCode"));
-		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().verifyCountry(data.get("Country"));
+		   // customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().verifyCountry(data.get("Country"));
 		    customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickSave();
 		    Thread.sleep(3000);
 		
 			System.out.println(data.get("errorMessage"));
 			String[] msg = data.get("errorMessage").split(",");
 			for(int i=0;i<msg.length;i++) {
-			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));	
+		    Thread.sleep(2000);
+			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickTab();
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
 	//	customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().verifyAddBankAccountview();
@@ -181,6 +204,18 @@ public class PaymentMethodsTest{
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test AddDebitAuthidWith Invalid Data is failed due to exception " +  e);
 		}
+	}
+	
+
+	@Test
+	@Parameters({"strParams"})
+	public void  testCreditCardWithInvalidPreAuthyAmount(String strParams) {
+		testCardAuthiWithInvalidData(strParams, "credit" );
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void  testDebitCardWithInvalidPreAuthyAmount(String strParams) {
+		testCardAuthiWithInvalidData(strParams, "debit" );
 	}
 
 	

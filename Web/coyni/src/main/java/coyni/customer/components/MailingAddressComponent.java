@@ -18,7 +18,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	private By txtCity = By.name("city");
 
-	private By drpDwnState = By.xpath("//div[text()='State']/following-sibling::div");
+	private By drpDwnState = By.xpath("//div[text()='State']/parent::div");
 
 	private By txtZipCode = By.name("zipCode");
 	
@@ -26,7 +26,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtCountry = By.xpath("//div[text()='United States']");
 
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
-	private By lblState =By.xpath("//div[text()='State']");
+	private By lblState =By.xpath("//div[text()='State']/parent::div");
 
 	
 	public void fillAddress1(String address1) {

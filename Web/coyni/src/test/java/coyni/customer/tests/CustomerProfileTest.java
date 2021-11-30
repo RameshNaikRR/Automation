@@ -162,13 +162,13 @@ public class CustomerProfileTest {
 	}
 
 	@Test
-	@Parameters({ "strParams" })
+	//@Parameters({ "strParams" })
 
 	public void testNotifications(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.userDetailsComponent().notificationsComponent()
-					.verifyBellIconMouseHoverAction(data.get("background"), strParams);
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			//customerProfilePage.userDetailsComponent().notificationsComponent()
+					//.verifyBellIconMouseHoverAction(data.get("background"), strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();

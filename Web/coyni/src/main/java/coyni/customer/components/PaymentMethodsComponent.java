@@ -12,7 +12,7 @@ public class PaymentMethodsComponent extends BrowserFunctions {
 	
 	private By btnAddNewPaymentMethod =By.xpath("//span[text()='Add New Payment Method']");
 	private By lblNoActivePaymentMethods =By.cssSelector("");
-	private By lblPaymentMethods = By.cssSelector("//span[contains(@class,'text-base text-cgy4')]");
+	private By lblPaymentMethods = By.xpath("//span[contains(@class,'text-base text-cgy4')]");
 	
 	public void clickAddNewPaymentMethod() {
 		click(btnAddNewPaymentMethod, "Click Add new Payment Method");

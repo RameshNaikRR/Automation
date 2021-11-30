@@ -26,7 +26,7 @@ public class CommonFunctions {
 
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
-			By options = By.cssSelector("");
+			By options = By.xpath("//div[contains(@class, 'FormField_options_wrap')]/div");
 			boolean status = false;
 			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
 			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");

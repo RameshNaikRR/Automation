@@ -251,9 +251,9 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-			loginPage.phoneVerificationComponent().clickGoBack();
-			loginPage.forgotEmailComponent().verifyFirstName();
-			loginPage.forgotEmailComponent().verifyLastName();
+//			loginPage.phoneVerificationComponent().clickGoBack();
+//			loginPage.forgotEmailComponent().verifyFirstName();
+//			loginPage.forgotEmailComponent().verifyLastName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
@@ -285,7 +285,7 @@ public class LoginTest {
 				} else {
 					for (int j = 0; j <= 1; j++) {
 					Thread.sleep(5000);
-					loginPage.phoneVerificationComponent().clickGoBack();
+					//loginPage.phoneVerificationComponent().clickGoBack();
 					// loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
 				}
 					
