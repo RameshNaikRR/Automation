@@ -31,7 +31,6 @@ public class LoginTest {
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-
 			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.verifyEmailview();
@@ -573,6 +572,26 @@ public class LoginTest {
 					"testRetrieveEmailWithInvalidFirstAndLastName Failed due to exception " + e);
 		}
 
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			landingPage.clickLogin();
+			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			String[] email =data.get("email").split(",");
+			loginPage.validateEmailField(email[0],email[1],email[2]);
+			String[] password =data.get("password").split(",");
+			loginPage.validatePasswordField(password[0],password[1],password[2]);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
 	}
 
 }

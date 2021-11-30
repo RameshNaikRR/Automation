@@ -154,6 +154,22 @@ public class LoginPage extends MobileFunctions {
     public VerifyNewEmailPage verifyNewEmailPage() {
     	return new VerifyNewEmailPage();
     }
+    public void validateEmailField(String singleChar,String maxChar,String moreThanMax) {
+    	new CommonFunctions().validateField(txtEmail, "Email", singleChar);
+    	new CommonFunctions().clearText(txtEmail, "Email");
+    	new CommonFunctions().validateField(txtEmail, "Email", maxChar);
+    	new CommonFunctions().clearText(txtEmail, "Email");
+    	new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
+
+    }
+    public void validatePasswordField(String singleChar,String maxChar,String moreThanMax) {
+    	new CommonFunctions().validateField(txtPassword, "password", singleChar);
+    	new CommonFunctions().clearText(txtPassword, "password");
+    	new CommonFunctions().validateField(txtPassword, "password", maxChar);
+    	new CommonFunctions().clearText(txtPassword, "password");
+    	new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
+
+    }
 
 	
 }
