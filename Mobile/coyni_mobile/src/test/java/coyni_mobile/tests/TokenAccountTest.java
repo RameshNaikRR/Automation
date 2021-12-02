@@ -10,6 +10,7 @@ import coyni_mobile.components.FiltersComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -142,6 +143,91 @@ public class TokenAccountTest {
 			tokenAccountPage.notificationComponent().clickDeny(data.get("senderName"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Request Deny  faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
+			tokenAccountPage.buyTokenMenuComponent()
+					.verifyLabelSelectPaymentMethod(data.get("selectPaymentmethodexpHeading"));
+			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
+			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.buyTokenMenuComponent().btnPaymentBuyToken();
+			tokenAccountPage.buyTokenMenuComponent().verifyLabelOrderPreview(data.get("orderPreviewexpHeading"));
+			tokenAccountPage.buyTokenMenuComponent().Swipe();
+			tokenAccountPage.buyTokenMenuComponent()
+					.verifyLabelTransactionPending(data.get("transactionPendingexpHeading"));
+			tokenAccountPage.buyTokenMenuComponent().Done();
+			tokenAccountPage.buyTokenMenuComponent()
+					.verifyLabelAvailableBalance(data.get("availableBalanceExpHeading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankWithInvalidDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
+			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
+			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.buyTokenMenuComponent().crossIcon();
+			tokenAccountPage.buyTokenMenuComponent()
+					.verifyLabelSelectPaymentMethod(data.get("selectPaymentExpHeading"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testBuyTokenBankWithInvalidDetails  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
+			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
+			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
+			if (!data.get("amount").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBankWithInvalidAmount  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankTransactionFailed(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
+			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
+			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.buyTokenMenuComponent().verifyLabelOrderPreview(data.get("orderPreviewExpHeading"));
+			tokenAccountPage.buyTokenMenuComponent().Swipe();
+			tokenAccountPage.buyTokenMenuComponent()
+					.verifyLabelTransactionFailed(data.get("tansactionFailedExpHeading"));
+			tokenAccountPage.buyTokenMenuComponent().clickTryAgain();
+			tokenAccountPage.buyTokenMenuComponent().verifyLabelPaymentMethod(data.get("paymentMethodExpHeadig"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBankTransactionFailed  failed due to exception " + e);
 		}
 
 	}

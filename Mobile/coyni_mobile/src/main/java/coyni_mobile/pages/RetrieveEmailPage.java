@@ -114,4 +114,31 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	}
 
+	public void validateFirstAndLastNameField(String singleChar, String maxChar, String moreThanMax) {
+		new CommonFunctions().validateField(txtFirstName, "FirstName", singleChar);
+		new CommonFunctions().clearText(txtFirstName, "FirstName");
+		new CommonFunctions().validateField(txtFirstName, "FirstName", maxChar);
+		new CommonFunctions().clearText(txtFirstName, "FirstName");
+		new CommonFunctions().validateFieldMaxichar(txtFirstName, "FirstName", moreThanMax);
+		new CommonFunctions().clearText(txtFirstName, "FirstName");
+		new CommonFunctions().validateField(txtLastName, "LastName", singleChar);
+		new CommonFunctions().clearText(txtLastName, "LastName");
+		new CommonFunctions().validateField(txtLastName, "LastName", maxChar);
+		new CommonFunctions().clearText(txtLastName, "LastName");
+		new CommonFunctions().validateFieldMaxichar(txtLastName, "LastName", moreThanMax);
+
+	}
+
+	public void validatePhoneNumberField(String minchar, String moreThanMax, String alphabets,
+			String specialCharacters) {
+		new CommonFunctions().validateField(txtPhoneNumber, "PhoneNumber", minchar);
+		new CommonFunctions().clearText(txtPhoneNumber, "PhoneNumber");
+		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "PhoneNumber", moreThanMax);
+		new CommonFunctions().clearText(txtPhoneNumber, "PhoneNumber");
+		new CommonFunctions().validateFieldWithalphabet(txtPhoneNumber, "LastName", alphabets);
+		new CommonFunctions().clearText(txtLastName, "LastName");
+		new CommonFunctions().validateFieldWithSpecialchar(txtLastName, "LastName", specialCharacters);
+
+	}
+
 }

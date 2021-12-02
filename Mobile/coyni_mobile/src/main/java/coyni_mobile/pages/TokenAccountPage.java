@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.BuyTokenMenuComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomeComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -24,16 +25,17 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnIssueCard = MobileBy.xpath(" ");
 
 	public void verifyLogin() {
-	 if(getElement(lblUserName, "UserName").isDisplayed()) {
-		 ExtentTestManager.setPassMessageInReport("Login success");
-	 }else {
-		 ExtentTestManager.setPassMessageInReport("Login failed");
-	 }
+		if (getElement(lblUserName, "UserName").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport("Login success");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Login failed");
+		}
 	}
 
 	public String getAvailableBalance() {
 		return getText(lblAvailableBalance);// doubt
 	}
+
 	public void verifyAvailableBalanceView() {
 		new CommonFunctions().elementView(lblAvailableBalance, "AvailableBalance");
 	}
@@ -93,5 +95,9 @@ public class TokenAccountPage extends MobileFunctions {
 
 	public NotificationComponent notificationComponent() {
 		return new NotificationComponent();
+	}
+
+	public BuyTokenMenuComponent buyTokenMenuComponent() {
+		return new BuyTokenMenuComponent();
 	}
 }
