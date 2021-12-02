@@ -4,15 +4,15 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.actions.SwipeDirection;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
-	private By imgUser = MobileBy.xpath("");
-	private By lblUserName = MobileBy.xpath("");
-	private By lblAccountID = MobileBy.xpath("");
-	private By lblAccountStatus = MobileBy.xpath("");
-
+	
+	
 	private By imgQRCode = MobileBy.xpath("");
 	private By lblMyQRCodeHeading = MobileBy.xpath("");
 	private By btnShare = MobileBy.xpath("");
@@ -28,6 +28,121 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkChangePassword = MobileBy.xpath("");
 	private By btnLogOut = MobileBy.xpath("");
 
+	
+	private By imgUser = MobileBy.xpath("");
+	private By lblUserName = MobileBy.xpath("");
+	private By lblAccountID = MobileBy.xpath("");
+	private By lblAccountStatus = MobileBy.xpath("");
+	private By lblAvaliableBalance = MobileBy.xpath("");
+	private By viewPayRequestButton = MobileBy.xpath("");
+	private By lblRecentTransaction = MobileBy.xpath("");
+	private By lblFirstAndLastName = MobileBy.xpath("");
+	private By lblContact = MobileBy.xpath("");
+
+	private By viewDashboard = MobileBy.xpath("");
+	private By viewCrypto = MobileBy.xpath("");
+	private By viewIssueCard = MobileBy.xpath("");
+	private By viewProfile = MobileBy.xpath("");
+	private By viewTokenMenu = MobileBy.xpath("");
+	private By lblCryptoAssets = MobileBy.xpath("");
+
+	private By btnScan = MobileBy.xpath("");
+	private By btnPayRequest = MobileBy.xpath("");
+	private By btnBuyToken = MobileBy.xpath("");
+	private By btnWithdrawToUSD = MobileBy.xpath("");
+	private By popUp = MobileBy.xpath("");
+
+	public void viewScan() {
+		new CommonFunctions().elementView(btnScan, "View Scan");
+	}
+
+	public void viewPayRequest() {
+		new CommonFunctions().elementView(btnPayRequest, "Request");
+	}
+
+	public void verifyAvaliableBlc(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblAvaliableBalance, "Avaliable Balance", expHeading);
+	}
+
+	public void viewPayRequestMenu() {
+		new CommonFunctions().elementView(viewPayRequestButton, "Pay Request");
+	}
+
+	public void viewBuyToken() {
+		new CommonFunctions().elementView(btnBuyToken, "Buy Token");
+	}
+
+	public void viewWithdrawnToUSD() {
+		new CommonFunctions().elementView(btnWithdrawToUSD, "Withdrawn To USD");
+	}
+
+	public void clickPayRequest() {
+		click(viewPayRequestButton, "Pay Request");
+	}
+
+	public void verifyRecentTransaction(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblRecentTransaction, "Recent Transaction", expHeading);
+	}
+
+	public void clickImg() {
+		click(imgUser, "Click Image");
+	}
+
+	public void verifyFirstAndLastName(String firstAndLastName) {
+		new CommonFunctions().verifyLabelText(lblFirstAndLastName, "First and Last Name", firstAndLastName);
+	}
+
+	public void verifyContactContent(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblContact, "Contact Heading", expHeading);
+	}
+
+	public void viewDashboard() {
+		new CommonFunctions().elementView(viewCrypto, "Dashboard");
+	}
+
+	public void viewCrypto() {
+		new CommonFunctions().elementView(viewDashboard, "Crypto");
+	}
+
+	public void viewIssueCard() {
+		new CommonFunctions().elementView(viewIssueCard, "Issue Card");
+	}
+
+	public void viewProfile() {
+		new CommonFunctions().elementView(viewProfile, "Profile");
+	}
+
+	public void viewTokenAccount() {
+		new CommonFunctions().elementView(viewTokenMenu, "Token Account");
+	}
+
+	public void clickTokenMenu() {
+		click(viewTokenMenu, "Token Menu");
+	}
+
+	public void verifyAssets(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblCryptoAssets, "Crypto Assets comming soon", expHeading);
+	}
+
+	public void clickCrypto() {
+		click(viewCrypto, "Crypto");
+	}
+
+	private void minimizePopup() {
+		if (DriverFactory.getDriver().findElement(lblUserName).isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
+		}
+	}
+
+	public void minimizePopupBySwipeDown() {
+		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
+		minimizePopup();
+
+	}
+
+	
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);
 	}
@@ -129,5 +244,9 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+	public ExternalBankAccountPage externalBankAccountPage() {
+		return new ExternalBankAccountPage();
 	}
 }
