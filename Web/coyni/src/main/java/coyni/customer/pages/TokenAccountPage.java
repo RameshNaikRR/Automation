@@ -22,11 +22,13 @@ public class TokenAccountPage extends BrowserFunctions {
 	// added
 	private By btnTokenAccount = By.id("token-dashboard");
 	private By lblTotalFunds = By.cssSelector(".text-6xl");
+	private By amount = By.cssSelector(".text-6xl");
 	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
 	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]");
+
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
 
 	public void clickTokenAccount() {
@@ -38,9 +40,14 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	}
 
-//	public void clickUserName() {
-//		click(dropDownUserName, "UserName");
-//	}
+	public void verifyAmount() {
+
+		new CommonFunctions().elementView(amount, "Amount");
+	}
+
+//			public void clickUserName() {
+//				click(dropDownUserName, "UserName");
+//			}
 
 	public void clickPayRequestToken() {
 		click(btnPayRequestToken, "PayRequestToken");
@@ -66,7 +73,7 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().elementView(lblYourTransactions, "Your Transactions");
 	}
 	// public TokenAccountActivityComponent tokenAccountActivityComponent() {
-//	 	return new TokenAccountActivityComponent(); }
+//			 	return new TokenAccountActivityComponent(); }
 	// public TransactionsListComponent transactionsListComponent() {
 	// return new TransactionsListComponent(); }
 	// public TokensSentDetailsComponent tokensSentDetailsComponent() {
@@ -75,7 +82,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	// return new TokensReceivedDetailsComponent(); }
 	// public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
 	// return new TokensPurchasedDetailsComponent() ;}
-//	 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
+//			 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
 	// return new TokensWithdrawnDetailsComponent();}
 	// public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
 	// return new TokenPaidOrdersDetailsComponent(); }

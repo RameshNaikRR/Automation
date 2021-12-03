@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.components.AuthyComponent;
+import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.TokenAccountPage;
 import coyni.customer.popups.PayAndRequestTokensPopup;
 import coyni.uitilities.CommonFunctions;
@@ -15,17 +16,20 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenAccountTest {
 	TokenAccountPage tokenAccountPage;
+	LoginPage loginPage;
 
 	@BeforeTest
 	public void init() {
 		tokenAccountPage = new TokenAccountPage();
-
+		loginPage = new LoginPage();
 	}
 
 	@Test
 	public void testAvailableBalance() {
 		try {
 			tokenAccountPage.clickTokenAccount();
+			Thread.sleep(2000);
+			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 
@@ -199,10 +203,10 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyAmountView();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyRecipientsAddressView();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyMessageToRecipientView();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyRecipientsAddressView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyMessageToRecipientView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testView failed due to exception " + e);
@@ -216,7 +220,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountBalanceUpdatedView failed due to exception " + e);
@@ -229,15 +233,71 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyYourTokenAccountView();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyPayingRecipient();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyCrossIconView();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyBackIconView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyPayingRecipient();
+			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
+			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
 
 		}
 
 		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testView failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testCrossIcons failed due to exception " + e);
+		}
+
+	}
+
+	// added P - Alphabets and Special characters in verification
+	@Test
+	@Parameters({ "strParams" })
+	public void testPayWithInvalidVerificationCode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (!data.get("code").isEmpty()) {
+				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+
+				loginPage.authyComponent().verifyMessage(data.get("errMessage"));
+			}
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayWithInvalidVerificationCode failed due to exception " + e);
+		}
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testCopyTextAndShare(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("TestCopyTextAndShare failed due to exception " + e);
+		}
+
+	}
+
+	// added P
+	@Test
+	@Parameters({ "strParams" })
+	public void testCopyPaste(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCopyPaste failed due to exception " + e);
 		}
 
 	}
@@ -267,9 +327,9 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("message"));
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			if (!data.get("amount").isEmpty()) {
-			//	new CommonFunctions().validateFormErrorMessage("", strParams);
-
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("amount"),
+						data.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPayFieldsWithInvalidData failed due to  exception " + e);
@@ -284,9 +344,11 @@ public class TokenAccountTest {
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("message"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyCountMessageToRecipient();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			//
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
@@ -302,6 +364,7 @@ public class TokenAccountTest {
 					.successFailurePopupCardComponent().verifyImage(data.get("image"));
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.successFailurePopupCardComponent().verifyMessge(data.get("sucessMessage"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickOnCopyLink();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.successFailurePopupCardComponent().clickDone();
 		} catch (Exception e) {
@@ -309,7 +372,7 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
+	@Test // added P
 	@Parameters({ "strParams" })
 	public void testPayTransactionsWithInvalidAmount(String strParams) {
 		try {
@@ -317,14 +380,24 @@ public class TokenAccountTest {
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			String[] amount = data.get("amount").split(",");
+			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
 
-//			if (!data.get("errMessageForInsufficientFunds").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInsufficientFunds"), strParams);
-//			} else if (!data.get("errMessageForMinimumTransaction").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage("The minimum transaction amount is", strParams);
-//			} else {
-//				new CommonFunctions().validateFormErrorMessage("The maximum transaction amount is", strParams);
-//			}
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidAmount"),
+						data.get("Invalid Amount"), data.get("elementName"));
+			}
+
+			else if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForMinimumTransaction"),
+						data.get("Minimum Transaction"), data.get("elementName"));
+			}
+
+			else {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForMaximumTransaction"),
+						data.get("Maximum Transaction"), data.get("elementName"));
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to Invalid Amount exception " + e);
 		}
@@ -340,9 +413,33 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			if (!data.get("errMessageForInvalidRecipientAddress").isEmpty()) {
-			//	new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidRecipientAddress"),
-			//			strParams);
+				if (!data.get("errMessageForInvalidRecipientAddress").isEmpty()) {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidRecipientAddress"),
+							data.get("RecipientAddress"), data.get("elementName"));
+				}
+
 			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
+		}
+	}
+
+	@Test // added P
+	@Parameters({ "strParams" })
+	public void testPayTransactionsWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidAmount"),
+						data.get("Invalid Amount"), data.get("elementName"));
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
@@ -355,8 +452,8 @@ public class TokenAccountTest {
 	public void testTryAgain(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.payAndRequestTokensPopup().VerifyButtonPay();
-			tokenAccountPage.payAndRequestTokensPopup().VerifyTransactionFailed();
+			tokenAccountPage.payAndRequestTokensPopup().verifyButtonPay();
+			tokenAccountPage.payAndRequestTokensPopup().verifyTransactionFailed();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTryAgain failed due to exception " + e);
@@ -368,7 +465,7 @@ public class TokenAccountTest {
 	public void testVerificationFailed(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.payAndRequestTokensPopup().VerifyTransactionFailed();
+			tokenAccountPage.payAndRequestTokensPopup().verifyTransactionFailed();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testVerification failed due to exception " + e);
 		}
@@ -400,6 +497,42 @@ public class TokenAccountTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRequestTransaction failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestTransactionsWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+//			if (!data.get("errMessageForInvalidAmount").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidAmount"), strParams);
+//			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to Invalid Amount exception " + e);
+		}
+	}
+
+	// correct or not
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestTransactionsWithInvalidAccountAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+//			if (!data.get("errMessageForInvalidRecipientAddress").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidRecipientAddress"),
+//						strParams);
+//			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
 		}
 	}
 

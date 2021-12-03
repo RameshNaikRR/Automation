@@ -1,9 +1,11 @@
 package coyni.customer.components;
 
+import org.apache.poi.ss.formula.functions.Count;
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class NotificationsComponent extends BrowserFunctions {
 
@@ -11,10 +13,16 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By notificationsIcon = By.cssSelector(".icon-notification-bold");
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
-	private By btnPay = By.xpath("");
-	private By btnDeny = By.xpath("");
 	private By btnRequests = By.xpath("//button[contains(text(),'Requests')]");
-	private By btnDelete = By.xpath("");
+	private By btnPay = By.xpath("(//button[text()='Pay'])[1]");
+	private By btnDeny = By.xpath("(//div[text()='Deny'])[2]");
+	private By btnReminder = By.xpath("(//button[text()='Reminder'])[1]");
+	private By btnCancel = By.xpath("(//div[text()='Cancel'])[2]");
+	private By lblPayMessage = By.xpath("//span[text()='Pay ']");
+	private By lblReminderMessage = By.xpath("//div[text()='You sent a reminder to ']");
+	private By clearAll = By.xpath("//span[text()='Clear All']");
+
+	private By count = By.xpath("");
 
 	// added
 	public void clickNotificationsIcon() {
@@ -30,18 +38,29 @@ public class NotificationsComponent extends BrowserFunctions {
 		click(btnRequests, "Requests ");
 	}
 
-//		public void clickPay() {
-//			click(btnPay, "Pay ");
-//		}
-	//
-//		public void clickDeny() {
-//			click(btnDeny, "Deny ");
-//		}
-	//
-//		public void clickDelete() {
-//			click(btnDelete, "Delete ");
-	//
-//		}
+	public void clickPay() {
+		click(btnPay, "Pay ");
+	}
+
+	public void clickDeny() {
+		click(btnDeny, "Deny ");
+	}
+
+	public void clickReminder() {
+		click(btnReminder, "Reminder");
+	}
+
+	public void clickDelete() {
+		click(btnCancel, "Delete ");
+	}
+
+	public void clickClearAll() {
+		click(clearAll, "Clear All");
+	}
+
+	public void verifyLabelPayMessage() {
+		new CommonFunctions().elementView(lblPayMessage, "Pay Message");
+	}
 
 	// added
 	public void verifyPay() {
@@ -64,20 +83,23 @@ public class NotificationsComponent extends BrowserFunctions {
 	}
 
 	// added
-	// public Count count() {
-	// return new Count();
-	// }
+	public Count count() {
+		return new Count();
+	}
 
 	// added
-//	public void verifyNotificationsCount() {
-//		int actCount = Integer.parseInt(this.count().toString());
-//		int notificationsCount = getElementsList(notificationCount, "Count").size();
-//		if (actCount == notificationsCount) {
-//			ExtentTestManager.setPassMessageInReport("Number of Count in Notifications is " + actCount);
-//		} else {
-//			ExtentTestManager.setFailMessageInReport(
-//					String.format("Number of Count in Notifications is ", notificationsCount, actCount));
-//		}
-//	}
+	public void verifyNotificationsCount() {
+		int actCount = Integer.parseInt(this.count().toString());
+		int notificationsCount = getElementsList(notificationCount, "Count").size();
+		if (actCount == notificationsCount) {
+			ExtentTestManager.setPassMessageInReport("Number of Count in Notifications is " + actCount);
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					String.format("Number of Count in Notifications is ", notificationsCount, actCount));
+		}
+	}
 
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
 }

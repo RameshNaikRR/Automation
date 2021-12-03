@@ -162,13 +162,13 @@ public class CustomerProfileTest {
 	}
 
 	@Test
-	//@Parameters({ "strParams" })
+	// @Parameters({ "strParams" })
 
-	public void testNotifications(String strParams) {
+	public void testNotifications() {
 		try {
-			//Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//customerProfilePage.userDetailsComponent().notificationsComponent()
-					//.verifyBellIconMouseHoverAction(data.get("background"), strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// customerProfilePage.userDetailsComponent().notificationsComponent()
+			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
@@ -179,7 +179,7 @@ public class CustomerProfileTest {
 		}
 	}
 
-	// added
+	// added p
 //	@Test
 //	public void testNotificationsViewPayAndDeny() {
 //
@@ -194,45 +194,121 @@ public class CustomerProfileTest {
 //		}
 //
 //	}
+
+	// added p
+	@Test
+	public void testNotificationsPay() {
+		try {
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLabelPayMessage();
+			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent()
+					.fillAuthyInput("securityKey");
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDeny();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testPay is failed due to Exception " + e);
+		}
+	}
+
 //added
-//	@Test
-//	public void testNotificationsPay() {
-//		try {
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-	// customerProfilePage.useDetailsComPonent().notificationsComponent().
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(" testPay is failed due to Exception " + e);
-//		}
-//	}
-////added
-//	@Test
-//	public void testNotificationsDeny() {
-//		try {
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(" testDeny is failed due to Exception " + e);
-//		}
-//
-//	}
-////added
-//	@Test
-//	public void testNotificationsRemove() {
-//		try {
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
-//		}
-//
-//	}
+	@Test
+	public void testNotificationsDeny() {
+		try {
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testDeny is failed due to Exception " + e);
+		}
+
+	}
+
+//added
+	@Test
+	public void testNotificationsReminder() {
+		try {
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			// customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickReminder();
+			// customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
+		}
+
+	}
+
+	// added
+	@Test
+	public void testNotificationsDelete() {
+		try {
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			// customerProfilePage.userDetailsComponent().notificationsComponent().clickReminder();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testNotificationsClearAll() {
+		try {
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickClearAll();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
+		}
+
+	}
+
+	@Test // added P
+	@Parameters({ "strParams" })
+	public void testView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testView failed due to exception " + e);
+		}
+
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testCrossIcon(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testTransactionFailed(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
+		}
+	}
 
 	// DOUBT
 	@Test // added
@@ -311,7 +387,8 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("currentPassword"));
 			customerProfilePage.changePasswordComponent().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -330,7 +407,8 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordComponent().authyComponent().verifyHeading(data.get("heading"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("invalidAuthyOtp"));
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
