@@ -11,7 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -20,88 +23,100 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class HomePage extends BrowserFunctions {
-	private By lnkPersonalAccount = By.xpath("//div[text()='Personal Account']");
+	private By lnkPersonalAccount = By.cssSelector("div[class='pt-3 pb-3 font-bold text-center 1xl:text-lg 2xl:text-xl text-cm3']");
 	private By lnkBusinessAccount = By.cssSelector("div[currentitem='false']");
-	private By lnkLogIn = By.cssSelector("");
+	private By lnkLogIn = By.xpath("//span[contains(text(),'Log In')]");
+	private By lnkSignUp = By.cssSelector("span[class='font-semibold cursor-pointer text-cm3 hover:underline']");
 	private By lblCreateAccount = By.xpath("//span[contains(text(), 'Create an Account')]");
 	private By lblPersonalAccount = By.xpath("//div[contains(text(),'Personal Account')]");
 	private By lblBusinnesAccount = By.xpath("//div[text()='Business Account']");
 	private By lblLogin = By.xpath("//span[text()='Log In']");
 	private By lblCreateAnAccountText = By.xpath("//p[@class='disclaimer']");
-	private By lblPersonalAccountText = By.xpath("//p[contains(text(),'Used for sending and receiving')]");
+	private By lblPersonalAccountText = By.cssSelector("a[href='/choose-account/create-account/personal-account'] p");
 	private By lblBusinessAccountText = By.xpath("//p[contains(text(),'Used for receiving token')]");
 	private By lblCreateAPersonAccountText = By.xpath("//span[contains(text(),'Create a Personal Account')]");
-	private By lblCreateAPersonalAccountDescriptionText = By.xpath("");
-	private By lblBusinessAccountTooltip = By.xpath(
-			"//div[@class='__react_component_tooltip tc400c05a-2593-4ab8-a062-5bfe85d97f35 place-top type-dark items-center text-center text-cwhite']");
-    
-	private By SignUpElements = By.cssSelector("");
-	private By txtFirstName = By.cssSelector("");
-	private By txtLastName = By.cssSelector("");
-	private By txtEmail = By.cssSelector("");
+	private By lblCreateAPersonalAccountDescriptionText = By.cssSelector("div[class='create-account__form'] p");
+	private By lblBusinessAccountTooltip = By.xpath("//div[@class='__react_component_tooltip tc400c05a-2593-4ab8-a062-5bfe85d97f35 place-top type-dark items-center text-center text-cwhite']");
 
-	private By txtCreatePasswordFiled = By.cssSelector("");
+	private By SignUpElements =By.xpath("");
+	private By passErrorMsg = By.cssSelector("");
+	private By txtFirstName = By.cssSelector("input[name='first_name']");
+	private By txtLastName = By.cssSelector("input[name='last_name']");
+	private By txtEmail = By.cssSelector("input[id='email-address']");
+
+	private By txtCreatePasswordFiled = By.cssSelector("input[name='create_password']");
 	private By lblCreatePasswordRequirementsToolTipText = By.cssSelector("span.criteria span");
 	private By lblConfirmPassword = By.cssSelector("label[for='confirm-password']");
 	private By opacity = By.cssSelector("div[style='opacity: 1; transform: none;']");
-	private By txtConfirmPasswordFiled = By.cssSelector("");
-	private By btnNext = By.cssSelector("");
+	private By txtConfirmPasswordFiled = By.cssSelector("input[name='confirm_password']");
+	private By btnNext = By.xpath("//button[text()='Next']");
 
-	private By txtPhoneNumber = By.cssSelector("");
-	private By lnkUsLogoDefault = By.cssSelector("");
-	private By passErrorMsg = By.cssSelector("");
-	private By lnkCreatePasswordShowIcon = By.cssSelector("");
-	private By lnkConfirmPasswordShowIcon = By.cssSelector("");
-	private By lnkPrivacyPolicy = By.cssSelector("");
-	private By lnkTermsOfServices = By.cssSelector("");
+	private By txtPhoneNumber = By.cssSelector("input[id='phone-number']");
+	private By lnkCreatePasswordShowIcon = By.cssSelector("button[class='icon-button  icon-password-hide-new fix-eye view-password']");
+	private By lnkConfirmPasswordShowIcon = By.cssSelector("button[class='icon-button  icon-password-hide-new  view-password']");
+	private By lnkPrivacyPolicy = By.xpath("//span[text()='Privacy Policy']");
+	private By lnkTermsOfServices = By.xpath("//span[contains(text(),' Terms of Services.')]");
 	private By lblLogInToCoyni = By.xpath("//span[contains(text(),'Log In to Coyni')]");
-	private By lblPhoneVerification = By.xpath("//div[text()='Phone Verification']");
-	private By lblPhoneVericationText = By.cssSelector(
-			"p[class='pl-5 text-base 4xl:text-base text-cgy5 SmsValidation_phone_validation__sub_title__2OJbV']");
+	private By lblPhoneVerification = By.cssSelector("div[class='font-bold tracking-wide cursor-default text-cgy4 SmsValidation_title__3ok9r']");
+	private By lblPhoneVericationText = By.cssSelector("div[class='flex mt-5 cursor-default'] p");
 	private By lblResend = By.xpath("//div[text()='Resend']");
 	private By lblGoBack = By.xpath("//div[contains(text(),'Go Back')]");
-	private By lblPhoneNumber = By.cssSelector("span[class='ml-2 text-base font-semibold text-cm3']");
+	private By lblPhoneNumber = By.cssSelector("div[class='flex mt-5 cursor-default'] p span");
+	
+	
+	public void clickOnPersonalAccount() {
+		click(lnkPersonalAccount, "Personal Account");
+	}
 
 	public void verifyHomePageOptions(String expCreateAccountText, String expPersonalAccountText,
 			String expBusinessAccountText, String expLogin) {
 
-		new CommonFunctions().verifyLabelText(lblCreateAccount, "CreateAccount", expCreateAccountText);
-		new CommonFunctions().verifyLabelText(lblPersonalAccount, "PersonalAccount", expPersonalAccountText);
-		new CommonFunctions().verifyLabelText(lblBusinnesAccount, "BusinnesAccount", expBusinessAccountText);
-		new CommonFunctions().verifyLabelText(lblLogin, "Log In", expLogin);
+		new CommonFunctions().verifyLabelText(lblCreateAccount, "Create Account Title is", expCreateAccountText);
+		new CommonFunctions().verifyLabelText(lblPersonalAccount, "Personal Account Title is", expPersonalAccountText);
+		new CommonFunctions().verifyLabelText(lblBusinnesAccount, "Businees Account Title is", expBusinessAccountText);
+		new CommonFunctions().verifyLabelText(lblLogin, "Log In Title is", expLogin);
 
 	}
 
 	public void verifyCreateAccountText(String expCreateAccountText) {
-		new CommonFunctions().verifyLabelText(lblCreateAnAccountText, "Create Account Text", expCreateAccountText);
+
+		new CommonFunctions().verifyLabelTextContains(lblCreateAnAccountText, "Create Account Text Description is",
+				expCreateAccountText);
 	}
 
 	public void verifyPersonalAccountText(String expPersonalAccountText) {
-		new CommonFunctions().verifyLabelText(lblPersonalAccountText, "Personal Account Text", expPersonalAccountText);
+		new CommonFunctions().verifyLabelTextContains(lblPersonalAccountText, "Personal Account Text Description is",
+				expPersonalAccountText);
 	}
 
 	public void verifyBusinessAccountText(String expBusinessAccountText) {
-		new CommonFunctions().verifyLabelText(lblBusinessAccountText, "Business Account Text", expBusinessAccountText);
+		new CommonFunctions().verifyLabelTextContains(lblBusinessAccountText, "Business Account Text Description is",
+				expBusinessAccountText);
+	}
+
+	public void clickOnSignUp() {
+		click(lnkSignUp, "clicked on SignUpLink");
 	}
 
 	public void verifyCreateAPersonalAccountText(String expCreateAPersonAccountText) {
-		click(lnkPersonalAccount, "Persona Account");
-		new CommonFunctions().verifyLabelText(lblCreateAPersonAccountText, "CreateAccountText",
+
+		new CommonFunctions().verifyLabelText(lblCreateAPersonAccountText, "Create A Personal Account Title is",
 				expCreateAPersonAccountText);
 	}
 
 	public void verifyBusinessAccountDisabled() {
-		boolean flag = verifyElementDisabled(lnkBusinessAccount, "BusinessAccount");
+		boolean flag = verifyElementDisabled(lnkBusinessAccount, "Clicked on BusinessAccountLink");
 		if (flag) {
 
 			ExtentTestManager.setPassMessageInReport("Business account is Disabled");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Business account is Disabled");
+			ExtentTestManager.setFailMessageInReport("Business account is  not Disabled");
 		}
 	}
 
 	public void verifyBusinessAccountToolTip(String expBusinessAccountToolTip) {
-		WebElement actToolTip = getElement(lblBusinessAccountTooltip, "BusinessAccountToolTip");
+
+		String actToolTip = getAttributeValue(lblBusinessAccountTooltip, "value", "BusinessAccountToolTip");
 
 		if (actToolTip.equals(expBusinessAccountToolTip)) {
 			ExtentTestManager.setPassMessageInReport("Business account ToolTip is Succesfully Verified");
@@ -109,46 +124,28 @@ public class HomePage extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Business account ToolTip is not Succesfully Verified");
 		}
 	}
+
 	
-	public void verifyHomePageTabNavigation() throws AWTException {
-		Robot robot = new Robot();
-		List<WebElement> str = getElementsList(SignUpElements, "elementsList");
-		for (int i = 0; i < str.size(); i++) {
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_TAB);
-			String focus = str.get(i).getAttribute("focus");
-			if (focus.equals("true")) {
-
-				ExtentTestManager.setPassMessageInReport("foucsed with tab");
-			} else {
-				ExtentTestManager.setFailMessageInReport("Not Foucsed in order with Tab");
-				break;
-			}
-
-		}
-	}
-
-
 	public void verifyCreatePersonalAccountDescriptionText(String expCreatePersonalAccountDescriptionText) {
-		new CommonFunctions().verifyLabelText(lblCreateAPersonalAccountDescriptionText, "CreateAccount",
-				expCreatePersonalAccountDescriptionText);
+		new CommonFunctions().verifyLabelText(lblCreateAPersonalAccountDescriptionText,"Create Personal Account Description is", expCreatePersonalAccountDescriptionText);
 	}
 
-	public void verifyFirstNameautoFoucsed() {
-
-		String attributeValue = getAttributeValue(txtFirstName, "autofoucs", "autofocus");
-
-		if (attributeValue.equals("1")) {
-			ExtentTestManager.setPassMessageInReport("Autofoucsed");
-
-		} else {
-			ExtentTestManager.setFailMessageInReport("Not AutoFoucsed");
-		}
-
-	}
+	
+	  public void verifyFirstNameautoFoucsed(String expColor) { 
+		  new CommonFunctions().verifyTextBoxBorderColor(expColor); 
+	 
+	  
+	  if (expColor.equals("1")) {
+	  ExtentTestManager.setPassMessageInReport("Autofoucsed");
+	  
+	  } else { ExtentTestManager.setFailMessageInReport("Not AutoFoucsed"); }
+	  
+	  }
+	 
 
 	public void verifySignUpFieldsTabNavigation() throws AWTException {
 		Robot robot = new Robot();
+        
 		List<WebElement> str = getElementsList(SignUpElements, "elementsList");
 		for (int i = 0; i < str.size(); i++) {
 			robot.keyPress(KeyEvent.VK_TAB);
@@ -176,14 +173,57 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	public void verifyFirstNameValidations(String expFirstNameText, String input) {
-		enterText(txtFirstName, "FirstName", expFirstNameText);
-		String actFirstNameText = getAttributeValue(txtFirstName, "Value", "First Name");
+		enterText(txtFirstName, expFirstNameText, "FirstName");
+		String actFirstNameText = getAttributeValue(txtFirstName, "value", "First Name");
 
-		if (expFirstNameText == actFirstNameText) {
+		if (expFirstNameText.equals(actFirstNameText)) {
 
 			ExtentTestManager.setPassMessageInReport("Accepting " + input + "character");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Not Accepting " + input + " character");
+		}
+
+	}
+
+	public void verifySignUpFieldsWithEmpty(String expFirstName, String expLastName, String expPhoneNumber,
+			String expEmail, String expCreatePassword, String expConfirmPassword) throws AWTException {
+
+		enterText(txtFirstName, expFirstName, "FirstName");
+		enterText(txtLastName, expLastName, "LastName");
+		enterText(txtPhoneNumber, expPhoneNumber, "PhoneNumber");
+		enterText(txtEmail, expEmail, "Email");
+		enterText(txtCreatePasswordFiled, expCreatePassword, "CreatePassword");
+		enterText(txtConfirmPasswordFiled, expConfirmPassword, "ConfirmPassword");
+	}
+
+	public void clickOnTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+	}
+
+	public void verifySignUpEmailFieldsWithInvalidData(String expEmail) {
+		enterText(txtEmail, expEmail, "Email");
+
+	}
+
+	public void verifySignUpFieldCreatePasswordWithInvalidData(String expCreatePAssword) {
+		enterText(txtCreatePasswordFiled, expCreatePAssword, "CreatePassword");
+	}
+
+	public void verifySignUpFieldConfirmPasswordWithInvalidData(String expConfirmPassword) {
+		enterText(txtConfirmPasswordFiled, expConfirmPassword, "ConfirmPassword");
+	}
+
+	public void verifyFirstNameValidations(String expFirstNameText) {
+		enterText(txtFirstName, expFirstNameText, "FirstName");
+		String actFirstNameText = getAttributeValue(txtFirstName, "value", "First Name");
+
+		if (!expFirstNameText.equals(actFirstNameText)) {
+
+			ExtentTestManager.setPassMessageInReport("Not Accepting More Than 30 characters");
+		} else {
+			ExtentTestManager.setFailMessageInReport(" Accepting More than 30 character");
 		}
 
 	}
@@ -197,15 +237,30 @@ public class HomePage extends BrowserFunctions {
 
 	}
 
-	public void verifyLastNameValidations(String expLastNameText, String input) {
-		enterText(txtLastName, "Last Name", expLastNameText);
-		String actLastNameText = getAttributeValue(txtLastName, "value", "Last Name");
+	public void verifyLastNameValidations(String explastNameText, String input) throws InterruptedException {
+		enterText(txtLastName, explastNameText, "Last name");
 
-		if (expLastNameText == actLastNameText) {
+		String actLastNameText = getAttributeValue(txtLastName, "value", "LastName");
+
+		if (explastNameText.equals(actLastNameText)) {
 
 			ExtentTestManager.setPassMessageInReport("Accepting " + input + "character");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Not Accepting " + input + " character");
+		}
+
+	}
+
+	public void verifyLastNameValidations(String explastNameText) throws InterruptedException {
+		enterText(txtLastName, explastNameText, "Last name");
+
+		String actLastNameText = getAttributeValue(txtLastName, "value", "LastName");
+
+		if (!explastNameText.equals(actLastNameText)) {
+
+			ExtentTestManager.setPassMessageInReport("Not Accepting Moore than  30character");
+		} else {
+			ExtentTestManager.setFailMessageInReport(" Accepting more than 30 character");
 		}
 
 	}
@@ -219,24 +274,25 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	public void verifyPhoneNumberTenDigitValidations(String PhoneNumber) {
-		enterText(txtPhoneNumber, "Phone Number", PhoneNumber);
-		String phnnum = getAttributeValue(txtPhoneNumber, "value", PhoneNumber);
-		int size = phnnum.length();
+		enterText(txtPhoneNumber, PhoneNumber, "Phone Number");
+		String phnnum = getAttributeValue(txtPhoneNumber, "value", "txtPhoneNumber");
+		String strNew = phnnum.replaceAll("[^0-9]", "");
+		int size = strNew.length();
 		if (size == 10) {
-			ExtentTestManager.setPassMessageInReport("Accepting " + PhoneNumber + "Number");
+			ExtentTestManager.setPassMessageInReport("Accepting 10 Digits Phone Number Number");
 
 		} else {
 			ExtentTestManager.setFailMessageInReport("Not Accepting " + PhoneNumber + " Number");
 		}
 	}
 
-	public void verifyUSLogoDefault() {
-		verifyElementDisplayed(lnkUsLogoDefault, "Defaul UsLogo");
-	}
+	
 
 	public void verifyUSnumberForformat(String number) {
+		enterText(txtPhoneNumber, number, "number");
+		String actNumber = getAttributeValue(txtPhoneNumber, "value", number);
 		Pattern pattern = Pattern.compile("\\(\\d{3}\\)\\\\d{3}-\\d{4}");
-		Matcher matcher = pattern.matcher(number);
+		Matcher matcher = pattern.matcher(actNumber);
 		if (matcher.matches()) {
 			ExtentTestManager.setPassMessageInReport("US Number Format is mattched (xxx) xxx-xxxx");
 		} else {
@@ -245,14 +301,14 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	public void verifyPhoneNumberValidations(String expPhoneNumber, String input) {
-		enterText(txtPhoneNumber, "PhoneNumber", expPhoneNumber);
-		String actPhoneNumber = getAttributeValue(txtPhoneNumber, "Value", "Phone Number");
+		enterText(txtPhoneNumber, expPhoneNumber, "PhoneNumber");
+		String actPhoneNumber = getAttributeValue(txtPhoneNumber, "value", "Phone Number");
 
-		if (expPhoneNumber == actPhoneNumber) {
+		if (!expPhoneNumber.equals(actPhoneNumber)) {
 
-			ExtentTestManager.setPassMessageInReport("Accepting " + input + "character");
+			ExtentTestManager.setPassMessageInReport("Not Accepting " + input + "character");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Not Accepting " + input + " character");
+			ExtentTestManager.setFailMessageInReport(" Accepting " + input + " character");
 		}
 	}
 
@@ -264,70 +320,31 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	public String randomStringGen(int length) {
-
-		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-		StringBuilder sb = new StringBuilder();
-
-		Random random = new Random();
-
-		for (int i = 0; i < length; i++) {
-
-			int index = random.nextInt(alphabet.length());
-
-			char randomChar = alphabet.charAt(index);
-
-			sb.append(randomChar);
-		}
-
-		String randomString = sb.toString();
-
-		return randomString;
-
-	}
-
-	public void verifyEmailAdressFiledwithReqcharc(String number) {
-		String reqText = randomStringGen(Integer.parseInt(number));
-		enterText(txtEmail, "Email Address", reqText);
-		String actualEmail = getAttributeValue(txtEmail, "value", "Email");
-		if (actualEmail.length() == reqText.length()) {
-			ExtentTestManager.setPassMessageInReport("Email text Filed is accepting lenght is " + actualEmail.length());
-		} else {
-			ExtentTestManager
-					.setFailMessageInReport("Email text Filed is not accepting lenght is " + actualEmail.length());
-		}
-
-	}
-
-	public void verifyEmailAdressFiledWithSpecialCharacters(String reqText) {
-		enterText(txtEmail, "Email Address", reqText);
-		String actualEmail = getAttributeValue(txtEmail, "value", "Email");
-		if (actualEmail.equals(reqText)) {
-			ExtentTestManager.setPassMessageInReport("Email text Filed is accepting Special Characters is " + reqText);
-		} else {
-			ExtentTestManager
-					.setFailMessageInReport("Email text Filed is not accepting Special Characters is " + reqText);
-		}
-
-	}
 	
+
+	public void verifyEmailAdressFiledWithSpecialCharacters(String expEmail, String inputTypes) {
+		enterText(txtEmail, expEmail, "Email Address");
+		String actualEmail = getAttributeValue(txtEmail, "value", "Email");
+		if (actualEmail.equals(expEmail)) {
+			ExtentTestManager.setPassMessageInReport("Email  Filed is accepting  " + expEmail);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Email Filed is not accepting " + expEmail);
+		}
+
+	}
+
 	public void verifyCreatePasswordOpacity() {
-		boolean flag = verifyElementDisplayed(lnkCreatePasswordShowIcon, "ShowIcon");
-
-		if (flag) {
-			ExtentTestManager.setPassMessageInReport("Create and confirm password have ShowIcon");
+		if (verifyElementDisplayed(opacity, "Opacity")) {
+			ExtentTestManager.setPassMessageInReport("Opacity is  100% Succesfully verified");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Create and confirm password not have ShowIcon");
+			ExtentTestManager.setFailMessageInReport("Opacity is  not Succesfully verified verified ");
 		}
 
 	}
-		
-	
 
 	public void verifyCreatePasswordTextFiled(String expCreatepassword) {
-		enterText(txtCreatePasswordFiled, expCreatepassword, "create password");// San@123$* San123
-		String actualcnfpwd = getAttributeValue(txtConfirmPasswordFiled, "value", "password");
+		enterText(txtCreatePasswordFiled, expCreatepassword, "createpassword");// San@123$* San123
+		String actualcnfpwd = getAttributeValue(txtCreatePasswordFiled, "value", "createpassword");
 		if (actualcnfpwd.equals(expCreatepassword)) {
 			ExtentTestManager.setPassMessageInReport(
 					"Confirm password is accepted Uppercase, lower case and numbers and special charcters"
@@ -339,12 +356,11 @@ public class HomePage extends BrowserFunctions {
 		}
 
 	}
-	
-	
 
-	public void verifyCreatePasswordRequirementsToolTip(String Createpassword, String ToolTipText, String inputType) {
+	public void verifyCreatePasswordRequirementsToolTip(String Createpassword, String createPasswordToolTipText,
+			String inputTypes) {
 		enterText(txtCreatePasswordFiled, Createpassword, "create password");
-		String[] exptoolTipText = ToolTipText.split(",");
+		String[] exptoolTipText = createPasswordToolTipText.split("*");
 		List<WebElement> toolTipTexts = getElementsList(lblCreatePasswordRequirementsToolTipText, "ToolTip Texts");
 
 		List<String> toolTipText = null;
@@ -355,14 +371,14 @@ public class HomePage extends BrowserFunctions {
 		}
 		for (int i = 0; i < exptoolTipText.length; i++) {
 
-			if (exptoolTipText[i].equals(toolTipText.get(i))) {
+			if (exptoolTipText[i].toString().equals(toolTipText.get(i))) {
 				ExtentTestManager.setPassMessageInReport("displayed correct message when the user enter only "
-						+ inputType
+						+ inputTypes
 						+ " letters in 'Create Password' field then the Password Requirements text message expected is "
 						+ exptoolTipText[i] + " Actual is " + toolTipText.get(i));
 			} else {
 				ExtentTestManager.setFailMessageInReport("Not displayed correct message when the user enter only"
-						+ inputType
+						+ inputTypes
 						+ "letters in 'Create Password' field then the Password Requirements text message expected is "
 						+ exptoolTipText[i] + " Actual is " + toolTipText.get(i));
 			}
@@ -371,28 +387,29 @@ public class HomePage extends BrowserFunctions {
 
 	}
 
-	public void verifyCreatePasswordMaskedWithBlackCircles(String CreatePassword) {
+	public void verifyCreatePasswordMaskedWithBlackCircles(String CreatePassword, String expType) {
 		enterText(txtCreatePasswordFiled, CreatePassword, "Create Password");
+
 		String str = getAttributeValue(txtCreatePasswordFiled, "type", CreatePassword);
 
-		if (str.equals(CreatePassword)) {
+		if (expType.contains(str)) {
 
 			ExtentTestManager.setPassMessageInReport(
-					"Create and confirm password have masked with black circles" + CreatePassword);
+					"Create and confirm password have masked with black circles " + CreatePassword);
 		} else {
 			ExtentTestManager.setFailMessageInReport(
-					"Create and confirm password not masked with black circles" + CreatePassword);
+					"Create and confirm password not masked with black circles " + CreatePassword);
 
 		}
 	}
 
-	public void verifyCreatePasswordShowIcons() {
-		boolean flag = verifyElementDisplayed(lnkCreatePasswordShowIcon, "");
+	public void verifyCreatePasswordShowIcons(String expCreateShowIconType) {
 
-		if (flag) {
-			ExtentTestManager.setPassMessageInReport("Create and confirm password have ShowIcon");
+		String str = getAttributeValue(lnkCreatePasswordShowIcon, "type", expCreateShowIconType);
+		if (str.equals(expCreateShowIconType)) {
+			ExtentTestManager.setPassMessageInReport("Create password have ShowIcon");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Create and confirm password not have ShowIcon");
+			ExtentTestManager.setFailMessageInReport("Create  password not have ShowIcon");
 		}
 
 	}
@@ -400,7 +417,7 @@ public class HomePage extends BrowserFunctions {
 	public void verifyClickOnCreatePasswordShowIcon(String CreatePassowrd) {
 		enterText(txtCreatePasswordFiled, CreatePassowrd, "Create Password");
 		click(lnkCreatePasswordShowIcon, "Clicked  on ShowIcon");
-		String actualPaasword = getAttributeValue(txtCreatePasswordFiled, CreatePassowrd, "Create Paasword");
+		String actualPaasword = getAttributeValue(txtCreatePasswordFiled, "value", CreatePassowrd);
 
 		if (actualPaasword.equals(CreatePassowrd)) {
 			ExtentTestManager.setPassMessageInReport("Enterd password is visibled " + actualPaasword);
@@ -423,10 +440,19 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	public void verifyConfirmPasswordMaskedWithBlackCircles(String ConfirmPassword) {
+	public void verifyConfirmPasswordShowIcon() {
+		boolean flag = verifyElementSelected(lnkConfirmPasswordShowIcon, "Click Confirm Password");
+		if (flag) {
+			ExtentTestManager.setPassMessageInReport("Confirm password have ShowIcon");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Confirm password not have ShowIcon");
+		}
+	}
+
+	public void verifyConfirmPasswordMaskedWithBlackCircles(String ConfirmPassword, String expType) {
 		enterText(txtConfirmPasswordFiled, ConfirmPassword, "Confirm Password");
 		String str1 = getAttributeValue(txtConfirmPasswordFiled, "type", ConfirmPassword);
-		if (str1.equals(ConfirmPassword)) {
+		if (expType.equals(str1)) {
 
 			ExtentTestManager
 					.setPassMessageInReport(" Confirm password have masked with black circles" + ConfirmPassword);
@@ -437,19 +463,10 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	public void verifyConfirmPasswordShowIcon() {
-		boolean flag = verifyElementDisplayed(lnkConfirmPasswordShowIcon, "");
-		if (flag) {
-			ExtentTestManager.setPassMessageInReport("Create and confirm password have ShowIcon");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Create and confirm password not have ShowIcon");
-		}
-	}
-
 	public void verifyClickOnConfirmPasswordShowIcon(String ConfirmPassword) {
 		enterText(txtConfirmPasswordFiled, ConfirmPassword, "Confirm Password");
-		click(lnkConfirmPasswordShowIcon, "Clicked  on ShowIcon");
-		String actualPaasword = getAttributeValue(txtConfirmPasswordFiled, ConfirmPassword, "Confirm Paasword");
+		click(lnkConfirmPasswordShowIcon, " ShowIcon");
+		String actualPaasword = getAttributeValue(txtConfirmPasswordFiled, "value", ConfirmPassword);
 
 		if (actualPaasword.equals(ConfirmPassword)) {
 			ExtentTestManager.setPassMessageInReport("Enterd password is visibled " + actualPaasword);
@@ -459,19 +476,9 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	
-
 	public void clickOnNext() {
 		click(btnNext, "click Next");
 
-	}
-
-	public void clickOnPrivacyPolicy() {
-		click(lnkPrivacyPolicy, "click PrivacyPolicy");
-	}
-
-	public void clickOnTermsOfServices() {
-		click(lnkTermsOfServices, "click TermsOfServices");
 	}
 
 	public void verifyNextButtonEnabled(String FirstName, String LastName, String Email, String PhoneNumber,
@@ -479,12 +486,11 @@ public class HomePage extends BrowserFunctions {
 		enterText(txtFirstName, FirstName, "First Name");
 		enterText(txtLastName, LastName, "Last Name");
 		enterText(txtEmail, Email, "Email");
-		enterText(txtPhoneNumber, Email, "Email");
+		enterText(txtPhoneNumber, PhoneNumber, "Phone Number");
 		enterText(txtCreatePasswordFiled, CreatePassword, "Create Password");
 		enterText(txtConfirmPasswordFiled, ConfirmPassword, "Confirm Password");
 
-		boolean flag = verifyElementSelected(btnNext, "Next");
-		if (flag) {
+		if (verifyElementPresence(btnNext, "Next")) {
 
 			ExtentTestManager.setPassMessageInReport("Next Button is Enabled");
 		} else {
@@ -494,34 +500,44 @@ public class HomePage extends BrowserFunctions {
 
 	public void verifyClickOnLogIn(String expLoginText) {
 		click(lnkLogIn, "LogIn");
-		new CommonFunctions().verifyLabelText(lblLogInToCoyni, "Log In To Coyni", expLoginText);
+		new CommonFunctions().verifyLabelText(lblLogInToCoyni, "Log In Tite Description is", expLoginText);
 	}
 
 	public void verifyClickOnNext(String expPhoneVerifictionText) {
 		click(btnNext, "Next");
-		new CommonFunctions().verifyLabelText(lblPhoneVerification, "Log In To Coyni", expPhoneVerifictionText);
+		new CommonFunctions().verifyLabelText(lblPhoneVerification, "Phone Verification Title is",
+				expPhoneVerifictionText);
 	}
 
 	public void verifyPhoneVerificationPage(String expPhoneVerificationDescription, String expResendText,
 			String expGoBackText) {
-		new CommonFunctions().verifyLabelText(lblPhoneVericationText, "Phone Verification Description",
+		new CommonFunctions().verifyLabelTextContains(lblPhoneVericationText, "Phone Verification Description",
 				expPhoneVerificationDescription);
-		new CommonFunctions().verifyLabelText(lblResend, "Phone Verification Description", expResendText);
-		new CommonFunctions().verifyLabelText(lblGoBack, "Phone Verification Description", expGoBackText);
+		new CommonFunctions().verifyLabelText(lblResend, "Resend Button text is", expResendText);
+		new CommonFunctions().verifyLabelText(lblGoBack, "Go Back Button Txt is", expGoBackText);
 	}
 
 	public void verifyPhoneNumberTextInPhoneNumberDescription(String expPhoneNumber) {
-		new CommonFunctions().verifyLabelText(lblPhoneNumber, "Phone Number Description", expPhoneNumber);
+		new CommonFunctions().verifyLabelTextContains(lblPhoneNumber, "Phone Number in phone verication description is",
+				expPhoneNumber);
 	}
 
-  public void validateRemainingAttempts(String expAttempts) {
-	Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
-	String text = getText(passErrorMsg, "password error").replaceAll("[^0-9]", "");
-	if (expAttempts.equals(text)) {
-		ExtentTestManager.setPassMessageInReport("Number of remaining invalid password attemps are " + expAttempts);
-	} else {
-		ExtentTestManager.setFailMessageInReport("Expected of number of remaining password attempts  are "
-				+ expAttempts + " but actual are " + text);
+	public void validateRemainingAttempts(String expAttempts) {
+		Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
+		String text = getText(passErrorMsg, "password error").replaceAll("[^0-9]", "");
+		if (expAttempts.equals(text)) {
+			ExtentTestManager.setPassMessageInReport("Number of remaining invalid password attemps are " + expAttempts);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Expected of number of remaining password attempts  are "
+					+ expAttempts + " but actual are " + text);
+		}
 	}
-  }
+
+	public void clickOnPrivacyPolicy() {
+		click(lnkPrivacyPolicy, "click PrivacyPolicy");
+	}
+
+	public void clickOnTermsOfServices() {
+		click(lnkTermsOfServices, "click TermsOfServices");
+	}
 }

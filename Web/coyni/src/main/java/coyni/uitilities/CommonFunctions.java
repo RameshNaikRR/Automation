@@ -23,6 +23,17 @@ public class CommonFunctions {
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
 	}
+	
+	public void verifyLabelTextContains(By label, String labelName, String expText) {
+		objBrowserFunctions.waitForCondition(e -> e.findElement(label).isDisplayed(), labelName + " is displayed");
+		String actText = objBrowserFunctions.getText(label, labelName).trim().replace("\n", "").replace(",", "");
+		if (expText.contains(actText)) {
+			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
+		}
+	}
 
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
