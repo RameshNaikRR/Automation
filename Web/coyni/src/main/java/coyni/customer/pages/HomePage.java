@@ -64,7 +64,7 @@ public class HomePage extends BrowserFunctions {
 	private By lblPhoneNumber = By.cssSelector("div[class='flex mt-5 cursor-default'] p span");
 	
 	
-	public void clickOnPersonalAccount() {
+	public void clickPersonalAccount() {
 		click(lnkPersonalAccount, "Personal Account");
 	}
 
@@ -94,7 +94,7 @@ public class HomePage extends BrowserFunctions {
 				expBusinessAccountText);
 	}
 
-	public void clickOnSignUp() {
+	public void clickSignUp() {
 		click(lnkSignUp, "clicked on SignUpLink");
 	}
 
@@ -196,13 +196,13 @@ public class HomePage extends BrowserFunctions {
 		enterText(txtConfirmPasswordFiled, expConfirmPassword, "ConfirmPassword");
 	}
 
-	public void clickOnTab() throws AWTException {
+	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
-	public void verifySignUpEmailFieldsWithInvalidData(String expEmail) {
+	public void verifySignUpEmailFieldsWithInvalidData(String expEmail, String inputTypes) {
 		enterText(txtEmail, expEmail, "Email");
 
 	}
@@ -475,8 +475,12 @@ public class HomePage extends BrowserFunctions {
 
 		}
 	}
+	
+	public void clickLogIn() {
+		click(lnkLogIn,"Click LogIn");
+	}
 
-	public void clickOnNext() {
+	public void clickNext() {
 		click(btnNext, "click Next");
 
 	}
@@ -498,12 +502,12 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	public void verifyClickOnLogIn(String expLoginText) {
+	public void verifyClickLogIn(String expLoginText) {
 		click(lnkLogIn, "LogIn");
 		new CommonFunctions().verifyLabelText(lblLogInToCoyni, "Log In Tite Description is", expLoginText);
 	}
 
-	public void verifyClickOnNext(String expPhoneVerifictionText) {
+	public void verifyClickNext(String expPhoneVerifictionText) {
 		click(btnNext, "Next");
 		new CommonFunctions().verifyLabelText(lblPhoneVerification, "Phone Verification Title is",
 				expPhoneVerifictionText);
@@ -533,11 +537,11 @@ public class HomePage extends BrowserFunctions {
 		}
 	}
 
-	public void clickOnPrivacyPolicy() {
+	public void clickPrivacyPolicy() {
 		click(lnkPrivacyPolicy, "click PrivacyPolicy");
 	}
 
-	public void clickOnTermsOfServices() {
+	public void clickTermsOfServices() {
 		click(lnkTermsOfServices, "click TermsOfServices");
 	}
 }

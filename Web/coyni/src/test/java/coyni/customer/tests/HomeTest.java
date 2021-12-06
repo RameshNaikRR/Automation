@@ -77,8 +77,8 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyClickOnLogIn(data.get("loginText"));
-			homePage.clickOnSignUp();
+			homePage.verifyClickLogIn(data.get("loginText"));
+			homePage.clickSignUp();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
 
@@ -93,7 +93,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyCreateAPersonalAccountText(data.get("createAPersonAccountText"));
 			homePage.verifyCreatePersonalAccountDescriptionText(data.get("createPersonalAccountDescText"));
             
@@ -123,7 +123,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyFirstNameFieldOpacity();
             homePage.verifyFirstNameValidations(data.get("firstName"), data.get("input"));
 			/*
@@ -152,7 +152,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyFirstNameValidations(data.get("firstName"));
 
 			if (!data.get("errMessage").isEmpty()) {
@@ -176,7 +176,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			homePage.verifySignUpFieldsWithEmpty(data.get("firstName"), data.get("lastNameText"),
 					data.get("phoneNumber"), data.get("email"), data.get("createPassword"),
@@ -204,7 +204,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyLastNameOpacity();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			homePage.verifyLastNameValidations(data.get("lastNameText"), data.get("input"));
@@ -234,7 +234,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyLastNameValidations(data.get("lastNameText"));
 
 			if (!data.get("errMessage").isEmpty()) {
@@ -257,7 +257,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyPhonenUmberOpacity();
 			homePage.verifyPhoneNumberTenDigitValidations(data.get("phoneNumberdigits"));
 
@@ -311,11 +311,11 @@ public class HomeTest {
 	@Test
 	@Parameters({ "strParams" })
 
-	public void testCreatePersonalAccountEmailTextFiled(String strParams) {
+	public void testEmailTextFiled(String strParams) {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyEmailOpacity();
 			homePage.verifyEmailAdressFiledWithSpecialCharacters(data.get("email"), data.get("inputTypes"));
 
@@ -335,6 +335,10 @@ public class HomeTest {
 		}
 	}
 
+	
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 
@@ -342,7 +346,7 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyCreatePasswordOpacity();
 
 			homePage.verifyCreatePasswordRequirementsToolTip(data.get("createPassword"),data.get("createPasswordToolTip"), data.get("inputTypes"));
@@ -368,14 +372,17 @@ public class HomeTest {
 		}
 	}
 
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 
-	public void testCreatePersonalAccountConfirmPasswordFieldText(String strParams) {
+	public void testConfirmPasswordTextField(String strParams) {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyConfirmPasswordOpacity();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			homePage.verifyConfirmPaaswordFieldDescription(data.get("confirmPasswordText"));
@@ -400,7 +407,8 @@ public class HomeTest {
 		}
 
 	}
-
+    
+	
 	@Test
 	@Parameters({ "strParams" })
 
@@ -408,10 +416,10 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
+			homePage.clickPersonalAccount();
 			homePage.verifyNextButtonEnabled(data.get("firstName"), data.get("lastNameText"), data.get("email"),
 					data.get("phoneNumber"), data.get("createPassword"), data.get("confirmPassword"));
-			homePage.verifyClickOnNext(data.get("phoneVerifictionText"));
+			homePage.verifyClickNext(data.get("phoneVerifictionText"));
 			homePage.verifyPhoneVerificationPage(data.get("PhoneVerificationDescription"), data.get("ResendText"),
 					data.get("GoBackText"));
 			homePage.verifyPhoneNumberTextInPhoneNumberDescription(data.get("phoneNumber"));
@@ -439,13 +447,13 @@ public class HomeTest {
 		try {
 			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickOnPersonalAccount();
-			homePage.verifySignUpEmailFieldsWithInvalidData(data.get("email"));
-			homePage.clickOnTab();
+			homePage.clickPersonalAccount();
+			homePage.verifySignUpEmailFieldsWithInvalidData(data.get("email"),data.get("inputTypes"));
+			homePage.clickTab();
 			homePage.verifySignUpFieldCreatePasswordWithInvalidData(data.get("createPassword"));
-			homePage.clickOnTab();
+			homePage.clickTab();
 			homePage.verifySignUpFieldConfirmPasswordWithInvalidData(data.get("ConfirmPassword"));
-			homePage.clickOnTab();
+			homePage.clickTab();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
 						data.get("elementName"));
