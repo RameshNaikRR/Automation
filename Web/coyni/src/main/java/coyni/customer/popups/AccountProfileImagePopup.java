@@ -2,7 +2,6 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
-import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -33,7 +32,7 @@ public class AccountProfileImagePopup extends BrowserFunctions {
 		new CommonFunctions().elementView(btnUploadNewImage, "Upload New Image");
 	}
 
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
+//	public NavigationComponent navigationComponent() {
+//		return new NavigationComponent();
+//	}
 }

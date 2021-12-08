@@ -10,14 +10,14 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class AuthyComponent extends  BrowserFunctions{
+public class AuthyComponent extends BrowserFunctions {
 
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	
+
 	private By heading = By.cssSelector(".VerifyYourIdentity_two_step_sub__14Irv>div:first-of-type");
-	
+
 	private By lblMessage = By.cssSelector("span[class*='VerifyYourIdentity_two_step']");
-	
+
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 
 	private static String prevCode = "";
@@ -44,20 +44,32 @@ public class AuthyComponent extends  BrowserFunctions{
 			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
 		}
 		//
-	}	
-	
+	}
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
 	}
-	
+
 	public void verifyMessage(String expMessage) {
-		waitForCondition(e->e.findElement(lblMessage).getText().contains("Verification"), "verification message is displayed");
+		waitForCondition(e -> e.findElement(lblMessage).getText().contains("Verification"),
+				"verification message is displayed");
 		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
-	
-	
-	public void fillAuthyInputInvalid(String code,String character) {
-		
+
+	public void fillpin(String code) {
+
+		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
+		int noOfInputs = inputs.size();
+		if (noOfInputs == 6) {
+			for (int i = 0; i < noOfInputs; i++) {
+				inputs.get(i).sendKeys(code.charAt(i) + "");
+			}
+			ExtentTestManager.setPassMessageInReport("verification entered in text field");
+		}
+	}
+
+	public void fillAuthyInputInvalid(String code, String character) {
+
 		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
 		int noOfInputs = inputs.size();
 		if (noOfInputs == 6) {
@@ -68,30 +80,29 @@ public class AuthyComponent extends  BrowserFunctions{
 		}
 		//
 	}
-	
-	
+
 	public void clickGoBack() {
 		click(lnkGoBack, "Back Option");
 	}
-	
-	public void verifyLogin(){
+
+	public void verifyLogin() {
 		waitForCondition(e -> e.getCurrentUrl().contains("getstarted"), "Waiting for url to contain token-account");
 		String pageURL = getPageURL();
-		if(pageURL.contains("token-account")||pageURL.contains("getstarted")) {
+		if (pageURL.contains("token-account") || pageURL.contains("getstarted")) {
 			ExtentTestManager.setPassMessageInReport("Login success");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Login failed. Page url "+pageURL+" does not contains token-account");
+			ExtentTestManager
+					.setFailMessageInReport("Login failed. Page url " + pageURL + " does not contains token-account");
 		}
 	}
 
-public void verifyLoginWithInvalidPin(){
-		
+	public void verifyLoginWithInvalidPin() {
+
 		String pageURL = getPageURL();
-		if(pageURL.contains("token-account")||pageURL.contains("getstarted")) {
+		if (pageURL.contains("token-account") || pageURL.contains("getstarted")) {
 			ExtentTestManager.setFailMessageInReport("Login success with invalid pin");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Login failed with invalid pin");
 		}
 	}
 }
-
