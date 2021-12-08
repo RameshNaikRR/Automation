@@ -37,15 +37,15 @@ public class CustomerAccountDetailsSideBar  {
 	public void testUserDetails(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.customerMenuComponent().verifyUserDetails(data.get("UserDetails"));
-			customerProfilePage.userDetailsComponent().verifyViewuserImg();
-			customerProfilePage.userDetailsComponent().verifyViewUserName();
-			customerProfilePage.userDetailsComponent().verifyViewAccountAddress();
-			customerProfilePage.userDetailsComponent().verifyviewAccountId();
-			customerProfilePage.userDetailsComponent().verifyViewAccountStatus();
-			customerProfilePage.userDetailsComponent().verifyViewEmailAddress();
-			customerProfilePage.userDetailsComponent().verifyViewPhoneNum();
+//			customerProfilePage.customerMenuComponent().clickUserDetails();
+//			customerProfilePage.customerMenuComponent().verifyUserDetails(data.get("UserDetails"));
+//			customerProfilePage.userDetailsComponent().verifyViewuserImg();
+//			customerProfilePage.userDetailsComponent().verifyViewUserName();
+//			customerProfilePage.userDetailsComponent().verifyViewAccountAddress();
+//			customerProfilePage.userDetailsComponent().verifyviewAccountId();
+//			customerProfilePage.userDetailsComponent().verifyViewAccountStatus();
+//			customerProfilePage.userDetailsComponent().verifyViewEmailAddress();
+//			customerProfilePage.userDetailsComponent().verifyViewPhoneNum();
 			
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test User Details is failed due to Exception" +e);

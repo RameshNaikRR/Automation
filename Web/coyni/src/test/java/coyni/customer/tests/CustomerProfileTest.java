@@ -11,6 +11,7 @@ import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
 import coyni.customer.pages.CustomerProfilePage;
 import coyni.customer.pages.NavigationMenuPage;
+import coyni.customer.pages.TokenAccountPage;
 import coyni.customer.popups.EditEmailAddressPopup;
 import coyni.customer.popups.EditPhoneNumberPopup;
 import coyni.uitilities.CommonFunctions;
@@ -25,7 +26,7 @@ public class CustomerProfileTest {
 	CustomerMenuComponent customerMenuComponent;
 	AuthyComponent authyComponent;
 	ChangePasswordComponent changePasswordComponent;
-
+	  TokenAccountPage tokenAccountPage;
 	@BeforeTest
 	public void init() {
 
@@ -36,6 +37,7 @@ public class CustomerProfileTest {
 		customerMenuComponent = new CustomerMenuComponent();
 		authyComponent = new AuthyComponent();
 		changePasswordComponent = new ChangePasswordComponent();
+		tokenAccountPage = new TokenAccountPage();
 	}
 
 	@Test
@@ -60,13 +62,15 @@ public class CustomerProfileTest {
 	public void testEditImageView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			customerProfilePage.customerMenuComponent().clickUserDetails();
-//			customerProfilePage.userDetailsComponent().verifyEditImageView();
-//			customerProfilePage.userDetailsComponent().clickEditUserImage();
-//			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("Heading"));
-//			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
-//			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
-
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+	        tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyEditImageView();
+			customerProfilePage.userDetailsComponent().verifyEditImageToolTip(data.get("toolTip"));
+			customerProfilePage.userDetailsComponent().clickEditUserImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("heading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent().verifyCloseView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Edit Image view failed due to exception " + e);
 		}

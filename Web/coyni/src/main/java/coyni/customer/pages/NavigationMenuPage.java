@@ -7,6 +7,7 @@ import coyni.customer.components.MyQRCodeComponent;
 import coyni.customer.components.UserNameDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class NavigationMenuPage extends BrowserFunctions {
 
@@ -18,24 +19,33 @@ public class NavigationMenuPage extends BrowserFunctions {
 	private By lnkGetHelp = By.xpath("//span[text()='Get Help']");
 
 	private By lblUserNameMenu = By.cssSelector("");
-	private By lblAccountId = By.xpath("//span[text()='Account ID:']");
-	private By lnkTokenAccount = By.id("token-dashboard");
-	private By ImgQRcode = By.cssSelector(" ");
-	private By lblUserNameHead = By.cssSelector(" ");
+	private By lblAccountId = By.xpath("//span[contains(text(),'Account ID:')][1]");
+	private By lnkTokenAccount =By.cssSelector("#token-dashboard");          
+	private By ImgQRcode = By.xpath("(//div[contains(@class,'DashboardMenu_QR_main__3YOcW')])[1]");
+	private By lblUserNameHead = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__JM4Nk')]/preceding-sibling::*[1]");
 	private By ImgNotifications = By.cssSelector(" ");
-	private By imgUser = By.cssSelector("");
-	private By drpDwnAccount = By.cssSelector("");
-	private By lnkPersonalAccount = By.cssSelector("");
-	private By lnkBusinessAccount = By.cssSelector("");
+	private By imgUser = By.xpath("(//div[contains(@class,'DashboardMenu_image_navbar__F0NOF')])[1]");
+	private By drpDwnAccount = By.xpath("//div[(contains(@class,'DashboardMenu_downArrow__JM4Nk'))]");
+	private By lblPersonalAccount = By.xpath("(//span[text()='Personal'])[1]");
+	private By lnkBusinessAccount = By.xpath("");
 	private By lblBusinessAccount = By.cssSelector("");
-	private By lnkAddNewBusiness = By.cssSelector("");
+	private By lnkAddNewBusiness = By.xpath("//div[text()=' Add New Business']");
 	private By lblTokenAccount = By.cssSelector("");
 	private By lblExportFiles = By.xpath("");
 	private By lblGetHelp = By.xpath("");
 
+	
+	private By getSidebarItems(String sidebarItems) {
+		return By.xpath(String.format("(//div[contains(@class,'DashboardMenuItems_imgLogo__2kQaD ')]/following-sibling::span[text()='%s'])[1]",
+				sidebarItems));
+		}
+	
+	
 	// added
 	public void clickTokenAccount() {
-		click(btnTokenAccount, "Token Account ");
+		click(getSidebarItems("Token Account"),"Token Account ");
+	//	click(btnTokenAccount, "Token Account ");
+		
 	}
 
 	// added
@@ -102,7 +112,13 @@ public class NavigationMenuPage extends BrowserFunctions {
 	}
 
 	public void verifyAccountID(String expAccountID) {
-		new CommonFunctions().verifyLabelText(lblAccountId, "Account ID", expAccountID);
+		String id = getText(lblAccountId, "Account ID").split(" ")[2];
+		System.out.println("id: "+ id);
+		if(id.equals(expAccountID)) {
+			ExtentTestManager.setPassMessageInReport("Account Id is verified");
+		}else {
+			ExtentTestManager.setFailMessageInReport("Account Id is not verified");
+		}
 	}
 
 	public void verifyUserImageView() {
@@ -119,7 +135,7 @@ public class NavigationMenuPage extends BrowserFunctions {
 	}
 
 	public void verifyPersonalAccountView() {
-		new CommonFunctions().elementView(lnkPersonalAccount, "Personal Account ");
+		new CommonFunctions().elementView(lblPersonalAccount, "Personal Account ");
 	}
 
 	public void verifyBusinessAccountView() {
@@ -128,6 +144,7 @@ public class NavigationMenuPage extends BrowserFunctions {
 
 	public void verifyAddNewBusinessAccountView() {
 		new CommonFunctions().elementView(lnkAddNewBusiness, "Add New Business");
+		verifyElementDisabled(lnkAddNewBusiness, "Add New Business");
 	}
 
 	public void verifyAddNewBusinessAccountLabel(String expMessage) {

@@ -7,31 +7,36 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.pages.NavigationMenuPage;
+import coyni.customer.pages.TokenAccountPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class NavigationMenuTest {
 	NavigationMenuPage navigationMenuPage;
+	TokenAccountPage tokenAccountPage;
 
 	@BeforeTest
 	public void init() {
 		navigationMenuPage = new NavigationMenuPage();
-
+		tokenAccountPage = new TokenAccountPage();
 	}
 
 	@Test
-	// @Parameters({ "strParams" })
-	public void testSideBarView() {
+	@Parameters({ "strParams" })
+	public void testSideBarView(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// navigationMenuPage.verifyAccountHolderNameView();
-			// navigationMenuPage.verifyAccountIDView();
-			// navigationMenuPage.verifyAccountID(data.get("AccountID"));
-			// navigationMenuPage.verifyUserImageView();//
-			// navigationMenuPage.verifyQRCodeView();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			Thread.sleep(2000);
+			navigationMenuPage.verifyAccountHolderNameView();
+			navigationMenuPage.verifyAccountIDView();
+			navigationMenuPage.verifyAccountID(data.get("AccountID"));
+			navigationMenuPage.verifyUserImageView();//
+			navigationMenuPage.verifyQRCodeView();
 			navigationMenuPage.verifyTokenAccountView();
 			navigationMenuPage.verifyExportFilesView();
 			navigationMenuPage.verifyGetHelpView();
+			navigationMenuPage.clickExportFilesMenu();
 		} catch (Exception e) {
 
 			ExtentTestManager.setFailMessageInReport("Test Side Bar view is failed  due to exception " + e);
@@ -39,15 +44,18 @@ public class NavigationMenuTest {
 	}
 
 	@Test
-	@Parameters({ "strParams" })
-	public void testAccountDropdownView(String strParams) {
+	// @Parameters({ "strParams" })
+	public void testAccountDropdownView() {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickAccountDropdwn();
-			navigationMenuPage.verifyBusinessAccountView();// DOUBT
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			Thread.sleep(5000);
+			navigationMenuPage.verifyAccountHolderNameView();
+			navigationMenuPage.clickUserNameHead();
+			// navigationMenuPage.verifyBusinessAccountView();
 			navigationMenuPage.verifyPersonalAccountView();
 			navigationMenuPage.verifyAddNewBusinessAccountView();
-			navigationMenuPage.verifyAddNewBusinessAccountLabel(data.get("message"));
+			// navigationMenuPage.verifyAddNewBusinessAccountLabel(data.get("message"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Account Drop down view is failed  due to exception " + e);
 		}
