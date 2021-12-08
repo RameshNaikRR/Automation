@@ -8,8 +8,9 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class UserDetailsComponent extends BrowserFunctions {
 
-	private By editUserImage = By.cssSelector("");
-	private By editUserImgToolTip =By.cssSelector("");
+	private By lblHeading =By.cssSelector(".text-base.text-cgy4");
+	private By editUserImage = By.cssSelector(".w-4");
+	private By editUserImgToolTip =By.xpath("//img[@class='w-4 h-4']/../following-sibling::*[1]");
 	private By lnkRemoveImage = By.cssSelector("");
 	private By btnRemove = By.cssSelector("");
 	private By btnUploadNewImage = By.cssSelector("");
@@ -30,12 +31,16 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblEmailAddress = By.cssSelector("");
 	private By lblAccountAddress = By.cssSelector(" ");
 
+	public void verifyUserDetailsView() {
+		new CommonFunctions().elementView(lblHeading, "User Details Screen ");
+	}
 	public void verifyEditImageView() {
-		new CommonFunctions().elementView(editUserImage, "UserImg");
+		new CommonFunctions().elementView(editUserImage, "Edit User Img icon");
 	}
 
 	public void verifyEditImageToolTip(String expToolTip) {
-		new CommonFunctions().verifyCursorAction(editUserImage, "Edit User Img");	
+		new CommonFunctions().verifyCursorAction(editUserImgToolTip, "Edit User Img");	
+	//	moveToElement(editUserImgToolTip, "Edit User Img");
 		new CommonFunctions().verifyLabelText(editUserImgToolTip, "Edit User Img", expToolTip);
 		
 	}
