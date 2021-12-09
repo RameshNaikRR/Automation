@@ -8,8 +8,11 @@ import ilabs.WebFramework.BrowserFunctions;
 public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	private By imgSuccessFailure = By.cssSelector(".h-36.w-36");
+	private By imgSuccessFailureRequest = By.cssSelector(".h-48.w-48");
+
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
+	private By lblRequestSuccessful = By.xpath("//div[text()='Tokens Requested Successfully']");
 	private By lblMessage = By.className("SendReceiveModal_Pay_text__1SSJw");
 
 	private By btnDone = By.xpath("//button[text()='Done']");
@@ -25,6 +28,10 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblAccountBalance, "Account Balance");
 	}
 
+	public void verifyRequestHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblRequestSuccessful, expHeading, "Tokens Requested Successfully");
+	}
+
 	// DOUBT
 	public void verifyImage() {
 		new CommonFunctions().elementView(imgSuccessFailure, "Tick Mark");
@@ -37,6 +44,11 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	public void verifyMessge(String expMessage) {
 		new CommonFunctions().verifyLabelText(lblMessage, "Message", expMessage);
+	}
+
+	public void verifyImageRequest() {
+		new CommonFunctions().elementView(imgSuccessFailureRequest, "Tick Mark");
+
 	}
 
 	public void clickDone() {

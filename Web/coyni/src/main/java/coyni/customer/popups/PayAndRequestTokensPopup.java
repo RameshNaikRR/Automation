@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -24,6 +25,7 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By crossIcon = By.cssSelector(".self-end");
 	private By btnNext = By.cssSelector(".w-60.h-9.rounded-full");
 	private By lblTransactionFailed = By.cssSelector("");
+	private By btnCopy = By.cssSelector(".icon-copy");
 	// private By lnkPaste = By.cssSelector("//button[text()='Paste']");
 	// private By lblAccountHolderName = By.cssSelector("");
 
@@ -42,6 +44,9 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	public void clickPay() {
 		click(btnPay, "Click Pay");
 
+	}
+	public void viewAmount() {
+		new CommonFunctions().elementView(txtAmount, "Amount");
 	}
 
 //	public void verifyWalletID() {
@@ -130,6 +135,9 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 //		new CommonFunctions().elementView(lblYourTokenAcount, "Your Token Acccount");
 //
 //	}
+	public void clickCopy() {
+		click(btnCopy, "Copy Icon");
+	}
 
 	public void verifyPayingRecipient() {
 		new CommonFunctions().elementView(lblPayingRecipientName, "Paying Recipient");
@@ -182,5 +190,8 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", lessCharLength);
 		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
 
+	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

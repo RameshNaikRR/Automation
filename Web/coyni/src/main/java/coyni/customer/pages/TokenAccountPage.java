@@ -9,7 +9,6 @@ import coyni.customer.components.TokensReceivedDetailsComponent;
 import coyni.customer.components.TokensSentDetailsComponent;
 import coyni.customer.components.TokensWithdrawnDetailsComponent;
 import coyni.customer.components.TransactionsListComponent;
-import coyni.customer.components.UserDetailsComponent;
 import coyni.customer.components.UserNameDropDownComponent;
 import coyni.customer.popups.BuyCoyniTokensPaymentMethodPopup;
 import coyni.customer.popups.PayAndRequestTokensPopup;
@@ -135,4 +134,5 @@ public class TokenAccountPage extends BrowserFunctions {
 	public WithdrawCoyniToUSDPopup withdrawCoyniToUSDPopup() {
 		return new WithdrawCoyniToUSDPopup();
 	}
+	
 }
