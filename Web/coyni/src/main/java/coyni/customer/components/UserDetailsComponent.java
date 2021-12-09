@@ -36,6 +36,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 	public void verifyEditImageView() {
 		new CommonFunctions().elementView(editUserImage, "Edit User Img icon");
+		new CommonFunctions().verifyCursorAction(editUserImage, "Edit User Img icon");
 	}
 
 	public void verifyEditImageToolTip(String expToolTip) {

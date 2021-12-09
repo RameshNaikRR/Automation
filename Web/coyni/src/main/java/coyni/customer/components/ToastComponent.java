@@ -12,8 +12,8 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 public class ToastComponent extends BrowserFunctions {
 
-	private By title = By.cssSelector(".title");
-	private By message = By.cssSelector(".message");
+	private By title = By.cssSelector("p.title");
+	private By message = By.cssSelector("p.message");
 	private By btnClose = By.cssSelector("");
 
 	/**

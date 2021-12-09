@@ -1,10 +1,13 @@
 package coyni.customer.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ChangePasswordComponent;
@@ -58,6 +61,8 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testEditImageView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -69,13 +74,15 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
-
+            //AccountProfile-Close Navigation
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent().verifyCloseView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent().clickClose();
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
+			//RemoveProfile-Back and Close Navigation
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyHeading(data.get("removeProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyRemoveView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().verifyBackView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().verifyCloseView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().clickBack();
@@ -83,7 +90,18 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().clickClose();
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-
+			//Crop Image -Navigation
+			customerProfilePage.userDetailsComponent().clickEditUserImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifyHeading(data.get("cropYourImageHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifySaveView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().verifyBackView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().verifyCloseView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().clickBack();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Edit Image view failed due to exception " + e);
 		}
@@ -91,19 +109,25 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testUserDetailsImage(String strParams) {
-
+	public void testUserDetailsAddImage(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
-			customerProfilePage.userDetailsComponent().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().clickSave();
-			customerProfilePage.userDetailsComponent().toastComponent().verifyToast(strParams, strParams);
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifyHeading(data.get("cropYourImageHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().uploadSelectImage(data.get("folderName"),data.get("fileName"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
+			Thread.sleep(500);
+			if (!data.get("toastMessage").isEmpty()) {
+				customerProfilePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
 
 		} catch (Exception e) {
 
-			ExtentTestManager.setFailMessageInReport("Test user details failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception " + e);
 		}
 	}
 
@@ -112,14 +136,17 @@ public class CustomerProfileTest {
 	public void testUserDetailsImageRemove(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().clickRemoveImage();
-			customerProfilePage.userDetailsComponent().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().clickRemove();
-			customerProfilePage.userDetailsComponent().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().clickSave();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().clickEditUserImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyHeading(data.get("removeProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().clickRemoveImage();
+			Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test User details failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testUserDetailsImageRemove failed due to exception " + e);
 
 		}
 	}

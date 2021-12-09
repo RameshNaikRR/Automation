@@ -14,12 +14,10 @@ public class AccountProfileImagePopup extends BrowserFunctions {
 
 	public void clickRemove() {
 		click(lnkRemoveImage, "Remove image");
-		new CommonFunctions().verifyCursorAction(lnkRemoveImage, "Remove image");
 	}
 
-	public void uploadNewImage() {
-		click(btnUploadNewImage, "Succesfully uploaded new image");
-
+	public void clickUploadNewImage() {
+		click(btnUploadNewImage, "Upload New Image");
 	}
 
 	public void verifyHeading(String expHeading) {
@@ -28,16 +26,22 @@ public class AccountProfileImagePopup extends BrowserFunctions {
 
 	public void verifyRemoveImageView() {
 		new CommonFunctions().elementView(lnkRemoveImage, "Remove Image");
+		new CommonFunctions().verifyCursorAction(lnkRemoveImage, "Remove Image");
 	}
 
 	public void verifyUploadImageView() {
 		new CommonFunctions().elementView(btnUploadNewImage, "Upload New Image");
+		new CommonFunctions().verifyCursorAction(btnUploadNewImage, "Upload New Image");
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
 	public RemoveProfileImagePopup removeProfileImagePopup() {
 		return new RemoveProfileImagePopup();
 	}
-
+	public CropYourImagePopup cropYourImagePopup() {
+		return new CropYourImagePopup();
+	}
 }
