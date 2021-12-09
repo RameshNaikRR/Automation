@@ -23,7 +23,7 @@ public class CommonFunctions {
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
 	}
-	
+
 	public void verifyLabelTextContains(By label, String labelName, String expText) {
 		objBrowserFunctions.waitForCondition(e -> e.findElement(label).isDisplayed(), labelName + " is displayed");
 		String actText = objBrowserFunctions.getText(label, labelName).trim().replace("\n", "").replace(",", "");
@@ -58,16 +58,18 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFormErrorMessage(String expErrMsg,String expcolour,String elementName) {
+	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
 		try {
 			By errorMsgs = By.cssSelector("span.text-crd5");
 			objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 			boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 					.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
 			if (status) {
-				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  "+elementName );
+				ExtentTestManager
+						.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
 			} else {
-				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for "+ elementName);
+				ExtentTestManager
+						.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
 			}
 			verifyTextBoxBorderColor(expcolour);
 		} catch (Exception e) {
@@ -179,115 +181,114 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}
 	}
-	public void clearText(By ele,String eleName) {
-		try {	
-		 objBrowserFunctions.getElement(ele, eleName).clear();
-			ExtentTestManager.setPassMessageInReport("Text field "+eleName+ " is cleared");
-		}catch(Exception e) {
-			ExtentTestManager.setPassMessageInReport("Text field "+eleName+ " is  not cleared");
+
+	public void clearText(By ele, String eleName) {
+		try {
+			objBrowserFunctions.getElement(ele, eleName).clear();
+			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is cleared");
+		} catch (Exception e) {
+			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is  not cleared");
 		}
-		}
-		public void validateField(By ele , String eleName, String enterText) {
-			try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter "+ enterText.length()+"characters  in " +eleName);
+	}
+
+	public void validateField(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager
+					.setInfoMessageInReport("trying to enter " + enterText.length() + "characters  in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
 			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "");
-			System.out.println("length "+ actualtext.length());
-			if(enterText.equalsIgnoreCase(actualtext)) {
-				
-			ExtentTestManager.setPassMessageInReport(eleName + " is accepting " + enterText.length() +" characters"  );
+			System.out.println("length " + actualtext.length());
+			if (enterText.equalsIgnoreCase(actualtext)) {
+
+				ExtentTestManager
+						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
+			} else {
+
+				ExtentTestManager
+						.setFailMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
 			}
-			else 
-		    {
-				
-			ExtentTestManager.setFailMessageInReport(eleName + " is not accepting "+enterText.length()+" characters");
-			}
-			}
-			
-		
-			
-			catch(Exception e) {
+		}
+
+		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate field is failed due to exception " + e);
 
-			}
-			
-			}
-		public void validateFieldMaxichar(By ele , String eleName, String enterText) {
-			try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter "+ enterText.length()+"characters  in " +eleName);
+		}
+
+	}
+
+	public void validateFieldMaxichar(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager
+					.setInfoMessageInReport("trying to enter " + enterText.length() + "characters  in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
 			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName);
-			if(!enterText.equalsIgnoreCase(actualtext)) {
-				
-			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting " + enterText.length() +" characters"  );
+			if (!enterText.equalsIgnoreCase(actualtext)) {
+
+				ExtentTestManager
+						.setPassMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
+			} else {
+
+				ExtentTestManager
+						.setInfoMessageInReport(eleName + " is  accepting " + enterText.length() + " characters");
 			}
-			else {
-				
-			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting "+enterText.length()+" characters");
-			}
-			}
-			catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldMaxichar is failed due to exception " + e);
 
-			}
-			}
-		public void validateFieldWithalphabet(By ele , String eleName, String enterText) {
-			try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter alphabets in " +eleName);
+		}
+	}
+
+	public void validateFieldWithalphabet(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter alphabets in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
 			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName);
-			if(actualtext.length()==0) {
-				
-			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  alphabets"  );
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  alphabets");
+			} else {
+
+				ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  alphabets");
 			}
-			else {
-				
-			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  alphabets");
-			}
-			}
-			catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
 
-			}
-			}
-		public void validateFieldWithNumber(By ele , String eleName, String enterText) {
-			try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " +eleName);
+		}
+	}
+
+	public void validateFieldWithNumber(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
 			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName);
-			if(actualtext.length()==0) {
-				
-			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  Numbers"  );
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  Numbers");
+			} else {
+
+				ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  Numbers");
 			}
-			else {
-				
-			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  Numbers");
-			}
-			}
-			catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
 
-			}
-			}
-		public void validateFieldWithSpecialchar(By ele , String eleName, String enterText) {
-			try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " +eleName);
+		}
+	}
+
+	public void validateFieldWithSpecialchar(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
 			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName);
-			if(actualtext.length()==0) {
-				
-			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  Special characters"  );
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  Special characters");
+			} else {
+
+				ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  Special characters");
 			}
-			else {
-				
-			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  Special characters");
-			}
-			}
-			catch(Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
 
-			}
-			}
-
+		}
+	}
 
 }

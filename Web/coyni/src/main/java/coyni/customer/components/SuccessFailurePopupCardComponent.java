@@ -7,20 +7,32 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
-	private By imgSuccessFailure = By.cssSelector("");
-	private By lblTransactionSuccessful = By.xpath("");
+	private By imgSuccessFailure = By.cssSelector(".h-36.w-36");
+	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
 	private By lblMessage = By.className("SendReceiveModal_Pay_text__1SSJw");
 
 	private By btnDone = By.xpath("//button[text()='Done']");
+	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
+	private By lblAccountBalance = By.xpath("//span[text()='Account Balance']");
 
-	private By heading = By.xpath("//h1[text()='Pre-Authorization Failed']");
+	private By heading = By.className("SendReceiveModal_successful_message__3TKQt");
 	private By btnClose = By.xpath("//button[text()='Close']");
-	private By btnAddBankAccount = By.xpath("//button[text()='Add Bank Account']");
+	// private By btnAddBankAccount = By.xpath("//button[text()='Add Bank
+	// Account']");
+
+	public void verifyAccountBalance() {
+		new CommonFunctions().elementView(lblAccountBalance, "Account Balance");
+	}
 
 	// DOUBT
-	public void verifyImage(String expImage) {
-		new CommonFunctions().verifyLabelText(imgSuccessFailure, "expImage", expImage);
+	public void verifyImage() {
+		new CommonFunctions().elementView(imgSuccessFailure, "Tick Mark");
+
+	}
+
+	public void verifyReferenceID() {
+		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
 	}
 
 	public void verifyMessge(String expMessage) {
@@ -32,18 +44,18 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	}
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblTransactionSuccessful, "Success Heading", expHeading);
 	}
 
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
 
-	public void verifyAddBankAccountview() {
-		new CommonFunctions().elementView(btnAddBankAccount, "AddBankAccount");
-
-	}
-
+//
+//	public void verifyAddBankAccountview() {
+//		new CommonFunctions().elementView(btnAddBankAccount, "AddBankAccount");
+//
+//	}
 	public void verifyheadingview() {
 		new CommonFunctions().elementView(heading, "heading");
 

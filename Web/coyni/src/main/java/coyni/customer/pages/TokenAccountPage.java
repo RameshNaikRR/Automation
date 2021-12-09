@@ -31,8 +31,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
 
-	public void clickTokenAccount() {
+	public void clickTokenAccount() throws InterruptedException {
 		click(btnTokenAccount, "Token Account");
+		Thread.sleep(2000);
 	}
 
 	public String getAvailableBalance() {

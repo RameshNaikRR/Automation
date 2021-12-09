@@ -40,24 +40,27 @@ public class TokenAccountTest {
 
 	// added
 	@Test
-	public void testPayAndRequestTokens() {
+	public void testPayAndRequestTokens() throws InterruptedException {
 		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickPayRequestToken();
 		tokenAccountPage.verifyPay();
+
 	}
 
 	// added
 	@Test
-	public void testBuyTokens() {
+	public void testBuyTokens() throws InterruptedException {
 		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickBuyTokens();
+
 	}
 
 	// added
 	@Test
-	public void testWithdrawToUSD() {
+	public void testWithdrawToUSD() throws InterruptedException {
 		tokenAccountPage.clickTokenAccount();
 		tokenAccountPage.clickWithdrawToUSD();
+
 	}
 
 	@Test
@@ -197,11 +200,60 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added P
+	@Test
 	@Parameters({ "strParams" })
-	public void testView(String strParams) {
+	public void testPayTransactions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			// tokenAccountPage.payAndRequestTokensPopup().verifyWalletID();
+			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
+			// tokenAccountPage.payAndRequestTokensPopup().verifyCountMessageToRecipient();
+			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+			//
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
+			// tokenAccount
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.verifyHeading(data.get("authyPayHeading"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
+					.fillAuthyInput(data.get("securityKey"));
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
+//					.verifyMessage(data.get("message"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyHeading(data.get("successFailureHeading"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyImage();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyMessge(data.get("successMessage"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyReferenceID();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyAccountBalance();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickOnCopyLink();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().clickDone();
+			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to exception " + e);
+		}
+	}
+
+	@Test // added P
+	public void testViewPayTransaction() {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
 			tokenAccountPage.payAndRequestTokensPopup().verifyRecipientsAddressView();
@@ -216,76 +268,222 @@ public class TokenAccountTest {
 
 	@Test // added P
 	@Parameters({ "strParams" })
-	public void testAccountBalanceUpdatedView(String strParams) {
+	public void testPayTransactionsWithInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAccountBalanceUpdatedView failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testPayTransactionsWithInvalidAmount failed due to Invalid Amount exception " + e);
 		}
 	}
 
 	@Test // added P
 	@Parameters({ "strParams" })
-	public void testCrossIcons(String strParams) {
+	public void testPayTransactionsWithInvalidAccountAddress(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
-			tokenAccountPage.payAndRequestTokensPopup().verifyPayingRecipient();
-			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
-			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
-			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
-
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			Thread.sleep(2000);
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
 		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCrossIcons failed due to exception " + e);
-		}
-
 	}
 
-	// added P - Alphabets and Special characters in verification
-	@Test
+	@Test // added P
 	@Parameters({ "strParams" })
-	public void testPayWithInvalidVerificationCode(String strParams) {
+	public void testPayAmountFieldWithNullSpecialCharAndChar(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
-			if (!data.get("code").isEmpty()) {
-				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
-			}
-			if (!data.get("errMessage").isEmpty()) {
-
-				loginPage.authyComponent().verifyMessage(data.get("errMessage"));
-			}
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			Thread.sleep(2000);
+
+			String[] amount = data.get("amount").split(",");
+			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPayWithInvalidVerificationCode failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testPayFieldsWithInvalidAmountAndAccountAddress failed due to  exception " + e);
+		}
+	}
+
+	@Test // added P
+	@Parameters({ "strParams" })
+	public void testPayRecipientAddressFieldWithMax(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			Thread.sleep(2000);
+
+			String[] recipient = data.get("address").split(",");
+			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(recipient[0], recipient[1]);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testPayFieldsWithInvalidAmountAndAccountAddress failed due to  exception " + e);
 		}
 	}
 
 	// added P
 	@Test
 	@Parameters({ "strParams" })
-	public void testCopyTextAndShare(String strParams) {
+	public void testPayWithInvalidVerificationCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.verifyHeading(data.get("authyPayHeading"));
+			// loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (!data.get("code").isEmpty()) {
+				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				loginPage.authyComponent().verifyMessage(data.get("errMessage"));
 
+			}
+
+			Thread.sleep(2000);
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("TestCopyTextAndShare failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testPayWithInvalidVerificationCode failed due to exception " + e);
+		}
+	}
+
+	@Test // added P
+	@Parameters({ "strParams" })
+	//
+	public void testPayNavigationIcon(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickTokenAccount();
+			// tokenAccountPage.payAndRequestTokensPopup().verifycolor(data.get("color"));
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+			// tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
+			// tokenAccountPage.payAndRequestTokensPopup().verifyPayingRecipient();
+			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
+			tokenAccountPage.payAndRequestTokensPopup().verifycursorCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
+			// tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayNavigationIcon failed due to exception " + e);
 		}
 
 	}
+
+	@Test // added P
+	@Parameters({ "strParams" })
+	//
+	public void testPayNavigations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			Thread.sleep(5000);
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+
+			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
+			tokenAccountPage.payAndRequestTokensPopup().clickBackIcon();
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
+			//
+
+			Thread.sleep(3000);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			Thread.sleep(5000);
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.verifyHeading(data.get("authyPayHeading"));
+			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
+			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
+			tokenAccountPage.payAndRequestTokensPopup().clickBackIcon();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+			// tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
+			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayNavigations failed due to exception " + e);
+		}
+
+	}
+
+	// added P
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCopyTextAndShare(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickPayRequestToken();
+//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("TestCopyTextAndShare failed due to exception " + e);
+//		}
+//
+//	}
 
 	// added P
 	@Test
@@ -307,142 +505,12 @@ public class TokenAccountTest {
 	public void testNoFundsAvailable(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().isFundsDisplayed("noFundsAvailable");
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNoFundsAvailable failed due to  exception " + e);
-		}
-	}
-
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayFieldsWithInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("message"));
-			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("amount"),
-						data.get("elementName"));
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPayFieldsWithInvalidData failed due to  exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testPayTransactions(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("message"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyCountMessageToRecipient();
-			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			//
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
-					.verifyHeading(data.get("authyHeading"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
-					.verifyMessage(data.get("message"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.successFailurePopupCardComponent().verifyHeading(data.get("successFailureHeading"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.successFailurePopupCardComponent().verifyImage(data.get("image"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.successFailurePopupCardComponent().verifyMessge(data.get("sucessMessage"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickOnCopyLink();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.successFailurePopupCardComponent().clickDone();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to exception " + e);
-		}
-	}
-
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayTransactionsWithInvalidAmount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			String[] amount = data.get("amount").split(",");
-			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidAmount"),
-						data.get("Invalid Amount"), data.get("elementName"));
-			}
-
-			else if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForMinimumTransaction"),
-						data.get("Minimum Transaction"), data.get("elementName"));
-			}
-
-			else {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForMaximumTransaction"),
-						data.get("Maximum Transaction"), data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to Invalid Amount exception " + e);
-		}
-	}
-
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayTransactionsWithInvalidAccountAddress(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			if (!data.get("errMessageForInvalidRecipientAddress").isEmpty()) {
-				if (!data.get("errMessageForInvalidRecipientAddress").isEmpty()) {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidRecipientAddress"),
-							data.get("RecipientAddress"), data.get("elementName"));
-				}
-
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
-		}
-	}
-
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayTransactionsWithInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessageForInvalidAmount"),
-						data.get("Invalid Amount"), data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
 		}
 	}
 
@@ -460,18 +528,6 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added
-	@Parameters({ "strParams" })
-	public void testVerificationFailed(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.payAndRequestTokensPopup().verifyTransactionFailed();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testVerification failed due to exception " + e);
-		}
-
-	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testRequestTransactions(String strParams) {
@@ -482,14 +538,14 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("message"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
+			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			//
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
 					.successFailurePopupCardComponent().verifyHeading(data.get("successFailureHeading"));
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
-					.successFailurePopupCardComponent().verifyImage(data.get("image"));
+					.successFailurePopupCardComponent().verifyImage();
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
 					.successFailurePopupCardComponent().verifyMessge(data.get("sucessMessage"));
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
