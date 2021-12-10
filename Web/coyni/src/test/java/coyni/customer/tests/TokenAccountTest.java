@@ -36,28 +36,35 @@ public class TokenAccountTest {
 		}
 	}
 
-	// added
 	@Test
-	public void testPayAndRequestTokens() throws InterruptedException {
-		tokenAccountPage.clickTokenAccount();
-		tokenAccountPage.clickPayRequestToken();
-		tokenAccountPage.verifyPay();
-
+	public void testPayAndRequestTokens() {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.verifyPay();
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testPayAnRequstTokens is failed due to exception " + e);
+		}
 	}
 
-	// added
 	@Test
-	public void testBuyTokens() throws InterruptedException {
-		tokenAccountPage.clickTokenAccount();
-		tokenAccountPage.clickBuyTokens();
-
+	public void testBuyTokens() {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickBuyTokens();
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokens is failed due to exception " + e);
+		}
 	}
 
-	// added
 	@Test
-	public void testWithdrawToUSD() throws InterruptedException {
-		tokenAccountPage.clickTokenAccount();
-		tokenAccountPage.clickWithdrawToUSD();
+	public void testWithdrawToUSD() {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawToUSD is failed due to exception " + e);
+		}
 
 	}
 
@@ -220,8 +227,7 @@ public class TokenAccountTest {
 			//
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
-			// tokenAccount
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyProcessingFee();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.verifyHeading(data.get("authyPayHeading"));
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
@@ -259,7 +265,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testView failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testViewPayTransaction failed due to exception " + e);
 		}
 
 	}
@@ -271,6 +277,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
@@ -294,6 +301,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
@@ -305,7 +313,7 @@ public class TokenAccountTest {
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
+					"testPayTransactionsWithInvalidAccountAddress failed due to  exception " + e);
 		}
 	}
 
@@ -317,16 +325,13 @@ public class TokenAccountTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			Thread.sleep(2000);
-
 			String[] amount = data.get("amount").split(",");
 			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
+			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"testPayFieldsWithInvalidAmountAndAccountAddress failed due to  exception " + e);
+					"testPayAmountFieldWithNullSpecialCharAndChar failed due to  exception " + e);
 		}
 	}
 
@@ -341,13 +346,12 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			Thread.sleep(2000);
-
-			String[] recipient = data.get("address").split(",");
+			String[] recipient = data.get("recipientMessage").split(",");
 			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(recipient[0], recipient[1]);
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testPayFieldsWithInvalidAmountAndAccountAddress failed due to  exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testPayRecipientAddressFieldWithMax failed due to  exception " + e);
 		}
 	}
 
@@ -401,9 +405,9 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
 			// tokenAccountPage.payAndRequestTokensPopup().verifyPayingRecipient();
-			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
-			tokenAccountPage.payAndRequestTokensPopup().verifycursorCrossIcon();
-			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
+			// tokenAccountPage.payAndRequestTokensPopup().verifycursorCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
 			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
 			// tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
 
@@ -431,11 +435,12 @@ public class TokenAccountTest {
 			Thread.sleep(5000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 
-			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
-			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
-			tokenAccountPage.payAndRequestTokensPopup().clickBackIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
+			// tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickBack();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
 			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
 			//
 
@@ -452,13 +457,13 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.verifyHeading(data.get("authyPayHeading"));
-			tokenAccountPage.payAndRequestTokensPopup().verifyBackIconView();
-			tokenAccountPage.payAndRequestTokensPopup().verifyCrossIconView();
-			tokenAccountPage.payAndRequestTokensPopup().clickBackIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickBack();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			// tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
-			tokenAccountPage.payAndRequestTokensPopup().clickCrossIcon();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
 
 		}
 
@@ -484,19 +489,19 @@ public class TokenAccountTest {
 //	}
 
 	// added P
-	@Test
-	@Parameters({ "strParams" })
-	public void testCopyPaste(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCopyPaste failed due to exception " + e);
-		}
-
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCopyPaste(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickPayRequestToken();
+//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testCopyPaste failed due to exception " + e);
+//		}
+//
+//	}
 
 	@Test // added P
 	@Parameters({ "strParams" })
@@ -506,6 +511,8 @@ public class TokenAccountTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.payAndRequestTokensPopup().isFundsDisplayed("noFundsAvailable");
+			tokenAccountPage.payAndRequestTokensPopup().clickBuyToken();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNoFundsAvailable failed due to  exception " + e);
@@ -518,8 +525,34 @@ public class TokenAccountTest {
 	public void testTryAgain(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.payAndRequestTokensPopup().verifyButtonPay();
-			tokenAccountPage.payAndRequestTokensPopup().verifyTransactionFailed();
+			tokenAccountPage.clickPayRequestToken();
+			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
+			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
+			tokenAccountPage.payAndRequestTokensPopup().clickNext();
+
+			//
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyProcessingFee();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.verifyHeading(data.get("authyPayHeading"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
+					.fillAuthyInput(data.get("securityKey"));
+
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent()
+					.verifyTransactionFailedHeading(data.get("successFailureHeading"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().verifyLabelFailedMessage();
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+//					.successFailurePopupCardComponent().verifyImage();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+					.successFailurePopupCardComponent().clickTryAgain();
+
+			Thread.sleep(3000);
+			tokenAccountPage.payAndRequestTokensPopup().viewPay();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTryAgain failed due to exception " + e);
@@ -541,7 +574,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup().clickRequest();
+			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().clickCopy();
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
 					.successFailurePopupCardComponent().verifyRequestHeading(data.get("successFailureHeading"));
@@ -549,6 +582,7 @@ public class TokenAccountTest {
 					.successFailurePopupCardComponent().verifyImageRequest();
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
 					.successFailurePopupCardComponent().clickDone();
+			tokenAccountPage.payAndRequestTokensPopup().verifyLabelYourTokenAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRequestTransaction failed due to exception " + e);
@@ -579,7 +613,7 @@ public class TokenAccountTest {
 	public void testRequestTransactionsWithInvalidAccountAddress(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			
+
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
 			tokenAccountPage.clickPayRequestToken();
@@ -596,7 +630,7 @@ public class TokenAccountTest {
 					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRequestTransactionsWithNavigation(String strParams) {
@@ -631,12 +665,13 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
-			
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testPayTransaction failed due to Back and cross Icon exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testPayTransaction failed due to Back and cross Icon exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenTransactionBankAccount(String strParams) {

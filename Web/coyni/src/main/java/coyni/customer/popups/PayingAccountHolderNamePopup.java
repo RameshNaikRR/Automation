@@ -19,9 +19,9 @@ public class PayingAccountHolderNamePopup extends BrowserFunctions {
 		click(lnkCopy, "click copy");
 	}
 
-	public String getProcessingFee() {
-		return getText(lblProcessingFee, "Processing Fee");
-	}
+//	public String getProcessingFee() {
+//		return getText(lblProcessingFee, "Processing Fee");
+//	}
 
 	public void verifyProcessingFee() {
 		new CommonFunctions().elementView(lblProcessingFee, "Processing Fee");

@@ -10,6 +10,10 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By imgSuccessFailure = By.cssSelector(".h-36.w-36");
 	private By imgSuccessFailureRequest = By.cssSelector(".h-48.w-48");
 
+	private By lblTransactionFailed = By.cssSelector("");
+	private By tryAgain = By.xpath("");
+	private By lblFailedMessage = By.xpath("");
+
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
 	private By lblRequestSuccessful = By.xpath("//div[text()='Tokens Requested Successfully']");
@@ -38,6 +42,14 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	}
 
+	public void verifyLabelFailedMessage() {
+		new CommonFunctions().elementView(lblFailedMessage, "Transaction Failed Description");
+	}
+
+	public void verifyTransactionFailedHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblTransactionFailed, "Transaction Failed", expHeading);
+	}
+
 	public void verifyReferenceID() {
 		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
 	}
@@ -53,6 +65,10 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	public void clickDone() {
 		click(btnDone, "Click Done");
+	}
+
+	public void clickTryAgain() {
+		click(tryAgain, "Try Again");
 	}
 
 	public void verifyHeading(String expHeading) {

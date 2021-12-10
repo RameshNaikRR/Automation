@@ -1,7 +1,6 @@
 package coyni.customer.popups;
 
 import org.openqa.selenium.By;
-
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -14,6 +13,9 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By lblYourTokenAccount = By.xpath("//h1[text()='Your Token Account']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
 	private By btnRequest = By.xpath("//button[text()='Request']");
+	private By btnBuyToken = By.xpath("");
+	private By lblNoFundsAvailable = By.xpath("");
+	private By lblBuyCoyniTokens = By.xpath("");
 	private By txtAmount = By.id("amount");
 	private By lblAvailableBalance = By.xpath("//span[text()='Available Balance:']");
 	private By txtRecipientMessage = By.xpath("//textarea[@id='message']");
@@ -21,13 +23,10 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By RecipientID = By.className("Input_form_input__3qrhS w-1/2 pr-6 truncate");
 	private By countMsgToRecipient = By.xpath("//span[text()='120']");
 	private By lblPayingRecipientName = By.cssSelector(".font-bold.text-cgy4.text-xl.text-center.tracking-wide.mt-2");
-	private By backIcon = By.cssSelector(".self-start");
-	private By crossIcon = By.cssSelector(".self-end");
 	private By btnNext = By.cssSelector(".w-60.h-9.rounded-full");
-	private By lblTransactionFailed = By.cssSelector("");
 	private By btnCopy = By.cssSelector(".icon-copy");
 	// private By lnkPaste = By.cssSelector("//button[text()='Paste']");
-	// private By lblAccountHolderName = By.cssSelector("");
+	// private By lblAccountHolderName = By.className("text-sm truncate text-cm3");
 
 	public void verifyCountMessageToRecipient() {
 		new CommonFunctions().elementView(countMsgToRecipient, "Message to Recipient");
@@ -45,6 +44,7 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		click(btnPay, "Click Pay");
 
 	}
+
 	public void viewAmount() {
 		new CommonFunctions().elementView(txtAmount, "Amount");
 	}
@@ -69,6 +69,10 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	public void fillRecipientAddress(String RecipientAddress) {
 		enterText(txtRecipientsAddress, RecipientAddress, "RecipientAddress");
 
+	}
+
+	public void clickBuyToken() {
+		click(btnBuyToken, "Buy Token");
 	}
 
 //	public String copyDataToClipboard(String dataToCopy) {
@@ -110,6 +114,10 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		return new PayingAccountHolderNamePopup();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 	public void verifyAmountView() {
 		new CommonFunctions().elementView(txtAmount, "Amount Field");
 
@@ -129,10 +137,10 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		new CommonFunctions().elementView(lblAvailableBalance, "Available Balance");
 
 	}
-//
+
 //	public void verifyYourTokenAccountView() {
 //
-//		new CommonFunctions().elementView(lblYourTokenAcount, "Your Token Acccount");
+//		new CommonFunctions().elementView(lblYourTokenAcount, "Your Token Account");
 //
 //	}
 	public void clickCopy() {
@@ -143,32 +151,8 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		new CommonFunctions().elementView(lblPayingRecipientName, "Paying Recipient");
 	}
 
-	public void verifyCrossIconView() {
-		new CommonFunctions().elementView(crossIcon, "Cross Icon");
-	}
-
-	public void clickCrossIcon() {
-		click(crossIcon, "Cross Icon");
-	}
-
-	public void clickBackIcon() {
-		click(backIcon, "Back Icon");
-	}
-
-	public void verifycursorCrossIcon() {
-		new CommonFunctions().verifyCursorAction(crossIcon, "Cross Icon");
-	}
-
-	public void verifyBackIconView() {
-		new CommonFunctions().elementView(backIcon, "Back Icon");
-	}
-
 	public void verifyButtonPay() {
 		new CommonFunctions().elementView(btnPay, "Pay Button");
-	}
-
-	public void verifyTransactionFailed() {
-		new CommonFunctions().elementView(lblTransactionFailed, "Transaction Failed");
 	}
 
 	public void verifyLabelYourTokenAccount() {
@@ -177,21 +161,17 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	}
 
 	public void validateAmountField(String singleChar, String specialCharacters) {
-		new CommonFunctions().validateField(txtAmount, "Amount", singleChar);
-		new CommonFunctions().clearText(txtAmount, "Amount");
+		new CommonFunctions().validateFieldWithalphabet(txtAmount, "Amount", singleChar);
 		new CommonFunctions().validateFieldWithSpecialchar(txtAmount, "Amount", specialCharacters);
-		new CommonFunctions().clearText(txtAmount, "Amount");
 
 	}
 
 	public void validateRecipientField(String lessCharLength, String maxiCharLength) {
-		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", lessCharLength);
+		new CommonFunctions().validateFieldWithalphabet(txtRecipientMessage, "Recipient Message", lessCharLength);
 		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
-		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", lessCharLength);
+		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", maxiCharLength);
 		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
 
 	}
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
+
 }
