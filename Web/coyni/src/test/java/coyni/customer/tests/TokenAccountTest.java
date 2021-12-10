@@ -263,6 +263,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().verifyRecipientsAddressView();
 			tokenAccountPage.payAndRequestTokensPopup().verifyMessageToRecipientView();
 			tokenAccountPage.payAndRequestTokensPopup().verifyAccountBalanceView();
+			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testViewPayTransaction failed due to exception " + e);

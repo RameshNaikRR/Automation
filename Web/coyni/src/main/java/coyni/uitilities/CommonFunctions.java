@@ -111,6 +111,25 @@ public class CommonFunctions {
 
 	}
 
+	public void verifyChangedColor(By ele, String eleName, String cssProp, String expValue, String expColor) {
+		try {
+			String initialValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+			objBrowserFunctions.moveToElement(ele, eleName);
+			Thread.sleep(500);
+			String FinalValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+			System.out.println(initialValue + " : " + FinalValue);
+			if (FinalValue.equalsIgnoreCase(expValue)) {
+				ExtentTestManager.setPassMessageInReport(
+						String.format("%s css property value changed to ", cssProp) + " " + expColor);
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						String.format("%s css property value is not changed to ", cssProp) + " " + expColor);
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("VerifyChangedColor is failed due to exception " + e);
+		}
+	}
+
 	public void elementView(By ele, String eleName) {
 		try {
 			if (objBrowserFunctions.getElement(ele, eleName).isDisplayed()) {

@@ -69,38 +69,53 @@ public class CustomerProfileTest {
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().verifyEditImageView();
-		//	customerProfilePage.userDetailsComponent().verifyEditImageToolTip(data.get("toolTip"));
+			// customerProfilePage.userDetailsComponent().verifyEditImageToolTip(data.get("toolTip"));
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
-            //AccountProfile-Close Navigation
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent().verifyCloseView();
+			// AccountProfile-Close Navigation
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent()
+					.verifyCloseView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent().clickClose();
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-			//RemoveProfile-Back and Close Navigation
+			// RemoveProfile-Back and Close Navigation
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyHeading(data.get("removeProfileHeading"));
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyRemoveView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().verifyBackView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().verifyCloseView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().clickBack();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.verifyHeading(data.get("removeProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.verifyRemoveView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.navigationComponent().verifyBackView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.navigationComponent().verifyCloseView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.navigationComponent().clickBack();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.navigationComponent().clickClose();
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-			//Crop Image -Navigation
+			// Crop Image -Navigation
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifyHeading(data.get("cropYourImageHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.verifyHeading(data.get("cropYourImageHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifySaveView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().verifyBackView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().verifyCloseView();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().clickBack();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.navigationComponent().verifyBackView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.navigationComponent().verifyCloseView();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.navigationComponent().clickBack();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.navigationComponent().clickClose();
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Edit Image view failed due to exception " + e);
@@ -115,10 +130,13 @@ public class CustomerProfileTest {
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifyHeading(data.get("cropYourImageHeading"));
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().uploadSelectImage(data.get("folderName"),data.get("fileName"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.verifyHeading(data.get("cropYourImageHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
 			Thread.sleep(500);
 			if (!data.get("toastMessage").isEmpty()) {
@@ -139,12 +157,16 @@ public class CustomerProfileTest {
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().verifyHeading(data.get("removeProfileHeading"));
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup().clickRemoveImage();
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.verifyHeading(data.get("removeProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.clickRemoveImage();
 			Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyHeading(data.get("accountProfileHeading"));
+			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUserDetailsImageRemove failed due to exception " + e);
 
@@ -314,71 +336,27 @@ public class CustomerProfileTest {
 
 	}
 
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testView(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testView failed due to exception " + e);
-		}
-
-	}
-
 	@Test // added
 	@Parameters({ "strParams" })
-	public void testCrossIcon(String strParams) {
 
+	public void testPreferences(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-	public void testTransactionFailed(String strParams) {
-
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
-		}
-	}
-
-	// DOUBT
-	@Test // added
-	@Parameters({ "strParams" })
-	public void testUpdatePreferences(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.preferencesComponent().selectTimeZone("Time Zone");
-			customerProfilePage.preferencesComponent().selectDefaultAccount("Default Account");
-			customerProfilePage.preferencesComponent().verifyLocalCurrency("Local Currency");
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPreferences();
+			// customerProfilePage.preferencesComponent().clickOnPreferences();
+			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			customerProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount"));
 			customerProfilePage.preferencesComponent().clickSave();
+			// customerProfilePage.preferencesComponent().verifyLocalCurrency("Local
+			// Currency");
+
+			customerProfilePage.preferencesComponent().verifyLabelSuccessMessage();
+			customerProfilePage.preferencesComponent().verifyLabelPreferences(data.get("expHeading"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" test Preferences is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	// @Parameters({ "strParams" })
-	public void testDropDown(String strParams) {
-		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.preferencesComponent().selectTimeZone("Time Zone");
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" test Preferences is failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
 		}
 	}
 
@@ -388,7 +366,15 @@ public class CustomerProfileTest {
 
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.preferencesComponent().VerifyClickOnAccountDetails();
+			Thread.sleep(2000);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPreferences();
+			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			customerProfilePage.preferencesComponent().verifyTimeZoneView();
+			customerProfilePage.preferencesComponent().verifyPSTTickMark();
+			// customerProfilePage.preferencesComponent().selectDefaultAccount("defaultAccount");
+			// customerProfilePage.preferencesComponent().verifyDefautAccountTickMark();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testPreferencesDisplayed is failed due to Exception " + e);

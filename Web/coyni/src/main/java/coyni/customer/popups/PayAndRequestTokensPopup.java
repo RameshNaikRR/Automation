@@ -75,10 +75,6 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		click(btnBuyToken, "Buy Token");
 	}
 
-//	public String copyDataToClipboard(String dataToCopy) {
-//		return dataToCopy;
-//	}
-
 //	public void clickPasteLink() {
 //		click(lnkPaste, "Click Paste");
 //	}
@@ -138,11 +134,6 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 
 	}
 
-//	public void verifyYourTokenAccountView() {
-//
-//		new CommonFunctions().elementView(lblYourTokenAcount, "Your Token Account");
-//
-//	}
 	public void clickCopy() {
 		click(btnCopy, "Copy Icon");
 	}

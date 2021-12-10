@@ -12,7 +12,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By lnkUserDetails = By.xpath("//span[text()='User Details']");
 
 	private By lnkPaymentMethods = By.cssSelector("div.dropdown-container>div:nth-of-type(3)");
-	private By lnkPreferences = By.cssSelector(" ");
+	private By lnkPreferences = By.xpath("(//span[text()='Preferences'])[1]");
 	private By lnkAccountLimits = By.cssSelector(" ");
 	private By lnkAgreements = By.cssSelector(" ");
 	private By lnkChangePassword = By.cssSelector(" ");
