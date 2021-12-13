@@ -382,6 +382,7 @@ public class CustomerProfileTest {
 
 	}
 
+
 	@Test // added M
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {

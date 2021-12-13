@@ -114,6 +114,10 @@ public class LoginPage extends BrowserFunctions {
 
 	}
 
+	public void viewEmail() {
+		new CommonFunctions().elementView(txtEmail, "View Email");
+	}
+
 	public void verifyEmail(String expEmail) {
 		new CommonFunctions().verifyLabelText(lblEmail, "exp email", expEmail);
 	}
