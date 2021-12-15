@@ -8,34 +8,42 @@ import ilabs.WebFramework.BrowserFunctions;
 public class PreferencesComponent extends BrowserFunctions {
 
 	private By lblPreferences = By.xpath("(//span[text()='Preferences'])[2]");
-	// private By lblPreferencesBackGroundcolor =
-	// By.xpath("(//span[text()='Preferences'])[1]");
-	private By drpDwnTimeZone = By.xpath("(//div[text()='Pacific (PST)'])[1]");
-	//private By tickMarksuccessfully = By.className("w-56");
+	private By drpDwnTimeZonePST = By.xpath("(//div[text()='Pacific (PST)'])[1]");
+	private By drpDwnTimeZoneMST = By.xpath("(//div[text()='Mountain// (MST)'])[1]");
+	// private By tickMarksuccessfully = By.className("w-56");
+	private By backGroundColorPreferences = By.xpath("(//span[text()='Preferences'])[1]");
 
 	private By drpDwnDefaultAccount = By.xpath("//div[text()='anudeepG (Personal)']");
 
 	private By txtLocalCurrency = By.cssSelector("");
 
-	// private By backGroundColor = By.className("group-hover:bg-cbl5");
-
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By lblmessage = By.xpath("//div[text()='Preferences Updated Successfully']");
 
 	public void selectTimeZone(String timeZone) {
-		click(drpDwnTimeZone, "Time Zone DropDown");
+		click(drpDwnTimeZonePST, "Time Zone DropDown");
 		new CommonFunctions().selectCustomDropDown(timeZone, "Time Zone");
 	}
 
+	public void selectDefaultAccount(String defaultAccount) {
+		click(drpDwnDefaultAccount, "Default Account DropDown");
+		new CommonFunctions().selectCustomDropDown(defaultAccount, "Default Account");
+	}
+
 	public void verifyTimeZoneView() {
-		new CommonFunctions().elementView(drpDwnTimeZone, "drop down for Timezone");
+		new CommonFunctions().elementView(drpDwnTimeZonePST, "drop down for Timezone");
 
 	}
 
-//	public void verifyLabelPreferencesColor() {
-//		new CommonFunctions().verifyChangedColor(lblPreferencesBackGroundcolor, "Preferences", cssProp, expValue,
-//				expColor);
-//	}
+	public void verifyPreferencesBackGroundColor(String cssProp, String expValue, String expColor) {
+		new CommonFunctions().verifyChangedColor(backGroundColorPreferences, "Preferences", cssProp, expValue,
+				expColor);
+	}
+
+	public void verifyDefaultAccountBackGroundColor(String cssProp, String expValue, String expColor) {
+		new CommonFunctions().verifyChangedColor(drpDwnDefaultAccount, "Default Account", cssProp, expValue, expColor);
+
+	}
 
 	public void verifyTickMarkSuccesfull(String Prefereces) {
 		new CommonFunctions().elementView(verifyTickMark("Preferences Updated Successfully"), "TickMark");
@@ -45,17 +53,12 @@ public class PreferencesComponent extends BrowserFunctions {
 //		new CommonFunctions().elementView(drpDwnDefaultAccount, "drop down for Default Account");
 //	}
 
-	public void selectDefaultAccount(String defaultAccount) {
-		click(drpDwnDefaultAccount, "Default Account DropDown");
-		new CommonFunctions().selectCustomDropDown(defaultAccount, "Default Account");
-	}
-
 	public void verifyLocalCurrency(String expCurrency) {
 		new CommonFunctions().verifyLabelText(txtLocalCurrency, "Local Currency", expCurrency);
 	}
 
 	public void clickSave() {
-		click(btnSave, "Click Save");
+		click(btnSave, "Save");
 	}
 
 	public void verifyLabelSuccessMessage() {
@@ -74,7 +77,7 @@ public class PreferencesComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(verifyTickMark("Pacific (PST)"), "TickMark");
 	}
 
-	public void verifyDefautAccountTickMark() {
-		new CommonFunctions().elementView(verifyTickMark("anudeepG (Personal)"), "TickMark");
-	}
+//	public void verifyDefautAccountTickMark() {
+//		new CommonFunctions().elementView(verifyTickMark("anudeepG (Personal)"), "TickMark");
+//	}
 }

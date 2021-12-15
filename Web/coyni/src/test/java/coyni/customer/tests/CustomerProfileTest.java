@@ -345,9 +345,11 @@ public class CustomerProfileTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickPreferences();
-			// customerProfilePage.preferencesComponent().clickOnPreferences();
 			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
 			customerProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount"));
+			// customerProfilePage.preferencesComponent().verifyDefaultAccountBackGroundColor(data.get(""),
+			// strParams);
+			Thread.sleep(3000);
 			customerProfilePage.preferencesComponent().clickSave();
 			// customerProfilePage.preferencesComponent().verifyLocalCurrency("Local
 			// Currency");
@@ -374,6 +376,9 @@ public class CustomerProfileTest {
 			customerProfilePage.preferencesComponent().verifyTimeZoneView();
 			customerProfilePage.preferencesComponent().verifyPSTTickMark();
 			// customerProfilePage.preferencesComponent().selectDefaultAccount("defaultAccount");
+			// customerProfilePage.preferencesComponent().verifyDefaultAccountBackGroundColor(data.get("expColor"),
+			// data.get("expCssProp"));
+
 			// customerProfilePage.preferencesComponent().verifyDefautAccountTickMark();
 
 		} catch (Exception e) {
@@ -382,6 +387,25 @@ public class CustomerProfileTest {
 
 	}
 
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testPreferencesSelectTimeZone(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPreferences();
+			customerProfilePage.preferencesComponent().verifyPreferencesBackGroundColor(data.get("cssProp"),
+					data.get("expValue"), data.get("expColor"));
+			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testPreferencesSelectTimeZone is failed due to Exception " + e);
+		}
+
+	}
 
 	@Test // added M
 	@Parameters({ "strParams" })

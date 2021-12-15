@@ -19,7 +19,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class TokenAccountPage extends BrowserFunctions {
 
 	// added
-	private By btnTokenAccount = By.id("token-dashboard");
+	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
 	private By lblTotalFunds = By.cssSelector(".text-6xl");
 	private By amount = By.cssSelector(".text-6xl");
 	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
@@ -134,5 +134,5 @@ public class TokenAccountPage extends BrowserFunctions {
 	public WithdrawCoyniToUSDPopup withdrawCoyniToUSDPopup() {
 		return new WithdrawCoyniToUSDPopup();
 	}
-	
+
 }

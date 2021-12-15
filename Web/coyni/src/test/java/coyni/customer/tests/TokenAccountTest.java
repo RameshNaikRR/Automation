@@ -71,44 +71,39 @@ public class TokenAccountTest {
 	@Test
 	public void testTokenSent() {
 		try {
-			ExtentTestManager.setInfoMessageInReport(
-					"Tokens sent " + tokenAccountPage.tokenAccountActivityComponent().getTokensSent());
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			ExtentTestManager.setInfoMessageInReport(
+					"Tokens Sent " + tokenAccountPage.tokenAccountActivityComponent().getTokensSent());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().verifyTransactionDetails();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test token sent failed due to exception " + e);
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testTokenSent failed due to exception " + e);
 		}
 	}
 
 	@Test
 	public void testTokenPurchased() {
 		try {
+			tokenAccountPage.clickTokenAccount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Tokens purchased " + tokenAccountPage.tokenAccountActivityComponent().getTokensPurchased());
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("test token purchased failed due to exception " + e);
-		}
-	}
-
-	@Test
-	public void testTokenReceived() {
-		try {
-			ExtentTestManager.setInfoMessageInReport(
-					"Tokens received " + tokenAccountPage.tokenAccountActivityComponent().getTokensReceived());
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test token received failed due to exception " + e);
 		}
 	}
 
 	@Test
 	public void testTokenWithdrawn() {
 		try {
+			tokenAccountPage.clickTokenAccount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Tokens Withdrawn " + tokenAccountPage.tokenAccountActivityComponent().getTokensWithdrawn());
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawn();
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("test token withdrawn failed due to exception " + e);
 		}
 	}
@@ -116,10 +111,11 @@ public class TokenAccountTest {
 	@Test
 	public void testPaidOrders() {
 		try {
+			tokenAccountPage.clickTokenAccount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Paid orders " + tokenAccountPage.tokenAccountActivityComponent().getPaidOrders());
 			tokenAccountPage.tokenAccountActivityComponent().clickPaidOrdersDetails();
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("test paid orders failed due to exception " + e);
 		}
 
@@ -127,11 +123,14 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTodayTransactionList(String strParams) {
+	public void testTodayTransactionListSent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickToday();
-			// verify today transactions list?
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickTodayTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenSentDetails(data.get("expHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Today Transaction List is failed due to exception " + e);
@@ -140,60 +139,78 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testYesterdayTransactionList(String strParams) {
+	public void testYesterdayTransactionListSent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickYesterday();
-			// verify yesterday transactions list?
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickYesterdayTokensSent(data.get("txnDetails"));
+			tokenAccountPage.tokenAccountActivityComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenSentDetails(data.get("expHeading"));
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Yesterday Transaction List is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testLast7DaysTransactionList(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickLast7Days();
-			// verify last7Days transactions list ?
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Last7Days TransactionList is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testLastMonthTransactionList(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickLastMonth();
-			// verify lastMonth transactions list?
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test LastMonth TransactionList is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testMonthToDate(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickMonthToDate();
-			// verify monthToDate
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test MonthToDate TransactionList is failed due to exception " + e);
+					.setFailMessageInReport("testYesterdayTransactionList List is failed due to exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCustomDateRange(String strParams) {
+	public void testLast7DaysTransactionListSent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickCustomDateRange();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickLast7DaysTokensSent(data.get("txnDetails"));
+			tokenAccountPage.tokenAccountActivityComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenSentDetails(data.get("expHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLast7DaysTransactionList is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLastMonthTransactionListSent(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickLastMonthTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenSentDetails(data.get("expHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLastMonthTransactionList is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMonthToDateSentTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickMonthToDateTokenSent();
+			tokenAccountPage.tokenAccountActivityComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenSentDetails(data.get("expHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMonthToDateSentTransaction is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangeSentTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensSent();
+			Thread.sleep(2000);
 			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
 					.setDateWithYear(data.get("startDate"));
 			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
@@ -201,7 +218,150 @@ public class TokenAccountTest {
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test CustomDateRange TransactionList is failed due to exception " + e);
+					.setFailMessageInReport("testCustomDateRangeSentTransaction is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	public void testTokenReceived() {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			ExtentTestManager.setInfoMessageInReport(
+					"Tokens Receive " + tokenAccountPage.tokenAccountActivityComponent().getTokensReceived());
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyTransactionDetails();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("test token received failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTodayTransactionListReceive(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickTodayTokensReceive();
+			tokenAccountPage.tokenAccountActivityComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenReceiveDetails(data.get("expHeading"));
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Today Transaction List is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testYesterdayTransactionListReceive(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickYesterdayTokensReceive(data.get("txnDetails"));
+			Thread.sleep(2000);
+			tokenAccountPage.tokenAccountActivityComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenReceiveDetails(data.get("expHeading"));
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testYesterdayTransactionList List is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLast7DaysTransactionListReceive(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickLast7DaysTokensReceive(data.get("txnDetails"));
+			Thread.sleep(2000);
+			tokenAccountPage.tokenAccountActivityComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenReceiveDetails(data.get("expHeading"));
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLast7DaysTransactionList is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLastMonthTransactionListReceive(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickLastMonthTokensReceive();
+			Thread.sleep(2000);
+			tokenAccountPage.tokenAccountActivityComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenReceiveDetails(data.get("expHeading"));
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLastMonthTransactionList is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMonthToDateReceiveTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickMonthToDateTokensReceive();
+			Thread.sleep(2000);
+			tokenAccountPage.tokenAccountActivityComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyReceivedAmountAndCountTransactions();
+			tokenAccountPage.tokenAccountActivityComponent().verifyLabelTokenReceiveDetails(data.get("expHeading"));
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMonthToDate is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangeReceiveTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensReceive();
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCustomDateRange is failed due to exception " + e);
 		}
 	}
 
