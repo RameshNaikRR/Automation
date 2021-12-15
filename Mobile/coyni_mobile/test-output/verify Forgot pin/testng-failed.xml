@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [verify Forgot pin]">
+  <listeners>
+    <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
+  </listeners>
+  <test thread-count="5" name="coyni_mobile.tests.LoginTest.testForgotPin(failed)">
+    <parameter name="strParams" value="-pemail,
+-ppassword,
+-ppin,
+-presendMsgOld,
+-presendMsgNew"/>
+    <classes>
+      <class name="coyni_mobile.tests.LoginTest">
+        <methods>
+          <include name="init"/>
+          <include name="testForgotPin" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- coyni_mobile.tests.LoginTest -->
+    </classes>
+  </test> <!-- coyni_mobile.tests.LoginTest.testForgotPin(failed) -->
+</suite> <!-- Failed suite [verify Forgot pin] -->
