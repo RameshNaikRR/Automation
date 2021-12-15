@@ -10,7 +10,7 @@ public class ForgotEmailComponent extends BrowserFunctions {
 
 	private By forgotHeading = By.cssSelector(".forgot-email__title");
 	private By lnkBackToLogin = By.cssSelector(".pl-1");
-	private By txtPhoneNumber = By.id("Phone-Number");
+	private By txtPhoneNumber = By.id("Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtFirstName = By.name("first_name");
 	private By txtLastName = By.name("last_name");
