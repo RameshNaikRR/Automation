@@ -2,6 +2,7 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
 import coyni.customer.components.PaymentMethodsComponent;
@@ -54,5 +55,8 @@ public class CustomerProfilePage extends BrowserFunctions {
 
 	public CommonFunctions commonFunctions() {
 		return new CommonFunctions();
+	}
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 }

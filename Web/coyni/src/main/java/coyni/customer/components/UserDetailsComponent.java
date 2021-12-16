@@ -3,6 +3,7 @@ package coyni.customer.components;
 import org.openqa.selenium.By;
 
 import coyni.customer.popups.AccountProfileImagePopup;
+import coyni.customer.popups.EditEmailAddressPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -17,18 +18,19 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By btnSave = By.cssSelector("");
 	private By lblUserName = By.cssSelector("");
 	private By lblAccountStatus = By.cssSelector("");
-	private By lblEmail = By.cssSelector("");
+	private By lblEmail = By.cssSelector(".UserDetails_email_address__3EjH8");
 	private By lblAddress = By.cssSelector("");
 	private By lnkEditAccountEmail = By.cssSelector("");
 	private By lnkEditAccountPhNum = By.cssSelector("");
 	private By lnkEditAccountAddress = By.cssSelector("");
-	private By iconEditEmail = By.cssSelector("");
+	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
 	private By iconEditPhNum = By.cssSelector("");
 	private By iconEditAddress = By.cssSelector("");
 	private By userImg = By.cssSelector(" ");
 	private By accountId = By.cssSelector(" ");
 	private By lblPhoneNum = By.cssSelector(" ");
-	private By lblEmailAddress = By.cssSelector("");
+	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
+	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
 	private By lblAccountAddress = By.cssSelector(" ");
 
 	public void verifyUserDetailsView() {
@@ -128,6 +130,12 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public void clickIconEditAddress() {
 		click(iconEditAddress, "Click Edit Address Icon");
 	}
+	public void verifyEditEmailAddress(String expheading) {
+		new CommonFunctions().verifyLabelText(lblEmailAddress, "Edit Email Address PopUp Heading", expheading);
+	}
+	public void verifyEditEmailAddressAuthentication(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblEmailAuth, "Edit Email Address Authentication PopUp Heading", expHeading);
+	}
 
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
@@ -143,5 +151,12 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public AccountProfileImagePopup accountProfileImagePopup() {
 		return new AccountProfileImagePopup();
+	}
+	public EditEmailAddressPopup editEmailAddressPopup() {
+		return new EditEmailAddressPopup();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 }

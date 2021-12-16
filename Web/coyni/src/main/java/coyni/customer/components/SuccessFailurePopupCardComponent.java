@@ -27,7 +27,8 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By btnClose = By.xpath("//button[text()='Close']");
 	// private By btnAddBankAccount = By.xpath("//button[text()='Add Bank
 	// Account']");
-
+	private By lblEmailAddress = By.xpath("//div[@class='mt-4']");
+	
 	public void verifyAccountBalance() {
 		new CommonFunctions().elementView(lblAccountBalance, "Account Balance");
 	}
@@ -87,5 +88,8 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	public void verifyheadingview() {
 		new CommonFunctions().elementView(heading, "heading");
 
+	}
+	public void verifyEmailAddressChanged(String emailAddress) {
+		new CommonFunctions().verifyLabelText(lblEmailAddress, "Email Address Changed Successfully Popup", emailAddress);
 	}
 }

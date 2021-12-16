@@ -27,7 +27,6 @@ public class AuthyComponent extends BrowserFunctions {
 		String twoFactorCode = totp.now(); // Generated 2FA code here
 		while (prevCode.equals(twoFactorCode)) {
 			twoFactorCode = totp.now();
-
 		}
 		prevCode = twoFactorCode;
 		return twoFactorCode;
@@ -35,52 +34,28 @@ public class AuthyComponent extends BrowserFunctions {
 
 	public void fillAuthyInput(String securityKey) {
 		String code = getTwoFactorCode(securityKey);
-		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
-		int noOfInputs = inputs.size();
-		if (noOfInputs == 6) {
-			for (int i = 0; i < noOfInputs; i++) {
-				inputs.get(i).sendKeys(code.charAt(i) + "");
-			}
-			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
-		}
-		//
+		fillPin(inputBox, "InputBoxes", code);
 	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
 	}
 
-	public void verifyMessage(String expMessage) {
+	public void verifyMessage(String expMessage) throws InterruptedException {
 		waitForCondition(e -> e.findElement(lblMessage).getText().contains("Verification"),
 				"verification message is displayed");
-		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
-	}
-
-	public void fillpin(String code) {
-
-		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
-		int noOfInputs = inputs.size();
-		if (noOfInputs == 6) {
-			for (int i = 0; i < noOfInputs; i++) {
-				inputs.get(i).sendKeys(code.charAt(i) + "");
-			}
-			ExtentTestManager.setPassMessageInReport("verification entered in text field");
-		}
+		Thread.sleep(500);
+		new CommonFunctions().verifyLabelText(lblMessage, "Message", expMessage);
 	}
 
 	public void fillAuthyInputInvalid(String code, String character) {
-
-		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
-		int noOfInputs = inputs.size();
-		if (noOfInputs == 6) {
-			for (int i = 0; i < noOfInputs; i++) {
-				inputs.get(i).sendKeys(code.charAt(i) + "");
-			}
-			ExtentTestManager.setPassMessageInReport(character + " entered in text field");
-		}
-		//
+		fillPin(inputBox, "InputBoxes", code);
+		ExtentTestManager.setPassMessageInReport(character + " entered in text field");
 	}
 
+	public void fillInput(String code) {
+		fillPin(inputBox, "InputBoxes", code);
+	}
 	public void clickGoBack() {
 		click(lnkGoBack, "Back Option");
 	}
@@ -104,5 +79,16 @@ public class AuthyComponent extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setPassMessageInReport("Login failed with invalid pin");
 		}
+	}
+	public void fillPin(By ele,String eleName,String code) {
+		List<WebElement> inputs = getElementsList(ele,eleName);
+		int noOfInputs = inputs.size();
+		if (noOfInputs == 6) {
+			for (int i = 0; i < noOfInputs; i++) {
+				inputs.get(i).sendKeys(code.charAt(i) + "");
+			}
+			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
+		}
+		//
 	}
 }

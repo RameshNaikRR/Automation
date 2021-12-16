@@ -197,16 +197,97 @@ public class CustomerProfileTest {
 	public void testEditEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			Thread.sleep(5000);
+			customerProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
+			customerProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			editEmailAddressPopup.fillNewEmailAddress(data.get("emailAddress"));
-			editEmailAddressPopup.clickSendCode();
+			//customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
+	        customerProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddress(data.get("heading"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.fillNewEmailAddress(data.get("newEmailAddress"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+		    customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyCurrentEmail(data.get("currentEmail"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().fillInput(data.get("fillPinEmail"));
+			//customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().verifyMessage(data.get("message"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
+			 customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().verifyNewEmail(data.get("newEmail"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
+            customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().successFailurePopupCardComponent().verifyEmailAddressChanged(data.get("emailAddressChanged"));
 
+	    } catch (Exception e) {	
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditEmaiWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
+			customerProfilePage.userDetailsComponent().clickIconEditEmail();
+			customerProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.fillNewEmailAddress(data.get("newEmailAddress"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().fillNewEmailAddress(data.get("newEmailAddress"));
+
+			if (!data.get("errorMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+
+			}
+			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+					data.get("elementName"));
+
+			Thread.sleep(5000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditEmailAddressWithInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			Thread.sleep(5000);
+			customerProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
+			customerProfilePage.userDetailsComponent().clickIconEditEmail();
+			customerProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
+			if (!data.get("code").isEmpty()) {
+				customerProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("errorMessage").isEmpty()) {
+				Thread.sleep(4000);
+				customerProfilePage.authyComponent().verifyMessage(data.get("errorMessage"));
+			}
+			Thread.sleep(2000);
+			customerProfilePage.authyComponent().verifyLoginWithInvalidPin();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void editAddress(String strParams) {
@@ -470,7 +551,7 @@ public class CustomerProfileTest {
 			Thread.sleep(1000);
 			customerMenuComponent.clickChangePassword();
 			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
-			customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
+			//customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
