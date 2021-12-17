@@ -4,24 +4,15 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	private By btnTokensSentDetails = By.xpath("(//button[text()='Details'])[1]");
 
-	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent']");
-
 	private By btnTokensReceivedDetails = By.xpath("(//button[text()='Details'])[2]");
 
-	private By lblTokensReceived = By.xpath("//span[text()='Tokens Received']");
-
-	private By ReceivedAmount = By.xpath("(//div[@class='TokenAccountDetail_widthDivide__8Bwmr'])[1]");
-
-	private By ReceivedCountTxns = By.xpath("(//span[@class='text-7xl font-bold cursor-default text-cgy4'])[2]");
-
 	private By btnTokensPurchasedDetails = By.xpath("(//button[text()='Details'])[3]");
-
-	private By lblTokensPurchased = By.xpath("//span[text()='Token Purchased']");
 
 	private By btnTokensWithdrawn = By.xpath("(//button[text()='Details'])[4]");
 
@@ -31,53 +22,101 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	private By lblPaidOrders = By.xpath("//span[text()='Token Paid (To Business)']");
 
-	private By lblTokensSentTransactions = By.xpath("//h1[text()='Tokens Sent Transactions']");
-
-	private By lblTokensReceiveTransactions = By.xpath("//h1[text()='Tokens Received Transactions']");
-
-	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
-
-	private By lblType = By.xpath("//span[text()='Type']");
-
-	private By lblDescription = By.xpath("//span[text()='Description']");
-
-	private By lblAmount = By.xpath("//span[text()='Amount']");
-
-	private By lblBalance = By.xpath("//span[text()='Balance']");
-
-	private By lblStatus = By.xpath("//span[text()='Status']");
-
 	private By transactionDetails = By.xpath("//div[@Class='custom-table-container custom-table-container--empty']");
 
 	private By entriesPerPageDropDown = By.xpath(
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
 
-	private By defaultEntries = By.xpath(
-			"//div[@class=\"custom-pagination-select__value-container custom-pagination-select__value-container--has-value css-1hwfws3\"]");
+	private By lblItemsPerPage = By.cssSelector(".entries-container .entries-message");
+
+	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
+
+	private By defaultEntries = By
+			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
 
 	private By lblEntriesMessage = By.xpath("//span[@class='entries-message']");
 
-	private By pagination = By.xpath("//li[@class='paginator__pagination__item active']");
+	// private By pagination = By.xpath("//li[@class='paginator__pagination__item
+	// active']");
 
-	// private By iIconPaidOrders = By.cssSelector("");
+//	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
+//
+//	private By prevPage = By.xpath("//a[contains(@aria-label, 'previous page') or text() = '❮']");
+//
+//	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
+//
+//	private By lastPage = By.xpath("//a[contains(@aria-label, 'last page') and text() = '»']");
+//
+//	public void clickGoToFirstPage() {
+//		click(firstPage, "first page '«'");
+//	}
+//
+//	public void clickGoToPreviousPage() {
+//		click(prevPage, "previou page '❮'");
+//	}
+//
+//	public void clickGoToNextPage() {
+//		click(nextPage, "next page '❯'");
+//	}
+//
+//	public void clickGoToLastPage() {
+//		click(lastPage, "last page '»'");
+//	}
+//
+//	public boolean isNextButtonEnabled() {
+//		return getElement(nextPage, "next page '❯'").isEnabled();
+//	}
 
 	public void clickTokensSentDetails() {
 		click(btnTokensSentDetails, "Click Token Sent Details");
 	}
 
-	public String getTokensSent() {
-		return getText(lblTokensSent, "Tokens Sent");
+	public String getItemsPerPage() {
+		return getText(lblItemsPerPage, "entries per page");
 	}
 
-	public void verifyLabelTokenSentDetails(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTokensSentTransactions, "Tokens Sent Transactions", expHeading);
-		new CommonFunctions().elementView(lblDateTime, "Date and Time");
-		new CommonFunctions().elementView(lblType, "Type");
-		new CommonFunctions().elementView(lblDescription, "Description");
-		new CommonFunctions().elementView(lblAmount, "Amount");
-		new CommonFunctions().elementView(lblBalance, "Balance");
-		new CommonFunctions().elementView(lblStatus, "Status");
+	public void verifyTableItemsCount(String query) {
+		int actCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+		int rowInTable = getElementsList(rows, "Table Rows").size();
+		if (actCount == rowInTable) {
+			ExtentTestManager.setPassMessageInReport(
+					"Number of rows in transactions table matches with number of entries selected i.e " + actCount);
+		} else {
+			ExtentTestManager.setFailMessageInReport(String.format(
+					"Number of rows in transactions table = %s and entries selected in show drop down = %s", rowInTable,
+					actCount));
+		}
 	}
+
+//	public void verifyPaginations() throws InterruptedException {
+//		int expStart = 1;
+//		int expEnd = 10;
+//		int page = 1;
+//		int total = Integer.parseInt(getItemsPerPage().split(" ")[5]);
+//		while (isNextButtonEnabled()) {
+//			int start = Integer.parseInt(getItemsPerPage().split(" ")[1]);
+//			int end = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+//			if (start == expStart && end == expEnd) {
+//				ExtentTestManager.setPassMessageInReport(
+//						String.format("Page %d contains items from %d to %d", page, start, end));
+//			} else {
+//				ExtentTestManager.setFailMessageInReport(
+//						String.format("Page %d should contain items from %d to %d but contains items from %d to %d",
+//								page, expStart, expEnd, start, end));
+//			}
+//			expStart += 10;
+//			expEnd += 10;
+//			if (expEnd > total) {
+//				expEnd = total;
+//			}
+//			if (expStart > total) {
+//				break;
+//			}
+//			page++;
+//			Thread.sleep(500);
+//			clickGoToNextPage();
+//		}
+//	}
 
 	public void verifyEntriesMessage() {
 		new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
@@ -89,46 +128,29 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	public void clickDropDownEntriesPage() {
 		click(entriesPerPageDropDown, "Entries Per Page");
-		new CommonFunctions().elementView(defaultEntries, "Default Entries");
 
 	}
 
-	public void clickOnPages() {
-		click(pagination, "Pagination");
+	public String getDefaultEntriesPerPage() {
+		return getText(defaultEntries, "Default Entries");
+
 	}
+
+	public String getEntriesMessage() {
+		return getText(lblEntriesMessage, "Entries Message");
+	}
+
+//	public void clickOnPages() {
+//		click(pagination, "Pagination");
+//	}
 
 	public void clickTokensReceivedDetails() {
 		click(btnTokensReceivedDetails, "Click Token Received Details");
 
 	}
 
-	public String getTokensReceived() {
-		return getText(lblTokensReceived, "Tokens Received");
-	}
-
-	public void verifyReceivedAmountAndCountTransactions() {
-
-		new CommonFunctions().elementView(ReceivedAmount, "Received Amount");
-		new CommonFunctions().elementView(ReceivedCountTxns, "Received TxnsCount");
-
-	}
-
-	public void verifyLabelTokenReceiveDetails(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTokensReceiveTransactions, "Tokens Received Transactions", expHeading);
-		new CommonFunctions().elementView(lblDateTime, "Date and Time");
-		new CommonFunctions().elementView(lblType, "Type");
-		new CommonFunctions().elementView(lblDescription, "Description");
-		new CommonFunctions().elementView(lblAmount, "Amount");
-		new CommonFunctions().elementView(lblBalance, "Balance");
-		new CommonFunctions().elementView(lblStatus, "Status");
-	}
-
 	public void clickTokensPurchasedDetails() {
 		click(btnTokensPurchasedDetails, "Click Token Received Details");
-	}
-
-	public String getTokensPurchased() {
-		return getText(lblTokensPurchased, "Tokens Purchased");
 	}
 
 	public void clickTokensWithdrawn() {
@@ -147,12 +169,20 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		return getText(lblPaidOrders, "Paid Orders");
 	}
 
-//	public String getIIconMessage() {
-//		return getText(iIconPaidOrders, "I Icon Paid Orders");
-//	}
-
 	public DaysMonthsDropDownComponent daysMonthsDropDownComponent() {
 		return new DaysMonthsDropDownComponent();
+	}
+
+	public TokensSentDetailsComponent tokensSentDetailsComponent() {
+		return new TokensSentDetailsComponent();
+	}
+
+	public TokensReceivedDetailsComponent tokensReceivedDetailsComponent() {
+		return new TokensReceivedDetailsComponent();
+	}
+
+	public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
+		return new TokensPurchasedDetailsComponent();
 	}
 
 	public DatePickerComponent datePickerComponent() {
