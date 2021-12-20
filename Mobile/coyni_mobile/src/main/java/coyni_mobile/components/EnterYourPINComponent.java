@@ -11,13 +11,13 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class EnterYourPINComponent extends MobileFunctions {
-	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
-	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
+	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]|//*[@name='Enter your PIN']");
+	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]|(//*[@name='Forgot PIN'])[1]/preceding-sibling::*[1]");
+	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]|(//*[@name='Forgot PIN'])[1]");
 	private By lblErrorMsg = MobileBy.xpath("");
 
 	private By getOneNumberOfPin(char num) {
-		return MobileBy.xpath(String.format("(//*[@text='%s'])", Character.toString(num)));
+		return MobileBy.xpath(String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num),Character.toString(num)));
 	}
 
 	public void fillPin(String pin) {

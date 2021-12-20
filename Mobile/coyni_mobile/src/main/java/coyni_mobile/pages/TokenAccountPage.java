@@ -13,7 +13,7 @@ import io.appium.java_client.MobileBy;
 
 public class TokenAccountPage extends MobileFunctions {
 
-	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id, 'tvUserName')]");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
 	private By iconNotifications = MobileBy.xpath(" ");
 	private By btnPayRequest = MobileBy.xpath(" ");
@@ -28,7 +28,7 @@ public class TokenAccountPage extends MobileFunctions {
 		if (getElement(lblUserName, "UserName").isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Login success");
 		} else {
-			ExtentTestManager.setPassMessageInReport("Login failed");
+			ExtentTestManager.setFailMessageInReport("Login failed");
 		}
 	}
 

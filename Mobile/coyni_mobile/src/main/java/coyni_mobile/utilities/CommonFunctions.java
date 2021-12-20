@@ -36,6 +36,23 @@ public class CommonFunctions {
 		}
 
 	}
+	
+	public void validateFormErrorMessageIOS(String expErrMsg,String elementName) {
+		try {
+			By errorMsgs = MobileBy.xpath(String.format("//*[contains(@label,'%s,')]", elementName));
+			String msg = mobileFunctions.getText(errorMsgs).split(",")[1];
+			String actualMsg = msg.trim();
+			System.out.println(actualMsg);
+			mobileFunctions.waitForVisibility(errorMsgs);
+			if (actualMsg.equals(expErrMsg)) {
+				ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed for "+ elementName);
+			} else {
+				ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for "+ elementName);
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
+		}
+	}
 
 	public void validateFormErrorMessage(String expErrMsg,String elementName) {
 		try {

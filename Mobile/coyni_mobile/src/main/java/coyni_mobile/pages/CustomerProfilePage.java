@@ -137,7 +137,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void minimizePopupBySwipeDown() {
-		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
+		swipeOnElementAndroid(popUp, "popUp");
 		minimizePopup();
 
 	}

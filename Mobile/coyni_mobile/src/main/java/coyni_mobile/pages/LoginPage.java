@@ -16,16 +16,16 @@ import io.appium.java_client.MobileBy;
 
 public class LoginPage extends MobileFunctions {
 
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
-	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
-	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')]");
-	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]");
-	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
-	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
-	private By lblerrMsg = MobileBy.xpath("(//*[contains(@text,'is incorrect')])[1]");
-	private By popUperror =MobileBy.xpath("//*[contains(@resource-id,'design_bottom_sheet')]");
-	private By btnOk =MobileBy.xpath("//*[contains(@resource-id,'okBtn')]");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
+	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
+	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
+	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]| (//*[contains(@name,'Forgot Password')]");
+	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]|(//*[@name='Log in'])[1]");
+	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
+	private By lblerrMsg = MobileBy.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]");
+	private By popUperror =MobileBy.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
+	private By btnOk =MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]");
 	private By btnCross = MobileBy.xpath("");
 	private By iconFace = MobileBy.xpath("");
 	
@@ -74,7 +74,7 @@ public class LoginPage extends MobileFunctions {
 	}
 	
 	public void minimizePopupBySwipeDown() {
-		swipeOnElement(popUperror, "popUp", SwipeDirection.DOWN);
+		swipeOnElementAndroid(popUperror,"popUp");
 		minimizePopup();
 	}
 	

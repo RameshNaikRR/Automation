@@ -9,18 +9,22 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
 public class SignUpTest {
 
 	SignUpPage signUpPage;
+	LandingPage landingPage;
 
 	@BeforeMethod
 	public void init() {
 		signUpPage = new SignUpPage();
+		landingPage = new LandingPage();
 	}
 
 	@Test
@@ -29,9 +33,9 @@ public class SignUpTest {
 
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signUpPage.clickGetStarted();
-			signUpPage.clickCrossMark();
-			signUpPage.clickGetStarted();
+			landingPage.clickGetStarted();
+//			signUpPage.clickCrossMark();
+//			signUpPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
 //			signUpPage.clickCrossMark();
 //			signUpPage.clickGetStarted();
@@ -41,6 +45,7 @@ public class SignUpTest {
 			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
+		//	DriverFactory.getDriver().hideKeyboard();
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
@@ -58,7 +63,7 @@ public class SignUpTest {
 	public void testSignUpWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signUpPage.clickGetStarted();
+			landingPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			signUpPage.fillFirstName(data.get("firstName"));
@@ -86,7 +91,7 @@ public class SignUpTest {
 	public void testCreateAccountInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signUpPage.clickGetStarted();
+			landingPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			signUpPage.fillFirstName(data.get("firstName"));
@@ -116,7 +121,7 @@ public class SignUpTest {
 	public void testFieldValidationCreateAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signUpPage.clickGetStarted();
+			landingPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
 			String[] firstname = data.get("firstName").split(",");
 			String[] lastname = data.get("lastName").split(",");
