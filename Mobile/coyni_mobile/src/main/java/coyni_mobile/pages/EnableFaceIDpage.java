@@ -49,7 +49,13 @@ public class EnableFaceIDpage extends MobileFunctions {
 	public void verifyEnableFaceIdView() {
 		new CommonFunctions().elementView(lblEnableFaceId, "Enable Face Id");
 	}
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblEnableFaceId, "heading", expHeading);
+	}
   public  TokenAccountPage tokenAccountPage() {
 	   return new TokenAccountPage();
+  }
+  public AccountCreatedPage accountCreatedPage() {
+	  return new AccountCreatedPage();
   }
 }

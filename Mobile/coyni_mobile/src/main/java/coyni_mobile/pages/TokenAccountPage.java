@@ -15,7 +15,7 @@ public class TokenAccountPage extends MobileFunctions {
 
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
-	private By iconNotifications = MobileBy.xpath(" ");
+	private By iconNotifications = MobileBy.xpath("//*[@name='notifications_nobadge']");
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnScan = MobileBy.xpath(" ");
 	private By btnDashBoard = MobileBy.xpath(" ");
@@ -29,6 +29,14 @@ public class TokenAccountPage extends MobileFunctions {
 			ExtentTestManager.setPassMessageInReport("Login success");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Login failed");
+		}
+	}
+	
+	public void verifyRegistration() {
+		if (getElement(iconNotifications, "icon").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport("Registration success");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Registration failed");
 		}
 	}
 

@@ -74,7 +74,7 @@ public class LoginPage extends MobileFunctions {
 	}
 	
 	public void minimizePopupBySwipeDown() {
-		swipeOnElementAndroid(popUperror,"popUp");
+		swipeOnElement(popUperror,"popUp",SwipeDirection.DOWN);
 		minimizePopup();
 	}
 	

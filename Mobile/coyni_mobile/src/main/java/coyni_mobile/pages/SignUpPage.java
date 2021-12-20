@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -10,23 +11,26 @@ import io.appium.java_client.MobileBy;
 
 public class SignUpPage extends MobileFunctions {
 
-	private By lnkPersonalAccount = MobileBy.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
+	private By lnkPersonalAccount = MobileBy
+			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
 	private By lnKBusinessAccount = MobileBy.xpath("");
 	private By lblCreateAccount = MobileBy.xpath("//*[@text='Create Account']|//*[@name='Create Account']");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]|(//*[@name='First Name'])[1]");
 	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'lastNameET')]|(//*[@name='Last Name'])[1]");
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'emailET')]|(//*[@name='Email'])[1]");
-	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]|(//*[@name='usa'])/preceding-sibling::*[1]");
+	private By txtPhoneNumber = MobileBy
+			.xpath("//*[contains(@resource-id,'pnET')]|(//*[@name='usa'])/preceding-sibling::*[1]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'passwordET')]|(//*[@name='Password'])[1]");
-	private By txtConfirmPassword = MobileBy.xpath("//*[contains(@resource-id,'confirmPasswordET')]|(//*[@name='Confirm Password'])[1]");
+	private By txtConfirmPassword = MobileBy
+			.xpath("//*[contains(@resource-id,'confirmPasswordET')]|(//*[@name='Confirm Password'])[1]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'nextCV')]|(//*[@name='Next'])[1]");
-	private By fieldBar = MobileBy.xpath("//*[contains(@resource-id, 'stregnthViewLL')]/*|(//*[@name='Password'])[1]/following-sibling::*[1]/descendant::*");
+	private By fieldBar = MobileBy.xpath(
+			"//*[contains(@resource-id, 'stregnthViewLL')]/*|(//*[@name='Password'])[1]/following-sibling::*[1]/descendant::*");
 	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
 	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
 	private By iconBackArrow = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
-    private By btnDone =MobileBy.xpath("//*[@name='Done']");
-
+	private By btnDone = MobileBy.xpath("//*[@name='Done']");
 
 	public void clickPersonalAccount() {
 		click(lnkPersonalAccount, "Personal Account");
@@ -56,26 +60,26 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
-		//scrollDownToElement(txtPassword, "Password");
+		// scrollDownToElement(txtPassword, "Password");
 		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-        click(btnDone, "Done");
+		 click(btnDone, "Done");
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		click(btnDone, "Done");
+		 click(btnDone, "Done");
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
-	//scrollDownToElement(txtConfirmPassword, "Confirm Password");
+		// scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-	
+		 click(btnDone, "Done");
 	}
 
 	public void clickNext() {
-		//scrollDownToElement(btnNext, "Next");
+		// scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
 
@@ -91,12 +95,15 @@ public class SignUpPage extends MobileFunctions {
 	public void verifyPhoneNumberText(String phoneNumber) {
 		new CommonFunctions().verifyLabelText(headingPhoneNumber, phoneNumber, phoneNumber);
 	}
+
 	public void clickResend() {
 		click(lnkResend, "Resend");
 	}
+
 	public void clickBackArrow() {
 		click(iconBackArrow, "Back Arrow");
 	}
+
 	public void clickCrossMark() {
 		click(iconCrossMark, "Cross Mark");
 	}
@@ -155,6 +162,10 @@ public class SignUpPage extends MobileFunctions {
 		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", moreThanMax);
 		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
 		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", maxChar);
+	}
+
+	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
 	}
 
 }

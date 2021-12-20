@@ -14,6 +14,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
+import ilabs.mobile.utilities.FileReaderManager;
 
 public class LoginTest {
 
@@ -40,21 +41,21 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
-			//loginPage.clickRememberMe();
+			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
-
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
-            DriverFactory.getDriver().resetApp();
+			if (new CommonFunctions().getConfigProp().equalsIgnoreCase("android")) {
+				System.out.println("pass");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -117,9 +118,15 @@ public class LoginTest {
 				loginPage.clickRememberMe();
 				loginPage.clickLogin();
 			}
+
 			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-						loginData.get("elementName"));
+				if (new CommonFunctions().getConfigProp().equalsIgnoreCase("ios")) {
+					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				}
 			}
 			if (!loginData.get("popUpMsg").isEmpty()) {
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
@@ -169,7 +176,6 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -477,6 +483,5 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-	
-	
+
 }
