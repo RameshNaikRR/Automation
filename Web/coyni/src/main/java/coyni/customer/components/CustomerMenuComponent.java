@@ -95,5 +95,33 @@ public class CustomerMenuComponent extends BrowserFunctions {
 	public void clickChangePassword() {
 		click(lnkChangePassword, "Click Change Password");
 	}
+	private By getSidebarItems(String sidebarItems) {
+		return By.xpath(String.format("//div[@class='flex flex-col gap-2.5 mt-6']/descendant::a/span[text()='%s']",
+		sidebarItems));
+		}
+
+	public void verifyUserDetailsView() {
+		new CommonFunctions().elementView(getSidebarItems("User Details"), "UserDetails");
+	}
+
+	public void verifyPaymentMethodsView() {
+		new CommonFunctions().elementView(getSidebarItems("Payment Methods"), "PaymentMethods ");
+	}
+
+	public void verifyPreferencesView() {
+		new CommonFunctions().elementView(getSidebarItems("Preferences"), "Preferences ");
+	}
+
+	public void verifyAccountlimitsView() {
+		new CommonFunctions().elementView(getSidebarItems("Account Limits"), "Account limits ");
+	}
+
+	public void verifyAgreementsView() {
+		new CommonFunctions().elementView(getSidebarItems("Agreements"), "Agreements ");
+	}
+
+	public void verifyChangePasswordView() {
+		new CommonFunctions().elementView(getSidebarItems("Change Password"), "Change Password ");
+	}
 
 }

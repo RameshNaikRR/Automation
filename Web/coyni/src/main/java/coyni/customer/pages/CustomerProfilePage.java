@@ -14,19 +14,19 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class CustomerProfilePage extends BrowserFunctions {
 	private By imageImg = By.cssSelector(" ");
-	private By lblAccountId = By.cssSelector(" ");
-	private By lblAccountUser = By.cssSelector(" ");
-
+	private By lblAccountId = By.xpath("//div[contains(text(),'Account ID:')]");
+	private By lblUserName = By.xpath("//div[contains(text(),'Account ID:')]/preceding-sibling::div ");
+	
 	public void verifyViewImage() {
 		new CommonFunctions().elementView(imageImg, "imageImg");
 	}
 
-	public void verifyViewAccountId() {
+	public void verifyAccountIdView() {
 		new CommonFunctions().elementView(lblAccountId, "AccountId");
 	}
 
-	public void verifyViewAccountUser() {
-		new CommonFunctions().elementView(lblAccountUser, "AccountUser");
+	public void verifyUserNameView() {
+		new CommonFunctions().elementView(lblUserName, "AccountUser");
 	}
 
 	public CustomerMenuComponent customerMenuComponent() {

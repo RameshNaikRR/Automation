@@ -16,7 +16,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By lnkAccountLimits = By.cssSelector(" ");
 	private By lnkAgreements = By.cssSelector(" ");
 	private By lnkChangePassword = By.cssSelector(" ");
-	private By lnkSignOut = By.cssSelector(" ");
+	private By lnkSignOut = By.xpath("//span[text()='Sign Out']");
 	private By lblRequests = By.cssSelector(" ");
 	private By signOutIcon = By.cssSelector(" ");
 

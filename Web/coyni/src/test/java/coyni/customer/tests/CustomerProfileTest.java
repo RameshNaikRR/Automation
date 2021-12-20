@@ -13,6 +13,8 @@ import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
 import coyni.customer.pages.CustomerProfilePage;
+import coyni.customer.pages.HomePage;
+import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.customer.pages.TokenAccountPage;
 import coyni.customer.popups.EditEmailAddressPopup;
@@ -30,6 +32,8 @@ public class CustomerProfileTest {
 	AuthyComponent authyComponent;
 	ChangePasswordComponent changePasswordComponent;
 	TokenAccountPage tokenAccountPage;
+	HomePage homePage;
+	LoginPage loginPage;
 
 	@BeforeTest
 	public void init() {
@@ -42,6 +46,8 @@ public class CustomerProfileTest {
 		authyComponent = new AuthyComponent();
 		changePasswordComponent = new ChangePasswordComponent();
 		tokenAccountPage = new TokenAccountPage();
+		homePage = new HomePage();
+		loginPage = new LoginPage();
 	}
 
 	@Test
@@ -205,27 +211,34 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
 			customerProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			//customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
-	        customerProfilePage.userDetailsComponent().editEmailAddressPopup()
+			// customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-		    customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyCurrentEmail(data.get("currentEmail"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().fillInput(data.get("fillPinEmail"));
-			//customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().verifyMessage(data.get("message"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
-			 customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().verifyNewEmail(data.get("newEmail"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
-            customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyNewEmailAddressPopUp().successFailurePopupCardComponent().verifyEmailAddressChanged(data.get("emailAddressChanged"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.authyComponent().fillInput(data.get("fillPinEmail"));
+			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().verifyMessage(data.get("message"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().verifyNewEmail(data.get("newEmail"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
+			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().successFailurePopupCardComponent()
+					.verifyEmailAddressChanged(data.get("emailAddressChanged"));
 
-	    } catch (Exception e) {	
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
@@ -288,6 +301,7 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void editAddress(String strParams) {
@@ -326,67 +340,201 @@ public class CustomerProfileTest {
 		}
 	}
 
-	// added p
-//	@Test
-//	public void testNotificationsViewPayAndDeny() {
-//
-//		try {
-//			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyPay();
-//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDeny();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport(" testNotificationsViewPayAndDeny is failed due to Exception " + e);
-//		}
-//
-//	}
-
-	// added p
 	@Test
-	public void testNotificationsPay() {
+	@Parameters({ "strParams" })
+	public void testLoginwithNewAccount(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			homePage.clickLogIn();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email1"));
+			loginPage.fillPassword(data.get("password1"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			Thread.sleep(1000);
+			loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
+			loginPage.authyComponent().verifyMessage(data.get("message"));
+			loginPage.authyComponent().verifyLogin();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestPayInsufficientfunds(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyRequestbtnView();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyInitialMsg(data.get("initialMsg"));
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
-			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLabelPayMessage();
-			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent()
-					.fillAuthyInput("securityKey");
-			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDeny();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyFinalMsg(data.get("finalMsg"));
+			// customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+
+//          customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent().verifyHeading(data.get("authyHeading"));
+//			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent()
+//					.fillAuthyInput(data.get("securityKey"));
+//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testPay is failed due to Exception " + e);
 		}
 	}
 
-//added
 	@Test
-	public void testNotificationsDeny() {
+	@Parameters({ "strParams" })
+	public void testNotificationsPayInsufficientfunds(String strParams) {
+
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsIconView();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsbtnView();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyInitialMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyPaybtnView();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyFinalMsg(data.get("finalMsg"));
+//			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+//			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent().verifyHeading(data.get("authyHeading"));
+//			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent()
+//					.fillAuthyInput(data.get("securityKey"));
+//			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testPay is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testNotificationsPaywithAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyRecievedMsg(data.get("recievedMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Notifications Pay with funds failed due to Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestAmountPay(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyInitialMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyFinalMsg(data.get("finalMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickPay();
+			customerProfilePage.userDetailsComponent().notificationsComponent().payingAccountHolderNamePopup()
+					.verifyHeading(data.get("authyPayHeading"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().authyComponent()
+					.fillAuthyInput(data.get("securityKey1"));
+			Thread.sleep(1000);
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Request Amount Pay is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReminderNotification(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifybtnReminderView();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyReminderfirstMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickReminder();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyReminderLastMsg(data.get("finalMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Reminder Notifications failed due to Exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCancelNotifications(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifybtnCancelView();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyReminderfirstMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickCancel();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyCancelMsg(data.get("finalMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Cancel notifications failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestDeny(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyInitialMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDenybtnView();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testDeny is failed due to Exception " + e);
 		}
-
 	}
 
-//added
 	@Test
-	public void testNotificationsReminder() {
+	@Parameters({ "strParams" })
+	public void testNotificationsDeny(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			// customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickReminder();
-			// customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent()
+					.verifyInitialMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testDeny is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	// @Parameters({ "strParams" })
+	public void testClearAllNotifications() {
+		try {
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyClearallBtnView();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickClearAll();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("test Clear all Notifications failed due to Exception " + e);
 		}
-
 	}
 
 	// added
@@ -397,19 +545,6 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
 			// customerProfilePage.userDetailsComponent().notificationsComponent().clickReminder();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test
-	public void testNotificationsClearAll() {
-		try {
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickClearAll();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testRemove is failed due to Exception " + e);
@@ -551,7 +686,7 @@ public class CustomerProfileTest {
 			Thread.sleep(1000);
 			customerMenuComponent.clickChangePassword();
 			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
-			//customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
+			// customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));

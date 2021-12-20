@@ -16,6 +16,7 @@ import coyni.customer.components.ForgotEmailComponent;
 import coyni.customer.components.ForgotPasswordComponent;
 import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
+import coyni.customer.components.UserNameDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -157,5 +158,8 @@ public class LoginPage extends BrowserFunctions {
 	}
 	public ForgotPasswordComponent forgotPasswordComponent() {
 		return new ForgotPasswordComponent();
+	}
+	public UserNameDropDownComponent userNameDropDownComponent() {
+		return new UserNameDropDownComponent();
 	}
 }

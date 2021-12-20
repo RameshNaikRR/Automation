@@ -755,7 +755,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("messageToRecipient"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();

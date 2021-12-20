@@ -16,22 +16,22 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By btnRemove = By.cssSelector("");
 	private By btnUploadNewImage = By.cssSelector("");
 	private By btnSave = By.cssSelector("");
-	private By lblUserName = By.cssSelector("");
-	private By lblAccountStatus = By.cssSelector("");
+	private By lblUserName = By.xpath("//span[@class='text-2xl font-bold text-cgy8']");
+	private By lblAccountStatus = By.xpath("//div[@class='flex flex-row text-md text-cgy4']");
 	private By lblEmail = By.cssSelector(".UserDetails_email_address__3EjH8");
 	private By lblAddress = By.cssSelector("");
-	private By lnkEditAccountEmail = By.cssSelector("");
-	private By lnkEditAccountPhNum = By.cssSelector("");
-	private By lnkEditAccountAddress = By.cssSelector("");
+	private By lnkEditAccountEmail = By.xpath("//div[text()='Edit Account Email']");
+	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
+	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
 	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
-	private By iconEditPhNum = By.cssSelector("");
-	private By iconEditAddress = By.cssSelector("");
-	private By userImg = By.cssSelector(" ");
-	private By accountId = By.cssSelector(" ");
-	private By lblPhoneNum = By.cssSelector(" ");
+	private By iconEditPhNum = By.xpath("//div[@id='t8d39f6c8-bba6-4463-a16b-daa4a2d0975d']");
+	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
+	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
+	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
+	private By lblPhoneNum = By.xpath("//h3[@class='text-cgy4 tracking-wide Heading_heading3__3l6XX font-semibold leading-3 tracking-tightest UserDetails_phoneNumber__borc2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
-	private By lblAccountAddress = By.cssSelector(" ");
+	private By lblAccountAddress = By.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
 
 	public void verifyUserDetailsView() {
 		new CommonFunctions().elementView(lblHeading, "User Details Screen ");
@@ -47,27 +47,27 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(editUserImgToolTip, "Edit User Img", expToolTip);
 		
 	}
-	public void verifyViewUserName() {
+	public void verifyUserNameView() {
 		new CommonFunctions().elementView(lblUserName, "UserName");
 	}
 
-	public void verifyviewAccountId() {
+	public void verifyAccountIdView() {
 		new CommonFunctions().elementView(accountId, "accountId");
 	}
 
-	public void verifyViewAccountStatus() {
+	public void verifyAccountStatusView() {
 		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
 	}
 
-	public void verifyViewPhoneNum() {
+	public void verifyPhoneNumView() {
 		new CommonFunctions().elementView(lblPhoneNum, "PhoneNum");
 	}
 
-	public void verifyViewEmailAddress() {
+	public void verifyEmailAddressView() {
 		new CommonFunctions().elementView(lblEmailAddress, "EmailAddress");
 	}
 
-	public void verifyViewAccountAddress() {
+	public void verifyAccountAddressView() {
 		new CommonFunctions().elementView(lblAccountAddress, "AccountAddress");
 	}
 
@@ -159,4 +159,5 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}
+	
 }

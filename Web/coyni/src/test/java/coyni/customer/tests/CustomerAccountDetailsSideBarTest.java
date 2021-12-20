@@ -7,30 +7,80 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.pages.CustomerProfilePage;
+import coyni.customer.pages.NavigationMenuPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class CustomerAccountDetailsSideBar  {
+public class CustomerAccountDetailsSideBarTest  {
 	CustomerProfilePage customerProfilePage;
+	NavigationMenuPage navigationMenuPage;
 	@BeforeTest
 	public void init() {
 		customerProfilePage   =  new CustomerProfilePage();
+		navigationMenuPage = new NavigationMenuPage();
 
 	}
+//	@Test
+//	@Parameters({"strParams"})
+//
+//	public void testViewAccountDetailsSideBar(String strParams) {
+//		try {
+//			Map<String, String>  data = Runner.getKeywordParameters(strParams);
+//			customerProfilePage.verifyViewImage();
+//			customerProfilePage.verifyViewAccountId();
+//			customerProfilePage.verifyViewAccountUser();
+//		}catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(" test Account Details Side Bar is failed due to Exception " +e);
+//		}
+//
+//	}
+	
+	
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 
 	public void testViewAccountDetailsSideBar(String strParams) {
 		try {
-			Map<String, String>  data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.verifyViewImage();
-			customerProfilePage.verifyViewAccountId();
-			customerProfilePage.verifyViewAccountUser();
-		}catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" test Account Details Side Bar is failed due to Exception " +e);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().clickUserDetails();
+			//customerProfilePage.verifyImageView();
+			customerProfilePage.verifyAccountIdView();
+			customerProfilePage.verifyUserNameView();
+			customerProfilePage.customerMenuComponent().verifyUserDetailsView();
+			customerProfilePage.customerMenuComponent().verifyUserDetails(data.get("userDetailsHeading"));
+			// customerProfilePage.userDetailsComponent().verifyUserImgView();
+			customerProfilePage.userDetailsComponent().verifyUserNameView();
+			customerProfilePage.userDetailsComponent().verifyAccountAddressView();
+			customerProfilePage.userDetailsComponent().verifyAccountIdView();
+			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
+			customerProfilePage.userDetailsComponent().verifyEmailAddressView();
+			customerProfilePage.userDetailsComponent().verifyPhoneNumView();
+			customerProfilePage.customerMenuComponent().verifyPaymentMethodsView();
+			customerProfilePage.customerMenuComponent().clickPaymentMethods();
+			customerProfilePage.customerMenuComponent().verifyPaymentMtehods(data.get("paymentMethodHeading"));
+			customerProfilePage.customerMenuComponent().verifyPreferencesView();
+			customerProfilePage.customerMenuComponent().clickPreferences();
+
+			customerProfilePage.customerMenuComponent().verifyPreferences(data.get("preferencesHeading"));
+			customerProfilePage.customerMenuComponent().verifyAccountlimitsView();
+			customerProfilePage.customerMenuComponent().clickAccountLimits();
+			customerProfilePage.customerMenuComponent().verifyAccountLimits(data.get("accountLimitsHeading"));
+			Thread.sleep(1000);
+			customerProfilePage.customerMenuComponent().verifyAgreementsView();
+			customerProfilePage.customerMenuComponent().clickAgreements();
+			customerProfilePage.customerMenuComponent().verifyAgreements(data.get("agreementsHeading"));
+			customerProfilePage.customerMenuComponent().verifyChangePasswordView();
+			customerProfilePage.customerMenuComponent().clickChangePassword();
+			customerProfilePage.customerMenuComponent().verifyChangePassword(data.get("changePasswordHeading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Account Details Side Bar is failed due to Exception " + e);
 		}
 
 	}
+
 	@Test
 	@Parameters({"strParams"})
 
