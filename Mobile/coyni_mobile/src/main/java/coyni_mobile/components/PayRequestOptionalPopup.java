@@ -5,17 +5,20 @@ import org.openqa.selenium.By;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class PayRequestOptionalComponent extends MobileFunctions {
+public class PayRequestOptionalPopup extends MobileFunctions {
 	private By btnCancel = MobileBy.xpath(" ");
 	private By btnDone = MobileBy.xpath(" ");
-	
+	private By txtMessage = MobileBy.xpath("");
+
 	public void clickCancel() {
-		click(btnCancel,"Cancel");
+		click(btnCancel, "Cancel");
 	}
+
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
-	
-	
 
+	public void fillMessage(String message) {
+		enterText(txtMessage, message, "Message");
+	}
 }

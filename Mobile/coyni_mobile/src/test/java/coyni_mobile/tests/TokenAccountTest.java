@@ -331,5 +331,19 @@ public class TokenAccountTest {
 		}
 
 	}
-
+@Test
+@Parameters({"strParams"})
+public void testPayAndRequest(String strParams) {
+	try {
+     Map<String, String> data = Runner.getKeywordParameters(strParams);
+     tokenAccountPage.btnHome();
+     tokenAccountPage.tokenHomeComponent().clickPayRequest();
+     tokenAccountPage.tokenHomeComponent().payRequestPage().fillSearchBx(data.get("user"));
+     tokenAccountPage.tokenHomeComponent().payRequestPage().clickSearch();
+     
+	}catch(Exception e) {
+		
+	}
+	
+}
 }
