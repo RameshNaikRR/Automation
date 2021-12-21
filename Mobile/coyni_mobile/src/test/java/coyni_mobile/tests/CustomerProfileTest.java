@@ -553,4 +553,18 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	public void testLogOut() {
+		try {
+			tokenAccountPage.clickProfile();
+			customerProfilePage.logOut();
+			customerProfilePage.verifyLogOut();
+			customerProfilePage.clickLogOut();
+			customerProfilePage.signUpPage().verifyGetStarted();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLogOut failed due to exception " + e);
+		}
+	}
+
 }

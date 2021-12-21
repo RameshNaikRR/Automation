@@ -184,6 +184,10 @@ public class CustomerProfilePage extends MobileFunctions {
 		click(lnkChangePassword, "Click Change Password");
 	}
 
+	public void logOut() {
+		scrollDownToElement(btnLogOut, "Log Out");
+	}
+
 	public void clickLogOut() {
 		click(btnLogOut, "Click LogOut");
 	}
@@ -249,5 +253,10 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public ExternalBankAccountPage externalBankAccountPage() {
 		return new ExternalBankAccountPage();
+	}
+
+	public SignUpPage signUpPage() {
+		return new SignUpPage();
+
 	}
 }
