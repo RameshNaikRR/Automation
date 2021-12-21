@@ -13,7 +13,7 @@ public class CustomerMenuComponent extends BrowserFunctions {
 
 	private By lnkRequests = By.cssSelector("");
 
-	private By lnkUserDetails = By.cssSelector("");
+	private By lnkUserDetails = By.xpath("(//span[text()='User Details'])[1]");
 
 	private By lnkPaymentMethods = By.cssSelector("");
 
