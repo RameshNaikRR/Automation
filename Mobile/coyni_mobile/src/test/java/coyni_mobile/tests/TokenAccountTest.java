@@ -234,7 +234,7 @@ public class TokenAccountTest {
 
 	@Test // added
 	@Parameters({ "strParams" })
-	public void testView(String strParams) {
+	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
@@ -293,34 +293,43 @@ public class TokenAccountTest {
 
 	}
 
-	@Test // added
+	@Test
 	@Parameters({ "strParams" })
-	public void testDateRange(String strParams) {
-
+	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.ViewMore();
+			tokenAccountPage.clickViewMore();
+			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
+			tokenAccountPage.transactionPage().verifySearchOption();
+			tokenAccountPage.transactionPage().verifyFiltersIcon();
+			tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
+			tokenAccountPage.transactionPage().verifyCloseView();
 
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testDateRange failed due to exception " + e);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList  failed due to exception " + e);
 		}
 
 	}
 
-	@Test // added
+	@Test
 	@Parameters({ "strParams" })
-	public void testCrossIcon(String strParams) {
-
+	public void testTransactionListStatus(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			transactionPage.FiltersComponent().navigationComponent().clickClose();
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.ViewMore();
+			tokenAccountPage.clickViewMore();
+			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
+			tokenAccountPage.transactionPage().verifyMessage();
+			tokenAccountPage.transactionPage().verifyAmount();
+			tokenAccountPage.transactionPage().verifyStatus();
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionListStatus  failed due to exception " + e);
 		}
 
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCrossIcon failed due to exception " + e);
-		}
 	}
 
 }

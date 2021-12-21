@@ -11,8 +11,7 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
-	
-	
+
 	private By imgQRCode = MobileBy.xpath("");
 	private By lblMyQRCodeHeading = MobileBy.xpath("");
 	private By btnShare = MobileBy.xpath("");
@@ -26,9 +25,8 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkResetPinCode = MobileBy.xpath("");
 	private By btnFaceIDSetting = MobileBy.xpath("");
 	private By lnkChangePassword = MobileBy.xpath("");
-	private By btnLogOut = MobileBy.xpath("");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
 
-	
 	private By imgUser = MobileBy.xpath("");
 	private By lblUserName = MobileBy.xpath("");
 	private By lblAccountID = MobileBy.xpath("");
@@ -137,12 +135,11 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void minimizePopupBySwipeDown() {
-		swipeOnElement(popUp, "popUp",SwipeDirection.DOWN);
+		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
 		minimizePopup();
 
 	}
 
-	
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);
 	}
@@ -189,6 +186,10 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void clickLogOut() {
 		click(btnLogOut, "Click LogOut");
+	}
+
+	public void verifyLogOut() {
+		new CommonFunctions().elementView(btnLogOut, "Log Out");
 	}
 
 	public void clickQRImage() {

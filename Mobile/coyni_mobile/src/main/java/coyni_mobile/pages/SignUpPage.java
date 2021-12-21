@@ -11,6 +11,7 @@ import io.appium.java_client.MobileBy;
 
 public class SignUpPage extends MobileFunctions {
 
+	private By btnGetStarted = MobileBy.xpath("//*[contains(@resource-id,'getStartedLL')]");
 	private By lnkPersonalAccount = MobileBy
 			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
 	private By lnKBusinessAccount = MobileBy.xpath("");
@@ -31,6 +32,14 @@ public class SignUpPage extends MobileFunctions {
 	private By iconBackArrow = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
+
+	public void clickGetStarted() {
+		click(btnGetStarted, "Get Started");
+	}
+
+	public void verifyGetStarted() {
+		new CommonFunctions().elementView(btnGetStarted, "Get Started");
+	}
 
 	public void clickPersonalAccount() {
 		click(lnkPersonalAccount, "Personal Account");
@@ -62,20 +71,20 @@ public class SignUpPage extends MobileFunctions {
 	public void fillPhoneNumber(String phoneNumber) {
 		// scrollDownToElement(txtPassword, "Password");
 		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-		 click(btnDone, "Done");
+		click(btnDone, "Done");
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		 click(btnDone, "Done");
+		click(btnDone, "Done");
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
 		// scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		 click(btnDone, "Done");
+		click(btnDone, "Done");
 	}
 
 	public void clickNext() {

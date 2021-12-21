@@ -435,7 +435,7 @@ public class CustomerProfileTest {
 
 	}
 
-	//Ios M
+	// Ios M
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddExternalBankAccountWithNavigateOption(String strParams) {
@@ -503,4 +503,54 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Verify DashBoard Failed due to exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			tokenAccountPage.accountLimitsComponent().AccountLimits();
+			tokenAccountPage.accountLimitsComponent().clickAccountLimits();
+			tokenAccountPage.accountLimitsComponent().verifyLabelAccountLimits(data.get("expHeading"));
+			tokenAccountPage.accountLimitsComponent().verifyPayRequest(data.get("expPayRequestHeading"));
+			tokenAccountPage.accountLimitsComponent().getPayRequest();
+			tokenAccountPage.accountLimitsComponent().verifyBuyTokensHeading(data.get("expBuyTokenHeading"));
+			tokenAccountPage.accountLimitsComponent().getBankAccountAmount();
+			tokenAccountPage.accountLimitsComponent().verifyBuyTokenAmountLimit();
+			tokenAccountPage.accountLimitsComponent().VerifyWithdrawHeading(data.get("expWithdrawHeading"));
+			tokenAccountPage.accountLimitsComponent().getWithdrawBankAccountAmount();
+			tokenAccountPage.accountLimitsComponent().verifyWithdrawBankAccountAmountLimit();
+			tokenAccountPage.accountLimitsComponent().getInstantPayAccount();
+			tokenAccountPage.accountLimitsComponent().verifyWithdrawInstantPayAmountLimit();
+			tokenAccountPage.accountLimitsComponent().getGiftCardAmount();
+			tokenAccountPage.accountLimitsComponent().verifyWithdrawGiftCardAmountLimit();
+			tokenAccountPage.accountLimitsComponent().navigationComponent().clickBack();
+			tokenAccountPage.accountLimitsComponent().VerifyAccountHolderName();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAccountLimits Failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	public void testAgreements() {
+		try {
+			tokenAccountPage.clickProfile();
+			tokenAccountPage.agreementComponent().Agreements();
+			tokenAccountPage.agreementComponent().clickOnAgreements();
+			// tokenAccountPage.agreementComponent().clickPrivacyPolicy();
+			// tokenAccountPage.agreementComponent().clickTermsOfService();
+			tokenAccountPage.agreementComponent().verifyPrivacyPolicy();
+			tokenAccountPage.agreementComponent().verifyTermsOfService();
+			tokenAccountPage.agreementComponent().clickBack();
+			tokenAccountPage.agreementComponent().VerifyAccountHolderName();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
+
+		}
+	}
+
 }
