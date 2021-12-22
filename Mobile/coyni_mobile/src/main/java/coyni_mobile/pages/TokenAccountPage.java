@@ -6,7 +6,7 @@ import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.BuyTokenMenuComponent;
 import coyni_mobile.components.NotificationComponent;
-import coyni_mobile.components.TokenHomeComponent;
+import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -97,8 +97,8 @@ public class TokenAccountPage extends MobileFunctions {
 		click(btnProfile, "Button Profile ");
 	}
 
-	public TokenHomeComponent tokenHomeComponent() {
-		return new TokenHomeComponent();
+	public TokenHomePopUp tokenHomePopUp() {
+		return new TokenHomePopUp();
 	}
 
 	public ScanPage scanPage() {

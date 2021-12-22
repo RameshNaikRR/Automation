@@ -7,14 +7,14 @@ import io.appium.java_client.MobileBy;
 
 public class PayRequestPage extends MobileFunctions {
 	private By iconSearch = MobileBy.xpath(" ");
-	private By txtSearchBx = MobileBy.xpath("(//*[@name='search'])[1]/following-sibling::*[1]");
+	private By txtSearchBx = MobileBy.xpath("(//*[@name='search'])[2]/following-sibling::*[1]");
 	private By lblUser =MobileBy.xpath("(//*[@name='Recent Contacts'])[1]/following-sibling::*[1]");
 	
 	public void clickSearch() {
 		click(iconSearch,"Search");
 	}
 	public void fillSearchBx(String userName) {
-		enterText(txtSearchBx, "userName", userName);
+		enterText(txtSearchBx, userName, "userName");
 	}
 	public void selectUser() {
 		click(lblUser,"user");

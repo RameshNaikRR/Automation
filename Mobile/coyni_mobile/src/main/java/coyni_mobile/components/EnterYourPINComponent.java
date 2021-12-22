@@ -70,4 +70,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+	public SecurePayPopup securePayPopup() {
+		return new SecurePayPopup();
+	}
 }

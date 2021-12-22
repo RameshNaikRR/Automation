@@ -6,9 +6,9 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class PayRequestOptionalPopup extends MobileFunctions {
-	private By btnCancel = MobileBy.xpath(" ");
-	private By btnDone = MobileBy.xpath(" ");
-	private By txtMessage = MobileBy.xpath("");
+	private By btnCancel = MobileBy.xpath("(//*[@name='Cancel'])[1]");
+	private By btnDone = MobileBy.xpath("(//*[@name='Done'])[1]");
+	private By txtMessage = MobileBy.xpath("(//*[@name='Cancel'])[1]/../preceding-sibling::*[1]");
 
 	public void clickCancel() {
 		click(btnCancel, "Cancel");

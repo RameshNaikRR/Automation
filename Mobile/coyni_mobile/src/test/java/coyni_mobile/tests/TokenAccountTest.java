@@ -2,6 +2,7 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -29,6 +31,10 @@ public class TokenAccountTest {
 		filtersComponent = new FiltersComponent();
 		notificationComponent = new NotificationComponent();
 
+	}
+	@AfterTest
+	public void restApp() {
+		DriverFactory.getDriver().resetApp();
 	}
 
 	// private By viewDot= MobileBy.xpath("");
@@ -333,16 +339,51 @@ public class TokenAccountTest {
 	}
 @Test
 @Parameters({"strParams"})
-public void testPayAndRequest(String strParams) {
+public void testPay(String strParams) {
 	try {
      Map<String, String> data = Runner.getKeywordParameters(strParams);
      tokenAccountPage.btnHome();
-     tokenAccountPage.tokenHomeComponent().clickPayRequest();
-     tokenAccountPage.tokenHomeComponent().payRequestPage().fillSearchBx(data.get("user"));
-     tokenAccountPage.tokenHomeComponent().payRequestPage().clickSearch();
+     tokenAccountPage.tokenHomePopUp().clickPayRequest();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().verifyName(data.get("user"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().fillAmount(data.get("amount"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestOptionalPopup().fillMessage(data.get("message"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestOptionalPopup().clickDone();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().swipeConfirm();
+     //tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().enterYourPINComponent().verifyHeading("enterPinHeading");
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().enterYourPINComponent().fillPin(data.get("pin"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().enterYourPINComponent().securePayPopup().clickNotNow();
+     
      
 	}catch(Exception e) {
-		
+		ExtentTestManager.setFailMessageInReport("testPay  failed due to exception " + e);
+	}
+	
+}
+@Test
+@Parameters({"strParams"})
+public void testRequest(String strParams) {
+	try {
+     Map<String, String> data = Runner.getKeywordParameters(strParams);
+     tokenAccountPage.btnHome();
+     tokenAccountPage.tokenHomePopUp().clickPayRequest();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().verifyName(data.get("user"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().fillAmount(data.get("amount"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestOptionalPopup().fillMessage(data.get("message"));
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestOptionalPopup().clickDone();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickRequest();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().swipeConfirm();
+     tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().securePayPopup().clickNotNow();
+     
+     
+	}catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("testRequest  failed due to exception " + e);
 	}
 	
 }
