@@ -39,6 +39,7 @@ new CommonFunctions().verifyLabelText(lblverifyEmailheading, "Forgot Password ",
 // new CommonFunctions().verifyLabelText(verifyEmailHeading, "Verify Email Otp Screen ", expHeading);
 //}
 public void verifyResendlbl(String resendlbl) {
+waitForCondition(e->e.findElement(lblResend).getText().contains("new"), "Resend label");
 new CommonFunctions().verifyLabelText(lnkResend, "Resend label", resendlbl);
 
 }

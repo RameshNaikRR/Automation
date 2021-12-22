@@ -3,10 +3,12 @@ package coyni_mobile.tests;
 import java.util.Map;
 
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile.components.VerifyEmailComponent;
 import coyni_mobile.pages.HomePage;
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.LoginPage;
@@ -21,12 +23,20 @@ public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
 	LandingPage landingPage;
+	VerifyEmailComponent verifyEmailComponent;
 
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
 		landingPage = new LandingPage();
+		verifyEmailComponent = new VerifyEmailComponent();
+		DriverFactory.getDriver().hideKeyboard();
+	}
+
+	@AfterTest
+	public void hideKeyBoard() {
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	@Test
@@ -166,10 +176,9 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.verifyResendlbl(loginData.get("resendMsgOld"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
-			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.verifyResendlbl(loginData.get("resendMsgNew"));
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.verifyNewResendlbl(loginData.get("resendMsgOld"));
 		} catch (Exception e) {
@@ -271,80 +280,67 @@ public class LoginTest {
 		}
 	}
 
-	// added P
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmail(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
 			landingPage.clickLogin();
-			Thread.sleep(5000);
 			loginPage.clickForgotEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			// loginPage.retrieveEmailPage().verifyPhoneNumber(loginData.get("lblPhoneNumber"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			Thread.sleep(2000);
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
-			// loginPage.retrieveEmailPage().fillInputBoxes(loginData.get("code"));
-			loginPage.retrieveEmailPage().clickResend();
-			loginPage.retrieveEmailPage().clickClose();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
+			loginPage.retrieveEmailPage().clickCoyniAccount();
+			loginPage.VerifyLoginPageView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
 		}
-
 	}
 
-	// added P
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithEmptyCredentials(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
-			landingPage.clickLogin();
-			Thread.sleep(5000);
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-						loginData.get("elementName"));
-			}
-			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			loginPage.retrieveEmailPage().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithEmptyCredentials Failed due to exception " + e);
-		}
-
-	}
-
-	// added P
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
 			landingPage.clickLogin();
-			Thread.sleep(5000);
 			loginPage.clickForgotEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			Thread.sleep(2000);
+			loginPage.retrieveEmailPage().clickNext();
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+						loginData.get("elementName"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithEmptyCredentials Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailView(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().verifyTryAgain(loginData.get("tryAgain"));
 			loginPage.retrieveEmailPage().clickTryAgain();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().clickCloseIcon();
+			loginPage.VerifyLoginPageView();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -353,114 +349,47 @@ public class LoginTest {
 
 	}
 
-	// added P
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithInvalidFirstAndLastName(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
-			landingPage.clickLogin();
-			Thread.sleep(5000);
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			Thread.sleep(2000);
-			loginPage.retrieveEmailPage().clickCloseIcon();
-			loginPage.retrieveEmailPage().ViewCoyni();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testRetrieveEmailWithInvalidFirstAndLastName Failed due to exception " + e);
-		}
-
-	}
-
-	// added P
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithPhoneNumberMorethanCount(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
-			landingPage.clickLogin();
-			Thread.sleep(5000);
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			String[] PhoneNumber = loginData.get("phoneNumber").split(",");
-			loginPage.retrieveEmailPage().validatePhoneNumberField(PhoneNumber[0], PhoneNumber[1], PhoneNumber[2],
-					PhoneNumber[3]);
-
-//		   	if (!loginData.get("errMessage").isEmpty()) {
-//					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-//							loginData.get("elementName"));
-//				}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testRetrieveEmailWithPhoneNumberMorethanCount Failed due to exception " + e);
-		}
-
-	}
-
-	// added P
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithFirstLastNameMorethanCount(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
-			landingPage.clickLogin();
-			Thread.sleep(5000);
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			Thread.sleep(3000);
-			String[] firstName = loginData.get("firstName").split(",");
-			loginPage.retrieveEmailPage().validateFirstAndLastNameField(firstName[0], firstName[1], firstName[2]);
-			String[] lastName = loginData.get("lastName").split(",");
-			loginPage.retrieveEmailPage().validateFirstAndLastNameField(lastName[0], lastName[1], lastName[2]);
-			loginPage.retrieveEmailPage().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testRetrieveEmailWithFirstLastNameMorethanCount Failed due to exception " + e);
-		}
-
-	}
-
-	// added P
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithInvalidOTPCredentials(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
 			landingPage.clickLogin();
-			Thread.sleep(5000);
 			loginPage.clickForgotEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			loginPage.retrieveEmailPage().fillInputBoxes(loginData.get("code"));
+			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
 			for (int i = 0; i <= 2; i++) {
 				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
 			}
-
 			loginPage.retrieveEmailPage().clickOk();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testRetrieveEmailWithInvalidFirstAndLastName Failed due to exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
 		}
+	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailFieldValidations(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
+		}
 	}
 
 	@Test

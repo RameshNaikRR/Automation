@@ -7,6 +7,7 @@ import coyni_mobile.components.FaceIDDisabledComponent;
 import coyni_mobile.components.FaceIDnotAvailableComponent;
 import coyni_mobile.components.ForgotPinComponent;
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.components.VerifyEmailComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -19,7 +20,7 @@ public class LoginPage extends MobileFunctions {
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
 	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
-	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]| (//*[contains(@name,'Forgot Password')]");
+	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]| //*[contains(@name,'Forgot Password')]");
 	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
 	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]|(//*[@name='Log in'])[1]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
@@ -153,6 +154,9 @@ public class LoginPage extends MobileFunctions {
 	}
     public VerifyNewEmailPage verifyNewEmailPage() {
     	return new VerifyNewEmailPage();
+    }
+    public VerifyEmailComponent verifyEmailComponent() {
+    	return new VerifyEmailComponent();
     }
     public void validateEmailField(String singleChar,String maxChar,String moreThanMax) {
     	new CommonFunctions().validateField(txtEmail, "Email", singleChar);

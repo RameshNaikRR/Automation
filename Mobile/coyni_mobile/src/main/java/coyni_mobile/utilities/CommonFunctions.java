@@ -92,7 +92,9 @@ public class CommonFunctions {
 			mobileFunctions.enterText(ele, enterText, eleName);
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "");
 			System.out.println("length " + actualtext.length());
-			if (enterText.equalsIgnoreCase(actualtext)) {
+			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
+			if (enterText.equalsIgnoreCase(actualtext)
+					&& mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0) {
 
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
@@ -178,6 +180,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
 		}
 	}
+
 	public String getConfigProp() {
 		return FileReaderManager.getInstance().getConfigReader().get("platform");
 	}

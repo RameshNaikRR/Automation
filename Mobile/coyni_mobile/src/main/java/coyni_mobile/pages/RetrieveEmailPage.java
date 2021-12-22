@@ -26,12 +26,22 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
+	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']");
+	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]");
 	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(retrieveheading, "Retrieve Email Heading ", expHeading);
 
+	}
+
+	public void verifyLabelAccountHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblAccount, "Account Heading", expHeading);
+	}
+
+	public void clickCoyniAccount() {
+		click(CoyniAccount, "Coyni Account");
 	}
 
 	public void clickOk() {
@@ -58,6 +68,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
+		scrollDownToElement(btnNext, "Next");
 		if (getElement(btnNext, "Next").isEnabled()) {
 			click(btnNext, "Next ");
 		} else {
@@ -102,7 +113,6 @@ public class RetrieveEmailPage extends MobileFunctions {
 		if (elements == 6) {
 			for (int i = 0; i < elements; i++) {
 				elementList.get(i).sendKeys(code.charAt(i) + " ");
-				;
 			}
 			ExtentTestManager.setPassMessageInReport("Verification Text Entered");
 		}
@@ -115,29 +125,13 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void validateFirstAndLastNameField(String singleChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateField(txtFirstName, "FirstName", singleChar);
-		new CommonFunctions().clearText(txtFirstName, "FirstName");
-		new CommonFunctions().validateField(txtFirstName, "FirstName", maxChar);
-		new CommonFunctions().clearText(txtFirstName, "FirstName");
-		new CommonFunctions().validateFieldMaxichar(txtFirstName, "FirstName", moreThanMax);
-		new CommonFunctions().clearText(txtFirstName, "FirstName");
-		new CommonFunctions().validateField(txtLastName, "LastName", singleChar);
-		new CommonFunctions().clearText(txtLastName, "LastName");
-		new CommonFunctions().validateField(txtLastName, "LastName", maxChar);
-		new CommonFunctions().clearText(txtLastName, "LastName");
-		new CommonFunctions().validateFieldMaxichar(txtLastName, "LastName", moreThanMax);
+		
 
 	}
 
 	public void validatePhoneNumberField(String minchar, String moreThanMax, String alphabets,
 			String specialCharacters) {
-		new CommonFunctions().validateField(txtPhoneNumber, "PhoneNumber", minchar);
-		new CommonFunctions().clearText(txtPhoneNumber, "PhoneNumber");
-		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "PhoneNumber", moreThanMax);
-		new CommonFunctions().clearText(txtPhoneNumber, "PhoneNumber");
-		new CommonFunctions().validateFieldWithalphabet(txtPhoneNumber, "LastName", alphabets);
-		new CommonFunctions().clearText(txtLastName, "LastName");
-		new CommonFunctions().validateFieldWithSpecialchar(txtLastName, "LastName", specialCharacters);
+		
 
 	}
 
