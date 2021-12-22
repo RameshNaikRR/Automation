@@ -59,9 +59,6 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
-			if (new CommonFunctions().getConfigProp().equalsIgnoreCase("android")) {
-				System.out.println("pass");
-			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -128,9 +125,8 @@ public class LoginTest {
 				loginPage.clickRememberMe();
 				loginPage.clickLogin();
 			}
-
 			if (!loginData.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().getConfigProp().equalsIgnoreCase("ios")) {
+				if (new CommonFunctions().isPlatformiOS()) {
 					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
 							loginData.get("elementName"));
 				} else {

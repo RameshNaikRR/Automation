@@ -1,11 +1,16 @@
 package coyni_mobile.utilities;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.touch.TouchActions;
 
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class CommonFunctions {
 
@@ -181,7 +186,27 @@ public class CommonFunctions {
 		}
 	}
 
-	public String getConfigProp() {
-		return FileReaderManager.getInstance().getConfigReader().get("platform");
+	public boolean isPlatformAndroid() {
+		try {
+			if (FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("android")) {
+				return true;
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("isPlatformAndroid is failed " + e);
+		}
+		return false;
 	}
+	
+	public boolean isPlatformiOS() {
+		try {
+			if (FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios")) {
+				return true;
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("isPlatformAndroid is failed " + e);
+		}
+		return false;
+	}
+	
+
 }

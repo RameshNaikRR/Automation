@@ -33,6 +33,12 @@ public class SignUpPage extends MobileFunctions {
 	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
 
+	public void clickDone() {
+		if (new CommonFunctions().isPlatformiOS()) {
+			click(btnDone, "Done");
+		}
+	}
+
 	public void clickGetStarted() {
 		click(btnGetStarted, "Get Started");
 	}
@@ -69,26 +75,30 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
-		 scrollDownToElement(txtPassword, "Password");
+		scrollDownToElement(txtPassword, "Password");
+		click(txtPhoneNumber, "Phone Number");
 		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-		//click(btnDone, "Done");
+		clickDone();
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		//click(btnDone, "Done");
+		clickDone();
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
-		//scrollDownToElement(txtConfirmPassword, "Confirm Password");
+		scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		//click(btnDone, "Done");
+		if (new CommonFunctions().isPlatformAndroid()) {
+			pressBack();
+		}
+		clickDone();
 	}
 
 	public void clickNext() {
-	    scrollDownToElement(btnNext, "Next");
+		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
 

@@ -1,8 +1,8 @@
 package coyni_mobile.tests;
 
+import java.awt.RenderingHints.Key;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -96,11 +96,14 @@ public class SignUpTest {
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
-	//		signUpPage.verifyPhoneHeading(data.get("phoneHeading"));
-			if (!data.get("errorMessage").isEmpty()) {
-				// Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.SECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("elementName"));
-
+			if (!data.get("errMessage").isEmpty()) {
+				if (new CommonFunctions().isPlatformiOS()) {
+					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"),
+							data.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),
+							data.get("elementName"));
+				}
 			}
 
 		} catch (Exception e) {
