@@ -69,26 +69,26 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
-		// scrollDownToElement(txtPassword, "Password");
+		 scrollDownToElement(txtPassword, "Password");
 		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-		click(btnDone, "Done");
+		//click(btnDone, "Done");
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		click(btnDone, "Done");
+		//click(btnDone, "Done");
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
-		// scrollDownToElement(txtConfirmPassword, "Confirm Password");
+		//scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		click(btnDone, "Done");
+		//click(btnDone, "Done");
 	}
 
 	public void clickNext() {
-		// scrollDownToElement(btnNext, "Next");
+	    scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
 

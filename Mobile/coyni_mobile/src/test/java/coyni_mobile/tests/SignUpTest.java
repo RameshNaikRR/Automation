@@ -96,7 +96,7 @@ public class SignUpTest {
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
-			signUpPage.verifyPhoneHeading(data.get("phoneHeading"));
+	//		signUpPage.verifyPhoneHeading(data.get("phoneHeading"));
 			if (!data.get("errorMessage").isEmpty()) {
 				// Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.SECONDS);
 				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("elementName"));
