@@ -196,7 +196,7 @@ public class CommonFunctions {
 		}
 		return false;
 	}
-	
+
 	public boolean isPlatformiOS() {
 		try {
 			if (FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios")) {
@@ -207,6 +207,15 @@ public class CommonFunctions {
 		}
 		return false;
 	}
-	
+
+	public void checkPassword(By ele, By ele1) {
+		String enterPassword = mobileFunctions.getText(ele);
+		String confirmPassword = mobileFunctions.getText(ele1);
+		if (enterPassword.equals(confirmPassword)) {
+			ExtentTestManager.setPassMessageInReport("Password is Same");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Password is not Same");
+		}
+	}
 
 }

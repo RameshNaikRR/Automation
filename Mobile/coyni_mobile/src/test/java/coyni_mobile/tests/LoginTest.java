@@ -347,6 +347,33 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testRetrieveEmailNavigationOptions(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().navigationComponent().clickBack();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
+			loginPage.retrieveEmailPage().navigationComponent().clickClose();
+			landingPage.verifyLandingPage();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmailNavigationOptions Failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithInvalidOTPCredentials(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
@@ -372,6 +399,28 @@ public class LoginTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailFieldValidations(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			// loginPage.retrieveEmailPage().validatePhoneNumberField(loginData.get("phoneNumber"));
+			loginPage.retrieveEmailPage().validateFirstField(loginData.get("firstName"));
+			// loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			// if (!loginData.get("errMessage").isEmpty()) {
+			// new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+			// loginData.get("elementName"));
+			// }
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidFieldValidations(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();

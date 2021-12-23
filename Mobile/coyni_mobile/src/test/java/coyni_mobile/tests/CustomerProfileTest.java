@@ -591,6 +591,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.customerProfilePage().changePasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage().verifyPassword();
 			tokenAccountPage.customerProfilePage().changePasswordPage().clickSave();
 			tokenAccountPage.customerProfilePage().changePasswordPage()
 					.verifySuccessFailureMessage(data.get("message"));

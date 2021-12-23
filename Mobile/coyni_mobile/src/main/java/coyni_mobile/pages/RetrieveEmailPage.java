@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -119,19 +120,22 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 	public void clickResend() {
 		click(lnkResend, "Resend ");
 
 	}
 
-	public void validateFirstAndLastNameField(String singleChar, String maxChar, String moreThanMax) {
-		
+	public void validateFirstField(String expFirstName) {
+		new CommonFunctions().validateField(txtFirstName, "firstName", expFirstName);
 
 	}
 
 	public void validatePhoneNumberField(String minchar, String moreThanMax, String alphabets,
 			String specialCharacters) {
-		
 
 	}
 

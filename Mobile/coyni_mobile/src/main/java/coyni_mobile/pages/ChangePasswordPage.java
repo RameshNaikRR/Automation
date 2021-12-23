@@ -1,6 +1,7 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
@@ -78,6 +79,10 @@ public class ChangePasswordPage extends MobileFunctions {
 			ExtentTestManager.setPassMessageInReport("save button is in disabled mode");
 		}
 
+	}
+
+	public void verifyPassword() {
+		new CommonFunctions().checkPassword(txtNewPassword, txtConfirmPassword);
 	}
 
 	public void verifySuccessFailureMessage(String expHeading) {
