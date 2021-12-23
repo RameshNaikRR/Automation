@@ -567,4 +567,60 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickProfile();
+			tokenAccountPage.customerProfilePage().clickChangePassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+			// tokenAccountPage.customerProfilePage().changePasswordPage()
+			// .verifyHeadingConfirmPassword(data.get("expConfirmPasswordHeading"));
+			// tokenAccountPage.CustomerProfilePage().changePasswordPage().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			tokenAccountPage.customerProfilePage().changePasswordPage()
+					.fillCurrentPassword(data.get("currentPassword"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickNext();
+			tokenAccountPage.customerProfilePage().changePasswordPage()
+					.verifyHeadingChangePassword(data.get("expChangePasswordHeading"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().fillNewPassword(data.get("newPassword"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage()
+					.fillConfirmPassword(data.get("confirmPassword"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickSave();
+			tokenAccountPage.customerProfilePage().changePasswordPage()
+					.verifySuccessFailureMessage(data.get("message"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().clickLogout();
+			tokenAccountPage.signUpPage().verifyGetStarted();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePassword Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickProfile();
+			tokenAccountPage.customerProfilePage().clickChangePassword();
+			tokenAccountPage.customerProfilePage().navigationComponent().clickBack();
+
+			tokenAccountPage.customerProfilePage().clickChangePassword();
+			tokenAccountPage.customerProfilePage().changePasswordPage().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+			tokenAccountPage.customerProfilePage().changePasswordPage().navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePasswordInvalid Failed due to exception " + e);
+
+		}
+	}
+
 }

@@ -19,7 +19,7 @@ public class AgreementComponent extends MobileFunctions {
 	private By backIconAgreement = MobileBy.xpath("//*[contains(@resource-id,'backAgreeIV')]");
 
 	private By lblVerifyAcitveAgreements = MobileBy.xpath(" ");
-	
+
 	private By lblVerifyPastAgreements = MobileBy.xpath(" ");
 
 	public void clickBack() {
@@ -52,6 +52,17 @@ public class AgreementComponent extends MobileFunctions {
 
 	public void VerifyAccountHolderName() {
 		new CommonFunctions().elementView(lblAccountHolderName, "Account Holder " + getText(lblAccountHolderName));
+	}
+
+	public void verifyActiveAgreementsHeading(String expHeading) {
+		// new CommonFunctions().verifyLabelText(lblVerifyAcitveAgreements, "Active
+		// Agreements Heading", expHeading);
+	}
+
+	public void verifyPastAgreementsHeading(String expHeading) {
+
+		// new CommonFunctions().verifyLabelText(lblVerifyPastAgreements, "past
+		// Agreements Heading", expHeading);
 	}
 
 }

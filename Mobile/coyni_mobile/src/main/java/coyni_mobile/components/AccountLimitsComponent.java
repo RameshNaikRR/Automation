@@ -104,17 +104,6 @@ public class AccountLimitsComponent extends MobileFunctions {
 		new CommonFunctions().elementView(withdrawGiftCardAmountLimit, "Withdraw Gift Card Amount Limit");
 	}
 
-	public void verifyActiveAgreementsHeading(String expHeading) {
-		// new CommonFunctions().verifyLabelText(lblVerifyAcitveAgreements, "Active
-		// Agreements Heading", expHeading);
-	}
-
-	public void verifyPastAgreementsHeading(String expHeading) {
-
-		// new CommonFunctions().verifyLabelText(lblVerifyPastAgreements, "past
-		// Agreements Heading", expHeading);
-	}
-
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

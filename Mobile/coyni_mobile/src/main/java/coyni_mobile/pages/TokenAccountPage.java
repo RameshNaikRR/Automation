@@ -113,6 +113,14 @@ public class TokenAccountPage extends MobileFunctions {
 		return new WithDrawToUSDPage();
 	}
 
+	public SignUpPage signUpPage() {
+		return new SignUpPage();
+	}
+
+	public CustomerProfilePage customerProfilePage() {
+		return new CustomerProfilePage();
+	}
+
 	public NotificationComponent notificationComponent() {
 		return new NotificationComponent();
 	}

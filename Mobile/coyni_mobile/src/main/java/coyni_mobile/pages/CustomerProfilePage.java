@@ -24,7 +24,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkAgreements = MobileBy.xpath("");
 	private By lnkResetPinCode = MobileBy.xpath("");
 	private By btnFaceIDSetting = MobileBy.xpath("");
-	private By lnkChangePassword = MobileBy.xpath("");
+	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
 
 	private By imgUser = MobileBy.xpath("");
@@ -49,6 +49,11 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnBuyToken = MobileBy.xpath("");
 	private By btnWithdrawToUSD = MobileBy.xpath("");
 	private By popUp = MobileBy.xpath("");
+	private By lblAccountHolderName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
+
+	public void VerifyAccountHolderName() {
+		new CommonFunctions().elementView(lblAccountHolderName, "Account Holder " + getText(lblAccountHolderName));
+	}
 
 	public void viewScan() {
 		new CommonFunctions().elementView(btnScan, "View Scan");
@@ -181,7 +186,12 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
-		click(lnkChangePassword, "Click Change Password");
+		scrollDownToElement(btnChangePassword, "Change Password");
+		click(btnChangePassword, "Click Change Password");
+	}
+
+	public void verifyChangePassword() {
+		new CommonFunctions().elementView(btnChangePassword, "Change Password");
 	}
 
 	public void logOut() {
@@ -258,5 +268,9 @@ public class CustomerProfilePage extends MobileFunctions {
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
 
+	}
+
+	public ChangePasswordPage changePasswordPage() {
+		return new ChangePasswordPage();
 	}
 }
