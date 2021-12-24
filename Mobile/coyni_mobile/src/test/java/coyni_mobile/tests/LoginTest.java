@@ -166,7 +166,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailview();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
