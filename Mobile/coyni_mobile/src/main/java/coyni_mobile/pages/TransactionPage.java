@@ -19,11 +19,11 @@ public class TransactionPage extends MobileFunctions {
 
 	private By lblMerchantAndeferenceID = MobileBy.xpath("//*[@text='Merchant’s Name/Reference ID.']");
 
-	private By message = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[1]");
+	private By message = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[3]");
 
-	private By status = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[1]");
+	private By status = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[3]");
 
-	private By amount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[1]");
+	private By amount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[3]");
 
 	public void verifyLabelTransactions(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTransactions, "Transactions", expHeading);

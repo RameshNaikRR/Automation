@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.components.FiltersComponent;
 import coyni_mobile.components.NotificationComponent;
+import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
 import ilabs.MobileFramework.Runner;
@@ -19,6 +20,7 @@ public class TokenAccountTest {
 	TransactionPage transactionPage;
 	FiltersComponent filtersComponent;
 	NotificationComponent notificationComponent;
+	CustomerProfilePage customerProfilePage;
 
 	@BeforeTest
 	public void init() {
@@ -27,7 +29,7 @@ public class TokenAccountTest {
 		transactionPage = new TransactionPage();
 		filtersComponent = new FiltersComponent();
 		notificationComponent = new NotificationComponent();
-
+        customerProfilePage = new CustomerProfilePage();
 	}
 
 	@Test
@@ -291,42 +293,29 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionList(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.btnDashBoard();
-			tokenAccountPage.ViewMore();
-			tokenAccountPage.clickViewMore();
-			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
-			tokenAccountPage.transactionPage().verifySearchOption();
-			tokenAccountPage.transactionPage().verifyFiltersIcon();
-			tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
-			tokenAccountPage.transactionPage().verifyCloseView();
+	try {
+	Map<String, String> data = Runner.getKeywordParameters(strParams);
+	tokenAccountPage.btnDashBoard();
+	tokenAccountPage.ViewMore();
+	tokenAccountPage.clickViewMore();
+	tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
+	tokenAccountPage.transactionPage().verifySearchOption();
+	tokenAccountPage.transactionPage().verifyFiltersIcon();
+	tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
+	tokenAccountPage.transactionPage().verifyMessage();
+	tokenAccountPage.transactionPage().verifyAmount();
+	tokenAccountPage.transactionPage().verifyCloseView();
+	customerProfilePage.clickLogOut();
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionList  failed due to exception " + e);
-		}
 
+
+	} catch (Exception e) {
+	ExtentTestManager.setFailMessageInReport("testTransactionList failed due to exception " + e);
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testTransactionListStatus(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.btnDashBoard();
-			tokenAccountPage.ViewMore();
-			tokenAccountPage.clickViewMore();
-			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
-			tokenAccountPage.transactionPage().verifyMessage();
-			tokenAccountPage.transactionPage().verifyAmount();
-			tokenAccountPage.transactionPage().verifyStatus();
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionListStatus  failed due to exception " + e);
-		}
 
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testPay(String strParams) {

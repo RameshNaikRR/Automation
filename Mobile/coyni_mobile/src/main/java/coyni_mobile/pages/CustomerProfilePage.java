@@ -25,7 +25,8 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("");
-	private By lnkChangePassword = MobileBy.xpath("");
+
+	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
 
 	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]");
@@ -188,7 +189,8 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
-		click(lnkChangePassword, "Click Change Password");
+		scrollDownToElement(btnChangePassword, "Scrolled to element");
+		click(btnChangePassword, "Click Change Password");
 	}
 
 	public void clickLogOut() {
@@ -263,10 +265,10 @@ public class CustomerProfilePage extends MobileFunctions {
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
 	}
+
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
-	
 
 	public ChangePasswordPage changePasswordPage() {
 		return new ChangePasswordPage();

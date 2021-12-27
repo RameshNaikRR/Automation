@@ -10,7 +10,6 @@ import io.appium.java_client.MobileBy;
 
 public class ForgotPinComponent extends MobileFunctions{
 
-	private By lnkForgotPin	= MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]|//*[contains(@name,'Before')]/following-sibling::*[1]");
 	private By txEmailFieldInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By txtChooseYourPinInputBoxes = MobileBy.xpath("");
@@ -53,9 +52,6 @@ public class ForgotPinComponent extends MobileFunctions{
 	return new VerifyEmailComponent();
 	}
 
-	public void clickForgotPin() {
-		click(lnkForgotPin,"Clicked Forgot Pin");
-	}
 	public void headingEnterYourPin(String expEnterYourPinHeading) {
 		new CommonFunctions().verifyLabelText(lblEnterYourPinHeading, "Forgot Pin Heading is", expEnterYourPinHeading);
 	}

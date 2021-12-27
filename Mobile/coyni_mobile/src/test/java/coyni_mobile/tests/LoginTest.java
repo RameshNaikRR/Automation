@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.VerifyEmailComponent;
 import coyni_mobile.pages.HomePage;
 import coyni_mobile.pages.LandingPage;
@@ -22,6 +23,7 @@ public class LoginTest {
 	HomePage homePage;
 	LandingPage landingPage;
 	VerifyEmailComponent verifyEmailComponent;
+	EnterYourPINComponent enterYourPINComponent;
 
 	@BeforeTest
 	public void init() {
@@ -29,6 +31,7 @@ public class LoginTest {
 		homePage = new HomePage();
 		landingPage = new LandingPage();
 		verifyEmailComponent = new VerifyEmailComponent();
+		enterYourPINComponent = new EnterYourPINComponent();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -475,5 +478,183 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyForgotPin(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			  enterYourPINComponent.clickForgotPin();
+				
+			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			  enterYourPINComponent.forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
+			  enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
+			  enterYourPINComponent.forgotPinComponent().crossIconView();
+			  enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
+				 
+			
+		}
+		catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyVerifyEmail(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			  enterYourPINComponent.clickForgotPin();
+				
+			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			  enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
+			  enterYourPINComponent.forgotPinComponent().clickNext();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+				  
+		}
+		
+	
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+	}
+	
+}
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyChooseYourPin(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			enterYourPINComponent.clickForgotPin();
+				
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+				  
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChooseYourPinView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().enterYourPINComponent().verifyPinView();
+				  
+				  
+				  
+		}
+		
+	
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+	}
+		
+	
+}	
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyChooseYourPinWithBack(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			enterYourPINComponent.clickForgotPin();
+				
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+				  
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+				 
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent().clickBack();
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+					
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otpagain") );
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().enterYourPINComponent().fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+					 
+		}
+		
+	
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+	}
+}
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyConfirmYourPin(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			enterYourPINComponent.clickForgotPin();
+				
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+				  
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+					 
+				 
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+		}
+		
+		
+	
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+	}
+}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testVerifyConfirmYourPinWithBack(String strParams) {
+		try{
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+			
+			  enterYourPINComponent.clickForgotPin();
+				
+			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			  enterYourPINComponent.forgotPinComponent().clickNext();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+				  
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+					 
+				 
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent().clickBack();
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
+			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+				  }
+		
+		
+	
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+	}
+}
 
 }

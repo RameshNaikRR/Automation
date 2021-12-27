@@ -13,7 +13,6 @@ public class ChoosePinComponent extends MobileFunctions {
 	private By heading1 = MobileBy.xpath("//*[@name='Choose your PIN'] | (//*[contains(@resource-id,'tvHead')])");
 	
 	private By heading2 = MobileBy.xpath("//*[@name='Confirm your PIN'] | (//*[contains(@resource-id,'tvHead')])");
-	private By lblChooseYourPin = MobileBy.xpath("//*[contains(@resource-id,'bottomKeyPad')]");
 	
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
@@ -22,14 +21,6 @@ public class ChoosePinComponent extends MobileFunctions {
 		return new NavigationComponent();
 	}
 	
-	public void verifyKeyPad() {
-		if(verifyElementPresence(lblChooseYourPin, "")) {
-			ExtentTestManager.setPassMessageInReport("Key Pad Automatically Opened");
-		}
-		else {
-			ExtentTestManager.setFailMessageInReport("Key Pad was not opend");
-		}
-	}
 	
 	public void verifyChoosePinHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading1, "heading", expHeading);
