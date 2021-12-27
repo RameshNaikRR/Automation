@@ -717,5 +717,25 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordWithInvalid Failed due to exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testResetPinCode(String strParams) {
+		try {
+			  Map<String, String> data = Runner.getKeywordParameters(strParams);            
+			tokenAccountPage.clickProfile();
+			customerProfilePage.verifyResetPinCodeView();
+		    customerProfilePage.clickResetPinCode();
+		    customerProfilePage.enterYourPINComponent().verifyEnterYourPinView();
+		    customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+		    Thread.sleep(1000);
+		    customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChoosePinHeading(data.get("heading1"));
+		    customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+		    customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmPinHeading(data.get("heading2"));
+		    customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+		    
+		}catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Reset Pin Code failed due to Exception " + e);
+		}
+	}
 
 }

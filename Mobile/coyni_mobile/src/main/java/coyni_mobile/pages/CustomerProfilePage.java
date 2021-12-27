@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
@@ -22,12 +23,12 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']");
 	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
 	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
-	private By lnkResetPinCode = MobileBy.xpath("");
+	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("");
 	private By lnkChangePassword = MobileBy.xpath("");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
 
-	private By lblSettings =MobileBy.xpath("(//*[@name='Settings'])[1]");
+	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]");
 	private By imgUser = MobileBy.xpath("");
 	private By lblUserName = MobileBy.xpath("");
 	private By lblAccountID = MobileBy.xpath("");
@@ -73,6 +74,11 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void viewWithdrawnToUSD() {
 		new CommonFunctions().elementView(btnWithdrawToUSD, "Withdrawn To USD");
+	}
+
+	public void verifyResetPinCodeView() {
+		scrollDownToElement(lnkResetPinCode, "Resetpin");
+		new CommonFunctions().elementView(lnkResetPinCode, "Resent pin code");
 	}
 
 	public void clickPayRequest() {
@@ -256,9 +262,13 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
-
 	}
+	public EnterYourPINComponent enterYourPINComponent() {
+		return new EnterYourPINComponent();
+	}
+	
+
 	public ChangePasswordPage changePasswordPage() {
 		return new ChangePasswordPage();
-		}
+	}
 }

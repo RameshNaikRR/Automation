@@ -62,7 +62,9 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public EditPhoneNumberPage editPhoneNumberPage() {
 		return new EditPhoneNumberPage();
 	}
-
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
+	}
 	public EditAddressPage editAddressPage() {
 		return new EditAddressPage();
 	}
