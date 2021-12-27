@@ -1,7 +1,6 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
@@ -24,6 +23,12 @@ public class ChangePasswordPage extends MobileFunctions {
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id, 'cvSave')]");
 	private By lblSuccessFailureMessage = MobileBy.xpath("//*[@text='Change Password Successful']");
 	private By btnLogout = MobileBy.xpath("//*[@text='Log Out']");
+	private By changePasswordContent = MobileBy.xpath("//*[contains(@resource-id,'tvMessageChangePass')]");
+
+	public void verifyChangePasswordContent(String expHeading) {
+		new CommonFunctions().verifyLabelText(changePasswordContent, "Change Password", expHeading);
+
+	}
 
 	public void verifyHeadingConfirmPassword(String expHeading) {
 		new CommonFunctions().verifyLabelText(confirmPasswordHeading, expHeading, "Confirm Password ");
@@ -33,6 +38,9 @@ public class ChangePasswordPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(changePasswordHeading, "Change Password ", expHeading);
 	}
 
+	public void verifyPassword() {
+		new CommonFunctions().checkPassword(txtNewPassword, txtConfirmPassword);
+	}
 //	public void fillPin(String pin) {
 //		enterText(txtPin, pin, "Pin");
 //	}

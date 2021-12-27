@@ -28,11 +28,14 @@ public class VerifyEmailComponent extends MobileFunctions {
 	private By lblVerifyDidntGetCode = MobileBy.xpath("//*[@text='Didn't get the code?']");
 	private By lblEmailFiled = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
 	private By lblChosseYourPin = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]"); 
-
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	public ChoosePinComponent choosePinComponent() {
 		return new ChoosePinComponent();
 	}
 
+	public void clickOk() {
+		click(btnOk, "Ok");
+	}
 	/*
 	 * public ChooseYourPinComponent chooseYouPinComponent() { return new
 	 * ChooseYourPinComponent(); }

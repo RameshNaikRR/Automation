@@ -56,4 +56,22 @@ public class ForgotPasswordPage extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+	
+	public CreatePasswordPage createPasswordPage() {
+		return new CreatePasswordPage();
+	}
+	public void validateEmailField(String minChar, String minCharPlus, String maxLessChar, String maxChar,
+			String moreThanMax) {
+
+		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
+		new CommonFunctions().clearText(txtEmail, "Email");
+		new CommonFunctions().validateField(txtEmail, "Email", minChar);
+		new CommonFunctions().clearText(txtEmail, "Email");
+		new CommonFunctions().validateField(txtEmail, "Email", minCharPlus);
+		new CommonFunctions().clearText(txtEmail, "Email");
+		new CommonFunctions().validateField(txtEmail, "Email", maxLessChar);
+		new CommonFunctions().clearText(txtEmail, "Email");
+		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
+
+	}
 }

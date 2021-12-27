@@ -22,7 +22,7 @@ public class LoginPage extends MobileFunctions {
 	private By lnkRetriveEmail = MobileBy.xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
 	private By lnkForgotPassword = MobileBy.xpath("//*[contains(@resource-id,'forgotpwd')]| //*[contains(@name,'Forgot Password')]");
 	private By chkBxRememberMe = MobileBy.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]|(//*[@name='Log in'])[1]");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
 	private By lblerrMsg = MobileBy.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]");
 	private By popUperror =MobileBy.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");

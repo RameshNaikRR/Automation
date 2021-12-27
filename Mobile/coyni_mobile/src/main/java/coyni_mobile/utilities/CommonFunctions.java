@@ -1,16 +1,11 @@
 package coyni_mobile.utilities;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.touch.TouchActions;
 
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class CommonFunctions {
 
@@ -187,10 +182,18 @@ public class CommonFunctions {
 	}
 
 	public boolean isPlatformiOS() {
-			return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
-				
+		return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
+
 	}
-	
-	
+
+	public void checkPassword(By ele, By ele1) {
+		String enterPassword = mobileFunctions.getText(ele);
+		String confirmPassword = mobileFunctions.getText(ele1);
+		if (enterPassword.equals(confirmPassword)) {
+			ExtentTestManager.setPassMessageInReport("Password is Same");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Password is not Same");
+		}
+	}
 
 }

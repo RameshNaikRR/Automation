@@ -258,4 +258,7 @@ public class CustomerProfilePage extends MobileFunctions {
 		return new SignUpPage();
 
 	}
+	public ChangePasswordPage changePasswordPage() {
+		return new ChangePasswordPage();
+		}
 }

@@ -2,7 +2,6 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -16,7 +15,6 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
-import ilabs.mobile.utilities.FileReaderManager;
 
 public class LoginTest {
 
@@ -101,7 +99,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyNotNowButtonView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyDontRemindButtonView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test LoginNavigation view failed due to Exception " + e);
 		}
@@ -188,24 +186,25 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
-			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-			Thread.sleep(2000);
-			loginPage.forgotPasswordPage().verifyEmailComponent().clickClose();
-			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
+			loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
+			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
+			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
 		}
 	}
-
-	// private By popHeading =
-	// MobileBy.xpath("//*[contains(@resource-id,'textTV')]");
 
 	@Test
 	@Parameters({ "strParams" })
@@ -215,19 +214,14 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			Thread.sleep(2000);
 			if (!loginData.get("errMessage").isEmpty()) {
-
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
 						loginData.get("elementName"));
 			}
-//			else if (mobileFunctions.getElement(popHeading, "pop heading").isDisplayed()) {
-//				loginPage.forgotPasswordPage().verifyPopErrMessa(loginData.get("popUpContent"));
-//			}
-
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
@@ -242,30 +236,66 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			Thread.sleep(2000);
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-
-			// String[] msg = loginData.get("errMessage").split(",");
-			// for (int i = 0; i <=6; i++) {
-			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyOTPErrorMessage(msg[i]);
-			// }
-			loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyResentMsg(loginData.get("resendMessage"));
-			for (int i = 0; i <= 2; i++) {
+			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-				// loginPage.forgotPasswordPage().verifyEmailComponent()
-				// .verifyResentMsg(loginData.get("resendMessage"));
+//				 loginPage.forgotPasswordPage().verifyEmailComponent()
+//				 .verifyResentMsg(loginData.get("resendMessage"));
 			}
-//
-			// loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
+			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+		}
+	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithNavigationOption(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent()
+					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithFieldValidation(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			String[] email = loginData.get("email").split(",");
+			loginPage.forgotPasswordPage().validateEmailField(email[0], email[1], email[2], email[3], email[4]);
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
@@ -395,43 +425,35 @@ public class LoginTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailFieldValidations(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			// loginPage.retrieveEmailPage().validatePhoneNumberField(loginData.get("phoneNumber"));
-			loginPage.retrieveEmailPage().validateFirstField(loginData.get("firstName"));
-			// loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			loginPage.retrieveEmailPage().clickNext();
-			// if (!loginData.get("errMessage").isEmpty()) {
-			// new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-			// loginData.get("elementName"));
-			// }
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
-		}
+	try {
+	Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+	landingPage.clickLogin();
+	loginPage.clickForgotEmail();
+	loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+	// String phoneNumber = loginData.get("phoneNumber");
+	// loginPage.retrieveEmailPage().validatePhoneNumberField(phoneNumber);
+	// , phoneNumber[1], phoneNumber[2],phoneNumber[3]);
+	String[] firstName = loginData.get("firstName").split(",");
+	loginPage.retrieveEmailPage().validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3],
+	firstName[4]);
+	String[] lastName = loginData.get("lastName").split(",");
+	loginPage.retrieveEmailPage().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],
+	lastName[4]);
+
+
+
+	loginPage.retrieveEmailPage().clickNext();
+
+
+
+	} catch (Exception e) {
+	ExtentTestManager
+	.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
+	}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithInvalidFieldValidations(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-			loginPage.retrieveEmailPage().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
-		}
-	}
+	
+	
 
 	@Test
 	@Parameters({ "strParams" })

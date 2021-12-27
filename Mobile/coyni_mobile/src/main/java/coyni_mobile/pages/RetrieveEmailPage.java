@@ -129,14 +129,50 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	}
 
-	public void validateFirstField(String expFirstName) {
-		new CommonFunctions().validateField(txtFirstName, "firstName", expFirstName);
+	public void validateFirstNameField(String minChar, String minPlusChar, String moreThanChar, String specialChar,
+			String numbers) {
+		new CommonFunctions().validateField(txtFirstName, "firstName", minChar);
+		new CommonFunctions().clearText(txtFirstName, "firstName");
+		new CommonFunctions().validateField(txtFirstName, "firstName", minPlusChar);
+		new CommonFunctions().clearText(txtFirstName, "firstName");
+		new CommonFunctions().validateFieldMaxichar(txtFirstName, "firstName", moreThanChar);
+		new CommonFunctions().clearText(txtFirstName, "firstName");
+		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "firstName", specialChar);
+		new CommonFunctions().clearText(txtFirstName, "firstName");
+		new CommonFunctions().validateFieldWithNumber(txtFirstName, "firstName", numbers);
 
 	}
 
-	public void validatePhoneNumberField(String minchar, String moreThanMax, String alphabets,
-			String specialCharacters) {
+	public void validateLastNameField(String minChar, String minPlusChar, String moreThanChar, String specialChar,
+			String numbers) {
+		new CommonFunctions().validateField(txtLastName, "lastName", minChar);
+		new CommonFunctions().clearText(txtLastName, "lastName");
+		new CommonFunctions().validateField(txtLastName, "lastName", minPlusChar);
+		new CommonFunctions().clearText(txtLastName, "lastName");
+		new CommonFunctions().validateFieldMaxichar(txtLastName, "lastName", moreThanChar);
+		new CommonFunctions().clearText(txtLastName, "lastName");
+		new CommonFunctions().validateFieldWithSpecialchar(txtLastName, "lastName", specialChar);
+		new CommonFunctions().clearText(txtLastName, "LastName");
+		new CommonFunctions().validateFieldWithNumber(txtLastName, "lastName", numbers);
 
 	}
+	//
+	// public void validatePhoneNumberField(String minPhoneNumber) {// String
+	// minPhoneNumber, String maxPhoneNumber, String
+	// // specialCharacter,
+	// // String alphabets
+	// new CommonFunctions().validateFieldWithNumber(txtPhoneNumber, "phoneNumber",
+	// minPhoneNumber);
+	// new CommonFunctions().clearText(txtPhoneNumber, "phoneNumber");
+	//// new CommonFunctions().validateFieldWithNumber(txtPhoneNumber,
+	// "phoneNumber", maxPhoneNumber);
+	//// new CommonFunctions().clearText(txtPhoneNumber, "phoneNumber");
+	//// new CommonFunctions().validateFieldWithSpecialchar(txtPhoneNumber,
+	// "phoneNumber", specialCharacter);
+	//// new CommonFunctions().clearText(txtPhoneNumber, "phoneNumber");
+	//// new CommonFunctions().validateFieldWithalphabet(txtPhoneNumber,
+	// "phoneNumber", alphabets);
+	//
+	// }
 
 }

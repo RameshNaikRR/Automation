@@ -127,4 +127,9 @@ public class TokenAccountPage extends MobileFunctions {
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
 	}
+
+	public SignUpPage signUpPage() {
+		return new SignUpPage();
+
+	}
 }

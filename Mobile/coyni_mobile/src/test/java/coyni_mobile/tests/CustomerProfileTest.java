@@ -10,6 +10,7 @@ import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.UserDetailsPage;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -638,61 +639,83 @@ public class CustomerProfileTest {
 //		}
 //
 ////	}
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testChangePassword(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//
-//			tokenAccountPage.clickProfile();
-//			tokenAccountPage.customerProfilePage().clickChangePassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage().enterYourPINComponent()
-//					.fillPin(data.get("pin"));
-//			// tokenAccountPage.customerProfilePage().changePasswordPage()
-//			// .verifyHeadingConfirmPassword(data.get("expConfirmPasswordHeading"));
-//			// tokenAccountPage.CustomerProfilePage().changePasswordPage().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage()
-//					.fillCurrentPassword(data.get("currentPassword"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickNext();
-//			tokenAccountPage.customerProfilePage().changePasswordPage()
-//					.verifyHeadingChangePassword(data.get("expChangePasswordHeading"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().fillNewPassword(data.get("newPassword"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage()
-//					.fillConfirmPassword(data.get("confirmPassword"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickIconViewPassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage().verifyPassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickSave();
-//			tokenAccountPage.customerProfilePage().changePasswordPage()
-//					.verifySuccessFailureMessage(data.get("message"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().clickLogout();
-//			tokenAccountPage.signUpPage().verifyGetStarted();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testChangePassword Failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testChangePasswordWithNavigationOptions(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//
-//			tokenAccountPage.clickProfile();
-//			tokenAccountPage.customerProfilePage().clickChangePassword();
-//			tokenAccountPage.customerProfilePage().navigationComponent().clickBack();
-//
-//			tokenAccountPage.customerProfilePage().clickChangePassword();
-//			tokenAccountPage.customerProfilePage().changePasswordPage().enterYourPINComponent()
-//					.fillPin(data.get("pin"));
-//			tokenAccountPage.customerProfilePage().changePasswordPage().navigationComponent().clickClose();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testChangePasswordInvalid Failed due to exception " + e);
-//
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.changePasswordPage().enterYourPINComponent().fillPin(data.get("pin"));
+			// tokenAccountPage.customerProfilePage().changePasswordPage()
+			// .verifyHeadingConfirmPassword(data.get("expConfirmPasswordHeading"));
+			// tokenAccountPage.CustomerProfilePage().changePasswordPage().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			customerProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordPage().clickIconViewPassword();
+			customerProfilePage.changePasswordPage().clickNext();
+			customerProfilePage.changePasswordPage().verifyHeadingChangePassword(data.get("expChangePasswordHeading"));
+			customerProfilePage.changePasswordPage()
+			.verifyChangePasswordContent(data.get("expChangePasswordContent"));
+			customerProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.changePasswordPage().clickIconViewPassword();
+			customerProfilePage.changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			customerProfilePage.changePasswordPage().clickIconViewPassword();
+			customerProfilePage.changePasswordPage().verifyPassword();
+			customerProfilePage.changePasswordPage().clickSave();
+			customerProfilePage.changePasswordPage().verifySuccessFailureMessage(data.get("message"));
+			customerProfilePage.changePasswordPage().clickLogout();
+			tokenAccountPage.signUpPage().verifyGetStarted();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePassword Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.navigationComponent().clickBack();
+
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.changePasswordPage().enterYourPINComponent().fillPin(data.get("pin"));
+			customerProfilePage.changePasswordPage().navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePasswordInvalid Failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordWithInvalidCurrentPassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.changePasswordPage().enterYourPINComponent().fillPin(data.get("pin"));
+
+			customerProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordPage().clickIconViewPassword();
+			customerProfilePage.changePasswordPage().clickNext();
+
+			if (!data.get("errMessage").isEmpty()) {
+
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+
+			}
+			customerProfilePage.changePasswordPage().navigationComponent().clickClose();
+			customerProfilePage.changePasswordPage().clickLogout();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePasswordWithInvalid Failed due to exception " + e);
+		}
+	}
 
 }
