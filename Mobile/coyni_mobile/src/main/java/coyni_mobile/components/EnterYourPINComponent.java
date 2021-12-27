@@ -23,7 +23,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public void fillPin(String pin) {
 		System.out.println(pin.length());
 		for (int i = 0; i <pin.length(); i++) {
-			click(getOneNumberOfPin(pin.charAt(i)), "pin " + i);
+			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
 		}
 	}
 

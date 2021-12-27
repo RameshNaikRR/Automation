@@ -17,16 +17,17 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnShare = MobileBy.xpath("");
 	private By popup = MobileBy.xpath("");
 	private By lblCopyMessage = MobileBy.xpath("");
-	private By lnkUserDetails = MobileBy.xpath("");
-	private By lnkPaymentMethods = MobileBy.xpath("");
-	private By lnkPreferences = MobileBy.xpath("");
-	private By lnkAccountLimits = MobileBy.xpath("");
-	private By lnkAgreements = MobileBy.xpath("");
+	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']");
+	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']");
+	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']");
+	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
+	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
 	private By lnkResetPinCode = MobileBy.xpath("");
 	private By btnFaceIDSetting = MobileBy.xpath("");
-	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
-	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
+	private By lnkChangePassword = MobileBy.xpath("");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
 
+	private By lblSettings =MobileBy.xpath("(//*[@name='Settings'])[1]");
 	private By imgUser = MobileBy.xpath("");
 	private By lblUserName = MobileBy.xpath("");
 	private By lblAccountID = MobileBy.xpath("");
@@ -49,11 +50,6 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnBuyToken = MobileBy.xpath("");
 	private By btnWithdrawToUSD = MobileBy.xpath("");
 	private By popUp = MobileBy.xpath("");
-	private By lblAccountHolderName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
-
-	public void VerifyAccountHolderName() {
-		new CommonFunctions().elementView(lblAccountHolderName, "Account Holder " + getText(lblAccountHolderName));
-	}
 
 	public void viewScan() {
 		new CommonFunctions().elementView(btnScan, "View Scan");
@@ -186,23 +182,16 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
-		scrollDownToElement(btnChangePassword, "Change Password");
-		click(btnChangePassword, "Click Change Password");
-	}
-
-	public void verifyChangePassword() {
-		new CommonFunctions().elementView(btnChangePassword, "Change Password");
-	}
-
-	public void logOut() {
-		scrollDownToElement(btnLogOut, "Log Out");
+		click(lnkChangePassword, "Click Change Password");
 	}
 
 	public void clickLogOut() {
+		scrollUpToElement(btnLogOut, "Log out");
 		click(btnLogOut, "Click LogOut");
 	}
 
 	public void verifyLogOut() {
+		scrollUpToElement(btnLogOut, "Log out");
 		new CommonFunctions().elementView(btnLogOut, "Log Out");
 	}
 
@@ -216,7 +205,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void verifyProfilePageView() {
-		new CommonFunctions().elementView(lblUserName, "UserName");
+		new CommonFunctions().elementView(lblSettings, "Profile Page");
 	}
 
 	public void verifyUserDetailsView() {
@@ -268,9 +257,5 @@ public class CustomerProfilePage extends MobileFunctions {
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
 
-	}
-
-	public ChangePasswordPage changePasswordPage() {
-		return new ChangePasswordPage();
 	}
 }

@@ -13,12 +13,12 @@ public class SubMenuComponent extends MobileFunctions {
     private By btnPayOrRequest = MobileBy.id("com.coyni.android:id/layoutTPay");
     private By btnBuyToken = MobileBy.id("com.coyni.android:id/layoutTBuy");
     private By btnWithdraw = MobileBy.id("com.coyni.android:id/layoutTWihdraw");
-
-    // sub menu actions
-    public BuyTokenMenuComponent clickBuyToken() {
-        click(btnBuyToken, "Buy Token");
-        return new BuyTokenMenuComponent();
-    }
+//
+//    // sub menu actions
+//    public BuyTokenComponent clickBuyToken() {
+//        click(btnBuyToken, "Buy Token");
+//        return new BuyTokenMenuComponent();
+//    }
 
     public void clickScanQR() {
         click(btnScanQR, "Scan QR");

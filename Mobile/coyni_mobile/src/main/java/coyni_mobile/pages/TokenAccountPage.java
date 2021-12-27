@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
-import coyni_mobile.components.BuyTokenMenuComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.utilities.CommonFunctions;
@@ -22,7 +21,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnScan = MobileBy.xpath(" ");
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");
 	private By btnCrypto = MobileBy.xpath(" ");
-	private By btnProfile = MobileBy.xpath("//*[@text='Profile']");
+	private By btnProfile = MobileBy.xpath("//*[@text='Profile']| (//*[@name='Profile'])[1]");
 	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
@@ -113,20 +112,8 @@ public class TokenAccountPage extends MobileFunctions {
 		return new WithDrawToUSDPage();
 	}
 
-	public SignUpPage signUpPage() {
-		return new SignUpPage();
-	}
-
-	public CustomerProfilePage customerProfilePage() {
-		return new CustomerProfilePage();
-	}
-
 	public NotificationComponent notificationComponent() {
 		return new NotificationComponent();
-	}
-
-	public BuyTokenMenuComponent buyTokenMenuComponent() {
-		return new BuyTokenMenuComponent();
 	}
 
 	public AccountLimitsComponent accountLimitsComponent() {

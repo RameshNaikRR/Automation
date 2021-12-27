@@ -1,18 +1,14 @@
 package coyni_mobile.tests;
 
-import java.awt.RenderingHints.Key;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.google.common.util.concurrent.Uninterruptibles;
-
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -45,7 +41,7 @@ public class SignUpTest {
 			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			//DriverFactory.getDriver().hideKeyboard();
+			// DriverFactory.getDriver().hideKeyboard();
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
@@ -98,11 +94,9 @@ public class SignUpTest {
 			signUpPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"),
-							data.get("elementName"));
+					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
 				} else {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),
-							data.get("elementName"));
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 				}
 			}
 
@@ -130,11 +124,19 @@ public class SignUpTest {
 				ExtentTestManager.setPassMessageInReport("password is invalid");
 			}
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			if (!data.get("errorMessage").isEmpty()) {
-				// Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.SECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("elementName"));
-
+			signUpPage.clickNext();
+			if (!data.get("errMessage").isEmpty()) {
+				if (new CommonFunctions().isPlatformiOS()) {
+					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				}
 			}
+//			if (!data.get("errorMessage").isEmpty()) {
+//				// Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.SECONDS);
+//				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("elementName"));
+//
+//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}

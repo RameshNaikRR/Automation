@@ -81,9 +81,9 @@ public class ChangePasswordPage extends MobileFunctions {
 
 	}
 
-	public void verifyPassword() {
-		new CommonFunctions().checkPassword(txtNewPassword, txtConfirmPassword);
-	}
+//	public void verifyPassword() {
+//		new CommonFunctions().checkPassword(txtNewPassword, txtConfirmPassword);
+//	}
 
 	public void verifySuccessFailureMessage(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblSuccessFailureMessage, "Success", expHeading);

@@ -2,10 +2,11 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.MailingAddressComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class AddNewDebitCardPage extends MobileFunctions {
+public class AddCardPage extends MobileFunctions {
 	
 	private By txtNameOnCard = MobileBy.xpath("");
 	private By txtCardNumber = MobileBy.xpath("");
@@ -32,7 +33,7 @@ public class AddNewDebitCardPage extends MobileFunctions {
 	public void clickCamera() {
 		click(iconCamera, "Camera");
 	}
-	
-	
-
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
+	}
 }

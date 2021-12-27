@@ -186,36 +186,11 @@ public class CommonFunctions {
 		}
 	}
 
-	public boolean isPlatformAndroid() {
-		try {
-			if (FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("android")) {
-				return true;
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("isPlatformAndroid is failed " + e);
-		}
-		return false;
-	}
-
 	public boolean isPlatformiOS() {
-		try {
-			if (FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios")) {
-				return true;
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("isPlatformAndroid is failed " + e);
-		}
-		return false;
+			return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
+				
 	}
-
-	public void checkPassword(By ele, By ele1) {
-		String enterPassword = mobileFunctions.getText(ele);
-		String confirmPassword = mobileFunctions.getText(ele1);
-		if (enterPassword.equals(confirmPassword)) {
-			ExtentTestManager.setPassMessageInReport("Password is Same");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Password is not Same");
-		}
-	}
+	
+	
 
 }

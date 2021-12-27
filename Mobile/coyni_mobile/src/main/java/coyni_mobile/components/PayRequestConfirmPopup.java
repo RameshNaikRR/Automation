@@ -23,7 +23,6 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 
 	public void swipeConfirm() {
 		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
-		
 	}
 
 	public void getAvailableBalance() {

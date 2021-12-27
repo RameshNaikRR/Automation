@@ -3,6 +3,7 @@ package coyni_mobile.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.pages.PayRequestPage;
+import coyni_mobile.pages.PaymentMethodsPage;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -27,6 +28,8 @@ public class TokenHomePopUp extends MobileFunctions {
 	public PayRequestPage payRequestPage() {
 		return new PayRequestPage();
 	}
-	 
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
 
 }

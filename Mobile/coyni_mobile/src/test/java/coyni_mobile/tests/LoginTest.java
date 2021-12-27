@@ -31,12 +31,16 @@ public class LoginTest {
 		homePage = new HomePage();
 		landingPage = new LandingPage();
 		verifyEmailComponent = new VerifyEmailComponent();
-		DriverFactory.getDriver().hideKeyboard();
+		if (!new CommonFunctions().isPlatformiOS()) {
+			DriverFactory.getDriver().hideKeyboard();
+		}
 	}
 
 	@AfterTest
 	public void hideKeyBoard() {
-		DriverFactory.getDriver().hideKeyboard();
+		if (!new CommonFunctions().isPlatformiOS()) {
+			DriverFactory.getDriver().hideKeyboard();
+		}
 	}
 
 	@Test
@@ -96,7 +100,8 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIDButtonView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyNotNowButtonView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyDontRemindButtonView();
-
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test LoginNavigation view failed due to Exception " + e);
 		}
@@ -110,21 +115,12 @@ public class LoginTest {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
-			if (loginData.get("email").isEmpty()) {
-				loginPage.fillEmail(loginData.get("email"));
-				// loginPage.clickPassword();
-			} else {
-				loginPage.fillEmail(loginData.get("email"));
-			}
-
-			if (loginData.get("password").isEmpty()) {
-				loginPage.fillPassword("");
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			if (loginData.get("password").length() < 8) {
 				loginPage.clickEmail();
-			} else {
-				loginPage.fillPassword(loginData.get("password"));
-				loginPage.clickRememberMe();
-				loginPage.clickLogin();
 			}
+			loginPage.clickLogin();
 			if (!loginData.get("errMessage").isEmpty()) {
 				if (new CommonFunctions().isPlatformiOS()) {
 					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
@@ -141,7 +137,7 @@ public class LoginTest {
 				Thread.sleep(2000);
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
-				loginPage.minimizePopupBySwipeDown();
+//				loginPage.minimizePopupBySwipeDown();
 
 			}
 		} catch (Exception e) {

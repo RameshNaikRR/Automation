@@ -152,9 +152,6 @@ public class LoginPage extends MobileFunctions {
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
-    public VerifyNewEmailPage verifyNewEmailPage() {
-    	return new VerifyNewEmailPage();
-    }
     public VerifyEmailComponent verifyEmailComponent() {
     	return new VerifyEmailComponent();
     }

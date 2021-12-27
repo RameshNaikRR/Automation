@@ -11,10 +11,10 @@ import io.appium.java_client.MobileBy;
 public class ForgotPinComponent extends MobileFunctions{
 
 	private By lnkForgotPin	= MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]|//*[contains(@name,'Before')]/following-sibling::*[1]");
 	private By txEmailFieldInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By txtChooseYourPinInputBoxes = MobileBy.xpath("");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]|(//*[@name='Next'])[1]");
 	private By lblEnterYourPinHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')] ");
 	private By lblForgotPinHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lblForgotPinDescrp = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
@@ -28,7 +28,7 @@ public class ForgotPinComponent extends MobileFunctions{
 	private By headingUserDetails = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
 	private By resendIcon = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("");
-	private By lblForgotYourPin = MobileBy.xpath("//*[contains(@resource-id,'tvHead')] ");
+	private By lblForgotYourPin = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]|//*[contains(@name,'Forgot Your')]");
 
 	public void verifyForgotYourPinView() {
 	new CommonFunctions().elementView(lblForgotYourPin, "ForgotYourPin");

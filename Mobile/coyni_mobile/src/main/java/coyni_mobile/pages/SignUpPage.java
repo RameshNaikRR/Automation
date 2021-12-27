@@ -11,7 +11,7 @@ import io.appium.java_client.MobileBy;
 
 public class SignUpPage extends MobileFunctions {
 
-	private By btnGetStarted = MobileBy.xpath("//*[contains(@resource-id,'getStartedLL')]");
+	private By btnGetStarted = MobileBy.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
 	private By lnkPersonalAccount = MobileBy
 			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
 	private By lnKBusinessAccount = MobileBy.xpath("");
@@ -91,7 +91,7 @@ public class SignUpPage extends MobileFunctions {
 		scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		if (new CommonFunctions().isPlatformAndroid()) {
+		if (!new CommonFunctions().isPlatformiOS()) {
 			pressBack();
 		}
 		clickDone();

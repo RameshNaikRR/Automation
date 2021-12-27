@@ -9,8 +9,8 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class EditAddressPage extends MobileFunctions{
-	private By heading =MobileBy.xpath("");
-	private By btnSave =MobileBy.xpath("");
+	private By heading =MobileBy.xpath("//*[@name='Edit Address']");
+	private By btnSave =MobileBy.xpath("(//*[@name='Save'])[1]");
 	
 	public void clickSave() {
 		click(btnSave, "Click Save");

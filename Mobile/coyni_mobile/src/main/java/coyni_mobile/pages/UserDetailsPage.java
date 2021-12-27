@@ -14,18 +14,18 @@ import io.appium.java_client.MobileBy;
 
 public class UserDetailsPage extends MobileFunctions {
 
-	private By heading =MobileBy.xpath("");
-	private By btnEditUserImage = MobileBy.xpath("");
+	private By heading =MobileBy.xpath("//*[@name='User Details']");
+	private By btnEditUserImage = MobileBy.xpath("//*[@name='edit']");
 	
-	private By lnkEditEmail = MobileBy.xpath("");
-	private By lblEmailTitle =MobileBy.xpath("");
-	private By lblExistingEmail =MobileBy.xpath("");
-	private By lnkEditPhoneNumber = MobileBy.xpath("");
-	private By lblAddressTitle =MobileBy.xpath("");
-	private By lblExistingAddress =MobileBy.xpath("");
-	private By lnkEditAddress = MobileBy.xpath("");
-	private By lblPhoneNumberTitle =MobileBy.xpath("");
-	private By lblExistingPhonenumber =MobileBy.xpath("");
+	private By lnkEditEmail = MobileBy.xpath("//*[@name='Email']/following-sibling::*[@name='arrow right']");
+	private By lblEmailTitle =MobileBy.xpath("//*[@name='Email']");
+	private By lblExistingEmail =MobileBy.xpath("//*[@name='Email']/preceding-sibling::XCUIElementTypeStaticText");
+	private By lnkEditPhoneNumber = MobileBy.xpath("//*[@name='Phone Number']/following-sibling::*[@name='arrow right']");
+	private By lblAddressTitle =MobileBy.xpath("//*[@name='Address']");
+	private By lblExistingAddress =MobileBy.xpath("//*[@name='Address']/preceding-sibling::XCUIElementTypeStaticText");
+	private By lnkEditAddress = MobileBy.xpath("//*[@name='Address']/following-sibling::*[@name='arrow right']");
+	private By lblPhoneNumberTitle =MobileBy.xpath("//*[@name='Phone Number']");
+	private By lblExistingPhonenumber =MobileBy.xpath("//*[@name='Phone Number']/preceding-sibling::XCUIElementTypeStaticText");
 	
 
 	public void verifyPhoneNumberTitleView() {
@@ -59,16 +59,16 @@ public class UserDetailsPage extends MobileFunctions {
 		new CommonFunctions().elementView(btnEditUserImage, "Edit Image");
 	}
 	public void clickEditUserImage() {
-		click(btnEditUserImage, "click Edit User Image");
+		click(btnEditUserImage, "Edit User Image");
 	}
 	
 
 	public void clickEditEmail() {
-		click(lnkEditEmail, "click Edit Email");
+		click(lblExistingEmail, "Edit Email");
 	}
 
 	public void clickEditPhoneNumber() {
-		click(lnkEditPhoneNumber, "click Edit Phone Number");
+		click(lblExistingPhonenumber, "Edit Phone Number");
 	}
 
 	public void verifyAddressTitleView() {
@@ -81,7 +81,7 @@ public class UserDetailsPage extends MobileFunctions {
 		new CommonFunctions().elementView(lnkEditAddress, "Edit Address Arrow");
 	}
 	public void clickEditAddress() {
-		click(lnkEditAddress, "click Edit Address");
+		click(lblExistingAddress, "click Edit Address");
 	}
 
 	public EditProfileComponent editProfileComponent() {
