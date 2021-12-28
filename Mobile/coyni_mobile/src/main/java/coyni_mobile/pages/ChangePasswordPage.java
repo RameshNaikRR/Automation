@@ -98,6 +98,7 @@ public class ChangePasswordPage extends MobileFunctions {
 	}
 
 	public void clickLogout() {
+		scrollDownToElement(btnLogout, "Scroll down to element");
 		click(btnLogout, "Logout");
 
 	}

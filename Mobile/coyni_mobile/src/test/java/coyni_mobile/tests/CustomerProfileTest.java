@@ -570,7 +570,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.accountLimitsComponent().getGiftCardAmount();
 			tokenAccountPage.accountLimitsComponent().verifyWithdrawGiftCardAmountLimit();
 			tokenAccountPage.accountLimitsComponent().navigationComponent().clickBack();
-			tokenAccountPage.accountLimitsComponent().VerifyAccountHolderName();
+			customerProfilePage.clickLogOut();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimits Failed due to exception " + e);
@@ -589,7 +589,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.agreementComponent().verifyPrivacyPolicy();
 			tokenAccountPage.agreementComponent().verifyTermsOfService();
 			tokenAccountPage.agreementComponent().clickBack();
-			tokenAccountPage.agreementComponent().VerifyAccountHolderName();
+			customerProfilePage.clickLogOut();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
@@ -687,7 +687,7 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordPage().navigationComponent().clickClose();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testChangePasswordInvalid Failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testChangePasswordWithNavigationOptions Failed due to exception " + e);
 
 		}
 	}
