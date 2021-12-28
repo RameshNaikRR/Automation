@@ -2,6 +2,8 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.AccountLimitsComponent;
+import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -266,11 +268,20 @@ public class CustomerProfilePage extends MobileFunctions {
 		return new SignUpPage();
 	}
 
+	public ChangePasswordPage changePasswordPage() {
+		return new ChangePasswordPage();
+	}
+
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
 
-	public ChangePasswordPage changePasswordPage() {
-		return new ChangePasswordPage();
+	public AccountLimitsComponent accountLimitsComponent() {
+		return new AccountLimitsComponent();
 	}
+
+	public AgreementComponent agreementComponent() {
+		return new AgreementComponent();
+	}
+
 }

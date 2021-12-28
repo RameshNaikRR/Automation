@@ -116,14 +116,6 @@ public class TokenAccountPage extends MobileFunctions {
 		return new NotificationComponent();
 	}
 
-	public AccountLimitsComponent accountLimitsComponent() {
-		return new AccountLimitsComponent();
-	}
-
-	public AgreementComponent agreementComponent() {
-		return new AgreementComponent();
-	}
-
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
 	}
