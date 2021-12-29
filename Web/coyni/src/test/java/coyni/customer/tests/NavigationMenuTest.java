@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.customer.pages.HomePage;
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.customer.pages.TokenAccountPage;
 import ilabs.WebFramework.Runner;
@@ -14,11 +15,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class NavigationMenuTest {
 	NavigationMenuPage navigationMenuPage;
 	TokenAccountPage tokenAccountPage;
+	HomePage homePage;
 
 	@BeforeTest
 	public void init() {
 		navigationMenuPage = new NavigationMenuPage();
 		tokenAccountPage = new TokenAccountPage();
+		homePage = new HomePage();
 	}
 
 	@Test
@@ -78,23 +81,25 @@ public class NavigationMenuTest {
 
 	}
 
-	// added
 	@Test
 	// @Parameters({ "strParams" })
 	public void testProgressBar() {
 		try {
 			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccount();
+			tokenAccountPage.clickTokenAccount();
 			navigationMenuPage.verifyLabelMessage();
 			// navigationMenuPage.verifyProfileInformation();
+			// navigationMenuPage.userNameDropDownComponent().cursorhoverUserName();
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.userNameDropDownComponent().verifyUserDetails();
-			navigationMenuPage.verifyNotificationsIcon();
+			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
+			navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
+			// navigationMenuPage.verifyNotificationsIcon();
+			navigationMenuPage.userNameDropDownComponent().clickSignOut();
+			homePage.clickPersonalAccount();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Test Progress Bar is failed  due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("Test Progress Bar is failed due to exception " + e);
 		}
 
 	}
-
 }

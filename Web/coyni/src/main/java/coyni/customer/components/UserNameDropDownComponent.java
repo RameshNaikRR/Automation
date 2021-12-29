@@ -19,6 +19,12 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By lnkSignOut = By.xpath("//span[text()='Sign Out']");
 	private By lblRequests = By.cssSelector(" ");
 	private By signOutIcon = By.cssSelector(" ");
+	private By requestdot = By.xpath("//span[contains(@class,'green-dot')]");
+
+	public void cursorhoverUserName() {
+		new CommonFunctions().verifyCursorAction(dropwnUserName, "drop down");
+
+	}
 
 	public void verifyUserDetails() {
 		new CommonFunctions().elementView(lnkUserDetails, "User Details");
@@ -62,6 +68,22 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 
 	public void verifyUserNameView() {
 		new CommonFunctions().elementView(dropwnUserName, "UserName");
+	}
+
+	public void verifyRequestDot() {
+		new CommonFunctions().elementView(requestdot, "Request Dot");
+	}
+
+	public void verifyDropDownElements() {
+		new CommonFunctions().elementView(lblRequests, "Requests");
+		new CommonFunctions().elementView(lnkUserDetails, "User Details");
+		new CommonFunctions().elementView(lnkPaymentMethods, "Payment Methods");
+		new CommonFunctions().elementView(lnkPreferences, "Preferences");
+		new CommonFunctions().elementView(lnkAccountLimits, "Account Limits");
+		new CommonFunctions().elementView(lnkAgreements, "Agreements");
+		new CommonFunctions().elementView(lnkChangePassword, "Change Password");
+		new CommonFunctions().elementView(lnkSignOut, "Sign Out");
+
 	}
 
 }

@@ -56,12 +56,15 @@ public class AuthyComponent extends BrowserFunctions {
 	public void fillInput(String code) {
 		fillPin(inputBox, "InputBoxes", code);
 	}
+
 	public void clickGoBack() {
 		click(lnkGoBack, "Back Option");
 	}
 
 	public void verifyLogin() {
-		waitForCondition(e -> e.getCurrentUrl().contains("getstarted"), "Waiting for url to contain token-account");
+		waitForCondition(e -> !e.getCurrentUrl().contains("verify-you-identity"),
+				"Waiting for url to contain token-account");
+
 		String pageURL = getPageURL();
 		if (pageURL.contains("token-account") || pageURL.contains("getstarted")) {
 			ExtentTestManager.setPassMessageInReport("Login success");
@@ -80,8 +83,9 @@ public class AuthyComponent extends BrowserFunctions {
 			ExtentTestManager.setPassMessageInReport("Login failed with invalid pin");
 		}
 	}
-	public void fillPin(By ele,String eleName,String code) {
-		List<WebElement> inputs = getElementsList(ele,eleName);
+
+	public void fillPin(By ele, String eleName, String code) {
+		List<WebElement> inputs = getElementsList(ele, eleName);
 		int noOfInputs = inputs.size();
 		if (noOfInputs == 6) {
 			for (int i = 0; i < noOfInputs; i++) {
