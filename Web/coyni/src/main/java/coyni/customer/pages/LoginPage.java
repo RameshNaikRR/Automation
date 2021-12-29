@@ -81,6 +81,9 @@ public class LoginPage extends BrowserFunctions {
 		new CommonFunctions().elementView(txtEmail, "Email");
 	}
 
+	public void viewEmail() {
+		new CommonFunctions().elementView(txtEmail, "View Email");
+	}
 	public void verifyPasswordView() {
 		new CommonFunctions().elementView(txtPassword, "Password");
 	}
