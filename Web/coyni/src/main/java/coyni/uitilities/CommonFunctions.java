@@ -1,14 +1,14 @@
 package coyni.uitilities;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
@@ -22,8 +22,7 @@ public class CommonFunctions {
 		if (expText.equalsIgnoreCase(actText)) {
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
 		} else {
-			ExtentTestManager.setFailMessageInReport(
-					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
+			ExtentTestManager.setWarningMessageInReport(String.format("%s ::</br>Expected =  %s</br>Actual = %s", labelName, expText, actText));
 		}
 	}
 
@@ -40,7 +39,7 @@ public class CommonFunctions {
 
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
-			By options = By.xpath("//div[contains(@class, 'FormField_options_wrap')]/div");
+			By options = By.xpath("//div[contains(@class, 'StateForm_options_wrap__22oMi')]/div");
 			boolean status = false;
 			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
 			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
@@ -112,25 +111,6 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("getcssValue failed due to exception " + e);
 		}
 
-	}
-
-	public void verifyChangedColor(By ele, String eleName, String cssProp, String expValue, String expColor) {
-		try {
-			String initialValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
-			objBrowserFunctions.moveToElement(ele, eleName);
-			Thread.sleep(500);
-			String FinalValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
-			System.out.println(initialValue + " : " + FinalValue);
-			if (FinalValue.equalsIgnoreCase(expValue)) {
-				ExtentTestManager.setPassMessageInReport(
-						String.format("%s css property value changed to ", cssProp) + " " + expColor);
-			} else {
-				ExtentTestManager.setFailMessageInReport(
-						String.format("%s css property value is not changed to ", cssProp) + " " + expColor);
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("VerifyChangedColor is failed due to exception " + e);
-		}
 	}
 
 	public void elementView(By ele, String eleName) {
@@ -206,21 +186,39 @@ public class CommonFunctions {
 
 	public void clearText(By ele, String eleName) {
 		try {
-			objBrowserFunctions.getElement(ele, eleName).clear();
+			// WebElement eleAddress = objBrowserFunctions.getElement(ele, eleName);
+			// objBrowserFunctions.executeJavaScript("arguments[0].value = ''", eleAddress);
+			DriverFactory.getDriver().findElement(ele).clear();
+			objBrowserFunctions.getElement(ele, eleName).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is cleared");
 		} catch (Exception e) {
 			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is  not cleared");
 		}
 	}
 
+	public void clickOutSideElement() {
+		// DriverFactory.getDriver().findElement(By.xpath("//html")).click();
+
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.moveByOffset(0, 0).click().build().perform();
+
+		ExtentTestManager.setInfoMessageInReport("clicked outside");
+	}
+
 	public void validateField(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager
-					.setInfoMessageInReport("trying to enter " + enterText.length() + "characters  in " + eleName);
+					.setInfoMessageInReport("trying to enter " + enterText.length() + "characters in " + eleName);
 			objBrowserFunctions.enterText(ele, enterText, eleName);
-			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "");
+			String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "")
+					.replace("-", "").replace("(", "").replace(")", "");
 			System.out.println("length " + actualtext.length());
-			if (enterText.equalsIgnoreCase(actualtext)) {
+
+			clickOutSideElement();
+
+			By errorMsgs = By.cssSelector("span.text-crd5");
+			if (enterText.equalsIgnoreCase(actualtext)
+					&& objBrowserFunctions.getElementsList(errorMsgs, "error messages").size() == 0) {
 
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
@@ -305,17 +303,45 @@ public class CommonFunctions {
 				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting  Special characters");
 			} else {
 
-				ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting  Special characters");
+				ExtentTestManager.setFailMessageInReport(eleName + " is  accepting  Special characters");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
 
 		}
 	}
-	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+
+	public void verifyAutoFocus(By ele, String eleName) {
+		WebElement webele = objBrowserFunctions.getElement(ele, eleName);
+		try {
+			if (webele.equals(DriverFactory.getDriver().switchTo().activeElement())) {
+				ExtentTestManager.setPassMessageInReport(eleName + " is Auto Focused");
+			} else {
+				ExtentTestManager.setFailMessageInReport(eleName + " is not Auto Focused");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("verifyAutoFocus is failed due to exception " + e);
+
+		}
 	}
 
+	public void verifyChangedColor(By ele, String eleName, String cssProp, String expValue, String expColor) {
+
+		try {
+			String initialValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+			objBrowserFunctions.moveToElement(ele, eleName);
+			Thread.sleep(500);
+			String FinalValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+			System.out.println(initialValue + " : " + FinalValue);
+			if (FinalValue.equalsIgnoreCase(expValue)) {
+				ExtentTestManager.setPassMessageInReport(
+						String.format("%s css property value changed to ", cssProp) + "" + expColor);
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						String.format("%s css property value is not changed to ", cssProp) + "" + expColor);
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("VerifyChangedColor is failed due to exception " + e);
+		}
+	}
 }

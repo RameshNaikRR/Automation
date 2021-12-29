@@ -9,7 +9,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ForgotEmailComponent extends BrowserFunctions {
 
 	private By forgotHeading = By.cssSelector(".forgot-email__title");
-	private By lnkBackToLogin = By.cssSelector(".pl-1");
+	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
 	private By txtPhoneNumber = By.id("Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtFirstName = By.name("first_name");
@@ -26,11 +26,54 @@ public class ForgotEmailComponent extends BrowserFunctions {
 	}
 
 	public void clickBackToLogin() {
-		click(lnkBackToLogin, "BackToLogin");
+		click(lnkBackToLogin, "Back To Login");
 	}
 
 	public void fillPhoneNumber(String PhoneNumber) {
 		enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
+	}
+
+	public void validatePhoneNumber(String maxChar, String moreThanMaxChar, String alphabets, String specialChar) {
+		new CommonFunctions().validateFieldWithSpecialchar(txtPhoneNumber, "Phone Number", specialChar);
+		new CommonFunctions().validateFieldWithalphabet(txtPhoneNumber, "Phone Number", alphabets);
+		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", moreThanMaxChar);
+		new CommonFunctions().clearText(txtPhoneNumber, "Name on card");
+		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", maxChar);
+
+	}
+
+	public void validateFirstName(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
+			String specialChar)  {
+		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "First Name", specialChar);
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateFieldWithNumber(txtFirstName, "First Name", number);
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateFieldMaxichar(txtFirstName, "First Name", moreThanMaxChar);
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateField(txtFirstName, "First Name", maxChar);
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateField(txtFirstName, "First Name", minChar);
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateField(txtFirstName, "First Name",minCharPlus );
+		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().validateField(txtFirstName, "First Name", maxLessChar);
+	}
+
+	public void validateLastName(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
+			String specialChar) {
+		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "Last Name", specialChar);
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateFieldWithNumber(txtFirstName, "Last Name", number);
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateFieldMaxichar(txtFirstName, "Last Name", moreThanMaxChar);
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateField(txtFirstName, "Last Name", maxChar);
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateField(txtFirstName, "Last Name", minChar);
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateField(txtFirstName, "Last Name",minCharPlus );
+		new CommonFunctions().clearText(txtFirstName, "Last Name");
+		new CommonFunctions().validateField(txtFirstName, "Last Name", maxLessChar);
 	}
 
 //	public void validateRemainingAttempts(String expAttempts) {

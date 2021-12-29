@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -17,453 +18,228 @@ import ilabs.api.reporting.ExtentTestManager;
 public class HomeTest {
 
 	HomePage homePage;
+	PhoneVerificationComponent phoneVerificationComponent;
 
 	@BeforeMethod
 	public void init() {
 		homePage = new HomePage();
+		phoneVerificationComponent = new PhoneVerificationComponent();
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 
-	public void testVerifyHomePageOptions(String strParams) {
+	public void testcreateAccount(String strParams) {
 		try {
-			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-			homePage.verifyHomePageOptions(data.get("createAccount"), data.get("personalAccount"),
-					data.get("businessAccount"), data.get("logIn"));
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-
-	@Parameters({ "strParams" })
-
-	public void testVerifyHomePageOptionsText(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-				
-			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
-			homePage.verifyCreateAccountText(data.get("createAccountText"));
-			homePage.verifyPersonalAccountText(data.get("personalAccountText"));
-			homePage.verifyBusinessAccountText(data.get("businessAccountText"));
-             
-			/*
-			 * homePage.verifyHomePageTabNavigation();
-			 * 
-			 * homePage.verifyBusinessAccountDisabled();
-			 * homePage.verifyBusinessAccountToolTip(data.get("BusinessAccountToolTip"));
-			 */
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-	}
-
-	@Test
-
-	@Parameters({ "strParams" })
-
-	public void testVerifyLogInOptions(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyClickLogIn(data.get("loginText"));
-			homePage.clickSignUp();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-	}
-	
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testCreatePersonalAccountText(String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
-			homePage.verifyCreateAPersonalAccountText(data.get("createAPersonAccountText"));
-			homePage.verifyCreatePersonalAccountDescriptionText(data.get("createPersonalAccountDescText"));
-            
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testFirstNameField(String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyFirstNameFieldOpacity();
-            homePage.verifyFirstNameValidations(data.get("firstName"), data.get("input"));
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testFirstNameFieldsWithInvalidData(String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyFirstNameValidations(data.get("firstName"));
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void verifySignUpFieldsWithEmpty  (String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
-			homePage.verifySignUpFieldsWithEmpty(data.get("firstName"), data.get("lastNameText"),
-					data.get("phoneNumber"), data.get("email"), data.get("createPassword"),
-					data.get("confirmPassword"));
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testLastNameField(String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyLastNameOpacity();
-			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
-			homePage.verifyLastNameValidations(data.get("lastNameText"), data.get("input"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testLastNameFieldWithInvalidData(String strParams) {
-
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyLastNameValidations(data.get("lastNameText"));
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testPhoneNumberField(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyPhonenUmberOpacity();
-			homePage.verifyPhoneNumberTenDigitValidations(data.get("phoneNumberdigits"));
-
-			homePage.verifyUSnumberForformat(data.get("numberFormat"));
-
-			homePage.verifyPhoneNumberValidations(data.get("phoneNumber"), data.get("input"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-	
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testPhoneNumberFieldWithInvalidData(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyPhoneNumberValidations(data.get("phoneNumber"), data.get("input"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testEmailTextFiled(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyEmailOpacity();
-			homePage.verifyEmailAdressFiledWithSpecialCharacters(data.get("email"), data.get("inputTypes"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-	}
-
-	
-	
-	
-	
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testverifyCreatePasswordTextFiled (String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyCreatePasswordOpacity();
-
-			homePage.verifyCreatePasswordRequirementsToolTip(data.get("createPassword"),data.get("createPasswordToolTip"), data.get("inputTypes"));
-			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.fillFirstName(data.get("firstName"));
+			homePage.fillLastName(data.get("lastName"));
+			homePage.fillPhoneNumber(data.get("phoneNumber"));
+			homePage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			homePage.fillCreatePassword(data.get("createPassword"));
+			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			homePage.clickCheckBox();
+			homePage.clickNext();
+			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			homePage.phoneVerificationComponent().fillpin(data.get("code"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyEmailHeading(data.get("emailHeading"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyAccountCreated(data.get("createdAccountHeading"));
 			
-
-			homePage.verifyCreatePasswordTextFiled(data.get("createPassword"));
-			homePage.verifyCreatePasswordShowIcons(data.get("expCreateShowIconType"));
-			homePage.verifyClickOnCreatePasswordShowIcon(data.get("createPassword"));
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
+//			if (!data.get("errMessage").isEmpty()) {
+//				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+//				homePage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
+//			}
+//			homePage.phoneVerificationComponent().clickResend();
+//			homePage.phoneVerificationComponent().clickGoBack();
+//			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+//			 verify data presence
 		}
 
 		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
+			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
 		}
-	}
-
-	
-	
-	
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testConfirmPasswordTextField(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyConfirmPasswordOpacity();
-			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
-			homePage.verifyConfirmPaaswordFieldDescription(data.get("confirmPasswordText"));
-
-			homePage.verifyConfirmPasswordMaskedWithBlackCircles(data.get("confirmPassword"), data.get("expType"));
-			//homePage.verifyConfirmPasswordShowIcon();
-			homePage.verifyClickOnConfirmPasswordShowIcon(data.get("confirmPassword"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
-
-		}
-
-	}
-    
-	
-	@Test
-	@Parameters({ "strParams" })
-
-	public void testPhoneVerificationPage(String strParams) {
-		try {
-			Thread.sleep(2000);
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickPersonalAccount();
-			homePage.verifyNextButtonEnabled(data.get("firstName"), data.get("lastNameText"), data.get("email"),
-					data.get("phoneNumber"), data.get("createPassword"), data.get("confirmPassword"));
-			homePage.verifyClickNext(data.get("phoneVerifictionText"));
-			homePage.verifyPhoneVerificationPage(data.get("PhoneVerificationDescription"), data.get("ResendText"),
-					data.get("GoBackText"));
-			homePage.verifyPhoneNumberTextInPhoneNumberDescription(data.get("phoneNumber"));
-
-			/*
-			 * if (!data.get("invalidAttempts").isEmpty()) {
-			 * homePage.validateRemainingAttempts(data.get("invalidAttempts")); }
-			 */
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "", "");
-			}
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);	
-
-		}
-
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifySignUpFieldsWithInvalidDetails(String strParams) {
+
+	public void validateCreateAccountFields(String strParams) {
 		try {
-			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
-			homePage.verifySignUpEmailFieldsWithInvalidData(data.get("email"),data.get("inputTypes"));
-			homePage.clickTab();
-			homePage.verifySignUpFieldCreatePasswordWithInvalidData(data.get("createPassword"));
-			homePage.clickTab();
-			homePage.verifySignUpFieldConfirmPasswordWithInvalidData(data.get("ConfirmPassword"));
-			homePage.clickTab();
+			// homePage.verifyCreateAccountPageHeading("createAccountHeading");
+			String[] firstName = data.get("firstName").split(",");
+			homePage.validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3], firstName[4],firstName[5],firstName[6]);
+			String[] lastName = data.get("lastName").split(",");
+			homePage.validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3], lastName[4],lastName[5],lastName[6]);
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			homePage.validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2], phoneNumber[3]);
+			String[] email = data.get("email").split(",");
+			homePage.validateEmailField(email[0], email[1], email[2],email[3],email[4]);
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("validateCreateAccountFields Failed due to Exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testcreateAccountWithInvalidData(String strParams) {
+		try {
+
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.clickPersonalAccount();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.fillFirstName(data.get("firstName"));
+			homePage.fillLastName(data.get("lastName"));
+			homePage.fillPhoneNumber(data.get("phoneNumber"));
+			homePage.fillEmail(data.get("email"));
+			homePage.fillCreatePassword1(data.get("createPassword"));
+			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			// new CommonFunctions().clickOutSideElement();
+			homePage.clickNext();
+			homePage.clickCheckBox();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
+				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));
+			} else if (!data.get("toastMessage").isEmpty()) {
+				//homePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
 
 		}
 
 		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("CreatAccount Page is not loaded" + e);
 
+			ExtentTestManager.setFailMessageInReport("testcreateAccountWithInvalidData Failed due to Exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+    public void testcreateAccountPhoneVerification(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.clickPersonalAccount();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.fillFirstName(data.get("firstName"));
+			homePage.fillLastName(data.get("lastName"));
+			homePage.fillPhoneNumber(data.get("phoneNumber"));
+			homePage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			homePage.fillCreatePassword(data.get("createPassword"));
+			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			homePage.clickNext();
+			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			String[] msg = data.get("errMessage").split(",");
+			for (int i = 0; i < msg.length; i++) {
+				homePage.phoneVerificationComponent().fillpin(data.get("code"));
+				homePage.phoneVerificationComponent().verifyMessage(msg[i]);
+			}
+			homePage.phoneVerificationComponent().clickResend();
+			homePage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+			for (int i = 0; i <= 3; i++) {
+				Thread.sleep(5000);
+				homePage.phoneVerificationComponent().clickResend();
+				homePage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+			}
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testcreateAccountPhoneVerification Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+    public void testSignUpWithInvalidPhoneOTP(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.clickPersonalAccount();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.fillFirstName(data.get("firstName"));
+			homePage.fillLastName(data.get("lastName"));
+			homePage.fillPhoneNumber(data.get("phoneNumber"));
+			homePage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			homePage.fillCreatePassword(data.get("createPassword"));
+			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			homePage.clickNext();
+			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			String[] msg = data.get("errMessage").split(",");
+			for(int i=0;i<msg.length;i++) {
+				homePage.phoneVerificationComponent().fillpin(data.get("code"));
+				homePage.phoneVerificationComponent().verifyMessage(msg[i]);
+				//verify screen presence
+			}
+		
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testCreateAccountView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.verifyBusinessAccountView();
+			homePage.verifyPersonalAccountView();
+			homePage.verifyLoginView();
+			homePage.verifyCreateAccountSubTitleView();
+			homePage.verifyPersonalAccountSubTitleView();
+			homePage.verifyBusinessAccountSubTitleView();
+			homePage.clickPersonalAccount();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.verifyFirstNameAutoFocus();
+		//	homePage.verifyElementOpacity();
+			
+			
+			
+			
+//			
+//			homePage.fillFirstName(data.get("firstName"));
+//			homePage.fillLastName(data.get("lastName"));
+//			homePage.fillPhoneNumber(data.get("phoneNumber"));
+//			homePage.fillEmail(data.get("email"));
+//			Thread.sleep(1000);
+//			homePage.fillCreatePassword(data.get("createPassword"));
+//			homePage.fillConfirmPassword(data.get("confirmPassword"));
+//			homePage.clickNext();
+//			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+//			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+//			String[] msg = data.get("errMessage").split(",");
+//			for(int i=0;i<msg.length;i++) {
+//				homePage.phoneVerificationComponent().fillpin(data.get("code"));
+//				homePage.phoneVerificationComponent().verifyMessage(msg[i]);
+//				//verify screen presence
+//			}
+//		
+	}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCreateAccountView Failed due to Exception " + e);
 		}
 	}
 }

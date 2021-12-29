@@ -645,7 +645,7 @@ public void testVerifyNewPhoneNumberResendButton(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
-			homePage.clickLogIn();
+			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));
