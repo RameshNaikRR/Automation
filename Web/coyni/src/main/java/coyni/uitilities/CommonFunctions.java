@@ -39,7 +39,7 @@ public class CommonFunctions {
 
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
-			By options = By.xpath("//div[contains(@class, 'StateForm_options_wrap__22oMi')]/div");
+			By options = By.xpath("//div[contains(@class, 'StateForm_options_wrap__22oMi') or contains(@class, 'FormField_options')]/div");
 			boolean status = false;
 			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
 			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
