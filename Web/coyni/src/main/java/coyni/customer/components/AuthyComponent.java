@@ -1,6 +1,8 @@
 package coyni.customer.components;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.By;
@@ -20,15 +22,20 @@ public class AuthyComponent extends BrowserFunctions {
 
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 
-	private static String prevCode = "";
+	private static Map<String, String> prevCode = new HashMap<>();
 
 	private String getTwoFactorCode(String securityKey) {
 		Totp totp = new Totp(securityKey); // 2FA secret key
 		String twoFactorCode = totp.now(); // Generated 2FA code here
-		while (prevCode.equals(twoFactorCode)) {
+		try {
+			prevCode.get(securityKey).equals(twoFactorCode);
+		} catch (Exception e) {
+			prevCode.put(securityKey, "");
+		}
+		while (prevCode.get(securityKey).equals(twoFactorCode)) {
 			twoFactorCode = totp.now();
 		}
-		prevCode = twoFactorCode;
+		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
 	}
 
