@@ -2,6 +2,7 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AccountLimitsComponent;
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ChangePasswordComponent;
 import coyni.customer.components.CustomerMenuComponent;
@@ -16,7 +17,7 @@ public class CustomerProfilePage extends BrowserFunctions {
 	private By imageImg = By.cssSelector(" ");
 	private By lblAccountId = By.xpath("//div[contains(text(),'Account ID:')]");
 	private By lblUserName = By.xpath("//div[contains(text(),'Account ID:')]/preceding-sibling::div ");
-	
+
 	public void verifyViewImage() {
 		new CommonFunctions().elementView(imageImg, "imageImg");
 	}
@@ -56,7 +57,12 @@ public class CustomerProfilePage extends BrowserFunctions {
 	public CommonFunctions commonFunctions() {
 		return new CommonFunctions();
 	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public AccountLimitsComponent accountLimitsComponent() {
+		return new AccountLimitsComponent();
 	}
 }

@@ -1062,4 +1062,39 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickAccountLimits();
+			ExtentTestManager.setInfoMessageInReport(
+					"Pay and Request" + customerProfilePage.accountLimitsComponent().getPayAndRequest());
+			ExtentTestManager
+					.setInfoMessageInReport("Send Token" + customerProfilePage.accountLimitsComponent().getSendToken());
+			ExtentTestManager
+					.setInfoMessageInReport("Buy Tokens" + customerProfilePage.accountLimitsComponent().getBuyTokens());
+			ExtentTestManager.setInfoMessageInReport(
+					"Bank Account" + customerProfilePage.accountLimitsComponent().getBankAccount());
+			ExtentTestManager.setInfoMessageInReport(
+					"Bank Account Wallet" + customerProfilePage.accountLimitsComponent().getBankAccountWallet());
+			ExtentTestManager.setInfoMessageInReport(
+					"Debit Card" + customerProfilePage.accountLimitsComponent().getDebitAndCard());
+			ExtentTestManager.setInfoMessageInReport(
+					"Debit and Credit Wallet" + customerProfilePage.accountLimitsComponent().getDebitAndCreditWallet());
+			ExtentTestManager.setInfoMessageInReport(
+					"Withdraw To USD" + customerProfilePage.accountLimitsComponent().getWithdrawtoUSD());
+			ExtentTestManager.setInfoMessageInReport(
+					"Bank Account Withdarw" + customerProfilePage.accountLimitsComponent().getBankAccountWithdraw());
+			ExtentTestManager.setInfoMessageInReport(
+					"Instant Pay" + customerProfilePage.accountLimitsComponent().getInstantPay());
+			ExtentTestManager
+					.setInfoMessageInReport("Gift Card" + customerProfilePage.accountLimitsComponent().getGiftCard());
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
 }

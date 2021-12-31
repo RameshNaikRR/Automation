@@ -13,7 +13,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 
 	private By lnkPaymentMethods = By.cssSelector("div.dropdown-container>div:nth-of-type(3)");
 	private By lnkPreferences = By.xpath("(//span[text()='Preferences'])[1]");
-	private By lnkAccountLimits = By.cssSelector(" ");
+	private By lnkAccountLimits = By.xpath("(//span[contains(text(),'Account Limits')])[1]");
 	private By lnkAgreements = By.cssSelector(" ");
 	private By lnkChangePassword = By.cssSelector(" ");
 	private By lnkSignOut = By.xpath("//span[text()='Sign Out']");
@@ -56,6 +56,9 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 
 	public void clickSignOut() {
 		click(lnkSignOut, "SignOut");
+	}
+	public void clickAccountLimits() {
+		click(lnkAccountLimits, "Account Limits");
 	}
 
 	public void verifyRequestView() {
