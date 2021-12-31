@@ -15,6 +15,7 @@ import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ForgotEmailComponent;
 import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
+import coyni.customer.components.UserNameDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -84,6 +85,7 @@ public class LoginPage extends BrowserFunctions {
 	public void viewEmail() {
 		new CommonFunctions().elementView(txtEmail, "View Email");
 	}
+
 	public void verifyPasswordView() {
 		new CommonFunctions().elementView(txtPassword, "Password");
 	}
@@ -153,9 +155,13 @@ public class LoginPage extends BrowserFunctions {
 	public ForgotEmailComponent forgotEmailComponent() {
 		return new ForgotEmailComponent();
 	}
-	
-	public void validateFieldWithEmail(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-			String specialChar) throws InterruptedException {
+
+	public UserNameDropDownComponent userNameDropDownComponent() {
+		return new UserNameDropDownComponent();
+	}
+
+	public void validateFieldWithEmail(String minChar, String minCharPlus, String maxLessChar, String maxChar,
+			String moreThanMaxChar, String number, String specialChar) throws InterruptedException {
 		new CommonFunctions().validateFieldWithSpecialchar(txtEmail, "Email", specialChar);
 		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateFieldWithNumber(txtEmail, "Email", number);
@@ -166,7 +172,7 @@ public class LoginPage extends BrowserFunctions {
 		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", minChar);
 		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email",minCharPlus );
+		new CommonFunctions().validateField(txtEmail, "Email", minCharPlus);
 		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", maxLessChar);
 	}

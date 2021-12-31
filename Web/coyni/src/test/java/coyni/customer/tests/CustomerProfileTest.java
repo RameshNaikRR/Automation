@@ -649,6 +649,16 @@ public class CustomerProfileTest {
 	}
 
 	@Test
+	public void testLogout() {
+		try {
+			loginPage.userNameDropDownComponent().clickUserName();
+			loginPage.userNameDropDownComponent().clickSignOut();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLogout is failed due to Exception " + e);
+		}
+	}
+
+	@Test
 	// @Parameters({ "strParams" })
 
 	public void testNotifications() {
