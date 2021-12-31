@@ -200,7 +200,7 @@ public class CommonFunctions {
 		// DriverFactory.getDriver().findElement(By.xpath("//html")).click();
 
 		Actions action = new Actions(DriverFactory.getDriver());
-		action.moveByOffset(0, 0).click().build().perform();
+		action.moveByOffset(10, 10).click().build().perform();
 
 		ExtentTestManager.setInfoMessageInReport("clicked outside");
 	}

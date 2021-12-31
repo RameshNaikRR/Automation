@@ -22,6 +22,8 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
 	private By lblState = By.xpath("//div[text()='State']/parent::div");
 	private By zipCode = By.xpath("//input[@id='zip-code']/parent::div");
+	private By txtDateOfBirth =By.cssSelector("#date-of-birth");
+	private By txtSocialSecurity =By.cssSelector("#social-security-no");
 
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
@@ -62,6 +64,12 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void FillZipCode(String ZipCode) {
 		enterText(zipCode, ZipCode, "ZipCode");
+	}
+	public void fillDateOfBirth(String dateOfBirth) {
+		enterText(txtDateOfBirth, dateOfBirth, "Date of Birth");
+	}
+	public void fillSocialSecurityNum(String socialSecurityNum) {
+		enterText(txtSocialSecurity, socialSecurityNum, "Social Security Number");
 	}
 
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
