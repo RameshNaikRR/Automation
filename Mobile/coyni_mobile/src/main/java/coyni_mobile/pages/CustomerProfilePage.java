@@ -283,5 +283,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	public AgreementComponent agreementComponent() {
 		return new AgreementComponent();
 	}
-
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
 }

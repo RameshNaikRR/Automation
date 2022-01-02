@@ -459,58 +459,58 @@ public class CustomerProfileTest {
 
 	}
 
-	// M
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddExternalBankAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.externalBankAccountPage().clickBank();
-			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
-			customerProfilePage.externalBankAccountPage().clickLearnMore();
-			customerProfilePage.externalBankAccountPage().navigationComponent().clickClose();
-			customerProfilePage.externalBankAccountPage().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
-		}
-
-	}
-
-	// Ios M
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddExternalBankAccountWithNavigateOption(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.navigationComponent().clickClose();
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
-			customerProfilePage.externalBankAccountPage().navigationComponent().clickBack();
-			customerProfilePage.externalBankAccountPage().clickLearnMore();
-			customerProfilePage.externalBankAccountPage().navigationComponent().clickClose();
-			customerProfilePage.externalBankAccountPage().clickNext();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
-		}
-	}
-
-	// Ios M
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddExternalBankAccountWithUserHavePaymentMethods(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.externalBankAccountPage().clickNext();
-			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
-		}
-	}
+//	// M
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddExternalBankAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickProfile();
+//			customerProfilePage.clickPaymentMethods();
+//			customerProfilePage.externalBankAccountPage().clickBank();
+//			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
+//			customerProfilePage.externalBankAccountPage().clickLearnMore();
+//			customerProfilePage.externalBankAccountPage().navigationComponent().clickClose();
+//			customerProfilePage.externalBankAccountPage().clickNext();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
+//		}
+//
+//	}
+//
+//	// Ios M
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddExternalBankAccountWithNavigateOption(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			customerProfilePage.clickPaymentMethods();
+//			customerProfilePage.navigationComponent().clickClose();
+//			customerProfilePage.clickPaymentMethods();
+//			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
+//			customerProfilePage.externalBankAccountPage().navigationComponent().clickBack();
+//			customerProfilePage.externalBankAccountPage().clickLearnMore();
+//			customerProfilePage.externalBankAccountPage().navigationComponent().clickClose();
+//			customerProfilePage.externalBankAccountPage().clickNext();
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
+//		}
+//	}
+//
+//	// Ios M
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddExternalBankAccountWithUserHavePaymentMethods(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			customerProfilePage.externalBankAccountPage().clickNext();
+//			customerProfilePage.externalBankAccountPage().verifyHeading(data.get("addBankHeading"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Add External Bank Account Failed due to exception " + e);
+//		}
+//	}
 
 	// Ios M
 	@Test
@@ -610,35 +610,27 @@ public class CustomerProfileTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testAddCreditCard(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickProfile();
-//			customerProfilePage.clickPaymentMethods();
-//			customerProfilePage.addPaymentMethodPage().clickDebitCard();
-//			customerProfilePage.addPaymentMethodPage().addCardPage().fillCardNumber(data.get("nameOnCard"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().fillCardNumber(data.get("cardNumber"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().fillCardExp(data.get("expiryDate"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().fillCVVorCVC(data.get("cvv"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().clickNext();
-//			customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent()
-//					.fillAddressLine1(data.get("addline1"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent()
-//					.fillAddressLine2(data.get("addline2"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent()
-//					.fillCity(data.get("city"));
-//			// customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent().selectState();
-//			customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent()
-//					.fillZipCode(data.get("zipCode"));
-//			customerProfilePage.addPaymentMethodPage().addCardPage().mailingAddressComponent().clickAddCard();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
-//		}
-//
-////	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+			customerProfilePage.paymentMethodsPage().clickAddNewPayment();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyHeading("addBankHeading");
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().verifyHeading(data.get("AccountHeading"));
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
+		}
+
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {
