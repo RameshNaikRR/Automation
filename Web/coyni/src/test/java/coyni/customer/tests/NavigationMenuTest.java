@@ -90,6 +90,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyLabelMessage();
 			// navigationMenuPage.verifyProfileInformation();
 			// navigationMenuPage.userNameDropDownComponent().cursorhoverUserName();
+			navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
 			navigationMenuPage.userNameDropDownComponent().verifyRequestDot();

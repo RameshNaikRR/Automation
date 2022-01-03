@@ -8,22 +8,25 @@ import ilabs.WebFramework.BrowserFunctions;
 public class UserNameDropDownComponent extends BrowserFunctions {
 
 	// added
+	private By userDetailsNameHeading = By.xpath("//div[@class='internal-header__circle-initials hover:underline']");
 	private By dropwnUserName = By.cssSelector(".down-arrow");
+	private By lblRequests = By.xpath("//span[text()='Requests']");
+	private By requestdot = By.xpath("//span[contains(@class,'green-dot')]");
 	private By lnkUserDetails = By.xpath("//span[text()='User Details']");
-
 	private By lnkPaymentMethods = By.cssSelector("div.dropdown-container>div:nth-of-type(3)");
 	private By lnkPreferences = By.xpath("(//span[text()='Preferences'])[1]");
-	private By lnkAccountLimits = By.xpath("(//span[contains(text(),'Account Limits')])[1]");
-	private By lnkAgreements = By.cssSelector(" ");
-	private By lnkChangePassword = By.cssSelector(" ");
+	private By lnkAccountLimits = By.xpath("//span[text()='Account Limits']");
+	private By lnkAgreements = By.xpath("//span[text()='Agreements']");
+	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
 	private By lnkSignOut = By.xpath("//span[text()='Sign Out']");
-	private By lblRequests = By.cssSelector(" ");
-	private By signOutIcon = By.cssSelector(" ");
-	private By requestdot = By.xpath("//span[contains(@class,'green-dot')]");
 
 	public void cursorhoverUserName() {
 		new CommonFunctions().verifyCursorAction(dropwnUserName, "drop down");
 
+	}
+
+	public void verifyUserDetailsNameHeading() {
+		new CommonFunctions().elementView(userDetailsNameHeading, "user name");
 	}
 
 	public void verifyUserDetails() {
@@ -57,6 +60,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	public void clickSignOut() {
 		click(lnkSignOut, "SignOut");
 	}
+
 	public void clickAccountLimits() {
 		click(lnkAccountLimits, "Account Limits");
 	}
@@ -65,9 +69,9 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(dropwnUserName, "Request");
 	}
 
-	public void verifysignOutView() {
-		new CommonFunctions().elementView(signOutIcon, "SignOut");
-	}
+//	public void verifysignOutView() {
+//		new CommonFunctions().elementView(signOutIcon, "SignOut");
+//	}
 
 	public void verifyUserNameView() {
 		new CommonFunctions().elementView(dropwnUserName, "UserName");
