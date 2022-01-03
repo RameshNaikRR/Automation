@@ -369,16 +369,24 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
+			Thread.sleep(5000);
 			tokenAccountPage.verifyLabelYourTransactions(data.get("expHeading"));
-			// tokenAccountPage.verifyLabelTransactionListDetails();
 			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
+			tokenAccountPage.verifyLabelTransactionListDetails();
+			tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
 			// tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
 			// tokenAccountPage.verifyTransactionList();
+			// tokenAccountPage.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.verifyPostedTransactions(data.get("count"));
+			// tokenAccountPage.verifyBracesCount();
+			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
 			tokenAccountPage.clickDropDownEntriesPage();
+			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 			// tokenAccountPage.getEntryOptions();
 			tokenAccountPage.verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport("Entries is displayed as " + tokenAccountPage.getEntriesMessage());
@@ -387,6 +395,7 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testTransactionList failed due to exception " + e);
 		}
+
 	}
 
 	@Test

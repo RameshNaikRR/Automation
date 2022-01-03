@@ -32,17 +32,19 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
 	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]");
-//		private By lblDateTime = By.xpath("//span[text()='Date & Time']");
-//		private By lblType = By.xpath("//span[text()='Type']");
-//		private By lblSubType = By.xpath("//span[text()='SUB TYPE']");
-//		private By lblDescription = By.xpath("//span[text()='Description']");
-//		private By lblAmount = By.xpath("//span[text()='Amount']");
-//		private By lblBalance = By.xpath("//span[text()='Balance']");
-//		private By lblStatus = By.xpath("//span[text()='Status']");
+	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
+	private By lblType = By.xpath("//span[text()='Type']");
+	private By lblSubType = By.xpath("//span[text()='SUB TYPE']");
+	private By lblDescription = By.xpath("//span[text()='Description']");
+	private By lblAmount = By.xpath("//span[text()='Amount']");
+	private By lblBalance = By.xpath("//span[text()='Balance']");
+	private By lblStatus = By.xpath("//span[text()='Status']");
 	private By lblPostedTransactions = By.xpath("//div[@class='posted-txn']");
 	// private By transaction = By.xpath("(//tr[@class=' hovered'])[1]");
 	private By lblItemsPerPage = By.cssSelector(".entries-container .entries-message");
 	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
+	private By transaction = By.xpath("//tr[@class='  hovered']");
+	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
 	private By defaultEntries = By
 			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
 	private By lblEntriesMessage = By.xpath("//span[@class='entries-message']");
@@ -51,6 +53,42 @@ public class TokenAccountPage extends BrowserFunctions {
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
 
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
+
+	public String getBracesCount() {
+		String str = getText(lblBracesCount, "braces Count");
+		return str;
+
+	}
+
+	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
+
+	private By seconPage = By.xpath("//a[@aria-label='Go to page number 2']");
+
+	private By prevPage = By.xpath("//a[contains(@aria-label, 'previous page') or text() = '❮']");
+
+	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
+
+	private By lastPage = By.xpath("//a[contains(@aria-label, 'last page') and text() = '»']");
+
+	public void clickGoToFirstPage() {
+		click(firstPage, "first page '«'");
+	}
+
+	public void clickGoToPreviousPage() {
+		click(prevPage, "previous page '❮'");
+	}
+
+	public void clickGoToNextPage() {
+		click(nextPage, "next page '❯'");
+	}
+
+	public void clickGoToLastPage() {
+		click(lastPage, "last page '»'");
+	}
+
+	public boolean isNextButtonEnabled() {
+		return getElement(nextPage, "next page '❯'").isEnabled();
+	}
 
 	public void clickTokenAccount() throws InterruptedException {
 		click(btnTokenAccount, "Token Account");
@@ -85,16 +123,69 @@ public class TokenAccountPage extends BrowserFunctions {
 		return getText(lblItemsPerPage, "entries per page");
 	}
 
-	public void verifyTableItemsCount() {
+	public void verifyPostedTransactions(String expCount) {
+
+		int page1 = getElementsList(transaction, "page transaction count").size();
+		int count = Integer.parseInt(expCount);
+		if (page1 == count) {
+			ExtentTestManager.setPassMessageInReport("No of Entries" + page1);
+
+		} else {
+			ExtentTestManager.setFailMessageInReport("Not Entries" + page1);
+
+		}
+
+	}
+
+	public void verifyPageNumbersWithCount() {
 		int actCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
-		int rowInTable = getElementsList(rows, "Table Rows").size();
-		if (actCount == rowInTable) {
+		int page = getElementsList(transaction, "page transaction count").size();
+		int pageNumber = actCount / page;
+		int remainder = actCount % page;
+		if (!(remainder == 0)) {
+			pageNumber++;
+			if (!(pageNumber == 0)) {
+				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
+			}
+		} else {
+			ExtentTestManager.setFailMessageInReport("No of Page is Null");
+		}
+
+	}
+
+	public void verifyBracesCount() {
+		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+		int bracesCount = Integer.parseInt(getBracesCount().split(" ")[0].split("(")[1].split(")")[2]);
+		if (expCount == bracesCount) {
+			ExtentTestManager.setPassMessageInReport("Braces are " + bracesCount);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Braces are not" + bracesCount);
+		}
+	}
+
+	public void verifyPageNumberHighlighted(String cssProp, String expValue, String expColor) {
+
+		if (verifyElementDisplayed(nextPage, "Next Page")) {
+			click(nextPage, "Clicked Next Page");
+			new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp, expValue, expColor);
+			ExtentTestManager.setPassMessageInReport("Page is Highlighted when clicked on Page number");
+		}
+
+		else {
+			ExtentTestManager.setWarningMessageInReport("Page is Not Highlighted");
+
+		}
+	}
+
+	public void verifyTableItemsCount(String query) {
+		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+		int actCount = Integer.parseInt(query);
+		if (expCount == actCount) {
 			ExtentTestManager.setPassMessageInReport(
 					"Number of rows in transactions table matches with number of entries selected i.e " + actCount);
 		} else {
-			ExtentTestManager.setFailMessageInReport(String.format(
-					"Number of rows in transactions table = %s and entries selected in show drop down = %s", rowInTable,
-					actCount));
+			ExtentTestManager.setFailMessageInReport(
+					"Number of rows in transactions table = %s and entries selected in show drop down = %s");
 		}
 	}
 
@@ -131,14 +222,14 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().elementView(lblYourTransactions, "Your Transactions");
 	}
 
-//		public void verifyLabelTransactionListDetails() {
-//			new CommonFunctions().elementView(lblDateTime, "Date and Time");
-//			new CommonFunctions().elementView(lblType, "Type");
-//			new CommonFunctions().elementView(lblDescription, "Description");
-//			new CommonFunctions().elementView(lblAmount, "Amount");
-//			new CommonFunctions().elementView(lblBalance, "Balance");
-//			new CommonFunctions().elementView(lblStatus, "Status");
-//		}
+	public void verifyLabelTransactionListDetails() {
+		new CommonFunctions().elementView(lblDateTime, "Date and Time");
+		new CommonFunctions().elementView(lblType, "Type");
+		new CommonFunctions().elementView(lblDescription, "Description");
+		new CommonFunctions().elementView(lblAmount, "Amount");
+		new CommonFunctions().elementView(lblBalance, "Balance");
+		new CommonFunctions().elementView(lblStatus, "Status");
+	}
 
 	public void verifyLabelPostedTransactions(String expPostedTranasactionHeading) {
 		new CommonFunctions().verifyLabelText(lblPostedTransactions, "Posted Transactions",
