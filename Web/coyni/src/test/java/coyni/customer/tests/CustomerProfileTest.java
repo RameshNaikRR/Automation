@@ -709,6 +709,9 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsIconView();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyMoveToCrossbtn();
+			customerProfilePage.userDetailsComponent().notificationsComponent().VerifyMousehoverNotificationscolor(data.get("CssProp"), data.get("CssValue"), data.get("Color"));
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsbtnView();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			customerProfilePage.userDetailsComponent().notificationsComponent()
@@ -889,8 +892,9 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifybtnCancelView();
-			customerProfilePage.userDetailsComponent().notificationsComponent()
-					.verifyReminderfirstMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyReminderfirstMsg(data.get("initialMsg"));
+			Thread.sleep(1000);
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyCancelBorderColor(data.get("CssProp"), data.get("CssValue"), data.get("Color"));
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickCancel();
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyCancelMsg(data.get("finalMsg"));
 
@@ -908,6 +912,7 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
 			customerProfilePage.userDetailsComponent().notificationsComponent()
 					.verifyInitialMsg(data.get("initialMsg"));
+			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDenyBordercolor(data.get("CssProp"), data.get("CssValue"), data.get("Color"));
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDenybtnView();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickDeny();
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyLastMsg(data.get("lastMsg"));

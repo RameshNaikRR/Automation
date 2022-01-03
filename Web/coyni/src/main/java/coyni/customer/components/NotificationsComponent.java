@@ -31,6 +31,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By ReminderLastMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By CancelMsg = By.xpath("//span[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By count = By.xpath("");
+	private By btnCross = By.xpath("//span[@class='cross-icon']//img ");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
 	// private By notificationCOunt = By.xpath("//span[@class='text']");
@@ -69,6 +70,22 @@ public class NotificationsComponent extends BrowserFunctions {
 		}
 
 	}
+	 public void verifyMoveToCrossbtn() {
+	    	moveToElement(btnCross, "Cross");
+	    }
+	 public void VerifyMousehoverNotificationscolor(String expCssProp,String expValue, String expColor) {
+			new CommonFunctions().verifyChangedColor(btnNotifications, "Notifications",expCssProp , expValue, expColor);
+		}
+	 public void MousehoverNotificationscolor(String expCssProp,String expValue, String expColor) {
+			new CommonFunctions().verifyChangedColor(btnNotifications, "notifications",expCssProp , expValue, expColor);
+		}
+		
+		public void verifyDenyBordercolor(String expCssProp,String expValue, String expColor) {
+			new CommonFunctions().verifyChangedColor(btnDeny, "Deny", expCssProp , expValue, expColor);
+		}
+		public void verifyCancelBorderColor(String expCssProp,String expValue, String expColor) {
+			new CommonFunctions().verifyChangedColor(btnCancel, "Cancel", expCssProp , expValue, expColor);
+		}
 
 	// added
 	public Count count() {
