@@ -262,24 +262,6 @@ public class CustomerProfileTest {
 	@Test // added
 	@Parameters({ "strParams" })
 
-	public void testOldNumberEditible(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().verifyOldPhoneNumberTextEditible();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testOldNumberEditible is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
 	public void testNewPhoneNumberVerificationCodeSendButton(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -351,7 +333,6 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInputInvalid(data.get("code"),
 					data.get("char"));
 
-			customerProfilePage.userDetailsComponent().verifyCurrentNumberWithValidCodeAfterTenMinutes();
 			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("codeWithInvalid"));
 
 		} catch (Exception e) {
@@ -480,8 +461,6 @@ public class CustomerProfileTest {
 					data.get("expHeading"));
 			customerProfilePage.userDetailsComponent()
 					.verifyNewPhoneNumberVerificationCodeWithInvalidData(data.get("expCode"), data.get("input"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberWithValidCodeAfterTenMinutes(data.get("expVerificationFailedMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager

@@ -32,7 +32,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
 	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
 	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
-	private By iconEditPhNum = By.xpath("//div[@id='t8d39f6c8-bba6-4463-a16b-daa4a2d0975d']");
+	private By iconEditPhNum = By.xpath("//div[@class='text-xs icon-edit cursor-pointer UserDetails_edit_Phone_icon__1iIcs']");
 	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
@@ -40,7 +40,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
 	private By lblAccountAddress = By.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
-	private By lblEditPhoneNumber = By.xpath("//h3[@class=\"text-cgy4 tracking-wide Heading_heading3__3l6XX font-semibold leading-3 tracking-tightest UserDetails_phoneNumber__borc2\"]");
+	private By lblEditPhoneNumber = By.xpath("//h3[@class='text-cgy4 tracking-wide Heading_heading3__3l6XX font-semibold leading-3 tracking-tightest UserDetails_phoneNumber__borc2']");
 	private By lblEditPhoneNumberAuthenticationDescription = By.xpath("//span[@class='mt-10 text-base text-center text-cgy4']");
     private By lblVerificationCodeDescription = By.cssSelector("");
     private By txtCode = By.cssSelector("input[class *= 'verification-input']");
@@ -217,9 +217,6 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     public void verifyVerificationCodeDescriptionText(String expVerificationCodeDescriptionText) {
     	new CommonFunctions().verifyLabelText(lblVerificationCodeDescription, "Edit Phone Number Description Text", expVerificationCodeDescriptionText);
     }
-    public void verifyVerificationCodeAutoFoucsed() {
-    	
-    }
     public void verifyVerificationTextCodeBoxBorderColorAndDescription(String expColor, String expVerificationmsg) {
     	
     	new CommonFunctions().verifyTextBoxBorderColor(expColor);
@@ -280,16 +277,7 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     	}
     	}
     
-    public void verifyOldPhoneNumberTextEditible() {
-    	if(verifyElementSelected(txtOldPhoneNumber, "Old Number Tesxt Editible"))
-    	{
-    		ExtentTestManager.setPassMessageInReport("Old Number Field is not Editble");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Old Number Field is  Editble");
-		
-    	}
-    	
-    }
+ 
     public void veriySendCodeButtonWithEmpty(String expNumber) {
     	enterText(txtNewPhoneNumber, "New Phone Number With empty", expNumber);
     	verifyElementDisabled(btnSendCode, "Send Code");
@@ -325,24 +313,13 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     	new CommonFunctions().verifyLabelText(headingCurrentPhoneNumber, "Current Phone Number Heading is", expHeadingCurrentNumber );
     }
     
-    public void verifyCurrentPhoneNumberVerificationCodeWithNumbers(String expCode) {
-    	//new CommonFunctions().validateFieldWithNumber(txtCurrentPhoneNumberVerificationCode, "Current pHone Number Verification Code", expCode);
-    }
-    public void verifyCurrentPhoneNumberVerificationCodeDescriptionWithInValidCode(String expVerificationSuccesful) {
-    	//enterText(txtCurrentPhoneNumberVerificationCode, "Current Phone Number Verification Code", expCode);
-    	//new CommonFunctions().verifyTextBoxBorderColor(expColor);
-    	new CommonFunctions().verifyLabelText(lblCurrentNumberVerficationSuccesful, "Verification Succesful", expVerificationSuccesful);
-    	
-    }
+    
+    
     public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
     	new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification", expNewPhoneNumberHeading);
     }
    
-    public void verifyCurrentNumberWithValidCodeAfterTenMinutes() {
-    	Uninterruptibles.sleepUninterruptibly(10, TimeUnit.MINUTES);
-    	//enterText(txtCurrentPhoneNumberVerificationCode, "Current Phone Number Verification Code", expCode);
-    	//new CommonFunctions().verifyLabelText(lblCurrentNumberVerificationFailed, "Verification Failed", expVerificationFailedMsg);
-    }
+    
     
     
     
@@ -416,16 +393,7 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
 			ExtentTestManager.setFailMessageInReport("New Phone Number is Accepting" +input +"Character");
     	}
     }
-    public void verifyNewPhoneNumberWithValidCodeAfterTenMinutes(String expVerificationFailedMsg) {
-    	Uninterruptibles.sleepUninterruptibly(10, TimeUnit.MINUTES);
-    	new CommonFunctions().verifyLabelText(lblNewPhoneNumberVerificationFailed, "Verification Failed", expVerificationFailedMsg);
-    }
-    public void verifyNewPhoneNumberVerificationCodeBorderColorAndDescriptionWithInvalidData(String expCode,String expColor,String expVerificationSuccesfulMsg) {
-    	enterText(txtNewPhoneNumber, "", expCode);
-    	new CommonFunctions().verifyTextBoxBorderColor(expColor);
-    	new CommonFunctions().verifyLabelText(lblNewPhoneNumberVerificationFailed, "Verification Failed", expVerificationSuccesfulMsg);
-    	
-    }
+    
     
     public void clickNewPhoneNumberResend() {
     	click(btnNewNumberResend,"Click Resend");

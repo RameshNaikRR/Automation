@@ -42,6 +42,8 @@ public class HomePage extends BrowserFunctions {
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By chkBox = By.cssSelector(".custom-checkbox ");
+	private By eyeIconCreatePassword = By.xpath("(//button[@class='icon-button  icon-password-hide-new  view-password text-cgy2 hover:text-cgy3'])[1]");
+	private By eyeIconConfirmPassword = By.xpath("(//button[@class='icon-button  icon-password-hide-new  view-password text-cgy2 hover:text-cgy3'])[2]");
 	
     public void clickCheckBox() {
     	click(chkBox, "CheckBox");
@@ -271,6 +273,60 @@ public class HomePage extends BrowserFunctions {
 //	
 //		clickConfirmIcon();
 //	}
+    public void verifyCreatePasswordMasked(String CreatePassword,String expType) {
+    	enterText(txtCreatePassword, CreatePassword, "Create Password");
+    	String str = getAttributeValue(txtCreatePassword, "type", CreatePassword);
+    	if(expType.contains(str)) {
+    		ExtentTestManager.setPassMessageInReport("Create password have masked with black circles " + CreatePassword);
+    	}
+    	else {
+    		ExtentTestManager.setFailMessageInReport("Create password not masked with black circles " + CreatePassword);
+    		
+    	}
+    }
+   public void verifyCreatePasswordEyeIcon() {
+	   new CommonFunctions().elementView(eyeIconCreatePassword, "Create Password View Eye Icon");
+   }
+   public void verifyClickOnCreatePasswordShowIcon(String CreatePassowrd) {
+		enterText(txtCreatePassword, CreatePassowrd, "Create Password");
+		click(eyeIconCreatePassword, "Clicked  on ShowIcon");
+		String actualPaasword = getAttributeValue(txtCreatePassword, "value", CreatePassowrd);
+
+		if (actualPaasword.equals(CreatePassowrd )) {
+			ExtentTestManager.setPassMessageInReport("Enterd password is visibled " + actualPaasword);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Enterd password is not visibled " + actualPaasword);
+
+		}
+	}
+
+   public void verifyConfirmPasswordMasked(String ConfirmPassword,String expType) {
+   	enterText(txtConfirmPassword, ConfirmPassword, "Create Password");
+   	String str = getAttributeValue(txtCreatePassword, "type", ConfirmPassword);
+   	if(expType.contains(str)) {
+   		ExtentTestManager.setPassMessageInReport("Create password have masked with black circles " + ConfirmPassword);
+   	}
+   	else {
+   		ExtentTestManager.setFailMessageInReport("Create password not masked with black circles " + ConfirmPassword);
+   		
+   	}
+   }
+  public void verifyConfirmPasswordEyeIcon() {
+	   new CommonFunctions().elementView(eyeIconConfirmPassword, "Confirm Password View Eye Icon");
+  }
+  public void verifyClickOnConfirmPasswordShowIcon(String CreatePassowrd) {
+		enterText(txtCreatePassword, CreatePassowrd, "Create Password");
+		click(eyeIconCreatePassword, "Clicked  on ShowIcon");
+		String actualPaasword = getAttributeValue(txtCreatePassword, "value", CreatePassowrd);
+
+		if (actualPaasword.equals(CreatePassowrd )) {
+			ExtentTestManager.setPassMessageInReport("Enterd password is visibled " + actualPaasword);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Enterd password is not visibled " + actualPaasword);
+
+		}
+	}
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}

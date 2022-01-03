@@ -147,6 +147,9 @@ public class TokenAccountPage extends BrowserFunctions {
 			if (!(pageNumber == 0)) {
 				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
 			}
+			else if(remainder == 0) {
+				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
+				}
 		} else {
 			ExtentTestManager.setFailMessageInReport("No of Page is Null");
 		}
