@@ -45,6 +45,7 @@ public class LoginTest {
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
+			loginPage.authyComponent().validateAuthyField(data.get("code"));
 			loginPage.authyComponent().clickGoBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test view failed due to exception " + e);
