@@ -511,43 +511,43 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayAmountFieldWithNullSpecialCharAndChar(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			String[] amount = data.get("amount").split(",");
-			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
-			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
+//	@Test // added P
+//	@Parameters({ "strParams" })
+//	public void testPayAmountFieldWithNullSpecialCharAndChar(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.clickPayRequestToken();
+//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+//			String[] amount = data.get("amount").split(",");
+//			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
+//			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(
+//					"testPayAmountFieldWithNullSpecialCharAndChar failed due to  exception " + e);
+//		}
+//	}
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testPayAmountFieldWithNullSpecialCharAndChar failed due to  exception " + e);
-		}
-	}
-
-	@Test // added P
-	@Parameters({ "strParams" })
-	public void testPayRecipientAddressFieldWithMax(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			Thread.sleep(2000);
-			String[] recipient = data.get("recipientMessage").split(",");
-			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(recipient[0], recipient[1]);
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testPayRecipientAddressFieldWithMax failed due to  exception " + e);
-		}
-	}
+//	@Test // added P
+//	@Parameters({ "strParams" })
+//	public void testPayRecipientAddressFieldWithMax(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.clickPayRequestToken();
+//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
+//			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
+//			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+//			Thread.sleep(2000);
+//			String[] recipient = data.get("recipientMessage").split(",");
+//			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(recipient[0], recipient[1]);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager
+//					.setFailMessageInReport("testPayRecipientAddressFieldWithMax failed due to  exception " + e);
+//		}
+//	}
 
 	// added P
 	@Test
@@ -783,24 +783,24 @@ public class TokenAccountTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testRequestTransactionsWithValidations(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
-			tokenAccountPage.clickPayRequestToken();
-			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
-			String[] amount = data.get("amount").split(",");
-			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
-			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
-			String[] message = data.get("messageToRecipient").split(",");
-			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(message[0], message[1]);
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to Invalid Amount exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRequestTransactionsWithValidations(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.payAndRequestTokensPopup().cursorhoverPayRequest();
+//			tokenAccountPage.clickPayRequestToken();
+//			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
+//			String[] amount = data.get("amount").split(",");
+//			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
+//			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
+//			String[] message = data.get("messageToRecipient").split(",");
+//			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(message[0], message[1]);
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testPayTransaction failed due to Invalid Amount exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })

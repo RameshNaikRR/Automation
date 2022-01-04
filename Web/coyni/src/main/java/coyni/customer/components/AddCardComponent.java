@@ -63,63 +63,63 @@ public class AddCardComponent extends BrowserFunctions {
 		}
 	}
 
-	public void validateNameOnCard(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-			String specialChar) {
-		new CommonFunctions().validateFieldWithSpecialchar(txtNameOnCard, "Name on Card", specialChar);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateFieldWithNumber(txtNameOnCard, "Name on Card", number);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateFieldMaxichar(txtNameOnCard, "Name on Card", moreThanMaxChar);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", maxChar);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", maxLessChar);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", minCharPlus);
-		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
-		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", minChar);
-
-	}
-
-	public void validateCardNumber(String minChar, String maxChar, String moreThanMaxChar, String specialChar,
-			String alphabets) {
-
-		new CommonFunctions().validateFieldWithSpecialchar(txtCardNumber, "Card Number", specialChar);// #$@!
-		new CommonFunctions().clearText(txtCardNumber, "Card Number");
-		new CommonFunctions().validateFieldWithalphabet(txtCardNumber, "Card Number", alphabets);
-		new CommonFunctions().clearText(txtCardNumber, "Card Number");
-		new CommonFunctions().validateFieldMaxichar(txtCardNumber, "Card Number", moreThanMaxChar);
-		new CommonFunctions().clearText(txtCardNumber, "Card Number");
-		new CommonFunctions().validateField(txtCardNumber, "Card Number", maxChar);
-		new CommonFunctions().clearText(txtCardNumber, "Card Number");
-		new CommonFunctions().validateField(txtCardNumber, "Card Number", minChar);
-
-	}
-
-	public void validateCardExpiry(String minChar, String moreThanMaxChar, String specialChar, String alphabets) {
-
-		new CommonFunctions().validateFieldWithSpecialchar(txtCardExp, "Card Expiry", specialChar);// #$@!
-		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
-		new CommonFunctions().validateFieldWithalphabet(txtCardExp, "Card Expiry", alphabets);// abcg
-		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
-		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Expiry", moreThanMaxChar);// 5
-		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
-		new CommonFunctions().validateField(txtCardExp, "Card Expiry", minChar);// 4
-
-	}
-
-	public void validateCVVorCVC(String minChar, String maxChar, String moreThanMaxChar, String specialChar,
-			String alphabets) throws InterruptedException {
-
-		new CommonFunctions().validateFieldWithSpecialchar(txtCVVorCVC, "CVVorCVC", specialChar);
-		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
-		new CommonFunctions().validateFieldWithalphabet(txtCVVorCVC, "CVVorCVC", alphabets);
-		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
-		new CommonFunctions().validateField(txtCVVorCVC, "CVCorCVC", minChar);
-		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
-		new CommonFunctions().validateField(txtCVVorCVC, "CVCorCVC", maxChar);
-		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
-		new CommonFunctions().validateFieldMaxichar(txtCVVorCVC, "CVVorCVC", moreThanMaxChar);
-	}
+//	public void validateNameOnCard(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
+//			String specialChar) {
+//		new CommonFunctions().validateFieldWithSpecialchar(txtNameOnCard, "Name on Card", specialChar);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateFieldWithNumber(txtNameOnCard, "Name on Card", number);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateFieldMaxichar(txtNameOnCard, "Name on Card", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", maxChar);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", maxLessChar);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", minCharPlus);
+//		new CommonFunctions().clearText(txtNameOnCard, "Name on card");
+//		new CommonFunctions().validateField(txtNameOnCard, "Name on Card", minChar);
+//
+//	}
+//
+//	public void validateCardNumber(String minChar, String maxChar, String moreThanMaxChar, String specialChar,
+//			String alphabets) {
+//
+//		new CommonFunctions().validateFieldWithSpecialchar(txtCardNumber, "Card Number", specialChar);// #$@!
+//		new CommonFunctions().clearText(txtCardNumber, "Card Number");
+//		new CommonFunctions().validateFieldWithalphabet(txtCardNumber, "Card Number", alphabets);
+//		new CommonFunctions().clearText(txtCardNumber, "Card Number");
+//		new CommonFunctions().validateFieldMaxichar(txtCardNumber, "Card Number", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtCardNumber, "Card Number");
+//		new CommonFunctions().validateField(txtCardNumber, "Card Number", maxChar);
+//		new CommonFunctions().clearText(txtCardNumber, "Card Number");
+//		new CommonFunctions().validateField(txtCardNumber, "Card Number", minChar);
+//
+//	}
+//
+//	public void validateCardExpiry(String minChar, String moreThanMaxChar, String specialChar, String alphabets) {
+//
+//		new CommonFunctions().validateFieldWithSpecialchar(txtCardExp, "Card Expiry", specialChar);// #$@!
+//		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
+//		new CommonFunctions().validateFieldWithalphabet(txtCardExp, "Card Expiry", alphabets);// abcg
+//		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
+//		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Expiry", moreThanMaxChar);// 5
+//		new CommonFunctions().clearText(txtCardExp, "Card Expiry");
+//		new CommonFunctions().validateField(txtCardExp, "Card Expiry", minChar);// 4
+//
+//	}
+//
+//	public void validateCVVorCVC(String minChar, String maxChar, String moreThanMaxChar, String specialChar,
+//			String alphabets) throws InterruptedException {
+//
+//		new CommonFunctions().validateFieldWithSpecialchar(txtCVVorCVC, "CVVorCVC", specialChar);
+//		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
+//		new CommonFunctions().validateFieldWithalphabet(txtCVVorCVC, "CVVorCVC", alphabets);
+//		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
+//		new CommonFunctions().validateField(txtCVVorCVC, "CVCorCVC", minChar);
+//		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
+//		new CommonFunctions().validateField(txtCVVorCVC, "CVCorCVC", maxChar);
+//		new CommonFunctions().clearText(txtCVVorCVC, "CVVorCVC");
+//		new CommonFunctions().validateFieldMaxichar(txtCVVorCVC, "CVVorCVC", moreThanMaxChar);
+//	}
 
 }

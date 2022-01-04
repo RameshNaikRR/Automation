@@ -222,10 +222,10 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     	new CommonFunctions().verifyTextBoxBorderColor(expColor);
     	new CommonFunctions().verifyLabelText(lblVerificationSuccesful, "Verificational Succesful", expVerificationmsg);
     }
-    public void verifyVerificationCodeWithNumber(String expCode) {
-    	new CommonFunctions().validateFieldWithNumber(txtCode, "Verification", expCode);
-    		
-    }
+//    public void verifyVerificationCodeWithNumber(String expCode) {
+//    	new CommonFunctions().validateFieldWithNumber(txtCode, "Verification", expCode);
+//    		
+//    }
     public void verifyPageHeadingWithValidCode( String expHeding)
     {
     	new CommonFunctions().verifyLabelText(Heading, "Edit Phone Number", expHeding);
@@ -239,9 +239,9 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     	enterText(txtCode, "Code", expCode);
     	new CommonFunctions().verifyLabelText(Heading, "Code", expHeading);
     }
-    public void verifyVerificationCodeWithAlphabets(String expCode) {
-    	new CommonFunctions().validateFieldWithalphabet(txtCode, "", expCode);
-    }
+//    public void verifyVerificationCodeWithAlphabets(String expCode) {
+//    	new CommonFunctions().validateFieldWithalphabet(txtCode, "", expCode);
+//    }
     public void enterCode(String expCode) {
     	enterText(txtCode,expCode,"Verification Code");
     }
@@ -258,13 +258,13 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
      	new CommonFunctions().verifyTextBoxBorderColor(expColor);
     	new CommonFunctions().verifyLabelText(lblVerificationFailed, "Verification Failed", expVericationMsg);
     }
-    public void verifyNewPhoneNumberFieldWithAlphabets(String expNewPhoneNumber) {
-    	new CommonFunctions().validateFieldWithalphabet(txtNewPhoneNumber, "New Phone Number", expNewPhoneNumber);
-    }
-    public void verifyNewPhoneNumberFieldWithSpecialCharacters(String expNewPhoneNumber) {
-    	new CommonFunctions().validateFieldWithSpecialchar(txtNewPhoneNumber, "", expNewPhoneNumber);
-    	
-    }
+//    public void verifyNewPhoneNumberFieldWithAlphabets(String expNewPhoneNumber) {
+//    	new CommonFunctions().validateFieldWithalphabet(txtNewPhoneNumber, "New Phone Number", expNewPhoneNumber);
+//    }
+//    public void verifyNewPhoneNumberFieldWithSpecialCharacters(String expNewPhoneNumber) {
+//    	new CommonFunctions().validateFieldWithSpecialchar(txtNewPhoneNumber, "", expNewPhoneNumber);
+//    	
+//    }
     
     public void verifyNewPhoneNumberFieldWithInvalidData(String expNewPhoneNumber, String input) {
     	enterText(txtNewPhoneNumber, "New Phone Number", expNewPhoneNumber);
@@ -363,9 +363,9 @@ public void verifyEditPhoneNumberAuthenticationDescription(String expEditPhoneNu
     	new CommonFunctions().verifyLabelText(lblNewPhoneNumberDescriptionText, expNewPhoneNumber, expNewPhoneNumber); 
     }
     
-    public void verifyNewPhoneNumberVerificationCodeWithNumbers(String expCode) {
-    	new CommonFunctions().validateFieldWithNumber(txtNewPhoneNumber, "New Phone Number", expCode);
-    }
+//    public void verifyNewPhoneNumberVerificationCodeWithNumbers(String expCode) {
+//    	new CommonFunctions().validateFieldWithNumber(txtNewPhoneNumber, "New Phone Number", expCode);
+//    }
     public void verifyNewPhoneNumberVerificationCodeBorderColorAndDescription(String expCode,String expColor,String expVerificationSuccesfulMsg) {
     	enterText(txtNewPhoneNumber, "", expCode);
     	new CommonFunctions().verifyTextBoxBorderColor(expColor);

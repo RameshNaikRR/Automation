@@ -151,18 +151,18 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 
 	}
 
-	public void validateAmountField(String singleChar, String specialCharacters) {
-		new CommonFunctions().validateFieldWithalphabet(txtAmount, "Amount", singleChar);
-		new CommonFunctions().validateFieldWithSpecialchar(txtAmount, "Amount", specialCharacters);
-
-	}
-
-	public void validateRecipientField(String lessCharLength, String maxiCharLength) {
-		new CommonFunctions().validateFieldWithalphabet(txtRecipientMessage, "Recipient Message", lessCharLength);
-		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
-		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", maxiCharLength);
-		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
-
-	}
+//	public void validateAmountField(String singleChar, String specialCharacters) {
+//		new CommonFunctions().validateFieldWithalphabet(txtAmount, "Amount", singleChar);
+//		new CommonFunctions().validateFieldWithSpecialchar(txtAmount, "Amount", specialCharacters);
+//
+//	}
+//
+//	public void validateRecipientField(String lessCharLength, String maxiCharLength) {
+//		new CommonFunctions().validateFieldWithalphabet(txtRecipientMessage, "Recipient Message", lessCharLength);
+//		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
+//		new CommonFunctions().validateFieldMaxichar(txtRecipientMessage, "Recipient Message", maxiCharLength);
+//		new CommonFunctions().clearText(txtRecipientMessage, "Recipient Message");
+//
+//	}
 
 }

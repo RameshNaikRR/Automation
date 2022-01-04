@@ -53,6 +53,20 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testLoginPageFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.validateEmailTextField(data.get("email"));
+			loginPage.validatePasswordText(data.get("password"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginPageFieldValidation failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -329,7 +343,6 @@ public class LoginTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPassword(String strParams) {
@@ -391,12 +404,12 @@ public class LoginTest {
 			loginPage.clickForgotPassword();
 			loginPage.verifyHeading(data.get("forgotHeading"));
 			String[] email = data.get("email").split(",");
-			loginPage.validateFieldWithEmail(email[0], email[1], email[2], email[3], email[4], email[5], email[6]);
-			
+			// loginPage.validateFieldWithEmail(email[0], email[1], email[2], email[3],
+			// email[4], email[5], email[6]);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
 		}
 	}
-	
 
 }

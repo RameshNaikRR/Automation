@@ -133,11 +133,11 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(successHEading, "Password Changed Heading", expHeading);
 	}
 
-	public void validateOTPField(String singleChar, String specialCharacters) {
-		new CommonFunctions().validateFieldWithalphabet(inputBox, "OTP", singleChar);
-		new CommonFunctions().validateFieldWithSpecialchar(inputBox, "OTP", specialCharacters);
-
-	}
+//	public void validateOTPField(String singleChar, String specialCharacters) {
+//		new CommonFunctions().validateFieldWithalphabet(inputBox, "OTP", singleChar);
+//		new CommonFunctions().validateFieldWithSpecialchar(inputBox, "OTP", specialCharacters);
+//
+//	}
 
 	public void verifyMessage(String expMessage) {
 		waitForCondition(e -> e.findElement(lblMessage).getText().contains("Verification"),

@@ -67,30 +67,6 @@ public class HomeTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-
-	public void validateCreateAccountFields(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
-			homePage.clickPersonalAccount();
-			// homePage.verifyCreateAccountPageHeading("createAccountHeading");
-			String[] firstName = data.get("firstName").split(",");
-			homePage.validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3], firstName[4],firstName[5],firstName[6]);
-			String[] lastName = data.get("lastName").split(",");
-			homePage.validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3], lastName[4],lastName[5],lastName[6]);
-			String[] phoneNumber = data.get("phoneNumber").split(",");
-			homePage.validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2], phoneNumber[3]);
-			String[] email = data.get("email").split(",");
-			homePage.validateEmailField(email[0], email[1], email[2],email[3],email[4]);
-
-		} catch (Exception e) {
-
-			ExtentTestManager.setFailMessageInReport("validateCreateAccountFields Failed due to Exception " + e);
-
-		}
-	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -240,6 +216,24 @@ public class HomeTest {
 
 		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCreateAccountView Failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+
+	public void validateCreateAccountFields(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.clickPersonalAccount();
+		    homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+            homePage.validateFirstNameField(data.get("firstName"));
+            homePage.validateLastNameField(data.get("lastName"));
+            homePage.validatePhoneNumber(data.get("phoneNumber"));
+            homePage.validatePassword(data.get("createPassword"));
+            homePage.validateEmailField(data.get("email"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validateCreateAccountFields Failed due to Exception " + e);
 		}
 	}
 }

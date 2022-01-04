@@ -96,59 +96,59 @@ public class MailingAddressComponent extends BrowserFunctions {
 		}
 	}
 
-	public void validateAddress1(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
-		new CommonFunctions().validateFieldMaxichar(txtAddress1, "Address1", moreThanMaxChar);
-		new CommonFunctions().clearText(txtAddress1, "Address1");
-		new CommonFunctions().validateField(txtAddress1, "Address1", maxChar);
-		new CommonFunctions().clearText(txtAddress1, "Address1");
-		new CommonFunctions().validateField(txtAddress1, "Address1", maxLessChar);
-		new CommonFunctions().clearText(txtAddress1, "Address1");
-		new CommonFunctions().validateField(txtAddress1, "Address1", minCharPlus);
-		new CommonFunctions().clearText(txtAddress1, "Address1");
-		new CommonFunctions().validateField(txtAddress1, "Address1", minChar);
-
-	}
-
-	public void vaidateAddress2(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
-		new CommonFunctions().validateFieldMaxichar(txtAddress2, "Address2", moreThanMaxChar);
-		new CommonFunctions().clearText(txtAddress2, "Address2");
-		new CommonFunctions().validateField(txtAddress2, "Address2", maxChar);
-		new CommonFunctions().clearText(txtAddress2, "Address2");
-		new CommonFunctions().validateField(txtAddress2, "Address2", maxLessChar);
-		new CommonFunctions().clearText(txtAddress2, "Address2");
-		new CommonFunctions().validateField(txtAddress2, "Address2", minCharPlus);
-		new CommonFunctions().clearText(txtAddress2, "Address2");
-		new CommonFunctions().validateField(txtAddress2, "Address2", minChar);
-
-	}
-
-	public void validateCity(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-			String specialChar) {
-		new CommonFunctions().validateFieldWithSpecialchar(txtCity, "City", specialChar);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateFieldWithNumber(txtCity, "City", number);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateFieldMaxichar(txtCity, "City", moreThanMaxChar);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateField(txtCity, "City", maxChar);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateField(txtCity, "City", maxLessChar);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateField(txtCity, "City", minCharPlus);
-		new CommonFunctions().clearText(txtCity, "City");
-		new CommonFunctions().validateField(txtCity, "City", minChar);
-
-	}
-
-	public void validateZipCode(String minChar, String moreThanMaxChar, String specialChar, String alphabets) {
-		new CommonFunctions().validateFieldWithSpecialchar(txtZipCode, "ZipCode", specialChar);
-		new CommonFunctions().validateFieldWithalphabet(txtZipCode, "ZipCode", alphabets);
-		new CommonFunctions().validateField(txtZipCode, "ZipCode", minChar);
-		new CommonFunctions().clearText(txtZipCode, "ZipCode");
-		// new CommonFunctions().validateField(txtZipCode, "ZipCode", maxChar);
-		// new CommonFunctions().clearText(txtZipCode, "ZipCode");
-		new CommonFunctions().validateFieldMaxichar(txtZipCode, "ZipCode", moreThanMaxChar);
-		new CommonFunctions().clearText(txtZipCode, "ZipCode");
-	}
+//	public void validateAddress1(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
+//		new CommonFunctions().validateFieldMaxichar(txtAddress1, "Address1", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtAddress1, "Address1");
+//		new CommonFunctions().validateField(txtAddress1, "Address1", maxChar);
+//		new CommonFunctions().clearText(txtAddress1, "Address1");
+//		new CommonFunctions().validateField(txtAddress1, "Address1", maxLessChar);
+//		new CommonFunctions().clearText(txtAddress1, "Address1");
+//		new CommonFunctions().validateField(txtAddress1, "Address1", minCharPlus);
+//		new CommonFunctions().clearText(txtAddress1, "Address1");
+//		new CommonFunctions().validateField(txtAddress1, "Address1", minChar);
+//
+//	}
+//
+//	public void vaidateAddress2(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
+//		new CommonFunctions().validateFieldMaxichar(txtAddress2, "Address2", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtAddress2, "Address2");
+//		new CommonFunctions().validateField(txtAddress2, "Address2", maxChar);
+//		new CommonFunctions().clearText(txtAddress2, "Address2");
+//		new CommonFunctions().validateField(txtAddress2, "Address2", maxLessChar);
+//		new CommonFunctions().clearText(txtAddress2, "Address2");
+//		new CommonFunctions().validateField(txtAddress2, "Address2", minCharPlus);
+//		new CommonFunctions().clearText(txtAddress2, "Address2");
+//		new CommonFunctions().validateField(txtAddress2, "Address2", minChar);
+//
+//	}
+//
+//	public void validateCity(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
+//			String specialChar) {
+//		new CommonFunctions().validateFieldWithSpecialchar(txtCity, "City", specialChar);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateFieldWithNumber(txtCity, "City", number);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateFieldMaxichar(txtCity, "City", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateField(txtCity, "City", maxChar);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateField(txtCity, "City", maxLessChar);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateField(txtCity, "City", minCharPlus);
+//		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().validateField(txtCity, "City", minChar);
+//
+//	}
+//
+//	public void validateZipCode(String minChar, String moreThanMaxChar, String specialChar, String alphabets) {
+//		new CommonFunctions().validateFieldWithSpecialchar(txtZipCode, "ZipCode", specialChar);
+//		new CommonFunctions().validateFieldWithalphabet(txtZipCode, "ZipCode", alphabets);
+//		new CommonFunctions().validateField(txtZipCode, "ZipCode", minChar);
+//		new CommonFunctions().clearText(txtZipCode, "ZipCode");
+//		// new CommonFunctions().validateField(txtZipCode, "ZipCode", maxChar);
+//		// new CommonFunctions().clearText(txtZipCode, "ZipCode");
+//		new CommonFunctions().validateFieldMaxichar(txtZipCode, "ZipCode", moreThanMaxChar);
+//		new CommonFunctions().clearText(txtZipCode, "ZipCode");
+//	}
 
 }

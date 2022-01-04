@@ -159,21 +159,24 @@ public class LoginPage extends BrowserFunctions {
 	public UserNameDropDownComponent userNameDropDownComponent() {
 		return new UserNameDropDownComponent();
 	}
-
-	public void validateFieldWithEmail(String minChar, String minCharPlus, String maxLessChar, String maxChar,
-			String moreThanMaxChar, String number, String specialChar) throws InterruptedException {
-		new CommonFunctions().validateFieldWithSpecialchar(txtEmail, "Email", specialChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateFieldWithNumber(txtEmail, "Email", number);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMaxChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", minChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", minCharPlus);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxLessChar);
+	public void validateLoginField(By ele,String eleName, String textField) {
+		String[] field = textField.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
+		new CommonFunctions().validateTextFeild(ele, eleName, field[5]);
+	}
+	/**
+	 Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
+	 */
+	public void validateEmailTextField(String emailField) {
+		validateLoginField(txtEmail, "Email", emailField);
+	}
+	/**
+	 Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
+	 */
+	public void validatePasswordText(String passwordField) {
+		validateLoginField(txtPassword, "Password", passwordField);
 	}
 }
