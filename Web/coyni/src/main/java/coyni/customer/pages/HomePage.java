@@ -19,12 +19,15 @@ public class HomePage extends BrowserFunctions {
 	private By lblPersonalAccount =By.xpath("//div[contains(text(),'Personal Account')]/following-sibling::*[1]");
 	private By lblBusinessAccount =By.xpath("//div[contains(text(),'Business Account')]/following-sibling::*[1]");
 	private By lblBusinessAccountTooltip =By.xpath("//*[@id='businessAccount']/text()");
+	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
+	private By lblResendDescrp =  By.xpath("//div[text()='New Verification Code Sent");
 	
 	private By lblLastName = By.xpath("//label[text()='Last Name']");
 	private By lblEmail = By.xpath("//input[@id='email-address']/preceding-sibling::*[1]");
 	private By lblPhoneNumber = By.xpath("//input[@id='phone-number']/preceding-sibling::*[1]");
 	private By lblCreatePassword = By.xpath("//input[@id='create-password']/preceding-sibling::*[1]");
 	private By lblConfirmPassword = By.xpath("//input[@id='confirm-password']/preceding-sibling::*[1]");
+	private By lblLogin = By.xpath("//span[@class='business-login__title']");
 	
 	private By createHeading = By.xpath("//span[contains(text(),'Create a Personal Account')]");
 	private By txtFirstName = By.id("first-name");
@@ -326,8 +329,24 @@ public class HomePage extends BrowserFunctions {
 
 		}
 	}
+  
+  public void verifyLoginPageHeading() {
+	  new CommonFunctions().elementView(lblLogin, "Login Page heading is");
+  }
 
-	public ToastComponent toastComponent() {
+  public void clickResend() {
+	  click(lnkResend, "Clicked on Resend");
+  }
+  
+  public void verifyResendHeading() {
+	  new CommonFunctions().elementView(lnkResend, "Resend Heading");
+  }
+  
+  public void verifyResendDescrp() {
+	  new CommonFunctions().elementView(lblResendDescrp, "Resend description");
+  }
+  
+   public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}
 }

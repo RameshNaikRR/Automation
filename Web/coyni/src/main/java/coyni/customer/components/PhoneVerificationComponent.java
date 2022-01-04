@@ -18,7 +18,12 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 	private By chooseHeading = By.xpath("//span[text()='Choose Account']");
 	private By btnMail = By.cssSelector(".rounded-lg");
 	private By btnReturnToLogin = By.xpath("//div[text()='Return to Login']");
-
+	private By phoneVerificationHeading = By.xpath("//div[text()='Phone Verification']");
+    
+	public void verifyPhoneVerificationHeading() {
+		new CommonFunctions().elementView(phoneVerificationHeading, "Phone Verification Heading");
+	}
+	
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Phone Number Verification PopUp Heading", expHeading);
 	}
