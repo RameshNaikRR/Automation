@@ -26,6 +26,11 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/jars/WebFramework-0.0.1.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.20</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jboss.aerogear/aerogear-otp-java -->
 		<!-- to automate google authenticator -->
 		<dependency>
