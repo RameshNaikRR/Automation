@@ -1,9 +1,12 @@
 package coyni_mobile.pages;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -13,7 +16,6 @@ import io.appium.java_client.MobileBy;
 
 public class RetrieveEmailPage extends MobileFunctions {
 
-	// added p
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
 	private By retrieveheading = MobileBy.xpath("//*[@text='Retrieve Email']");
 	// private By lblPhoneNumber =
@@ -24,16 +26,23 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By tryAgain = MobileBy.xpath("//*[@text='Try Again']");
 	private By closeIcon = MobileBy.xpath("//*[contains(@resource-id,'imgREClose')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
+	private By headingPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']");
 	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]");
 	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
+	private By otpMsg = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
+	private By errMessage = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(retrieveheading, "Retrieve Email Heading ", expHeading);
+
+	}
+
+	public void verifyErrorMessage() {
+		new CommonFunctions().elementView(errMessage, "Error message");
 
 	}
 
@@ -60,12 +69,21 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "First Name ");
+		click(txtPhoneNumber, "Phone Number");
 
 	}
 
 	public void fillLastName(String lastName) {
+		scrollDownToElement(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name ");
 
+	}
+
+	public void pasteOption(String code) {
+		copyDataToClipboard(code);
+		click(otpMsg, "Paste");
+
+		Uninterruptibles.sleepUninterruptibly(10000, TimeUnit.MILLISECONDS);
 	}
 
 	public void clickNext() {
@@ -102,6 +120,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	public void fillPhoneNumber(String phoneNumber) {
 		enterText(txtPhoneNumber, phoneNumber, "Phone Number ");
+		click(txtFirstName, "First Name");
 
 	}
 

@@ -10,9 +10,11 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class NavigationComponent extends MobileFunctions {
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Back')]|//*[@name='back']");
+
+	private By btnBack = MobileBy.xpath(
+			"//*[contains(@resource-id,'Back')]|//*[@name='back']|//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By btnClose = MobileBy.xpath(
-			"//*[contains(@resource-id,'imgClose') or contains(@resource-id,'cpConfirmBackIV') or contains(@resource-id,'imgFPClose') or contains(@resource-id,'imgBack')]|//*[@name='close'or @name='Button']");
+			"//*[contains(@resource-id,'imgClose') or contains(@resource-id,'lyClose') or contains(@resource-id,'cpConfirmBackIV') or contains(@resource-id,'imgFPClose') or contains(@resource-id,'imgBack')]|//*[@name='close'or @name='Button']");
 
 	public void clickBack() {
 		if (new CommonFunctions().isPlatformiOS()) {

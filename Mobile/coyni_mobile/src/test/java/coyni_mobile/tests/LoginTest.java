@@ -318,6 +318,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
+			loginPage.retrieveEmailPage().pasteOption(loginData.get("code"));
 			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
 			loginPage.retrieveEmailPage().clickCoyniAccount();
@@ -339,13 +340,14 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
+
 			if (!loginData.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
 						loginData.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithEmptyCredentials Failed due to exception " + e);
+					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
 		}
 	}
 
@@ -368,8 +370,7 @@ public class LoginTest {
 			loginPage.VerifyLoginPageView();
 
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmailView Failed due to exception " + e);
 		}
 
 	}
@@ -413,11 +414,16 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
+//			loginPage.retrieveEmailPage().verifyErrorMessage();
+//			loginPage.retrieveEmailPage().clickOk();
+//			loginPage.retrieveEmailPage().clickNext();
+			// Thread.sleep(5000);
 			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
-			for (int i = 0; i <= 2; i++) {
+			for (int i = 0; i <= 3; i++) {
 				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
 			}
+			loginPage.retrieveEmailPage().verifyErrorMessage();
 			loginPage.retrieveEmailPage().clickOk();
 		} catch (Exception e) {
 			ExtentTestManager
@@ -428,35 +434,27 @@ public class LoginTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailFieldValidations(String strParams) {
-	try {
-	Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-	landingPage.clickLogin();
-	loginPage.clickForgotEmail();
-	loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-	// String phoneNumber = loginData.get("phoneNumber");
-	// loginPage.retrieveEmailPage().validatePhoneNumberField(phoneNumber);
-	// , phoneNumber[1], phoneNumber[2],phoneNumber[3]);
-	String[] firstName = loginData.get("firstName").split(",");
-	loginPage.retrieveEmailPage().validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3],
-	firstName[4]);
-	String[] lastName = loginData.get("lastName").split(",");
-	loginPage.retrieveEmailPage().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],
-	lastName[4]);
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotEmail();
+			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+			// String phoneNumber = loginData.get("phoneNumber");
+			// loginPage.retrieveEmailPage().validatePhoneNumberField(phoneNumber);
+			// , phoneNumber[1], phoneNumber[2],phoneNumber[3]);
+			String[] firstName = loginData.get("firstName").split(",");
+			loginPage.retrieveEmailPage().validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3],
+					firstName[4]);
+			String[] lastName = loginData.get("lastName").split(",");
+			loginPage.retrieveEmailPage().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],
+					lastName[4]);
 
+			loginPage.retrieveEmailPage().clickNext();
 
-
-	loginPage.retrieveEmailPage().clickNext();
-
-
-
-	} catch (Exception e) {
-	ExtentTestManager
-	.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmailFieldValidations Failed due to exception " + e);
+		}
 	}
-	}
-
-	
-	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -478,183 +476,192 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testVerifyForgotPin(String strParams) {
-		try{
+		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
-			  enterYourPINComponent.clickForgotPin();
-				
-			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			  enterYourPINComponent.forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
-			  enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
-			  enterYourPINComponent.forgotPinComponent().crossIconView();
-			  enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
-				 
-			
-		}
-		catch(Exception e) {
+
+			enterYourPINComponent.clickForgotPin();
+
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
+			enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
+			enterYourPINComponent.forgotPinComponent().crossIconView();
+			enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testVerifyVerifyEmail(String strParams) {
-		try{
+		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
-			  enterYourPINComponent.clickForgotPin();
-				
-			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			  enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
-			  enterYourPINComponent.forgotPinComponent().clickNext();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
-				  
-		}
-		
-	
-	catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
-	}
-	
-}
-	@Test
-	@Parameters({"strParams"})
-	public void testVerifyChooseYourPin(String strParams) {
-		try{
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
+
 			enterYourPINComponent.clickForgotPin();
-				
+
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent()
+					.verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
-				  
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChooseYourPinView();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().enterYourPINComponent().verifyPinView();
-				  
-				  
-				  
+
 		}
-		
-	
-	catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
+
 	}
-		
-	
-}	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
+	public void testVerifyChooseYourPin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
+
+			enterYourPINComponent.clickForgotPin();
+
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent()
+					.verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChooseYourPinView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.enterYourPINComponent().verifyPinView();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testVerifyChooseYourPinWithBack(String strParams) {
-		try{
+		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
+
 			enterYourPINComponent.clickForgotPin();
-				
+
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
-				  
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-				 
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent().clickBack();
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent()
+					.clickBack();
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-					
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otpagain") );
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().enterYourPINComponent().fillPin(data.get("pin"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
-					 
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otpagain"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.enterYourPINComponent().fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+
 		}
-		
-	
-	catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
 	}
-}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testVerifyConfirmYourPin(String strParams) {
-		try{
+		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
+
 			enterYourPINComponent.clickForgotPin();
-				
+
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
-				  
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-					 
-				 
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
 		}
-		
-		
-	
-	catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
 	}
-}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testVerifyConfirmYourPinWithBack(String strParams) {
-		try{
+		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
-			
-			  enterYourPINComponent.clickForgotPin();
-				
-			  enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			  enterYourPINComponent.forgotPinComponent().clickNext();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
-				  
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-					 
-				 
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent().clickBack();
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().fillPin(data.get("pin"));
-			  enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
-				  }
-		
-		
-	
-	catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+
+			enterYourPINComponent.clickForgotPin();
+
+			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+			enterYourPINComponent.forgotPinComponent().clickNext();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent().navigationComponent()
+					.clickBack();
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.fillPin(data.get("pin"));
+			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
 	}
-}
 
 }
