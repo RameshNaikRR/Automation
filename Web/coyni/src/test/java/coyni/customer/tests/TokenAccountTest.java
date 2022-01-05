@@ -416,10 +416,9 @@ public class TokenAccountTest {
 			// tokenAccountPage.payAndRequestTokensPopup().verifyCountMessageToRecipient();
 			Thread.sleep(2000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			//
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyProcessingFee();
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.verifyHeading(data.get("authyPayHeading"));
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()

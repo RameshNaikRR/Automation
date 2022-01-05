@@ -10,7 +10,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class PayingAccountHolderNamePopup extends BrowserFunctions {
 
 	private By lnkCopy = By.className("copy-image");
-	private By lblamount = By.className("SendReceiveModal_amount__c5vVg");
+	private By lblamount = By.xpath("//div[@class='flex justify-center items-baseline mt-3 mb-2']//p");
 	private By lblProcessingFee = By.xpath("//span[text()='Processing Fee']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
 	private By heading = By.xpath("//h1[text()='Verify Your Identity']");

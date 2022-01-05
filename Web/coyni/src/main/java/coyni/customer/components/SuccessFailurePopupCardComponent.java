@@ -17,7 +17,7 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
 	private By lblRequestSuccessful = By.xpath("//div[text()='Tokens Requested Successfully']");
-	private By lblMessage = By.className("SendReceiveModal_Pay_text__1SSJw");
+	private By lblMessage = By.xpath("//h2[text()='You successfully sent']");
 
 	private By btnDone = By.xpath("//button[text()='Done']");
 	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
