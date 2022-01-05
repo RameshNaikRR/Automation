@@ -33,59 +33,45 @@ public class ForgotEmailComponent extends BrowserFunctions {
 		enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
 	}
 
-//	public void validatePhoneNumber(String maxChar, String moreThanMaxChar, String alphabets, String specialChar) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtPhoneNumber, "Phone Number", specialChar);
-//		new CommonFunctions().validateFieldWithalphabet(txtPhoneNumber, "Phone Number", alphabets);
-//		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtPhoneNumber, "Name on card");
-//		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", maxChar);
-//
-//	}
-//
-//	public void validateFirstName(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-//			String specialChar)  {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "First Name", specialChar);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateFieldWithNumber(txtFirstName, "First Name", number);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateFieldMaxichar(txtFirstName, "First Name", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateField(txtFirstName, "First Name", maxChar);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateField(txtFirstName, "First Name", minChar);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateField(txtFirstName, "First Name",minCharPlus );
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateField(txtFirstName, "First Name", maxLessChar);
-//	}
-//
-//	public void validateLastName(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-//			String specialChar) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "Last Name", specialChar);
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateFieldWithNumber(txtFirstName, "Last Name", number);
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateFieldMaxichar(txtFirstName, "Last Name", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateField(txtFirstName, "Last Name", maxChar);
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateField(txtFirstName, "Last Name", minChar);
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateField(txtFirstName, "Last Name",minCharPlus );
-//		new CommonFunctions().clearText(txtFirstName, "Last Name");
-//		new CommonFunctions().validateField(txtFirstName, "Last Name", maxLessChar);
-//	}
+	
+	/**
+	 * Order -minChar, alphabets, specialChar, spaces, maxiPlus
+	 */
+	public void validatePhoneNumber(String textField) {
+		String[] field = textField.split(",");
+		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", field[0]);
+		for (int i = 1; i < 4; i++) {
+			new CommonFunctions().validateTextFeild(txtPhoneNumber, "Phone Number", field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", field[4]);
+	}
 
-//	public void validateRemainingAttempts(String expAttempts) {
-//		Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
-//		String text = getText(lblerrorMsg, "error message").replaceAll("[^0-9]", "");
-//		if (expAttempts.equals(text)) {
-//			ExtentTestManager.setPassMessageInReport("Number of remaining invalid password attemps are " + expAttempts);
-//		} else {
-//			ExtentTestManager.setFailMessageInReport("Expected of number of remaining password attempts  are "
-//					+ expAttempts + " but actual are " + text);
-//		}
-//	}
+	/**
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
+	 * spaces maxiPlus
+	 */
+	
+	
+	//we,ere,hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh,hhhhhhhhhhhhhhhhhhhhhhhhhhhhh,#$,1234,   ,hhhdfhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+	public void validateNameField(By ele, String eleName, String textField) {
+		String[] field = textField.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		System.out.println(textField.length());
+		for (int j = 4; j < 6; j++) {
+			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[6]);
+	}
+
+	public void validateFirstNameField(String firstName) {
+		validateNameField(txtFirstName, "First Name", firstName);
+	}
+
+	public void validateLastNameField(String LastName) {
+		validateNameField(txtLastName, "Last Name", LastName);
+	}
 
 	public void clickNext() {
 		if (getElement(btnNext, "Enabled").isEnabled()) {
