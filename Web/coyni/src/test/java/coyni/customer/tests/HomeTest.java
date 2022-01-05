@@ -139,6 +139,10 @@ public class HomeTest {
 			}
 			
 			homePage.phoneVerificationComponent().verifyResendError();
+			homePage.phoneVerificationComponent().clickButtonGoBack();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.getPreviousData();
+			homePage.verifyClearAndUpdateAllFileds(data.get("firstName"),data.get("lastName"),data.get("newPhoneNumber"), data.get("newEmail"),data.get("createPassword"),data.get("confirmPassword"));
 			
 		}
 		catch (Exception e) {
@@ -186,7 +190,10 @@ public class HomeTest {
 			}
 			
 			homePage.phoneVerificationComponent().emailVerificationComponent().verifyResendError();			
-		
+			homePage.phoneVerificationComponent().emailVerificationComponent().clickGoBack();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.getPreviousData();
+			homePage.verifyClearAndUpdateAllFileds(data.get("firstName"),data.get("lastName"),data.get("newPhoneNumber"), data.get("newEmail"),data.get("createPassword"),data.get("confirmPassword"));
 		}
 		
 		catch (Exception e) {

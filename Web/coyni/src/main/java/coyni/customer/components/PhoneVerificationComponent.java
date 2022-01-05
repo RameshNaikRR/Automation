@@ -26,6 +26,7 @@ public class PhoneVerificationComponent extends BrowserFunctions {
     private By txtFirstCodeBox = By.xpath("(//input[@class='verification-input  '])[1]");
     private By lblResendDescrp =  By.xpath("//div[text()='New Verification Code Sent']");
     private By lblResendError =By.xpath("//span[@class='text-base text-crd5']");
+    private By btnGoBack = By.xpath("//div[text()='Go Back']");
     
 	public void verifyPhoneVerificationHeading() {
 		new CommonFunctions().elementView(phoneVerificationHeading, "Phone Verification Heading");
@@ -89,6 +90,10 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 
 	public void clickGoBack() {
 		click(lnkGoBack, "Back To Login");
+	}
+	
+	public void clickButtonGoBack() {
+		click(btnGoBack,"Click Go Back");
 	}
 
 	public void verifyChooseHeading(String expHeading) {

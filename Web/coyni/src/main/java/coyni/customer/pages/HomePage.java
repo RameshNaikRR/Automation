@@ -47,6 +47,12 @@ public class HomePage extends BrowserFunctions {
 	private By chkBox = By.cssSelector(".custom-checkbox ");
 	private By eyeIconCreatePassword = By.xpath("(//button[@class='icon-button  icon-password-hide-new  view-password text-cgy2 hover:text-cgy3'])[1]");
 	private By eyeIconConfirmPassword = By.xpath("(//button[@class='icon-button  icon-password-hide-new  view-password text-cgy2 hover:text-cgy3'])[2]");
+	private String FirstName;
+	private String LastName;
+	private String PhoneNumber;
+	private String Email;
+	private String CreatePassword;
+	private String ConfirmPassword;
 	
     public void clickCheckBox() {
     	click(chkBox, "CheckBox");
@@ -103,18 +109,22 @@ public class HomePage extends BrowserFunctions {
 
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "firstName");
+		FirstName = getText(txtFirstName, "First Name");
 	}
 
 	public void fillLastName(String lastName) {
 		enterText(txtLastName, lastName, "lastName");
+		LastName = getText(txtLastName,"Last Name");
 	}
 
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
+		Email = getText(txtEmail, "Email");
 	}
 
 	public void fillPhoneNumber(String PhoneNumber) {
 		enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
+		PhoneNumber = getText(txtPhoneNumber,  "Phone Number");
 	}
 
 	public void fillCreatePassword(String createPassword) throws InterruptedException {
@@ -135,6 +145,7 @@ public class HomePage extends BrowserFunctions {
 						.setFailMessageInReport("Password field does not satisifies strength condition : " + text);
 			}
 //			new CommonFunctions().clearText(txtCreatePassword, "Create Password");
+			
 			clearText(txtCreatePassword, "Create Password");
 		}
 		int initialRedDot = getElementsList(reddot, "red dot").size();
@@ -147,6 +158,7 @@ public class HomePage extends BrowserFunctions {
 		System.out.println("value: "+initialRedDot+" "+initialGreenDot+" "+finalRedDot+" "+finalGreenDot);
 		if (initialGreenDot == finalRedDot && initialRedDot == finalGreenDot && finalRedDot == initialGreenDot
 				&& finalGreenDot == initialRedDot) {
+			CreatePassword = getText(txtCreatePassword, "CreatePassword");
 			ExtentTestManager.setPassMessageInReport("password is valid");
 		} else {
 			ExtentTestManager.setFailMessageInReport("password is invalid");
@@ -155,6 +167,7 @@ public class HomePage extends BrowserFunctions {
 
 	public void fillConfirmPassword(String confirmPassword) {
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+		ConfirmPassword = getText(txtConfirmPassword, "Confirm Password");
 	}
 
 	public void clickprivacyPolicy() {
@@ -299,6 +312,52 @@ System.out.println(textField.length());
 			new CommonFunctions().validateTextFeild(txtPhoneNumber, "Phone Number", field[i]);
 		}
 		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", field[4]);
+	}
+   
+	public void getPreviousData() {
+		String FirstNameData = getText(txtFirstName, "First Name Data");
+		String LastNameData = getText(txtLastName, "Last Name Data");
+		String PhoneNumberData = getText(txtPhoneNumber, "Phone Number");
+		String EmailData = getText(txtEmail, "Email Data");
+		String CreatePasswordData = getText(txtCreatePassword, "Create Password Data");
+		String ConfirmPasswordData = getText(txtConfirmPassword, "Confirm Passwords");
+		if(FirstNameData.equals(FirstName)) {
+		  ExtentTestManager.setPassMessageInReport("First Name Field is Populated with Previosly entered Data");
+		   if(LastNameData.equals(LastName)) {
+			ExtentTestManager.setPassMessageInReport("Last Name Field is Populated with Previosly entered Data");
+		       if(PhoneNumberData.equals(PhoneNumber)) { 
+		    	   ExtentTestManager.setPassMessageInReport("Phone Number Field is Populated with Previosly entered Data");			  
+                     if(EmailData.equals(Email)) {
+                    	 ExtentTestManager.setPassMessageInReport("Email Field is Populated with Previosly entered Data");
+                    	   if(CreatePasswordData.equals(CreatePassword)) {
+                    		   ExtentTestManager.setPassMessageInReport("Create Password Field is Populated with Previosly entered Data");
+                    		   if(ConfirmPasswordData.equals(ConfirmPassword)) {
+                    			   ExtentTestManager.setPassMessageInReport("Confirm Password Field is Populated with Previosly entered Data");
+                    		   }
+                   }
+                }
+		    }
+	    }
+    }
+		else {
+			ExtentTestManager.setFailMessageInReport("Previous Data is not Populated");
+		}
+	 }
+	
+	public void verifyClearAndUpdateAllFileds(String firstName,String lastName,String NewPhoneNumber,String NewEmail, String createPassword,String confirmPassword
+			) throws InterruptedException {
+		clearText(txtFirstName, "First Name");
+		clearText(txtLastName, "Last Name");
+		clearText(txtPhoneNumber, "Phone Number");
+		clearText(txtEmail, "Email");
+		clearText(txtCreatePassword, "Create Password");
+		clearText(txtConfirmPassword, "Confirm Password");
+		enterText(txtFirstName, firstName, "First Name");
+		enterText(txtLastName, lastName, "Last name");
+		enterText(txtPhoneNumber, NewPhoneNumber, "Phone Number");
+		enterText(txtEmail, NewEmail, "Email");
+		enterText(txtCreatePassword, createPassword, "Create Password");
+		enterText(txtConfirmPassword, confirmPassword, "COnfirm Password");
 	}
 
 }
