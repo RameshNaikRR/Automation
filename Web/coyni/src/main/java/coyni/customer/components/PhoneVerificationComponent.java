@@ -19,9 +19,31 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 	private By btnMail = By.cssSelector(".rounded-lg");
 	private By btnReturnToLogin = By.xpath("//div[text()='Return to Login']");
 	private By phoneVerificationHeading = By.xpath("//div[text()='Phone Verification']");
+	private By phoneVerificationNumber = By.xpath("//span[@class='text-base font-bold text-cgy4']");
+    private By txtFirstCodeBox = By.xpath("(//input[@class='verification-input  '])[1]");
+    private By lblResendDescrp =  By.xpath("//div[text()='New Verification Code Sent']");
+    private By lblResendError =By.xpath("//span[@class='text-base text-crd5']");
     
 	public void verifyPhoneVerificationHeading() {
 		new CommonFunctions().elementView(phoneVerificationHeading, "Phone Verification Heading");
+	}
+	
+	public void verifPhoneVericationDescription() {
+		new CommonFunctions().elementView(phoneVerificationNumber, "Phone Verification Description");
+	}
+	
+	public void verifyPhoneVerificationNumber(String expPhoneVerificationNumber) {
+    	new CommonFunctions().verifyLabelText(phoneVerificationNumber, "Phone Number", expPhoneVerificationNumber);
+    }
+	
+	public void verifyVerificationCodeBoxAutoFocused() {
+		new CommonFunctions().verifyAutoFocus(txtFirstCodeBox, "First Text Code Box is Auto Focused");
+	}
+	public void verifyResendDescrp() {
+		  new CommonFunctions().elementView(lblResendDescrp, "Resend description");
+	  }
+	public void verifyResendError() {
+		new CommonFunctions().elementView(lblResendError, "Resend error");
 	}
 	
 	public void verifyHeading(String expHeading) {
@@ -79,6 +101,10 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 
 	public EmailVerificationComponent emailVerificationComponent() {
 		return new EmailVerificationComponent();
+	}
+	
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 
 }

@@ -118,26 +118,79 @@ public class HomeTest {
 			Thread.sleep(1000);
 			homePage.fillCreatePassword(data.get("createPassword"));
 			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			homePage.clickCheckBox();
 			homePage.clickNext();
-			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
-			String[] msg = data.get("errMessage").split(",");
-			for (int i = 0; i < msg.length; i++) {
-				homePage.phoneVerificationComponent().fillpin(data.get("code"));
-				homePage.phoneVerificationComponent().verifyMessage(msg[i]);
-			}
-			homePage.phoneVerificationComponent().clickResend();
-			homePage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
-			for (int i = 0; i <= 3; i++) {
-				Thread.sleep(5000);
-				homePage.phoneVerificationComponent().clickResend();
-				homePage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
-			}
-
+			Thread.sleep(3000);
+			homePage.phoneVerificationComponent().verifyPhoneVerificationHeading();
+			homePage.phoneVerificationComponent().verifPhoneVericationDescription();
+			homePage.phoneVerificationComponent().verifyPhoneVerificationNumber(data.get("PhoneVerificationNumber"));
+			homePage.phoneVerificationComponent().verifyVerificationCodeBoxAutoFocused();
+			homePage.phoneVerificationComponent().authyComponent().validateAuthyField(data.get("code"));
+			homePage.phoneVerificationComponent().authyComponent().fillAuthyInputInvalid(data.get("expCode"), data.get("Character"));
+			if (!data.get("errMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 		}
-
+			homePage.phoneVerificationComponent().clickResend();
+			Thread.sleep(3000);
+			homePage.phoneVerificationComponent().verifyResendDescrp();
+			for(int i =0; i <=5;i++) {
+				homePage.phoneVerificationComponent().clickResend();
+			}
+			
+			homePage.phoneVerificationComponent().verifyResendError();
+			
+		}
 		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccountPhoneVerification Failed due to Exception " + e);
+		}
+	}	
+	
+	@Test
+	@Parameters({ "strParams" })
+    public void testcreateAccountEmailVerification(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			homePage.clickPersonalAccount();
+			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.fillFirstName(data.get("firstName"));
+			homePage.fillLastName(data.get("lastName"));
+			homePage.fillPhoneNumber(data.get("phoneNumber"));
+			homePage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			homePage.fillCreatePassword(data.get("createPassword"));
+			homePage.fillConfirmPassword(data.get("confirmPassword"));
+			homePage.clickCheckBox();
+			homePage.clickNext();
+			Thread.sleep(3000);
+			homePage.phoneVerificationComponent().verifyPhoneVerificationHeading();
+			homePage.phoneVerificationComponent().verifPhoneVericationDescription();
+			homePage.phoneVerificationComponent().verifyVerificationCodeBoxAutoFocused();
+			homePage.phoneVerificationComponent().authyComponent().fillInput(data.get("pin"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyEmailHeading(data.get("emailHeading"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyEmailDescription();
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("emailDescrp"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyfirstCodeBoxAutoFocused();
+			homePage.phoneVerificationComponent().emailVerificationComponent().authyComponent().validateAuthyField(data.get("code"));
+			homePage.phoneVerificationComponent().emailVerificationComponent().authyComponent().fillAuthyInputInvalid(data.get("expCode"), data.get("Character"));
+			if (!data.get("errMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+		}
+			homePage.phoneVerificationComponent().emailVerificationComponent().clickResendVerificationCode();
+			Thread.sleep(3000);
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyResendDescription();
+			for(int i =0; i <=5;i++) {
+				homePage.phoneVerificationComponent().emailVerificationComponent().clickResendVerificationCode();
+			}
+			
+			homePage.phoneVerificationComponent().emailVerificationComponent().verifyResendError();			
+		
+		}
+		
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testcreateAccountEmailVerification Failed due to Exception " + e);
 		}
 	}
 	
