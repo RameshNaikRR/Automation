@@ -39,6 +39,9 @@ public class NavigationMenuPage extends BrowserFunctions {
 		return By.xpath(String.format("(//div[contains(@class,'DashboardMenuItems_imgLogo__2kQaD ')]/following-sibling::span[text()='%s'])[1]",
 				sidebarItems));
 		}
+	public String getCustId() {
+		   return getText(lblAccountId, "Account Id").replaceAll("[^0-9]", "");
+		    }
 	
 	
 	// added

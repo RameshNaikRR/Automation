@@ -43,6 +43,9 @@ public class NotificationsComponent extends BrowserFunctions {
 		click(notificationsIcon, "NotificationIcon");
 
 	}
+	public String getUiCount() {
+		return getText(notificationCount, "NotificationsCount");
+	}
 
 	// added
 	public void verifyCursorNotification() {

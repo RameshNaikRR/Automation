@@ -23,6 +23,7 @@ import coyni.customer.popups.EditPhoneNumberPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class CustomerProfileTest {
 	CustomerProfilePage customerProfilePage;
@@ -794,6 +795,30 @@ public class CustomerProfileTest {
 		}
 
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testNotificationsCount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			System.out.println("id:"+ navigationMenuPage.getCustId());
+			String dbCount = DBConnection.getDbCon()
+					.getColumnData(String.format(data.get("query"), navigationMenuPage.getCustId()));
+			System.out.println(dbCount);
+			String uiCount = customerProfilePage.userDetailsComponent().notificationsComponent().getUiCount();
+			if (uiCount.equals(dbCount)) {
+				ExtentTestManager.setPassMessageInReport("Count is verified");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Count is not verified");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotifications count failed due to Exception " + e);
+		}
+	}
+	
+	
+	
 
 	@Test
 	@Parameters({ "strParams" })
