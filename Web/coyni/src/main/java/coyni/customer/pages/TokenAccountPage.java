@@ -1,5 +1,6 @@
 package coyni.customer.pages;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ import coyni.customer.popups.WithdrawCoyniToUSDPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountPage extends BrowserFunctions {
 
@@ -105,10 +107,6 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().elementView(amount, "Amount");
 	}
 
-//		public void clickUserName() {
-//		   click(dropDownUserName, "UserName");
-//		}
-
 	public void verifyTransactionList() {
 //			List<WebElement> elements = getElementsList(lblPostedTransactions, "Posted Transactions List");
 //			int noOfTransactions = elements.size();
@@ -124,7 +122,6 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public void verifyPostedTransactions(String expCount) {
-
 		int page1 = getElementsList(transaction, "page transaction count").size();
 		int count = Integer.parseInt(expCount);
 		if (page1 == count) {
@@ -146,23 +143,22 @@ public class TokenAccountPage extends BrowserFunctions {
 			pageNumber++;
 			if (!(pageNumber == 0)) {
 				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
-			}
-			else if(remainder == 0) {
+			} else if (remainder == 0) {
 				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
-				}
+			}
 		} else {
 			ExtentTestManager.setFailMessageInReport("No of Page is Null");
 		}
 
 	}
 
-	public void verifyBracesCount() {
+	public void verifyBracesCount(String query) throws SQLException {
 		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
-		int bracesCount = Integer.parseInt(getBracesCount().split(" ")[0].split("(")[1].split(")")[2]);
-		if (expCount == bracesCount) {
-			ExtentTestManager.setPassMessageInReport("Braces are " + bracesCount);
+		int count = DBConnection.getDbCon().getCount(String.format(query));
+		if (expCount == count) {
+			ExtentTestManager.setPassMessageInReport("Braces are " + count);
 		} else {
-			ExtentTestManager.setFailMessageInReport("Braces are not" + bracesCount);
+			ExtentTestManager.setFailMessageInReport("Braces are not" + count);
 		}
 	}
 
@@ -172,23 +168,20 @@ public class TokenAccountPage extends BrowserFunctions {
 			click(nextPage, "Clicked Next Page");
 			new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp, expValue, expColor);
 			ExtentTestManager.setPassMessageInReport("Page is Highlighted when clicked on Page number");
-		}
-
-		else {
+		} else {
 			ExtentTestManager.setWarningMessageInReport("Page is Not Highlighted");
-
 		}
 	}
 
-	public void verifyTableItemsCount(String query) {
+	public void verifyTableItemsCount(String query) throws SQLException {
+		int count = DBConnection.getDbCon().getCount(String.format(query));
 		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
-		int actCount = Integer.parseInt(query);
-		if (expCount == actCount) {
+		if (count == expCount) {
 			ExtentTestManager.setPassMessageInReport(
-					"Number of rows in transactions table matches with number of entries selected i.e " + actCount);
+					"Number of transactions in table matches with number of entries selected i.e ");
 		} else {
 			ExtentTestManager.setFailMessageInReport(
-					"Number of rows in transactions table = %s and entries selected in show drop down = %s");
+					"Number of transactions in table doesnot match with numer of entries selected");
 		}
 	}
 

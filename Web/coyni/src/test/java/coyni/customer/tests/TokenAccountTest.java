@@ -375,12 +375,11 @@ public class TokenAccountTest {
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 			tokenAccountPage.verifyLabelTransactionListDetails();
-			tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
 			// tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
 			// tokenAccountPage.verifyTransactionList();
-			// tokenAccountPage.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.verifyTableItemsCount(data.get("query"));
 			tokenAccountPage.verifyPostedTransactions(data.get("count"));
-			// tokenAccountPage.verifyBracesCount();
+			tokenAccountPage.verifyBracesCount(data.get("query"));
 			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
