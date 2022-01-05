@@ -17,17 +17,18 @@ import io.appium.java_client.MobileBy;
 public class RetrieveEmailPage extends MobileFunctions {
 
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
-	private By retrieveheading = MobileBy.xpath("//*[@text='Retrieve Email']");
+	private By retrieveheading = MobileBy.xpath("//*[@text='Retrieve Email']|//*[@name='Retrieve Email']");
 	// private By lblPhoneNumber =
 	// MobileBy.xpath("//*[contains(@resource-id,'hintTV')]");
-	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'reFirstNameET')]");
-	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'reLastNameET')]");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')]");
+	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'reFirstNameET')]|//*[@name='First Name']");
+	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'reLastNameET')]|//*[@name='Last Name']");
+	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')|(//*[@name='Next'])[1]]");
 	private By tryAgain = MobileBy.xpath("//*[@text='Try Again']");
 	private By closeIcon = MobileBy.xpath("//*[contains(@resource-id,'imgREClose')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By headingPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
-	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
+	private By txtPhoneNumber = MobileBy.xpath(
+			"//*[contains(@resource-id,'pnET')]|(//*[contains(@name,'Phone Number')])[1]/following-sibling::*[1]/child::*[1]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']");
 	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]");

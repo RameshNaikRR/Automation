@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.popups.CvvPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -41,5 +42,8 @@ public class PaymentMethodsPage extends MobileFunctions{
 	}
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
+	}
+	public CvvPopup cvvPopup() {
+		return new CvvPopup();
 	}
 }

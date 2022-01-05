@@ -406,4 +406,58 @@ public class TokenAccountTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyToken(String strParams, String method) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			if(method.equalsIgnoreCase("bank")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));	
+			}
+			else if(method.equalsIgnoreCase("credit")) {
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			}else {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			}
+			if(!method.equalsIgnoreCase("bank")) {
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().verifyPopupHeading(data.get("cvvPopupHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().clickOk();
+		}
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyPayment(data.get("paymentMethod"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.verifyHeading(data.get("previewHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.swipeConfirm();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.successFailureComponent().getStatus();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenCard  failed due to exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithBank(String strParams) {
+		testBuyToken(strParams,"bank");
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithCreditCard(String strParams) {
+		testBuyToken(strParams,"credit");
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithDebitCard(String strParams) {
+		testBuyToken(strParams,"debit");
+	}
 }
