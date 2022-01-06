@@ -344,20 +344,24 @@ System.out.println(textField.length());
 		}
 	 }
 	
-	public void verifyClearAndUpdateAllFileds(String firstName,String lastName,String NewPhoneNumber,String NewEmail, String createPassword,String confirmPassword
-			) throws InterruptedException {
-		clearText(txtFirstName, "First Name");
-		clearText(txtLastName, "Last Name");
-		clearText(txtPhoneNumber, "Phone Number");
-		clearText(txtEmail, "Email");
-		clearText(txtCreatePassword, "Create Password");
-		clearText(txtConfirmPassword, "Confirm Password");
+	public void verifyClearAndUpdateAllFileds(String firstName,String lastName,String NewPhoneNumber,String newEmail, String createPassword,String confirmPassword)  {
+		
+		
 		enterText(txtFirstName, firstName, "First Name");
+		ExtentTestManager.setInfoMessageInReport("First name field is updated with " + firstName);
 		enterText(txtLastName, lastName, "Last name");
+		ExtentTestManager.setInfoMessageInReport("Last name field is updated with " + lastName);
 		enterText(txtPhoneNumber, NewPhoneNumber, "Phone Number");
-		enterText(txtEmail, NewEmail, "Email");
+		ExtentTestManager.setInfoMessageInReport("Phone Number field is updated with " + NewPhoneNumber);
+		enterText(txtEmail, newEmail, "Email");
+		ExtentTestManager.setInfoMessageInReport("Email field is updated with " + newEmail);
 		enterText(txtCreatePassword, createPassword, "Create Password");
-		enterText(txtConfirmPassword, confirmPassword, "COnfirm Password");
+		ExtentTestManager.setInfoMessageInReport("Create Password field is updated with " + createPassword);
+		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+		ExtentTestManager.setInfoMessageInReport("Confirm Password field is updated with " + confirmPassword);
+		
+		ExtentTestManager.setPassMessageInReport("All Populated data cleared and updated with new data");
 	}
+
 
 }
