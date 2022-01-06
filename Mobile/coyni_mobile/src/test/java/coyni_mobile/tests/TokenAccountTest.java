@@ -29,7 +29,7 @@ public class TokenAccountTest {
 		transactionPage = new TransactionPage();
 		filtersComponent = new FiltersComponent();
 		notificationComponent = new NotificationComponent();
-        customerProfilePage = new CustomerProfilePage();
+		customerProfilePage = new CustomerProfilePage();
 	}
 
 	@Test
@@ -293,29 +293,26 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionList(String strParams) {
-	try {
-	Map<String, String> data = Runner.getKeywordParameters(strParams);
-	tokenAccountPage.btnDashBoard();
-	tokenAccountPage.ViewMore();
-	tokenAccountPage.clickViewMore();
-	tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
-	tokenAccountPage.transactionPage().verifySearchOption();
-	tokenAccountPage.transactionPage().verifyFiltersIcon();
-	tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
-	tokenAccountPage.transactionPage().verifyMessage();
-	tokenAccountPage.transactionPage().verifyAmount();
-	tokenAccountPage.transactionPage().verifyCloseView();
-	customerProfilePage.clickLogOut();
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnDashBoard();
+			tokenAccountPage.ViewMore();
+			tokenAccountPage.clickViewMore();
+			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
+			tokenAccountPage.transactionPage().verifySearchOption();
+			tokenAccountPage.transactionPage().verifyFiltersIcon();
+			tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
+			tokenAccountPage.transactionPage().verifyMessage();
+			tokenAccountPage.transactionPage().verifyAmount();
+			tokenAccountPage.transactionPage().verifyCloseView();
+			customerProfilePage.clickLogOut();
 
-
-
-	} catch (Exception e) {
-	ExtentTestManager.setFailMessageInReport("testTransactionList failed due to exception " + e);
-	}
-
-
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList failed due to exception " + e);
+		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testPay(String strParams) {
@@ -406,26 +403,25 @@ public class TokenAccountTest {
 		}
 
 	}
-	@Test
-	@Parameters({ "strParams" })
+
 	public void testBuyToken(String strParams, String method) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			if(method.equalsIgnoreCase("bank")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));	
-			}
-			else if(method.equalsIgnoreCase("credit")) {
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
-			}else {
+			if (method.equalsIgnoreCase("bank")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+			} else if (method.equalsIgnoreCase("credit")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			} else {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
 			}
-			if(!method.equalsIgnoreCase("bank")) {
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().verifyPopupHeading(data.get("cvvPopupHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().clickOk();
-		}
+			if (!method.equalsIgnoreCase("bank")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup()
+						.verifyPopupHeading(data.get("cvvPopupHeading"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().clickOk();
+			}
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
@@ -445,19 +441,22 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenCard  failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithBank(String strParams) {
-		testBuyToken(strParams,"bank");
+		testBuyToken(strParams, "bank");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithCreditCard(String strParams) {
-		testBuyToken(strParams,"credit");
+		testBuyToken(strParams, "credit");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithDebitCard(String strParams) {
-		testBuyToken(strParams,"debit");
+		testBuyToken(strParams, "debit");
 	}
 }

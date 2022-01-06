@@ -11,14 +11,16 @@ import io.appium.java_client.MobileBy;
 
 public class OrderPreviewPopup extends MobileFunctions {
 
-	private By lblOrderPreview = MobileBy.xpath("//*[@name='Order Preview']");
-	private By lblAmount = MobileBy.xpath("//*[@name='Order Preview']/following-sibling::*[1]");
+	private By lblOrderPreview = MobileBy.xpath("//*[@name='Order Preview']|//*[@text='Order Preview']");
+	private By lblAmount = MobileBy
+			.xpath("//*[@name='Order Preview']/following-sibling::*[1]|//*[contains(@resource-id,'tvGet')]");
 	private By lblPaymentMethod = MobileBy
 			.xpath("(//*[@name='Payment Method']/following-sibling::XCUIElementTypeStaticText)[1]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[@name='Purchase Amount']/following-sibling::*[1]");
 	private By lblProcessingFee = MobileBy.xpath("//*[@name='Processing Fee']/following-sibling::*[1]");
 	private By lblTotal = MobileBy.xpath("//*[@name='Total']/following-sibling::*[1]");
-	private By btnConfirm = MobileBy.xpath("//*[@name='Slide to confirm']/../..");
+	private By btnConfirm = MobileBy
+			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[@name='Slide to confirm']/../..");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblOrderPreview, "Popup Heading", expHeading);
@@ -53,6 +55,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 	public void swipeConfirm() {
 		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
 	}
+
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}

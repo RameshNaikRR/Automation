@@ -10,12 +10,13 @@ import io.appium.java_client.MobileBy;
 
 public class BuyTokenComponent extends MobileFunctions {
 
-	private By lblBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[1]");
-	private By lblPaymentMethod = MobileBy.xpath("//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
+	private By lblBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[1]|//*[@text='Buy Token']");
+	private By lblPaymentMethod = MobileBy
+			.xpath("//*[@text='Payment Method']|//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
 	private By lblDailylimits = MobileBy.xpath("//*[@name ='arrow-right']/following-sibling::*[1]");
 	private By btnChangePayment = MobileBy.xpath("//*[@name ='arrow-right']");
 	private By txtAmount = MobileBy.xpath("//*[@name ='currency toggle']/preceding-sibling::XCUIElementTypeTextField");
-	private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]");
+	private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]|//*[contains(@resource-id,'keyActionTV')]");
 	private By btnConvert = MobileBy.xpath("//*[@name ='currency toggle']");
 
 	public void verifyHeading(String expHeading) {
@@ -41,7 +42,7 @@ public class BuyTokenComponent extends MobileFunctions {
 
 	public void fillAmount(String Amount) {
 		new EnterYourPINComponent().fillPin(Amount);
-		ExtentTestManager.setInfoMessageInReport("Entered Amount: "+Amount);
+		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
 	}
 
 	public void clickBuyToken() {
