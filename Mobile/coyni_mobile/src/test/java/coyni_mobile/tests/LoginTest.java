@@ -185,7 +185,6 @@ public class LoginTest {
 		try {
 
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
@@ -194,7 +193,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().verifyEmailComponent()
 					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			//loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
@@ -242,8 +241,8 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailComponent()
-					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+//			loginPage.forgotPasswordPage().verifyEmailComponent()
+//					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			Thread.sleep(2000);
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			for (int i = 0; i <= 4; i++) {
@@ -283,12 +282,16 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
+			loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
+//			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
+//			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordWithFieldValidation(String strParams) {
