@@ -22,7 +22,10 @@ public class LandingPage extends MobileFunctions {
 			click(btnLogin, "login");
 		}
 	}
-
+    public void verifyLoginbtnView() {
+    	new  CommonFunctions().elementView(btnLogin, "Login");
+    	
+    }
 	public void verifyLandingPage() {
 		new CommonFunctions().elementView(btnGetStarted, "Landing Page ");
 	}

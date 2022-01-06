@@ -31,6 +31,9 @@ public class ChoosePinComponent extends MobileFunctions {
 	public void verifyConfirmPinHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading2, "heading", expHeading);
 	}
+	public void verifyConfirmYourPinView() {
+		new CommonFunctions().elementView(heading2, "Confirm your Pin");
+	}
 	public void fillPin(String pin) {
 		new EnterYourPINComponent().fillPin(pin);
 	}

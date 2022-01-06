@@ -732,5 +732,50 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport(" test Reset Pin Code failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testResetPinCodeViewFlow(String strParams) {
+		try {
+			   Map<String, String> data = Runner.getKeywordParameters(strParams);
+			   tokenAccountPage.clickProfile();
+			   customerProfilePage.verifyResetPinCodeView();
+			   customerProfilePage.clickResetPinCode();
+			   customerProfilePage.enterYourPINComponent().verifyEnterYourPinView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyCloseView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			   customerProfilePage.clickResetPinCode();
+			   customerProfilePage.enterYourPINComponent().verifyForgotPinView();
+			   customerProfilePage.enterYourPINComponent().clickForgotPin();
+		  //   customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			   customerProfilePage.clickResetPinCode();
+			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			   Thread.sleep(1000);
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChooseYourPinView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			   customerProfilePage.clickResetPinCode();
+			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChoosePinHeading(data.get("heading1"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmYourPinView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			   customerProfilePage.clickResetPinCode();
+			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmPinHeading(data.get("heading2"));
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));	   
+		}catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test ResetPinCodeView Flow failed due to Exception " + e);
+			
+		}
+	}
+	}
+	
+	
+	
+	
+	
 
-}
+

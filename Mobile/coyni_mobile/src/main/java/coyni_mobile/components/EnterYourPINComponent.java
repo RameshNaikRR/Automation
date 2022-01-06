@@ -15,6 +15,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]|(//*[@name='Forgot PIN'])[1]/preceding-sibling::*[1]");
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]|(//*[@name='Forgot PIN'])[1]");
 	private By lblErrorMsg = MobileBy.xpath("");
+	
 
 	private By getOneNumberOfPin(char num) {
 		return MobileBy.xpath(String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num),Character.toString(num)));
@@ -42,10 +43,12 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public void verifyEnterYourPinView() {
 		new CommonFunctions().elementView(heading, "Enter Your PIN");
 	}
+	
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 	}
+	
 
 	public EnableFaceIDpage enableFaceIDpage() {
 		return new EnableFaceIDpage();

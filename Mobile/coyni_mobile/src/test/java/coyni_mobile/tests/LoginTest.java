@@ -74,6 +74,7 @@ public class LoginTest {
 	public void testLoginNavigationView(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+		    landingPage.verifyLoginbtnView();
 			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.navigationComponent().verifyCloseView();
