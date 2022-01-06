@@ -43,7 +43,27 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 		}
 	}
-
+    
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginWithOutPin(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			//loginPage.clickRememberMe();
+			loginPage.clickLogin();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
@@ -503,7 +523,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifyVerifyEmail(String strParams) {
+	public void testEmailVerify(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
@@ -530,7 +550,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifyChooseYourPin(String strParams) {
+	public void testChooseYourPin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
@@ -564,7 +584,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifyChooseYourPinWithBack(String strParams) {
+	public void testChooseYourPinWithBackNavigation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
@@ -604,7 +624,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifyConfirmYourPin(String strParams) {
+	public void testConfirmYourPin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
@@ -633,7 +653,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testVerifyConfirmYourPinWithBack(String strParams) {
+	public void testConfirmYourPinWithBackNavigation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			enterYourPINComponent.verifyHeading(data.get("expEnterYourPinHeading"));
