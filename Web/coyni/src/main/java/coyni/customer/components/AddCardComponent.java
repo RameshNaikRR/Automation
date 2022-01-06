@@ -2,6 +2,7 @@ package coyni.customer.components;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -61,6 +62,38 @@ public class AddCardComponent extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("invalid card type: " + cardType.toUpperCase());
 		}
+	}
+	
+	/**
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
+	 * spaces maxiPlus
+	 */
+	public void validateNameOnCard(String nameOnCard) {
+		new HomePage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
+	}
+	
+	public void validateCardNumber(String cardNumber) {
+		validateCardNumberAndCvv(txtCardNumber, "Card Number", cardNumber);
+	}
+	public void validateCardExpiry(String cardExpiry) {
+		new HomePage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
+	}
+	public void validateCVVorCVC(String cvvOrCVC) {
+		validateCardNumberAndCvv(txtCVVorCVC, "CVV or CVC", cvvOrCVC);
+	}
+	/**
+	 * Order -minChar, maxChar, specialChar, alphabets,
+	 * spaces ,maxiPlus
+	 */
+	public void validateCardNumberAndCvv(By ele,String eleName, String textField) {
+		String[] field = textField.split(",");
+		for(int i=0;i<2;i++) {
+		new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		for (int i = 2; i < 5; i++) {
+			new CommonFunctions().validateTextFeild(ele, eleName, field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[5]);
 	}
 
 //	public void validateNameOnCard(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,

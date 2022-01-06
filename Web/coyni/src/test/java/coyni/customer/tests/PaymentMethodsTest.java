@@ -342,71 +342,63 @@ public class PaymentMethodsTest {
            ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testCardsFieldValidations(String strParams, String card) {
-//
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			navigationMenuPage.clickTokenAccountMenu();
-//			tokenAccountPage.userNameDropDownComponent().clickUserName();
-//			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-//			Thread.sleep(2000);
-//			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
-//			Thread.sleep(2000);
-//			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
-//
-//			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
-//			if (card.equalsIgnoreCase("credit")) {
-//				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
-//			} else {
-//				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
-//			}
-//
-//			String[] name = data.get("nameOnCard").split(",");
-//			String[] number = data.get("cardNumber").split(",");
-//			String[] expiry = data.get("cardExpiry").split(",");
-//			String[] cvv = data.get("cvvNumber").split(",");
-//			String[] address1 = data.get("address1").split(",");
-//			String[] address2 = data.get("address2").split(",");
-//			String[] city = data.get("city").split(",");
-//			String[] zipcode = data.get("zipCode").split(",");
-//
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.validateNameOnCard(name[0], name[1], name[2], name[3], name[4],name[5],name[6]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.validateCardNumber(number[0], number[1], number[2], number[3], number[4]);
-//			Thread.sleep(3000);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.validateCardExpiry(expiry[0], expiry[1], expiry[2], expiry[3]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.validateCVVorCVC(cvv[0], cvv[1], cvv[2], cvv[3], cvv[4]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.mailingAddressComponent().validateAddress1(address1[0], address1[1], address1[2],address1[3],address1[4]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.mailingAddressComponent().vaidateAddress2(address2[0], address2[1], address2[2],address2[3],address2[4]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.mailingAddressComponent().validateCity(city[0], city[1], city[2], city[3], city[4],city[5],city[6]);
-//			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-//					.mailingAddressComponent()
-//					.validateZipCode(zipcode[0], zipcode[1], zipcode[2], zipcode[3]);
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("failed due to" + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testCardsFieldValidations(String strParams, String card) {
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testDebitCardFieldValidations(String strParams) {
-//		testCardsFieldValidations(strParams, "debit");
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testCreditCardFieldValidations(String strParams) {
-//		testCardsFieldValidations(strParams, "credit");
-//	}
-//	
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+
+			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
+			} else {
+				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			}
+
+           Thread.sleep(3000);
+		   customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateNameOnCard(data.get("nameOnCard"));
+		   customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+			        .validateCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateCardExpiry(data.get("cardExpiry"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateCVVorCVC(data.get("cvvNumber"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress1(data.get("address1"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress2(data.get("address2"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().validateCity(data.get("city"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent()
+					.validateZipCode(data.get("zipCode"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDebitCardFieldValidations(String strParams) {
+		testCardsFieldValidations(strParams, "debit");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCreditCardFieldValidations(String strParams) {
+		testCardsFieldValidations(strParams, "credit");
+	}
+	
 
 
 }

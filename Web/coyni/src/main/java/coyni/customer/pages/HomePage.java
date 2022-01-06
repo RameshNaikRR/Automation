@@ -270,21 +270,24 @@ public class HomePage extends BrowserFunctions {
    public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}
-   /**
-	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number, spaces
-	 * maxiPlus
+
+	/**
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
+	 * spaces maxiPlus
 	 */
 	public void validateNameField(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
 		for (int i = 0; i < 4; i++) {
 			new CommonFunctions().validateField(ele, eleName, field[i]);
 		}
-System.out.println(textField.length());
-		for (int j = 4; j <6; j++) {
+		System.out.println(textField.length());
+		for (int j = 4; j < 7; j++) {
 			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
 		}
-		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[6]);
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[7]);
 	}
+	
+	
 
 	public void validateFirstNameField(String firstName) {
 		validateNameField(txtFirstName, "First Name", firstName);
@@ -305,13 +308,16 @@ System.out.println(textField.length());
 	/**
 	 * Order -minChar, alphabets, specialChar, spaces, maxiPlus
 	 */
-	public void validatePhoneNumber(String textField) {
+	public void validateNumber(By ele,String eleName, String textField) {
 		String[] field = textField.split(",");
-		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", field[0]);
+		new CommonFunctions().validateField(ele, eleName, field[0]);
 		for (int i = 1; i < 4; i++) {
-			new CommonFunctions().validateTextFeild(txtPhoneNumber, "Phone Number", field[i]);
+			new CommonFunctions().validateTextFeild(ele, eleName, field[i]);
 		}
-		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", field[4]);
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
+	}
+	public void validatePhoneNumber(String phoneNumber) {
+		validateNumber(txtPhoneNumber, "Phone Number", phoneNumber);
 	}
    
 	public void getPreviousData() {
