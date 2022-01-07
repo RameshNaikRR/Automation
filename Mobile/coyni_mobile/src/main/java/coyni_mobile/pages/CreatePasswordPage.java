@@ -9,12 +9,14 @@ import io.appium.java_client.MobileBy;
 
 public class CreatePasswordPage extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By txtNewPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
-	private By txtConfirmPassword = MobileBy.xpath("//*[contains(@resource-id,'etCPassword')]");
-	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvSave')]");
-	private By lblSuccessMsg = MobileBy.xpath("//*[contains(@text,'Your password has been successfully updated.')]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@text,'Log in')]");
+	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]|//*[@name='Create New Password']");
+	private By txtNewPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]|//*[@name='New Password']");
+	private By txtConfirmPassword = MobileBy
+			.xpath("//*[contains(@resource-id,'etCPassword')]|//*[@name='Confirm Password']");
+	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvSave')]|(//*[@name='Save'])[1]");
+	private By lblSuccessMsg = MobileBy.xpath(
+			"//*[contains(@text,'Your password has been successfully updated.')]|//*[@name='Your password has been successfully updated.']");
+	private By btnLogin = MobileBy.xpath("//*[contains(@text,'Log in')]|(//*[@name='Log in'])[1]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Create Password Heading", expHeading);

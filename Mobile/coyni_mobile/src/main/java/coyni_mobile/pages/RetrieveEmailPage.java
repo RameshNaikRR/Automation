@@ -22,18 +22,18 @@ public class RetrieveEmailPage extends MobileFunctions {
 	// MobileBy.xpath("//*[contains(@resource-id,'hintTV')]");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'reFirstNameET')]|//*[@name='First Name']");
 	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'reLastNameET')]|//*[@name='Last Name']");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')|(//*[@name='Next'])[1]]");
-	private By tryAgain = MobileBy.xpath("//*[@text='Try Again']");
-	private By closeIcon = MobileBy.xpath("//*[contains(@resource-id,'imgREClose')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')]|(//*[@name='Next'])[1]");
+	private By tryAgain = MobileBy.xpath("//*[@text='Try Again']|//*[@name='Try Again']");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By headingPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+	private By headingPhoneNumber = MobileBy
+			.xpath("//*[contains(@resource-id,'headerTV')]|//*[@name='Please Verify your Phone Number']");
 	private By txtPhoneNumber = MobileBy.xpath(
 			"//*[contains(@resource-id,'pnET')]|(//*[contains(@name,'Phone Number')])[1]/following-sibling::*[1]/child::*[1]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
-	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']");
-	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]");
-	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
+	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']|//*[@name='We’ve Found Your Account!']");
+	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]|//*[@name='Anudeep Ag']");
+	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]|(//*[@name='Resend'])[1]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]|//*[@name='OK']");
 	private By otpMsg = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By errMessage = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 
@@ -75,27 +75,33 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void fillLastName(String lastName) {
-		scrollDownToElement(txtLastName, "Last Name");
+		// scrollUpToElement(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name ");
-
+		click(txtPhoneNumber, "Phone Number");
+      new SignUpPage().clickDone();
 	}
 
 	public void pasteOption(String code) {
 		copyDataToClipboard(code);
-		click(otpMsg, "Paste");
+		click(txtInputBoxes, "Paste");
 
 		Uninterruptibles.sleepUninterruptibly(10000, TimeUnit.MILLISECONDS);
 	}
 
 	public void clickNext() {
+//		if (new CommonFunctions().isPlatformiOS()) {
+//			scrollUpToElement(btnNext, "Next button");
+//
+//		} else {
 		scrollDownToElement(btnNext, "Next");
 		if (getElement(btnNext, "Next").isEnabled()) {
 			click(btnNext, "Next ");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
 		}
-
 	}
+
+//	}
 
 	public void ViewCoyni() {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
@@ -113,10 +119,6 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public void clickClose() {
 		click(btnClose, "Close ");
 
-	}
-
-	public void clickCloseIcon() {
-		click(closeIcon, "close Icon");
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {

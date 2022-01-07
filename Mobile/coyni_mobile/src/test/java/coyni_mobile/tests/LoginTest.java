@@ -43,7 +43,7 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 		}
 	}
-    
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginWithOutPin(String strParams) {
@@ -56,14 +56,14 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
-			//loginPage.clickRememberMe();
+			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
@@ -94,7 +94,7 @@ public class LoginTest {
 	public void testLoginNavigationView(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-		    landingPage.verifyLoginbtnView();
+			landingPage.verifyLoginbtnView();
 			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.navigationComponent().verifyCloseView();
@@ -209,18 +209,18 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailComponent()
-					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			//loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			// loginPage.forgotPasswordPage().verifyEmailComponent()
+			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
-			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
-			loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			// loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
+			// loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
 			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
 			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
@@ -237,14 +237,20 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			Thread.sleep(2000);
 			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-						loginData.get("elementName"));
+				if (new CommonFunctions().isPlatformiOS()) {
+					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				}
 			}
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
@@ -259,13 +265,13 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 //			loginPage.forgotPasswordPage().verifyEmailComponent()
 //					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			Thread.sleep(2000);
-			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
@@ -287,25 +293,26 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
 			loginPage.clickForgotPassword();
-			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailComponent()
-					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			// loginPage.forgotPasswordPage().verifyEmailComponent()
+			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
-			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
-			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
-			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
-			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
-			loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
-			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
+			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+
+//			loginPage.forgotPasswordPage().clickNext();
+//			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+//			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
+//			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
+//			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
+			// loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
+			// loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			// loginPage.forgotPasswordPage().createPasswordPage().clickSave();
 //			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
 //			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
 		} catch (Exception e) {
@@ -313,6 +320,7 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordWithFieldValidation(String strParams) {
@@ -342,7 +350,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
-			loginPage.retrieveEmailPage().pasteOption(loginData.get("code"));
+			// loginPage.retrieveEmailPage().pasteOption(loginData.get("code"));
 			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
 			loginPage.retrieveEmailPage().clickCoyniAccount();
@@ -366,8 +374,13 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().clickNext();
 
 			if (!loginData.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-						loginData.get("elementName"));
+				if (new CommonFunctions().isPlatformiOS()) {
+					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				}
 			}
 		} catch (Exception e) {
 			ExtentTestManager
@@ -390,7 +403,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().verifyTryAgain(loginData.get("tryAgain"));
 			loginPage.retrieveEmailPage().clickTryAgain();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().clickCloseIcon();
+			loginPage.retrieveEmailPage().navigationComponent().clickClose();
 			loginPage.VerifyLoginPageView();
 
 		} catch (Exception e) {
@@ -443,11 +456,11 @@ public class LoginTest {
 //			loginPage.retrieveEmailPage().clickNext();
 			// Thread.sleep(5000);
 			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
-			for (int i = 0; i <= 3; i++) {
+			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
 			}
-			loginPage.retrieveEmailPage().verifyErrorMessage();
+			// loginPage.retrieveEmailPage().verifyErrorMessage();
 			loginPage.retrieveEmailPage().clickOk();
 		} catch (Exception e) {
 			ExtentTestManager
@@ -513,8 +526,8 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
 			enterYourPINComponent.forgotPinComponent().emailFieldTiltle();
-			enterYourPINComponent.forgotPinComponent().crossIconView();
-			enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
+			enterYourPINComponent.forgotPinComponent().navigationComponent().clickClose();
+			// enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
@@ -536,7 +549,7 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent()
 					.verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
 
@@ -563,7 +576,7 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent()
 					.verifyEmailOtpHeading(data.get("expVerifyEmailDecrp"));
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
 
@@ -571,8 +584,8 @@ public class LoginTest {
 					.verifyChoosePinHeading(data.get("expChooseYourPinHeading"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyChooseYourPinView();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
-					.enterYourPINComponent().verifyPinView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
+			// .enterYourPINComponent().verifyPinView();
 
 		}
 
@@ -594,7 +607,7 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyResendlbl(data.get("resendlbl"));
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
 
@@ -634,7 +647,7 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
 
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()
@@ -663,7 +676,7 @@ public class LoginTest {
 			enterYourPINComponent.forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 			enterYourPINComponent.forgotPinComponent().clickNext();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
+			// enterYourPINComponent.forgotPinComponent().verifyEmailComponent().verifyInputView();
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().fillInputBoxes(data.get("otp"));
 
 			enterYourPINComponent.forgotPinComponent().verifyEmailComponent().choosePinComponent()

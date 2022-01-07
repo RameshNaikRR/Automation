@@ -11,20 +11,20 @@ import io.appium.java_client.MobileBy;
 
 public class ForgotPasswordPage extends MobileFunctions {
 
-	private By forgotHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
+	private By forgotHeading = MobileBy
+			.xpath("//*[contains(@resource-id,'tvHead')]|//*[@name='Forgot Your Password?']");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]|//*[@name='Email']");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'llClose')]");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
-	private By contentForgot = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]|(//*[@name='Next'])[1]");
+	private By contentForgot = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]|//*[contains(@name,'Before')]");
 
-	private By popErrorMessage = MobileBy.xpath("//*[contains(@resource-id,'textTV')]");  //
+	private By popErrorMessage = MobileBy.xpath("//*[contains(@resource-id,'textTV')]"); //
 	private By popHeading = MobileBy.xpath("//*[@text='Coyni']");
-	
+
 	public void verifyPopEHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(popHeading, "PopUp Heading ", expHeading);
 	}
-	
-	
+
 	public void verifyPopErrMessa(String expHeading) {
 		new CommonFunctions().verifyLabelText(popErrorMessage, "User data not found ", expHeading);
 	}
@@ -56,10 +56,11 @@ public class ForgotPasswordPage extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-	
+
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
 	}
+
 	public void validateEmailField(String minChar, String minCharPlus, String maxLessChar, String maxChar,
 			String moreThanMax) {
 
