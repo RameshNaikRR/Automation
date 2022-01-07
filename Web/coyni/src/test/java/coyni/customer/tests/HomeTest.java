@@ -141,7 +141,7 @@ public class HomeTest {
 			homePage.phoneVerificationComponent().verifyResendError();
 			homePage.phoneVerificationComponent().clickButtonGoBack();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
-			homePage.getPreviousData();
+			homePage.getPreviousData(data.get("firstName"),data.get("lastName"),data.get("phoneNumber"),data.get("email"),data.get("createPassword"),data.get("confirmPassword"));
 			homePage.verifyClearAndUpdateAllFileds(data.get("firstName"),data.get("lastName"),data.get("newPhoneNumber"), data.get("newEmail"),data.get("createPassword"),data.get("confirmPassword"));
 			
 		}
@@ -192,7 +192,7 @@ public class HomeTest {
 			homePage.phoneVerificationComponent().emailVerificationComponent().verifyResendError();			
 			homePage.phoneVerificationComponent().emailVerificationComponent().clickGoBack();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
-			homePage.getPreviousData();
+			homePage.getPreviousData(data.get("firstName"),data.get("lastName"),data.get("phoneNumber"),data.get("email"),data.get("createPassword"),data.get("confirmPassword"));
 			homePage.verifyClearAndUpdateAllFileds(data.get("firstName"),data.get("lastName"),data.get("newPhoneNumber"), data.get("newEmail"),data.get("createPassword"),data.get("confirmPassword"));
 		}
 		

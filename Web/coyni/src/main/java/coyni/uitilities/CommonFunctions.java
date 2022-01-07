@@ -13,6 +13,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.Navigation;
 import ilabs.web.actions.WaitForElement;
 
 public class CommonFunctions {
@@ -268,4 +269,16 @@ public class CommonFunctions {
 			}
 		}
 	}
+	public void verifyPreviousData(By ele,String eleName,String expText) {
+		String actualText = objBrowserFunctions.getTextBoxValue(ele, eleName).trim().replace("/", "").replace("-", "")
+				.replace("(", "").replace(") ", "");
+		if(expText.equals(actualText)) {
+			ExtentTestManager.setPassMessageInReport(eleName+" has previous data");
+		}else {
+			ExtentTestManager.setWarningMessageInReport("Previous data is mismatched for "+eleName);
+		}
+	}
+	public void Refresh() {
+		objBrowserFunctions.navigate(Navigation.REFRESH);
+		}
 }

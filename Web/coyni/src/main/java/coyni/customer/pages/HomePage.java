@@ -320,54 +320,30 @@ public class HomePage extends BrowserFunctions {
 		validateNumber(txtPhoneNumber, "Phone Number", phoneNumber);
 	}
    
-	public void getPreviousData() {
-		String FirstNameData = getText(txtFirstName, "First Name Data");
-		String LastNameData = getText(txtLastName, "Last Name Data");
-		String PhoneNumberData = getText(txtPhoneNumber, "Phone Number");
-		String EmailData = getText(txtEmail, "Email Data");
-		String CreatePasswordData = getText(txtCreatePassword, "Create Password Data");
-		String ConfirmPasswordData = getText(txtConfirmPassword, "Confirm Passwords");
-		if(FirstNameData.equals(FirstName)) {
-		  ExtentTestManager.setPassMessageInReport("First Name Field is Populated with Previosly entered Data");
-		   if(LastNameData.equals(LastName)) {
-			ExtentTestManager.setPassMessageInReport("Last Name Field is Populated with Previosly entered Data");
-		       if(PhoneNumberData.equals(PhoneNumber)) { 
-		    	   ExtentTestManager.setPassMessageInReport("Phone Number Field is Populated with Previosly entered Data");			  
-                     if(EmailData.equals(Email)) {
-                    	 ExtentTestManager.setPassMessageInReport("Email Field is Populated with Previosly entered Data");
-                    	   if(CreatePasswordData.equals(CreatePassword)) {
-                    		   ExtentTestManager.setPassMessageInReport("Create Password Field is Populated with Previosly entered Data");
-                    		   if(ConfirmPasswordData.equals(ConfirmPassword)) {
-                    			   ExtentTestManager.setPassMessageInReport("Confirm Password Field is Populated with Previosly entered Data");
-                    		   }
-                   }
-                }
-		    }
-	    }
-    }
-		else {
-			ExtentTestManager.setFailMessageInReport("Previous Data is not Populated");
-		}
-	 }
-	
-	public void verifyClearAndUpdateAllFileds(String firstName,String lastName,String NewPhoneNumber,String newEmail, String createPassword,String confirmPassword)  {
-		
-		
-		enterText(txtFirstName, firstName, "First Name");
-		ExtentTestManager.setInfoMessageInReport("First name field is updated with " + firstName);
-		enterText(txtLastName, lastName, "Last name");
-		ExtentTestManager.setInfoMessageInReport("Last name field is updated with " + lastName);
-		enterText(txtPhoneNumber, NewPhoneNumber, "Phone Number");
-		ExtentTestManager.setInfoMessageInReport("Phone Number field is updated with " + NewPhoneNumber);
-		enterText(txtEmail, newEmail, "Email");
-		ExtentTestManager.setInfoMessageInReport("Email field is updated with " + newEmail);
-		enterText(txtCreatePassword, createPassword, "Create Password");
-		ExtentTestManager.setInfoMessageInReport("Create Password field is updated with " + createPassword);
-		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		ExtentTestManager.setInfoMessageInReport("Confirm Password field is updated with " + confirmPassword);
-		
-		ExtentTestManager.setPassMessageInReport("All Populated data cleared and updated with new data");
+	public void getPreviousData(String firstName, String lastName, String phoneNumber, String email,
+			String createPassword, String confirmPassword) {
+		new CommonFunctions().verifyPreviousData(txtFirstName, "First Name", firstName);
+		new CommonFunctions().verifyPreviousData(txtLastName, "Last Name", lastName);
+		new CommonFunctions().verifyPreviousData(txtPhoneNumber, "Phone Number", phoneNumber);
+		new CommonFunctions().verifyPreviousData(txtEmail, "Email", email);
+		new CommonFunctions().verifyPreviousData(txtCreatePassword, "Create Password", createPassword);
+		new CommonFunctions().verifyPreviousData(txtConfirmPassword, "Confirm Password", confirmPassword);
 	}
+
+	public void verifyClearAndUpdateAllFileds(String firstName, String lastName, String NewPhoneNumber, String newEmail,
+			String createPassword, String confirmPassword) {
+
+		new CommonFunctions().Refresh();
+
+		fillFirstName(firstName);
+		fillLastName(lastName);
+		fillPhoneNumber(NewPhoneNumber);
+		fillEmail(newEmail);
+		enterText(txtCreatePassword, createPassword, "CreatePassword");
+		fillConfirmPassword(confirmPassword);
+
+	}
+
 
 
 }
