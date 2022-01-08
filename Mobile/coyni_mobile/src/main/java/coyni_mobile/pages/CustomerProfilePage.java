@@ -15,27 +15,32 @@ import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
 
-	private By imgQRCode = MobileBy.xpath("");
+	
+	private By lblUserName = MobileBy.xpath("//*[contains(@name,'Account ID')]/preceding-sibling::*[1]|//*[contains(@resource-id,'customerNameTV')]");
+	private By lblAccountID = MobileBy.xpath("//*[contains(@name,'Account ID')]|//*[contains(@resource-id,'cpAccountIDTV')]");
+	private By lblAccountStatus = MobileBy.xpath("//*[contains(@name,'Status')]/preceding-sibling::*[1]|//*[contains(@resource-id,'tvACStatus')]");
+	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]|//*[contains(@name,'code')]");
+	private By imgUser = MobileBy.xpath("");
+	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]|//*[contains(@text,'Settings')]");
+	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']");
+	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']");
+	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']");
+	private By lblAccount =MobileBy.xpath("");
+	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
+	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
+	private By lblSecurity =MobileBy.xpath("");
+	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
+	private By btnFaceIDSetting = MobileBy.xpath("");
+	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
+	
+	
+	
+	
 	private By lblMyQRCodeHeading = MobileBy.xpath("");
 	private By btnShare = MobileBy.xpath("");
 	private By popup = MobileBy.xpath("");
 	private By lblCopyMessage = MobileBy.xpath("");
-	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']");
-	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']");
-	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']");
-	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
-	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
-	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
-	private By btnFaceIDSetting = MobileBy.xpath("");
-
-	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
-	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
-
-	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]");
-	private By imgUser = MobileBy.xpath("");
-	private By lblUserName = MobileBy.xpath("");
-	private By lblAccountID = MobileBy.xpath("");
-	private By lblAccountStatus = MobileBy.xpath("");
 	private By lblAvaliableBalance = MobileBy.xpath("");
 	private By viewPayRequestButton = MobileBy.xpath("");
 	private By lblRecentTransaction = MobileBy.xpath("");
@@ -207,7 +212,9 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void clickQRImage() {
 		click(imgQRCode, "Click QR Code ");
-
+	}
+	public void verifyQRImageView() {
+		new CommonFunctions().elementView(imgQRCode, "QR Code");
 	}
 
 	public void clickShare() {

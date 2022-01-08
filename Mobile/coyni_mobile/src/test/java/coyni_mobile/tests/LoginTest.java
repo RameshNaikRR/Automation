@@ -109,6 +109,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().navigationComponent().verifyCloseView();
 			loginPage.enterYourPINComponent().navigationComponent().clickClose();
 			loginPage.VerifyLoginPageView();
+			loginPage.fillPassword(loginData.get("password"));
 			// navigation LoginPage - Forgot Your PIN Component
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
@@ -185,13 +186,13 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
+//			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+//					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.verifyResendlbl(loginData.get("resendMsgOld"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-					.verifyResendlbl(loginData.get("resendMsgNew"));
+					.verifyNewResendlbl(loginData.get("resendMsgNew"));
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.verifyNewResendlbl(loginData.get("resendMsgOld"));

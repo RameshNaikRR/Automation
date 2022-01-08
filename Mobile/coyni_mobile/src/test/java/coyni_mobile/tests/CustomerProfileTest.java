@@ -28,6 +28,24 @@ public class CustomerProfileTest {
 		tokenAccountPage = new TokenAccountPage();
 		navigationComponent = new NavigationComponent();
 	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testProfileView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.verifyProfilePageView();
+			customerProfilePage.verifyUserNameView();
+			customerProfilePage.verifyAccountIDView();
+			customerProfilePage.verifyAccountStatusView();
+			customerProfilePage.verifyQRImageView();
+			
+			
+	} catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("testProfileView failed due to exception " + e);
+	}
+}
 
 	@Test
 	@Parameters({ "strParams" })
