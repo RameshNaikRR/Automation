@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
 
 import coyni.customer.components.AuthyComponent;
+import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -46,6 +47,10 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 
 	public VerifyCurrentEmailAddressPopup verifyCurrentEmailAddressPopup() {
 		return new VerifyCurrentEmailAddressPopup();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 	public void clickTab() throws AWTException {

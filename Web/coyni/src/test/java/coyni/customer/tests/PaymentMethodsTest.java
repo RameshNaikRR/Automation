@@ -59,6 +59,7 @@ public class PaymentMethodsTest {
 			} else {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			}
+			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -122,6 +123,7 @@ public class PaymentMethodsTest {
 			} else {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			}
+			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -197,6 +199,7 @@ public class PaymentMethodsTest {
 			} else {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			}
+			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
