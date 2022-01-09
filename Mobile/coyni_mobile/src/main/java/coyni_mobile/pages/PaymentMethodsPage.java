@@ -28,7 +28,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public By getPaymentItems(String paymentMethod, String last4digits) {
 		return MobileBy.xpath(String.format(
-				"//*[contains(@resource-id,'rvSelPayMethods')]|//*[contains(@name,'paymentMethodsTableView')]/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name,'%s')and contains(@name,'%s')]",
+				"//*[contains(@name,'paymentMethodsTableView')]/XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name,'%s')and contains(@name,'%s')]",
 				paymentMethod, last4digits));
 	}
 

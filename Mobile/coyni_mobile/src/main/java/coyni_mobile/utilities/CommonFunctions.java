@@ -2,10 +2,14 @@ package coyni_mobile.utilities;
 
 import org.openqa.selenium.By;
 
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class CommonFunctions {
 
@@ -20,7 +24,7 @@ public class CommonFunctions {
 		if (expText.equalsIgnoreCase(actText)) {
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
 		} else {
-			ExtentTestManager.setFailMessageInReport(
+			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
 	}
@@ -196,4 +200,7 @@ public class CommonFunctions {
 		}
 	}
 
+	public void clickEnter() {
+		 ((AndroidDriver)DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+	}
 }

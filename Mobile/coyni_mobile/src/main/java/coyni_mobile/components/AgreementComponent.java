@@ -8,61 +8,51 @@ import io.appium.java_client.MobileBy;
 
 public class AgreementComponent extends MobileFunctions {
 
-	private By btnAgreements = MobileBy.xpath("//*[@text='Agreements']");
-
+	private By lblHeading = MobileBy.xpath("//*[@text='Agreements']");
 	private By privacyPolicy = MobileBy.xpath("(//*[contains(@resource-id,'listagreementsTV')])[1]");
-
 	private By termsOfService = MobileBy.xpath("(//*[contains(@resource-id,'listagreementsTV')])[2]");
-
-	private By lblAccountHolderName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
-
 	private By backIconAgreement = MobileBy.xpath("//*[contains(@resource-id,'backAgreeIV')]");
+	private By lblActiveAgreements = MobileBy.xpath(" ");
+	private By lblPastAgreements = MobileBy.xpath(" ");
 
-	private By lblVerifyAcitveAgreements = MobileBy.xpath(" ");
-
-	private By lblVerifyPastAgreements = MobileBy.xpath(" ");
-
-	public void clickBack() {
-		click(backIconAgreement, "Back");
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}
 
-	public void Agreements() {
-		scrollDownToElement(btnAgreements, "Agreements");
+	public void verifyActiveAgreementsView() {
+		new CommonFunctions().elementView(lblActiveAgreements, "Active Agreements Label");
 	}
 
-	public void clickOnAgreements() {
-		click(btnAgreements, "Agreements");
+	public void verifyPastAgreementsView() {
+		new CommonFunctions().elementView(lblPastAgreements, "Past Agreements Label");
+	}
+
+	public void verifyActiveAgreementsHeading(String expActiveHeading) {
+		new CommonFunctions().verifyLabelText(lblActiveAgreements, "Active Agreements ", expActiveHeading);
+	}
+
+	public void verifyPastAgreementsHeading(String expPastHeading) {
+		new CommonFunctions().verifyLabelText(lblPastAgreements, "Past Agreements ", expPastHeading);
+	}
+
+	public void verifyPrivacyPolicyView() {
+		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
 	}
 
 	public void clickPrivacyPolicy() {
 		click(privacyPolicy, "Privacy Policy");
 	}
 
-	public void verifyPrivacyPolicy() {
-		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
+	public void verifyTermsOfServiceView() {
+		new CommonFunctions().elementView(termsOfService, "Terms of Service");
 	}
 
 	public void clickTermsOfService() {
 		click(termsOfService, "Terms of Service");
 	}
 
-	public void verifyTermsOfService() {
-		new CommonFunctions().elementView(termsOfService, "Terms of Service");
-	}
-
-	public void VerifyAccountHolderName() {
-		new CommonFunctions().elementView(lblAccountHolderName, "Account Holder " + getText(lblAccountHolderName));
-	}
-
-	public void verifyActiveAgreementsHeading(String expHeading) {
-		// new CommonFunctions().verifyLabelText(lblVerifyAcitveAgreements, "Active
-		// Agreements Heading", expHeading);
-	}
-
-	public void verifyPastAgreementsHeading(String expHeading) {
-
-		// new CommonFunctions().verifyLabelText(lblVerifyPastAgreements, "past
-		// Agreements Heading", expHeading);
+	public void clickBack() {
+		click(backIconAgreement, "Back");
 	}
 
 }

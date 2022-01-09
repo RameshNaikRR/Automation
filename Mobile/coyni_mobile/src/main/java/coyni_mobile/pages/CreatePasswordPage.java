@@ -30,6 +30,9 @@ public class CreatePasswordPage extends MobileFunctions {
 	public void fillConfirmPassword(String confirmPassword) {
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+		if (!new CommonFunctions().isPlatformiOS()) {
+			pressBack();
+		}
 	}
 
 	public void scrollDown() {

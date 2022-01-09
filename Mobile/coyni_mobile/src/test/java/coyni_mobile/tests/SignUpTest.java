@@ -77,33 +77,33 @@ public class SignUpTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testSignUpWithInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.clickPersonalAccount();
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("lastName"));
-			signUpPage.fillEmail(data.get("email"));
-			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			signUpPage.fillPassword(data.get("password"));
-			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickNext();
-			if (!data.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-				} else {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-				}
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testSignUpWithInvalidData(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			landingPage.clickGetStarted();
+//			signUpPage.clickPersonalAccount();
+//			signUpPage.verifyCreateAccount(data.get("createAccount"));
+//			signUpPage.fillFirstName(data.get("firstName"));
+//			signUpPage.fillLastName(data.get("lastName"));
+//			signUpPage.fillEmail(data.get("email"));
+//			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
+//			signUpPage.fillPassword(data.get("password"));
+//			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
+//			signUpPage.clickNext();
+//			if (!data.get("errMessage").isEmpty()) {
+//				if (new CommonFunctions().isPlatformiOS()) {
+//					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
+//				} else {
+//					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+//				}
+//			}
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -150,14 +150,9 @@ public class SignUpTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
-			String[] firstname = data.get("firstName").split(",");
-			String[] lastname = data.get("lastName").split(",");
-			String[] email = data.get("email").split(",");
-			String[] phonenumber = data.get("phoneNumber").split(",");
-			signUpPage.validateFirstName(firstname[0], firstname[1], firstname[2]);
-			signUpPage.validateLastName(lastname[0], lastname[1], lastname[2]);
-			signUpPage.validateEmailField(email[0], email[1], email[2]);
-			signUpPage.validatePhoneNumber(phonenumber[0], phonenumber[1]);
+			signUpPage.fillFirstName(data.get("firstName"));
+			new CommonFunctions().clickEnter();
+			Thread.sleep(10000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

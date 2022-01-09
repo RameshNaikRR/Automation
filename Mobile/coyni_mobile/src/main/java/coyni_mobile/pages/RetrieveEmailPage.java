@@ -79,6 +79,9 @@ public class RetrieveEmailPage extends MobileFunctions {
 		enterText(txtLastName, lastName, "Last Name ");
 		click(txtPhoneNumber, "Phone Number");
       new SignUpPage().clickDone();
+      if (!new CommonFunctions().isPlatformiOS()) {
+			pressBack();
+		}
 	}
 
 	public void pasteOption(String code) {

@@ -572,24 +572,21 @@ public class CustomerProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
-			customerProfilePage.accountLimitsComponent().AccountLimits();
-			customerProfilePage.accountLimitsComponent().clickAccountLimits();
-			customerProfilePage.accountLimitsComponent().verifyLabelAccountLimits(data.get("expHeading"));
-			customerProfilePage.accountLimitsComponent().verifyPayRequest(data.get("expPayRequestHeading"));
-			customerProfilePage.accountLimitsComponent().getPayRequest();
-			customerProfilePage.accountLimitsComponent().verifyBuyTokensHeading(data.get("expBuyTokenHeading"));
-			customerProfilePage.accountLimitsComponent().getBankAccountAmount();
-			customerProfilePage.accountLimitsComponent().verifyBuyTokenAmountLimit();
-			customerProfilePage.accountLimitsComponent().VerifyWithdrawHeading(data.get("expWithdrawHeading"));
-			customerProfilePage.accountLimitsComponent().getWithdrawBankAccountAmount();
-			customerProfilePage.accountLimitsComponent().verifyWithdrawBankAccountAmountLimit();
-			customerProfilePage.accountLimitsComponent().getInstantPayAccount();
-			customerProfilePage.accountLimitsComponent().verifyWithdrawInstantPayAmountLimit();
-			customerProfilePage.accountLimitsComponent().getGiftCardAmount();
-			customerProfilePage.accountLimitsComponent().verifyWithdrawGiftCardAmountLimit();
+			customerProfilePage.verifyAccountLimitsView();
+			customerProfilePage.clickAccountLimits();
+			customerProfilePage.accountLimitsComponent().verifyHeading(data.get("expHeading"));
+			customerProfilePage.accountLimitsComponent().verifyPayRequestLabel(data.get("expPayRequestHeading"));
+			customerProfilePage.accountLimitsComponent().verifyBuyTokensLabel(data.get("expBuyTokenHeading"));
+			customerProfilePage.accountLimitsComponent().VerifyWithdrawLabel(data.get("expWithdrawHeading"));
+			customerProfilePage.accountLimitsComponent().getPayRequestLimit();
+			customerProfilePage.accountLimitsComponent().getBuyTokenBankLimit();
+			customerProfilePage.accountLimitsComponent().getCardsLimit();
+			customerProfilePage.accountLimitsComponent().getWithdrawBankLimit();
+			customerProfilePage.accountLimitsComponent().getInstantPayLimit();
+			customerProfilePage.accountLimitsComponent().getGiftCardLimit();
+			customerProfilePage.accountLimitsComponent().navigationComponent().verifyBackView();
 			customerProfilePage.accountLimitsComponent().navigationComponent().clickBack();
-			customerProfilePage.clickLogOut();
-
+			customerProfilePage.verifyProfilePageView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimits Failed due to exception " + e);
 
@@ -597,17 +594,22 @@ public class CustomerProfileTest {
 	}
 
 	@Test
-	public void testAgreements() {
+	@Parameters({ "strParams" })
+	public void testAgreements(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
-			customerProfilePage.agreementComponent().Agreements();
-			customerProfilePage.agreementComponent().clickOnAgreements();
-			// tokenAccountPage.agreementComponent().clickPrivacyPolicy();
-			// tokenAccountPage.agreementComponent().clickTermsOfService();
-			customerProfilePage.agreementComponent().verifyPrivacyPolicy();
-			customerProfilePage.agreementComponent().verifyTermsOfService();
+			customerProfilePage.verifyAgreementsView();
+			customerProfilePage.clickAgreements();
+			customerProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
+//			customerProfilePage.agreementComponent().verifyActiveAgreementsView();
+//			customerProfilePage.agreementComponent().verifyPastAgreementsView();
+//			customerProfilePage.agreementComponent().verifyActiveAgreementsHeading(data.get("ActiveHeading"));
+//			customerProfilePage.agreementComponent().verifyPastAgreementsHeading(data.get("pastHeading"));
+			customerProfilePage.agreementComponent().verifyPrivacyPolicyView();
+			customerProfilePage.agreementComponent().verifyTermsOfServiceView();
 			customerProfilePage.agreementComponent().clickBack();
-			customerProfilePage.clickLogOut();
+			customerProfilePage.verifyProfilePageView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
@@ -765,15 +767,16 @@ public class CustomerProfileTest {
 			   customerProfilePage.clickResetPinCode();
 			   customerProfilePage.enterYourPINComponent().verifyForgotPinView();
 			   customerProfilePage.enterYourPINComponent().clickForgotPin();
-		  //   customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+		       customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
 			   customerProfilePage.clickResetPinCode();
 			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
 			   Thread.sleep(1000);
 			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChooseYourPinView();
-			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
-			   customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyCloseView();
+			   customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
 			   customerProfilePage.clickResetPinCode();
 			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			   Thread.sleep(1000);
 			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChoosePinHeading(data.get("heading1"));
 			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
 			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmYourPinView();

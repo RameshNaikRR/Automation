@@ -22,13 +22,13 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]|//*[contains(@name,'code')]");
 	private By imgUser = MobileBy.xpath("");
 	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]|//*[contains(@text,'Settings')]");
-	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']");
-	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']");
-	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']");
-	private By lblAccount =MobileBy.xpath("");
-	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
-	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']");
-	private By lblSecurity =MobileBy.xpath("");
+	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']|//*[contains(@resource-id,'cpUserDetailsLL')]");
+	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']|//*[contains(@resource-id,'cpPaymentMethodsLL')]");
+	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']|//*[contains(@resource-id,'pPreferencesLL')]");
+	private By lblAccount =MobileBy.xpath("//*[contains(@resource-id,'accountTV')]");
+	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']|//*[contains(@resource-id,'pAccountLimitsLL')]");
+	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']|//*[contains(@resource-id,'cpAgreementsLL')]");
+	private By lblSecurity =MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
@@ -168,45 +168,51 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickUserDetails() {
-		click(lnkUserDetails, " Click User Details");
+		click(lnkUserDetails, "User Details");
 	}
 
 	public void clickPaymentMethods() {
-		click(lnkPaymentMethods, "Click Payment Methods");
+		click(lnkPaymentMethods, "Payment Methods");
 	}
 
 	public void clickPreferences() {
-		click(lnkPreferences, "Click Preferences");
+		click(lnkPreferences, "Preferences");
 	}
 
 	public void clickAccountLimits() {
-		click(lnkAccountLimits, "click Account limits");
+		click(lnkAccountLimits, "Account Limits");
+	}
+	public void verifyAccountLimitsView() {
+		new CommonFunctions().elementView(lnkAccountLimits, "Account Limits");
 	}
 
 	public void clickAgreements() {
-		click(lnkAgreements, "Click Agreements");
+		click(lnkAgreements, "Agreements");
+	}
+	public void verifyAgreementsView() {
+		new CommonFunctions().elementView(lnkAgreements, "Agreements");
 	}
 
 	public void clickResetPinCode() {
-		click(lnkResetPinCode, "Click Reset Pin Code");
+		click(lnkResetPinCode, "Reset Pin Code");
 	}
 
 	public void clickFaceIDSetting() {
-		click(btnFaceIDSetting, "Click FaceID Setting");
+		click(btnFaceIDSetting, "FaceID Setting");
 	}
 
 	public void clickChangePassword() {
 		scrollDownToElement(btnChangePassword, "Scrolled to element");
-		click(btnChangePassword, "Click Change Password");
+		click(btnChangePassword, "Change Password");
 	}
 
 	public void clickLogOut() {
-		scrollUpToElement(btnLogOut, "Log out");
-		click(btnLogOut, "Click LogOut");
+		scrollDownToElement(btnLogOut, "Log out");
+		click(btnLogOut, "LogOut");
 	}
 
 	public void verifyLogOut() {
-		scrollUpToElement(btnLogOut, "Log out");
+		scrollDownToElement(btnLogOut, "Log out");
 		new CommonFunctions().elementView(btnLogOut, "Log Out");
 	}
 
