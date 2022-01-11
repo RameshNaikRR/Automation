@@ -14,6 +14,8 @@ public class ChoosePinComponent extends MobileFunctions {
 	
 	private By heading2 = MobileBy.xpath("//*[@name='Confirm your PIN'] | (//*[contains(@resource-id,'tvHead')])");
 	
+	private By lblPinMatching = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
+	
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
@@ -39,6 +41,17 @@ public class ChoosePinComponent extends MobileFunctions {
 	}
 	public EnableFaceIDpage enableFaceIDpage() {
 		return new EnableFaceIDpage();
+	}
+	public void verifyPinMatching(String expPinMatchingText) {
+	    new CommonFunctions().verifyLabelText(lblPinMatching,"Pin Matching Text", expPinMatchingText );     	
+	}
+	public void verifyPinMissMatch() {
+		if(verifyElementDisplayed(heading2, "Confirm Your Pin")){
+			ExtentTestManager.setPassMessageInReport("Pin is miss matched");
+		}
+		else {
+			ExtentTestManager.setFailMessageInReport("pin is matched");
+		}
 	}
 	
 }
