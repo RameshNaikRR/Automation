@@ -20,11 +20,13 @@ public class NavigationMenuPage extends BrowserFunctions {
 
 	private By lblUserNameMenu = By.cssSelector("");
 	private By lblAccountId = By.xpath("//span[contains(text(),'Account ID:')][1]");
-	private By lnkTokenAccount =By.cssSelector("#token-dashboard");          
-	private By ImgQRcode = By.xpath("(//div[contains(@class,'DashboardMenu_QR_main__3YOcW')])[1]");
-	private By lblUserNameHead = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__JM4Nk')]/preceding-sibling::*[1]");
+	private By lnkTokenAccount = By.cssSelector("#token-dashboard");
+	private By ImgQRcode = By
+			.xpath("(//div[@class='absolute bg-cwhite UserProfile_QR_main__18gK4 cursor-pointer'])[1]");
+	private By lblUserNameHead = By
+			.xpath("//div[contains(@class,'DashboardMenu_downArrow__JM4Nk')]/preceding-sibling::*[1]");
 	private By ImgNotifications = By.cssSelector(" ");
-	private By imgUser = By.xpath("(//div[contains(@class,'DashboardMenu_image_navbar__F0NOF')])[1]");
+	private By imgUser = By.xpath("//div[contains(@class,'bg-cm3 rounded-full UserProfile_image_navbar__1d_ht')]");
 	private By drpDwnAccount = By.xpath("//div[(contains(@class,'DashboardMenu_downArrow__JM4Nk'))]");
 	private By lblPersonalAccount = By.xpath("(//span[text()='Personal'])[1]");
 	private By lnkBusinessAccount = By.xpath("");
@@ -34,21 +36,21 @@ public class NavigationMenuPage extends BrowserFunctions {
 	private By lblExportFiles = By.xpath("");
 	private By lblGetHelp = By.xpath("");
 
-	
 	private By getSidebarItems(String sidebarItems) {
-		return By.xpath(String.format("(//div[contains(@class,'DashboardMenuItems_imgLogo__2kQaD ')]/following-sibling::span[text()='%s'])[1]",
+		return By.xpath(String.format(
+				"(//div[contains(@class,'DashboardMenuItems_imgLogo__2kQaD ')]/following-sibling::span[text()='%s'])[1]",
 				sidebarItems));
-		}
+	}
+
 	public String getCustId() {
-		   return getText(lblAccountId, "Account Id").replaceAll("[^0-9]", "");
-		    }
-	
-	
+		return getText(lblAccountId, "Account Id").replaceAll("[^0-9]", "");
+	}
+
 	// added
 	public void clickTokenAccount() {
-		click(getSidebarItems("Token Account"),"Token Account ");
-	//	click(btnTokenAccount, "Token Account ");
-		
+		click(getSidebarItems("Token Account"), "Token Account ");
+		// click(btnTokenAccount, "Token Account ");
+
 	}
 
 	// added
@@ -116,10 +118,10 @@ public class NavigationMenuPage extends BrowserFunctions {
 
 	public void verifyAccountID(String expAccountID) {
 		String id = getText(lblAccountId, "Account ID").split(" ")[2];
-		System.out.println("id: "+ id);
-		if(id.equals(expAccountID)) {
+		System.out.println("id: " + id);
+		if (id.equals(expAccountID)) {
 			ExtentTestManager.setPassMessageInReport("Account Id is verified");
-		}else {
+		} else {
 			ExtentTestManager.setFailMessageInReport("Account Id is not verified");
 		}
 	}

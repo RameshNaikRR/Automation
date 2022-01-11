@@ -42,7 +42,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyTokenAccountView();
 			navigationMenuPage.verifyExportFilesView();
 			navigationMenuPage.verifyGetHelpView();
-			navigationMenuPage.clickExportFilesMenu();
+			// navigationMenuPage.clickExportFilesMenu();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Side Bar view is failed  due to exception " + e);
 		}
@@ -101,7 +101,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			navigationMenuPage.myQRCodeComponent().clickShare();
 			navigationMenuPage.myQRCodeComponent().fillTextEmail(data.get("email1"));
-		//	Thread.sleep(3000);
+			// Thread.sleep(3000);
 			navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
 			navigationMenuPage.myQRCodeComponent().clickTab();
 			if (!data.get("errMessage").isEmpty()) {

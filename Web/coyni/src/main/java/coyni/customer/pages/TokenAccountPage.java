@@ -28,7 +28,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	// added
 	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
 	private By lblTotalFunds = By.cssSelector(".text-6xl");
-	private By amount = By.cssSelector(".text-6xl");
+	private By amount = By
+			.xpath("//span[@class='TokenAccountDashboard_wallet_balance__2NXxb font-bold cursor-default text-cgy4']");
 	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
@@ -98,12 +99,11 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public String getAvailableBalance() {
-		return getText(lblTotalFunds, "Available Balance");
+		return getText(amount, "Available Balance");
 
 	}
 
 	public void verifyAmount() {
-
 		new CommonFunctions().elementView(amount, "Amount");
 	}
 

@@ -1,6 +1,11 @@
 package coyni.customer.popups;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -20,7 +25,7 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By lblAvailableBalance = By.xpath("//span[text()='Available Balance:']");
 	private By txtRecipientMessage = By.xpath("//textarea[@id='message']");
 	private By txtRecipientsAddress = By.xpath("//input[@id='wallet-id']");
-	private By RecipientID = By.className("Input_form_input__3qrhS w-1/2 pr-6 truncate");
+	private By RecipientID = By.xpath("//label[contains(text(),'Recipient’s')]");
 	private By countMsgToRecipient = By.xpath("//span[text()='120']");
 	private By lblPayingRecipientName = By.cssSelector(".font-bold.text-cgy4.text-xl.text-center.tracking-wide.mt-2");
 	private By btnNext = By.cssSelector(".w-60.h-9.rounded-full");
@@ -44,6 +49,19 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		click(btnPay, "Click Pay");
 
 	}
+
+//	public void checkAmountWithSpecialAndNull(String amount) {
+//		new CommonFunctions().validateTextFeild(txtAmount, "Amount", amount);
+//	}
+//	
+//
+//	public void pasteOption(String address) {
+//		copyDataToClipboard(address);
+//		click(RecipientID, "Paste");
+//		pasteOption(address);
+//
+//		Uninterruptibles.sleepUninterruptibly(10000, TimeUnit.MILLISECONDS);
+//	}
 
 	public void viewAmount() {
 		new CommonFunctions().elementView(txtAmount, "Amount");

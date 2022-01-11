@@ -33,7 +33,6 @@ public class ForgotEmailComponent extends BrowserFunctions {
 		enterText(txtPhoneNumber, PhoneNumber, "PhoneNumber");
 	}
 
-	
 	/**
 	 * Order -minChar, alphabets, specialChar, spaces, maxiPlus
 	 */
@@ -50,9 +49,9 @@ public class ForgotEmailComponent extends BrowserFunctions {
 	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
 	 * spaces maxiPlus
 	 */
-	
-	
-	//we,ere,hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh,hhhhhhhhhhhhhhhhhhhhhhhhhhhhh,#$,1234,   ,hhhdfhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+	// we,ere,hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh,hhhhhhhhhhhhhhhhhhhhhhhhhhhhh,#$,1234,
+	// ,hhhdfhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 	public void validateNameField(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
 		for (int i = 0; i < 4; i++) {
@@ -95,6 +94,10 @@ public class ForgotEmailComponent extends BrowserFunctions {
 
 	public void verifyLastName() {
 		getTextBoxValue(txtLastName, "verify first Name");
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 }

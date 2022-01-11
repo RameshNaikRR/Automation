@@ -25,7 +25,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnCustomDateRange = By.cssSelector("data[value='custom-date-range']");
 
-	private By selectDropDown = By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");
+	private By selectDropDown = By.xpath("//div[@class='relative FloatingDropDown_main__1p8if']");
 
 	// private By selectDropDownforReceive =
 	// By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");

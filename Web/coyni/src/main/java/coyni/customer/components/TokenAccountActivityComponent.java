@@ -1,10 +1,13 @@
 package coyni.customer.components;
 
+import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountActivityComponent extends BrowserFunctions {
 
@@ -75,19 +78,17 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		return getText(lblItemsPerPage, "entries per page");
 	}
 
-	public void verifyTableItemsCount(String query) {
-		int actCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
-		int rowInTable = getElementsList(rows, "Table Rows").size();
-		if (actCount == rowInTable) {
-			ExtentTestManager.setPassMessageInReport(
-					"Number of rows in transactions table matches with number of entries selected i.e " + actCount);
+	public void verifyTableItemsCount(String query) throws SQLException {
+		int count = DBConnection.getDbCon().getCount(String.format(query));
+		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+		if (count == expCount) {
+			ExtentTestManager
+					.setPassMessageInReport("Number of transactions in table matches with number of entries selected ");
 		} else {
-			ExtentTestManager.setFailMessageInReport(String.format(
-					"Number of rows in transactions table = %s and entries selected in show drop down = %s", rowInTable,
-					actCount));
+			ExtentTestManager.setFailMessageInReport(
+					"Number of transactions in table doesnot match with numer of entries selected");
 		}
 	}
-
 //	public void verifyPaginations() throws InterruptedException {
 //		int expStart = 1;
 //		int expEnd = 10;
