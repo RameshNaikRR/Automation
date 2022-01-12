@@ -22,7 +22,7 @@ public class TokensPurchasedDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyLabelPurchasedTransactionDetails(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTokensPurchaseTransactions, "Tokens Received Transactions",
+		new CommonFunctions().verifyLabelText(lblTokensPurchaseTransactions, "Tokens Purchased Transactions",
 				expHeading);
 	}
 

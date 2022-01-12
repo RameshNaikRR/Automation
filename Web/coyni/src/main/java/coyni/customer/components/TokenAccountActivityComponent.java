@@ -154,7 +154,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		click(btnTokensPurchasedDetails, "Click Token Received Details");
 	}
 
-	public void clickTokensWithdrawn() {
+	public void clickTokensWithdrawnDetails() {
 		click(btnTokensWithdrawn, "Click Token Withdrawn Details");
 	}
 
@@ -184,6 +184,10 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
 		return new TokensPurchasedDetailsComponent();
+	}
+
+	public TokensWithdrawnDetailsComponent tokensWithdrawnDetailsComponent() {
+		return new TokensWithdrawnDetailsComponent();
 	}
 
 	public DatePickerComponent datePickerComponent() {

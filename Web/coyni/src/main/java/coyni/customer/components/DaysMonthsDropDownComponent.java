@@ -13,6 +13,8 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By lblTokensPurchased = By.xpath("//span[text()='Token Purchased']");
 
+	private By lblTokensWithdraw = By.xpath("//span[text()='Token Withdraw']");
+
 	private By btnToday = By.cssSelector("data[value='today']");
 
 	private By btnYesterday = By.cssSelector("data[value='yesterday']");
@@ -136,5 +138,41 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 		click(selectDropDown, "Click Select DropDOwn");
 		click(btnCustomDateRange, "Click Custom Date Range");
 		new CommonFunctions().elementView(lblTokensPurchased, "Tokens Purchased");
+	}
+
+	public void clickTodayTokensWithdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnToday, "Click Today");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
+	}
+
+	public void clickYesterdayTokensWithdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnYesterday, "yesterday");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
+	}
+
+	public void clickLast7DaysTokensWithdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnLast7Days, "Click Last7days");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
+	}
+
+	public void clickMonthToDateTokensWithdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnMonthToDate, "Click Monthtodate");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
+	}
+
+	public void clickLastMonthTokensWithdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnLastMonth, "Click Lastmonth");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
+	}
+
+	public void clickCustomDateRangeTokensdraw() {
+		click(selectDropDown, "Click Select DropDOwn");
+		click(btnCustomDateRange, "Click Custom Date Range");
+		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
 	}
 }

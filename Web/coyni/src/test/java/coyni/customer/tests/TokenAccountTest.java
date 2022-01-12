@@ -46,7 +46,7 @@ public class TokenAccountTest {
 			tokenAccountPage.clickPayRequestToken();
 			tokenAccountPage.verifyPay();
 		} catch (InterruptedException e) {
-			ExtentTestManager.setFailMessageInReport("testPayAnRequstTokens is failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testPayAnRequestTokens is failed due to exception " + e);
 		}
 	}
 
@@ -157,7 +157,7 @@ public class TokenAccountTest {
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionDetailsList is failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testTransactionSentDetailsList is failed due to exception " + e);
 		}
 
 	}
@@ -262,7 +262,8 @@ public class TokenAccountTest {
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Today Transaction List is failed due to exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testTransactionReceiveDetailsList is failed due to exception " + e);
 		}
 	}
 
@@ -358,7 +359,86 @@ public class TokenAccountTest {
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionDetailsList is failed due to exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testTransactionPurchasedDetailsList is failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionWithdrawDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickTodayTokensWithdraw();
+			// add Total Amount count
+			// add Count of Total Transactions
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickYesterdayTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPaginations();
+			// tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickLast7DaysTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickMonthToDateTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionWithdrawDetailsList is failed due to exception " + e);
 		}
 
 	}
@@ -790,7 +870,7 @@ public class TokenAccountTest {
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"testPayTransaction failed due to Invalid Recipient Address exception " + e);
+					"testRequestTransactionsWithInvalidAccountAddress failed due to Invalid Recipient Address exception " + e);
 		}
 	}
 
@@ -831,7 +911,7 @@ public class TokenAccountTest {
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("testPayTransaction failed due to Back and cross Icon exception " + e);
+					.setFailMessageInReport("testRequestTransactionsWithNavigation failed due to Back and cross Icon exception " + e);
 		}
 	}
 
