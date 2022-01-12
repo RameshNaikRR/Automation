@@ -768,6 +768,9 @@ public class CustomerProfileTest {
 			   customerProfilePage.enterYourPINComponent().verifyForgotPinView();
 			   customerProfilePage.enterYourPINComponent().clickForgotPin();
 		       customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+		       customerProfilePage.enterYourPINComponent().verifyForgotPinView();
+		       customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+		       Thread.sleep(2000);
 			   customerProfilePage.clickResetPinCode();
 			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
 			   Thread.sleep(1000);
@@ -782,11 +785,11 @@ public class CustomerProfileTest {
 			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmYourPinView();
 			   customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
 			   customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
-			   customerProfilePage.clickResetPinCode();
-			   customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
-			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
-			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmPinHeading(data.get("heading2"));
-			   customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));	   
+			   customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChoosePinHeading(data.get("heading1"));
+			   customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			   customerProfilePage.verifyResetPinCodeView();
+			   
+			    
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test ResetPinCodeView Flow failed due to Exception " + e);
 			

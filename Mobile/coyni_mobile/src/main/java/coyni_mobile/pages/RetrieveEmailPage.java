@@ -71,6 +71,9 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "First Name ");
 		click(txtPhoneNumber, "Phone Number");
+	    if (!new CommonFunctions().isPlatformiOS()) {
+				pressBack();
+	    }
 
 	}
 
@@ -78,12 +81,9 @@ public class RetrieveEmailPage extends MobileFunctions {
 		// scrollUpToElement(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name ");
 		click(txtPhoneNumber, "Phone Number");
-      new SignUpPage().clickDone();
-      if (!new CommonFunctions().isPlatformiOS()) {
-			pressBack();
-		}
+      //new SignUpPage().clickDone();
+  		
 	}
-
 	public void pasteOption(String code) {
 		copyDataToClipboard(code);
 		click(txtInputBoxes, "Paste");
