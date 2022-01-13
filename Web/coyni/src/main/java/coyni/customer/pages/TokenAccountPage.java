@@ -28,6 +28,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	// added
 	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
 	private By lblTotalFunds = By.cssSelector(".text-6xl");
+	private By lblYourTokenAccount = By.xpath("//h1[text()='Your Token Account']");
 	private By amount = By
 			.xpath("//span[@class='TokenAccountDashboard_wallet_balance__2NXxb font-bold cursor-default text-cgy4']");
 	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
@@ -199,6 +200,11 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public void clickWithdrawToUSD() {
 		click(btnWithdrawToUSD, "WithdrawToUSD");
+
+	}
+
+	public void verifyLabelYourTokenAccount() {
+		new CommonFunctions().elementView(lblYourTokenAccount, "Your Token Account");
 
 	}
 
