@@ -185,32 +185,58 @@ public class CustomerProfileTest {
 	@Test // added
 	@Parameters({ "strParams" })
 
-	public void testEditPhoneNumberIcon(String strParams) {
+	public void testEditPhoneNumberWithValidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.customerMenuComponent().clickUserDetails();
 
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberAuthenticationDescription(
-					data.get("EditPhoneNumberAuthenticationDescription"));
-
+			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();;
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyEditPhoneNumberAuthenticationDescription(data.get("EditPhoneNumberAuthenticationDescription"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().clickResend();
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyResendVerificationCodeDescription(data.get("resendVerificationCodeDescription"));
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));  
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().clickOnResendVerificationCode();;
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescription(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescriptionAppears();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescriptionDisappears();
+            
+			
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testEditPhoneNumberIcon is failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testEditPhoneNumberWithValidData is failed due to Exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testEditPhoneNumberWithValidCode(String strParams) {
+	public void testEditPhoneNumberWithInvalidCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.customerMenuComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().validateAuthyField(data.get("code"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyNewPhoneField(data.get("expNewPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("number"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifySendCodeButtonEnabled();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("expHeadingCurrentNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyMultipleResend();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().authyComponent().fillInput("code");
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen("expNewPhoneNumberHeading");
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().clickMultipleResend();
+			
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testEditPhoneNumberWithValidCode is failed due to Exception " + e);
@@ -220,289 +246,45 @@ public class CustomerProfileTest {
 	@Test // added
 	@Parameters({ "strParams" })
 
-	public void testEditPhoneNumberVerificationCodeWithInvalidCode(String strParams) {
+	public void testEditPhoneNumberWithBackNavigation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.customerMenuComponent().clickUserDetails();
 			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInputInvalid(data.get("code"),
-					data.get("char"));
-
-			customerProfilePage.userDetailsComponent().verifyVerificationWithInvalid(data.get("errMessage"));
-
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().navigationComponent().clickBack();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().navigationComponent().clickClose();
+			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("expNewPhoneNumberHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().navigationComponent().clickClose();
+			
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testEditPhoneNumberVerificationCodeWithInvalidCode is failed due to Exception " + e);
 		}
 	}
 
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testNewPhoneNumberFieldWithInvalid(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberFieldWithInvalidData(data.get("expNewPhoneNumber"), data.get("input"));
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testNewPhoneNumberFieldWithInvalid is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testNewPhoneNumberVerificationCodeSendButton(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().veriySendCodeButtonWithEmpty(data.get("expNumberWithEmpty"));
-			customerProfilePage.userDetailsComponent()
-					.verifySendCodeButtonWithInvalidData(data.get("expNumberWithInvalid"));
-			customerProfilePage.userDetailsComponent().verifySendCodeButtonEnabled();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testNewPhoneNumberVerificationCodeSendButton is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyCuurentPhoneNumberVerificationCode(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			Thread.sleep(5000);
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			Thread.sleep(2000);
-
-			customerProfilePage.userDetailsComponent().clickTab();
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyVerifyCurrentPhoneNumberDescriptionText(data.get("verifyPhoneNumberDescriptionText"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testVerifyCuurentPhoneNumberVerificationCode is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyCuurentPhoneNumberVerificationCodeWithInvalid(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInputInvalid(data.get("code"),
-					data.get("char"));
-
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("codeWithInvalid"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testVerifyCuurentPhoneNumberVerificationCodeWithInvalid is failed due to Exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyCurrentPhoneNumberResendVerificationCode(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			customerProfilePage.userDetailsComponent().clickResend();
-
-			customerProfilePage.userDetailsComponent()
-					.verifyResendVerificationCodeDescription(data.get("resendVerificationCodeDescription"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testVerifyCurrentPhoneNumberResendVerificationCode is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyCurrentPhoneNumberBackButton(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickBackButton();
-
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberScreen(data.get("headingEditPhoneNumber"));
-			// customerProfilePage.userDetailsComponent().verifyNewPhoneNumberTextWithPreviousData();
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testVerifyCurrentPhoneNumberBackButton is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyCurrentPhoneNumberCrossButton(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			customerProfilePage.userDetailsComponent().clickCrossButton();
-			customerProfilePage.userDetailsComponent().verifyUserdetailsScreen(data.get("expUserDetailsHeading"));
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testVerifyCurrentPhoneNumberCrossButton is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyNewPhoneNumberWithValidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
-			customerProfilePage.userDetailsComponent().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
-			customerProfilePage.userDetailsComponent().verifyNewPhoneNumberWithEmpty(data.get("expCode"),
-					data.get("expHeading"));
-			customerProfilePage.userDetailsComponent().verifyNewPhoneNumberWithLessSixDigits(data.get("expCode"),
-					data.get("expHeading"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberVerificationCodeWithInvalidData(data.get("expCode"), data.get("input"));
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testVerifyNewPhoneNumberWithValidData is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-
-	public void testVerifyNewPhoneNumberResendButton(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
-			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent()
-					.verifyNewPhoneNumberHeading(data.get("expNewPhoneNumberHeading"));
-			customerProfilePage.userDetailsComponent().enternumber(data.get("expNumber"));
-			customerProfilePage.userDetailsComponent().clickTab();
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().clickSend();
-			customerProfilePage.userDetailsComponent()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
-			customerProfilePage.userDetailsComponent().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
-			customerProfilePage.userDetailsComponent().clickNewPhoneNumberResend();
-			customerProfilePage.userDetailsComponent().verifyResendDescription(data.get("expHeading"));
-			customerProfilePage.userDetailsComponent().verifyResendDescriptionAppears();
-			customerProfilePage.userDetailsComponent().verifyResendDescriptionDisappears();
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testVerifyNewPhoneNumberResendButton is failed due to Exception " + e);
-		}
-
-	}
 	
 	@Test
 	@Parameters({ "strParams" })
