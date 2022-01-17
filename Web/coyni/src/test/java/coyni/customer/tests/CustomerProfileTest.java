@@ -838,6 +838,64 @@ public class CustomerProfileTest {
 		}
 
 	}
+	@Test // added M
+	@Parameters({ "strParams" })
+	public void testChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			customerMenuComponent.clickUserName();
+			Thread.sleep(2000);
+			customerMenuComponent.clickChangePassword();
+			Thread.sleep(2000);
+			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			//customerProfilePage.changePasswordComponent().verifyHeading("heading1");
+		//	customerProfilePage.changePasswordComponent().verifyContent(data.get("content"));
+			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.changePasswordComponent().clickIcon();
+			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
+			customerProfilePage.changePasswordComponent().clickSave();
+			Thread.sleep(1000);
+			customerProfilePage.changePasswordComponent().verifyContaint(data.get("successContent"));
+			homePage.verifyLandingPageHeading(data.get("createHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testChangePasswordInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerMenuComponent.clickUserName();
+			Thread.sleep(1000);
+			customerMenuComponent.clickChangePassword();
+			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.changePasswordComponent().clickIcon();
+			customerProfilePage.changePasswordComponent().viewCurrentPassword();
+			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
+			customerProfilePage.changePasswordComponent().clickTab();
+			// customerProfilePage.changePasswordComponent().clickSave();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+//						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test change password with invalis  credentials failed due to exception " + e);
+		}
+	}
+
+
+
 
 	@Test // added
 	@Parameters({ "strParams" })
@@ -859,56 +917,6 @@ public class CustomerProfileTest {
 
 	}
 
-	@Test // added M
-	@Parameters({ "strParams" })
-	public void testChangePassword(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerMenuComponent.clickUserName();
-			Thread.sleep(1000);
-			customerMenuComponent.clickChangePassword();
-			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			// customerProfilePage.changePasswordComponent().verifyHeading("heading1");
-			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
-			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
-			customerProfilePage.changePasswordComponent().clickIcon();
-			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
-			customerProfilePage.changePasswordComponent().clickSave();
-//			if (!data.get("successMsg").isEmpty()) {
-//				customerProfilePage.changePasswordComponent().verifyUpdatePassword(data.get("successMsg"));
-//			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
-		}
-	}
-
-	@Test // added
-	@Parameters({ "strParams" })
-	public void testChangePasswordInvalidCredentials(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerMenuComponent.clickUserName();
-			Thread.sleep(1000);
-			customerMenuComponent.clickChangePassword();
-			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
-			customerProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
-			customerProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
-			customerProfilePage.changePasswordComponent().clickTab();
-
-			// customerProfilePage.changePasswordComponent().clickSave();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"test change password with invalis  credentials failed due to exception " + e);
-		}
-	}
 
 	@Test // added
 	@Parameters({ "strParams" })

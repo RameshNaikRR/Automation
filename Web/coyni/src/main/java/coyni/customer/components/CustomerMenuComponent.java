@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class CustomerMenuComponent extends BrowserFunctions {
 
-	private By lblUserName = By.cssSelector(".internal-header__circle-initials");
+	private By lblUserName = By.xpath("//div[@class='hover:underline internal-header__circle-initials-large']");
 
 	private By lblAccountStatus = By.cssSelector("");
 

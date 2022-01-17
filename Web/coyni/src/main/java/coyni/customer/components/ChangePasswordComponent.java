@@ -22,6 +22,18 @@ public class ChangePasswordComponent extends BrowserFunctions {
 //    private By msgValidation = By.cssSelector("");
 	private By iconValidation = By.className("check_password");
 	private By iconView = By.cssSelector(".icon-button");
+	
+	private By lblSuccessMsg = By.cssSelector("//h2[text()='Your Password Was Updated Successfully!']");
+	
+	public void verifyContaint(String expContent) {
+		new CommonFunctions().verifyLabelText(lblSuccessMsg, expContent, "Your Password Was Updated Successfully");
+	}
+	
+	private By lblContentChangePassword = By.cssSelector(".Paragraph_para_regular__2OHbq");
+	
+	public void verifyContent(String expContent) {
+		new CommonFunctions().verifyLabelText(lblContentChangePassword, "Change Password Content", expContent);
+	}
 
 	// Authy
 	private By headingAuthy = By.xpath("//h1[text()='Verify your Identity']");
@@ -51,6 +63,10 @@ public class ChangePasswordComponent extends BrowserFunctions {
 	public void clickNewPassword() {
 		click(txtNewPassword, "Click");
 	}
+	
+	public void viewCurrentPassword() {
+		new CommonFunctions().elementView(txtCurrentPassword, "Current password");
+	}
 
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
@@ -62,20 +78,9 @@ public class ChangePasswordComponent extends BrowserFunctions {
 		click(iconView, "Click Icon");
 	}
 
-//    private void printNewPasswordStrengthMessage() {
-//        StringBuilder message = new StringBuilder(getText(msgPasswordStrength, "password strength"));
-////        String passCode = "<div class='status-avatar pass-bg'><i class='fa fa-check text-white'></i></div>";
-////        String failCode = "<div class='status-avatar fail-bg'><i class='fa fa-times text-white'></i></div>";
-//        List<WebElement> validation_messages = getElementsList(msgValidation, "validation messages");
-//        List<WebElement> validation_icons = getElementsList(iconValidation, "validation icons");
-//        for (int i = 0; i < validation_icons.size(); i++) {
-//            String iconClass = validation_icons.get(i).getAttribute("class");
-//            String icon = iconClass.contains("success") ? "<span style='color: green'>Valid Icon</span>" : "<span style='color: red'>Error Icon</span>";
-//            String msg = validation_messages.get(i).getText();
-//            message.append(icon.concat(msg));
-//        }
-//        ExtentTestManager.setPassMessageInReport(message.toString());
-//    }
+//public void passwordMatch() {
+//	new CommonFunctions().pas
+//}
 
 	public void fillCurrentPassword(String currentPassword) {
 		enterText(txtCurrentPassword, currentPassword, "Current Password");
