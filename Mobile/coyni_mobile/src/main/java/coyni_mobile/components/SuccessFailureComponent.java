@@ -7,10 +7,10 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class SuccessFailureComponent extends MobileFunctions {
-	private By lblSucessFailure = MobileBy.xpath("//*[contains(@name,'security')]/preceding-sibling::*[1]");
+	private By lblSucessFailure = MobileBy.xpath("//*[contains(@text,'security')]/preceding-sibling::*[1]");
 	private By lblHeading = MobileBy.xpath("//*[contains(@name,'total amount')]/preceding-sibling::*[3]");
 	private By ImgSuccessFailure = MobileBy.xpath("");
-	private By btnLogout = MobileBy.xpath("(//*[@name='Log Out'])[1]");
+	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
 	private By btnDone = MobileBy.xpath("(//*[@name='Done'])[1]");
 	
 	public void getStatus() {

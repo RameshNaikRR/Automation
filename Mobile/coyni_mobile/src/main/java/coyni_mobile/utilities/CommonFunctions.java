@@ -94,12 +94,12 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
+			clickEnter();
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
 			if (enterText.equalsIgnoreCase(actualtext)
 					&& mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0) {
-
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {
@@ -119,6 +119,7 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
+			clickEnter();
 			String actualtext = mobileFunctions.getText(ele);
 			if (!enterText.equalsIgnoreCase(actualtext)) {
 

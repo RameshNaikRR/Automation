@@ -10,17 +10,23 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class VerifyEmailPage extends MobileFunctions {
-	private By lblCurrEmailHeading = MobileBy.xpath("//*[contains(@name,'your Current')]");
-	private By lblNewEmailHeading = MobileBy.xpath("//*[contains(@name,'Verify New ')]");
-	private By lblCurrentEmail = MobileBy.xpath("");
-	private By lblNewEmail = MobileBy.xpath("");
-	private By txtPin = MobileBy.xpath("//*[contains(@name,'the code')]");
-	private By lnkResend = MobileBy.xpath("(//*[@name='Resend'])[1]");
+	private By lblCurrEmailHeading = MobileBy.xpath("//*[contains(@text,'your Current')]");
+	private By lblNewEmailHeading = MobileBy.xpath("//*[contains(@text,'Verify New')]");
+	private By lblCurrentEmail = MobileBy.xpath("//*[contains(@resource-id,'subHeader')]");
+	private By lblNewEmail = MobileBy.xpath("//*[contains(@resource-id,'subHeader')]");
+	private By txtPin = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
+	private By lblGetCode= MobileBy.xpath("//*[contains(@text,'the code')]");
+	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 
 	public void verifyCurrentEmailHeading(String expCurrEmailHeading) {
 		new CommonFunctions().verifyLabelText(lblCurrEmailHeading, "heading", expCurrEmailHeading);
 	}
-
+	public void verifyCurrentEmailPageView() {
+		new CommonFunctions().elementView(lblNewEmailHeading, "verify current email page");
+	}
+public void verifyGetCodeLabelView() {
+	new CommonFunctions().elementView(lblGetCode, "Didn't get the code");
+}
 	public void verifyNewEmailHeading(String expNewEmailHeading) {
 		new CommonFunctions().verifyLabelText(lblNewEmailHeading, "heading", expNewEmailHeading);
 	}
@@ -34,7 +40,7 @@ public class VerifyEmailPage extends MobileFunctions {
 	}
 
 	public void fillPin(String pin) {
-		new EnterYourPINComponent().fillPin(pin);
+		enterText(txtPin, pin, "pin");
 	}
 
 	public void verifyPinView() {

@@ -21,7 +21,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnScan = MobileBy.xpath(" ");
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");
 	private By btnCrypto = MobileBy.xpath(" ");
-	private By btnProfile = MobileBy.xpath("//*[@text='Profile']| (//*[@name='Profile'])[1]");
+	private By btnProfile = MobileBy.xpath("//*[@text='Profile']");
 	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']|//*[contains(@resource-id,'layoutMainMenu')]");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");

@@ -8,11 +8,12 @@ import io.appium.java_client.MobileBy;
 
 public class EditUserImagePopup  extends MobileFunctions{
 
-	private By lnkChooseFromLibrary =MobileBy.xpath("//*[@name='Choose From Library']");
-	private By lnkTakeAPhoto =MobileBy.xpath("//*[@name='Take a Photo']");
-	
+	private By lnkChooseFromLibrary =MobileBy.xpath("//*[contains(@resource-id,'chooseLL')]");
+	private By lnkTakeAPhoto =MobileBy.xpath("//*[contains(@resource-id,'PhotoLL')]");
+	private By btnCancel =MobileBy.xpath("//*[contains(@resource-id,'action_cancel')]");
 	public void clickChooseFromLibrary() {
 		click(lnkChooseFromLibrary, "Click Choose From Library");
+		click(btnCancel, "Cancel");
 	}
 	public void clickTakeAphoto() {
 		click(lnkTakeAPhoto, "Click Take A Photo");

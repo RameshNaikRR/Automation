@@ -14,20 +14,21 @@ import io.appium.java_client.MobileBy;
 
 public class UserDetailsPage extends MobileFunctions {
 
-	private By heading =MobileBy.xpath("//*[@name='User Details']");
-	private By btnEditUserImage = MobileBy.xpath("//*[@name='edit']");
+	private By heading =MobileBy.xpath("//*[@text='User Details']");
+	private By btnEditUserImage = MobileBy.xpath("//*[contains(@resource-id,'editProfile')]");
+	private By lblEmailTitle =MobileBy.xpath("//*[@text='Email']");
+	private By lblExistingEmail =MobileBy.xpath("//*[contains(@resource-id,'/userEmailIdTV')]");
+	private By lnkEditEmail = MobileBy.xpath("//*[contains(@resource-id,'/userEmailIdTV')]/../following-sibling::*[1]");
+	private By lblPhoneNumberTitle =MobileBy.xpath("//*[@text='Phone Number']");
+	private By lblExistingPhonenumber =MobileBy.xpath("//*[contains(@resource-id,'userPhoneNumTV')]");
+	private By lnkEditPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'userPhoneNumTV')]/../following-sibling::*[1]");
+	private By lblAddressTitle =MobileBy.xpath("//*[@text='Address']");
+	private By lblExistingAddress =MobileBy.xpath("//*[contains(@resource-id,'userAddressTV')]");
+	private By lnkEditAddress = MobileBy.xpath("//*[contains(@resource-id,'/userAddressTV')]/../following-sibling::*[1]");
 	
-	private By lnkEditEmail = MobileBy.xpath("//*[@name='Email']/following-sibling::*[@name='arrow right']");
-	private By lblEmailTitle =MobileBy.xpath("//*[@name='Email']");
-	private By lblExistingEmail =MobileBy.xpath("//*[@name='Email']/preceding-sibling::XCUIElementTypeStaticText");
-	private By lnkEditPhoneNumber = MobileBy.xpath("//*[@name='Phone Number']/following-sibling::*[@name='arrow right']");
-	private By lblAddressTitle =MobileBy.xpath("//*[@name='Address']");
-	private By lblExistingAddress =MobileBy.xpath("//*[@name='Address']/preceding-sibling::XCUIElementTypeStaticText");
-	private By lnkEditAddress = MobileBy.xpath("//*[@name='Address']/following-sibling::*[@name='arrow right']");
-	private By lblPhoneNumberTitle =MobileBy.xpath("//*[@name='Phone Number']");
-	private By lblExistingPhonenumber =MobileBy.xpath("//*[@name='Phone Number']/preceding-sibling::XCUIElementTypeStaticText");
-	
-
+	private By btnAlert =MobileBy.xpath("//*[contains(@resource-id,'allow_one_time_button')]");
+    private By btnAllow =MobileBy.xpath("//*[contains(@resource-id,'allow_button')]");
+    
 	public void verifyPhoneNumberTitleView() {
 		new CommonFunctions().elementView(lblPhoneNumberTitle, "PhoneNumber Title");
 	}
@@ -60,6 +61,8 @@ public class UserDetailsPage extends MobileFunctions {
 	}
 	public void clickEditUserImage() {
 		click(btnEditUserImage, "Edit User Image");
+		click(btnAlert, "Alert Popup");
+		click(btnAllow, "Allow");
 	}
 	
 

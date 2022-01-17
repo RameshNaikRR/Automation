@@ -9,19 +9,21 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class EditEmailPage extends MobileFunctions {
-	private By heading = MobileBy.xpath("//*[@name='Edit Email']");
-	private By txtCurrentEmail = MobileBy.xpath("//*[@name='Current Email']");
-	private By txtNewEmail = MobileBy.xpath("//*[@name='Enter New Email']");
-	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@name,'access')]");
-	private By lnkContactUs = MobileBy.xpath("(//*[@name='Contact Us'])[1]");
-	private By btnSave = MobileBy.xpath("(//*[@name='Save'])[1]");
+	private By heading = MobileBy.xpath("//*[@text='Edit Email']");
+	private By txtCurrentEmail = MobileBy.xpath("//*[contains(@resource-id,'currentEmailET')]");
+	private By txtNewEmail = MobileBy.xpath("//*[contains(@resource-id,'newEmailET')]");
+	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@text,'access')]");
+	private By lnkContactUs = MobileBy.xpath("//*[@text='Contact Us']");
+	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'saveEmailCV')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
 	}
-
+    public void verifyEditEmailPageView() {
+    	new CommonFunctions().elementView(heading, "Edit Email Page");
+    }
 	public void verifyCurrentEmail(String expEmail) {
-		String value = getAttribute(txtCurrentEmail, "value");
+		String value = getAttribute(txtCurrentEmail, "text");
 		if (value.equalsIgnoreCase(expEmail)) {
 			ExtentTestManager.setPassMessageInReport("Current email is " + expEmail);
 		} else {

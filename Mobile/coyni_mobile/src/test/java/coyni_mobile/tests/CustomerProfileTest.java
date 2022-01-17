@@ -74,26 +74,28 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickUserDetails();
+			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
 			customerProfilePage.userDetailsPage().clickEditUserImage();
 			customerProfilePage.userDetailsPage().editUserImagePopup().verifyChooseFromLibraryView();
 			customerProfilePage.userDetailsPage().editUserImagePopup().verifyTakeAPhotoView();
 			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyLibraryView();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent()
-					.verifyCloseView();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyDoneView();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickImage();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickDone();
-			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
-			// Navigation userDetailsPage - ChooseFromLibraryPopup
-			customerProfilePage.userDetailsPage().clickEditUserImage();
-			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
-			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent()
-					.clickClose();
-			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
+			Thread.sleep(5000);
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyLibraryView();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent()
+//					.verifyCloseView();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().verifyDoneView();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickImage();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().clickDone();
+//			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
+//			// Navigation userDetailsPage - ChooseFromLibraryPopup
+//			customerProfilePage.userDetailsPage().clickEditUserImage();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
+//			customerProfilePage.userDetailsPage().editUserImagePopup().chooseFromLibraryPopup().navigationComponent()
+//					.clickClose();
+//			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Test user details view failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testEditImageView failed due to exception " + e);
 		}
 	}
 
@@ -104,17 +106,22 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickUserDetails();
+			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
 			customerProfilePage.userDetailsPage().verifyEmailTitleView();
 			customerProfilePage.userDetailsPage().verifyExistingEmailView();
 			customerProfilePage.userDetailsPage().verifyEditEmailArrowView();
+			
+			//Navigation User Details-Enter Your Pin
 			customerProfilePage.userDetailsPage().clickEditEmail();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyEnterYourPinView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyPinView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyForgotPinView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().navigationComponent().clickBack();
-			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
+			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
+			//Navigation user Details -Verify New Email
 			customerProfilePage.userDetailsPage().clickEditEmail();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().fillPin(data.get("pin"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage()
 					.verifyHeading(data.get("editEmailHeading"));
@@ -122,32 +129,45 @@ public class CustomerProfileTest {
 					.verifyCurrentEmail(data.get("email"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyDontHaveAccessView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyContactUsView();
-			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().navigationComponent()
-					.verifyBackView();
-			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().navigationComponent()
-					.clickBack();
-			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
-			customerProfilePage.userDetailsPage().enterYourPINComponent().fillPin(data.get("pin"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage()
 					.fillNewEmail(data.get("newEmail"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().clickSave();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.verifyCurrentEmailHeading(data.get("currentEmailHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
-					.verifyCurrentEmail(data.get("email"));
+					.verifyCurrentEmail(data.get("currEmailText"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.verifyPinView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.verifyResendView();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyGetCodeLabelView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.fillPin(data.get("code"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyNewEmailHeading(data.get("newEmailHeading"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyNewEmail(data.get("newEmailText"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyPinView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyResendView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.verifyGetCodeLabelView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
+					.navigationComponent().verifyBackView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.navigationComponent().clickBack();
-			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage()
-					.verifyHeading(data.get("editEmailHeading"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEditEmailPageView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().navigationComponent()
+					.verifyBackView();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().navigationComponent()
+					.clickBack();
+			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit Email view failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -204,7 +224,7 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
 
-				// new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "New Email");
 			}
 
 		} catch (Exception e) {
@@ -292,10 +312,10 @@ public class CustomerProfileTest {
 					.verifyNewPhoneHeading(data.get("newPhoneHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
 					.fillPin(data.get("code"));
-//			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
-//					.successFailureComponent().verifySuccessFailureHeading(data.get("expHeading"));
-//			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
-//					.successFailureComponent().clickLogOut();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
+					.successFailureComponent().verifySuccessFailureHeading(data.get("expHeading"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
+					.successFailureComponent().clickLogOut();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit PhoneNumber view failed due to exception " + e);
 		}

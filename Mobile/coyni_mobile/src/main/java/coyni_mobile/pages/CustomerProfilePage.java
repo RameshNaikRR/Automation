@@ -16,23 +16,23 @@ import io.appium.java_client.MobileBy;
 public class CustomerProfilePage extends MobileFunctions {
 
 	
-	private By lblUserName = MobileBy.xpath("//*[contains(@name,'Account ID')]/preceding-sibling::*[1]|//*[contains(@resource-id,'customerNameTV')]");
-	private By lblAccountID = MobileBy.xpath("//*[contains(@name,'Account ID')]|//*[contains(@resource-id,'cpAccountIDTV')]");
-	private By lblAccountStatus = MobileBy.xpath("//*[contains(@name,'Status')]/preceding-sibling::*[1]|//*[contains(@resource-id,'tvACStatus')]");
-	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]|//*[contains(@name,'code')]");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
+	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'cpAccountIDTV')]");
+	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'tvACStatus')]");
+	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
 	private By imgUser = MobileBy.xpath("");
-	private By lblSettings = MobileBy.xpath("(//*[@name='Settings'])[1]|//*[contains(@text,'Settings')]");
-	private By lnkUserDetails = MobileBy.xpath("//*[@name='User Details']|//*[contains(@resource-id,'cpUserDetailsLL')]");
-	private By lnkPaymentMethods = MobileBy.xpath("//*[@name='Payment Methods']|//*[contains(@resource-id,'cpPaymentMethodsLL')]");
-	private By lnkPreferences = MobileBy.xpath("//*[@name='Preferences']|//*[contains(@resource-id,'pPreferencesLL')]");
+	private By lblSettings = MobileBy.xpath("//*[contains(@text,'Settings')]");
+	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'cpUserDetailsLL')]");
+	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'cpPaymentMethodsLL')]");
+	private By lnkPreferences = MobileBy.xpath("//*[contains(@resource-id,'pPreferencesLL')]");
 	private By lblAccount =MobileBy.xpath("//*[contains(@resource-id,'accountTV')]");
-	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']|//*[contains(@resource-id,'pAccountLimitsLL')]");
-	private By lnkAgreements = MobileBy.xpath("//*[@name='Agreements']|//*[contains(@resource-id,'cpAgreementsLL')]");
+	private By lnkAccountLimits = MobileBy.xpath("//*[contains(@resource-id,'pAccountLimitsLL')]");
+	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
 	private By lblSecurity =MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
-	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]|(//*[@name='Log Out'])[1]");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
 	
 	
 	
