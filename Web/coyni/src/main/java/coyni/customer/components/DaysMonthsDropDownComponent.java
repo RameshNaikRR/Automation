@@ -27,7 +27,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnCustomDateRange = By.cssSelector("data[value='custom-date-range']");
 
-	private By selectDropDown = By.xpath("//div[@class='relative FloatingDropDown_main__1p8if']");
+	private By selectDropDown = By.xpath("//div[@class='h-8 flex items-center space-x-4 cursor-pointer ']");
 
 	// private By selectDropDownforReceive =
 	// By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");
@@ -170,7 +170,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");
 	}
 
-	public void clickCustomDateRangeTokensdraw() {
+	public void clickCustomDateRangeTokensWithdraw() {
 		click(selectDropDown, "Click Select DropDOwn");
 		click(btnCustomDateRange, "Click Custom Date Range");
 		new CommonFunctions().elementView(lblTokensWithdraw, "Tokens Withdraw");

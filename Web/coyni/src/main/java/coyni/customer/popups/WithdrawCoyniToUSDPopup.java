@@ -7,11 +7,13 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
-	private By withdrawToUSDHeading = By.xpath("//h1[text()='Withdraw Coyni to USD']");
-	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
-	private By btnExternalBankAccount = By.xpath("//span[text()='Bank Account']");
-	private By btnInstantPay = By.xpath("//span[text()='Instant Pay']");
-	private By btnGiftCard = By.xpath("//span[text()='Gift Card']");
+	private By withdrawToUSDHeading = By.xpath("//h1[@class='WithdrawOptionsModal_title__2V2wo']");
+	private By btnWithdrawToUSD = By
+			.xpath("(//button[@class='group h-28 w-full flex flex-col justify-center items-center '])[3]");
+	private By btnExternalBankAccount = By.xpath("(//button[@class='payment-method-button '])[1]");
+	private By btnInstantPay = By.xpath("(//button[@class='payment-method-button '])[2]");
+	private By btnGiftCard = By.xpath("(//button[@class='payment-method-button '])[3]");
+	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
 
 	public void clickOnExternalBankAccount() {
 		click(btnExternalBankAccount, "click ExternalBankAccount");
@@ -36,7 +38,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	}
 
 	public void verifyWithdrawBackgroundcolor(String cssProp, String expValue, String expColor) {
-		new CommonFunctions().verifyChangedColor(btnWithdrawToUSD, "WithdrawToUSD", cssProp, expValue, expColor);
+		new CommonFunctions().verifyChangedColor(withdrawToUSDColor, "WithdrawToUSD", cssProp, expValue, expColor);
 	}
 
 	public WithdrawViaInstantPay withdrawViaInstantPay() {

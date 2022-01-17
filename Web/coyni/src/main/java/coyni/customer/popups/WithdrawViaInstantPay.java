@@ -13,10 +13,12 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawViaInstantPay extends BrowserFunctions {
+
 	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
 	private By txtAmount = By.xpath("//input[@class='CynField_cyn_input__31vZ6']");
-	private By lblmsg = By.cssSelector("");
-	private By txtmsg = By.cssSelector("");
+	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
+	private By txtmsg = By.cssSelector(".FormField_form_textarea__2VA0I.false.undefined.false");
+	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
 	private By lnkConvert = By.id("flip-button");
 	private By lnkChange = By.xpath("//span[text()='Change']");
 	private By btnNext = By.xpath("//button[text()='Next']");
@@ -31,6 +33,7 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 	private By btnRadioDebit = By.xpath("(//input[@name='buy-token-radio'])[1]");
 	private By btnAddNewDebit = By.xpath("//span[contains(text(),'Add New Debit Card')]");
 	private By toggle = By.xpath("//img[@src='/static/media/Flip-Icon.ec69897c.svg']");
+	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -47,12 +50,25 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 
 	}
 
+	public void verifyErrorMessage() {
+		new CommonFunctions().elementView(errMessageforInsufficientFunds, "Error Message");
+	}
+
+	public void txtMessage(String txt) {
+		enterText(txtmsg, txt, "TransactionalMessage");
+	}
+
+	public By getPaymentItems(String paymentMethod, String last4digits) {
+		return By.xpath(String.format("//*[@contains(text,'%s')]/following-sibling::*[contains(text,'%s')]",
+				paymentMethod, last4digits));
+	}
+
 	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {
 		new CommonFunctions().verifyChangedColor(toggle, "Toggle", cssProp, expValue, expColor);
 	}
 
 	public void verifyInstantPayDebitCardBackgroundcolor(String cssProp, String expValue, String expColor) {
-		new CommonFunctions().verifyChangedColor(debitCard, "Debit Card", cssProp, expValue, expColor);
+		new CommonFunctions().verifyChangedColor(instantPayColor, "Instant Pay", cssProp, expValue, expColor);
 	}
 
 	public void clickEdit() {

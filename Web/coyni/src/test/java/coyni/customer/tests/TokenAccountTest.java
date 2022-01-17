@@ -152,9 +152,12 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionSentDetailsList is failed due to exception " + e);
@@ -162,26 +165,26 @@ public class TokenAccountTest {
 
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testCustomDateRangeSentTransaction(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickTokenAccount();
-//			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
-//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-//					.clickCustomDateRangeTokensSent();
-//			Thread.sleep(2000);
-//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-//					.setDateWithYear(data.get("startDate"));
-//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-//			// verify CustomDateRange
-//
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport("testCustomDateRangeSentTransaction is failed due to exception " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangeSentTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensSent();
+			Thread.sleep(2000);
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCustomDateRangeSentTransaction is failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -257,9 +260,12 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -267,24 +273,25 @@ public class TokenAccountTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testCustomDateRangeReceiveTransaction(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickTokenAccount();
-//			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
-//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-//					.clickCustomDateRangeTokensReceive();
-//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-//					.setDateWithYear(data.get("startDate"));
-//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-//			// verify CustomDateRange
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testCustomDateRange is failed due to exception " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangeReceiveTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensReceive();
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCustomDateRangeReceiveTransaction is failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -354,15 +361,38 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testTransactionPurchasedDetailsList is failed due to exception " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangePurchaseTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensPurchased();
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCustomDateRangePurchaseTransaction is failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -433,15 +463,38 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+			// tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testTransactionWithdrawDetailsList is failed due to exception " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangeWithdrawTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangeTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCustomDateRangeWithdrawTransaction is failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -590,44 +643,6 @@ public class TokenAccountTest {
 					"testPayTransactionsWithInvalidAccountAddress failed due to  exception " + e);
 		}
 	}
-
-//	@Test // added P
-//	@Parameters({ "strParams" })
-//	public void testPayAmountFieldWithNullSpecialCharAndChar(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickTokenAccount();
-//			tokenAccountPage.clickPayRequestToken();
-//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-//			String[] amount = data.get("amount").split(",");
-//			tokenAccountPage.payAndRequestTokensPopup().validateAmountField(amount[0], amount[1]);
-//			ExtentTestManager.setPassMessageInReport("Amount field is not accepting special characters and characters");
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testPayAmountFieldWithNullSpecialCharAndChar failed due to  exception " + e);
-//		}
-//	}
-
-//	@Test // added P
-//	@Parameters({ "strParams" })
-//	public void testPayRecipientAddressFieldWithMax(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickTokenAccount();
-//			tokenAccountPage.clickPayRequestToken();
-//			tokenAccountPage.payAndRequestTokensPopup().clickPay();
-//			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-//			Thread.sleep(2000);
-//			String[] recipient = data.get("recipientMessage").split(",");
-//			tokenAccountPage.payAndRequestTokensPopup().validateRecipientField(recipient[0], recipient[1]);
-//
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport("testPayRecipientAddressFieldWithMax failed due to  exception " + e);
-//		}
-//	}
 
 	// added P
 	@Test
@@ -989,14 +1004,12 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
-					data.get("expValue"), data.get("expColor"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
-					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
@@ -1040,14 +1053,12 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
-					data.get("expValue"), data.get("expColor"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
-					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
@@ -1056,13 +1067,19 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
+//			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
+//					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-			}
+			Thread.sleep(4000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.txtMessage(data.get("transactionalmessage"));
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyErrorMessage();
+
+//			if (!data.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+//			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1075,15 +1092,17 @@ public class TokenAccountTest {
 	public void testWithdrawToUSDViaInstantPayWithNavigationOptions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
-					data.get("expValue"), data.get("expColor"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
+//					data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
-					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
+//					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
@@ -1277,14 +1296,10 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
-					data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
-					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
@@ -1311,7 +1326,7 @@ public class TokenAccountTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
 		}
 	}
 

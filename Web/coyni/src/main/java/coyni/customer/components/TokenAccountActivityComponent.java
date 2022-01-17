@@ -34,6 +34,10 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 
+	private By transaction = By.xpath("//tr[@class='  hovered']");
+
+	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
+
 	private By defaultEntries = By
 			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
 
@@ -42,33 +46,41 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 	// private By pagination = By.xpath("//li[@class='paginator__pagination__item
 	// active']");
 
-//	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
-//
-//	private By prevPage = By.xpath("//a[contains(@aria-label, 'previous page') or text() = '❮']");
-//
-//	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
-//
-//	private By lastPage = By.xpath("//a[contains(@aria-label, 'last page') and text() = '»']");
-//
-//	public void clickGoToFirstPage() {
-//		click(firstPage, "first page '«'");
-//	}
-//
-//	public void clickGoToPreviousPage() {
-//		click(prevPage, "previou page '❮'");
-//	}
-//
-//	public void clickGoToNextPage() {
-//		click(nextPage, "next page '❯'");
-//	}
-//
-//	public void clickGoToLastPage() {
-//		click(lastPage, "last page '»'");
-//	}
-//
-//	public boolean isNextButtonEnabled() {
-//		return getElement(nextPage, "next page '❯'").isEnabled();
-//	}
+	public String getBracesCount() {
+		String str = getText(lblBracesCount, "braces Count");
+		return str;
+
+	}
+
+	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
+
+	private By seconPage = By.xpath("//a[@aria-label='Go to page number 2']");
+
+	private By prevPage = By.xpath("//a[contains(@aria-label, 'previous page') or text() = '❮']");
+
+	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
+
+	private By lastPage = By.xpath("//a[contains(@aria-label, 'last page') and text() = '»']");
+
+	public void clickGoToFirstPage() {
+		click(firstPage, "first page '«'");
+	}
+
+	public void clickGoToPreviousPage() {
+		click(prevPage, "previous page '❮'");
+	}
+
+	public void clickGoToNextPage() {
+		click(nextPage, "next page '❯'");
+	}
+
+	public void clickGoToLastPage() {
+		click(lastPage, "last page '»'");
+	}
+
+	public boolean isNextButtonEnabled() {
+		return getElement(nextPage, "next page '❯'").isEnabled();
+	}
 
 	public void clickTokensSentDetails() {
 		click(btnTokensSentDetails, "Click Token Sent Details");
@@ -118,6 +130,35 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 //			clickGoToNextPage();
 //		}
 //	}
+
+	public void verifyPageNumberHighlighted(String cssProp, String expValue, String expColor) {
+
+		if (verifyElementDisplayed(nextPage, "Next Page")) {
+			click(nextPage, "Clicked Next Page");
+			new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp, expValue, expColor);
+			ExtentTestManager.setPassMessageInReport("Page is Highlighted when clicked on Page number");
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Page is Not Highlighted");
+		}
+	}
+
+	public void verifyPageNumbersWithCount() {
+		int actCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
+		int page = getElementsList(transaction, "page transaction count").size();
+		int pageNumber = actCount / page;
+		int remainder = actCount % page;
+		if (!(remainder == 0)) {
+			pageNumber++;
+			if (!(pageNumber == 0)) {
+				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
+			} else if (remainder == 0) {
+				ExtentTestManager.setPassMessageInReport("No of pages is" + pageNumber);
+			}
+		} else {
+			ExtentTestManager.setFailMessageInReport("No of Page is Null");
+		}
+
+	}
 
 	public void verifyEntriesMessage() {
 		new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
