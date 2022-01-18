@@ -13,7 +13,7 @@ public class VerifyCurrentPhoneNumberPopup extends BrowserFunctions {
 
 	private By btnResendVerificationCode = By.xpath("//button[@type='submit']");
 	private By headingCurrentPhoneNumber = By.xpath("//h1[text()='Verify Current Phone Number']");
-	private By lblResendVerificationCodeDescription = By.xpath("//span[contains(text(),'verication Code Sent')]");
+	private By lblResendVerificationCodeDescription = By.xpath("//span[contains(text(),'Verification Code Sent!')]");
 	private By lblresendErrorMsg = By.xpath("//span[contains(text(),'Looks like something went wrong. Please try again')]");
 	
 	public VerifyNewPhoneNumberPopup verifyNewPhoneNumberPopup() {

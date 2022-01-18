@@ -1372,5 +1372,44 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescription(data.get("buyCoyniTokenDescrp"));
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().verifyAddNewDebitCardHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+			         .addCardComponent().validateNameOnCard(data.get("cardName"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().validateCardNumber(data.get("cardNumber"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().validateCardExpiry(data.get("cardExpiry"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().validateCVVorCVC(data.get("cardCVV"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().mailingAddressComponent().validateAddress1(data.get("addressLine1"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().mailingAddressComponent().validateAddress1(data.get("addressLine2"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().mailingAddressComponent().validateCity(data.get("city"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().mailingAddressComponent().validateZipCode(data.get("zipCode"));
+
+
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+		}
+
+	}
 
 }
+

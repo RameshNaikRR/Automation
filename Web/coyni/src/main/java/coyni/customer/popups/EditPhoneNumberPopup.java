@@ -64,7 +64,7 @@ public class EditPhoneNumberPopup extends BrowserFunctions {
 	}
 	
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
-		new CommonFunctions().validateTextFeild(txtNewNumber, expNewPhoneNumber, "New Phone Number");
+		new CommonFunctions().validateTextFeild(txtNewNumber,"New Phone Number",expNewPhoneNumber);
 	}
 	
 	public void verifySendCodeButtonEnabled() {

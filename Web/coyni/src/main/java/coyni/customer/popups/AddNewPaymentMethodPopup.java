@@ -3,10 +3,12 @@ package coyni.customer.popups;
 import org.openqa.selenium.By;
 
 import coyni.customer.components.AddCardComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	
+  private By headingAddNewPaymentMethod = By.xpath("//h1[contains(text(),'Add New Payment Method')]");
   private By btnExternalBankAccount = By.xpath("//span[text()='Bank Account']");
   private By btnDebitCard = By.xpath("//span[text()='Debit Card']");
   private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
@@ -41,6 +43,13 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
    }
    public PreAuthorizationPopup preAuthorizationPopup() {
 	   return new PreAuthorizationPopup();
+   }
+   public AddNewDebitCardPopup addNewDebitCardPopup() {
+	   return new AddNewDebitCardPopup();
+   }
+   
+   public void verifyAddNewPaymentMethodHeading() {
+	   new CommonFunctions().elementView(headingAddNewPaymentMethod, "Add New Payment Method heading");
    }
     
   
