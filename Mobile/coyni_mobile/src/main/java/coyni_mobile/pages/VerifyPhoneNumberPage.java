@@ -10,13 +10,13 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class VerifyPhoneNumberPage extends MobileFunctions {
-	private By lblCurrPhoneHeading = MobileBy.xpath("//*[contains(@name,'your Current Phone')]");
-	private By lblNewPhoneHeading = MobileBy.xpath("//*[contains(@name,'your New Phone')]");
-	private By lblCurrPhone = MobileBy.xpath("");
-	private By lblNewPhone = MobileBy.xpath("");
-	private By txtPin = MobileBy.xpath("//*[contains(@name,'the code')]");
-	private By lnkResend = MobileBy.xpath("(//*[@name='Resend'])[1]");
-
+	private By lblCurrPhoneHeading = MobileBy.xpath("//*[contains(@text,'your Current Phone')]");
+	private By lblNewPhoneHeading = MobileBy.xpath("//*[contains(@text,'your New Phone')]");
+	private By lblCurrPhone = MobileBy.xpath("//*[contains(@resource-id,'subHeader')]");
+	private By lblNewPhone = MobileBy.xpath("//*[contains(@resource-id,'subHeader')]");
+	private By txtPin = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
+	private By lblGetCode= MobileBy.xpath("//*[contains(@text,'the code')]");
+	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	public void verifyCurrentPhoneHeading(String expCurrPhoneHeading) {
 		new CommonFunctions().verifyLabelText(lblCurrPhoneHeading, "heading", expCurrPhoneHeading);
 	}
@@ -25,6 +25,9 @@ public class VerifyPhoneNumberPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblNewPhoneHeading, "heading", expNewPhoneHeading);
 	}
 
+	public void verifyGetCodeLabelView() {
+		new CommonFunctions().elementView(lblGetCode, "Didn't get the code");
+	}
 	public void verifyCurrentPhone(String expCurrPhone) {
 		new CommonFunctions().verifyLabelText(lblCurrPhone, "Current Phone", expCurrPhone);
 	}
@@ -34,7 +37,7 @@ public class VerifyPhoneNumberPage extends MobileFunctions {
 	}
 
 	public void fillPin(String pin) {
-		new EnterYourPINComponent().fillPin(pin);
+		enterText(txtPin, pin, "pin");
 	}
 
 	public void verifyPinView() {

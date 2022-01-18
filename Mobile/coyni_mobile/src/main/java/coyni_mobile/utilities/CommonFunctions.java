@@ -20,7 +20,7 @@ public class CommonFunctions {
 	}
 
 	public void verifyLabelText(By label, String labelName, String expText) {
-		String actText = mobileFunctions.getText(label).trim().replace("\n", "").replace(",", "");
+		String actText = mobileFunctions.getText(label).trim().replace("\n", "");
 		if (expText.equalsIgnoreCase(actText)) {
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
 		} else {

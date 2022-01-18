@@ -312,10 +312,7 @@ public class CustomerProfileTest {
 					.verifyNewPhoneHeading(data.get("newPhoneHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
 					.fillPin(data.get("code"));
-			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
-					.successFailureComponent().verifySuccessFailureHeading(data.get("expHeading"));
-			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
-					.successFailureComponent().clickLogOut();
+			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit PhoneNumber view failed due to exception " + e);
 		}
@@ -383,11 +380,12 @@ public class CustomerProfileTest {
 					.selectState(data.get("state"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipcode"));
-//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
-//					.verifyCountry(data.get("country"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+					.verifyCountry(data.get("country"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().clickSave();
 			// Toast Message
-			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
+			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
+			customerProfilePage.userDetailsPage().verifyAddress(data.get("expAddress"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit Address failed due to exception " + e);
 		}
@@ -414,9 +412,10 @@ public class CustomerProfileTest {
 					.fillCity(data.get("city"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipcode"));
+			Thread.sleep(10000);
 			if (!data.get("errMessage").isEmpty()) {
 
-				// new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("elementName"));
 			}
 
 		} catch (Exception e) {

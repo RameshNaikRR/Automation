@@ -80,6 +80,9 @@ public class UserDetailsPage extends MobileFunctions {
 	public void verifyExistingAddressView() {
 		new CommonFunctions().elementView(lblExistingAddress, "Existing Address");
 	}
+	public void verifyAddress(String expAddress) {
+		new CommonFunctions().verifyLabelText(lblExistingAddress, "Updated Address ", expAddress);
+	}
 	public void verifyEditAddressArrowView() {
 		new CommonFunctions().elementView(lnkEditAddress, "Edit Address Arrow");
 	}

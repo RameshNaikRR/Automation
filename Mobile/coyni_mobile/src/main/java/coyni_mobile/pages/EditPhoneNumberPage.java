@@ -10,19 +10,19 @@ import io.appium.java_client.MobileBy;
 
 public class EditPhoneNumberPage extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[contains(@name,'Edit Phone')]");
-	private By txtCurrentPhone = MobileBy.xpath("//*[contains(@name,'Current Phone')]");
-	private By txtNewPhone = MobileBy.xpath("//*[contains(@name,'Current Phone')]/following-sibling::*[1]");
-	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@name,'access')]");
-	private By lnkContactUs = MobileBy.xpath("(//*[@name='Contact Us'])[1]");
-	private By btnSave = MobileBy.xpath("(//*[@name='Save'])[1]");
+	private By heading = MobileBy.xpath("//*[contains(@text,'Edit Phone')]");
+	private By txtCurrentPhone = MobileBy.xpath("(//*[contains(@resource-id,'pnET')])[1]");
+	private By txtNewPhone = MobileBy.xpath("(//*[contains(@resource-id,'pnET')])[2]");
+	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@text,'access')]");
+	private By lnkContactUs = MobileBy.xpath("//*[@text='Contact Us']");
+	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'save')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
 	}
 
 	public void verifyCurrentPhoneNumber(String expPhone) {
-		String value = getAttribute(txtCurrentPhone, "value");
+		String value = getAttribute(txtCurrentPhone, "text");
 		if (value.equalsIgnoreCase(expPhone)) {
 			ExtentTestManager.setPassMessageInReport("Current Phone Number is " + expPhone);
 		} else {
