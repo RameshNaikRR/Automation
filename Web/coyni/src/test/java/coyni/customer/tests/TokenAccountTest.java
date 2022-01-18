@@ -1018,24 +1018,29 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
+//			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
+//					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
+			Thread.sleep(3000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+//					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.enterMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().clickConfirm();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 					.verifyHeading(data.get("authyVerificationHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().verifyAuthy();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().verifyAuthy();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().authyComponent()
 					.fillAuthyInput(data.get("securityKey"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
-					.verifyHeading(data.get("expTransactionInProgressHeading"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+//					.verifyHeading(data.get("expTransactionInProgressHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 					.successFailurePopupCardComponent().verifyReferenceID();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
@@ -1121,14 +1126,16 @@ public class TokenAccountTest {
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
+//			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as " + tokenAccountPage
+//					.withdrawCoyniToUSDPopup().withdrawViaInstantPay().accountLimitsComponent().getInstantPay());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
-					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+//					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterMessage(data.get("message"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.enterMessage(data.get("transactionalmessage"));
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
@@ -1137,7 +1144,9 @@ public class TokenAccountTest {
 					.clickBack();
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterMessage(data.get("message"));
+			Thread.sleep(3000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+					.enterMessage(data.get("transactionalmessage"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().navigationComponent()
@@ -1160,18 +1169,24 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnAddNewDebitCard();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyAddNewDebitCard(
 					data.get("cardName"), data.get("cardNumber"), data.get("cardExpiry"), data.get("cardCVV"),
 					data.get("addressLine1"), data.get("addressLine2"), data.get("city"), data.get("state"),
 					data.get("zipCode"), data.get("country"));
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().preAuthorizationPopup()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().preAuthorizationPopup().clickOnVerify();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().preAuthorizationPopup()
-					.successFailurePopupCardComponent().clickDone();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodEditSuccessfullyPopup()
+					.clickWithdrawCoyni();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1191,27 +1206,28 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
 					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
 					data.get("state"), data.get("zipCode"), data.get("country"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
 					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
 					data.get("state"), data.get("zipCode"), data.get("country"));
-
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickClose();
 
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
 					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
 					data.get("state"), data.get("zipCode"), data.get("country"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().mailingAddressComponent().clickSave();
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodEditSuccessfullyPopup()
 					.verifyHeading(data.get("paymentEditedHeading"));
@@ -1239,21 +1255,26 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
-
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickClose();
 
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDelete();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
 					.clickOnRemove();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
-					.successFailurePopupCardComponent().clickClose();
+					.getRemoveMessage();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+					.clickWithdrawCoyni();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+//					.navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1273,15 +1294,34 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyAddNewDebitCard(
-					data.get("cardName"), data.get("cardNumber"), data.get("cardExpiry"), data.get("cardCVV"),
-					data.get("addressLine1"), data.get("addressLine2"), data.get("city"), data.get("state"),
-					data.get("zipCode"), data.get("country"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnAddNewDebitCard();
 
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().validateNameOnCard(data.get("cardName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().validateCardNumber(data.get("cardNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().validateCardExpiry(data.get("cardExpiry"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().validateCVVorCVC(data.get("cardCVV"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
+					.validateAddress1(data.get("addressLine1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
+					.validateAddress1(data.get("addressLine2"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
+					.validateCity(data.get("city"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
+					.validateZipCode(data.get("zipCode"));
+
+//			if (!data.get("errMessage").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+//						data.get("elementName"));
+//			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1308,14 +1348,17 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
+//			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
+//					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
+			Thread.sleep(3000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 					.enterMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().clickConfirm();

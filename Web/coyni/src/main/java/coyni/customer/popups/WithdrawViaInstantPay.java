@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AccountLimitsComponent;
 import coyni.customer.components.AddCardComponent;
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.EditandDeleteComponent;
@@ -19,7 +20,7 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
 	private By txtmsg = By.cssSelector(".FormField_form_textarea__2VA0I.false.undefined.false");
 	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
-	private By lnkConvert = By.id("flip-button");
+	private By lnkConvert = By.xpath("//button[@class='group flex flex-col justify-center items-center ']");
 	private By lnkChange = By.xpath("//span[text()='Change']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lblheading = By.xpath("//h1[text()='Withdraw via Instant Pay']");
@@ -100,15 +101,11 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 	}
 
 	public void clickOnChangeLink() {
-		click(lnkChange, "Click Delete");
+		click(lnkChange, "Clicked On ChangeDebitCard");
 	}
 
 	public void clickOnNext() {
-		if (getElement(btnNext, "Next").isEnabled()) {
-			click(btnNext, "Next ");
-		} else {
-			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
-		}
+		click(btnNext, "Next");
 	}
 
 	public OrderPreviewPopup orderPreviewPopup() {
@@ -155,8 +152,13 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 		return new PaymentMethodEditSuccessfullyPopup();
 	}
 
+	public AccountLimitsComponent accountLimitsComponent() {
+		return new AccountLimitsComponent();
+	}
+
 	public void verifyAddDebitCard(String expCardName, String expCardNumber, String expCVV, String expiry,
-			String address1, String address2, String city, String state, String zipCode, String country) {
+			String address1, String address2, String city, String state, String zipCode, String country)
+			throws InterruptedException {
 		if (verifyElementDisplayed(btnRadioDebit, "Debit Card")) {
 			verifyDebitCardFlow();
 		} else {
@@ -169,11 +171,26 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 
 	}
 
-	public void verifyDebitCardFlow() {
+	public void verifyDebitCardFlow() throws InterruptedException {
 		new CommonFunctions().elementView(lblChooseHeading, "Choose Your Instant Pay Source ");
 		moveToElement(btnRadioDebit, "Moved to Radio Button");
 		new CommonFunctions().elementView(deleteCard, "Delete Card");
+		moveToElement(btnRadioDebit, "Moved to Radio Button");
+		Thread.sleep(2000);
 		new CommonFunctions().elementView(editCard, "Edit Card");
+	}
+
+	public void clickOnDelete() {
+		click(deleteCard, "Delete Card");
+	}
+
+	public void clickOnEdit() {
+		click(editCard, "Edit Card");
+	}
+
+	public void clickOnAddNewDebitCard() {
+		click(btnAddNewDebit, "Add New Debit Card");
+
 	}
 
 	public void verifyAddNewDebitCard(String expCardName, String expCardNumber, String expiry, String expCVV,
