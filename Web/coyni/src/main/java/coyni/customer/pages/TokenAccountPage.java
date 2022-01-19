@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.customer.components.NavigationComponent;
 import coyni.customer.components.TokenAccountActivityComponent;
 import coyni.customer.components.TokenPaidOrdersDetailsComponent;
 import coyni.customer.components.TokensPurchasedDetailsComponent;
@@ -325,9 +326,14 @@ public class TokenAccountPage extends BrowserFunctions {
 	public WithdrawCoyniToUSDPopup withdrawCoyniToUSDPopup() {
 		return new WithdrawCoyniToUSDPopup();
 	}
-	
+
 	public BuyCoyniTokensPopup buyCoyniTokensPopup() {
 		return new BuyCoyniTokensPopup();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+
 	}
 
 }

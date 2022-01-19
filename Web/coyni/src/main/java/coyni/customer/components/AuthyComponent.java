@@ -15,7 +15,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class AuthyComponent extends BrowserFunctions {
 
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	
+
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
 
 	private By heading = By.cssSelector(".VerifyYourIdentity_two_step_sub__14Irv>div:first-of-type");
@@ -23,7 +23,7 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
-
+	private By heading1 = By.xpath("//h1[text()='Verify Your Identity']");
 	private static Map<String, String> prevCode = new HashMap<>();
 
 	private String getTwoFactorCode(String securityKey) {
@@ -39,6 +39,10 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
+	}
+
+	public void verifyHeading1(String expHeading) {
+		new CommonFunctions().verifyLabelText(heading1, "Autentication Heading", expHeading);
 	}
 
 	public void fillAuthyInput(String securityKey) {
@@ -61,13 +65,15 @@ public class AuthyComponent extends BrowserFunctions {
 		fillPin(inputBox, "InputBoxes", code);
 		ExtentTestManager.setPassMessageInReport(character + " entered in text field");
 	}
-	//order - alphabet, specialChar
-    public void validateAuthyField(String code) {
-    String[] field = code.split(",");
-    	for(int i=0;i<2;i++) {
-    	new CommonFunctions().validateTextFeild(txtInput, "Input", field[i]);
-    	}
-    }
+
+	// order - alphabet, specialChar
+	public void validateAuthyField(String code) {
+		String[] field = code.split(",");
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateTextFeild(txtInput, "Input", field[i]);
+		}
+	}
+
 	public void fillInput(String code) {
 		fillPin(inputBox, "InputBoxes", code);
 	}

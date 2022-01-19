@@ -1410,6 +1410,146 @@ public class TokenAccountTest {
 		}
 
 	}
+	
+	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			if (giftCard.equalsIgnoreCase("Amazon")) {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			} else {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+						.enterSearckey(data.get("searchKey1"));
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
+			}
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifyHeadingOrderPreview(data.get("orderHeading"));
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDGiftCardWithAmazon(String strParams) {
+		testWithdrawToUSDGiftCard(strParams, "Amazon");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDGiftCardWithVisa(String strParams) {
+		testWithdrawToUSDGiftCard(strParams, "Visa");
+	}
+
+	public void testWithdrawToUSD(String strParams, String giftCard) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			if (giftCard.equalsIgnoreCase("Amazon")) {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			} else {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
+			}
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDAmazonInvalidData(String strParams) {
+		testWithdrawToUSD(strParams, "Amazon");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDVisaInvalidData(String strParams) {
+		testWithdrawToUSD(strParams, "Visa");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDNavigationOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.navigationComponent().clickClose();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+//			tokenAccountPage.navigationComponent().clickClose();
+//			Thread.sleep(2000);
+//			tokenAccountPage.clickWithdrawToUSD();
+////			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			//tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifyHeadingOrderPreview(data.get("orderHeading"));
+			tokenAccountPage.navigationComponent().clickBack();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+		//	tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifyHeadingOrderPreview(data.get("orderHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
 
 }
 
