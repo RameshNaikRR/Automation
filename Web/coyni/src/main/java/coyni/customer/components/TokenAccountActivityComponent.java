@@ -13,6 +13,21 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	private By btnTokensSentDetails = By.xpath("(//button[text()='Details'])[1]");
 
+	private By tokenSentDetailsList = By
+			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[1]");
+
+	private By tokenReceivedDetailsList = By
+			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[2]");
+
+	private By tokenPurchasedDetailsList = By
+			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[3]");
+
+	private By tokenWithdrawDetailsList = By
+			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[4]");
+
+	private By tokenPaidOrdersDetailsList = By
+			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[5]");
+
 	private By btnTokensReceivedDetails = By.xpath("(//button[text()='Details'])[2]");
 
 	private By btnTokensPurchasedDetails = By.xpath("(//button[text()='Details'])[3]");
@@ -173,6 +188,26 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	}
 
+	public String getTransactionSentDetailsList() {
+		return getText(tokenSentDetailsList, "Transaction Sent List");
+	}
+
+	public String getTransactionReceivedDetailsList() {
+		return getText(tokenReceivedDetailsList, "Transaction Received List");
+	}
+
+	public String getTransactionPurchasedDetailsList() {
+		return getText(tokenPurchasedDetailsList, "Transaction Purchased List");
+	}
+
+	public String getTransactionWithdrawDetailsList() {
+		return getText(tokenWithdrawDetailsList, "Transaction Withdraw List");
+	}
+
+	public String getTransactionPaidOrdersDetailsList() {
+		return getText(tokenPaidOrdersDetailsList, "Transaction Paid Orders List");
+	}
+
 	public String getDefaultEntriesPerPage() {
 		return getText(defaultEntries, "Default Entries");
 
@@ -186,13 +221,20 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 //		click(pagination, "Pagination");
 //	}
 
+	public void tokenAccountActivityDetails() {
+		new CommonFunctions().elementView(btnTokensSentDetails, "Tokens Sent Details");
+		new CommonFunctions().elementView(btnTokensReceivedDetails, "Tokens Received Details");
+		new CommonFunctions().elementView(btnTokensPurchasedDetails, "Tokens Purchased Details");
+		new CommonFunctions().elementView(btnTokensWithdrawn, "Tokens Withdrawn Details");
+	}
+
 	public void clickTokensReceivedDetails() {
 		click(btnTokensReceivedDetails, "Click Token Received Details");
 
 	}
 
 	public void clickTokensPurchasedDetails() {
-		click(btnTokensPurchasedDetails, "Click Token Received Details");
+		click(btnTokensPurchasedDetails, "Click Token Purchased Details");
 	}
 
 	public void clickTokensWithdrawnDetails() {

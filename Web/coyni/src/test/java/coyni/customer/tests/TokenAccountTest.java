@@ -26,7 +26,7 @@ public class TokenAccountTest {
 	}
 
 	@Test
-	public void testAvailableBalance() {
+	public void testAvailableBalance() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			Thread.sleep(2000);
@@ -34,13 +34,13 @@ public class TokenAccountTest {
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("testAvailableBalance is failed due to exception " + e);
 		}
 	}
 
 	@Test
-	public void testPayAndRequestTokens() {
+	public void testPayAndRequestTokens() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickPayRequestToken();
@@ -51,7 +51,7 @@ public class TokenAccountTest {
 	}
 
 	@Test
-	public void testBuyTokens() {
+	public void testBuyTokens() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
@@ -61,7 +61,7 @@ public class TokenAccountTest {
 	}
 
 	@Test
-	public void testWithdrawToUSD() {
+	public void testWithdrawToUSD() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
@@ -494,6 +494,58 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testCustomDateRangeWithdrawTransaction is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	public void testTokenAccountActivityDetails() throws InterruptedException {
+		try {
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent().getTokensReceived();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
+			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnToday();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionSentDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionReceivedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnYesterday();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionSentDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionReceivedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLast7Days();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionSentDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionReceivedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnMonthToDate();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionSentDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionReceivedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLastMonth();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionSentDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionReceivedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountActivityDetails is failed due to exception " + e);
 		}
 	}
 
@@ -1372,6 +1424,7 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {
@@ -1384,25 +1437,24 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().verifyAddNewDebitCardHeading(data.get("expHeading"));
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-			         .addCardComponent().validateNameOnCard(data.get("cardName"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().validateCardNumber(data.get("cardNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().validateCardExpiry(data.get("cardExpiry"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().validateCVVorCVC(data.get("cardCVV"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().mailingAddressComponent().validateAddress1(data.get("addressLine1"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().mailingAddressComponent().validateAddress1(data.get("addressLine2"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().mailingAddressComponent().validateCity(data.get("city"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().mailingAddressComponent().validateZipCode(data.get("zipCode"));
-
-
+					.verifyAddNewDebitCardHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateNameOnCard(data.get("cardName"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCardNumber(data.get("cardNumber"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCardExpiry(data.get("cardExpiry"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCVVorCVC(data.get("cardCVV"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress1(data.get("addressLine1"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress1(data.get("addressLine2"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateCity(data.get("city"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateZipCode(data.get("zipCode"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1410,7 +1462,7 @@ public class TokenAccountTest {
 		}
 
 	}
-	
+
 	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1514,7 +1566,7 @@ public class TokenAccountTest {
 ////			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
 			tokenAccountPage.navigationComponent().clickBack();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
-			//tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
@@ -1526,7 +1578,7 @@ public class TokenAccountTest {
 			tokenAccountPage.navigationComponent().clickBack();
 //			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
 //			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
-		//	tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
@@ -1550,6 +1602,4 @@ public class TokenAccountTest {
 		}
 	}
 
-
 }
-
