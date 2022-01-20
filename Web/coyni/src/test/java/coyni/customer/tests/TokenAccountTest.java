@@ -91,14 +91,14 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
 					.clickTodayTokensSent();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -110,7 +110,7 @@ public class TokenAccountTest {
 					.clickYesterdayTokensSent();
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -124,7 +124,7 @@ public class TokenAccountTest {
 					.clickLast7DaysTokensSent();
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -136,7 +136,7 @@ public class TokenAccountTest {
 					.clickMonthToDateTokenSent();
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -148,16 +148,16 @@ public class TokenAccountTest {
 					.clickLastMonthTokensSent();
 			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-					data.get("expColor"));
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionSentDetailsList is failed due to exception " + e);
@@ -193,14 +193,14 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensReceivedDetails();
-			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent().getTokensReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent().getTokensReceived();
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickTodayTokensReceive();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -214,21 +214,20 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensReceive();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -242,7 +241,7 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -256,16 +255,16 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-					data.get("expColor"));
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -300,14 +299,14 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickTodayTokensPurchased();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -319,7 +318,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickYesterdayTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -333,7 +332,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickLast7DaysTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -345,7 +344,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickMonthToDateTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -357,11 +356,11 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickLastMonthTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
@@ -409,7 +408,7 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -421,7 +420,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickYesterdayTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -435,7 +434,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickLast7DaysTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-//			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -447,7 +446,7 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickMonthToDateTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
@@ -459,11 +458,11 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			// tokenAccountActivityComponent.verifyTableItemsCount(data.get("query"));
+			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
 			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			// tokenAccountPage.verifyPageNumbersWithCount();
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
 			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
@@ -565,7 +564,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.verifyTransactionList();
 			tokenAccountPage.verifyTableItemsCount(data.get("query"));
 			tokenAccountPage.verifyPostedTransactions(data.get("count"));
-			tokenAccountPage.verifyBracesCount(data.get("query"));
+			// tokenAccountPage.verifyBracesCount(data.get("query"));
 			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
@@ -1060,42 +1059,43 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
-					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			Thread.sleep(3000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.getPaymentItems(data.get("last4digits"));
 //			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 //					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.enterMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().clickConfirm();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyHeading(data.get("authyVerificationHeading"));
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().verifyAuthy();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().authyComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
 					.fillAuthyInput(data.get("securityKey"));
 //			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 //					.verifyHeading(data.get("expTransactionInProgressHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.successFailurePopupCardComponent().verifyReferenceID();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.successFailurePopupCardComponent().clickDone();
 			tokenAccountPage.verifyLabelYourTokenAccount();
 
@@ -1114,25 +1114,24 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
-					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
 			Thread.sleep(4000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.txtMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyErrorMessage();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyErrorMessage();
 
 //			if (!data.get("errMessage").isEmpty()) {
 //				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
@@ -1158,51 +1157,51 @@ public class TokenAccountTest {
 //			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
 //					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
-					.getPaymentItems(data.get("paymentMethod"), data.get("last4digits"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickBack();
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnChangeLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnDebitCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as " + tokenAccountPage
 //					.withdrawCoyniToUSDPopup().withdrawViaInstantPay().accountLimitsComponent().getInstantPay());
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
 //			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
 //					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.enterMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().navigationComponent()
-					.clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.navigationComponent().clickBack();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			Thread.sleep(3000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.enterMessage(data.get("transactionalmessage"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().navigationComponent()
-					.clickClose();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.navigationComponent().clickClose();
 			tokenAccountPage.verifyLabelYourTokenAccount();
 
 		} catch (Exception e) {
@@ -1222,20 +1221,21 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnAddNewDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyAddNewDebitCard(
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnAddNewDebitCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyAddNewDebitCard(
 					data.get("cardName"), data.get("cardNumber"), data.get("cardExpiry"), data.get("cardCVV"),
 					data.get("addressLine1"), data.get("addressLine2"), data.get("city"), data.get("state"),
 					data.get("zipCode"), data.get("country"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().preAuthorizationPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().preAuthorizationPopup()
 					.fillAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().preAuthorizationPopup().clickOnVerify();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodEditSuccessfullyPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().preAuthorizationPopup()
+					.clickOnVerify();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodEditSuccessfullyPopup()
 					.clickWithdrawCoyni();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
@@ -1257,33 +1257,34 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
-					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
-					data.get("state"), data.get("zipCode"), data.get("country"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnEdit();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyEditDebitCard(
+					data.get("cardName"), data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"),
+					data.get("city"), data.get("state"), data.get("zipCode"), data.get("country"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickBack();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
-					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
-					data.get("state"), data.get("zipCode"), data.get("country"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickClose();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnEdit();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyEditDebitCard(
+					data.get("cardName"), data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"),
+					data.get("city"), data.get("state"), data.get("zipCode"), data.get("country"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickClose();
 
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnEdit();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnEdit();
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyEditDebitCard(data.get("cardName"),
-					data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"), data.get("city"),
-					data.get("state"), data.get("zipCode"), data.get("country"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().mailingAddressComponent().clickSave();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyEditDebitCard(
+					data.get("cardName"), data.get("cardExpiry"), data.get("addressLine1"), data.get("addressLine2"),
+					data.get("city"), data.get("state"), data.get("zipCode"), data.get("country"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().mailingAddressComponent()
+					.clickSave();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodEditSuccessfullyPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodEditSuccessfullyPopup()
 					.verifyHeading(data.get("paymentEditedHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodEditSuccessfullyPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodEditSuccessfullyPopup()
 					.clickWithdrawCoyni();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
@@ -1306,21 +1307,21 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickBack();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().navigationComponent().clickClose();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickClose();
 
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDelete();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnDelete();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().removePaymentMethodPopup()
 					.clickOnRemove();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().removePaymentMethodPopup()
 					.getRemoveMessage();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().removePaymentMethodPopup()
 					.clickWithdrawCoyni();
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
@@ -1344,29 +1345,29 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnAddNewDebitCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnAddNewDebitCard();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().validateNameOnCard(data.get("cardName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().validateCardNumber(data.get("cardNumber"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().validateCardExpiry(data.get("cardExpiry"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().validateCVVorCVC(data.get("cardCVV"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.validateAddress1(data.get("addressLine1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.validateAddress1(data.get("addressLine2"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.validateCity(data.get("city"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().paymentMethodsComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().paymentMethodsComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.validateZipCode(data.get("zipCode"));
 
@@ -1392,31 +1393,32 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnDebitCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			Thread.sleep(3000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyLabelDebitCardView();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnConvertLink();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.enterMessage(data.get("transactionalmessage"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().clickOnNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().clickConfirm();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyHeading(data.get("authyVerificationHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().authyComponent()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().authyComponent()
 					.fillAuthyInputInvalid(data.get("code"), data.get("character"));
 
 		} catch (Exception e) {

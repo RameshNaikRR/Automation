@@ -13,7 +13,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class WithdrawViaInstantPay extends BrowserFunctions {
+public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
 	private By txtAmount = By.xpath("//input[@class='CynField_cyn_input__31vZ6']");
@@ -59,9 +59,14 @@ public class WithdrawViaInstantPay extends BrowserFunctions {
 		enterText(txtmsg, txt, "TransactionalMessage");
 	}
 
-	public By getPaymentItems(String paymentMethod, String last4digits) {
-		return By.xpath(String.format("//*[@contains(text,'%s')]/following-sibling::*[contains(text,'%s')]",
-				paymentMethod, last4digits));
+	public By getPaymentItems(String last4digits) {
+		return By.xpath(String.format("//p[contains(text(),'%s')]", last4digits));
+	}
+
+	public void clickDebitCard(String last4Digits) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
+		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
 	}
 
 	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {

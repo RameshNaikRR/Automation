@@ -49,7 +49,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 
-	private By transaction = By.xpath("//tr[@class='  hovered']");
+	private By transaction = By.xpath("//tr[@class='  ']");
 
 	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
 
@@ -112,8 +112,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 			ExtentTestManager
 					.setPassMessageInReport("Number of transactions in table matches with number of entries selected ");
 		} else {
-			ExtentTestManager.setFailMessageInReport(
-					"Number of transactions in table doesnot match with numer of entries selected");
+			ExtentTestManager.setWarningMessageInReport("No Transactions Found");
 		}
 	}
 //	public void verifyPaginations() throws InterruptedException {

@@ -18,8 +18,9 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public void clickOnExternalBankAccount() {
 		click(btnExternalBankAccount, "click ExternalBankAccount");
 	}
-	public void cursorhoverWithdrawToUSD( ) {
-		 new CommonFunctions().verifyCursorAction(btnGiftCard, "Gift Card");
+
+	public void cursorhoverWithdrawToUSD() {
+		new CommonFunctions().verifyCursorAction(btnGiftCard, "Gift Card");
 	}
 
 	public void clickOnInstantPay() {
@@ -44,8 +45,8 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		new CommonFunctions().verifyChangedColor(withdrawToUSDColor, "WithdrawToUSD", cssProp, expValue, expColor);
 	}
 
-	public WithdrawViaInstantPay withdrawViaInstantPay() {
-		return new WithdrawViaInstantPay();
+	public WithdrawViaInstantPayPopup withdrawViaInstantPaypopup() {
+		return new WithdrawViaInstantPayPopup();
 	}
 
 	public WithdrawToBankAccountSelectBankPopup withdrawToBankAccountSelectBankPopup() {
