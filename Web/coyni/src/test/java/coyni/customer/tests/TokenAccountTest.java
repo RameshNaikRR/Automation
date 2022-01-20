@@ -1426,7 +1426,46 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
 		}
 	}
+    
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyCoyniTokenAddDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescription(data.get("buyCoyniTokenDescrp"));
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().verifyAddNewDebitCardHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+			         .addCardComponent().fillNameOnCard(data.get("expName"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().fillCardNumber(data.get("expNumber"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().fillCVVorCVC(data.get("expCVVorCVC"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.addCardComponent().fillCardExpiry(data.get("expExpiry"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().selectState(data.get("expOption"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().fillAmount(data.get("expAmount"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().clickOnVerify();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().successFailurePopupCardComponent().verifyPreAuthorizationSucessHeading(data.get("expPreAuthorizationSucessHeading"));          
+            tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().successFailurePopupCardComponent().clickBuyCoyni();
+            tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
+			
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+		}
+
+	}
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {

@@ -14,6 +14,7 @@ public class PreAuthorizationPopup extends BrowserFunctions{
 	
 	private By txtAmount = By.name("authAmount");
 	private By btnVerify = By.xpath("//button[@type='submit']");
+	private By heading = By.xpath("//h1[contains(text(),'Pre-Authorization')]");
 	//private By lblErrorMessage = By.cssSelector("");
 	
 	public void fillAmount(String Amount) {
@@ -36,5 +37,8 @@ public class PreAuthorizationPopup extends BrowserFunctions{
     	robot.keyRelease(KeyEvent.VK_TAB);
     	}
     
+    public void verifyHeading() {
+    	new CommonFunctions().elementView(heading, "Pre-Authorization heading");
+    }
      
 }

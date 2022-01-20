@@ -9,10 +9,12 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	private By imgSuccessFailure = By.cssSelector(".h-36.w-36");
 	private By imgSuccessFailureRequest = By.cssSelector(".h-48.w-48");
+	 private By headingPreAuthorizationSucess = By.xpath("//h1[contains(text(),'Pre-Authorization Success')]");
 
 	private By lblTransactionFailed = By.cssSelector("");
 	private By tryAgain = By.xpath("");
 	private By lblFailedMessage = By.xpath("");
+	private By btnBuyCoyni = By.xpath("//button[contains(text(),'Buy Coyni')]");
 
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
@@ -91,5 +93,12 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	}
 	public void verifyEmailAddressChanged(String emailAddress) {
 		new CommonFunctions().verifyLabelText(lblEmailAddress, "Email Address Changed Successfully Popup", emailAddress);
+	}
+	public void verifyPreAuthorizationSucessHeading(String expPreAuthorizationSucessHeading) {
+		new CommonFunctions().verifyLabelText(headingPreAuthorizationSucess, "Pre-Authorization", expPreAuthorizationSucessHeading);
+	}
+	
+	public void clickBuyCoyni() {
+		click(btnBuyCoyni,"Click Buy Coyni");
 	}
 }

@@ -19,6 +19,7 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 	private By txtCVVorCVC = By.name("cvv");
 	private By lblErrorMsg = By.cssSelector("span.text-crd5 ");
 	private By heading = By.cssSelector(".Heading_heading1__18f6i.mb-10.text-center");
+	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 
 	public void fillNameOnCard(String nameOnCard) {
 		enterText(txtNameOnCard, nameOnCard, "Name On Card");
@@ -99,8 +100,20 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[5]);
 	}
 	
+	public void selectState(String expOption) {
+	       new CommonFunctions().selectCustomDropDown(expOption, "Alasak");
+	}
+
+	public void clickNext() {
+		click(btnNext,"click Next");
+	}
+	
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
+	}
+	
+	public PreAuthorizationPopup preAuthorizationPopup() {
+		return new PreAuthorizationPopup();
 	}
 
 }
