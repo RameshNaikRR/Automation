@@ -1059,7 +1059,7 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+		//	tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
@@ -1603,5 +1603,72 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
 		}
 	}
-
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
+			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.bankAccountsComponent().clickToggle();
+			tokenAccountPage.bankAccountsComponent().getPaymentItems( data.get("last4Digits")); //data.get("bankName"),
+			tokenAccountPage.bankAccountsComponent().verifyAvalibleBalance(data.get("avalible"));
+			tokenAccountPage.bankAccountsComponent().fillMessage(data.get("message"));
+			tokenAccountPage.bankAccountsComponent().verifyMsg(data.get("content"));
+			tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().clickConfirm();
+		tokenAccountPage.bankAccountsComponent().authyComponent().verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.bankAccountsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.bankAccountsComponent().verifySuccessHeading(data.get("sucessHeading"));
+			tokenAccountPage.bankAccountsComponent().clickCopy();
+			tokenAccountPage.bankAccountsComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDRemoveExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().clickDelete();
+			tokenAccountPage.bankAccountsComponent().verifyRemoveHeading(data.get("removeHeading"));
+			tokenAccountPage.bankAccountsComponent().clickRemove();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDExternalBankAccountInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+		//	tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+		//	tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
+			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.bankAccountsComponent().clickToggle();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
+		}
+	}
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.customer.components.BankAccountsComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.customer.components.TokenAccountActivityComponent;
 import coyni.customer.components.TokenPaidOrdersDetailsComponent;
@@ -336,4 +337,7 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	}
 
+	public BankAccountsComponent bankAccountsComponent() {
+		return new BankAccountsComponent();
+	}
 }
