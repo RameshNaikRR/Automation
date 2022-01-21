@@ -193,4 +193,41 @@ public class NavigationMenuTest {
 		}
 
 	}
+
+	@Test
+	// @Parameters({ "strParams" })
+	public void testFloatingIcon() {
+		try {
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			navigationMenuPage.verifyLabelMessage();
+			// navigationMenuPage.verifyProfileInformation();
+			// navigationMenuPage.userNameDropDownComponent().cursorhoverUserName();
+			navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
+			navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
+			navigationMenuPage.userNameDropDownComponent().clickRequest();
+			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
+			navigationMenuPage.userNameDropDownComponent().navigationComponent().clickClose();
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().clickUserDetails();
+			navigationMenuPage.userNameDropDownComponent().clickPaymentMethods();
+			navigationMenuPage.userNameDropDownComponent().clickPreferences();
+			navigationMenuPage.userNameDropDownComponent().clickAccountLimits();
+			navigationMenuPage.userNameDropDownComponent().clickAgreements();
+			navigationMenuPage.userNameDropDownComponent().clickChangePassword();
+			navigationMenuPage.verifyAccountHolderNameView();
+			navigationMenuPage.clickOnRefresh();
+			navigationMenuPage.verifyAccountHolderNameView();
+
+			// navigationMenuPage.verifyNotificationsIcon();
+			// navigationMenuPage.userNameDropDownComponent().clickSignOut();
+			// homePage.clickPersonalAccount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Test Progress Bar is failed due to exception " + e);
+		}
+
+	}
 }

@@ -77,6 +77,10 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(dropwnUserName, "UserName");
 	}
 
+	public void clickRequest() {
+		click(requestdot, "Request Dot");
+	}
+
 	public void verifyRequestDot() {
 		new CommonFunctions().elementView(requestdot, "Request Dot");
 	}
@@ -91,6 +95,14 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lnkChangePassword, "Change Password");
 		new CommonFunctions().elementView(lnkSignOut, "Sign Out");
 
+	}
+
+	public NotificationsComponent notificationsComponent() {
+		return new NotificationsComponent();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }

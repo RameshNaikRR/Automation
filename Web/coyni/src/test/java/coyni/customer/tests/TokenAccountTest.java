@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.components.TokenAccountActivityComponent;
+import coyni.customer.pages.GetHelpPage;
 import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
@@ -16,12 +17,14 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TokenAccountTest {
 	TokenAccountPage tokenAccountPage;
 	LoginPage loginPage;
+	GetHelpPage getHelpPage;
 	TokenAccountActivityComponent tokenAccountActivityComponent;
 
 	@BeforeTest
 	public void init() {
 		tokenAccountPage = new TokenAccountPage();
 		loginPage = new LoginPage();
+		getHelpPage = new GetHelpPage();
 		tokenAccountActivityComponent = new TokenAccountActivityComponent();
 	}
 
@@ -30,6 +33,7 @@ public class TokenAccountTest {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			Thread.sleep(2000);
+			tokenAccountPage.verifyLabelYourTokenAccount();
 			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
@@ -80,6 +84,30 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().clickPaidOrdersDetails();
 		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("test paid orders failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testGetHelp(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			getHelpPage.clickGetHelp();
+			getHelpPage.view();
+			getHelpPage.fillFullName(data.get("fullName"));
+			getHelpPage.fillAccountIDNumber(data.get("accountID"));
+			getHelpPage.fillEmail(data.get("email"));
+			getHelpPage.fillPhoneNumber(data.get("phoneNumber"));
+			getHelpPage.selectInquiryType(data.get("inquiryType"));
+			getHelpPage.selectdrpDwnCustomertopics(data.get("customerTopics"));
+			getHelpPage.fillDetails(data.get("details"));
+			// getHelpPage.clickOnFiles();
+			getHelpPage.clickOnSubmit();
+
+		} catch (InterruptedException e) {
+			ExtentTestManager.setFailMessageInReport("testGetHelp is failed due to exception " + e);
 		}
 
 	}
@@ -1059,7 +1087,7 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-		//	tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
@@ -1426,8 +1454,7 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
 		}
 	}
-    
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyCoyniTokenAddDebitCard(String strParams) {
@@ -1439,24 +1466,31 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().verifyAddNewDebitCardHeading(data.get("expHeading"));
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-			         .addCardComponent().fillNameOnCard(data.get("expName"));
+					.verifyAddNewDebitCardHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.fillNameOnCard(data.get("expName"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.fillCardNumber(data.get("expNumber"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.fillCVVorCVC(data.get("expCVVorCVC"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.fillCardExpiry(data.get("expExpiry"));
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().fillCardNumber(data.get("expNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().fillCVVorCVC(data.get("expCVVorCVC"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-					.addCardComponent().fillCardExpiry(data.get("expExpiry"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().selectState(data.get("expOption"));
+					.selectState(data.get("expOption"));
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().verifyHeading();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().fillAmount(data.get("expAmount"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().clickOnVerify();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().successFailurePopupCardComponent().verifyPreAuthorizationSucessHeading(data.get("expPreAuthorizationSucessHeading"));          
-            tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().preAuthorizationPopup().successFailurePopupCardComponent().clickBuyCoyni();
-            tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
-			
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.preAuthorizationPopup().verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.preAuthorizationPopup().fillAmount(data.get("expAmount"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.preAuthorizationPopup().clickOnVerify();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.preAuthorizationPopup().successFailurePopupCardComponent()
+					.verifyPreAuthorizationSucessHeading(data.get("expPreAuthorizationSucessHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+					.preAuthorizationPopup().successFailurePopupCardComponent().clickBuyCoyni();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1464,8 +1498,7 @@ public class TokenAccountTest {
 		}
 
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {
@@ -1642,6 +1675,7 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDExternalBankAccount(String strParams) {
@@ -1655,13 +1689,13 @@ public class TokenAccountTest {
 			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
 			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.bankAccountsComponent().clickToggle();
-			tokenAccountPage.bankAccountsComponent().getPaymentItems( data.get("last4Digits")); //data.get("bankName"),
+			tokenAccountPage.bankAccountsComponent().getPaymentItems(data.get("last4Digits")); // data.get("bankName"),
 			tokenAccountPage.bankAccountsComponent().verifyAvalibleBalance(data.get("avalible"));
 			tokenAccountPage.bankAccountsComponent().fillMessage(data.get("message"));
 			tokenAccountPage.bankAccountsComponent().verifyMsg(data.get("content"));
 			tokenAccountPage.bankAccountsComponent().ClickNext();
 			tokenAccountPage.bankAccountsComponent().clickConfirm();
-		tokenAccountPage.bankAccountsComponent().authyComponent().verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.bankAccountsComponent().authyComponent().verifyHeading1(data.get("authyHeading1"));
 			tokenAccountPage.bankAccountsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			tokenAccountPage.bankAccountsComponent().verifySuccessHeading(data.get("sucessHeading"));
 			tokenAccountPage.bankAccountsComponent().clickCopy();
@@ -1671,6 +1705,7 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDRemoveExternalBankAccount(String strParams) {
@@ -1689,6 +1724,7 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDExternalBankAccountInvalidAmount(String strParams) {
@@ -1697,8 +1733,8 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-		//	tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
-		//	tokenAccountPage.bankAccountsComponent().ClickNext();
+			// tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			// tokenAccountPage.bankAccountsComponent().ClickNext();
 			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
 			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.bankAccountsComponent().clickToggle();

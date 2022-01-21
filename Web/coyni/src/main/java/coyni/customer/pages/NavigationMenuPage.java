@@ -139,6 +139,10 @@ public class NavigationMenuPage extends BrowserFunctions {
 
 	}
 
+	public void clickOnRefresh() {
+		new CommonFunctions().Refresh();
+	}
+
 	public void verifyPersonalAccountView() {
 		new CommonFunctions().elementView(lblPersonalAccount, "Personal Account ");
 	}
@@ -183,11 +187,6 @@ public class NavigationMenuPage extends BrowserFunctions {
 	// added
 	public UserNameDropDownComponent userNameDropDownComponent() {
 		return new UserNameDropDownComponent();
-	}
-
-	// added
-	public CommonFunctions commonFunctions() {
-		return new CommonFunctions();
 	}
 
 	public void verifyBellIconMouseHoverAction(String background, String border) {
