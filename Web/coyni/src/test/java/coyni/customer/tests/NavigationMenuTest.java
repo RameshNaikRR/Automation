@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.pages.HomePage;
+import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.customer.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
@@ -17,12 +18,14 @@ public class NavigationMenuTest {
 	NavigationMenuPage navigationMenuPage;
 	TokenAccountPage tokenAccountPage;
 	HomePage homePage;
+	LoginPage loginPage;
 
 	@BeforeTest
 	public void init() {
 		navigationMenuPage = new NavigationMenuPage();
 		tokenAccountPage = new TokenAccountPage();
 		homePage = new HomePage();
+		loginPage = new LoginPage();
 	}
 
 	@Test
@@ -195,22 +198,23 @@ public class NavigationMenuTest {
 	}
 
 	@Test
-	// @Parameters({ "strParams" })
-	public void testFloatingIcon() {
+	@Parameters({ "strParams" })
+	public void testFloatingIcon(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			navigationMenuPage.verifyLabelMessage();
 			// navigationMenuPage.verifyProfileInformation();
 			// navigationMenuPage.userNameDropDownComponent().cursorhoverUserName();
-			navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
+			// navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
-			navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
+			// navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			navigationMenuPage.userNameDropDownComponent().clickRequest();
 			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
-			navigationMenuPage.userNameDropDownComponent().navigationComponent().clickClose();
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickCloseIcon();
+
+			// navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().clickUserDetails();
 			navigationMenuPage.userNameDropDownComponent().clickPaymentMethods();
 			navigationMenuPage.userNameDropDownComponent().clickPreferences();
@@ -220,6 +224,9 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyAccountHolderNameView();
 			navigationMenuPage.clickOnRefresh();
 			navigationMenuPage.verifyAccountHolderNameView();
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().clickSignOut();
+			loginPage.verifyHeading(data.get("loginHeading"));
 
 			// navigationMenuPage.verifyNotificationsIcon();
 			// navigationMenuPage.userNameDropDownComponent().clickSignOut();

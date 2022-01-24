@@ -12,8 +12,8 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By dropwnUserName = By.cssSelector(".down-arrow");
 	private By lblRequests = By.xpath("//span[text()='Requests']");
 	private By requestdot = By.xpath("//span[contains(@class,'green-dot')]");
-	private By lnkUserDetails = By.xpath("//span[text()='User Details']");
-	private By lnkPaymentMethods = By.cssSelector("div.dropdown-container>div:nth-of-type(3)");
+	private By lnkUserDetails = By.xpath("(//span[text()='User Details'])[1]");
+	private By lnkPaymentMethods = By.xpath("(//span[text()='Payment Methods'])[1]");
 	private By lnkPreferences = By.xpath("(//span[text()='Preferences'])[1]");
 	private By lnkAccountLimits = By.xpath("//span[text()='Account Limits']");
 	private By lnkAgreements = By.xpath("//span[text()='Agreements']");
@@ -69,16 +69,16 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(dropwnUserName, "Request");
 	}
 
-//	public void verifysignOutView() {
-//		new CommonFunctions().elementView(signOutIcon, "SignOut");
-//	}
+//		public void verifysignOutView() {
+//			new CommonFunctions().elementView(signOutIcon, "SignOut");
+//		}
 
 	public void verifyUserNameView() {
 		new CommonFunctions().elementView(dropwnUserName, "UserName");
 	}
 
 	public void clickRequest() {
-		click(requestdot, "Request Dot");
+		click(lblRequests, "Request");
 	}
 
 	public void verifyRequestDot() {
