@@ -1708,33 +1708,14 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDRemoveExternalBankAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
-			tokenAccountPage.bankAccountsComponent().ClickNext();
-			tokenAccountPage.bankAccountsComponent().clickDelete();
-			tokenAccountPage.bankAccountsComponent().verifyRemoveHeading(data.get("removeHeading"));
-			tokenAccountPage.bankAccountsComponent().clickRemove();
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testWithdrawToUSDExternalBankAccountInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			// tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
-			// tokenAccountPage.bankAccountsComponent().ClickNext();
+			 tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			 tokenAccountPage.bankAccountsComponent().ClickNext();
 			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
 			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.bankAccountsComponent().clickToggle();
@@ -1746,4 +1727,46 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDRemoveExternalBankAccount2(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+			tokenAccountPage.bankAccountsComponent().clickOnDelete(data.get("last4Digits"));
+			tokenAccountPage.bankAccountsComponent().verifyRemoveHeading(data.get("removeHeading"));
+			tokenAccountPage.bankAccountsComponent().clickRemove();
+			tokenAccountPage.bankAccountsComponent().removeHeading(data.get("removeHeading1"));
+			tokenAccountPage.bankAccountsComponent().clickRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDRemoveExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+//			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+//			tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().clickDelete();
+			tokenAccountPage.bankAccountsComponent().verifyRemoveHeading(data.get("removeHeading"));
+			tokenAccountPage.bankAccountsComponent().clickRemove();
+			tokenAccountPage.bankAccountsComponent().removeHeading(data.get("removeHeading1"));
+			tokenAccountPage.bankAccountsComponent().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
+		}
+	}
+
 }

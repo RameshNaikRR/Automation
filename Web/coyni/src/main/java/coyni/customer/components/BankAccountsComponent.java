@@ -31,6 +31,17 @@ public class BankAccountsComponent extends BrowserFunctions {
 	private By btnConfirm = By.xpath("//button[text()='Confirm']");
 
 	private By lblRemove = By.xpath("//h1[text()='Remove Payment Method']");
+	private By lblRemoveSuccessHeadind = By.xpath("//h1[text()='Payment Method Removed Successfully']");
+
+	private By btnWithdrawn = By.xpath("//button[text()='Withdraw Coyni']");
+
+	public void removeHeading(String ecpHeading) {
+		new CommonFunctions().verifyLabelText(lblRemoveSuccessHeadind, "Remove Heading", ecpHeading);
+	}
+
+	public void clickWithdrawCoyni() {
+		click(btnWithdrawn, "Withdraw Coyn");
+	}
 
 	public void verifyRemoveHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblRemove, "Remove Payment Method", expHeading);
@@ -118,9 +129,9 @@ public class BankAccountsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblAddress, "Address", address);
 	}
 
-	public void clickDelete(String accNumber) {
-		click(iconDelete, "Delete icon");
-	}
+//	public void clickDelete(String accNumber) {
+//		click(iconDelete, "Delete icon");
+//	}
 
 	public void verifyMsg(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblMSG, "Please allow 3-5 business days to process this transaction.",
@@ -138,11 +149,33 @@ public class BankAccountsComponent extends BrowserFunctions {
 	public void clickOnBank(String last4Digits) {
 		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Bank");
 		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
-		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (last4Digits));
+		ExtentTestManager.setInfoMessageInReport(" clicked on Bank " + (last4Digits));
+	}
+
+	public void clickOnDelete(String last4Digits) {
+		moveToElement(By.xpath(String
+				.format("//p[contains(text(),'%s')]/following-sibling::button[@data-tip=\"Delete\"]", last4Digits)),
+				"Delete Bank");
+		click(By.xpath(String.format("//p[contains(text(),'%s')]/following-sibling::button[@data-tip=\"Delete\"]",
+				last4Digits)), last4Digits);
+		ExtentTestManager.setInfoMessageInReport("Clicked on delete Icon " + (last4Digits));
+	}
+
+	public void clickDelete(String last4Digits) {
+		moveToElement(By.xpath(String
+				.format("//span[contains(text(),'%s')]//following::img[@class='cursor-pointer']", last4Digits)),
+				"Delete Bank");
+		click(By.xpath(String.format("//span[contains(text(),'%s')]//following::img[@class='cursor-pointer']",
+				last4Digits)), last4Digits);
+		ExtentTestManager.setInfoMessageInReport("Clicked on delete Icon " + (last4Digits));
 	}
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }
