@@ -7,7 +7,7 @@ import io.appium.java_client.MobileBy;
 
 public class AllDonePage extends MobileFunctions{
 	
-	private By btnDone = MobileBy.xpath("");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'cvDone')]");
 	
 	public void clickDone() {
 		click(btnDone, "Done");

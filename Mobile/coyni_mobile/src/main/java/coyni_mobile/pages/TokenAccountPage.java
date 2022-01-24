@@ -93,7 +93,7 @@ public class TokenAccountPage extends MobileFunctions {
 
 	// added
 	public void clickProfile() {
-		click(btnProfile, "Profile ");
+		click(btnProfile, "Profile");
 	}
 
 	public TokenHomePopUp tokenHomePopUp() {

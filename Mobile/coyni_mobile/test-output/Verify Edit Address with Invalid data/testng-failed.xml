@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Verify Edit Address with Invalid data]">
+  <listeners>
+    <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
+  </listeners>
+  <test thread-count="5" name="coyni_mobile.tests.CustomerProfileTest.testEditAddressWithInvalidData(failed)">
+    <parameter name="strParams" value="-puserDetailsHeading,
+-ppinHeading,
+-ppin,
+-peditAddrHeading,
+-paddLine1,
+-paddline2,
+-pcity,
+-pstate,
+-pzipcode,
+-perrMessage,
+-pelementName"/>
+    <classes>
+      <class name="coyni_mobile.tests.CustomerProfileTest">
+        <methods>
+          <include name="init"/>
+          <include name="testEditAddressWithInvalidData" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- coyni_mobile.tests.CustomerProfileTest -->
+    </classes>
+  </test> <!-- coyni_mobile.tests.CustomerProfileTest.testEditAddressWithInvalidData(failed) -->
+</suite> <!-- Failed suite [Verify Edit Address with Invalid data] -->

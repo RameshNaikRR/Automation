@@ -11,8 +11,8 @@ import io.appium.java_client.MobileBy;
 
 public class PaymentMethodsPage extends MobileFunctions {
 
-	private By lblHeading = MobileBy.xpath("//*[@name='Payment Methods']");
-	private By btnAddNewPayment = MobileBy.xpath("//*[@name='Add New Payment Method']");
+	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
+	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'cvAddPayment')]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
@@ -20,9 +20,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 		}
 	}
 
-	public void clickAddNewPayment() {
+	public void clickAddNewPaymentMethod() {
 		if (getElementList(lblHeading, "heading").size() > 0) {
-			click(btnAddNewPayment, "Add New Payment Method");
+			click(btnAddNewPaymentMethod, "Add New Payment Method");
 		}
 	}
 
