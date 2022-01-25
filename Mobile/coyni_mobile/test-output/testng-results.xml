@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="48" total="50" passed="1" failed="1" skipped="0">
+<testng-results ignored="50" total="52" passed="1" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-01-23T23:39:37 IST" name="Verify Delete Debit Card In Payment Methods" finished-at="2022-01-23T23:41:15 IST" duration-ms="97481">
+  <suite started-at="2022-01-25T01:50:58 IST" name="Verify Add Credit Card With Invalid Data" finished-at="2022-01-25T01:52:24 IST" duration-ms="85603">
     <groups>
     </groups>
-    <test started-at="2022-01-23T23:39:37 IST" name="coyni_mobile.tests.LoginTest.testLogin" finished-at="2022-01-23T23:40:05 IST" duration-ms="27495">
+    <test started-at="2022-01-25T01:50:58 IST" name="coyni_mobile.tests.LoginTest.testLogin" finished-at="2022-01-25T01:51:19 IST" duration-ms="20882">
       <class name="coyni_mobile.tests.LoginTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-23T23:39:37 IST" name="init" finished-at="2022-01-23T23:39:38 IST" duration-ms="211" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-25T01:50:58 IST" name="init" finished-at="2022-01-25T01:50:59 IST" duration-ms="227" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="testLogin(java.lang.String)[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-23T23:39:38 IST" name="testLogin" finished-at="2022-01-23T23:40:05 IST" duration-ms="27110" status="PASS">
+        <test-method signature="testLogin(java.lang.String)[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-25T01:50:59 IST" name="testLogin" finished-at="2022-01-25T01:51:19 IST" duration-ms="20533" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -25,23 +25,33 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testLogin -->
-        <test-method is-config="true" signature="hideKeyBoard()[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-23T23:40:05 IST" name="hideKeyBoard" finished-at="2022-01-23T23:40:05 IST" duration-ms="119" status="PASS">
+        <test-method is-config="true" signature="hideKeyBoard()[pri:0, instance:coyni_mobile.tests.LoginTest@7bb3a9fe]" started-at="2022-01-25T01:51:19 IST" name="hideKeyBoard" finished-at="2022-01-25T01:51:19 IST" duration-ms="68" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- hideKeyBoard -->
       </class> <!-- coyni_mobile.tests.LoginTest -->
     </test> <!-- coyni_mobile.tests.LoginTest.testLogin -->
-    <test started-at="2022-01-23T23:40:05 IST" name="coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard" finished-at="2022-01-23T23:41:15 IST" duration-ms="69948">
+    <test started-at="2022-01-25T01:51:19 IST" name="coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData" finished-at="2022-01-25T01:52:24 IST" duration-ms="64691">
       <class name="coyni_mobile.tests.CustomerProfileTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:coyni_mobile.tests.CustomerProfileTest@1b28f282]" started-at="2022-01-23T23:40:05 IST" name="init" finished-at="2022-01-23T23:40:05 IST" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:coyni_mobile.tests.CustomerProfileTest@5e77f0f4]" started-at="2022-01-25T01:51:19 IST" name="init" finished-at="2022-01-25T01:51:19 IST" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="testDeleteDebitCard(java.lang.String)[pri:0, instance:coyni_mobile.tests.CustomerProfileTest@1b28f282]" started-at="2022-01-23T23:40:05 IST" name="testDeleteDebitCard" finished-at="2022-01-23T23:41:14 IST" duration-ms="69247" status="FAIL">
+        <test-method signature="testAddDebitCardWithInvalidData(java.lang.String)[pri:0, instance:coyni_mobile.tests.CustomerProfileTest@5e77f0f4]" started-at="2022-01-25T01:51:19 IST" name="testAddDebitCardWithInvalidData" finished-at="2022-01-25T01:52:24 IST" duration-ms="64406" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[-pcardNumber]]>
+                <![CDATA[-pnameOnCard,
+-pcardNumber,
+-pcardExp,
+-pcvvOrCVC,
+-paddressLine1,
+-paddreddLine2,
+-pcity,
+-pstate,
+-pzipCode,
+-perrMsg,
+-pelementName]]>
               </value>
             </param>
           </params>
@@ -56,8 +66,9 @@ at org.testng.Assert.fail(Assert.java:106)
 at ilabs.mobile.reporting.ExtentTestManager.setFailMessageInReport(ExtentTestManager.java:76)
 at ilabs.MobileFramework.MobileFunctions.getElement(MobileFunctions.java:99)
 at ilabs.MobileFramework.MobileFunctions.click(MobileFunctions.java:120)
-at coyni_mobile.components.MailingAddressComponent.clickYes(MailingAddressComponent.java:77)
-at coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard(CustomerProfileTest.java:897)
+at coyni_mobile.components.AddNewPaymentComponent.clickDebitCard(AddNewPaymentComponent.java:24)
+at coyni_mobile.tests.CustomerProfileTest.testAddCardWithInvalidData(CustomerProfileTest.java:918)
+at coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData(CustomerProfileTest.java:948)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -92,8 +103,8 @@ at coyni_mobile.runner.TestRunner.main(TestRunner.java:9)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testDeleteDebitCard -->
+        </test-method> <!-- testAddDebitCardWithInvalidData -->
       </class> <!-- coyni_mobile.tests.CustomerProfileTest -->
-    </test> <!-- coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard -->
-  </suite> <!-- Verify Delete Debit Card In Payment Methods -->
+    </test> <!-- coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData -->
+  </suite> <!-- Verify Add Credit Card With Invalid Data -->
 </testng-results>

@@ -203,5 +203,6 @@ public class CommonFunctions {
 
 	public void clickEnter() {
 		 ((AndroidDriver)DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+		 System.out.println("clicked on enter");
 	}
 }

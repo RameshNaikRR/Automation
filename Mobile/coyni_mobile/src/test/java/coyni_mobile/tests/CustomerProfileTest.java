@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.model.context.ExceptionTestContextStore;
+
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.TokenAccountPage;
@@ -843,7 +845,7 @@ public class CustomerProfileTest {
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillZipCode(data.get("zipCode"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddCard();
             Thread.sleep(2000);
-            customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().preAuthorizationPage().fillPin(data.get("amount"));
+            customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().preAuthorizationPage().clickVerify();
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().preAuthorizationPage().allDonePage().clickDone();
 		} catch (Exception e) {
@@ -876,6 +878,7 @@ public class CustomerProfileTest {
 		    customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine2(data.get("addreddLine2"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillCity(data.get("city"));
+            Thread.sleep(2000);
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().selectState(data.get("state"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillZipCode(data.get("zipCode"));
             customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickSave();
@@ -900,6 +903,51 @@ public class CustomerProfileTest {
 		}
 		
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testAddCardWithInvalidData(String strParams,String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			Thread.sleep(2000);
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
+			} else {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			}
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillNameOnCard(data.get("nameOnCard"));
+	        customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCardNumber(data.get("cardNumber"));
+	        customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCardExp(data.get("cardExp"));
+	        customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCVVorCVC(data.get("cvvOrCVC"));
+	        if(!data.get("errMsg").isEmpty()) {
+	        	new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+	        }
+	        if(data.get("validateAddress").equalsIgnoreCase("Yes")) {
+	        	
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+	         Thread.sleep(3000);
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine2(data.get("addreddLine2"));
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillCity(data.get("city"));
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().selectState(data.get("state"));
+	         customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+	         
+	        }
+	        if(!data.get("errMsg").isEmpty()) {
+	        	new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+	        }
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardWithInvalidData(String strParams) {
+		testAddCardWithInvalidData(strParams, "debit");
+	}
+	
 }
 	
 	

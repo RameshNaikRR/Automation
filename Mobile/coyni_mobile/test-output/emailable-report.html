@@ -8,24 +8,35 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="8">Verify Delete Debit Card In Payment Methods</th></tr>
-<tr><td><a href="#t0">coyni_mobile.tests.LoginTest.testLogin</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">27,495</td><td></td><td></td></tr>
-<tr class="stripe"><td><a href="#t1">coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">69,948</td><td></td><td></td></tr>
-<tr><th>Total</th><th class="num">1</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">97,443</th><th colspan="2"></th></tr>
+<tr><th colspan="8">Verify Add Credit Card With Invalid Data</th></tr>
+<tr><td><a href="#t0">coyni_mobile.tests.LoginTest.testLogin</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">20,882</td><td></td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">64,691</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">1</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">85,573</th><th colspan="2"></th></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Verify Delete Debit Card In Payment Methods</th></tr></tbody><tbody id="t0"><tr><th colspan="4">coyni_mobile.tests.LoginTest.testLogin &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">coyni_mobile.tests.LoginTest</td><td><a href="#m0">testLogin</a></td><td rowspan="1">1642961378173</td><td rowspan="1">27110</td></tr></tbody>
-<tbody id="t1"><tr><th colspan="4">coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">coyni_mobile.tests.CustomerProfileTest</td><td><a href="#m1">testDeleteDebitCard</a></td><td rowspan="1">1642961405451</td><td rowspan="1">69247</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Verify Add Credit Card With Invalid Data</th></tr></tbody><tbody id="t0"><tr><th colspan="4">coyni_mobile.tests.LoginTest.testLogin &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">coyni_mobile.tests.LoginTest</td><td><a href="#m0">testLogin</a></td><td rowspan="1">1643055659161</td><td rowspan="1">20533</td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4">coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">coyni_mobile.tests.CustomerProfileTest</td><td><a href="#m1">testAddDebitCardWithInvalidData</a></td><td rowspan="1">1643055679800</td><td rowspan="1">64406</td></tr></tbody>
 </table>
 <h2>coyni_mobile.tests.LoginTest.testLogin</h2><h3 id="m0">coyni_mobile.tests.LoginTest#testLogin</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pemail,
 -ppassword,
 -ppin,
 -puserName</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard</h2><h3 id="m1">coyni_mobile.tests.CustomerProfileTest#testDeleteDebitCard</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pcardNumber</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: null
+<h2>coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData</h2><h3 id="m1">coyni_mobile.tests.CustomerProfileTest#testAddDebitCardWithInvalidData</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pnameOnCard,
+-pcardNumber,
+-pcardExp,
+-pcvvOrCVC,
+-paddressLine1,
+-paddreddLine2,
+-pcity,
+-pstate,
+-pzipCode,
+-perrMsg,
+-pelementName</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: null
 	at ilabs.mobile.reporting.ExtentTestManager.setFailMessageInReport(ExtentTestManager.java:76)
 	at ilabs.MobileFramework.MobileFunctions.getElement(MobileFunctions.java:99)
 	at ilabs.MobileFramework.MobileFunctions.click(MobileFunctions.java:120)
-	at coyni_mobile.components.MailingAddressComponent.clickYes(MailingAddressComponent.java:77)
-	at coyni_mobile.tests.CustomerProfileTest.testDeleteDebitCard(CustomerProfileTest.java:897)
+	at coyni_mobile.components.AddNewPaymentComponent.clickDebitCard(AddNewPaymentComponent.java:24)
+	at coyni_mobile.tests.CustomerProfileTest.testAddCardWithInvalidData(CustomerProfileTest.java:918)
+	at coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData(CustomerProfileTest.java:948)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at ilabs.MobileFramework.TestReader.run(TestReader.java:53)
 	at ilabs.MobileFramework.Runner.runOneIteration(Runner.java:149)
