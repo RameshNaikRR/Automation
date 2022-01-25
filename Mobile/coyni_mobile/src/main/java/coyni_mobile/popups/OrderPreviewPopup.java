@@ -20,7 +20,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblProcessingFee = MobileBy.xpath("//*[@name='Processing Fee']/following-sibling::*[1]");
 	private By lblTotal = MobileBy.xpath("//*[@name='Total']/following-sibling::*[1]");
 	private By btnConfirm = MobileBy
-			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[@name='Slide to confirm']/../..");
+			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[contains(@resource-id,'slideToConfirm')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblOrderPreview, "Popup Heading", expHeading);
@@ -28,6 +28,11 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	public void getAmount() {
 		ExtentTestManager.setInfoMessageInReport("Amount: " + getText(lblAmount) + " CYN");
+	}
+
+	public String verifySlideText() {
+		return getText(btnConfirm);
+
 	}
 
 	public void getPaymentMethod(String expPaymentMethod) {

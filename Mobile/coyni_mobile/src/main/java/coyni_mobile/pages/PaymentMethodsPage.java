@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.popups.CvvPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -27,8 +28,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public By getPaymentItems(String paymentMethod, String last4digits) {
-		return MobileBy.xpath(String.format(
-				"//*[contains(@text,'%s')]/following-sibling::*[contains(@text,'%s')]",
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]/following-sibling::*[contains(@text,'%s')]",
 				paymentMethod, last4digits));
 	}
 
@@ -50,6 +50,10 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
+	}
+
+	public WithdrawMenuComponent withdrawMenuComponent() {
+		return new WithdrawMenuComponent();
 	}
 
 	public CvvPopup cvvPopup() {

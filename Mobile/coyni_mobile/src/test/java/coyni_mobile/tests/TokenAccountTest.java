@@ -11,6 +11,7 @@ import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -481,7 +482,8 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyAmazonHeading(data.get("amazonGift"));
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyRecipentEmail(data.get("recipentEmail"));
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().sideBar();
-			tokenAccountPage.withdrawMenuComponent().giftCardPage().enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().enterYourPINComponent()
+					.verifyHeading(data.get(data.get("pinHeading")));
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().enterYourPINComponent().fillPin(data.get("code"));
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyRecipentEmail(data.get("content"));
 			tokenAccountPage.withdrawMenuComponent().giftCardPage().clickDone();
@@ -489,4 +491,203 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("  failed due to exception " + e);
 		}
 	}
+
+	public void testWithdrawToken(String strParams, String method) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			if (method.equalsIgnoreCase("bank")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+			} else if (method.equalsIgnoreCase("debit")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			}
+			// else {
+			// tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get(""));
+			// }
+			if (!method.equalsIgnoreCase("bank")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickDebitCard(data.get("last4Digits"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().getPaymentItems("last4Digits");
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().getDailyLimit();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickOnConvertLink();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickDone();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickWithdraw();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.verifyHeading(data.get("previewHeading"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.getAmount();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.verifySlideText();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.swipeConfirm();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().enterYourPINComponent()
+						.fillPin(data.get("pin"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().getStatus();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().verifyReferenceID();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().clickLearnMore();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().navigationComponent().clickClose();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().clickDone();
+				tokenAccountPage.verifyAvailableBalanceView();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawToken failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithBank(String strParams) {
+		testWithdrawToken(strParams, "bank");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithInstantPay(String strParams) {
+		testWithdrawToken(strParams, "Debit");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithInstantPayWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
+					.clickClose();
+
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().navigationComponent().clickBack();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("withdrawMethodHeading"));
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getPaymentItems("last4Digits");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getDailyLimit();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyCancelAndButton();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickCancel();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickWithdraw();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+					.verifyHeading(data.get("previewHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+					.getAmount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+					.swipeConfirm();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().enterYourPINComponent()
+					.navigationComponent().clickClose();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().navigationComponent().clickBack();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
+					.clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawTokenWithInstantPayWithNavigationOptions  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDInstantPayAddDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
+					.clickClose();
+
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.verifyAddInstantPayHeading(data.get("instantPayHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickOnDebitCard();
+			// new CustomerProfileTest().testAddDebitCard("Debit");
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWithdrawToUSDInstantPayAddDebitCard  failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithInvalidDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("withdrawMethodHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getPaymentItems("last4Digits");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getDailyLimit();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyExchangeRate();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+
+		}
+	}
+
 }
