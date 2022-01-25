@@ -459,4 +459,34 @@ public class TokenAccountTest {
 	public void testBuyTokenWithDebitCard(String strParams) {
 		testBuyToken(strParams, "debit");
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawnToUSDGiftCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.withdrawMenuComponent().clickGiftCard();
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyBrandHeading(data.get("poplurHeading"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().clickAmazon();
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().clickPurchase();
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyOrderPreviewHeading(data.get("orderPreview"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyAmazonHeading(data.get("amazonGift"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyRecipentEmail(data.get("recipentEmail"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().sideBar();
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().enterYourPINComponent().fillPin(data.get("code"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().verifyRecipentEmail(data.get("content"));
+			tokenAccountPage.withdrawMenuComponent().giftCardPage().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("  failed due to exception " + e);
+		}
+	}
 }

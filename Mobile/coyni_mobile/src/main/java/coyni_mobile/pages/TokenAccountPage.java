@@ -6,6 +6,7 @@ import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
+import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -123,5 +124,9 @@ public class TokenAccountPage extends MobileFunctions {
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
 
+	}
+
+	public WithdrawMenuComponent withdrawMenuComponent() {
+		return new WithdrawMenuComponent();
 	}
 }
