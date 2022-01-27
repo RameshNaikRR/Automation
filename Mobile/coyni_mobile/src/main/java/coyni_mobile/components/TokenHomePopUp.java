@@ -37,5 +37,8 @@ public class TokenHomePopUp extends MobileFunctions {
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}
+	public WithdrawMenuComponent withdrawMenuComponent() {
+		return new WithdrawMenuComponent();
+	}
 
 }
