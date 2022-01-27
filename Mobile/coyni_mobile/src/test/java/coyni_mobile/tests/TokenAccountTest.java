@@ -469,36 +469,92 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyGiftCardHeading(data.get("cardHeading"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyBrandHeading(data.get("poplurHeading"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyBrandHeading(data.get("poplurHeading"));
+			//tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyOrderPreviewHeading(data.get("orderPreview"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyAmazonHeading(data.get("amazonGift"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyRecipentEmail(data.get("recipentEmail"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().sideBar();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyHeading(data.get("orderPreview"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyAmazonHeading(data.get("amazonGift"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyRecipentEmail(data.get("recipentEmail"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().getProcessingFee();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().getTotal();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().slideToConfirm();
 			Thread.sleep(2000);
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().enterYourPINComponent()
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent()
 					.verifyHeading(data.get(data.get("pinHeading")));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().enterYourPINComponent()
-					.fillPin(data.get("pin"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
-					.verifyRecipentEmail(data.get("content"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickDone();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyReferenceID();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickLearnMore();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawnToUSDGiftCardInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyBrandHeading(data.get("poplurHeading"));
+			//tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			Thread.sleep(2000);
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
+			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawnToUSDGiftCardNavigationOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().navigationComponent().clickClose();
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().navigationComponent().clickClose();
+//			tokenAccountPage.btnHome();
+//			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().navigationComponent().clickBack();
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			Thread.sleep(2000);
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().slideToConfirm();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+			.enterYourPINComponent().clickForgotPin();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+			.enterYourPINComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}

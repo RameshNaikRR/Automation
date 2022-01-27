@@ -2,6 +2,7 @@ package coyni_mobile.popups;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -11,14 +12,22 @@ import io.appium.java_client.MobileBy;
 
 public class OrderPreviewPopup extends MobileFunctions {
 
-	private By lblOrderPreview = MobileBy.xpath("//*[@name='Order Preview']|//*[@text='Order Preview']");
-	private By lblAmount = MobileBy
-			.xpath("//*[@name='Order Preview']/following-sibling::*[1]|//*[contains(@resource-id,'tvGet')]");
+//	private By headingOrderPreview = MobileBy.xpath("//*[@text='Order Overview']");      //  
+
+	private By lblAmazon = MobileBy.xpath("//*[contains(@resource-id,'giftCardTypeTV')]"); //
+
+	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]"); ///
+	
+	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]"); //
+
+	private By lblOrderPreview = MobileBy.xpath("//*[@text='Order Overview']");
+	private By lblAmount = MobileBy.xpath(
+			"//*[contains(@resource-id,'giftCardAmountTV')]");
 	private By lblPaymentMethod = MobileBy
 			.xpath("(//*[@name='Payment Method']/following-sibling::XCUIElementTypeStaticText)[1]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[@name='Purchase Amount']/following-sibling::*[1]");
-	private By lblProcessingFee = MobileBy.xpath("//*[@name='Processing Fee']/following-sibling::*[1]");
-	private By lblTotal = MobileBy.xpath("//*[@name='Total']/following-sibling::*[1]");
+	private By lblProcessingFee = MobileBy.xpath("//*[contains(@resource-id,'feeTV')]");
+	private By lblTotal = MobileBy.xpath("//*[contains(@resource-id,'totalTV')]");
 	private By btnConfirm = MobileBy
 			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[contains(@resource-id,'slideToConfirm')]");
 
@@ -26,8 +35,16 @@ public class OrderPreviewPopup extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblOrderPreview, "Popup Heading", expHeading);
 	}
 
+	public void verifyAmazonHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblAmazon, "Amazon", expHeading);
+	}
+
 	public void getAmount() {
 		ExtentTestManager.setInfoMessageInReport("Amount: " + getText(lblAmount) + " CYN");
+	}
+
+	public void verifyRecipentEmail(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblReceipentEmail, "Email", expHeading);
 	}
 
 	public String verifySlideText() {
@@ -60,7 +77,12 @@ public class OrderPreviewPopup extends MobileFunctions {
 	public void swipeConfirm() {
 		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
 	}
-
+	public void slideToConfirm() {
+		swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
+	}
+	public EnterYourPINComponent enterYourPINComponent() {
+		return new EnterYourPINComponent();
+	}
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}

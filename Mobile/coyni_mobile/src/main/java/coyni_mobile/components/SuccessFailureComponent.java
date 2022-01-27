@@ -7,13 +7,16 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class SuccessFailureComponent extends MobileFunctions {
-	private By btnClickMore = MobileBy.xpath("");
+	private By btnClickMore = MobileBy.xpath("//*[contains(@resource-id,'learnMoreTV')]");//
 	private By lblSucessFailure = MobileBy.xpath("//*[contains(@text,'security')]/preceding-sibling::*[1]");
 	private By lblHeading = MobileBy.xpath("//*[contains(@name,'total amount')]/preceding-sibling::*[3]");
 	private By ImgSuccessFailure = MobileBy.xpath("");
 	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
-	private By btnDone = MobileBy.xpath("(//*[@name='Done'])[1]");
-	private By lblReferenceID = MobileBy.xpath("");
+	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
+	
+	
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]");//
+	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']");//
 
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblHeading));
@@ -21,6 +24,9 @@ public class SuccessFailureComponent extends MobileFunctions {
 
 	public void clickDone() {
 		click(btnDone, "Done");
+	}
+	public void verifyRecipentEmail(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblReceipentEmail, "Email", expHeading);
 	}
 
 	public void verifySuccessFailureHeading(String expHeading) {

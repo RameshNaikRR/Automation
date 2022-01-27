@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.EnterYourPINComponent;
+import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
@@ -125,6 +126,9 @@ public class GiftCardPage extends MobileFunctions {
 
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
+	}
+	public OrderPreviewPopup orderPreviewPopup() {
+		return new OrderPreviewPopup(); 
 	}
 
 }
