@@ -12,6 +12,7 @@ import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -22,6 +23,7 @@ public class TokenAccountTest {
 	FiltersComponent filtersComponent;
 	NotificationComponent notificationComponent;
 	CustomerProfilePage customerProfilePage;
+	CustomerProfileTest customerProfileTest;
 
 	@BeforeTest
 	public void init() {
@@ -31,6 +33,7 @@ public class TokenAccountTest {
 		filtersComponent = new FiltersComponent();
 		notificationComponent = new NotificationComponent();
 		customerProfilePage = new CustomerProfilePage();
+		customerProfileTest = new CustomerProfileTest();
 	}
 
 	@Test
@@ -469,31 +472,45 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyGiftCardHeading(data.get("cardHeading"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyBrandHeading(data.get("poplurHeading"));
-			//tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyBrandHeading(data.get("poplurHeading"));
+			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyHeading(data.get("orderPreview"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyAmazonHeading(data.get("amazonGift"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().verifyRecipentEmail(data.get("recipentEmail"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().getProcessingFee();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.verifyHeading(data.get("orderPreview"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.verifyAmazonHeading(data.get("amazonGift"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.verifyRecipentEmail(data.get("recipentEmail"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.getProcessingFee();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().getTotal();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().slideToConfirm();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.slideToConfirm();
 			Thread.sleep(2000);
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent()
-					.verifyHeading(data.get(data.get("pinHeading")));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyReferenceID();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickLearnMore();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().fillPin(data.get("pin"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().successFailureComponent().verifyReferenceID();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().successFailureComponent().clickLearnMore();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
@@ -507,14 +524,18 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyGiftCardHeading(data.get("cardHeading"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyBrandHeading(data.get("poplurHeading"));
-			//tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyBrandHeading(data.get("poplurHeading"));
+			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
 			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
@@ -526,6 +547,7 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawnToUSDGiftCardNavigationOption(String strParams) {
@@ -546,15 +568,17 @@ public class TokenAccountTest {
 //			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillFirstName(data.get("firstName"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().slideToConfirm();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-			.enterYourPINComponent().clickForgotPin();
+					.slideToConfirm();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-			.enterYourPINComponent().navigationComponent().clickClose();
+					.enterYourPINComponent().clickForgotPin();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+					.enterYourPINComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
@@ -567,12 +591,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			if (method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
-			} else if (method.equalsIgnoreCase("debit")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
 			}
-			// else {
-			// tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get(""));
-			// }
+
 			if (!method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -580,9 +600,11 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-						.withdrawToUSDInstantPayPopup().getPaymentItems("last4Digits");
+						.withdrawToUSDInstantPayPopup().getPaymentItems(data.get("last4Digits"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().getDailyLimit();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().getAvailabeBalance();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -591,6 +613,7 @@ public class TokenAccountTest {
 						.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().clickDone();
+				DriverFactory.getDriver().hideKeyboard();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().clickWithdraw();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
@@ -601,12 +624,14 @@ public class TokenAccountTest {
 						.verifySlideText();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.swipeConfirm();
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().enterYourPINComponent()
-						.fillPin(data.get("pin"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.enterYourPINComponent().fillPin(data.get("pin"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().getStatus();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().verifyReferenceID();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+						.successFailureComponent().copiedData(data.get("code"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().clickLearnMore();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
@@ -629,7 +654,7 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawTokenWithInstantPay(String strParams) {
-		testWithdrawToken(strParams, "Debit");
+		testWithdrawToken(strParams, "debit");
 	}
 
 	@Test
@@ -646,6 +671,10 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyVisaCards();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyMasterCards();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickDebitCard(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -667,12 +696,15 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().getDailyLimit();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
+
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().verifyCancelAndButton();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickCancel();
+			DriverFactory.getDriver().hideKeyboard();
+
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickWithdraw();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
@@ -682,8 +714,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.swipeConfirm();
 
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().enterYourPINComponent()
-					.navigationComponent().clickClose();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
+					.enterYourPINComponent().navigationComponent().clickClose();
 
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
@@ -703,24 +735,42 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDInstantPayAddDebitCard(String strParams) {
+	public void testWithdrawToUSDInstantPayAddDebitCardWithNoCards(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
-					.clickClose();
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
+//					.clickClose();
 
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyAddInstantPayHeading(data.get("instantPayHeading"));
+			customerProfileTest.testAddCard(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDInstantPayAddDebitCardWithNoCards  failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDInstantPayAddDebitCardWithCards(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-					.verifyAddInstantPayHeading(data.get("instantPayHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-					.withdrawToUSDInstantPayPopup().clickOnDebitCard();
-			// new CustomerProfileTest().testAddDebitCard("Debit");
+					.withdrawToUSDInstantPayPopup().clickOnAddNewPaymentMethod();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().verify();
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickOnDebitCard();
+			customerProfileTest.testAddDebitCard("debit");
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testWithdrawToUSDInstantPayAddDebitCard  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDInstantPayAddDebitCardWithCards  failed due to exception " + e);
 
 		}
 	}
@@ -745,8 +795,9 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().getDailyLimit();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-					.withdrawToUSDInstantPayPopup().verifyExchangeRate();
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+//					.withdrawToUSDInstantPayPopup().verifyExchangeRate();
+
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}

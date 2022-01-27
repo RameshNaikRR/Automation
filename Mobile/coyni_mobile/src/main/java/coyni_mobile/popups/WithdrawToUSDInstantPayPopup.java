@@ -12,19 +12,21 @@ import io.appium.java_client.MobileBy;
 public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	private By visaCard = MobileBy.xpath("//*[contains(@resource-id,'imgPayMethod')]");
-	private By masterCard =MobileBy.xpath("");
-	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'lyPayClick')]");
+	private By masterCard = MobileBy.xpath("//*[contains(@resource-id,'imgPayMethod')]");
+	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
+	private By optionaltxt = MobileBy.xpath("//*[contains(@resource-id,'etRemarks')]");
 	private By txtmsg = MobileBy.xpath("//*[contains(@resource-id,'addNoteET')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelBtn')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneBtn')]");
 	private By lnkConvert = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
 	private By lbldailyLimit = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvAvailableBal')]");
-	private By errMessageforInsufficientFunds = MobileBy.xpath("//*[contains(@resource-id,'tvError')]");
 	private By withdrawTokenHeading = MobileBy.xpath("//*[@text='Withdraw Token']");
 	private By withdraw = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
+	private By instantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'tvPayHead')]");
+	private By addNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
 
 	public void fillAmount(String Amount) {
 		new EnterYourPINComponent().fillPin(Amount);
@@ -32,8 +34,29 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	}
 
 	public void enterMessage(String Message) {
-		enterText(txtmsg, Message, "Message");
+		click(optionaltxt, "optional message");
+		enterText(txtmsg, Message, "message");
 
+	}
+
+	public void clickOnAddNewPaymentMethod() {
+		click(addNewPaymentMethod, "Add New Payment Method");
+	}
+
+	public void verifyAddInstantPayHeading(String expheading) {
+		new CommonFunctions().verifyLabelText(instantPayHeading, "Instant Pay Heading", expheading);
+	}
+
+	public String getAvailabeBalance() {
+		return getText(lblAvailableBalance);
+	}
+
+	public String verifyVisaCards() {
+		return getText(visaCard);
+	}
+
+	public String verifyMasterCards() {
+		return getText(masterCard);
 	}
 
 	public void verifyCancelAndButton() {
@@ -63,11 +86,7 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	}
 
 	public void verifyWithdrawTokenHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(debitCard, getCopiedData(), getCopiedData());
-	}
-
-	public void verifyErrorMessage() {
-		new CommonFunctions().elementView(errMessageforInsufficientFunds, "Error Message");
+		new CommonFunctions().verifyLabelText(withdrawTokenHeading, "Withdraw Token", expHeading);
 	}
 
 	public void txtMessage(String txt) {
@@ -78,9 +97,13 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		return By.xpath(String.format("//p[contains(text(),'%s')]", last4digits));
 	}
 
-	public void clickDebitCard(String last4Digits) {
-		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
-		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
+	public By getPaymentItems(String paymentMethod, String last4digits) {
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]/following-sibling::*[contains(@text,'%s')]",
+				paymentMethod, last4digits));
+	}
+
+	public void clickDebitCard(String last4digits) {
+		click(getPaymentItems("Debit", last4digits), "Debit");
 	}
 
 	public void clickOnDebitCard() {

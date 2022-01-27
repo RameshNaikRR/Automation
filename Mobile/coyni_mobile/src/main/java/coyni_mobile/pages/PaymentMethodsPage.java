@@ -14,6 +14,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'cvAddPayment')]");
+	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
+	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
+	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
@@ -30,6 +33,12 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public By getPaymentItems(String paymentMethod, String last4digits) {
 		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]/following-sibling::*[contains(@text,'%s')]",
 				paymentMethod, last4digits));
+	}
+
+	public void verify() {
+		new CommonFunctions().elementView(btnExternalBankAccount, "External Bank Account");
+		new CommonFunctions().elementView(btndebitCard, "Debit Card");
+		new CommonFunctions().elementView(btnCreditCard, "Credit Card");
 	}
 
 	public void clickCreditCard(String last4digits) {

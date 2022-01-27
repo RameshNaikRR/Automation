@@ -15,7 +15,8 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By txtAddressLine2 = MobileBy.xpath("//*[contains(@resource-id,'etAddress2')]");
 	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]");
 	private By drpDwnState = MobileBy.xpath("//*[contains(@resource-id,'etState')]");
-	private By txtZipCode = MobileBy.xpath("//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]");
+	private By txtZipCode = MobileBy
+			.xpath("//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]");
 	private By lblCountry = MobileBy.xpath("//*[contains(@resource-id,'etCountry')]");
 	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')]");
 	private By txtState = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
@@ -40,7 +41,7 @@ public class MailingAddressComponent extends MobileFunctions {
 		scrollDownToElement(txtAddressLine2, "Address Line2");
 		click(txtCity, "City");
 		enterText(txtCity, city, "City");
-		//new CommonFunctions().clickEnter();
+		// new CommonFunctions().clickEnter();
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
@@ -54,11 +55,11 @@ public class MailingAddressComponent extends MobileFunctions {
 		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
 		new CommonFunctions().clickEnter();
 		click(btnConfirmState, "Done");
-		
+
 	}
 
 	public void fillZipCode(String zipCode) {
-		scrollDownToElement(txtState, "State");
+		// scrollDownToElement(txtState, "State");
 		click(txtZipCode, "zip Code");
 		enterText(txtZipCode, zipCode, "Zip Code");
 		new CommonFunctions().clickEnter();

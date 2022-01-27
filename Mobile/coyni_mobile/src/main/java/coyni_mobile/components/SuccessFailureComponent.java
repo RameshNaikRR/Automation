@@ -1,6 +1,11 @@
 package coyni_mobile.components;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -13,10 +18,8 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By ImgSuccessFailure = MobileBy.xpath("");
 	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
-	
-	
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]");//
-	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']");//
+	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]");//
 
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblHeading));
@@ -25,6 +28,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
+
 	public void verifyRecipentEmail(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReceipentEmail, "Email", expHeading);
 	}
@@ -32,6 +36,13 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void verifySuccessFailureHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblSucessFailure, "heading", expHeading);
 
+	}
+
+	public void copiedData(String code) {
+		copyDataToClipboard(code);
+		click(lblReferenceID, "Paste");
+
+		Uninterruptibles.sleepUninterruptibly(10000, TimeUnit.MILLISECONDS);
 	}
 
 	public void clickLearnMore() {

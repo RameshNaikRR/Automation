@@ -63,7 +63,8 @@ public class CommonFunctions {
 
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
 		try {
-			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
+			By errorMsgs = MobileBy
+					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			// mobileFunctions.
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
@@ -202,7 +203,7 @@ public class CommonFunctions {
 	}
 
 	public void clickEnter() {
-		 ((AndroidDriver)DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
-		 System.out.println("clicked on enter");
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
+		System.out.println("clicked on enter");
 	}
 }
