@@ -809,4 +809,77 @@ public class TokenAccountTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaExternalBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.getPaymentItems(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.fillMSG(data.get("msg"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().verifyOrderHeading(data.get("orderPreviw"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getPaymentItems(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getBankProcessingFee();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getBankTotal();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().slideToConfirm();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("code"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().successFailureComponent()
+					.verifySuccessFailureHeading(data.get("successHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyReferenceID();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaExternalBankWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.fillAmount(data.get("amount"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+
+		}
+	}
 }

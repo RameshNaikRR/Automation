@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.pages.GiftCardPage;
 import coyni_mobile.popups.OrderPreviewPopup;
+import coyni_mobile.popups.WithdrawToUSDBankAccountPopup;
 import coyni_mobile.popups.WithdrawToUSDInstantPayPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -47,5 +48,8 @@ public class WithdrawMenuComponent extends MobileFunctions {
 
 	public GiftCardPage giftCardPage() {
 		return new GiftCardPage();
+	}
+	public WithdrawToUSDBankAccountPopup withdrawToUSDBankAccountPopup() {
+		return new WithdrawToUSDBankAccountPopup();
 	}
 }

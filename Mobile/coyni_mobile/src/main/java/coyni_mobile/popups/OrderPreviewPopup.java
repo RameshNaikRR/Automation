@@ -17,12 +17,12 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblAmazon = MobileBy.xpath("//*[contains(@resource-id,'giftCardTypeTV')]"); //
 
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]"); ///
-	
+
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]"); //
 
 	private By lblOrderPreview = MobileBy.xpath("//*[@text='Order Overview']");
-	private By lblAmount = MobileBy.xpath(
-			"//*[contains(@resource-id,'giftCardAmountTV')]");
+
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'giftCardAmountTV')]");
 	private By lblPaymentMethod = MobileBy
 			.xpath("(//*[@name='Payment Method']/following-sibling::XCUIElementTypeStaticText)[1]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[@name='Purchase Amount']/following-sibling::*[1]");
@@ -77,13 +77,36 @@ public class OrderPreviewPopup extends MobileFunctions {
 	public void swipeConfirm() {
 		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
 	}
+
 	public void slideToConfirm() {
 		swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
 	}
+
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
+
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
+	}
+
+	private By lblHeadingOrderPre = MobileBy.xpath("//*[@text='Order Preview']");// tvTotal
+	private By lblProcessingF = MobileBy.xpath("//*[contains(@resource-id,'tvProcessingFee')]");
+	private By lblTotalAmount = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]");
+
+	public void verifyOrderHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeadingOrderPre, "Order Preview", expHeading);
+	}
+
+	public void getBankProcessingFee() {
+		ExtentTestManager.setInfoMessageInReport("Processing Fee: " + getText(lblProcessingF) + "CYN");
+	}
+
+	public void getBankTotal() {
+		ExtentTestManager.setInfoMessageInReport("Total: " + getText(lblTotalAmount) + "CYN");
+	}
+
+	public By getPaymentItems(String last4digits) {
+		return By.xpath(String.format("//*[contains(@text,'%s')]", last4digits));
 	}
 }

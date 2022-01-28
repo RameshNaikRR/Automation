@@ -13,12 +13,12 @@ import io.appium.java_client.MobileBy;
 
 public class SuccessFailureComponent extends MobileFunctions {
 	private By btnClickMore = MobileBy.xpath("//*[contains(@resource-id,'learnMoreTV')]");//
-	private By lblSucessFailure = MobileBy.xpath("//*[contains(@text,'security')]/preceding-sibling::*[1]");
+	private By lblSucessFailure = MobileBy.xpath("//*[contains(@resource-id,'tvHeading')]");
 	private By lblHeading = MobileBy.xpath("//*[contains(@name,'total amount')]/preceding-sibling::*[3]");
 	private By ImgSuccessFailure = MobileBy.xpath("");
 	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]");//
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvDone')]");//
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]");//
 
 	public void getStatus() {
