@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.customer.components.TokenAccountActivityComponent;
+import coyni.customer.pages.ExportfilesPage;
 import coyni.customer.pages.GetHelpPage;
 import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.TokenAccountPage;
@@ -18,6 +19,7 @@ public class TokenAccountTest {
 	TokenAccountPage tokenAccountPage;
 	LoginPage loginPage;
 	GetHelpPage getHelpPage;
+	ExportfilesPage exportfilesPage;
 	TokenAccountActivityComponent tokenAccountActivityComponent;
 
 	@BeforeTest
@@ -25,6 +27,7 @@ public class TokenAccountTest {
 		tokenAccountPage = new TokenAccountPage();
 		loginPage = new LoginPage();
 		getHelpPage = new GetHelpPage();
+		exportfilesPage = new ExportfilesPage();
 		tokenAccountActivityComponent = new TokenAccountActivityComponent();
 	}
 
@@ -1776,6 +1779,21 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
+		}
+	}
+	@Test
+	public void testExportFiles()  {
+		try {
+			exportfilesPage.clickExportfiles();
+			Thread.sleep(1000);
+			exportfilesPage.ExportIdView();
+			exportfilesPage.ExportDateView();
+			exportfilesPage.DateRangeView();
+			exportfilesPage.ReportNameView();
+			exportfilesPage.StatusView();
+			exportfilesPage.verifyIdFormat();
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
 		}
 	}
 
