@@ -585,6 +585,21 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Verify DashBoard Failed due to exception " + e);
 		}
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testPreferences(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.verifyPreferencesView();
+			customerProfilePage.clickPreferences();
+			customerProfilePage.preferencesComponent().verifyPreferencesHeading(data.get("heading"));
+			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })

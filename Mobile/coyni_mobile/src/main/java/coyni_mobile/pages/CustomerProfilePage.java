@@ -6,6 +6,7 @@ import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.components.PreferencesComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -15,7 +16,6 @@ import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
 
-	
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'cpAccountIDTV')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'tvACStatus')]");
@@ -25,18 +25,15 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'cpUserDetailsLL')]");
 	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'cpPaymentMethodsLL')]");
 	private By lnkPreferences = MobileBy.xpath("//*[contains(@resource-id,'pPreferencesLL')]");
-	private By lblAccount =MobileBy.xpath("//*[contains(@resource-id,'accountTV')]");
+	private By lblAccount = MobileBy.xpath("//*[contains(@resource-id,'accountTV')]");
 	private By lnkAccountLimits = MobileBy.xpath("//*[contains(@resource-id,'pAccountLimitsLL')]");
 	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
-	private By lblSecurity =MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
+	private By lblSecurity = MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
-	
-	
-	
-	
+
 	private By lblMyQRCodeHeading = MobileBy.xpath("");
 	private By btnShare = MobileBy.xpath("");
 	private By popup = MobileBy.xpath("");
@@ -179,9 +176,14 @@ public class CustomerProfilePage extends MobileFunctions {
 		click(lnkPreferences, "Preferences");
 	}
 
+	public void verifyPreferencesView() {
+		new CommonFunctions().elementView(lnkPreferences, "Preferences");
+	}
+
 	public void clickAccountLimits() {
 		click(lnkAccountLimits, "Account Limits");
 	}
+
 	public void verifyAccountLimitsView() {
 		new CommonFunctions().elementView(lnkAccountLimits, "Account Limits");
 	}
@@ -189,6 +191,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	public void clickAgreements() {
 		click(lnkAgreements, "Agreements");
 	}
+
 	public void verifyAgreementsView() {
 		new CommonFunctions().elementView(lnkAgreements, "Agreements");
 	}
@@ -219,6 +222,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	public void clickQRImage() {
 		click(imgQRCode, "Click QR Code ");
 	}
+
 	public void verifyQRImageView() {
 		new CommonFunctions().elementView(imgQRCode, "QR Code");
 	}
@@ -293,9 +297,14 @@ public class CustomerProfilePage extends MobileFunctions {
 		return new AccountLimitsComponent();
 	}
 
+	public PreferencesComponent preferencesComponent() {
+		return new PreferencesComponent();
+	}
+
 	public AgreementComponent agreementComponent() {
 		return new AgreementComponent();
 	}
+
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}
