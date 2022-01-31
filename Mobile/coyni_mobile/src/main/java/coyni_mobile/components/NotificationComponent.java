@@ -4,24 +4,27 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class NotificationComponent extends MobileFunctions {
 
-	private By btnNotifications = MobileBy.xpath(" ");
-	private By btnRequest = MobileBy.xpath(" ");
-	private By btnCancel = MobileBy.xpath(" ");
-	private By btnRemainder = MobileBy.xpath(" ");
-	private By btnDeny = MobileBy.xpath(" ");
-	private By btnPay = MobileBy.xpath(" ");
+	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsTV')]");
+	private By btnRequest = MobileBy.xpath("//*[contains(@resource-id,'requestsTV')]");
+	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelLL')]");
+	private By btnReminder = MobileBy.xpath("//*[contains(@resource-id,'remindLL')]");
+	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'denyLL')]");
+	private By btnPay = MobileBy.xpath("//*[contains(@resource-id,'payLL')]");
 	private By btnBack = MobileBy.xpath(" ");
 	private By countNotification = MobileBy.xpath(" ");
-
-	private By viewDot = MobileBy.xpath(" ");
-	private By btnDelete = MobileBy.xpath(" ");
-
-	private By verifyDenyHeading = MobileBy.xpath(" ");
+	private By viewDot = MobileBy.xpath("//*[contains(@resource-id,'readStatusCV')]");
+	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'subject')]");
+	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
+	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+	private By lblRead = MobileBy.xpath("//*[contains(@resource-id,'readStatusTV')]");
 
 	public void clickNotifications() {
 		click(btnNotifications, "Notification");
@@ -29,6 +32,14 @@ public class NotificationComponent extends MobileFunctions {
 
 	public void clickRequest() {
 		click(btnRequest, "Request");
+	}
+
+	public void clickRead() {
+		click(lblRead, "Read");
+	}
+
+	public void verifyRead() {
+		new CommonFunctions().elementView(lblRead, "Read ");
 	}
 
 	public void countNotifications() {
@@ -67,8 +78,24 @@ public class NotificationComponent extends MobileFunctions {
 		}
 	}
 
-	public void verifyDenyHeading(String heading) {
-		new CommonFunctions().verifyLabelText(verifyDenyHeading, "Deny Heading", heading);
+	public void verifyDenyMessage(String heading) {
+		new CommonFunctions().verifyLabelText(denyMessage, "Deny Message", heading);
+	}
+
+	public void verifyReminderMessage(String heading) {
+		new CommonFunctions().verifyLabelText(reminderMessage, "Reminder Message", heading);
+	}
+
+	public void verifyCancelMessage(String heading) {
+		new CommonFunctions().verifyLabelText(cancelMessage, "Cancel Message", heading);
+	}
+
+	public void swipeNotificationRight() {
+		swipeOnElement(notificationSwipe, "Swipe Notification", SwipeDirection.LEFT);
+	}
+
+	public void swipeNotificationLeft() {
+		swipeOnElement(notificationSwipe, "Swipe", SwipeDirection.RIGHT);
 	}
 
 	public NavigationComponent navigationComponent() {
@@ -76,24 +103,32 @@ public class NotificationComponent extends MobileFunctions {
 	}
 
 	// Added
-	public void clickPay(String senderName) {
+	public void clickPay() {
 		if (getElement(btnPay, "Click Pay").isDisplayed()) {
-			click(By.xpath(String.format(" ", senderName)), "Pay  button");
+			click(btnPay, "Pay");
+			// String senderName
+			// (By.xpath(String.format("btnPay", senderName)), "Pay button");
 		} else {
-			System.out.println();
+			System.out.println("Pay button is in disable mode");
 		}
 	}
 
-	public void clickDeny(String senderName) {
-		click(By.xpath(String.format(" ", senderName)), "Deny button");
+	public void clickDeny() {
+		click(btnDeny, "Deny");
+
 	}
 
-	public void clickRemainder(String senderName) {
-		click(By.xpath(String.format(" ", senderName)), "Remainder  button");
+	public void clickRemainder() {
+		click(btnReminder, "Reminder");
+
 	}
 
-	public void clickCancel(String senderName) {
-		click(By.xpath(String.format(" ", senderName)), "Cancel  button");
+	public void clickCancel() {
+		click(btnCancel, "Cancel");
+
 	}
 
+	public PayRequestConfirmPopup payRequestConfirmPopup() {
+		return new PayRequestConfirmPopup();
+	}
 }

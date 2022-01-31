@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 import coyni_mobile.components.FiltersComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.pages.CustomerProfilePage;
+import coyni_mobile.pages.HomePage;
+import coyni_mobile.pages.LandingPage;
+import coyni_mobile.pages.LoginPage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.TransactionPage;
 import coyni_mobile.utilities.CommonFunctions;
@@ -19,10 +22,13 @@ import ilabs.mobile.reporting.ExtentTestManager;
 public class TokenAccountTest {
 
 	TokenAccountPage tokenAccountPage;
+	HomePage homePage;
 	TransactionPage transactionPage;
 	FiltersComponent filtersComponent;
 	NotificationComponent notificationComponent;
+	LoginPage loginPage;
 	CustomerProfilePage customerProfilePage;
+	LandingPage landingPage;
 	CustomerProfileTest customerProfileTest;
 
 	@BeforeTest
@@ -34,30 +40,61 @@ public class TokenAccountTest {
 		notificationComponent = new NotificationComponent();
 		customerProfilePage = new CustomerProfilePage();
 		customerProfileTest = new CustomerProfileTest();
+		homePage = new HomePage();
+		loginPage = new LoginPage();
+		landingPage = new LandingPage();
 	}
 
 	@Test
-	@Parameters({ "strParams" })
-	public void testNotification(String strParams) {
+	// @Parameters({ "strParams" })
+	// String strParams
+	public void testNotifications() {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().viewNotification();
-			// tokenAccountPage.notificationComponent().clickNotifications();
-			tokenAccountPage.notificationComponent().readDot(); // Dot message //read and delete
-			tokenAccountPage.notificationComponent().viewPay();
+			tokenAccountPage.notificationComponent().clickNotifications();
+			tokenAccountPage.notificationComponent().viewDots();// Dot message
+			// tokenAccountPage.notificationComponent().readDot(); // Dot message //read and
+			// delete
+			// tokenAccountPage.notificationComponent().viewPay();
 			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().viewRequest();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().readDot(); // dot Read
+			// tokenAccountPage.notificationComponent().readDot(); // dot Read
 			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().clickNotifications();
+			tokenAccountPage.notificationComponent().swipeNotificationLeft();
+			tokenAccountPage.notificationComponent().verifyRead();
+			tokenAccountPage.notificationComponent().clickRead();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Notification faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testNotifications faield due to exception " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginwithNewAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(data.get("email1"));
+			loginPage.fillPassword(data.get("password1"));
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().fillPin(data.get("pin1"));
+			Thread.sleep(2000);
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -67,10 +104,20 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().viewPay();
-			tokenAccountPage.notificationComponent().clickPay(data.get("senderName"));
+			tokenAccountPage.notificationComponent().clickPay();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent().clickForgotPin();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent().navigationComponent()
+					.clickClose();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.fillPin(data.get("pin"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Notification pay faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testNotificationPay faield due to exception " + e);
 		}
 	}
 
@@ -80,27 +127,28 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().viewDeny();
-			tokenAccountPage.notificationComponent().clickDeny(data.get("senderName"));
-			tokenAccountPage.notificationComponent().verifyDenyHeading(data.get("denyHeading"));
+			// tokenAccountPage.notificationComponent().viewDeny();
+			tokenAccountPage.notificationComponent().clickDeny();
+			tokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Notification Deny faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testNotificationDeny faield due to exception " + e);
 		}
 
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testRequestRemainder(String strParams) {
+	public void testRequestReminder(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickRemainder(data.get("senderName"));
+			tokenAccountPage.notificationComponent().clickRemainder();
+			tokenAccountPage.notificationComponent().verifyReminderMessage(data.get("reminderMessage"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Request Remainder  faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRequestReminder faield due to exception " + e);
 		}
 
 	}
@@ -112,10 +160,11 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickCancel(data.get("senderName"));
+			tokenAccountPage.notificationComponent().clickCancel();
+			tokenAccountPage.notificationComponent().verifyCancelMessage(data.get("cancelMessage"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Request cancel  faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRequestCancel faield due to exception " + e);
 		}
 
 	}
@@ -127,9 +176,20 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickPay(data.get("senderName"));
+			tokenAccountPage.notificationComponent().clickPay();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent().clickForgotPin();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent().navigationComponent()
+					.clickClose();
+			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Request Pay  faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRequestPay faield due to exception " + e);
 		}
 
 	}
@@ -141,13 +201,27 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().clickRequest();
-			tokenAccountPage.notificationComponent().clickDeny(data.get("senderName"));
+			tokenAccountPage.notificationComponent().viewPay();
+			tokenAccountPage.notificationComponent().viewDeny();
+			tokenAccountPage.notificationComponent().clickDeny();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Request Deny  faield due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRequestDeny faield due to exception " + e);
 		}
 
 	}
 
+	@Test
+	public void testNotificationsDelete() {
+		try {
+			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().swipeNotificationRight();
+			tokenAccountPage.notificationComponent().clickDelete();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
+		}
+
+	}
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testBuyTokenBank(String strParams) {
@@ -330,9 +404,9 @@ public class TokenAccountTest {
 					.verifyName(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
+			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.payRequestOptionalPopup().fillMessage(data.get("message"));
+					.payRequestOptionalPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.payRequestOptionalPopup().clickDone();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
@@ -363,9 +437,9 @@ public class TokenAccountTest {
 					.verifyName(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
-			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
+			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.payRequestOptionalPopup().fillMessage(data.get("message"));
+					.payRequestOptionalPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.payRequestOptionalPopup().clickDone();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickRequest();
@@ -857,6 +931,7 @@ public class TokenAccountTest {
 
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDViaExternalBankWithInvalidAmount(String strParams) {

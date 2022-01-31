@@ -17,7 +17,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By lblUserName = MobileBy.xpath(
 			"//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
-	private By iconNotifications = MobileBy.xpath("//*[@name='notifications_nobadge']");
+	private By iconNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsLL')]");//*[@name='notifications_nobadge']
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnScan = MobileBy.xpath(" ");
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");

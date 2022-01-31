@@ -2,23 +2,50 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import io.appium.java_client.MobileBy;
 
 public class PayRequestConfirmPopup extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("");
+	private By heading = MobileBy.xpath("//*[contains(@resource-id, 'tvHeading')]");
 	private By lnkCopy = MobileBy.xpath(" ");
-	private By btnConfirm = MobileBy.xpath("//*[@name='Slide to confirm']/../..");
-	private By lblAvailableBalance = MobileBy.xpath(" ");
-	private By btnDone = MobileBy.xpath(" ");
+	private By amount = MobileBy.xpath("//*[contains(@resource-id, 'amountTV')]");
+	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']");
+	private By lblAvailabelBalance = MobileBy.xpath("//*[contains(@resource-id, 'balanceTV')]");
+	private By message = MobileBy.xpath("//*[contains(@resource-id, 'myUserIDTV')]");
+	private By btnConfirm = MobileBy.xpath("//*[contains(@resource-id, 'slideToConfirm')]");// *[@name='Slide to
+																							// confirm']/../..
+	private By lock = MobileBy.xpath("//*[contains(@resource-id, 'im_lock')]");
+	// private By lblAvailableBalance = MobileBy.xpath(" ");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id, 'doneCV')]");
 
 	public void verifyHeading() {
-		
+
 	}
+
+	public void verifyLockSwipe() {
+		new CommonFunctions().elementView(lock, "Lock ");
+	}
+
 	public void clickCopy() {
 		click(lnkCopy, "Copy");
+	}
+
+	public void verifyAmount() {
+		new CommonFunctions().elementView(amount, "Amount");
+	}
+
+	public String verifySlideText() {
+		return getText(btnConfirm);
+
+	}
+
+	public void verifyPreview() {
+		new CommonFunctions().elementView(lblRecipientAddress, "Recipient Address");
+		new CommonFunctions().elementView(lblAvailabelBalance, "Availabel Balance");
+		new CommonFunctions().elementView(message, "Message");
 	}
 
 	public void swipeConfirm() {
@@ -32,9 +59,15 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
+
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
+
+	public ForgotPinComponent forgotPinComponent() {
+		return new ForgotPinComponent();
+	}
+
 	public SecurePayPopup securePayPopup() {
 		return new SecurePayPopup();
 	}
