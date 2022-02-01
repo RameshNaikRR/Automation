@@ -3,6 +3,7 @@ package coyni_mobile.popups;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.EnterYourPINComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -108,5 +109,9 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	public By getPaymentItems(String last4digits) {
 		return By.xpath(String.format("//*[contains(@text,'%s')]", last4digits));
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

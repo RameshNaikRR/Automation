@@ -910,6 +910,7 @@ public class TokenAccountTest {
 					.getPaymentItems(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.fillMSG(data.get("msg"));
+			DriverFactory.getDriver().hideKeyboard();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().verifyOrderHeading(data.get("orderPreviw"));
@@ -924,7 +925,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("code"));
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().successFailureComponent()
 					.verifySuccessFailureHeading(data.get("successHeading"));
@@ -933,8 +934,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSDVia External Bank  failed due to exception " + e);
 
 		}
 	}
@@ -959,8 +960,124 @@ public class TokenAccountTest {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaExternalBankWithChangePaymentMethod(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickArrow();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.verifyPaymentHeading(data.get("paymentMethod"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits1"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaAddExternalBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickAddPaymentMethod();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().addExternalBank();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaAddExternalBankNavigationOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().navigationComponent().clickClose();
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.navigationComponent().clickBack();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().verifyOrderHeading(data.get("orderPreviw"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getPaymentItems(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getBankProcessingFee();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().getBankTotal();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().slideToConfirm();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaAddExternalBankWithResetPin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.clickOnBank(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().slideToConfirm();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().clickForgotPin();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().clickNext();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+					.fillInputBoxes(data.get("code"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+			.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+			.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
 
 		}
 	}

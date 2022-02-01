@@ -41,5 +41,9 @@ public class TokenHomePopUp extends MobileFunctions {
 	public WithdrawMenuComponent withdrawMenuComponent() {
 		return new WithdrawMenuComponent();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 
 }

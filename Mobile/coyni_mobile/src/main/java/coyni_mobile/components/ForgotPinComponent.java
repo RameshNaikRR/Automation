@@ -47,6 +47,12 @@ public class ForgotPinComponent extends MobileFunctions {
 		click(btnNext, "Next");
 	}
 
+	private By btnForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
+
+	public void clickForgotPin() {
+		click(btnForgotPin, "Forgot Pin");
+	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

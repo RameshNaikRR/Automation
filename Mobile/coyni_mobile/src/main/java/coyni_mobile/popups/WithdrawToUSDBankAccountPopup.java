@@ -2,6 +2,7 @@ package coyni_mobile.popups;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -19,9 +20,26 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneBtn')]");
 	private By btnWithdraw = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'ImageView')]");
+	private By btnArrow = MobileBy.xpath("//*[contains(@resource-id,'imgArrow')]");
+	private By lblPaymentHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By btnExternalbank = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
+	private By btnAddPayment = MobileBy.xpath("//*[contains(@resource-id,'lyAddPay')]");
 
 	public void fillAmount(String amount) {
 		enterText(txtAmount, amount, "Amount");
+	}
+
+	public void verifyPaymentHeading(String expheading) {
+		new CommonFunctions().verifyLabelText(lblPaymentHeading, "Payment Method", expheading);
+
+	}
+
+	public void clickAddPaymentMethod() {
+		click(btnAddPayment, "Add Payment Method");
+	}
+
+	public void clickArrow() {
+		click(btnArrow, "Click Arrow");
 	}
 
 	public void clickToggle() {
@@ -52,6 +70,14 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 
 	}
 
+	public void addExternalBank() {
+		if (getElement(btnExternalbank, "External Bank").isEnabled()) {
+			click(btnExternalbank, "External Bank");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(" Exrenal Bank limit exceeded");
+		}
+	}
+
 	public void verifyWithdrawTokenHeading(String expheading) {
 		new CommonFunctions().verifyLabelText(lblWirhdrawToken, "Withdraw Method", expheading);
 
@@ -68,6 +94,10 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }
