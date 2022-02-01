@@ -16,10 +16,9 @@ public class NotificationComponent extends MobileFunctions {
 	private By btnReminder = MobileBy.xpath("//*[contains(@resource-id,'remindLL')]");
 	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'denyLL')]");
 	private By btnPay = MobileBy.xpath("//*[contains(@resource-id,'payLL')]");
-	private By btnBack = MobileBy.xpath(" ");
-	private By countNotification = MobileBy.xpath(" ");
-	private By viewDot = MobileBy.xpath("//*[contains(@resource-id,'readStatusCV')]");
-	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'subject')]");
+	private By countNotification = MobileBy.xpath("//*[contains(@resource-id,'countCV')]");
+	private By viewDot = MobileBy.xpath("(//*[contains(@resource-id,'readStatusCV')])[3]");
+	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'notificationItemLL')]");
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
 	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
@@ -28,6 +27,7 @@ public class NotificationComponent extends MobileFunctions {
 
 	public void clickNotifications() {
 		click(btnNotifications, "Notification");
+
 	}
 
 	public void clickRequest() {
@@ -59,7 +59,9 @@ public class NotificationComponent extends MobileFunctions {
 	}
 
 	public void viewDots() {
+		scrollDownToElement(viewDot, "view Dot");
 		new CommonFunctions().elementView(viewDot, "View Dot");
+
 	}
 
 	public void clickDelete() {
@@ -91,11 +93,15 @@ public class NotificationComponent extends MobileFunctions {
 	}
 
 	public void swipeNotificationRight() {
-		swipeOnElement(notificationSwipe, "Swipe Notification", SwipeDirection.LEFT);
+		if (verifyElementDisplayed(viewDot, "Dot")) {
+			swipeOnElement(notificationSwipe, "Swiped Deleted Notification", SwipeDirection.LEFT);
+		}
 	}
 
 	public void swipeNotificationLeft() {
-		swipeOnElement(notificationSwipe, "Swipe", SwipeDirection.RIGHT);
+		if (verifyElementDisplayed(viewDot, "Dot")) {
+			swipeOnElement(notificationSwipe, "Swiped Read Notification", SwipeDirection.RIGHT);
+		}
 	}
 
 	public NavigationComponent navigationComponent() {
