@@ -16,11 +16,11 @@ import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
 
-	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'cpAccountIDTV')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'tvACStatus')]");
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
-	private By imgUser = MobileBy.xpath("");
+	private By imgUser = MobileBy.xpath("//*[contains(@resource-id,'tvUserInfo')]");// tvUserInfo
 	private By lblSettings = MobileBy.xpath("//*[contains(@text,'Settings')]");
 	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'cpUserDetailsLL')]");
 	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'cpPaymentMethodsLL')]");
@@ -38,24 +38,34 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnShare = MobileBy.xpath("");
 	private By popup = MobileBy.xpath("");
 	private By lblCopyMessage = MobileBy.xpath("");
-	private By lblAvaliableBalance = MobileBy.xpath("");
-	private By viewPayRequestButton = MobileBy.xpath("");
-	private By lblRecentTransaction = MobileBy.xpath("");
-	private By lblFirstAndLastName = MobileBy.xpath("");
-	private By lblContact = MobileBy.xpath("");
+	private By lblAvaliableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvBalance')]");// tvBalance
+	private By viewPayRequestButton = MobileBy.xpath("//*[contains(@resource-id,'cvPayRequest')]");// cvPayRequest
+	private By lblRecentTransaction = MobileBy.xpath("//*[contains(@text,'Recent Transactions')]");// Recent
+																									// Transactions
+	private By lblFirstAndLastName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
+	private By lblContact = MobileBy.xpath("//*[contains(@text,'Recent Contacts')]");// Recent Contacts
 
 	private By viewDashboard = MobileBy.xpath("");
-	private By viewCrypto = MobileBy.xpath("");
-	private By viewIssueCard = MobileBy.xpath("");
-	private By viewProfile = MobileBy.xpath("");
-	private By viewTokenMenu = MobileBy.xpath("");
-	private By lblCryptoAssets = MobileBy.xpath("");
+	private By viewCrypto = MobileBy.xpath("//*[contains(@resource-id,'layoutCrypto')]");// layoutCrypto
+	private By viewIssueCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCard')]");// layoutCard
+	private By viewProfile = MobileBy.xpath("//*[contains(@resource-id,'layoutProfile')]");// layoutProfile
+	private By viewTokenMenu = MobileBy.xpath("//*[contains(@resource-id,'layoutMainMenu')]");// layoutMainMenu
+	private By lblCryptoAssets = MobileBy.xpath("//*[contains(@text,'Crypto Assets Coming Soon…')]");// Crypto Assets
+																										// Coming Soon…
+																										// text
 
 	private By btnScan = MobileBy.xpath("");
-	private By btnPayRequest = MobileBy.xpath("");
-	private By btnBuyToken = MobileBy.xpath("");
-	private By btnWithdrawToUSD = MobileBy.xpath("");
+	private By btnPayRequest = MobileBy.xpath("//*[contains(@text,'Pay/Request')]");// Pay/Request
+	private By btnBuyToken = MobileBy.xpath("//*[contains(@text,'Buy Tokens')]");// Buy Tokens
+	private By btnWithdrawToUSD = MobileBy.xpath("//*[contains(@text,'Withdraw to USD')]");// Withdraw to USD
 	private By popUp = MobileBy.xpath("");
+//View More
+
+	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
+
+	public void clickViewMore() {
+		scrollDownToElement(btnViewMore, "View More");
+	}
 
 	public void viewScan() {
 		new CommonFunctions().elementView(btnScan, "View Scan");
