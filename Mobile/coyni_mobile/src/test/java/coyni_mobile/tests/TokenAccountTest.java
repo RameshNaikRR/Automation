@@ -551,8 +551,6 @@ public class TokenAccountTest {
 	public void testBuyToken(String strParams, String method) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.btnHome();
-			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
 			if (method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
 			} else if (method.equalsIgnoreCase("credit")) {
@@ -589,19 +587,25 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithBank(String strParams) {
-		testBuyToken(strParams, "bank");
+		tokenAccountPage.btnHome();
+		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+        testBuyToken(strParams, "bank");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithCreditCard(String strParams) {
-		testBuyToken(strParams, "credit");
+		tokenAccountPage.btnHome();
+		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+        testBuyToken(strParams, "credit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithDebitCard(String strParams) {
-		testBuyToken(strParams, "debit");
+		tokenAccountPage.btnHome();
+		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+        testBuyToken(strParams, "debit");
 	}
 
 	@Test

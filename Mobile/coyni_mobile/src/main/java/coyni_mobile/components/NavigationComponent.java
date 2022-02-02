@@ -11,8 +11,7 @@ public class NavigationComponent extends MobileFunctions {
 	private By btnBack = MobileBy.xpath(
 			"//*[contains(@resource-id,'Back') or contains(@resource-id,'otpValidationCloseIV') or contains(@resource-id,'Close')]");
 	private By btnClose = MobileBy.xpath(
-			"(//*[contains(@resource-id,'Close')][1]|//*[contains(@resource-id,'Close')][2]|//*[contains(@resource-id,'Close')])[3]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
-
+			"//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'Back')]");
 	public void clickBack() {
 
 		if (!new CommonFunctions().isPlatformiOS()) {

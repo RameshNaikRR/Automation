@@ -11,15 +11,15 @@ import io.appium.java_client.MobileBy;
 
 public class MailingAddressComponent extends MobileFunctions {
 
-	private By txtAddressLine1 = MobileBy.xpath("//*[contains(@resource-id,'etAddress1')]");
-	private By txtAddressLine2 = MobileBy.xpath("//*[contains(@resource-id,'etAddress2')]");
-	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]");
-	private By drpDwnState = MobileBy.xpath("//*[contains(@resource-id,'etState')]");
+	private By txtAddressLine1 = MobileBy.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]");
+	private By txtAddressLine2 = MobileBy.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]");
+	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]");
+	private By drpDwnState = MobileBy.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
 	private By txtZipCode = MobileBy
-			.xpath("//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]");
-	private By lblCountry = MobileBy.xpath("//*[contains(@resource-id,'etCountry')]");
+			.xpath("//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
+	private By lblCountry = MobileBy.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
 	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')]");
-	private By txtState = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
+	private By txtState = MobileBy.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvSave')]");
 	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");

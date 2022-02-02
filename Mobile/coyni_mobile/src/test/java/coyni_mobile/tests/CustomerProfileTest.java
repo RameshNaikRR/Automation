@@ -1006,5 +1006,26 @@ public class CustomerProfileTest {
 	public void testAddDebitCardWithInvalidData(String strParams) {
 		testAddCardWithInvalidData(strParams, "debit");
 	}
-
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().clickExternalBankAccount();
+			customerProfilePage.paymentMethodsPage().verifyHeadingAddExternalBankAccount();
+			customerProfilePage.paymentMethodsPage().clickNext();
+			Thread.sleep(5000);
+			customerProfilePage.paymentMethodsPage().verifyHeadingAddAccount();
+			customerProfilePage.paymentMethodsPage().enterBankName(data.get("expBankName"));
+			customerProfilePage.paymentMethodsPage().selectBank();
+			customerProfilePage.paymentMethodsPage().fillUserName(data.get("expUserName"));
+			customerProfilePage.paymentMethodsPage().fillPassword(data.get("expPassword"));
+			
+			
+	 } catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("testAddBank failed due to this Exception" + e);
+	}
+}
 }

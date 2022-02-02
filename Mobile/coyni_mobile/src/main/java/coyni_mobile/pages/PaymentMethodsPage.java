@@ -17,11 +17,38 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
+	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
+	private By headingAddExternalBankAccount = MobileBy.xpath("//*[contains(@text,'Add External Bank Account')]");
+    private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");   
+	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
+	private By selectBank = MobileBy.xpath("//*[contains(@resource-id,'20349')]");
+	private By HeadingBankName = MobileBy.xpath("//*[contains(@resource-id,'selectedBankName')]");
+	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
+	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 		}
+	}
+	
+	public void clickExternalBankAccount() {
+		click(bankAccountBtn,"Click External Bank Account");
+	}
+	public void clickNext() {
+		click(btnNext,"Click Next");
+	}
+	public void verifyHeadingAddExternalBankAccount() {
+		new CommonFunctions().elementView(headingAddExternalBankAccount,"Add External Bank Account Heading is");
+		}
+	
+	public void verifyHeadingAddAccount() {
+		new CommonFunctions().elementView(headingAddAccount, "Add Account");
+	}
+	
+	public void enterBankName(String expBankName) {
+		enterText(txtBankName,expBankName,"Enter Bank Name");
 	}
 
 	public void clickAddNewPaymentMethod() {
@@ -67,5 +94,21 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public CvvPopup cvvPopup() {
 		return new CvvPopup();
+	}
+	
+	public void selectBank() {
+		click(selectBank,"click select bank");
+	}
+	
+	public void verifyBankNameHeading() {
+		new CommonFunctions().elementView(HeadingBankName, "Bank Name");
+	}
+	
+	public void fillUserName(String expUserName) {
+		enterText(txtUserName, expUserName, "User Name");
+	}
+	
+	public void fillPassword(String expPassword) {
+		enterText(txtPassword, expPassword, "Password");
 	}
 }
