@@ -841,8 +841,8 @@ public class CustomerProfileTest {
 	public void testAddCard(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			Thread.sleep(2000);
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
 			} else {

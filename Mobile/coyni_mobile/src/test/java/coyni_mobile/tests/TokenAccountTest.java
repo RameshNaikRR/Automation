@@ -375,20 +375,22 @@ public class TokenAccountTest {
 	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.btnDashBoard();
-			tokenAccountPage.ViewMore();
+			tokenAccountPage.verifyTransactionHeading(data.get("transactionHeading"));
+			Thread.sleep(3000);
 			tokenAccountPage.clickViewMore();
 			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
 			tokenAccountPage.transactionPage().verifySearchOption();
 			tokenAccountPage.transactionPage().verifyFiltersIcon();
-			tokenAccountPage.transactionPage().verifyMerchantAndReferenceID();
-			tokenAccountPage.transactionPage().verifyMessage();
-			tokenAccountPage.transactionPage().verifyAmount();
+			tokenAccountPage.transactionPage().verifyReferenceID();
 			tokenAccountPage.transactionPage().verifyCloseView();
-			customerProfilePage.clickLogOut();
-
+			tokenAccountPage.transactionPage().verifySendTransactions(data.get("sendFunds"));
+			tokenAccountPage.transactionPage().clickOnMessage();
+			tokenAccountPage.transactionPage().verifyTransactionReferenceID(data.get("referenceID"));
+			tokenAccountPage.transactionPage().verifyReceivedTransactions(data.get("receivedFunds"));
+			tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
+			tokenAccountPage.transactionPage().verifyTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionList failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testTransactionList faield due to exception " + e);
 		}
 
 	}
