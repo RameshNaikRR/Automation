@@ -396,6 +396,63 @@ public class TokenAccountTest {
 	}
 
 	@Test
+	public void testScanCode() {
+		try {
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickScan();
+			tokenAccountPage.tokenHomePopUp().scanPage().clickOnWhileUsingApp();
+			tokenAccountPage.tokenHomePopUp().scanPage().verifyScanCodeAndScanMe();
+			tokenAccountPage.tokenHomePopUp().scanPage().clickScanCode();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickFlashLight();
+			tokenAccountPage.tokenHomePopUp().scanPage().navigationComponent().clickClose();
+
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickScan();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnAlbum();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testScanMe(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickScan();
+			tokenAccountPage.tokenHomePopUp().scanPage().clickOnWhileUsingApp();
+			tokenAccountPage.tokenHomePopUp().scanPage().verifyScanCodeAndScanMe();
+			tokenAccountPage.tokenHomePopUp().scanPage().clickScanMe();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifylblUserName(data.get("userName"));
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifylblProfileWithNoImage(data.get("profile"));
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifyQrCode();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSetAmount();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent()
+					.fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent().clickOk();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickClearAmount();
+
+//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSetAmount();
+//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent()
+//					.fillAmount(data.get("amount"));
+//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent().clickOk();
+
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSaveToAlbum();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifyReceipientAddress();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickCopy();
+
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickShare();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
 	@Parameters({ "strParams" })
 	public void testPay(String strParams) {
 		try {
@@ -1074,9 +1131,9 @@ public class TokenAccountTest {
 					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.fillInputBoxes(data.get("code"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-			.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-			.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);

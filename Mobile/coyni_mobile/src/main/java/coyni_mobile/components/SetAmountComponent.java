@@ -7,17 +7,17 @@ import io.appium.java_client.MobileBy;
 
 public class SetAmountComponent extends MobileFunctions {
 
-	private By txtAmount =  MobileBy.xpath(" ");
-	private By btnOk = MobileBy.xpath(" ");
-	private By btnCross = MobileBy.xpath(" ");
+	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'setAmountET')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'keyActionLL')]");
 
 	public void fillAmount(String amount) {
-		enterText(txtAmount, "amount", amount);
+		click(txtAmount, "Amount");
+		enterText(txtAmount, amount, "amount");
 	}
+
 	public void clickOk() {
 		click(btnOk, "Ok");
+		click(btnOk, "Ok");
 	}
-	public void clickCross() {
-		click(btnCross, "Cross");
-	}
+
 }
