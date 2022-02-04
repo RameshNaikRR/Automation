@@ -21,27 +21,37 @@ public class TransactionPage extends MobileFunctions {
 
 	private By message = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[3]");
 
+	private By btnfiltericon = MobileBy.xpath("//*[@name='filter']");
+
 	private By lblReferenceId = MobileBy.xpath("//*[@text='Reference ID']");
 
 	private By status = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[3]");
 
 	private By lblSendFunds = MobileBy.xpath("//*[@text='Sent funds to Manikanth Vallapureddy']");
 
-	private By lblWithdrawFunds = MobileBy.xpath("//*[contains(@text,'Withdraw funds to Card']");
+	private By lblWithdrawFunds = MobileBy
+			.xpath("(//*[contains(@text,'Withdraw')])[1]/following-sibling::*[contains(@resource-id,'amountTV')]");
 
-	private By lblReceivedFunds = MobileBy.xpath("//*[@text='Received funds from Anudeep Ag']");
+	private By lblWithdrawAmount = MobileBy.xpath(
+			"(//*[contains(@text,'Withdraw')])[1]/../following-sibling::*[1]/*[contains(@resource-id,'balanceTV')]");
+
+	private By lblReceivedFunds = MobileBy
+			.xpath("(//*[contains(@text,'Received')])[1]/following-sibling::*[contains(@resource-id,'amountTV')]");
 
 	private By lblGiftCard = MobileBy.xpath("//*[@text='Gift Card purchase for Santosh Pr']");
 
 	private By sendAmount = MobileBy.xpath("(//*[contains(@text,'-')])[4]");
 
-	private By RecieveAmount = MobileBy.xpath("(//*[contains(@text,'+')])[4]");
+	private By RecieveAmount = MobileBy.xpath(
+			"(//*[contains(@text,'Received')])[1]/../following-sibling::*[1]/*[contains(@resource-id,'balanceTV')]");
 
 	private By giftCardAmount = MobileBy.xpath("(//*[contains(@text,'-')])[1]");
 
 	private By amount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[3]");
 
 	private By lblNoTransactions = MobileBy.xpath("//*[@text='You have no more transactions']");
+
+	private By lblNoMore = MobileBy.xpath("//*[contains(@name,'more transactions')]");
 
 	public void verifySendTransactions(String sendFunds) {
 		if (!verifyElementDisplayed(lblSendFunds, "Send Funds")) {
@@ -58,20 +68,20 @@ public class TransactionPage extends MobileFunctions {
 			scrollDownToElement(lblReceivedFunds, "Received Funds");
 
 		}
-		new CommonFunctions().verifyLabelText(lblReceivedFunds, receiveFunds, "ReceiveFunds Funds");
+		new CommonFunctions().verifyLabelText(lblReceivedFunds, receiveFunds, "Receive Funds");
 		new CommonFunctions().elementView(RecieveAmount, "Receive Amountf");
 
 	}
 
-//	public void verifyWithdrawTransactions(String withdrawFunds) {
-//		if (!verifyElementDisplayed(lblSendFunds, "Send Funds")) {
-//			scrollDownToElement(lblSendFunds, "Send Funds");
-//
-//		}
-//		new CommonFunctions().verifyLabelText(lblSendFunds, withdrawFunds, "Send Funds");
-//		new CommonFunctions().elementView(sendAmount, "sendAmount");
-//
-//	}
+	public void verifyWithdrawTransactions(String withdrawFunds) {
+		if (!verifyElementDisplayed(lblWithdrawFunds, "Withdraw Funds")) {
+			scrollDownToElement(lblWithdrawFunds, "Withdraw Funds");
+
+		}
+		new CommonFunctions().verifyLabelText(lblWithdrawFunds, withdrawFunds, "Withdraw Funds");
+		new CommonFunctions().elementView(lblWithdrawAmount, "withdraw Amount");
+
+	}
 
 	public void verifyGiftCardTransactions(String giftCard) {
 		if (!verifyElementDisplayed(lblGiftCard, "Gift Card")) {
@@ -81,6 +91,10 @@ public class TransactionPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblGiftCard, giftCard, "Gift Card");
 		new CommonFunctions().elementView(giftCardAmount, "Gift Card Amount");
 
+	}
+
+	public void clickfilter() {
+		click(btnfiltericon, "filter icon");
 	}
 
 	public void clickOnMessage() {
@@ -121,6 +135,12 @@ public class TransactionPage extends MobileFunctions {
 
 	public void verifyStatus() {
 		new CommonFunctions().elementView(status, "Status " + getText(status));
+	}
+
+	public void ScrollTransactions() {
+		if (getElementList(lblNoTransactions, "").size() == 0) {
+			scrollDownToElement(lblNoTransactions, "You have no more transactions");
+		}
 	}
 
 	public void verifyTransactions(String expHeading) {

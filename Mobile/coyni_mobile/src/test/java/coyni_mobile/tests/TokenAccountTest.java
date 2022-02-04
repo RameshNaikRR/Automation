@@ -387,7 +387,7 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().clickOnMessage();
 			tokenAccountPage.transactionPage().verifyTransactionReferenceID(data.get("referenceID"));
 			tokenAccountPage.transactionPage().verifyReceivedTransactions(data.get("receivedFunds"));
-			tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
+			// tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
 			tokenAccountPage.transactionPage().verifyTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList faield due to exception " + e);
@@ -589,7 +589,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithBank(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-        testBuyToken(strParams, "bank");
+		testBuyToken(strParams, "bank");
 	}
 
 	@Test
@@ -597,7 +597,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithCreditCard(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-        testBuyToken(strParams, "credit");
+		testBuyToken(strParams, "credit");
 	}
 
 	@Test
@@ -605,7 +605,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithDebitCard(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-        testBuyToken(strParams, "debit");
+		testBuyToken(strParams, "debit");
 	}
 
 	@Test
