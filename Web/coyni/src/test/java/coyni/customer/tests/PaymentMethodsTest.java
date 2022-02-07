@@ -29,21 +29,48 @@ public class PaymentMethodsTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testExternalBankAccount(String strParams) {
+	
+	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+			
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
+			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
+			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
-
+			Thread.sleep(2000);
+           customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyHeading();
+            Thread.sleep(8000);
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
+			
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyNewWindowHeading();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterBankName(data.get("expBankName"));
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickOnBankName();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterUserName(data.get("expUserName"));;
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterPassword(data.get("expPassword"));
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickNext();;   
+			Thread.sleep(5000);
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().unSelectBank();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickUncheckBank();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccountWithOutPaymentMethod(String strParams) {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		testAddExternalBankAccount(strParams);
+	}
+
 
 	public void testAddCard(String strParams, String card) {
 		try {

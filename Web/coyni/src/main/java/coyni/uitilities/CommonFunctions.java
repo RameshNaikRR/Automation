@@ -1,6 +1,7 @@
 package coyni.uitilities;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -280,5 +281,17 @@ public class CommonFunctions {
 	}
 	public void Refresh() {
 		objBrowserFunctions.navigate(Navigation.REFRESH);
+		}
+	public void switchTodWindow() {
+		String mainWindow = DriverFactory.getDriver().getWindowHandle();
+		Set<String> windowHandles = DriverFactory.getDriver().getWindowHandles();
+			for (String string : windowHandles) {
+				if (!string.equals(mainWindow)) {
+					DriverFactory.getDriver().switchTo().window(string);
+					ExtentTestManager.setPassMessageInReport("Switched to Window");
+					break;
+				}
+			}
+
 		}
 }

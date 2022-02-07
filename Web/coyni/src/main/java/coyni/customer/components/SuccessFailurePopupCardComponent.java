@@ -24,6 +24,7 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By btnDone = By.xpath("//button[text()='Done']");
 	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
 	private By lblAccountBalance = By.xpath("//span[text()='Account Balance']");
+	private By lblBankAddedSuceesful = By.xpath("//h1[contains(text(),'Bank Account Added')]");
 
 	private By heading = By.className("SendReceiveModal_successful_message__3TKQt");
 	private By btnClose = By.xpath("//button[text()='Close']");
@@ -100,5 +101,9 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	
 	public void clickBuyCoyni() {
 		click(btnBuyCoyni,"Click Buy Coyni");
+	}
+	
+	public void verifyBankAddSuccesfulHeaading() {
+		new CommonFunctions().elementView(lblBankAddedSuceesful, "Bank Added Succesful");
 	}
 }
