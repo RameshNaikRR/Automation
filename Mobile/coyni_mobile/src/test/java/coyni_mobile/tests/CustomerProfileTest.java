@@ -437,62 +437,18 @@ public class CustomerProfileTest {
 			customerProfilePage.verifyUserNameView();
 			customerProfilePage.verifyAccountIDView();
 			customerProfilePage.verifyAccountStatusView();
-			customerProfilePage.verifyImageUserView();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("TestCustomerProfileView failed due to exception " + e);
-		}
-
-	}
-
-	// added
-	@Test
-	@Parameters({ "strParams" })
-	public void testClickCustomerProfile(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.verifyUserNameView();
 			customerProfilePage.clickQRImage();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("TestClickCustomerProfile failed due to exception " + e);
-		}
-
-	}
-
-	// added
-	@Test
-	@Parameters({ "strParams" })
-	public void testCopyTextAndShare(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickQRImage();
+			// customerProfilePage.navigationComponent().clickClose();
+			// customerProfilePage.clickQRImage();
+			customerProfilePage.verifyMyQRCodeHeading(data.get("qrHeading"));
+			customerProfilePage.verifyFirstAndLastName(data.get("expHeading"));
 			customerProfilePage.verifyLabelMyQRCodeView();
-			customerProfilePage.verifyLabelCopyText();
+			customerProfilePage.clickOnCopy();
 			customerProfilePage.clickShare();
 			customerProfilePage.verifyPopUp();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("TestCopyTextAndShare failed due to exception " + e);
-		}
-
-	}
-
-	// added
-	@Test
-	@Parameters({ "strParams" })
-	public void testCrossIcon(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickQRImage();
-			customerProfilePage.navigationComponent().clickClose();
-			customerProfilePage.verifyUserNameView();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("TestCrossIcon failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("TestCustomerProfileView failed due to exception " + e);
 		}
 
 	}
@@ -585,8 +541,40 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Verify DashBoard Failed due to exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
+	public void testDashboardTabBarMenu(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
+			customerProfilePage.viewDashboard();
+			customerProfilePage.viewCrypto();
+			customerProfilePage.viewIssueCard();
+			customerProfilePage.viewProfile();
+			// customerProfilePage.clickCrypto();
+//			customerProfilePage.verifyAssets(data.get("cryptoHeading"));
+//			customerProfilePage.navigationComponent().clickClose();
+//			customerProfilePage.clickIssueCard();
+//			customerProfilePage.verifyIssueCardHeading(data.get("issueHeading"));
+//			customerProfilePage.navigationComponent().clickClose();
+//			customerProfilePage.clickTokenMenu();
+//			customerProfilePage.viewScan();
+//			customerProfilePage.viewPayRequest();
+//			customerProfilePage.viewBuyToken();
+//			customerProfilePage.viewWithdrawnToUSD();
+//			customerProfilePage.clickOutside();
+			customerProfilePage.clickProfile();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.verifyAvailableBalance();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDashboardTabBarMenu Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testPreferences(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -595,7 +583,7 @@ public class CustomerProfileTest {
 			customerProfilePage.clickPreferences();
 			customerProfilePage.preferencesComponent().verifyPreferencesHeading(data.get("heading"));
 			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
@@ -1006,6 +994,7 @@ public class CustomerProfileTest {
 	public void testAddDebitCardWithInvalidData(String strParams) {
 		testAddCardWithInvalidData(strParams, "debit");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBank(String strParams) {
@@ -1022,10 +1011,9 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().selectBank();
 			customerProfilePage.paymentMethodsPage().fillUserName(data.get("expUserName"));
 			customerProfilePage.paymentMethodsPage().fillPassword(data.get("expPassword"));
-			
-			
-	 } catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("testAddBank failed due to this Exception" + e);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddBank failed due to this Exception" + e);
+		}
 	}
-}
 }

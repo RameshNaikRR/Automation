@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.FiltersComponent;
+import coyni_mobile.components.TransactionDetailsComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -150,6 +151,10 @@ public class TransactionPage extends MobileFunctions {
 
 	public FiltersComponent FiltersComponent() {
 		return new FiltersComponent();
+	}
+
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent();
 	}
 
 }

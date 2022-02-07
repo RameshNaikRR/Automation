@@ -7,6 +7,7 @@ import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PreferencesComponent;
+import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -16,11 +17,11 @@ import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
 
-	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'cpAccountIDTV')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'tvACStatus')]");
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
-	private By imgUser = MobileBy.xpath("//*[contains(@resource-id,'tvUserInfo')]");// tvUserInfo
+	private By imgUser = MobileBy.xpath("//*[contains(@resource-id,'imageTextTV')]");
 	private By lblSettings = MobileBy.xpath("//*[contains(@text,'Settings')]");
 	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'cpUserDetailsLL')]");
 	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'cpPaymentMethodsLL')]");
@@ -34,32 +35,32 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
 
-	private By lblMyQRCodeHeading = MobileBy.xpath("");
-	private By btnShare = MobileBy.xpath("");
-	private By popup = MobileBy.xpath("");
-	private By lblCopyMessage = MobileBy.xpath("");
-	private By lblAvaliableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvBalance')]");// tvBalance
+	private By lblMyQRCodeHeading = MobileBy.xpath("//*[@text='My QR Code']");
+	private By qrCode = MobileBy.xpath("//*[contains(@resource-id,'idIVQrcode')]");
+	private By btnShare = MobileBy.xpath("//*[contains(@resource-id,'imgShare')]");
+	private By sharepopup = MobileBy.xpath("//*[@text='Share']");
+	private By lblCopyMessage = MobileBy.xpath("//*[contains(@resource-id,'imgCopy')]");
+	private By lblAvaliableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvBalHead')]");// tvBalance
 	private By viewPayRequestButton = MobileBy.xpath("//*[contains(@resource-id,'cvPayRequest')]");// cvPayRequest
 	private By lblRecentTransaction = MobileBy.xpath("//*[contains(@text,'Recent Transactions')]");// Recent
 																									// Transactions
-	private By lblFirstAndLastName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
+	private By lblFirstAndLastName = MobileBy.xpath("//*[contains(@resource-id,'tvUserInfo')]");
 	private By lblContact = MobileBy.xpath("//*[contains(@text,'Recent Contacts')]");// Recent Contacts
 
-	private By viewDashboard = MobileBy.xpath("");
+	private By viewDashboard = MobileBy.xpath("//*[contains(@text,'Dashboard')]");
 	private By viewCrypto = MobileBy.xpath("//*[contains(@resource-id,'layoutCrypto')]");// layoutCrypto
 	private By viewIssueCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCard')]");// layoutCard
 	private By viewProfile = MobileBy.xpath("//*[contains(@resource-id,'layoutProfile')]");// layoutProfile
 	private By viewTokenMenu = MobileBy.xpath("//*[contains(@resource-id,'layoutMainMenu')]");// layoutMainMenu
-	private By lblCryptoAssets = MobileBy.xpath("//*[contains(@text,'Crypto Assets Coming Soon…')]");// Crypto Assets
-																										// Coming Soon…
-																										// text
-
-	private By btnScan = MobileBy.xpath("");
+	private By lblCryptoAssets = MobileBy.xpath("//*[@text='Crypto Assets Coming Soon…']");// Crypto Assets //
+																							// Coming Soon
+	// text
+	private By lblIssueCard = MobileBy.xpath("//*[@text='Issuing Card Coming Soon…']");
+	private By btnScan = MobileBy.xpath("//*[contains(@text,'scanLL')]");
 	private By btnPayRequest = MobileBy.xpath("//*[contains(@text,'Pay/Request')]");// Pay/Request
 	private By btnBuyToken = MobileBy.xpath("//*[contains(@text,'Buy Tokens')]");// Buy Tokens
 	private By btnWithdrawToUSD = MobileBy.xpath("//*[contains(@text,'Withdraw to USD')]");// Withdraw to USD
 	private By popUp = MobileBy.xpath("");
-//View More
 
 	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
 
@@ -71,8 +72,16 @@ public class CustomerProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(btnScan, "View Scan");
 	}
 
+	public void clickScan() {
+		click(btnScan, "Scan");
+	}
+
 	public void viewPayRequest() {
 		new CommonFunctions().elementView(btnPayRequest, "Request");
+	}
+
+	public void verifyAvailableBalance() {
+		new CommonFunctions().elementView(lblAvaliableBalance, "Available Balance");
 	}
 
 	public void verifyAvaliableBlc(String expHeading) {
@@ -117,11 +126,15 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void viewDashboard() {
-		new CommonFunctions().elementView(viewCrypto, "Dashboard");
+		new CommonFunctions().elementView(viewDashboard, "Dashboard");
 	}
 
 	public void viewCrypto() {
-		new CommonFunctions().elementView(viewDashboard, "Crypto");
+		new CommonFunctions().elementView(viewCrypto, "Crypto");
+	}
+
+	public void clickIssueCard() {
+		click(viewIssueCard, "Issue Card");
 	}
 
 	public void viewIssueCard() {
@@ -130,6 +143,10 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void viewProfile() {
 		new CommonFunctions().elementView(viewProfile, "Profile");
+	}
+
+	public void clickProfile() {
+		click(viewProfile, "Profile");
 	}
 
 	public void viewTokenAccount() {
@@ -141,7 +158,11 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void verifyAssets(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblCryptoAssets, "Crypto Assets comming soon", expHeading);
+		new CommonFunctions().verifyLabelText(lblCryptoAssets, "Crypto Assets comming soon Heading", expHeading);
+	}
+
+	public void verifyIssueCardHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblIssueCard, "Issue Card Heading", expHeading);
 	}
 
 	public void clickCrypto() {
@@ -155,6 +176,10 @@ public class CustomerProfilePage extends MobileFunctions {
 			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
 		}
 	}
+
+//	public void clickOutside() {
+//		new CommonFunctions().clickOutSideElement();
+//	}
 
 	public void minimizePopupBySwipeDown() {
 		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
@@ -257,6 +282,11 @@ public class CustomerProfilePage extends MobileFunctions {
 		return new UserDetailsPage();
 	}
 
+	public void clickOnCopy() {
+		click(lblCopyMessage, "Copy");
+
+	}
+
 	public void verifyLabelCopyText() {
 		new CommonFunctions().elementView(lblCopyMessage, "Copied Message");
 	}
@@ -273,13 +303,17 @@ public class CustomerProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(lblAccountStatus, "Account ID ");
 	}
 
+	public void verifyMyQRCodeHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblMyQRCodeHeading, "QR Heading", heading);
+	}
+
 	public void verifyLabelMyQRCodeView() {
-		new CommonFunctions().elementView(lblMyQRCodeHeading, "Image QR ");
+		new CommonFunctions().elementView(qrCode, "Image QR ");
 
 	}
 
 	public void verifyPopUp() {
-		new CommonFunctions().elementView(popup, "Verify Popup");
+		new CommonFunctions().elementView(sharepopup, "Verify Popup");
 
 	}
 
@@ -317,5 +351,9 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
+	}
+
+	public TokenHomePopUp tokenHomePopUp() {
+		return new TokenHomePopUp();
 	}
 }

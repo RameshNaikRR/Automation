@@ -396,6 +396,51 @@ public class TokenAccountTest {
 	}
 
 	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.verifyTransactionHeading(data.get("transactionHeading"));
+			Thread.sleep(3000);
+			tokenAccountPage.clickViewMore();
+			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
+			tokenAccountPage.transactionPage().verifySearchOption();
+			tokenAccountPage.transactionPage().verifyFiltersIcon();
+			tokenAccountPage.transactionPage().verifyReferenceID();
+			tokenAccountPage.transactionPage().verifyCloseView();
+			tokenAccountPage.transactionPage().clickOnMessage();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifySentTransactionDetails(data.get("transactionSentHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickSentBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyReceiveTransactionDetails(data.get("transactionReceiveHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickReceiveBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyBuyTokenBankTransactionDetails(data.get("transactionBuyTokenBankHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickBuyTokenBankBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyBuyTokenDebitCardTransactionDetails(data.get("transactionBuyTokenDebitCardHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickBuyTokenDebitBackIcon();
+//			tokenAccountPage.transactionPage().transactionDetailsComponent()
+//					.verifyBuyTokenCreditCardTransactionDetails(data.get("transactionBuyTokenCreditCardHeading"));
+//			tokenAccountPage.transactionPage().transactionDetailsComponent().clickBuyTokenCreditBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyWithdrawBankTransactionDetails(data.get("transactionWithdrawBankHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickWithdrawBankBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyWithdrawInstantPayTransactionDetails(data.get("transactionWithdrawInstantPayHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickWithdrawInstantPayBackIcon();
+			tokenAccountPage.transactionPage().transactionDetailsComponent()
+					.verifyWithdrawGiftCardTransactionDetails(data.get("transactionWithdrawGiftCardHeading"));
+			tokenAccountPage.transactionPage().transactionDetailsComponent().clickWithdrawGiftCardBackIcon();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList faield due to exception " + e);
+		}
+
+	}
+
+	@Test
 	public void testScanCode() {
 		try {
 			tokenAccountPage.btnHome();
