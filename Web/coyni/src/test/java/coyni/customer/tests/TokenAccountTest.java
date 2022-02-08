@@ -1782,20 +1782,63 @@ public class TokenAccountTest {
 		}
 	}
 	@Test
-	public void testExportFiles()  {
+	@Parameters({ "strParams" })
+	public void testExportFiles(String strParams)  {
 		try {
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
 			exportfilesPage.clickExportfiles();
 			Thread.sleep(1000);
-			exportfilesPage.ExportIdView();
-			exportfilesPage.ExportDateView();
-			exportfilesPage.DateRangeView();
-			exportfilesPage.ReportNameView();
-			exportfilesPage.StatusView();
+			exportfilesPage.exportIdView();
+			exportfilesPage.exportDateView();
+			exportfilesPage.dateRangeView();
+			exportfilesPage.reportNameView();
+			exportfilesPage.statusView();
 			exportfilesPage.verifyIdFormat();
+			exportfilesPage.clickIconDownload();
+			exportfilesPage.successView();
+//			exportfilesPage.clickCheckBox();
+//			exportfilesPage.clickDownload();
+//			exportfilesPage.clickApply();
+			
 		}catch(Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportFilesBulkDownload(String strParams)  {
+		try {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			exportfilesPage.clickExportfiles();
+			Thread.sleep(2000);
+			exportfilesPage.clickCheckBox();
+			exportfilesPage.clickBulkActionDropDown();
+			exportfilesPage.clickDownload();
+			exportfilesPage.clickApply();
+			exportfilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"), data.get("expColour"));
+		//	tokenAccountPage.verifyTableItemsCount(data.get("query"));
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportFilesBulkTrash(String strParams)  {
+		try {
+		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			exportfilesPage.clickExportfiles();
+			Thread.sleep(2000);
+			exportfilesPage.clickCheckBox();
+			exportfilesPage.clickBulkActionDropDown();
+			exportfilesPage.clickTrash();
+			exportfilesPage.clickApply();
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
+		}
+	}
+
 
 	@Test
 	@Parameters({ "strParams" })
