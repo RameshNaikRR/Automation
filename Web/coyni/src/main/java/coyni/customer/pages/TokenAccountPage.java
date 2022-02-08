@@ -340,4 +340,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	public BankAccountsComponent bankAccountsComponent() {
 		return new BankAccountsComponent();
 	}
+
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
+	}
 }

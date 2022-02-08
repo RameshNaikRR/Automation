@@ -2,6 +2,7 @@ package coyni.customer.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.popups.ExportSelectedTransactionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -23,11 +24,16 @@ public class ExportfilesPage extends BrowserFunctions {
 	private By lblSuccess = By.xpath("//span[text()='Success']");
 
 	private By downloadIcon = By.xpath("(//span[@data-tip='Download'])[1]");
+	private By btnExport = By.xpath("//button[text()='Export']");
+
+	public void clickExport() {
+		click(btnExport, "Export");
+	}
 
 	public void successView() {
-		
-		ExtentTestManager.setInfoMessageInReport(getText(lblSuccess, "Success Message")+" is displayed");
-		//new CommonFunctions().elementView(lblSuccess, "Success");
+
+		ExtentTestManager.setInfoMessageInReport(getText(lblSuccess, "Success Message") + " is displayed");
+		// new CommonFunctions().elementView(lblSuccess, "Success");
 	}
 
 	public void clickIconDownload() {
@@ -77,11 +83,13 @@ public class ExportfilesPage extends BrowserFunctions {
 	public void statusView() {
 		new CommonFunctions().elementView(lblStatus, "Status");
 	}
+
 	public void verifyPageNumberHighlighted(String cssProp, String expValue, String expColor) {
 
 		if (verifyElementDisplayed(nextPage, "Next Page")) {
 			click(nextPage, "Clicked Next Page");
-		//	new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp, expValue, expColor);
+			// new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp,
+			// expValue, expColor);
 			ExtentTestManager.setPassMessageInReport("Page is Highlighted when clicked on Page number");
 		} else {
 			ExtentTestManager.setWarningMessageInReport("Page is Not Highlighted");
@@ -95,6 +103,10 @@ public class ExportfilesPage extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Export id is not in digits format");
 		}
+	}
+
+	public ExportSelectedTransactionsPopup exportSelectedTransactionsPopup() {
+		return new ExportSelectedTransactionsPopup();
 	}
 
 }
