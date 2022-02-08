@@ -575,6 +575,26 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testFaceIDSettings(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.viewDashboard();
+			customerProfilePage.clickProfile();
+			customerProfilePage.clickTogggle();
+			customerProfilePage.setUpTouchIDPopup().clickSetUpTouchID();
+			customerProfilePage.setUpTouchIDPopup().verifyHeading(data.get("expHeading"));
+			customerProfilePage.setUpTouchIDPopup().clickBackButton();
+			customerProfilePage.clickTogggle();
+			customerProfilePage.setUpTouchIDPopup().clickNotNow();
+			customerProfilePage.clickLogOut();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFaceIDSettings Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testPreferences(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

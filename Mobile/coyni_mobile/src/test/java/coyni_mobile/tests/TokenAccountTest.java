@@ -533,6 +533,58 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testPayRequestView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickPayRequest();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().navigationComponent().clickClose();
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickPayRequest();
+			// tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.verifyName(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().navigationComponent()
+					.clickClose();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayRequestView  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testPayInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickPayRequest();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.verifyName(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.fillAmount(data.get("amount"));
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayInvalidAmount  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testRequest(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

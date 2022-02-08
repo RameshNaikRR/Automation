@@ -8,6 +8,7 @@ import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PreferencesComponent;
 import coyni_mobile.components.TokenHomePopUp;
+import coyni_mobile.popups.SetUpTouchIDPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -16,7 +17,6 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
-
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'customerNameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'cpAccountIDTV')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'tvACStatus')]");
@@ -31,7 +31,8 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
 	private By lblSecurity = MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
-	private By btnFaceIDSetting = MobileBy.xpath("");
+	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'tvBMSetting')]");
+	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
 
@@ -74,6 +75,11 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void clickScan() {
 		click(btnScan, "Scan");
+	}
+
+	public void clickTogggle() {
+		scrollDownToElement(btnFaceIDSetting, "FaceID Setting");
+		click(btnToggle, "Toggle");
 	}
 
 	public void viewPayRequest() {
@@ -355,5 +361,9 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();
+	}
+
+	public SetUpTouchIDPopup setUpTouchIDPopup() {
+		return new SetUpTouchIDPopup();
 	}
 }

@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.NavigationComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -39,6 +40,10 @@ public class PayRequestPage extends MobileFunctions {
 	public PayandRequestAccountHolderPage payandRequestAccountHolderPage() {
 		return new PayandRequestAccountHolderPage();
 
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }
