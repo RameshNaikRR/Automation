@@ -550,6 +550,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().navigationComponent()
 					.clickClose();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage()
+					.verifyFirstAndLastLetter(data.get("firstLastLetterheading"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 
 		} catch (Exception e) {
@@ -572,9 +574,13 @@ public class TokenAccountTest {
 					.verifyName(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
 
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+						.verifyErrorMessage(data.get("errMessage"));
+				// new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),
+				// data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -582,7 +588,6 @@ public class TokenAccountTest {
 		}
 
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testRequest(String strParams) {
