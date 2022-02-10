@@ -21,7 +21,8 @@ public class TokenAccountTest {
 	GetHelpPage getHelpPage;
 	ExportfilesPage exportfilesPage;
 	TokenAccountActivityComponent tokenAccountActivityComponent;
-
+    PaymentMethodsTest paymentMethodsTest;
+	
 	@BeforeTest
 	public void init() {
 		tokenAccountPage = new TokenAccountPage();
@@ -29,6 +30,7 @@ public class TokenAccountTest {
 		getHelpPage = new GetHelpPage();
 		exportfilesPage = new ExportfilesPage();
 		tokenAccountActivityComponent = new TokenAccountActivityComponent();
+		paymentMethodsTest = new PaymentMethodsTest();
 	}
 
 	@Test
@@ -1051,13 +1053,18 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("Amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
-					.clickConfirm();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup().verifyOrderViewHeading();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup().orderPreviewBuyTokenWithBankView();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup().clickConfirm();
+			
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.transactionInProgessPopup().clickDone();
 
@@ -1065,6 +1072,27 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport(
 					"test Buy Token Transaction with bank account failed due to exception " + e);
 		}
+		
+	}
+
+		@Test
+		@Parameters({ "strParams" })
+		public void testBuyTokenTransactionBankAccountWithInvalidData(String strParams) {
+			try {
+				Map<String, String> data = Runner.getKeywordParameters(strParams);
+				tokenAccountPage.clickBuyTokens();
+				tokenAccountPage.buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get(""));
+				tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank();
+				tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
+				tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get(""));
+				tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get(""));
+				
+
+			} catch (Exception e) {
+				ExtentTestManager.setFailMessageInReport(
+						"test Buy Token Transaction with bank account failed due to exception " + e);
+			}
+
 	}
 
 	@Test
@@ -1108,6 +1136,101 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport(" test Buy Token Transaction with debit card failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenViewWithOutPaymentMethods(String strParams)
+	{
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescrpWithOutPaymentMethods();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickBack();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get(""));
+			tokenAccountPage.buyCoyniTokensPopup().navigationComponent().clickClose();
+			tokenAccountPage.verifyLabelYourTokenAccount();
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().navigationComponent().clickBack();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickClose();
+			tokenAccountPage.verifyLabelYourTokenAccount();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenAddBank(String strParams)
+	{
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			paymentMethodsTest.testAddExternalBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenDeleteBank(String strParams)
+	{
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			paymentMethodsTest.testDeleteBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenDebitCard(String strParams)
+	{
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			paymentMethodsTest.testAddCard(strParams,"Debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenViewWithPaymentMethods(String strParams)
+	{
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().viewChangeLink();
+			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenDescription();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickDelete();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().successFailurePopupCardComponent().viewClose();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().successFailurePopupCardComponent().clickClose();
+			tokenAccountPage.viewBuyTokens();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
 

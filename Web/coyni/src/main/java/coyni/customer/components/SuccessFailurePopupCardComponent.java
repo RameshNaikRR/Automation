@@ -19,6 +19,7 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 
 	private By lblRequestSuccessful = By.xpath("//div[text()='Tokens Requested Successfully']");
+	private By lblRemovedSuccessfully = By.xpath("//h1[contains(text(),'Payment Method Removed Successfully')]");
 	private By lblMessage = By.xpath("//h2[text()='You successfully sent']");
 
 	private By btnDone = By.xpath("//button[text()='Done']");
@@ -105,5 +106,12 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	
 	public void verifyBankAddSuccesfulHeaading() {
 		new CommonFunctions().elementView(lblBankAddedSuceesful, "Bank Added Succesful");
+	}
+	public void verifyPaymnetRemovedSuccessfulHeading() {
+		new CommonFunctions().elementView(lblRemovedSuccessfully, "Payment Method Removed Successfully");
+	}
+	
+	public void viewClose() {
+		new CommonFunctions().elementView(btnClose, "Close");
 	}
 }

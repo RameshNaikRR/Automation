@@ -3,6 +3,7 @@ package coyni.customer.popups;
 import org.openqa.selenium.By;
 
 import coyni.customer.components.AddCardComponent;
+import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -51,6 +52,13 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
    public void verifyAddNewPaymentMethodHeading() {
 	   new CommonFunctions().elementView(headingAddNewPaymentMethod, "Add New Payment Method heading");
    }
-    
+   
+   public NavigationComponent navigationComponent() {
+	   return new NavigationComponent();
+   }
+   
+   public AddExternalBankAccountPopup addExternalBankAccountPopup() {
+	   return new AddExternalBankAccountPopup();
+   }
   
 }

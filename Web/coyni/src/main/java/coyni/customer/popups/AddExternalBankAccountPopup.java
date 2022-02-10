@@ -3,6 +3,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.NavigationComponent;
 import coyni.customer.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -82,5 +83,9 @@ public class AddExternalBankAccountPopup extends BrowserFunctions {
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 		return new SuccessFailurePopupCardComponent();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
+	}
+
 

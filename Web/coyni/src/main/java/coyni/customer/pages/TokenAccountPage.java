@@ -196,6 +196,10 @@ public class TokenAccountPage extends BrowserFunctions {
 	public void clickPayRequestToken() {
 		click(btnPayRequestToken, "PayRequestToken");
 	}
+	
+	public void viewBuyTokens() {
+		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
+	}
 
 	public void clickBuyTokens() {
 		click(btnBuyTokens, "BuyTokens");

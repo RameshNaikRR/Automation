@@ -70,6 +70,25 @@ public class PaymentMethodsTest {
 		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
 		testAddExternalBankAccount(strParams);
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteBankAccount(String strParams) {
+		try {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+	    customerProfilePage.paymentMethodsComponent().verifyBankName();
+	    customerProfilePage.paymentMethodsComponent().clickDelete();
+	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().verifyRemovePaymentHeading();
+	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().clickOnRemove();
+	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
+	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().clickClose();
+	} catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
+	}
+
+	}
 
 
 	public void testAddCard(String strParams, String card) {
