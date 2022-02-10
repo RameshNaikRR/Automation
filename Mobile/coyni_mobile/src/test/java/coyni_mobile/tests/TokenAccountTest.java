@@ -522,8 +522,10 @@ public class TokenAccountTest {
 			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().enterYourPINComponent().verifyHeading("enterPinHeading");
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
+//			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
+//					.enterYourPINComponent().securePayPopup().clickNotNow();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
-					.enterYourPINComponent().securePayPopup().clickNotNow();
+					.clickDone();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPay  failed due to exception " + e);

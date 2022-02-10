@@ -3,6 +3,7 @@ package coyni_mobile.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import io.appium.java_client.MobileBy;
@@ -54,7 +55,8 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	}
 
 	public void swipeConfirm() {
-		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
+
+		new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
 	}
 
 	public void getAvailableBalance() {

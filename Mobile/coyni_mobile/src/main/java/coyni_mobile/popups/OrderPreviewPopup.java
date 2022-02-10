@@ -6,6 +6,7 @@ import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -76,11 +77,13 @@ public class OrderPreviewPopup extends MobileFunctions {
 	}
 
 	public void swipeConfirm() {
-		swipeOnElement(btnConfirm, "Confirm", SwipeDirection.RIGHT);
+		new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+
 	}
 
 	public void slideToConfirm() {
-		swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
+		new CommonFunctions().swipeElement(btnSideView, Direction.RIGHT);
+		// swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
 	}
 
 	public EnterYourPINComponent enterYourPINComponent() {

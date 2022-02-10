@@ -1,15 +1,22 @@
 package coyni_mobile.utilities;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class CommonFunctions {
 
@@ -205,5 +212,67 @@ public class CommonFunctions {
 	public void clickEnter() {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
 		System.out.println("clicked on enter");
+	}
+
+	public void swipeElement(By loc, Direction dir) {
+		System.out.println("swipeElementAndroid(): dir: '" + dir + "'");
+
+		// Animation default time:
+		// - Android: 300 ms
+		// - iOS: 200 ms
+		// final value depends on your app and could be greater
+		final int ANIMATION_TIME = 200; // ms
+
+		final int PRESS_TIME = 200; // ms
+
+		int edgeBorder;
+		PointOption pointOptionStart, pointOptionEnd;
+
+		// init screen variables
+		WebElement element = mobileFunctions.getElement(loc, "eleName");
+		Rectangle rect = element.getRect();
+		// sometimes it is needed to configure edgeBorders
+		// you can also improve borders to have vertical/horizontal
+		// or left/right/up/down border variables
+		edgeBorder = 0;
+
+		switch (dir) {
+		case DOWN: // from up to down
+			pointOptionStart = PointOption.point(rect.x + rect.width / 2, rect.y + edgeBorder);
+			pointOptionEnd = PointOption.point(rect.x + rect.width / 2, rect.y + rect.height - edgeBorder);
+			break;
+		case UP: // from down to up
+			pointOptionStart = PointOption.point(rect.x + rect.width / 2, rect.y + rect.height - edgeBorder);
+			pointOptionEnd = PointOption.point(rect.x + rect.width / 2, rect.y + edgeBorder);
+			break;
+		case LEFT: // from right to left
+			pointOptionStart = PointOption.point(rect.x + rect.width - edgeBorder, rect.y + rect.height / 2);
+			pointOptionEnd = PointOption.point(rect.x + edgeBorder, rect.y + rect.height / 2);
+			break;
+		case RIGHT: // from left to right
+			pointOptionStart = PointOption.point(rect.x + edgeBorder, rect.y + rect.height / 2);
+			pointOptionEnd = PointOption.point(rect.x + rect.width - 10 * edgeBorder, rect.y + rect.height / 2);
+			break;
+		default:
+			throw new IllegalArgumentException("swipeElementAndroid(): dir: '" + dir + "' NOT supported");
+		}
+		ExtentTestManager.setInfoMessageInReport("Swipe Action Completed on element Slide to Confirm");
+		// execute swipe using TouchAction
+		try {
+			new TouchAction(DriverFactory.getDriver()).press(pointOptionStart)
+					// a bit more reliable when we add small wait
+					.waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME))).moveTo(pointOptionEnd).release()
+					.perform();
+		} catch (Exception e) {
+			System.err.println("swipeElementAndroid(): TouchAction FAILED\n" + e.getMessage());
+			return;
+		}
+
+		// always allow swipe action to complete
+		try {
+			Thread.sleep(ANIMATION_TIME);
+		} catch (InterruptedException e) {
+			// ignore
+		}
 	}
 }
