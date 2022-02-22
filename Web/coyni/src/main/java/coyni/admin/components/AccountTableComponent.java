@@ -7,18 +7,32 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AccountTableComponent extends BrowserFunctions{
 	
-	private By lblWithdrawlist = By.cssSelector("");
-	private By lblDepoditlist = By.cssSelector("");
-	private By drpdwn = By.cssSelector("");
-	private By txtBatchId = By.cssSelector("");
-	private By btnSearch = By.cssSelector("");
-	private By tabBankAccount = By.cssSelector("");
-	private By tabSignetAccount  = By.cssSelector("");
-	private By tabInstantPay = By.cssSelector("");
-	private By tabGiftCard = By.cssSelector("");
-	private By tabCreditAndDebitCard = By.cssSelector("");
+	private By lblWithdrawlist = By.xpath("//span[text()='Withdraw List']");
+	private By lblDepoditlist = By.xpath("//span[text()='Deposits List']");
+	private By drpdwn = By.xpath("//div[text()='Batch ID']//following::img");
+	private By txtBatchId = By.cssSelector(".form-input-search.search-bar");
+	private By btnSearch = By.cssSelector("//div[text()='Search']");
 	
-	public void verifyWithdrawView(String expHeading) {
+	
+	private By getTabItemLoc(String elementName) {
+		return By.xpath(String.format("//div[contains(@class,'tabs__tab') and text()='%s']", elementName));
+	}
+	public void clickBankAccount() {
+		click(getTabItemLoc("Bank Accounts"), "Bank Accounts");
+	}
+	public void clickSignetAccount() {
+		click(getTabItemLoc("Signet Accounts"), "Signet Accounts");
+	}
+	public void clickInstantPay() {
+		click(getTabItemLoc("Instant Pay"), "Instant Pay");
+	}
+	public void clickGiftCard() {
+		click(getTabItemLoc("Gift Cards"), "Gift Cards");
+	}
+	public void clickCreditAndDebitCard() {
+		click(getTabItemLoc("Credit/Debit"), "Credit/Debit");
+	}
+    public void verifyWithdrawView(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawlist, "Withdraw List", expHeading);
 	}
 	public void verifyDepositView(String expHeading) {
@@ -33,20 +47,5 @@ public class AccountTableComponent extends BrowserFunctions{
 	public void clickSearch() {
 		click(btnSearch, "Search");
 	}
-	public void clickBankAccount() {
-		click(tabBankAccount, "Bank Accounts");
-	}
-	public void clickSignetAccount() {
-		click(tabSignetAccount, "Signet Accounts");
-	}
-	public void clickInstantPay() {
-		click(tabInstantPay, "Instant Pay");
-	}
-	public void clickGiftCard() {
-		click(tabGiftCard, "Gift Cards");
-	}
-	public void clickCreditAndDebitCard() {
-		click(tabCreditAndDebitCard, "Credit/Debit");
-	}
-
+	
 }
