@@ -11,125 +11,149 @@ public class SideBarComponent extends BrowserFunctions {
 				elementName));
 	}
 
-	public void getElementsForCoyniPortal(String type) {
-		click(getSideBarItems("Coyni Portal"), type);
+	public void clickCoyniPortal() {
+		click(getSideBarItems("Coyni Portal"), "Coyni Portal");
 	}
 
-	public void getElementsForTransactions(String type) {
-		click(getSideBarItems("Transactions"), type);
+	public void clickTransactions() {
+		click(getSideBarItems("Transactions"), "Transactions");
 	}
 
-	public void getElementsForProfiles(String type) {
-		click(getSideBarItems("Profiles"), type);
+	public void clickProfiles() {
+		click(getSideBarItems("Profiles"), "Profiles");
 	}
 
-	public void getElementsForUnderWriting(String type) {
-		click(getSideBarItems("UnderWriting"), type);
+	public void clickUnderWriting() {
+		click(getSideBarItems("UnderWriting"), "UnderWriting");
 	}
 
-	public void getElementsForDisputes(String type) {
-		click(getSideBarItems("Disputes"), type);
+	public void clickDisputes() {
+		click(getSideBarItems("Disputes"), "Disputes");
 	}
 
-	public void getElementsForAccounting(String type) {
-		click(getSideBarItems("Accounting"), type);
+	public void clickAccounting() {
+		click(getSideBarItems("Accounting"), "Accounting");
 	}
 
-	public void getElementsForGatewaySettings(String type) {
-		click(getSideBarItems("Gateway Settings"), type);
+	public void clickGatewaySettings() {
+		click(getSideBarItems("Gateway Settings"), "Gateway Settings");
 	}
 
-	public void getElementsForExportedFiles(String type) {
-		click(getSideBarItems("Exported Files"), type);
+	public void clickExportedFiles() {
+		click(getSideBarItems("Exported Files"), "Exported Files");
 	}
 
-	public void getElementsForBalanceReports(String type) {
-		click(getSideBarItems("Balance Reports"), type);
+	public void clickBalanceReports() {
+		click(getSideBarItems("Balance Reports"), "Balance Reports");
 	}
 
-	public void getElementsForSystemSettings(String type) {
-		click(getSideBarItems("System Settings"), type);
+	public void clickSystemSettings() {
+		click(getSideBarItems("System Settings"), "System Settings");
 	}
 
-	public By getSubMenuItems(String elementName) {
-		return By.xpath(String.format("//div[(contains(@class,'flex' ) or contains(@class,'label'))and text()='%s']",
-				elementName));
+	public By getSubMenuItems(String mainItem, String subItem) {
+		return By.xpath(String.format("//span[text()='%s']/../../../following-sibling::*[1]//div[text()='%s']",
+				mainItem, subItem));
 
 	}
 
-	public void getElementsForTokenAccount(String type) {
-		click(getSubMenuItems("Token Account"), type);
+	public void clickTokenAccount() {
+		clickCoyniPortal();
+		click(getSubMenuItems("Coyni Portal", "Token Account"), "Token Account");
 	}
 
-	public void getElementsForCommissionAccount(String type) {
-		click(getSubMenuItems("Commission Account"), type);
+	public void clickCommissionAccount() {
+		clickCoyniPortal();
+		click(getSubMenuItems("Coyni Portal", "Commission Account"), "Commission Account");
 	}
 
-	public void getElementsForIndividuals(String type) {
-		click(getSubMenuItems("Individuals"), type);
+	public void clickIndividuals() {
+		clickProfiles();
+		click(getSubMenuItems("Profiles", "Individuals"), "Individuals");
 	}
 
-	public void getElementsForBusinesses(String type) {
-		click(getSubMenuItems("Businesses"), type);
+	public void clickBusinesses() {
+		clickProfiles();
+		click(getSubMenuItems("Profiles", "Businesses"), "Businesses");
 	}
 
-	public void getElementsForCoyniEmployees(String type) {
-		click(getSubMenuItems("Coyni Employees"), type);
+	public void clickCoyniEmployees() {
+		clickProfiles();
+		click(getSubMenuItems("Profiles", "Coyni Employees"), "Coyni Employees");
 	}
 
-	public void getElementsForAPIBusinesses(String type) {
-		click(getSubMenuItems("API Businesses"), type);
+	public void clickLedgers() {
+		clickProfiles();
+		click(getSubMenuItems("Profiles", "Ledgers"), "Ledgers");
 	}
 
-	public void getElementsForPersonal(String type) {
-		click(getSubMenuItems("Personal"), type);
+	public void clickAPIUsers() {
+		clickProfiles();
+		click(getSubMenuItems("Profiles", "API Users"), "API Users");
 	}
 
-	public void getElementsForBusiness(String type) {
-		click(getSubMenuItems("Business"), type);
+	public void clickPersonal() {
+		clickUnderWriting();
+		click(getSubMenuItems("UnderWriting", "Personal"), "Personal");
 	}
 
-	public void getElementsForTotalWithdraw(String type) {
-		click(getSubMenuItems("Total Withdraw"), type);
+	public void clickBusiness() {
+		clickUnderWriting();
+		click(getSubMenuItems("UnderWriting", "Business"), "Business");
 	}
 
-	public void getElementsForTotalDeposits(String type) {
-		click(getSubMenuItems("Total Deposits"), type);
+	public void clickTotalWithdraw() {
+		clickAccounting();
+		click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
 	}
 
-	public void getElementsForPaymentGateways(String type) {
-		click(getSubMenuItems("Payment Gateways"), type);
+	public void clickTotalDeposits() {
+		clickAccounting();
+		click(getSubMenuItems("Accounting", "Total Deposits"), "Total Deposits");
 	}
 
-	public void getElementsForLoadBalancer(String type) {
-		click(getSubMenuItems("Load Balancer"), type);
+	public void clickPaymentGateways() {
+		clickGatewaySettings();
+		click(getSubMenuItems("Gateway Settings", "Payment Gateways"), "Payment Gateways");
 	}
 
-	public void getElementsForAgreements(String type) {
-		click(getSubMenuItems("Agreements"), type);
+	public void clickLoadBalancer() {
+		clickGatewaySettings();
+		click(getSubMenuItems("Gateway Settings", "Load Balancer"), "Load Balancer");
 	}
 
-	public void getElementsForFeeStructure(String type) {
-		click(getSubMenuItems("Fee Sructure"), type);
+	public void getElementsForAgreements() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Agreements"), "Agreements");
 	}
 
-	public void getElementsForAccountLimits(String type) {
-		click(getSubMenuItems("Account Limits"), type);
+	public void getElementsForFeeStructure() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Fee Sructure"), "Fee Sructure");
 	}
 
-	public void getElementsForPermissions(String type) {
-		click(getSubMenuItems("Permissions"), type);
+	public void getElementsForAccountLimits() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Account Limits"), "Account Limits");
 	}
 
-	public void getElementsForFeatureControls(String type) {
-		click(getSubMenuItems("Feature Controls"), type);
+	public void getElementsForPermissions() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Permissions"), "Permissions");
 	}
 
-	public void getElementsForCardBlackList(String type) {
-		click(getSubMenuItems("Card BlackList"), type);
+	public void getElementsForFeatureControls() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Feature Controls"), "Feature Controls");
 	}
 
-	public void getElementsForPushNotifications(String type) {
-		click(getSubMenuItems("Push Notifications"), type);
+	public void getElementsForCardBlackList() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Card BlackList"), "Card BlackList");
+	}
+
+	public void getElementsForPushNotifications() {
+		clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Push Notifications"), "Push Notifications");
 	}
 }
