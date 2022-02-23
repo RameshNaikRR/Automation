@@ -8,16 +8,16 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionPage extends BrowserFunctions {
 
-	private By headingTransactionList = By.cssSelector(".text");
-	private By lblToken = By.xpath("");
-	private By lblBusiness = By.xpath("");
-	private By lblDateTime = By.xpath("");
-	private By lblUserType = By.xpath("");
-	private By lblType = By.xpath("");
-	private By lblSubType = By.xpath("");
-	private By lblDescription = By.xpath("");
-	private By lblAmount = By.xpath("");
-	private By lblStatus = By.xpath("");
+	private By headingTransactionList = By.xpath("//span[text()='Transaction List']");
+	private By lblToken = By.xpath("//div[text()='Token']");
+	private By lblBusiness = By.xpath("//div[text()='Business']");
+	private By lblDateTime = By.xpath("//span[text()='Date / Time']");
+	private By lblUserType = By.xpath("//span[text()='User Type']");
+	private By lblType = By.xpath("//span[text()='Type']");
+	private By lblSubType = By.xpath("//span[text()='Sub Type']");
+	private By lblDescription = By.xpath("//span[text()='Description']");
+	private By lblAmount = By.xpath("//span[text()='Amount(CYN)']");
+	private By lblStatus = By.xpath("//span[text()='Status']");
 
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", expHeading);
