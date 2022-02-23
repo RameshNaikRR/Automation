@@ -8,13 +8,13 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class BatchIDComponent extends BrowserFunctions{
 	
-	private By lblTotalBatchAmount = By.cssSelector("");
-	private By lblInProgressCount = By.cssSelector("");
-	private By lblPaidCount = By.cssSelector("");
-	private By lblFailedCount = By.cssSelector("");
-	private By lblPendingCount = By.cssSelector("");
-	private By totalCount = By.cssSelector("");
-	private By lblBatchId = By.cssSelector("");
+	private By lblTotalBatchAmount = By.xpath("(//span[text()='Total Batch Amount']//following::span)[1]");
+	private By lblInProgressCount = By.xpath("(//span[text()='InProgress']//following::span)[1]");
+	private By lblPaidCount = By.xpath("(//span[text()='Paid']//following::span)[1]");
+	private By lblFailedCount = By.xpath("(//span[text()='Failed']//following::span)[1]");
+	private By lblPendingCount = By.xpath("(//span[text()='Pending']//following::span)[1]");
+	private By totalCount = By.xpath("(//span[text()='Total Count']//following::span)[1]");
+	private By lblBatchId = By.cssSelector(".text");
 	
 	
 	public String getTotalBatchAmount() {
