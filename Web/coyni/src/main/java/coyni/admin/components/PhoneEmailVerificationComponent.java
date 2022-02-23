@@ -1,0 +1,62 @@
+package coyni.admin.components;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import coyni.uitilities.CommonFunctions;
+import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
+
+public class PhoneEmailVerificationComponent extends BrowserFunctions {
+	private By lblHeading = By.xpath("");
+	private By lblDescription = By.xpath("");
+	private By lnkResend = By.xpath("");
+	private By txtInput = By.xpath("");
+	private By lnkLogin = By.xpath("");
+	private By lnkCoyni = By.xpath("");
+	private By lnkBackToLogin = By.xpath("");
+
+	public void verifyPageHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Email Verification", expHeading);
+	}
+
+	public void verifyPageDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblDescription, "Email Verification", expDescription);
+	}
+
+	public void clickResend() {
+		click(lnkResend, " Resend ");
+
+	}
+
+	public void fillpin(String code) {
+
+		List<WebElement> inputs = getElementsList(txtInput, "input boxes");
+		int noOfInputs = inputs.size();
+		if (noOfInputs == 6) {
+			for (int i = 0; i < noOfInputs; i++) {
+				inputs.get(i).sendKeys(code.charAt(i) + "");
+			}
+			ExtentTestManager.setPassMessageInReport("verification entered in text failed");
+		}
+	}
+
+	public void clickLogin() {
+		if (getElement(lnkLogin, "Login").isEnabled()) {
+			click(lnkLogin, " Login ");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(" Login Button is Disabled");
+		}
+	}
+
+	public void clickCoyni() {
+		click(lnkCoyni, "Coyni");
+	}
+
+	public void clickBackToLogin() {
+		click(lnkBackToLogin, "Back to Login");
+	}
+
+}

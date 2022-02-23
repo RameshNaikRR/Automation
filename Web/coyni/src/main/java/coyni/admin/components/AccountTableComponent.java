@@ -12,7 +12,7 @@ public class AccountTableComponent extends BrowserFunctions{
 	private By drpdwn = By.xpath("//div[text()='Batch ID']//following::img");
 	private By txtBatchId = By.cssSelector(".form-input-search.search-bar");
 	private By btnSearch = By.cssSelector("//div[text()='Search']");
-	
+	//axcd
 	
 	private By getTabItemLoc(String elementName) {
 		return By.xpath(String.format("//div[contains(@class,'tabs__tab') and text()='%s']", elementName));
