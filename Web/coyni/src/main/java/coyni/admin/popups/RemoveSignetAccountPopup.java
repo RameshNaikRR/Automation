@@ -23,7 +23,7 @@ public class RemoveSignetAccountPopup extends BrowserFunctions {
 	}
 
 	public void verifyWalletIDView() {
-		ExtentTestManager.setPassMessageInReport("Wallet ID is " + getElement(lblWalletID, "Wallet ID"));
+		ExtentTestManager.setInfoMessageInReport("Wallet ID is " + getElement(lblWalletID, "Wallet ID"));
 	}
 
 	public void verifyName(String name) {

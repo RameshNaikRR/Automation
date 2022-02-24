@@ -28,17 +28,17 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getRecipientName() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Recipient Name  is " + getText(getLabelItem("Recipient Name"), "Recipient Name"));
 	}
 
 	public void getRecipientEmail() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Recipient Email  is " + getText(getLabelItem("Recipient Email"), "Recipient Email"));
 	}
 
 	public void getRecipientPhoneNumber() {
-		ExtentTestManager.setPassMessageInReport("Recipient PhoneNumber  is "
+		ExtentTestManager.setInfoMessageInReport("Recipient PhoneNumber  is "
 				+ getText(getLabelItem("Recipient Phone Number"), "Recipient PhoneNumber"));
 	}
 
@@ -47,22 +47,22 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getTransactionType() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Transaction Type is " + getText(getLabelItem("Transaction Type"), "TransactionType"));
 	}
 
 	public void getTransactionSubType() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Transaction SubType is " + getText(getLabelItem("Transaction Sub Type"), "Transaction SubType"));
 	}
 
 	public void getCreatedDate() {
 		ExtentTestManager
-				.setPassMessageInReport("Created Date  is " + getText(getLabelItem("Date / Time"), "Created Date"));
+				.setInfoMessageInReport("Created Date  is " + getText(getLabelItem("Date / Time"), "Created Date"));
 	}
 
 	public void getAmount() {
-		ExtentTestManager.setPassMessageInReport("Amount  is " + getText(getLabelItem("Amount Received"), "Amount"));
+		ExtentTestManager.setInfoMessageInReport("Amount  is " + getText(getLabelItem("Amount Received"), "Amount"));
 	}
 
 	public void verifyLedgerInformation(String expHeading) {
@@ -72,15 +72,15 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public void getReferenceID() {
 		ExtentTestManager
-				.setPassMessageInReport("ReferenceID  is " + getText(getLabelItem("Reference ID"), "ReferenceID"));
+				.setInfoMessageInReport("ReferenceID  is " + getText(getLabelItem("Reference ID"), "ReferenceID"));
 	}
 
 	public void getCordaID() {
-		ExtentTestManager.setPassMessageInReport("CordaID  is " + getText(getLabelItem("Corda ID"), "CordaID"));
+		ExtentTestManager.setInfoMessageInReport("CordaID  is " + getText(getLabelItem("Corda ID"), "CordaID"));
 	}
 
 	public void getTransactionIPAddress() {
-		ExtentTestManager.setPassMessageInReport("Transaction IP Address  is "
+		ExtentTestManager.setInfoMessageInReport("Transaction IP Address  is "
 				+ getText(getLabelItem("Transaction IP Address"), "TransactionIPAddress"));
 	}
 
@@ -90,15 +90,15 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getSenderName() {
-		ExtentTestManager.setPassMessageInReport("SenderName is " + getText(getLabelItem("Sender Name"), "SenderName"));
+		ExtentTestManager.setInfoMessageInReport("SenderName is " + getText(getLabelItem("Sender Name"), "SenderName"));
 	}
 
 	public void getAccountID() {
-		ExtentTestManager.setPassMessageInReport("AccountID  is " + getText(getLabelItem("Account ID"), "AccountID"));
+		ExtentTestManager.setInfoMessageInReport("AccountID  is " + getText(getLabelItem("Account ID"), "AccountID"));
 	}
 
 	public void getAccountAddress() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Account Address  is " + getText(getLabelItem("Account Address"), "AccountAddress"));
 	}
 
@@ -113,7 +113,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getMessageFromSender() {
-		ExtentTestManager.setPassMessageInReport(
+		ExtentTestManager.setInfoMessageInReport(
 				"Message From Sender  is " + getText(lblMessageFromSender, "Message From Sender"));
 	}
 

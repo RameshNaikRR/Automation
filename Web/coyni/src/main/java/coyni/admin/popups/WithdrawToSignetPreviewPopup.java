@@ -26,20 +26,20 @@ public class WithdrawToSignetPreviewPopup extends BrowserFunctions {
 
 	public void getWithdrawAmount() {
 		ExtentTestManager
-				.setPassMessageInReport("Withdraw Amount is " + getElement(lblWithdrawAmount, "Withdraw Amount"));
+				.setInfoMessageInReport("Withdraw Amount is " + getElement(lblWithdrawAmount, "Withdraw Amount"));
 	}
 
 	public void getSignetAccount() {
 		ExtentTestManager
-				.setPassMessageInReport("Withdraw Amount is " + getElement(lblSignetAccount, "Signet Account"));
+				.setInfoMessageInReport("Withdraw Amount is " + getElement(lblSignetAccount, "Signet Account"));
 	}
 
 	public void getProcessingFee() {
-		ExtentTestManager.setPassMessageInReport("Processing Fee is " + getElement(lblProcessingFee, "Processing Fee"));
+		ExtentTestManager.setInfoMessageInReport("Processing Fee is " + getElement(lblProcessingFee, "Processing Fee"));
 	}
 
 	public void getTotal() {
-		ExtentTestManager.setPassMessageInReport("Total is " + getElement(lblTotal, "Total"));
+		ExtentTestManager.setInfoMessageInReport("Total is " + getElement(lblTotal, "Total"));
 	}
 
 	public void clickConfirm() {

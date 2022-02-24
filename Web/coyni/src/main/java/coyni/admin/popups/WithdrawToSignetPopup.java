@@ -22,7 +22,7 @@ public class WithdrawToSignetPopup extends BrowserFunctions {
 
 	public void getAvailableBalance() {
 		ExtentTestManager
-				.setPassMessageInReport("Withdraw Amount is " + getElement(lblAvailableBalance, "Available Balance"));
+				.setInfoMessageInReport("Withdraw Amount is " + getElement(lblAvailableBalance, "Available Balance"));
 
 	}
 
