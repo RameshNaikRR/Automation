@@ -6,19 +6,19 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class FilterComponent extends BrowserFunctions {
-	private By lblDate = By.xpath("");
-	private By lnkClear = By.xpath("");
-	private By lblTransactionType = By.xpath("");
-	private By lnkClearAll = By.xpath("");
-	private By lblTransactionAmount = By.xpath("");
-	private By txtFromAmount = By.xpath("");
-	private By txtToAmount = By.xpath("");
-	private By lblReferenceId = By.xpath("");
-	private By txtReferenceId = By.xpath("");
-	private By lblTransactionStatus = By.xpath("");
+	private By lblDate = By.xpath("//label[text()='Date']");
+	private By lnkClear = By.xpath("//label[text()='Date']//button[text()='Clear']");
+	private By lblTransactionType = By.xpath("//span[text()='Transaction Type']");
+	private By lnkClearAll = By.xpath("//span[text()='Transaction Type']//button[text()='Clear All']");
+	private By lblTransactionAmount = By.xpath("//label[text()='Transaction Amount']");
+	private By txtFromAmount = By.xpath("//span[text()='From (CYN)']");
+	private By txtToAmount = By.xpath("//span[text()='To (CYN)']");
+	private By lblReferenceId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Reference ID']");
+	private By txtReferenceId = By.xpath("//input[@id='Reference ID']");
+	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	//private By lnkClaerAll = By.xpath("");
-	private By lblEmployeeName = By.xpath("");
-	private By drpdwn = By.xpath("");
+	private By lblEmployeeName = By.xpath("//label[text()='Employee Name']");
+	private By drpdwn = By.xpath("div[class*='selected_option']");
 	private By lnkResetAllFilters = By.xpath("");
 	private By btnApplyFilters = By.xpath("");
 	

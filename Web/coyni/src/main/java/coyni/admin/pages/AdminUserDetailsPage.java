@@ -9,25 +9,25 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AdminUserDetailsPage extends BrowserFunctions {
 	
-	private By lblHeading = By.xpath("");
-	private By lblName = By.xpath("");
-	private By lblAcountID = By.xpath("");
-	private By lnkChangePassword = By.xpath("");
-	private By lblChangePasswordHeading = By.xpath("");
-	private By lblChangePasswordDesc = By.xpath("");
-	private By txtCurrentPassword = By.xpath("");
-	private By txtNewPassword = By.xpath("");
-	private By txtConfirmPassword = By.xpath("");
-	private By iconEyeCurrentPassword = By.xpath("");
-	private By iconEyeConfirmPassword = By.xpath("");
-	private By iconEyeNewPassword = By.xpath("");
+	private By lblHeading = By.xpath("//span[text()='Admin User Details']");
+	private By lblName = By.xpath("//span[@class='text-2xl font-bold text-cgy8']");
+	private By lblAcountID = By.xpath("//span[@class='mt-1 text-xs text-cgy3']");
+	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
+	private By lblChangePasswordHeading = By.xpath("//div[(contains(@class,'AdminProfile'))]//span[text()='Change Password']");
+	private By lblChangePasswordDesc = By.xpath("//span[@class='mt-2 text-sm text-cgy13']");
+	private By txtCurrentPassword = By.xpath("//label[text()='Current Password']");
+	private By txtNewPassword = By.xpath("//label[text()='New Password']");
+	private By txtConfirmPassword = By.xpath("//label[text()='Confirm New Password']");
+	private By iconEyeCurrentPassword = By.xpath("(//button[contains(@class,'icon-View')])[1]");
+	private By iconEyeConfirmPassword = By.xpath("(//button[contains(@class,'icon-View')])[3]");
+	private By iconEyeNewPassword = By.xpath("(//button[contains(@class,'icon-View')])[2]");
 	private By lblGreenDot = By.xpath("");
 	private By lblGreenDot1 = By.xpath(""); 
 	private By lblRedDot = By.xpath("");
-	private By btnSave = By.xpath("");
+	private By btnSave = By.xpath("//button[text()='Save']");
 	private By lblPasswordSuccessMsgHeading = By.xpath("");
 	private By lblPasswordSuccessMsgDesc = By.xpath("");
-	private By btneditImage = By.xpath("");
+	private By btneditImage = By.xpath("//img[@class='w-4 h-4']");
 	
 	public By getUserDetails(String Type) {
 		return By.xpath(String.format("//span[(contains(@class,'Admin') or contains(@class,'text')) and text()='%s']", Type)) ;
