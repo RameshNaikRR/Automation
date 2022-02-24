@@ -10,13 +10,13 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class PhoneEmailVerificationComponent extends BrowserFunctions {
-	private By lblHeading = By.xpath("");
-	private By lblDescription = By.xpath("");
-	private By lnkResend = By.xpath("");
-	private By txtInput = By.xpath("");
+	private By lblHeading = By.xpath("//div[text()='Email Verification']");
+	private By lblDescription = By.cssSelector(".text-base");
+	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
+	private By txtInput = By.cssSelector(".verification-input-wrapper ");
 	private By lnkLogin = By.xpath("");
 	private By lnkCoyni = By.xpath("");
-	private By lnkBackToLogin = By.xpath("");
+	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Email Verification", expHeading);

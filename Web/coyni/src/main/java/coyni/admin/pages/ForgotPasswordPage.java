@@ -8,11 +8,11 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class ForgotPasswordPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("");
-	private By lblDescription = By.xpath("");
-	private By txtEmail = By.xpath("");
-	private By btnNext = By.xpath("");
-	private By lnkBackToLogin = By.xpath("");
+	private By lblHeading = By.xpath("//span[text()='Forgot Password?']");
+	private By lblDescription = By.xpath("//span[@class=\"forgot-password__sub-title\"]");
+	private By txtEmail = By.id("Email-id");
+	private By btnNext = By.xpath("//button[text()='Next']");
+	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password", expHeading);
