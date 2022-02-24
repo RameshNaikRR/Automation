@@ -9,18 +9,19 @@ public class ExportComponent extends BrowserFunctions {
 
 	private By lblExportHeading = By.xpath("//h3[text()='Export Selected Transactions']");
 
-	private By lblDateRange = By.xpath("");
+	private By lblDateRange = By.xpath("//h3[text()='Date Range']");
 
-	private By drpDwnDefault = By.xpath("");
+	private By drpDwn = By.xpath("//div[@class='FormField_selected_option__dQiIf undefined']");
 
-	private By drpDwnCustom = By.xpath("");
+	private By lblColumns = By.xpath("//h3[text()='Columns']");
 
-	private By lnkDeSelectAll = By.xpath("");
+	private By lnkDeSelectAll = By.xpath("//span[text()='Deselect All']");
 
-	private By lblColumns = By.xpath("");
+	private By btnExport = By.xpath("//button[text()='Export']");
 
 	public By getRadioBtn(String elementName) {
-		return By.xpath(String.format("", elementName));
+		return By.xpath(String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
+				elementName));
 	}
 
 	public void clickToday() {
@@ -56,12 +57,12 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickSelectDropDownDefault() {
-		click(drpDwnDefault, "Click Select DropDOwn");
+		click(drpDwn, "Click Select DropDOwn");
 
 	}
 
 	public void clickSelectDropDownCustom() {
-		click(drpDwnCustom, "Click Select DropDOwn");
+		click(drpDwn, "Click Select DropDOwn");
 
 	}
 
@@ -74,7 +75,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public By getCheckBox(String elementName) {
-		return By.xpath(String.format("", elementName));
+		return By.xpath(
+				String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
+						elementName));
 	}
 
 	public void clickReferenceId() {
@@ -190,7 +193,8 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void btnExport() {
-		click(getCheckBox("clickExport"), "clickExport");
+		click(btnExport, "Export");
 	}
+
 
 }
