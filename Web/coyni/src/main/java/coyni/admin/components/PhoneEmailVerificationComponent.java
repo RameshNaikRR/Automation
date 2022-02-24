@@ -32,15 +32,7 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 	}
 
 	public void fillpin(String code) {
-
-		List<WebElement> inputs = getElementsList(txtInput, "input boxes");
-		int noOfInputs = inputs.size();
-		if (noOfInputs == 6) {
-			for (int i = 0; i < noOfInputs; i++) {
-				inputs.get(i).sendKeys(code.charAt(i) + "");
-			}
-			ExtentTestManager.setPassMessageInReport("verification entered in text failed");
-		}
+new AuthyComponent().fillInput(code);
 	}
 
 	public void clickLogin() {
