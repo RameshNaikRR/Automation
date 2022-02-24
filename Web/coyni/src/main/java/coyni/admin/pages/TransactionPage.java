@@ -59,7 +59,6 @@ public class TransactionPage extends BrowserFunctions {
 		ExtentTestManager.setPassMessageInReport("Status is " + getElement(lblStatus, "Status"));
 	}
 
-	public TransactionDetailsPage transactionDetailsPage() {
-		return new TransactionDetailsPage();
-	}
+	
+	
 }

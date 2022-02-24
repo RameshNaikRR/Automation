@@ -2,29 +2,119 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionDetailsComponent extends BrowserFunctions {
 
-	private By lblTransactionType = By.cssSelector(" ");
-	private By lblAmountSent = By.cssSelector(" ");
-	private By lblProcessingFee = By.cssSelector(" ");
-	private By lblTotalAmount = By.cssSelector(" ");
-	private By lblAccountBalance = By.cssSelector(" ");
-	
-	public String getlblTransactionType() {
-	return	getText(lblTransactionType, "Transaction type");
+	private By lblHeadingTransactionDetails = By.cssSelector(".text ");
+
+	private By lblLedgerInformation = By.xpath("//span[text()='Ledger Information']");
+
+	private By lblSenderInformation = By.xpath("//span[text()='Sender Information']");
+
+	private By lblMessageFromSender = By.xpath("");
+
+	private By headingRecipientInformation = By.xpath("//span[text()='Recipient Information']");
+
+	public By getLabelItem(String Type) {
+		return By.xpath(String.format(
+				"//p[text()='%s']/following-sibling::div[1]/p | //p[text()='%s']//following-sibling::span", Type));
 	}
-	public String getlblAmountSent() {
-		return getText(lblAmountSent, "Amount sent");
+
+	public void verifyRecipientInformation(String expHeading) {
+		new CommonFunctions().verifyLabelText(headingRecipientInformation, "Recipient Information", expHeading);
 	}
-    public String getlblProcessingFee() {
-    	return getText(lblAccountBalance, "Procesing Fee");
-    }
-    public String getlblTotalAmount(){
-    	return getText(lblTotalAmount, "Total Amount");
-    	}
-    public String getlblAccountBalance() {
-    	return getText(lblAccountBalance, "Account Balance");
-    }
+
+	public void getRecipientName() {
+		ExtentTestManager.setPassMessageInReport(
+				"Recipient Name  is " + getText(getLabelItem("Recipient Name"), "Recipient Name"));
+	}
+
+	public void getRecipientEmail() {
+		ExtentTestManager.setPassMessageInReport(
+				"Recipient Email  is " + getText(getLabelItem("Recipient Email"), "Recipient Email"));
+	}
+
+	public void getRecipientPhoneNumber() {
+		ExtentTestManager.setPassMessageInReport("Recipient PhoneNumber  is "
+				+ getText(getLabelItem("Recipient Phone Number"), "Recipient PhoneNumber"));
+	}
+
+	public void verifyTransactionDetailsHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeadingTransactionDetails, "Transaction Heading", expHeading);
+	}
+
+	public void getTransactionType() {
+		ExtentTestManager.setPassMessageInReport(
+				"Transaction Type is " + getText(getLabelItem("Transaction Type"), "TransactionType"));
+	}
+
+	public void getTransactionSubType() {
+		ExtentTestManager.setPassMessageInReport(
+				"Transaction SubType is " + getText(getLabelItem("Transaction Sub Type"), "Transaction SubType"));
+	}
+
+	public void getCreatedDate() {
+		ExtentTestManager
+				.setPassMessageInReport("Created Date  is " + getText(getLabelItem("Date / Time"), "Created Date"));
+	}
+
+	public void getAmount() {
+		ExtentTestManager.setPassMessageInReport("Amount  is " + getText(getLabelItem("Amount Received"), "Amount"));
+	}
+
+	public void verifyLedgerInformation(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblLedgerInformation, "Ledger Information Heading", expHeading);
+
+	}
+
+	public void getReferenceID() {
+		ExtentTestManager
+				.setPassMessageInReport("ReferenceID  is " + getText(getLabelItem("Reference ID"), "ReferenceID"));
+	}
+
+	public void getCordaID() {
+		ExtentTestManager.setPassMessageInReport("CordaID  is " + getText(getLabelItem("Corda ID"), "CordaID"));
+	}
+
+	public void getTransactionIPAddress() {
+		ExtentTestManager.setPassMessageInReport("Transaction IP Address  is "
+				+ getText(getLabelItem("Transaction IP Address"), "TransactionIPAddress"));
+	}
+
+	public void verifySenderInformation(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblSenderInformation, "Sender Information Heading", expHeading);
+
+	}
+
+	public void getSenderName() {
+		ExtentTestManager.setPassMessageInReport("SenderName is " + getText(getLabelItem("Sender Name"), "SenderName"));
+	}
+
+	public void getAccountID() {
+		ExtentTestManager.setPassMessageInReport("AccountID  is " + getText(getLabelItem("Account ID"), "AccountID"));
+	}
+
+	public void getAccountAddress() {
+		ExtentTestManager.setPassMessageInReport(
+				"Account Address  is " + getText(getLabelItem("Account Address"), "AccountAddress"));
+	}
+
+	public void getSenderEmail() {
+		ExtentTestManager
+				.setPassMessageInReport("Sender Email  is " + getText(getLabelItem("Sender Email"), "Sender Email"));
+	}
+
+	public void getSenderPhoneNumber() {
+		ExtentTestManager.setPassMessageInReport(
+				"Sender PhoneNumber  is " + getText(getLabelItem("Sender Phone Number"), "Sender PhoneNumber"));
+	}
+
+	public void getMessageFromSender() {
+		ExtentTestManager.setPassMessageInReport(
+				"Message From Sender  is " + getText(lblMessageFromSender, "Message From Sender"));
+	}
+
 }
