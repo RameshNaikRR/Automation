@@ -2,9 +2,16 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarComponent extends BrowserFunctions {
+
+	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
+
+	public void verifyCursorAction() {
+		new CommonFunctions().verifyCursorAction(handMark, "Hand Mark");
+	}
 
 	public By getSideBarItems(String elementName) {
 		return By.xpath(String.format("//span[(contains(@class,'menu' ) or contains(@class,'label'))and text()='%s']",
@@ -87,9 +94,9 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSubMenuItems("Profiles", "Ledgers"), "Ledgers");
 	}
 
-	public void clickAPIUsers() {
+	public void clickAPIBusinessess() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "API Users"), "API Users");
+		click(getSubMenuItems("Profiles", "API Users"), "API Businesses");
 	}
 
 	public void clickPersonal() {
