@@ -2,6 +2,7 @@ package coyni.admin.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.PhoneEmailVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -38,4 +39,9 @@ public class ForgotPasswordPage extends BrowserFunctions {
 		click(lnkBackToLogin, "Back to Login");
 	}
 
+	public PhoneEmailVerificationComponent phoneEmailVerificationComponent()
+	{
+		return new PhoneEmailVerificationComponent();
+	}
+	
 }

@@ -159,7 +159,8 @@ public class LoginPage extends BrowserFunctions {
 	public UserNameDropDownComponent userNameDropDownComponent() {
 		return new UserNameDropDownComponent();
 	}
-	public void validateLoginField(By ele,String eleName, String textField) {
+
+	public void validateLoginField(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
 		for (int i = 0; i < 4; i++) {
 			new CommonFunctions().validateField(ele, eleName, field[i]);
@@ -167,16 +168,22 @@ public class LoginPage extends BrowserFunctions {
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
 		new CommonFunctions().validateTextFeild(ele, eleName, field[5]);
 	}
+
 	/**
-	 Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
 	 */
 	public void validateEmailTextField(String emailField) {
 		validateLoginField(txtEmail, "Email", emailField);
 	}
+
 	/**
-	 Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, maxCharPlus, spaces
 	 */
 	public void validatePasswordText(String passwordField) {
 		validateLoginField(txtPassword, "Password", passwordField);
+	}
+
+	public CreatePasswordPage createPasswordPage() {
+		return new CreatePasswordPage();
 	}
 }

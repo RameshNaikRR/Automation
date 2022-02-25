@@ -2,6 +2,7 @@ package coyni.admin.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -21,8 +22,6 @@ public class CreatePasswordPage extends BrowserFunctions {
 	private By lblRedDot = By.cssSelector(".red-dot");
 	private By btnSubmit = By.cssSelector(".update-password-password__login-button");
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
-
-
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Create New Password", expHeading);
@@ -87,4 +86,7 @@ public class CreatePasswordPage extends BrowserFunctions {
 		}
 	}
 
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
 }

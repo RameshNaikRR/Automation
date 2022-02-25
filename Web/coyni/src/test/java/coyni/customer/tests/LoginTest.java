@@ -404,17 +404,10 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("verificationHeading"));
 			loginPage.verifyEmail(data.get("email") + ".");
 			loginPage.fillVerificationInput(data.get("code"));
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
-//			loginPage.clickResend();
-//			loginPage.verifyResendMessage(data.get("resendMessage"));
-//			loginPage.clickGoBack();
-//			loginPage.verifyHeading(data.get("forgotHeading"));
-//			loginPage.clickBackToLogin();
-//			loginPage.verifyHeading(data.get("loginHeading"));
-
+			loginPage.createPasswordPage().verifyHeading(data.get("passwordHeading"));
+			loginPage.createPasswordPage().fillNewPassword(data.get("enterPassword"));
+			loginPage.createPasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			loginPage.createPasswordPage().clickSubmit();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
 		}
@@ -450,9 +443,18 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.verifyHeading(data.get("forgotHeading"));
-			String[] email = data.get("email").split(",");
-			// loginPage.validateFieldWithEmail(email[0], email[1], email[2], email[3],
-			// email[4], email[5], email[6]);
+			loginPage.fillEmail(data.get("email"));
+			loginPage.clickNext();
+			loginPage.verifyHeading(data.get("verificationHeading"));
+			loginPage.verifyEmail(data.get("email") + ".");
+			loginPage.fillVerificationInput(data.get("code"));
+			loginPage.createPasswordPage().verifyHeading(data.get("passwordHeading"));
+			loginPage.createPasswordPage().fillNewPassword(data.get("enterPassword"));
+			loginPage.createPasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
