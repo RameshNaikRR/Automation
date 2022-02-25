@@ -25,6 +25,8 @@ public class AccountingTest {
 	public void testAccountingTest(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalWithdraw();
 			homePage.sideBarComponent().clickTotalDeposits();

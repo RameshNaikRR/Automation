@@ -27,6 +27,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickTokenAccount();
 			homePage.sideBarComponent().clickCommissionAccount();
@@ -35,6 +36,7 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testCoyniPortal Failed due to Exception " + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })

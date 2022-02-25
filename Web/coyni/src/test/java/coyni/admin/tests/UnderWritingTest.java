@@ -26,6 +26,7 @@ public class UnderWritingTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickUnderWriting();
 			homePage.sideBarComponent().clickPersonal();
 			homePage.sideBarComponent().clickBusiness();

@@ -6,11 +6,15 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarComponent extends BrowserFunctions {
-
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
 
 	public void verifyCursorAction() {
 		new CommonFunctions().verifyCursorAction(handMark, "Hand Mark");
+	}
+
+	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {
+		new CommonFunctions().verifyChangedColor(getSideBarItems("Type"), "SideBarItems", expCssProp, expValue,
+				expColor);
 	}
 
 	public By getSideBarItems(String elementName) {
@@ -129,37 +133,37 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSubMenuItems("Gateway Settings", "Load Balancer"), "Load Balancer");
 	}
 
-	public void getElementsForAgreements() {
+	public void clickAgreements() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Agreements"), "Agreements");
 	}
 
-	public void getElementsForFeeStructure() {
+	public void clickFeeStructure() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Fee Sructure"), "Fee Sructure");
 	}
 
-	public void getElementsForAccountLimits() {
+	public void clickAccountLimits() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Account Limits"), "Account Limits");
 	}
 
-	public void getElementsForPermissions() {
+	public void clickPermissions() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Permissions"), "Permissions");
 	}
 
-	public void getElementsForFeatureControls() {
+	public void clickFeatureControls() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Feature Controls"), "Feature Controls");
 	}
 
-	public void getElementsForCardBlackList() {
+	public void clickCardBlackList() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Card BlackList"), "Card BlackList");
 	}
 
-	public void getElementsForPushNotifications() {
+	public void clickPushNotifications() {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Push Notifications"), "Push Notifications");
 	}

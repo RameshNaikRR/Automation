@@ -25,6 +25,8 @@ public class DisputesTest {
 	public void testDisputesTest(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickDisputes();
 
 		} catch (Exception e) {

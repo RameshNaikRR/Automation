@@ -25,6 +25,8 @@ public class GatewaySettingsTest {
 	public void testGatewaySettingsTest(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickGatewaySettings();
 			homePage.sideBarComponent().clickPaymentGateways();
 			homePage.sideBarComponent().clickLoadBalancer();
@@ -33,5 +35,4 @@ public class GatewaySettingsTest {
 			ExtentTestManager.setFailMessageInReport("testGatewaySettingsTest Failed due to Exception " + e);
 		}
 	}
-
 }
