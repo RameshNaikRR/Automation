@@ -75,9 +75,8 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public By getCheckBox(String elementName) {
-		return By.xpath(
-				String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
-						elementName));
+		return By.xpath(String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
+				elementName));
 	}
 
 	public void clickReferenceId() {
@@ -188,8 +187,132 @@ public class ExportComponent extends BrowserFunctions {
 		click(getCheckBox("Wallet Id"), "Wallet Id");
 	}
 
+	public void clickBusinessID() {
+		click(getCheckBox("Business ID"), "Business ID");
+	}
+
+	public void clickBusinessName() {
+		click(getCheckBox("Business Name"), "Business Name");
+	}
+
+	public void clickDBAName() {
+		click(getCheckBox("DBA Name"), "DBA Name");
+	}
+
+	public void clickCustomerID() {
+		click(getCheckBox("Customer ID"), "Customer ID");
+	}
+
+	public void clickAssignedTo() {
+		click(getCheckBox("Assigned To"), "Assigned To");
+	}
+
+	public void clickCustomerName() {
+		click(getCheckBox("Customer Name"), "Customer Name");
+	}
+
+	public void clickCaseID() {
+		click(getCheckBox("Case ID"), "Case ID");
+	}
+
 	public void clickNameOnCard() {
 		click(getCheckBox("Name On Card"), "Name On Card");
+	}
+
+	public void clickGiactReasonCode() {
+		click(getCheckBox("Giact Reason Code "), "Giact Reason Code ");
+	}
+
+	public void clickMerchantName() {
+		click(getCheckBox("Merchant Name"), "Merchant Name");
+	}
+
+	public void clickMerchantID() {
+		click(getCheckBox("Merchant ID"), "Merchant ID");
+	}
+
+	public void clickReleaseRule() {
+		click(getCheckBox("Release Rule"), "Release Rule");
+	}
+
+	public void clickReleaseType() {
+		click(getCheckBox("Release Type"), "Release Type");
+	}
+
+	public void clickNextRelease() {
+		click(getCheckBox("Next Release"), "Next Release");
+	}
+
+	public void clickMerchantBalance() {
+		click(getCheckBox("Merchant Balance"), "Merchant Balance");
+	}
+
+	public void clickReserveBalance() {
+		click(getCheckBox("Reserve Balance"), "Reserve Balance");
+	}
+
+	public void clickCaseNumber() {
+		click(getCheckBox("Case Number"), "Case Number");
+	}
+
+	public void clickAccountID() {
+		click(getCheckBox("Account ID"), "Account ID");
+	}
+
+	public void clickReceiveDate() {
+		click(getCheckBox("Received Date"), "Received Date");
+	}
+
+	public void clickDueDate() {
+		click(getCheckBox("Due Date"), "Due Date");
+	}
+
+	public void clickCreatedDate() {
+		click(getCheckBox("Created Date"), "Created Date");
+	}
+
+	public void clickCBKAmount() {
+		click(getCheckBox("CBk Amount"), "CBk Amount");
+	}
+
+	public void clickCBKReason() {
+		click(getCheckBox("CBK Reason"), "CBK Reason");
+	}
+
+	public void clickFeePaid() {
+		click(getCheckBox("Fee Paid"), "Fee Paid");
+	}
+
+	public void clickBankDescriptor() {
+		click(getCheckBox("Bank Descriptor"), "Bank Descriptor");
+	}
+
+	public void clickCardBrand() {
+		click(getCheckBox("Card Brand"), "Card Brand");
+	}
+
+	public void clickCardFirst6() {
+		click(getCheckBox("Card First 6"), "Card First 6");
+	}
+
+	public void clickCardLast4() {
+		click(getCheckBox("Card Last 4"), "Card Last 4");
+	}
+
+	public void clickOriginalTransAmount() {
+		click(getCheckBox("OriginalTrans , Amount"), "OriginalTrans , Amount");
+	}
+
+	public void clickTransactionType() {
+		click(getCheckBox("Transaction Type"), "Transaction Type");
+	}
+
+	public void clickTransactionSubType() {
+		click(getCheckBox("Transaction SubType"), "Transaction SubType");
+	}
+
+	public void clcikOriginalTransDate() {
+		click(getCheckBox("OriginalTrans , Date"), "OriginalTrans , Date");
 	}
 
 	public void btnExport() {
