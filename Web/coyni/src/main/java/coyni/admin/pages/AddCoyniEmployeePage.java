@@ -3,6 +3,7 @@ package coyni.admin.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AddCoyniEmployeePage  extends BrowserFunctions{
@@ -18,7 +19,12 @@ public class AddCoyniEmployeePage  extends BrowserFunctions{
 	private By lblPermissionDes =By.xpath("//p[contains(.,'below')]");
 	private By btnAddPermission = By.xpath("//button[.='+ Add Permission Role']");
 	
-	
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading ", expHeading);
+	}
+	public void verifyEmployeeLabel() {
+		
+	}
 	
 	
 	
