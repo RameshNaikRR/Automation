@@ -15,9 +15,14 @@ public class WithdrawToSignetPopup extends BrowserFunctions {
 	public By txtMessage = By.xpath("//textarea[@id='message']");
 	public By btnNext = By.xpath("//button[text()='Next'] ");
 	public By lnkConvertOption = By.xpath("//div[@class='relative mt-14']//img[1]");
+	public By lblTransDescription = By.xpath(" ");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Withdraw To Signet Account Heading", expHeading);
+	}
+
+	public void verifyTransDescription(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblTransDescription, " ", expHeading);
 	}
 
 	public void getAvailableBalance() {

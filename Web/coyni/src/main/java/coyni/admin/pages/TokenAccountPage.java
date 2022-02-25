@@ -2,6 +2,14 @@ package coyni.admin.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.AuthyComponent;
+import coyni.admin.components.SuccessFailureComponent;
+import coyni.admin.popups.AddNewSignetAccountPopup;
+import coyni.admin.popups.NoSignetAccountsExistPopup;
+import coyni.admin.popups.RemoveSignetAccountPopup;
+import coyni.admin.popups.WithdrawToSignetPopup;
+import coyni.admin.popups.WithdrawToSignetPreviewPopup;
+import coyni.customer.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -59,5 +67,37 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public void verifyTransactionView(String expHeading) {
 		new CommonFunctions().verifyLabelTextContains(lblTransactions, "Transactions", expHeading);
+	}
+
+	public WithdrawToSignetPopup withdrawToSignetPopup() {
+		return new WithdrawToSignetPopup();
+	}
+
+	public WithdrawToSignetPreviewPopup withdrawToSignetPreviewPopup() {
+		return new WithdrawToSignetPreviewPopup();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
+
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
+
+	public NoSignetAccountsExistPopup noSignetAccountsExistPopup() {
+		return new NoSignetAccountsExistPopup();
+	}
+
+	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
+		return new AddNewSignetAccountPopup();
+	}
+
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
+	}
+
+	public RemoveSignetAccountPopup removeSignetAccountPopup() {
+		return new RemoveSignetAccountPopup();
 	}
 }

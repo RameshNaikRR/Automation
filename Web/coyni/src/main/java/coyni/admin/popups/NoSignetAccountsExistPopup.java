@@ -19,7 +19,7 @@ public class NoSignetAccountsExistPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Add New signet Account Heading", expDescription);
 	}
 
-	public void clickSave() {
+	public void clickAddSignet() {
 		click(btnAddSignet, "Click on Add Signet Account");
 	}
 
