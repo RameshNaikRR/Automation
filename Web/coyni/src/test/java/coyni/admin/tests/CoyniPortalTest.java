@@ -47,7 +47,7 @@ public class CoyniPortalTest {
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("Withdraw To Signet Account"));
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("5.00"));
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-			tokenAccountPage.withdrawToSignetPopup().verifyTransDescription(data.get(""));
+			tokenAccountPage.withdrawToSignetPopup().verifyTransDescription(data.get("Description"));
 			tokenAccountPage.withdrawToSignetPopup().clickNext();
 			tokenAccountPage.withdrawToSignetPreviewPopup().clickConfirm();
 			tokenAccountPage.authyComponent();
@@ -64,12 +64,12 @@ public class CoyniPortalTest {
 	public void testAddSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("No Signet Accounts Exist"));
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get(""));
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("No Signet Accounts Exist Heading"));
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("Description"));
 			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get(" "));
-			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get(" "));
-			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get(" "));
+			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("Add New Signet Account Heading "));
+			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("New Signet Account"));
+			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("Adsfgt12345"));
 			tokenAccountPage.addNewSignetAccountPopup().clickPaste();
 			tokenAccountPage.mailingAddressComponent();
 			tokenAccountPage.addNewSignetAccountPopup().clickSave();
@@ -85,10 +85,10 @@ public class CoyniPortalTest {
 	public void testRemoveSignetAccount(String strparams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strparams);
-			tokenAccountPage.removeSignetAccountPopup().verifyPageHeading(data.get(" Remove Signet Account"));
-			tokenAccountPage.removeSignetAccountPopup().verifyPageDescription(data.get(" "));
+			tokenAccountPage.removeSignetAccountPopup().verifyPageHeading(data.get(" Remove Signet Account Heading"));
+			tokenAccountPage.removeSignetAccountPopup().verifyPageDescription(data.get("Description "));
 			tokenAccountPage.removeSignetAccountPopup().verifyWalletIDView();
-			tokenAccountPage.removeSignetAccountPopup().verifyName(data.get(" "));
+			tokenAccountPage.removeSignetAccountPopup().verifyName(data.get("Signet Account "));
 			tokenAccountPage.removeSignetAccountPopup().clickRemove();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
