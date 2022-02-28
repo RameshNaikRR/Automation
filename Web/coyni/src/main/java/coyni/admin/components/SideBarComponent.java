@@ -180,5 +180,7 @@ public class SideBarComponent extends BrowserFunctions {
 	public TokenAccountPage tokenAccountPage() {
 		return new TokenAccountPage();
 	}
-
+   public ProfileComponent profileComponent() {
+	   return new ProfileComponent();
+   }
 }

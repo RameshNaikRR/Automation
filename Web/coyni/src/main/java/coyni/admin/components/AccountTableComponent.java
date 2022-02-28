@@ -69,5 +69,8 @@ public class AccountTableComponent extends BrowserFunctions{
 	public BatchIDComponent batchIDComponent() {
 		return new BatchIDComponent();
 	}
+	public ProfileSideBarComponent profileSideBarComponent() {
+		return new ProfileSideBarComponent();
+	}
 	
 }

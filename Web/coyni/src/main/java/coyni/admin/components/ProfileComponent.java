@@ -33,5 +33,7 @@ public class ProfileComponent extends BrowserFunctions {
 	public void clickAddNewEmployee() {
 		click(btnNewEmployee, "New Employee");
 	}
-
+	public AccountTableComponent accountTableComponent() {
+		return new AccountTableComponent();
+	}
 }
