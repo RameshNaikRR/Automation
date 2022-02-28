@@ -37,6 +37,44 @@ public class CoyniPortalTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testTopBar(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.topBarComponent().fillSearch(data.get("search"));
+			homePage.topBarComponent().clickDropDownUserName();
+			homePage.topBarComponent().verifyCursorAction();
+			homePage.topBarComponent().clickUserName();
+			homePage.topBarComponent().adminUserDetailsPage().verifyPageHeading(data.get("heading"));
+			homePage.topBarComponent().verifyCursorAction();
+			homePage.topBarComponent().clickChangePassword();
+			homePage.topBarComponent().navigationComponent().clickBack();
+			homePage.topBarComponent().clickDropDownUserName();
+			homePage.topBarComponent().clickSignOut();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTopBar Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
+			homePage.sideBarComponent().tokenAccountPage().getTotalAvailable();
+			homePage.sideBarComponent().tokenAccountPage().clickWithdrawToSignet();
+			homePage.sideBarComponent().tokenAccountPage().navigationComponent().clickBack();
+			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCoyniPortal Failed due to Exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -64,7 +102,8 @@ public class CoyniPortalTest {
 	public void testAddSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("No Signet Accounts Exist Heading"));
+			tokenAccountPage.noSignetAccountsExistPopup()
+					.verifyPageHeading(data.get("No Signet Accounts Exist Heading"));
 			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("Description"));
 			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
 			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("Add New Signet Account Heading "));

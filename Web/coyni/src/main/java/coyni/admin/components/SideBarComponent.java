@@ -2,6 +2,7 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -167,13 +168,17 @@ public class SideBarComponent extends BrowserFunctions {
 		clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Push Notifications"), "Push Notifications");
 	}
-	
+
 	public void verifyTotalDepositsView() {
 		new CommonFunctions().elementView(getSubMenuItems("Accounting", "Total Deposits"), "TotalDeposits");
 	}
+
 	public AccountTableComponent accountTableComponent() {
 		return new AccountTableComponent();
 	}
-	
-	
+
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
+	}
+
 }

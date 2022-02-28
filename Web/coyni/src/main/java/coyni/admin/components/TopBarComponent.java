@@ -2,6 +2,8 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.pages.AdminUserDetailsPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class TopBarComponent extends BrowserFunctions {
@@ -10,6 +12,12 @@ public class TopBarComponent extends BrowserFunctions {
 			"//input[@class='form-input-search  Header_main_search__2-DYt px-2 bg-cwhite flex-row flex shadow-3xl outline-none border-2 focus:border-cgy2']");
 
 	private By drpdwnUserName = By.xpath("//span[contains(@class,'user-initials-ring user-initials-ring__active' )]");
+
+	private By handMark = By.xpath("//div[@class='cursor-pointer']");
+
+	public void verifyCursorAction() {
+		new CommonFunctions().verifyCursorAction(handMark, "Hand Mark");
+	}
 
 	public void fillSearch(String search) {
 		enterText(drpdwnUserName, "Search", search);
@@ -35,5 +43,13 @@ public class TopBarComponent extends BrowserFunctions {
 
 	public void clickSignOut() {
 		click(getDropDownItems("SignOut"), "SignOut");
+	}
+
+	public AdminUserDetailsPage adminUserDetailsPage() {
+		return new AdminUserDetailsPage();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

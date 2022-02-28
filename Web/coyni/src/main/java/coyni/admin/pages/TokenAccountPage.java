@@ -3,6 +3,7 @@ package coyni.admin.pages;
 import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.admin.components.NavigationComponent;
 import coyni.admin.components.SuccessFailureComponent;
 import coyni.admin.popups.AddNewSignetAccountPopup;
 import coyni.admin.popups.NoSignetAccountsExistPopup;
@@ -99,5 +100,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public RemoveSignetAccountPopup removeSignetAccountPopup() {
 		return new RemoveSignetAccountPopup();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }
