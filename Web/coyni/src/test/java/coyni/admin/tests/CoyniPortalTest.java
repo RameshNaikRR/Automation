@@ -88,7 +88,7 @@ public class CoyniPortalTest {
 			tokenAccountPage.withdrawToSignetPopup().verifyTransDescription(data.get("Description"));
 			tokenAccountPage.withdrawToSignetPopup().clickNext();
 			tokenAccountPage.withdrawToSignetPreviewPopup().clickConfirm();
-			tokenAccountPage.authyComponent();
+			tokenAccountPage.authyComponent().verifyLogin();
 			tokenAccountPage.successFailureComponent();
 
 		} catch (Exception e) {
@@ -110,9 +110,13 @@ public class CoyniPortalTest {
 			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("New Signet Account"));
 			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("Adsfgt12345"));
 			tokenAccountPage.addNewSignetAccountPopup().clickPaste();
-			tokenAccountPage.mailingAddressComponent();
+			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
+			tokenAccountPage.mailingAddressComponent().clickstate();
+			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+			tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			tokenAccountPage.addNewSignetAccountPopup().clickSave();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
