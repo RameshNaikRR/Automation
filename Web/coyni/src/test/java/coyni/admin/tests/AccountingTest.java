@@ -15,7 +15,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class AccountingTest {
 
 	HomePage homePage;
-	SideBarComponent  sideBarComponent;
+	SideBarComponent sideBarComponent;
 	AccountTableComponent accountTableComponent;
 
 	@BeforeTest
@@ -23,8 +23,63 @@ public class AccountingTest {
 		homePage = new HomePage();
 		sideBarComponent = new SideBarComponent();
 		accountTableComponent = new AccountTableComponent();
-		
+	}
 
+	@Test
+	@Parameters("strParams")
+	public void testTotalWithdrawWithBankAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters("strParams")
+	public void testTotalWithdrawWithSignetAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters("strParams")
+	public void testTotalWithdrawWithInsantPay(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickInstantPay();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters("strParams")
+	public void testTotalWithdrawWithGiftCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickGiftCard();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
 	}
 
 	@Test
@@ -42,46 +97,48 @@ public class AccountingTest {
 			ExtentTestManager.setFailMessageInReport("testAccountingTest Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 
 	public void testTotalDepositsBankAccount() {
 		try {
-	Map<String, String> data = Runner.getKeywordParameters(null);
-	   homePage.sideBarComponent().clickAccounting();
-	   homePage.sideBarComponent().verifyTotalDepositsView();
-	   homePage.sideBarComponent().clickTotalDeposits();
-	   homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
-	   homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchIdView();
-	   homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
-	   homePage.sideBarComponent().accountTableComponent().verifyButtonSearchView();
-	   }catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("test Total Deposits failed due to Exception" + e);	
+			Map<String, String> data = Runner.getKeywordParameters(null);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().verifyTotalDepositsView();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchIdView();
+			homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
+			homePage.sideBarComponent().accountTableComponent().verifyButtonSearchView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total Deposits failed due to Exception" + e);
 		}
 	}
-		
+
 	@Test
 	public void testTotalDepositSignetAccount() {
 		try {
-		   Map<String, String> data = Runner.getKeywordParameters(null);
-		   homePage.sideBarComponent().clickAccounting();
-		   homePage.sideBarComponent().clickTotalDeposits();
-		   homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
-		   }catch(Exception e) {
+			Map<String, String> data = Runner.getKeywordParameters(null);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Signet Account failed due to Exception " + e);
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testTotalDepositCreditandDebitCard() {
 		try {
-			 Map<String, String> data = Runner.getKeywordParameters(null);
-			 homePage.sideBarComponent().clickAccounting();
-			 homePage.sideBarComponent().clickTotalDeposits();
-			 homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
-			
-		}catch(Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Total Deposit Credit and Debit Card failed due to Exception " + e);
+			Map<String, String> data = Runner.getKeywordParameters(null);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Total Deposit Credit and Debit Card failed due to Exception " + e);
 		}
 	}
 
