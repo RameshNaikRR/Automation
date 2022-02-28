@@ -38,5 +38,8 @@ public class BatchIDComponent extends BrowserFunctions{
 	public void verifyBatchId(String expBatchId) {
 		new CommonFunctions().verifyLabelText(lblBatchId, "Batch ID",expBatchId);
 	}
-
+   public void verifyBatchIdView() {
+	   new CommonFunctions().elementView(lblBatchId, "Batch Id");
+   }
+   
 }

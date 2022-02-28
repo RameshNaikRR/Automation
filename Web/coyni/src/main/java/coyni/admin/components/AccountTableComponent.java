@@ -13,6 +13,7 @@ public class AccountTableComponent extends BrowserFunctions{
 	private By txtBatchId = By.cssSelector(".form-input-search.search-bar");
 	private By btnSearch = By.cssSelector("//div[text()='Search']");
 	private By lnkUser = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
+	private By lblEnter8CharId = By.xpath("//input[@placeholder='Enter 8 Characters ID']");
 	//axcd
 	public void clickUser() {
 		click(lnkUser, "User");
@@ -49,6 +50,24 @@ public class AccountTableComponent extends BrowserFunctions{
 	}
 	public void clickSearch() {
 		click(btnSearch, "Search");
+	}
+	public void verifyEnter8charIdView(){
+		new CommonFunctions().elementView(lblEnter8CharId, "Enter8CharId");
+	}
+	public void verifyBankAccountView() {
+		new CommonFunctions().elementView(getTabItemLoc("Bank Accounts"), "Bank Accounts");
+	}
+   public void verifyButtonSearchView() {
+	   new CommonFunctions().elementView(btnSearch, "Search");
+   }
+   public void verifySignetAccountView() {
+	   new CommonFunctions().elementView(getTabItemLoc("Signet Accounts"), "Signet Account");
+   }
+   public void verifyCreditandDebitCardView() {
+	   new CommonFunctions().elementView(getTabItemLoc("Credit/Debit"), "Credit/Debit");
+   }
+	public BatchIDComponent batchIDComponent() {
+		return new BatchIDComponent();
 	}
 	
 }
