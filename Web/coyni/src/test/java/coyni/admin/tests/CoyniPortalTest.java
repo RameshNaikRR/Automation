@@ -72,10 +72,78 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testCoyniPortal Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testTokenAccount Failed due to Exception " + e);
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccountActivity(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().verifyTokenAccountActivityView(data.get("heading"));
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnToday();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnYesterday();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnLast7Days();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnMonthToDate();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnMonthToDate();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnLastMonth();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnCustomDateRange();
+			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountActivity Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccountTransactionList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage()
+					.verifyTransactionHeading(data.get("heading"));
+			ExtentTestManager.setInfoMessageInReport("Available balance is displayed as "
+					+ homePage.sideBarComponent().tokenAccountPage().getTotalAvailable());
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().getDateAndTime();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().getType();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().getDescription();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().getAmount();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().getStatus();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
+					.verifyTableItemsCount(data.get("query"));
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
+					.verifyPageNumbersWithCount();
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
+					.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport("Entries is displayed as "
+					+ homePage.sideBarComponent().tokenAccountPage().transactionPage().getEntriesMessage());
+			homePage.sideBarComponent().tokenAccountPage().transactionPage().clickOnPages();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToSignetAccount(String strParams) {
