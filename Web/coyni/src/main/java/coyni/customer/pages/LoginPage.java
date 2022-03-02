@@ -13,6 +13,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.ForgotEmailComponent;
+import coyni.customer.components.ForgotPasswordComponent;
 import coyni.customer.components.PhoneVerificationComponent;
 import coyni.customer.components.ToastComponent;
 import coyni.customer.components.UserNameDropDownComponent;
@@ -185,5 +186,8 @@ public class LoginPage extends BrowserFunctions {
 
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
+	}
+	public ForgotPasswordComponent forgotPasswordComponent() {
+		return new ForgotPasswordComponent();
 	}
 }
