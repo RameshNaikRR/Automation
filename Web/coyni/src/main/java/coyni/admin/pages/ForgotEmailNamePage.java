@@ -7,6 +7,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class ForgotEmailNamePage extends BrowserFunctions {
+
 	private By lblHeading = By.cssSelector(".forgot-email__title");
 	private By lblDescription = By.cssSelector(".forgot-email__sub-title");
 	private By txtFirstName = By.cssSelector("#First-Name");
@@ -38,8 +39,32 @@ public class ForgotEmailNamePage extends BrowserFunctions {
 		click(lnkBackToLogin, "BackToLogin");
 	}
 
-	public PhoneEmailVerificationComponent phoneVerificationComponent() {
+	public PhoneEmailVerificationComponent phoneEmailVerificationComponent() {
 		return new PhoneEmailVerificationComponent();
+	}
+
+	/**
+	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
+	 * spaces maxiPlus
+	 */
+	public void validateNameField(By ele, String eleName, String textField) {
+		String[] field = textField.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		System.out.println(textField.length());
+		for (int j = 4; j < 7; j++) {
+			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[7]);
+	}
+
+	public void validateFirstNameField(String firstName) {
+		validateNameField(txtFirstName, "First Name", firstName);
+	}
+
+	public void validateLastNameField(String LastName) {
+		validateNameField(txtLastName, "Last Name", LastName);
 	}
 
 }

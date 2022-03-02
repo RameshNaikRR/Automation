@@ -5,12 +5,14 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.admin.pages.ChooseAccountPage;
 import coyni.admin.pages.CreatePasswordPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class PhoneEmailVerificationComponent extends BrowserFunctions {
+
 	private By lblHeading = By.xpath("//div[text()='Email Verification']");
 	private By lblDescription = By.cssSelector(".text-base");
 	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
@@ -54,6 +56,10 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
+	}
+
+	public ChooseAccountPage chooseAccountPage() {
+		return new ChooseAccountPage();
 	}
 
 }
