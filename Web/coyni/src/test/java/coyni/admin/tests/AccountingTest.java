@@ -1,11 +1,9 @@
 package coyni.admin.tests;
 
 import java.util.Map;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import coyni.admin.components.AccountTableComponent;
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.HomePage;
@@ -99,7 +97,6 @@ public class AccountingTest {
 	}
 
 	@Test
-
 	public void testTotalDepositsBankAccount() {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(null);
@@ -110,6 +107,11 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchIdView();
 			homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
 			homePage.sideBarComponent().accountTableComponent().verifyButtonSearchView();
+			homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
+			homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
+			homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
+			homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
+			homePage.sideBarComponent().accountTableComponent().clickdrpdwnBatchId();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposits failed due to Exception" + e);
 		}
@@ -125,7 +127,6 @@ public class AccountingTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Signet Account failed due to Exception " + e);
 		}
-
 	}
 
 	@Test
@@ -141,5 +142,18 @@ public class AccountingTest {
 					.setFailMessageInReport("test Total Deposit Credit and Debit Card failed due to Exception " + e);
 		}
 	}
-
-}
+	@Test
+	public void testTotalDepositFilter() {
+		try {
+		 Map<String, String> data = Runner.getKeywordParameters(null);
+		 homePage.sideBarComponent().clickAccounting();
+		 homePage.sideBarComponent().clickTotalDeposits();
+		 homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+		 homePage.sideBarComponent().accountTableComponent().clickSearch();
+		 homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "exp value", " expcolor");
+		 homePage.sideBarComponent().profileComponent().clickFilter();	 
+		}catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total Deposit Filter is failed due to Exception " + e);
+		}	
+	}
+	}

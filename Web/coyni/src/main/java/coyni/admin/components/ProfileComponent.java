@@ -9,7 +9,7 @@ public class ProfileComponent extends BrowserFunctions {
 	
 	private By lblHeading = By.cssSelector("");
 	private By txtSearch  = By.cssSelector("input[class*='search_bar']");
-	private By btnFilter =By.cssSelector("");
+	private By btnFilter =By.cssSelector("//div[@class='flex flex-row mr-5']");
 	private By btnExport =By.cssSelector("");
 	private By btnSearchIcon = By.cssSelector(".icon-search");
 	private By btnNewEmployee = By.xpath("//button[.='New Employee']");
