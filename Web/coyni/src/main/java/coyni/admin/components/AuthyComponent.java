@@ -14,17 +14,15 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AuthyComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-
+	private By lblHeading = By.cssSelector(".verify-identity__title");
+	private By lblDescription = By.cssSelector(".verify-identity__sub-title");
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
-
-	private By heading = By.cssSelector(".VerifyYourIdentity_two_step_sub__14Irv>div:first-of-type");
-
+	private By lnkSmsCode = By.xpath("//span[contains(.,'Having')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
-
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
-	private By heading1 = By.xpath("//h1[text()='Verify Your Identity']");
+	
 	private static Map<String, String> prevCode = new HashMap<>();
-
+	
 	private String getTwoFactorCode(String securityKey) {
 		Totp totp = new Totp(securityKey); // 2FA secret key
 		String twoFactorCode = totp.now(); // Generated 2FA code here
@@ -39,18 +37,23 @@ public class AuthyComponent extends BrowserFunctions {
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
 	}
-
-	public void verifyHeading1(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading1, "Autentication Heading", expHeading);
-	}
-
+	
 	public void fillAuthyInput(String securityKey) {
 		String code = getTwoFactorCode(securityKey);
 		fillPin(inputBox, "InputBoxes", code);
 	}
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "Autentication Heading", expHeading);
+	public void verifyPageHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Autentication Heading", expHeading);
+	}
+	public void verifyPageDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblDescription, "Description ", expDescription);
+	}
+	public void clickGoBack() {
+		click(lnkGoBack, "Back Option");
+	}
+	public void clickSmsCode() {
+		click(lnkSmsCode, "SmsCode");
 	}
 
 	public void verifyMessage(String expMessage) throws InterruptedException {
@@ -77,9 +80,7 @@ public class AuthyComponent extends BrowserFunctions {
 		fillPin(inputBox, "InputBoxes", code);
 	}
 
-	public void clickGoBack() {
-		click(lnkGoBack, "Back Option");
-	}
+	
 
 	public void verifyLogin() {
 		waitForCondition(e -> !e.getCurrentUrl().contains("verify-you-identity"),
@@ -95,7 +96,6 @@ public class AuthyComponent extends BrowserFunctions {
 	}
 
 	public void verifyLoginWithInvalidPin() {
-
 		String pageURL = getPageURL();
 		if (pageURL.contains("token-account") || pageURL.contains("getstarted")) {
 			ExtentTestManager.setFailMessageInReport("Login success with invalid pin");

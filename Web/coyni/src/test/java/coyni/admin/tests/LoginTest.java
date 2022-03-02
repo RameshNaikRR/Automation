@@ -20,6 +20,26 @@ public class LoginTest {
 
 		loginPage = new LoginPage();
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("Heading"));
+			loginPage.verifyPageDescription(data.get("Description"));
+			loginPage.fillEmail(data.get("Eamil"));
+			loginPage.fillPassword(data.get("Password"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyPageHeading(data.get("expHeading"));
+			loginPage.authyComponent().verifyPageDescription(data.get("expDescription"));
+			loginPage.authyComponent().fillAuthyInput(data.get("SecurityKey"));
+			loginPage.authyComponent().verifyMessage(data.get("expMessage"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
