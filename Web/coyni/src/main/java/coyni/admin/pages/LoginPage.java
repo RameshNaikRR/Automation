@@ -15,20 +15,20 @@ public class LoginPage extends BrowserFunctions {
 	private By lnkForgotEmail = By.xpath("//span[.='Forgot Email?']");
 	private By lnkForgotPassword = By.xpath("//span[.='Forgot Password?']");
 
-	public void verifyPageHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
+	public void verifyPageHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", heading);
 	}
 
-	public void verifyPageDescription(String Description) {
-		new CommonFunctions().verifyLabelText(lblDescription, "Description", Description);
+	public void verifyPageDescription(String description) {
+		new CommonFunctions().verifyLabelText(lblDescription, "Description", description);
 	}
 
-	public void fillEmail(String Email) {
-		enterText(txtEmail, Email, "Email");
+	public void fillEmail(String email) {
+		enterText(txtEmail, email, "Email");
 	}
 
-	public void fillPassword(String Password) {
-		enterText(txtPassword, Password, "Password");
+	public void fillPassword(String password) {
+		enterText(txtPassword, password, "Password");
 
 	}
 

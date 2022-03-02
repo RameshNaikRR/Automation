@@ -26,15 +26,16 @@ public class LoginTest {
 	public void testAdminLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyPageHeading(data.get("Heading"));
-			loginPage.verifyPageDescription(data.get("Description"));
-			loginPage.fillEmail(data.get("Eamil"));
-			loginPage.fillPassword(data.get("Password"));
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.verifyPageDescription(data.get("loginDescription"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().verifyPageHeading(data.get("expHeading"));
-			loginPage.authyComponent().verifyPageDescription(data.get("expDescription"));
-			loginPage.authyComponent().fillAuthyInput(data.get("SecurityKey"));
-			loginPage.authyComponent().verifyMessage(data.get("expMessage"));
+			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
+			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
+			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			loginPage.authyComponent().fillInput(data.get("code"));
+			loginPage.authyComponent().verifyMessage(data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
