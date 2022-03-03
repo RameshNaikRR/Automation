@@ -156,9 +156,11 @@ public class LoginTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			// loginPage.forgotPasswordPage().verifyPageHeading("expHeading");
-
-			loginPage.forgotPasswordPage().verifyPageHeading("forgotHeading");
-			loginPage.forgotPasswordPage().verifyPageDescription("description");
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.verifyPageDescription(data.get("loginDescription"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyPageDescription(data.get("forgotDescription"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
@@ -167,9 +169,9 @@ public class LoginTest {
 					.verifyPageDescription(data.get("emailDescription"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.verifyPageHeading(data.get("passwordHeading"));
+					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.verifyPageDescription(data.get("passwordDescription"));
+					.verifyPageDescription(data.get("createPasswordDescription"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillCreatePassword(data.get("createPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
@@ -190,8 +192,9 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.forgotPasswordPage().verifyPageHeading("forgotHeading");
-			loginPage.forgotPasswordPage().verifyPageDescription("description");
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			if (!data.get("errMessage").isEmpty()) {
@@ -209,19 +212,16 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidPassword(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.forgotPasswordPage().verifyPageHeading("forgotHeading");
-			loginPage.forgotPasswordPage().verifyPageDescription("description");
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyPageHeading(data.get("emailHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
-					.verifyPageDescription(data.get("emailDescription"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.verifyPageHeading(data.get("passwordHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.verifyPageDescription(data.get("passwordDescription"));
+					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillCreatePassword(data.get("createPassword"));
 
@@ -237,4 +237,29 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithInvalidEmailVerificationCode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+					.verifyPageHeading(data.get("emailHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
+
+		}
 }
+	}
+
+

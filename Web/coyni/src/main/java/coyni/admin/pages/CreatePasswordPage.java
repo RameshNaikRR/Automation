@@ -10,7 +10,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class CreatePasswordPage extends BrowserFunctions {
 
 	private By lblHeading = By.cssSelector(".update-password-password__title");
-	private By lblDescription = By.xpath(".update-password-password__sub-title");
+	private By lblDescription = By.cssSelector(".update-password-password__sub-title");
 	private By txtCreatePassword = By.id("Enter_Password");
 	private By txtConfirmPassword = By.id("confirm_Password");
 	private By lnkLogin = By.xpath("");
@@ -24,11 +24,11 @@ public class CreatePasswordPage extends BrowserFunctions {
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Create New Password", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Create New Password Heading is ", expHeading);
 	}
 
 	public void verifyPageDescription(String expDescription) {
-		new CommonFunctions().verifyLabelText(lblDescription, "Create New Password Description ", expDescription);
+		new CommonFunctions().verifyLabelText(lblDescription, "Create New Password Description is ", expDescription);
 	}
 
 	public void fillCreatePassword(String createPassword) {
