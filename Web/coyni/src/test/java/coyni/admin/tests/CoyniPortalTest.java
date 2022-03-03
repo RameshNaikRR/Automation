@@ -191,38 +191,21 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToSignetAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("Withdraw To Signet Account"));
-			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("5.00"));
-			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-			tokenAccountPage.withdrawToSignetPopup().verifyTransDescription(data.get("Description"));
-			tokenAccountPage.withdrawToSignetPopup().clickNext();
-			tokenAccountPage.withdrawToSignetPreviewPopup().clickConfirm();
-			tokenAccountPage.authyComponent().verifyLogin();
-			tokenAccountPage.successFailureComponent();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testAddSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.noSignetAccountsExistPopup()
-					.verifyPageHeading(data.get("No Signet Accounts Exist Heading"));
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("Description"));
+			Thread.sleep(5000);
+//			homePage.sideBarComponent().clickCoyniPortal();
+//			homePage.sideBarComponent().clickTokenAccount();
+			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
 			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("Add New Signet Account Heading "));
-			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("New Signet Account"));
-			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("Adsfgt12345"));
-			tokenAccountPage.addNewSignetAccountPopup().clickPaste();
+			// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading
+			// "));
+			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
 			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
@@ -238,14 +221,49 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testRemoveSignetAccount(String strparams) {
+	public void testWithdrawToSignetAccount(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strparams);
-			tokenAccountPage.removeSignetAccountPopup().verifyPageHeading(data.get(" Remove Signet Account Heading"));
-			tokenAccountPage.removeSignetAccountPopup().verifyPageDescription(data.get("Description "));
-			tokenAccountPage.removeSignetAccountPopup().verifyWalletIDView();
-			tokenAccountPage.removeSignetAccountPopup().verifyName(data.get("Signet Account "));
-			tokenAccountPage.removeSignetAccountPopup().clickRemove();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+			tokenAccountPage.withdrawToSignetPopup().clickNext();
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount(data.get("amount"));
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+			// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+					.successFailureComponent();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRemoveSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
+			tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
+					.verifyPageHeading(data.get("removeSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
+					.verifyPageDescription(data.get("description"));
+			// tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().verifyWalletIDView();
+			tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().clickRemove();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 

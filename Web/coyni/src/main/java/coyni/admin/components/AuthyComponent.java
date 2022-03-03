@@ -20,9 +20,9 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lnkSmsCode = By.xpath("//span[contains(.,'Having')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
-	
+
 	private static Map<String, String> prevCode = new HashMap<>();
-	
+
 	private String getTwoFactorCode(String securityKey) {
 		Totp totp = new Totp(securityKey); // 2FA secret key
 		String twoFactorCode = totp.now(); // Generated 2FA code here
@@ -37,7 +37,7 @@ public class AuthyComponent extends BrowserFunctions {
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
 	}
-	
+
 	public void fillAuthyInput(String securityKey) {
 		String code = getTwoFactorCode(securityKey);
 		fillPin(inputBox, "InputBoxes", code);
@@ -46,12 +46,15 @@ public class AuthyComponent extends BrowserFunctions {
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Autentication Heading", expHeading);
 	}
+
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Description ", expDescription);
 	}
+
 	public void clickGoBack() {
 		click(lnkGoBack, "Back Option");
 	}
+
 	public void clickSmsCode() {
 		click(lnkSmsCode, "SmsCode");
 	}
@@ -79,8 +82,6 @@ public class AuthyComponent extends BrowserFunctions {
 	public void fillInput(String code) {
 		fillPin(inputBox, "InputBoxes", code);
 	}
-
-	
 
 	public void verifyLogin() {
 		waitForCondition(e -> !e.getCurrentUrl().contains("verify-you-identity"),
@@ -114,6 +115,10 @@ public class AuthyComponent extends BrowserFunctions {
 			ExtentTestManager.setPassMessageInReport("Authy Verification Code entered");
 		}
 		//
+	}
+
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
 	}
 
 }
