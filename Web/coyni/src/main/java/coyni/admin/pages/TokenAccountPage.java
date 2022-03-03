@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
 import coyni.admin.components.DaysMonthsDropDownComponent;
+import coyni.admin.components.FilterComponent;
 import coyni.admin.components.NavigationComponent;
 import coyni.admin.components.SuccessFailureComponent;
 import coyni.admin.popups.AddNewSignetAccountPopup;
@@ -113,5 +114,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
+	}
+
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
 	}
 }

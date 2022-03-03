@@ -144,6 +144,51 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccountFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyMouseHoverChangedColor("cssProp",
+					"expValue", "expColor");
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().selectFilter(data.get("filterType"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("amount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("amount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccountResetFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyMouseHoverChangedColor("cssProp",
+					"expValue", "expColor");
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().selectFilter(data.get("filterType"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("amount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("amount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickResetAllFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountResetFilters Failed due to Exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToSignetAccount(String strParams) {
