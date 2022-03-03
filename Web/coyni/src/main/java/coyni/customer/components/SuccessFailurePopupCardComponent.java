@@ -10,7 +10,7 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By imgSuccessFailure = By.cssSelector(".h-36.w-36");
 	private By imgSuccessFailureRequest = By.cssSelector(".h-48.w-48");
 	 private By headingPreAuthorizationSucess = By.xpath("//h1[contains(text(),'Pre-Authorization Success')]");
-
+	 private By headingPreAuthorizationFailed = By.xpath("//h1[contains(text(),'Pre-Authorization Failed')]");
 	private By lblTransactionFailed = By.cssSelector("");
 	private By tryAgain = By.xpath("");
 	private By lblFailedMessage = By.xpath("");
@@ -67,7 +67,10 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(imgSuccessFailureRequest, "Tick Mark");
 
 	}
-
+	public void verifyFailedHeadingView() {
+		new CommonFunctions().elementView(headingPreAuthorizationFailed, "Pre Authorization Failed");
+	}
+	
 	public void clickDone() {
 		click(btnDone, "Click Done");
 	}

@@ -285,7 +285,7 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickTab();
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent()
-					.verifyheadingview();
+					.verifyFailedHeadingView();
 
 		} catch (Exception e) {
 			ExtentTestManager

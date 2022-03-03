@@ -33,7 +33,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By lblTotalFunds = By.cssSelector(".text-6xl");
 	private By lblYourTokenAccount = By.xpath("//h1[text()='Your Token Account']");
 	private By amount = By
-			.xpath("//span[@class='TokenAccountDashboard_wallet_balance__2NXxb font-bold cursor-default text-cgy4']");
+			.xpath("//span[@class='TokenAccountDashboard_wallet_balance_normal__1gHJE font-bold cursor-default text-cgy4']");
 	private By btnPayRequestToken = By.xpath("//span[text()='Pay / Request Tokens']");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");

@@ -78,8 +78,9 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
-			loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
-			loginPage.authyComponent().verifyMessage(data.get("message"));
+			loginPage.authyComponent().fillInput(data.get("code"));
+			//		Thread.sleep(3000);
+			//loginPage.authyComponent().verifyMessage(data.get("message"));
 			// loginPage.authyComponent().verifyLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
