@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.admin.components.AuthyComponent;
 import coyni.admin.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -189,7 +190,7 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testForgotPasswordWithInvalidEmail(String strParams) {
+	public void testForgotPasswordWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
@@ -197,46 +198,31 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
+			if(data.get("validatePassword").equalsIgnoreCase("yes")) {
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+				.verifyPageHeading(data.get("emailHeading"));
+		loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
+		loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+				.verifyPageHeading(data.get("createPasswordHeading"));
+		loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+				.fillCreatePassword(data.get("createPassword"));
+
+		loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+				.fillConfirmPassword(data.get("confirmPassword"));
+
+		loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
+			}
+			
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testForgotPasswordWithInvalidData failed due to exception " + e);
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testForgotPasswordWithInvalidPassword(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyPageHeading(data.get("loginHeading"));
-			loginPage.clickForgotPassword();
-			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
-			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
-					.verifyPageHeading(data.get("emailHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.verifyPageHeading(data.get("createPasswordHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.fillCreatePassword(data.get("createPassword"));
-
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.fillConfirmPassword(data.get("confirmPassword"));
-
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
-		}
-	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -251,8 +237,8 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyPageHeading(data.get("emailHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			if (!data.get("message").isEmpty()) {
+				new AuthyComponent().verifyMessage(data.get("message"));
 			}
 
 		} catch (Exception e) {
