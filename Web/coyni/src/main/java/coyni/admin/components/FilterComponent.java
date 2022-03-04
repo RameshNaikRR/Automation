@@ -23,6 +23,27 @@ public class FilterComponent extends BrowserFunctions {
 	private By drpdwn = By.xpath("div[class*='selected_option']");
 	private By lnkResetAllFilters = By.xpath("");
 	private By btnApplyFilters = By.xpath("");
+	private By lblDepositId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Deposit ID']");
+	private By textDepositId = By.xpath("//input[@id='Deposit ID']");
+	private By lblUserId = By.xpath("//button[text()='Clear']/ancestor::label[text()='User ID']");
+	private By textUserId = By.xpath("//input[@id='User ID']");
+	private By lblUserType = By.xpath("//button[text()='Clear All']/ancestor::span[text()='User Type']");
+	private By lblBusiness = By
+			.xpath("//span[text()='Business']/ancestor::div[@class='flex items-center mr-3 selectOption']");
+	private By lblPersonal = By
+			.xpath("//span[text()='Personal']/ancestor::div[@class='flex items-center mr-3 selectOption']");
+	private By lblCoyniAdmin = By
+			.xpath("//span[text()='Coyni Admin']/ancestor::div[@class='flex items-center mr-3 selectOption']");
+	private By lblDepositAmount = By.xpath("//label[text()='Deposit Amount']");
+	private By lblNameOnAccount = By.xpath("//label[text()='Name on Account']");
+	private By txtName = By.xpath("//input[@id='Name']");
+	private By lblBankAccountNum = By.xpath("//label[text()='Bank Account Number']");
+	private By txtAccountNum = By.xpath("//input[@id='Account Number']");
+	private By lblPaid = By.xpath("//span[text()='Paid']/ancestor::div[@class='flex items-center mr-3 selectOption']");
+	private By lblFailed = By
+			.xpath("//span[text()='Failed']/ancestor::div[@class='flex items-center mr-3 selectOption']");
+	private By lblInProgress = By
+			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 
 	public void verifyDate(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblDate, "Heading is", expHeading);
@@ -34,6 +55,17 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickFilters() {
 		click(lblFilters, "Filters");
+	}
+
+	public By getElement(String elementName) {
+		return By.xpath(String.format("//button[text()='Clear']/ancestor::label[text()='%s']", elementName));
+	}
+
+	public void verifyFiltersLabelView(String elements) {
+		String[] list = elements.split(",");
+		for (int i = 0; i < list.length; i++) {
+			new CommonFunctions().elementView(getElement(list[i]), list[i]);
+		}
 	}
 
 	public void viewFilters() {

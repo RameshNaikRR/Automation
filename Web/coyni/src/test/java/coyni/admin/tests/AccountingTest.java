@@ -150,8 +150,9 @@ public class AccountingTest {
 		 homePage.sideBarComponent().clickTotalDeposits();
 		 homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
 		 homePage.sideBarComponent().accountTableComponent().clickSearch();
-		 homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "exp value", " expcolor");
-		 homePage.sideBarComponent().profileComponent().clickFilter();	 
+		 homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"),data.get("exp value"),data.get(" expcolor"));
+		 homePage.sideBarComponent().profileComponent().clickFilter();	
+		 homePage.sideBarComponent().filterComponent().verifyFiltersLabelView(data.get("elememnts"));
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Filter is failed due to Exception " + e);
 		}	

@@ -183,4 +183,7 @@ public class SideBarComponent extends BrowserFunctions {
    public ProfileComponent profileComponent() {
 	   return new ProfileComponent();
    }
+   public FilterComponent filterComponent() {
+	   return new FilterComponent();
+   }
 }
