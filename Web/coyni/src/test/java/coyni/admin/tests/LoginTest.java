@@ -25,6 +25,7 @@ public class LoginTest {
 		loginPage = new LoginPage();
 	}
 
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminLogin(String strParams) {
@@ -34,10 +35,15 @@ public class LoginTest {
 			loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+//			Thread.sleep(2000);
+        	loginPage.clickEyeIcon();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickEyeIcon();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
-			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
 			loginPage.authyComponent().verifyMessage(data.get("message"));
 
@@ -45,6 +51,45 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testLoginInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			Thread.sleep(2000);
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"),data.get("elementName"));
+			}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			ExtentTestManager.setFailMessageInReport("Login test with invalid credentials failed due to exception "+e);
+		}
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void testLoginView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.verifyEmail();
+			loginPage.verifyPassword();
+			loginPage.verifyForgotEmail();
+			loginPage.verifyForgotPassword();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception "+e);
+		}
+	}
+	
 
 	@Test
 	@Parameters({ "strParams" })

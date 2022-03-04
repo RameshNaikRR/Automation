@@ -3,15 +3,17 @@ package coyni.admin.pages;
 import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.admin.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions {
-
 	private By lblHeading = By.xpath("//span[text()='Log In to Coyni Admin']");
 	private By lblDescription = By.xpath("//span[text()='Welcome back, let’s log in to your coyni admin account.']");
 	private By txtEmail = By.cssSelector("#Email");
 	private By txtPassword = By.cssSelector("#Password");
+	private By eyeIcon = By.xpath("//button[@type='button']");
 	private By btnNext = By.cssSelector(".business-login__login-button");
 	private By lnkForgotEmail = By.xpath("//span[.='Forgot Email?']");
 	private By lnkForgotPassword = By.xpath("//span[.='Forgot Password?']");
@@ -30,11 +32,31 @@ public class LoginPage extends BrowserFunctions {
 
 	public void fillPassword(String password) {
 		enterText(txtPassword, password, "Password");
-
 	}
-
+	public void clickEyeIcon() {
+		click(eyeIcon, "EyeIcon");
+	}
+	
+	public void verifyPasswordMaskedView(String attribute,String password) {
+		String attributeValue = getAttributeValue(txtPassword, attribute, password);
+		if (attributeValue.contains("password")) {
+			ExtentTestManager.setInfoMessageInReport(password+" Masked with black circles");
+			
+		}else {
+			ExtentTestManager.setInfoMessageInReport(password+" Not masked with black circles");
+			
+		}
+	}
+//	public void clickNext() {
+//		click(btnNext, "Next");
+//	}
 	public void clickNext() {
-		click(btnNext, "Next");
+		if (getElement(btnNext, "Enabled").isEnabled()) {
+			click(btnNext, "Next");
+		}
+		else {
+			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
+		}
 	}
 
 	public void clickForgotEmail() {
@@ -44,11 +66,27 @@ public class LoginPage extends BrowserFunctions {
 	public void clickForgotPassword() {
 		click(lnkForgotPassword, "ForgotPasswordLink");
 	}
+	public void verifyEmail() {
+		new CommonFunctions().elementView(txtEmail, "Email");
+	}
+	public void verifyPassword()
+	{
+		new CommonFunctions().elementView(txtPassword, "Password");
+	}
+	public void verifyForgotEmail() {
+		new CommonFunctions().elementView(lnkForgotEmail, "ForgotEmail");
+	}
+	public void verifyForgotPassword() {
+		new CommonFunctions().elementView(lnkForgotPassword, "ForgotPassword");
+	}
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}
-
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 	public ForgotPasswordPage forgotPasswordPage() {
 		return new ForgotPasswordPage();
 
