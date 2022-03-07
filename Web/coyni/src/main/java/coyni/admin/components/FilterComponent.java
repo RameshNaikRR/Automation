@@ -36,7 +36,7 @@ public class FilterComponent extends BrowserFunctions {
 			.xpath("//span[text()='Coyni Admin']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 	private By lblDepositAmount = By.xpath("//label[text()='Deposit Amount']");
 	private By lblNameOnAccount = By.xpath("//label[text()='Name on Account']");
-	private By txtName = By.xpath("//input[@id='Name']");
+	private By txtName = By.xpath("//input[@id='NameName']");
 	private By lblBankAccountNum = By.xpath("//label[text()='Bank Account Number']");
 	private By txtAccountNum = By.xpath("//input[@id='Account Number']");
 	private By lblPaid = By.xpath("//span[text()='Paid']/ancestor::div[@class='flex items-center mr-3 selectOption']");
@@ -67,6 +67,27 @@ public class FilterComponent extends BrowserFunctions {
 			new CommonFunctions().elementView(getElement(list[i]), list[i]);
 		}
 	}
+	public By getTextFieldElements(String elementId) {
+		return By.cssSelector(String.format("#'%s'", elementId));
+		
+	}
+	public void fillDepositId(String DepositId) {
+		enterText(getTextFieldElements("Deposit ID"), DepositId, "Deposit Id");
+	}
+	public void fillReferenceId(String ReferenceId) {
+		enterText(getTextFieldElements("Reference ID"), ReferenceId, "Reference Id");
+	}
+	public void fillUserId(String UserId) {
+		enterText(getTextFieldElements("User ID"), UserId, "User Id");
+	}
+	public void fillNameOnAccount(String Name) {
+		enterText(getTextFieldElements("Name"), Name, "Name on Account");
+	}
+	public void fillBankAccountNumber(String AccountNumber) {
+		enterText(getTextFieldElements("Account Number"), AccountNumber, "BankAccountNumber");
+	}
+	
+	
 
 	public void viewFilters() {
 		new CommonFunctions().elementView(lblDate, "Date");
@@ -135,7 +156,7 @@ public class FilterComponent extends BrowserFunctions {
 
 	private By getCheckBox(String elementName) {
 		return By.xpath(String.format(
-				"//span[(contains(@class,'text-sm' ) or contains(@class,'relative')) and text()='%s']", elementName));
+				"//span[text()='%s']//preceding-sibling::input", elementName));
 	}
 
 	public void clickWithdraw() {
@@ -165,5 +186,24 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickLost() {
 		click(getCheckBox("Lost"), "Lost");
 	}
+	public void clickchkbxBusiness() {
+		click(getCheckBox("Business"), "Business");
+	}
+	public void clickchkbxPersonal() {
+		click(getCheckBox("Personal"),"Personal");
+	}
+	public void clickchkbxCoyniAdmin() {
+		click(getCheckBox("Coyni Admin"), "Coyni Admin");
+	}
+	public void clickchkbxPaid() {
+		click(getCheckBox("Paid"), "Paid");
+	}
+	public void clickchkbxFailed() {
+		click(getCheckBox("Failed"), "Failed");
+	}
+	public void clickchkbx() {
+		click(getCheckBox("In Progress"), "In Progress");
+	}
+	
 
 }

@@ -152,7 +152,8 @@ public class AccountingTest {
 		 homePage.sideBarComponent().accountTableComponent().clickSearch();
 		 homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"),data.get("exp value"),data.get(" expcolor"));
 		 homePage.sideBarComponent().profileComponent().clickFilter();	
-		 homePage.sideBarComponent().filterComponent().verifyFiltersLabelView(data.get("elememnts"));
+		 homePage.sideBarComponent().filterComponent().verifyFiltersLabelView(data.get("elemements"));
+		 
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Filter is failed due to Exception " + e);
 		}	
