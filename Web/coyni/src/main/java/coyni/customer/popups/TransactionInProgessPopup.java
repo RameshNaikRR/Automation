@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -32,5 +33,9 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 	public void verifyReferenceID() {
 		new CommonFunctions().elementView(referenceID, "Reference ID");
 
+	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

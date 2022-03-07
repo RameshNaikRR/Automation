@@ -79,4 +79,8 @@ public class BuyCoyniTokensPopup extends BrowserFunctions{
     public NavigationComponent navigationComponent() {
     	return new NavigationComponent();
     }
+    
+    public void clickOutSIde() {
+  	   new CommonFunctions().clickOutSideElement();
+     }
 }

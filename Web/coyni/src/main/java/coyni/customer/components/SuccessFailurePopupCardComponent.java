@@ -117,4 +117,8 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	public void viewClose() {
 		new CommonFunctions().elementView(btnClose, "Close");
 	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 }

@@ -24,6 +24,7 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	private By lbldebitErrorMessage = By.cssSelector("");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
 	private By btnDelete = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
+	private By txtCvv = By.xpath("//input[@name='cvv']");
 	
 	public void clickBank() {
 		click(lblBank,"Click Bank" );
@@ -81,7 +82,14 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
    public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 	   return new SuccessFailurePopupCardComponent();
    }
+    
+   public RemovePaymentMethodPopup removePaymentMethodPopup() {
+	   return new RemovePaymentMethodPopup();
+   }
    
+   public void fillCvv(String expCvv) {
+	   enterText(txtCvv, expCvv, "Cvv");
+   }
    
    
 }
