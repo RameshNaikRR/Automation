@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.popups.CvvPopup;
+import coyni_mobile.popups.RemovingPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -22,7 +24,7 @@ public class PaymentMethodsPage extends MobileFunctions {
     private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");   
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
-	private By selectBank = MobileBy.xpath("//*[contains(@resource-id,'20349')]");
+	private By selectBank = MobileBy.xpath("//*[contains(@text,'CashEdge Test Bank (Agg) - Retail Non 2FA')]");
 	private By HeadingBankName = MobileBy.xpath("//*[contains(@resource-id,'selectedBankName')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
@@ -111,4 +113,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public void fillPassword(String expPassword) {
 		enterText(txtPassword, expPassword, "Password");
 	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
+	public RemovingPopup removingPopup() {
+		return new RemovingPopup();
+	}
+	
+	
 }

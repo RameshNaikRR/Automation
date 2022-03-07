@@ -675,13 +675,11 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddExternalBankAccount(String strParams) {
+	public void testAddBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
-			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifyHeading(data.get("addPaymentHeading"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
@@ -690,14 +688,58 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.clickNext();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().verifyHeading(data.get("AccountHeading"));
+					.addAccountsComponent().verifyHeadingAddAccount();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().enterBankName(data.get("expBankName"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().fillUserName(data.get("expUserName"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().fillPassword(data.get("expPassword"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().unSelectBank1();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().unSelectBank2();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().clickNext();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().verifyDoneHeading(data.get("expDoneHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().clickDone();
+			customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
 		}
 
 	}
-
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			testAddBankAccount(strParams);
+		}
+		catch(Exception e) {
+			
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+			customerProfilePage.paymentMethodsPage().selectBank();
+			customerProfilePage.paymentMethodsPage().removingPopup().verifyHeading();
+			customerProfilePage.paymentMethodsPage().removingPopup().clickYes();
+		}
+		catch(Exception e) {
+			
+		}
+	}
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {

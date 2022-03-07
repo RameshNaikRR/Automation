@@ -622,6 +622,24 @@ public class TokenAccountTest {
 		}
 
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankWithOutPayments(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().clickExternalBankAcount();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
+            customerProfileTest.testAddBank(strParams);
+            testBuyTokenBank(strParams);
+            customerProfileTest.testDeleteBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -652,7 +670,7 @@ public class TokenAccountTest {
 
 	}
 
-	public void testBuyToken(String strParams, String method) {
+	public void testBuyTokenwithPayments(String strParams, String method) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			if (method.equalsIgnoreCase("bank")) {
@@ -693,7 +711,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithBank(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-		testBuyToken(strParams, "bank");
+		testBuyTokenwithPayments(strParams, "bank");
 	}
 
 	@Test
@@ -701,7 +719,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithCreditCard(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-		testBuyToken(strParams, "credit");
+		testBuyTokenwithPayments(strParams, "credit");
 	}
 
 	@Test
@@ -709,7 +727,7 @@ public class TokenAccountTest {
 	public void testBuyTokenWithDebitCard(String strParams) {
 		tokenAccountPage.btnHome();
 		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-		testBuyToken(strParams, "debit");
+		testBuyTokenwithPayments(strParams, "debit");
 	}
 
 	@Test

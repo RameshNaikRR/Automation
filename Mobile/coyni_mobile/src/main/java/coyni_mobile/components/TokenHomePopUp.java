@@ -50,5 +50,9 @@ public class TokenHomePopUp extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+	
+	public AddNewPaymentComponent addNewPaymentComponent() {
+		return new AddNewPaymentComponent();
+	}
 
 }
