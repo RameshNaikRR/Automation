@@ -216,10 +216,10 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	}
 
-	public List<String> getEntryOptions() {
-		return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
-				.collect(Collectors.toList());
-	}
+//	public List<String> getEntryOptions() {
+//		return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
+//				.collect(Collectors.toList());
+//	}
 
 	// added
 	public void verifyPay() {

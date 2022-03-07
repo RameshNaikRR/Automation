@@ -21,8 +21,8 @@ public class FilterComponent extends BrowserFunctions {
 	// private By lnkClaerAll = By.xpath("");
 	private By lblEmployeeName = By.xpath("//label[text()='Employee Name']");
 	private By drpdwn = By.xpath("div[class*='selected_option']");
-	private By lnkResetAllFilters = By.xpath("");
-	private By btnApplyFilters = By.xpath("");
+	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
+	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
 	private By lblDepositId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Deposit ID']");
 	private By textDepositId = By.xpath("//input[@id='Deposit ID']");
 	private By lblUserId = By.xpath("//button[text()='Clear']/ancestor::label[text()='User ID']");
@@ -98,10 +98,7 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblEmployeeName, "Date");
 	}
 
-	public void clickClear() {
-		click(lnkClear, "Clear");
-	}
-
+	
 	public void verifyTransactionType(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type Heading is", expHeading);
 	}
@@ -149,11 +146,40 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickApplyFilters() {
 		click(btnApplyFilters, "Apply Filters");
 	}
-
+    private By getClearElements(String elementName) {
+    	return By.xpath(String.format("//label[text()='%s']//following-sibling::button[text()='Clear']", elementName));
+    }
+    private By getClearAllElements(String elementName) {
+    	return By.xpath(String.format("//span[text()='%s']//following-sibling::button[text()='Clear All']", elementName));
+    }
+    public void clickUserTypeClearAll() {
+    	click(getClearAllElements("User Type"), "User Type Clear All");
+    }
+    public void clickTransactionStatusClr() {
+    	click(getClearAllElements("Transaction Status"), "Transaction Status Clear All");
+    }
+    public void clickDepositIdClr() {
+    	click(getClearElements("Deposit ID"),"Deposit Id Clear");
+    }
+    public void clickReferenceIdClr() {
+    	click(getClearElements("Reference ID")," Reference Id Clear");
+    }
+    public void clickUserIdClr() {
+    	click(getClearElements("User ID"), "User Id Clear");
+    }
+    public void clickDepositAmtClr() {
+    	click(getClearElements("Deposit Amount"), "Deposit Amount Clear");
+    }
+    public void clickNameOnAccountClr() {
+    	click(getClearElements("Name on Account"), "Name on Account Clear");
+    }
+    public void clickBankAccountnumClr() {
+    	click(getClearElements("Bank Account Number"), "Bank Account Number");
+    }
 	public void selectFilter(String type) {
 		click(getCheckBox(type), type);
 	}
-
+ 
 	private By getCheckBox(String elementName) {
 		return By.xpath(String.format(
 				"//span[text()='%s']//preceding-sibling::input", elementName));
@@ -201,9 +227,8 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickchkbxFailed() {
 		click(getCheckBox("Failed"), "Failed");
 	}
-	public void clickchkbx() {
+	public void clickchkbxInprogress() {
 		click(getCheckBox("In Progress"), "In Progress");
 	}
 	
-
 }

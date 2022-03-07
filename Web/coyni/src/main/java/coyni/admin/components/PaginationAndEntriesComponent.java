@@ -103,21 +103,21 @@ public class PaginationAndEntriesComponent extends BrowserFunctions {
 	}
 
 	public void clickPageNumber(String pageNumber) {
-		List<WebElement> pageNumbers = getElementsList(this.pageNumbers, "page numbers");
-		List<String> pagenumList = pageNumbers.stream().map(ele -> ele.getText()).collect(Collectors.toList());
-		boolean flag = false;
-		for (int i = 0; i < pagenumList.size(); i++) {
-			if (pagenumList.get(i).trim().equalsIgnoreCase(pageNumber)) {
-				pageNumbers.get(i).click();
-				ExtentTestManager.setInfoMessageInReport("Clicked on Page Number " + pageNumber);
-				flag = true;
-				break;
-			}
-		}
-		if (!flag) {
-			ExtentTestManager.setFailMessageInReport(
-					"Unable to click on Page number " + pageNumber + " and available page numbers are " + pagenumList);
-		}
+//		List<WebElement> pageNumbers = getElementsList(this.pageNumbers, "page numbers");
+//		List<String> pagenumList = pageNumbers.stream().map(ele -> ele.getText()).collect(Collectors.toList());
+//		boolean flag = false;
+//		for (int i = 0; i < pagenumList.size(); i++) {
+//			if (pagenumList.get(i).trim().equalsIgnoreCase(pageNumber)) {
+//				pageNumbers.get(i).click();
+//				ExtentTestManager.setInfoMessageInReport("Clicked on Page Number " + pageNumber);
+//				flag = true;
+//				break;
+//			}
+//		}
+//		if (!flag) {
+//			ExtentTestManager.setFailMessageInReport(
+//					"Unable to click on Page number " + pageNumber + " and available page numbers are " + pagenumList);
+//		}
 	}
 
 }

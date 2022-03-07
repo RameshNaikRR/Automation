@@ -142,20 +142,126 @@ public class AccountingTest {
 					.setFailMessageInReport("test Total Deposit Credit and Debit Card failed due to Exception " + e);
 		}
 	}
+
 	@Test
-	public void testTotalDepositFilter() {
+	@Parameters({ "strParams" })
+	public void testTotalDepositFilterView(String strParams) {
 		try {
-		 Map<String, String> data = Runner.getKeywordParameters(null);
-		 homePage.sideBarComponent().clickAccounting();
-		 homePage.sideBarComponent().clickTotalDeposits();
-		 homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
-		 homePage.sideBarComponent().accountTableComponent().clickSearch();
-		 homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"),data.get("exp value"),data.get(" expcolor"));
-		 homePage.sideBarComponent().profileComponent().clickFilter();	
-		 homePage.sideBarComponent().filterComponent().verifyFiltersLabelView(data.get("elemements"));
-		 
-		}catch (Exception e) {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"), data.get("exp value"),
+					data.get(" expcolor"));
+			homePage.sideBarComponent().profileComponent().clickFilter();
+			homePage.sideBarComponent().filterComponent().verifyFiltersLabelView(data.get("elemements"));
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Filter is failed due to Exception " + e);
-		}	
+		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTotalDepositsFilterFlow(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"), data.get("exp value"),
+					data.get(" expcolor"));
+			homePage.sideBarComponent().profileComponent().clickFilter();
+			homePage.sideBarComponent().filterComponent().fillDepositId(data.get("depositId"));
+			homePage.sideBarComponent().filterComponent().fillReferenceId(data.get("referenceId"));
+			homePage.sideBarComponent().filterComponent().fillUserId(data.get("UserId"));
+			homePage.sideBarComponent().filterComponent().clickchkbxBusiness();
+			homePage.sideBarComponent().filterComponent().clickchkbxPersonal();
+			homePage.sideBarComponent().filterComponent().clickchkbxCoyniAdmin();
+			homePage.sideBarComponent().filterComponent().fillFromAmount(data.get("fromAmount"));
+			homePage.sideBarComponent().filterComponent().fillToAmount(data.get("toAmount"));
+			homePage.sideBarComponent().filterComponent().fillNameOnAccount(data.get("accountName"));
+			homePage.sideBarComponent().filterComponent().fillBankAccountNumber(data.get("bankAccountNumber"));
+			homePage.sideBarComponent().filterComponent().clickchkbxPaid();
+			homePage.sideBarComponent().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().filterComponent().clickApplyFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total depoist filter flow is failed due to Exception " + e);
+		}
 	}
+
+	@Test
+	@Parameters({"String strParams"})
+	public void testTotalDepositsFilterClearFlow(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
+			homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"), data.get("exp value"),
+					data.get(" expcolor"));
+			homePage.sideBarComponent().profileComponent().clickFilter();
+			homePage.sideBarComponent().filterComponent().fillDepositId(data.get("depositId"));
+			homePage.sideBarComponent().filterComponent().fillReferenceId(data.get("referenceId"));
+			homePage.sideBarComponent().filterComponent().fillUserId(data.get("UserId"));
+			homePage.sideBarComponent().filterComponent().clickchkbxBusiness();
+			homePage.sideBarComponent().filterComponent().clickchkbxPersonal();
+			homePage.sideBarComponent().filterComponent().clickchkbxCoyniAdmin();
+			homePage.sideBarComponent().filterComponent().fillFromAmount(data.get("fromAmount"));
+			homePage.sideBarComponent().filterComponent().fillToAmount(data.get("toAmount"));
+			homePage.sideBarComponent().filterComponent().fillNameOnAccount(data.get("accountName"));
+			homePage.sideBarComponent().filterComponent().fillBankAccountNumber(data.get("bankAccountNumber"));
+			homePage.sideBarComponent().filterComponent().clickchkbxPaid();
+			homePage.sideBarComponent().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().filterComponent().clickDepositIdClr();
+			homePage.sideBarComponent().filterComponent().clickReferenceIdClr();
+			homePage.sideBarComponent().filterComponent().clickUserIdClr();
+			homePage.sideBarComponent().filterComponent().clickUserTypeClearAll();
+			homePage.sideBarComponent().filterComponent().clickDepositAmtClr();
+			homePage.sideBarComponent().filterComponent().clickNameOnAccountClr();
+			homePage.sideBarComponent().filterComponent().clickBankAccountnumClr();
+			homePage.sideBarComponent().filterComponent().clickTransactionStatusClr();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total Deposits Filter failed due to Exception " + e);
+		}
+
+	}
+	@Test
+	@Parameters({"String strParams"})
+	public void testTotalDepositsFilterResetFilters() {
+		try { 
+			  Map<String, String> data = Runner.getKeywordParameters(null);
+			  homePage.sideBarComponent().clickAccounting();
+				homePage.sideBarComponent().clickTotalDeposits();
+				homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+				homePage.sideBarComponent().accountTableComponent().clickSearch();
+				homePage.sideBarComponent().verifyMouseHoverChangedColor(data.get("cssProp"), data.get("exp value"),
+						data.get(" expcolor"));
+				homePage.sideBarComponent().profileComponent().clickFilter();
+				homePage.sideBarComponent().filterComponent().fillDepositId(data.get("depositId"));
+				homePage.sideBarComponent().filterComponent().fillReferenceId(data.get("referenceId"));
+				homePage.sideBarComponent().filterComponent().fillUserId(data.get("UserId"));
+				homePage.sideBarComponent().filterComponent().clickchkbxBusiness();
+				homePage.sideBarComponent().filterComponent().clickchkbxPersonal();
+				homePage.sideBarComponent().filterComponent().clickchkbxCoyniAdmin();
+				homePage.sideBarComponent().filterComponent().fillFromAmount(data.get("fromAmount"));
+				homePage.sideBarComponent().filterComponent().fillToAmount(data.get("toAmount"));
+				homePage.sideBarComponent().filterComponent().fillNameOnAccount(data.get("accountName"));
+				homePage.sideBarComponent().filterComponent().fillBankAccountNumber(data.get("bankAccountNumber"));
+				homePage.sideBarComponent().filterComponent().clickchkbxPaid();
+				homePage.sideBarComponent().filterComponent().clickchkbxFailed();
+				homePage.sideBarComponent().filterComponent().clickchkbxInprogress();
+				homePage.sideBarComponent().filterComponent().clickResetAllFilters();
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total Deposits Filter failed due to Exception " + e);
+		}
+	}
+	
+	
+	
+}
