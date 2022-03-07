@@ -27,11 +27,12 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().clickCoyniPortal();
 			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
 			// "expValue", "expColor");
-			// homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickTokenAccount();
 			Thread.sleep(2000);
+			homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickCommissionAccount();
 
 		} catch (Exception e) {
@@ -71,13 +72,14 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 			homePage.sideBarComponent().tokenAccountPage().getTotalAvailable();
 			homePage.sideBarComponent().tokenAccountPage().clickWithdrawToSignet();
-			homePage.sideBarComponent().tokenAccountPage().navigationComponent().clickBack();
+			homePage.sideBarComponent().tokenAccountPage().navigationComponent().clickClose();
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccount Failed due to Exception " + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })

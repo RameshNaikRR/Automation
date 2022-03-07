@@ -11,7 +11,7 @@ public class TopBarComponent extends BrowserFunctions {
 	private By txtSearch = By.xpath(
 			"//input[@class='form-input-search  Header_main_search__2-DYt px-2 bg-cwhite flex-row flex shadow-3xl outline-none border-2 focus:border-cgy2']");
 
-	private By drpdwnUserName = By.xpath("//span[contains(@class,'user-initials-ring user-initials-ring__active' )]");
+	private By drpdwnUserName = By.xpath("//div[contains(@class,'header__circle-initials hover:underline hover:text-cgy4')]");
 
 	private By handMark = By.xpath("//div[@class='cursor-pointer']");
 
@@ -34,7 +34,7 @@ public class TopBarComponent extends BrowserFunctions {
 	}
 
 	public void clickUserName() {
-		click(getDropDownItems("UserName"), "Coyni Portal");
+		click(getDropDownItems("User Details"), "Coyni Portal");
 	}
 
 	public void clickChangePassword() {
@@ -42,7 +42,7 @@ public class TopBarComponent extends BrowserFunctions {
 	}
 
 	public void clickSignOut() {
-		click(getDropDownItems("SignOut"), "SignOut");
+		click(getDropDownItems("Sign Out"), "Sign Out");
 	}
 
 	public AdminUserDetailsPage adminUserDetailsPage() {
