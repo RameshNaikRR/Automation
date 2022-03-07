@@ -35,11 +35,6 @@ public class LoginTest {
 			loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-//			Thread.sleep(2000);
-        	loginPage.clickEyeIcon();
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
-			loginPage.clickEyeIcon();
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
@@ -82,6 +77,12 @@ public class LoginTest {
 			loginPage.verifyForgotPassword();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			loginPage.clickEyeIcon();
+			Thread.sleep(1000);
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickEyeIcon();
+			Thread.sleep(1000);
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			
 		} catch (Exception e) {
@@ -89,7 +90,28 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception "+e);
 		}
 	}
-	
+	@Test
+	@Parameters({"strParams"})
+	public void testLoginInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
+			if (!data.get("code").isEmpty()) {
+				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("message").isEmpty()) {
+				loginPage.authyComponent().verifyMessage(data.get("message"));
+			}
+			Thread.sleep(2000);
+			loginPage.authyComponent().verifyLoginWithInvalidPin();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Authy failed due to this exception "+e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
