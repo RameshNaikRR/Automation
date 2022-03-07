@@ -2,6 +2,7 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.popups.ExportSelectedTransactionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -315,9 +316,12 @@ public class ExportComponent extends BrowserFunctions {
 		click(getCheckBox("OriginalTrans , Date"), "OriginalTrans , Date");
 	}
 
-	public void btnExport() {
+	public void clickExport() {
 		click(btnExport, "Export");
 	}
 
+	public ExportSelectedTransactionsPopup exportSelectedTransactionsPopup() {
+		return new ExportSelectedTransactionsPopup();
+	}
 
 }

@@ -70,12 +70,12 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTokenAccount() {
-		clickCoyniPortal();
+		// clickCoyniPortal();
 		click(getSubMenuItems("Coyni Portal", "Token Account"), "Token Account");
 	}
 
 	public void clickCommissionAccount() {
-		clickCoyniPortal();
+		// clickCoyniPortal();
 		click(getSubMenuItems("Coyni Portal", "Commission Account"), "Commission Account");
 	}
 
@@ -180,10 +180,16 @@ public class SideBarComponent extends BrowserFunctions {
 	public TokenAccountPage tokenAccountPage() {
 		return new TokenAccountPage();
 	}
-   public ProfileComponent profileComponent() {
-	   return new ProfileComponent();
-   }
-   public FilterComponent filterComponent() {
-	   return new FilterComponent();
-   }
+
+	public ProfileComponent profileComponent() {
+		return new ProfileComponent();
+	}
+
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
+	}
+
+	public ExportComponent exportComponent() {
+		return new ExportComponent();
+	}
 }

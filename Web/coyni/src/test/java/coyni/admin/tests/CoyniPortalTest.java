@@ -27,9 +27,11 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
-			homePage.sideBarComponent().clickCoyniPortal();
+			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
+			// "expValue", "expColor");
+			// homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickTokenAccount();
+			Thread.sleep(2000);
 			homePage.sideBarComponent().clickCommissionAccount();
 
 		} catch (Exception e) {
@@ -42,14 +44,15 @@ public class CoyniPortalTest {
 	public void testTopBar(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.topBarComponent().fillSearch(data.get("search"));
+			// homePage.topBarComponent().fillSearch(data.get("search"));
 			homePage.topBarComponent().clickDropDownUserName();
-			homePage.topBarComponent().verifyCursorAction();
+			// homePage.topBarComponent().verifyCursorAction();
 			homePage.topBarComponent().clickUserName();
 			homePage.topBarComponent().adminUserDetailsPage().verifyPageHeading(data.get("heading"));
-			homePage.topBarComponent().verifyCursorAction();
+			// homePage.topBarComponent().verifyCursorAction();
+			homePage.topBarComponent().clickDropDownUserName();
 			homePage.topBarComponent().clickChangePassword();
-			homePage.topBarComponent().navigationComponent().clickBack();
+			homePage.topBarComponent().navigationComponent().clickClose();
 			homePage.topBarComponent().clickDropDownUserName();
 			homePage.topBarComponent().clickSignOut();
 
@@ -63,7 +66,7 @@ public class CoyniPortalTest {
 	public void testTokenAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
+			// homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickTokenAccount();
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 			homePage.sideBarComponent().tokenAccountPage().getTotalAvailable();
@@ -187,6 +190,68 @@ public class CoyniPortalTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountResetFilters Failed due to Exception " + e);
 		}
+	}
+
+	public void testExportSelectedTransactions(String strParams, String strParams1) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().exportComponent().clickExport();
+			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+					.verifyHeading(data.get("heading"));
+			if (strParams1.equalsIgnoreCase("Today")) {
+				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnToday();
+			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
+				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnYesterday();
+
+			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
+				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOn7Days();
+			} else if (strParams1.equalsIgnoreCase("Last Month")) {
+				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnLastMonth();
+			} else {
+				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickMonthTODate();
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnExport();
+			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+					.verifyTitle(data.get("exportHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickExportPage();
+			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionToday(String strParams) {
+		testExportSelectedTransactions(strParams, "Today");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionYesterday(String strParams) {
+		testExportSelectedTransactions(strParams, "Yesterday");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+		testExportSelectedTransactions(strParams, "Last Seven Days");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastMonth(String strParams) {
+		testExportSelectedTransactions(strParams, "Last Month");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionMonthToDate(String strParams) {
+		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
 	@Test
