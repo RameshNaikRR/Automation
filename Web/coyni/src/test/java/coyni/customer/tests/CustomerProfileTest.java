@@ -509,10 +509,10 @@ public class CustomerProfileTest {
 			// customerProfilePage.userDetailsComponent().notificationsComponent()
 			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			customerProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
+			//customerProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			Thread.sleep(2000);
-			customerProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
+			//customerProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
 			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
@@ -535,7 +535,8 @@ public class CustomerProfileTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			Thread.sleep(1000);
-			loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
+			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
+			loginPage.authyComponent().fillInput(data.get("code"));
 			loginPage.authyComponent().verifyMessage(data.get("message"));
 			loginPage.authyComponent().verifyLogin();
 		} catch (Exception e) {

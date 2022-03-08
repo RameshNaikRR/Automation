@@ -45,7 +45,7 @@ public class LoginTest {
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
-			loginPage.authyComponent().validateAuthyField(data.get("code"));
+		//	loginPage.authyComponent().validateAuthyField(data.get("code"));
 			loginPage.authyComponent().clickGoBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test view failed due to exception " + e);
@@ -396,6 +396,7 @@ public class LoginTest {
 	public void testForgotPassword(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -426,6 +427,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -448,6 +450,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -489,6 +492,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidPasswordFiled(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));

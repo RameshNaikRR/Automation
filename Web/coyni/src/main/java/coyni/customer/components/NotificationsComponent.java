@@ -14,7 +14,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By notificationsIcon = By.cssSelector(".icon-notification-bold");
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
-	private By btnRequests = By.xpath("//button[contains(text(),'Requests')]");
+	private By btnRequests = By.xpath("//button[contains(text(),'Pay/Req')]");
 	private By btnPay = By.xpath("(//button[text()='Pay'])[1]");
 	private By btnDeny = By.xpath("(//div[text()='Deny'])[2]");
 	private By btnReminder = By.xpath("(//button[text()='Reminder'])[1]");

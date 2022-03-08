@@ -671,8 +671,9 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.verifyHeading(data.get("authyPayHeading"));
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
+//					.fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent().fillInput(data.get("code"));
 //			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().authyComponent()
 //					.verifyMessage(data.get("message"));
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
@@ -683,8 +684,8 @@ public class TokenAccountTest {
 					.successFailurePopupCardComponent().verifyMessge(data.get("successMessage"));
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.successFailurePopupCardComponent().verifyReferenceID();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.successFailurePopupCardComponent().verifyAccountBalance();
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+//					.successFailurePopupCardComponent().verifyAccountBalance();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickOnCopyLink();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.successFailurePopupCardComponent().clickDone();
@@ -994,6 +995,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("messageToRecipient"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
@@ -1021,7 +1023,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("messageToRecipient"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
@@ -1034,7 +1036,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
-			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("messageToRecipient"));
+			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
