@@ -1,9 +1,13 @@
 package coyni.admin.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class AccountTableComponent extends BrowserFunctions{
 	
@@ -18,7 +22,46 @@ public class AccountTableComponent extends BrowserFunctions{
 	private By drpdwnBatchId = By.xpath("//div[@class='flex items-center justify-between pr-3 cursor-pointer hover:text-cm3 text-xs text-cm4 font-semibold']");
 	private By drpdwnDepositId = By.xpath("//div[text()='Deposit ID']");
 	private By drpdwnReferenceId = By.xpath("//div[@class='flex items-center justify-between pr-3 cursor-pointer hover:text-cm3 text-xs text-cm4 font-semibold']");
-	//axcd
+	private By lblTableHeadings = By.cssSelector("thead>tr>th");
+	private By lblCreditDebitBatchIdDetail = By.xpath("//p[text()='Credit/Debit Batch Detail']");
+	private By lblTotalBatchAmount = By.xpath("//span[text()='Total Batch Amount']");
+	
+	private By getLabelHeadings(String lblHeading) {
+		return By.xpath(String.format("//span[text()='%s']/ancestor::div[@class='flex items-center gap-2']", lblHeading));
+	}
+	
+	public void verifylblInprogressView() {
+		new CommonFunctions().elementView(getLabelHeadings("InProgress"), "InProgress");
+	}
+	public void verifylblPaidView() {
+		new CommonFunctions().elementView(getLabelHeadings("Paid"), "Paid");
+	}
+	public void verifylblFailedView() {
+		new CommonFunctions().elementView(getLabelHeadings("Failed"), "Failed");
+	}
+	public void verifylblTotalCountView() {
+		new CommonFunctions().elementView(getLabelHeadings("Total Count"), "Total Count");
+	}
+	
+	public void verifyTableLabels(String labels) {
+		String[] list = labels.split(",");
+		
+		List<WebElement> elements = getElementsList(lblTableHeadings, "");
+		int size = elements.size();
+		for(int i=0;i<size;i++) {
+			String label = elements.get(i).getText();
+			if(label.equals(list[i])) {
+				ExtentTestManager.setPassMessageInReport(list[i]  + " column is displayed in Table ");
+			}
+			else {
+				ExtentTestManager.setFailMessageInReport(list[i] + " column is not displayed in Table ");
+			}
+		}
+	}
+	public void verifyCreditDebitBatchIdDetailView() {
+		new CommonFunctions().elementView(lblCreditDebitBatchIdDetail, "CreditDebitBatchIdDetail");
+	}
+	
 	public void clickUser() {
 		click(lnkUser, "User");
 	}
@@ -103,5 +146,6 @@ public class AccountTableComponent extends BrowserFunctions{
 	public ProfileComponent profileComponent() {
 		return new ProfileComponent();
 	}
+	
 	
 }

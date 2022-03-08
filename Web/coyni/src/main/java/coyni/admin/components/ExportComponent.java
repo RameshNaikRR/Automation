@@ -12,19 +12,22 @@ public class ExportComponent extends BrowserFunctions {
 
 	private By lblDateRange = By.xpath("//h3[text()='Date Range']");
 
-	private By drpDwn = By.xpath("//div[@class='FormField_selected_option__dQiIf undefined']");
+	private By drpDwn = By.xpath("//div[text()='Default (9)']");
 
 	private By lblColumns = By.xpath("//h3[text()='Columns']");
 
 	private By lnkDeSelectAll = By.xpath("//span[text()='Deselect All']");
 
 	private By btnExport = By.xpath("//button[text()='Export']");
+	private By lblCustom = By.xpath("//div[text()='Custom']");
 
 	public By getRadioBtn(String elementName) {
 		return By.xpath(String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
 				elementName));
 	}
-
+    public void clicklblCustom() {
+    	click(lblCustom, "Custom");
+    }
 	public void clickToday() {
 		click(getRadioBtn("Today"), "Today");
 	}
@@ -75,11 +78,38 @@ public class ExportComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelTextContains(lblColumns, "Columns", expHeading);
 	}
 
-	public By getCheckBox(String elementName) {
-		return By.xpath(String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
+	private By getCheckBox(String elementName) {
+		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input",
 				elementName));
 	}
-
+	public void verifydrpdwnDepositIdView() {
+		new CommonFunctions().elementView(getCheckBox("Deposit ID"), "Deposit ID");
+	}
+	public void verifydrpdwnUserIdView() {
+		new CommonFunctions().elementView(getCheckBox("User ID"), "User ID");
+	}
+	public void verifydrpdwnFeeView() {
+		new CommonFunctions().elementView(getCheckBox("Fee"), "Fee");
+	}
+	public void verifydrpdwnFirst6digitsView() {
+		new CommonFunctions().elementView(getCheckBox("First 6 digits"), "First 6 digits");
+	}
+	public void verifydrpdwnStatusView()
+	{
+		new CommonFunctions().elementView(getCheckBox("Status"), "Status");
+	}
+	public void verifydrpdwnUserTypeView() {
+		new CommonFunctions().elementView(getCheckBox("User Type"), "User Type");
+	}
+	public void verifydrpdwnDepositAmountView() {
+		new CommonFunctions().elementView(getCheckBox("Deposit Amount"), "Deposit Amount");
+	}
+	public void verifydrpdwnRecievedAmountView() {
+		new CommonFunctions().elementView(getCheckBox("Received Amount"),"Received Amount");
+	}
+	public void verifydrpdwnLast4digitsView() {
+		new CommonFunctions().elementView(getCheckBox("Last 4 digits"), "Last 4 digits");
+	}
 	public void clickReferenceId() {
 		click(getCheckBox("ReferenceId"), "Reference ID");
 	}
@@ -319,7 +349,13 @@ public class ExportComponent extends BrowserFunctions {
 	public void clickExport() {
 		click(btnExport, "Export");
 	}
-
+	public void clickExportDrpdwn() {
+		click(drpDwn, "Export drop down");
+		
+	}
+   public void VerifylblExportHdgView() {
+	   new CommonFunctions().elementView(lblExportHeading, "Export selected Transactions ");
+   }
 	public ExportSelectedTransactionsPopup exportSelectedTransactionsPopup() {
 		return new ExportSelectedTransactionsPopup();
 	}

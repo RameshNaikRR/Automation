@@ -67,6 +67,8 @@ public class TokenAccountPage extends BrowserFunctions {
 		return str;
 
 	}
+	
+	
 
 	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
 
