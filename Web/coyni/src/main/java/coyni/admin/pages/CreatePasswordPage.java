@@ -38,6 +38,10 @@ public class CreatePasswordPage extends BrowserFunctions {
 		new CommonFunctions().verifyAutoFocus(txtCreatePassword, "Create Password");
 	}
 
+	public void fillInvalidCreatePassword(String createPassword) {
+		enterText(txtCreatePassword, createPassword, "Create Password");
+	}
+
 	public void fillCreatePassword(String createPassword) throws InterruptedException {
 		String[] inputs = { "H", "h", "qazwsxeh", "qazwsxedcrfv", "@", "1" };
 		String[] messages = { "uppercase", "lowercase", "total characters", "total characters", "special character",
@@ -94,18 +98,25 @@ public class CreatePasswordPage extends BrowserFunctions {
 		click(lnkCoyni, "Coyni");
 	}
 
-//	public void clickEyeIconCreatePassword() {
-//		click(eyeIconCreate, "Eye Icon Create Password");
-//	}
-//
-//	public void clickEyeIconConfirmPassword() {
-//		click(eyeIconConfirm, "Eye Icon Confirm Password");
-//	}
+	public void clickEyeIconCreatePassword() {
+		click(eyeIconCreate, "Eye Icon Create Password");
+	}
+
+	public void clickEyeIconConfirmPassword() {
+		click(eyeIconConfirm, "Eye Icon Confirm Password");
+	}
+
+	public void verifyCreatePassword() {
+		new CommonFunctions().elementView(txtCreatePassword, "Create Password");
+	}
+
+	public void verifyConfirmPassword() {
+		new CommonFunctions().elementView(txtConfirmPassword, "Confirm Password");
+	}
 
 	public void verifyCreatePasswordEyeIcon() {
 		new CommonFunctions().elementView(eyeIconCreate, "Create Password View Eye Icon");
 	}
-
 
 	public void verifyConfirmPasswordEyeIcon() {
 		new CommonFunctions().elementView(eyeIconConfirm, "Confirm Password View Eye Icon");
@@ -114,11 +125,11 @@ public class CreatePasswordPage extends BrowserFunctions {
 	public void verifyCreatePasswordMaskedView() {
 		new CommonFunctions().verifyPasswordMaskedView(txtCreatePassword, "Create Password");
 	}
+
 	public void verifyConfirmPasswordMaskedView() {
 		new CommonFunctions().verifyPasswordMaskedView(txtConfirmPassword, "Confirm Password");
 	}
-	
-	
+
 	public void clickCreate() {
 		click(btnCreate, "Create Button");
 	}
