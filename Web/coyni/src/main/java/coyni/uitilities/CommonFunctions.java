@@ -294,4 +294,17 @@ public class CommonFunctions {
 			}
 
 		}
+	public void verifyPasswordMaskedView(By ele,String eleName) {
+		String attributeValue = objBrowserFunctions.getElement(ele, eleName).getAttribute("type");
+		if (attributeValue.contains("password")) {
+			ExtentTestManager.setInfoMessageInReport("Password Masked with black circles");
+			
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Password Not masked with black circles");
+			
+		}
+	}
+
+	
+	
 }

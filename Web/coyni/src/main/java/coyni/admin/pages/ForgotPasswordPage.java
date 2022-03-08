@@ -16,7 +16,7 @@ public class ForgotPasswordPage extends BrowserFunctions {
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password Heading ", expHeading);
 	}
 
 	public void verifyPageDescription(String expDescription) {
@@ -39,9 +39,12 @@ public class ForgotPasswordPage extends BrowserFunctions {
 		click(lnkBackToLogin, "Back to Login");
 	}
 
-	public PhoneEmailVerificationComponent phoneEmailVerificationComponent()
-	{
+	public void clickOutSide() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
+	public PhoneEmailVerificationComponent phoneEmailVerificationComponent() {
 		return new PhoneEmailVerificationComponent();
 	}
-	
+
 }

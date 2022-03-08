@@ -37,15 +37,8 @@ public class LoginPage extends BrowserFunctions {
 		click(eyeIcon, "EyeIcon");
 	}
 	
-	public void verifyPasswordMaskedView(String attribute,String password) {
-		String attributeValue = getAttributeValue(txtPassword, attribute, password);
-		if (attributeValue.contains("password")) {
-			ExtentTestManager.setInfoMessageInReport(password+" Masked with black circles");
-			
-		}else {
-			ExtentTestManager.setInfoMessageInReport(password+" Not masked with black circles");
-			
-		}
+	public void verifyPasswordMaskedView() {
+		new CommonFunctions().verifyPasswordMaskedView(txtPassword, "password");
 	}
 //	public void clickNext() {
 //		click(btnNext, "Next");

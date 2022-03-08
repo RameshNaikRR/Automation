@@ -79,10 +79,10 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickEyeIcon();
 			Thread.sleep(1000);
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.verifyPasswordMaskedView();
 			loginPage.clickEyeIcon();
 			Thread.sleep(1000);
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.verifyPasswordMaskedView();
 			loginPage.clickNext();
 			
 		} catch (Exception e) {
@@ -243,11 +243,11 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillCreatePassword(data.get("createPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.clickEyeIconCreatePassword();
+					.verifyCreatePasswordMaskedView();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
-					.clickEyeIconConfirmPassword();
+					.verifyConfirmPasswordMaskedView();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
 
 		} catch (Exception e) {
