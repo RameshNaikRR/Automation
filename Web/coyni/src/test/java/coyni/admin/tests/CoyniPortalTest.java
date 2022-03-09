@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import coyni.admin.pages.HomePage;
 import coyni.admin.pages.TokenAccountPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -79,7 +80,6 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccount Failed due to Exception " + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -337,4 +337,50 @@ public class CoyniPortalTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddSignetAccountInvalidDataValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
+			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
+			// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading"));
+			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
+			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
+			tokenAccountPage.mailingAddressComponent().clickstate();
+			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+			tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawSignetAccountFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("transDescription"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
 }
