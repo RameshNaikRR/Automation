@@ -15,6 +15,7 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//div[text()='Email Verification']");
 	private By lblDescription = By.cssSelector(".text-base");
+	private By lblPhoneHeading = By.xpath("//div[text()='Phone Verification']");
 	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
 	// private By txtInput = By.cssSelector(".verification-input-wrapper ");
 	private By lnkLogin = By.xpath("");
@@ -29,9 +30,16 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Email Verification", expDescription);
 	}
 
+	public void verifyPhoneHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblPhoneHeading, "Phone Verification", expHeading);
+	}
 	public void clickResend() {
 		click(lnkResend, " Resend ");
 
+	}
+	
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 
 	public void fillpin(String code) {
@@ -52,6 +60,9 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 
 	public void clickBackToLogin() {
 		click(lnkBackToLogin, "Back to Login");
+	}
+	public void verifyMessage(String message) throws InterruptedException {
+		new AuthyComponent().verifyMessage(message);
 	}
 
 	public CreatePasswordPage createPasswordPage() {

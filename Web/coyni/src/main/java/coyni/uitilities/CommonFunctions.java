@@ -140,6 +140,16 @@ public class CommonFunctions {
 		} else {
 			ExtentTestManager.setPassMessageInReport("Hand symbol is not displayed when mouse hover on " + eleName);
 		}
+		
+	}
+	public void verifyTextUnderLine(By ele, String eleName) {
+		String text = objBrowserFunctions.getElement(ele, eleName).getAttribute("class");
+		if(text.contains("underline")) {
+			ExtentTestManager.setPassMessageInReport(eleName +"text is underlined when mouse hover on it");
+		}
+		else {
+			ExtentTestManager.setFailMessageInReport(eleName +"text is not underlined when mouse hover on it");
+		}
 	}
 
 	public void validateFormErrorMessage(String expErrMsg) {
