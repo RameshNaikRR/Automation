@@ -640,6 +640,45 @@ public class TokenAccountTest {
 		}
 
 	}
+	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenDebitWithOutPayments(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().clickDebitCard();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addCardPage().clickNext();
+            customerProfileTest.testAddDebitCard(strParams);
+            testBuyTokenDebitCard(strParams);
+            customerProfileTest.testDeleteDebitCard(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenCreditWithOutPayments(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().clickCreditCard();
+			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addCardPage().clickNext();
+            customerProfileTest.testAddCreditCard(strParams);
+            testBuyTokenCreditCard(strParams);
+            customerProfileTest.testDeleteCreditCard(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -664,6 +703,55 @@ public class TokenAccountTest {
 					.successFailureComponent().getStatus();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().fillCvv(data.get("expCvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().verifyHeading(data.get("previewHeading"));
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().swipeConfirm();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent().fillPin(data.get("pin"));
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().verifyTrasactionsStatus();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenCreditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().fillCvv(data.get("expCvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().verifyHeading(data.get("previewHeading"));
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().swipeConfirm();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent().fillPin(data.get("pin"));
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().verifyTrasactionsStatus();
+	        tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().clickDone();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
 		}

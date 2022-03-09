@@ -1001,6 +1001,25 @@ public class CustomerProfileTest {
 		}
 
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteCreditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickRemove();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickYes();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
 
 	@Test
 	@Parameters({ "strParams" })

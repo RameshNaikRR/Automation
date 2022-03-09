@@ -20,9 +20,17 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvDone')]");//
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]");//
+	private By lblTrasactionStatus = MobileBy.xpath("//*[contains(@text,'Trasactions')]");
 
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblHeading));
+	}
+	
+	public void verifyTrasactionsStatus() {
+		String str = getText(lblTrasactionStatus);
+		
+		ExtentTestManager.setPassMessageInReport("Trasactions status is "+ str);
+		
 	}
 
 	public void clickDone() {

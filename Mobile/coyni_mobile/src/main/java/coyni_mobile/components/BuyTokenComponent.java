@@ -2,6 +2,7 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.popups.CvvPopup;
 import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -55,5 +56,17 @@ public class BuyTokenComponent extends MobileFunctions {
 
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
+	}
+	
+	public CvvPopup cvvPopup() {
+		return new CvvPopup();
+	}
+	
+	public EnterYourPINComponent enterYourPINComponent() {
+		return new EnterYourPINComponent();
+	}
+	
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
 	}
 }
