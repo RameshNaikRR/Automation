@@ -1,6 +1,9 @@
 package coyni.customer.popups;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.customer.components.AccountLimitsComponent;
 import coyni.customer.components.AddCardComponent;
@@ -64,7 +67,7 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 	}
 
 	public void clickDebitCard(String last4Digits) {
-		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+		//moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
 		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
 		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
 	}
@@ -161,6 +164,18 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		return new AccountLimitsComponent();
 	}
 
+    public void clickDebitCard() {
+		
+		List<WebElement> lst = getElementsList(btnRadioDebit, "Radio Button");
+	    int i = lst.size();
+	    for(int j=1;j<4;j++) {
+		  if(i==j) {
+		    clickDebitCard("5169");
+		  }
+	   }
+		  clickOnNext();		  
+    }
+	
 	public void verifyAddDebitCard(String expCardName, String expCardNumber, String expCVV, String expiry,
 			String address1, String address2, String city, String state, String zipCode, String country)
 			throws InterruptedException {
