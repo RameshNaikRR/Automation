@@ -2,6 +2,8 @@ package coyni.admin.components;
 
 import java.util.List;
 
+import javax.xml.xpath.XPath;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -25,23 +27,43 @@ public class AccountTableComponent extends BrowserFunctions{
 	private By lblTableHeadings = By.cssSelector("thead>tr>th");
 	private By lblCreditDebitBatchIdDetail = By.xpath("//p[text()='Credit/Debit Batch Detail']");
 	private By lblTotalBatchAmount = By.xpath("//span[text()='Total Batch Amount']");
+	private By drpdwnId = By.cssSelector("div[class*='selected_option']");
+	private By lblFirstRowElements = By.cssSelector("tbody>tr:nth-of-type(2)>td");
+	private By lnkFirstElement = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
+	private By lblBatchDetails = By.xpath("//p[@class='breadcrumb--current']");
 	
-	private By getLabelHeadings(String lblHeading) {
-		return By.xpath(String.format("//span[text()='%s']/ancestor::div[@class='flex items-center gap-2']", lblHeading));
+	public void clickDropDownId() {
+		click(drpdwnId, "drop down");
 	}
-	
-	public void verifylblInprogressView() {
-		new CommonFunctions().elementView(getLabelHeadings("InProgress"), "InProgress");
+	private By getDropDownElements(String dropDownElementName) {
+		return By.xpath(String.format("//div[contains(@class,'Select')]/div[text()='%s']","Id" ));
 	}
-	public void verifylblPaidView() {
-		new CommonFunctions().elementView(getLabelHeadings("Paid"), "Paid");
+	 public void clickdrpdwnBatchId() {
+		   click(getDropDownElements("Batch ID"), "Batch Id");
+	   }
+	   public void clickdrpdwnDepositId() {
+		   click(getDropDownElements("Deposit ID"), "deposit ID");
+	   }
+	   public void clickdrpdwnRefferenceId() {
+		   click(getDropDownElements("Refference ID"), "Refference Id");
+	   }
+	   public void getRowElements(String columns) {
+		   String[] column = columns.split(",");
+		  List<WebElement> list = getElementsList(lblFirstRowElements, " ");
+	      int size = list.size();
+	      for(int i=0;i<size;i++) {
+				String label = list.get(i).getText();
+				ExtentTestManager.setInfoMessageInReport(column[i]+ ": "+label);
+	      }
+	   }
+	public void verifyLabelHeading(String labelHeading) {
+		new CommonFunctions().verifyLabelText(lblBatchDetails, "label heading", labelHeading);
+		
 	}
-	public void verifylblFailedView() {
-		new CommonFunctions().elementView(getLabelHeadings("Failed"), "Failed");
+	public void clickFirstElement() {
+		click(lnkFirstElement, "First Element");
 	}
-	public void verifylblTotalCountView() {
-		new CommonFunctions().elementView(getLabelHeadings("Total Count"), "Total Count");
-	}
+
 	
 	public void verifyTableLabels(String labels) {
 		String[] list = labels.split(",");
@@ -122,15 +144,7 @@ public class AccountTableComponent extends BrowserFunctions{
    public void verifySignetAccountView() {
 	   new CommonFunctions().elementView(getTabItemLoc("Signet Accounts"), "Signet Account");
    }
-   public void clickdrpdwnBatchId() {
-	   click(drpdwnBatchId, "Batch Id");
-   }
-   public void clickdrpdwnDepositId() {
-	   click(drpdwnDepositId, "deposit Id");
-   }
-   public void clickdrpdwnRefferenceId() {
-	   click(drpdwnReferenceId, "Refference Id");
-   }
+  
    public void verifyCreditandDebitCardView() {
 	   new CommonFunctions().elementView(getTabItemLoc("Credit/Debit"), "Credit/Debit");
    }

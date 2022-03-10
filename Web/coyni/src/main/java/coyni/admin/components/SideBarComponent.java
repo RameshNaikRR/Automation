@@ -188,6 +188,9 @@ public class SideBarComponent extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
+	public BatchIDComponent batchIDComponent() {
+		return new BatchIDComponent();
+	}
 
 	public ExportComponent exportComponent() {
 		return new ExportComponent();

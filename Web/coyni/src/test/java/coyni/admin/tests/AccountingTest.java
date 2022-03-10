@@ -112,7 +112,8 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
 			homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
 			homePage.sideBarComponent().accountTableComponent().clickdrpdwnBatchId();
-			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tableLabels"));
+			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));
+			
 			
 			
 		} catch (Exception e) {
@@ -121,21 +122,24 @@ public class AccountingTest {
 	}
 
 	@Test
-	public void testTotalDepositSignetAccount() {
+	@Parameters({"String strParams"})
+	public void testTotalDepositSignetAccount(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(null);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
 			homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
-		} catch (Exception e) {
+			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));	
+			} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Signet Account failed due to Exception " + e);
 		}
 	}
 
 	@Test
-	public void testTotalDepositCreditandDebitCard() {
+	@Parameters({"String strParams"})
+	public void testTotalDepositCreditandDebitCard(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(null);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
 			homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
@@ -274,10 +278,10 @@ public class AccountingTest {
 		homePage.sideBarComponent().clickTotalDeposits();
 		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
 		homePage.sideBarComponent().accountTableComponent().clickSearch();
-		homePage.sideBarComponent().accountTableComponent().verifylblInprogressView();
-		homePage.sideBarComponent().accountTableComponent().verifylblPaidView();
-		homePage.sideBarComponent().accountTableComponent().verifylblFailedView();
-		homePage.sideBarComponent().accountTableComponent().verifylblTotalCountView();
+//		homePage.sideBarComponent().accountTableComponent().verifylblInprogressView();
+//		homePage.sideBarComponent().accountTableComponent().verifylblPaidView();
+//		homePage.sideBarComponent().accountTableComponent().verifylblFailedView();
+//		homePage.sideBarComponent().accountTableComponent().verifylblTotalCountView();
 		homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tableLabels"));
 		homePage.sideBarComponent().exportComponent().clickExport();
 		homePage.sideBarComponent().exportComponent().VerifylblExportHdgView();
@@ -291,14 +295,71 @@ public class AccountingTest {
 		homePage.sideBarComponent().exportComponent().verifydrpdwnUserTypeView();
 		homePage.sideBarComponent().exportComponent().verifydrpdwnRecievedAmountView();
 		homePage.sideBarComponent().exportComponent().verifydrpdwnLast4digitsView();
+		homePage.sideBarComponent().exportComponent().clickExportButton();
 		}catch(Exception e){
 			ExtentTestManager.setFailMessageInReport("test Total Deposits Credit and Debit Card filters failed due to Exception " + e);
 		}
-		
+	}
+	@Test
+	@Parameters({"String strParams"})
+	public void testTotalDepositsView(String strParams) {
+		try { 
+		  Map<String, String> data = Runner.getKeywordParameters(strParams);
+		   homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().verifyTotalDepositsView();
+			homePage.sideBarComponent().clickTotalDeposits();
+			if(data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
+				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
+				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+				
+			}else if(data.get("paymentMethod").equalsIgnoreCase("cards")) {
+				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
+				homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
+			}
+			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));	
+			homePage.sideBarComponent().accountTableComponent().clickDropDownId();
+			if(data.get("id").equalsIgnoreCase("Batch ID")) {
+				homePage.sideBarComponent().accountTableComponent().clickdrpdwnBatchId();
+			}else if(data.get("id").equalsIgnoreCase("Reference ID")) {
+				homePage.sideBarComponent().accountTableComponent().clickdrpdwnRefferenceId();
+			}else{
+				homePage.sideBarComponent().accountTableComponent().clickdrpdwnDepositId();
+			}
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("value"));
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
+			homePage.sideBarComponent().accountTableComponent().getRowElements(data.get("columns"));
+			
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test total deposits View failed due to Exception " + e);
+		}  
 	}
 	
-	
-	
+	@Test
+	@Parameters({"String strParams"})
+	public void testTotalDepositsDetailsView(String strParams) {
+		try {
+		   Map<String, String> data = Runner.getKeywordParameters(strParams);
+		   homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			if(data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
+				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
+				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+				
+			}else if(data.get("paymentMethod").equalsIgnoreCase("cards")) {
+				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
+				homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
+			}
+			homePage.sideBarComponent().accountTableComponent().clickFirstElement();
+			homePage.sideBarComponent().accountTableComponent().verifyLabelHeading(data.get("label Headings"));
+			homePage.sideBarComponent().batchIDComponent().getInProgressCount();
+			homePage.sideBarComponent().batchIDComponent().getTotalAccount();
+			homePage.sideBarComponent().batchIDComponent().getPaidCount();
+			homePage.sideBarComponent().batchIDComponent().getFailedCount();
+		   
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Total deposits detailed view is failed due to Exception "+ e);
+		}
+	}
 	
 	
 	

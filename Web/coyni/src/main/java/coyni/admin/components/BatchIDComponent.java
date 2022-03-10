@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 
 public class BatchIDComponent extends BrowserFunctions{
@@ -13,27 +14,27 @@ public class BatchIDComponent extends BrowserFunctions{
 	private By lblPaidCount = By.xpath("(//span[text()='Paid']//following::span)[1]");
 	private By lblFailedCount = By.xpath("(//span[text()='Failed']//following::span)[1]");
 	private By lblPendingCount = By.xpath("(//span[text()='Pending']//following::span)[1]");
-	private By totalCount = By.xpath("(//span[text()='Total Count']//following::span)[1]");
+	private By lblTotalCount = By.xpath("(//span[text()='Total Count']//following::span)[1]");
 	private By lblBatchId = By.cssSelector(".text");
 	
 	
-	public String getTotalBatchAmount() {
-		return getText(lblTotalBatchAmount, "Total Batch Amount");
+	public void getTotalBatchAmount() {
+		ExtentTestManager.setInfoMessageInReport("Total Batch Amount: "+getText(lblTotalBatchAmount, ""));
 	}
-	public String getInProgressCount() {
-		return getText(lblInProgressCount, "In Progress Count");
+	public void getInProgressCount() {
+	   ExtentTestManager.setInfoMessageInReport("In Progress Count : "+getText(lblInProgressCount, " "));
 	}
-	public String getPaidCount() {
-		return getText(lblPaidCount, "Paid Count");
+	public void getPaidCount() {
+		ExtentTestManager.setInfoMessageInReport("Paid Count : "+getText(lblPaidCount, " "));
 	}
-	public String getFailedCount() {
-		return getText(lblFailedCount, "Failed Count");
+	public void getFailedCount() {
+		ExtentTestManager.setInfoMessageInReport("Failed Count : "+getText(lblFailedCount, " "));
 	}
-	public String getPendingCount() {
-		return getText(lblPendingCount, "Pending Count");
+	public void getPendingCount() {
+		ExtentTestManager.setInfoMessageInReport("Pending Count : "+getText(lblPendingCount, " "));
 	}
-	public String getTotalAccount() {
-		return getText(totalCount, "Total Count");
+	public void getTotalAccount() {
+		ExtentTestManager.setInfoMessageInReport("Total Count : "+getText(lblTotalCount, " "));
 	}
 	public void verifyBatchId(String expBatchId) {
 		new CommonFunctions().verifyLabelText(lblBatchId, "Batch ID",expBatchId);

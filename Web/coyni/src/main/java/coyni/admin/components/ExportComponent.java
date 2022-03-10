@@ -20,7 +20,10 @@ public class ExportComponent extends BrowserFunctions {
 
 	private By btnExport = By.xpath("//button[text()='Export']");
 	private By lblCustom = By.xpath("//div[text()='Custom']");
-
+	private By ExportButton = By.xpath("//div[@class='export-modal__button-row']//button[text()='Export']");
+    public void clickExportButton() {
+    	click(ExportButton, "ExportButton");
+    }
 	public By getRadioBtn(String elementName) {
 		return By.xpath(String.format("//span[(contains(@class,'custom') or contains(@class,'text')) and text()='%s']",
 				elementName));
