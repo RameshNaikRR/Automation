@@ -170,6 +170,12 @@ public class FilterComponent extends BrowserFunctions {
     public void clickDepositAmtClr() {
     	click(getClearElements("Deposit Amount"), "Deposit Amount Clear");
     }
+    public  void clickFromAmountClr() {
+    	click(getClearElements(" From (CYN)"), "From CYN");
+    }
+    public void clickTOAmountClr() {
+    	click(getClearElements("To (CYN)"), "To (CYN)");
+    }
     public void clickNameOnAccountClr() {
     	click(getClearElements("Name on Account"), "Name on Account Clear");
     }
