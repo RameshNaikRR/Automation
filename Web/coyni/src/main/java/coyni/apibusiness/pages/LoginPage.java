@@ -9,8 +9,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions {
-	private By lblHeading = By.xpath("//span[text()='Log In to Coyni Admin']");
-	private By lblDescription = By.xpath("//span[text()='Welcome back, let’s log in to your coyni admin account.']");
+	private By lblHeading = By.cssSelector(".business-login__title");
+	private By lblDescription = By.cssSelector(".business-login__sub_title");
 	private By txtEmail = By.cssSelector("#Email");
 	private By txtPassword = By.cssSelector("#Password");
 	private By eyeIcon = By.xpath("//button[@type='button']");

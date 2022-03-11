@@ -1,12 +1,9 @@
 package coyni.apibusiness.components;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import coyni.admin.pages.ChooseAccountPage;
-import coyni.admin.pages.CreatePasswordPage;
+import coyni.apibusiness.pages.ChooseAccountPage;
+import coyni.apibusiness.pages.CreatePasswordPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;

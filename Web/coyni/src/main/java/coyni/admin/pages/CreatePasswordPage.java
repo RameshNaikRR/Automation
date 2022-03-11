@@ -2,7 +2,6 @@ package coyni.admin.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -84,6 +83,7 @@ public class CreatePasswordPage extends BrowserFunctions {
 	public void fillConfirmPassword(String confirmPassword) {
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
 		ConfirmPassword = getText(txtConfirmPassword, "Confirm Password");
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void clickLogin() {
