@@ -12,7 +12,7 @@ public class NoSignetAccountsExistPopup extends BrowserFunctions {
 	private By btnAddSignet = By.xpath("//span[@class='label text-cgy3']");
 
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Remove signet Account Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "No signet Accounts Exist Heading", expHeading);
 	}
 
 	public void verifyPageDescription(String expDescription) {

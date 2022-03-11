@@ -32,11 +32,11 @@ public class WithdrawToSignetPopup extends BrowserFunctions {
 	}
 
 	public void fillAmount(String amount) {
-		new CommonFunctions().verifyLabelText(txtAmount, amount, "Amount");
+		enterText(txtAmount, amount, "Amount");
 	}
 
 	public void fillMessage(String message) {
-		new CommonFunctions().verifyLabelText(txtMessage, message, "Message");
+		enterText(txtMessage, message, "Message");
 	}
 
 	public void clickNext() {

@@ -40,6 +40,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelTextContains(lblHeading, "Heading", expHeading);
 	}
 
+	public void clickTab() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public String getTotalAvailable() {
 		return getText(lblTotalAvailable, "Total Available");
 	}

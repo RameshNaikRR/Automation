@@ -18,11 +18,11 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 	}
 
 	public void fillName(String message) {
-		new CommonFunctions().verifyLabelText(txtName, message, "Name");
+		enterText(txtName, message, "Name");
 	}
 
 	public void fillSignetWalletId(String walletID) {
-		new CommonFunctions().verifyLabelText(txtSignetWalletID, walletID, "walletID");
+		enterText(txtSignetWalletID, walletID, "walletID");
 	}
 
 	public void clickSave() {

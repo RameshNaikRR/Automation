@@ -266,18 +266,21 @@ public class CoyniPortalTest {
 //			homePage.sideBarComponent().clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+//			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+			Thread.sleep(1000);
 			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-			// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading
-			// "));
+			Thread.sleep(1000);
+//			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading "));
 			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
 			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
 			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
 			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-			tokenAccountPage.mailingAddressComponent().clickstate();
+//			tokenAccountPage.mailingAddressComponent().clickstate();
+			Thread.sleep(500);
 			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+			Thread.sleep(1000);
 			tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			tokenAccountPage.addNewSignetAccountPopup().clickSave();
 		} catch (Exception e) {
@@ -309,6 +312,7 @@ public class CoyniPortalTest {
 					.fillInput(data.get("code"));
 			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
 					.successFailureComponent();
+			Thread.sleep(2000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -345,18 +349,26 @@ public class CoyniPortalTest {
 			Thread.sleep(5000);
 			tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+//			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
 			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-			// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading"));
+//			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading"));
 			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
 			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
 			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
 			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-			tokenAccountPage.mailingAddressComponent().clickstate();
-			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
-			tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+//			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+
+			if (data.get("state").isEmpty()) {
+				tokenAccountPage.mailingAddressComponent().clickstate();
+				tokenAccountPage.mailingAddressComponent().clickTab();
+			}
+			if (!data.get("state").isEmpty()) {
+				tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+				tokenAccountPage.mailingAddressComponent().clickTab();
+				// tokenAccountPage.mailingAddressComponent().clickSave();
+			}
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
@@ -375,6 +387,8 @@ public class CoyniPortalTest {
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("transDescription"));
+			tokenAccountPage.withdrawToSignetPopup().clickNext();
+			Thread.sleep(1000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
