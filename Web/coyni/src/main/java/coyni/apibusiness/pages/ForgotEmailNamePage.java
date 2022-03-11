@@ -2,13 +2,14 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.PhoneEmailVerificationComponent;
+import coyni.apibusiness.components.PhoneEmailVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ForgotEmailNamePage extends BrowserFunctions {
 
-	private By lblHeading = By.cssSelector(".forgot-email__title");
+	private By lblHeading = By.xpath("//span[text()='Forgot Email?']");
 	private By lblDescription = By.cssSelector(".forgot-email__sub-title");
 	private By txtFirstName = By.cssSelector("#First-Name");
 	private By txtLastName = By.cssSelector("#Last-Name");
@@ -20,22 +21,30 @@ public class ForgotEmailNamePage extends BrowserFunctions {
 	}
 
 	public void verifyPageDescription(String expDescription) {
-		new CommonFunctions().verifyLabelText(lblDescription, "expDescription", expDescription);
+		new CommonFunctions().verifyLabelTextContains(lblDescription, "expDescription", expDescription);
 	}
 
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "firstName");
 	}
 
+	public void clickOutside() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public void fillLastName(String lastName) {
 		enterText(txtLastName, lastName, "lastName");
 	}
-
 	public void clickNext() {
-		click(btnNext, "Next");
+		if (getElement(btnNext, "Enabled").isEnabled()) {
+			click(btnNext, "Next");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
+		}
+		new CommonFunctions().elementView(btnNext, "Next");
 	}
 
-	public void lnkBackToLogin() {
+	public void clickBackToLogin() {
 		click(lnkBackToLogin, "BackToLogin");
 	}
 

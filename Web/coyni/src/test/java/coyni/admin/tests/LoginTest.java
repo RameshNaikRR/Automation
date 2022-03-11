@@ -122,7 +122,7 @@ public class LoginTest {
 	public void testForgotEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyPageHeading(data.get("loginHeading"));
+			//loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));

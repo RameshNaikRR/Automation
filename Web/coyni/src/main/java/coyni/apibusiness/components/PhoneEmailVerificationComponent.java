@@ -11,6 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class PhoneEmailVerificationComponent extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//div[text()='Email Verification']");
+	private By lblPhoneheading=By.xpath("//div[text()='Phone Verification']");
 	private By lblDescription = By.cssSelector(".text-base");
 	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
 	// private By txtInput = By.cssSelector(".verification-input-wrapper ");
@@ -25,10 +26,16 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Email Verification", expDescription);
 	}
-
+	public void verifyPhoneheading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblPhoneheading, "Phone Verification", expHeading);
+}
 	public void clickResend() {
 		click(lnkResend, " Resend ");
 
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 
 	public void fillpin(String code) {
@@ -49,6 +56,10 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 
 	public void clickBackToLogin() {
 		click(lnkBackToLogin, "Back to Login");
+	}
+
+	public void verifyMessage(String message) throws InterruptedException {
+		new AuthyComponent().verifyMessage(message);
 	}
 
 	public CreatePasswordPage createPasswordPage() {
