@@ -2,13 +2,9 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.EnterYourPINComponent;
-import coyni_mobile.components.FaceIDDisabledComponent;
-import coyni_mobile.components.FaceIDnotAvailableComponent;
-import coyni_mobile.components.ForgotPinComponent;
-import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.components.VerifyEmailComponent;
+
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.EnterYourPINComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
@@ -40,9 +36,9 @@ public class LoginPage extends MobileFunctions {
 	public void VerifyFaceView() {
 		new CommonFunctions().elementView(iconFace, "Face Icon");
 	}
-    public FaceIDnotAvailableComponent faceIDnotAvailableComponent() {
-    	return new FaceIDnotAvailableComponent();
-    }
+//    public FaceIDnotAvailableComponent faceIDnotAvailableComponent() {
+//    	return new FaceIDnotAvailableComponent();
+//    }
 	public void fillEmail(String email) {
 		click(txtEmail, "email");
 		enterText(txtEmail, email, "Email ");
@@ -131,20 +127,20 @@ public class LoginPage extends MobileFunctions {
 	
 		
 	
-	public FaceIDDisabledComponent faceIDDisabledComponent() {
-		return new FaceIDDisabledComponent();
-	}
+//	public FaceIDDisabledComponent faceIDDisabledComponent() {
+//		return new FaceIDDisabledComponent();
+//	}
 
 //	public ForgotPasswordPage forgotPasswordPage() {
 //		return new ForgotPasswordPage();
 //	}
 	
-	public ForgotPinComponent forgotPinPage() {
-		return new ForgotPinComponent();
-	}
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
+//	public ForgotPinComponent forgotPinPage() {
+//		return new ForgotPinComponent();
+//	}
+//	public NavigationComponent navigationComponent() {
+//		return new NavigationComponent();
+//	}
 
 //	public RetrieveEmailPage retrieveEmailPage() {
 //		return new RetrieveEmailPage();
@@ -152,9 +148,7 @@ public class LoginPage extends MobileFunctions {
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
-    public VerifyEmailComponent verifyEmailComponent() {
-    	return new VerifyEmailComponent();
-    }
+   
     public void validateEmailField(String singleChar,String maxChar,String moreThanMax) {
     	new CommonFunctions().validateField(txtEmail, "Email", singleChar);
     	new CommonFunctions().clearText(txtEmail, "Email");
