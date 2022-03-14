@@ -10,17 +10,17 @@ import io.appium.java_client.MobileBy;
 public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	private By phoneHeading = MobileBy.xpath("");
-	private By emailHeading = MobileBy.xpath("");
+	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']");
 	private By lblPhoneText = MobileBy.xpath("");
-	private By lblEmailText =MobileBy.xpath("");
-	private By txtCode =MobileBy.xpath("");
-	private By lblGetCode =MobileBy.xpath("");
-	private By lnkResend =MobileBy.xpath("");
-	private By lblNewCode =MobileBy.xpath("");
+	private By lblEmailText =MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
+	private By txtCode =MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
+	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
+	private By lnkResend =MobileBy.xpath("//*[@text='Resend']");
+	private By lblNewCode =MobileBy.xpath("//*[@text=' A new code has sent']");
 	private By btnBackspace =MobileBy.xpath("");
-	private By lblPopupHeading =MobileBy.xpath("");
-	private By lblPopupMsg =MobileBy.xpath("");
-	private By btnOk = MobileBy.xpath("");
+	private By lblPopupHeading =MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By lblPopupMsg =MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	
 	public void verifyPopUpView() {
 		new CommonFunctions().elementView(lblPopupHeading, "Popup");
@@ -87,4 +87,8 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	public void verifyEmailVerificationPage() {
 		new CommonFunctions().elementView(emailHeading, "Email Verification Page");
 	}
+	public ChoosePinComponent choosePinComponent() {
+		return new  ChoosePinComponent();
+	}
+	
 }

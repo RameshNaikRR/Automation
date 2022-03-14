@@ -60,13 +60,16 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public EditEmailPage editEmailPage() {
 		return new EditEmailPage();
 	}
+	public ForgotPinComponent forgotPinComponent() {
+		return new ForgotPinComponent();
+	}
 
 	public EditPhoneNumberPage editPhoneNumberPage() {
 		return new EditPhoneNumberPage();
 	}
-//	public ChoosePinComponent choosePinComponent() {
-//		return new ChoosePinComponent();
-//	}
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
+	}
 	public EditAddressPage editAddressPage() {
 		return new EditAddressPage();
 	}

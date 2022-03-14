@@ -159,7 +159,62 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
+	
+    @Test
+    @Parameters({"strParams"})
+    public void testForgotPinFlow(String strParams) {
+    	try {
+       Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+       Thread.sleep(1000);
 
+       landingPage.clickLogin();
+
+       Thread.sleep(3000);
+
+       loginPage.VerifyLoginPageView();
+
+       loginPage.fillEmail(loginData.get("email"));
+
+       loginPage.fillPassword(loginData.get("password"));
+
+       loginPage.clickLogin();
+
+       loginPage.enterYourPINComponent().verifyEnterYourPinView();
+
+       loginPage.enterYourPINComponent().clickForgotPin();
+
+       loginPage.enterYourPINComponent().forgotPinComponent().VerifyHeadingForgotPin(loginData.get("forgotHeading"));
+       loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotPinDescView();
+
+       loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyEmailHeading(loginData.get("emailVerificationHeading"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyEmailText(loginData.get("emailText"));
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyOtpTextFieldView();
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyGetCodeView();
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyResendView();
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().fillPin(loginData.get("code"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().choosePinComponent().verifyChoosePinHeading(loginData.get("choosePinHeading"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().choosePinComponent().fillPin(loginData.get("pin"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().choosePinComponent().verifyConfirmPinHeading(loginData.get("confirmPinHeading"));
+
+       loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().choosePinComponent().fillPin(loginData.get("pin"));
+
+       Thread.sleep(10000);
+    		
+    		
+    	}catch(Exception e) {
+    		ExtentTestManager.setFailMessageInReport(" Forgot Pin Flow failed due to Exception " + e);
+    	}
+    	
+    }
 	
 
 	

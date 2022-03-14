@@ -6,7 +6,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class EnableFaceIDpage extends MobileFunctions {
+public class EnableFaceIDComponent extends MobileFunctions {
 	
 	private By btnNotNow = MobileBy.xpath("//*[contains(@resource-id, 'layoutNotnow')]|(//*[@name='Not Now'])[1]");
 	private By lnkDontRemindMeAgain = MobileBy.xpath("//*[contains(@resource-id, 'dontRemindTouchTV')]|(//*[@name='Don’t Remind Me Again'])[1]");
