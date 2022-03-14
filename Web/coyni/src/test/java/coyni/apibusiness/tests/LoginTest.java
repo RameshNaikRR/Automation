@@ -25,10 +25,9 @@ public class LoginTest {
 		loginPage = new LoginPage();
 	}
 
-	
 	@Test
 	@Parameters({ "strParams" })
-	public void testAdminLogin(String strParams) {
+	public void testApiLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
@@ -36,9 +35,9 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
+			loginPage.authyComponent().verifyPageHeading("authyHeading");
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
-			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
 			loginPage.authyComponent().verifyMessage(data.get("message"));
 
@@ -46,8 +45,9 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testLoginInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -57,16 +57,19 @@ public class LoginTest {
 			loginPage.clickNext();
 			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),data.get("colour"),data.get("elementName"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
-				
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			ExtentTestManager.setFailMessageInReport("Login test with invalid credentials failed due to exception "+e);
+			ExtentTestManager
+					.setFailMessageInReport("Login test with invalid credentials failed due to exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -77,21 +80,22 @@ public class LoginTest {
 			loginPage.verifyForgotPassword();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			loginPage.clickEyeIcon();
-			Thread.sleep(1000);
-			loginPage.verifyPasswordMaskedView();
-			loginPage.clickEyeIcon();
-			Thread.sleep(1000);
+			loginPage.verifyEyeIcon();
+//			Thread.sleep(1000);
+//			loginPage.verifyPasswordMaskedView();
+//			loginPage.clickEyeIcon();
+//			Thread.sleep(1000);
 			loginPage.verifyPasswordMaskedView();
 			loginPage.clickNext();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception "+e);
+			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testLoginInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -109,7 +113,7 @@ public class LoginTest {
 			Thread.sleep(2000);
 			loginPage.authyComponent().verifyLoginWithInvalidPin();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Authy failed due to this exception "+e);
+			ExtentTestManager.setFailMessageInReport("Authy failed due to this exception " + e);
 		}
 	}
 
