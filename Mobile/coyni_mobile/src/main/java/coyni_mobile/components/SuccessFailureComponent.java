@@ -21,6 +21,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvDone')]");//
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]");//
 	private By lblTrasactionStatus = MobileBy.xpath("//*[contains(@text,'Trasactions')]");
+	private By lblEmailSucessFul = MobileBy.xpath("//*[contains(@text,'Change Email Successful')]");
 
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblHeading));
@@ -31,6 +32,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 		
 		ExtentTestManager.setPassMessageInReport("Trasactions status is "+ str);
 		
+	}
+	
+	public void viewEmailSuccessHeading() {
+		new CommonFunctions().elementView(lblEmailSucessFul, "Email Successful");
 	}
 
 	public void clickDone() {

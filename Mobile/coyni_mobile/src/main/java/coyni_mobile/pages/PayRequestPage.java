@@ -11,7 +11,7 @@ public class PayRequestPage extends MobileFunctions {
 
 	private By allow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
 	private By firstAndLastLetterName = MobileBy.xpath("//*[contains(@resource-id,'tvNameHead')]");
-	private By txtSearchBx = MobileBy.xpath("//*[contains(@resource-id,'etSearch')]");// *[@name='search'])[2]/following-sibling::*[1]|
+	private By txtSearchBx = MobileBy.xpath("//*[contains(@resource-id,'searchIconIV')]");// *[@name='search'])[2]/following-sibling::*[1]|
 	private By lblUser = MobileBy.xpath("//*[contains(@resource-id,'lyRecentUsers')]");// *[@name='Recent
 																						// Contacts'])[1]/following-sibling::*[1]|
 

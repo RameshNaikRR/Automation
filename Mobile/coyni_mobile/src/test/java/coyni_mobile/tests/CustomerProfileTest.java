@@ -198,7 +198,7 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.fillPin(data.get("code"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
-					.successFailureComponent().verifySuccessFailureHeading(data.get("expHeading"));
+					.successFailureComponent().viewEmailSuccessHeading();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.successFailureComponent().clickLogOut();
 		} catch (Exception e) {
@@ -829,7 +829,7 @@ public class CustomerProfileTest {
 			customerProfilePage.clickResetPinCode();
 			customerProfilePage.enterYourPINComponent().verifyEnterYourPinView();
 			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyChoosePinHeading(data.get("heading1"));
 			customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
