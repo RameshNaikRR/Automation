@@ -275,4 +275,7 @@ public class CommonFunctions {
 			// ignore
 		}
 	}
+	public String getTextBoxValue(By ele) {
+		return mobileFunctions.getAttribute(ele, "value");
+	}
 }
