@@ -2,6 +2,7 @@ package coyni.customer.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -70,6 +71,10 @@ public class VerifyNewPhoneNumberPopup extends BrowserFunctions {
 		}
 		public void ResendErrorMessage(String expResendErrorMsg) {
 			new CommonFunctions().verifyLabelText(lblresendErrorMsg, expResendErrorMsg, "Resend Error Message");
+		}
+		
+		public AuthyComponent authyComponent() {
+			return new AuthyComponent();
 		}
 
 }

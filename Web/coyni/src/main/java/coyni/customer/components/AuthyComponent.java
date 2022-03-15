@@ -116,4 +116,8 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		//
 	}
+	
+	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
+		return new SuccessFailurePopupCardComponent();
+	}
 }

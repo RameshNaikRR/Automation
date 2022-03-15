@@ -193,20 +193,19 @@ public class CustomerProfileTest {
 
 			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();;
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyEditPhoneNumberAuthenticationDescription(data.get("EditPhoneNumberAuthenticationDescription"));
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+//			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().clickResend();
-            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyResendVerificationCodeDescription(data.get("resendVerificationCodeDescription"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
             customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));  
-            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().clickOnResendVerificationCode();;
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescription(data.get("expHeading"));
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescriptionAppears();
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyResendDescriptionDisappears();
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+            Thread.sleep(3000);
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().authyComponent().successFailurePopupCardComponent().navigationComponent().clickClose();
             
 			
 		} catch (Exception e) {
@@ -305,7 +304,8 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
 			// Edit Email Address -Close Navigation
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
+			//customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().navigationComponent().verifyCloseView();
@@ -313,7 +313,8 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
 			// Current Email Address-Back Navigation Back
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
+			//customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
