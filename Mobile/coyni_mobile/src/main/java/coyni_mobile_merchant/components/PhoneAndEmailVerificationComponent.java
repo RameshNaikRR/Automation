@@ -21,6 +21,8 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By lblPopupHeading =MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lblPopupMsg =MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+	private By errorPopuphdg = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By errorPopupDesc = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 	
 	public void verifyPopUpView() {
 		new CommonFunctions().elementView(lblPopupHeading, "Popup");
@@ -33,6 +35,12 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	}
 	public void ClickOk() {
 	click(btnOk, "Ok");	
+	}
+	public void verifyErrorHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(errorPopuphdg, "Popup Heading", expHeading);
+	}
+	public void verifyErrorDesc(String expDesc) { 
+		new CommonFunctions().verifyLabelText(errorPopupDesc, "Popup Desc ", expDesc);
 	}
 	
 	public void verifyPhoneHeading(String expHeading) {
