@@ -68,10 +68,17 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	public void clickDebitCard(String last4Digits) {
 		//moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+		List<WebElement> lst = getElementsList(btnRadioDebit, "Debit");
+		int i = lst.size();
+		if(i<1) {
 		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
+		clickOnNext();
 		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
 	}
-
+		else {
+			clickOnNext();
+		}
+	}
 	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {
 		new CommonFunctions().verifyChangedColor(toggle, "Toggle", cssProp, expValue, expColor);
 	}

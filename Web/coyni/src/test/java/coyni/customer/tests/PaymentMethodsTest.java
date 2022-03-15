@@ -94,11 +94,8 @@ public class PaymentMethodsTest {
 	public void testAddCard(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
-			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			
 			Thread.sleep(2000);
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
@@ -134,8 +131,7 @@ public class PaymentMethodsTest {
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
-			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent()
-					.clickDone();
+			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -145,12 +141,23 @@ public class PaymentMethodsTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCard(String strParams) {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 		testAddCard(strParams, "debit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
+	
 	public void testAddCreditCard(String strParams) {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 		testAddCard(strParams, "credit");
 	}
 
@@ -159,10 +166,7 @@ public class PaymentMethodsTest {
 	public void testAddCardWihInvalidData(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
-			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+	         CustomerProfilePage customerProfilePage = new CustomerProfilePage(); 
 			Thread.sleep(2000);
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
@@ -221,12 +225,20 @@ public class PaymentMethodsTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testCreditCardWithInvalidData(String strParams) {
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 		testAddCardWihInvalidData(strParams, "credit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testDebitCardWithInvalidData(String strParams) {
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 		testAddCardWihInvalidData(strParams, "debit");
 	}
 
@@ -397,14 +409,7 @@ public class PaymentMethodsTest {
 
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
-
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
@@ -428,9 +433,9 @@ public class PaymentMethodsTest {
 					.mailingAddressComponent().validateAddress2(data.get("address2"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().validateCity(data.get("city"));
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent()
-					.validateZipCode(data.get("zipCode"));
+		//	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+			//		.mailingAddressComponent()
+				//	.validateZipCode(data.get("zipCode"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to" + e);
 		}
@@ -438,9 +443,23 @@ public class PaymentMethodsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDebitCardFieldValidations(String strParams) {
+	public void testDebitCardFieldValidations(String strParams)  {
+		try {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		Thread.sleep(2000);
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		Thread.sleep(2000);
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
+
 		testCardsFieldValidations(strParams, "debit");
 	}
+		catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDebitCardFieldValidations is"+e);
+		}
+	}
+		
 
 	@Test
 	@Parameters({ "strParams" })

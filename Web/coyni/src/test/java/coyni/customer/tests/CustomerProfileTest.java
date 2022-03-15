@@ -533,7 +533,7 @@ public class CustomerProfileTest {
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));
 			loginPage.clickNext();
-			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+		//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			Thread.sleep(1000);
 			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
 			loginPage.authyComponent().fillInput(data.get("code"));
