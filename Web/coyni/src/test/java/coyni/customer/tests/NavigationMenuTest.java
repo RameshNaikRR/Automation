@@ -211,7 +211,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
 			// navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			navigationMenuPage.userNameDropDownComponent().clickRequest();
-			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
+			//navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
 			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickCloseIcon();
 
 			// navigationMenuPage.userNameDropDownComponent().clickUserName();
@@ -223,9 +223,9 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().clickChangePassword();
 			navigationMenuPage.verifyAccountHolderNameView();
 			navigationMenuPage.clickOnRefresh();
-			navigationMenuPage.verifyAccountHolderNameView();
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.userNameDropDownComponent().clickSignOut();
+			//navigationMenuPage.verifyAccountHolderNameView();
+			//navigationMenuPage.userNameDropDownComponent().clickUserName();
+			//navigationMenuPage.userNameDropDownComponent().clickSignOut();
 			loginPage.verifyHeading(data.get("loginHeading"));
 
 			// navigationMenuPage.verifyNotificationsIcon();
