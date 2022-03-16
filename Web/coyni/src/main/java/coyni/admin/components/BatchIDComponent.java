@@ -21,8 +21,7 @@ public class BatchIDComponent extends BrowserFunctions{
 	public void getTotalBatchAmount() {
 		ExtentTestManager.setInfoMessageInReport("Total Batch Amount: "+getText(lblTotalBatchAmount, ""));
 	}
-	
-	public void getInProgressCount() {
+	public void  getInProgressCount() {
 	   ExtentTestManager.setInfoMessageInReport("In Progress Count : "+getText(lblInProgressCount, " "));
 	}
 	public void getPaidCount() {
