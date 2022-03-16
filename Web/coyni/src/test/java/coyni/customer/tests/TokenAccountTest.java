@@ -1498,25 +1498,26 @@ public class TokenAccountTest {
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
-
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			//tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+				//	.clickDebitCard(data.get("last4digits"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.clickDebitCard(data.get("last4digits"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.verifyLabelHeading(data.get("instantPayHeading"));
+				.txtMessage(data.get("transactionalmessage"));
+		//	tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
+		//	tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			//		.verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
-			Thread.sleep(4000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.txtMessage(data.get("transactionalmessage"));
+		//	tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			//tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
+			Thread.sleep(1000);
+		//
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyErrorMessage();
+			//tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyErrorMessage();
 
-//			if (!data.get("errMessage").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-//			}
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1726,6 +1727,31 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
 		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayAddDebritCardWithinvailddata(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.verifyLabelHeading(data.get("instantPayHeading"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			paymentMethodsTest.testAddCardWihInvalidData(strParams, "Debit");
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+		}
+		
 
 	}
 
