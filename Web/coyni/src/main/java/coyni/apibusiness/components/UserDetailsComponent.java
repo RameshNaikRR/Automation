@@ -22,22 +22,22 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblHeading = By.cssSelector("");
 	private By editUserImage = By.cssSelector("");
 	private By editUserImgToolTip = By.xpath("");
-	private By lnkRemoveImage = By.cssSelector("");
-	private By btnRemove = By.cssSelector("");
-	private By btnUploadNewImage = By.cssSelector("");
-	private By btnSave = By.cssSelector("");
+//	private By lnkRemoveImage = By.cssSelector("");
+//	private By btnRemove = By.cssSelector("");
+//	private By btnUploadNewImage = By.cssSelector("");
+//	private By btnSave = By.cssSelector("");
 	private By lblUserName = By.xpath("");
 	private By lblAccountStatus = By.xpath("");
 	private By lblEmail = By.cssSelector("");
-	private By lblAddress = By.cssSelector("");
+//	private By lblAddress = By.cssSelector("");
 	private By lnkEditAccountEmail = By.xpath("");
 	private By lnkEditAccountPhNum = By.xpath("");
-	private By lnkEditAccountAddress = By.xpath("");
+//	private By lnkEditAccountAddress = By.xpath("");
 	private By iconEditEmail = By.cssSelector("");
 	private By iconEditPhNum = By.xpath("");
 	private By lblEditPhoneNumber = By.xpath("");
 //	private By iconEditAddress = By.xpath("");
-	private By userImg = By.xpath("");
+//	private By userImg = By.xpath("");
 	private By imgPhone = By.xpath("");
 	private By accountId = By.xpath("");
 	private By lblPhoneNum = By.xpath(" ");
@@ -108,21 +108,21 @@ public class UserDetailsComponent extends BrowserFunctions {
 		click(editUserImage, "Edit User Image");
 	}
 
-	public void clickRemoveImage() {
-		click(lnkRemoveImage, "Remove Image");
-	}
-
-	public void clickRemove() {
-		click(btnRemove, "Remove Button");
-	}
-
-	public void clickUploadNewImage() {
-		click(btnUploadNewImage, "Upload New Image Button");
-	}
-
-	public void clickSave() {
-		click(btnSave, "Save Button");
-	}
+//	public void clickRemoveImage() {
+//		click(lnkRemoveImage, "Remove Image");
+//	}
+//
+//	public void clickRemove() {
+//		click(btnRemove, "Remove Button");
+//	}
+//
+//	public void clickUploadNewImage() {
+//		click(btnUploadNewImage, "Upload New Image Button");
+//	}
+//
+//	public void clickSave() {
+//		click(btnSave, "Save Button");
+//	}
 
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "UserName", expUserName);
@@ -136,9 +136,9 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblEmail, "Email", expEmail);
 	}
 
-	public void verifyAddress(String expAddress) {
-		new CommonFunctions().verifyLabelText(lblAddress, "Address", expAddress);
-	}
+//	public void verifyAddress(String expAddress) {
+//		new CommonFunctions().verifyLabelText(lblAddress, "Address", expAddress);
+//	}
 
 	public void clickEditAccountEmail() {
 		click(lnkEditAccountEmail, "Click Edit Email");
@@ -148,9 +148,9 @@ public class UserDetailsComponent extends BrowserFunctions {
 		click(lnkEditAccountPhNum, "Click Edit PhoneNumber");
 	}
 
-	public void clickEditAccountAddress() {
-		click(lnkEditAccountAddress, "Click Edit Address");
-	}
+//	public void clickEditAccountAddress() {
+//		click(lnkEditAccountAddress, "Click Edit Address");
+//	}
 
 	public void clickIconEditEmail() {
 		moveToElement(lblEmail, "Edit Email");
