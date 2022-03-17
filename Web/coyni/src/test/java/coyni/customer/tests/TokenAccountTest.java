@@ -949,7 +949,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
-			tokenAccountPage.payAndRequestTokensPopup().clickCopy();
+			//tokenAccountPage.payAndRequestTokensPopup().clickCopy();
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().requestingAccountHolderPopup()
 					.successFailurePopupCardComponent().verifyRequestHeading(data.get("successFailureHeading"));
