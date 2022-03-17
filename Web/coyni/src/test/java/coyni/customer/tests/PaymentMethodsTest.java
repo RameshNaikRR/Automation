@@ -322,10 +322,11 @@ public class PaymentMethodsTest {
 	public void testEditCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+			
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
+		
 			customerProfilePage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
 					.clickEdit(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
@@ -351,21 +352,69 @@ public class PaymentMethodsTest {
 
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDebitCardEdit(String strParams) {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+		testEditCard(strParams);
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testCreditCardEdit(String strParams) {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+		testEditCard(strParams);
+	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			customerProfilePage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
 					.clickDelete(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup().clickOnRemove();
 			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test delete card failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDebitDeleteCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			testDeleteCard(strParams);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test delete card failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCreditDeleteCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.clickTokenAccountMenu();
+			tokenAccountPage.userNameDropDownComponent().clickUserName();
+			tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+			testDeleteCard(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test delete card failed due to exception " + e);
