@@ -2,11 +2,9 @@ package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.pages.EditAddressPage;
-import coyni_mobile.pages.EditEmailPage;
-import coyni_mobile.pages.EditPhoneNumberPage;
-import coyni_mobile.pages.EnableFaceIDpage;
+
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.pages.EnableFaceIDpage;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -57,22 +55,22 @@ public class EnterYourPINComponent extends MobileFunctions {
 //		return new ForgotPinComponent();
 //	}
 
-	public EditEmailPage editEmailPage() {
-		return new EditEmailPage();
-	}
+//	public EditEmailPage editEmailPage() {
+//		return new EditEmailPage();
+//	}
 	public ForgotPinComponent forgotPinComponent() {
 		return new ForgotPinComponent();
 	}
-
-	public EditPhoneNumberPage editPhoneNumberPage() {
-		return new EditPhoneNumberPage();
-	}
+//
+//	public EditPhoneNumberPage editPhoneNumberPage() {
+//		return new EditPhoneNumberPage();
+//	}
 	public ChoosePinComponent choosePinComponent() {
 		return new ChoosePinComponent();
 	}
-	public EditAddressPage editAddressPage() {
-		return new EditAddressPage();
-	}
+//	public EditAddressPage editAddressPage() {
+//		return new EditAddressPage();
+//	}
 
 //	public NavigationComponent navigationComponent() {
 //		return new NavigationComponent();
