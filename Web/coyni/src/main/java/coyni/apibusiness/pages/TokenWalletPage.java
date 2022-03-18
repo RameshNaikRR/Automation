@@ -14,15 +14,15 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By lblcurrency = By.xpath("//span[@class='ml-1 text-2xl font-semibold text-cgy2']");
 
 	public void getWalletBalance() {
-		ExtentTestManager.setInfoMessageInReport("Withdraw Amount is " + getElement(walletamount, "Available Balance"));
+		ExtentTestManager.setInfoMessageInReport("Total Wallet Balance is " + getText(walletamount, "Available Balance"));
 
 	}
 
 	public void verifyCurrencyView() {
-		new CommonFunctions().elementView(lblcurrency, "Coyni");
+		new CommonFunctions().elementView(lblcurrency, "CYN");
 	}
 
 	public void verifyTokenWalletBalanceView(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Token Wallet Balance", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Total Wallet Balance", expHeading);
 	}
 }

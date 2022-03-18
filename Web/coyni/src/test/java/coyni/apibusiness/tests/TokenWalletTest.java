@@ -25,7 +25,7 @@ public class TokenWalletTest {
 	public void testTokenWalletBalance(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenwalletPage.verifyTokenWalletBalanceView(data.get("walletBalancenHeading"));
+			tokenwalletPage.verifyTokenWalletBalanceView(data.get("walletBalanceHeading"));
 			tokenwalletPage.getWalletBalance();
 			tokenwalletPage.verifyCurrencyView();
 
