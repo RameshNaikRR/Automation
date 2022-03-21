@@ -1,4 +1,4 @@
-package coyni.apibusiness.components;
+     	package coyni.apibusiness.components;
 
 public class SuccessFailureComponent {
 
