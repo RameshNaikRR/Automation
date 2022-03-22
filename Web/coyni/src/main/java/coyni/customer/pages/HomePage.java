@@ -344,6 +344,10 @@ public class HomePage extends BrowserFunctions {
 
 	}
 
+	
+	public LoginPage loginPage() {
+		return new LoginPage();
+	}
 
 
 }

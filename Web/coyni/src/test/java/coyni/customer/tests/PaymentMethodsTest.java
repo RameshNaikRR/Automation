@@ -38,7 +38,7 @@ public class PaymentMethodsTest {
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
            customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyHeading();
             Thread.sleep(8000);
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
@@ -209,10 +209,10 @@ public class PaymentMethodsTest {
 					.mailingAddressComponent().clickTab();
 			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().backandCrossIconComponent().clickCross();
 
-			if (!data.get("errorMessage").isEmpty()) {
+			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 			}
 
@@ -282,8 +282,8 @@ public class PaymentMethodsTest {
 					.mailingAddressComponent().clickSave();
 			Thread.sleep(3000);
 
-			System.out.println(data.get("errorMessage"));
-			String[] msg = data.get("errorMessage").split(",");
+			System.out.println(data.get("errMessage"));
+			String[] msg = data.get("errMessage").split(",");
 			for (int i = 0; i < msg.length; i++) {
 				Thread.sleep(2000);
 				customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
@@ -359,7 +359,7 @@ public class PaymentMethodsTest {
 		navigationMenuPage.clickTokenAccountMenu();
 		tokenAccountPage.userNameDropDownComponent().clickUserName();
 		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+	//	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 		testEditCard(strParams);
 	}
 	
@@ -369,7 +369,7 @@ public class PaymentMethodsTest {
 		navigationMenuPage.clickTokenAccountMenu();
 		tokenAccountPage.userNameDropDownComponent().clickUserName();
 		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
-		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+	//	customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 		testEditCard(strParams);
 	}
 

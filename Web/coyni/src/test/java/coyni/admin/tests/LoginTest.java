@@ -31,12 +31,12 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
-			loginPage.verifyPageDescription(data.get("loginDescription"));
+			//loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
-			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
+			//loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
 			loginPage.authyComponent().verifyMessage(data.get("message"));

@@ -1,8 +1,13 @@
 package coyni.admin.pages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.admin.popups.AccountProfileImagePopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -36,8 +41,8 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 		}
-	public void verifyName(String expName) {
-		new CommonFunctions().verifyLabelText(lblName, "Name", expName);
+	public void verifyName() {
+		new CommonFunctions().elementView(lblName, "Name");
 	}
 	public void verifyAccountId(String expId) {
 		String actId = getAttributeValue(lblAcountID, "value", "Account Id");
@@ -156,4 +161,14 @@ public class AdminUserDetailsPage extends BrowserFunctions {
     public void clickEditImage() {
     	click(btneditImage,"Edit Image");
     }
+    
+    public AccountProfileImagePopup accountProfileImagePopup() {
+    	return new AccountProfileImagePopup();
+    }
+    
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+	}
 }

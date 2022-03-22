@@ -9,6 +9,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class PayAndRequestTokensPopup extends BrowserFunctions {
@@ -81,7 +82,9 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	}
 
 	public void fillAmount(String amount) {
-		enterText(txtAmount, amount, "amount");
+	
+		//	enterText(txtAmount, amount, "amount");
+		DriverFactory.getDriver().findElement(txtAmount).sendKeys("1.00");
 	}
 
 	public void fillRecipientAddress(String RecipientAddress) {
