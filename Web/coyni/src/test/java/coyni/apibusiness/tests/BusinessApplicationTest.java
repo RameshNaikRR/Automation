@@ -27,8 +27,8 @@ public class BusinessApplicationTest {
 	public void testBeneficialsOwnersFlow() {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(null);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
 	//	sideBarMenuComponent.businessSettingsMenuComponent().clickBeneficialOwners();
 			
 			

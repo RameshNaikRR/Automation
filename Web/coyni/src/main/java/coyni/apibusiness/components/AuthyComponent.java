@@ -8,6 +8,7 @@ import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.apibusiness.pages.ChangePasswordPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -120,5 +121,7 @@ public class AuthyComponent extends BrowserFunctions {
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
-
+	public ChangePasswordPage changePasswordPage() {
+	return new ChangePasswordPage();
+}
 }
