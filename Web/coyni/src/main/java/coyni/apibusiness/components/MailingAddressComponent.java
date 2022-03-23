@@ -110,6 +110,39 @@ public class MailingAddressComponent extends BrowserFunctions {
 	public void validateZipCode(String zipCode) {
 		new HomePage().validateNameField(txtZipCode, "ZipCode", zipCode);
 	}
+	public void verifyFirstNameView() {
+		new CommonFunctions().elementView(txtFirstName, "FirstName");
+	}
+	public void verifyLastNameView() {
+		new CommonFunctions().elementView(txtLastName, "LastName");
+	}
+	public void verifyDOBView() {
+		new CommonFunctions().elementView(txtDateOfBirth, "Date Of Birth");
+	}
+	public void verifySSNView() {
+		new CommonFunctions().elementView(txtSocialSecurity, "SSN");
+	}
+	public void verifyOwnershipView() {
+		new CommonFunctions().elementView(txtOwnership, "OwnerShip");
+	}
+	public void verifyAddressLine1View() {
+		new CommonFunctions().elementView(txtAddress1, "Mailing Address Line 1");
+	}
+	public void verifyAddressLine2View() {
+		new CommonFunctions().elementView(txtAddress2, "Mailing AddressLine 2");
+	}
+	public void verifyCityView() {
+		new CommonFunctions().elementView(txtCity, "City");
+	}
+	public void verifyDrpdwnStateView() {
+		new CommonFunctions().elementView(drpDwnState, "State Dropdown");
+	}
+	public void verifyZipCodeView() {
+		new CommonFunctions().elementView(txtZipCode, "ZipCode");
+	}
+	public void verifyUnitedStatesView() {
+		new CommonFunctions().elementView(txtCountry, "Country-UnitedStates");
+	}
 
 //	public void validateAddress1(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
 //		new CommonFunctions().validateFieldMaxichar(txtAddress1, "Address1", moreThanMaxChar);

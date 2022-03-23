@@ -22,6 +22,21 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 	  private By getRadioBtn(String elementName) {
 	    	return By.xpath(String.format("//input[@type='radio']/following::span[text()='%s']/preceding-sibling::input", elementName));
 	    }
+	  private By getRadioBtntextsView(String elementName) {
+			return By.xpath(String.format("//input[@type='radio']/following::span[text()='Passport']", elementName));
+		}
+
+		public void verifyDriverLicenseView(String elementName) {
+			new CommonFunctions().elementView(getRadioBtntextsView("Driver's License"), "Driver's License");
+		}
+
+		public void verifyPassportView(String elementName) {
+			new CommonFunctions().elementView(getRadioBtntextsView("Passport"), "Passport");
+		}
+
+		public void verifyStateIssueIDView(String elementName) {
+			new CommonFunctions().elementView(getRadioBtntextsView("State-Issued ID"), "State-Issued ID");
+		}
 	  public void clickDriverLicenseRadBtn() {
 		  click(getRadioBtn("Driver's License"), "Driver License");
 	  }
@@ -68,5 +83,7 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
     public void clickExit() {
     	click(lnkExit,"Exit");
     }
-    
+    public void verifyUploadRequiredDocumentsView() {
+		new CommonFunctions().elementView(lblUploadDocumentsHdg, "Upload Required Documents");
+	}
 }
