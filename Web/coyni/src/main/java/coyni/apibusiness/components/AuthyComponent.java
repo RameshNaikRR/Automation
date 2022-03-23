@@ -21,6 +21,17 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lnkSmsCode = By.xpath("//span[contains(.,'Having')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
+	private By lblVerifyYourIdentityHeading = By.xpath("//h1[contains(text(),' Your Identity')]");
+	private By lblVerifyYourIdentityDescription = By.xpath("//span[contains(text(),'Enter the code generated')]");
+
+	public void verifyYourIdentityHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblVerifyYourIdentityHeading, "Verify Your Identity Page Heading", expHeading);
+	}
+
+	public void verifyYourIdentityDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblVerifyYourIdentityDescription, "Verify Your Identity Page Description", expDescription);
+	}
+
 
 	private static Map<String, String> prevCode = new HashMap<>();
 
@@ -61,9 +72,10 @@ public class AuthyComponent extends BrowserFunctions {
 	}
 
 	public void verifyMessage(String expMessage) throws InterruptedException {
+		Thread.sleep(1000);
 		waitForCondition(e -> e.findElement(lblMessage).getText().contains("Verification"),
 				"verification message is displayed");
-		Thread.sleep(500);
+		
 		new CommonFunctions().verifyLabelText(lblMessage, "Message", expMessage);
 	}
 
@@ -121,7 +133,8 @@ public class AuthyComponent extends BrowserFunctions {
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
+
 	public ChangePasswordPage changePasswordPage() {
-	return new ChangePasswordPage();
-}
+		return new ChangePasswordPage();
+	}
 }

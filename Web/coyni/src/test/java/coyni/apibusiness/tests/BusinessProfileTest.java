@@ -28,20 +28,24 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			
+
 			tokenWalletPage.topBarComponent().clickUserName();
 			tokenWalletPage.topBarComponent().clickChangePassword();
-			tokenWalletPage.topBarComponent().authyComponent().verifyPageHeading(data.get("identityHeading"));
-			tokenWalletPage.topBarComponent().authyComponent().verifyPageDescription(data.get("identityDescription"));
+			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityDescription(data.get("identityDescription"));
 			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
-			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyPageHeading(data.get("changePasswordHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
+					.verifyPageHeading(data.get("changePasswordHeading"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.VerifyPageDescription(data.get("changePasswordDescription"));
-			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
+					.fillCurrentPassword(data.get("currentPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconCurrentPassword();
-			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyNewPassword(data.get("newPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
+					.verifyNewPassword(data.get("newPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconNewPassowrd();
-			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
+					.fillConfirmPassword(data.get("confirmPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickSave();
 
@@ -57,17 +61,15 @@ public class BusinessProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			// APIAdminMenuComponent.clickUserName();
-//			tokenWalletPage.topBarComponent().clickUserName();
-//			tokenWalletPage.topBarComponent().clickChangePassword();
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage().verifyPageHeading(data.get("identityHeading"));
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage()
-//					.verifyPageDescription(data.get("identityDescription"));
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage().fillpin(data.get("code"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyPageHeading(data.get("changePasswordHeading"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillNewPassword(data.get("newPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickOutSide();
+			tokenWalletPage.topBarComponent().clickUserName();
+			tokenWalletPage.topBarComponent().clickChangePassword();
+			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyPageHeading(data.get("changePasswordHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillNewPassword(data.get("newPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickOutSide();
 
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
@@ -85,34 +87,32 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-//			tokenWalletPage.topBarComponent().clickUserName();
-//			tokenWalletPage.topBarComponent().clickChangePassword();
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage().verifyPageHeading(data.get("identityHeading"));
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage()
-//					.verifyPageDescription(data.get("identityDescription"));
-//			tokenWalletPage.topBarComponent().verifyYourIdentityPage().fillpin(data.get("code"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyPageHeading(data.get("changePasswordHeading"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconCurrentPassword();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyCurrentPasswordMaskedView();
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconCurrentPassword();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyCurrentPasswordMaskedView();
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillNewPassword(data.get("newPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconNewPassowrd();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyNewPasswordMaskedView();
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconNewPassowrd();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyNewPasswordMaskedView();
-//			tokenWalletPage.topBarComponent().changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconConfirmPassword();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
-//			tokenWalletPage.topBarComponent().changePasswordPage().clickEyeIconConfirmPassword();
-//			Thread.sleep(1000);
-//			tokenWalletPage.topBarComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
+			tokenWalletPage.topBarComponent().clickUserName();
+			tokenWalletPage.topBarComponent().clickChangePassword();
+			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyPageHeading(data.get("changePasswordHeading"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconCurrentPassword();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyCurrentPasswordMaskedView();
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconCurrentPassword();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyCurrentPasswordMaskedView();
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillNewPassword(data.get("newPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconNewPassowrd();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyNewPasswordMaskedView();
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconNewPassowrd();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyNewPasswordMaskedView();
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordView failed due to exception " + e);

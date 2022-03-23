@@ -95,9 +95,10 @@ public class CommonFunctions {
 
 	public void verifyTextBoxBorderColor(String expcolour) {
 		By txterror = By.cssSelector("div[class *= 'FormField_error']");
+		 Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
 		ExtentTestManager.setInfoMessageInReport(value);
-
+		
 		if (value.equalsIgnoreCase(expcolour)) {
 			ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
 		} else {
