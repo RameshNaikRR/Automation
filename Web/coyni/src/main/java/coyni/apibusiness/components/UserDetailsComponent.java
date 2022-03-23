@@ -19,39 +19,37 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class UserDetailsComponent extends BrowserFunctions {
 
-	private By lblHeading = By.cssSelector("");
-	private By editUserImage = By.cssSelector("");
-	private By editUserImgToolTip = By.xpath("");
-//	private By lnkRemoveImage = By.cssSelector("");
-//	private By btnRemove = By.cssSelector("");
-//	private By btnUploadNewImage = By.cssSelector("");
-//	private By btnSave = By.cssSelector("");
-	private By lblUserName = By.xpath("");
-	private By lblAccountStatus = By.xpath("");
-	private By lblEmail = By.cssSelector("");
-//	private By lblAddress = By.cssSelector("");
-	private By lnkEditAccountEmail = By.xpath("");
-	private By lnkEditAccountPhNum = By.xpath("");
-//	private By lnkEditAccountAddress = By.xpath("");
-	private By iconEditEmail = By.cssSelector("");
-	private By iconEditPhNum = By.xpath("");
-	private By lblEditPhoneNumber = By.xpath("");
-//	private By iconEditAddress = By.xpath("");
-//	private By userImg = By.xpath("");
-	private By imgPhone = By.xpath("");
-	private By accountId = By.xpath("");
-	private By lblPhoneNum = By.xpath(" ");
-	private By lblEmailAuth = By.xpath("");
-	private By lblVerificationCodeDescription = By.cssSelector("");
-	private By txtCode = By.cssSelector("");
-	private By txtNewPhoneNumber = By.cssSelector("");
-	private By btnCross = By.cssSelector("");
-	private By headingUserDetais = By.xpath("");
-	private By lblCurrentPhoneNumberDescriptionText = By.xpath("");
-	private By btnBackButton = By.xpath("");
-	private By lblVerificationSuccesful = By.xpath("");
-	private By lblNewPhoneNumberHeading = By.xpath("");
-	private By headingEditAccountPhone = By.xpath("");
+	private By lblHeading = By.xpath("//span[@class='text-base text-cgy4']");
+	private By lblUserName = By.xpath("//span[text()='Test API']");
+	private By EditUserImgToolTip = By.xpath("//img[@data-tip='Edit Image']");
+	private By lblAccountID = By.xpath("//span[text()='Account ID: BAP-510']");
+	private By lblAccountStatus = By.xpath("//span[@class=' font-bold text-md  text-cgn5']");
+	private By lblEditAccountPhone = By.xpath("//h3[contains(@class, 'UserDetails_phone')]");
+	private By IconEditPhone = By.xpath("//div[contains(@class, 'UserDetails_edit_Phone')]");
+	private By lblEditAccountEmail = By.xpath("//h3[contains(@class, 'UserDetails_email')]");
+	private By IconEditEmail = By.xpath("//div[contains(@class, 'UserDetails_edit_email_icon')]");
+	private By lblEditPhoneNumAuth = By.xpath("");
+	private By lblEditPhoneNum = By.xpath("");
+	private By descEditPhoneNum = By.xpath("");
+//	private By NewPhoneNumberTextWithPreviousData = By.xpath("");
+	private By txtNewPhoneNumber = By.xpath("//input[@id='Phone_Number']");
+	private By btnPhoneSendCode = By.xpath(".w-60");
+	private By lblCurrentPhoneNum = By.xpath("");
+	private By descCurrentPhoneNum = By.xpath("");
+//	private By phoneNumVerificationCode = By.xpath("");
+//	private By lnkResendVerificationCode = By.xpath("");
+	private By lblEmailAddressAuth = By.xpath("");
+	private By descEmailAddressAuth = By.xpath("");
+//	private By emailVerificationCode = By.xpath("");
+	private By lblEditEmailAddress = By.xpath("");
+	private By descEditEmailAddress = By.xpath("");
+//	private By NewEmailTextWithPreviousData = By.xpath("");
+	private By txtNewEmailAddress = By.xpath("");
+	private By btnEmailSendCode = By.cssSelector(".w-60");
+//	private By oldEmailVerificationCode = By.xpath("");
+//	private By lnkEmailResendVerificationCode = By.xpath("");
+//	private By NewEmailVerificationCode = By.xpath("");
+	public By btnCross = By.xpath("//button[@class='self-end']");
 
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
@@ -64,15 +62,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblHeading, "User Details Screen ");
 	}
 
-	public void verifyEditImageView() {
-		new CommonFunctions().elementView(editUserImage, "Edit User Img icon");
-		new CommonFunctions().verifyCursorAction(editUserImage, "Edit User Img icon");
-	}
-
 	public void verifyEditImageToolTip(String expToolTip) {
-		new CommonFunctions().verifyCursorAction(editUserImgToolTip, "Edit User Img");
-		// moveToElement(editUserImgToolTip, "Edit User Img");
-		new CommonFunctions().verifyLabelText(editUserImgToolTip, "Edit User Img", expToolTip);
+		new CommonFunctions().verifyCursorAction(EditUserImgToolTip, "Edit User Img");
+		moveToElement(EditUserImgToolTip, "Edit User Img");
+		new CommonFunctions().verifyLabelText(EditUserImgToolTip, "Edit User Img", expToolTip);
 
 	}
 
@@ -81,7 +74,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyAccountIdView() {
-		new CommonFunctions().elementView(accountId, "accountId");
+		new CommonFunctions().elementView(lblAccountID, "accountId");
 	}
 
 	public void verifyAccountStatusView() {
@@ -89,88 +82,56 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyPhoneNumView() {
-		new CommonFunctions().elementView(lblPhoneNum, "PhoneNum");
+		new CommonFunctions().elementView(lblEditAccountPhone, "PhoneNum");
 	}
 
-//	public void verifyEmailAddressView() {
-//		new CommonFunctions().elementView(lblEmailAddress, "EmailAddress");
-//	}
-//
-//	public void verifyAccountAddressView() {
-//		new CommonFunctions().elementView(lblAccountAddress, "AccountAddress");
-//	}
+	public void verifyEmailAddressView() {
+		new CommonFunctions().elementView(lblEditEmailAddress, "EmailAddress");
+	}
+
+	public void verifyEditAccountPhone(String expAccountPhone) {
+		new CommonFunctions().verifyLabelText(lblEditAccountPhone, "EditImageToolTip", expAccountPhone);
+	}
+
+	public void verifyEditAccountEmail(String expAccountPhone) {
+		new CommonFunctions().verifyLabelText(lblEditAccountEmail, "EditImageToolTip", expAccountPhone);
+	}
 
 	public VerifyCurrentPhoneNumberPopup verifyCurrentPhoneNumberPopup() {
 		return new VerifyCurrentPhoneNumberPopup();
 	}
 
 	public void clickEditUserImage() {
-		click(editUserImage, "Edit User Image");
+		click(EditUserImgToolTip, "Edit User Image");
 	}
-
-//	public void clickRemoveImage() {
-//		click(lnkRemoveImage, "Remove Image");
-//	}
-//
-//	public void clickRemove() {
-//		click(btnRemove, "Remove Button");
-//	}
-//
-//	public void clickUploadNewImage() {
-//		click(btnUploadNewImage, "Upload New Image Button");
-//	}
-//
-//	public void clickSave() {
-//		click(btnSave, "Save Button");
-//	}
 
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "UserName", expUserName);
 	}
 
-	public void verifyAccountStatus(String expAccountStatus) {
-		new CommonFunctions().verifyLabelText(lblAccountStatus, "Account Status", expAccountStatus);
-	}
-
-	public void verifyEmail(String expEmail) {
-		new CommonFunctions().verifyLabelText(lblEmail, "Email", expEmail);
-	}
-
-//	public void verifyAddress(String expAddress) {
-//		new CommonFunctions().verifyLabelText(lblAddress, "Address", expAddress);
-//	}
-
 	public void clickEditAccountEmail() {
-		click(lnkEditAccountEmail, "Click Edit Email");
+		click(IconEditEmail, "Click Edit Email");
 	}
-
-	public void clickEditAccountPhNumber() {
-		click(lnkEditAccountPhNum, "Click Edit PhoneNumber");
-	}
-
-//	public void clickEditAccountAddress() {
-//		click(lnkEditAccountAddress, "Click Edit Address");
-//	}
 
 	public void clickIconEditEmail() {
-		moveToElement(lblEmail, "Edit Email");
-		click(iconEditEmail, "Click Edit Email Icon");
+		moveToElement(IconEditEmail, "Edit Email");
+		click(IconEditEmail, "Click Edit Email Icon");
 	}
 
 	public void clickIconEditPhNum() {
-		click(iconEditPhNum, "Click Edit Phone Icon");
+		click(IconEditPhone, "Click Edit Phone Icon");
 	}
 
-//	public void clickIconEditAddress() {
-//		click(iconEditAddress, "Click Edit Address Icon");
-//	}
+	public void verifyEditEmailAddress(String expheading) {
+		new CommonFunctions().verifyLabelText(lblEditEmailAddress, "Edit Email Address PopUp Heading", expheading);
+	}
 
-//	public void verifyEditEmailAddress(String expheading) {
-//		new CommonFunctions().verifyLabelText(lblEmailAddress, "Edit Email Address PopUp Heading", expheading);
-//	}
+	public void verifyEditEmailAddressDesc(String expheading) {
+		new CommonFunctions().verifyLabelText(descEditEmailAddress, "Edit Email Address PopUp Heading", expheading);
+	}
 
 	public void verifyEditEmailAddressAuthentication(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblEmailAuth, "Edit Email Address Authentication PopUp Heading",
+		new CommonFunctions().verifyLabelText(lblEmailAddressAuth, "Edit Email Address Authentication PopUp Heading",
 				expHeading);
 	}
 
@@ -206,33 +167,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 		return new NavigationComponent();
 	}
 
-	public void verifyEditPhoneNumberIconView() {
-		moveToElement(imgPhone, "Moved to Edit PhoneNumber");
-		click(iconEditPhNum, "Clciked Edit Phone Number Icon");
-	}
-
-	public void verifyVerificationCodeDescriptionText(String expVerificationCodeDescriptionText) {
-		new CommonFunctions().verifyLabelText(lblVerificationCodeDescription, "Edit Phone Number Description Text",
-				expVerificationCodeDescriptionText);
-	}
-
-	public void verifyVerificationTextCodeBoxBorderColorAndDescription(String expColor, String expVerificationmsg) {
-
-		new CommonFunctions().verifyTextBoxBorderColor(expColor);
-		new CommonFunctions().verifyLabelText(lblVerificationSuccesful, "Verificational Succesful", expVerificationmsg);
-	}
-
-//    public void verifyVerificationCodeWithNumber(String expCode) {
-//    	new CommonFunctions().validateFieldWithNumber(txtCode, "Verification", expCode);
-//    		
-//    }
-
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
 		new CommonFunctions().validateTextFeild(txtNewPhoneNumber, expNewPhoneNumber, "New Phone Number");
-	}
-
-	public void enterCode(String expCode) {
-		enterText(txtCode, expCode, "Verification Code");
 	}
 
 	public void verifyNewPhoneNumberFieldWithInvalidData(String expNewPhoneNumber, String input) {
@@ -247,23 +183,14 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyVerifyCurrentPhoneNumberDescriptionText(String expVerifyPhoneNumberDescriptionText) {
-		new CommonFunctions().verifyLabelText(lblCurrentPhoneNumberDescriptionText,
-				"Verify Current Phone Number Description Text", expVerifyPhoneNumberDescriptionText);
+		new CommonFunctions().verifyLabelText(descCurrentPhoneNum, "Verify Current Phone Number Description Text",
+				expVerifyPhoneNumberDescriptionText);
 
 	}
 
-	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
-		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
-				expNewPhoneNumberHeading);
-	}
-
-	public void clickBackButton() {
-		click(btnBackButton, "");
-	}
-
-//	public void verifyEditPhoneNumberScreen(String expHeading) {
-//		new CommonFunctions().verifyLabelText(headingEditPhoneNumber, "Edit Phone Number", expHeading);
-//
+//	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
+//		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
+//				expNewPhoneNumberHeading);
 //	}
 
 	public void verifyNewPhoneNumberTextWithPreviousData() {
@@ -276,13 +203,63 @@ public class UserDetailsComponent extends BrowserFunctions {
 		}
 	}
 
+	public void verifyNewEmailAddressTextWithPreviousData() {
+		String str = getText(txtNewEmailAddress, "New Email Address");
+		if (!str.isEmpty()) {
+
+			ExtentTestManager.setPassMessageInReport("New Email Address Field");
+		} else {
+			ExtentTestManager.setFailMessageInReport("New Email Address field With Empty");
+		}
+	}
+
 	public void clickCrossButton() {
 		click(btnCross, "Click Cross Button");
 	}
 
-	public void verifyUserdetailsScreen(String expUserDetailsHeading) {
-		new CommonFunctions().verifyLabelText(headingUserDetais, "User Details Heading", expUserDetailsHeading);
+	public void clickPhoneSendCode() {
+		click(btnPhoneSendCode, "Send Code");
+	}
 
+	public void clickEmailSendCode() {
+		click(btnEmailSendCode, "Send Code");
+	}
+
+	public void verifyAccountStatus(String expStatus) {
+		String str = getText(lblAccountStatus, "Account Status");
+
+		if (str.equals(expStatus)) {
+			ExtentTestManager.setPassMessageInReport("Account status is Active");
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Account Status is" + str);
+		}
+	}
+
+	public void verifyEditPhoneNumAuth(String expheading) {
+		new CommonFunctions().verifyLabelText(lblEditPhoneNumAuth, "Edit Email Address Authencation Heading",
+				expheading);
+	}
+
+	public void verifyEmailAddressAuth(String expheading) {
+		new CommonFunctions().verifyLabelText(lblEmailAddressAuth, "Edit Email Address Authencation Heading",
+				expheading);
+	}
+
+	public void verifyEmailAddressAuthDesc(String expheading) {
+		new CommonFunctions().verifyLabelText(descEmailAddressAuth, "Edit Email Address Authencation Heading",
+				expheading);
+	}
+
+	public void verifyEditPhoneNum(String expheading) {
+		new CommonFunctions().verifyLabelText(lblEditPhoneNum, "Edit Phone Number  Heading", expheading);
+	}
+
+	public void verifyCurrentPhoneNum(String expheading) {
+		new CommonFunctions().verifyLabelText(lblCurrentPhoneNum, "Current Phone Number Heading", expheading);
+	}
+
+	public void verifyCurrentPhoneNumDesc(String expheading) {
+		new CommonFunctions().verifyLabelText(descEditPhoneNum, "Current Phone Number Heading", expheading);
 	}
 
 }
