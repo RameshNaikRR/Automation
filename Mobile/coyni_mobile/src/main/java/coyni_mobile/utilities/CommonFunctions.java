@@ -214,6 +214,11 @@ public class CommonFunctions {
 		System.out.println("clicked on enter");
 	}
 
+	public void clickTab() {
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.TAB));
+		System.out.println("clicked on tab");
+	}
+
 	public void swipeElement(By loc, Direction dir) {
 		System.out.println("swipeElementAndroid(): dir: '" + dir + "'");
 
@@ -275,6 +280,15 @@ public class CommonFunctions {
 			// ignore
 		}
 	}
+
+	public void elementEnabled(By ele, String eleName) {
+		if (mobileFunctions.getElement(ele, eleName).isEnabled()) {
+			ExtentTestManager.setPassMessageInReport(eleName + " is enabled");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(eleName + " is not enabled");
+		}
+	}
+
 	public String getTextBoxValue(By ele) {
 		return mobileFunctions.getAttribute(ele, "value");
 	}

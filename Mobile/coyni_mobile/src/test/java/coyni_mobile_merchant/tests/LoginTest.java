@@ -74,7 +74,7 @@ public class LoginTest {
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-		//	loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+			// loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -171,8 +171,7 @@ public class LoginTest {
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
-			loginPage.enterYourPINComponent().forgotPinComponent()
-					.VerifyHeadingForgotPin(data.get("forgotHeading"));
+			loginPage.enterYourPINComponent().forgotPinComponent().VerifyHeadingForgotPin(data.get("forgotHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotPinDescView();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(data.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
@@ -262,17 +261,15 @@ public class LoginTest {
 //			loginPage.enterYourPINComponent().forgotPinComponent()
 //			.VerifyHeadingForgotPin(loginData.get("forgotHeading"));
 //			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Pin Navigation Flow failed due to Exception " + e);
 		}
 	}
 
-	
 	@Test
 	@Parameters({ "strParams" })
-	public void testCompanyInformation(String strParams) 
-	{
+	public void testCompanyInformation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
@@ -289,12 +286,202 @@ public class LoginTest {
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().verifyHeading(data.get("RegHeading"));
+			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage()
+					.verifyHeading(data.get("RegHeading"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().clickStart();
-			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().registrationCompanyInformationPage().verifyHeading(data.get("companyInfoHeading"));
-			
-		}catch(Exception e) {
-			
+			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().registrationCompanyInformationPage()
+					.verifyHeading(data.get("companyInfoHeading"));
+
+		} catch (Exception e) {
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmail(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().verifyDescription(data.get("retrieveEmailDescription"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyPhoneVerificationPage();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneDescription(data.get("phoneDescription"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillPin(data.get("phoneOTP"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyHeading(data.get("accountPageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyDescription(data.get("accountPageDescription"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().clickCoyniAccount();
+			loginPage.verifyEmail(data.get("email"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happens due to this " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.verifyRetrieveView();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().verifyPhoneNumberView();
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().verifyFirstNameViewView();
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().verifyLastNameView();
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().navigationComponent().verifyCloseView();
+			loginPage.retrieveEmailPage().verifyNextButtonView();
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyGetCodeView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyResendView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().navigationComponent().verifyBackView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillPin(data.get("phoneOTP"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyHeading(data.get("accountPageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
+					.verifyCloseView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyCoyniAccountView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().clickCoyniAccount();
+			loginPage.verifyEmailview();
+			loginPage.navigationComponent().verifyCloseView();
+			loginPage.verifyEmail(data.get("email"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEamilView failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().accountNotFoundPage().verifyHeading(data.get("cantFindHeading"));
+			loginPage.retrieveEmailPage().accountNotFoundPage().verifyTryAgainView();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveWithInavlidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			if (!data.get("errMsg").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+			}
+			loginPage.retrieveEmailPage().verifyNextButtonDisabled();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveWithInavlidData failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithNavigationView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().navigationComponent().clickBack();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillPin(data.get("phoneOTP"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyHeading(data.get("accountPageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
+					.clickClose();
+			Thread.sleep(1000);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillPin(data.get("phoneOTP"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
+					.verifyHeading(data.get("accountPageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().clickCoyniAccount();
+			loginPage.verifyEmail(data.get("email"));
+			loginPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithNavigationView failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidOTP(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
+			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
+			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneHeading"));
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(5000);
+				loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().clickResend();
+			}
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().errorMessagePopup()
+					.verifyHeading(data.get("errorMessageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().errorMessagePopup()
+					.verifyDescription(data.get("errorMessageDescription"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().errorMessagePopup().clickOk();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidOTP failed due to this exception " + e);
 		}
 	}
 }
