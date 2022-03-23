@@ -27,12 +27,37 @@ public class BusinessApplicationTest {
 	public void testBeneficialsOwnersFlow() {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(null);
-//			sideBarMenuComponent.clickBusinessApplicationArrow();
-//			sideBarMenuComponent.clickContinueApplication();
-	//	sideBarMenuComponent.businessSettingsMenuComponent().clickBeneficialOwners();
-			
-			
-
+			sideBarMenuComponent.clickBusinessApplicationArrow();
+			sideBarMenuComponent.clickStartApplication();
+			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyFirstNameView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyLastNameView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyDOBView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifySSNView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyOwnershipView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyAddressLine1View();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyAddressLine2View();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyCityView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyDrpdwnStateView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyZipCodeView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyUploadRequiredDocumentsView();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyDriverLicenseView(data.get("driverLicense"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyStateIssueIDView(data.get("StateIssueId"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyPassportView(data.get("passport"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillFirstName(data.get("firstName"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillLastName("lastName");
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillDateOfBirth(data.get("dateOfBirth"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillSocialSecurityNum(data.get("ssn"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillOwnerShip(data.get("ownerShip"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillAddress1(data.get("addline1"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillAddress2(data.get("addline2"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillCity(data.get("state"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().selectState(data.get("state"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().fillZipCode(data.get("zipcode"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().verifyCountry(data.get("country"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().clickRadioBtn(data.get("radioButton"));
+			sideBarMenuComponent.registrationBeneficialOwnersPage().clickUploadImg();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Beneficial Owners flow failed due to Exception " + e);
 		}

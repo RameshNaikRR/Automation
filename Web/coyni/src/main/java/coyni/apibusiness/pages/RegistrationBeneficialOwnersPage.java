@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.apibusiness.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.utilities.FileHelper;
 
 public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 	private By lblBeneficialOwners = By.xpath("//h4[@class='mb-5 text-2xl font-bold text-cm4']");
@@ -18,9 +19,11 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 	private By btnBack = By.xpath("//button[text()='Back']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkExit = By.xpath("//span[text()='Exit']");
+	private By lnkUploadImg = By.xpath("//div[@class='flex items-center justify-center']//img");
 	
-	  private By getRadioBtn(String elementName) {
-	    	return By.xpath(String.format("//input[@type='radio']/following::span[text()='%s']/preceding-sibling::input", elementName));
+	  public void clickRadioBtn(String radioButton) {
+	    By radioButtons	=   By.xpath(String.format("//input[@type='radio']/following::span[text()='%s']/preceding-sibling::input", radioButton));
+	    click(radioButtons, radioButton + "Radio Buttons");
 	    }
 	  private By getRadioBtntextsView(String elementName) {
 			return By.xpath(String.format("//input[@type='radio']/following::span[text()='Passport']", elementName));
@@ -37,15 +40,18 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 		public void verifyStateIssueIDView(String elementName) {
 			new CommonFunctions().elementView(getRadioBtntextsView("State-Issued ID"), "State-Issued ID");
 		}
-	  public void clickDriverLicenseRadBtn() {
-		  click(getRadioBtn("Driver's License"), "Driver License");
-	  }
-	  public void clickPassportRadBtn() {
-		  click(getRadioBtn("Passport"), "Passport");
-	  }
-	  public void clickStateIssueRadBtn() {
-		  click(getRadioBtn("State-Issued ID"), "State Issue ID");
-	  }
+		public void clickUploadImg() {
+			click(lnkUploadImg, "upload Image");
+		}
+//	  public void clickDriverLicenseRadBtn() {
+//		  click(getRadioBtn("Driver's License"), "Driver License");
+//	  }
+//	  public void clickPassportRadBtn() {
+//		  click(getRadioBtn("Passport"), "Passport");
+//	  }
+//	  public void clickStateIssueRadBtn() {
+//		  click(getRadioBtn("State-Issued ID"), "State Issue ID");
+//	  }
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
@@ -86,4 +92,7 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
     public void verifyUploadRequiredDocumentsView() {
 		new CommonFunctions().elementView(lblUploadDocumentsHdg, "Upload Required Documents");
 	}
+//    public void uploadSelectImage(String folderName,String fileName) {
+//		getElement(btnSelectImage, "select Image").sendKeys(FileHelper.getFilePath(folderName,fileName));
+//	}
 }

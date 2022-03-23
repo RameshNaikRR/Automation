@@ -29,11 +29,12 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtAddress1 = By.name("addressLine1");
 	private By txtAddress2 = By.name("addressLine2");
 	
-	
-	
-	
-	
-
+	public void fillFirstName(String firstName) {
+		enterText(txtFirstName, firstName, "firstName");
+	}
+	public void fillLastName(String lastName) {
+		enterText(txtLastName, lastName, "lastName");
+	}
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
 	}
@@ -57,6 +58,9 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void verifyCountry(String country) {
 		new CommonFunctions().verifyLabelText(txtCountry, country, "United States");
+	}
+	public void fillOwnerShip(String ownerShip) {
+		enterText(txtOwnership, ownerShip, "ownerShip");
 	}
 
 	public void clickCountry() {
