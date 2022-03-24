@@ -22,6 +22,13 @@ public class BankAccountPage extends BrowserFunctions{
 	private By btnBankNext = By.xpath("//a[@id='acctForm:addFiNext']");
 	private By chkbxBank = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]/input");
 	private By NextButton = By.xpath(" ");
+	private By informationAboutFiesrvHdg = By.xpath("//h1[text()='Information About Fiserv']");
+	private By lblAddBankAccount = By.xpath("//h1[text()='Add Bank Account']");
+	private By lblDoNotNavigate = By.xpath("//h2[text()='Do Not Navigate Away From This Page']");
+	
+	public void  verifyDoNotNavigateView() {
+		new CommonFunctions().elementView(lblDoNotNavigate, "Do Not Navigate AwayFrom This Page");
+	}
 	public void verifyLabelHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, heading, "Heading");
 	}
@@ -61,5 +68,13 @@ public class BankAccountPage extends BrowserFunctions{
 	public void clickChkbxBank() {
 		click(chkbxBank, "Bank");
 	}
-	
+	public void verifyHeadingView() {
+		new CommonFunctions().elementView(lblHeading, "Add Bank Account");
+	}
+	public void verifyFiesrvHeading(String fiesrvHdg) {
+		new CommonFunctions().verifyLabelText(informationAboutFiesrvHdg, "fiesrv heading",fiesrvHdg );
+	}
+	public void verifyAddBankAccountView() {
+		new CommonFunctions().elementView(lblAddBankAccount, "Add Bank Account");
+	}
 }
