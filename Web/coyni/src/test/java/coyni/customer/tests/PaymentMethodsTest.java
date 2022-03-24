@@ -34,7 +34,7 @@ public class PaymentMethodsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
@@ -53,6 +53,7 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().unSelectBank();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickUncheckBank();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
+			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
 			
@@ -68,6 +69,7 @@ public class PaymentMethodsTest {
 		tokenAccountPage.userNameDropDownComponent().clickUserName();
 		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
 		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
 		testAddExternalBankAccount(strParams);
 	}
 	

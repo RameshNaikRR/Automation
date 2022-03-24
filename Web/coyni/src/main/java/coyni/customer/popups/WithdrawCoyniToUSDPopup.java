@@ -56,4 +56,9 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public GiftCardPurchasePopup giftCardPurchasePopup() {
 		return new GiftCardPurchasePopup();
 	}
+	
+	public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
+		return new WithdrawToBankAccountPopup();
+	}
+
 }

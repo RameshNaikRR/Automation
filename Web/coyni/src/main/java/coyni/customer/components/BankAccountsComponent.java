@@ -90,8 +90,9 @@ public class BankAccountsComponent extends BrowserFunctions {
 		click(btnToggle, "Toggle");
 	}
 
-	public void verifyAvalibleBalance(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblAvalibleBalance, "Avalible Balance", expHeading);
+	public void verifyAvalibleBalance() {
+		String str = getText(lblAvalibleBalance, "Availble Balance");
+        ExtentTestManager.setPassMessageInReport(str);		
 	}
 
 	public void fillMessage(String message) {
@@ -109,7 +110,7 @@ public class BankAccountsComponent extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Next Button is disable");
 	}
 
-	public void verifyBankHeading(String expHeading) {
+	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Withdraw to Bank Account", expHeading);
 	}
 

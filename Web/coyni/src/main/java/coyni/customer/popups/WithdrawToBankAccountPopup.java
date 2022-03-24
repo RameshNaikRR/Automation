@@ -13,6 +13,9 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions{
 	private By btnNext = By.cssSelector("");
 	private By lnkConvert = By.cssSelector("");
 	private By btnDelete = By.cssSelector("");
+	private By btnAddNewBankAccount = By.xpath("//span[text()='Add New Bank Account']");
+	private By heading = By.xpath("//h2[text()='No Bank Accounts Exist']");		
+
 	
 	public void verifyErrorMessage(String ErrorMessage) {
 	  	  new CommonFunctions().verifyLabelText(lblErrorMessage, ErrorMessage, "ErrorMessage");
@@ -22,6 +25,15 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions{
 		enterText(txtMessage, Message, "Message");
 		
 	}
+	
+	public void clickAddBankAccount() {
+		click(btnAddNewBankAccount, "Add New Bank Account");
+	}
+	
+	public void verifyHeading() {
+		new CommonFunctions().elementView(heading, "No Bank Account Exist");
+	}
+
 	
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");

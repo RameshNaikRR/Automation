@@ -1933,6 +1933,26 @@ public class TokenAccountTest {
 		}
 	}
 
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDAddExternalBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToBankAccountPopup().verifyHeading();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToBankAccountPopup().clickAddBankAccount();
+			paymentMethodsTest.testAddExternalBankAccount(strParams);
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);
+		}
+	}
+
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDExternalBankAccount(String strParams) {
@@ -1941,19 +1961,20 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
-			tokenAccountPage.bankAccountsComponent().ClickNext();
-			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
+			//tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			//tokenAccountPage.bankAccountsComponent().ClickNext();
+			tokenAccountPage.bankAccountsComponent().verifyHeading(data.get("bankHeading"));
 			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.bankAccountsComponent().clickToggle();
-			tokenAccountPage.bankAccountsComponent().getPaymentItems(data.get("last4Digits")); // data.get("bankName"),
-			tokenAccountPage.bankAccountsComponent().verifyAvalibleBalance(data.get("avalible"));
+			//tokenAccountPage.bankAccountsComponent().getPaymentItems(data.get("last4Digits")); // data.get("bankName"),
+			tokenAccountPage.bankAccountsComponent().verifyAvalibleBalance();
 			tokenAccountPage.bankAccountsComponent().fillMessage(data.get("message"));
 			tokenAccountPage.bankAccountsComponent().verifyMsg(data.get("content"));
 			tokenAccountPage.bankAccountsComponent().ClickNext();
 			tokenAccountPage.bankAccountsComponent().clickConfirm();
 			tokenAccountPage.bankAccountsComponent().authyComponent().verifyHeading1(data.get("authyHeading1"));
-			tokenAccountPage.bankAccountsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.bankAccountsComponent().authyComponent().fillInput(data.get("code"));
+			//tokenAccountPage.bankAccountsComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			tokenAccountPage.bankAccountsComponent().verifySuccessHeading(data.get("sucessHeading"));
 			tokenAccountPage.bankAccountsComponent().clickCopy();
 			tokenAccountPage.bankAccountsComponent().clickDone();
@@ -1971,9 +1992,9 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
+			//tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
 			tokenAccountPage.bankAccountsComponent().ClickNext();
-			tokenAccountPage.bankAccountsComponent().verifyBankHeading(data.get("bankHeading"));
+			tokenAccountPage.bankAccountsComponent().verifyHeading(data.get("bankHeading"));
 			tokenAccountPage.bankAccountsComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.bankAccountsComponent().clickToggle();
 			if (!data.get("errMessage").isEmpty()) {

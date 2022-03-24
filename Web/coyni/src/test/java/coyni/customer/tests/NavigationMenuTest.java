@@ -40,7 +40,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyPersonalAccountView();
 			navigationMenuPage.verifyAccountIDView();
 			navigationMenuPage.verifyAccountID(data.get("AccountID"));
-			navigationMenuPage.verifyUserImageView();//
+			//navigationMenuPage.verifyUserImageView();//
 			navigationMenuPage.verifyQRCodeView();
 			navigationMenuPage.verifyTokenAccountView();
 			navigationMenuPage.verifyExportFilesView();

@@ -352,7 +352,7 @@ public class LoginTest {
 //			loginPage.forgotEmailComponent().verifyFirstName();
 //			loginPage.forgotEmailComponent().verifyLastName();
 			// loginPage.clickNext();
-			loginPage.forgotEmailComponent().phoneVerificationComponent().fillpin(data.get("code"));
+			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
 			Thread.sleep(1000);
 			loginPage.forgotEmailComponent().phoneVerificationComponent()
 					.verifyChooseHeading(data.get("chooseAccount"));
@@ -436,8 +436,7 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Thread.sleep(1000);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
 
 		} catch (Exception e) {
