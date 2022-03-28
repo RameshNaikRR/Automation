@@ -3,6 +3,7 @@ package coyni_mobile_merchant.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.pages.CreatePasswordPage;
 import coyni_mobile_merchant.pages.FoundAccountPage;
 import coyni_mobile_merchant.popups.ErrorMessagePopup;
 import ilabs.MobileFramework.MobileFunctions;
@@ -17,7 +18,6 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
 	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-
 	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
@@ -83,6 +83,10 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	public void verifyBackButtonView() {
 		new CommonFunctions().elementView(btnBackspace, "Back Icon");
 	}
+	public void clickCloseIcon() {
+		click(btnBackspace, "Back Space");
+	}
+
 
 	public void clickResend() {
 		click(lnkResend, "Resend");
@@ -133,6 +137,10 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	public FoundAccountPage foundAccountPage() {
 		return new FoundAccountPage();
+	}
+
+	public CreatePasswordPage createPasswordPage() {
+		return new CreatePasswordPage();
 	}
 
 }

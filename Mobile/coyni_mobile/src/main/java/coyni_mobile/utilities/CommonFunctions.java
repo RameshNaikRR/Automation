@@ -290,6 +290,6 @@ public class CommonFunctions {
 	}
 
 	public String getTextBoxValue(By ele) {
-		return mobileFunctions.getAttribute(ele, "value");
+		return mobileFunctions.getAttribute(ele, "text");
 	}
 }

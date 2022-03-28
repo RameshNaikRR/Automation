@@ -200,5 +200,9 @@ public class LoginPage extends MobileFunctions {
 	public RetrieveEmailPage retrieveEmailPage() {
 		return new RetrieveEmailPage();
 	}
+	public ForgotPasswordPage forgotPasswordPage() {
+    	return new ForgotPasswordPage();
+    }
+	
 
 }

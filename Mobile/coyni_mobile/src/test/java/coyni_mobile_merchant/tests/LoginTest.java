@@ -484,4 +484,116 @@ public class LoginTest {
 					.setFailMessageInReport("testRetrieveEmailWithInvalidOTP failed due to this exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPassword(String strParams) {
+		try {
+
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyForgotPasswordPageView();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyPageDescription(loginData.get("forgotDescription"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			Thread.sleep(30000);
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().verifyEmailVerificationPage();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+					.verifyEmailHeading(loginData.get("verifyEmailHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+					.verifyEmailText(loginData.get("verifyEmailDescription"));
+			Thread.sleep(3000);
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillPin(loginData.get("code"));
+			Thread.sleep(3000);
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.verifyPageHeading(loginData.get("createPasswordHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.fillNewPassword(loginData.get("newPassword"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.fillConfirmPassword(loginData.get("confirmPassword"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSave();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordInvalidData(String strParams) {
+		try {
+
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			if (loginData.get("validatePassword").equalsIgnoreCase("yes")) {
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+						.verifyEmailHeading(loginData.get("verifyEmailHeading"));
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillPin(loginData.get("code"));
+				Thread.sleep(3000);
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+						.verifyPageHeading(loginData.get("createPasswordHeading"));
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+						.fillNewPassword(loginData.get("newPassword"));
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+						.fillConfirmPassword(loginData.get("confirmPassword"));
+				if (loginData.get("confirmPassword").equalsIgnoreCase("")) {
+					loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+							.clickNewPassword();
+				}
+
+				if (loginData.get("expPasswordMessage").contains("Must be 8-12 characters")) {
+					loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+							.VerifyPasswordErrMessage(loginData.get("expPasswordMessage"));
+				}
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSave();
+
+			}
+
+			if (!loginData.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+						loginData.get("elementName"));
+
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordNavigation(String strParams) {
+		try {
+
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			Thread.sleep(3000);
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().verifyEmailVerificationPage();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+					.verifyEmailHeading(loginData.get("verifyEmailHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillPin(loginData.get("code"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.verifyPageHeading(loginData.get("createPasswordHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickCloseIcon();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+			.verifyEmailHeading(loginData.get("verifyEmailHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().clickCloseIcon();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().clickCloseIcon();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
+		}
+	}
 }

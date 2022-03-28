@@ -74,6 +74,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void fillLastName(String LastName) {
+		DriverFactory.getDriver().hideKeyboard();
 		click(txtLastName, "Last Name");
 		enterText(txtLastName, LastName, "Last Name");
 		new CommonFunctions().clickTab();
