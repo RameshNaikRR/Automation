@@ -16,9 +16,11 @@ public class TopBarComponent extends BrowserFunctions {
 	private By getDropDownItems(String itemsNum) {
 		return By.xpath(String.format("//div[@class='dropdown-container']//span[text()='%s']", itemsNum));
 	}
+
 	public void VerifyTitle(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTitle, "Title Heading", expHeading);
 	}
+
 	public void clickUserName() {
 		click(drpdwnUserName, "User Name");
 	}
@@ -26,6 +28,7 @@ public class TopBarComponent extends BrowserFunctions {
 	public void clickIconNotification() {
 		click(iconNotification, "Icon Notification");
 	}
+
 	public void clickUserDetails() {
 		click(getDropDownItems("User Details"), "User Details");
 	}
@@ -53,8 +56,13 @@ public class TopBarComponent extends BrowserFunctions {
 	public void clickSignOut() {
 		click(getDropDownItems("Sign Out"), "Sign Out");
 	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public UserDetailsComponent userDetailsComponent() {
+		return new UserDetailsComponent();
 	}
 
 //	public void clickUserDetails() {
