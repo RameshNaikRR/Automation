@@ -82,7 +82,6 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
-			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyRemoveImageView();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().verifyUploadImageView();
 			// AccountProfile-Close Navigation
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().navigationComponent()
@@ -138,6 +137,7 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			Thread.sleep(2000);
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
@@ -149,9 +149,10 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
 			Thread.sleep(500);
 			if (!data.get("toastMessage").isEmpty()) {
-				customerProfilePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+				//customerProfilePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
-
+            Thread.sleep(2000);
+			
 		} catch (Exception e) {
 
 			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception " + e);
@@ -165,6 +166,7 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			Thread.sleep(4000);
 			customerProfilePage.userDetailsComponent().clickEditUserImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
@@ -379,8 +381,10 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
 			customerProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
+			//customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			// customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
+			
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();

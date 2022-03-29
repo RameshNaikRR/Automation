@@ -79,7 +79,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			loginPage.authyComponent().fillInput(data.get("code"));
-			//		Thread.sleep(3000);
+					Thread.sleep(3000);
 			//loginPage.authyComponent().verifyMessage(data.get("message"));
 			// loginPage.authyComponent().verifyLogin();
 		} catch (Exception e) {
