@@ -10,13 +10,12 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	
 	private By lblBank = By.xpath("//p[contains(text(),'Bank')]");
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy Coyni Tokens')]");
-	private By radBtnDebit = By.cssSelector("");
-	private By radBtnCredit = By.cssSelector("");
+	private By radBtnDebit = By.xpath("//input[@name='buy-token-radio']");
+	private By radBtnCredit = By.xpath("//input[@name='buy-token-radio']");
 	private By lnkAddNewPayment = By.cssSelector("");
-	private By btnDeleteBank = By.cssSelector("");
-	private By btnDeleteCredit = By.cssSelector("");
+	private By btnDeleteBank = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
+	private By btnDeleteCard = By.xpath("//button[@data-tip='Delete']");
 	private By btnEditCredit = By.cssSelector("");
-	private By btnDeleteDebit = By.cssSelector("");
 	private By btnEditDebit = By.cssSelector("");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 	private By lblBankErrorMessage = By.cssSelector("");
@@ -25,6 +24,7 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
 	private By btnDelete = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
 	private By txtCvv = By.xpath("//input[@name='cvv']");
+
 	
 	public void clickBank() {
 		click(lblBank,"Click Bank" );
@@ -39,10 +39,12 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 		click(btnDeleteBank,"Click DeleteBank" );
 	}
 	public void deleteDebit() {
-		click(btnDeleteDebit,"Click DeleteDebit" );
+		moveToElement(radBtnDebit, "Delete Debit card");
+		click(btnDeleteCard,"Click DeleteDebit" );
 	}
 	public void deleteCredit() {
-		click(btnDeleteCredit,"Click DeleteCredit" );
+		moveToElement(radBtnCredit, getCopiedData());
+		click(btnDeleteCard,"Click DeleteCredit" );
 	}
 	public void editDebit() {
 		click(btnEditDebit,"Click EditDebit" );

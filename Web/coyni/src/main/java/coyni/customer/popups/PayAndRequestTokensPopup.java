@@ -83,8 +83,8 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 
 	public void fillAmount(String amount) {
 	
-		//	enterText(txtAmount, amount, "amount");
-		DriverFactory.getDriver().findElement(txtAmount).sendKeys("1.00");
+			enterText(txtAmount, amount, "amount");
+		//DriverFactory.getDriver().findElement(txtAmount).sendKeys("1.00");
 	}
 
 	public void fillRecipientAddress(String RecipientAddress) {

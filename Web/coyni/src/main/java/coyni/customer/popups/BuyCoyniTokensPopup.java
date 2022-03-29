@@ -18,7 +18,7 @@ public class BuyCoyniTokensPopup extends BrowserFunctions{
 	private By lblDollar = By.xpath("//span[contains(text(),'$')]");
 	private By lblCYN = By.xpath("(//span[text()='CYN'])[2]");
 	private By btnConvert = By.xpath("//button[@class='group flex flex-col justify-center items-center ']");
-	private By btnNext = By.cssSelector("");
+	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 	private By lblBuyTokenNoPayments = By.xpath("//h2[contains(text(),'No Payment Method Available')]");
 	
 	public void fillAmount(String Amount) {

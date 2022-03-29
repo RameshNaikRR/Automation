@@ -290,8 +290,9 @@ public class HomeTest {
             homePage.validateFirstNameField(data.get("firstName"));
             homePage.validateLastNameField(data.get("lastName"));
             homePage.validatePhoneNumber(data.get("phoneNumber"));
-            homePage.validatePassword(data.get("createPassword"));
             homePage.validateEmailField(data.get("email"));
+            homePage.validatePassword(data.get("createPassword"));
+            
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateCreateAccountFields Failed due to Exception " + e);
 		}

@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class CustomerMenuComponent extends BrowserFunctions {
 
-	private By lblUserName = By.xpath("//div[@class='hover:underline internal-header__circle-initials']");
+	private By lblUserName = By.xpath("//div[@class='hover:underline text-cgy3 capitalize internal-header__circle-initials']");
 
 	private By lblAccountStatus = By.cssSelector("");
 
@@ -23,7 +23,7 @@ public class CustomerMenuComponent extends BrowserFunctions {
 
 	private By lnkAgreements = By.cssSelector("");
 
-	private By lnkChangePassword = By.cssSelector("div.dropdown-container>div:nth-of-type(7)");
+	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
 
 	private By lblUserDetails = By.cssSelector("div.dropdown-container>div:nth-of-type(2)");
 	private By lblPaymentMethods = By.cssSelector(" ");

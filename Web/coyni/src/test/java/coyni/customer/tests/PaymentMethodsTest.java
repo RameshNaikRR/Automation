@@ -37,6 +37,7 @@ public class PaymentMethodsTest {
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
 			Thread.sleep(5000);
            customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyHeading();
@@ -55,7 +56,7 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
 			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
+		//	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
@@ -69,7 +70,6 @@ public class PaymentMethodsTest {
 		tokenAccountPage.userNameDropDownComponent().clickUserName();
 		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
 		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
-		customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
 		testAddExternalBankAccount(strParams);
 	}
 	
@@ -85,7 +85,7 @@ public class PaymentMethodsTest {
 	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().verifyRemovePaymentHeading();
 	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().clickOnRemove();
 	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
-	    customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().clickClose();
+	  //  customerProfilePage.paymentMethodsComponent().removePaymentMethodPopup().successFailurePopupCardComponent().clickClose();
 	} catch(Exception e) {
 		ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
 	}
@@ -133,7 +133,7 @@ public class PaymentMethodsTest {
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
-			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+			//customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -345,8 +345,8 @@ public class PaymentMethodsTest {
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().clickSave();
-			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
-					.successFailurePopupCardComponent().clickClose();
+		//	customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
+			//		.successFailurePopupCardComponent().clickClose();
 
 		} catch (Exception e) {
 
@@ -385,8 +385,8 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
 					.clickDelete(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup().clickOnRemove();
-			customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup()
-					.successFailurePopupCardComponent().clickClose();
+		//	customerProfilePage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup()
+			//		.successFailurePopupCardComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test delete card failed due to exception " + e);

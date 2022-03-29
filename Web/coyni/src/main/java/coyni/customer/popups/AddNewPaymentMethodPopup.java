@@ -10,7 +10,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	private By headingAddNewPaymentMethod = By.xpath("//h1[contains(text(),'Add New Payment Method')]");
-	private By btnExternalBankAccount = By.xpath("//span[text()='Bank Account']");
+	private By btnExternalBankAccount = By.xpath("//span[contains(text(),'Bank Account')]");
 	private By btnDebitCard = By.xpath("//span[text()='Debit Card'] | //span[text()='Add New Debit Card']");
 	private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
 	private By lblExternalBankAccountCount = By.xpath("(//span[@class='count'])[1]");

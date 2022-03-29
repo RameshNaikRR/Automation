@@ -778,8 +778,8 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
 					.verifyHeading(data.get("authyPayHeading"));
 			// loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
-			if (!data.get("code").isEmpty()) {
-				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			if (!data.get("code1").isEmpty()) {
+				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code1"), data.get("char"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
 				loginPage.authyComponent().verifyMessage(data.get("errMessage"));
@@ -1040,7 +1040,7 @@ public class TokenAccountTest {
 			Thread.sleep(1000);
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
-			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
+			//tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
 
 		} catch (Exception e) {
@@ -1157,6 +1157,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickBuyTokens();
 			//tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
+			Thread.sleep(3000);
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
@@ -1205,7 +1206,8 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickDebit();
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().fillCvv(data.get("cvvNumber"));
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amountCard"));
 			//tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
@@ -1250,7 +1252,8 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickCredit();
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().fillCvv(data.get("cvvNumber"));
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amountCard"));
 			//tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
@@ -1273,7 +1276,7 @@ public class TokenAccountTest {
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().deleteCredit();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+		//	tokenAccountPage.buyCoyniTokensPaymentMethodPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
 			
 		}
 		catch(Exception e) {
@@ -1339,7 +1342,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.clickConfirm();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
-					.transactionInProgessPopup().clickDone();
+				.transactionInProgessPopup().clickDone();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1367,7 +1370,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().verifyHeading();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().navigationComponent().clickBack();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup().verifyHeading();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickClose();
+		//	tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickClose();
 			tokenAccountPage.verifyLabelYourTokenAccount();
 			
 		} catch (Exception e) {
@@ -1401,7 +1404,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().deleteBank();
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
-			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+//			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
@@ -1942,7 +1945,6 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToBankAccountPopup().verifyHeading();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToBankAccountPopup().clickAddBankAccount();
 			paymentMethodsTest.testAddExternalBankAccount(strParams);
 			
 			
