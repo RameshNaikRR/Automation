@@ -2,8 +2,10 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.components.TopBarComponent;
+import coyni.apibusiness.components.UserDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -63,6 +65,14 @@ public class TokenWalletPage extends BrowserFunctions {
 	}
 
 	public SideBarMenuComponent sideBarMenuComponent() {
-return new SideBarMenuComponent();
+		return new SideBarMenuComponent();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
+
+	public UserDetailsComponent userDetailsComponent() {
+		return new UserDetailsComponent();
 	}
 }

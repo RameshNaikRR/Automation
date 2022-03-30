@@ -2,6 +2,8 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+
+import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
@@ -27,6 +29,10 @@ public class NewEmailAddressPopup extends BrowserFunctions {
 	public void verifyNewEmailAddressDescHeading(String expCurrentEmailAddDescHeading) {
 		new CommonFunctions().verifyLabelText(descNewEmailAddress, " New Email Address Description  Heading is",
 				expCurrentEmailAddDescHeading);
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 
 }

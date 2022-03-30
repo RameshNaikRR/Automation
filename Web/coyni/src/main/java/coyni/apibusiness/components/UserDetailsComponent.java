@@ -33,21 +33,21 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblEditPhoneNumAuth = By.xpath("//h1[text()='Edit Phone Number']");
 	private By descEditPhoneNumAuth = By.xpath("//span[contains(text(),'Please enter')]");
 	private By lblEditPhoneNum = By.xpath("//h1[text()='Edit Phone Number']");
-	private By descEditPhoneNum = By.xpath("//span[contains(text(),'Please enter a new phone number below.')]");
+	private By lblEditPhoneNumDescription = By
+			.xpath("//span[contains(text(),'Please enter a new phone number below.')]");
 	private By txtNewPhoneNumber = By.xpath("//input[@id='Phone_Number']");
 	private By btnPhoneSendCode = By.cssSelector(".w-60");
 	private By lblCurrentPhoneNum = By.xpath("//h1[text()='Verify Current Phone Number']");
-	private By descCurrentPhoneNum = By
+	private By lblCurrentPhoneNumDescription = By
 			.xpath("//span[contains(text() ,'A text message with your verification code has been ')]");
 	private By lnkResendVerificationCode = By.xpath("//button[contains(text(),'Resend Verification Code')]");
 	private By lblEditEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
-	private By descEditEmailAddress = By.xpath("//span[contains(text(),'Please enter a new email address')]");
-
-	public By btnCross = By.xpath("//button[@class='self-end']");
-	public By lblCurrentEmailAdd = By.xpath("//h1[text()='Verify Current Email Address']");
-	public By descCurrentEmailAdd = By.xpath("//span[contains(text(),'An email')]");
-	public By lblNewEmail = By.xpath("//h1[text()='Verify New Email Address']");
-	public By descNewEmail = By.xpath("");
+	private By lblEditEmailAddressDescription = By.xpath("//span[contains(text(),'Please enter a new email address')]");
+	private By btnCross = By.xpath("//button[@class='self-end']");
+	private By lblCurrentEmailAdd = By.xpath("//h1[text()='Verify Current Email Address']");
+	private By lblCurrentEmailAddressDescription = By.xpath("//span[contains(text(),'An email')]");
+	private By lblNewEmail = By.xpath("//h1[text()='Verify New Email Address']");
+	private By lblNewEmailDescription = By.xpath("");
 
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
@@ -79,8 +79,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
 	}
 
-	public void verifyEmailAddressView() {
-		new CommonFunctions().elementView(lblEditEmailAddress, "EmailAddress");
+	public void verifyEmailAddress(String expEmail) {
+		new CommonFunctions().verifyLabelText(lblEditAccountEmail, "Email Address", expEmail);
 	}
 
 	public void verifyEditPhoneNUmberView() {
@@ -112,7 +112,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyCurrentEmailAddressDesc(String expDescription) {
-		new CommonFunctions().verifyLabelTextContains(descCurrentEmailAdd, "EmailAddDescription", expDescription);
+		new CommonFunctions().verifyLabelTextContains(lblCurrentEmailAddressDescription, "EmailAddDescription",
+				expDescription);
 	}
 
 	public void verifyNewEmailAdd(String expEmailAddress) {
@@ -120,7 +121,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyDescNewEmail(String expDescNewEmailAddress) {
-		new CommonFunctions().verifyLabelText(descNewEmail, "New Email Address Desc", expDescNewEmailAddress);
+		new CommonFunctions().verifyLabelText(lblNewEmailDescription, "New Email Address Desc", expDescNewEmailAddress);
 	}
 
 	public void clickEditAccountEmail() {
@@ -145,7 +146,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyEditEmailAddressDesc(String expheading) {
-		new CommonFunctions().verifyLabelText(descEditEmailAddress, "Edit Email Address PopUp Heading", expheading);
+		new CommonFunctions().verifyLabelText(lblEditEmailAddressDescription, "Edit Email Address PopUp Description ",
+				expheading);
 	}
 
 	public MailingAddressComponent mailingAddressComponent() {
@@ -188,15 +190,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyVerifyCurrentPhoneNumberDescriptionText(String expVerifyPhoneNumberDescriptionText) {
-		new CommonFunctions().verifyLabelTextContains(descCurrentPhoneNum,
+		new CommonFunctions().verifyLabelTextContains(lblCurrentPhoneNumDescription,
 				"Verify Current Phone Number Description Text", expVerifyPhoneNumberDescriptionText);
 
 	}
-
-//	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
-//		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
-//				expNewPhoneNumberHeading);
-//	}
 
 	public void verifyNewPhoneNumberTextWithPreviousData() {
 		String str = getText(txtNewPhoneNumber, "New Phone Number");
@@ -235,7 +232,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyCurrentPhoneNumDesc(String expheading) {
-		new CommonFunctions().verifyLabelText(descEditPhoneNum, "Current Phone Number Description ", expheading);
+		new CommonFunctions().verifyLabelText(lblEditPhoneNumDescription, "Current Phone Number Description ",
+				expheading);
 	}
 
 	public void verifyEditPhoneNumAuthDesc(String expheading) {
@@ -245,10 +243,6 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public PhoneEmailVerificationComponent phoneEmailVerificationComponent() {
 		return new PhoneEmailVerificationComponent();
-	}
-
-	public void clickOutside() {
-		new CommonFunctions().clickOutSideElement();
 	}
 
 	public EmailAddressAuthenticationPopup emailAddressAuthenticationPopup() {

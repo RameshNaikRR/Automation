@@ -1,7 +1,6 @@
 package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
-
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
@@ -35,7 +34,15 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 		enterText(txtNewEmailAddress, expEmail, "New Email Address");
 	}
 
+	public void clickOutside() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public void clickEmailSendCode() {
 		click(btnEmailSendCode, "Send Code");
 	}
+	public CurrentEmailAddressPopup currentEmailAddressPopup() {
+		return new CurrentEmailAddressPopup();
+	}
+
 }
