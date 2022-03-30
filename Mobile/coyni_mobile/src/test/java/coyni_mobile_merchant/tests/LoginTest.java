@@ -171,7 +171,7 @@ public class LoginTest {
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
-			loginPage.enterYourPINComponent().forgotPinComponent().VerifyHeadingForgotPin(data.get("forgotHeading"));
+			loginPage.enterYourPINComponent().forgotPinComponent().VerifyHeadingForgotPin(data.get("forgotPinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotPinDescView();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(data.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
@@ -215,7 +215,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent()
-					.VerifyHeadingForgotPin(loginData.get("forgotHeading"));
+					.VerifyHeadingForgotPin(loginData.get("forgotPinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotPinDescView();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
 			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
@@ -498,13 +498,12 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyPageDescription(loginData.get("forgotDescription"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			Thread.sleep(30000);
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().verifyEmailVerificationPage();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyEmailHeading(loginData.get("verifyEmailHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyEmailText(loginData.get("verifyEmailDescription"));
-			Thread.sleep(3000);
+
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillPin(loginData.get("code"));
 			Thread.sleep(3000);
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
@@ -512,8 +511,18 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillNewPassword(loginData.get("newPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.clickEyeIconNewPassword();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(loginData.get("confirmPassword"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.clickEyeIconConfirmPassword();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSave();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.successFailureComponent().verifyPageHeading(loginData.get("sucessHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.successFailureComponent().verifyPageDescription(loginData.get("sucessDescription"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.successFailureComponent().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
 		}
@@ -587,13 +596,57 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
-			.verifyEmailHeading(loginData.get("verifyEmailHeading"));
+					.verifyEmailHeading(loginData.get("verifyEmailHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().clickCloseIcon();
 			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().clickCloseIcon();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordInvalidOTPCredentials(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+//			loginPage.forgotPasswordPage().verifyEmailComponent()
+//					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+			Thread.sleep(2000);
+			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(5000);
+				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().clickResend();
+//				 loginPage.forgotPasswordPage().verifyEmailComponent()
+//				 .verifyResentMsg(loginData.get("resendMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithFieldValidation(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(loginData.get("forgotHeading"));
+			String[] email = loginData.get("email").split(",");
+			loginPage.forgotPasswordPage().validateEmailField(email[0], email[1], email[2], email[3], email[4]);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
 }
