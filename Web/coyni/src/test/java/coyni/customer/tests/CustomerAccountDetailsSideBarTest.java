@@ -56,7 +56,6 @@ public class CustomerAccountDetailsSideBarTest  {
 			customerProfilePage.userDetailsComponent().verifyAccountIdView();
 			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
 			customerProfilePage.userDetailsComponent().verifyEmailAddressView();
-			customerProfilePage.userDetailsComponent().verifyPhoneNumView();
 			customerProfilePage.customerMenuComponent().verifyPaymentMethodsView();
 			customerProfilePage.customerMenuComponent().clickPaymentMethods();
 			customerProfilePage.customerMenuComponent().verifyPaymentMtehods(data.get("paymentMethodHeading"));

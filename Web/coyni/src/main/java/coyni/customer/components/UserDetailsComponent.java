@@ -3,12 +3,7 @@ package coyni.customer.components;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-
-import com.google.common.util.concurrent.Uninterruptibles;
-
 import coyni.customer.popups.AccountProfileImagePopup;
 import coyni.customer.popups.EditEmailAddressPopup;
 import coyni.customer.popups.EditPhoneNumberPopup;
@@ -34,34 +29,21 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
 	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
 	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
-	private By iconEditPhNum = By
-			.xpath("//div[@class='text-xs icon-edit cursor-pointer UserDetails_edit_Phone_icon__1iIcs']");
-	private By lblEditPhoneNumber = By.xpath("//h3[@class='text-cgy4 tracking-wide Heading_heading3__3l6XX font-semibold leading-3 tracking-tightest UserDetails_phoneNumber__borc2']");
+	private By iconEditPhNum = By.xpath("//div[@class='text-xs icon-edit cursor-pointer UserDetails_edit_Phone_icon__1iIcs']");
 	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
 	private By imgPhone = By.xpath("//div[@class='text-sm icon-phone-icon text-cm3']");
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
-	private By lblPhoneNum = By.xpath(
-			"//h3[@class='text-cgy4 tracking-wide Heading_heading3__3l6XX font-semibold leading-3 tracking-tightest UserDetails_phoneNumber__borc2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
-	private By lblAccountAddress = By
-			.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
-
-	private By lblVerificationCodeDescription = By.cssSelector("");
+	private By lblAccountAddress = By.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
 	private By txtCode = By.cssSelector("input[class *= 'verification-input']");
-	private By txtNewPhoneNumber = By.cssSelector("input[class='Input_form_input__3qrhS text-cgy4']");
+	private By txtNewPhoneNumber = By.xpath("//input[text()='New Phone Number']");
 	private By btnCross = By.cssSelector("button[class='self-end']");
 	private By headingUserDetais = By.xpath("//span[@class='text-base text-cgy4']");
-	private By lblCurrentPhoneNumberDescriptionText = By
-			.xpath("//span[@class='mt-8 text-base font-normal leading-5 tracking-tight text-center text-cgy4']");
-	private By btnBackButton = By.xpath("//button[@class='self-start']");
-	private By lblVerificationSuccesful = By.xpath(
-			"//span[@class='mt-1 text-sm text-center font-semibold text-cgn5 VerificationInput_code__verification_success__8qRYN']");
-	private By lblNewPhoneNumberHeading = By
-			.xpath("//h1[@class='text-cm3 tracking-normal Heading_heading1__18f6i mt-4 text-center']");
-	private By headingEditPhoneNumber = By
-			.xpath("//h1[@class='text-cm3 tracking-normal Heading_heading1__18f6i mt-4 text-center']");
+	private By lblVerificationSuccesful = By.xpath("//span[text='Verification Successful']");
+	private By lblNewPhoneNumberHeading = By.xpath("//h1[text()='New Phone Number']");
+	private By headingEditPhoneNumber = By.xpath("//h1[@text()='Edit Phone Number']");
 
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
@@ -96,10 +78,6 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public void verifyAccountStatusView() {
 		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
-	}
-
-	public void verifyPhoneNumView() {
-		new CommonFunctions().elementView(lblPhoneNum, "PhoneNum");
 	}
 
 	public void verifyEmailAddressView() {
@@ -222,24 +200,11 @@ public class UserDetailsComponent extends BrowserFunctions {
 	}
 
 
-	
-
-	public void verifyVerificationCodeDescriptionText(String expVerificationCodeDescriptionText) {
-		new CommonFunctions().verifyLabelText(lblVerificationCodeDescription, "Edit Phone Number Description Text",
-				expVerificationCodeDescriptionText);
-	}
-
 	public void verifyVerificationTextCodeBoxBorderColorAndDescription(String expColor, String expVerificationmsg) {
 
 		new CommonFunctions().verifyTextBoxBorderColor(expColor);
 		new CommonFunctions().verifyLabelText(lblVerificationSuccesful, "Verificational Succesful", expVerificationmsg);
 	}
-
-//    public void verifyVerificationCodeWithNumber(String expCode) {
-//    	new CommonFunctions().validateFieldWithNumber(txtCode, "Verification", expCode);
-//    		
-//    }
-	
 	
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
 		new CommonFunctions().validateTextFeild(txtNewPhoneNumber, expNewPhoneNumber, "New Phone Number");
@@ -248,38 +213,12 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public void enterCode(String expCode) {
 		enterText(txtCode, expCode, "Verification Code");
 	}
-
 	
-	
-
-	public void verifyNewPhoneNumberFieldWithInvalidData(String expNewPhoneNumber, String input) {
-		enterText(txtNewPhoneNumber, "New Phone Number", expNewPhoneNumber);
-		String actNumber = getAttributeValue(txtNewPhoneNumber, "value", "New Phone Number");
-		if (!actNumber.equals(expNewPhoneNumber)) {
-			ExtentTestManager.setPassMessageInReport("New Phone Number Filed is Not Accepting " + input + "Charater");
-		} else {
-			ExtentTestManager.setFailMessageInReport("New Phone Number Filed is  Accepting " + input + "Charater");
-
-		}
-	}
-
-	
-
-	
-	public void verifyVerifyCurrentPhoneNumberDescriptionText(String expVerifyPhoneNumberDescriptionText) {
-		new CommonFunctions().verifyLabelText(lblCurrentPhoneNumberDescriptionText,
-				"Verify Current Phone Number Description Text", expVerifyPhoneNumberDescriptionText);
-
-	}
-
 	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
 		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
 				expNewPhoneNumberHeading);
 	}
 
-	public void clickBackButton() {
-		click(btnBackButton, "");
-	}
 
 	public void verifyEditPhoneNumberScreen(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingEditPhoneNumber, "Edit Phone Number", expHeading);
@@ -304,8 +243,5 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(headingUserDetais, "User Details Heading", expUserDetailsHeading);
 
 	}
-
-	
-	
 
 }
