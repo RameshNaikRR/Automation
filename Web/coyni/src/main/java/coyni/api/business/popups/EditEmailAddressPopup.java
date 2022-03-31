@@ -1,10 +1,12 @@
 package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
+
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class EditEmailAddressPopup extends BrowserFunctions {
 
@@ -39,8 +41,13 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	}
 
 	public void clickEmailSendCode() {
-		click(btnEmailSendCode, "Send Code");
+		if (getElement(btnEmailSendCode, "").isEnabled()) {
+			click(btnEmailSendCode, "Send Code");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Send code is disabled");
+		}
 	}
+
 	public CurrentEmailAddressPopup currentEmailAddressPopup() {
 		return new CurrentEmailAddressPopup();
 	}

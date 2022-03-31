@@ -264,16 +264,16 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
 					.fillInput(data.get("code"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.verifyEditEmailAddressHeading(data.get("heading"));
+					.verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.fillNewEmailText(data.get("fillNewEmail"));
+					.fillNewEmailText(data.get("newEmail"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
 			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
-			if (!data.get("errorMessage").isEmpty()) {
+			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
 			}
-			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+			new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 					data.get("elementName"));
 
 			Thread.sleep(5000);
