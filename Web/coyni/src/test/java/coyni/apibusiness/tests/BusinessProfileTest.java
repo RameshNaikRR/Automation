@@ -253,7 +253,7 @@ public class BusinessProfileTest {
 
 	@Test()
 	@Parameters({ "strParams" })
-	public void testUserDetailsEmailAddressInvalidData(String strParams) {
+	public void testEditEmailAddressInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenWalletPage.topBarComponent().clickUserName();
@@ -312,6 +312,93 @@ public class BusinessProfileTest {
 
 		Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test()
+	@Parameters({ "strParams" })
+	public void testCurrentEmailAddressInvalidVerification(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().clickUserDetails();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
+					.fillNewEmailText(data.get("newEmail"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
+					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
+					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("fillPin"));
+			Thread.sleep(1000);
+			if (!data.get("fillPin").isEmpty()) {
+				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("fillPin"), data.get("charact"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(4000);
+				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.verifyMessage(data.get("errMessage"));
+			}
+			Thread.sleep(2000);
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Test UserDetails Current Email Address  data failed  due to this " + e);
+		}
+	}
+
+	@Test()
+	@Parameters({ "strParams" })
+	public void testNewEmailAddressInvalidVerification(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().clickUserDetails();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
+					.fillNewEmailText(data.get("newEmail"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
+					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
+					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("code"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup()
+					.verifyNewEmailAddressHeading(data.get("newEmailPopUp"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
+					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("fillPin"));
+			Thread.sleep(1000);
+			if (!data.get("fillPin").isEmpty()) {
+				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("fillPin"), data.get("charact"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(4000);
+				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.verifyMessage(data.get("errMessage"));
+			}
+			Thread.sleep(2000);
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Test UserDetails Current Email Address  data failed  due to this " + e);
 		}
 	}
 
