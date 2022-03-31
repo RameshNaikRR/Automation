@@ -35,8 +35,9 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	private By btneditImage = By.xpath("//img[@class='w-4 h-4']");
 	
 	public By getUserDetails(String Type) {
-		return By.xpath(String.format("//span[(contains(@class,'Admin') or contains(@class,'text')) and text()='%s']", Type)) ;
+		return By.xpath(String.format("//span[text()='%s']/following-sibling::*[1]/div/span",Type)) ;
 	}
+	
 	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -44,37 +45,38 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	public void verifyName() {
 		new CommonFunctions().elementView(lblName, "Name");
 	}
+	
 	public void verifyAccountId(String expId) {
-		String actId = getAttributeValue(lblAcountID, "value", "Account Id");
+		String actId = getText(lblAcountID, "Account Id");
 		if(actId.equals(expId)) {
 		 ExtentTestManager.setPassMessageInReport("Account Id is Matched");
 		}
 		else {
-			ExtentTestManager.setFailMessageInReport("Account Id is not Matched");
+			ExtentTestManager.setWarningMessageInReport("Account Id is not Matched");
 		}
 	}
 	public void getPhoneNumer(String expPhoneNumber) {
-		
-		String str = getText(getUserDetails("Phone Number"),"Phone Number");
-		//new CommonFunctions().verifyLabelTextContains(getUserDetails(Type), expPhoneNumber, "Phone Number");
-		ExtentTestManager.setPassMessageInReport("Phone Number"+str);
+		ExtentTestManager.setInfoMessageInReport("Phone Number is "+getText(getUserDetails("Phone Number"), ""));
+//		String str = getText(getUserDetails(expPhoneNumber),"Phone Number");
+//		//new CommonFunctions().verifyLabelTextContains(getUserDetails(Type), expPhoneNumber, "Phone Number");
+//		ExtentTestManager.setPassMessageInReport("Phone Number is"+str);
 	}
-    public void getEmailAddress(String expexpEmailAddress) {
-    	String str = getText(getUserDetails("Email Address"),"Email Address");
+    public void getEmailAddress(String expEmailAddress) {
+    	String str = getText(getUserDetails("Email Address"),"");
 		//new CommonFunctions().verifyLabelTextContains(getUserDetails("Email Address"), expexpEmailAddress, "Email Adress");
-		ExtentTestManager.setPassMessageInReport("Email Address"+str);
+		ExtentTestManager.setInfoMessageInReport("Email Address is"+str);
     }
     
     public void getEmployeeDept(String expEmployeeDept) {
-    	String str = getText(getUserDetails("Employee Department"),"Employee Department");
+    	String str = getText(getUserDetails("Employee Department"),"");
 		//new CommonFunctions().verifyLabelTextContains(getUserDetails("Employee Department"), expEmployeeDept, "Employee Department");
-		ExtentTestManager.setPassMessageInReport("Employee Department"+str);
+		ExtentTestManager.setInfoMessageInReport("Employee Department is"+str);
     }
     
     public void getPermission(String PermissionRole) {
-    	String str = getText(getUserDetails("Permission Role"),"Permission Role");
+    	String str = getText(getUserDetails("Permission Role"),"");
 		//new CommonFunctions().verifyLabelTextContains(getUserDetails("Permission Role"), expPermissionRole, "Employee Department");
-		ExtentTestManager.setPassMessageInReport("Permission Role"+str);
+		ExtentTestManager.setInfoMessageInReport("Permission Role"+str);
     }	
     
     public void clickChangePassword() {

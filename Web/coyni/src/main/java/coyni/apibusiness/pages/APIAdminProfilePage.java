@@ -2,14 +2,6 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.customer.components.AccountLimitsComponent;
-import coyni.customer.components.AuthyComponent;
-import coyni.customer.components.ChangePasswordComponent;
-import coyni.customer.components.CustomerMenuComponent;
-import coyni.customer.components.PaymentMethodsComponent;
-import coyni.customer.components.PreferencesComponent;
-import coyni.customer.components.ToastComponent;
-import coyni.customer.components.UserDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 
 public class APIAdminProfilePage {
@@ -29,39 +21,5 @@ public class APIAdminProfilePage {
 		new CommonFunctions().elementView(lblUserName, "AccountUser");
 	}
 
-	public CustomerMenuComponent customerMenuComponent() {
-		return new CustomerMenuComponent();
-	}
-
-	public UserDetailsComponent userDetailsComponent() {
-		return new UserDetailsComponent();
-	}
-
-	public PaymentMethodsComponent paymentMethodsComponent() {
-		return new PaymentMethodsComponent();
-	}
-
-	public PreferencesComponent preferencesComponent() {
-		return new PreferencesComponent();
-	}
-
-	public ToastComponent toastComponent() {
-		return new ToastComponent();
-	}
-
-	public ChangePasswordComponent changePasswordComponent() {
-		return new ChangePasswordComponent();
-	}
-
-	public CommonFunctions commonFunctions() {
-		return new CommonFunctions();
-	}
-
-	public AuthyComponent authyComponent() {
-		return new AuthyComponent();
-	}
-
-	public AccountLimitsComponent accountLimitsComponent() {
-		return new AccountLimitsComponent();
-	}
+	
 }

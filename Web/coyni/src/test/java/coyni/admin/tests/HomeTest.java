@@ -31,15 +31,16 @@ public class HomeTest {
 	public void testUserDetailsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			
 		homePage.clickUserName();
 		homePage.clickUserDetails();
 		homePage.adminUserDetailsPage().verifyPageHeading(data.get("heading"));
 		homePage.adminUserDetailsPage().verifyName();
 		homePage.adminUserDetailsPage().verifyAccountId(data.get("expId"));
-		homePage.adminUserDetailsPage().getPhoneNumer(data.get(""));
-		homePage.adminUserDetailsPage().getEmailAddress(data.get(""));
-		homePage.adminUserDetailsPage().getEmployeeDept(data.get(""));
-		homePage.adminUserDetailsPage().getPermission(data.get(""));
+		homePage.adminUserDetailsPage().getPhoneNumer(data.get("expPhoneNumber"));
+		homePage.adminUserDetailsPage().getEmailAddress(data.get("expEmailAddress"));
+		homePage.adminUserDetailsPage().getEmployeeDept(data.get("expEmployeeDept"));
+		homePage.adminUserDetailsPage().getPermission(data.get("permissionRole"));
 		homePage.adminUserDetailsPage().clickChangePassword();
 		homePage.adminUserDetailsPage().authyComponent().fillInput(data.get("code"));
 		homePage.adminUserDetailsPage().verifyChangePasswordHeading();

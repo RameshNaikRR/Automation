@@ -6,6 +6,7 @@ import coyni.admin.components.AuthyComponent;
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.components.TopBarComponent;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.web.actions.Navigation;
 
 public class HomePage extends BrowserFunctions {
 	
@@ -39,6 +40,10 @@ public class HomePage extends BrowserFunctions {
 		
 		public AuthyComponent authyComponent() {
 			return new AuthyComponent();
+		}
+		
+		public void navigationTOSignUp() {
+			navigate(Navigation.valueOf("https://admin-qa.coyni.com/activate-account?code=UnFKclo5dVNTbTAzSG9EMzFjVEZwK3NKL1JwWmFvMk40NlFFcXVxb3JiZ2ZZNzZpYlZPR2RGbzVvM1Z2VXBYa2lyZnMvck0zbnBiaUMyTkJWYVN6NW1NRk5UZS9vVy8wSEgzU2U0R1NLcHBBWFJUUUp2dnZSUVE1VHJOeFYzRjR4UlA2MU5waUYwUi95OEJSTlRxejFKN1pZMjkwV0Y0WFR3PT0="));
 		}
 
 }

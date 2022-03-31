@@ -76,7 +76,7 @@ public class HomeTest {
 					.verifyEmailAddressDescHeading(data.get("emailAddressDesc"));
 			homePage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailText(data.get("newEmail"));
-			homePage.topBarComponent().userDetailsComponent().clickOutside();
+			//homePage.topBarComponent().userDetailsComponent().clickOutside();
 			homePage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
 			homePage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
 					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
