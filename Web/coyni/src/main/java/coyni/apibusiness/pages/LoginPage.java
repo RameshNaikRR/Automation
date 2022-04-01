@@ -56,6 +56,22 @@ public class LoginPage extends BrowserFunctions {
 		enterText(txtPassword, password, "Password");
 	}
 
+	public void validateEmail(String email) {
+		validateTextField(email, txtEmail, "Email");
+	}
+
+	public void validatePassword(String password) {
+		validateTextField(password, txtPassword, "Password");
+	}
+
+	public void validateTextField(String text, By ele, String eleName) {
+		String[] data = text.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, data[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, data[4]);
+	}
+
 	public void clickEyeIcon() {
 		click(eyeIcon, "EyeIcon");
 	}
@@ -123,6 +139,5 @@ public class LoginPage extends BrowserFunctions {
 		return new ForgotEmailPage();
 
 	}
-
 
 }

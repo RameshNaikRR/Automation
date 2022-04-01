@@ -27,6 +27,19 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testLoginFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.validateEmail(data.get("email"));
+			loginPage.validatePassword(data.get("password"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFieldValidations exception happend due to " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testApiLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -123,7 +136,7 @@ public class LoginTest {
 	public void testForgotEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
@@ -139,16 +152,17 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.verifyPhoneheading(data.get("phoneEmailVerificationHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
-				.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
+					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
-			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
+			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+					.verifyMessage(data.get("message"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.verifyPageHeading(data.get("chooseAccountHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.clickUser();
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
-		//	loginPage.viewEmail();
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.viewEmail();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotEmail failed due to exception " + e);
@@ -160,7 +174,7 @@ public class LoginTest {
 	public void testForgotEmailWithInvalidVerificationCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
@@ -176,7 +190,8 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().authyComponent()
 					.fillInput(data.get("code"));
 			if (!data.get("message").isEmpty()) {
-				loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
+				loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+						.verifyMessage(data.get("message"));
 			}
 
 		} catch (Exception e) {
@@ -190,14 +205,14 @@ public class LoginTest {
 	public void testForgotEmailNavigationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
-		    loginPage.forgotEmailPage().verifyForgotEmailunderline();
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.forgotEmailPage().verifyForgotEmailunderline();
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
 			loginPage.forgotEmailPage().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().clickBackToLogin();
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.forgotEmailPage().clickNext();
@@ -205,9 +220,9 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillLastName(data.get("lastName"));
 			loginPage.forgotEmailPage().clickNext();
-		Thread.sleep(1000);
-		loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
-		.verifyPhoneheading(data.get("phoneEmailVerificationHeading"));
+			Thread.sleep(1000);
+			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+					.verifyPhoneheading(data.get("phoneEmailVerificationHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
 			Thread.sleep(1000);
@@ -215,7 +230,7 @@ public class LoginTest {
 					.verifyPageHeading(data.get("chooseAccountHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.clickReturnToLogin();
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
 		}
@@ -226,7 +241,7 @@ public class LoginTest {
 	public void testForgotEmailFieldValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().validatePhoneNumber(data.get("phoneNumber"));
@@ -244,7 +259,7 @@ public class LoginTest {
 	public void testForgotEmailWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
@@ -268,8 +283,6 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot email with invalid phone number test failed due to exception " + e);
 		}
 	}
-
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -460,6 +473,4 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception " + e);
 		}
 	}
-	}
-
-
+}
