@@ -41,12 +41,13 @@ public class ForgotPasswordPage extends BrowserFunctions {
 	public void clickOutSide() {
 		new CommonFunctions().clickOutSideElement();
 	}
+
 	public void verifyEmail() {
 		new CommonFunctions().elementView(txtEmail, "Email");
 	}
+
 	public PhoneEmailVerificationComponent phoneEmailVerificationComponent() {
 		return new PhoneEmailVerificationComponent();
 	}
-	
-	
+
 }

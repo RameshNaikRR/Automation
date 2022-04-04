@@ -20,8 +20,11 @@ public class CreatePasswordPage extends BrowserFunctions {
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By reddot = By.cssSelector(".red-dot");
-	private By btnSubmit = By.cssSelector(".update-password-password__login-button");
+	private By btnSubmit = By.xpath("//button[@type='submit']");
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lblSucessHeading=By.cssSelector(".title");
+	private By lblSucessDescription=By.cssSelector(".subtitle");
+	private By btnLogin = By.xpath("//button[text()='Log In']");
 	private String CreatePassword;
 	private String ConfirmPassword;
 
@@ -148,6 +151,16 @@ public class CreatePasswordPage extends BrowserFunctions {
 
 	public void clickOutSide() {
 		new CommonFunctions().clickOutSideElement();
+	}
+	public void verifySucessHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblSucessHeading," Password Sucess Heading ", expHeading);
+	}
+	public void verifySucessDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblSucessDescription, "Password Sucess Description ", expDescription);
+	}
+	public void clickLogIn() {
+		new CommonFunctions().elementView(btnLogin, "Login");
+		click(btnLogin, "Log In");
 	}
 
 }

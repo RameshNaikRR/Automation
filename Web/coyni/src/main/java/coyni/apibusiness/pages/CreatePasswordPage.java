@@ -22,6 +22,9 @@ public class CreatePasswordPage extends BrowserFunctions {
 	private By reddot = By.cssSelector(".red-dot");
 	private By btnSubmit = By.cssSelector(".update-password-password__login-button");
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lblSucessHeading=By.cssSelector(".title");
+	private By lblSucessDescription=By.cssSelector(".subtitle");
+	private By btnLogin = By.xpath("//button[text()='Log In']");
 	private String CreatePassword;
 	private String ConfirmPassword;
 
@@ -144,6 +147,16 @@ public class CreatePasswordPage extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setInfoMessageInReport(" Submit Button is Disabled");
 		}
+	}
+	public void verifySucessHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblSucessHeading," Password Sucess Heading ", expHeading);
+	}
+	public void verifySucessDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblSucessDescription, "Password Sucess Description ", expDescription);
+	}
+	public void clickLogIn() {
+		new CommonFunctions().elementView(btnLogin, "Login");
+		click(btnLogin, "Log In");
 	}
 
 }

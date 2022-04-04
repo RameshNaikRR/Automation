@@ -313,7 +313,11 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
-
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessHeading(data.get("sucessHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessDescription(data.get("sucessDescription"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickLogIn();
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
 		}
@@ -467,6 +471,9 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.verifyConfirmPasswordMaskedView();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessHeading(data.get("sucessHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickLogIn();
+			loginPage.verifyPageHeading(data.get("loginHeading"));
 
 		} catch (Exception e) {
 			// TODO: handle exception
