@@ -131,4 +131,30 @@ public class HomeTest {
 			
 		}
 }
+	
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testverifyYourPhoneNumberWithInvalid(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(5000);
+			homePage.navigationTOSignUp(data.get("expUrl"));
+			Thread.sleep(5000);
+			homePage.verifyHeading(data.get("expHeading"));
+			homePage.fillNumber(data.get("expPhoneNumber"));
+			homePage.clickNext();
+			Thread.sleep(3000);
+			homePage.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("code"));
+			homePage.phoneEmailVerificationComponent().createPasswordPage().verifyPageHeading(data.get("heading"));
+			homePage.phoneEmailVerificationComponent().createPasswordPage().fillCreatePassword(data.get("expCreatePassword"));
+			homePage.phoneEmailVerificationComponent().createPasswordPage().fillConfirmPassword(data.get("expConfirmPassword"));
+			homePage.phoneEmailVerificationComponent().createPasswordPage().clickCreate();
+			Thread.sleep(2000);
+			homePage.verifyTokenAccountHeading(data.get("expTokenAccountHeading"));
+			}
+        catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("testverifyYourPhoneNumberWithInvalid i sfailed due to"+e);
+		}
+}
+	
 }
