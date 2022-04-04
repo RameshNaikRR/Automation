@@ -1,13 +1,14 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
-
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
 import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.components.UserDetailsComponent;
@@ -456,6 +457,40 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.phoneVerificationPopup().resendCode();
 			Thread.sleep(1000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" data failed  due to this " + e);
+		}
+
+	}
+
+	@Test()
+	@Parameters({ "strParams" })
+	public void testPhoneVerificationInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().clickUserDetails();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().smsCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().verifyHeading(data.get("heading"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().authyComponent().fillInput(data.get("fillPin"));
+			if (!data.get("fillPin").isEmpty()) {
+				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("fillPin"), data.get("charact"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(2000);
+				tokenWalletPage.userDetailsComponent().emailAddressAuthenticationPopup().phoneVerificationPopup()
+						.authyComponent().verifyMessage(data.get("errMessage"));
+			}
+			Thread.sleep(2000);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" data failed  due to this " + e);
 		}
