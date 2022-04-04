@@ -1,6 +1,7 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -402,4 +403,61 @@ public class BusinessProfileTest {
 		}
 	}
 
+	@Test()
+	@Parameters({ "strParams" })
+	public void testGetSmsCodeVerificationEmailAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().clickUserDetails();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.verifyEmailAddressAuthHeading1(data.get("emailHeading1"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.verifyEmailAddressAuthHeading2(data.get("emailHeading2"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().smsCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().verifyHeading(data.get("heading"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().verifySmsVerificationCode(data.get("resend"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().authyComponent().fillInput(data.get("input"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().toastComponent().verifyToast(data.get("title"), data.get("msg"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().navigationComponent().verifyCloseView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" data failed  due to this " + e);
+		}
+	}
+
+	@Test()
+	@Parameters({ "strParams" })
+	public void testResendVerificationCodeEmailAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().clickUserDetails();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.verifyEmailAddressAuthHeading1(data.get("emailHeading1"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.verifyEmailAddressAuthHeading2(data.get("emailHeading2"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().smsCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().verifyHeading(data.get("heading"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.phoneVerificationPopup().resendCode();
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" data failed  due to this " + e);
+		}
+	}
 }
