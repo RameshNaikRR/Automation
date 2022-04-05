@@ -28,6 +28,9 @@ public class HomeTest {
 
 	}
 	
+	@Test // added
+	@Parameters({ "strParams" })
+	
 	public void testUserDetailsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -59,6 +62,9 @@ public class HomeTest {
 			ExtentTestManager.setFailMessageInReport("testUserDetailsView is failed due to "+ e);
 		}
 	}
+	@Test // added
+	@Parameters({ "strParams" })
+	
 	
 	public void testUserDetailsChangePasswordWithValid(String strParams) {
 		try {
@@ -72,7 +78,7 @@ public class HomeTest {
 			homePage.adminUserDetailsPage().clickEyeIconCurrentPassword();
 			homePage.adminUserDetailsPage().fillNewPassword(data.get("newPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconNewPassword();
-			homePage.adminUserDetailsPage().fillConfirmPassword("expConfirmPassword");
+			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("expConfirmPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconConfirmPassword();
 			homePage.adminUserDetailsPage().clickSave();
 			
@@ -134,7 +140,7 @@ public class HomeTest {
 	
 	@Test // added
 	@Parameters({ "strParams" })
-	public void testverifyYourPhoneNumberWithInvalid(String strParams) {
+	public void testverifyYourPhoneNumberWithValid(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(5000);

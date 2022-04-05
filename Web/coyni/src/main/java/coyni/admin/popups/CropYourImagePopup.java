@@ -11,7 +11,7 @@ import ilabs.api.utilities.FileHelper;
 public class CropYourImagePopup extends BrowserFunctions {
 
 	private By btnSelectImage = By.xpath("");
-	private By lblCropYourImageHeading= By.xpath("//h1[text()='Account Profile Image']");
+	private By lblCropYourImageHeading= By.xpath("//h1[text()='Crop Your Image']");
 	private By btnSave = By.xpath("//button[contains(text(),'Save')]");
 	
 	

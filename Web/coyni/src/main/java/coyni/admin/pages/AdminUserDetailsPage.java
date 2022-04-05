@@ -20,15 +20,15 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
 	private By lblChangePasswordHeading = By.xpath("//div[(contains(@class,'AdminProfile'))]//span[text()='Change Password']");
 	private By lblChangePasswordDesc = By.xpath("//span[@class='mt-2 text-sm text-cgy13']");
-	private By txtCurrentPassword = By.xpath("//label[text()='Current Password']");
-	private By txtNewPassword = By.xpath("//label[text()='New Password']");
-	private By txtConfirmPassword = By.xpath("//label[text()='Confirm New Password']");
+	private By txtCurrentPassword = By.xpath("//input[@id='CurrentPassword']");
+	private By txtNewPassword = By.xpath("//input[@id='NewPassword']");
+	private By txtConfirmPassword = By.xpath("//input[@id='ConfirmNewPassword']");
 	private By iconEyeCurrentPassword = By.xpath("(//button[contains(@class,'icon-View')])[1]");
 	private By iconEyeConfirmPassword = By.xpath("(//button[contains(@class,'icon-View')])[3]");
 	private By iconEyeNewPassword = By.xpath("(//button[contains(@class,'icon-View')])[2]");
-	private By lblGreenDot = By.xpath("");
-	private By lblGreenDot1 = By.xpath(""); 
-	private By lblRedDot = By.xpath("");
+	private By reddot = By.cssSelector(".red-dot");
+	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
+	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By lblPasswordSuccessMsgHeading = By.xpath("");
 	private By lblPasswordSuccessMsgDesc = By.xpath("");
@@ -104,9 +104,9 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 			enterText(txtNewPassword, inputs[i], "New Password");
 			String text = "";
 			if (inputs[i].length() >= 8) {
-				 text = getText(lblGreenDot1, "Validation Dot");
+				 text = getText(greendot1, "Validation Dot");
 			}else {
-				text = getText(lblGreenDot, "Validation Dot");
+				text = getText(greendot, "Validation Dot");
 			}
 			if (text.toLowerCase().contains(messages[i])) {
 				ExtentTestManager.setPassMessageInReport("Password field satisifies strength condition : " + text);
@@ -118,13 +118,13 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 			
 			clearText(txtNewPassword, "Create Password");
 		}
-		int initialRedDot = getElementsList(lblRedDot, "red dot").size();
+		int initialRedDot = getElementsList(reddot, "red dot").size();
 		Thread.sleep(100);
-		int initialGreenDot = getElementsList(lblGreenDot, "green dot").size();
+		int initialGreenDot = getElementsList(greendot, "green dot").size();
 		Thread.sleep(100);
 		enterText(txtNewPassword, newPassword	, "Create Password");
-		int finalRedDot = getElementsList(lblRedDot, "red dot").size();
-		int finalGreenDot = getElementsList(lblGreenDot, "green dot").size();
+		int finalRedDot = getElementsList(reddot, "red dot").size();
+		int finalGreenDot = getElementsList(greendot, "green dot").size();
 		System.out.println("value: "+initialRedDot+" "+initialGreenDot+" "+finalRedDot+" "+finalGreenDot);
 		if (initialGreenDot == finalRedDot && initialRedDot == finalGreenDot && finalRedDot == initialGreenDot
 				&& finalGreenDot == initialRedDot) {

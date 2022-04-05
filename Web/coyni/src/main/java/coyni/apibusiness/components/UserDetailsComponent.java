@@ -48,7 +48,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblCurrentEmailAddressDescription = By.xpath("//span[contains(text(),'An email')]");
 	private By lblNewEmail = By.xpath("//h1[text()='Verify New Email Address']");
 	private By lblNewEmailDescription = By.xpath("");
-
+	private By lblPaymentMethod = By.xpath("//span[text()='Payment Methods']");
+	
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
@@ -211,6 +212,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public void clickPhoneSendCode() {
 		click(btnPhoneSendCode, "Send Code");
+	}
+	
+	public void clickPaymentMethods() {
+		click(lblPaymentMethod, "Payment Methods");
 	}
 
 	public void verifyAccountStatus(String expStatus) {

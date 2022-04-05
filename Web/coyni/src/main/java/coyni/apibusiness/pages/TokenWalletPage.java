@@ -3,6 +3,7 @@ package coyni.apibusiness.pages;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.components.AuthyComponent;
+import coyni.apibusiness.components.PaymentMethodComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.components.UserDetailsComponent;
@@ -74,5 +75,9 @@ public class TokenWalletPage extends BrowserFunctions {
 
 	public UserDetailsComponent userDetailsComponent() {
 		return new UserDetailsComponent();
+	}
+	
+	public PaymentMethodComponent paymentMethodComponent() {
+		return new PaymentMethodComponent();
 	}
 }

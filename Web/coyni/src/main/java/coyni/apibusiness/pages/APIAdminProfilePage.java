@@ -2,6 +2,7 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.PaymentMethodComponent;
 import coyni.uitilities.CommonFunctions;
 
 public class APIAdminProfilePage {
@@ -20,6 +21,9 @@ public class APIAdminProfilePage {
 	public void verifyUserNameView() {
 		new CommonFunctions().elementView(lblUserName, "AccountUser");
 	}
-
+    
+	public PaymentMethodComponent paymentMethodComponent() {
+		return new PaymentMethodComponent();
+	}
 	
 }
