@@ -1821,6 +1821,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
 					.verifyHeading1(data.get("authyHeading1"));
+			Thread.sleep(2000);
 			//tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
 				//	.fillAuthyInput(data.get("securityKey"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent().fillInput(data.get("code"));

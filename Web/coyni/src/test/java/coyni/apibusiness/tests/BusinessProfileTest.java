@@ -553,5 +553,58 @@ public class BusinessProfileTest {
 	}
 
 	}
+	
+	public void testAddCard(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			APIAdminProfilePage apiAdminProfilePage = new APIAdminProfilePage();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickDebit();
+			
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillNameOnCard(data.get("nameOnCard"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateCardBrand(data.get("cardType"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardExpiry(data.get("cardExpiry"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCVVorCVC(data.get("cvvNumber"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress1(data.get("address1"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress2(data.get("address2"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillCity(data.get("city"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().selectState(data.get("state"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().verifyCountry(data.get("country"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().clickSave();
+			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
+			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
+	     	apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
+			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCard(String strParams) {
+		tokenWalletPage.topBarComponent().clickUserName();;
+		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
+		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
+		testAddExternalBankAccount(strParams);
+
+		testAddCard(strParams, "debit");
+	}
 
 }

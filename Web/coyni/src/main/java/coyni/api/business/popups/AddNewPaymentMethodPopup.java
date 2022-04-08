@@ -2,6 +2,7 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.AddCardComponent;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
@@ -26,5 +27,9 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	
 	public AddBankAccountPopup addBankAccountPopup() {
 		return new AddBankAccountPopup();
+	}
+	
+	public AddCardComponent addCardComponent() {
+		return new AddCardComponent();
 	}
 }

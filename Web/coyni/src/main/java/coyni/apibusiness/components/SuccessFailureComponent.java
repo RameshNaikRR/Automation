@@ -18,5 +18,9 @@ public class SuccessFailureComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblRemovedSuccesful, " Remove sucessful", expRemovedheading);
 	}
 	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+		
 	
 }
