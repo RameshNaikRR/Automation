@@ -7,6 +7,7 @@ import javax.xml.xpath.XPath;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.admin.popups.ActionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -31,7 +32,7 @@ public class AccountTableComponent extends BrowserFunctions{
 	private By lblFirstRowElements = By.cssSelector("tbody>tr:nth-of-type(2)>td");
 	private By lnkFirstElement = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
 	private By lblBatchDetails = By.xpath("//p[@class='breadcrumb--current']");
-	
+	private By btnAction = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(6)>div>div>div");
 	public void clickDropDownId() {
 		click(drpdwnId, "drop down");
 	}
@@ -161,5 +162,11 @@ public class AccountTableComponent extends BrowserFunctions{
 		return new ProfileComponent();
 	}
 	
-	
+	public ActionsPopup actionsPopup() {
+		return new ActionsPopup();
+		
 }
+	public void clickAction() {
+		click(btnAction, "Action");
+	}
+	}

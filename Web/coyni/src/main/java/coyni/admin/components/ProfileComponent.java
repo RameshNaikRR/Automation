@@ -36,4 +36,7 @@ public class ProfileComponent extends BrowserFunctions {
 	public AccountTableComponent accountTableComponent() {
 		return new AccountTableComponent();
 	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 }

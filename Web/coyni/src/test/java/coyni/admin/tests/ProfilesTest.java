@@ -1,10 +1,13 @@
 package coyni.admin.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.pages.HomePage;
 import ilabs.WebFramework.Runner;
@@ -109,6 +112,27 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickActivityLog();
 		//	homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().A
 			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testActionsOnCoyniEmployee(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyHeading(data.get("popupHeading"));
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
+			if (!data.get("toastMessage").isEmpty()) {
+				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
