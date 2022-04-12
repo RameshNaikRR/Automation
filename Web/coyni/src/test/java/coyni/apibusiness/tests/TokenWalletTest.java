@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.TokenWalletPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
@@ -13,13 +14,31 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TokenWalletTest {
 
 	TokenWalletPage tokenwalletPage;
+	SideBarMenuComponent sideBarMenuComponent;
 
 	@BeforeMethod
 	public void init() {
 
 		tokenwalletPage = new TokenWalletPage();
+		sideBarMenuComponent = new SideBarMenuComponent();
 	}
-	
+	@Test
+	@Parameters({"strParams"})
+	public void testTokenWalletView(String strParams) {
+		try {
+		 Map<String, String> data = Runner.getKeywordParameters(strParams);
+		 sideBarMenuComponent.verifyTokenWalletView();
+		 sideBarMenuComponent.verifyHandCursorAction();
+		 sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
+		 sideBarMenuComponent.clickTokenwallet();
+		 Thread.sleep(5000);
+		 sideBarMenuComponent.tokenWalletPage().verifyHeading(data.get("heading"));
+		 sideBarMenuComponent.tokenWalletPage().verifyTotalWalletBalanceView();
+		 sideBarMenuComponent.tokenWalletPage().getWalletInfo();
+		}catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet view is failed due to Exception " + e);
+		}
+	}
 
 //	@Test
 //	@Parameters({ "strParams" })

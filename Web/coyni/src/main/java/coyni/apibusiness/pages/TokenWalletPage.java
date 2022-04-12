@@ -17,7 +17,51 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By lblTotalWalletBalance = By.xpath("//h3[text()='Total Wallet Balance']");
 	private By walletBalance = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(1)");
 	private By lblcurrency = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(2)");
+	private By walletsList = By.cssSelector("div[class*='TokenAccountWallets_Wallets_Table']>div");
+	
+	private By getWalletListElements(String walletElements, String rowNum) {
+		return By.cssSelector(String.format(
+				"div[class*='TokenAccountWallets_Wallets_Table']>div:nth-of-type(%s)>div:nth-of-type(1)>div:nth-of-type(%s)>span",
+				rowNum, walletElements));
+	}
 
+	private By getCopyWalletAdressIcon(String WalletElements) {
+		return By.cssSelector(String.format(
+				"div[class*='TokenAccountWallets_Wallets_Table']>div:nth-of-type(%s)>div:nth-of-type(1)>div:nth-of-type(4)>div",
+				WalletElements));
+	}
+	public void getIndividualWalletsName(String rowNum) {
+		ExtentTestManager
+				.setInfoMessageInReport(rowNum + " WalletName: " + getText(getWalletListElements("2", rowNum), ""));
+	}
+
+	public void getIndividualWalletAmount(String rowNum) {
+		ExtentTestManager.setInfoMessageInReport(
+				rowNum + " WalletAmount: " + getText(getWalletListElements("3", rowNum), "") + " CYN");
+	}
+
+	public void getIndividualWalletAddress(String rowNum) {
+
+		click(getCopyWalletAdressIcon(rowNum), "copy");
+
+		ExtentTestManager.setInfoMessageInReport(rowNum + " WalletAddress: " + getCopiedData());
+
+	}
+
+	public void getWalletInfo() {
+		int walletCount = getElementsList(walletsList, "").size();
+		for (int i = 1; i <= walletCount; i++) {
+			String num = Integer.toString(i);
+			getIndividualWalletsName(num);
+			getIndividualWalletAmount(num);
+			getIndividualWalletAddress(num);
+
+		}
+
+	}
+	
+	
+	
 	private By getlnk(String walletNum, String type) {
 		return By.cssSelector(String.format(
 				"div[class*='TokenAccountWallets_Wallets_Table']>div:nth-of-type('%s')>div:nth-of-type(2)>button:nth-of-type('%s')",
@@ -52,7 +96,7 @@ public class TokenWalletPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
 
-	public void verifyTotalWalletBalance() {
+	public void verifyTotalWalletBalanceView() {
 		new CommonFunctions().elementView(lblTotalWalletBalance, "Total Wallet Balance");
 	}
 
