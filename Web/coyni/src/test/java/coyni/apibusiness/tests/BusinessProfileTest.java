@@ -291,6 +291,7 @@ public class BusinessProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditEmailAddressWithInvalidAuthy(String strParams) {
+
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenWalletPage.topBarComponent().clickUserName();
@@ -305,105 +306,79 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
 					.fillInput(data.get("pin"));
 			if (!data.get("pin").isEmpty()) {
-				tokenWalletPage.authyComponent().fillAuthyInputInvalid(data.get("pin"), data.get("char"));
+				tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+						.authyComponent().fillAuthyInputInvalid(data.get("pin"), data.get("char"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(4000);
-				tokenWalletPage.authyComponent().verifyMessage(data.get("errMessage"));
+				Thread.sleep(1000);
+				tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+						.authyComponent().verifyMessage(data.get("errMessage"));
+				Thread.sleep(3000);
 			}
-			Thread.sleep(2000);
-			tokenWalletPage.authyComponent().verifyLoginWithInvalidPin();
-		} catch (
-
-		Exception e) {
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.navigationComponent().clickClose();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
+					.fillInput(data.get("validPin"));
+			Thread.sleep(5000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().fillNewEmailText(data.get("newEmail"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().clickOutside();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().clickEmailSendCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().currentEmailAddressPopup()
+					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().currentEmailAddressPopup().authyComponent().fillInput(data.get("pin"));
+			if (!data.get("pin").isEmpty()) {
+				tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("pin"), data.get("char"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(1000);
+				tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+						.editEmailAddressPopup().currentEmailAddressPopup().authyComponent()
+						.verifyMessage(data.get("errMessage"));
+				Thread.sleep(3000);
+			}
+			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup().navigationComponent()
+					.clickClose();
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
+					.fillInput(data.get("validPin"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+					.editEmailAddressPopup().fillNewEmailText(data.get("newEmail"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
+			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().currentEmailAddressPopup()
+					.authyComponent().fillInput(data.get("validPin"));
+//			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup()
+//					.verifyNewEmailAddressHeading(data.get("newEmailPopUp"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup().authyComponent()
+					.fillInput(data.get("pin"));
+			if (!data.get("pin").isEmpty()) {
+				tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("pin"), data.get("char"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(1000);
+				tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
+						.editEmailAddressPopup().currentEmailAddressPopup().newEmailAddressPopup().authyComponent()
+						.verifyMessage(data.get("errMessage"));
+				Thread.sleep(3000);
+			}
+			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup().navigationComponent().clickClose();
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-	}
-
-	@Test()
-	@Parameters({ "strParams" })
-	public void testCurrentEmailAddressInvalidVerification(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenWalletPage.topBarComponent().clickUserName();
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().clickUserDetails();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
-			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
-					.fillInput(data.get("code"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.fillNewEmailText(data.get("newEmail"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
-					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
-					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("fillPin"));
-			Thread.sleep(1000);
-			if (!data.get("fillPin").isEmpty()) {
-				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
-						.fillAuthyInputInvalid(data.get("fillPin"), data.get("charact"));
-			}
-			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(4000);
-				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
-						.verifyMessage(data.get("errMessage"));
-			}
-			Thread.sleep(2000);
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("Test UserDetails Current Email Address  data failed  due to this " + e);
-		}
-	}
-
-	@Test()
-	@Parameters({ "strParams" })
-	public void testNewEmailAddressInvalidVerification(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenWalletPage.topBarComponent().clickUserName();
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().clickUserDetails();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
-			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
-					.fillInput(data.get("code"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.verifyEditEmailAddressHeading(data.get("emailAddressHeading"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup()
-					.fillNewEmailText(data.get("newEmail"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickOutside();
-			tokenWalletPage.topBarComponent().userDetailsComponent().editEmailAddressPopup().clickEmailSendCode();
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
-					.verifyCurrentEmailAddressHeading(data.get("emailHeading"));
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
-					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("code"));
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup()
-					.verifyNewEmailAddressHeading(data.get("newEmailPopUp"));
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup()
-					.phoneEmailVerificationComponent().authyComponent().fillInput(data.get("fillPin"));
-			Thread.sleep(1000);
-			if (!data.get("fillPin").isEmpty()) {
-				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
-						.fillAuthyInputInvalid(data.get("fillPin"), data.get("charact"));
-			}
-			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(4000);
-				tokenWalletPage.userDetailsComponent().currentEmailAddressPopup().authyComponent()
-						.verifyMessage(data.get("errMessage"));
-			}
-			Thread.sleep(2000);
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("Test UserDetails Current Email Address  data failed  due to this " + e);
 		}
 	}
 
@@ -498,68 +473,84 @@ public class BusinessProfileTest {
 			ExtentTestManager.setFailMessageInReport(" data failed  due to this " + e);
 		}
 	}
-	
+
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			
+
 			APIAdminProfilePage apiAdminProfilePage = new APIAdminProfilePage();
-		
+
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickIamReady();
-            Thread.sleep(8000);
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().switchToWindow();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.clickIamReady();
+			Thread.sleep(8000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.switchToWindow();
 			Thread.sleep(5000);
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().verifyNewHeading(strParams);
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterBankName(data.get("expBankName"));
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickOnBankName();
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterUserName(data.get("expUserName"));;
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterPassword(data.get("expPassword"));
-            apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickNext();;   
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.verifyNewHeading(strParams);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.enterBankName(data.get("expBankName"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.clickOnBankName();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.enterUserName(data.get("expUserName"));
+			;
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.enterPassword(data.get("expPassword"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickNext();
+			;
 			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().unSelectBank();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickUncheckBank();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().switchToWindow();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.unSelectBank();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.clickUncheckBank();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.switchToWindow();
 			Thread.sleep(2000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().successFailureComponent().verifyBankAddSuccesfulHeaading();
-		//	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
-			
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.successFailureComponent().verifyBankAddSuccesfulHeaading();
+			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBankAccountWithOutPaymentMethod(String strParams) {
-		tokenWalletPage.topBarComponent().clickUserName();;
+		tokenWalletPage.topBarComponent().clickUserName();
+		;
 		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
 		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
 		testAddExternalBankAccount(strParams);
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenWalletPage.topBarComponent().clickUserName();;
+			tokenWalletPage.topBarComponent().clickUserName();
+			;
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
-	    apiAdminProfilePage.paymentMethodComponent().clickDeleteBank();
-	    apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
-	    apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().successFailureComponent().verifyPaymnetRemovedSuccessfulHeading(data.get(""));
-	} catch(Exception e) {
-		ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
-	}
+			apiAdminProfilePage.paymentMethodComponent().clickDeleteBank();
+			apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
+			apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().successFailureComponent()
+					.verifyPaymnetRemovedSuccessfulHeading(data.get(""));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
+		}
 
 	}
-	
+
 	public void testAddCard(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			APIAdminProfilePage apiAdminProfilePage = new APIAdminProfilePage();
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickDebit();
-			
+
 			Thread.sleep(3000);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
@@ -588,8 +579,9 @@ public class BusinessProfileTest {
 					.mailingAddressComponent().clickSave();
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
-	     	apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
-			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent().navigationComponent().clickClose();
+			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
+			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent()
+					.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -599,7 +591,8 @@ public class BusinessProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCard(String strParams) {
-		tokenWalletPage.topBarComponent().clickUserName();;
+		tokenWalletPage.topBarComponent().clickUserName();
+		;
 		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
 		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
 		testAddExternalBankAccount(strParams);

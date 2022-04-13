@@ -45,4 +45,8 @@ public class EmailAddressAuthenticationPopup extends BrowserFunctions {
 	public PhoneVerificationPopup phoneVerificationPopup() {
 		return new PhoneVerificationPopup();
 	}
+
+	public EditEmailAddressPopup editEmailAddressPopup() {
+		return new EditEmailAddressPopup();
+	}
 }

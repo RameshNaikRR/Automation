@@ -12,7 +12,7 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 
 	private By lblEmailAddressHeading = By.xpath("//h1[text()='Edit Email Address']");
 	private By descEmailAddress = By.xpath("//span[contains(text(),'Please enter a new email address')]");
-	private By txtNewEmailAddress = By.xpath("//input[@id='Email']");
+	private By txtNewEmailAddress = By.xpath("//input[@name='email']");
 	private By btnEmailSendCode = By.cssSelector(".w-60");
 
 	public NavigationComponent navigationComponent() {
