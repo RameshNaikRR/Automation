@@ -3,6 +3,7 @@ package coyni.admin.components;
 import org.openqa.selenium.By;
 
 import coyni.admin.pages.TokenAccountPage;
+import coyni.admin.pages.TransactionPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -194,5 +195,9 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public ExportComponent exportComponent() {
 		return new ExportComponent();
+	}
+	
+	public TransactionPage transactionPage() {
+		return new TransactionPage();
 	}
 }

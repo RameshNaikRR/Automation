@@ -67,27 +67,31 @@ public class FilterComponent extends BrowserFunctions {
 			new CommonFunctions().elementView(getElement(list[i]), list[i]);
 		}
 	}
+
 	public By getTextFieldElements(String elementId) {
 		return By.cssSelector(String.format("#'%s'", elementId));
-		
+
 	}
+
 	public void fillDepositId(String DepositId) {
 		enterText(getTextFieldElements("Deposit ID"), DepositId, "Deposit Id");
 	}
+
 	public void fillReferenceId(String ReferenceId) {
 		enterText(getTextFieldElements("Reference ID"), ReferenceId, "Reference Id");
 	}
+
 	public void fillUserId(String UserId) {
 		enterText(getTextFieldElements("User ID"), UserId, "User Id");
 	}
+
 	public void fillNameOnAccount(String Name) {
 		enterText(getTextFieldElements("Name"), Name, "Name on Account");
 	}
+
 	public void fillBankAccountNumber(String AccountNumber) {
 		enterText(getTextFieldElements("Account Number"), AccountNumber, "BankAccountNumber");
 	}
-	
-	
 
 	public void viewFilters() {
 		new CommonFunctions().elementView(lblDate, "Date");
@@ -98,7 +102,6 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblEmployeeName, "Date");
 	}
 
-	
 	public void verifyTransactionType(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type Heading is", expHeading);
 	}
@@ -146,49 +149,62 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickApplyFilters() {
 		click(btnApplyFilters, "Apply Filters");
 	}
-    private By getClearElements(String elementName) {
-    	return By.xpath(String.format("//label[text()='%s']//following-sibling::button[text()='Clear']", elementName));
-    }
-    private By getClearAllElements(String elementName) {
-    	return By.xpath(String.format("//span[text()='%s']//following-sibling::button[text()='Clear All']", elementName));
-    }
-    public void clickUserTypeClearAll() {
-    	click(getClearAllElements("User Type"), "User Type Clear All");
-    }
-    public void clickTransactionStatusClr() {
-    	click(getClearAllElements("Transaction Status"), "Transaction Status Clear All");
-    }
-    public void clickDepositIdClr() {
-    	click(getClearElements("Deposit ID"),"Deposit Id Clear");
-    }
-    public void clickReferenceIdClr() {
-    	click(getClearElements("Reference ID")," Reference Id Clear");
-    }
-    public void clickUserIdClr() {
-    	click(getClearElements("User ID"), "User Id Clear");
-    }
-    public void clickDepositAmtClr() {
-    	click(getClearElements("Deposit Amount"), "Deposit Amount Clear");
-    }
-    public  void clickFromAmountClr() {
-    	click(getClearElements(" From (CYN)"), "From CYN");
-    }
-    public void clickTOAmountClr() {
-    	click(getClearElements("To (CYN)"), "To (CYN)");
-    }
-    public void clickNameOnAccountClr() {
-    	click(getClearElements("Name on Account"), "Name on Account Clear");
-    }
-    public void clickBankAccountnumClr() {
-    	click(getClearElements("Bank Account Number"), "Bank Account Number");
-    }
+
+	private By getClearElements(String elementName) {
+		return By.xpath(String.format("//label[text()='%s']//following-sibling::button[text()='Clear']", elementName));
+	}
+
+	private By getClearAllElements(String elementName) {
+		return By.xpath(
+				String.format("//span[text()='%s']//following-sibling::button[text()='Clear All']", elementName));
+	}
+
+	public void clickUserTypeClearAll() {
+		click(getClearAllElements("User Type"), "User Type Clear All");
+	}
+
+	public void clickTransactionStatusClr() {
+		click(getClearAllElements("Transaction Status"), "Transaction Status Clear All");
+	}
+
+	public void clickDepositIdClr() {
+		click(getClearElements("Deposit ID"), "Deposit Id Clear");
+	}
+
+	public void clickReferenceIdClr() {
+		click(getClearElements("Reference ID"), " Reference Id Clear");
+	}
+
+	public void clickUserIdClr() {
+		click(getClearElements("User ID"), "User Id Clear");
+	}
+
+	public void clickDepositAmtClr() {
+		click(getClearElements("Deposit Amount"), "Deposit Amount Clear");
+	}
+
+	public void clickFromAmountClr() {
+		click(getClearElements(" From (CYN)"), "From CYN");
+	}
+
+	public void clickTOAmountClr() {
+		click(getClearElements("To (CYN)"), "To (CYN)");
+	}
+
+	public void clickNameOnAccountClr() {
+		click(getClearElements("Name on Account"), "Name on Account Clear");
+	}
+
+	public void clickBankAccountnumClr() {
+		click(getClearElements("Bank Account Number"), "Bank Account Number");
+	}
+
 	public void selectFilter(String type) {
 		click(getCheckBox(type), type);
 	}
- 
+
 	private By getCheckBox(String elementName) {
-		return By.xpath(String.format(
-				"//span[text()='%s']//preceding-sibling::input", elementName));
+		return By.xpath(String.format("//span[text()='%s']//preceding-sibling::input", elementName));
 	}
 
 	public void clickWithdraw() {
@@ -201,6 +217,31 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickInProgress() {
 		click(getCheckBox("In Progress"), "In Progress");
+	}
+
+	// buyToken
+	public void clickBuyToken() {
+		click(getCheckBox("Buy Token"), "Buy Token");
+	}
+
+	public void clickGiftCard() {
+		click(getCheckBox("Gift Card"), "Gift Card");
+	}
+
+	public void clickDebitCard() {
+		click(getCheckBox("Debit Card"), "Debit Card");
+	}
+
+	public void clickExternalBankAccount() {
+		click(getCheckBox("External Bank Account"), "External Bank Accoun");
+	}
+
+	public void clickCreditCard() {
+		click(getCheckBox("Credit Card"), "Credit Card");
+	}
+
+	public void clickInstantPay() {
+		click(getCheckBox("Instant Pay"), "Instant Pay");
 	}
 
 	public void clickCompleted() {
@@ -218,23 +259,32 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickLost() {
 		click(getCheckBox("Lost"), "Lost");
 	}
+
 	public void clickchkbxBusiness() {
 		click(getCheckBox("Business"), "Business");
 	}
+
 	public void clickchkbxPersonal() {
-		click(getCheckBox("Personal"),"Personal");
+		click(getCheckBox("Personal"), "Personal");
 	}
+
 	public void clickchkbxCoyniAdmin() {
 		click(getCheckBox("Coyni Admin"), "Coyni Admin");
 	}
+
 	public void clickchkbxPaid() {
 		click(getCheckBox("Paid"), "Paid");
 	}
+
 	public void clickchkbxFailed() {
 		click(getCheckBox("Failed"), "Failed");
 	}
+
 	public void clickchkbxInprogress() {
 		click(getCheckBox("In Progress"), "In Progress");
 	}
-	
+
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent();
+	}
 }
