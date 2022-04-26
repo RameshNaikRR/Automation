@@ -64,8 +64,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		return new RegistrationBeneficialOwnersPage();
 	}
 
-	public BusinessSettingsMenuComponent businessSettingsMenuComponent() {
-		return new BusinessSettingsMenuComponent();
+	public BusinessSettingsSideBarMenuComponent businessSettingsSideBarMenuComponent() {
+		return new BusinessSettingsSideBarMenuComponent();
 	}
 
 	public void verifyBusinessApplicationTrackerView() {
