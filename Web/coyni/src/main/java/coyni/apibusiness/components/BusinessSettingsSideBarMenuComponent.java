@@ -2,6 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -17,6 +18,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 				"div[class*='BusinessSettings_container']>div:nth-of-type(1)>div:nth-of-type(2)>a:nth-of-type(%s)",
 				btnNumber));
 	}
+
 	private By getAccountInfo(String eleName) {
 		return By.xpath(String.format("(//div[@class='px-3 lg:px-1']//div//div)['%s']", eleName));
 	}
@@ -28,6 +30,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void verifyAccountIdView() {
 		new CommonFunctions().elementView(getAccountInfo("5"), "Account-ID");
 	}
+
 	public void getAccountStatus(String accountStatus) {
 		enterText(getAccountInfo("8"), accountStatus, "accountStatus");
 	}
@@ -35,9 +38,11 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void getAccountId(String accountID) {
 		enterText(getAccountInfo("6"), accountID, "account ID");
 	}
+
 	public void clickCompanyInformation() {
 		click(getSideMenuBarItems("1"), "Company Information");
 	}
+
 	public void verifyCompanyInformationView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("1"), "Company Information");
 	}
@@ -45,12 +50,15 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickDBAinformation() {
 		click(getSideMenuBarItems("2"), "DBA Infromation");
 	}
+
 	public void verifyDBAInformationView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("2"), "DBA Infromation");
 	}
+
 	public void clickBeneficiaryOwner() {
 		click(getSideMenuBarItems("3"), "Beneficiary Owner");
 	}
+
 	public void verifyBeneficiaryOwnersView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("3"), "Beneficiary Owner");
 	}
@@ -58,6 +66,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickPaymentMethods() {
 		click(getSideMenuBarItems("4"), "Payment Methods");
 	}
+
 	public void verifyPaymentMethodsView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("4"), "Payment Methods");
 	}
@@ -65,6 +74,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickPreferences() {
 		click(getSideMenuBarItems("5"), "Preferences");
 	}
+
 	public void verifyPreferencesView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("5"), "Preferences");
 	}
@@ -72,12 +82,15 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickAgreements() {
 		click(getSideMenuBarItems("6"), "Agreements");
 	}
-    public void verifyAgreementsView() {
-    	new CommonFunctions().elementView(getSideMenuBarItems("6"), "Agreements");
-    }
+
+	public void verifyAgreementsView() {
+		new CommonFunctions().elementView(getSideMenuBarItems("6"), "Agreements");
+	}
+
 	public void clickFees() {
 		click(getSideMenuBarItems("7"), "Fees");
 	}
+
 	public void verifyFeesView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("7"), "Fees");
 	}
@@ -85,6 +98,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickAccountLimits() {
 		click(getSideMenuBarItems("8"), "Account Limits");
 	}
+
 	public void verifyAccountLimitsView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("8"), "Account Limits");
 	}
@@ -92,6 +106,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickTeam() {
 		click(getSideMenuBarItems("9"), "Team");
 	}
+
 	public void verifyTeamView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("9"), "Team");
 	}
@@ -99,6 +114,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickIpAddresses() {
 		click(getSideMenuBarItems("10"), "Ip Addresses");
 	}
+
 	public void verifyIpAddressesView() {
 		new CommonFunctions().elementView(getSideMenuBarItems("10"), "Ip Addresses");
 	}
@@ -106,15 +122,19 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void clickApiKey() {
 		click(getSideMenuBarItems("11"), "Api Key");
 	}
-    public void verifyApiKeyView() {
-    	new CommonFunctions().elementView(getSideMenuBarItems("11"), "Api Key");
-    }
+
+	public void verifyApiKeyView() {
+		new CommonFunctions().elementView(getSideMenuBarItems("11"), "Api Key");
+	}
+
 	public void clickWebhooks() {
 		click(getSideMenuBarItems("12"), "Webhooks");
 	}
-    public void verifyWebHooksView() {
-    	new CommonFunctions().elementView(getSideMenuBarItems("12"), "Webhooks");
-    }
+
+	public void verifyWebHooksView() {
+		new CommonFunctions().elementView(getSideMenuBarItems("12"), "Webhooks");
+	}
+
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Heading");
 	}
@@ -122,7 +142,10 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void verifyApplication(String Application) {
 		new CommonFunctions().verifyLabelText(lblApplication, Application, "Application");
 	}
-	
+
+	public PaymentMethodComponent paymentMethodComponent() {
+		return new PaymentMethodComponent();
+	}
 
 //	public void verifyIdInformation(String Idinformation) {
 //		new CommonFunctions().verifyLabelText(lblIdInformation, Idinformation, "Idinformation");
