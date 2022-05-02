@@ -82,6 +82,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
     public TokenWalletPage tokenWalletPage() {	
 	return new TokenWalletPage();
 }
-
+    public FilterComponent filterComponent() {
+    	return new FilterComponent()
+    			;}
 
 }

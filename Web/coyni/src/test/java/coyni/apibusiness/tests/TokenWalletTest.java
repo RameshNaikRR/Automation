@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.admin.components.FilterComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.TokenWalletPage;
 import ilabs.WebFramework.Runner;
@@ -15,12 +16,14 @@ public class TokenWalletTest {
 
 	TokenWalletPage tokenwalletPage;
 	SideBarMenuComponent sideBarMenuComponent;
+	FilterComponent filterComponent;
 
 	@BeforeMethod
 	public void init() {
 
 		tokenwalletPage = new TokenWalletPage();
 		sideBarMenuComponent = new SideBarMenuComponent();
+		filterComponent = new FilterComponent();
 	}
 	@Test
 	@Parameters({"strParams"})
@@ -37,6 +40,36 @@ public class TokenWalletTest {
 		 sideBarMenuComponent.tokenWalletPage().getWalletInfo();
 		}catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Token Wallet view is failed due to Exception " + e);
+		}
+	}
+	@Test
+	public void testTokenWalletFiltersView() {
+		try {
+		 Map<String, String> data = Runner.getKeywordParameters(null);
+		 sideBarMenuComponent.filterComponent().verifyFilterBackgroundColor(data.get("backGround color"), data.get("border"));
+		 sideBarMenuComponent.filterComponent().verifyFilterCursorAction();
+		 sideBarMenuComponent.filterComponent().clickFilter();
+		 sideBarMenuComponent.filterComponent().verifyDateView();
+		 sideBarMenuComponent.filterComponent().verifyFromCYNview();
+		 sideBarMenuComponent.filterComponent().verifyToCYNview();
+		 sideBarMenuComponent.filterComponent().verifyTransactionTypeView();
+		 sideBarMenuComponent.filterComponent().verifyWithdrawChkbxView();
+		 sideBarMenuComponent.filterComponent().verifyBuyTokenChkbxView();
+		 sideBarMenuComponent.filterComponent().verifyWithdrawChkbxView();
+		 sideBarMenuComponent.filterComponent().verifyTransactionSubtypeView();
+		 sideBarMenuComponent.filterComponent().verifyBankAccountChkbxView();
+		 sideBarMenuComponent.filterComponent().verifyInstantPayChkbxView();
+		 sideBarMenuComponent.filterComponent().verifySignetChkbxView();
+		 sideBarMenuComponent.filterComponent().verifyTransactionAmountView();
+		 sideBarMenuComponent.filterComponent().verifyReferenceIdView();
+		 sideBarMenuComponent.filterComponent().verifyTransactionStatusView();
+		 sideBarMenuComponent.filterComponent().verifyApplyFiltersView();
+		 sideBarMenuComponent.filterComponent().verifyResetFiltersView();
+		 sideBarMenuComponent.filterComponent().verifyTransactionDateClearView();
+		 sideBarMenuComponent.filterComponent().verify15CharIdView();
+	
+		}catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Filters failed due to Exception " + e);
 		}
 	}
 
