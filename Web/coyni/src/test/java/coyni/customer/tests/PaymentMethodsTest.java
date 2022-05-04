@@ -133,7 +133,7 @@ public class PaymentMethodsTest {
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
 			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
-			//customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+			customerProfilePage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -515,9 +515,19 @@ public class PaymentMethodsTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testCreditCardFieldValidations(String strParams) {
+		try {
+		navigationMenuPage.clickTokenAccountMenu();
+		tokenAccountPage.userNameDropDownComponent().clickUserName();
+		tokenAccountPage.userNameDropDownComponent().clickPaymentMethods();
+		Thread.sleep(2000);
+		customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();
+		Thread.sleep(2000);
+		customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 		testCardsFieldValidations(strParams, "credit");
 	}
-	
-
-
+	catch(Exception e) {
+		ExtentTestManager.setFailMessageInReport("testDebitCardFieldValidations is"+e);
+	}
+  }
 }
+	

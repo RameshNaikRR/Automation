@@ -8,7 +8,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class UserNameDropDownComponent extends BrowserFunctions {
 
 	// added
-	private By userDetailsNameHeading = By.xpath("//div[@class='hover:underline internal-header__circle-initials']");
+	private By userDetailsNameHeading = By.xpath("//div[contains(@class,'circle-initials')]");
 	private By dropwnUserName = By.cssSelector(".down-arrow");
 	private By lblRequests = By.xpath("//span[text()='Requests']");
 	private By requestdot = By.xpath("//span[contains(@class,'green-dot')]");

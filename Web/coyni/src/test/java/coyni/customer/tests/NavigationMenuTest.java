@@ -186,7 +186,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
-			navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
+			//navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			// navigationMenuPage.verifyNotificationsIcon();
 			navigationMenuPage.userNameDropDownComponent().clickSignOut();
 			homePage.clickPersonalAccount();
