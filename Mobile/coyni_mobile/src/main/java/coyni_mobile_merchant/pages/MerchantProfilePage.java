@@ -10,6 +10,7 @@ import coyni_mobile.components.PreferencesComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.popups.SetUpTouchIDPopup;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FeesComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
@@ -346,5 +347,9 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public SetUpTouchIDPopup setUpTouchIDPopup() {
 		return new SetUpTouchIDPopup();
+	}
+
+	public FeesComponent feesComponent() {
+		return new FeesComponent();
 	}
 }

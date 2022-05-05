@@ -88,6 +88,51 @@ public class MerchantProfileTest {
 	}
 
 	@Test
+	@Parameters({ "strParams" })
+	public void testFees(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantProfilePage.clickProfile();
+			merchantProfilePage.feesComponent().verifyHeading(data.get("label"));
+			merchantProfilePage.feesComponent().verifyTransactionsLabel(data.get("transactionLabel"));
+			merchantProfilePage.feesComponent().verifyTokenAccountLabel(data.get("tokenAccountLabel"));
+			merchantProfilePage.feesComponent().verifyBuyTokenLabel(data.get("buyTokenLabel"));
+			merchantProfilePage.feesComponent().verifyExternalBankAccountLabel(data.get("externalBankAccountLabel"));
+			merchantProfilePage.feesComponent().verifyInstantPayLabel(data.get("instantPayLabel"));
+			merchantProfilePage.feesComponent().verifySignetAccountLabel(data.get("signetAccountLabel"));
+			merchantProfilePage.feesComponent().verifyGiftCardLabel(data.get("giftCardLabel"));
+			merchantProfilePage.feesComponent().verifyFailedBankWithdrawLabel(data.get("failedBankWithdrawLabel"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFees Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testFeesWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantProfilePage.clickProfile();
+			merchantProfilePage.feesComponent().verifyHeading(data.get("label"));
+			merchantProfilePage.feesComponent().verifyTransactionsLabel(data.get("transactionLabel"));
+			merchantProfilePage.feesComponent().verifyTokenAccountLabel(data.get("tokenAccountLabel"));
+			merchantProfilePage.feesComponent().verifyBuyTokenLabel(data.get("buyTokenLabel"));
+			merchantProfilePage.feesComponent().verifyExternalBankAccountLabel(data.get("externalBankAccountLabel"));
+			merchantProfilePage.feesComponent().verifyInstantPayLabel(data.get("instantPayLabel"));
+			merchantProfilePage.feesComponent().verifySignetAccountLabel(data.get("signetAccountLabel"));
+			merchantProfilePage.feesComponent().verifyGiftCardLabel(data.get("giftCardLabel"));
+			merchantProfilePage.feesComponent().verifyFailedBankWithdrawLabel(data.get("failedBankWithdrawLabel"));
+			merchantProfilePage.feesComponent().navigationComponent().clickBack();
+			merchantProfilePage.feesComponent().navigationComponent().clickClose();
+			merchantProfilePage.clickProfile();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFeesWithNavigationOptions Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
 	public void testLogOut() {
 		try {
 			// tokenAccountPage.clickProfile();
