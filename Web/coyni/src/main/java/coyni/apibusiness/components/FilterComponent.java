@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class FilterComponent extends BrowserFunctions {
 	private By btnFilter = By.xpath("//button[text()='Filter']");
@@ -20,176 +21,274 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	private By btnResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
-    private By getTransactionTypeChkbx(String eleName) {
-    	return By.xpath(String.format("(//div[@class='relative flex flex-wrap gap-2'])[1]//label//input[@name='%s']", eleName));
-    }
-    private By getTransactionSubTypeChkbx(String eleName) {
-    	return By.xpath(String.format("(//div[@class='relative flex flex-wrap gap-2'])[2]//div//label//input[@name='%s']", eleName));
-    }
-    private By getTransactionStatusChkbx(String eleName) {
-    	return By.xpath(String.format("(//div[@class='relative flex flex-wrap gap-2'])[3]//div//label//input[@name='%s']", eleName));
-    }
-    private By getClearItems(String eleName) {
-    	return By.xpath(String.format("(//button[text()='Clear'])['%s']", eleName));
-    }
-    private By getClearAllItems(String eleName) {
-    	return By.xpath(String.format("(//button[text()='Clear All'])['%s']", eleName));
-    }
-    public void clickFilter() {
-    	click(btnFilter, "Filter");
-    }
-    public void verifyFilterBackgroundColor(String backGround,String border) {
-    	new CommonFunctions().verifyMouseHoverAction(btnApplyFilters, "Apply filters", backGround, border);
-    }
-    public void verifyFilterCursorAction() {
-    	new CommonFunctions().verifyCursorAction(btnApplyFilters, "Apply Filters");
-    }
-    public void verifyLabelDate(String date) {
-    	new CommonFunctions().verifyLabelText(lblDate, "date", date);
-    }
-    public void verifyDateView() {
-    	new CommonFunctions().elementView(lblDate, "Date");
-    }
-    public void fillStartDate() {
-    	click(txtStartDate, "Start Date");
-    }
-    public void verifyResetFiltersView() {
-    	new CommonFunctions().elementView(btnResetAllFilters, "Reset All Filters");
-    }
-    public void verifyApplyFiltersView() {
-    	new CommonFunctions().elementView(btnApplyFilters, "Apply Filters");
-    }
-    public void verifyTransactionDateClearView() {
-    	new CommonFunctions().elementView(getClearItems("2"), "Clear");
-    }
-    public void fillEndDate() {
-    	click(txtEndDate, "End Date");
-    }
-    public void clickDateClear() {
-    	click(getClearItems("1"), "Date clear");
-    }
-    public void clickTransactionAmntClear() {
-    	click(getClearItems("2"), "TransactionAmtClear");
-    }
-    public void clickReferenceIdClear() {
-    	click(getClearItems("3"), "Reference ID Clear");
-    }
-    public void verify15CharIdView() {
-    	new CommonFunctions().elementView(txt15CharReferenceId, "15 Char Reference Id");
-    }
-    public void clickWalletTransferChkbx() {
-    	click(getTransactionTypeChkbx("20"), "wallet Transfer");
-    }
-    public void verifyWalletTransferChkbxView() {
-    	new CommonFunctions().elementView(getTransactionTypeChkbx("20"), "Wallet Transfer");
-    }
-    public void clickBuyTokenChkBx() {
-    	click(getTransactionTypeChkbx("2"), "Buy Token");
-    }
-    public void verifyBuyTokenChkbxView() {
-    	new CommonFunctions().elementView(getTransactionTypeChkbx("2"), "Buy Token");
-    }
-    public void clickWithdrawChkbx() {
-    	click(getTransactionTypeChkbx("3"), "Withdraw");
-    }
-    public void verifyWithdrawChkbxView() {
-    	new CommonFunctions().elementView(getTransactionTypeChkbx("3"), "Withdraw");
-    }
-    
-    public void verifylabelTransactionAmt(String transactionAmount) {
-    	new CommonFunctions().verifyLabelText(lblTransactionAmt, "Transaction Amount", transactionAmount);
-    }
-    public void verifyTransactionAmountView() {
-    	new CommonFunctions().elementView(lblTransactionAmt, "Transaction Amount");
-    }
-    public void fillFromCYN() {
-    	click(txtFromCYN, "FromCYN");
-    }
-    public void verifyFromCYNview() {
-    	new CommonFunctions().elementView(txtFromCYN, "From CYN");
-    }
-    public void fillToCYN() {
-    	click(txtToCYN, "TOCYN");
-    }
-    public void verifyToCYNview() {
-    	new CommonFunctions().elementView(txtToCYN, "To CYN");
-    }
-    public void verifylabelReferenceID(String ReferenceId) {
-    	new CommonFunctions().verifyLabelText(lblReferenceID, "ReferenceID", ReferenceId);
-    }
-    public void fill15CharReferenceId() {
-    	click(txt15CharReferenceId, "Reference Id 15 Char");
-    }
-    public void veriffyLabelTransactionType(String TrasactionType) {
-    	new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type", TrasactionType);
-    }
-    public void verifyTransactionTypeView() {
-    	new CommonFunctions().elementView(lblTransactionType, "Trasaction Type");
-    }
-    public void verifyLabelTransactionSubType(String TransactionSubType) {
-    	new CommonFunctions().verifyLabelText(lblTransactionSubType, "TransactionSubType", TransactionSubType);
-    }
-    public void verifyTransactionSubtypeView() {
-    	new CommonFunctions().elementView(lblTransactionSubType, "Transaction subtype");
-    }
-    public void clickBankAccountChkbx() {
-    	click(getTransactionSubTypeChkbx("0"), "Bank Account");
-    }
-    public void verifyBankAccountChkbxView() {
-    	new CommonFunctions().elementView(getTransactionSubTypeChkbx("0"), "BankAccount");
-    }
-    public void clickInstantPayChkbx() {
-    	click(getTransactionSubTypeChkbx("1"), "Instant Pay");
-    }
-    public void verifyInstantPayChkbxView() {
-    	new CommonFunctions().elementView(getTransactionSubTypeChkbx("1"), "Instant Pay");
-    }
-    public void clickSignetChkbx() {
-    	click(getTransactionSubTypeChkbx("7"), "Signet");
-    }
-    public void verifySignetChkbxView() {
-    	new CommonFunctions().elementView(getTransactionSubTypeChkbx("7"), "Signet");
-    }
-    public void verifyLabelTransactionStatus(String TransactionStatus) {
-    	new CommonFunctions().verifyLabelText(lblTransactionStatus, "TransactionStatus", TransactionStatus);
-    }
-    public void clickResetAllFilters() {
-    	click(btnResetAllFilters, "Reset all Filters");
-    }
-    public void clickApplyFilter() {
-    	click(btnApplyFilters, "Apply Filters");
-    }
-    public void clickPendingChkbx() {
-    	click(getTransactionStatusChkbx("1"), "Pending");
-    }
-    public void clickCompletedChkbx() {
-    	click(getTransactionStatusChkbx("2"), "Completed");
-    }
-    public void clickCancelledChkbx() {
-    	click(getTransactionStatusChkbx("4"), "Cancelled");
-    }
-    public void clickInprogressChkbx() {
-    	click(getTransactionStatusChkbx("0"), "In Progress");
-    }
-    public void clickFailedChkbx() {
-    	click(getTransactionStatusChkbx("3"), "Failed");
-    }
-    public void clickTransactionTypeClearAll() {
-    	click(getClearAllItems("1"), "Transaction type clear All");
-    }
-    public void clickTrasactionSubtypeClearAll() {
-    	click(getClearAllItems("2"), "Transaction subtype clear All");
-    }
-    public void clickTransactionStatusClearAll() {
-    	click(getClearAllItems("3"), "Transaction Status Clear All");
-    }
-    public void verifyReferenceIdView() {
-    	new CommonFunctions().elementView(lblReferenceID, "Reference ID");
-    }
-    public void verifyTransactionStatusView() {
-    	new CommonFunctions().elementView(lblTransactionStatus, "Transaction status");
-    }
+
+	public void verifyStartDate(String expectedDate) {
+		String actualDate = getText(txtStartDate, "start Date");
+		if (actualDate.equals(expectedDate)) {
+			ExtentTestManager.setPassMessageInReport("start Date is verified");
+		} else {
+			ExtentTestManager.setFailMessageInReport("start Date is not verified");
+		}
+	}
+
+	public void verifyEndDate(String expectedDate) {
+		String actualDate = getText(txtEndDate, "end Date");
+		if (actualDate.equals(expectedDate)) {
+			ExtentTestManager.setPassMessageInReport("End date is verified");
+		} else {
+			ExtentTestManager.setFailMessageInReport("End Date is not verified");
+		}
+	}
+
+	public By getCheckkBoxes(String text) {
+		return By.xpath(
+				String.format("//span[text()='%s']/preceding-sibling::input", text));
+	}
+    public void clickCheckBox(String text) {
+    	click(getCheckkBoxes(text), text);
     }
 
+	private By getClearItems(String eleName) {
+		return By.xpath(String.format("(//button[text()='Clear'])['%s']", eleName));
+	}
 
+	private By getClearAllItems(String eleName) {
+		return By.xpath(String.format("(//button[text()='Clear All'])['%s']", eleName));
+	}
 
+	public void clickFilter() {
+		click(btnFilter, "Filter");
+	}
+
+	public void verifyFilterBackgroundColor(String backGround, String border) {
+		new CommonFunctions().verifyMouseHoverAction(btnApplyFilters, "Apply filters", backGround, border);
+	}
+
+	public void verifyFilterCursorAction() {
+		new CommonFunctions().verifyCursorAction(btnApplyFilters, "Apply Filters");
+	}
+
+	public void verifyLabelDate(String date) {
+		new CommonFunctions().verifyLabelText(lblDate, "date", date);
+	}
+
+	public void verifyDateView() {
+		new CommonFunctions().elementView(lblDate, "Date");
+	}
+
+	public void fillStartDate() {
+		click(txtStartDate, "Start Date");
+	}
+
+	public void verifyResetFiltersView() {
+		new CommonFunctions().elementView(btnResetAllFilters, "Reset All Filters");
+	}
+
+	public void verifyApplyFiltersView() {
+		new CommonFunctions().elementView(btnApplyFilters, "Apply Filters");
+	}
+
+	public void verifyTransactionDateClearView() {
+		new CommonFunctions().elementView(getClearItems("2"), "Clear");
+	}
+
+	public void fillEndDate() {
+		click(txtEndDate, "End Date");
+	}
+
+	public void clickDateClear() {
+		click(getClearItems("1"), "Date clear");
+	}
+
+	public void clickTransactionAmntClear() {
+		click(getClearItems("2"), "TransactionAmtClear");
+	}
+
+	public void clickReferenceIdClear() {
+		click(getClearItems("3"), "Reference ID Clear");
+	}
+
+	public void verify15CharIdView() {
+		new CommonFunctions().elementView(txt15CharReferenceId, "15 Char Reference Id");
+	}
+
+	public void clickWalletTransferChkbx() {
+		click(getCheckkBoxes("wallet Transfer"), "wallet Transfer");
+	}
+
+	public void verifyWalletTransferChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Wallet Transfer"), "Wallet Transfer");
+	}
+
+	public void clickBuyTokenChkBx() {
+		click(getCheckkBoxes("Buy Token"), "Buy Token");
+	}
+
+	public void verifyBuyTokenChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Buy Token"), "Buy Token");
+	}
+
+	public void clickWithdrawChkbx() {
+		click(getCheckkBoxes("Withdraw"), "Withdraw");
+	}
+
+	public void verifyWithdrawChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Withdraw"), "Withdraw");
+	}
+
+	public void verifylabelTransactionAmt(String transactionAmount) {
+		new CommonFunctions().verifyLabelText(lblTransactionAmt, "Transaction Amount", transactionAmount);
+	}
+
+	public void verifyTransactionAmountView() {
+		new CommonFunctions().elementView(lblTransactionAmt, "Transaction Amount");
+	}
+
+	public void fillFromCYN(String FromCYN) {
+		enterText(txtToCYN, FromCYN, "From CYN");
+	}
+
+	public void verifyFromCYNview() {
+		new CommonFunctions().elementView(txtFromCYN, "From CYN");
+	}
+
+	public void fillToCYN(String toCYN) {
+		enterText(txtToCYN, toCYN, "to CYN");
+	}
+
+	public void verifyToCYNview() {
+		new CommonFunctions().elementView(txtToCYN, "To CYN");
+	}
+
+	public void verifylabelReferenceID(String ReferenceId) {
+		new CommonFunctions().verifyLabelText(lblReferenceID, "ReferenceID", ReferenceId);
+	}
+
+	public void fill15CharReferenceId(String referenceCharID) {
+		enterText(txt15CharReferenceId, referenceCharID, "referenceCharID");
+	}
+
+	public void veriffyLabelTransactionType(String TrasactionType) {
+		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type", TrasactionType);
+	}
+
+	public void verifyTransactionTypeView() {
+		new CommonFunctions().elementView(lblTransactionType, "Trasaction Type");
+	}
+
+	public void verifyLabelTransactionSubType(String TransactionSubType) {
+		new CommonFunctions().verifyLabelText(lblTransactionSubType, "TransactionSubType", TransactionSubType);
+	}
+
+	public void verifyTransactionSubtypeView() {
+		new CommonFunctions().elementView(lblTransactionSubType, "Transaction subtype");
+	}
+
+	public void clickBankAccountChkbx() {
+		click(getCheckkBoxes("Bank Account"), "Bank Account");
+	}
+
+	public void verifyBankAccountChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Bank Account"), "BankAccount");
+	}
+
+	public void clickInstantPayChkbx() {
+		click(getCheckkBoxes("Instant Pay"), "Instant Pay");
+	}
+
+	public void verifyInstantPayChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Instant Pay"), "Instant Pay");
+	}
+
+	public void clickSignetChkbx() {
+		click(getCheckkBoxes("Signet"), "Signet");
+	}
+
+	public void verifySignetChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Signet"), "Signet");
+	}
+
+	public void verifyLabelTransactionStatus(String TransactionStatus) {
+		new CommonFunctions().verifyLabelText(lblTransactionStatus, "TransactionStatus", TransactionStatus);
+	}
+
+	public void clickResetAllFilters() {
+		click(btnResetAllFilters, "Reset all Filters");
+	}
+
+	public void clickApplyFilter() {
+		click(btnApplyFilters, "Apply Filters");
+	}
+
+	public void clickPendingChkbx() {
+		click(getCheckkBoxes("Pending"), "Pending");
+	}
+
+	public void verifyPendingChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Pending"), "Pending");
+	}
+
+	public void clickCompletedChkbx() {
+		click(getCheckkBoxes("Completed"), "Completed");
+	}
+
+	public void verifyCompletedChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Completed"), "Completed");
+	}
+
+	public void clickCancelledChkbx() {
+		click(getCheckkBoxes("Cancelled"), "Cancelled");
+	}
+
+	public void verifyCancelledChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Cancelled"), "Cancelled");
+	}
+
+	public void clickInprogressChkbx() {
+		click(getCheckkBoxes("In Progress"), "In Progress");
+	}
+
+	public void verifyInprogressChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("In Progress"), "In Progress");
+	}
+
+	public void clickFailedChkbx() {
+		click(getCheckkBoxes("Failed"), "Failed");
+	}
+
+	public void verifyFailedChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Failed"), "Failed");
+	}
+
+	public void clickTransactionTypeClearAll() {
+		click(getClearAllItems("1"), "Transaction type clear All");
+	}
+
+	public void clickTrasactionSubtypeClearAll() {
+		click(getClearAllItems("2"), "Transaction subtype clear All");
+	}
+
+	public void clickTransactionStatusClearAll() {
+		click(getClearAllItems("3"), "Transaction Status Clear All");
+	}
+
+	public void verifyReferenceIdView() {
+		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
+	}
+
+	public void verifyTransactionStatusView() {
+		new CommonFunctions().elementView(lblTransactionStatus, "Transaction status");
+	}
+
+	public DaysMonthsDropDownComponent daysMonthsDropDownComponent() {
+		return new DaysMonthsDropDownComponent();
+	}
+
+	public void clickStartDate() {
+		click(txtStartDate, "start Date");
+	}
+
+	public DatePickerComponent datePickerComponent() {
+		return new DatePickerComponent();
+	}
+}
