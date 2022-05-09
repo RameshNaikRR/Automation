@@ -68,6 +68,16 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblEmailText, "Email Verification Description ", expText);
 	}
 
+	public void getEmailText() {
+		String str = getText(lblEmailText);
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
+	public void getPhoneDescription() {
+		String str = getText(phoneDescription);
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
 	public void verifyOtpTextFieldView() {
 		new CommonFunctions().elementView(txtCode, "OTP Text field");
 	}
@@ -83,10 +93,10 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	public void verifyBackButtonView() {
 		new CommonFunctions().elementView(btnBackspace, "Back Icon");
 	}
+
 	public void clickCloseIcon() {
 		click(btnBackspace, "Back Space");
 	}
-
 
 	public void clickResend() {
 		click(lnkResend, "Resend");

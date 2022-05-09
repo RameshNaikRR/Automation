@@ -2,7 +2,6 @@ package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
 
-
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.EnableFaceIDpage;
 import ilabs.MobileFramework.MobileFunctions;
@@ -12,15 +11,15 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
-	
 
 	private By getOneNumberOfPin(char num) {
-		return MobileBy.xpath(String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num),Character.toString(num)));
+		return MobileBy.xpath(
+				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 	}
 
 	public void fillPin(String pin) {
 		System.out.println(pin.length());
-		for (int i = 0; i <pin.length(); i++) {
+		for (int i = 0; i < pin.length(); i++) {
 			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
 		}
 	}
@@ -40,12 +39,10 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public void verifyEnterYourPinView() {
 		new CommonFunctions().elementView(heading, "Enter Your PIN");
 	}
-	
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 	}
-	
 
 	public EnableFaceIDpage enableFaceIDpage() {
 		return new EnableFaceIDpage();
@@ -61,6 +58,11 @@ public class EnterYourPINComponent extends MobileFunctions {
 	public ForgotPinComponent forgotPinComponent() {
 		return new ForgotPinComponent();
 	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 //
 //	public EditPhoneNumberPage editPhoneNumberPage() {
 //		return new EditPhoneNumberPage();

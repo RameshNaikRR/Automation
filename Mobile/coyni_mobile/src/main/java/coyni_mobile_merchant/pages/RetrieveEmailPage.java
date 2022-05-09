@@ -1,7 +1,5 @@
 package coyni_mobile_merchant.pages;
 
-import java.awt.AWTException;
-
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -57,6 +55,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void verifyDescription(String expDescription) {
@@ -71,10 +70,10 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public void fillFirstName(String FirstName) {
 		click(txtFirstName, "First Name");
 		enterText(txtFirstName, FirstName, "First Name");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillLastName(String LastName) {
-		DriverFactory.getDriver().hideKeyboard();
 		click(txtLastName, "Last Name");
 		enterText(txtLastName, LastName, "Last Name");
 		new CommonFunctions().clickTab();

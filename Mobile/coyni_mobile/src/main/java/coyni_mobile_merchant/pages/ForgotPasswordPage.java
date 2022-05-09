@@ -13,7 +13,8 @@ public class ForgotPasswordPage extends MobileFunctions {
 	private By lblDescription = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
-	private By btnCloseIcon=MobileBy.xpath("//*[contains(@resource-id,'imgFPClose')]");
+	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'imgFPClose')]");
+
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password Heading ", expHeading);
 	}
@@ -33,15 +34,19 @@ public class ForgotPasswordPage extends MobileFunctions {
 			ExtentTestManager.setInfoMessageInReport(" Next Button is Disabled");
 		}
 	}
+
 	public void verifyForgotPasswordPageView() {
 		new CommonFunctions().elementView(lblHeading, "Email Verification Page");
 	}
+
 	public PhoneAndEmailVerificationComponent phoneEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
 	}
+
 	public void clickCloseIcon() {
 		click(btnCloseIcon, " Close Icon");
 	}
+
 	public void validateEmailField(String minChar, String minCharPlus, String maxLessChar, String maxChar,
 			String moreThanMax) {
 
