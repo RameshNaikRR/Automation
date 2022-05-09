@@ -3,150 +3,159 @@ package coyni.customer.components;
 import org.openqa.selenium.By;
 
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
-public class FilterComponent extends BrowserFunctions{
-	
-	private By txtStartDate = By.cssSelector("");
-	private By txtEndDate = By.cssSelector("");
-	private By lnkClearCreatedDate = By.cssSelector("");
-	private By chkBxSent = By.cssSelector("");
-	private By chkBxReceived = By.cssSelector("");
-	private By chkBxPurchased = By.cssSelector("");
-	private By chkBxPayRequest = By.cssSelector("");
-	private By chkBxBuyToken = By.cssSelector("");
-	private By chkBxWithdraw = By.cssSelector("");
-	private By chkBxAccountTransfer = By.cssSelector("");
-	private By chkBxSaleOrder = By.cssSelector("");
-	private By chkBxPaidOrders = By.cssSelector("");
-	private By lnkClearAllTransactionType = By.cssSelector("");
-	private By chkBxInstantPay = By.cssSelector("");
-	private By chkBxGiftCard = By.cssSelector("");
-	private By chkBxCreditCard = By.cssSelector("");
-	private By chkBxDebitCard = By.cssSelector("");
-	private By chkBxchkBxSaleOrderToken = By.cssSelector("");
-	private By lnkClearAllTransactionSubtype = By.cssSelector("");
-	private By chkBxBankAccount = By.cssSelector("");
-	private By txtFromAmount = By.cssSelector("");
-	private By txtToAmount = By.cssSelector("");
-	private By lnkClearTransactionAmount = By.cssSelector("");
-	private By txtReferenceID = By.cssSelector("");
-	private By lnkClearReferenceID = By.cssSelector("");
-	private By txtMerchantName = By.cssSelector("");
-	private By lnkClearMerchantName = By.cssSelector("");
-	private By chkBxPending = By.cssSelector("");
-	private By chkBxCompleted = By.cssSelector("");
-	private By chkBxCanceled = By.cssSelector("");
-	private By chkBxFailed = By.cssSelector("");
-	private By chkBxInProgress = By.cssSelector("");
-	private By lnkClearAllTrasactionStatus = By.cssSelector("");
-	private By btnResetAllFilters = By.cssSelector("");
-	private By btnApplyFilters = By.cssSelector("");
-	
+public class FilterComponent extends BrowserFunctions {
+	private By txtStartDate = By
+			.cssSelector("custom-date-picker-filter relative mb-0 flex items-center justify-between group  Date");
+	private By txtEndDate = By.cssSelector(
+			"custom-date-picker-filter relative mb-0 flex items-center justify-between group  relative Date");
+	private By lnkClearCreatedDate = By.xpath("//label[text()='Date']/button");
+	private By lnkClearAllTransactionType = By.xpath("//span[text()='Transaction Type']/button");
+	private By lnkClearAllTransactionSubtype = By.xpath("//span[text()='Transaction Subtype']/button");
+	private By txtFromAmount = By.cssSelector("div[class $='group__from']>input");
+	private By txtToAmount = By.cssSelector("div[class $='group__to']>input");
+	private By lnkClearTransactionAmount = By.xpath("//label[text()='Transaction Amount']/button");
+	private By txtReferenceID = By.name("gbxTransactionId");
+	private By lnkClearReferenceID = By.xpath("//label[text()='Reference ID']/button");
+	private By txtReferencrID = By.xpath("//label[text()='Reference ID']");
+	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
+	private By tableRows = By.cssSelector(".custom-table-wrapper>tbody>tr");
+	private By msgNoRecoreds = By.cssSelector(".message");
+
+	private By getCheckBoxes(String checkBox) {
+		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", checkBox));
+	}
+
+	public void clickCheckBox(String checkBox) {
+		By checkCheckBoxes = By.xpath(String
+				.format("//input[@type='checkbox']/following::span[text()='%s']/preceding-sibling::input", checkBox));
+		click(checkCheckBoxes, checkBox + "Check Box ");
+	}
+
 	public void clickStartDate() {
 		click(txtStartDate, "Start Date");
 	}
+
 	public void clickEndDate() {
 		click(txtEndDate, "End Date");
 	}
+
 	public void clickClearCreatedDate() {
 		click(lnkClearCreatedDate, "Clear Created Date");
 	}
-	public void clickSentCheckBox() {
-		click(chkBxSent,"Sent");
-		
-	}
-	public void clickReceivedCheckBox() {
-		click(chkBxReceived, "Received");
-	}
-	public void clickPurchasedCheckBox() {
-		click(chkBxPurchased, "Purchased");
-	}
+	// Transaction Type
 	public void clickPayRequestCheckBox() {
-		click(chkBxPayRequest, "Pay/Request");
+		click(getCheckBoxes("Pay / Request"), "Pay / Request");
 	}
+
 	public void clickBuyTokenCheckBox() {
-		click(chkBxBuyToken, "Buy Token");
+		click(getCheckBoxes("Buy Token"), "Buy Token");
 	}
+
 	public void clickWithdrawCheckBox() {
-		click(chkBxWithdraw, "Withdraw");
+		click(getCheckBoxes("Withdraw"), "Withdraw");
 	}
-	public void clickAccountTransferCheckBox() {
-		click(chkBxAccountTransfer, "Account Transfer");
-	}
-	public void clickSaleOrderCheckBox() {
-		click(chkBxSaleOrder, "Sale Order");
-	}
-	public void clickPaidOrersCheckBox() {
-		click(chkBxPaidOrders, "Paid Order");
-	}
+
 	public void clickClearAllTransactionType() {
-        click(lnkClearAllTransactionType, "All Transction Type");
+		click(lnkClearAllTransactionType, "All Transction Type");
 	}
+
+	public void clickBankAccountCheckBox() {
+		click(getCheckBoxes("Bank Account"), "Bank Account");
+	}
+
 	public void clickInstantPayCheckBox() {
-		click(chkBxInstantPay, "Instant Pay");
+		click(getCheckBoxes("Instant Pay"), "Instant Pay");
 	}
+
 	public void clickGiftCardCheckBox() {
-		click(chkBxGiftCard, "Gift Card");
+		click(getCheckBoxes("Gift Card"), "Gift Card");
 	}
+
 	public void clickCreditCardCheckBox() {
-		click(chkBxCreditCard, "Credit Card");
+		click(getCheckBoxes("Credit Card"), "Credit Card");
 	}
+
 	public void clickDebitCardCheckBox() {
-		click(chkBxDebitCard, "Debit Card");
+		click(getCheckBoxes("Debit Card"), "Debit Card");
 	}
-	public void clickSalesOrderTokenCheckBox() {
-		click(chkBxchkBxSaleOrderToken, "Sales Order Token");
+
+	public void clickSentCheckBox() {
+		click(getCheckBoxes("Sent"), "Sent");
 	}
-	public void clickclickClearAllTransactionSubType() {
+
+	public void clickReceivedCheckBox() {
+		click(getCheckBoxes("Received"), "Received");
+	}
+	public void clickClearAllTransactionSubType() {
 		click(lnkClearAllTransactionSubtype, "All Transaction SubType");
 	}
-	public void clickBankAccountCheckBox() {
-		click(chkBxBankAccount, "Bank Account");
-	}
+
 	public void fillFromAmount(String amount) {
 		enterText(txtFromAmount, amount, "Amount");
-	
+
 	}
+
 	public void fillToAmount(String amount) {
 		enterText(txtToAmount, amount, "Amount");
 	}
+
 	public void clickClearTransactionAmount() {
 		click(lnkClearTransactionAmount, "Transaction Amount");
 	}
+
 	public void fillReferenceID(String referenceID) {
+		copyDataToClipboard(referenceID);
 		enterText(txtReferenceID, referenceID, "Reference ID");
 	}
+
 	public void clickClearReferenceID() {
 		click(lnkClearReferenceID, "Reference ID");
 	}
-	public void fillMerchantName(String merchantName) {
-		enterText(txtMerchantName, merchantName, "Merchant Name");
-	}
-	public void clickClearMerchantName() {
-		click(lnkClearMerchantName, "Merchant Name");
-	}
+
 	public void clickPendingCheckBox() {
-		click(chkBxPending, "Pending");
+		click(getCheckBoxes("Pending"), "Pending");
 	}
+
 	public void clickCompletedCheckBox() {
-		click(chkBxCompleted, "Completed");
+		click(getCheckBoxes("Completed"), "Completed");
 	}
+
 	public void clickCanceledCheckBox() {
-		click(chkBxCanceled, "Cancel");
+		click(getCheckBoxes("Cancelled"), "Cancelled");
 	}
+
 	public void clickFailedCheckBox() {
-		click(chkBxFailed, "Failed");
+		click(getCheckBoxes("Failed"), "Failed");
 	}
+
 	public void clickInProgressCheckBox() {
-		click(chkBxInProgress, "In Progress");
+		click(getCheckBoxes("In Progress"), "In Progress");
 	}
-	public void clickClearAllTransactionStatus() {
-		click(lnkClearAllTrasactionStatus, "All Transaction Status");
-	}
-	public void clickResetAllFilters() {
-		click(btnResetAllFilters, "Reset All Filters");
-	}
+
 	public void clickApplyFilters() {
 		click(btnApplyFilters, "Apply Filters");
 	}
+
+	public void scroolDownToElement() {
+		scrollToElement(txtReferenceID, "Reference ID");
+	}
+
+	public CalendarComponponent calendarComponponent() {
+		return new CalendarComponponent();
+	}
+
+	public DatePickerComponent datePickerComponent() {
+		return new DatePickerComponent();
+	}
+
+	public void getNoRecordsFound() {
+		if (getElementsList(msgNoRecoreds, "No Records Found").size() > 0) {
+			ExtentTestManager.setInfoMessageInReport("Table contains Records");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Table does not contains any records");
+		}
+	}
+
 }

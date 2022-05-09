@@ -2169,5 +2169,31 @@ public class TokenAccountTest {
 					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testFilter(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.transactionsListComponent().clickFilterButton();
+			tokenAccountPage.transactionsListComponent().filterComponent().calendarComponponent().clickStartDate();
+			tokenAccountPage.transactionsListComponent().filterComponent().datePickerComponent().setDate(data.get("startDate"));
+			tokenAccountPage.transactionsListComponent().filterComponent().datePickerComponent().setDate(data.get("endDate"));
+			Thread.sleep(5000);
+			tokenAccountPage.transactionsListComponent().filterComponent().scroolDownToElement();
+     		tokenAccountPage.transactionsListComponent().filterComponent().clickCheckBox(data.get("checkBox"));
+     		tokenAccountPage.transactionsListComponent().filterComponent().fillFromAmount(data.get("fromAmount"));
+     		tokenAccountPage.transactionsListComponent().filterComponent().fillToAmount(data.get("toAmount"));
+     		tokenAccountPage.transactionsListComponent().filterComponent().fillReferenceID(data.get("referenceID"));
+     		tokenAccountPage.transactionsListComponent().filterComponent().clickCheckBox(data.get("checkBox"));
+			tokenAccountPage.transactionsListComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
+			tokenAccountPage.transactionsListComponent().filterComponent().getNoRecordsFound();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+		
+	}
 
 }
