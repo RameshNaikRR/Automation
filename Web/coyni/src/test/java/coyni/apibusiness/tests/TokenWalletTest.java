@@ -49,6 +49,8 @@ public class TokenWalletTest {
 	public void testTokenWalletFiltersView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.filterComponent().verifyFilterBackgroundColor(data.get("backGround color"),
 					data.get("border"));
 			sideBarMenuComponent.filterComponent().verifyFilterCursorAction();
@@ -87,10 +89,13 @@ public class TokenWalletTest {
 	public void testTokenWalletFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.filterComponent().clickFilter();
 			if (data.get("validateDate").equalsIgnoreCase("Yes")) {
-				sideBarMenuComponent.filterComponent().clickStartDate();
-				sideBarMenuComponent.filterComponent().datePickerComponent().setDateWithYear(data.get("startDate"));
-				sideBarMenuComponent.filterComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+				sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
+				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
+				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
 				sideBarMenuComponent.filterComponent().verifyStartDate(data.get("expStartDate"));
 				sideBarMenuComponent.filterComponent().verifyEndDate(data.get("expEndDate"));
 			} else if (data.get("validateTransactionType").equalsIgnoreCase("Yes")) {
@@ -109,10 +114,10 @@ public class TokenWalletTest {
 					sideBarMenuComponent.filterComponent().clickCheckBox(checkBox[i]);
 				}
 
-			}else if(data.get("validateTransactionAmount").equalsIgnoreCase("Yes")) {
-				sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
+			} else if (data.get("validateTransactionAmount").equalsIgnoreCase("Yes")) {
 				sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
-			}else if(data.get("ValidateReferenceID").equalsIgnoreCase("Yes")) {
+				sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
+			} else if (data.get("ValidateReferenceID").equalsIgnoreCase("Yes")) {
 				sideBarMenuComponent.filterComponent().fill15CharReferenceId(data.get("referenceId"));
 			}
 			sideBarMenuComponent.filterComponent().clickApplyFilter();
@@ -124,10 +129,15 @@ public class TokenWalletTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTokenWalletFiltersValidations(String strParams) {
+	public void testTokenWalletFiltersClearAllFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideBarMenuComponent.filterComponent().daysMonthsDropDownComponent();
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.filterComponent().clickFilter();
+			sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
+			sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
+			sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
 			sideBarMenuComponent.filterComponent().clickWalletTransferChkbx();
 			sideBarMenuComponent.filterComponent().clickBuyTokenChkBx();
 			sideBarMenuComponent.filterComponent().clickWithdrawChkbx();
@@ -136,8 +146,8 @@ public class TokenWalletTest {
 			sideBarMenuComponent.filterComponent().clickInstantPayChkbx();
 			sideBarMenuComponent.filterComponent().clickSignetChkbx();
 			sideBarMenuComponent.filterComponent().clickTrasactionSubtypeClearAll();
-			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
+			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().clickTransactionAmntClear();
 			sideBarMenuComponent.filterComponent().fill15CharReferenceId(data.get("refernceID"));
 			sideBarMenuComponent.filterComponent().clickReferenceIdClear();
@@ -147,16 +157,31 @@ public class TokenWalletTest {
 			sideBarMenuComponent.filterComponent().clickInprogressChkbx();
 			sideBarMenuComponent.filterComponent().clickFailedChkbx();
 			sideBarMenuComponent.filterComponent().clickTransactionStatusClearAll();
-			// 2nd validation
-			// sideBarMenuComponent.filterComponent().daysMonthsDropDownComponent();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Token Wallet Filters Clear All  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletResetAllFiltersFlow(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.filterComponent().clickFilter();
+			sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
+			sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
+			sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
 			sideBarMenuComponent.filterComponent().clickWalletTransferChkbx();
 			sideBarMenuComponent.filterComponent().clickBuyTokenChkBx();
 			sideBarMenuComponent.filterComponent().clickWithdrawChkbx();
 			sideBarMenuComponent.filterComponent().clickBankAccountChkbx();
 			sideBarMenuComponent.filterComponent().clickInstantPayChkbx();
 			sideBarMenuComponent.filterComponent().clickSignetChkbx();
-			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
+			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().fill15CharReferenceId(data.get("refernceID"));
 			sideBarMenuComponent.filterComponent().clickPendingChkbx();
 			sideBarMenuComponent.filterComponent().clickCompletedChkbx();
@@ -167,48 +192,109 @@ public class TokenWalletTest {
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Token Wallet Filters Validations Failed due to Exception " + e);
+					.setFailMessageInReport("test Token Wallet ResetAll Filters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletExportsView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.exportComponent().clickExport();
+			sideBarMenuComponent.exportComponent().verifyExportBackgroundColor(data.get("backgroundColor"),
+					data.get("border"));
+			sideBarMenuComponent.exportComponent().verifyExportCursorAction();
+			sideBarMenuComponent.exportComponent().verifyExportsSelectedOptionsView();
+			sideBarMenuComponent.exportComponent().verifyDateRangeView();
+			sideBarMenuComponent.exportComponent().verifyTodayView();
+			sideBarMenuComponent.exportComponent().verifyYesterdayView();
+			sideBarMenuComponent.exportComponent().verifyLast7DatsView();
+			sideBarMenuComponent.exportComponent().verifyMonthtoDateView();
+			sideBarMenuComponent.exportComponent().verifyLastMonthView();
+			sideBarMenuComponent.exportComponent().verifyCustomDateRangeView();
+			sideBarMenuComponent.exportComponent().verifyColumnsView();
+			sideBarMenuComponent.exportComponent().verifyDefault8View();
+			sideBarMenuComponent.exportComponent().verifyDefault8Desc(data.get("description"));
+			sideBarMenuComponent.exportComponent().clickimgDropdown();
+			sideBarMenuComponent.exportComponent().verifyDateandTimeChkbxView();
+			sideBarMenuComponent.exportComponent().verifyReferenceIDChkbxView();
+			sideBarMenuComponent.exportComponent().verifyTypeChkbxView();
+			sideBarMenuComponent.exportComponent().verifySubTypeChkbxView();
+			sideBarMenuComponent.exportComponent().verifyDescriptionChkbxView();
+			sideBarMenuComponent.exportComponent().verifyAmountChkbxView();
+			sideBarMenuComponent.exportComponent().verifyBalanceChkbxView();
+			sideBarMenuComponent.exportComponent().verifyStatusChkbxView();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Exports View Failed due to Exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({"strParams"})
-	public void testTokenWalletExportsView(String strParams) {
+	public void testTokenWalletExports(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		sideBarMenuComponent.exportComponent().clickExport();
-		sideBarMenuComponent.exportComponent().verifyExportBackgroundColor(data.get("backgroundColor"), data.get("border"));
-		sideBarMenuComponent.exportComponent().verifyExportCursorAction();
-		sideBarMenuComponent.exportComponent().verifyExportsSelectedOptionsView();
-		sideBarMenuComponent.exportComponent().verifyDateRangeView();
-		sideBarMenuComponent.exportComponent().verifyTodayView();
-		sideBarMenuComponent.exportComponent().verifyYesterdayView();
-		sideBarMenuComponent.exportComponent().verifyLast7DatsView();
-		sideBarMenuComponent.exportComponent().verifyMonthtoDateView();
-		sideBarMenuComponent.exportComponent().verifyLastMonthView();
-		sideBarMenuComponent.exportComponent().verifyCustomDateRangeView();
-		sideBarMenuComponent.exportComponent().verifyColumnsView();
-		sideBarMenuComponent.exportComponent().verifyDefault8View();
-		sideBarMenuComponent.exportComponent().verifyDefault8Desc(data.get("description"));
-		sideBarMenuComponent.exportComponent().clickimgDropdown();
-		sideBarMenuComponent.exportComponent().verifyDateandTimeChkbxView();
-		sideBarMenuComponent.exportComponent().verifyReferenceIDChkbxView();
-		sideBarMenuComponent.exportComponent().verifyTypeChkbxView();
-		sideBarMenuComponent.exportComponent().verifySubTypeChkbxView();
-		sideBarMenuComponent.exportComponent().verifyDescriptionChkbxView();
-		sideBarMenuComponent.exportComponent().verifyAmountChkbxView();
-		sideBarMenuComponent.exportComponent().verifyBalanceChkbxView();
-		sideBarMenuComponent.exportComponent().verifyStatusChkbxView();
-		
-	}
-		catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("test Token Wallet Exports View Failed due to Exception " + e);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.exportComponent().clickExport();
+			if (data.get("validate").equalsIgnoreCase("Today")) {
+				sideBarMenuComponent.exportComponent().clickToday();
+			} else if (data.get("validate").equalsIgnoreCase("Yesterday")) {
+				sideBarMenuComponent.exportComponent().clickYesterday();
+			} else if (data.get("validate").equalsIgnoreCase("Last7Days")) {
+				sideBarMenuComponent.exportComponent().clickLast7Days();
+			} else if (data.get("validate").equalsIgnoreCase("MonthToDate")) {
+				sideBarMenuComponent.exportComponent().clickMonthtoDate();
+			} else if (data.get("validate").equalsIgnoreCase("LastMonth")) {
+				sideBarMenuComponent.exportComponent().clickLastMonth();
+			} else if (data.get("validate").equalsIgnoreCase("CustomDateRange")) {
+				sideBarMenuComponent.exportComponent().clickCustomDateRange();
+				sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
+				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
+				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
+				sideBarMenuComponent.exportComponent().verifyStartDate(data.get("expStartDate"));
+				sideBarMenuComponent.exportComponent().verifyEndDate(data.get("expEndDate"));
+			}
+			sideBarMenuComponent.exportComponent().clickExport();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Exports failed due to Exception " + e);
 		}
 	}
 	
+	@Test
+	public void testTokenWalletExportsCustom() {
+		try {
+		    Map<String, String> data = Runner.getKeywordParameters(null);
+		    sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+		    sideBarMenuComponent.exportComponent().clickExport();
+		    sideBarMenuComponent.exportComponent().clickToday();
+		    sideBarMenuComponent.exportComponent().clickimgDropdown();
+		    sideBarMenuComponent.exportComponent().verifyDeselectAllView();
+		    sideBarMenuComponent.exportComponent().clickDeselectAll();
+		    sideBarMenuComponent.exportComponent().clickDateandTimeChkbx();
+		    sideBarMenuComponent.exportComponent().clickReferenceIDChkbx();
+		    sideBarMenuComponent.exportComponent().clickTypeChkbx();
+		    sideBarMenuComponent.exportComponent().clickSubTypeChkbx();
+		    sideBarMenuComponent.exportComponent().clickDescriptionChkbx();
+		    sideBarMenuComponent.exportComponent().clickAmountChkbx();
+		    sideBarMenuComponent.exportComponent().clickBalanceChkbx();
+		    sideBarMenuComponent.exportComponent().clickStatusChkbx();
+		    sideBarMenuComponent.exportComponent().clickExport();
+		    sideBarMenuComponent.exportComponent().verifyPopupHeading(data.get("heading"));
+		    sideBarMenuComponent.exportComponent().verifyPopupHeadingView();
+		    sideBarMenuComponent.exportComponent().clickClose();
+		    
+		}catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Exports Custom is failed due to Exception " + e);
+		}
+	}
 	
-	
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testTokenWalletBalance(String strParams) {

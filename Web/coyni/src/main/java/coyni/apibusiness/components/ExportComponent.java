@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ExportComponent extends BrowserFunctions {
 	private By btnExport = By.xpath("//button[text()='Export'] or (//button[text()='Export'])[2]");
@@ -17,13 +18,50 @@ public class ExportComponent extends BrowserFunctions {
 	private By lnkDeselectAll = By.xpath("//span[text()='Deselect All']");
 	private By lblDefault8 = By.xpath("//div[text()='Default (8)']");
 	private By txtdefault8Desc  = By.xpath("//p[@class='export-modal__default-column-label']");
+    private By lblpopuphdng  = By.xpath("//h2[text()='Your Export is Being Prepared']");
+    private By lnkExportPage = By.xpath("//strong[text()='Export page.']");
+    private By btnClose = By.xpath("//button[text()='Close']");
+    private By popuphdngDesc = By.xpath("//span[@class='text-sm text-cgy3']");
+    public void verifyPopupHeading(String heading) {
+    	new CommonFunctions().verifyLabelText(lblpopuphdng, "heading", "heading");
+    }
+    public void verifyPopupHeadingView() {
+    	new CommonFunctions().elementView(popuphdngDesc, "Export popup description");
+    }
+    public void clickExportPage() {
+    	click(lnkExportPage, "Export Page");
+    }
+    public void clickClose() {
+    	click(btnClose, "close");
+    }
+	public void verifyStartDate(String expectedDate) {
+		String actualDate = getText(txtStartDate, "start Date");
+		if (actualDate.equals(expectedDate)) {
+			ExtentTestManager.setPassMessageInReport("start Date is verified");
+		} else {
+			ExtentTestManager.setFailMessageInReport("start Date is not verified");
+		}
+	}
 
-	
+	public void verifyEndDate(String expectedDate) {
+		String actualDate = getText(txtEndDate, "end Date");
+		if (actualDate.equals(expectedDate)) {
+			ExtentTestManager.setPassMessageInReport("End date is verified");
+		} else {
+			ExtentTestManager.setFailMessageInReport("End Date is not verified");
+		}
+	}
 	public By getToggleInputs(String text) {
 		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", text));
 	}
+	public void clickToggleInputs(String text) {
+		click(getToggleInputs(text), text);
+	}
 	public By getExportCheckBoxes(String text) {
 		return By.xpath(String.format("(//span[text()='%s'])[2]/preceding-sibling::input", text));
+	}
+	public void clickExportCheckBoxes(String text) {
+		click(getExportCheckBoxes(text), text);
 	}
 	public void verifyDefault8View() {
 		new CommonFunctions().elementView(lblDefault8, "Default8");
@@ -147,8 +185,14 @@ public class ExportComponent extends BrowserFunctions {
 	public void clickDeselectAll() {
 		click(lnkDeselectAll, "Deselect All");
 	}
+	public void verifyDeselectAllView() {
+		new CommonFunctions().elementView(lnkDeselectAll, "Deselect All");
+	}
 	public void verifyDefault8Desc(String description) {
 		new CommonFunctions().verifyLabelText(txtdefault8Desc, "description", "description");
+	}
+	public DatePickerComponent datePickerComponent() {
+		return new DatePickerComponent();
 	}
 	
 }

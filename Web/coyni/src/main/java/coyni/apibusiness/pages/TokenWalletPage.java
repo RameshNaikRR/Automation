@@ -39,6 +39,10 @@ public class TokenWalletPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport(
 				rowNum + " WalletAmount: " + getText(getWalletListElements("3", rowNum), "") + " CYN");
 	}
+	
+	public void clickIndividualWalletsName( ) {
+		click(getWalletListElements("2", "1"),"");
+	}
 
 	public void getIndividualWalletAddress(String rowNum) {
 

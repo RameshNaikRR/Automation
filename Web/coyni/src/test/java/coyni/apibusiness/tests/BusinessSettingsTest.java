@@ -27,6 +27,8 @@ public class BusinessSettingsTest {
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyUserImageView();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountIdView();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountId(data.get("accountID"));
+	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountStatusView();
+	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountStatus(data.get("accountStatus"));
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyCompanyInformationView();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyDBAInformationView();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
@@ -50,18 +52,6 @@ public class BusinessSettingsTest {
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickApiKey();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyWebHooksView();
 	   sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickWebhooks();
-	if(data.get("accountStatus").equalsIgnoreCase("Active")) {
-		sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountStatus(data.get("accountStatus"));
-	   }
-	else if(data.get("accountStatus").equalsIgnoreCase("Scheduled")) {
-		sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountStatus(data.get("accountStatus"));
-	}
-	else{
-		sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountStatus(data.get("accountStatus"));
-	}
-	   
-	   
-		
 	}
 
 }

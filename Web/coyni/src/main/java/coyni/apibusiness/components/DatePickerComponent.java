@@ -21,16 +21,16 @@ public class DatePickerComponent {
 	private static final String SPACE = " ";
 	private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
-	@FindBy(xpath = "//button[@class=\"rc_header_nav rc_header_nav-prev\"]")
+	@FindBy(css = ".react-datepicker__navigation--previous")
 	private WebElement prev;
 
-	@FindBy(xpath = "//button[@class=\"rc_header_nav rc_header_nav-next\"]")
+	@FindBy(css = ".react-datepicker__navigation--next")
 	private WebElement next;
 
-	@FindBy(css = ".rc_header_label-days-of-month")
+	@FindBy(xpath = "(//div[contains(@class,'current-month')])[1]")
 	private WebElement curDate;
 
-	@FindBy(css = ".rc_active button")
+	@FindBy(xpath = "(//div[contains(@class,'current-month')])[1]/../following-sibling::*[1]//div[contains(@class,'react-datepicker__day react-datepicker__day') and not(contains(@class,'outside'))]")
 	private List<WebElement> dates;
 
 	@FindBy(xpath = "//div[@class='rc_body-cell' or @class='rc_body-cell rc_this_year']")

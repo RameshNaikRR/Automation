@@ -287,6 +287,9 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickStartDate() {
 		click(txtStartDate, "start Date");
 	}
+	public CalendarComponponent calendarComponponent() {
+		return new CalendarComponponent();
+	}
 
 	public DatePickerComponent datePickerComponent() {
 		return new DatePickerComponent();
