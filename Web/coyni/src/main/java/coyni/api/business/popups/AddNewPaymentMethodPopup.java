@@ -8,7 +8,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	private By btnBankAccount = By
-			.xpath("//button[@class='payment-method-button ']/following-sibling::*[1]/div/span[text()='Bank Account']");
+			.xpath("//span[text()='Bank Account']");
 	private By btnDebit = By
 			.xpath("//button[@class='payment-method-button ']/following-sibling::*[1]/div/span[text()='Debit Card']");
 	private By btnSignetAccount = By.xpath(

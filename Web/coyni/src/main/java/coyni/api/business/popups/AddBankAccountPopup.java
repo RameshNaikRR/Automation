@@ -8,7 +8,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AddBankAccountPopup extends BrowserFunctions{
 	
-	private By btnIamReady = By.xpath("");
+	private By btnIamReady = By.cssSelector(".w-60");
     private By headingNewWindow = By.xpath("//h1[text()='Add Accounts']");
     private By txtBankName = By.xpath("//input[@id='searchbar']");
     private By lnkBankName = By.xpath("(//div[@class='autoResultBankName'])[1]");

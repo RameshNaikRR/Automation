@@ -32,6 +32,10 @@ public class AddCardComponent extends BrowserFunctions {
 		enterText(txtCVVorCVC, cvvOrCvc, "CVV or CVC");
 	}
 
+	public void switchToWindow() {
+		new CommonFunctions().switchTodWindow();
+	}
+
 	public void verifylblErrorMsg(String expErrorMsg) {
 		new CommonFunctions().verifyLabelText(lblErrorMsg, "Error Message", expErrorMsg);
 
@@ -40,11 +44,11 @@ public class AddCardComponent extends BrowserFunctions {
 	public void verifyAddNewCreditCard(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblNewCreditCard, "Add New Credit Card PopUp Heading", expHeading);
 	}
-	
+
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
-	
+
 	public void validateCardBrand(String cardType) {
 
 		String brandClass = getAttributeValue(lblCardType, "class", "card brand");
@@ -56,7 +60,7 @@ public class AddCardComponent extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("invalid card type: " + cardType.toUpperCase());
 		}
 	}
-	
+
 	public void validateNameField(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
 		for (int i = 0; i < 4; i++) {
@@ -68,7 +72,9 @@ public class AddCardComponent extends BrowserFunctions {
 		}
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[7]);
 	}
-	
 
-	
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
+
 }

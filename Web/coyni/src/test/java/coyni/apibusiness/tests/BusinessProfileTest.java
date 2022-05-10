@@ -494,30 +494,26 @@ public class BusinessProfileTest {
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.switchToWindow();
 			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.verifyNewHeading(strParams);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.verifyNewHeading(strParams);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.enterBankName(data.get("expBankName"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.clickOnBankName();
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.enterUserName(data.get("expUserName"));
-			;
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.enterPassword(data.get("expPassword"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickNext();
-			;
 			Thread.sleep(5000);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.unSelectBank();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.clickUncheckBank();
+			Thread.sleep(5000);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.switchToWindow();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.successFailureComponent().verifyBankAddSuccesfulHeaading();
-			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
@@ -584,7 +580,11 @@ public class BusinessProfileTest {
 					.mailingAddressComponent().verifyCountry(data.get("country"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().clickSave();
+			Thread.sleep(4000);
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
+//			Thread.sleep(3000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent().switchToWindow();
+			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().verifyHeading();
 			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
 			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
 			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent()
@@ -610,6 +610,7 @@ public class BusinessProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsAddExternalBank(String strParams) {
+		homePage.sideBarComponent().clickBusinessSettings();
 		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 				.clickAddNewPayment();
@@ -619,10 +620,38 @@ public class BusinessProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsAddDebitCard(String strParams) {
+		homePage.sideBarComponent().clickBusinessSettings();
 		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 				.clickAddNewPayment();
 		testAddCard(strParams, "debit");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickBusinessSettings();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().elementScroll();
+			Thread.sleep(1000);
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().clickDeleteCard();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().verifyRemoveHeading(data.get("heading"));
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().clickOnRemove();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().successFailureComponent()
+					.verifyPaymnetRemovedSuccessfulHeading(data.get("successHeading"));
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.removePaymentMethodPopup().successFailureComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Test Business Settings Delete Debit card  failed  due to this " + e);
+		}
 	}
 
 	@Test
@@ -649,8 +678,12 @@ public class BusinessProfileTest {
 	public void testBusinenssSettingsSignetAccount(String strParams) {
 		try {
 			Thread.sleep(1000);
+			homePage.sideBarComponent().clickBusinessSettings();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.clickAddNewPayment();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().clickSignetAccount();
 			testSignetAccount(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -664,33 +697,40 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
+//			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.addNewPaymentMethodPopup().addNewSignetAccountPopup().verifyPageHeading(data.get("heading"));
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().clickSignetAccount();
-//			homePage.sideBarComponent().businessSettingsMenuComponent().paymentMethodComponent()
-//					.addNewPaymentMethodPopup().switchToWindow();
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().verifyPageHeading(data.get("heading"));
-			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillName(data.get("name"));
-			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillSignetWalletId(data.get("walletId"));
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
 					.fillAddress1(data.get("address1"));
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
-					.fillAddress2("address2");
-			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent().fillCity("city");
+					.fillAddress2(data.get("address2"));
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
-					.selectState("state");
+					.fillCity(data.get("city"));
+			Thread.sleep(500);
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
-					.fillZipCode("zipCode");
+					.selectState(data.get("state"));
+			Thread.sleep(1000);
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent().clickSave();
-
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().clickSave();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.verifySignetSucessfulHeading(data.get("heading1"));
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.verifySignetSucessfulHeading2(data.get("heading2"));
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.navigationComponent().clickClose();
 		} catch (
 
 		Exception e) {
@@ -702,14 +742,64 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsAddBankAccountWithOutPaymentMethod(String strParams) {
+	public void testBusinessSettingsAddDebitCardWithOutPaymentMethod(String strParams) {
 		try {
+			homePage.sideBarComponent().clickBusinessSettings();
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().clickBankAccount();
-			apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
-			testAddExternalBankAccount(strParams);
+					.clickAddNewPayment();
+			Thread.sleep(1000);
+			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().clickDebit();
+			testAddCard(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddBankAccountWithoutPaymentMethod is failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsEditDebitCard(String strParams) {
+		homePage.sideBarComponent().clickBusinessSettings();
+		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
+		homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent().clickEdit();
+		testEditCard(strParams, "debit");
+	}
+
+	private void testEditCard(String strParams, String string) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			APIAdminProfilePage apiAdminProfilePage = new APIAdminProfilePage();
+
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillNameOnCard(data.get("nameOnCard"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateCardBrand(data.get("cardType"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardExpiry(data.get("cardExpiry"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress1(data.get("address1"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress2(data.get("address2"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillCity(data.get("city"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().selectState(data.get("state"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().verifyCountry(data.get("country"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().clickSave();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.successFailureComponent().verifyPaymentEditSuccess(data.get("successHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
 
 	}
