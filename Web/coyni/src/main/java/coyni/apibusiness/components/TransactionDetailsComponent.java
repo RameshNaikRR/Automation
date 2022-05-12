@@ -1,0 +1,499 @@
+package coyni.apibusiness.components;
+
+import org.openqa.selenium.By;
+
+import coyni.uitilities.CommonFunctions;
+import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
+
+public class TransactionDetailsComponent extends BrowserFunctions {
+	private By lblHeading = By.cssSelector("p[class*='TokenTransactionDetails_MainTitle']");
+	private By lblTransactionType = By.xpath("//span[.='Transaction Type']");
+//	private By verifylblTransactionType(String lblTransactionType) {
+//		return By.xpath(String.format("//span[.='Transaction Type']", lblTransactionType));
+//	}
+	private By lblTransactionSubType = By.xpath("(//p[contains(@class,'TokenBuyTokenDetails_row')])[1]");
+
+	// Reference ID is 2 and Deposit ID is 3 (Lables)
+	private By getLblIDheadings(String lblIdHeadings) {
+		return By.xpath(String.format("(//p[contains(@class,'TokenBuyTokenDetails_row')])[%s]", lblIdHeadings));
+	}
+
+	private By getlblCreatedDate(String CreatedDateNum) {
+		return By.xpath(String.format("(//p[contains(@class,'row')])[%s]", CreatedDateNum));
+	}
+
+	private By getStatus(String Status) {
+		return By.xpath(String.format("//div[.='%s']", Status));
+	}
+
+//	private String TransactionType = getText(By.xpath("//p[.='Buy Token']"), "");
+	private By verifyTransactionType(String TransactionType) {
+		return By.xpath(String.format("//p[.='%s']", TransactionType));
+	}
+//	private By getTransactionType(String ) {
+//		return By.xpath(String.format("//p[.='Buy Token']", null));
+//	}
+
+	private By lblBankAccount = By.cssSelector("p[class*='TokenBuyTokenDetails_referenceTitle']");
+
+	// Reference and Deposit ID'S
+	private By getId(String ID) {
+		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", ID));
+	}
+
+	// Reference ID and Deposit ID copy links
+	private By getIdLnks(String IdLnks) {
+		return By.xpath(String.format("(//span[contains(@class,'copy-image icon-copy')])[1]", IdLnks));
+	}
+
+//	private By verifyCreatedDate = By.xpath("(//span[contains(@class,'referenceTitle')])[3]");
+
+	public By verifyCreatedDate(String Date) {
+		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", Date));
+	}
+
+	private By lblAmountCategory = By.cssSelector("div[class*='amount'][class*='cyn']>div:nth-of-type(1)");
+	private By lblAmount = By.cssSelector("div[class*='amount'][class*='cyn']>div:nth-of-type(2)>span:nth-of-type(1)");
+
+	private By getAmountDetails(String AmountDetailsNum) {
+		return By.xpath(String.format("(//div[contains(@class,'account_amount')])[%s]", AmountDetailsNum));
+	}
+
+	private By getInformationHeadings(String Headings) {
+		return By.xpath(String.format("//span[.='%s']", Headings));
+	}
+
+	private By lblType = By.cssSelector("table>tbody>tr:nth-of-type(2)>td:nth-of-type(2)");
+	private By lblSubType = By.cssSelector("table>tbody>tr:nth-of-type(2)>td:nth-of-type(3)");
+	private By transactions = By.xpath("//tr[contains(@class,'posted-txn')]/following-sibling::tr[1]");
+
+	private By getInformationDetails(String Type, String subType) {
+		return By.xpath(String.format("//div[contains(@class,'%s')]/..//p[text()='%s']/following-sibling::*[1]", Type,
+				subType));
+	}
+
+	private By getRecipientAccountIDaddressinfo = By.xpath(
+			"//div[contains(@class,'Recipient')]/..//span[text()='Recipient Account ID']/following-sibling::div[1]");
+	private By getSenderAccoutAddressInfo = By
+			.xpath("//span[text()='Sender Account Address']/following-sibling::*[1]/*[2]");
+
+	private By getLedgerInfo(String Type) {
+		return By.xpath(String.format("//span[.='%s']/following-sibling::*[1]//span[2]", Type));
+	}
+
+	private By getTransactionIPaddress = By.xpath("//span[.='Transaction IP Address']/following-sibling::*[1]");
+
+	public void verifyLblTransactionDetailsHeading(String Heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Transaction Details");
+	}
+
+	public void verifyLblTransactionType(String TransactionType) {
+		new CommonFunctions().verifyLabelText(lblTransactionType, TransactionType, "TransactionType");
+	}
+
+	public void verifyLblTransactionSubType(String TransactionSubType) {
+		new CommonFunctions().verifyLabelText(lblTransactionSubType, TransactionSubType, "TransactionSubType");
+	}
+
+	public void verifyLblBuyTokenCreatedDate() {
+		new CommonFunctions().verifyLabelText(getlblCreatedDate("4"), "Created Date", "Created Date");
+	}
+
+	public void verifyLblWalletTransferCreatedDate(String CreatedDate) {
+		new CommonFunctions().verifyLabelText(getlblCreatedDate("1"), CreatedDate, "Created Date");
+	}
+
+	public void verifyFailed() {
+		new CommonFunctions().verifyLabelText(getStatus("Completed"), "Completed", "Completed");
+	}
+
+	public void verifyCompleted() {
+		new CommonFunctions().verifyLabelText(getStatus("Failed"), "Failed", "Failed");
+	}
+
+	public void verifyInProgress() {
+		new CommonFunctions().verifyLabelText(getStatus("In Progress"), "In Progress", "In Progress");
+	}
+
+	public void verifyLblReferenceID(String ReferenceID) {
+		new CommonFunctions().verifyLabelText(getLblIDheadings("2"), ReferenceID, "ReferenceID");
+	}
+
+	public void verifyLblDepositID(String DepositID) {
+		new CommonFunctions().verifyLabelText(getLblIDheadings("3"), DepositID, "DepositID");
+	}
+
+//	public void getBuyTokenTransactionType() {
+//		new CommonFunctions().verifyLabelText(verifyTransactionType("Buy Token"), "Buy Token", "Buy Token");
+//	}
+	public void getBuyTokenTransactionType() {
+		String TransactionType = getText(verifyTransactionType("Buy Token"), "");
+		ExtentTestManager.setInfoMessageInReport("Transaction Type: " + TransactionType);
+	}
+
+//	public void getWalletTransferTransactionType() {
+//		new CommonFunctions().verifyLabelText(verifyTransactionType("Wallet Transfer"), "Wallet Transfer",
+//				"Wallet Transfer");
+//	}
+	public void getWalletTransferTransactionType() {
+		String TransactionType = getText(verifyTransactionType("Wallet Transfer"), "");
+		ExtentTestManager.setInfoMessageInReport("Wallet Transfer: " + TransactionType);
+	}
+
+//	public void getWalletReceivedTransactionType() {
+//		new CommonFunctions().verifyLabelText(verifyTransactionType("Wallet Received"), "Wallet Received",
+//				"Wallet Received");
+//	}
+	public void getWalletReceivedTransactionType() {
+		String TransactionType = getText(verifyTransactionType("Wallet Received"), "");
+		ExtentTestManager.setInfoMessageInReport("Wallet Received: " + TransactionType);
+	}
+
+	public void verifyBankAccount(String BankAccount) {
+		new CommonFunctions().verifyLabelText(lblBankAccount, BankAccount, "BankAccount");
+	}
+
+	public void verifyReferenceID(String ReferenceID) {
+		new CommonFunctions().verifyLabelText(getId("1"), ReferenceID, "ReferenceID");
+	}
+
+	public void verifyDepositID(String DepositID) {
+		new CommonFunctions().verifyLabelText(getId("2"), DepositID, "DepositID");
+	}
+
+	public void verifyReferenceIDlnk() {
+		new CommonFunctions().elementView(getIdLnks("1"), "Reference ID Link");
+//		click(getIdLnks("1"), getCopiedData());
+	}
+
+	public void verifyDepositIDlnk() {
+		new CommonFunctions().elementView(getIdLnks("2"), "Deposit ID Link");
+	}
+
+//	public void getCreatedDateValue() {
+//		String date = getText(verifyCreatedDate, "");
+//		if (!date.isEmpty()) {
+//			ExtentTestManager.setInfoMessageInReport("Created Date: " + date);
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Created Date: " + date);
+//		}
+//	}
+	
+	public void verifyAmountCategory(String AmountCategory) {
+		new CommonFunctions().verifyLabelText(lblAmountCategory, AmountCategory, "AmountCategory");
+	}
+
+	public void verifyAmount() {
+		String Amount = getText(lblAmount, "");
+		if (!Amount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Amount: " + Amount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Amount: " + Amount);
+		}
+	}
+
+	public void getWalletTransferProcessingFee() {
+		String ProcessingFee = getText(getAmountDetails("1"), "");
+		if (!ProcessingFee.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Processing Fee: " + ProcessingFee);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
+		}
+	}
+
+	public void getWalletTransferTotalAmount() {
+		String TotalAmount = getText(getAmountDetails("2"), "");
+		if (!TotalAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Total Amount : " + TotalAmount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
+		}
+	}
+
+	public void getBuyTokenPurchaseAmount() {
+		String PurchaseAmount = getText(getAmountDetails("1"), "");
+		if (!PurchaseAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + PurchaseAmount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Purchase Amount" + PurchaseAmount);
+		}
+	}
+
+	public void getBuyTokenProcessingFee() {
+		String ProcessingFee = getText(getAmountDetails("2"), "");
+		if (!ProcessingFee.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Processing Fee: " + ProcessingFee);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
+		}
+	}
+
+	public void getBuyTokenTotalAmount() {
+		String TotalAmount = getText(getAmountDetails("3"), "");
+		if (!TotalAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Total Amount: " + TotalAmount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
+		}
+	}
+
+	public void getBuyTokenAccountBalance() {
+		String AccountBalance = getText(getAmountDetails("4"), "");
+		if (!AccountBalance.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Account Balance: " + AccountBalance);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Account Balance: " + AccountBalance);
+		}
+	}
+
+	public void verifyLedgerInfoHeading() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Ledger Information"), "Ledger Information",
+				"Ledger Information");
+	}
+
+	public void verifyRecipientInfoHeading() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Recipient Information"), "Recipient Information",
+				"Recipient Information");
+	}
+
+	public void verifySenderInfoHeading() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Sender Information"), "Sender Information",
+				"Sender Information");
+	}
+
+	public void verifyBankAccountInfoHeading() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Bank Account Information"),
+				"Bank Account Information", "Bank Account Information");
+	}
+
+	public void verifyActivityLogHeading() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Activity Log"), "Activity Log", "Activity Log");
+	}
+
+	public void getNameOnAccount() {
+		String NameOnAccount = getText(getInformationDetails("Recipient", "Name On Account"), "");
+		if (!NameOnAccount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Name On Account: " + NameOnAccount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Name On Account: " + NameOnAccount);
+		}
+	}
+
+	public void getBankName() {
+		String BankName = getText(getInformationDetails("Recipient", "Bank Name"), "");
+		if (!BankName.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Bank Name: " + BankName);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Bank Name: " + BankName);
+		}
+	}
+
+	public void getBankAccountNumber() {
+		String BankAccountNumber = getText(getInformationDetails("Recipient", "Bank Account Number"), "");
+		if (!BankAccountNumber.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Bank Account Number: " + BankAccountNumber);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Bank Account Number: " + BankAccountNumber);
+		}
+	}
+
+	public void getRecipientAccountID() {
+		String RecipientAccountID = getText(getInformationDetails("Recipient", "Recipient Account ID"), "");
+		if (RecipientAccountID != null) {
+			ExtentTestManager.setInfoMessageInReport("Recipient Account ID: " + RecipientAccountID);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Recipient Account ID: " + RecipientAccountID);
+		}
+	}
+
+	public void getRecipientName() {
+		String RecipientName = getText(getInformationDetails("Recipient", "Recipient Name"), "");
+		if (!RecipientName.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Recipient Name: " + RecipientName);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Recipient Name: " + RecipientName);
+		}
+	}
+
+	public void getRecipientAccountIDaddress() {
+		String RecipientAccountIDaddress = getText(getRecipientAccountIDaddressinfo, "");
+		if (!RecipientAccountIDaddress.isEmpty()) {
+			click(getRecipientAccountIDaddressinfo, "");
+			ExtentTestManager.setInfoMessageInReport("Recipient Account ID Address: " + getCopiedData());
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Recipient Account ID Address: " + getCopiedData());
+		}
+	}
+
+	public void getRecipientEmail() {
+		String RecipientEmail = getText(getInformationDetails("Recipient", "Recipient Email"), "");
+		if (!RecipientEmail.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Recipient Email: " + RecipientEmail);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Recipient Email: " + RecipientEmail);
+		}
+	}
+
+	public void getRecipientPhone() {
+		String RecipientPhone = getText(getInformationDetails("Recipient", "Recipient Phone"), "");
+		if (!RecipientPhone.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Recipient Phone: " + RecipientPhone);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Recipient Phone: " + RecipientPhone);
+		}
+	}
+
+	public void getSenderAccountID() {
+		String SenderAccountID = getText(getInformationDetails("Sender", "Sender Account ID"), "");
+		if (!SenderAccountID.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Sender Account ID: " + SenderAccountID);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Sender Account ID: " + SenderAccountID);
+		}
+	}
+
+	public void getSenderName() {
+		String SenderName = getText(getInformationDetails("Sender", "Sender Name"), "");
+		if (!SenderName.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Sender Name: " + SenderName);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Sender Name: " + SenderName);
+		}
+	}
+
+	public void getSenderAccountAddress() {
+		String SenderAccountAddress = getText(getSenderAccoutAddressInfo, "");
+		if (!SenderAccountAddress.isEmpty()) {
+			click(getSenderAccoutAddressInfo, "");
+			ExtentTestManager.setInfoMessageInReport("Sender Account Address: " + getCopiedData());
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Sender Account Address: " + getCopiedData());
+		}
+	}
+
+	public void getSenderEmail() {
+		String SenderEmail = getText(getInformationDetails("Sender", "Sender Email"), "");
+		if (!SenderEmail.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Sender Email: " + SenderEmail);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Sender Email: " + SenderEmail);
+		}
+	}
+
+	public void getSenderPhone() {
+		String SenderPhone = getText(getInformationDetails("Sender", "Sender Phone"), "");
+		if (!SenderPhone.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Sender Phone: " + SenderPhone);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Sender Phone: " + SenderPhone);
+		}
+	}
+
+	public void getLedgerReferenceID() {
+		String ReferenceID = getText(getLedgerInfo("Reference ID"), "");
+		if (!ReferenceID.isEmpty()) {
+			click(getLedgerInfo("Reference ID"), "");
+			ExtentTestManager.setInfoMessageInReport("Reference ID: " + getCopiedData());
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Reference ID: " + getCopiedData());
+		}
+	}
+
+	public void getLedgerCordaID() {
+		String CordaID = getText(getLedgerInfo("Corda ID"), "");
+		if (!CordaID.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Corda ID: " + getCopiedData());
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Corda ID: " + getCopiedData());
+		}
+	}
+
+//	public void getReferenceID() {
+//		if (getText(getLedgerInfo("Reference ID"), "").isEmpty()) {
+//			ExtentTestManager.setInfoMessageInReport("Reference ID: " + getText(getLedgerInfo("Reference ID"), ""));
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Reference ID: " + getText(getLedgerInfo("Reference ID"), ""));
+//		}
+//	}
+//
+//	public void getCordaID() {
+//		if (getText(getLedgerInfo("Corda ID"), "").isEmpty()) {
+//			ExtentTestManager.setInfoMessageInReport("Corda ID: " + getText(getLedgerInfo("Corda ID"), ""));
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Corda ID: " + getText(getLedgerInfo("Corda ID"), ""));
+//		}
+//	}
+
+	public void getLedgerTransactionIPaddress() {
+		String TransactionIPaddress = getText(getTransactionIPaddress, "");
+		if (!TransactionIPaddress.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Transaction IP Address: " + TransactionIPaddress);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Transaction IP Address: " + TransactionIPaddress);
+		}
+	}
+
+	public void verifyTransactionType() {
+		new CommonFunctions().elementView(lblType, "Wallet");
+	}
+
+	public void verifyTransactionSubType() {
+		new CommonFunctions().elementView(lblSubType, getCopiedData());
+	}
+
+	public void clickTransactions() {
+		click(transactions, "Transactions");
+	}
+
+	public void getTransactionDetails() {
+		if (getText(lblType, "").equalsIgnoreCase("Buy Token")) {
+			if (getText(lblSubType, "").equalsIgnoreCase("Bank Account")) {
+
+			} else {
+//
+			}
+		}
+		if (getText(lblType, "").equalsIgnoreCase("Wallet")) {
+
+		}
+		if (getText(lblType, "").equalsIgnoreCase("Wallet")) {
+			if (getText(lblSubType, "").equalsIgnoreCase("Transfer")) {
+
+			} else {
+//
+			}
+		}
+	}
+
+	public void WalletTransferTransactionDetails(String lblHeading, String lblTransactionType,
+			String lblAmountCategory) {
+		verifyLblTransactionDetailsHeading(lblHeading);
+		verifyLblTransactionType(lblTransactionType);
+		verifyLblWalletTransferCreatedDate(lblAmountCategory);
+		verifyTransactionType(lblTransactionType);
+		getWalletTransferTransactionType();
+//		getCreatedDateValue();
+		verifyAmountCategory(lblAmountCategory);
+		verifyAmount();
+		getWalletTransferProcessingFee();
+		getWalletTransferTotalAmount();
+		verifyLedgerInfoHeading();
+		getLedgerReferenceID();
+		getLedgerCordaID();
+		getLedgerTransactionIPaddress();
+		verifyRecipientInfoHeading();
+		getRecipientAccountID();
+		getRecipientName();
+		getRecipientAccountIDaddress();
+		getRecipientEmail();
+		getRecipientPhone();
+		verifySenderInfoHeading();
+		getSenderAccountID();
+		getSenderName();
+		getSenderAccountAddress();
+		getSenderEmail();
+		getSenderPhone();
+
+	}
+}

@@ -191,8 +191,7 @@ public class TokenWalletTest {
 			sideBarMenuComponent.filterComponent().clickResetAllFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("test Token Wallet ResetAll Filters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("test Token Wallet ResetAll Filters Failed due to Exception " + e);
 		}
 	}
 
@@ -234,7 +233,7 @@ public class TokenWalletTest {
 	}
 
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testTokenWalletExports(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -264,36 +263,36 @@ public class TokenWalletTest {
 			ExtentTestManager.setFailMessageInReport("test Token Wallet Exports failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	public void testTokenWalletExportsCustom() {
 		try {
-		    Map<String, String> data = Runner.getKeywordParameters(null);
-		    sideBarMenuComponent.clickTokenwallet();
+			Map<String, String> data = Runner.getKeywordParameters(null);
+			sideBarMenuComponent.clickTokenwallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
-		    sideBarMenuComponent.exportComponent().clickExport();
-		    sideBarMenuComponent.exportComponent().clickToday();
-		    sideBarMenuComponent.exportComponent().clickimgDropdown();
-		    sideBarMenuComponent.exportComponent().verifyDeselectAllView();
-		    sideBarMenuComponent.exportComponent().clickDeselectAll();
-		    sideBarMenuComponent.exportComponent().clickDateandTimeChkbx();
-		    sideBarMenuComponent.exportComponent().clickReferenceIDChkbx();
-		    sideBarMenuComponent.exportComponent().clickTypeChkbx();
-		    sideBarMenuComponent.exportComponent().clickSubTypeChkbx();
-		    sideBarMenuComponent.exportComponent().clickDescriptionChkbx();
-		    sideBarMenuComponent.exportComponent().clickAmountChkbx();
-		    sideBarMenuComponent.exportComponent().clickBalanceChkbx();
-		    sideBarMenuComponent.exportComponent().clickStatusChkbx();
-		    sideBarMenuComponent.exportComponent().clickExport();
-		    sideBarMenuComponent.exportComponent().verifyPopupHeading(data.get("heading"));
-		    sideBarMenuComponent.exportComponent().verifyPopupHeadingView();
-		    sideBarMenuComponent.exportComponent().clickClose();
-		    
-		}catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Token Wallet Exports Custom is failed due to Exception " + e);
+			sideBarMenuComponent.exportComponent().clickExport();
+			sideBarMenuComponent.exportComponent().clickToday();
+			sideBarMenuComponent.exportComponent().clickimgDropdown();
+			sideBarMenuComponent.exportComponent().verifyDeselectAllView();
+			sideBarMenuComponent.exportComponent().clickDeselectAll();
+			sideBarMenuComponent.exportComponent().clickDateandTimeChkbx();
+			sideBarMenuComponent.exportComponent().clickReferenceIDChkbx();
+			sideBarMenuComponent.exportComponent().clickTypeChkbx();
+			sideBarMenuComponent.exportComponent().clickSubTypeChkbx();
+			sideBarMenuComponent.exportComponent().clickDescriptionChkbx();
+			sideBarMenuComponent.exportComponent().clickAmountChkbx();
+			sideBarMenuComponent.exportComponent().clickBalanceChkbx();
+			sideBarMenuComponent.exportComponent().clickStatusChkbx();
+			sideBarMenuComponent.exportComponent().clickExport();
+			sideBarMenuComponent.exportComponent().verifyPopupHeading(data.get("heading"));
+			sideBarMenuComponent.exportComponent().verifyPopupHeadingView();
+			sideBarMenuComponent.exportComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Token Wallet Exports Custom is failed due to Exception " + e);
 		}
 	}
-	
 
 //	@Test
 //	@Parameters({ "strParams" })
