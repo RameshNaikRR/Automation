@@ -2,7 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
-
+import coyni.apibusiness.pages.PreferencesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -157,8 +157,12 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public void verifyAccountStatusView() {
 		new CommonFunctions().elementView(lblAccountStatus, "Account Status");
 	}
+
 	public void verifyAccountStatus(String accountStatus) {
 		new CommonFunctions().verifyLabelText(lblActive, accountStatus, "Account status");
 	}
-   
+
+	public PreferencesPage preferencesPage() {
+		return new PreferencesPage();
+	}
 }
