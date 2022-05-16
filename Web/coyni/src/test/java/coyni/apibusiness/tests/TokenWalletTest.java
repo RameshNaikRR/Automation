@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import coyni.admin.components.FilterComponent;
+import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.TokenWalletPage;
 import ilabs.WebFramework.Runner;
@@ -14,16 +14,305 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenWalletTest {
 
-	TokenWalletPage tokenwalletPage;
+	TokenWalletPage tokenWalletPage;
 	SideBarMenuComponent sideBarMenuComponent;
 	FilterComponent filterComponent;
 
 	@BeforeMethod
 	public void init() {
 
-		tokenwalletPage = new TokenWalletPage();
+		tokenWalletPage = new TokenWalletPage();
 		sideBarMenuComponent = new SideBarMenuComponent();
 		filterComponent = new FilterComponent();
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletTransfer(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenWalletPage.sideBarMenuComponent().clickTokenwallet();
+//			tokenWalletPage.sideBarMenuComponent().verifyTokenWalletCursorAction();
+//			tokenWalletPage.sideBarMenuComponent().verifyTokenWalletColor();
+			sideBarMenuComponent.verifyTokenWalletView();
+			sideBarMenuComponent.verifyHandCursorAction();
+			sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
+			sideBarMenuComponent.clickTokenwallet();
+			tokenWalletPage.verifyHeading(data.get("tokenPageHeading"));
+			tokenWalletPage.clickTransfer(data.get("walletNumber"));
+			tokenWalletPage.tokenWalletTransferPopup().verifyHeading(data.get("transferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().verifyDescription(data.get("transferPopupDescription"));
+			tokenWalletPage.tokenWalletTransferPopup().fillAmount(data.get("amount"));
+			tokenWalletPage.tokenWalletTransferPopup().clickTransferToDropDown();
+			tokenWalletPage.tokenWalletTransferPopup().clickWallet1();
+			tokenWalletPage.tokenWalletTransferPopup().clickNext();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
+					.verifyHeading(data.get("walletTransferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().clickConfirm();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.verifyHeading(data.get("verifyYourIdentityHeading"));
+			Thread.sleep(2000);
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.authyComponent().fillInput(data.get("code"));
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.transactionSuccessfulPopup().verifyHeading(data.get("transactionSuccessfulHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.transactionSuccessfulPopup().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWalletTransfer exception happend due to this " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletTransferNavigationView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenWalletPage.sideBarMenuComponent().clickTokenwallet();
+//			tokenWalletPage.sideBarMenuComponent().verifyTokenWalletCursorAction();
+			sideBarMenuComponent.verifyTokenWalletView();
+			sideBarMenuComponent.verifyHandCursorAction();
+			sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
+			sideBarMenuComponent.clickTokenwallet();
+			tokenWalletPage.verifyHeading(data.get("tokenPageHeading"));
+			tokenWalletPage.clickTransfer(data.get("walletNumber"));
+			tokenWalletPage.tokenWalletTransferPopup().verifyHeading(data.get("transferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().navigationComponent().clickClose();
+			tokenWalletPage.clickTransfer(data.get("walletNumber"));
+			tokenWalletPage.tokenWalletTransferPopup().verifyHeading(data.get("transferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().fillAmount(data.get("amount"));
+			tokenWalletPage.tokenWalletTransferPopup().clickTransferToDropDown();
+			tokenWalletPage.tokenWalletTransferPopup().clickWallet1();
+			tokenWalletPage.tokenWalletTransferPopup().clickNext();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
+					.verifyHeading(data.get("walletTransferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().navigationComponent().clickBack();
+			tokenWalletPage.tokenWalletTransferPopup().verifyHeading(data.get("transferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().verifyAmount(data.get("expAmount"));
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().commonFunctions().clickOutSideElement();
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().clickNext();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
+					.verifyHeading(data.get("walletTransferPopupHeading"));
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().clickConfirm();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.verifyHeading(data.get("verifyYourIdentityHeading"));
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.navigationComponent().clickBack();
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
+					.verifyHeading(data.get("walletTransferPopupHeading"));
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
+					.verifyAmount(data.get("expAmount"));
+			Thread.sleep(1000);
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().clickConfirm();
+			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
+					.verifyHeading(data.get("verifyYourIdentityHeading"));
+//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().authyComponent().fillInput(data.get("code"));
+//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().transactionSuccessfulPopup().verifyHeading(data.get("transactionSuccessfulHeading"));
+//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().transactionSuccessfulPopup().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setPassMessageInReport("testTokenWalletNavigationView failed due to this exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletTransferView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.verifyTokenWalletView();
+			sideBarMenuComponent.verifyHandCursorAction();
+			sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().verifyHeading(data.get("tokenPageHeading"));
+			sideBarMenuComponent.tokenWalletPage().verifyTotalWalletBalanceView();
+//			sideBarMenuComponent.tokenWalletPage().getWalletInfo();
+			sideBarMenuComponent.tokenWalletPage().verifyTransfer();
+			sideBarMenuComponent.tokenWalletPage().clickTransfer(data.get("walletNumber"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet view is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWalletTransferTransactionDetails(String strParams) {
+		try {
+
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickWalletTransferChkbx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyWalletType();
+			tokenWalletPage.transactionDetailsComponent().verifyWalletTransferSubType();
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Wallet", "Transfer");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblWalletTransferCreatedDate(data.get("lblCreatedDate"));
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().verifyLedgerInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getLedgerReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getLedgerCordaID();
+			tokenWalletPage.transactionDetailsComponent().getLedgerTransactionIPaddress();
+			tokenWalletPage.transactionDetailsComponent().verifyRecipientInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getRecipientAccountID();
+			tokenWalletPage.transactionDetailsComponent().getRecipientName();
+			tokenWalletPage.transactionDetailsComponent().getRecipientAccountIDaddress();
+			tokenWalletPage.transactionDetailsComponent().getRecipientEmail();
+			tokenWalletPage.transactionDetailsComponent().getRecipientPhone();
+			tokenWalletPage.transactionDetailsComponent().verifySenderInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getSenderAccountID();
+			tokenWalletPage.transactionDetailsComponent().getSenderName();
+			tokenWalletPage.transactionDetailsComponent().getSenderAccountAddress();
+			tokenWalletPage.transactionDetailsComponent().getSenderEmail();
+			tokenWalletPage.transactionDetailsComponent().getSenderPhone();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWalletTransferTransactionDetails is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWalletRecievedTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickWalletTransferChkbx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyWalletType();
+			tokenWalletPage.transactionDetailsComponent().verifyWalletRecievedSubType();
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Wallet", "Received");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblWalletTransferCreatedDate(data.get("lblCreatedDate"));
+			tokenWalletPage.transactionDetailsComponent().getWalletReceivedTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getWalletRecievedCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getWalletTransferTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().verifyLedgerInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getLedgerReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getLedgerCordaID();
+			tokenWalletPage.transactionDetailsComponent().getLedgerTransactionIPaddress();
+			tokenWalletPage.transactionDetailsComponent().verifyRecipientInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getRecipientAccountID();
+			tokenWalletPage.transactionDetailsComponent().getRecipientName();
+			tokenWalletPage.transactionDetailsComponent().getRecipientAccountIDaddress();
+			tokenWalletPage.transactionDetailsComponent().getRecipientEmail();
+			tokenWalletPage.transactionDetailsComponent().getRecipientPhone();
+			tokenWalletPage.transactionDetailsComponent().verifySenderInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getSenderAccountID();
+			tokenWalletPage.transactionDetailsComponent().getSenderName();
+			tokenWalletPage.transactionDetailsComponent().getSenderAccountAddress();
+			tokenWalletPage.transactionDetailsComponent().getSenderEmail();
+			tokenWalletPage.transactionDetailsComponent().getSenderPhone();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWalletRecievedTransactionDetails is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenInProgressTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickBuyTokenChkBx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenType();
+			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenSubType();
+			Thread.sleep(2000);
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Buy Token", "Bank Account", "In Progress");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblDepositID(data.get("lblDepositID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblBuyTokenCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTransactionSubType();
+			tokenWalletPage.transactionDetailsComponent().getReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getDepositID();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenAccountBalance();
+			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().getBankName();
+			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
+			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenInProgressTransactionDetails failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenFailedTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickBuyTokenChkBx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenType();
+			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenSubType();
+			Thread.sleep(2000);
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Buy Token", "Bank Account", "Failed");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblDepositID(data.get("lblDepositID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblBuyTokenCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTransactionSubType();
+			tokenWalletPage.transactionDetailsComponent().getReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getDepositID();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().getBuyTokenAccountBalance();
+			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().getBankName();
+			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
+			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenFailedTransactionDetails failed due to " + e);
+		}
 	}
 
 	@Test

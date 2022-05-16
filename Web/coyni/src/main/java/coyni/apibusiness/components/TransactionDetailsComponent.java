@@ -1,6 +1,9 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -31,6 +34,9 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By verifyTransactionType(String TransactionType) {
 		return By.xpath(String.format("//p[.='%s']", TransactionType));
 	}
+
+	private By verifyLblTransactionSubType = By.xpath("//p[.='Bank Account ']");
+
 //	private By getTransactionType(String ) {
 //		return By.xpath(String.format("//p[.='Buy Token']", null));
 //	}
@@ -38,18 +44,18 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By lblBankAccount = By.cssSelector("p[class*='TokenBuyTokenDetails_referenceTitle']");
 
 	// Reference and Deposit ID'S
-	private By getId(String ID) {
-		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", ID));
-	}
+//	private By getId(String ID) {
+//		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", ID));
+//	}
 
-	// Reference ID and Deposit ID copy links
-	private By getIdLnks(String IdLnks) {
-		return By.xpath(String.format("(//span[contains(@class,'copy-image icon-copy')])[1]", IdLnks));
+	// Reference ID and Deposit ID
+	private By verifyIdLnks(String IdLnks) {
+		return By.xpath(String.format("(//span[contains(@class,'copy-image icon-copy')])[%s]", IdLnks));
 	}
 
 //	private By verifyCreatedDate = By.xpath("(//span[contains(@class,'referenceTitle')])[3]");
 
-	public By verifyCreatedDate(String Date) {
+	public By getCreatedDate(String Date) {
 		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", Date));
 	}
 
@@ -61,22 +67,28 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	private By getInformationHeadings(String Headings) {
-		return By.xpath(String.format("//span[.='%s']", Headings));
+		return By.xpath(
+				String.format("//div[contains(@class,'Token')][contains(@class,'Title')]/span[.='%s']", Headings));
 	}
 
-	private By lblType = By.cssSelector("table>tbody>tr:nth-of-type(2)>td:nth-of-type(2)");
-	private By lblSubType = By.cssSelector("table>tbody>tr:nth-of-type(2)>td:nth-of-type(3)");
-	private By transactions = By.xpath("//tr[contains(@class,'posted-txn')]/following-sibling::tr[1]");
+	private By getType(String type) {
+		return By.xpath(String.format("//tr[contains(@class,'  hovered')]//td[.='%s']", type));
+	}
+
+	private By getSubType(String subType) {
+		return By.xpath(String.format("//tr[contains(@class,'  hovered')]//td[.='%s']", subType));
+	}
+
+	private By transactions = By.xpath("//tr[contains(@class,'posted-txn')]/following-sibling::tr");
 
 	private By getInformationDetails(String Type, String subType) {
 		return By.xpath(String.format("//div[contains(@class,'%s')]/..//p[text()='%s']/following-sibling::*[1]", Type,
 				subType));
 	}
 
-	private By getRecipientAccountIDaddressinfo = By.xpath(
-			"//div[contains(@class,'Recipient')]/..//span[text()='Recipient Account ID']/following-sibling::div[1]");
-	private By getSenderAccoutAddressInfo = By
-			.xpath("//span[text()='Sender Account Address']/following-sibling::*[1]/*[2]");
+	private By getAccountAddressInfo(String Address) {
+		return By.xpath(String.format("//span[.='%s']//following-sibling::*[1]/*[2]", Address));
+	}
 
 	private By getLedgerInfo(String Type) {
 		return By.xpath(String.format("//span[.='%s']/following-sibling::*[1]//span[2]", Type));
@@ -85,23 +97,23 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By getTransactionIPaddress = By.xpath("//span[.='Transaction IP Address']/following-sibling::*[1]");
 
 	public void verifyLblTransactionDetailsHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Transaction Details");
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
 	public void verifyLblTransactionType(String TransactionType) {
-		new CommonFunctions().verifyLabelText(lblTransactionType, TransactionType, "TransactionType");
+		new CommonFunctions().verifyLabelText(lblTransactionType, "TransactionType      ", TransactionType);
 	}
 
 	public void verifyLblTransactionSubType(String TransactionSubType) {
-		new CommonFunctions().verifyLabelText(lblTransactionSubType, TransactionSubType, "TransactionSubType");
+		new CommonFunctions().verifyLabelText(lblTransactionSubType, "TransactionSubType     ", TransactionSubType);
 	}
 
 	public void verifyLblBuyTokenCreatedDate() {
-		new CommonFunctions().verifyLabelText(getlblCreatedDate("4"), "Created Date", "Created Date");
+		new CommonFunctions().verifyLabelText(getlblCreatedDate("4"), "Created Date      ", "Created Date");
 	}
 
 	public void verifyLblWalletTransferCreatedDate(String CreatedDate) {
-		new CommonFunctions().verifyLabelText(getlblCreatedDate("1"), CreatedDate, "Created Date");
+		new CommonFunctions().verifyLabelText(getlblCreatedDate("1"), "Created Date", CreatedDate);
 	}
 
 	public void verifyFailed() {
@@ -117,11 +129,11 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyLblReferenceID(String ReferenceID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings("2"), ReferenceID, "ReferenceID");
+		new CommonFunctions().verifyLabelText(getLblIDheadings("2"), "ReferenceID     ", ReferenceID);
 	}
 
 	public void verifyLblDepositID(String DepositID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings("3"), DepositID, "DepositID");
+		new CommonFunctions().verifyLabelText(getLblIDheadings("3"), "DepositID      ", DepositID);
 	}
 
 //	public void getBuyTokenTransactionType() {
@@ -129,7 +141,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //	}
 	public void getBuyTokenTransactionType() {
 		String TransactionType = getText(verifyTransactionType("Buy Token"), "");
-		ExtentTestManager.setInfoMessageInReport("Transaction Type: " + TransactionType);
+		ExtentTestManager.setInfoMessageInReport("Transaction Type:   " + TransactionType);
 	}
 
 //	public void getWalletTransferTransactionType() {
@@ -147,28 +159,34 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //	}
 	public void getWalletReceivedTransactionType() {
 		String TransactionType = getText(verifyTransactionType("Wallet Received"), "");
-		ExtentTestManager.setInfoMessageInReport("Wallet Received: " + TransactionType);
+		ExtentTestManager.setInfoMessageInReport("Wallet Received:    " + TransactionType);
+	}
+
+	public void getBuyTokenTransactionSubType() {
+		String TransactionsubType = getText(verifyLblTransactionSubType, "");
+		ExtentTestManager.setInfoMessageInReport("TransactionsubType:   " + TransactionsubType);
 	}
 
 	public void verifyBankAccount(String BankAccount) {
 		new CommonFunctions().verifyLabelText(lblBankAccount, BankAccount, "BankAccount");
 	}
 
-	public void verifyReferenceID(String ReferenceID) {
-		new CommonFunctions().verifyLabelText(getId("1"), ReferenceID, "ReferenceID");
+//	public void verifyReferenceID(String ReferenceID) {
+//		new CommonFunctions().verifyLabelText(getId("1"), ReferenceID, "ReferenceID");
+//	}
+//
+//	public void verifyDepositID(String DepositID) {
+//		new CommonFunctions().verifyLabelText(getId("2"), DepositID, "DepositID");
+//	}
+
+	public void getReferenceID() {
+		click(verifyIdLnks("1"), "");
+		ExtentTestManager.setInfoMessageInReport("ReferenceID:  " + getCopiedData());
 	}
 
-	public void verifyDepositID(String DepositID) {
-		new CommonFunctions().verifyLabelText(getId("2"), DepositID, "DepositID");
-	}
-
-	public void verifyReferenceIDlnk() {
-		new CommonFunctions().elementView(getIdLnks("1"), "Reference ID Link");
-//		click(getIdLnks("1"), getCopiedData());
-	}
-
-	public void verifyDepositIDlnk() {
-		new CommonFunctions().elementView(getIdLnks("2"), "Deposit ID Link");
+	public void getDepositID() {
+		click(verifyIdLnks("2"), "");
+		ExtentTestManager.setInfoMessageInReport("DepositID:    " + getCopiedData());
 	}
 
 //	public void getCreatedDateValue() {
@@ -179,9 +197,35 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //			ExtentTestManager.setWarningMessageInReport("Created Date: " + date);
 //		}
 //	}
-	
+	public void getWalletTransferCreatedDate() {
+		String date = getText(getCreatedDate("1"), "");
+		if (!date.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Wallet Transfer Created date: " + date);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Wallet Transfer Created date: " + date);
+		}
+	}
+
+	public void getWalletRecievedCreatedDate() {
+		String date = getText(getCreatedDate("1"), "");
+		if (!date.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Wallet Transfer Created date: " + date);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Wallet Transfer Created date: " + date);
+		}
+	}
+
+	public void getBuyTokenCreatedDate() {
+		String date = getText(getCreatedDate("3"), "");
+		if (!date.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Wallet Transfer Created date: " + date);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Wallet Transfer Created date: " + date);
+		}
+	}
+
 	public void verifyAmountCategory(String AmountCategory) {
-		new CommonFunctions().verifyLabelText(lblAmountCategory, AmountCategory, "AmountCategory");
+		new CommonFunctions().verifyLabelText(lblAmountCategory, "AmountCategory      ", AmountCategory);
 	}
 
 	public void verifyAmount() {
@@ -216,7 +260,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		if (!PurchaseAmount.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + PurchaseAmount);
 		} else {
-			ExtentTestManager.setWarningMessageInReport("Purchase Amount" + PurchaseAmount);
+			ExtentTestManager.setWarningMessageInReport("Purchase Amount: " + PurchaseAmount);
 		}
 	}
 
@@ -317,13 +361,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getRecipientAccountIDaddress() {
-		String RecipientAccountIDaddress = getText(getRecipientAccountIDaddressinfo, "");
-		if (!RecipientAccountIDaddress.isEmpty()) {
-			click(getRecipientAccountIDaddressinfo, "");
-			ExtentTestManager.setInfoMessageInReport("Recipient Account ID Address: " + getCopiedData());
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Recipient Account ID Address: " + getCopiedData());
-		}
+		click(getAccountAddressInfo("Recipient Account ID"), "");
+		ExtentTestManager.setInfoMessageInReport("Recipient Account ID Address: " + getCopiedData());
 	}
 
 	public void getRecipientEmail() {
@@ -363,13 +402,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getSenderAccountAddress() {
-		String SenderAccountAddress = getText(getSenderAccoutAddressInfo, "");
-		if (!SenderAccountAddress.isEmpty()) {
-			click(getSenderAccoutAddressInfo, "");
-			ExtentTestManager.setInfoMessageInReport("Sender Account Address: " + getCopiedData());
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Sender Account Address: " + getCopiedData());
-		}
+		click(getAccountAddressInfo("Sender Account Address"), "");
+		ExtentTestManager.setInfoMessageInReport("Sender Account Address: " + getCopiedData());
 	}
 
 	public void getSenderEmail() {
@@ -391,39 +425,14 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getLedgerReferenceID() {
-		String ReferenceID = getText(getLedgerInfo("Reference ID"), "");
-		if (!ReferenceID.isEmpty()) {
-			click(getLedgerInfo("Reference ID"), "");
-			ExtentTestManager.setInfoMessageInReport("Reference ID: " + getCopiedData());
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Reference ID: " + getCopiedData());
-		}
+		click(getLedgerInfo("Reference ID"), "");
+		ExtentTestManager.setInfoMessageInReport("Reference ID: " + getCopiedData());
 	}
 
 	public void getLedgerCordaID() {
-		String CordaID = getText(getLedgerInfo("Corda ID"), "");
-		if (!CordaID.isEmpty()) {
-			ExtentTestManager.setInfoMessageInReport("Corda ID: " + getCopiedData());
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Corda ID: " + getCopiedData());
-		}
+		click(getLedgerInfo("Corda ID"), "");
+		ExtentTestManager.setInfoMessageInReport("Corda ID: " + getCopiedData());
 	}
-
-//	public void getReferenceID() {
-//		if (getText(getLedgerInfo("Reference ID"), "").isEmpty()) {
-//			ExtentTestManager.setInfoMessageInReport("Reference ID: " + getText(getLedgerInfo("Reference ID"), ""));
-//		} else {
-//			ExtentTestManager.setWarningMessageInReport("Reference ID: " + getText(getLedgerInfo("Reference ID"), ""));
-//		}
-//	}
-//
-//	public void getCordaID() {
-//		if (getText(getLedgerInfo("Corda ID"), "").isEmpty()) {
-//			ExtentTestManager.setInfoMessageInReport("Corda ID: " + getText(getLedgerInfo("Corda ID"), ""));
-//		} else {
-//			ExtentTestManager.setWarningMessageInReport("Corda ID: " + getText(getLedgerInfo("Corda ID"), ""));
-//		}
-//	}
 
 	public void getLedgerTransactionIPaddress() {
 		String TransactionIPaddress = getText(getTransactionIPaddress, "");
@@ -434,31 +443,57 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		}
 	}
 
-	public void verifyTransactionType() {
-		new CommonFunctions().elementView(lblType, "Wallet");
+	public void verifyWalletType() {
+		new CommonFunctions().elementView(getType("Wallet"), "Wallet");
 	}
 
-	public void verifyTransactionSubType() {
-		new CommonFunctions().elementView(lblSubType, getCopiedData());
+	public void verifyBuyTokenType() {
+		new CommonFunctions().elementView(getType("Buy Token"), "Buy Token");
 	}
 
-	public void clickTransactions() {
-		click(transactions, "Transactions");
+	public void verifyWalletTransferSubType() {
+		new CommonFunctions().elementView(getSubType("Transfer"), "Transfer");
+	}
+
+	public void verifyWalletRecievedSubType() {
+		new CommonFunctions().elementView(getSubType("Received"), "Received");
+	}
+
+	public void verifyBuyTokenSubType() {
+		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
+	}
+
+	public void clickTransactions(String type, String subType, String status) {
+
+		List<WebElement> rows = getElementsList(transactions, "Transactions");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", " ");
+			if (replace.contains(type) && replace.contains(subType) && replace.contains(status)) {
+				row.click();
+				ExtentTestManager.setInfoMessageInReport("Clicked on " + type + " first occurance in the table");
+				break;
+			}
+		}
+
+	}
+
+	public void clickTransactions(String type, String subType) {
+		this.clickTransactions(type, subType, "");
 	}
 
 	public void getTransactionDetails() {
-		if (getText(lblType, "").equalsIgnoreCase("Buy Token")) {
-			if (getText(lblSubType, "").equalsIgnoreCase("Bank Account")) {
+		if (getText(getType("Buy Token"), "").equalsIgnoreCase("Buy Token")) {
+			if (getText(getSubType("Bank Account"), "").equalsIgnoreCase("Bank Account")) {
 
 			} else {
 //
 			}
 		}
-		if (getText(lblType, "").equalsIgnoreCase("Wallet")) {
+		if (getText(getType("Wallet"), "").equalsIgnoreCase("Wallet")) {
 
 		}
-		if (getText(lblType, "").equalsIgnoreCase("Wallet")) {
-			if (getText(lblSubType, "").equalsIgnoreCase("Transfer")) {
+		if (getText(getType("Wallet"), "").equalsIgnoreCase("Wallet")) {
+			if (getText(getSubType("Transfer"), "").equalsIgnoreCase("Transfer")) {
 
 			} else {
 //

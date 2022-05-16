@@ -2,13 +2,13 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.TransactionDetailsComponent;
 import coyni.api.business.popups.TokenWalletTransferTokenPopup;
 import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.PaymentMethodComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.components.TopBarComponent;
+import coyni.apibusiness.components.TransactionDetailsComponent;
 import coyni.apibusiness.components.UserDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
