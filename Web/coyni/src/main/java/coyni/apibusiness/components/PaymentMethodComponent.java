@@ -59,9 +59,4 @@ public class PaymentMethodComponent extends BrowserFunctions {
 	public PreAuthorizationPopup preAuthorizationPopup() {
 		return new PreAuthorizationPopup();
 	}
-
-	public EditandDeleteComponent editandDeleteComponent() {
-		return new EditandDeleteComponent();
-	}
-
 }
