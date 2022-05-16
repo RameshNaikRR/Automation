@@ -20,10 +20,6 @@ public class RemovePaymentMethodPopup extends BrowserFunctions {
 		click(btnDelete, "click Delete");
 	}
 
-	public void elementScroll() {
-		new BrowserFunctions().moveToElement(btnDelete, "Delete");
-	}
-
 	public void verifyRemoveHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, expHeading, "Remove Payment Method");
 	}

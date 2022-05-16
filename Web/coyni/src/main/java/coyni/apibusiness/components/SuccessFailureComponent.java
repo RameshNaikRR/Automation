@@ -13,6 +13,10 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	private By editHeading = By.xpath("//h1[text()='Payment Method Edited Successfully']");
 	private By lblSignetAddedSuccessful1 = By.xpath("//h1[text()='Signet Account Added']");
 	private By lblSignetAddedSuccessful2 = By.xpath("//h1[text()='Successfully']");
+	private By lblSignetDeleted = By.xpath("//h1[text()='Signet Account']");
+	private By lblSignetDeleted1 = By.xpath("//h1[text()='Removed Successfully']");
+	private By failedHeading = By.xpath("");
+	private By btnDone = By.xpath("//button[text()='Done']");
 
 	public void verifyBankAddSuccesfulHeaading() {
 		new CommonFunctions().elementView(lblBankAddedSuccesful, "Bank Added Succesful");
@@ -34,6 +38,22 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	public void verifySignetSucessfulHeading2(String expSignetHeading) {
 		new CommonFunctions().verifyLabelText(lblSignetAddedSuccessful2, "Signet Account Added Successfully",
 				expSignetHeading);
+	}
+
+	public void verifySignetDeleteHeading(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(lblSignetDeleted, "Signet Account Added Successfully", expSignetHeading);
+	}
+
+	public void verifySignetDeleteHeading2(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(lblSignetDeleted1, "Signet Account Added Successfully", expSignetHeading);
+	}
+
+	public void verifyFailedHeadingView(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(failedHeading, "Failed", expSignetHeading);
+	}
+
+	public void verifyDone(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(btnDone, "Done", expSignetHeading);
 	}
 
 	public void clickClose() {

@@ -28,8 +28,8 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtDateOfBirth =By.name("dateOfBirth");
 	private By txtSocialSecurity =By.name("ssn");
 	private By txtOwnership = By.name("ownership");
-	private By txtAddress1 = By.cssSelector("#address-line-1");
-	private By txtAddress2 = By.cssSelector("#address-line-2");
+	private By txtAddress1 = By.name("addressLine1");
+	private By txtAddress2 = By.name("addressLine2");
 	private By lblgetState =By.xpath("//div[text()='State']/following-sibling::*[1]");
 	
 	public By getElement(String state) {

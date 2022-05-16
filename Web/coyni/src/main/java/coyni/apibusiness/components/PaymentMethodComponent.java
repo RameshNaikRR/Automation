@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.api.business.popups.AddNewPaymentMethodPopup;
 import coyni.api.business.popups.PreAuthorizationPopup;
 import coyni.api.business.popups.RemovePaymentMethodPopup;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class PaymentMethodComponent extends BrowserFunctions {
@@ -28,6 +29,25 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		click(btnEdit, "Click Edit");
 	}
 
+	public void clickDeleteSignet(String SignetAccountNumber) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", SignetAccountNumber)), "Signet Account");
+		click(btnDelete, "Delete Signet");
+	}
+
+	public void clickDebitCard(String DeleteDebit) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteDebit)), "Delete Debit Card");
+		click(btnDelete, "Delete Debit");
+	}
+
+	public void clickDeleteBankAccount(String DeleteBank) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteBank)), "Delete Bank Account");
+		click(btnDelete, "Delete Bank ");
+	}
+
+	public void verifyAddNewPayment() {
+		new CommonFunctions().elementView(btnDelete, getCopiedData());
+	}
+
 	public AddNewPaymentMethodPopup addNewPaymentMethodPopup() {
 		return new AddNewPaymentMethodPopup();
 	}
@@ -38,6 +58,10 @@ public class PaymentMethodComponent extends BrowserFunctions {
 
 	public PreAuthorizationPopup preAuthorizationPopup() {
 		return new PreAuthorizationPopup();
+	}
+
+	public EditandDeleteComponent editandDeleteComponent() {
+		return new EditandDeleteComponent();
 	}
 
 }

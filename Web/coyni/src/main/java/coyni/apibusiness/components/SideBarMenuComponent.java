@@ -7,7 +7,6 @@ import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
 import coyni.apibusiness.pages.TokenWalletPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.api.reporting.ExtentTestManager;
 
 public class SideBarMenuComponent extends BrowserFunctions {
 
