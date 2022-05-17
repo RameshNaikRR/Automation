@@ -8,51 +8,54 @@ import io.appium.java_client.MobileBy;
 
 public class AgreementComponent extends MobileFunctions {
 
-	private By lblHeading = MobileBy.xpath("");
-	private By privacyPolicy = MobileBy.xpath("");
-	private By termsOfService = MobileBy.xpath("");
-	private By backIconAgreement = MobileBy.xpath("");
-	private By lblActiveAgreements = MobileBy.xpath(" ");
-	private By lblPastAgreements = MobileBy.xpath(" ");
+	private By headingAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
+	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
+//	private By privacyPolicy = MobileBy.xpath("");
+//	private By termsOfService = MobileBy.xpath("");
+	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'listagreementsTV')]");
+	private By headingPastAgreements = MobileBy.xpath(" ");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
+		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
 	}
 
 	public void verifyActiveAgreementsView() {
-		new CommonFunctions().elementView(lblActiveAgreements, "Active Agreements Label");
+		new CommonFunctions().elementView(headingActiveAgreements, "Active Agreements Label");
 	}
 
 	public void verifyPastAgreementsView() {
-		new CommonFunctions().elementView(lblPastAgreements, "Past Agreements Label");
+		new CommonFunctions().elementView(headingPastAgreements, "Past Agreements Label");
 	}
 
 	public void verifyActiveAgreementsHeading(String expActiveHeading) {
-		new CommonFunctions().verifyLabelText(lblActiveAgreements, "Active Agreements ", expActiveHeading);
+		new CommonFunctions().verifyLabelText(headingActiveAgreements, "Active Agreements ", expActiveHeading);
 	}
 
 	public void verifyPastAgreementsHeading(String expPastHeading) {
-		new CommonFunctions().verifyLabelText(lblPastAgreements, "Past Agreements ", expPastHeading);
+		new CommonFunctions().verifyLabelText(headingPastAgreements, "Past Agreements ", expPastHeading);
 	}
 
-	public void verifyPrivacyPolicyView() {
-		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
+	public void verifyMerchantAgreementsLabel(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
 	}
 
-	public void clickPrivacyPolicy() {
-		click(privacyPolicy, "Privacy Policy");
-	}
+//	public void verifyPrivacyPolicyView() {
+//		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
+//	}
+//
+//	public void clickPrivacyPolicy() {
+//		click(privacyPolicy, "Privacy Policy");
+//	}
 
-	public void verifyTermsOfServiceView() {
-		new CommonFunctions().elementView(termsOfService, "Terms of Service");
-	}
+//	public void verifyTermsOfServiceView() {
+//		new CommonFunctions().elementView(termsOfService, "Terms of Service");
+//	}
+//
+//	public void clickTermsOfService() {
+//		click(termsOfService, "Terms of Service");
+//	}
 
-	public void clickTermsOfService() {
-		click(termsOfService, "Terms of Service");
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
-
-	public void clickBack() {
-		click(backIconAgreement, "Back");
-	}
-
 }

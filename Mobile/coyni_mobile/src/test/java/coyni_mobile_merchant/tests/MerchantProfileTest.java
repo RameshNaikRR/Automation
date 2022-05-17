@@ -694,6 +694,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickPreferences();
 			merchantProfilePage.preferencesComponent().verifyPreferencesHeading(data.get("heading"));
 			merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			merchantProfilePage.preferencesComponent().getLocalCurrency();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -705,21 +706,20 @@ public class MerchantProfileTest {
 	public void testAccountLimits(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// tokenAccountPage.clickProfile();
+			merchantProfilePage.clickProfile();
 			merchantProfilePage.verifyAccountLimitsView();
 			merchantProfilePage.clickAccountLimits();
 			merchantProfilePage.accountLimitsComponent().verifyHeading(data.get("expHeading"));
-			merchantProfilePage.accountLimitsComponent().verifyPayRequestLabel(data.get("expPayRequestHeading"));
-			merchantProfilePage.accountLimitsComponent().verifyBuyTokensLabel(data.get("expBuyTokenHeading"));
-			merchantProfilePage.accountLimitsComponent().VerifyWithdrawLabel(data.get("expWithdrawHeading"));
-			merchantProfilePage.accountLimitsComponent().getPayRequestLimit();
-			merchantProfilePage.accountLimitsComponent().getBuyTokenBankLimit();
-			merchantProfilePage.accountLimitsComponent().getCardsLimit();
-			merchantProfilePage.accountLimitsComponent().getWithdrawBankLimit();
+			merchantProfilePage.accountLimitsComponent()
+					.verifyLabelMonthlyProcessingVolume(data.get("monthlyProcessingLabel"));
+			merchantProfilePage.accountLimitsComponent().verifyHighTicketLabel(data.get("highTicketLabel"));
+			merchantProfilePage.accountLimitsComponent().getMonthlyProcessingVolumeLimit();
+			merchantProfilePage.accountLimitsComponent().getHighTicketLimit();
+			merchantProfilePage.accountLimitsComponent().verifyBuyTokenHeading(data.get("buyTokenHeading"));
+			merchantProfilePage.accountLimitsComponent().getBuyTokenBankAccount();
+			merchantProfilePage.accountLimitsComponent().getWithdrawBankAccount();
 			merchantProfilePage.accountLimitsComponent().getInstantPayLimit();
 			merchantProfilePage.accountLimitsComponent().getGiftCardLimit();
-			merchantProfilePage.accountLimitsComponent().navigationComponent().verifyBackView();
-			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
 			merchantProfilePage.verifyProfilePageView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimits Failed due to exception " + e);
@@ -732,19 +732,36 @@ public class MerchantProfileTest {
 	public void testAgreements(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// tokenAccountPage.clickProfile();
+			merchantProfilePage.clickProfile();
 			merchantProfilePage.verifyAgreementsView();
 			merchantProfilePage.clickAgreements();
 			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
-//			customerProfilePage.agreementComponent().verifyActiveAgreementsView();
-//			customerProfilePage.agreementComponent().verifyPastAgreementsView();
-//			customerProfilePage.agreementComponent().verifyActiveAgreementsHeading(data.get("ActiveHeading"));
-//			customerProfilePage.agreementComponent().verifyPastAgreementsHeading(data.get("pastHeading"));
-			merchantProfilePage.agreementComponent().verifyPrivacyPolicyView();
-			merchantProfilePage.agreementComponent().verifyTermsOfServiceView();
-			merchantProfilePage.agreementComponent().clickBack();
+			merchantProfilePage.agreementComponent().verifyActiveAgreementsView();
+			merchantProfilePage.agreementComponent().verifyPastAgreementsView();
+			merchantProfilePage.agreementComponent().verifyActiveAgreementsHeading(data.get("ActiveHeading"));
+			merchantProfilePage.agreementComponent().verifyPastAgreementsHeading(data.get("pastHeading"));
 			merchantProfilePage.verifyProfilePageView();
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAgreementsWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantProfilePage.clickProfile();
+			merchantProfilePage.verifyAgreementsView();
+			merchantProfilePage.clickAgreements();
+			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
+			merchantProfilePage.agreementComponent().verifyActiveAgreementsView();
+			merchantProfilePage.agreementComponent().verifyPastAgreementsView();
+			merchantProfilePage.agreementComponent().verifyActiveAgreementsHeading(data.get("ActiveHeading"));
+			merchantProfilePage.agreementComponent().verifyPastAgreementsHeading(data.get("pastHeading"));
+			merchantProfilePage.agreementComponent().navigationComponent().clickBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
 
@@ -758,14 +775,19 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantProfilePage.clickProfile();
 			merchantProfilePage.feesComponent().verifyHeading(data.get("label"));
-			merchantProfilePage.feesComponent().verifyTransactionsLabel(data.get("transactionLabel"));
-			merchantProfilePage.feesComponent().verifyTokenAccountLabel(data.get("tokenAccountLabel"));
-			merchantProfilePage.feesComponent().verifyBuyTokenLabel(data.get("buyTokenLabel"));
-			merchantProfilePage.feesComponent().verifyExternalBankAccountLabel(data.get("externalBankAccountLabel"));
-			merchantProfilePage.feesComponent().verifyInstantPayLabel(data.get("instantPayLabel"));
-			merchantProfilePage.feesComponent().verifySignetAccountLabel(data.get("signetAccountLabel"));
-			merchantProfilePage.feesComponent().verifyGiftCardLabel(data.get("giftCardLabel"));
-			merchantProfilePage.feesComponent().verifyFailedBankWithdrawLabel(data.get("failedBankWithdrawLabel"));
+			merchantProfilePage.feesComponent().verifyHeadingTransactionsLabel("transactionHeading");
+			merchantProfilePage.feesComponent().verifySaleOrderLabel("saleOrderlable");
+			merchantProfilePage.feesComponent().verifyRefundLabel(data.get("refundLabel"));
+			merchantProfilePage.feesComponent().verifyHeadingTokenAccount(data.get("TokenAccountHeading"));
+			merchantProfilePage.feesComponent().verifyHeadingWithdraw(data.get("withdrawHeading"));
+			merchantProfilePage.feesComponent().getWithdrawsExternalBankAccount();
+			merchantProfilePage.feesComponent().getBuyTokenExternalBankAccount();
+			merchantProfilePage.feesComponent().verifyWithdrawInstantPayLabel(data.get("instantPayLabel"));
+			merchantProfilePage.feesComponent().verifyWithdrawGiftCardLabel(data.get("giftCardLabel"));
+			merchantProfilePage.feesComponent()
+					.verifyWithdrawFailedBankAccountLabel(data.get("failedBankAccountLabel"));
+			merchantProfilePage.feesComponent().getWithdrawsSignetAccount();
+			merchantProfilePage.feesComponent().getBuyTokenSignetAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFees Failed due to this Exception" + e);
@@ -779,16 +801,20 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantProfilePage.clickProfile();
 			merchantProfilePage.feesComponent().verifyHeading(data.get("label"));
-			merchantProfilePage.feesComponent().verifyTransactionsLabel(data.get("transactionLabel"));
-			merchantProfilePage.feesComponent().verifyTokenAccountLabel(data.get("tokenAccountLabel"));
-			merchantProfilePage.feesComponent().verifyBuyTokenLabel(data.get("buyTokenLabel"));
-			merchantProfilePage.feesComponent().verifyExternalBankAccountLabel(data.get("externalBankAccountLabel"));
-			merchantProfilePage.feesComponent().verifyInstantPayLabel(data.get("instantPayLabel"));
-			merchantProfilePage.feesComponent().verifySignetAccountLabel(data.get("signetAccountLabel"));
-			merchantProfilePage.feesComponent().verifyGiftCardLabel(data.get("giftCardLabel"));
-			merchantProfilePage.feesComponent().verifyFailedBankWithdrawLabel(data.get("failedBankWithdrawLabel"));
+			merchantProfilePage.feesComponent().verifyHeadingTransactionsLabel("transactionHeading");
+			merchantProfilePage.feesComponent().verifySaleOrderLabel("saleOrderlable");
+			merchantProfilePage.feesComponent().verifyRefundLabel(data.get("refundLabel"));
+			merchantProfilePage.feesComponent().verifyHeadingTokenAccount(data.get("TokenAccountHeading"));
+			merchantProfilePage.feesComponent().verifyHeadingWithdraw(data.get("withdrawHeading"));
+			merchantProfilePage.feesComponent().getWithdrawsExternalBankAccount();
+			merchantProfilePage.feesComponent().getBuyTokenExternalBankAccount();
+			merchantProfilePage.feesComponent().verifyWithdrawInstantPayLabel(data.get("instantPayLabel"));
+			merchantProfilePage.feesComponent().verifyWithdrawGiftCardLabel(data.get("giftCardLabel"));
+			merchantProfilePage.feesComponent()
+					.verifyWithdrawFailedBankAccountLabel(data.get("failedBankAccountLabel"));
+			merchantProfilePage.feesComponent().getWithdrawsSignetAccount();
+			merchantProfilePage.feesComponent().getBuyTokenSignetAccount();
 			merchantProfilePage.feesComponent().navigationComponent().clickBack();
-			merchantProfilePage.feesComponent().navigationComponent().clickClose();
 			merchantProfilePage.clickProfile();
 
 		} catch (Exception e) {

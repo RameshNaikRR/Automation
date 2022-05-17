@@ -1,7 +1,6 @@
 package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
-
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -9,48 +8,62 @@ import io.appium.java_client.MobileBy;
 
 public class AccountLimitsComponent extends MobileFunctions {
 
-	private By lblHeading = MobileBy.xpath("");
-	private By lblPayRequest = MobileBy.xpath("");
-	private By lblBuyTokens = MobileBy.xpath("");
-	private By lblWithdraw = MobileBy.xpath("");
-	private By lblPayRequestLimit = MobileBy.xpath("");
-	private By lblBuyTokenBankLimit = MobileBy.xpath("");
-	private By lblBuyTokenCardsLimit =MobileBy.xpath("");
-    private By lblWithdrawBankLimit =MobileBy.xpath("");
-	private By lblInstantPayLimit = MobileBy.xpath("");
-	private By lblGiftCardLimit = MobileBy.xpath("");
-	
+	private By headingAccountLimits = MobileBy.xpath("//*[contains(@resource-id,'cpAccountLimitsLL')]");
+	private By headingMerchantProcessing = MobileBy.xpath("//*[@text='Merchant Processing (CYN)']");
+	private By lblMonthlyProcessingVolumeLimit = MobileBy.xpath("//*[@text='Monthly Processing Volume']");
+	private By lblHighTicketLimit = MobileBy.xpath("//*[@text='High Ticket Limit']");
+	private By headingBuyToken = MobileBy.xpath("//*[@text='Buy Tokens (CYN)']");
+	private By lblSignetAccountLimit = MobileBy.xpath("//*[@text='Signet Account']");
+	private By headingWithdrawTokenLimit = MobileBy.xpath("//*[@text='Withdraw (CYN)']");
+	private By lblInstantPayLimit = MobileBy.xpath("//*[@text='Withdraw (CYN)']");
+	private By lblGiftCardLimit = MobileBy.xpath("//*[@text='Gift Card']");
+
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
+		new CommonFunctions().verifyLabelText(headingAccountLimits, "Page Heading", expHeading);
 	}
-	public void verifyPayRequestLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblPayRequest, "Label", expHeading);
+
+	public void verifyLabelMonthlyProcessingVolume(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblMonthlyProcessingVolumeLimit, "Label", expHeading);
 	}
-	public void verifyBuyTokensLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblBuyTokens, "Label", expHeading);
+
+	public void verifyHighTicketLabel(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHighTicketLimit, "Label", expHeading);
 	}
-	public void VerifyWithdrawLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblWithdraw, "Label", expHeading);
+
+	public void verifyBuyTokenHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(headingBuyToken, "Page Heading", expHeading);
 	}
-	public void getPayRequestLimit() {
-		ExtentTestManager.setInfoMessageInReport("Pay/Request limit is "+ getText(lblPayRequestLimit));
+
+	public void getMonthlyProcessingVolumeLimit() {
+		ExtentTestManager.setInfoMessageInReport("Pay/Request limit is " + getText(lblMonthlyProcessingVolumeLimit));
 	}
-	public void getBuyTokenBankLimit() {
-		ExtentTestManager.setInfoMessageInReport("Buy Token Bank limit is "+ getText(lblBuyTokenBankLimit));
+
+	public void getHighTicketLimit() {
+		ExtentTestManager.setInfoMessageInReport("Buy Token Bank limit is " + getText(lblHighTicketLimit));
 	}
-	public void getCardsLimit() {
-		ExtentTestManager.setInfoMessageInReport("Cards limit is "+ getText(lblBuyTokenCardsLimit));
+
+	private By verifyBankAccount(String Value) {
+		return By.xpath(String.format("(//*[contains(@text,'Bank Account')])[%s]", Value));
 	}
-	public void getWithdrawBankLimit() {
-		ExtentTestManager.setInfoMessageInReport("Withdraw Bank limit is "+ getText(lblWithdrawBankLimit));
+
+	public void getBuyTokenBankAccount() {
+		String buyTokenBankAccount = getText(verifyBankAccount("1"));
+		ExtentTestManager.setInfoMessageInReport("buyTokenBankAccount: " + buyTokenBankAccount);
 	}
+
+	public void getWithdrawBankAccount() {
+		String withdrawBankAccount = getText(verifyBankAccount("2"));
+		ExtentTestManager.setInfoMessageInReport("withdrawBankAccount: " + withdrawBankAccount);
+	}
+
 	public void getInstantPayLimit() {
-		ExtentTestManager.setInfoMessageInReport("Instant Pay limit is "+ getText(lblInstantPayLimit));
+		ExtentTestManager.setInfoMessageInReport("Instant Pay limit is " + getText(lblInstantPayLimit));
 	}
+
 	public void getGiftCardLimit() {
-		ExtentTestManager.setInfoMessageInReport("Gift Card limit is"+ getText(lblGiftCardLimit));
+		ExtentTestManager.setInfoMessageInReport("Gift Card limit is" + getText(lblGiftCardLimit));
 	}
-	
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
