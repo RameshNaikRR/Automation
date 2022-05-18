@@ -1,5 +1,9 @@
 package coyni.api.business.popups;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.components.AuthyComponent;
@@ -26,6 +30,21 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	public void clickWallet1() {
 		click(getWallets("1"), "Wallet 1 is clicked");
 	}
+	public void verifyWallet1View() {
+		new CommonFunctions().elementView(getWallets("1"), "Wallet 1");
+	}
+
+	public void verifytxtAmountView() {
+		new CommonFunctions().elementView(txtAmount, "Amount");
+	}
+
+	public void verifyTransferToView() {
+		new CommonFunctions().elementView(drpdwnTransferTo, "Transferring To");
+	}
+
+	public void verifyAvailableBalanceView() {
+		new CommonFunctions().elementView(lblAvailableBalance, "AvailableBalance");
+	}
 
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transfer Popup Heading", Heading);
@@ -43,10 +62,14 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 		String actAmount = getTextBoxValue(txtAmount, "Amount");
 		if (actAmount.equals(expAmount)) {
 			ExtentTestManager.setPassMessageInReport("Amount is verified");
-		}
-		else {
+		} else {
 			ExtentTestManager.setFailMessageInReport("Amount is not verified");
 		}
+	}
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 	public void verifyAvailableBalance() {
@@ -64,8 +87,11 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	public void clickNext() {
 		click(btnNext, "Next");
 	}
+	public void clickClose() {
+		click(btnClose, "close");
+	}
 
-	public void verifyClose() {
+	public void verifyCloseView() {
 		new CommonFunctions().elementView(btnClose, "Close Icon");
 	}
 
@@ -76,10 +102,15 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}
+
 	public CommonFunctions commonFunctions() {
 		return new CommonFunctions();
+	}
+	public VerifyYourIdentityPopup verifyYourIdentityPopup() {
+		return new VerifyYourIdentityPopup();
 	}
 }

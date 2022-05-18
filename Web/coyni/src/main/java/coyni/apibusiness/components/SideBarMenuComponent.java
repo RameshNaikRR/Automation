@@ -90,5 +90,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public ExportComponent exportComponent() {
 		return new ExportComponent();
 	}
+	public TokenWalletActivityComponent tokenWalletActivityComponent() {
+		return new TokenWalletActivityComponent();
+	}
 
 }

@@ -16,17 +16,21 @@ public class WalletTransferPrieviewPopup extends BrowserFunctions {
 		return By.xpath(String.format(elementName, "//span[text()='%s']//following-sibling::span"));
 	}
 
-	public void VerifyTransferFrom() {
+	public void VerifyTransferFromView() {
 		new CommonFunctions().elementView(getLblItems("Transferring from:"), "Transferring from");
 	}
 
-	public void verifyTransferTo() {
+	public void verifyTransferToView() {
 		new CommonFunctions().elementView(getLblItems("Transferring to:"), "Transferring to");
 	}
 
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
+	public void verifyWalletTransferPreviewPopupHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", heading);
+	}
+    
 
 	public void verifyAmount(String expAmount) {
 		String actAmount = getTextBoxValue(lblAmount, "Amount");

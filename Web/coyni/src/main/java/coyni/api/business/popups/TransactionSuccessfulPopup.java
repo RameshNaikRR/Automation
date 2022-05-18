@@ -21,6 +21,19 @@ public class TransactionSuccessfulPopup extends BrowserFunctions {
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
+	public void verifyDescriptionView() {
+		new CommonFunctions().elementView(lblDescription, "Description");
+	}
+	public void VerifyReferenceIdView() {
+		new CommonFunctions().elementView(getAccountDetails("1"), "ReferenceID");
+	}
+	public void verifyFromBalanceNameView() {
+		new CommonFunctions().elementView(getAccountDetails("2"), "FromBalanceName");
+	}
+
+	public void verifyToBalanceNameView() {
+		new CommonFunctions().elementView(getAccountDetails("3"), "ToBalanceName");
+	}
 
 	public void verifyDescription(String Description) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Description", Description);

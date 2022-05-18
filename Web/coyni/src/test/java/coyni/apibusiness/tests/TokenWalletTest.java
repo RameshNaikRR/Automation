@@ -1,14 +1,18 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.TokenWalletPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -387,26 +391,26 @@ public class TokenWalletTest {
 				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
 				sideBarMenuComponent.filterComponent().verifyStartDate(data.get("expStartDate"));
 				sideBarMenuComponent.filterComponent().verifyEndDate(data.get("expEndDate"));
-			} else if (data.get("validateTransactionType").equalsIgnoreCase("Yes")) {
+			}if (data.get("validateTransactionType").equalsIgnoreCase("Yes")) {
 				String[] checkBox = data.get("TransactionTypecheckBoxList").split(",");
 				for (int i = 0; i <= checkBox.length; i++) {
 					sideBarMenuComponent.filterComponent().clickCheckBox(checkBox[i]);
 				}
-			} else if (data.get("validateTransactionSubType").equalsIgnoreCase("Yes")) {
+			}if (data.get("validateTransactionSubType").equalsIgnoreCase("Yes")) {
 				String[] checkBox = data.get("TransactionSubTypecheckboxList").split(",");
 				for (int i = 0; i <= checkBox.length; i++) {
 					sideBarMenuComponent.filterComponent().clickCheckBox(checkBox[i]);
 				}
-			} else if (data.get("validateTransactionStatus").equalsIgnoreCase("Yes")) {
+			}if (data.get("validateTransactionStatus").equalsIgnoreCase("Yes")) {
 				String[] checkBox = data.get("TransactionStatus").split(",");
 				for (int i = 0; i <= checkBox.length; i++) {
 					sideBarMenuComponent.filterComponent().clickCheckBox(checkBox[i]);
 				}
 
-			} else if (data.get("validateTransactionAmount").equalsIgnoreCase("Yes")) {
+			}if (data.get("validateTransactionAmount").equalsIgnoreCase("Yes")) {
 				sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
 				sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
-			} else if (data.get("ValidateReferenceID").equalsIgnoreCase("Yes")) {
+			}if (data.get("ValidateReferenceID").equalsIgnoreCase("Yes")) {
 				sideBarMenuComponent.filterComponent().fill15CharReferenceId(data.get("referenceId"));
 			}
 			sideBarMenuComponent.filterComponent().clickApplyFilter();
@@ -531,15 +535,15 @@ public class TokenWalletTest {
 			sideBarMenuComponent.exportComponent().clickExport();
 			if (data.get("validate").equalsIgnoreCase("Today")) {
 				sideBarMenuComponent.exportComponent().clickToday();
-			} else if (data.get("validate").equalsIgnoreCase("Yesterday")) {
+			}if (data.get("validate").equalsIgnoreCase("Yesterday")) {
 				sideBarMenuComponent.exportComponent().clickYesterday();
-			} else if (data.get("validate").equalsIgnoreCase("Last7Days")) {
+			}if (data.get("validate").equalsIgnoreCase("Last7Days")) {
 				sideBarMenuComponent.exportComponent().clickLast7Days();
-			} else if (data.get("validate").equalsIgnoreCase("MonthToDate")) {
+			}if (data.get("validate").equalsIgnoreCase("MonthToDate")) {
 				sideBarMenuComponent.exportComponent().clickMonthtoDate();
-			} else if (data.get("validate").equalsIgnoreCase("LastMonth")) {
+			}if (data.get("validate").equalsIgnoreCase("LastMonth")) {
 				sideBarMenuComponent.exportComponent().clickLastMonth();
-			} else if (data.get("validate").equalsIgnoreCase("CustomDateRange")) {
+			}if (data.get("validate").equalsIgnoreCase("CustomDateRange")) {
 				sideBarMenuComponent.exportComponent().clickCustomDateRange();
 				sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
 				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
@@ -582,6 +586,163 @@ public class TokenWalletTest {
 					.setFailMessageInReport("test Token Wallet Exports Custom is failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletTransferTokens(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			// sideBarMenuComponent.tokenWalletActivityComponent().verifyTransferTokenBackgroundColor(data.get("backgroundcolor"),
+			// data.get("border"));
+			sideBarMenuComponent.tokenWalletActivityComponent().verifyTransferTokenCursorAction();
+			sideBarMenuComponent.tokenWalletActivityComponent().clickTransferTokens();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifytxtAmountView();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifyTransferToView();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.verifyAvailableBalanceView();
+			// sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickClose();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.fillAmount(data.get("amount"));
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.clickTransferToDropDown();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifyWallet1View();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickWallet1();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickNext();
+			sideBarMenuComponent.tokenWalletActivityComponent().walletTransferPrieviewPopup()
+					.verifyWalletTransferPreviewPopupHeading(data.get("WalletTransferheading"));
+			Thread.sleep(5000);
+			sideBarMenuComponent.tokenWalletActivityComponent().walletTransferPrieviewPopup().VerifyTransferFromView();
+			sideBarMenuComponent.tokenWalletActivityComponent().walletTransferPrieviewPopup().verifyTransferToView();
+			sideBarMenuComponent.tokenWalletActivityComponent().walletTransferPrieviewPopup().clickConfirm();
+			sideBarMenuComponent.tokenWalletActivityComponent().verifyYourIdentityPopup()
+					.verifyHeading(data.get("verifyYourIdentityHeading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().verifyYourIdentityPopup().authyComponent()
+					.fillInput(data.get("code"));
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup()
+					.verifyHeading(data.get("TransactionSuccessfullHeading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().verifyDescriptionView();
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().VerifyReferenceIdView();
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup()
+					.verifyFromBalanceNameView();
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().verifyToBalanceNameView();
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Token Wallet Transfer Tokens is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletTransferTokenWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.tokenWalletActivityComponent().clickTransferTokens();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.fillAmount(data.get("amount"));
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.clickTransferToDropDown();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickTab();
+			Thread.sleep(2000);
+			if (!data.get("errMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+
+			Thread.sleep(1000);
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickNext();
+//			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+//			.clickTransferToDropDown();
+//			Thread.sleep(1000);
+//			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickTab();
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Token WalletTransfer Token Navigation failed due to Exception" + e);
+		}
+
+	}
+
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletBuyTokensBuyTokensBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.tokenWalletActivityComponent().clickBuyTokens();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+					.VerifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+					.VerifySubHeading(data.get("subHeading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickAddnewpaymentmethod();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
+					.verifyHeading(data.get("addNewPaymenthdg"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
+			sideBarMenuComponent.bankAccountPage().clickImReady();
+			sideBarMenuComponent.bankAccountPage().verifyAddBankAccountView();
+			sideBarMenuComponent.bankAccountPage().verifyDoNotNavigateView();
+			Thread.sleep(15000);
+			sideBarMenuComponent.bankAccountPage().switchTab();
+			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
+			Thread.sleep(1000);
+			sideBarMenuComponent.bankAccountPage().fillUserName(data.get("userName"));
+			sideBarMenuComponent.bankAccountPage().fillPassword(data.get("password1"));
+			Thread.sleep(5000);
+			sideBarMenuComponent.bankAccountPage().clickEnter();
+			Thread.sleep(10000);
+		//	sideBarMenuComponent.bankAccountPage().clickBankNext();
+			sideBarMenuComponent.bankAccountPage().clickChkbxBank();
+			sideBarMenuComponent.bankAccountPage().clickEnter();
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Buy Tokens is failed due to Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletBuyTokensSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
+			sideBarMenuComponent.tokenWalletActivityComponent().clickBuyTokens();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+					.VerifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+					.VerifySubHeading(data.get("subHeading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickAddnewpaymentmethod();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
+					.verifyHeading(data.get("addNewPaymenthdg"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup().clickSignetAccount();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().verifyPageHeading(data.get("signetAccounthdg"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().fillName(data.get("nameOnSignetAccount"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("address1"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillAddress2(data.get("address2"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillCity(data.get("city"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("address1"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().selectState(data.get("state"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("address1"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().verifyCountry(data.get("country"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup().mailingAddressComponent().clickSave();	
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Buy Tokens is failed due to Exception" + e);
+		}
+	}
+}
+
 
 //	@Test
 //	@Parameters({ "strParams" })
@@ -636,4 +797,4 @@ public class TokenWalletTest {
 //			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 //		}
 //	}
-}
+

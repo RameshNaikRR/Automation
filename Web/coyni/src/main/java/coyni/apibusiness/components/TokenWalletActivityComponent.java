@@ -2,6 +2,12 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.api.business.popups.BuyCoyniTokensPopup;
+import coyni.api.business.popups.BuyTokensPaymentPopup;
+import coyni.api.business.popups.TokenWalletTransferTokenPopup;
+import coyni.api.business.popups.TransactionSuccessfulPopup;
+import coyni.api.business.popups.VerifyYourIdentityPopup;
+import coyni.api.business.popups.WalletTransferPrieviewPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -33,7 +39,7 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	private By getTokens(String Tokens) {
 		return By.xpath(String.format("//span[.='%s']", Tokens));
 	}
-	
+
 	private By getAmount(String Amount) {
 		return By.xpath(String.format("(//span[contains(@class,'AccountActivity_Wallet_balance__FcRUz')])[1]", Amount));
 	}
@@ -54,6 +60,18 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 
 	public void verifyTokenWalletsLnk() {
 		new CommonFunctions().elementView(lnkTokenWallets, "Token Wallets Link");
+	}
+
+	public void verifyTransferTokenCursorAction() {
+		new CommonFunctions().verifyCursorAction(lnkTransferTokens, "Transfer Tokens");
+	}
+
+	public void clickTransferTokens() {
+		click(lnkTransferTokens, "Transfer tokens");
+	}
+
+	public void clickBuyTokens() {
+		click(lnkBuyTokens, "Buy Tokens");
 	}
 
 	public void verifyTokenWalletHeading(String Heading) {
@@ -156,6 +174,25 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	public void verifyTokensWithdrawn() {
 		new CommonFunctions().verifyLabelText(getTokens("Tokens Withdrawn "), "Tokens Withdrawn ", "Tokens Withdrawn ");
 	}
-	
-
+    public BuyTokensPaymentPopup buyTokensPaymentPopup() {
+    	return new BuyTokensPaymentPopup();
+    }
+   
+	public TokenWalletTransferTokenPopup tokenWalletTransferTokenPopup() {
+		return new TokenWalletTransferTokenPopup();
+	}
+	public WalletTransferPrieviewPopup walletTransferPrieviewPopup() {
+		return new WalletTransferPrieviewPopup();
+	}
+	public VerifyYourIdentityPopup verifyYourIdentityPopup() {
+		return new VerifyYourIdentityPopup();
+	}
+	public TransactionSuccessfulPopup transactionSuccessfulPopup() {
+		return new TransactionSuccessfulPopup();
+	}
+    public BuyCoyniTokensPopup buyCoyniTokensPopup() {
+    	return new BuyCoyniTokensPopup();
+    }
 }
+
+

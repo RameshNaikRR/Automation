@@ -3,10 +3,11 @@ package coyni.api.business.popups;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.components.AddCardComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
-
+	private By lblAddNewPaymentMethodhdg = By.xpath("//h1[text()='Add New Payment Method']");
 	private By btnBankAccount = By
 			.xpath("//span[text()='Bank Account']");
 	private By btnDebit = By
@@ -37,5 +38,8 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
 		return new AddNewSignetAccountPopup();
+	}
+	public void verifyHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblAddNewPaymentMethodhdg, "add New Payment Method", heading);
 	}
 }

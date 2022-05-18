@@ -7,7 +7,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class BuyCoyniTokensPopup extends BrowserFunctions{
+public class BuyTokensPaymentPopup extends BrowserFunctions{
 	
 	private By txtAmount = By.xpath("//input[@name='usd']");
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy Coyni Tokens')]");
