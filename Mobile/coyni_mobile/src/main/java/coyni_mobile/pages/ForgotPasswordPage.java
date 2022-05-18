@@ -3,10 +3,10 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
-
 import coyni_mobile.components.VerifyEmailComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ForgotPasswordPage extends MobileFunctions {
@@ -46,7 +46,14 @@ public class ForgotPasswordPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next");
+		new CommonFunctions().clickTab();
+		boolean enabled = new MobileFunctions().getElement(btnNext, "").isEnabled();
+		if (enabled) {
+			click(btnNext, "Next");
+			ExtentTestManager.setPassMessageInReport("Next button is in Disabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Next button is in Enable mode");
+		}
 	}
 
 	public VerifyEmailComponent verifyEmailComponent() {

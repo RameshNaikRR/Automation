@@ -11,7 +11,7 @@ public class NavigationComponent extends MobileFunctions {
 	private By btnBack = MobileBy.xpath(
 			"//*[contains(@resource-id,'Back') or contains(@resource-id,'otpValidationCloseIV') or contains(@resource-id,'Close') or contains(@resource-id,'cpbackBtn')]");
 	private By btnClose = MobileBy.xpath(
-			"(//*[contains(@resource-id,'Close')][1]|//*[contains(@resource-id,'Close')][2]|//*[contains(@resource-id,'Close')])[3]|//*[contains(@resource-id,'layoutClose')]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
+			"(//*[contains(@resource-id,'Close')][1]|//*[contains(@resource-id,'Close')][2]|//*[contains(@resource-id,'Close')])[3]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
 
 	public void clickBack() {
 
