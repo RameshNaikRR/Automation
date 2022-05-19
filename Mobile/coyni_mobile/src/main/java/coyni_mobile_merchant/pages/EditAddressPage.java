@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.MailingAddressComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -25,6 +26,8 @@ public class EditAddressPage extends MobileFunctions {
 	public void fillAddress(String expAddress) {
 		click(txtAddress, "Address");
 		enterText(txtAddress, expAddress, "Address");
+		DriverFactory.getDriver().hideKeyboard();
+
 	}
 
 	public void fillCity(String expCity) {
@@ -60,5 +63,9 @@ public class EditAddressPage extends MobileFunctions {
 
 	public void clickBack() {
 		click(btnBack, "Back");
+	}
+
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
 	}
 }

@@ -100,6 +100,7 @@ public class SignUpPage extends MobileFunctions {
 	public void clickNext() {
 		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
+		scrollUpToElement(txtFirstName, "First Name");
 	}
 
 	public int fieldBarCount() {

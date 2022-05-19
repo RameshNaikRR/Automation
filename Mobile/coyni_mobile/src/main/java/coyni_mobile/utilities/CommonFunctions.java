@@ -71,7 +71,7 @@ public class CommonFunctions {
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
 		try {
 			By errorMsgs = MobileBy
-					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]");
+					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			// mobileFunctions.
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()

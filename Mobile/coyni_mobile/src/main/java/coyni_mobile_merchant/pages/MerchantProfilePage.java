@@ -392,43 +392,52 @@ public class MerchantProfilePage extends MobileFunctions {
 		click(getDashBoardItems("Company Information"), "Company Information");
 	}
 
-	public void clickDbaInformation() {
+	public void clickDBAInformation() {
 		click(getDashBoardItems("DBA Information"), "DBA Information");
 	}
 
 	public void clickBeneficialOwners() {
+		scrollDownToElement(getDashBoardItems("Beneficial Owners"), "Beneficial Owners");
 		click(getDashBoardItems("Beneficial Owners"), "Beneficial Owners");
 	}
 
 	public void clickTeam() {
+		scrollDownToElement(getDashBoardItems("Team"), "Team");
 		click(getDashBoardItems("Team"), "Team");
 	}
 
 	public void clickPaymentMethods() {
+		scrollDownToElement(getDashBoardItems("Payment Methods"), "Payment Methods");
 		click(getDashBoardItems("Payment Methods"), "Payment Methods");
 	}
 
 	public void clickPreferences() {
+		scrollDownToElement(getDashBoardItems("Preferences"), "Preferences");
 		click(getDashBoardItems("Preferences"), "Preferences");
 	}
 
 	public void clickFees() {
+		scrollDownToElement(getDashBoardItems("Fees"), "Fees");
 		click(getDashBoardItems("Fees"), "Fees");
 	}
 
 	public void clickAccountLimits() {
+		scrollDownToElement(getDashBoardItems("Account Limits"), "Account Limits");
 		click(getDashBoardItems("Account Limits"), "Account Limits");
 	}
 
 	public void clickAgreements() {
+		scrollDownToElement(getDashBoardItems("Agreements"), "Agreements");
 		click(getDashBoardItems("Agreements"), "Agreements");
 	}
 
 	public void clickResetPINCode() {
+		scrollDownToElement(getDashBoardItems("Reset PIN Code"), "Reset PIN Code");
 		click(getDashBoardItems("Reset PIN Code"), "Reset PIN Code");
 	}
 
 	public void clickTouchIDSetting() {
+		scrollDownToElement(getDashBoardItems("Touch ID Setting"), "Touch ID Setting");
 		click(getDashBoardItems("Touch ID Setting"), "Touch ID Setting");
 	}
 
@@ -438,6 +447,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickLogOut() {
+		scrollDownToElement(getDashBoardItems("Log Out"), "Log Out");
 		click(getDashBoardItems("Log Out"), "Log Out");
 	}
 
@@ -459,12 +469,22 @@ public class MerchantProfilePage extends MobileFunctions {
 		return new UserDetailsPage();
 	}
 
-//	public EnterYourPINComponent enterYourPINComponent() {
-//		return new EnterYourPINComponent();
-//	}
+	public DBAInformationPage dbaInformationPage() {
+		return new DBAInformationPage();
+	}
+
+	public CompanyInformationPage companyInformationPage() {
+		return new CompanyInformationPage();
+	}
+	public BenificialOwnersPage benificialOwnersPage() {
+		return new BenificialOwnersPage();
+	}
 
 	public ConfirmPasswordPage confirmPasswordPage() {
 		return new ConfirmPasswordPage();
+	}
+	public TeamPage teamPage() {
+		return new TeamPage();
 	}
 
 }

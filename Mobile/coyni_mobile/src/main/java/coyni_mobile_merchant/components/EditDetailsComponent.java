@@ -1,5 +1,9 @@
 package coyni_mobile_merchant.components;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -12,7 +16,7 @@ public class EditDetailsComponent extends MobileFunctions {
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'CloseLL')]");
 	private By btnSave = MobileBy.xpath("//*[contains(@text,'Save')]");
 	private By txtComponent = MobileBy
-			.xpath("//*[contains(@resource-id,'textinput_placeholder')]|//*[contains(@resource-id,'pnET')]");
+			.xpath("//*[contains(@resource-id,'b_newEmailET')]|//*[contains(@resource-id,'pnET')]");
 	private By lblErrorMsgHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lblErrorMsg = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
@@ -24,9 +28,11 @@ public class EditDetailsComponent extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
+
 	public void clickOk() {
 		click(btnOk, "Ok");
 	}
+
 	public void verifyEmailHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEditComponentHeading, " Email Heading ", expHeading);
 	}
@@ -34,8 +40,14 @@ public class EditDetailsComponent extends MobileFunctions {
 	public void verifyPhoneNumberHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEditComponentHeading, " Phone Number Heading ", expHeading);
 	}
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		}
 
 	public void fillEmail(String email) {
+		click(txtComponent, email);
 		enterText(txtComponent, email, "Email");
 	}
 
