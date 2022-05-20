@@ -13,7 +13,7 @@ public class PreferencesComponent extends BrowserFunctions {
 	// private By tickMarksuccessfully = By.className("w-56");
 	private By backGroundColorPreferences = By.xpath("(//span[text()='Preferences'])[1]");
 
-	private By drpDwnDefaultAccount = By.xpath("//div[@class=' text-center w-40 truncate']");
+	private By drpDwnDefaultAccount = By.xpath("//div[text()='Default Account']/../div[contains(@class,'FormField_selected_option')]");
 
 	private By txtLocalCurrency = By.cssSelector("");
 

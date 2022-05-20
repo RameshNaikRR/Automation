@@ -36,7 +36,7 @@ public class ChangePasswordComponent extends BrowserFunctions {
 	}
 
 	// Authy
-	private By headingAuthy = By.xpath("//h1[text()='Verify your Identity']");
+	private By headingAuthy = By.xpath("//h1[text()='Verify Your Identity']");
 
 	public void verifyAuthyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAuthy, "Authy Heading", expHeading);

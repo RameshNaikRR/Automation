@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensPurchasedDetailsComponent extends BrowserFunctions {
 
-	private By lblTokensPurchased = By.xpath("//span[text()='Token Purchased']");
+	private By lblTokensPurchased = By.xpath("//span[contains(text(),'Tokens Purchased')]");
 
 	private By lblTokensPurchaseTransactions = By.xpath("//h1[text()='Tokens Purchased Transactions']");
 

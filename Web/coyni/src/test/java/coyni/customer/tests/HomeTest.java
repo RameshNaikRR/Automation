@@ -32,7 +32,7 @@ public class HomeTest {
 	public void testcreateAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			homePage.fillFirstName(data.get("firstName"));
@@ -75,7 +75,7 @@ public class HomeTest {
 		try {
 
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			//homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			homePage.fillFirstName(data.get("firstName"));
@@ -108,7 +108,7 @@ public class HomeTest {
     public void testcreateAccountPhoneVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			homePage.fillFirstName(data.get("firstName"));
@@ -155,7 +155,7 @@ public class HomeTest {
     public void testcreateAccountEmailVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			homePage.fillFirstName(data.get("firstName"));
@@ -206,7 +206,7 @@ public class HomeTest {
     public void testSignUpWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			homePage.fillFirstName(data.get("firstName"));
@@ -239,7 +239,7 @@ public class HomeTest {
 	public void testCreateAccountView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.verifyBusinessAccountView();
 			homePage.verifyPersonalAccountView();
 			homePage.verifyLoginView();
@@ -284,7 +284,7 @@ public class HomeTest {
 	public void validateCreateAccountFields(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.verifyLandingPageHeading(data.get("landingHeading"));
+		//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickPersonalAccount();
 		    homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
             homePage.validateFirstNameField(data.get("firstName"));

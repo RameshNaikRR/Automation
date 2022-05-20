@@ -11,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class VerifyNewPhoneNumberPopup extends BrowserFunctions {
 	
 	private By lnkResendVerificationCode = By.xpath("//button[@type='submit']");
-	private By headingNewPhoneNumber = By.xpath("//h1[@class='text-cm3 tracking-normal Heading_heading1__18f6i mt-4 text-center']");
+	private By headingNewPhoneNumber = By.xpath("//h1[contains(text(),'Verify New Phone Number')]");
 	private By lblResendVerificationCodeDescription = By.xpath("//span[contains(text(),'Verification Code Sent!')]");
 	private By lblresendErrorMsg = By.xpath("//span[contains(text(),'Looks like something went wrong. Please try again')]");
 	private By lblNewPhoneNumberDescriptionText = By.xpath("//span[@class='mt-8 text-base font-normal leading-5 tracking-tight text-center text-cgy4']");

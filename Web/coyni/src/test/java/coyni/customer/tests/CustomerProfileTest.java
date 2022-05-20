@@ -197,7 +197,7 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
 //			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
-			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
@@ -215,6 +215,36 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test // added
+	@Parameters({ "strParams" })
+
+	public void testEditPhoneNumberWithInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.customerMenuComponent().clickUserDetails();
+
+			customerProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();;
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+//			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));  
+            customerProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup().verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code1"));
+                        
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testEditPhoneNumberWithValidData is failed due to Exception " + e);
+		}
+	}
+
+
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditPhoneNumberWithInvalidCode(String strParams) {
@@ -427,7 +457,8 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
 			customerProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
-			customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			//customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+			customerProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
 			customerProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
@@ -513,6 +544,7 @@ public class CustomerProfileTest {
 			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// customerProfilePage.userDetailsComponent().notificationsComponent()
 			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
+			Thread.sleep(2000);  
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			//customerProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
@@ -541,6 +573,7 @@ public class CustomerProfileTest {
 		//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			Thread.sleep(1000);
 			//loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
+			Thread.sleep(2000);
 			loginPage.authyComponent().fillInput(data.get("code"));
 		//	loginPage.authyComponent().verifyMessage(data.get("message"));
 			loginPage.authyComponent().verifyLogin();
@@ -881,6 +914,7 @@ public class CustomerProfileTest {
 			customerMenuComponent.clickUserDetails();
 			Thread.sleep(1000);
 			customerMenuComponent.clickChangePassword();
+			Thread.sleep(1000);
 			customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
 			//customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			customerProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));

@@ -13,7 +13,9 @@ public class ProfileComponent extends BrowserFunctions {
 	private By btnExport =By.cssSelector("");
 	private By btnSearchIcon = By.cssSelector(".icon-search");
 	private By btnNewEmployee = By.xpath("//button[.='New Employee']");
-	
+	private By lblSearchBar = By.xpath("//input[@placeholder='Search by Name, Email, or Phone']");
+	private By lblSearchIcon = By.xpath("//button[@class='icon-search']");
+
 	 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading ", expHeading);
@@ -36,6 +38,11 @@ public class ProfileComponent extends BrowserFunctions {
 	public AccountTableComponent accountTableComponent() {
 		return new AccountTableComponent();
 	}
+	public void verifySearchLables() {
+		new CommonFunctions().elementView(lblSearchBar, "Search Bar lable");
+		new CommonFunctions().elementView(lblSearchIcon, "Search Icon");
+	}
+	
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}

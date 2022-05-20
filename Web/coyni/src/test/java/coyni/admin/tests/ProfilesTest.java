@@ -138,4 +138,28 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testCoyniEmployeeSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+		
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyHeading(data.get("popupHeading"));
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
+			if (!data.get("toastMessage").isEmpty()) {
+				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
 }

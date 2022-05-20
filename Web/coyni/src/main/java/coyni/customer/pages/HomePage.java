@@ -17,7 +17,7 @@ public class HomePage extends BrowserFunctions {
 	private By lnkLogin = By.xpath("//span[contains(text(),'Log In')]");
 	private By lblCreateAccount =By.cssSelector(".disclaimer");
 	private By lblPersonalAccount =By.xpath("//div[contains(text(),'Personal Account')]/following-sibling::*[1]");
-	private By lblBusinessAccount =By.xpath("//div[contains(text(),'Business Account')]/following-sibling::*[1]");
+	private By lblBusinessAccount =By.xpath("//div[contains(text(),'Merchant Account')]/following-sibling::*[1]");
 	private By lblBusinessAccountTooltip =By.xpath("//*[@id='businessAccount']/text()");
 	private By lnkResend = By.xpath("//div[text()='Resend Verification Code']");
 	private By lblResendDescrp =  By.xpath("//div[text()='New Verification Code Sent");

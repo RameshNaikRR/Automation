@@ -29,10 +29,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
 	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
 	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
-	private By iconEditPhNum = By.xpath("//div[@class='text-xs icon-edit cursor-pointer UserDetails_edit_Phone_icon__1iIcs']");
+	private By iconEditPhNum = By.xpath("//div[contains(@class,'UserDetails_edit_Phone_icon__1iIcs')]");
 	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
-	private By imgPhone = By.xpath("//div[@class='text-sm icon-phone-icon text-cm3']");
+	private By imgPhone = By.xpath("//h3[contains(@class,'UserDetails_phoneNumber')]");
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");

@@ -22,7 +22,8 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	private By btnBuyToken = By.xpath("");
 	private By lblNoFundsAvailable = By.xpath("");
 	private By lblBuyCoyniTokens = By.xpath("");
-	private By txtAmount = By.id("amount");
+	private By txtAmount = By.xpath	("//input[@name='amount']");
+	private By txtAmount1 = By.xpath("//input[@id='amount']");
 	private By lblAvailableBalance = By.xpath("//span[text()='Available Balance:']");
 	private By txtRecipientMessage = By.xpath("//textarea[@id='message']");
 	private By txtRecipientsAddress = By.xpath("//input[@id='wallet-id']");
@@ -81,9 +82,18 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 		click(btnRequest, "Click Request");
 	}
 
+	
+	public void enterAmount(String amount) {
+		
+		enterText(txtAmount, amount, "amount");
+	//DriverFactory.getDriver().findElement(txtAmount).sendKeys("1.00");
+}
+
+	
+	
 	public void fillAmount(String amount) {
 	
-			enterText(txtAmount, amount, "amount");
+			enterText(txtAmount1, amount, "amount");
 		//DriverFactory.getDriver().findElement(txtAmount).sendKeys("1.00");
 	}
 

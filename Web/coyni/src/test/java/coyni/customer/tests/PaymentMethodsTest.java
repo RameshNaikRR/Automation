@@ -56,7 +56,7 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
 			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-		//	customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
+			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().clickDone();
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);

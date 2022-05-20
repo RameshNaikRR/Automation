@@ -316,7 +316,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-			loginPage.forgotEmailComponent().clickforgot();
+		//	loginPage.forgotEmailComponent().clickforgot();
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
@@ -352,8 +352,9 @@ public class LoginTest {
 //			loginPage.forgotEmailComponent().verifyFirstName();
 //			loginPage.forgotEmailComponent().verifyLastName();
 			// loginPage.clickNext();
-			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
 			Thread.sleep(1000);
+			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
+		
 			loginPage.forgotEmailComponent().phoneVerificationComponent()
 					.verifyChooseHeading(data.get("chooseAccount"));
 			loginPage.forgotEmailComponent().phoneVerificationComponent().clickReturnToLogin();

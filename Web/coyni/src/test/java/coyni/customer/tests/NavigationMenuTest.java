@@ -54,6 +54,7 @@ public class NavigationMenuTest {
 	public void testMyQRCode(String strParams, String textBox) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			tokenAccountPage.clickTokenAccount();
 			navigationMenuPage.clickQRcode();
 			navigationMenuPage.myQRCodeComponent().verifyCopy(); // data.get("copy")
@@ -189,7 +190,7 @@ public class NavigationMenuTest {
 			//navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			// navigationMenuPage.verifyNotificationsIcon();
 			navigationMenuPage.userNameDropDownComponent().clickSignOut();
-			homePage.clickPersonalAccount();
+		//	homePage.clickPersonalAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Progress Bar is failed due to exception " + e);
@@ -226,7 +227,7 @@ public class NavigationMenuTest {
 			//navigationMenuPage.verifyAccountHolderNameView();
 			//navigationMenuPage.userNameDropDownComponent().clickUserName();
 			//navigationMenuPage.userNameDropDownComponent().clickSignOut();
-			loginPage.verifyHeading(data.get("loginHeading"));
+//			loginPage.verifyHeading(data.get("loginHeading"));
 
 			// navigationMenuPage.verifyNotificationsIcon();
 			// navigationMenuPage.userNameDropDownComponent().clickSignOut();

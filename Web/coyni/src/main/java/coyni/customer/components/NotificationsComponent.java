@@ -11,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class NotificationsComponent extends BrowserFunctions {
 
 	// added
-	private By notificationsIcon = By.cssSelector(".icon-notification-bold");
+	private By notificationsIcon = By.xpath("//div[contains(@class,'internal-header__notification')]");
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
 	private By btnRequests = By.xpath("//button[contains(text(),'Pay/Req')]");
