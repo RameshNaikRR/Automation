@@ -14,7 +14,6 @@ public class NavigationComponent extends MobileFunctions {
 			"(//*[contains(@resource-id,'Close')][1]|//*[contains(@resource-id,'Close')][2]|//*[contains(@resource-id,'Close')])[3]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
 
 	public void clickBack() {
-
 		if (!new CommonFunctions().isPlatformiOS()) {
 			click(btnBack, "Back");
 		}

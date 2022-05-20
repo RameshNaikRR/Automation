@@ -8,7 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile.components.EnterYourPINComponent;
-import coyni_mobile.components.VerifyEmailComponent;
+import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.pages.HomePage;
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.LoginPage;
@@ -22,7 +22,7 @@ public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
 	LandingPage landingPage;
-	VerifyEmailComponent verifyEmailComponent;
+	EmailVerificationComponent verifyEmailComponent;
 	EnterYourPINComponent enterYourPINComponent;
 
 	@BeforeTest
@@ -30,7 +30,7 @@ public class LoginTest {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
 		landingPage = new LandingPage();
-		verifyEmailComponent = new VerifyEmailComponent();
+		verifyEmailComponent = new EmailVerificationComponent();
 		enterYourPINComponent = new EnterYourPINComponent();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
@@ -345,13 +345,13 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
+			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
+			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
 			// loginPage.retrieveEmailPage().pasteOption(loginData.get("code"));
 			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
@@ -368,7 +368,7 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
+			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
@@ -396,14 +396,15 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
+			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			loginPage.retrieveEmailPage().verifyTryAgain(loginData.get("tryAgain"));
-			loginPage.retrieveEmailPage().clickTryAgain();
+			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
+			loginPage.retrieveEmailPage().navigationComponent().clickBack();
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().navigationComponent().clickClose();
 			loginPage.VerifyLoginPageView();
@@ -420,25 +421,22 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
+			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
+			loginPage.retrieveEmailPage().clickOk();
 			loginPage.retrieveEmailPage().navigationComponent().clickBack();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
 			loginPage.retrieveEmailPage().navigationComponent().clickClose();
-			landingPage.verifyLandingPage();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmailNavigationOptions Failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -447,7 +445,7 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
+			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
@@ -457,7 +455,7 @@ public class LoginTest {
 //			loginPage.retrieveEmailPage().clickOk();
 //			loginPage.retrieveEmailPage().clickNext();
 			// Thread.sleep(5000);
-			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
+			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
@@ -470,29 +468,33 @@ public class LoginTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailFieldValidations(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-			loginPage.clickForgotEmail();
-			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			// String phoneNumber = loginData.get("phoneNumber");
-			// loginPage.retrieveEmailPage().validatePhoneNumberField(phoneNumber);
-			// , phoneNumber[1], phoneNumber[2],phoneNumber[3]);
-			String[] firstName = loginData.get("firstName").split(",");
-			loginPage.retrieveEmailPage().validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3],
-					firstName[4]);
-			String[] lastName = loginData.get("lastName").split(",");
-			loginPage.retrieveEmailPage().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],
-					lastName[4]);
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRetrieveEmailFieldValidations(String strParams) {
+//		try {
+//			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+//			landingPage.clickLogin();
+//			loginPage.clickRetrieveEmail();
+//			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+//			// String phoneNumber = loginData.get("phoneNumber");
+//			// loginPage.retrieveEmailPage().validatePhoneNumberField(phoneNumber);
+//			// , phoneNumber[1], phoneNumber[2],phoneNumber[3]);
+//			String[] firstName = loginData.get("firstName").split(",");
+//			loginPage.retrieveEmailPage().validateFirstNameField(firstName[0], firstName[1], firstName[2], firstName[3],
+//					firstName[4]);
+//			String[] lastName = loginData.get("lastName").split(",");
+//			loginPage.retrieveEmailPage().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],
+//					lastName[4]);
+//			loginPage.retrieveEmailPage().clickNext();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testRetrieveEmailFieldValidations Failed due to exception " + e);
+//		}
+//	}
 
-			loginPage.retrieveEmailPage().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRetrieveEmailFieldValidations Failed due to exception " + e);
-		}
+	private EnterYourPINComponent retrieveEmailPage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Test
@@ -577,9 +579,8 @@ public class LoginTest {
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
-
-			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.fillInputBoxes(data.get("otp"));
@@ -588,8 +589,10 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.navigationComponent().clickBack();
 			// verifying choose your pin back navigation
-			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
+			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.fillInputBoxes(data.get("otp"));

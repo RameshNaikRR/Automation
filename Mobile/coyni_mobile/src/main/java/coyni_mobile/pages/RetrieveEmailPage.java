@@ -30,7 +30,8 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By txtPhoneNumber = MobileBy.xpath(
 			"//*[contains(@resource-id,'pnET')]|(//*[contains(@name,'Phone Number')])[1]/following-sibling::*[1]/child::*[1]");
 	private By txtInputBoxes = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
-	private By lblAccount = MobileBy.xpath("//*[@text='We’ve Found Your Account!']|//*[@name='We’ve Found Your Account!']");
+	private By lblAccount = MobileBy
+			.xpath("//*[@text='We’ve Found Your Account!']|//*[@name='We’ve Found Your Account!']");
 	private By CoyniAccount = MobileBy.xpath("//*[contains(@resource-id,'llCoyniAct')]|//*[@name='Anudeep Ag']");
 	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]|(//*[@name='Resend'])[1]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]|//*[@name='OK']");
@@ -56,6 +57,13 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void clickOk() {
+//		if (getElement(btnOk, "Ok").isDisplayed()) {
+//			click(btnOk, "OK");
+//			ExtentTestManager.setFailMessageInReport("Navigation method failed due to Application issue");
+////			DriverFactory.getDriver().quit();
+//		} else {
+//			navigationComponent().clickBack();
+//		}
 		click(btnOk, "Ok");
 	}
 
@@ -64,26 +72,26 @@ public class RetrieveEmailPage extends MobileFunctions {
 	//
 //		}
 
-	public void verifyPhone(String expHeading) {
+	public void verifyPhoneNumberHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingPhoneNumber, "Phone Heading", expHeading);
 	}
 
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "First Name ");
-		click(txtPhoneNumber, "Phone Number");
-	    if (!new CommonFunctions().isPlatformiOS()) {
-				pressBack();
-	    }
+		new CommonFunctions().clickTab();
+		if (!new CommonFunctions().isPlatformiOS()) {
+			pressBack();
+		}
 
 	}
 
 	public void fillLastName(String lastName) {
 		// scrollUpToElement(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name ");
-		click(txtPhoneNumber, "Phone Number");
-      //new SignUpPage().clickDone();
-  		
+		new CommonFunctions().clickTab();
+		scrollDownToElement(btnNext, "Next");
 	}
+
 	public void pasteOption(String code) {
 		copyDataToClipboard(code);
 		click(txtInputBoxes, "Paste");
@@ -103,8 +111,6 @@ public class RetrieveEmailPage extends MobileFunctions {
 			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
 		}
 	}
-
-//	}
 
 	public void ViewCoyni() {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
@@ -126,7 +132,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	public void fillPhoneNumber(String phoneNumber) {
 		enterText(txtPhoneNumber, phoneNumber, "Phone Number ");
-		click(txtFirstName, "First Name");
+		new CommonFunctions().clickTab();
 
 	}
 

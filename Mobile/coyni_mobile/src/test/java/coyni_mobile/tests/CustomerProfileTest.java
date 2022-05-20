@@ -689,23 +689,30 @@ public class CustomerProfileTest {
 					.clickNext();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.addAccountsComponent().verifyHeadingAddAccount();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().enterBankName(data.get("expBankName"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().fillUserName(data.get("expUserName"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().fillPassword(data.get("expPassword"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().unSelectBank1();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().unSelectBank2();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().clickNext();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().verifyDoneHeading(data.get("expDoneHeading"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addAccountsComponent().clickDone();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().enterBankName(data.get("expBankName"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().fillUserName(data.get("expUserName"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().fillPassword(data.get("expPassword"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().unSelectBank1();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().unSelectBank2();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().clickNext();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().verifyDoneHeading(data.get("expDoneHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.addAccountsComponent().clickDone();
 			customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
-			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddExternalBankAccount(String strParams) {
@@ -716,12 +723,11 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			testAddBankAccount(strParams);
-		}
-		catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteBankAccount(String strParams) {
@@ -733,13 +739,11 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().selectBank();
 			customerProfilePage.paymentMethodsPage().removingPopup().verifyHeading();
 			customerProfilePage.paymentMethodsPage().removingPopup().clickYes();
-		}
-		catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {
@@ -856,7 +860,7 @@ public class CustomerProfileTest {
 			customerProfilePage.clickResetPinCode();
 			customerProfilePage.enterYourPINComponent().verifyForgotPinView();
 			customerProfilePage.enterYourPINComponent().clickForgotPin();
-			customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
 			customerProfilePage.enterYourPINComponent().verifyForgotPinView();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
 			Thread.sleep(2000);
@@ -864,21 +868,26 @@ public class CustomerProfileTest {
 			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
 			Thread.sleep(1000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChooseYourPinView();
-			customerProfilePage.enterYourPINComponent().navigationComponent().verifyCloseView();
-			customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-			customerProfilePage.clickResetPinCode();
-			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(1000);
-			customerProfilePage.enterYourPINComponent().choosePinComponent()
-					.verifyChoosePinHeading(data.get("heading1"));
-			customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
-			customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmYourPinView();
 			customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			customerProfilePage.clickResetPinCode();
+			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			Thread.sleep(2000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
-					.verifyChoosePinHeading(data.get("heading1"));
+					.verifyChoosePinHeading(data.get("choosePinHeading"));
+			customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+			customerProfilePage.enterYourPINComponent().choosePinComponent().verifyConfirmYourPinView();
+			customerProfilePage.enterYourPINComponent().choosePinComponent()
+					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
+			customerProfilePage.enterYourPINComponent().navigationComponent().verifyBackView();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
-			customerProfilePage.verifyResetPinCodeView();
+			Thread.sleep(2000);
+			customerProfilePage.enterYourPINComponent().choosePinComponent()
+					.verifyChoosePinHeading(data.get("choosePinHeading"));
+			Thread.sleep(5000);
+			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
+			Thread.sleep(5000);
+//			customerProfilePage.enterYourPINComponent().verifyEnterYourPinView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test ResetPinCodeView Flow failed due to Exception " + e);
@@ -1001,7 +1010,7 @@ public class CustomerProfileTest {
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteCreditCard(String strParams) {

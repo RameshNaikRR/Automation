@@ -10,7 +10,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class VerifyEmailComponent extends MobileFunctions {
+public class EmailVerificationComponent extends MobileFunctions {
 
 	private By lblEmailHeading = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]|//*[@name='Verify Email']");
 	private By lnkResend = MobileBy.xpath("(//*[@name='Resend'])[1]|//*[contains(@resource-id,'resendTV')]");

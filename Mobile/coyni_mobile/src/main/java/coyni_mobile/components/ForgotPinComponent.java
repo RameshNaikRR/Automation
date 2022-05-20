@@ -31,7 +31,7 @@ public class ForgotPinComponent extends MobileFunctions {
 	private By btnBack = MobileBy.xpath("");
 	private By lblForgotYourPin = MobileBy
 			.xpath("//*[contains(@resource-id,'tvHead')]|//*[contains(@name,'Forgot Your')]");
-	private By btnClose= MobileBy.xpath("//*[contains(@resource-id,'llClose')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'llClose')]");
 
 	public void verifyForgotYourPinView() {
 		new CommonFunctions().elementView(lblForgotYourPin, "ForgotYourPin");
@@ -58,8 +58,8 @@ public class ForgotPinComponent extends MobileFunctions {
 		return new NavigationComponent();
 	}
 
-	public VerifyEmailComponent verifyEmailComponent() {
-		return new VerifyEmailComponent();
+	public EmailVerificationComponent verifyEmailComponent() {
+		return new EmailVerificationComponent();
 	}
 
 	public void headingEnterYourPin(String expEnterYourPinHeading) {
@@ -120,7 +120,8 @@ public class ForgotPinComponent extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Clicked Back");
 	}
+
 	public void verifyForgotPinClose() {
-		click(btnClose,"close forgot pin");
+		click(btnClose, "close forgot pin");
 	}
 }

@@ -3,7 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.components.VerifyEmailComponent;
+import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -56,8 +56,8 @@ public class ForgotPasswordPage extends MobileFunctions {
 		}
 	}
 
-	public VerifyEmailComponent verifyEmailComponent() {
-		return new VerifyEmailComponent();
+	public EmailVerificationComponent verifyEmailComponent() {
+		return new EmailVerificationComponent();
 	}
 
 	public NavigationComponent navigationComponent() {

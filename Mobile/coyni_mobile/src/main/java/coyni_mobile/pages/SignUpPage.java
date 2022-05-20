@@ -11,7 +11,8 @@ import io.appium.java_client.MobileBy;
 
 public class SignUpPage extends MobileFunctions {
 
-	private By btnGetStarted = MobileBy.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
+	private By btnGetStarted = MobileBy
+			.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
 	private By lnkPersonalAccount = MobileBy
 			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
 	private By lnKBusinessAccount = MobileBy.xpath("");
@@ -75,9 +76,10 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
-		scrollDownToElement(txtPassword, "Password");
 		click(txtPhoneNumber, "Phone Number");
 		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
+		DriverFactory.getDriver().hideKeyboard();
+//		scrollDownToElement(txtPassword, "Password");
 		clickDone();
 	}
 
@@ -91,6 +93,7 @@ public class SignUpPage extends MobileFunctions {
 		scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+		new CommonFunctions().clickTab();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			pressBack();
 		}
@@ -98,6 +101,13 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
+//		scrollDownToElement(btnNext, "Next");
+//		if (getElement(btnNext, "Next").isEnabled()) {
+//			click(btnNext, "Next");
+//			ExtentTestManager.setInfoMessageInReport("Next button is in enable mode");
+//		}else {
+//			ExtentTestManager.setInfoMessageInReport("Next buttton is in disabled mode");
+//		}
 		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
