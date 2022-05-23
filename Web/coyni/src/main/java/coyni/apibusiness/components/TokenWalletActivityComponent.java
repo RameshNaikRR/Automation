@@ -2,12 +2,18 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.api.business.popups.AddNewSignetAccountPopup;
 import coyni.api.business.popups.BuyCoyniTokensPopup;
 import coyni.api.business.popups.BuyTokensPaymentPopup;
+import coyni.api.business.popups.RemovePaymentMethodPopup;
 import coyni.api.business.popups.TokenWalletTransferTokenPopup;
+import coyni.api.business.popups.TransactionInProgessPopup;
 import coyni.api.business.popups.TransactionSuccessfulPopup;
 import coyni.api.business.popups.VerifyYourIdentityPopup;
 import coyni.api.business.popups.WalletTransferPrieviewPopup;
+import coyni.api.business.popups.WithdrawCoyniToUSDPopup;
+import coyni.api.business.popups.WithdrawToBankAccountPopup;
+import coyni.api.business.popups.WithdrawtoSignetAccountPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -39,6 +45,7 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	private By getTokens(String Tokens) {
 		return By.xpath(String.format("//span[.='%s']", Tokens));
 	}
+	
 
 	private By getAmount(String Amount) {
 		return By.xpath(String.format("(//span[contains(@class,'AccountActivity_Wallet_balance__FcRUz')])[1]", Amount));
@@ -57,7 +64,12 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	}
 
 	private By lblNoTransactions = By.xpath("//span[.='You do not have any transactions.']");
-
+    public void clickWithdrawToUSD() {
+    	click(lnkWithdrawToUSD, "Withdraw to USD");
+    }
+    public void verifyWithdrawtoUsdCursorAction() {
+    	new CommonFunctions().verifyCursorAction(lnkWithdrawToUSD, "Withdrw to USD");
+    }
 	public void verifyTokenWalletsLnk() {
 		new CommonFunctions().elementView(lnkTokenWallets, "Token Wallets Link");
 	}
@@ -192,6 +204,27 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	}
     public BuyCoyniTokensPopup buyCoyniTokensPopup() {
     	return new BuyCoyniTokensPopup();
+    }
+    public WithdrawCoyniToUSDPopup withdrawCoyniToUSDPopup() {
+    	return new WithdrawCoyniToUSDPopup();
+    }
+    public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
+    	return new WithdrawToBankAccountPopup();
+    }
+    public WithdrawtoSignetAccountPopup withdrawtoSignetAccountPopup() {
+    	return new WithdrawtoSignetAccountPopup();
+    }
+    public AddNewSignetAccountPopup addNewSignetAccountPopup() {
+    	return new AddNewSignetAccountPopup();
+    }
+    public SuccessFailureComponent successFailureComponent() {
+    	return new SuccessFailureComponent();
+    }
+    public TransactionInProgessPopup transactionInProgessPopup() {
+    	return new TransactionInProgessPopup();
+    }
+    public RemovePaymentMethodPopup removePaymentMethodPopup() {
+    	return new RemovePaymentMethodPopup();
     }
 }
 

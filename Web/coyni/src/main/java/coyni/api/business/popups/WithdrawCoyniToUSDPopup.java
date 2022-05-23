@@ -22,6 +22,15 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public void verifyInstantPayHeading(String InstantPayHeading) {
 		new CommonFunctions().verifyLabelText(lblInstantPay, "Instant Pay Heading", InstantPayHeading);
 	}
+	public void clickBankAccount() {
+		click(lblHeading, "BankAccount");
+	}
+	public void clickInstantPay() {
+		click(lblInstantPay, "Instant Pay");
+	}
+	public void clickSignetAccount() {
+		click(lblSignetAccount, "SignetAccount");
+	}
 
 	public void verifySignetAccountHeading(String SignetAccountHeading) {
 		new CommonFunctions().verifyLabelText(lblSignetAccount, "Signet Account Heading", SignetAccountHeading);

@@ -9,7 +9,7 @@ public class HomePage extends BrowserFunctions {
 		return new TopBarComponent();
 	}
 
-	public SideBarMenuComponent sideBarComponent() {
+	public SideBarMenuComponent sideBarMenuComponent() {
 		return new SideBarMenuComponent();
 	}
 

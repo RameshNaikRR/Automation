@@ -7,21 +7,25 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class WithdrawToBankAccountPopup extends BrowserFunctions {
 
-	public By lblHeading = By.xpath("//h1[text()='Withdraw to Bank Account']");
-	public By lblchAccount = By.xpath("//h2[text()='Choose Your Payment Method:");
-	public By rdbtnBankAccount = By.id("//input[@id='radio-BANK-128']");
-	public By rdbtnBankAccount1 = By.id("//input[@id='radio-BANK-110']");
-	public By lnkBnkAccount = By.xpath("");
-	public By btnNext = By.xpath("//button[text()='Next']");
-	public By txtamount = By.xpath("");
-	public By txtDescription = By.xpath("//textarea[@id='message']");
-	public By wtdAmount = By.xpath("");
-	public By processingfee = By.xpath("");
-	public By total = By.xpath("");
-	public By btnConfirm = By.xpath("");
+	private By lblHeading = By.xpath("//h1[text()='Withdraw to Bank Account']");
+	private By lblchAccount = By.xpath("//h2[text()='Choose Your Payment Method:");
+	private By rdbtnBankAccount = By.id("//input[@id='radio-BANK-128']");
+	private By rdbtnBankAccount1 = By.id("//input[@id='radio-BANK-110']");
+	private By lnkBnkAccount = By.xpath("");
+	private By btnNext = By.xpath("//button[text()='Next']");
+	private By txtamount = By.xpath("");
+	private By txtDescription = By.xpath("//textarea[@id='message']");
+	private By wtdAmount = By.xpath("");
+	private By processingfee = By.xpath("");
+	private By total = By.xpath("");
+	private By btnConfirm = By.xpath("");
+	private By lnkAddNewBankAccount = By.xpath("//span[text()='Add New Bank Account']");
 
-	public void veriyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+//	public void veriyHeading(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+//	}
+	public void verifyWithdrawToBankAccountHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "heading", expHeading);
 	}
 
 	public void verifychooseAccount(String subHeading) {
@@ -35,7 +39,9 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions {
 	public void verifyBankAccount1(String BankAccount1) {
 		new CommonFunctions().verifyLabelText(rdbtnBankAccount1, "Bank Account", BankAccount1);
 	}
-
+    public void clickAddNewBankAccount() {
+    	click(lnkAddNewBankAccount, "Add New BankAccount");
+    }
 	public void clickNext() {
 		click(btnNext, "Next");
 	}

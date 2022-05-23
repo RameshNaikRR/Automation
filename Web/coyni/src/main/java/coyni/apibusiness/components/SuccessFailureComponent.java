@@ -59,6 +59,9 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
