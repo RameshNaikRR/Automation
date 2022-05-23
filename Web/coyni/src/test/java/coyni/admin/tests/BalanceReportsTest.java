@@ -34,4 +34,55 @@ public class BalanceReportsTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testBalanceReportTest(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickBalanceReports();
+			homePage.sideBarComponent().balanceReportsPage().verifyHeading(data.get("expHeading"));
+			homePage.sideBarComponent().balanceReportsPage().getAccountBalance();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().balanceReportsPage().getPersonalAccountsTotalBalance();
+			homePage.sideBarComponent().balanceReportsPage().getAmount();
+			homePage.sideBarComponent().balanceReportsPage().getTotalCustomer();
+			homePage.sideBarComponent().balanceReportsPage().getTotalBalance();
+			// homePage.sideBarComponent().balanceReportsPage().
+			homePage.sideBarComponent().balanceReportsPage().getFirstRowHeading();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBalanceReportTest Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickBalanceReports();
+			Thread.sleep(1000);
+			homePage.sideBarComponent().balanceReportsPage().clickExport();
+			Thread.sleep(2000);
+			if (data.get("dropDown").equalsIgnoreCase("Default (3)")) {
+				homePage.sideBarComponent().exportSelectedTransactions().verifyHeading(data.get("expHeading"));
+				homePage.sideBarComponent().exportSelectedTransactions().verifySubHeading(data.get("expSubHeading"));
+				Thread.sleep(2000);
+				homePage.sideBarComponent().exportSelectedTransactions().clickDropDown(data.get("dropDown"));
+				homePage.sideBarComponent().exportSelectedTransactions().clickExport();
+			} else {
+				homePage.sideBarComponent().exportSelectedTransactions().clickDropDown(data.get("dropDown"));
+				//homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickDeselectAll();
+				homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions()
+						.clickCheckBox(data.get("checkBox"));
+				
+				
+		 homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickExport();
+
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testExportSelectedTransactions Failed due to Exception " + e);
+		}
+	}
+
 }

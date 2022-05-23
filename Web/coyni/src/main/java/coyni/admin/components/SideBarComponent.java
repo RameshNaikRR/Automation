@@ -2,8 +2,14 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.pages.BalanceReportsPage;
+import coyni.admin.pages.FeatureControlPage;
+import coyni.admin.pages.FeeStructurePage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
+import coyni.admin.pages.ViewMerchantfeeStructurePage;
+import coyni.admin.pages.ViewPersonalFeeStructurePage;
+import coyni.admin.popups.ExportSelectedTransactions;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -141,8 +147,8 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickFeeStructure() {
-		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Fee Sructure"), "Fee Sructure");
+		//clickSystemSettings();
+		click(getSubMenuItems("System Settings", "Fee Structure"), "Fee Structure");
 	}
 
 	public void clickAccountLimits() {
@@ -156,7 +162,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickFeatureControls() {
-		clickSystemSettings();
+		//clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Feature Controls"), "Feature Controls");
 	}
 
@@ -200,4 +206,26 @@ public class SideBarComponent extends BrowserFunctions {
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
 	}
+	public FeeStructurePage feeStructurePage() {
+		return new FeeStructurePage();
+	}
+	public ViewPersonalFeeStructurePage viewPersonalFeeStructurePage() {
+		return new ViewPersonalFeeStructurePage();
+	}
+	public ViewMerchantfeeStructurePage viewMerchantfeeStructurePage() {
+		return new ViewMerchantfeeStructurePage();
+	}
+	public FeatureControlPage featureControlPage() {
+		return new FeatureControlPage();
+	}
+	public BalanceReportsPage balanceReportsPage() {
+		return new BalanceReportsPage();
+	}
+	public ExportSelectedTransactions exportSelectedTransactions() {
+		return new ExportSelectedTransactions();
+	}
+
+
+
 }
+
