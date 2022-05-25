@@ -21,7 +21,10 @@ public class DBAInformationPage extends MobileFunctions {
 	private By lblPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'phoneNumberTV')]");
 	private By btnEmail = MobileBy.xpath("//*[contains(@resource-id,'editEmailDBALL')]");
 	private By btnPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'editPhoneNumDBALL')]");
-
+	private By btnEditProfile = MobileBy.xpath("//*[contains(@resource-id,'dba_editProfileIV')]");
+	private By lnkChooseFromLibrary = MobileBy.xpath("//*[contains(@text,'Library')]");
+	private By lnkTakeAPhoto = MobileBy.xpath("//*[contains(@text,'Photo')]");
+	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "DBA Infromation Heading", expHeading);
 	}
@@ -73,6 +76,16 @@ public class DBAInformationPage extends MobileFunctions {
 
 	public void clickPhoneNumber() {
 		click(btnPhoneNumber, "Phone Number");
+	}
+
+	public void clickEditProfile() {
+		click(btnEditProfile, "Edit Profile");
+	}
+	public void clickChoosefromLibrary() {
+		click(lnkChooseFromLibrary, "Profile Choose from Library");
+	}
+	public void clickTakeAPhoto() {
+		click(lnkTakeAPhoto, "Take A Photo");
 	}
 
 	public CurrentDetailsComponent currentDetailsComponent() {

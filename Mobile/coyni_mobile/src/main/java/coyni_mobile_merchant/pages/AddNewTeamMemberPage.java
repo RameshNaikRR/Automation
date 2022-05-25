@@ -76,6 +76,8 @@ public class AddNewTeamMemberPage extends MobileFunctions {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 	public void clickOk() {

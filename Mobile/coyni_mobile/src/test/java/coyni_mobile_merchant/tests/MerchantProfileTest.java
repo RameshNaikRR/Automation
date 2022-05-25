@@ -1344,11 +1344,19 @@ public class MerchantProfileTest {
 					.verifyDescription(data.get("newTeamMemberDescription"));
 			merchantProfilePage.teamPage().addNewTeamMemberPage().getAdministratorDesc();
 			if (!data.get("errMessage").isEmpty()) {
-				merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
-				merchantProfilePage.teamPage().addNewTeamMemberPage().fillLastName(data.get("lastName"));
-				merchantProfilePage.teamPage().addNewTeamMemberPage().fillEmail(data.get("teamEmail"));
-				merchantProfilePage.teamPage().addNewTeamMemberPage().fillPhoneNumber(data.get("phoneNumber"));
-				merchantProfilePage.teamPage().addNewTeamMemberPage().clickTab();
+				if (data.get("validatePhoneNumber").equalsIgnoreCase("yes")) {
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillLastName(data.get("lastName"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillEmail(data.get("teamEmail"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillPhoneNumber(data.get("phoneNumber"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
+				}
+				if (data.get("validatePhoneNumber").equalsIgnoreCase("no")) {
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillLastName(data.get("lastName"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillEmail(data.get("teamEmail"));
+					merchantProfilePage.teamPage().addNewTeamMemberPage().fillPhoneNumber(data.get("phoneNumber"));
+				}
 			}
 			if (!data.get("popUpMsg").isEmpty()) {
 				merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
@@ -1472,15 +1480,31 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.verifyDescription(data.get("editTeamMemberDescription"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getAdministratorDesc();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.fillFirstName(data.get("firstName"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.fillLastName(data.get("lastName"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.fillEmail(data.get("teamEmail"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.fillPhoneNumber(data.get("phoneNumber"));
-			merchantProfilePage.teamPage().addNewTeamMemberPage().clickTab();
+			if (!data.get("errMessage").isEmpty()) {
+				if (data.get("validatePhoneNumber").equalsIgnoreCase("yes")) {
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillFirstName(data.get("firstName"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillLastName(data.get("lastName"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillEmail(data.get("teamEmail"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillPhoneNumber(data.get("phoneNumber"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillFirstName(data.get("firstName"));
+				}
+				if (data.get("validatePhoneNumber").equalsIgnoreCase("no")) {
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillFirstName(data.get("firstName"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillLastName(data.get("lastName"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillEmail(data.get("teamEmail"));
+					merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+							.fillPhoneNumber(data.get("phoneNumber"));
+				}
+			}
+
 			if (!data.get("popUpMsg").isEmpty()) {
 				merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 						.fillFirstName(data.get("firstName"));
@@ -1623,7 +1647,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.fillPhoneNumber(data.get("phoneNumber"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getNoteMsg();
-			// merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().clickSend();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().clickSend();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testResendInvitationTeamMember Failed due to exception " + e);
 
@@ -1668,13 +1692,14 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickbtnRemoveMember();
-//			merchantProfilePage.teamPage().teamMemberDetailsPage().clickYes();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().clickYes();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRemoveTeamMember Failed due to exception " + e);
 
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1789,6 +1814,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickFees();
 			merchantProfilePage.feesComponent().verifyHeading(data.get("label"));
 			merchantProfilePage.feesComponent().verifyHeadingTransactionsLabel("transactionHeading");
 			merchantProfilePage.feesComponent().verifySaleOrderLabel("saleOrderlable");
