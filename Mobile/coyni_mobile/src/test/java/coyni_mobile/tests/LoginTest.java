@@ -629,8 +629,8 @@ public class LoginTest {
 
 			loginPage.enterYourPINComponent().clickForgotPin();
 
-			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
+//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			// verifying email
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()

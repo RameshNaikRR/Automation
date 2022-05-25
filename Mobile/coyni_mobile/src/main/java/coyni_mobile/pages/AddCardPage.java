@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.MailingAddressComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -33,6 +34,7 @@ public class AddCardPage extends MobileFunctions {
 	}
 	public void clickNext() {
 		scrollDownToElement(btnNext,"Next");
+		DriverFactory.getDriver().hideKeyboard();
 		click(btnNext, "Next");
 	}
 	public void clickCamera() {

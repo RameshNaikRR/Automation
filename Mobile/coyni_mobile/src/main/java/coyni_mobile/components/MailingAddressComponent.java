@@ -11,20 +11,34 @@ import io.appium.java_client.MobileBy;
 
 public class MailingAddressComponent extends MobileFunctions {
 
-	private By txtAddressLine1 = MobileBy.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]");
-	private By txtAddressLine2 = MobileBy.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]");
+	private By txtAddressLine1 = MobileBy
+			.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]");
+	private By txtAddressLine2 = MobileBy
+			.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]");
 	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]");
-	private By drpDwnState = MobileBy.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
-	private By txtZipCode = MobileBy
-			.xpath("//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
-	private By lblCountry = MobileBy.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
+	private By drpDwnState = MobileBy
+			.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
+	private By txtZipCode = MobileBy.xpath(
+			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
+	private By lblCountry = MobileBy
+			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
 	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')]");
-	private By txtState = MobileBy.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
+	private By txtState = MobileBy
+			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvSave')]");
 	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
+
+//	private By txtCurrentState = MobileBy.xpath("//*[contains(@text,'California')]");
+	private By txtCurrentState(String currentState) {
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
+	}
+
+	public void clickCurrentState() {
+		click(txtCurrentState("California"), "California");
+	}
 
 	public void fillAddressLine1(String addressLine1) {
 		click(txtAddressLine1, "Address Line1");
@@ -46,8 +60,20 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void selectState(String state) throws InterruptedException {
+//		scrollDownToElement(txtCity, "City");
+//		click(drpDwnState, "State Drop down");
+////		click(txtState, "state");
+////		Thread.sleep(2000);
+//		enterText(txtState, state, "State");
+//		new CommonFunctions().clickEnter();
+//		Thread.sleep(2000);
+//		clickCurrentState();
+//		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
+////		new CommonFunctions().clickTab();
+//		click(btnConfirmState, "Done");
+		
+		
 		scrollDownToElement(txtCity, "City");
-
 		click(drpDwnState, "State Drop down");
 		enterText(txtState, state, "State");
 		Thread.sleep(2000);
@@ -55,14 +81,14 @@ public class MailingAddressComponent extends MobileFunctions {
 		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
 		new CommonFunctions().clickEnter();
 		click(btnConfirmState, "Done");
-
 	}
 
-	public void fillZipCode(String zipCode) {
-		// scrollDownToElement(txtState, "State");
+	public void fillZipCode(String zipCode) throws InterruptedException {
+		Thread.sleep(2000);
+		scrollDownToElement(txtZipCode, "zipCode");
 		click(txtZipCode, "zip Code");
 		enterText(txtZipCode, zipCode, "Zip Code");
-		new CommonFunctions().clickEnter();
+		new CommonFunctions().clickTab();
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
@@ -73,6 +99,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void clickAddCard() {
 		scrollDownToElement(btnAddCard, "Add Card");
 		click(btnAddCard, "Add Card");
+
 	}
 
 	public void clickSave() {
