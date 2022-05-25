@@ -10,8 +10,8 @@ public class AgreementComponent extends MobileFunctions {
 
 	private By headingAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-//	private By privacyPolicy = MobileBy.xpath("");
-//	private By termsOfService = MobileBy.xpath("");
+	private By privacyPolicy = MobileBy.xpath("//*[@text='Privay Policy']");
+	private By termsOfService = MobileBy.xpath("//*[@text='Terms of Service']");
 	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'listagreementsTV')]");
 	private By headingPastAgreements = MobileBy.xpath(" ");
 
@@ -39,18 +39,18 @@ public class AgreementComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
 	}
 
-//	public void verifyPrivacyPolicyView() {
-//		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
-//	}
+	public void verifyPrivacyPolicyView() {
+		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
+	}
 //
 //	public void clickPrivacyPolicy() {
 //		click(privacyPolicy, "Privacy Policy");
 //	}
 
-//	public void verifyTermsOfServiceView() {
-//		new CommonFunctions().elementView(termsOfService, "Terms of Service");
-//	}
-//
+	public void verifyTermsOfServiceView() {
+		new CommonFunctions().elementView(termsOfService, "Terms of Service");
+	}
+
 //	public void clickTermsOfService() {
 //		click(termsOfService, "Terms of Service");
 //	}

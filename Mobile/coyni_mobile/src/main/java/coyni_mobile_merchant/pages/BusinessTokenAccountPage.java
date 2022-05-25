@@ -2,6 +2,7 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile_merchant.components.BatchPayOutComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -15,5 +16,13 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 
 	public void clickClose() {
 		click(btnCloseIcon, "Close Icon");
+	}
+
+	public BatchPayOutComponent batchPayOutComponent() {
+		return new BatchPayOutComponent();
+	}
+
+	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
+		return new MerchantTransactionDetailsPage();
 	}
 }

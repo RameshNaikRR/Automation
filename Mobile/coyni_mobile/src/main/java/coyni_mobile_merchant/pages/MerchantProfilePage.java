@@ -9,9 +9,7 @@ import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.FeesComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PreferencesComponent;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
@@ -20,63 +18,44 @@ public class MerchantProfilePage extends MobileFunctions {
 //	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
 //	private By btnResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'businessResetPin')]");
 //	
-	private By lblUserName = MobileBy.xpath("");
-	private By lblAccountID = MobileBy.xpath("");
-	private By lblAccountStatus = MobileBy.xpath("");
-	private By imgQRCode = MobileBy.xpath("");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
+	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
+	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'AccountStatusTV')]");
+	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
 	private By imgUser = MobileBy.xpath("");
-	private By lblSettings = MobileBy.xpath("");
-	private By lnkUserDetails = MobileBy.xpath("");
-	private By lnkPaymentMethods = MobileBy.xpath("");
-	private By lnkPreferences = MobileBy.xpath("");
+	private By lblSettings = MobileBy.xpath("//*[contains(@resource-id,'userSettingsTV')]");
+	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'business_UserDetailsLL')]");
+	private By lblMerchantSettings = MobileBy.xpath("//*[contains(@resource-id,'settingTV')]");
+	private By lnkCompanyInformation = MobileBy.xpath("//*[contains(@resource-id,'companyInformationLL')]");
+	private By lnkDBAInformation = MobileBy.xpath("//*[contains(@resource-id,'DBAInformationLL')]");
+	private By lnkBeneficialOwners = MobileBy.xpath("//*[contains(@resource-id,'beneficialOwnersLL')]");
+	private By lnkTeam = MobileBy.xpath("//*[contains(@resource-id,'teamLL')]");
+	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'paymentMethodsLL')]");
+	private By lnkPreferences = MobileBy.xpath("//*[contains(@resource-id,'PreferencesLL')]");
+	private By lnkFees = MobileBy.xpath("//*[contains(@resource-id,'feesLL')]");
 	private By lblAccount = MobileBy.xpath("");
-	private By lnkAccountLimits = MobileBy.xpath("");
-	private By lnkAgreements = MobileBy.xpath("");
-	private By lblSecurity = MobileBy.xpath("");
-	private By lnkResetPinCode = MobileBy.xpath("");
-	private By btnFaceIDSetting = MobileBy.xpath("");
-	private By btnToggle = MobileBy.xpath("");
-	private By btnChangePassword = MobileBy.xpath("");
-	private By btnLogOut = MobileBy.xpath("");
+	private By lnkAccountLimits = MobileBy.xpath("//*[contains(@resource-id,'cpAccountLimitsLL')]");
+	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
+	private By lblSecurity = MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
+	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'businessResetPin')]");
+	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'b_tvBMSetting')]");
+	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
+	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
 
-	private By lblMyQRCodeHeading = MobileBy.xpath("");
-	private By qrCode = MobileBy.xpath("");
-	private By btnShare = MobileBy.xpath("");
-	private By sharepopup = MobileBy.xpath("");
-	private By lblCopyMessage = MobileBy.xpath("");
-	private By lblAvaliableBalance = MobileBy.xpath("");// tvBalance
-	private By viewPayRequestButton = MobileBy.xpath("");// cvPayRequest
-	private By lblRecentTransaction = MobileBy.xpath("");// Recent
-															// Transactions
-	private By lblFirstAndLastName = MobileBy.xpath("");
-	private By lblContact = MobileBy.xpath("");// Recent Contacts
-
-	private By viewDashboard = MobileBy.xpath("");
-	private By viewCrypto = MobileBy.xpath("");// layoutCrypto
-	private By viewIssueCard = MobileBy.xpath("");// layoutCard
-	private By viewProfile = MobileBy.xpath("");// layoutProfile
-	private By viewTokenMenu = MobileBy.xpath("");// layoutMainMenu
-	private By lblCryptoAssets = MobileBy.xpath("");// Crypto Assets //
-													// Coming Soon
 	// text
-	private By lblIssueCard = MobileBy.xpath("");
-	private By btnScan = MobileBy.xpath("");
-	private By btnPayRequest = MobileBy.xpath("");// Pay/Request
-	private By btnBuyToken = MobileBy.xpath("");// Buy Tokens
-	private By btnWithdrawToUSD = MobileBy.xpath("");// Withdraw to USD
-	private By popUp = MobileBy.xpath("");
+	private By btnScan = MobileBy.xpath("//*[@text='Scan']");
+	private By btnReceivePayment = MobileBy.xpath("//*[@text='Receive Payment']");
+	private By btnBuyToken = MobileBy.xpath("//*[@text='Buy Tokens']");//
+	private By btnWithdrawToUSD = MobileBy.xpath("//*[@text='Withdraw Tokens']");//
 
-	private By btnViewMore = MobileBy.xpath("");
-	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
-	private By lblAccId = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
+	private By lblHeading = MobileBy.xpath("");
+
+	private By lblAccId = MobileBy.xpath("");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format(
 				"//*[contains(@resource-id,'com.greenbox.coyni:id/profileSV')]//*[contains(@text,'%s')]", eleName));
-	}
-
-	public void clickViewMore() {
-		scrollDownToElement(btnViewMore, "View More");
 	}
 
 	public void viewScan() {
@@ -92,20 +71,12 @@ public class MerchantProfilePage extends MobileFunctions {
 		click(btnToggle, "Toggle");
 	}
 
-	public void viewPayRequest() {
-		new CommonFunctions().elementView(btnPayRequest, "Request");
+	public void viewReceivePayment() {
+		new CommonFunctions().elementView(btnReceivePayment, "Receive");
 	}
 
-	public void verifyAvailableBalance() {
-		new CommonFunctions().elementView(lblAvaliableBalance, "Available Balance");
-	}
-
-	public void verifyAvaliableBlc(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblAvaliableBalance, "Avaliable Balance", expHeading);
-	}
-
-	public void viewPayRequestMenu() {
-		new CommonFunctions().elementView(viewPayRequestButton, "Pay Request");
+	public void clickReceivePayment() {
+		click(btnReceivePayment, "Pay Request");
 	}
 
 	public void viewBuyToken() {
@@ -121,87 +92,27 @@ public class MerchantProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(lnkResetPinCode, "Resent pin code");
 	}
 
-	public void clickPayRequest() {
-		click(viewPayRequestButton, "Pay Request");
-	}
-
-	public void verifyRecentTransaction(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblRecentTransaction, "Recent Transaction", expHeading);
-	}
-
 	public void clickImg() {
 		click(imgUser, "Click Image");
 	}
 
-	public void verifyFirstAndLastName(String firstAndLastName) {
-		new CommonFunctions().verifyLabelText(lblFirstAndLastName, "First and Last Name", firstAndLastName);
-	}
-
-	public void verifyContactContent(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblContact, "Contact Heading", expHeading);
-	}
-
-	public void viewDashboard() {
-		new CommonFunctions().elementView(viewDashboard, "Dashboard");
-	}
-
-	public void viewCrypto() {
-		new CommonFunctions().elementView(viewCrypto, "Crypto");
-	}
-
-	public void clickIssueCard() {
-		click(viewIssueCard, "Issue Card");
-	}
-
-	public void viewIssueCard() {
-		new CommonFunctions().elementView(viewIssueCard, "Issue Card");
-	}
-
-	public void viewProfile() {
-		new CommonFunctions().elementView(viewProfile, "Profile");
-	}
-
-	public void clickProfile() {
-		click(viewProfile, "Profile");
-	}
-
-	public void viewTokenAccount() {
-		new CommonFunctions().elementView(viewTokenMenu, "Token Account");
-	}
-
-	public void clickTokenMenu() {
-		click(viewTokenMenu, "Token Menu");
-	}
-
-	public void verifyAssets(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblCryptoAssets, "Crypto Assets comming soon Heading", expHeading);
-	}
-
-	public void verifyIssueCardHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblIssueCard, "Issue Card Heading", expHeading);
-	}
-
-	public void clickCrypto() {
-		click(viewCrypto, "Crypto");
-	}
-
-	private void minimizePopup() {
-		if (DriverFactory.getDriver().findElement(lblUserName).isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
-		}
-	}
+//	private void minimizePopup() {
+//		if (DriverFactory.getDriver().findElement(lblUserName).isDisplayed()) {
+//			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
+//		}
+//	}
 
 //	public void clickOutside() {
 //		new CommonFunctions().clickOutSideElement();
 //	}
-
-	public void minimizePopupBySwipeDown() {
-		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
-		minimizePopup();
-
-	}
+//
+//	public void minimizePopupBySwipeDown() {
+//		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
+//		minimizePopup();
+//
+//	}
 
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);
@@ -214,34 +125,14 @@ public class MerchantProfilePage extends MobileFunctions {
 	public void verifyAccountStatus(String expStatus) {
 		new CommonFunctions().verifyLabelText(lblAccountStatus, "Account Status", expStatus);
 	}
-//
-//	public void clickUserDetails() {
-//		click(lnkUserDetails, "User Details");
-//	}
-//
-//	public void clickPaymentMethods() {
-//		click(lnkPaymentMethods, "Payment Methods");
-//	}
-//
-//	public void clickPreferences() {
-//		click(lnkPreferences, "Preferences");
-//	}
 
 	public void verifyPreferencesView() {
 		new CommonFunctions().elementView(lnkPreferences, "Preferences");
 	}
 
-//	public void clickAccountLimits() {
-//		click(lnkAccountLimits, "Account Limits");
-//	}
-
 	public void verifyAccountLimitsView() {
 		new CommonFunctions().elementView(lnkAccountLimits, "Account Limits");
 	}
-
-//	public void clickAgreements() {
-//		click(lnkAgreements, "Agreements");
-//	}
 
 	public void verifyAgreementsView() {
 		new CommonFunctions().elementView(lnkAgreements, "Agreements");
@@ -254,16 +145,6 @@ public class MerchantProfilePage extends MobileFunctions {
 	public void clickFaceIDSetting() {
 		click(btnFaceIDSetting, "FaceID Setting");
 	}
-
-//	public void clickChangePassword() {
-//		scrollDownToElement(btnChangePassword, "Scrolled to element");
-//		click(btnChangePassword, "Change Password");
-//	}
-//
-//	public void clickLogOut() {
-//		scrollDownToElement(btnLogOut, "Log out");
-//		click(btnLogOut, "LogOut");
-//	}
 
 	public void verifyLogOut() {
 		scrollDownToElement(btnLogOut, "Log out");
@@ -278,10 +159,6 @@ public class MerchantProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(imgQRCode, "QR Code");
 	}
 
-	public void clickShare() {
-		click(btnShare, "Share ");
-	}
-
 	public void verifyProfilePageView() {
 		new CommonFunctions().elementView(lblSettings, "Profile Page");
 	}
@@ -294,15 +171,6 @@ public class MerchantProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(lblUserName, "UserName");
 	}
 
-	public void clickOnCopy() {
-		click(lblCopyMessage, "Copy");
-
-	}
-
-	public void verifyLabelCopyText() {
-		new CommonFunctions().elementView(lblCopyMessage, "Copied Message");
-	}
-
 	public void verifyImageUserView() {
 		new CommonFunctions().elementView(imgUser, "Image User Initials ");
 	}
@@ -313,20 +181,6 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public void verifyAccountStatusView() {
 		new CommonFunctions().elementView(lblAccountStatus, "Account ID ");
-	}
-
-	public void verifyMyQRCodeHeading(String heading) {
-		new CommonFunctions().verifyLabelText(lblMyQRCodeHeading, "QR Heading", heading);
-	}
-
-	public void verifyLabelMyQRCodeView() {
-		new CommonFunctions().elementView(qrCode, "Image QR ");
-
-	}
-
-	public void verifyPopUp() {
-		new CommonFunctions().elementView(sharepopup, "Verify Popup");
-
 	}
 
 	public NavigationComponent navigationComponent() {
@@ -362,16 +216,15 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void verifySecurityHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(getDashBoardItems("Security"), "Security Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblSecurity, "Security Heading", expHeading);
 	}
 
 	public void verifyUserSettingsHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(getDashBoardItems("User Settings"), "User Settings", expHeading);
+		new CommonFunctions().verifyLabelText(lblUserName, "User Settings", expHeading);
 	}
 
 	public void verifyMerchantSettingsHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(getDashBoardItems("Merchant’s Settings"), "Merchant’s Settings",
-				expHeading);
+		new CommonFunctions().verifyLabelText(lblMerchantSettings, "Merchant’s Settings", expHeading);
 	}
 
 	public void getAccountDetails() {
@@ -385,15 +238,15 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickUserDetails() {
-		click(getDashBoardItems("User Details"), "User Details");
+		click(lnkUserDetails, "User Details");
 	}
 
 	public void clickCompanyInformation() {
-		click(getDashBoardItems("Company Information"), "Company Information");
+		click(lnkCompanyInformation, "Company Information");
 	}
 
 	public void clickDBAInformation() {
-		click(getDashBoardItems("DBA Information"), "DBA Information");
+		click(lnkDBAInformation, "DBA Information");
 	}
 
 	public void clickBeneficialOwners() {
@@ -402,53 +255,53 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickTeam() {
-		scrollDownToElement(getDashBoardItems("Team"), "Team");
-		click(getDashBoardItems("Team"), "Team");
+		scrollDownToElement(lnkTeam, "Team");
+		click(lnkTeam, "Team");
 	}
 
 	public void clickPaymentMethods() {
-		scrollDownToElement(getDashBoardItems("Payment Methods"), "Payment Methods");
-		click(getDashBoardItems("Payment Methods"), "Payment Methods");
+		scrollDownToElement(lnkPaymentMethods, "Payment Methods");
+		click(lnkPaymentMethods, "Payment Methods");
 	}
 
 	public void clickPreferences() {
-		scrollDownToElement(getDashBoardItems("Preferences"), "Preferences");
-		click(getDashBoardItems("Preferences"), "Preferences");
+		scrollDownToElement(lnkPreferences, "Preferences");
+		click(lnkPreferences, "Preferences");
 	}
 
 	public void clickFees() {
-		scrollDownToElement(getDashBoardItems("Fees"), "Fees");
-		click(getDashBoardItems("Fees"), "Fees");
+		scrollDownToElement(lnkFees, "Fees");
+		click(lnkFees, "Fees");
 	}
 
 	public void clickAccountLimits() {
-		scrollDownToElement(getDashBoardItems("Account Limits"), "Account Limits");
-		click(getDashBoardItems("Account Limits"), "Account Limits");
+		scrollDownToElement(lnkAccountLimits, "Account Limits");
+		click(lnkAccountLimits, "Account Limits");
 	}
 
 	public void clickAgreements() {
-		scrollDownToElement(getDashBoardItems("Agreements"), "Agreements");
-		click(getDashBoardItems("Agreements"), "Agreements");
+		scrollDownToElement(lnkAgreements, "Agreements");
+		click(lnkAgreements, "Agreements");
 	}
 
 	public void clickResetPINCode() {
-		scrollDownToElement(getDashBoardItems("Reset PIN Code"), "Reset PIN Code");
-		click(getDashBoardItems("Reset PIN Code"), "Reset PIN Code");
+		scrollDownToElement(lnkResetPinCode, "Reset PIN Code");
+		click(lnkResetPinCode, "Reset Pin");
 	}
 
 	public void clickTouchIDSetting() {
-		scrollDownToElement(getDashBoardItems("Touch ID Setting"), "Touch ID Setting");
-		click(getDashBoardItems("Touch ID Setting"), "Touch ID Setting");
+		scrollDownToElement(btnFaceIDSetting, "Touch ID Setting");
+		click(btnFaceIDSetting, "Touch ID Setting");
 	}
 
 	public void clickChangePassword() {
-		scrollDownToElement(getDashBoardItems("Change Password"), "Change Password");
-		click(getDashBoardItems("Change Password"), "Change Password");
+		scrollDownToElement(btnChangePassword, "Change Password");
+		click(btnChangePassword, "Change Password");
 	}
 
 	public void clickLogOut() {
-		scrollDownToElement(getDashBoardItems("Log Out"), "Log Out");
-		click(getDashBoardItems("Log Out"), "Log Out");
+		scrollDownToElement(btnLogOut, "Log Out");
+		click(btnLogOut, "Log Out");
 	}
 
 //	public void clickUserDetails() {
@@ -476,6 +329,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	public CompanyInformationPage companyInformationPage() {
 		return new CompanyInformationPage();
 	}
+
 	public BenificialOwnersPage benificialOwnersPage() {
 		return new BenificialOwnersPage();
 	}
@@ -483,6 +337,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	public ConfirmPasswordPage confirmPasswordPage() {
 		return new ConfirmPasswordPage();
 	}
+
 	public TeamPage teamPage() {
 		return new TeamPage();
 	}
