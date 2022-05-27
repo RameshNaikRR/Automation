@@ -150,108 +150,6 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTransactionSentDetailsList(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
-			// tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
-					.clickTodayTokensSent();
-			// add Total Amount count
-			// add Count of Total Transactions
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
-					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
-					.clickYesterdayTokensSent();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
-					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPaginations();
-			// tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
-
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
-					.clickLast7DaysTokensSent();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
-					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
-					.clickMonthToDateTokenSent();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
-					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
-					.clickLastMonthTokensSent();
-			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
-					.verifyLabelTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-//					data.get("expColor"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionSentDetailsList is failed due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testCustomDateRangeSentTransaction(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-					.clickCustomDateRangeTokensSent();
-			Thread.sleep(2000);
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-					.setDateWithYear(data.get("startDate"));
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-			// verify CustomDateRange
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testCustomDateRangeSentTransaction is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testTransactionReceiveDetailsList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -264,13 +162,12 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testTodayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			// tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensReceive();
@@ -278,40 +175,31 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testYesterDayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			// tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
+
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensReceive();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLast7DaysTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensReceive();
 			// add Total Amount count
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testMonthToDateTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensReceive();
@@ -319,21 +207,146 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensReceivedDetailsComponent()
 					.verifyLabelReceiveTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLastMonthTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-//					data.get("expColor"));
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testTransactionReceiveDetailsList is failed due to exception " + e);
 		}
+	}
+
+	public void testTodayTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryToday"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
+		}
+	}
+
+	public void testYesterDayTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryYesterday"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
+		}
+	}
+
+	public void testLast7DaysTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryLast7Days"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLast7DaysTrasactions failed due to" + e);
+		}
+	}
+
+	public void testMonthToDateTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryMonthToDate"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
+		}
+	}
+
+	public void testLastMonthTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryLastMonth"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionSentDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
+					.clickTodayTokensSent();
+			// add Total Amount count
+			// add Count of Total Transactions
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testTodayTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
+					.clickYesterdayTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testYesterDayTrasactions(strParams, "Date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			// tokenAccountPage.tokenAccountActivityComponent().verifyPaginations();
+			// tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
+					.clickLast7DaysTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testLast7DaysTrasactions(strParams, "Date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
+					.clickMonthToDateTokenSent();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testMonthToDateTrasactions(strParams, "Date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().daysMonthsDropDownComponent()
+					.clickLastMonthTokensSent();
+			tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testLastMonthTrasactions(strParams, "Date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionSentDetailsList is failed due to exception " + e);
+		}
+
 	}
 
 	@Test
@@ -370,66 +383,44 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testTodayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testYesterDayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPaginations();
-			// tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLast7DaysTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+
+			testMonthToDateTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLastMonthTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-//					data.get("expColor"));
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+//					
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -472,66 +463,38 @@ public class TokenAccountTest {
 			// add Count of Total Transactions
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryToday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testTodayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryYesterday"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testYesterDayTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPaginations();
-			// tokenAccountPage.tokenAccountActivityComponent().clickOnPages();
-
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLast7Days"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLast7DaysTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryMonthToDate"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testMonthToDateTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			tokenAccountActivityComponent.verifyTableItemsCount(data.get("queryLastMonth"));
-			tokenAccountPage.tokenAccountActivityComponent().clickDropDownEntriesPage();
+			testLastMonthTrasactions(strParams, "date");
 			ExtentTestManager.setInfoMessageInReport(
-					"Default Entries is displayed as " + tokenAccountActivityComponent.getDefaultEntriesPerPage());
-			// tokenAccountPage.tokenAccountActivityComponent().verifyPageNumbersWithCount();
-			tokenAccountPage.tokenAccountActivityComponent().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + tokenAccountActivityComponent.getEntriesMessage());
-//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-//					data.get("expColor"));
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 		} catch (Exception e) {
 			ExtentTestManager

@@ -56,7 +56,10 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 	private By defaultEntries = By
 			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
 
-	private By lblEntriesMessage = By.xpath("//span[@class='entries-message']");
+	private By lblEntriesMessage = By.xpath("//span[contains(@class,'entries-message')]");
+	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')]");
+	
+	String s;
 
 	// private By pagination = By.xpath("//li[@class='paginator__pagination__item
 	// active']");
@@ -112,9 +115,15 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 			ExtentTestManager
 					.setPassMessageInReport("Number of transactions in table matches with number of entries selected ");
 		} else {
-			ExtentTestManager.setWarningMessageInReport("No Transactions Found");
+			ExtentTestManager.setWarningMessageInReport("No Transactions found");
 		}
 	}
+
+	public String verifyNoTrasactionsFound() {
+		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
+	       return getText(lblNoTrasactons, "No Trasactions");
+	}
+
 //	public void verifyPaginations() throws InterruptedException {
 //		int expStart = 1;
 //		int expEnd = 10;
@@ -174,17 +183,45 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	}
 
-	public void verifyEntriesMessage() {
-		new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
+	public int verifyTransactions() {
+		return getElementsList(lblNoTrasactons, "").size();
 	}
+
+	public void verifyEntriesMessage() {
+		if (verifyElementDisplayed(lblEntriesMessage, "Enteries Messages")) {
+			new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("no data found");
+		}
+	}
+	
+	public String testGetEntriesMessage( ) {
+		int i = getElementsList(lblNoTrasactons, "Entries Message").size() ;
+		if (i != 0) {
+			 s = verifyNoTrasactionsFound();
+			verifyNoTrasactionsFound();
+				
+			} else {
+				getEntriesMessages();
+				return getEntriesMessages();
+			}
+		return s;
+	 
+	}
+
 
 	public void verifyTransactionDetails() {
 		new CommonFunctions().elementView(transactionDetails, "Transaction Details");
 	}
 
 	public void clickDropDownEntriesPage() {
-		click(entriesPerPageDropDown, "Entries Per Page");
 
+		if (verifyElementPresence(entriesPerPageDropDown, "Enteries Dropdown")) {
+			click(entriesPerPageDropDown, "Entries Per Page");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Default Entries is displayed as " + getDefaultEntriesPerPage());
+
+		}
 	}
 
 	public String getTransactionSentDetailsList() {
@@ -212,7 +249,12 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	}
 
-	public String getEntriesMessage() {
+	public int getEntriesMessageCount() {
+		return getElementsList(lblNoTrasactons, "Entries Message").size() ;
+		
+	}
+	
+	public String getEntriesMessages() {
 		return getText(lblEntriesMessage, "Entries Message");
 	}
 
@@ -275,5 +317,4 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 	public DatePickerComponent datePickerComponent() {
 		return new DatePickerComponent();
 	}
-
 }

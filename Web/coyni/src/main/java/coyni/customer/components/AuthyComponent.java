@@ -18,7 +18,7 @@ public class AuthyComponent extends BrowserFunctions {
 
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
 
-	private By heading = By.cssSelector(".VerifyYourIdentity_two_step_sub__14Irv>div:first-of-type");
+	private By heading = By.xpath("//div[contains(text(),'Two-Step Authentication')]");
 
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 

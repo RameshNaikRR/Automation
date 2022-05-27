@@ -54,7 +54,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
 	private By defaultEntries = By
 			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
-	private By lblEntriesMessage = By.xpath("//span[@class='entries-message']");
+	private By lblEntriesMessage = By.xpath("//span[contains(@class,'entries-message')]");
 	private By pagination = By.xpath("//li[@class='paginator__pagination__item active']");
 	private By entriesPerPageDropDown = By.xpath(
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
@@ -66,8 +66,6 @@ public class TokenAccountPage extends BrowserFunctions {
 		return str;
 
 	}
-	
-	
 
 	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
 
@@ -198,7 +196,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	public void clickPayRequestToken() {
 		click(btnPayRequestToken, "PayRequestToken");
 	}
-	
+
 	public void viewBuyTokens() {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
 	}
