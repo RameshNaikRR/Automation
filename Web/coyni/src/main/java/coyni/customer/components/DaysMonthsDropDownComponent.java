@@ -11,9 +11,9 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By lblTokensReceive = By.xpath("//span[text()='Tokens Received']");
 
-	private By lblTokensPurchased = By.xpath("//span[text()='Token Purchased']");
+	private By lblTokensPurchased = By.xpath("//span[text()='Tokens Purchased']");
 
-	private By lblTokensWithdraw = By.xpath("//span[text()='Token Withdraw']");
+	private By lblTokensWithdraw = By.xpath("//span[text()='Tokens Withdraw']");
 
 	private By btnToday = By.cssSelector("data[value='Today']");
 

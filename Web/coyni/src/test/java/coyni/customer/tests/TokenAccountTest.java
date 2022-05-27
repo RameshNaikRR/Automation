@@ -590,7 +590,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
 			// tokenAccountPage.verifyTransactionList();
 			tokenAccountPage.verifyTableItemsCount(data.get("query"));
-			tokenAccountPage.verifyPostedTransactions(data.get("count"));
+			// tokenAccountPage.verifyPostedTransactions(data.get("count"));
 			// tokenAccountPage.verifyBracesCount(data.get("query"));
 			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
