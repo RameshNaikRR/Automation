@@ -54,9 +54,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickAddNewPaymentMethod() {
-		if (getElementList(lblHeading, "heading").size() > 0) {
 			click(btnAddNewPaymentMethod, "Add New Payment Method");
-		}
 	}
 
 	public By getPaymentItems(String paymentMethod, String last4digits) {

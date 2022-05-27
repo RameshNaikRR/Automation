@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.MailingAddressComponent;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -31,10 +32,12 @@ public class AddCardPage extends MobileFunctions {
 	public void fillCVVorCVC(String cVVorCVC) {
 		click(txtCVVorCVC, "CVVorCVC");
 		enterText(txtCVVorCVC, cVVorCVC, "CVVorCVC");
+		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clickEnter();
 	}
 	public void clickNext() {
-		scrollDownToElement(btnNext,"Next");
-		DriverFactory.getDriver().hideKeyboard();
+//		scrollDownToElement(btnNext,"Next");
+//		DriverFactory.getDriver().hideKeyboard();
 		click(btnNext, "Next");
 	}
 	public void clickCamera() {
