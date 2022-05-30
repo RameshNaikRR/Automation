@@ -45,18 +45,57 @@ public class MerchantTransactionDetailsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testProcessingVolume(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.daysDropDownComponent().clickOnToday();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.daysDropDownComponent().clickOnYesterday();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.daysDropDownComponent().clickOnMonthToDate();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.daysDropDownComponent().clickOnLastMonth();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testProcessingVolume Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBatchPayOuts(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.batchPayOutComponent().veirfyLabelBatchPayouts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
+			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
 			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutsHistory();
-			businessTokenAccountPage.batchPayOutComponent().merchantTransactionDetailsPage()
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickPayOutDateRange();
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
+			// businessTokenAccountPage.batchPayOutComponent().payOutTransactions().
+			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickPayOutDateRange();
+			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);
 		}
@@ -68,11 +107,13 @@ public class MerchantTransactionDetailsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.batchPayOutComponent().veirfyLabelBatchPayouts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
+			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
 			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutsHistory();
-			businessTokenAccountPage.batchPayOutComponent().merchantTransactionDetailsPage()
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickResetAllFilters();
 		} catch (Exception e) {
@@ -86,11 +127,20 @@ public class MerchantTransactionDetailsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickMerchantTransctions();
-			businessTokenAccountPage.merchantTransactionDetailsPage().filterPopup()
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMerchantBalance();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage()
+					.clickMerchantTransctions();
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
 					.verifyTransactionType(data.get("labeltransactionType"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().filterPopup().selectFilter(data.get("type"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().filterPopup().clickApplyfilters();
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+					.selectFilter(data.get("type"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+					.clickApplyfilters();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -104,10 +154,12 @@ public class MerchantTransactionDetailsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickMerchantTransctions();
-			businessTokenAccountPage.merchantTransactionDetailsPage().filterPopup()
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage()
+					.clickMerchantTransctions();
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
 					.verifyTransactionType(data.get("labeltransactionType"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().filterPopup().clickResetAllFilters();
+			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+					.clickResetAllFilters();
 
 		} catch (Exception e) {
 			ExtentTestManager
