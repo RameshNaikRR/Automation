@@ -22,7 +22,7 @@ public class TransactionTest {
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
-		transactionPage= new TransactionPage();
+		transactionPage = new TransactionPage();
 		sideBarComponent = new SideBarComponent();
 	}
 
@@ -34,21 +34,53 @@ public class TransactionTest {
 			homePage.sideBarComponent().verifyCursorAction();
 			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickTransactions();
-		//	homePage.sideBarComponent().
+			// homePage.sideBarComponent().
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testTransactionDetailsBuyDebitCard(String strParams) {
+	public void testBuyTokenDebitCard(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
 			sideBarComponent.clickTransactions();
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
-			sideBarComponent.transactionPage().filterComponent().clickDebitCard();
+			testTransactionDetailsBuyToken(strParams, "debit");
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenCreditCard(String strParams) {
+		try {
+
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
+			testTransactionDetailsBuyToken(strParams, "credit");
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetailsBuyToken(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			if (card.equalsIgnoreCase("debit")) {
+				sideBarComponent.transactionPage().filterComponent().clickDebitCard();
+			} else {
+				sideBarComponent.transactionPage().filterComponent().clickCreditCard();
+			}
 			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
@@ -59,65 +91,30 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionSubType();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyRecipientInformation(data.get("recipientInformation"));
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientName();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientEmail();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientPhoneNumber();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardholderName();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyExpirationDate();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyProcessorID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyProcessorAuthCode();
-		
-			
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
-		}
-	}
-	
-	@Test
-	@Parameters({ "strParams" })
-	public void testTransactionDetailsBuyCreditCard(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarComponent.clickTransactions();
-			sideBarComponent.transactionPage().filterComponent().clickFilters();
-			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
-			sideBarComponent.transactionPage().filterComponent().clickCreditCard();
-			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
-					.verifyTransactionDetailsHeading(data.get("transactionHeading"));
-			Thread.sleep(2000);
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionType();
-			Thread.sleep(2000);
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionSubType();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
+					.verifyLedgerInformation(data.get("ledgerInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyRecipientInformation(data.get("recipientInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getTransactionIPAddress();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyRecipientInformation(data.get("recipientInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientEmail();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientPhoneNumber();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getRecipientPhoneNumber();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardholderName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyExpirationDate();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyProcessorID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyProcessorAuthCode();
-		
-			
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyProcessorAuthCode();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailsWithdrawGiftCard(String strParams) {
@@ -137,27 +134,30 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionSubType();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getgiftCardAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyLedgerInformation(data.get("ledgerInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyRecipientInformation(data.get("recipientInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getTransactionIPAddress();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyRecipientInformation(data.get("recipientInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientEmail();
-			
-			
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifySenderInformation(data.get("senderInformation"));
+
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifySenderInformation(data.get("senderInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAccountID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAccountAddress();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderEmail();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderPhoneNumber();
-		
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailsExternalBankAccount(String strParams) {
@@ -177,22 +177,27 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionSubType();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyLedgerInformation(data.get("ledgerInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyRecipientInformation(data.get("recipientInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getTransactionIPAddress();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyRecipientInformation(data.get("recipientInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientEmail();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getRecipientPhoneNumber();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyBankInformation(data.get("bankInformation"));
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getBankName();;
-		
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getRecipientPhoneNumber();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyBankInformation(data.get("bankInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getBankName();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailWithdrawInstantPay(String strParams) {
@@ -211,27 +216,31 @@ public class TransactionTest {
 			Thread.sleep(2000);
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionSubType();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
-		//	sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
+			// sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyLedgerInformation(data.get("ledgerInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifySenderInformation(data.get("senderInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getTransactionIPAddress();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifySenderInformation(data.get("senderInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAccountID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderName();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAccountAddress();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderEmail();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderPhoneNumber();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardInformation(data.get("cardInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyCardInformation(data.get("cardInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardholderName();
-			//sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
+			// sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyExpirationDate();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}
-	}	
-	
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailsWithdrawExternalBankAccount(String strParams) {
@@ -252,25 +261,24 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCreatedDate();
 			Thread.sleep(2000);
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAmount();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyLedgerInformation(data.get("ledgerInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyLedgerInformation(data.get("ledgerInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getReferenceID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getCordaID();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getTransactionIPAddress();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifySenderInformation(data.get("senderInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.getTransactionIPAddress();
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifySenderInformation(data.get("senderInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getAccountID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getSenderName();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyBankAccountInformation(data.get("bankInformation"));
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getBankName();;
-		
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.verifyBankAccountInformation(data.get("bankInformation"));
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getBankName();
+			;
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
