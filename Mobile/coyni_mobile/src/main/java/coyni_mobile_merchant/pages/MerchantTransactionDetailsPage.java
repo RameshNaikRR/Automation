@@ -25,6 +25,10 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By lblProcessingFees = MobileBy.xpath("//*[contains(@resource-id,'processing_fees')]");
 
+	private By lblHighTicket = MobileBy.xpath("//*[contains(@resource-id,'highest_ticket')]");
+
+	private By lblAverageTicket = MobileBy.xpath("//*[contains(@resource-id,'average_ticket')]");
+
 	private By lnkViewMerchantTransactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
 
 	public void clickDashBoard() {
@@ -36,28 +40,42 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void verifyLabelProcessingVolume(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblProcessingVolume, "Processing Volume", expHeading);
+		new CommonFunctions().verifyLabelText(lblProcessingVolume, expHeading, "Processing Volume");
+
 	}
 
 	public void getRefund() {
+		scrollDownToElement(lblRefunds, "Refunds");
 		ExtentTestManager.setInfoMessageInReport("Refund " + getText(lblRefunds));
 
 	}
 
 	public void getSaleOrder() {
+		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
 		ExtentTestManager.setInfoMessageInReport("Sale Order " + getText(lblSaleOrderDetails));
 	}
 
 	public void getMISCFee() {
+		scrollDownToElement(lblMISCFees, "MISC Fees");
 		ExtentTestManager.setInfoMessageInReport("MISC Fee " + getText(lblMISCFees));
 	}
 
 	public void getNetAmount() {
+		scrollDownToElement(lblNetAmount, "Net Amount");
 		ExtentTestManager.setInfoMessageInReport("Net Amount " + getText(lblNetAmount));
 	}
 
 	public void getProcessingFees() {
+		scrollDownToElement(lblProcessingFees, "Processing Fees");
 		ExtentTestManager.setInfoMessageInReport("Processing Fees " + getText(lblProcessingFees));
+	}
+
+	public void getHighTicket() {
+		ExtentTestManager.setInfoMessageInReport("High Ticket " + getText(lblHighTicket));
+	}
+
+	public void getAverageTicket() {
+		ExtentTestManager.setInfoMessageInReport("Average Ticket " + getText(lblAverageTicket));
 	}
 
 	public MerchantTransactionsPage merchantTransactionsPage() {

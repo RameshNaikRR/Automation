@@ -43,12 +43,15 @@ public class MerchantTransactionDetailsTest {
 		}
 	}
 
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testProcessingVolume(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.merchantTransactionDetailsPage().verifyLabelProcessingVolume(data.get("label"));
 			businessTokenAccountPage.daysDropDownComponent().clickOnToday();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
@@ -66,18 +69,19 @@ public class MerchantTransactionDetailsTest {
 			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
 			businessTokenAccountPage.daysDropDownComponent().clickOnLastMonth();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
 			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getHighTicket();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getAverageTicket();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testProcessingVolume Failed due to this Exception" + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })
