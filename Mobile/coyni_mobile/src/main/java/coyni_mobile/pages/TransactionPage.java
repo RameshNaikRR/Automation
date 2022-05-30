@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.FiltersComponent;
 import coyni_mobile.components.TransactionDetailsComponent;
+import coyni_mobile.popups.FilterPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -53,6 +54,8 @@ public class TransactionPage extends MobileFunctions {
 	private By lblNoTransactions = MobileBy.xpath("//*[@text='You have no more transactions']");
 
 	private By lblNoMore = MobileBy.xpath("//*[contains(@name,'more transactions')]");
+	
+	
 
 	public void verifySendTransactions(String sendFunds) {
 		if (!verifyElementDisplayed(lblSendFunds, "Send Funds")) {
@@ -156,5 +159,16 @@ public class TransactionPage extends MobileFunctions {
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
+	
+	public void verifyHeading(String heading) {
+    	new CommonFunctions().verifyLabelText(lblTransactions, "Transaction Heading is", heading);
+    }
+	public void clickFilter() {
+		click(filtersIcon, "Filter");
+	}
+	public FilterPopup filterPopup() {
+		return new FilterPopup();
+	}
+
 
 }

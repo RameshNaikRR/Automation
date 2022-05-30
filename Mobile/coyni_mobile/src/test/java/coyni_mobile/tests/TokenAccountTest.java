@@ -1366,4 +1366,23 @@ public class TokenAccountTest {
 
 		}
 	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testFilter(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			tokenAccountPage.clickViewMore();
+//			tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+//			tokenAccountPage.transactionPage().clickFilter();
+//			tokenAccountPage.transactionPage().filterPopup().selectFilter(data.get("filterType"));
+//			tokenAccountPage.transactionPage().filterPopup().clickApplyFilter();
+			Thread.sleep(2000);
+			//tokenAccountPage.transactionPage().
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
 }

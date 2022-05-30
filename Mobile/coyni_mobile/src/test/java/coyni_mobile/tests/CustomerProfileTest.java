@@ -961,15 +961,19 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters("strParams")
-	public void testEditDebitCard(String strParams) {
+	public void testEditCard(String strParams,String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
+			} else {
+				customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			}
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+            customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
 			// customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCVVorCVC(data.get("cvvOrCVC"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -990,51 +994,55 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testEditDebitCard(String strParams) {
+		testEditCard(strParams, "debit");
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void testEditCreditCard(String strParams) {
+		testEditCard(strParams, "credit");
+	}
+
 
 	@Test
-	@Parameters({ "strParams" })
+	@Parameters({"strParams"})
+	public void testDeleteCard(String strParams,String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			Thread.sleep(2000);
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
+			} else {
+				customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			}
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickRemove();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickYes();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+		
+	}
+	@Test
+	@Parameters({"strParams"})
 	public void testDeleteDebitCard(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickPaymentMethods();
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickRemove();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickYes();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-
+		testDeleteCard(strParams, "debit");
 	}
-
 	@Test
-	@Parameters({ "strParams" })
+	@Parameters({"strParams"})
 	public void testDeleteCreditCard(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickProfile();
-			customerProfilePage.clickPaymentMethods();
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickRemove();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickYes();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-
+		testDeleteCard(strParams, "credit");
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddCardWithInvalidData(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
+			Thread.sleep(2000);
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
@@ -1114,6 +1122,11 @@ public class CustomerProfileTest {
 	@Parameters({ "strParams" })
 	public void testAddDebitCardWithInvalidData(String strParams) {
 		testAddCardWithInvalidData(strParams, "debit");
+	}
+	@Test
+	@Parameters({"strParams"})
+	public void testAddCreditCardWithInvalidData(String strParams) {
+		testAddCardWithInvalidData(strParams, "credit");
 	}
 
 	@Test
