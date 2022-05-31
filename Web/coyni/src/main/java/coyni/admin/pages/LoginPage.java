@@ -9,7 +9,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions {
-	private By lblHeading = By.xpath("//span[text()='Log In to Coyni Admin']");
+	private By lblHeading = By.xpath("//span[text()='Log In to coyni Admin']");
 	private By lblDescription = By.xpath("//span[text()='Welcome back, let’s log in to your coyni admin account.']");
 	private By txtEmail = By.cssSelector("#Email");
 	private By txtPassword = By.cssSelector("#Password");

@@ -152,19 +152,19 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTokenAccountFilters(String strParams) {
+	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickTokenAccount();
+			HomePage homePage = new HomePage();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyMouseHoverChangedColor("cssProp",
 					"expValue", "expColor");
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().selectFilter(data.get("filterType"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("amount"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("amount"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
+			// homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
+			// homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
 
 		} catch (Exception e) {
@@ -174,11 +174,33 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testTokenAccountFilters(String strParams) {
+
+		// Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickTokenAccount();
+		testFilters(strParams);
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testTokenAccountResetFilters(String strParams) {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickTokenAccount();
+		testResetFilters(strParams);
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickTokenAccount();
+			HomePage homePage = new HomePage();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyMouseHoverChangedColor("cssProp",
 					"expValue", "expColor");
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
@@ -197,10 +219,7 @@ public class CoyniPortalTest {
 	public void testExportSelectedTransactions(String strParams, String strParams1) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().exportComponent().clickExport();
-			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
-					.verifyHeading(data.get("heading"));
+			HomePage homePage = new HomePage();
 			if (strParams1.equalsIgnoreCase("Today")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnToday();
 			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
@@ -229,30 +248,55 @@ public class CoyniPortalTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionToday(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+				.verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Today");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionYesterday(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+				.verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Yesterday");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+				.verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Last Seven Days");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionLastMonth(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+				.verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Last Month");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionMonthToDate(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
+				.verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 

@@ -95,11 +95,11 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void viewFilters() {
 		new CommonFunctions().elementView(lblDate, "Date");
-		new CommonFunctions().elementView(lblTransactionType, "Transaction Type");
+	//	new CommonFunctions().elementView(lblTransactionType, "Transaction Type");
 		new CommonFunctions().elementView(lblTransactionAmount, "Transaction Amount");
-		new CommonFunctions().elementView(lblReferenceId, "Reference ID");
+	//	new CommonFunctions().elementView(lblReferenceId, "Reference ID");
 		new CommonFunctions().elementView(lblTransactionStatus, "Transaction Status");
-		new CommonFunctions().elementView(lblEmployeeName, "Date");
+	//	new CommonFunctions().elementView(lblEmployeeName, "Date");
 	}
 
 	public void verifyTransactionType(String expHeading) {

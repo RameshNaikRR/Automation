@@ -7,7 +7,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.admin.components.SideBarComponent;
-import coyni.admin.components.TransactionDetailsComponent;
 import coyni.admin.pages.HomePage;
 import coyni.admin.pages.TransactionPage;
 import ilabs.WebFramework.Runner;
@@ -18,24 +17,151 @@ public class TransactionTest {
 	HomePage homePage;
 	TransactionPage transactionPage;
 	SideBarComponent sideBarComponent;
+	CoyniPortalTest coyniPortalTest;
 
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
 		transactionPage = new TransactionPage();
 		sideBarComponent = new SideBarComponent();
+		coyniPortalTest = new CoyniPortalTest();
 	}
 
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickTransactions();
-			// homePage.sideBarComponent().
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+		
+			homePage.sideBarComponent().transactionPage().getDateAndTime();
+			homePage.sideBarComponent().transactionPage().getType();
+			homePage.sideBarComponent().transactionPage().getDescription();
+			homePage.sideBarComponent().transactionPage().getAmount();
+			homePage.sideBarComponent().transactionPage().getStatus();
+			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
+					.verifyTableItemsCount(data.get("query"));
+			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
+					.verifyPageNumbersWithCount();
+			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
+					.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			homePage.sideBarComponent().transactionPage().verifyEntriesMessage();
+			ExtentTestManager.setInfoMessageInReport("Entries is displayed as "
+					+ homePage.sideBarComponent().transactionPage().getEntriesMessage());
+			homePage.sideBarComponent().transactionPage().clickOnPages();
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionToday(String strParams) throws InterruptedException {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickTransactions();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Today");
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionYesterday(String strParams) {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickTransactions();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Yesterday");
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+		homePage.sideBarComponent().clickTransactions();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Last Seven Days");
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastMonth(String strParams) {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickTransactions();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Last Month");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionMonthToDate(String strParams) {
+
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickTransactions();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Month to Date");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionListFilters(String strParams) {
+		try {
+			homePage.sideBarComponent().clickTransactions();
+			
+			coyniPortalTest.testFilters(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionListResetFilters(String strParams) {
+		try {
+			homePage.sideBarComponent().clickTransactions();
+			coyniPortalTest.testTokenAccountResetFilters(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}
