@@ -150,8 +150,7 @@ public class CoyniPortalTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+	
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -194,8 +193,7 @@ public class CoyniPortalTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+	
 	public void testResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

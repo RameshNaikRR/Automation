@@ -197,8 +197,7 @@ public class TransactionTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+	
 	public void testTransactionDetailsBuyToken(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
