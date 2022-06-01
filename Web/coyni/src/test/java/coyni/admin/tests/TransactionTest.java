@@ -161,7 +161,7 @@ public class TransactionTest {
 	public void testTransactionListResetFilters(String strParams) {
 		try {
 			homePage.sideBarComponent().clickTransactions();
-			coyniPortalTest.testTokenAccountResetFilters(strParams);
+			coyniPortalTest.testFilters(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
 		}

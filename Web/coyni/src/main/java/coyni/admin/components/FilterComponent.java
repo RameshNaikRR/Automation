@@ -13,8 +13,8 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblTransactionType = By.xpath("//span[text()='Transaction Type']");
 	private By lnkClearAll = By.xpath("//span[text()='Transaction Type']//button[text()='Clear All']");
 	private By lblTransactionAmount = By.xpath("//label[text()='Transaction Amount']");
-	private By txtFromAmount = By.xpath("//span[text()='From (CYN)']");
-	private By txtToAmount = By.xpath("//span[text()='To (CYN)']");
+	private By txtFromAmount = By.xpath("//span[text()='From (CYN)']/preceding-sibling::input");
+	private By txtToAmount = By.xpath("//span[text()='To (CYN)']/preceding-sibling::input");
 	private By lblReferenceId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Reference ID']");
 	private By txtReferenceId = By.xpath("//input[@id='Reference ID']");
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
