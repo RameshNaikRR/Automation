@@ -16,7 +16,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ForgotPasswordComponent extends BrowserFunctions {
 
 	private By heading = By.className("forgot-password__title");
-	private By txtEmail = By.cssSelector(".Input_form_input__3qrhS");
+	private By txtEmail = By.xpath("//input[@name='email']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By btnBackToLogin = By.xpath("//div[text()='Back to Login']");
 	private By btnSignUp = By.xpath("//span[text()='Sign Up']");

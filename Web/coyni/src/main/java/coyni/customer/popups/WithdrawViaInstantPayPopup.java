@@ -19,9 +19,9 @@ import ilabs.api.reporting.ExtentTestManager;
 public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
-	private By txtAmount = By.xpath("//input[@class='CynField_cyn_input__31vZ6']");
+	private By txtAmount = By.xpath("//input[@name='amount']");
 	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
-	private By txtmsg = By.cssSelector(".FormField_form_textarea__2VA0I.false.undefined.false");
+	private By txtmsg = By.xpath("//textarea[@name='message']");
 	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
 	private By lnkConvert = By.xpath("//button[@class='group flex flex-col justify-center items-center ']");
 	private By lnkChange = By.xpath("//span[text()='Change']");

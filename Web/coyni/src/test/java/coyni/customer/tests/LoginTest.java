@@ -270,7 +270,9 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
 			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.clickNext();
+	        Thread.sleep(1000);
 			loginPage.forgotEmailComponent().validateFirstNameField(data.get("firstName"));
+			loginPage.clickTab();
 			loginPage.forgotEmailComponent().validateLastNameField(data.get("lastName"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);

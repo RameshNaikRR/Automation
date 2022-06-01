@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
-	private By withdrawToUSDHeading = By.xpath("//h1[@class='WithdrawOptionsModal_title__2V2wo']");
+	private By withdrawToUSDHeading = By.xpath("//h1[contains(text(),'Withdraw coyni to USD')]");
 	private By btnWithdrawToUSD = By
 			.xpath("(//button[@class='group h-28 w-full flex flex-col justify-center items-center '])[3]");
 	private By btnExternalBankAccount = By.xpath("(//button[@class='payment-method-button '])[1]");

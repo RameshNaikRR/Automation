@@ -22,7 +22,7 @@ public class NavigationMenuPage extends BrowserFunctions {
 	private By lblAccountId = By.xpath("(//span[contains(text(),'Account ID:')])[1]");
 	private By lnkTokenAccount = By.cssSelector("#token-dashboard");
 	private By ImgQRcode = By
-			.xpath("(//div[@class='absolute bg-cwhite UserProfile_QR_main__18gK4 cursor-pointer'])[1]");
+			.xpath("(//div[contains(@class,'UserProfile_QR_main__')])[1]");
 	private By lblUserNameHead = By
 			.xpath("//div[contains(@class,'DashboardMenu_downArrow__JM4Nk')]/preceding-sibling::*[1]");
 	private By ImgNotifications = By.cssSelector(" ");

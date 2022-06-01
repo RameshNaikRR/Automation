@@ -628,6 +628,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			// tokenAccountPage.payAndRequestTokensPopup().verifyCountMessageToRecipient();
 			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyProcessingFee();
@@ -737,6 +738,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
@@ -771,6 +773,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(2000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAmountView();
 			// tokenAccountPage.payAndRequestTokensPopup().verifyPayingRecipient();
@@ -802,6 +805,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(5000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
@@ -912,6 +916,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			Thread.sleep(1000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			//tokenAccountPage.payAndRequestTokensPopup().clickCopy();
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
@@ -989,6 +994,7 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			Thread.sleep(1000);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
 			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickBack();
@@ -1770,6 +1776,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			if (giftCard.equalsIgnoreCase("Amazon")) {
 				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+				Thread.sleep(1000);
 				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			} else {
 				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
@@ -1817,7 +1824,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
+			//tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			if (giftCard.equalsIgnoreCase("Amazon")) {

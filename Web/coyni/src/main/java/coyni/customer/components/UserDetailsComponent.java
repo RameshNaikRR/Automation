@@ -23,12 +23,12 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By btnSave = By.cssSelector("");
 	private By lblUserName = By.xpath("//span[@class='text-2xl font-bold text-cgy8']");
 	private By lblAccountStatus = By.xpath("//div[@class='flex flex-row text-md text-cgy4']");
-	private By lblEmail = By.cssSelector(".UserDetails_email_address__3EjH8");
+	private By lblEmail = By.xpath("//h3[contains(@class,'UserDetails_email_address')]");
 	private By lblAddress = By.cssSelector("");
 	private By lnkEditAccountEmail = By.xpath("//div[text()='Edit Account Email']");
 	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
 	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
-	private By iconEditEmail = By.cssSelector(".UserDetails_edit_email_icon__2RuvO");
+	private By iconEditEmail = By.xpath("//div[contains(@class,'UserDetails_edit_email_icon')]");
 	private By iconEditPhNum = By.xpath("//div[contains(@class,'UserDetails_edit_Phone_icon__1iIcs')]");
 	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");

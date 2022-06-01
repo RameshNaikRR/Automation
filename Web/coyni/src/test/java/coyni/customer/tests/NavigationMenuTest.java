@@ -222,8 +222,8 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().clickAccountLimits();
 			navigationMenuPage.userNameDropDownComponent().clickAgreements();
 			navigationMenuPage.userNameDropDownComponent().clickChangePassword();
-			navigationMenuPage.verifyAccountHolderNameView();
-			navigationMenuPage.clickOnRefresh();
+			//navigationMenuPage.verifyAccountHolderNameView();
+		//	navigationMenuPage.clickOnRefresh();
 			//navigationMenuPage.verifyAccountHolderNameView();
 			//navigationMenuPage.userNameDropDownComponent().clickUserName();
 			//navigationMenuPage.userNameDropDownComponent().clickSignOut();

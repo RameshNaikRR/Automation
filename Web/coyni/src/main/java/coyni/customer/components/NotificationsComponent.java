@@ -22,14 +22,14 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By lblPayMessage = By.xpath("");
 	private By lblReminderMessage = By.xpath("//div[text()='You sent a reminder to ']");
 	private By btnclearAll = By.xpath("//span[text()='Clear All']");
-	private By initialMsg = By.xpath("(//div[@class='ReceivedNotificationCard_secondRow__16vcO']/div)[1] ");
-	private By finalMsg = By.xpath("(//div[@class='ReceivedNotificationCard_secondRow__16vcO']//span)[1] ");
+	private By initialMsg = By.xpath("(//div[contains(@class,'ReceivedNotificationCard')]/div)[1]/../.");
+	private By finalMsg = By.xpath("(//div[contains(@class,'ReceivedNotificationCard')]/div)[1]/../.");
 	private By lastMsg = By.xpath("//span[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By recievedMsg = By.xpath(
 			"//body//div[@id='root']//div[contains(@class,'notification-container')]//div//div//div[1]//div[2]//div[2]//div[1]//span[1]");
-	private By ReminderfirstMsg = By.xpath("(//div[@class='ReceivedNotificationCard_secondRow__16vcO']/div)[1]");
+	private By ReminderfirstMsg = By.xpath("(//div[contains(@class,'ReceivedNotificationCard')]/div)[1]/../.");
 	private By ReminderLastMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
-	private By CancelMsg = By.xpath("//span[@class='text-xs text-cm3 font-sans font-semibold']");
+	private By CancelMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By count = By.xpath("");
 	private By btnCross = By.xpath("//span[@class='cross-icon']//img ");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
@@ -178,7 +178,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	}
 
 	public void verifyInitialMsg(String expInitialmesssage) {
-		new CommonFunctions().verifyLabelText(initialMsg, "Initial msg", expInitialmesssage);
+		new CommonFunctions().verifyLabelTextContains(initialMsg, "Initial msg", expInitialmesssage);
 	}
 
 	public void verifyFinalMsg(String expFinalMessage) {

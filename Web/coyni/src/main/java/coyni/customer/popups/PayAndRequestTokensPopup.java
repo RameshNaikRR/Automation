@@ -1,5 +1,8 @@
 package coyni.customer.popups;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -50,6 +53,12 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	public void clickPay() {
 		click(btnPay, "Click Pay");
 
+	}
+	
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 //	public void checkAmountWithSpecialAndNull(String amount) {

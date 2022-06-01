@@ -18,7 +18,7 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 	private By lblErrorMsg = By.cssSelector("");
 	private By cardAmazon = By.xpath("//div[@class='gift-card-list-item__gift-image-container']");// amazon
 	private By cardVisa = By.xpath("(//button[@class='gift-card-list-item__link'])[2]");// Visa
-	private By txtSearch = By.cssSelector(".Input_form_input__3qrhS ");
+	private By txtSearch = By.xpath("//input[@placeholder='Search By Keyword']");
 	private By giftCardHeading = By.xpath("//h1[text()='Gift Card Purchase']");
 	private By labelOrderPreview = By.xpath("//p[text()='Order Preview']");
 
