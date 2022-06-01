@@ -205,10 +205,10 @@ public class CoyniPortalTest {
 					"expValue", "expColor");
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().selectFilter(data.get("filterType"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("amount"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("amount"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceID(data.get("referenceID"));
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickResetAllFilters();
 
 		} catch (Exception e) {
