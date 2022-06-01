@@ -8,10 +8,13 @@ import io.appium.java_client.MobileBy;
 
 public class PreferencesComponent extends MobileFunctions {
 
-	private By lblPreferencesHeading = MobileBy.xpath("//*[contains(@resource-id,'PreferencesLL')]");
+	private By lblPreferencesHeading = MobileBy.xpath("//*[contains(@text,'Preferences')]");
+	private By lblPreferencesDescription = MobileBy.xpath("//*[contains(@resource-id,'timezoneTextTV')]");
 	private By drpDwnTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
+	private By lblTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
 	private By lblLocalCurrency = MobileBy.xpath("//*[contains(@resource-id,'currencyET')]");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 
 	public void verifyPreferencesHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblPreferencesHeading, "Preferences Heading is", heading);
@@ -27,9 +30,22 @@ public class PreferencesComponent extends MobileFunctions {
 //		 click(btnDone, "Done");
 	}
 
+	public void getTimeZone() {
+		String preferencesDescription = getText(lblTimeZone);
+		ExtentTestManager.setInfoMessageInReport("Updated Time Zone is : " + preferencesDescription);
+	}
+
+	public void getDecscription() {
+		String preferencesDescription = getText(lblPreferencesDescription);
+		ExtentTestManager.setInfoMessageInReport("Preferences Description: " + preferencesDescription);
+	}
+
 	public void getLocalCurrency() {
 		String localCurrency = getText(lblLocalCurrency);
 		ExtentTestManager.setInfoMessageInReport("localCurrency: " + localCurrency);
 	}
 
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
 }

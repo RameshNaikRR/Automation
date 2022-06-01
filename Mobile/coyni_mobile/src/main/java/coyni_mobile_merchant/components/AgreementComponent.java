@@ -8,12 +8,13 @@ import io.appium.java_client.MobileBy;
 
 public class AgreementComponent extends MobileFunctions {
 
-	private By headingAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
+	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-	private By privacyPolicy = MobileBy.xpath("//*[@text='Privay Policy']");
-	private By termsOfService = MobileBy.xpath("//*[@text='Terms of Service']");
-	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'listagreementsTV')]");
-	private By headingPastAgreements = MobileBy.xpath(" ");
+	private By privacyPolicy = MobileBy.xpath("//*[contains(@text,'Privay Policy')]");
+	private By termsOfService = MobileBy.xpath("//*[contains(@text,'Terms of Service')]");
+	// private By lblv1 = MobileBy.xpath("(//*[contains(@text,'v1.0')])[3]");
+	private By headingPastAgreements = MobileBy.xpath("");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
@@ -35,9 +36,9 @@ public class AgreementComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(headingPastAgreements, "Past Agreements ", expPastHeading);
 	}
 
-	public void verifyMerchantAgreementsLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
-	}
+//	public void verifyMerchantAgreementsLabel(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
+//	}
 
 	public void verifyPrivacyPolicyView() {
 		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
@@ -54,6 +55,9 @@ public class AgreementComponent extends MobileFunctions {
 //	public void clickTermsOfService() {
 //		click(termsOfService, "Terms of Service");
 //	}
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();

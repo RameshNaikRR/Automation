@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class FeesComponent extends MobileFunctions {
 
-	private By headingFees = MobileBy.xpath("//*[contains(@resource-id,'feesLL')]");
+	private By headingFees = MobileBy.xpath("//*[contains(@text,'Fees')]");
 	private By headingTransactions = MobileBy.xpath("//*[@text='Transactions']");
 	private By lblSaleOrder = MobileBy.xpath("//*[contains(@text,'Sale Order: Token')]/following-sibling::*[2]");
 	private By lblRefund = MobileBy.xpath("//*[contains(@text,'Refund')]/following-sibling::*[2]");
@@ -19,8 +19,9 @@ public class FeesComponent extends MobileFunctions {
 	private By lblWithdrawFailedBank = MobileBy
 			.xpath("//*[contains(@text,'Failed Bank Withdraw')]/following-sibling::*[1]");
 	private By headingBuyToken = MobileBy.xpath("//*[@text='Buy Token']");
-	private By headingOtherFees = MobileBy.xpath("//*[@text='Other Fees']");
+	private By lblheadingOtherFees = MobileBy.xpath("//*[@text='Other Fees']");
 	private By lblMonthlyFee = MobileBy.xpath("//*[contains(@text,'Monthly Fee')]/following-sibling::*[1]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingFees, "Fee Heading", expHeading);
@@ -30,8 +31,17 @@ public class FeesComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(headingTransactions, "Transaction Heading", expHeading);
 	}
 
-	public void verifySaleOrderLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblSaleOrder, "Label", expHeading);
+	public void getSaleOrder() {
+		String saleOrder = getText(lblSaleOrder);
+		ExtentTestManager.setInfoMessageInReport("Sale Order: " + saleOrder);
+	}
+
+//	public void verifySaleOrderLabel(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblSaleOrder, "Label", expHeading);
+//	}
+	public void getRefund() {
+		String refund = getText(lblRefund);
+		ExtentTestManager.setInfoMessageInReport("Refund : " + refund);
 	}
 
 	public void verifyRefundLabel(String expHeading) {
@@ -52,12 +62,12 @@ public class FeesComponent extends MobileFunctions {
 
 	public void getWithdrawsExternalBankAccount() {
 		String withdrawsExternalBankAccount = getText(verifyExternalBankAccount("1"));
-		ExtentTestManager.setInfoMessageInReport("WithrawsExternalBankAccount: " + withdrawsExternalBankAccount);
+		ExtentTestManager.setInfoMessageInReport("Withraws External Bank Account: " + withdrawsExternalBankAccount);
 	}
 
 	public void getBuyTokenExternalBankAccount() {
 		String buyTokenExternalBankAccount = getText(verifyExternalBankAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("BuyTokenExternalBankAccount: " + buyTokenExternalBankAccount);
+		ExtentTestManager.setInfoMessageInReport("Buy Token External Bank Account: " + buyTokenExternalBankAccount);
 	}
 
 	private By verifySignetAccount(String Value) {
@@ -66,30 +76,44 @@ public class FeesComponent extends MobileFunctions {
 
 	public void getWithdrawsSignetAccount() {
 		String withdrawsSignetAccount = getText(verifySignetAccount("1"));
-		ExtentTestManager.setInfoMessageInReport("WithrawsSignetAccount: " + withdrawsSignetAccount);
+		ExtentTestManager.setInfoMessageInReport("Withraws Signet Account: " + withdrawsSignetAccount);
 	}
 
 	public void getBuyTokenSignetAccount() {
 		String buyTokenSignetAccount = getText(verifySignetAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("buyToken: " + buyTokenSignetAccount);
+		ExtentTestManager.setInfoMessageInReport("BuyToken Signet Account : " + buyTokenSignetAccount);
 	}
 
-	public void verifyWithdrawInstantPayLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblWithdrawInstantPay, "Label", expHeading);
+//
+//	public void verifyWithdrawInstantPayLabel(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblWithdrawInstantPay, "Label", expHeading);
+//		String withdrawInstantPay = getText(lblWithdrawInstantPay);
+//		ExtentTestManager.setInfoMessageInReport("withdrawInstantPay: " + withdrawInstantPay);
+//	}
+	public void getWithdrawInstantPayLabel() {
 		String withdrawInstantPay = getText(lblWithdrawInstantPay);
-		ExtentTestManager.setInfoMessageInReport("withdrawInstantPay: " + withdrawInstantPay);
+		ExtentTestManager.setInfoMessageInReport("Withdraw Instant Pay : " + withdrawInstantPay);
 	}
 
-	public void verifyWithdrawGiftCardLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblWithdrawGiftCard, "Label", expHeading);
+//	public void verifyWithdrawGiftCardLabel(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblWithdrawGiftCard, "Label", expHeading);
+//		String withdrawGiftCard = getText(lblWithdrawGiftCard);
+//		ExtentTestManager.setInfoMessageInReport("withdrawGiftCard: " + withdrawGiftCard);
+//	}
+	public void getWithdrawGiftCardLabel() {
 		String withdrawGiftCard = getText(lblWithdrawGiftCard);
-		ExtentTestManager.setInfoMessageInReport("withdrawGiftCard: " + withdrawGiftCard);
+		ExtentTestManager.setInfoMessageInReport("Withdraw Gift Card: " + withdrawGiftCard);
 	}
 
-	public void verifyWithdrawFailedBankAccountLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblWithdrawFailedBank, "Label", expHeading);
+	public void getWithdrawFailedBankAccountLabel() {
 		String withdrawFailedBank = getText(lblWithdrawFailedBank);
-		ExtentTestManager.setInfoMessageInReport("withdrawFailedBank: " + withdrawFailedBank);
+		ExtentTestManager.setInfoMessageInReport("Failed Bank Withdraw : " + withdrawFailedBank);
+	}
+
+	public void getMonthlyFee() {
+		scrollDownToElement(lblMonthlyFee, "Monthly Fee");
+		String MonthlyFee = getText(lblMonthlyFee);
+		ExtentTestManager.setInfoMessageInReport(" Monthly Fee : " + MonthlyFee);
 	}
 
 	public void verifyHeadingBuyToken(String expHeading) {
@@ -97,14 +121,17 @@ public class FeesComponent extends MobileFunctions {
 	}
 
 	public void verifyOtherFees(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingOtherFees, "Other Fees Heading", expHeading);
-	}
-
-	public void verifyMonthlyFeeLabel(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblRefund, "Label", expHeading);
+		scrollDownToElement(lblheadingOtherFees, "Other Fees");
+		new CommonFunctions().verifyLabelText(lblheadingOtherFees, "Other Fees Heading", expHeading);
 	}
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
+	public void clickBack() {
+		click(btnBack, "Back");
+
+	}
+
 }

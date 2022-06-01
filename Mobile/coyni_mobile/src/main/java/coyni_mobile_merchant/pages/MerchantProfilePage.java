@@ -24,7 +24,6 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'AccountStatusTV')]");
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
 	private By imgUser = MobileBy.xpath("");
-	private By btnHome = MobileBy.xpath("//*[contains(@resource-id,'iv_menu_tab')]");
 	private By lblSettings = MobileBy.xpath("//*[contains(@resource-id,'userSettingsTV')]");
 	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'business_UserDetailsLL')]");
 	private By lblMerchantSettings = MobileBy.xpath("//*[contains(@resource-id,'settingTV')]");
@@ -66,10 +65,6 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public void clickScan() {
 		click(btnScan, "Scan");
-	}
-
-	public void clickHome() {
-		click(btnHome, "Home");
 	}
 
 	public void clickTogggle() {
@@ -351,4 +346,9 @@ public class MerchantProfilePage extends MobileFunctions {
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();
 	}
+
+	public LandingPage landingPage() {
+		return new LandingPage();
+	}
+
 }

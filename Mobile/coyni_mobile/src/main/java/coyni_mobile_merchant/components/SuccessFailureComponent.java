@@ -12,7 +12,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvLogin')]");
 //	private By lblChangeEmailSucessfullHeading=MobileBy.xpath("//*[contains(@text,'Email Successful')]");
 //	private By lblChangeEmailSucessfullDescription=MobileBy.xpath("//*[contains(@text,'log in again through the button below.')]");
-	private By btnLogOut=MobileBy.xpath("//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]");
+	private By btnLogOut=MobileBy.xpath("//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]|//*[contains(@resource-id,'Logout')]");
 
 
 	public void verifyPageHeading(String expHeading) {
@@ -39,6 +39,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 //				"Change Email Upadated Page Description", expDescription);
 //	}
 	public void clickLogout() {
+		scrollDownToElement(btnLogOut, "Log Out");
 		new CommonFunctions().elementView(btnLogOut, "Logout");
 		click(btnLogOut, "Logout");
 	}

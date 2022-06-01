@@ -2,6 +2,7 @@ package coyni_mobile_merchant.popups;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile_merchant.pages.ReceivePaymentPage;
 import coyni_mobile_merchant.pages.ScanPage;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -31,6 +32,9 @@ public class TokenHomePopUp extends MobileFunctions {
 
 	public ScanPage scanPage() {
 		return new ScanPage();
+	}
+	public ReceivePaymentPage receivePaymentPage() {
+		return new ReceivePaymentPage();
 	}
 
 }
