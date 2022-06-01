@@ -2,6 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.pages.AgreementsPage;
 import coyni.apibusiness.pages.PreferencesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -164,5 +165,9 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public PreferencesPage preferencesPage() {
 		return new PreferencesPage();
+	}
+
+	public AgreementsPage agreementsPage() {
+		return new AgreementsPage();
 	}
 }

@@ -3,6 +3,7 @@ package coyni.api.business.popups;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.components.AuthyComponent;
+import coyni.apibusiness.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -33,5 +34,9 @@ public class OrderPreviewPopup extends BrowserFunctions {
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
 	}
 }

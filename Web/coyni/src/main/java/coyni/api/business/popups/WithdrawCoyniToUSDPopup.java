@@ -8,31 +8,59 @@ import ilabs.WebFramework.BrowserFunctions;
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	public By lblHeading = By.xpath("//h1[text()='Withdraw coyni to USD']");
-	public By lblBankAccount = By.xpath("//span[text()='Bank Account']");
-	public By lblInstantPay = By.xpath("//span[text()='Instant Pay']");
-	public By lblSignetAccount = By.xpath("//span[text()=' Signet Account']");
+	public By btnBankAccount = By.xpath("//span[text()='Bank Account']");
+	public By btnInstantPay = By.xpath("//span[text()='Instant Pay']");
+	public By btnSignetAccount = By.xpath("//span[text()=' Signet Account']");
+	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
 
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
+
+	public void clickOnExternalBankAccount() {
+		click(btnBankAccount, "click ExternalBankAccount");
+	}
+
+	public void cursorhoverWithdrawToUSD() {
+		new CommonFunctions().verifyCursorAction(btnBankAccount, "Bank Account");
+	}
+
+	public void clickOnInstantPay() {
+		click(btnInstantPay, "Click InstantPay");
+	}
+
+
+	public void clickOnSignetAccount() {
+		click(btnSignetAccount, "Click Signet Account");
+	}
+
 	public void verifyBankAccountHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblBankAccount, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(btnBankAccount, "Heading", expHeading);
 	}
 
 	public void verifyInstantPayHeading(String InstantPayHeading) {
-		new CommonFunctions().verifyLabelText(lblInstantPay, "Instant Pay Heading", InstantPayHeading);
-	}
-	public void clickBankAccount() {
-		click(lblHeading, "BankAccount");
-	}
-	public void clickInstantPay() {
-		click(lblInstantPay, "Instant Pay");
-	}
-	public void clickSignetAccount() {
-		click(lblSignetAccount, "SignetAccount");
+		new CommonFunctions().verifyLabelText(btnInstantPay, "Instant Pay Heading", InstantPayHeading);
 	}
 
 	public void verifySignetAccountHeading(String SignetAccountHeading) {
-		new CommonFunctions().verifyLabelText(lblSignetAccount, "Signet Account Heading", SignetAccountHeading);
+		new CommonFunctions().verifyLabelText(btnSignetAccount, "Signet Account Heading", SignetAccountHeading);
+	}
+
+	public void verifyWithdrawToUSD() {
+		new CommonFunctions().elementView(btnBankAccount, "External Bank Account");
+		new CommonFunctions().elementView(btnInstantPay, "Instant Pay");
+		new CommonFunctions().elementView(btnSignetAccount, "Signet Account");
+	}
+
+	public WithdrawviaInstantPayPopup withdrawviaInstantPayPopup() {
+		return new WithdrawviaInstantPayPopup();
+	}
+
+	public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
+		return new WithdrawToBankAccountPopup();
+	}
+
+	public void verifyWithdrawBackgroundcolor(String cssProp, String expValue, String expColor) {
+		new CommonFunctions().verifyChangedColor(withdrawToUSDColor, "WithdrawToUSD", cssProp, expValue, expColor);
 	}
 }

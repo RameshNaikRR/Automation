@@ -2,6 +2,7 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.NavigationComponent;
 import coyni.apibusiness.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -26,6 +27,10 @@ public class RemovePaymentMethodPopup extends BrowserFunctions {
 
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }

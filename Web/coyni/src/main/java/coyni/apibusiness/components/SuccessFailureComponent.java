@@ -17,6 +17,7 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	private By lblSignetDeleted1 = By.xpath("//h1[text()='Removed Successfully']");
 	private By failedHeading = By.xpath("");
 	private By btnDone = By.xpath("//button[text()='Done']");
+	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
 
 	public void verifyBankAddSuccesfulHeaading() {
 		new CommonFunctions().elementView(lblBankAddedSuccesful, "Bank Added Succesful");
@@ -59,8 +60,13 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
+
 	public void clickDone() {
 		click(btnDone, "Done");
+	}
+
+	public void verifyReferenceID() {
+		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
 	}
 
 	public NavigationComponent navigationComponent() {
