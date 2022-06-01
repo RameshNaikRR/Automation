@@ -49,10 +49,9 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By btnReceivePayment = MobileBy.xpath("//*[@text='Receive Payment']");
 	private By btnBuyToken = MobileBy.xpath("//*[@text='Buy Tokens']");//
 	private By btnWithdrawToUSD = MobileBy.xpath("//*[@text='Withdraw Tokens']");//
-
-	private By lblHeading = MobileBy.xpath("");
-
-	private By lblAccId = MobileBy.xpath("");
+	
+	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
+	private By lblAccId = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format(

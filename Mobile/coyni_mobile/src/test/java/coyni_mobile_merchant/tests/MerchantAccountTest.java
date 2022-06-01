@@ -53,14 +53,12 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickPhoto();
 			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnCancel();
 
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnAlbum();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickDeny();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
 		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testReceivePaymentView(String strParams) {
@@ -71,9 +69,11 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserLogoText();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageDescription(data.get("description"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifyPageDescription(data.get("description"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickSetAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyAmountPageHeading(data.get("amountHeading"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifyAmountPageHeading(data.get("amountHeading"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().fillAmount(data.get("amount"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickOk();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getRequestedAmount();
@@ -83,7 +83,8 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getReceiptentAddress();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickCopy();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickShare();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifySharePageHeading(data.get("sharePageHeading"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifySharePageHeading(data.get("sharePageHeading"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getShareDescription();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getShareReceiptentAddress();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickShareCopy();
@@ -92,13 +93,13 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickClose();
 			businessTokenAccountPage.getUserName();
-			
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReceivePayment  failed due to exception " + e);
 		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testReceivePaymentWithInvalidData(String strParams) {
@@ -109,16 +110,21 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserLogoText();
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageDescription(data.get("description"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifyPageDescription(data.get("description"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickSetAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyAmountPageHeading(data.get("amountHeading"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifyAmountPageHeading(data.get("amountHeading"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().fillAmount(data.get("amount"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickOk();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent().verifyPopUpMsgHeading(data.get("errPopUpHeading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent().verifyPopUpMsg(data.get("errPopUpMsg"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent()
+					.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent()
+					.verifyPopUpMsg(data.get("errPopUpMsg"));
 			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent().clickOk();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyAmountPageHeading(data.get("amountHeading"));
-			
+			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+					.verifyAmountPageHeading(data.get("amountHeading"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReceivePayment  failed due to exception " + e);
 		}

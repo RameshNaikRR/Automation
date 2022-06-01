@@ -43,7 +43,6 @@ public class MerchantTransactionDetailsTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testProcessingVolume(String strParams) {
@@ -81,7 +80,6 @@ public class MerchantTransactionDetailsTest {
 			ExtentTestManager.setFailMessageInReport("testProcessingVolume Failed due to this Exception" + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -168,6 +166,31 @@ public class MerchantTransactionDetailsTest {
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testResetFiltersForMerchantTransactions Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveBalance(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.reserveBalanceComponent().getNextRelease();
+			businessTokenAccountPage.reserveBalanceComponent().getLastRelease();
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickRolling();
+			businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickManual();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveBalance Failed due to this Exception" + e);
 		}
 	}
 

@@ -12,6 +12,8 @@ public class ScanPage extends MobileFunctions {
 	private By btnScanMe = MobileBy.xpath("");
 	private By btnWhileUsingApp = MobileBy
 			.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
+	private By btnOnlyOneTime = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_one_time_button')]");
+	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'permission_deny_button')]");
 
 	public void clickScanCode() {
 		click(btnScanCode, "ScanCode");
@@ -23,6 +25,14 @@ public class ScanPage extends MobileFunctions {
 
 	public void clickOnWhileUsingApp() {
 		click(btnWhileUsingApp, "While Using App");
+	}
+
+	public void clickOnlyOneTime() {
+		click(btnOnlyOneTime, "only One Time");
+	}
+
+	public void clickDeny() {
+		click(btnDeny, "Deny");
 	}
 
 	public void verifyScanCodeAndScanMe() {
