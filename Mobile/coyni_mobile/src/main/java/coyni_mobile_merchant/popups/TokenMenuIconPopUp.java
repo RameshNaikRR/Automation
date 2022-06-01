@@ -6,7 +6,7 @@ import coyni_mobile_merchant.pages.ScanPage;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class TokenHomePopUp extends MobileFunctions {
+public class TokenMenuIconPopUp extends MobileFunctions {
 
 	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'llScan')]");
 	private By btnReceivePayment = MobileBy.xpath("//*[contains(@resource-id,'receive_PaymentLL')]");

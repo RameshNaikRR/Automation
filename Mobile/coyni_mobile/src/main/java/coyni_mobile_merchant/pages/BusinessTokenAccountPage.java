@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.DaysDropDownComponent;
 import coyni_mobile_merchant.components.ReserveBalanceComponent;
-import coyni_mobile_merchant.popups.TokenHomePopUp;
+import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -48,7 +48,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		return new ReserveBalanceComponent();
 	}
 
-	public TokenHomePopUp tokenHomePopUp() {
-		return new TokenHomePopUp();
+	public TokenMenuIconPopUp tokenMenuIconPopUp() {
+		return new TokenMenuIconPopUp();
 	}
 }

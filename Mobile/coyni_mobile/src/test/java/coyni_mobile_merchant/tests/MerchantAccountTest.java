@@ -39,19 +39,18 @@ public class MerchantAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickHome();
-			businessTokenAccountPage.tokenHomePopUp().clickScan();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().clickOnWhileUsingApp();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickFlashLight();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().navigationComponent().clickClose();
-
+			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickFlashLight();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
 			businessTokenAccountPage.clickHome();
-			businessTokenAccountPage.tokenHomePopUp().clickScan();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnAlbum();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
 			Thread.sleep(2000);
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().verifySelectPhoto(data.get("label"));
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickPhoto();
-			businessTokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnCancel();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto(data.get("label"));
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnCancel();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
@@ -65,33 +64,33 @@ public class MerchantAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickHome();
-			businessTokenAccountPage.tokenHomePopUp().clickReceivePayment();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserLogoText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyPageDescription(data.get("description"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickSetAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSetAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyAmountPageHeading(data.get("amountHeading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().fillAmount(data.get("amount"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickOk();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getRequestedAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickSaveAlbum();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickAllow();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickClearAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getReceiptentAddress();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickCopy();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickShare();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().fillAmount(data.get("amount"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickOk();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getRequestedAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSaveAlbum();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClearAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getReceiptentAddress();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickCopy();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickShare();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifySharePageHeading(data.get("sharePageHeading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getShareDescription();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getShareReceiptentAddress();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickShareCopy();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserLogoText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getShareDescription();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getShareReceiptentAddress();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickShareCopy();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
 			businessTokenAccountPage.getUserName();
 
 		} catch (Exception e) {
@@ -106,23 +105,23 @@ public class MerchantAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickHome();
-			businessTokenAccountPage.tokenHomePopUp().clickReceivePayment();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserLogoText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().getUserNameText();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyPageDescription(data.get("description"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickSetAmount();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSetAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyAmountPageHeading(data.get("amountHeading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().fillAmount(data.get("amount"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().clickOk();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().fillAmount(data.get("amount"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickOk();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().errorMessagePopupComponent()
 					.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().errorMessagePopupComponent()
 					.verifyPopUpMsg(data.get("errPopUpMsg"));
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage().errorMessagePopupComponent().clickOk();
-			businessTokenAccountPage.tokenHomePopUp().receivePaymentPage()
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().errorMessagePopupComponent().clickOk();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyAmountPageHeading(data.get("amountHeading"));
 
 		} catch (Exception e) {

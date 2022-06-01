@@ -9,7 +9,7 @@ import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.FeesComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PreferencesComponent;
-import coyni_mobile_merchant.popups.TokenHomePopUp;
+import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -42,7 +42,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'b_tvBMSetting')]");
 	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
-	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
+	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]|//*[contains(@resource-id,'Logout')]");
 
 	// text
 	private By btnScan = MobileBy.xpath("//*[@text='Scan']");
@@ -342,8 +342,8 @@ public class MerchantProfilePage extends MobileFunctions {
 		return new TeamPage();
 	}
 
-	public TokenHomePopUp tokenHomePopUp() {
-		return new TokenHomePopUp();
+	public TokenMenuIconPopUp tokenMenuIconPopUp() {
+		return new TokenMenuIconPopUp();
 	}
 
 	public LandingPage landingPage() {
