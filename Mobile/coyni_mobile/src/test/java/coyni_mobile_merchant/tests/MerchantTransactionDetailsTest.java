@@ -176,21 +176,97 @@ public class MerchantTransactionDetailsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
 			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.reserveBalanceComponent().getReserveRule();
 			businessTokenAccountPage.reserveBalanceComponent().getNextRelease();
 			businessTokenAccountPage.reserveBalanceComponent().getLastRelease();
-			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-			businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
 			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickRolling();
-			businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
-			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickManual();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickRolling();
+			// businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
+			// businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
+			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickManual();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveBalance Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveBalanceFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickFilterIcon();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.selectFilter(data.get("filterType"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickApplyfilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveBalanceFilters Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveBalanceResetFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickFilterIcon();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.selectFilter(data.get("filterType"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickResetAllFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveBalanceResetFilters Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveReleaseDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getReserveID();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getReserveAmount();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getStatus();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getDailyBatchIDs();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getBatchDate();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getReserveRule();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().getReserve();
+			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+			// .reserveReleaseDetailsPage().getRecentTransactionsList();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveReleaseDetails Failed due to this Exception" + e);
 		}
 	}
 

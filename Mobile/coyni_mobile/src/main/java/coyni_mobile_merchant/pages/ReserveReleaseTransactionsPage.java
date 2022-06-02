@@ -17,11 +17,17 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By lblReserveReleases = MobileBy.xpath("//*[@text='Reserve Releases']");
 
-	private By drpdwn = MobileBy.xpath("//*[contains(@text,'Rolling')]/following-sibling::*[1]");
+	private By drpdwn = MobileBy.xpath("//*[contains(@resource-id,'tvChangeName')]");// *[contains(@text,'Rolling')]/following-sibling::*[1]
 
 	private By btnRolling = MobileBy.xpath("//*[contains(@resource-id,'rollingTV')]");
 
 	private By btnManual = MobileBy.xpath("//*[contains(@resource-id,'manualTV')]");
+
+	private By btnReserve = MobileBy.xpath("//*[contains(@resource-id,'rl_base')]");
+
+	public void clickReserve() {
+		click(btnReserve, "Reserve");
+	}
 
 	public void verifySearchOption() {
 		new CommonFunctions().elementView(searchOption, "Search Option");
@@ -49,5 +55,9 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
+	}
+
+	public ReserveReleaseDetailsPage reserveReleaseDetailsPage() {
+		return new ReserveReleaseDetailsPage();
 	}
 }

@@ -13,8 +13,8 @@ public class FilterPopup extends MobileFunctions {
 	private By txtToAmount = MobileBy.xpath("//*[@text='Transaction Amount']/preceding-sibling::*[1]");
 	private By btnCalender = MobileBy.xpath("//*[@text='Date']/following-sibling::*[1]");
 	private By btnResetAllFilters = MobileBy.xpath("//*[contains(@resource-id,'resetFiltersTV')]");
-	private By btnApplyfilter = MobileBy.xpath("//*[@text='Apply Filter']");
-	private By lblPayOutDateRange = MobileBy.xpath("");
+	private By btnApplyfilter = MobileBy.xpath("//*[contains(@resource-id,'applyFilterBtnCV')]");
+	private By btnFilterIcon = MobileBy.xpath("//*[contains(@resource-id,'ivFilterIcon')]");
 
 	public void clickApplyfilters() {
 		click(btnApplyfilter, "Apply filters");
@@ -24,8 +24,8 @@ public class FilterPopup extends MobileFunctions {
 		click(btnResetAllFilters, "Reset All Filters");
 	}
 
-	public void clickPayOutDateRange() {
-		click(lblPayOutDateRange, "PayOut Date Range");
+	public void clickFilterIcon() {
+		click(btnFilterIcon, "Filter Icon");
 	}
 
 	public void clickCalender() {
@@ -45,11 +45,11 @@ public class FilterPopup extends MobileFunctions {
 	}
 
 	public By getElement(String elementName) {
-		return MobileBy.xpath(String.format("//XCUIElementTypeCell/*[@name='%s']", elementName));
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", elementName));
 	}
 
 	public void selectFilter(String type) {
-		scrollDownToElement(getElement(type), type);
-		click(getElement(type), type);
+		scrollDownToElement(getElement(type), "");
+		click(getElement(type), "type");
 	}
 }
