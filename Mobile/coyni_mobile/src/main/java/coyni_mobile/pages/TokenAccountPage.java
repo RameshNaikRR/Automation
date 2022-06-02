@@ -1,16 +1,20 @@
 package coyni_mobile.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.AccountLimitsComponent;
-import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class TokenAccountPage extends MobileFunctions {
 
@@ -18,7 +22,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By lblUserName = MobileBy.xpath(
 			"//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
-	private By iconNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsLL')]");//*[@name='notifications_nobadge']
+	private By iconNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsLL')]");// *[@name='notifications_nobadge']
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnScan = MobileBy.xpath(" ");
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");
@@ -33,7 +37,13 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickViewMore() {
-		scrollDownToElement(btnViewMore, "View More");
+//		scrollDownToElement(btnViewMore, "View More");
+//		click(btnViewMore, "View More");
+		while (getElementList(btnViewMore, "View More").size() == 0) {
+			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+			touch.press(PointOption.point(720, 2000)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(720, 1350)).release().perform();
+		}
 		click(btnViewMore, "View More");
 	}
 

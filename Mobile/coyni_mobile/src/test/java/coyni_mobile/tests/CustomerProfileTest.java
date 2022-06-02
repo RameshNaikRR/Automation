@@ -664,6 +664,7 @@ public class CustomerProfileTest {
 		try {
 			tokenAccountPage.clickProfile();
 			customerProfilePage.verifyLogOut();
+			Thread.sleep(2000);
 			customerProfilePage.clickLogOut();
 			customerProfilePage.signUpPage().verifyGetStarted();
 
@@ -894,8 +895,8 @@ public class CustomerProfileTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+//	@Test
+//	@Parameters({ "strParams" })
 	public void testAddCard(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -961,19 +962,15 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters("strParams")
-	public void testEditCard(String strParams,String card) {
+	public void testEditDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			if (card.equalsIgnoreCase("credit")) {
-				customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
-			} else {
-				customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
-			}
+			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
 			Thread.sleep(2000);
-            customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
 			// customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCVVorCVC(data.get("cvvOrCVC"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -994,55 +991,51 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-	@Test
-	@Parameters({"strParams"})
-	public void testEditDebitCard(String strParams) {
-		testEditCard(strParams, "debit");
-	}
-	@Test
-	@Parameters({"strParams"})
-	public void testEditCreditCard(String strParams) {
-		testEditCard(strParams, "credit");
-	}
-
 
 	@Test
-	@Parameters({"strParams"})
-	public void testDeleteCard(String strParams,String card) {
+	@Parameters({ "strParams" })
+	public void testDeleteDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			if (card.equalsIgnoreCase("credit")) {
-				customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
-			} else {
-				customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
-			}
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickRemove();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickYes();
+			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickRemove();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickYes();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
-		
+
 	}
+
 	@Test
-	@Parameters({"strParams"})
-	public void testDeleteDebitCard(String strParams) {
-		testDeleteCard(strParams, "debit");
-	}
-	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testDeleteCreditCard(String strParams) {
-		testDeleteCard(strParams, "credit");
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickRemove();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickYes();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddCardWithInvalidData(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
-			Thread.sleep(2000);
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
@@ -1123,11 +1116,6 @@ public class CustomerProfileTest {
 	public void testAddDebitCardWithInvalidData(String strParams) {
 		testAddCardWithInvalidData(strParams, "debit");
 	}
-	@Test
-	@Parameters({"strParams"})
-	public void testAddCreditCardWithInvalidData(String strParams) {
-		testAddCardWithInvalidData(strParams, "credit");
-	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1139,12 +1127,12 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().clickExternalBankAccount();
 			customerProfilePage.paymentMethodsPage().verifyHeadingAddExternalBankAccount();
 			customerProfilePage.paymentMethodsPage().clickNext();
-			Thread.sleep(5000);
+			Thread.sleep(15000);
 			customerProfilePage.paymentMethodsPage().verifyHeadingAddAccount();
-			customerProfilePage.paymentMethodsPage().enterBankName(data.get("expBankName"));
+			customerProfilePage.paymentMethodsPage().enterBankName();
 			customerProfilePage.paymentMethodsPage().selectBank();
-			customerProfilePage.paymentMethodsPage().fillUserName(data.get("expUserName"));
-			customerProfilePage.paymentMethodsPage().fillPassword(data.get("expPassword"));
+			customerProfilePage.paymentMethodsPage().fillUserName();
+			customerProfilePage.paymentMethodsPage().fillPassword();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddBank failed due to this Exception" + e);

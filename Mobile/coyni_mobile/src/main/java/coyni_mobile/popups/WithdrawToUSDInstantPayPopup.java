@@ -11,8 +11,8 @@ import io.appium.java_client.MobileBy;
 
 public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
-	private By visaCard = MobileBy.xpath("//*[contains(@resource-id,'imgPayMethod')]");
-	private By masterCard = MobileBy.xpath("//*[contains(@resource-id,'imgPayMethod')]");
+	private By visaCard = MobileBy.xpath("//*[contains(@text,'Visa')]");
+	private By masterCard = MobileBy.xpath("//*[contains(@text,'Mastercard')]");
 	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By optionaltxt = MobileBy.xpath("//*[contains(@resource-id,'etRemarks')]");
@@ -29,7 +29,7 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	private By addNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
 
 	public void fillAmount(String Amount) {
-		new EnterYourPINComponent().fillPin(Amount);
+		enterText(txtAmount, Amount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
 	}
 
@@ -51,12 +51,14 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		return getText(lblAvailableBalance);
 	}
 
-	public String verifyVisaCards() {
-		return getText(visaCard);
+	public void verifyVisaCards() {
+		int size = getElementList(visaCard, "").size();
+		ExtentTestManager.setInfoMessageInReport(size + " Visa Card is there.");
 	}
 
-	public String verifyMasterCards() {
-		return getText(masterCard);
+	public void verifyMasterCards() {
+		int size = getElementList(masterCard, "").size();
+		ExtentTestManager.setInfoMessageInReport(size + " Master card is there.");
 	}
 
 	public void verifyCancelAndButton() {
@@ -93,17 +95,12 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		enterText(txtmsg, txt, "TransactionalMessage");
 	}
 
-	public By getPaymentItems(String last4digits) {
-		return By.xpath(String.format("//p[contains(text(),'%s')]", last4digits));
+	private By getPaymentItems(String Card) {
+		return By.xpath(String.format("//*[contains(@text,'Debit')]", Card));
 	}
 
-	public By getPaymentItems(String paymentMethod, String last4digits) {
-		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]/following-sibling::*[contains(@text,'%s')]",
-				paymentMethod, last4digits));
-	}
-
-	public void clickDebitCard(String last4digits) {
-		click(getPaymentItems("Debit", last4digits), "Debit");
+	public void clickDebitCard() {
+		click(getPaymentItems("Debit"), "Debit Card");
 	}
 
 	public void clickOnDebitCard() {

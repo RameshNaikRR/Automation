@@ -1,6 +1,10 @@
 package coyni_mobile.components;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -15,9 +19,9 @@ public class NotificationComponent extends MobileFunctions {
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelLL')]");
 	private By btnReminder = MobileBy.xpath("//*[contains(@resource-id,'remindLL')]");
 	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'denyLL')]");
-	private By btnPay = MobileBy.xpath("//*[contains(@resource-id,'payLL')]");
-	private By countNotification = MobileBy.xpath("//*[contains(@resource-id,'countCV')]");
-	private By viewDot = MobileBy.xpath("(//*[contains(@resource-id,'readStatusCV')])[3]");
+	private By btnPay = MobileBy.xpath("//*[@text='Pay']");
+	private By countNotification = MobileBy.xpath("//*[contains(@resource-id,'cvNotification')]");
+	private By viewDot = MobileBy.xpath("//*[contains(@resource-id,'readStatusCV')]");
 	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'notificationItemLL')]");
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
 	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
@@ -43,7 +47,8 @@ public class NotificationComponent extends MobileFunctions {
 	}
 
 	public void countNotifications() {
-		getElementList(countNotification, "Count Elements");
+		List<WebElement> elementList = getElementList(countNotification, "Count Elements");
+		ExtentTestManager.setInfoMessageInReport("Element List : " + elementList.size());
 	}
 
 	public void viewNotification() {

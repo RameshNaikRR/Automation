@@ -22,9 +22,9 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]"); //
 
-	private By lblOrderPreview = MobileBy.xpath("//*[@text='Order Overview']");
+	private By lblOrderPreview = MobileBy.xpath("//*[@text='Order Preview']");
 
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'giftCardAmountTV')]");
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'tvGet')]");
 	private By lblPaymentMethod = MobileBy
 			.xpath("(//*[@name='Payment Method']/following-sibling::XCUIElementTypeStaticText)[1]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[@name='Purchase Amount']/following-sibling::*[1]");
