@@ -45,6 +45,31 @@ public class MerchantTransactionDetailsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testMerchantBalance(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getAccountVerified();
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickNotification();
+			businessTokenAccountPage.merchantTransactionDetailsPage().navigationComponent().clickBack();
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickIcon();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getName();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getUserName();
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickCompanyName();
+			businessTokenAccountPage.merchantTransactionDetailsPage().navigationComponent().clickBack();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMonthlyVolumeLimit();
+			businessTokenAccountPage.merchantTransactionDetailsPage().getHighTicketLimit();
+			businessTokenAccountPage.merchantTransactionDetailsPage().verifyLabelMerchantBalance(data.get("label"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().getMerchantBalance();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantBalance Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testProcessingVolume(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -78,48 +103,6 @@ public class MerchantTransactionDetailsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testProcessingVolume Failed due to this Exception" + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testBatchPayOuts(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
-			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
-			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
-			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
-					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			// businessTokenAccountPage.batchPayOutComponent().payOutTransactions().
-			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickPayOutDateRange();
-			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testBatchPayOutResetFilters(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
-			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
-			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
-			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
-					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickResetAllFilters();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBatchPayOutResetFilters Failed due to this Exception" + e);
 		}
 	}
 
@@ -166,6 +149,70 @@ public class MerchantTransactionDetailsTest {
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testResetFiltersForMerchantTransactions Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBatchPayOuts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
+			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
+			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			// businessTokenAccountPage.batchPayOutComponent().payOutTransactions().
+			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickPayOutDateRange();
+			// businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBatchPayOutApplyFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
+			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
+			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickDateRange();
+			businessTokenAccountPage.batchPayOutComponent().filterPopup().selectFilter(data.get("filterType"));
+			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBatchPayOutResetFilters Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBatchPayOutResetFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
+			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
+			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
+			businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickResetAllFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBatchPayOutResetFilters Failed due to this Exception" + e);
 		}
 	}
 

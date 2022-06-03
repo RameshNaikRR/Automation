@@ -15,9 +15,14 @@ public class FilterPopup extends MobileFunctions {
 	private By btnResetAllFilters = MobileBy.xpath("//*[contains(@resource-id,'resetFiltersTV')]");
 	private By btnApplyfilter = MobileBy.xpath("//*[contains(@resource-id,'applyFilterBtnCV')]");
 	private By btnFilterIcon = MobileBy.xpath("//*[contains(@resource-id,'ivFilterIcon')]");
+	private By btnDateRange = MobileBy.xpath("//*[contains(@resource-id,'datePickIV')]");
 
 	public void clickApplyfilters() {
 		click(btnApplyfilter, "Apply filters");
+	}
+
+	public void clickDateRange() {
+		click(btnDateRange, "Date Range");
 	}
 
 	public void clickResetAllFilters() {

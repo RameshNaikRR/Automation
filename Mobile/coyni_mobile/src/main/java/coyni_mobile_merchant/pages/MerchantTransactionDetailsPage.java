@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.NavigationComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -11,7 +12,25 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By btnDashBoard = MobileBy.xpath("//*[contains(@resource-id,'ll_dashboard_tab')]");
 
-	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@text,'Merchant Balance')]/following-sibling::*[2]");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'userNameTV')]");
+
+	private By lblAccountVerified = MobileBy.xpath("//*[contains(@resource-id,'tv_officially_verified')]");
+
+	private By btnIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
+
+	private By btnCompanyName = MobileBy.xpath("//*[contains(@resource-id,'title')]");
+
+	private By monthlyVolumeLimit = MobileBy.xpath("(//*[contains(@resource-id,'tv_monthly_volume')])[2]");
+
+	private By highTicketLimit = MobileBy.xpath("//*[contains(@resource-id,'tv_high_tickets')]");
+
+	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'merchant_balance_tv')]");
+
+	private By name = MobileBy.xpath("//*[contains(@resource-id,'tvUserInfo')]");
+
+	private By btnNotificationIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
+
+	private By lblMerchant = MobileBy.xpath("//*[@text='Merchant Balance']");
 
 	private By lblProcessingVolume = MobileBy.xpath("//*[@text='Processing Volume']");
 
@@ -35,8 +54,51 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 		click(btnDashBoard, "DashBoard");
 	}
 
+	public void clickNotification() {
+		click(btnNotificationIcon, "Notification");
+	}
+
+	public void clickIcon() {
+		click(btnIcon, "Profile Icon");
+	}
+
+	public void clickCompanyName() {
+		click(btnCompanyName, "Company Name");
+	}
+
+	public void getMonthlyVolumeLimit() {
+		String text = getText(monthlyVolumeLimit);
+		ExtentTestManager.setInfoMessageInReport("Monthly Volume Limit: " + text);
+	}
+
+	public void getHighTicketLimit() {
+		String text = getText(highTicketLimit);
+		ExtentTestManager.setInfoMessageInReport("High Ticket Limit: " + text);
+	}
+
+	public void getName() {
+		String text = getText(name);
+		ExtentTestManager.setInfoMessageInReport("Name: " + text);
+	}
+
+	public void getUserName() {
+		String text = getText(lblUserName);
+		ExtentTestManager.setInfoMessageInReport("User Name: " + text);
+	}
+
+	public void getAccountVerified() {
+		String text = getText(lblAccountVerified);
+		ExtentTestManager.setInfoMessageInReport("Account Verified: " + text);
+	}
+
 	public void getMerchantBalance() {
-		ExtentTestManager.setInfoMessageInReport("Merchant Balance " + getText(lblMerchantBalance));
+		String text = getText(lblMerchantBalance);
+		ExtentTestManager.setInfoMessageInReport("Merchant Balance " + text);
+	}
+
+	public void verifyLabelMerchantBalance(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblMerchant, expHeading, "Merchant Balance");
+
 	}
 
 	public void verifyLabelProcessingVolume(String expHeading) {
@@ -82,4 +144,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 		return new MerchantTransactionsPage();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 }
