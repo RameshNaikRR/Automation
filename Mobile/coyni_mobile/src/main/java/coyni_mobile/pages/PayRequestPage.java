@@ -15,10 +15,9 @@ public class PayRequestPage extends MobileFunctions {
 	private By txtSearchBx = MobileBy.xpath("//*[contains(@resource-id,'etSearch')]");// *[@name='search'])[2]/following-sibling::*[1]|
 	private By lblUser = MobileBy.xpath("(//*[contains(@resource-id,'tvUserName')])[1]");// *[@name='Recent
 																							// Contacts'])[1]/following-sibling::*[1]|
-
 //	public void clickSearch() {
-//		click(iconSearch, "Search");
-//	}
+//	click(iconSearch, "Search");
+//}
 
 	public void fillSearchBx(String userName) {
 		enterText(txtSearchBx, userName, "userName");
@@ -33,19 +32,15 @@ public class PayRequestPage extends MobileFunctions {
 	}
 
 	public void clickAllow() {
-		if (getElement(allow, "").isDisplayed()) {
-			click(allow, "Allow");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("Allow button is not displayed");
-		}
+		click(allow, "Allow");
 	}
 
 	public ScanPage scanPage() {
 		return new ScanPage();
 	}
-//	public SelectUserPage selectUserPage() {
-//		return new SelectUserPage();
-//	}
+//public SelectUserPage selectUserPage() {
+//	return new SelectUserPage();
+//}
 
 	public PayandRequestAccountHolderPage payandRequestAccountHolderPage() {
 		return new PayandRequestAccountHolderPage();

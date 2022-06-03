@@ -37,13 +37,24 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickViewMore() {
-//		scrollDownToElement(btnViewMore, "View More");
-//		click(btnViewMore, "View More");
+		// scrollDownToElement(lblTransactionList, "Trasaction List");
+//		for (int i=0; i<10; i++) {
+//			new CommonFunctions().clickTab();
+//			if (getElement(btnViewMore, "").isDisplayed()) {
+//				click(btnViewMore, "View More");
+//				break;
+//			}
+//		}
+		// scrollDownToElement(btnViewMore, "View More");
+		
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(720, 2000)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 					.moveTo(PointOption.point(720, 1350)).release().perform();
 		}
+//		Dimension size = DriverFactory.getDriver().manage().window().getSize();
+//		ExtentTestManager.setInfoMessageInReport("Size" + size);
+//		scrollDownToElement(btnViewMore, "View More");
 		click(btnViewMore, "View More");
 	}
 
