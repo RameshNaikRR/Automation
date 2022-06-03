@@ -91,7 +91,7 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 		click(By.xpath(String.format("//*[contains(@text,'%s')]", last4Digits)), last4Digits);
 		ExtentTestManager.setInfoMessageInReport(" clicked on Bank " + (last4Digits));
 	}
-
+	
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
 	}

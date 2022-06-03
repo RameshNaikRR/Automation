@@ -17,7 +17,6 @@ public class SetAmountComponent extends MobileFunctions {
 
 	public void clickOk() {
 		click(btnOk, "Ok");
-		click(btnOk, "Ok");
 	}
 
 }

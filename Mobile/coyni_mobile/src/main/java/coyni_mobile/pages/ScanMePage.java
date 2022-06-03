@@ -18,6 +18,7 @@ public class ScanMePage extends MobileFunctions {
 	private By lnkCopy = MobileBy.xpath("//*[contains(@resource-id,'lyCopy')]");
 	private By lnkShare = MobileBy.xpath("//*[contains(@resource-id,'imgShare')]");
 	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']");
+	private By btnAllow = MobileBy.xpath("//*[contains(@text,'ALLOW')]");
 
 	public void verifylblUserName(String userName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "userName", userName);
@@ -62,5 +63,9 @@ public class ScanMePage extends MobileFunctions {
 
 	public SetAmountComponent setAmountComponent() {
 		return new SetAmountComponent();
+	}
+
+	public void clickAllow() {
+		click(btnAllow, "Allow");
 	}
 }
