@@ -845,8 +845,8 @@ public class TokenAccountTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
-			Thread.sleep(2000);
+			 tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			//Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
@@ -907,7 +907,8 @@ public class TokenAccountTest {
 					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
+			
+			 tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}

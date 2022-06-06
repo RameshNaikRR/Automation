@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -17,11 +18,11 @@ public class GiftCardPage extends MobileFunctions {
 
 	private By lblHeadind = MobileBy.xpath("//*[@text='Select Your Gift Card']");
 
-	private By lblPopularCard = MobileBy.xpath("//*[@text='Popular Brands']");
-	
+	private By lblPopularCard = MobileBy.xpath("//*[@text='Brands']");
+
 	private By lblWithdrawHeading = MobileBy.xpath("//*[@text='Withdraw Gift Card']");
 
-	private By imgAmazon = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[1]");
+	private By imgAmazon = MobileBy.xpath("//*[contains(@resource-id,'imgBrand')]");
 	private By imgVisa = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[2]");
 
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'amountET')]");
@@ -46,10 +47,10 @@ public class GiftCardPage extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
+
 	public void verifyWithdrawGiftCard(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawHeading, "Withdraw Gift Card", expHeading);
 	}
-
 
 	public void verifyDescription(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Description", expHeading);
@@ -88,19 +89,31 @@ public class GiftCardPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String firstName) {
+		click(txtFirstName, "First Name");
 		enterText(txtFirstName, firstName, "First Name");
+		DriverFactory.getDriver().hideKeyboard();
+		
 	}
 
 	public void fillLastName(String lastName) {
+		click(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name");
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillEmail(String email) {
+		scrollDownToElement(txtEmail, "Email");
 		enterText(txtEmail, email, "Email");
+		click(txtEmail, "Email");
+		new CommonFunctions().clickTab();
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillAmount(String amount) {
+		click(txtAmount, "Amount");
 		enterText(txtAmount, amount, "Amount");
+		scrollDownToElement(txtLastName, "Last Name");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void clickPurchase() {
@@ -116,7 +129,7 @@ public class GiftCardPage extends MobileFunctions {
 	}
 
 	public void fillSearchBox(String userName) {
-		enterText(txtSearchBox, "userName", userName);
+		enterText(txtSearchBox, userName, "User Name");
 
 	}
 
@@ -127,8 +140,9 @@ public class GiftCardPage extends MobileFunctions {
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}
+
 	public OrderPreviewPopup orderPreviewPopup() {
-		return new OrderPreviewPopup(); 
+		return new OrderPreviewPopup();
 	}
 
 }
