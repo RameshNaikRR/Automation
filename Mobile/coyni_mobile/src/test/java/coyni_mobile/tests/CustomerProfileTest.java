@@ -895,9 +895,49 @@ public class CustomerProfileTest {
 		}
 	}
 
+	public void testAddCardWithExsistingCards(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCVVorCVC(data.get("cvvOrCVC"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine1(data.get("addressLine1"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine2(data.get("addreddLine2"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickAddCard();
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.preAuthorizationPage().fillAmount(data.get("amount"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.preAuthorizationPage().clickVerify();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.preAuthorizationPage().allDonePage().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this " + e);
+		}
+	}
+
 //	@Test
 //	@Parameters({ "strParams" })
-	public void testAddCard(String strParams, String card) {
+	public void testAddCardWithNoCards(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
@@ -942,13 +982,14 @@ public class CustomerProfileTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+//	@Test
+//	@Parameters({ "strParams" })
 	public void testAddDebitCard(String strParams) {
+
 		tokenAccountPage.clickProfile();
 		customerProfilePage.clickPaymentMethods();
 		customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-		testAddCard(strParams, "debit");
+		testAddCardWithNoCards(strParams, "debit");
 	}
 
 	@Test
@@ -957,7 +998,7 @@ public class CustomerProfileTest {
 		tokenAccountPage.clickProfile();
 		customerProfilePage.clickPaymentMethods();
 		customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-		testAddCard(strParams, "credit");
+		testAddCardWithNoCards(strParams, "credit");
 	}
 
 	@Test

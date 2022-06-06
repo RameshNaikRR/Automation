@@ -22,7 +22,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
 	private By headingAddExternalBankAccount = MobileBy.xpath("//*[contains(@text,'Add External Bank Account')]");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
 	private By selectBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-2')]");
@@ -42,13 +42,13 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
-		boolean NextButton = verifyElementDisplayed(btnNext, "Next");
-		if (NextButton) {
-			click(btnNext, "Click Next");
-		} else {
-			scrollDownToElement(btnNext, "Next");
-			click(btnNext, "Next");
-		}
+//		boolean NextButton = verifyElementDisplayed(btnNext, "Next");
+//		if (NextButton) {
+//			click(btnNext, "Click Next");
+//		} else {
+		scrollDownToElement(btnNext, "Next");
+		click(btnNext, "Next");
+//		}
 
 	}
 

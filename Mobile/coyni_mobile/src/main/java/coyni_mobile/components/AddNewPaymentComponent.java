@@ -13,7 +13,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
 	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
 	private By btnDebitCard = MobileBy
-			.xpath("//*[contains(@resource-id,'imgDCardArrow')]");
+			.xpath("//*[@text='Debit Card']");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'imgCCardArrowC')]");
 
 	public void verifyHeading(String expHeading) {

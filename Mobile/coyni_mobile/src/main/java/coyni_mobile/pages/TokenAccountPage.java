@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
@@ -46,11 +47,11 @@ public class TokenAccountPage extends MobileFunctions {
 //			}
 //		}
 		// scrollDownToElement(btnViewMore, "View More");
-		
+
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
-			touch.press(PointOption.point(720, 2000)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-					.moveTo(PointOption.point(720, 1350)).release().perform();
+			touch.press(PointOption.point(540, 1020)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(540, 400)).release().perform();
 		}
 //		Dimension size = DriverFactory.getDriver().manage().window().getSize();
 //		ExtentTestManager.setInfoMessageInReport("Size" + size);

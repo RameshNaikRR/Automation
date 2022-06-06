@@ -631,6 +631,7 @@ public class TokenAccountTest {
 	public void testBuyTokenBankWithOutPayments(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
 			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().clickExternalBankAcount();
@@ -845,8 +846,8 @@ public class TokenAccountTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			 tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
-			//Thread.sleep(2000);
+			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
+			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
@@ -907,8 +908,7 @@ public class TokenAccountTest {
 					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
-			
-			 tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
+			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
@@ -1115,7 +1115,7 @@ public class TokenAccountTest {
 //			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
 //			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 //					.withdrawToUSDInstantPayPopup().verifyAddInstantPayHeading(data.get("instantPayHeading"));
-			customerProfileTest.testAddCard(strParams, "debit");
+			customerProfileTest.testAddCardWithNoCards(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDInstantPayAddDebitCardWithNoCards  failed due to exception " + e);
@@ -1134,8 +1134,10 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickOnAddNewPaymentMethod();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().verify();
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickOnDebitCard();
-			customerProfileTest.testAddDebitCard("debit");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+//			customerProfileTest.testAddDebitCard("debit");
+			customerProfileTest.testAddCardWithExsistingCards(strParams);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDInstantPayAddDebitCardWithCards  failed due to exception " + e);
@@ -1282,10 +1284,10 @@ public class TokenAccountTest {
 	}
 
 	@Test
-	//@Parameters({ "strParams" })
+	// @Parameters({ "strParams" })
 	public void testWithdrawToUSDViaAddExternalBank() {
 		try {
-		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
@@ -1371,28 +1373,6 @@ public class TokenAccountTest {
 			ExtentTestManager
 					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
 
-		}
-	}
-	@Test
-	@Parameters({"strParams"})
-	public void testFilter(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			tokenAccountPage.clickViewMore();
-		    tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-			tokenAccountPage.transactionPage().clickFilter();
-		    tokenAccountPage.transactionPage().filterPopup().selectFilter(data.get("filterType"));
-    	    tokenAccountPage.transactionPage().filterPopup().fillFromAmount(data.get("fromAmount"));
-		    tokenAccountPage.transactionPage().filterPopup().fillToAmount(data.get("toAmount"));
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickCalendar();
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectFromDate(data.get("fromDate"));
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectToDate(data.get("toDate"));
-		    Thread.sleep(3000);
-//		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickDone();
-//		    tokenAccountPage.transactionPage().filterPopup().clickApplyFilter();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
 }
