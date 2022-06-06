@@ -1373,4 +1373,26 @@ public class TokenAccountTest {
 
 		}
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testFilter(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			tokenAccountPage.clickViewMore();
+		    tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			tokenAccountPage.transactionPage().clickFilter();
+		    tokenAccountPage.transactionPage().filterPopup().selectFilter(data.get("filterType"));
+    	    tokenAccountPage.transactionPage().filterPopup().fillFromAmount(data.get("fromAmount"));
+		    tokenAccountPage.transactionPage().filterPopup().fillToAmount(data.get("toAmount"));
+		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickCalendar();
+		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectFromDate(data.get("fromDate"));
+		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectToDate(data.get("toDate"));
+		    Thread.sleep(3000);
+//		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickDone();
+//		    tokenAccountPage.transactionPage().filterPopup().clickApplyFilter();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
 }
