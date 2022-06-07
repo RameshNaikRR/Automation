@@ -995,30 +995,137 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyAgreementsView();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
-					.getAgreements(data.get("getAgreements"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyMerchantAgreements(data.get("merchantAg"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickMerchantAgreement();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickDownloadPDF();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyDownloadPDFlnk();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickDownloadPDF();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickLinkAgreements();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickiconDownload();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyVersionMerchant();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickiconDownload();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyPrivacyPolicy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickPrivacyPolicy();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickDownloadPDF();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickDownloadPDF();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickLinkAgreements();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickiconDownload();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyVersionPrivacyPolicy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickiconDownload();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyTermsOfService();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickTermsOfServices();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickDownloadPDF();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage()
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickDownloadPDF();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickLinkAgreements();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsPage().clickiconDownload();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.verifyVersionTermsOfService();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickiconDownload();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings Agreements failed due to Exception " + e);
 		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsNoTeamMember(String strParams) {
+
+		homePage.sideBarMenuComponent().clickBusinessSettings();
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyTeamHeading();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifySearch(data.get("search"));
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconSearch();
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickFilter();
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyRecords();
 
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsAddTeamMember(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickAddTeamMember();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyFirstName(data.get("firstName"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyLastName(data.get("lastName"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyEmail(data.get("email"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyPhone(data.get("phone"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.clickAddRole();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().verifyHeading(data.get("customHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().verifyRoleName(data.get("roleName"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().clickAdd();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.addCustomRolePopup().navigationComponent().clickClose();
+
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyTokenWalletAccess();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyTransferToken();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyBuyToken();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyWithdrawToken();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyEcosystemActivity();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyExportedFiles();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickSave();
+			Thread.sleep(2000);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.saveChangePopUp().verifyHeading(data.get("expHeading"));
+
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.saveChangePopUp().clickYes();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsTeamFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyActive();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyPending();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyExpired();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyClearAll();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+		}
+	}
 }

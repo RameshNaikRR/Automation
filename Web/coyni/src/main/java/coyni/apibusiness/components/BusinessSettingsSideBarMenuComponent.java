@@ -2,6 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.api.business.popups.AddNewPaymentMethodPopup;
 import coyni.apibusiness.pages.AgreementsPage;
 import coyni.apibusiness.pages.PreferencesPage;
 import coyni.uitilities.CommonFunctions;
@@ -167,7 +168,15 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 		return new PreferencesPage();
 	}
 
-	public AgreementsPage agreementsPage() {
-		return new AgreementsPage();
+	public AgreementsComponent agreementsComponent() {
+		return new AgreementsComponent();
+	}
+
+	public TeamComponent teamComponent() {
+		return new TeamComponent();
+	}
+
+	public AddTeamMemberComponent addTeamMemberComponent() {
+		return new AddTeamMemberComponent();
 	}
 }

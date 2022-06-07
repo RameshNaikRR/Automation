@@ -8,9 +8,10 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AgreementsPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("(//span[text()='Agreements'])[2]");
-	private By lnkDownload = By.xpath("//span[text()='Download PDF']");
-	private By lnkAgreements = By.xpath("//span[@aria-hidden=\"true\"]");
-	private By iconDownload = By.xpath("(//div[@data-tip='Download'])[1]");
+
+	private By lblMerchantAgreements = By.xpath("//span[text()='Merchant Agreement']");
+	private By lblPrivacyPolicy = By.xpath("//span[text()='Privacy Policy']");
+	private By lblTermsOfService = By.xpath("//span[text()='Terms of Service']");
 
 	public By getAgreements(String Agreements) {
 		return By.cssSelector(String.format(
@@ -22,24 +23,24 @@ public class AgreementsPage extends BrowserFunctions {
 		Thread.sleep(3000);
 	}
 
+	public void verifyMerchantAgreement(String expHeading) {
+		new CommonFunctions().elementView(lblMerchantAgreements, expHeading);
+	}
+
+	public void verifyPrivacyPolicy(String expHeading) {
+		new CommonFunctions().elementView(lblPrivacyPolicy, expHeading);
+	}
+
+	public void verifyTermsOfService(String expHeading) {
+		new CommonFunctions().elementView(lblTermsOfService, expHeading);
+	}
+
 	public void clickPrivacyPolicy() {
 		click(getAgreements("3"), "Privacy Policy");
 	}
 
 	public void clickTermsOfServices() {
 		click(getAgreements("4"), "Terms Of Services");
-	}
-
-	public void clickDownloadPDF() {
-		click(lnkDownload, "Download PDF");
-	}
-
-	public void clickLinkAgreements() {
-		click(lnkAgreements, "Agreements");
-	}
-
-	public void clickiconDownload() {
-		click(iconDownload, " Download Agreements");
 	}
 
 	public void verifyHeading(String Heading) {
