@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
-	private By btnToday = By.cssSelector("data[value='Today']");
+	private By btnToday = By.xpath("//div[contains(text(),'Today')]");
 
 	private By btnYesterday = By.cssSelector("data[value='Yesterday']");
 
@@ -19,10 +19,8 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnCustomDateRange = By.cssSelector("data[value='Custom-Date-Range']");
 
-	private By selectDropDown = By.xpath("//div[@class= 'icon-small-arrow text-xs mt-0.5 fill-current hover:text-cm3 text-cm3 FloatingDropDown_upArrow__1K2Pa false']");
-
-	// private By selectDropDownforReceive =
-	// By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");
+	private By selectDropDown = By.xpath(
+			"//div[@class='icon-small-arrow text-xs fill-current hover:text-cm3 mt-0.5 false FloatingDropDown_downArrow__3pCtF false']");
 
 	public void clickOnToday() {
 		click(selectDropDown, "Click Select DropDOwn");

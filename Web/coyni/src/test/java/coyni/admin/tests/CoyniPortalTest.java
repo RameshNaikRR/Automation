@@ -87,10 +87,10 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickTokenAccount();
+			// homePage.sideBarComponent().clickTokenAccount();
 			homePage.sideBarComponent().tokenAccountPage().verifyTokenAccountActivityView(data.get("heading"));
-			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+//			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
+//			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnToday();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
 			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
@@ -117,6 +117,7 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountActivity Failed due to Exception " + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })

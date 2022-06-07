@@ -15,6 +15,7 @@ import coyni.admin.popups.WithdrawToSignetPreviewPopup;
 import coyni.customer.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenAccountPage extends BrowserFunctions {
 
@@ -24,9 +25,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	private By lblTokenAccountActivity = By.xpath("//span[text()='Token Account Activity (CYN)']");
 
-	private By lblPayOutsReceived = By.xpath("//span[text()='Payouts Received']");
+	private By lblPayOutsReceived = By.xpath("//span[.='Payouts Received']/../following-sibling::*[1]/span");
 
-	private By lblSignetWithdraw = By.xpath("//span[text()='Signet Withdraws']");
+	private By lblSignetWithdraw = By.xpath("//span[.='Signet Withdraws']/../following-sibling::*[1]/span");
 
 	private By lnkWithdrawToSignet = By.xpath("//span[text()='Withdraw To Signet']");
 
@@ -52,16 +53,18 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelTextContains(lblTokenAccountActivity, "Token Account Activity", expHeading);
 	}
 
-	public String getPayOutsReceived() {
-		return getText(lblPayOutsReceived, "Pay Outs");
+	public void getPayOutsReceived() {
+		String Amount = getText(lblPayOutsReceived, "");
+		ExtentTestManager.setInfoMessageInReport("Payouts amount is " + Amount);
 	}
 
 	public void clickWithdrawToSignet() {
 		click(lnkWithdrawToSignet, "WithdrawToSignet");
 	}
 
-	public String getSignetWithdraw() {
-		return getText(lblSignetWithdraw, "Signet Withdraw");
+	public void getSignetWithdraw() {
+		String Amount = getText(lblSignetWithdraw, "");
+		ExtentTestManager.setInfoMessageInReport("Signet Withdraw amount is " + Amount);
 	}
 
 	public void clickFilter() {
