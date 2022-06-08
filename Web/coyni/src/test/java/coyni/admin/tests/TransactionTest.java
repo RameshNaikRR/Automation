@@ -58,36 +58,12 @@ public class TransactionTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionToday(String strParams) throws InterruptedException {
+	public void testExportSelectedTransactionToday(String strParams)  {
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickTransactions();

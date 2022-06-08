@@ -15,27 +15,67 @@ public class AccountingTest {
 	HomePage homePage;
 	SideBarComponent sideBarComponent;
 	AccountTableComponent accountTableComponent;
+	CoyniPortalTest coyniPortalTest;
 
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
 		sideBarComponent = new SideBarComponent();
 		accountTableComponent = new AccountTableComponent();
+		coyniPortalTest = new CoyniPortalTest();
 	}
 
-	@Test
-	@Parameters("strParams")
-	public void testTotalWithdrawWithBankAccounts(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickAccounting();
-			homePage.sideBarComponent().clickTotalWithdraw();
-			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
-			homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+	public void totalWithdraw(String strParams) throws InterruptedException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		Thread.sleep(2000);
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
+		homePage.sideBarComponent().accountTableComponent().verifyColumnView();
+		homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
+		homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
+		// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
+		homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
+		homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
+//		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
+		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
+		//Thread.sleep(2000);
+		homePage.sideBarComponent().accountTableComponent().clickSearch();
+		homePage.sideBarComponent().accountTableComponent().clickDetails();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getFailedCount();
+		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
+//		Thread.sleep(2000);
+//		homePage.sideBarComponent().accountTableComponent().batchIDComponent().paginationAndEntriesComponent()
+//		.verifyPageNumbersWithCount();
+
+	}
+
+	public void testFilters(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.fillWithdrawID(data.get("withdrawId"));
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.fillReferenceId(data.get("refrenceId"));
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.fillUserId(data.get("userId"));
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.fillNameOnAccount(data.get("nameOnBank"));
+	}
+
+	public void testExport(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
+				.verifyExport(data.get("heading"));
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickExportButton();
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
+				.verifyExportPrepared(data.get("exportPrepared"));
+		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickClose();
+
 	}
 
 	@Test
@@ -44,13 +84,67 @@ public class AccountingTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
+			Thread.sleep(2000);
 			homePage.sideBarComponent().clickTotalWithdraw();
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
+
+	@Test
+	@Parameters("strParams")
+	public void testTotalWithdrawWithBankAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+//	@Test
+//	@Parameters("strParams")
+//	public void testTotalWithdrawWithBankAccountsWithExports(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			homePage.sideBarComponent().clickAccounting();
+//			homePage.sideBarComponent().clickTotalWithdraw();
+//			totalWithdraw(strParams);
+//			coyniPortalTest.testExportSelectedTransactionToday(strParams);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
+
+//	@Test
+//	@Parameters("strParams")
+//	public void testTotalWithdrawWithBankAccountsWithFilters(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			homePage.sideBarComponent().clickAccounting();
+//			homePage.sideBarComponent().clickTotalWithdraw();
+//			totalWithdraw(strParams);
+//			coyniPortalTest.testFilters(strParams);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
 
 	@Test
 	@Parameters("strParams")
@@ -61,6 +155,10 @@ public class AccountingTest {
 			homePage.sideBarComponent().clickTotalWithdraw();
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickInstantPay();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
@@ -75,77 +173,82 @@ public class AccountingTest {
 			homePage.sideBarComponent().clickTotalWithdraw();
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickGiftCard();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+
+			totalWithdraw(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
 
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAccountingTest(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			homePage.sideBarComponent().verifyCursorAction();
+//			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+//			homePage.sideBarComponent().clickAccounting();
+//			homePage.sideBarComponent().clickTotalWithdraw();
+//			homePage.sideBarComponent().clickTotalDeposits();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAccountingTest Failed due to Exception " + e);
+//		}
+//	}
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testAccountingTest(String strParams) {
+	public void testTotalDepositsBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickAccounting();
-			homePage.sideBarComponent().clickTotalWithdraw();
+//			homePage.sideBarComponent().verifyTotalDepositsView();
+			Thread.sleep(1000);
 			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAccountingTest Failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	public void testTotalDepositsBankAccount() {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(null);
-			homePage.sideBarComponent().clickAccounting();
-			homePage.sideBarComponent().verifyTotalDepositsView();
-			homePage.sideBarComponent().clickTotalDeposits();
-			homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchIdView();
-			homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
-			homePage.sideBarComponent().accountTableComponent().verifyButtonSearchView();
-			homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
-			homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
-			homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
-			homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
-			homePage.sideBarComponent().accountTableComponent().clickdrpdwnBatchId();
-			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));
-			
-			
-			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposits failed due to Exception" + e);
 		}
 	}
 
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "strParams" })
 	public void testTotalDepositSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
-			homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
-			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));	
-			} catch (Exception e) {
+			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Total Deposit Signet Account failed due to Exception " + e);
 		}
 	}
 
-	
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "strParams" })
 	public void testTotalDepositCreditandDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
-			homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
-			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tableColumns"));
-            
+			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("withdraw"));
+			homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
+			totalWithdraw(strParams);
+			testFilters(strParams);
+			testExport(strParams);
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test Total Deposit Credit and Debit Card failed due to Exception " + e);
@@ -203,7 +306,7 @@ public class AccountingTest {
 	}
 
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "String strParams" })
 	public void testTotalDepositsFilterClearFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -254,84 +357,86 @@ public class AccountingTest {
 		}
 
 	}
-	
+
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "String strParams" })
 	public void testTotalDepositsCreditandDebitCardExports(String strParams) {
 		try {
-	   Map<String, String> data = Runner.getKeywordParameters(strParams);
-	   homePage.sideBarComponent().clickAccounting();
-		homePage.sideBarComponent().clickTotalDeposits();
-		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
-		homePage.sideBarComponent().accountTableComponent().clickSearch();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batch Id"));
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
 //		homePage.sideBarComponent().accountTableComponent().verifylblInprogressView();
 //		homePage.sideBarComponent().accountTableComponent().verifylblPaidView();
 //		homePage.sideBarComponent().accountTableComponent().verifylblFailedView();
 //		homePage.sideBarComponent().accountTableComponent().verifylblTotalCountView();
-		homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tableLabels"));
-		homePage.sideBarComponent().exportComponent().clickExport();
-		homePage.sideBarComponent().exportComponent().VerifylblExportHdgView();
-		homePage.sideBarComponent().exportComponent().clickExportDrpdwn();
-		homePage.sideBarComponent().exportComponent().clicklblCustom();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnDepositIdView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnUserIdView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnFeeView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnFirst6digitsView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnStatusView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnUserTypeView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnRecievedAmountView();
-		homePage.sideBarComponent().exportComponent().verifydrpdwnLast4digitsView();
-		homePage.sideBarComponent().exportComponent().clickExportButton();
-		}catch(Exception e){
-			ExtentTestManager.setFailMessageInReport("test Total Deposits Credit and Debit Card filters failed due to Exception " + e);
+			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tableLabels"));
+			homePage.sideBarComponent().exportComponent().clickExport();
+			homePage.sideBarComponent().exportComponent().VerifylblExportHdgView();
+			homePage.sideBarComponent().exportComponent().clickExportDrpdwn();
+			homePage.sideBarComponent().exportComponent().clicklblCustom();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnDepositIdView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnUserIdView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnFeeView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnFirst6digitsView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnStatusView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnUserTypeView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnRecievedAmountView();
+			homePage.sideBarComponent().exportComponent().verifydrpdwnLast4digitsView();
+			homePage.sideBarComponent().exportComponent().clickExportButton();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Total Deposits Credit and Debit Card filters failed due to Exception " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "String strParams" })
 	public void testTotalDepositsView(String strParams) {
-		try { 
-		  Map<String, String> data = Runner.getKeywordParameters(strParams);
-		   homePage.sideBarComponent().clickAccounting();
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().verifyTotalDepositsView();
 			homePage.sideBarComponent().clickTotalDeposits();
-			if(data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
+			if (data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
 				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
 				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
-				
-			}else if(data.get("paymentMethod").equalsIgnoreCase("cards")) {
+
+			} else if (data.get("paymentMethod").equalsIgnoreCase("cards")) {
 				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
 				homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
 			}
-			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));	
+			homePage.sideBarComponent().accountTableComponent().verifyTableLabels(data.get("tablecolumns"));
 			homePage.sideBarComponent().accountTableComponent().clickDropDownId();
-			if(data.get("id").equalsIgnoreCase("Batch ID")) {
+			if (data.get("id").equalsIgnoreCase("Batch ID")) {
 				homePage.sideBarComponent().accountTableComponent().clickdrpdwnBatchId();
-			}else if(data.get("id").equalsIgnoreCase("Reference ID")) {
+			} else if (data.get("id").equalsIgnoreCase("Reference ID")) {
 				homePage.sideBarComponent().accountTableComponent().clickdrpdwnRefferenceId();
-			}else{
+			} else {
 				homePage.sideBarComponent().accountTableComponent().clickdrpdwnDepositId();
 			}
 			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("value"));
 			homePage.sideBarComponent().accountTableComponent().clickSearch();
 			homePage.sideBarComponent().accountTableComponent().getRowElements(data.get("columns"));
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test total deposits View failed due to Exception " + e);
-		}  
+		}
 	}
-	
+
 	@Test
-	@Parameters({"String strParams"})
+	@Parameters({ "String strParams" })
 	public void testTotalDepositsDetailsView(String strParams) {
 		try {
-		   Map<String, String> data = Runner.getKeywordParameters(strParams);
-		   homePage.sideBarComponent().clickAccounting();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
-			if(data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
+			if (data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
 				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
 				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
-				
-			}else if(data.get("paymentMethod").equalsIgnoreCase("cards")) {
+
+			} else if (data.get("paymentMethod").equalsIgnoreCase("cards")) {
 				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
 				homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
 			}
@@ -341,9 +446,10 @@ public class AccountingTest {
 			homePage.sideBarComponent().batchIDComponent().getTotalAccount();
 			homePage.sideBarComponent().batchIDComponent().getPaidCount();
 			homePage.sideBarComponent().batchIDComponent().getFailedCount();
-		   
-		}catch(Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Total deposits detailed view is failed due to Exception "+ e);
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Total deposits detailed view is failed due to Exception " + e);
 		}
 	}
 

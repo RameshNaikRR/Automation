@@ -21,6 +21,21 @@ public class ExportComponent extends BrowserFunctions {
 	private By btnExport = By.xpath("//button[text()='Export']");
 	private By lblCustom = By.xpath("//div[text()='Custom']");
 	private By ExportButton = By.xpath("//div[@class='export-modal__button-row']//button[text()='Export']");
+	
+	
+	
+	private By lblHeadingExport = By.xpath("//h2[text()='Your Export is Being Prepared']");
+	
+	private By btnClose = By.xpath("//button[text()='Close']");
+	
+	public void clickClose()
+	{
+		click(btnClose, "Close");
+	}
+	public void verifyExportPrepared(String expHeading) {
+		new CommonFunctions().verifyLabelTextContains(lblHeadingExport, "Export Heading", expHeading);
+	}
+	
     public void clickExportButton() {
     	click(ExportButton, "ExportButton");
     }

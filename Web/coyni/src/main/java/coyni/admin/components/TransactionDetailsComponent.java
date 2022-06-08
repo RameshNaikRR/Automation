@@ -8,7 +8,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionDetailsComponent extends BrowserFunctions {
 
-	private By lblHeadingTransactionDetails = By.cssSelector(".text ");
+	private By lblHeadingTransactionDetails = By.cssSelector(".text");
 
 	private By lblLedgerInformation = By.xpath("//span[text()='Ledger Information']");
 
@@ -113,7 +113,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public void getTransactionSubType() {
 		ExtentTestManager.setInfoMessageInReport(
-				"Transaction SubType is " + getText(getLabelItem("Transaction SubType"), "Transaction SubType"));
+				"Transaction SubType is " + getText(getLabelItem("Transaction Sub-type"), "Transaction SubType"));
 	}
 
 	public void getCreatedDate() {

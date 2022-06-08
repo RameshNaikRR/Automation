@@ -19,7 +19,8 @@ public class FilterComponent extends BrowserFunctions {
 	private By txtReferenceId = By.xpath("//input[@id='Reference ID']");
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	// private By lnkClaerAll = By.xpath("");
-	private By lblEmployeeName = By.xpath("//label[text()='Employee Name']");
+	private By lblEmployeeName = By.xpath("//label[contains(text(),'Withdraw ID')]/following-sibling::*//input "); // label[text()='Employee
+																													// Name']
 	private By drpdwn = By.xpath("div[class*='selected_option']");
 	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
@@ -45,6 +46,11 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblInProgress = By
 			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 
+	public void fillWithdrawID(String id) {
+		enterText(getTextFieldElements("Deposit ID"), id, "Deposit Id");
+		// enterText(lblEmployeeName, id, id);
+	}
+
 	public void verifyDate(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblDate, "Heading is", expHeading);
 	}
@@ -69,7 +75,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public By getTextFieldElements(String elementId) {
-		return By.cssSelector(String.format("#'%s'", elementId));
+		return By.xpath(String.format("//input[@id='%s']", elementId));
 
 	}
 
@@ -95,11 +101,11 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void viewFilters() {
 		new CommonFunctions().elementView(lblDate, "Date");
-	//	new CommonFunctions().elementView(lblTransactionType, "Transaction Type");
+		// new CommonFunctions().elementView(lblTransactionType, "Transaction Type");
 		new CommonFunctions().elementView(lblTransactionAmount, "Transaction Amount");
-	//	new CommonFunctions().elementView(lblReferenceId, "Reference ID");
+		// new CommonFunctions().elementView(lblReferenceId, "Reference ID");
 		new CommonFunctions().elementView(lblTransactionStatus, "Transaction Status");
-	//	new CommonFunctions().elementView(lblEmployeeName, "Date");
+		// new CommonFunctions().elementView(lblEmployeeName, "Date");
 	}
 
 	public void verifyTransactionType(String expHeading) {

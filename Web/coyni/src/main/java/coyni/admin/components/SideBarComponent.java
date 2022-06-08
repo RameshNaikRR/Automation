@@ -122,12 +122,13 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTotalWithdraw() {
-		clickAccounting();
+		//clickAccounting();
 		click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
+	//	click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
 	}
 
 	public void clickTotalDeposits() {
-		clickAccounting();
+		//clickAccounting();
 		click(getSubMenuItems("Accounting", "Total Deposits"), "Total Deposits");
 	}
 
