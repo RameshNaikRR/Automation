@@ -26,65 +26,32 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By imgUser = MobileBy.xpath("");
 	private By lblSettings = MobileBy.xpath("//*[contains(@resource-id,'userSettingsTV')]");
 	private By lnkUserDetails = MobileBy.xpath("//*[contains(@resource-id,'business_UserDetailsLL')]");
-	private By lblMerchantSettings = MobileBy.xpath("//*[contains(@resource-id,'settingTV')]");
 	private By lnkCompanyInformation = MobileBy.xpath("//*[contains(@resource-id,'companyInformationLL')]");
 	private By lnkDBAInformation = MobileBy.xpath("//*[contains(@resource-id,'DBAInformationLL')]");
-	private By lnkBeneficialOwners = MobileBy.xpath("//*[contains(@resource-id,'beneficialOwnersLL')]");
 	private By lnkTeam = MobileBy.xpath("//*[contains(@resource-id,'teamLL')]");
 	private By lnkPaymentMethods = MobileBy.xpath("//*[contains(@resource-id,'paymentMethodsLL')]");
 	private By lnkPreferences = MobileBy.xpath("//*[contains(@resource-id,'PreferencesLL')]");
 	private By lnkFees = MobileBy.xpath("//*[contains(@resource-id,'feesLL')]");
-	private By lblAccount = MobileBy.xpath("");
 	private By lnkAccountLimits = MobileBy.xpath("//*[contains(@resource-id,'cpAccountLimitsLL')]");
 	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
-	private By lblSecurity = MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'businessResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'b_tvBMSetting')]");
 	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
-	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]|//*[contains(@resource-id,'Logout')]");
-
-	// text
-	private By btnScan = MobileBy.xpath("//*[@text='Scan']");
-	private By btnReceivePayment = MobileBy.xpath("//*[@text='Receive Payment']");
-	private By btnBuyToken = MobileBy.xpath("//*[@text='Buy Tokens']");//
-	private By btnWithdrawToUSD = MobileBy.xpath("//*[@text='Withdraw Tokens']");//
-	
+	private By btnLogOut = MobileBy.xpath(
+			"//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]|//*[contains(@resource-id,'Logout')]");
 	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
 	private By lblAccId = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format(
 				"//*[contains(@resource-id,'com.greenbox.coyni:id/profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
 
-	public void viewScan() {
-		new CommonFunctions().elementView(btnScan, "View Scan");
-	}
-
-	public void clickScan() {
-		click(btnScan, "Scan");
-	}
-
 	public void clickTogggle() {
 		scrollDownToElement(btnFaceIDSetting, "FaceID Setting");
 		click(btnToggle, "Toggle");
-	}
-
-	public void viewReceivePayment() {
-		new CommonFunctions().elementView(btnReceivePayment, "Receive");
-	}
-
-	public void clickReceivePayment() {
-		click(btnReceivePayment, "Pay Request");
-	}
-
-	public void viewBuyToken() {
-		new CommonFunctions().elementView(btnBuyToken, "Buy Token");
-	}
-
-	public void viewWithdrawnToUSD() {
-		new CommonFunctions().elementView(btnWithdrawToUSD, "Withdrawn To USD");
 	}
 
 	public void verifyResetPinCodeView() {
@@ -95,24 +62,6 @@ public class MerchantProfilePage extends MobileFunctions {
 	public void clickImg() {
 		click(imgUser, "Click Image");
 	}
-
-//	private void minimizePopup() {
-//		if (DriverFactory.getDriver().findElement(lblUserName).isDisplayed()) {
-//			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
-//		} else {
-//			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
-//		}
-//	}
-
-//	public void clickOutside() {
-//		new CommonFunctions().clickOutSideElement();
-//	}
-//
-//	public void minimizePopupBySwipeDown() {
-//		swipeOnElement(popUp, "popUp", SwipeDirection.DOWN);
-//		minimizePopup();
-//
-//	}
 
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);
@@ -183,58 +132,14 @@ public class MerchantProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(lblAccountStatus, "Account ID ");
 	}
 
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
-
-	public EnterYourPINComponent enterYourPINComponent() {
-		return new EnterYourPINComponent();
-	}
-
-	public AccountLimitsComponent accountLimitsComponent() {
-		return new AccountLimitsComponent();
-	}
-
-	public PreferencesComponent preferencesComponent() {
-		return new PreferencesComponent();
-	}
-
-	public AgreementComponent agreementComponent() {
-		return new AgreementComponent();
-	}
-//
-//	public TokenHomePopUp tokenHomePopUp() {
-//		return new TokenHomePopUp();
-//	}
-//
-//	public SetUpTouchIDPopup setUpTouchIDPopup() {
-//		return new SetUpTouchIDPopup();
-//	}
-
-	public FeesComponent feesComponent() {
-		return new FeesComponent();
-	}
-
-	public void verifySecurityHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblSecurity, "Security Heading", expHeading);
-	}
-
-	public void verifyUserSettingsHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblUserName, "User Settings", expHeading);
-	}
-
-	public void verifyMerchantSettingsHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblMerchantSettings, "Merchant’s Settings", expHeading);
-	}
-
 	public void getAccountDetails() {
 		String str = getText(lblHeading);
-		ExtentTestManager.setInfoMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport("User Name is : " + str);
 	}
 
 	public void getAccountId() {
 		String str = getText(lblAccId);
-		ExtentTestManager.setInfoMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(" User ID is :" + str);
 	}
 
 	public void clickUserDetails() {
@@ -304,19 +209,9 @@ public class MerchantProfilePage extends MobileFunctions {
 		click(btnLogOut, "Log Out");
 	}
 
-//	public void clickUserDetails() {
-//		click(btnUserDetails, "User Details");
-//	}
-//
-//	public void clickChangePassword() {
-//		scrollDownToElement(btnChangePassword, "Change Password");
-//		click(btnChangePassword, "Change Password");
-//	}
-//
-//	public void clickResetPinCode() {
-//		scrollDownToElement(btnResetPinCode, "Reset Pin Code");
-//		click(btnResetPinCode, "Reset Pin Code");
-//	}
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
 
 	public UserDetailsPage userDetailsPage() {
 		return new UserDetailsPage();
@@ -342,12 +237,32 @@ public class MerchantProfilePage extends MobileFunctions {
 		return new TeamPage();
 	}
 
-	public TokenMenuIconPopUp tokenMenuIconPopUp() {
-		return new TokenMenuIconPopUp();
-	}
-
 	public LandingPage landingPage() {
 		return new LandingPage();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
+	public EnterYourPINComponent enterYourPINComponent() {
+		return new EnterYourPINComponent();
+	}
+
+	public AccountLimitsComponent accountLimitsComponent() {
+		return new AccountLimitsComponent();
+	}
+
+	public PreferencesComponent preferencesComponent() {
+		return new PreferencesComponent();
+	}
+
+	public AgreementComponent agreementComponent() {
+		return new AgreementComponent();
+	}
+
+	public FeesComponent feesComponent() {
+		return new FeesComponent();
 	}
 
 }

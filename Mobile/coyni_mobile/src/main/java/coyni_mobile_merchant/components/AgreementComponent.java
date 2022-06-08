@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AgreementComponent extends MobileFunctions {
@@ -12,7 +13,7 @@ public class AgreementComponent extends MobileFunctions {
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
 	private By privacyPolicy = MobileBy.xpath("//*[contains(@text,'Privay Policy')]");
 	private By termsOfService = MobileBy.xpath("//*[contains(@text,'Terms of Service')]");
-	// private By lblv1 = MobileBy.xpath("(//*[contains(@text,'v1.0')])[3]");
+	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@text,'Merchant’s')]");
 	private By headingPastAgreements = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 
@@ -40,8 +41,15 @@ public class AgreementComponent extends MobileFunctions {
 //		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
 //	}
 
+	
+	public void verifyMerchantAgreementView() {
+		new CommonFunctions().elementView(lblMerchantAgreements, "Merchant Agreements");
+		ExtentTestManager.setInfoMessageInReport("Merchant Agreements : " + getText(lblMerchantAgreements));
+	}
+
 	public void verifyPrivacyPolicyView() {
 		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
+		ExtentTestManager.setInfoMessageInReport("Privacy Policy : " + getText(privacyPolicy));
 	}
 //
 //	public void clickPrivacyPolicy() {
@@ -50,6 +58,7 @@ public class AgreementComponent extends MobileFunctions {
 
 	public void verifyTermsOfServiceView() {
 		new CommonFunctions().elementView(termsOfService, "Terms of Service");
+		ExtentTestManager.setInfoMessageInReport("Terms of service : " + getText(termsOfService));
 	}
 
 //	public void clickTermsOfService() {

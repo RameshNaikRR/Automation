@@ -38,17 +38,18 @@ public class MerchantAccountTest {
 	public void testScanCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickHome();
+			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickFlashLight();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
-			businessTokenAccountPage.clickHome();
+			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
 			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto(data.get("label"));
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage()
+					.verifySelectPhoto(data.get("label"));
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnCancel();
 
@@ -63,7 +64,7 @@ public class MerchantAccountTest {
 	public void testReceivePaymentView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickHome();
+			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
@@ -78,6 +79,7 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getRequestedAmount();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSaveAlbum();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyQrCode();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClearAmount();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getReceiptentAddress();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickCopy();
@@ -94,7 +96,7 @@ public class MerchantAccountTest {
 			businessTokenAccountPage.getUserName();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testReceivePayment  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testReceivePaymentView  failed due to exception " + e);
 		}
 
 	}
@@ -104,7 +106,7 @@ public class MerchantAccountTest {
 	public void testReceivePaymentWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickHome();
+			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
@@ -125,7 +127,78 @@ public class MerchantAccountTest {
 					.verifyAmountPageHeading(data.get("amountHeading"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testReceivePayment  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testReceivePaymentWithInvalidData  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.verifyPageHeading(data.get("buyTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.verifyPageDescription(data.get("buyTokenDescription"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.getPaymentMethodDetails();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.getLimitDescription();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.fillAmount(data.get("amount"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.clickConvertor();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.getAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.clickConvertor();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.getAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.getExchangeRate();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.clickBuyToken();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().verifyPageHeading(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getCurrency();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getPurchaseAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getProcessingFee();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().getTotal();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().swipeSlideToConfirm();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getPageHeading();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getCurrency();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getPageDescription();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getReferenceID();
+//			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+//					.orderPreviewPopup().transactionSucessFailurePendingComponent().viewLearnMore();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
 
 	}

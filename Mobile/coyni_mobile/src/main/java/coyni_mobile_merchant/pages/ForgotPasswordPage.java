@@ -39,7 +39,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblHeading, "Email Verification Page");
 	}
 
-	public PhoneAndEmailVerificationComponent phoneEmailVerificationComponent() {
+	public PhoneAndEmailVerificationComponent phoneEmailAndVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
 	}
 

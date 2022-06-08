@@ -9,13 +9,19 @@ import io.appium.java_client.MobileBy;
 
 public class MerchantTransactionsPage extends MobileFunctions {
 
+	private By lblHeading = MobileBy.xpath("//*[contains(@text,'Merchant Transactions')]");
+
 	private By lblMerchantTansactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
 
 	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
 
 	private By filtersIcon = MobileBy.xpath("//*[contains(@resource-id,'filterIconIV')]");
 
-	private By closeIcon = MobileBy.xpath("//*[contains(@resource-id,'closeBtnIV')]");
+	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'closeBtnIV')]");
+	
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	}
 
 	public void clickMerchantTransctions() {
 		click(lblMerchantTansactions, "Merchant Transactions");
@@ -31,6 +37,9 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
+	}
+	public void clickClose() {
+		click(btnCloseIcon, "Close Icon");
 	}
 
 }

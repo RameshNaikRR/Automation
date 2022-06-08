@@ -37,8 +37,8 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	public void verifyRemoveMemberPopupHeading(String expRemoveMemberPopupHeading) {
 		new CommonFunctions().verifyLabelText(lblRemoveMemberPopupHeading, "Remove Member Popup Heading", expRemoveMemberPopupHeading);
 	}
-	public void verifyRemoveMemberPopupDescription(String expRemoveMemberPopupDescription) {
-		new CommonFunctions().verifyLabelText(lblRemoveMemberPopupDescription, "Remove Member Popup Description", expRemoveMemberPopupDescription);
+	public void getRemoveMemberPopupDescription() {
+	  ExtentTestManager.setInfoMessageInReport("Description : " + getText(lblRemoveMemberPopupDescription));
 	}
 	public void getTeamMemberName() {
 		String str = getText(lblTeamMemberName);

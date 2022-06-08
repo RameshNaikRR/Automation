@@ -18,6 +18,7 @@ public class ReceivePaymentPage extends MobileFunctions {
 	private By lblReceiptentAddress = MobileBy.xpath("//*[contains(@resource-id,'b_tvWalletAddress')]");
 	private By lnkCopy = MobileBy.xpath("//*[contains(@resource-id,'lyCopy')]");
 	// *[contains(@resource-id,'chooser_copy_button')]
+	private By lblQr = MobileBy.xpath("//*[contains(@resource-id,'b_idIVQrcode')]");
 	private By lnkShare = MobileBy.xpath("//*[contains(@resource-id,'lyShare')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'setAmountET')]");
 	private By lblAmountHeading = MobileBy.xpath("//*[contains(@text,'Set Amount')]");
@@ -48,7 +49,10 @@ public class ReceivePaymentPage extends MobileFunctions {
 	public void verifySharePageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblShareHeading, "Share Page Heading", expHeading);
 	}
-
+	public void verifyQrCode() {
+		new CommonFunctions().elementView(lblQr, "OR code");
+		ExtentTestManager.setInfoMessageInReport("QR code:" + getText(lblQr));
+	}
 	public void getUserLogoText() {
 		ExtentTestManager.setInfoMessageInReport("User Logo Text is :" + getText(lblUserLogo));
 	}

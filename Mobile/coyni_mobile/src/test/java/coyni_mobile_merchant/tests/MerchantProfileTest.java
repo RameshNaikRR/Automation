@@ -1535,7 +1535,6 @@ public class MerchantProfileTest {
 	public void testEditTeamMemberNavigationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -1615,7 +1614,6 @@ public class MerchantProfileTest {
 	public void testResendInvitationTeamMember(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -1679,8 +1677,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickbtnRemoveMember();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyRemoveMemberPopupHeading(data.get("popUpHeading"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage()
-					.verifyRemoveMemberPopupDescription(data.get("popUpDescription"));
+			merchantProfilePage.teamPage().teamMemberDetailsPage().getRemoveMemberPopupDescription();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickNo();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
@@ -1763,10 +1760,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickAgreements();
 			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
-//			merchantProfilePage.agreementComponent().verifyActiveAgreementsView();
-//			merchantProfilePage.agreementComponent().verifyPastAgreementsView();
-//			merchantProfilePage.agreementComponent().verifyActiveAgreementsHeading(data.get("ActiveHeading"));
-//			merchantProfilePage.agreementComponent().verifyPastAgreementsHeading(data.get("pastHeading"));
+			merchantProfilePage.agreementComponent().verifyPrivacyPolicyView();
+			merchantProfilePage.agreementComponent().verifyTermsOfServiceView();
+			merchantProfilePage.agreementComponent().verifyMerchantAgreementView();
 			merchantProfilePage.agreementComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();

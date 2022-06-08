@@ -141,8 +141,8 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		return new NavigationComponent();
 	}
 
-	public ErrorMessagePopup errorMessagePopup() {
-		return new ErrorMessagePopup();
+	public ErrorMessagePopupComponent errorMessagePopupComponent() {
+		return new ErrorMessagePopupComponent();
 	}
 
 	public FoundAccountPage foundAccountPage() {
