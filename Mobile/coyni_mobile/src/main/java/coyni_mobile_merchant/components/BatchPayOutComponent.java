@@ -22,22 +22,27 @@ public class BatchPayOutComponent extends MobileFunctions {
 	private By btnBatchNow = MobileBy.xpath("");
 
 	public void verifyLabelBatchPayOuts(String expHeading) {
+		scrollDownToElement(lblBatchPayOuts, "Batch PayOuts");
 		new CommonFunctions().verifyLabelText(lblBatchPayOuts, "Batch PayOuts", expHeading);
 	}
 
 	public void clickBatchNow() {
 		scrollDownToElement(btnBatchNow, "Batch Now");
-		click(btnBatchNow, "Batch Now");
-
+		if (verifyElementDisplayed(btnBatchNow, "Click Batch Now")) {
+			click(btnBatchNow, "Batch Now");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Batch Now is disabled");
+		}
 	}
 
 	public void clickFullPayOutHistory() {
-		scrollDownToElement(btnBatchNow, "Batch Now");
+		scrollDownToElement(lnkViewFullPayOutHistory, "Full Pay Out History");
 		click(lnkViewFullPayOutHistory, "Full PayOut History");
 
 	}
 
 	public void getNextPayOut() {
+		scrollDownToElement(lblNextPayOut, "Next PayOut");
 		ExtentTestManager.setInfoMessageInReport("Next PayOut " + getText(lblNextPayOut));
 	}
 

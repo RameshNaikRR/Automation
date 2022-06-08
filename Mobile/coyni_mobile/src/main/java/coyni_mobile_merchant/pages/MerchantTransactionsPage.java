@@ -11,16 +11,21 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[contains(@text,'Merchant Transactions')]");
 
-	private By lblMerchantTansactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
+	private By lblMerchantTansactions = MobileBy.xpath("//*[@text='Merchant Transactions']");
 
 	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
 
-	private By filtersIcon = MobileBy.xpath("//*[contains(@resource-id,'filterIconIV')]");
+	private By filtersIcon = MobileBy.xpath("//*[contains(@resource-id,'filtericonIV')]");
 
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'closeBtnIV')]");
-	
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	}
+
+	public void verifyLabelMerchanTransactions(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblMerchantTansactions, expHeading, "Merchant Transactions");
+
 	}
 
 	public void clickMerchantTransctions() {
@@ -31,13 +36,14 @@ public class MerchantTransactionsPage extends MobileFunctions {
 		new CommonFunctions().elementView(searchOption, "Search Option");
 	}
 
-	public void verifyFiltersIcon() {
-		new CommonFunctions().elementView(filtersIcon, "Filters Icon");
+	public void clickFilterIcon() {
+		click(filtersIcon, "Filter Icon");
 	}
 
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
 	}
+
 	public void clickClose() {
 		click(btnCloseIcon, "Close Icon");
 	}

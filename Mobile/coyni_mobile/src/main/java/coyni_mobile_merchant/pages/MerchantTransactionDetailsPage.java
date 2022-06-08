@@ -54,6 +54,11 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 		click(btnDashBoard, "DashBoard");
 	}
 
+	public void clickMerchantTransactions() {
+		scrollDownToElement(lnkViewMerchantTransactions, "Merchant Transactions");
+		click(lnkViewMerchantTransactions, "Merchant Transactions");
+	}
+
 	public void clickNotification() {
 		click(btnNotificationIcon, "Notification");
 	}
