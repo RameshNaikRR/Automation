@@ -49,11 +49,13 @@ public class TokenAccountPage extends MobileFunctions {
 		// scrollDownToElement(btnViewMore, "View More");
 
 		while (getElementList(btnViewMore, "View More").size() == 0) {
+			Dimension size = DriverFactory.getDriver().manage().window().getSize();
+			int x = size.getWidth();
+			int y = size.getHeight();
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
-			touch.press(PointOption.point(540, 1020)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-					.moveTo(PointOption.point(540, 400)).release().perform();
+			touch.press(PointOption.point(x/2, y/2)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(x/2, (int)(y * 0.2))).release().perform();
 		}
-//		Dimension size = DriverFactory.getDriver().manage().window().getSize();
 //		ExtentTestManager.setInfoMessageInReport("Size" + size);
 //		scrollDownToElement(btnViewMore, "View More");
 		click(btnViewMore, "View More");

@@ -31,6 +31,7 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
+		new CommonFunctions().clickTab();
 	}
 
 	public void enterMessage(String Message) {
@@ -82,8 +83,9 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		click(withdraw, "Withdraw");
 	}
 
-	public String getDailyLimit() {
-		return getText(lbldailyLimit);
+	public void getDailyLimit() {
+		String dailyLimit = getText(lbldailyLimit);
+		ExtentTestManager.setInfoMessageInReport(dailyLimit);
 
 	}
 

@@ -156,11 +156,9 @@ public class TokenAccountTest {
 			tokenAccountPage.notificationComponent().clickRequest();
 			tokenAccountPage.notificationComponent().clickCancel();
 			tokenAccountPage.notificationComponent().verifyCancelMessage(data.get("cancelMessage"));
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRequestCancel faield due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -177,9 +175,6 @@ public class TokenAccountTest {
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
-			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent().clickForgotPin();
-			tokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent().navigationComponent()
-					.clickBack();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 
@@ -1373,29 +1368,6 @@ public class TokenAccountTest {
 			ExtentTestManager
 					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
 
-		}
-	}
-	
-	@Test
-	@Parameters({"strParams"})
-	public void testFilter(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			tokenAccountPage.clickViewMore();
-		    tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-			tokenAccountPage.transactionPage().clickFilter();
-		    tokenAccountPage.transactionPage().filterPopup().selectFilter(data.get("filterType"));
-    	    tokenAccountPage.transactionPage().filterPopup().fillFromAmount(data.get("fromAmount"));
-		    tokenAccountPage.transactionPage().filterPopup().fillToAmount(data.get("toAmount"));
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickCalendar();
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectFromDate(data.get("fromDate"));
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().selectToDate(data.get("toDate"));
-		    Thread.sleep(3000);
-		    tokenAccountPage.transactionPage().filterPopup().datePickerComponent().clickDone();
-		    tokenAccountPage.transactionPage().filterPopup().clickApplyFilter();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
 }

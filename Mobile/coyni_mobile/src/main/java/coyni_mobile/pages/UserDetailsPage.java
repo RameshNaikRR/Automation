@@ -28,6 +28,36 @@ public class UserDetailsPage extends MobileFunctions {
 
 	private By btnAlert = MobileBy.xpath("//*[contains(@resource-id,'allow_one_time_button')]");
 	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'allow_button')]");
+	private By lblCurrentEmailHeading = MobileBy.xpath("//*[@text='Current Email']");
+	private By lblCurrentEmail = MobileBy.xpath("//*[contains(@text,'.com')]");
+	private By btnChange = MobileBy.xpath("//*[@text='Change']");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'dialogCLoseLL')]/*[1]");
+	private By lblCurrentPhoneNumHeading = MobileBy.xpath("//*[contains(@text,'Current Phone')]");
+	private By lblCurrentPhoneNum = MobileBy.xpath("//*[contains(@resource-id,'contentTV')]");
+
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
+
+	public void verifyCurrentPhoneNumHeading(String PhoneHeading) {
+		new CommonFunctions().verifyLabelText(lblCurrentPhoneNumHeading, "PhoneHeading", PhoneHeading);
+	}
+
+	public void verifyCurrentPhoneNum(String PhoneNum) {
+		new CommonFunctions().verifyLabelText(lblCurrentPhoneNum, "PhoneNum", PhoneNum);
+	}
+
+	public void verifyCurrentEmailHeading(String Heading) {
+		new CommonFunctions().verifyLabelText(lblCurrentEmailHeading, "Heading", Heading);
+	}
+
+	public void verifyCurrentEmail(String email) {
+		new CommonFunctions().verifyLabelText(lblCurrentEmail, "email", email);
+	}
+
+	public void clickChange() {
+		click(btnChange, "Change buttton");
+	}
 
 	public void verifyPhoneNumberTitleView() {
 		new CommonFunctions().elementView(lblPhoneNumberTitle, "PhoneNumber Title");
@@ -114,6 +144,7 @@ public class UserDetailsPage extends MobileFunctions {
 	public EditUserImagePopup editUserImagePopup() {
 		return new EditUserImagePopup();
 	}
+
 	public CurrentEmailPage currentEmailPage() {
 		return new CurrentEmailPage();
 	}

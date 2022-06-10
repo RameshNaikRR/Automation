@@ -7,6 +7,8 @@ import coyni_mobile.components.FaceIDDisabledComponent;
 import coyni_mobile.components.FaceIDnotAvailableComponent;
 import coyni_mobile.components.ForgotPinComponent;
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.popups.CoyniInavlidEmailPopup;
+import coyni_mobile.popups.EmailOrPasswordIsIncorrectPopup;
 import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
@@ -194,4 +196,11 @@ public class LoginPage extends MobileFunctions {
 
 	}
 
+	public CoyniInavlidEmailPopup coyniInavlidEmailPopup() {
+		return new CoyniInavlidEmailPopup();
+	}
+
+	public EmailOrPasswordIsIncorrectPopup emailOrPasswordIsIncorrectPopup() {
+		return new EmailOrPasswordIsIncorrectPopup();
+	}
 }

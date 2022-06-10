@@ -2,6 +2,8 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
+import javax.xml.crypto.Data;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -161,8 +163,7 @@ public class LoginTest {
 				Thread.sleep(2000);
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
-//				loginPage.minimizePopupBySwipeDown();
-
+				// loginPage.minimizePopupBySwipeDown();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
@@ -183,9 +184,9 @@ public class LoginTest {
 //			loginPage.clickLogin();
 //			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 //			loginPage.enterYourPINComponent().clickForgotPin();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
-//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+////			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
+////			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
+////			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 //			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 ////			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 ////					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
@@ -427,7 +428,6 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			loginPage.retrieveEmailPage().clickOk();
 			loginPage.retrieveEmailPage().navigationComponent().clickBack();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().clickNext();
