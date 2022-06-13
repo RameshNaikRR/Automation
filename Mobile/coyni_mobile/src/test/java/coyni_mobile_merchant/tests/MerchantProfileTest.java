@@ -1807,6 +1807,25 @@ public class MerchantProfileTest {
 	}
 
 	@Test
+	@Parameters({ "strParams" })
+	public void testFaceIDSettings(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickTogggle();
+			merchantProfilePage.setUpTouchIDPopup().clickSetUpTouchID();
+			merchantProfilePage.setUpTouchIDPopup().verifyHeading(data.get("expHeading"));
+			merchantProfilePage.setUpTouchIDPopup().clickBackButton();
+			merchantProfilePage.clickTogggle();
+			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
+			merchantProfilePage.clickLogOut();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFaceIDSettings Failed due to exception " + e);
+		}
+	}
+
+	@Test
 	public void testLogOut() {
 		try {
 			businessTokenAccountPage.clickProfile();

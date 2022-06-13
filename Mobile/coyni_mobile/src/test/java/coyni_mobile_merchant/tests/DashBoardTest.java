@@ -12,6 +12,8 @@ import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
+import coyni_mobile_merchant.pages.LandingPage;
+import coyni_mobile_merchant.pages.LoginPage;
 import coyni_mobile_merchant.pages.MerchantProfilePage;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
@@ -24,6 +26,8 @@ public class DashBoardTest {
 	BatchPayOutComponent batchPayOutComponent;
 	EnterYourPINComponent enterYourPINComponent;
 	NavigationComponent navigationComponent;
+	LoginPage loginPage;
+	LandingPage landingPage;
 
 	@BeforeTest
 	public void init() {
@@ -31,6 +35,9 @@ public class DashBoardTest {
 		businessTokenAccountPage = new BusinessTokenAccountPage();
 		navigationComponent = new NavigationComponent();
 		batchPayOutComponent = new BatchPayOutComponent();
+		loginPage = new LoginPage();
+		landingPage = new LandingPage();
+
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -365,6 +372,183 @@ public class DashBoardTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveReleaseDetails Failed due to this Exception" + e);
 		}
+	}
+
+	@Test
+	public void testNotifications() {
+		try {
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().viewNotification();
+			businessTokenAccountPage.notificationComponent().countNotifications();
+			businessTokenAccountPage.notificationComponent().viewDots();
+			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().viewRequest();
+			businessTokenAccountPage.notificationComponent().clickRequest();
+			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().swipeNotificationLeft();
+			// tokenAccountPage.notificationComponent().verifyRead();
+			businessTokenAccountPage.notificationComponent().clickRead();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotifications faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginwithNewAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(data.get("email1"));
+			loginPage.fillPassword(data.get("password1"));
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().fillPin(data.get("pin1"));
+			Thread.sleep(2000);
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginwithNewAccount failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testNotificationPay(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().viewPay();
+			businessTokenAccountPage.notificationComponent().clickPay();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup()
+					.verifyHeading(data.get("heading"));
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.clickForgotPin();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent()
+					.navigationComponent().clickBack();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotificationPay faield due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testNotificationDeny(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().viewDeny();
+			businessTokenAccountPage.notificationComponent().viewPay();
+			businessTokenAccountPage.notificationComponent().clickDeny();
+			businessTokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotificationDeny faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestReminder(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().clickRequest();
+			businessTokenAccountPage.notificationComponent().clickRemainder();
+			businessTokenAccountPage.notificationComponent().verifyReminderMessage(data.get("reminderMessage"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRequestReminder faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestCancel(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().clickRequest();
+			businessTokenAccountPage.notificationComponent().clickCancel();
+			businessTokenAccountPage.notificationComponent().verifyCancelMessage(data.get("cancelMessage"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRequestCancel faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestPay(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().clickRequest();
+			businessTokenAccountPage.notificationComponent().clickPay();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup()
+					.verifyHeading(data.get("heading"));
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.clickForgotPin();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent()
+					.navigationComponent().clickBack();
+			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRequestPay faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRequestDeny(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().clickRequest();
+			businessTokenAccountPage.notificationComponent().clickDeny();
+			businessTokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRequestDeny faield due to exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testNotificationsDelete() {
+		try {
+			businessTokenAccountPage.clickNotifications();
+			Thread.sleep(2000);
+			businessTokenAccountPage.notificationComponent().viewDots();
+			businessTokenAccountPage.notificationComponent().swipeNotificationRight();
+			businessTokenAccountPage.notificationComponent().clickDelete();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
+		}
+
 	}
 
 }

@@ -9,6 +9,7 @@ import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.FeesComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PreferencesComponent;
+import coyni_mobile_merchant.popups.SetUpTouchIDPopup;
 import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -263,6 +264,10 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public FeesComponent feesComponent() {
 		return new FeesComponent();
+	}
+
+	public SetUpTouchIDPopup setUpTouchIDPopup() {
+		return new SetUpTouchIDPopup();
 	}
 
 }

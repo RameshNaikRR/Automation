@@ -5,14 +5,15 @@ import org.openqa.selenium.By;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.DaysDropDownComponent;
+import coyni_mobile_merchant.components.NotificationComponent;
 import coyni_mobile_merchant.components.ReserveBalanceComponent;
 import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
-import freemarker.core.ReturnInstruction.Return;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class BusinessTokenAccountPage extends MobileFunctions {
+
 	private By btnDashBoard = MobileBy.xpath("//*[contains(@resource-id,'dashboard_tab')]");
 	private By btnProfile = MobileBy.xpath("//*[contains(@resource-id,'tv_profile_text')]");
 	private By btnMenuIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_menu_tab')]");
@@ -20,10 +21,16 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnTransactions = MobileBy.xpath("//*[contains(@resource-id,'transactions_tab')]");
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'businessTrackerCloseIV')]");
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tv_user_name')]");
+	private By btnNotifications = MobileBy.xpath("");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
 		click(btnAccount, "Account");
+	}
+
+	public void clickNotifications() {
+		new CommonFunctions().elementView(btnNotifications, "Notifications");
+		click(btnNotifications, "Notifications");
 	}
 
 	public void clickMenuIcon() {
@@ -88,5 +95,9 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 
 	public DashBoardPage dashBoardPage() {
 		return new DashBoardPage();
+	}
+
+	public NotificationComponent notificationComponent() {
+		return new NotificationComponent();
 	}
 }
