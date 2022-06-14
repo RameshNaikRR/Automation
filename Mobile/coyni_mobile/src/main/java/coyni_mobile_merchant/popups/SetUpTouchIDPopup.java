@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class SetUpTouchIDPopup extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By heading = MobileBy.xpath("//*[contains(@text,'Choose screen lock')]");//
 
 	private By setUpTouchID = MobileBy.xpath("//*[contains(@resource-id,'enableCV')]");
 

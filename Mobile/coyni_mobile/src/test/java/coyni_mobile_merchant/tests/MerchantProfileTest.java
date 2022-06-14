@@ -1814,9 +1814,9 @@ public class MerchantProfileTest {
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickTogggle();
 			merchantProfilePage.setUpTouchIDPopup().clickSetUpTouchID();
-			merchantProfilePage.setUpTouchIDPopup().verifyHeading(data.get("expHeading"));
+			merchantProfilePage.setUpTouchIDPopup().verifyHeading(data.get("heading"));
 			merchantProfilePage.setUpTouchIDPopup().clickBackButton();
-			merchantProfilePage.clickTogggle();
+			// merchantProfilePage.clickTogggle();
 			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
 			merchantProfilePage.clickLogOut();
 
