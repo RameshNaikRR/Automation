@@ -179,4 +179,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public AddTeamMemberComponent addTeamMemberComponent() {
 		return new AddTeamMemberComponent();
 	}
+	public IPAddressComponent ipAddressComponent() {
+		return new IPAddressComponent();
+	}
 }
