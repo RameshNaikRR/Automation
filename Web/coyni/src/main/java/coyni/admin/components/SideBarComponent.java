@@ -3,6 +3,7 @@ package coyni.admin.components;
 import org.openqa.selenium.By;
 
 import coyni.admin.pages.BalanceReportsPage;
+import coyni.admin.pages.CommissionAccountPage;
 import coyni.admin.pages.FeatureControlPage;
 import coyni.admin.pages.FeeStructurePage;
 import coyni.admin.pages.TokenAccountPage;
@@ -122,13 +123,12 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTotalWithdraw() {
-		//clickAccounting();
+		clickAccounting();
 		click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
-	//	click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
 	}
 
 	public void clickTotalDeposits() {
-		//clickAccounting();
+		clickAccounting();
 		click(getSubMenuItems("Accounting", "Total Deposits"), "Total Deposits");
 	}
 
@@ -148,7 +148,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickFeeStructure() {
-		//clickSystemSettings();
+		// clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Fee Structure"), "Fee Structure");
 	}
 
@@ -163,7 +163,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickFeatureControls() {
-		//clickSystemSettings();
+		// clickSystemSettings();
 		click(getSubMenuItems("System Settings", "Feature Controls"), "Feature Controls");
 	}
 
@@ -189,6 +189,10 @@ public class SideBarComponent extends BrowserFunctions {
 		return new TokenAccountPage();
 	}
 
+	public CommissionAccountPage commissionAccountPage() {
+		return new CommissionAccountPage();
+	}
+
 	public ProfileComponent profileComponent() {
 		return new ProfileComponent();
 	}
@@ -196,6 +200,7 @@ public class SideBarComponent extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
+
 	public BatchIDComponent batchIDComponent() {
 		return new BatchIDComponent();
 	}
@@ -203,30 +208,33 @@ public class SideBarComponent extends BrowserFunctions {
 	public ExportComponent exportComponent() {
 		return new ExportComponent();
 	}
-	
+
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
 	}
+
 	public FeeStructurePage feeStructurePage() {
 		return new FeeStructurePage();
 	}
+
 	public ViewPersonalFeeStructurePage viewPersonalFeeStructurePage() {
 		return new ViewPersonalFeeStructurePage();
 	}
+
 	public ViewMerchantfeeStructurePage viewMerchantfeeStructurePage() {
 		return new ViewMerchantfeeStructurePage();
 	}
+
 	public FeatureControlPage featureControlPage() {
 		return new FeatureControlPage();
 	}
+
 	public BalanceReportsPage balanceReportsPage() {
 		return new BalanceReportsPage();
 	}
+
 	public ExportSelectedTransactions exportSelectedTransactions() {
 		return new ExportSelectedTransactions();
 	}
 
-
-
 }
-

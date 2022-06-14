@@ -14,6 +14,14 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		return By.xpath(String.format("//div[@class='DashboardMenu_menu__3PSTN']//span[text()='%s']", eleName));
 	}
 
+	// business setting
+	private By lblBusinessSetting = By.xpath("//span[text()='Business Settings']");
+
+	public void clickBusinessSettings() {
+		click(lblBusinessSetting, "Business Settings");
+		// click(getDashBoardItems("Business Settings"), "Business Settings");
+	}
+
 	private By BusinessApplicationArrow = By.xpath("//div[@class='items-center text-xs -ml-2 4xl:mr-2']");
 	private By BusinessApplicationTracker = By.xpath("//div[@class='flex mt-3 h-2.5 justify-around']");
 	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
@@ -51,10 +59,6 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		click(btnContinueApplication, "Continue Application");
 	}
 
-	public void clickBusinessSettings() {
-		click(getDashBoardItems("Business Settings"), "Business Settings");
-	}
-
 	public void clickGetHelp() {
 		click(getDashBoardItems("Get Help"), "Get Help");
 	}
@@ -87,9 +91,11 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
+
 	public ExportComponent exportComponent() {
 		return new ExportComponent();
 	}
+
 	public TokenWalletActivityComponent tokenWalletActivityComponent() {
 		return new TokenWalletActivityComponent();
 	}
