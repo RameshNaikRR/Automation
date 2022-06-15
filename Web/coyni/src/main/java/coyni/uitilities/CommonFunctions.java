@@ -182,6 +182,7 @@ public class CommonFunctions {
 
 	public void validateField(By ele, String eleName, String enterText) {
 		ExtentTestManager.setInfoMessageInReport("trying to enter " + enterText.length() + "characters in " + eleName);
+		DriverFactory.getDriver().findElement(ele).clear();//
 		objBrowserFunctions.enterText(ele, enterText, eleName);
 		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "")
 				.replace("-", "").replace("(", "").replace(")", "");
@@ -206,6 +207,7 @@ public class CommonFunctions {
 
 		By errorMsgs = By.cssSelector("span.text-crd5");
 		ExtentTestManager.setInfoMessageInReport("trying to enter " + enterText.length() + "characters  in " + eleName);
+		DriverFactory.getDriver().findElement(ele).clear();//
 		objBrowserFunctions.enterText(ele, enterText, eleName);
 		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "")
 				.replace("-", "").replace("(", "").replace(")", "");
@@ -245,6 +247,7 @@ public class CommonFunctions {
 	}
 
 	public void validateTextFeild(By ele, String eleName, String enterText) {
+		DriverFactory.getDriver().findElement(ele).clear();//
 		objBrowserFunctions.enterText(ele, enterText, eleName);
 //		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).trim();
 		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).trim().replace("/", "").replace("-", "")

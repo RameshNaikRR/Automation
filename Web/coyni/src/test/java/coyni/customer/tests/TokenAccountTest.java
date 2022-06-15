@@ -1172,6 +1172,7 @@ public class TokenAccountTest {
 	{
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 		//	tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickDebit();
@@ -1218,6 +1219,7 @@ public class TokenAccountTest {
 	{
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();		
 			tokenAccountPage.clickBuyTokens();
 	//		tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().clickCredit();
@@ -1668,6 +1670,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup()
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 			Thread.sleep(2000);

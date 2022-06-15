@@ -332,7 +332,9 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
 					.clickEdit(data.get("cardNumber"));
 			customerProfilePage.paymentMethodsComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().addCardComponent().fillCardExpiry(data.get("cardExpiry"));
+			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
 					.fillAddress1(data.get("address1"));
 			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.customer.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddCardComponent extends BrowserFunctions {
@@ -15,7 +16,7 @@ public class AddCardComponent extends BrowserFunctions {
 	private By txtCardExp = By.name("expiryDate");
 	private By txtCVVorCVC = By.name("cvv");
 	private By lblErrorMsg = By.cssSelector("span.text-crd5 ");
-	private By lblNewCreditCard = By.cssSelector(".Heading_heading1__18f6i.mb-10.text-center");
+	private By lblNewCreditCard = By.xpath("//h1[contains(text(),'Add New')]");
 
 	public void fillNameOnCard(String nameOnCard) {
 		enterText(txtNameOnCard, nameOnCard, "Name On Card");
@@ -26,6 +27,7 @@ public class AddCardComponent extends BrowserFunctions {
 	}
 
 	public void fillCardExpiry(String cardExpiry) {
+		DriverFactory.getDriver().findElement(txtCardExp).clear();
 		enterText(txtCardExp, cardExpiry, "Card Expiry");
 	}
 

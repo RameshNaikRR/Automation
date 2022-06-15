@@ -950,8 +950,8 @@ public class CustomerProfileTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickPreferences();
-			customerProfilePage.preferencesComponent().verifyPreferencesBackGroundColor(data.get("cssProp"),
-					data.get("expValue"), data.get("expColor"));
+			//customerProfilePage.preferencesComponent().verifyPreferencesBackGroundColor(data.get("cssProp"),
+				//	data.get("expValue"), data.get("expColor"));
 			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
 
 		} catch (Exception e) {
