@@ -1058,6 +1058,7 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickAddTeamMember();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyHeading(data.get("heading"));
@@ -1102,6 +1103,8 @@ public class BusinessProfileTest {
 
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.saveChangePopUp().clickYes();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.clickSendInvitation();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1114,6 +1117,7 @@ public class BusinessProfileTest {
 	public void testBusinessSettingsTeamFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyActive();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -1122,10 +1126,165 @@ public class BusinessProfileTest {
 					.filtersPage().verifyExpired();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyClearAll();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyApplyFilters();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().getNoRecordsFound();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyResetFilters();
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsTeamSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifySearch(data.get("searchingKey"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconSearch();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsTeamEdit(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyEditIcon();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickEdit();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings Team Edit  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsAPIKeys(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.clickGenerateApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyHeading(data.get("secretKey"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyDescription(data.get("description"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.clickGenerate();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup().clickEnd();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyPublicKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifySecretKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyInactiveSecretKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickCopy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyCopy();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsRevealKey(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.clickGenerateApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyHeading(data.get("secretKey"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyDescription(data.get("description"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.clickGenerate();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
+					.fillAuthyInput(data.get("pin"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsInvalidVerificationRevealKey(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.clickGenerateApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyHeading(data.get("secretKey"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyDescription(data.get("description"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.clickGenerate();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
+					.fillAuthyInput(data.get("pin"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsHideSecretKey(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.clickGenerateApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyHeading(data.get("secretKey"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.verifyDescription(data.get("description"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
+					.clickGenerate();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
+					.fillAuthyInput(data.get("pin"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.clickHideSecretKey();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsAPIKeyLogs(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyApiKeyView();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPIEvents();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
 		}
 	}
 }

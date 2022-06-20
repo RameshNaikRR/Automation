@@ -17,7 +17,7 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	private By lnkAddRole = By.xpath("//span[text()='Add Role']");
 	private By txtedit = By.xpath("//span[text()='Edit']");
 	private By txtCancel = By.xpath("//span[text()='Cancel']");
-	private By txtSave = By.xpath("//span[text()='Cancel']");
+	private By txtSave = By.xpath("//span[text()='Save']");
 
 	private By getUserPermissions(String permissions) {
 		return By.xpath(String.format("(//div[contains(@class,'react-toggle-track-check')])[%s]", permissions));

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TeamComponent extends BrowserFunctions {
 	private By lblTeam = By.xpath("(//span[text()='Team'])[2]");
@@ -13,6 +14,8 @@ public class TeamComponent extends BrowserFunctions {
 	private By iconSearch = By.xpath("//button[@type='submit']");
 	private By checkBox = By.xpath("//input[@type='checkbox']");
 	private By noRecordFound = By.xpath("//p[text()='No Records Found'])");
+	private By editIcon = By.xpath("//div[@data-tip='Edit']");
+	private By sendInvite = By.xpath("//button[@type='button']");
 
 	public void verifyTeamHeading() {
 		new CommonFunctions().elementView(lblTeam, "Team");
@@ -41,4 +44,22 @@ public class TeamComponent extends BrowserFunctions {
 	public void clickCheckBox() {
 		click(checkBox, "CheckBox");
 	}
+
+	public void clickEdit() {
+		click(editIcon, "Edit");
+	}
+
+	public void verifyEditIcon() {
+		new CommonFunctions().elementView(editIcon, "Edit");
+	}
+
+	public void clickSendInvitation() {
+		if (getElement(sendInvite, "Send Invitation").isEnabled()) {
+			click(sendInvite, "Send Invitation ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Send Invitation button is in disabled mode");
+		}
+
+	}
+
 }

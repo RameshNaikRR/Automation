@@ -2,8 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
-import coyni.api.business.popups.AddNewPaymentMethodPopup;
-import coyni.apibusiness.pages.AgreementsPage;
+import coyni.api.business.popups.SecretKeyPopup;
 import coyni.apibusiness.pages.PreferencesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -179,7 +178,13 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public AddTeamMemberComponent addTeamMemberComponent() {
 		return new AddTeamMemberComponent();
 	}
+
+	public APIKeyComponent apiKeyComponent() {
+		return new APIKeyComponent();
+	}
+
 	public IPAddressComponent ipAddressComponent() {
 		return new IPAddressComponent();
 	}
+
 }
