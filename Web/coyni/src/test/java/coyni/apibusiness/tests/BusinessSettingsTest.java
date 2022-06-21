@@ -1,6 +1,7 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -133,6 +134,70 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickYes();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Remove ip address  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsWebhook(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickWebhooks();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().verifyEndPointURL();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().verifyEndPointStatus();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().verifyEndPointStatus();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().verifyLastUpdated();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsEditWebhook(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickWebhooks();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickIcon();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyEditEndPointURL(data.get("edit"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyEditEndPoint(data.get("editEndPoint"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickSave();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().saveChangePopUp()
+					.verifyEndPointHeading(data.get("endPointHeading"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().saveChangePopUp().clickYes();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsCreateWebhook(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickWebhooks();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickCreate();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.verifyEndPointURL(data.get("textEndPoint"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+					.endPointDescription(data.get("description"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickCreate();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
 		}
 	}
 }

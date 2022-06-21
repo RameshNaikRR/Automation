@@ -187,4 +187,8 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 		return new IPAddressComponent();
 	}
 
+	public WebhookComponent webhookComponent() {
+		return new WebhookComponent();
+	}
+
 }
