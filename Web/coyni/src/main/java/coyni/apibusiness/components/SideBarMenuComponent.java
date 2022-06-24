@@ -3,6 +3,7 @@ package coyni.apibusiness.components;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.pages.BankAccountPage;
+import coyni.apibusiness.pages.GetHelpPage;
 import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
 import coyni.apibusiness.pages.TokenWalletPage;
 import coyni.uitilities.CommonFunctions;
@@ -98,6 +99,10 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public TokenWalletActivityComponent tokenWalletActivityComponent() {
 		return new TokenWalletActivityComponent();
+	}
+
+	public GetHelpPage getHelpPage() {
+		return new GetHelpPage();
 	}
 
 }
