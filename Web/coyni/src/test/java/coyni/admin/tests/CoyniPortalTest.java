@@ -511,6 +511,10 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("heading"));
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().fillSearch(data.get("search"));
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().clickPayOut();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutDate();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutAmount();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTransactionReference();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getToTokenAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCommissionAccount Failed due to Exception " + e);
@@ -519,7 +523,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionToday(String strParams) {
+	public void testCommissionExportSelectedPayOutToday(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -532,7 +536,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionYesterday(String strParams) {
+	public void testCommissionExportSelectedPayOutYesterday(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -545,7 +549,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionLastSevenDays(String strParams) {
+	public void testCommissionExportSelectedpayOutLastSevenDays(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -558,7 +562,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionLastMonth(String strParams) {
+	public void testCommissionExportSelectedPayOutLastMonth(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -571,7 +575,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionMonthToDate(String strParams) {
+	public void testCommissionExportSelectedPayOutMonthToDate(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -589,15 +593,9 @@ public class CoyniPortalTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickCommissionAccount();
+			homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
 			homePage.sideBarComponent().tokenAccountPage().transactionPage()
 					.verifyTransactionHeading(data.get("heading"));
-			ExtentTestManager.setInfoMessageInReport("Available balance is displayed as "
-					+ homePage.sideBarComponent().tokenAccountPage().getTotalAvailable());
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().getDateAndTime();
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().getType();
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().getDescription();
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().getAmount();
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().getStatus();
 			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
 					.verifyTableItemsCount(data.get("query"));
 			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
@@ -614,15 +612,23 @@ public class CoyniPortalTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
 	public void testCommissionAccountFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickCommissionAccount();
+			homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().viewFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().selectFilter(data.get("filterType"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("amount"));
+			// homePage.sideBarComponent().tokenAccountPage().filterComponent().selectType(data.get("referenceID"));
+			// homePage.sideBarComponent().tokenAccountPage().filterComponent().verifyEmployeeName(data.get("empName"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
 
-		// Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
-		testFilters(strParams);
-
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+		}
 	}
 
 	@Test
@@ -632,8 +638,74 @@ public class CoyniPortalTest {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
 		testResetFilters(strParams);
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCommissionExportSelectedTransactionToday(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
+				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+		testExportSelectedTransactions(strParams, "Today");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCommissionExportSelectedTransactionYesterday(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
+				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+		testExportSelectedTransactions(strParams, "Yesterday");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCommissionExportSelectedTransactionLastSevenDays(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
+				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+		testExportSelectedTransactions(strParams, "Last Seven Days");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCommissionExportSelectedTransactionLastMonth(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
+				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+		testExportSelectedTransactions(strParams, "Last Month");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCommissionExportSelectedTransactionMonthToDate(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarComponent().clickCoyniPortal();
+		homePage.sideBarComponent().clickCommissionAccount();
+		homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+		homePage.sideBarComponent().exportComponent().clickExport();
+		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
+				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
 }

@@ -15,7 +15,7 @@ public class PayOutsPage extends BrowserFunctions {
 
 	private By txtSearch = By.xpath("//input[@class='form-input  payOut_search_bar_gbox__zmdaq mb-2']");
 
-	private By payOut = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
+	private By payOut = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(1)");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -31,6 +31,10 @@ public class PayOutsPage extends BrowserFunctions {
 
 	public void clickPayOut() {
 		click(payOut, "Pay Out");
+	}
+
+	public PayOutIDPage payOutIDPage() {
+		return new PayOutIDPage();
 	}
 
 	public FilterComponent filterComponent() {
