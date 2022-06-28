@@ -3,6 +3,7 @@ package coyni.apibusiness.components;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.pages.BankAccountPage;
+import coyni.apibusiness.pages.ExportFilesPage;
 import coyni.apibusiness.pages.GetHelpPage;
 import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
 import coyni.apibusiness.pages.TokenWalletPage;
@@ -85,6 +86,10 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	}
 
+	public TransactionListComponent transactionListComponent() {
+		return new TransactionListComponent();
+	}
+
 	public TokenWalletPage tokenWalletPage() {
 		return new TokenWalletPage();
 	}
@@ -103,6 +108,14 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public GetHelpPage getHelpPage() {
 		return new GetHelpPage();
+	}
+
+	public EcoSystemActivityComponent ecoSystemActivityComponent() {
+		return new EcoSystemActivityComponent();
+	}
+
+	public ExportFilesPage exportfilesPage() {
+		return new ExportFilesPage();
 	}
 
 }
