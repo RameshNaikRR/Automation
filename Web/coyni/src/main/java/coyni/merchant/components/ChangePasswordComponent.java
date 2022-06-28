@@ -23,15 +23,15 @@ public class ChangePasswordComponent extends BrowserFunctions {
 //    private By msgValidation = By.cssSelector("");
 	private By iconValidation = By.className("check_password");
 	private By iconView = By.cssSelector(".icon-button");
-	
+
 	private By lblSuccessMsg = By.cssSelector("//h2[text()='Your Password Was Updated Successfully!']");
-	
+
 	public void verifyContaint(String expContent) {
 		new CommonFunctions().verifyLabelText(lblSuccessMsg, expContent, "Your Password Was Updated Successfully");
 	}
-	
+
 	private By lblContentChangePassword = By.cssSelector(".Paragraph_para_regular__2OHbq");
-	
+
 	public void verifyContent(String expContent) {
 		new CommonFunctions().verifyLabelText(lblContentChangePassword, "Change Password Content", expContent);
 	}
@@ -64,7 +64,7 @@ public class ChangePasswordComponent extends BrowserFunctions {
 	public void clickNewPassword() {
 		click(txtNewPassword, "Click");
 	}
-	
+
 	public void viewCurrentPassword() {
 		new CommonFunctions().elementView(txtCurrentPassword, "Current password");
 	}

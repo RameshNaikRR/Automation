@@ -5,6 +5,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AgreementsComponent extends BrowserFunctions {
+
 	private By lblHeading = By.xpath("(//span[text()='Agreements'])[2]");
 	private By lnkDownloadPDF = By.xpath("//span[.='Download PDF']");
 	private By lblVersion1 = By.xpath("(//span[text()='v1.0'])[1]");

@@ -5,16 +5,13 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
-	private By lblHeading = By.xpath("//h1[.='Business Settings']");
-	private By lblApplication = By.xpath("//span[.='Application ']");
-	private By lblIdInformation = By.cssSelector("div[class*='flex flex-col text-xs lg:flex-row text-cgy2 lg:gap-1']");
+
+	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
 	private By lblAccountStatus = By.xpath("//div[text()='Account Status:']");
 	private By lblActive = By.xpath("//div[.='Active']");
 
 	private By getSideMenuBarItems(String btnNumber) {
-		return By.cssSelector(String.format(
-				"div[class*='BusinessSettings_container']>div:nth-of-type(1)>div:nth-of-type(2)>a:nth-of-type(%s)",
-				btnNumber));
+		return By.xpath(String.format("//button[@type='button']/span[.='%s']", btnNumber));
 	}
 
 	private By getAccountInfo(String eleName) {
@@ -109,36 +106,12 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getSideMenuBarItems("9"), "Team");
 	}
 
-	public void clickIpAddresses() {
-		click(getSideMenuBarItems("10"), "Ip Addresses");
-	}
-
-	public void verifyIpAddressesView() {
-		new CommonFunctions().elementView(getSideMenuBarItems("10"), "Ip Addresses");
-	}
-
 	public void clickApiKey() {
-		click(getSideMenuBarItems("11"), "Api Key");
+		click(getSideMenuBarItems("10"), "Api Key");
 	}
 
 	public void verifyApiKeyView() {
-		new CommonFunctions().elementView(getSideMenuBarItems("11"), "Api Key");
-	}
-
-	public void clickWebhooks() {
-		click(getSideMenuBarItems("12"), "Webhooks");
-	}
-
-	public void verifyWebHooksView() {
-		new CommonFunctions().elementView(getSideMenuBarItems("12"), "Webhooks");
-	}
-
-	public void verifyHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Heading");
-	}
-
-	public void verifyApplication(String Application) {
-		new CommonFunctions().verifyLabelText(lblApplication, Application, "Application");
+		new CommonFunctions().elementView(getSideMenuBarItems("10"), "Api Key");
 	}
 
 	public PaymentMethodComponent paymentMethodComponent() {
