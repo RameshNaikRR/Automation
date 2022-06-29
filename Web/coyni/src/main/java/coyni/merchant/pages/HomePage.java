@@ -10,7 +10,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class HomePage extends BrowserFunctions {
 
 	private By lnkBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]");
-	private By lnkLogin = By.xpath("//span[contains(text(),'Log In')]");
+	private By lnkLogin = By.xpath("//button[contains(text(),'Log In')]");
 	private By lblCreateAccount = By.cssSelector(".disclaimer");
 	private By lblBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]/following-sibling::*[1]");
 	private By lblBusinessAccountTooltip = By.xpath("//*[@id='businessAccount']/text()");
@@ -24,7 +24,7 @@ public class HomePage extends BrowserFunctions {
 	private By lblConfirmPassword = By.xpath("//input[@id='confirm-password']/preceding-sibling::*[1]");
 	private By lblLogin = By.xpath("//span[@class='business-login__title']");
 
-	private By createHeading = By.xpath("//span[contains(text(),'Create a Business Account')]");
+	private By createHeading = By.xpath("//span[contains(text(),'Create a Merchant Account')]");
 	private By txtFirstName = By.id("first-name");
 	private By txtLastName = By.id("last-name");
 	private By txtEmail = By.id("email-address");
@@ -90,8 +90,12 @@ public class HomePage extends BrowserFunctions {
 		click(lnkLogin, "Click Login");
 	}
 
+	public void clickMerchantAccount() {
+		click(lblBusinessAccount, "Business Account");
+	}
+	
 	public void verifyCreateAccountPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(createHeading, "Create Personal account Heading", expHeading);
+		new CommonFunctions().verifyLabelText(createHeading, "Create Business account Heading", expHeading);
 	}
 
 	public void fillFirstName(String firstName) {

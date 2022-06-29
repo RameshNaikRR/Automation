@@ -18,6 +18,8 @@ import ilabs.api.reporting.ExtentTestManager;
 public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
+	
+	
 
 	@BeforeMethod
 	public void init() {
