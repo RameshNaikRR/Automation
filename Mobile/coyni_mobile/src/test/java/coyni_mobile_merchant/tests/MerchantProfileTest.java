@@ -242,7 +242,7 @@ public class MerchantProfileTest {
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent()
 					.verifyPhoneHeading(data.get("verifyNewPhoneNumberVerificationHeading"));
@@ -580,6 +580,10 @@ public class MerchantProfileTest {
 			merchantProfilePage.confirmPasswordPage().fillCurrentPassword(data.get("currentPassword"));
 			merchantProfilePage.confirmPasswordPage().clickEyeIcon();
 			merchantProfilePage.confirmPasswordPage().clickNext();
+			if (data.get("validateCurrentPassword").equalsIgnoreCase("no")) {
+				merchantProfilePage.confirmPasswordPage().errorMessagePopupComponent().verifyPopUpMsg(data.get("errPopUpMsg"));
+				merchantProfilePage.confirmPasswordPage().errorMessagePopupComponent().clickOk();	
+			}
 			if (data.get("validateCurrentPassword").equalsIgnoreCase("yes")) {
 				merchantProfilePage.confirmPasswordPage().changePasswordPage()
 						.verifyPageHeading(data.get("changePwdHeading"));
@@ -599,11 +603,10 @@ public class MerchantProfileTest {
 					merchantProfilePage.confirmPasswordPage().changePasswordPage().clickNewPassword();
 				}
 
-			}
 			Thread.sleep(1000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-
+			}
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordWithInvalidData failed due to Exception " + e);
@@ -1803,25 +1806,6 @@ public class MerchantProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeesWithNavigationOptions Failed due to this Exception" + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testFaceIDSettings(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.clickTogggle();
-			merchantProfilePage.setUpTouchIDPopup().clickSetUpTouchID();
-			merchantProfilePage.setUpTouchIDPopup().verifyHeading(data.get("heading"));
-			merchantProfilePage.setUpTouchIDPopup().clickBackButton();
-			// merchantProfilePage.clickTogggle();
-			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
-			merchantProfilePage.clickLogOut();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testFaceIDSettings Failed due to exception " + e);
 		}
 	}
 

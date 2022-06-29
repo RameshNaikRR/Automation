@@ -8,7 +8,7 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class TransactionSucessFailurePendingComponent extends MobileFunctions {
-	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Heading')]");
+	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]");
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Amount')]");
 	private By lblCurrency = MobileBy.xpath("//*[contains(@text,'CYN')]");
@@ -20,6 +20,10 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	public void getPageHeading() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Status : " + getText(lblPageHeading));
 	}
+
+//	public void TransactionStatus() {
+//		return getPageHeading();
+//	}
 
 	public void getPageDescription() {
 		ExtentTestManager.setInfoMessageInReport("Page Description : " + getText(lblPageDescription));
@@ -38,7 +42,8 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	}
 
 	public void getTransactionTimeDescription() {
-		ExtentTestManager.setInfoMessageInReport("lblTransactionTimeDescription  : " + getText(lblTransactionTimeDescription));
+		ExtentTestManager
+				.setInfoMessageInReport("lblTransactionTimeDescription  : " + getText(lblTransactionTimeDescription));
 	}
 
 //	public void viewLearnMore() {

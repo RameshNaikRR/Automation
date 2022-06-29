@@ -65,6 +65,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public void fillPhoneNumber(String PhoneNumber) {
 		click(txtPhoneNumber, "Phone Number");
 		enterText(txtPhoneNumber, PhoneNumber, "Phone Number");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillFirstName(String FirstName) {

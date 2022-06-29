@@ -14,8 +14,8 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	private By lblOrderPageHeading = MobileBy.xpath("//*[contains(@text,'Order Preview')]");
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Get')]");
-	private By lblCurrency = MobileBy.xpath("//*[contains(@resource-id,'CYN')]");
-	private By lblPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvAccount')]");
+//	private By lblCurrency = MobileBy.xpath("//*[contains(@resource-id,'CYN')]");
+	private By lblPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'Method')]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[contains(@resource-id,'tvPurchaseAmt')]");
 	private By lblProcessingFee = MobileBy.xpath("//*[contains(@resource-id,'tvProcessingFee')]");
 	private By lblTotal = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]");
@@ -30,10 +30,10 @@ public class OrderPreviewPopup extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount));
 	}
 
-	public void getCurrency() {
-		new CommonFunctions().elementView(lblCurrency, "Currency");
-		ExtentTestManager.setInfoMessageInReport("Currency in  : " + getText(lblCurrency));
-	}
+//	public void getCurrency() {
+//		new CommonFunctions().elementView(lblCurrency, "Currency");
+//		ExtentTestManager.setInfoMessageInReport("Currency in  : " + getText(lblCurrency));
+//	}
 
 	public void getPaymentMethod() {
 		new CommonFunctions().elementView(lblPaymentMethod, "Payment Method");

@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.ErrorMessagePopupComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -42,5 +43,10 @@ public class ConfirmPasswordPage extends MobileFunctions {
 
 	public ChangePasswordPage changePasswordPage() {
 		return new ChangePasswordPage();
+	} 
+	public ErrorMessagePopupComponent errorMessagePopupComponent() {
+		return new ErrorMessagePopupComponent();
+		
 	}
-}
+	}
+

@@ -14,7 +14,7 @@ public class TeamPage extends MobileFunctions {
 	private By lblTeamMemberNotFoundMsg = MobileBy.xpath("//*[contains(@resource-id,'no_team_member')]");
 	private By btnClearText = MobileBy.xpath("//*[contains(@resource-id,'clearTextLL')]");
 	private By btnAddTeamMember = MobileBy.xpath("//*[contains(@text,'Add Team')]");
-	private By btnSelectPendingStatusTeamMember = MobileBy.xpath("(//*[contains(@resource-id,'teamsCV')]//*[contains(@text,'Pending')])[1]");
+	private By btnSelectPendingStatusTeamMember = MobileBy.xpath("(//*[contains(@text,'Pending')])[1]");
 	private By btnSelectResendInvitationStatusTeamMember = MobileBy.xpath("(//*[contains(@resource-id,'rvTeam')]//*[contains(@resource-id,'teamLL')]//*[contains(@text,'Resend')])[1]|(//*[contains(@text,'Resend')])[1]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'bpbackBtn')]");
 

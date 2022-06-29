@@ -3,6 +3,8 @@ package coyni_mobile_merchant.popups;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.WithdrawMenuComponent;
+import coyni_mobile_merchant.pages.PaymentMethodsPage;
 import coyni_mobile_merchant.pages.ReceivePaymentPage;
 import coyni_mobile_merchant.pages.ScanPage;
 import coyni_mobile_merchant.pages.SelectPaymentmethod;
@@ -14,7 +16,7 @@ public class TokenMenuIconPopUp extends MobileFunctions {
 	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'llScan')]");
 	private By btnReceivePayment = MobileBy.xpath("//*[contains(@resource-id,'receive_PaymentLL')]");
 	private By btnBuyTokens = MobileBy.xpath("//*[contains(@resource-id,'buy_TokenLL')]");
-	private By btnWithdrawTokens = MobileBy.xpath("//*[contains(@resource-id,'widthdrawtoLL')]");
+	private By btnWithdrawTokens = MobileBy.xpath("//*[contains(@text,'Withdraw Tokens')]");
 
 	public void clickScan() {
 		click(btnScan, "Scan");
@@ -40,7 +42,7 @@ public class TokenMenuIconPopUp extends MobileFunctions {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
 	}
 
-	public void clickWithdrawToUSD() {
+	public void clickWithdrawTokens() {
 		click(btnWithdrawTokens, "Withdraw Tokens");
 	}
 
@@ -58,6 +60,14 @@ public class TokenMenuIconPopUp extends MobileFunctions {
 
 	public SelectPaymentmethod selectPaymentmethod() {
 		return new SelectPaymentmethod();
+	}
+
+	public WithdrawMenuComponent withdrawMenuComponent() {
+		return new WithdrawMenuComponent();
+	}
+
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
 	}
 
 }
