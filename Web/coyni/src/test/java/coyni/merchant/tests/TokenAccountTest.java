@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -74,7 +75,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-		//	tokenAccountPage.clickTokenAccount();
+			// tokenAccountPage.clickTokenAccount();
 			getHelpPage.clickGetHelp();
 			// getHelpPage.view();
 			Thread.sleep(3000);
@@ -356,35 +357,26 @@ public class TokenAccountTest {
 	public void testTokenAccountActivityDetails() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
-			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
-			tokenAccountPage.clickTokenAccount();
+			// tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
+			//tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
+			//tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
+			//tokenAccountPage.clickTokenAccount();
+			//tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+			//tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
+			//tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnToday();
-			
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
-
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnYesterday();
-		
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
-
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLast7Days();
-			
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
-
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnMonthToDate();
-			
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
-
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLastMonth();
-			
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 
@@ -426,8 +418,6 @@ public class TokenAccountTest {
 		}
 
 	}
-
-	
 
 	@Test
 

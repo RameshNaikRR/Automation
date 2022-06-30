@@ -20,6 +20,8 @@ public class AuthyComponent extends BrowserFunctions {
 
 	private By heading = By.xpath("//div[contains(text(),'Two-Step Authentication')]");
 
+	private By sms = By.xpath("//div[@class='text-xs text-left text-cgy3 group-hover:text-cgy4']");
+
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
@@ -39,6 +41,10 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
+	}
+
+	public void clickSms() {
+		click(sms, "SMS");
 	}
 
 	public void verifyHeading1(String expHeading) {
@@ -116,7 +122,7 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		//
 	}
-	
+
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 		return new SuccessFailurePopupCardComponent();
 	}

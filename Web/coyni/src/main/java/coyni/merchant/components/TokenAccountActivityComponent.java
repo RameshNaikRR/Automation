@@ -9,6 +9,7 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountActivityComponent extends BrowserFunctions {
+	
 
 	private By btnPayOutsReceived = By.xpath("(//button[text()='Details'])[1]");
 

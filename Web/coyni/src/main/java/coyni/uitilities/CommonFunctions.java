@@ -154,7 +154,7 @@ public class CommonFunctions {
 	}
 
 	public void validateFormErrorMessage(String expErrMsg) {
-		By errorMsgs = By.cssSelector("span.text-crd5");
+		By errorMsgs = By.cssSelector(".text-crd5");
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));

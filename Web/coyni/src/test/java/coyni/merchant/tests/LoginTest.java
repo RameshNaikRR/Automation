@@ -18,8 +18,6 @@ import ilabs.api.reporting.ExtentTestManager;
 public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
-	
-	
 
 	@BeforeMethod
 	public void init() {
@@ -46,7 +44,7 @@ public class LoginTest {
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
-		//	loginPage.authyComponent().validateAuthyField(data.get("code"));
+			// loginPage.authyComponent().validateAuthyField(data.get("code"));
 			loginPage.authyComponent().clickGoBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test view failed due to exception " + e);
@@ -80,8 +78,8 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			loginPage.authyComponent().fillInput(data.get("code"));
-					Thread.sleep(3000);
-			//loginPage.authyComponent().verifyMessage(data.get("message"));
+			Thread.sleep(3000);
+			// loginPage.authyComponent().verifyMessage(data.get("message"));
 			// loginPage.authyComponent().verifyLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
@@ -150,6 +148,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
+			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			String[] msg = data.get("errMessage").split(",");
 			for (int i = 0; i < msg.length; i++) {
@@ -178,6 +177,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
+			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
@@ -271,7 +271,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
 			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.clickNext();
-	        Thread.sleep(1000);
+			Thread.sleep(1000);
 			loginPage.forgotEmailComponent().validateFirstNameField(data.get("firstName"));
 			loginPage.clickTab();
 			loginPage.forgotEmailComponent().validateLastNameField(data.get("lastName"));
@@ -319,7 +319,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-		//	loginPage.forgotEmailComponent().clickforgot();
+			loginPage.forgotEmailComponent().clickTab();
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
@@ -357,7 +357,7 @@ public class LoginTest {
 			// loginPage.clickNext();
 			Thread.sleep(1000);
 			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
-		
+
 			loginPage.forgotEmailComponent().phoneVerificationComponent()
 					.verifyChooseHeading(data.get("chooseAccount"));
 			loginPage.forgotEmailComponent().phoneVerificationComponent().clickReturnToLogin();

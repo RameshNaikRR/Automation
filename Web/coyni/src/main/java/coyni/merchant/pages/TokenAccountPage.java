@@ -21,6 +21,7 @@ import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountPage extends BrowserFunctions {
 
+	
 	// added
 	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
 	private By lblTotalFunds = By.xpath("//span[contains(text(),'Total Available Funds')]");

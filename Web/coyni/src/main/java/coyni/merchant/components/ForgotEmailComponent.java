@@ -1,7 +1,10 @@
 package coyni.merchant.components;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 
+import coyni.customer.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -27,6 +30,10 @@ public class ForgotEmailComponent extends BrowserFunctions {
 
 	public void clickBackToLogin() {
 		click(lnkBackToLogin, "Back To Login");
+	}
+	
+	public void clickTab() throws AWTException {
+		new LoginPage().clickTab();
 	}
 
 	public void fillPhoneNumber(String PhoneNumber) {
