@@ -1,6 +1,8 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
+
+import coyni.merchant.popups.AddExternalBankAccountPopup;
 import coyni.merchant.popups.AddNewPaymentMethodPopup;
 import coyni.merchant.popups.PreAuthorizationPopup;
 import coyni.merchant.popups.RemovePaymentMethodPopup;
@@ -10,7 +12,9 @@ import ilabs.WebFramework.BrowserFunctions;
 public class PaymentMethodComponent extends BrowserFunctions {
 
 	private By btnAddNewPayment = By.xpath("//span[text()='Add New Payment Method']");
-	private By lblbankName = By.xpath("//p[contains(text(),'3456')]");
+	private By lblPaymentMethods = By.xpath("//span[contains(@class,'text-base text-cgy4')]");
+	private By lblAddNewPaymentMethods = By.xpath("//h1[text()='Add New Payment Method']");
+	private By lblBankName = By.xpath("//p[contains(text(),'Bank')]");
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
 
@@ -18,14 +22,27 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		click(btnAddNewPayment, "Add New Payment Method");
 	}
 
+	public void verifyPaymentMethodsview() {
+		new CommonFunctions().elementView(lblPaymentMethods, "PaymentMethods");
+	}
+
 	public void clickDeleteBank() {
-		moveToElement(lblbankName, "Move to Bank name");
+		moveToElement(lblBankName, "Move to Bank name");
 		click(btnDelete, "Click Delete");
+	}
+
+	public void verifyAddNewPaymentMethods(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblAddNewPaymentMethods, "Add New Payment Methods PopUp Heading",
+				expHeading);
 	}
 
 	public void clickEdit() {
 		moveToElement(btnEdit, "Edit Debit Card");
 		click(btnEdit, "Click Edit");
+	}
+
+	public void verifyBankName() {
+		moveToElement(lblBankName, "Bank Name");
 	}
 
 	public void clickDeleteSignet(String SignetAccountNumber) {
@@ -58,4 +75,17 @@ public class PaymentMethodComponent extends BrowserFunctions {
 	public PreAuthorizationPopup preAuthorizationPopup() {
 		return new PreAuthorizationPopup();
 	}
+
+	public AddExternalBankAccountPopup addExternalBankAccountPopup() {
+		return new AddExternalBankAccountPopup();
+	}
+
+	public AddCardComponent addCardComponent() {
+		return new AddCardComponent();
+	}
+
+	public CardsComponent cardsComponent() {
+		return new CardsComponent();
+	}
+
 }
