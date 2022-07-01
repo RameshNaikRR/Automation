@@ -35,6 +35,7 @@ public class HomeTest {
 			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			// homePage.clic();
 			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			homePage.clickMerchantAccount();
 			homePage.fillFirstName(data.get("firstName"));
 			homePage.fillLastName(data.get("lastName"));
 			homePage.fillPhoneNumber(data.get("phoneNumber"));
@@ -45,7 +46,7 @@ public class HomeTest {
 			homePage.clickCheckBox();
 			homePage.clickNext();
 			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			homePage.phoneVerificationComponent().verifyPhoneNumber();
 			homePage.phoneVerificationComponent().fillpin(data.get("code"));
 			homePage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyEmailHeading(data.get("emailHeading"));
@@ -74,7 +75,6 @@ public class HomeTest {
 
 	public void testcreateAccountWithInvalidData(String strParams) {
 		try {
-
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			homePage.clickMerchantAccount();
@@ -96,13 +96,8 @@ public class HomeTest {
 				// homePage.toastComponent().verifyToast(data.get("toastTitle"),
 				// data.get("toastMessage"));
 			}
-
-		}
-
-		catch (Exception e) {
-
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccountWithInvalidData Failed due to Exception " + e);
-
 		}
 	}
 
@@ -230,7 +225,7 @@ public class HomeTest {
 			homePage.fillConfirmPassword(data.get("confirmPassword"));
 			homePage.clickNext();
 			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			homePage.phoneVerificationComponent().verifyPhoneNumber();
 			String[] msg = data.get("errMessage").split(",");
 			for (int i = 0; i < msg.length; i++) {
 				homePage.phoneVerificationComponent().fillpin(data.get("code"));
@@ -291,7 +286,7 @@ public class HomeTest {
 	@Test
 	@Parameters({ "strParams" })
 
-	public void validateCreateAccountFields(String strParams) {
+	public void testValidateCreateAccountFields(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// homePage.verifyLandingPageHeading(data.get("landingHeading"));

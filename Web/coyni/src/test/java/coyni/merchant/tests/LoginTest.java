@@ -148,7 +148,6 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			String[] msg = data.get("errMessage").split(",");
 			for (int i = 0; i < msg.length; i++) {
@@ -177,7 +176,6 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
@@ -205,7 +203,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			loginPage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			loginPage.phoneVerificationComponent().verifyPhoneNumber();
 
 			loginPage.phoneVerificationComponent().clickResend();
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
@@ -234,7 +232,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			loginPage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			loginPage.phoneVerificationComponent().verifyPhoneNumber();
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(3000);
 				loginPage.phoneVerificationComponent().clickResend();
@@ -319,7 +317,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-			loginPage.forgotEmailComponent().clickTab();
+			// loginPage.forgotEmailComponent().clickforgot();
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
@@ -383,7 +381,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			loginPage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
+			loginPage.phoneVerificationComponent().verifyPhoneNumber();
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));

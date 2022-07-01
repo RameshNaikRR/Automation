@@ -24,7 +24,7 @@ public class HomePage extends BrowserFunctions {
 	private By lblConfirmPassword = By.xpath("//input[@id='confirm-password']/preceding-sibling::*[1]");
 	private By lblLogin = By.xpath("//span[@class='business-login__title']");
 
-	private By createHeading = By.xpath("//span[contains(text(),'Create a Merchant Account')]");
+	private By createHeading = By.xpath("//span[contains(.,'Create a')]");
 	private By txtFirstName = By.id("first-name");
 	private By txtLastName = By.id("last-name");
 	private By txtEmail = By.id("email-address");
@@ -95,7 +95,7 @@ public class HomePage extends BrowserFunctions {
 	}
 	
 	public void verifyCreateAccountPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(createHeading, "Create Business account Heading", expHeading);
+		new CommonFunctions().verifyLabelText(createHeading, "Heading is :", expHeading);
 	}
 
 	public void fillFirstName(String firstName) {
