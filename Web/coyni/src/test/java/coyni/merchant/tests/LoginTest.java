@@ -193,6 +193,7 @@ public class LoginTest {
 	public void testForgotEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
@@ -204,7 +205,6 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
 			loginPage.phoneVerificationComponent().verifyPhoneNumber();
-
 			loginPage.phoneVerificationComponent().clickResend();
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			// loginPage.phoneVerificationComponent().verifyChooseHeading(data.get("chooseAccount"));
@@ -316,8 +316,8 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.clickNext();
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
+			Thread.sleep(2000);
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-			// loginPage.forgotEmailComponent().clickforgot();
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
@@ -355,7 +355,6 @@ public class LoginTest {
 			// loginPage.clickNext();
 			Thread.sleep(1000);
 			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
-
 			loginPage.forgotEmailComponent().phoneVerificationComponent()
 					.verifyChooseHeading(data.get("chooseAccount"));
 			loginPage.forgotEmailComponent().phoneVerificationComponent().clickReturnToLogin();

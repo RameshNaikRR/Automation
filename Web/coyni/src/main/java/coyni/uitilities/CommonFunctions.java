@@ -1,5 +1,8 @@
 package coyni.uitilities;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -95,10 +98,10 @@ public class CommonFunctions {
 
 	public void verifyTextBoxBorderColor(String expcolour) {
 		By txterror = By.cssSelector("div[class *= 'FormField_error']");
-		 Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
 		ExtentTestManager.setInfoMessageInReport(value);
-		
+
 		if (value.equalsIgnoreCase(expcolour)) {
 			ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
 		} else {
@@ -141,15 +144,15 @@ public class CommonFunctions {
 		} else {
 			ExtentTestManager.setPassMessageInReport("Hand symbol is not displayed when mouse hover on " + eleName);
 		}
-		
+
 	}
+
 	public void verifyTextUnderLine(By ele, String eleName) {
 		String text = objBrowserFunctions.getElement(ele, eleName).getAttribute("class");
-		if(text.contains("underline")) {
-			ExtentTestManager.setPassMessageInReport(eleName +"text is underlined when mouse hover on it");
-		}
-		else {
-			ExtentTestManager.setFailMessageInReport(eleName +"text is not underlined when mouse hover on it");
+		if (text.contains("underline")) {
+			ExtentTestManager.setPassMessageInReport(eleName + "text is underlined when mouse hover on it");
+		} else {
+			ExtentTestManager.setFailMessageInReport(eleName + "text is not underlined when mouse hover on it");
 		}
 	}
 
@@ -284,41 +287,49 @@ public class CommonFunctions {
 			}
 		}
 	}
-	public void verifyPreviousData(By ele,String eleName,String expText) {
+
+	public void verifyPreviousData(By ele, String eleName, String expText) {
 		String actualText = objBrowserFunctions.getTextBoxValue(ele, eleName).trim().replace("/", "").replace("-", "")
 				.replace("(", "").replace(") ", "");
-		if(expText.equals(actualText)) {
-			ExtentTestManager.setPassMessageInReport(eleName+" has previous data");
-		}else {
-			ExtentTestManager.setWarningMessageInReport("Previous data is mismatched for "+eleName);
+		if (expText.equals(actualText)) {
+			ExtentTestManager.setPassMessageInReport(eleName + " has previous data");
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Previous data is mismatched for " + eleName);
 		}
 	}
+
 	public void Refresh() {
 		objBrowserFunctions.navigate(Navigation.REFRESH);
-		}
+	}
+
 	public void switchTodWindow() {
 		String mainWindow = DriverFactory.getDriver().getWindowHandle();
 		Set<String> windowHandles = DriverFactory.getDriver().getWindowHandles();
-			for (String string : windowHandles) {
-				if (!string.equals(mainWindow)) {
-					DriverFactory.getDriver().switchTo().window(string);
-					ExtentTestManager.setPassMessageInReport("Switched to Window");
-					break;
-				}
+		for (String string : windowHandles) {
+			if (!string.equals(mainWindow)) {
+				DriverFactory.getDriver().switchTo().window(string);
+				ExtentTestManager.setPassMessageInReport("Switched to Window");
+				break;
 			}
-
 		}
-	public void verifyPasswordMaskedView(By ele,String eleName) {
+
+	}
+
+	public void verifyPasswordMaskedView(By ele, String eleName) {
 		String attributeValue = objBrowserFunctions.getElement(ele, eleName).getAttribute("type");
 		if (attributeValue.contains("password")) {
 			ExtentTestManager.setInfoMessageInReport("Password Masked with black circles");
-			
-		}else {
+
+		} else {
 			ExtentTestManager.setInfoMessageInReport("Password Not masked with black circles");
-			
+
 		}
 	}
 
-	
-	
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+	}
+
 }

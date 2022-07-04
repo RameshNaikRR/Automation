@@ -16,7 +16,8 @@ public class ForgotEmailComponent extends BrowserFunctions {
 	private By txtPhoneNumber = By.id("Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtFirstName = By.xpath("//input[@name='first_name']");
-	private By txtLastName = By.name("//input[@name='last_name']");
+	private By txtLastName = By.id("Last-Name");
+//	private By errMsg = By.xpath("//span[contains(.,'Please enter your')]");
 
 	public void clickforgot() {
 		if (getElement(forgotHeading, "click forgot").isDisplayed()) {
@@ -31,7 +32,7 @@ public class ForgotEmailComponent extends BrowserFunctions {
 	public void clickBackToLogin() {
 		click(lnkBackToLogin, "Back To Login");
 	}
-	
+
 	public void clickTab() throws AWTException {
 		new LoginPage().clickTab();
 	}
@@ -87,12 +88,14 @@ public class ForgotEmailComponent extends BrowserFunctions {
 		}
 	}
 
-	public void fillFirstName(String firstName) {
+	public void fillFirstName(String firstName){
 		enterText(txtFirstName, firstName, "firstName");
+		click(txtLastName, "Last Name");
 	}
 
 	public void fillLastName(String lastName) {
 		enterText(txtLastName, lastName, "lastName");
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void verifyFirstName() {
@@ -102,6 +105,15 @@ public class ForgotEmailComponent extends BrowserFunctions {
 	public void verifyLastName() {
 		getTextBoxValue(txtLastName, "verify first Name");
 	}
+
+//	public void getErrorMsg() {
+//		String text = getText(errMsg, "");
+//		if (!text.isEmpty()) {
+//			ExtentTestManager.setPassMessageInReport("Error Message is displayed");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("Error Message is not displayed");
+//		}
+//	}
 
 	public PhoneVerificationComponent phoneVerificationComponent() {
 		return new PhoneVerificationComponent();
