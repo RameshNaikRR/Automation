@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -9,7 +10,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.apibusiness.components.SideBarMenuComponent;
+import coyni.merchant.components.SideBarMenuComponent;
 import coyni.merchant.pages.BankAccountPage;
 import coyni.merchant.pages.ProcessingFeesPage;
 import coyni.merchant.pages.RegistrationBeneficialOwnersPage;
@@ -17,7 +18,6 @@ import coyni.merchant.pages.RegistrationStartPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
-
 
 public class MerchantApplicationTest {
 	SideBarMenuComponent sideBarMenuComponent;

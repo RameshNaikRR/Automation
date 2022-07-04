@@ -21,7 +21,7 @@ public class TokenAccountTest {
 	GetHelpPage getHelpPage;
 	ExportfilesPage exportfilesPage;
 	TokenAccountActivityComponent tokenAccountActivityComponent;
-	 MerchantSettingsTest merchantSettingTest;
+	MerchantSettingsTest merchantSettingTest;
 
 	@BeforeTest
 	public void init() {
@@ -357,26 +357,31 @@ public class TokenAccountTest {
 	public void testTokenAccountActivityDetails() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
-			// tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
-			//tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-			//tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
-			//tokenAccountPage.clickTokenAccount();
-			//tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
-			//tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
-			//tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
+			// tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
+			// tokenAccountPage.clickTokenAccount();
+			// tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
+			// tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnToday();
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnYesterday();
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLast7Days();
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnMonthToDate();
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnLastMonth();
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 

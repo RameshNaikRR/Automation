@@ -9,7 +9,6 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountActivityComponent extends BrowserFunctions {
-	
 
 	private By btnPayOutsReceived = By.xpath("(//button[text()='Details'])[1]");
 
@@ -211,16 +210,19 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		}
 	}
 
-	public String getTransactionSentDetailsList() {
-		return getText(btnPayOutsReceived, "PayOuts Received List");
+	public void getPayOutsReceivedList() {
+		String text = getText(tokenPayOutsReceivedList, "PayOuts Received List");
+		ExtentTestManager.setInfoMessageInReport(" PayOutReceived Details " + text);
 	}
 
-	public String getTransactionPurchasedDetailsList() {
-		return getText(tokenPurchasedDetailsList, "Transaction Purchased List");
+	public void getTransactionPurchasedDetailsList() {
+		String text = getText(tokenPurchasedDetailsList, "Transaction Purchased List");
+		ExtentTestManager.setInfoMessageInReport("Purchased Transaction Details " + text);
 	}
 
-	public String getTransactionWithdrawDetailsList() {
-		return getText(tokenWithdrawDetailsList, "Transaction Withdraw List");
+	public void getTransactionWithdrawDetailsList() {
+		String text = getText(tokenWithdrawDetailsList, "Transaction Withdraw List");
+		ExtentTestManager.setInfoMessageInReport("Purchased Withdraw Details " + text);
 	}
 
 	public String getDefaultEntriesPerPage() {
@@ -242,6 +244,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 //	}
 
 	public void tokenAccountActivityDetails() {
+		new CommonFunctions().elementView(btnPayOutsReceived, "PayOutsReceived");
 		new CommonFunctions().elementView(btnTokensPurchasedDetails, "Tokens Purchased Details");
 		new CommonFunctions().elementView(btnTokensWithdrawn, "Tokens Withdrawn Details");
 	}
