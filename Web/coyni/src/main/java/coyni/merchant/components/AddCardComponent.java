@@ -2,6 +2,7 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 import coyni.merchant.pages.HomePage;
+import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -38,6 +39,7 @@ public class AddCardComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblErrorMsg, "Error Message", expErrorMsg);
 
 	}
+
 	public void verifyAddNewCreditCard(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblNewCreditCard, "Add New Credit Card PopUp Heading", expHeading);
 	}
@@ -45,10 +47,12 @@ public class AddCardComponent extends BrowserFunctions {
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
+
 	public void clickClose() {
 		new NavigationComponent().clickClose();
-	
+
 	}
+
 	public void clickBack() {
 		new NavigationComponent().clickBack();
 	}
@@ -64,32 +68,34 @@ public class AddCardComponent extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("invalid card type: " + cardType.toUpperCase());
 		}
 	}
-	
+
 	/**
 	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
 	 * spaces maxiPlus
 	 */
 	public void validateNameOnCard(String nameOnCard) {
-		new HomePage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
+		new SignupPage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
 	}
-	
+
 	public void validateCardNumber(String cardNumber) {
 		validateCardNumberAndCvv(txtCardNumber, "Card Number", cardNumber);
 	}
+
 	public void validateCardExpiry(String cardExpiry) {
-		new HomePage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
+		new SignupPage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
 	}
+
 	public void validateCVVorCVC(String cvvOrCVC) {
 		validateCardNumberAndCvv(txtCVVorCVC, "CVV or CVC", cvvOrCVC);
 	}
+
 	/**
-	 * Order -minChar, maxChar, specialChar, alphabets,
-	 * spaces ,maxiPlus
+	 * Order -minChar, maxChar, specialChar, alphabets, spaces ,maxiPlus
 	 */
-	public void validateCardNumberAndCvv(By ele,String eleName, String textField) {
+	public void validateCardNumberAndCvv(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
-		for(int i=0;i<2;i++) {
-		new CommonFunctions().validateField(ele, eleName, field[i]);
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
 		}
 		for (int i = 2; i < 5; i++) {
 			new CommonFunctions().validateTextFeild(ele, eleName, field[i]);

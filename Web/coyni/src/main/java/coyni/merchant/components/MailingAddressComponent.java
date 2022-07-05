@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
 
 import coyni.merchant.pages.HomePage;
+import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -100,19 +101,19 @@ public class MailingAddressComponent extends BrowserFunctions {
 	}
 
 	public void validateAddress1(String address1) {
-		new HomePage().validateNameField(txtAddress1, "Address1", address1);
+		new SignupPage().validateNameField(txtAddress1, "Address1", address1);
 	}
 
 	public void validateAddress2(String address2) {
-		new HomePage().validateNameField(txtAddress2, "Address2", address2);
+		new SignupPage().validateNameField(txtAddress2, "Address2", address2);
 	}
 
 	public void validateCity(String city) {
-		new HomePage().validateNameField(txtCity, "City", city);
+		new SignupPage().validateNameField(txtCity, "City", city);
 	}
 
 	public void validateZipCode(String zipCode) {
-		new HomePage().validateNameField(txtZipCode, "ZipCode", zipCode);
+		new SignupPage().validateNameField(txtZipCode, "ZipCode", zipCode);
 	}
 
 //	public void validateAddress1(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {

@@ -6,6 +6,7 @@ import coyni.merchant.components.AddCardComponent;
 import coyni.merchant.components.MailingAddressComponent;
 import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.pages.HomePage;
+import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -73,14 +74,14 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 	 * spaces maxiPlus
 	 */
 	public void validateNameOnCard(String nameOnCard) {
-		new HomePage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
+		new SignupPage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
 	}
 	
 	public void validateCardNumber(String cardNumber) {
 		validateCardNumberAndCvv(txtCardNumber, "Card Number", cardNumber);
 	}
 	public void validateCardExpiry(String cardExpiry) {
-		new HomePage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
+		new SignupPage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
 	}
 	public void validateCVVorCVC(String cvvOrCVC) {
 		validateCardNumberAndCvv(txtCVVorCVC, "CVV or CVC", cvvOrCVC);
