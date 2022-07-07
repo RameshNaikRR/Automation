@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.merchant.components.SideBarMenuComponent;
+import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.pages.BankAccountPage;
 import coyni.merchant.pages.ProcessingFeesPage;
 import coyni.merchant.pages.RegistrationBeneficialOwnersPage;
@@ -20,7 +20,7 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantApplicationTest {
-	SideBarMenuComponent sideBarMenuComponent;
+	SideMenuBarComponent sideBarMenuComponent;
 	RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage;
 	BankAccountPage bankAccountPage;
 	RegistrationStartPage registrationStartPage;
@@ -30,7 +30,7 @@ public class MerchantApplicationTest {
 	public void init() {
 		registrationBeneficialOwnersPage = new RegistrationBeneficialOwnersPage();
 		bankAccountPage = new BankAccountPage();
-		sideBarMenuComponent = new SideBarMenuComponent();
+		sideBarMenuComponent = new SideMenuBarComponent();
 		registrationStartPage = new RegistrationStartPage();
 		processingFeesPage = new ProcessingFeesPage();
 	}
@@ -40,9 +40,9 @@ public class MerchantApplicationTest {
 	public void testBeneficialsOwners(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
@@ -104,9 +104,9 @@ public class MerchantApplicationTest {
 	public void testBeneficialsOwnersWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
@@ -160,9 +160,9 @@ public class MerchantApplicationTest {
 	public void testBankAccountFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
 			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
 			// sideBarMenuComponent.bankAccountPage().VerifyAddBankAccountDesc(data.get("bankAccountDesc"));
@@ -198,9 +198,9 @@ public class MerchantApplicationTest {
 	public void testBeneficialOwnersFieldValidationsFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();

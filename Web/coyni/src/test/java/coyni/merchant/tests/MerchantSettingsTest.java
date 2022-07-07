@@ -10,19 +10,19 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.merchant.components.SideBarMenuComponent;
+import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.MerchantSettingsSideBarMenuComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantSettingsTest {
-	SideBarMenuComponent sideBarMenuComponent;
+	SideMenuBarComponent sideBarMenuComponent;
 	MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent;
 
 	@BeforeTest
 	public void init() {
-		sideBarMenuComponent = new SideBarMenuComponent();
+		sideBarMenuComponent = new SideMenuBarComponent();
 		merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 	}
 
