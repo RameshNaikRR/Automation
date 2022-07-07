@@ -8,11 +8,11 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RegistrationStartPage extends BrowserFunctions {
 
-	private By lblHeading = By.cssSelector("div[class*=BusinessApplicationBanner_container]>div>h1");
-	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container]>div>p");
-	private By lblBusinessApplication = By.xpath("//p[text()='Business Application']");
+	private By lblHeading = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>h1");
+	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>p");
+	private By lblMerchantApplication = By.xpath("//p[text()='Merchant']");
 	private By btnStartApplication = By.xpath("//button[text()='Start Application']");
-	private By btnContinueApplication = By.xpath("//Button[text()='Continue Application']");
+	private By btnContinueApplication = By.xpath("//button[text()='Continue Application']");
 	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
 
 	public void verifyHeading(String expHeading) {
@@ -31,8 +31,8 @@ public class RegistrationStartPage extends BrowserFunctions {
 		click(btnContinueApplication, "Continue Application");
 	}
 
-	public void verifyBusinessApplicationView() {
-		new CommonFunctions().elementView(lblBusinessApplication, "Business Application");
+	public void verifyMerchantApplicationView() {
+		new CommonFunctions().elementView(lblMerchantApplication, "Merchant Application");
 	}
 
 	public void getStatus() {
@@ -45,5 +45,21 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	public RegistrationDBAInformationPage registrationDBAInformationPage() {
 		return new RegistrationDBAInformationPage();
+	}
+
+	public RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage() {
+		return new RegistrationBeneficialOwnersPage();
+	}
+
+	public BankAccountPage bankAccountPage() {
+		return new BankAccountPage();
+	}
+
+	public MerchantAgreementsPage merchantAgreementsPage() {
+		return new MerchantAgreementsPage();
+	}
+
+	public ApplicationSummaryPage applicationSummaryPage() {
+		return new ApplicationSummaryPage();
 	}
 }

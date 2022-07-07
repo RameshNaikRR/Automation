@@ -6,16 +6,15 @@ import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
 
-import coyni.merchant.pages.HomePage;
-import coyni.merchant.pages.SignupPage;
+import coyni.merchant.pages.RegistrationDBAInformationPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MailingAddressComponent extends BrowserFunctions {
 
-	private By txtAddress1 = By.name("addressLine1");
-	private By txtAddress2 = By.name("addressLine2");
+	private By txtFirstName = By.name("firstName");
+	private By txtLastName = By.name("lastName");
 	private By txtCity = By.name("city");
 	private By drpDwnState = By.xpath("//div[text()='State']/parent::div");
 	private By txtZipCode = By.name("zipCode");
@@ -23,9 +22,25 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtCountry = By.xpath("//div[text()='Country']/following-sibling::*[1]");
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
 	private By lblState = By.xpath("//div[text()='State']/parent::div");
-	private By zipCode = By.xpath("//input[@id='zip-code']/parent::div");
-	private By txtDateOfBirth = By.cssSelector("#date-of-birth");
-	private By txtSocialSecurity = By.cssSelector("#social-security-no");
+	// private By zipCode = By.cssSelector("#zip-code");
+	private By txtDateOfBirth = By.name("dateOfBirth");
+	private By txtSocialSecurity = By.name("ssn");
+	private By txtOwnership = By.name("ownership");
+	private By txtAddress1 = By.name("addressLine1");
+	private By txtAddress2 = By.name("addressLine2");
+	private By lblgetState = By.xpath("//div[text()='State']/following-sibling::*[1]");
+
+	public By getElement(String state) {
+		return By.xpath(String.format("//div[text()='%s']", state));
+	}
+
+	public void fillFirstName(String firstName) {
+		enterText(txtFirstName, firstName, "firstName");
+	}
+
+	public void fillLastName(String lastName) {
+		enterText(txtLastName, lastName, "lastName");
+	}
 
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
@@ -41,7 +56,12 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void selectState(String state) {
 		click(drpDwnState, "State DropDown");
-		new CommonFunctions().selectCustomDropDown(state, "State");
+		click(getElement(state), state);
+	}
+
+	public void clickStateDropdown() {
+		click(drpDwnState, "State DropDown");
+
 	}
 
 	public void fillZipCode(String zipCode) {
@@ -50,6 +70,10 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void verifyCountry(String country) {
 		new CommonFunctions().verifyLabelText(txtCountry, country, "United States");
+	}
+
+	public void fillOwnerShip(String ownerShip) {
+		enterText(txtOwnership, ownerShip, "ownerShip");
 	}
 
 	public void clickCountry() {
@@ -64,24 +88,15 @@ public class MailingAddressComponent extends BrowserFunctions {
 		click(lblState, "State");
 	}
 
-	public void FillZipCode(String ZipCode) {
-		enterText(zipCode, ZipCode, "ZipCode");
-	}
-
+//	public void FillZipCode(String ZipCode) {
+//		enterText(zipCode, ZipCode, "ZipCode");
+//	}
 	public void fillDateOfBirth(String dateOfBirth) {
 		enterText(txtDateOfBirth, dateOfBirth, "Date of Birth");
 	}
 
 	public void fillSocialSecurityNum(String socialSecurityNum) {
 		enterText(txtSocialSecurity, socialSecurityNum, "Social Security Number");
-	}
-
-	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
-		return new SuccessFailurePopupCardComponent();
-	}
-
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
 	}
 
 	public void clickTab() throws AWTException {
@@ -101,74 +116,109 @@ public class MailingAddressComponent extends BrowserFunctions {
 	}
 
 	public void validateAddress1(String address1) {
-		new SignupPage().validateNameField(txtAddress1, "Address1", address1);
+		validateTextField(txtAddress1, "Address1", address1);
 	}
 
 	public void validateAddress2(String address2) {
-		new SignupPage().validateNameField(txtAddress2, "Address2", address2);
+		validateTextField(txtAddress2, "Address2", address2);
 	}
 
 	public void validateCity(String city) {
-		new SignupPage().validateNameField(txtCity, "City", city);
+		validateTextField(txtCity, "City", city);
 	}
 
 	public void validateZipCode(String zipCode) {
-		new SignupPage().validateNameField(txtZipCode, "ZipCode", zipCode);
+		validateNumberfield(txtZipCode, "ZipCode", zipCode);
 	}
 
-//	public void validateAddress1(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
-//		new CommonFunctions().validateFieldMaxichar(txtAddress1, "Address1", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtAddress1, "Address1");
-//		new CommonFunctions().validateField(txtAddress1, "Address1", maxChar);
-//		new CommonFunctions().clearText(txtAddress1, "Address1");
-//		new CommonFunctions().validateField(txtAddress1, "Address1", maxLessChar);
-//		new CommonFunctions().clearText(txtAddress1, "Address1");
-//		new CommonFunctions().validateField(txtAddress1, "Address1", minCharPlus);
-//		new CommonFunctions().clearText(txtAddress1, "Address1");
-//		new CommonFunctions().validateField(txtAddress1, "Address1", minChar);
-//
-//	}
-//
-//	public void vaidateAddress2(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar) {
-//		new CommonFunctions().validateFieldMaxichar(txtAddress2, "Address2", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtAddress2, "Address2");
-//		new CommonFunctions().validateField(txtAddress2, "Address2", maxChar);
-//		new CommonFunctions().clearText(txtAddress2, "Address2");
-//		new CommonFunctions().validateField(txtAddress2, "Address2", maxLessChar);
-//		new CommonFunctions().clearText(txtAddress2, "Address2");
-//		new CommonFunctions().validateField(txtAddress2, "Address2", minCharPlus);
-//		new CommonFunctions().clearText(txtAddress2, "Address2");
-//		new CommonFunctions().validateField(txtAddress2, "Address2", minChar);
-//
-//	}
-//
-//	public void validateCity(String minChar,String minCharPlus,  String maxLessChar, String maxChar, String moreThanMaxChar, String number,
-//			String specialChar) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtCity, "City", specialChar);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateFieldWithNumber(txtCity, "City", number);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateFieldMaxichar(txtCity, "City", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateField(txtCity, "City", maxChar);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateField(txtCity, "City", maxLessChar);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateField(txtCity, "City", minCharPlus);
-//		new CommonFunctions().clearText(txtCity, "City");
-//		new CommonFunctions().validateField(txtCity, "City", minChar);
-//
-//	}
-//
-//	public void validateZipCode(String minChar, String moreThanMaxChar, String specialChar, String alphabets) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtZipCode, "ZipCode", specialChar);
-//		new CommonFunctions().validateFieldWithalphabet(txtZipCode, "ZipCode", alphabets);
-//		new CommonFunctions().validateField(txtZipCode, "ZipCode", minChar);
-//		new CommonFunctions().clearText(txtZipCode, "ZipCode");
-//		// new CommonFunctions().validateField(txtZipCode, "ZipCode", maxChar);
-//		// new CommonFunctions().clearText(txtZipCode, "ZipCode");
-//		new CommonFunctions().validateFieldMaxichar(txtZipCode, "ZipCode", moreThanMaxChar);
-//		new CommonFunctions().clearText(txtZipCode, "ZipCode");
-//	}
+	public void verifyFirstNameView() {
+		new CommonFunctions().elementView(txtFirstName, "FirstName");
+	}
+
+	public void verifyLastNameView() {
+		new CommonFunctions().elementView(txtLastName, "LastName");
+	}
+
+	public void verifyDOBView() {
+		new CommonFunctions().elementView(txtDateOfBirth, "Date Of Birth");
+	}
+
+	public void verifySSNView() {
+		new CommonFunctions().elementView(txtSocialSecurity, "SSN");
+	}
+
+	public void verifyOwnershipView() {
+		new CommonFunctions().elementView(txtOwnership, "OwnerShip");
+	}
+
+	public void verifyAddressLine1View() {
+		new CommonFunctions().elementView(txtAddress1, "Mailing Address Line 1");
+	}
+
+	public void verifyAddressLine2View() {
+		new CommonFunctions().elementView(txtAddress2, "Mailing AddressLine 2");
+	}
+
+	public void verifyCityView() {
+		new CommonFunctions().elementView(txtCity, "City");
+	}
+
+	public void verifyDrpdwnStateView() {
+		new CommonFunctions().elementView(drpDwnState, "State Dropdown");
+	}
+
+	public void verifyZipCodeView() {
+		new CommonFunctions().elementView(txtZipCode, "ZipCode");
+	}
+
+	public void verifyUnitedStatesView() {
+		new CommonFunctions().elementView(txtCountry, "Country-UnitedStates");
+	}
+
+	public void validateTextField(By ele, String eleName, String text) {
+		String[] field = text.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
+	}
+
+	public void validateNumberfield(By ele, String elename, String text) {
+		String[] field = text.split(",");
+		new CommonFunctions().validateField(ele, elename, field[0]);
+		new CommonFunctions().validateFieldMaxichar(ele, elename, field[1]);
+	}
+
+	public void verifyAddline1(String addline1) {
+		// new RegistrationDBAInformationPage().verifyElementDisable(txtAddress1,
+		// "addline1");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress1, "addline1", addline1);
+	}
+
+	public void verifyAddline2(String addline2) {
+		// new RegistrationDBAInformationPage().verifyElementDisable(txtAddress2,
+		// "addline2");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress2, "addline2", addline2);
+	}
+
+	public void verifyCity(String city) {
+		// new RegistrationDBAInformationPage().verifyElementDisable(txtCity, "city");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtCity, "city", city);
+	}
+
+	public void verifyState(String state) {
+		new RegistrationDBAInformationPage().verifyElementDisable(lblgetState, "state");
+		if (getText(lblgetState, "").equals(state)) {
+			ExtentTestManager.setPassMessageInReport(state + "is displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport(state + "is not displayed");
+		}
+	}
+
+	public void verifyZipCode(String zipcode) {
+		// new RegistrationDBAInformationPage().verifyElementDisable(txtZipCode,
+		// "zipcode");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtZipCode, "zipcode", zipcode);
+	}
 
 }

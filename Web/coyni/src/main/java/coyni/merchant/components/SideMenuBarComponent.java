@@ -2,6 +2,7 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
+
 import coyni.merchant.pages.BankAccountPage;
 import coyni.merchant.pages.RegistrationBeneficialOwnersPage;
 import coyni.merchant.pages.RegistrationCompanyInfoPage;
@@ -17,9 +18,14 @@ public class SideMenuBarComponent extends BrowserFunctions {
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
 	private By merchnatApplicationTrackerToolTip = By.xpath("(//div[text()='Merchant Application step 4 of 6'])[2]");
+	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+	
+	public void clickContinueApplication() {
+		click(btnContinueApplication, "Continue Application");
 	}
 
 	private By getMerchantActivityDrpDwn(String Activity) {
