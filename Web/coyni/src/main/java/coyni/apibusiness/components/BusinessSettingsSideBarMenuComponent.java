@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.api.business.popups.SecretKeyPopup;
 import coyni.apibusiness.pages.PreferencesPage;
+import coyni.apibusiness.pages.RegistrationDBAInformationPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -185,6 +186,10 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public IPAddressComponent ipAddressComponent() {
 		return new IPAddressComponent();
+	}
+
+	public RegistrationDBAInformationPage registrationDBAInformationPage() {
+		return new RegistrationDBAInformationPage();
 	}
 
 	public WebhookComponent webhookComponent() {
