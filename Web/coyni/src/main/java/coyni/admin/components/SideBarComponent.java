@@ -27,7 +27,8 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public By getSideBarItems(String elementName) {
-		return By.xpath(String.format("//span[(contains(@class,'menu' ) or contains(@class,'label'))and text()='%s']",
+		return By.xpath(String.format(
+				"(//span[(contains(@class,'menu' ) or contains(@class,'label') or contains(@class,'Label'))and text()='%s'])[1]",
 				elementName));
 	}
 
@@ -71,114 +72,113 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSideBarItems("System Settings"), "System Settings");
 	}
 
-	public By getSubMenuItems(String mainItem, String subItem) {
-		return By.xpath(String.format("//span[text()='%s']/../../../following-sibling::*[1]//div[text()='%s']",
-				mainItem, subItem));
+	public By getSubMenuItems(String subItem) {
+		return By.xpath(String.format("//p[.='%s']", subItem));
 
 	}
 
 	public void clickTokenAccount() {
 		// clickCoyniPortal();
-		click(getSubMenuItems("Coyni Portal", "Token Account"), "Token Account");
+		click(getSubMenuItems("Token Account"), "Token Account");
 	}
 
 	public void clickCommissionAccount() {
 		// clickCoyniPortal();
-		click(getSubMenuItems("Coyni Portal", "Commission Account"), "Commission Account");
+		click(getSubMenuItems("Commission Account"), "Commission Account");
 	}
 
 	public void clickIndividuals() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "Individuals"), "Individuals");
+		click(getSubMenuItems("Individuals"), "Individuals");
 	}
 
 	public void clickBusinesses() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "Businesses"), "Businesses");
+		click(getSubMenuItems("Businesses"), "Businesses");
 	}
 
 	public void clickCoyniEmployees() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "Coyni Employees"), "Coyni Employees");
+		click(getSubMenuItems("Coyni Employees"), "Coyni Employees");
 	}
 
 	public void clickLedgers() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "Ledgers"), "Ledgers");
+		click(getSubMenuItems("Ledgers"), "Ledgers");
 	}
 
 	public void clickAPIBusinessess() {
 		clickProfiles();
-		click(getSubMenuItems("Profiles", "API Users"), "API Businesses");
+		click(getSubMenuItems("API Users"), "API Businesses");
 	}
 
 	public void clickPersonal() {
 		clickUnderWriting();
-		click(getSubMenuItems("UnderWriting", "Personal"), "Personal");
+		click(getSubMenuItems("Personal"), "Personal");
 	}
 
 	public void clickBusiness() {
 		clickUnderWriting();
-		click(getSubMenuItems("UnderWriting", "Business"), "Business");
+		click(getSubMenuItems("Business"), "Business");
 	}
 
 	public void clickTotalWithdraw() {
 		clickAccounting();
-		click(getSubMenuItems("Accounting", "Total Withdraw"), "Total Withdraw");
+		click(getSubMenuItems("Total Withdraw"), "Total Withdraw");
 	}
 
 	public void clickTotalDeposits() {
 		clickAccounting();
-		click(getSubMenuItems("Accounting", "Total Deposits"), "Total Deposits");
+		click(getSubMenuItems("Total Deposits"), "Total Deposits");
 	}
 
 	public void clickPaymentGateways() {
 		clickGatewaySettings();
-		click(getSubMenuItems("Gateway Settings", "Payment Gateways"), "Payment Gateways");
+		click(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 	}
 
 	public void clickLoadBalancer() {
 		clickGatewaySettings();
-		click(getSubMenuItems("Gateway Settings", "Load Balancer"), "Load Balancer");
+		click(getSubMenuItems("Load Balancer"), "Load Balancer");
 	}
 
 	public void clickAgreements() {
 		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Agreements"), "Agreements");
+		click(getSubMenuItems("Agreements"), "Agreements");
 	}
 
 	public void clickFeeStructure() {
 		// clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Fee Structure"), "Fee Structure");
+		click(getSubMenuItems("Fee Structure"), "Fee Structure");
 	}
 
 	public void clickAccountLimits() {
 		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Account Limits"), "Account Limits");
+		click(getSubMenuItems("Account Limits"), "Account Limits");
 	}
 
 	public void clickPermissions() {
 		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Permissions"), "Permissions");
+		click(getSubMenuItems("Permissions"), "Permissions");
 	}
 
 	public void clickFeatureControls() {
 		// clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Feature Controls"), "Feature Controls");
+		click(getSubMenuItems("Feature Controls"), "Feature Controls");
 	}
 
 	public void clickCardBlackList() {
 		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Card BlackList"), "Card BlackList");
+		click(getSubMenuItems("Card BlackList"), "Card BlackList");
 	}
 
 	public void clickPushNotifications() {
 		clickSystemSettings();
-		click(getSubMenuItems("System Settings", "Push Notifications"), "Push Notifications");
+		click(getSubMenuItems("Push Notifications"), "Push Notifications");
 	}
 
 	public void verifyTotalDepositsView() {
-		new CommonFunctions().elementView(getSubMenuItems("Accounting", "Total Deposits"), "TotalDeposits");
+		new CommonFunctions().elementView(getSubMenuItems("Total Deposits"), "TotalDeposits");
 	}
 
 	public AccountTableComponent accountTableComponent() {

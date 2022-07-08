@@ -28,6 +28,10 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Email Verification", expDescription);
 	}
 
+	public void getEmailDescription() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblDescription, "Email Description : "));
+	}
+	
 	public void verifyPhoneHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPhoneHeading, "Phone Verification", expHeading);
 	}

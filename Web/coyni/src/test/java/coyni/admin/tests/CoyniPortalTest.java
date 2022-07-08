@@ -31,13 +31,13 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().clickCoyniPortal();
+			//homePage.sideBarComponent().clickCoyniPortal();
 			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
 			// "expValue", "expColor");
 			homePage.sideBarComponent().clickTokenAccount();
 			Thread.sleep(2000);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickCommissionAccount();
+			//homePage.sideBarComponent().clickCoyniPortal();
+			//homePage.sideBarComponent().clickCommissionAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCoyniPortal Failed due to Exception " + e);
@@ -83,7 +83,8 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccount Failed due to Exception " + e);
 		}
 	}
-
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testTokenAccountActivity(String strParams) {
@@ -120,6 +121,7 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountActivity Failed due to Exception " + e);
 		}
 	}
+	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -152,6 +154,7 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
+	
 
 	public void testFilters(String strParams) {
 		try {

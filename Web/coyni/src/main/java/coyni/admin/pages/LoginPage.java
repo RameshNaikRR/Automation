@@ -13,10 +13,10 @@ public class LoginPage extends BrowserFunctions {
 	private By lblDescription = By.xpath("//span[text()='Welcome back, let’s log in to your coyni admin account.']");
 	private By txtEmail = By.cssSelector("#Email");
 	private By txtPassword = By.cssSelector("#Password");
-	private By eyeIcon = By.xpath("//button[@type='button']");
+	private By eyeIcon = By.xpath("//button[(@data-for='button')]");
 	private By btnNext = By.cssSelector(".business-login__login-button");
-	private By lnkForgotEmail = By.xpath("//span[.='Forgot Email?']");
-	private By lnkForgotPassword = By.xpath("//span[.='Forgot Password?']");
+	private By lnkForgotEmail = By.xpath("//button[.='Forgot Email?']");
+	private By lnkForgotPassword = By.xpath("//button[.='Forgot Password?']");
 
 	public void verifyPageHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", heading);

@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class ChooseAccountPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//span[text()='Choose Account']");
-	private By btnUser = By.cssSelector("span[class*='text-sm font-semibold']");
+	private By btnUser = By.cssSelector("span[class*='text-sm font-bold text-cgy4']");
 	private By lnkReturnToLogin = By.xpath("//div[text()='Return to Login']");
 
 	public void verifyPageHeading(String expHeading) {

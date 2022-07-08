@@ -12,8 +12,8 @@ public class ForgotEmailPage extends BrowserFunctions {
 	private By lblDescription = By.cssSelector(".forgot-email__sub-title");
 	private By txtPhoneNumber = By.cssSelector("#Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
-	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
-	private By lnkForgotEmailunderline = By.xpath("//span[.='Forgot Email?']");
+	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
+	//private By lnkForgotEmailunderline = By.xpath("//span[.='Forgot Email?']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
@@ -46,9 +46,9 @@ public class ForgotEmailPage extends BrowserFunctions {
 		click(lnkBackToLogin, "BackToLogin");
 	}
 
-	public void verifyForgotEmailunderline() {
-		new CommonFunctions().verifyTextUnderLine(lnkForgotEmailunderline, "UnderLine");
-	}
+//	public void verifyForgotEmailunderline() {
+//		new CommonFunctions().verifyTextUnderLine(lnkForgotEmailunderline, "UnderLine");
+//	}
 
 	public ForgotEmailNamePage forgotEmailNamePage() {
 		return new ForgotEmailNamePage();

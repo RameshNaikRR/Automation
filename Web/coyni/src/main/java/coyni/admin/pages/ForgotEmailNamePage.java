@@ -14,7 +14,7 @@ public class ForgotEmailNamePage extends BrowserFunctions {
 	private By txtFirstName = By.cssSelector("#First-Name");
 	private By txtLastName = By.cssSelector("#Last-Name");
 	private By btnNext = By.xpath("//button[text()='Next']");
-	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
