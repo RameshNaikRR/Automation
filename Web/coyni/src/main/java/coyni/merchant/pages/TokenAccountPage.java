@@ -21,9 +21,9 @@ import ilabs.api.utilities.DBConnection;
 
 public class TokenAccountPage extends BrowserFunctions {
 
-	
 	// added
 	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
+	private By lblYourTokenAccount = By.xpath("//h1[text()='Merchant Token Account']");
 	private By lblTotalFunds = By.xpath("//span[contains(text(),'Total Available Funds')]");
 	private By lblHeading = By.xpath("//h1[text()='Merchant Token Account']");
 	private By amount = By.xpath("//span[contains(@class,'wallet_balance')]");
@@ -55,6 +55,11 @@ public class TokenAccountPage extends BrowserFunctions {
 	public String getBracesCount() {
 		String str = getText(lblBracesCount, "braces Count");
 		return str;
+
+	}
+
+	public void verifyLabelYourTokenAccount() {
+		new CommonFunctions().elementView(lblYourTokenAccount, "Your Token Account");
 
 	}
 

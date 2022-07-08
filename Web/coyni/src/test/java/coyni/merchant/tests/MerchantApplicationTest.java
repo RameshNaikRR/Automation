@@ -19,6 +19,7 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantApplicationTest {
+	
 
 	SideMenuBarComponent sideMenuBarComponent;
 	RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage;
