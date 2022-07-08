@@ -9,7 +9,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class ReserveHistoryPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1[contains(text(),'Reserve Release History')]");
+	private By lblHeading = By.xpath("//h1[.='Reserve Release History']");
 
 	private By btnRolling = By.xpath("//div[contains(text(),'Rolling')]");
 
@@ -32,8 +32,8 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	private By lnkManual = By.cssSelector("tbody>tr:nth-of-type(5)>td:nth-of-type(1)");
 
-	public void verifyReserveHistory(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Reserve History", expHeading);
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Reserve History page heading", expHeading);
 	}
 
 	public void fillSearch(String search) {

@@ -36,7 +36,7 @@ public class DashBoardPage extends BrowserFunctions {
 			.xpath("//span[contains(text(),'View Full Reserve Release History')]");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Dashboard page heading", expHeading);
 	}
 
 	public void getAccountBalance() {

@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ExportfilesPage extends BrowserFunctions {
-	private By lnkExportFiles = By.xpath("//span[text()='Export Files'][1]");
+	private By lblHeading = By.xpath("//h1[.='Export Files']");
 	private By lblExportID = By.xpath("//span[text()='EXPORT ID']");
 	private By lblReportName = By.xpath("//span[text()='REPORT NAME']");
 	private By lblExportDate = By.xpath("//span[text()='EXPORT DATE']");
@@ -58,8 +58,8 @@ public class ExportfilesPage extends BrowserFunctions {
 		click(btnBulkAction, "Bulk Action Drop Down");
 	}
 
-	public void clickExportfiles() {
-		click(lnkExportFiles, "Export files");
+	public void verifyHeading(String Heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Export files page heading ", Heading);
 	}
 
 	public void exportIdView() {

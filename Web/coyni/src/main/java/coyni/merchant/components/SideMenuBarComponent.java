@@ -2,12 +2,19 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
-
 import coyni.merchant.pages.BankAccountPage;
+import coyni.merchant.pages.DashBoardPage;
+import coyni.merchant.pages.ExportfilesPage;
+import coyni.merchant.pages.GetHelpPage;
+import coyni.merchant.pages.MerchantSettingsPage;
+import coyni.merchant.pages.PayOutHistoryPage;
 import coyni.merchant.pages.RegistrationBeneficialOwnersPage;
 import coyni.merchant.pages.RegistrationCompanyInfoPage;
 import coyni.merchant.pages.RegistrationDBAInformationPage;
 import coyni.merchant.pages.RegistrationStartPage;
+import coyni.merchant.pages.ReserveHistoryPage;
+import coyni.merchant.pages.TokenAccountPage;
+import coyni.merchant.pages.TransactionsPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -18,18 +25,13 @@ public class SideMenuBarComponent extends BrowserFunctions {
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
 	private By merchnatApplicationTrackerToolTip = By.xpath("(//div[text()='Merchant Application step 4 of 6'])[2]");
-	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}
-	
-	public void clickContinueApplication() {
-		click(btnContinueApplication, "Continue Application");
-	}
 
 	private By getMerchantActivityDrpDwn(String Activity) {
-		return By.xpath(String.format("//div[.='Reserve History']", Activity));
+		return By.xpath(String.format("//button[.='%s']", Activity));
 	}
 
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {
@@ -67,7 +69,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 //		ExtentTestManager.setInfoMessageInReport("Tracker status is displayed" + tracker);
 	}
 
-	public void clickMerchantActivity() {
+	public void clickMerchantActivityDrpDwn() {
 		click(getDashBoardItems("Merchant Activity"), "Merchant Activity");
 	}
 
@@ -111,40 +113,67 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		click(getMerchantActivityDrpDwn("Dashboard"), "Dashboard");
 	}
 
+	public void verifyDashboard() {
+		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Dashboard"), "Dashboard push button ");
+	}
+
 	public void clickTransactions() {
 		click(getMerchantActivityDrpDwn("Transactions"), "Transactions");
+	}
+
+	public void verifyTransactions() {
+		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Transactions"), "Transactions push button ");
 	}
 
 	public void clickPayoutHistory() {
 		click(getMerchantActivityDrpDwn("Payout History"), "Payout History");
 	}
 
+	public void verifyPayoutHistory() {
+		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Payout History"), "Payout History push button ");
+	}
+
 	public void clickReserveHistory() {
 		click(getMerchantActivityDrpDwn("Reserve History"), "Reserve History");
+	}
+
+	public void verifyReserveHistory() {
+		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Reserve History"), "Reserve History push button ");
 	}
 
 	public RegistrationSideBarMenuComponent registrationSideBarMenuComponent() {
 		return new RegistrationSideBarMenuComponent();
 	}
 
-	public RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage() {
-		return new RegistrationBeneficialOwnersPage();
+	public DashBoardPage dashBoardPage() {
+		return new DashBoardPage();
 	}
 
-	public RegistrationCompanyInfoPage registrationCompanyInfoPage() {
-		return new RegistrationCompanyInfoPage();
+	public TransactionsPage transactionsPage() {
+		return new TransactionsPage();
 	}
 
-	public RegistrationDBAInformationPage registrationDBAInformationPage() {
-		return new RegistrationDBAInformationPage();
+	public PayOutHistoryPage payOutHistoryPage() {
+		return new PayOutHistoryPage();
 	}
 
-	public RegistrationStartPage registrationStartPage() {
-		return new RegistrationStartPage();
+	public ReserveHistoryPage reserveHistoryPage() {
+		return new ReserveHistoryPage();
 	}
 
-	public BankAccountPage bankAccountPage() {
-		return new BankAccountPage();
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
 	}
 
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
+	}
+
+	public MerchantSettingsPage merchantSettingsPage() {
+		return new MerchantSettingsPage();
+	}
+
+	public GetHelpPage getHelpPage() {
+		return new GetHelpPage();
+	}
 }
