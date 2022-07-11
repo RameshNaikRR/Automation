@@ -54,6 +54,10 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 		return By.xpath(String.format("((//summary[contains(@class,'BeneficialOwners_summary')])[%s]//p)[4]", num));
 	}
 
+	public void clickBeneficialOwners() {
+		click(lblBeneficialOwners, "Beneficial OWners");
+	}
+
 	public void verifyBeneficialOwnerDetails(String num, String expOwnerlabel, String ownerName, String ownerShipLabel,
 			String ownerShipValue) {
 		new CommonFunctions().verifyLabelText(getBeneficialOwnerLabel(num), "Beneifical" + num, expOwnerlabel);
@@ -159,7 +163,6 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 	}
 
 	public void uploadSelectImage(String folderName, String fileName, String num) {
-
 		getElement(getUploadDocument(num), "Upload Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 }

@@ -13,6 +13,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class BankAccountPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h4[text()='Add Bank Account']");
+	private By lblBankAccount = By.xpath("//h6[text()='Bank Account']");
 	private By lnkLearnMore = By.xpath("//strong[text()='Learn More']");
 	private By lblAddBankAccountDesc = By.xpath("//p[@class='text-sm text-cgy13 leading-5']");
 	private By btnImReady = By.xpath("//button[text()='I’m Ready']");
@@ -40,6 +41,10 @@ public class BankAccountPage extends BrowserFunctions {
 	public void clickBank() {
 		click(btnBank, "Bank Next");
 
+	}
+
+	public void clickOnBankAccount() {
+		click(lblBankAccount, "Bank Account");
 	}
 
 	public void clickEnter() throws AWTException {

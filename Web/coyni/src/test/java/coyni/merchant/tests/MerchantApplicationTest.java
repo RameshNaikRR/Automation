@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -47,6 +48,7 @@ public class MerchantApplicationTest {
 			Thread.sleep(5000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			sideMenuBarComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
+			//sideMenuBarComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
 			String[] id = data.get("id").split(",");
@@ -89,10 +91,11 @@ public class MerchantApplicationTest {
 
 				sideMenuBarComponent.registrationBeneficialOwnersPage().clickSave(num1);
 				Thread.sleep(6000);
-				sideMenuBarComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnerDetails(num,
-						expOwnerlabel[i], ownerName[i], data.get("ownerShipLabel"), ownerShipValue[i]);
+//				sideMenuBarComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnerDetails(num,
+//						expOwnerlabel[i], ownerName[i], data.get("ownerShipLabel"), ownerShipValue[i]);
 			}
 			sideMenuBarComponent.registrationBeneficialOwnersPage().clickNext();
+			Thread.sleep(7000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Beneficial Owners  failed due to Exception " + e);
@@ -108,7 +111,7 @@ public class MerchantApplicationTest {
 			// sideBarMenuComponent.clickBusinessApplicationArrow();
 			sideMenuBarComponent.clickContinueApplication();
 			// sideBarMenuComponent.verifyBusinessApplicationTrackerView();
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			sideMenuBarComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -163,6 +166,7 @@ public class MerchantApplicationTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// sideBarMenuComponent.clickBusinessApplicationArrow();
 			sideMenuBarComponent.clickContinueApplication();
+			Thread.sleep(5000);
 			// sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			sideMenuBarComponent.bankAccountPage().verifyHeadingView();
 			sideMenuBarComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
@@ -204,7 +208,7 @@ public class MerchantApplicationTest {
 			// sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
-			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+			sideMenuBarComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.validateFirstNameField(data.get("firstName"));
 			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -414,10 +418,10 @@ public class MerchantApplicationTest {
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
 			registrationStartPage.registrationDBAInformationPage().verifyPageDescription(data.get("dbaDescription"));
-			// registrationStartPage.registrationDBAInformationPage().verifyInfo(data.get("expInfo"));
-//			registrationStartPage.registrationDBAInformationPage().verifyLabelYes(data.get("yesDes"));
-//			registrationStartPage.registrationDBAInformationPage().verifyLabelNo(data.get("noDes"));
-			// registrationStartPage.registrationDBAInformationPage().verifyMessage(data.get("expMessage"));
+			registrationStartPage.registrationDBAInformationPage().verifyInfo(data.get("expInfo"));
+			registrationStartPage.registrationDBAInformationPage().verifyLabelYes(data.get("yesDes"));
+			registrationStartPage.registrationDBAInformationPage().verifyLabelNo(data.get("noDes"));
+			registrationStartPage.registrationDBAInformationPage().verifyMessage(data.get("expMessage"));
 			registrationStartPage.registrationDBAInformationPage().clickExit();
 			registrationStartPage.verifyHeading(data.get("startPageHeading"));
 		} catch (Exception e) {
@@ -436,7 +440,7 @@ public class MerchantApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			// registrationStartPage.registrationDBAInformationPage().clickYes();
+			registrationStartPage.registrationDBAInformationPage().clickYes();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().verifyDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -549,7 +553,7 @@ public class MerchantApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			// registrationStartPage.registrationDBAInformationPage().clickNo();
+			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().validateDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -615,8 +619,8 @@ public class MerchantApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
-					data.get("fileName"));
+//			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
+//					data.get("fileName"));
 			registrationStartPage.registrationDBAInformationPage().clickNext();
 			Thread.sleep(5000);
 
@@ -652,10 +656,33 @@ public class MerchantApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.applicationSummaryPage().verifyCompanyInformation();
+			registrationStartPage.applicationSummaryPage().getCompanyInformation();
+			registrationStartPage.applicationSummaryPage().getCompanyInformationBusinessEntity();
+			registrationStartPage.applicationSummaryPage().getCompanyInformationEINNumber();
+			registrationStartPage.applicationSummaryPage().getCompanyInformationEmailAddress();
+			registrationStartPage.applicationSummaryPage().getCompanyInformationPhoneNumber();
+			registrationStartPage.applicationSummaryPage().getCompanyInformationAddress();
 			registrationStartPage.applicationSummaryPage().verifyDBAInformation();
+			registrationStartPage.applicationSummaryPage().getDBAInfomation();
+			registrationStartPage.applicationSummaryPage().getDBAInformationEmail();
+			registrationStartPage.applicationSummaryPage().getDBAInformationPhoneNumber();
+			registrationStartPage.applicationSummaryPage().getDBAInformationWebsite();
+			registrationStartPage.applicationSummaryPage().getDBAInformationMonthlyProcessingVolume();
+			registrationStartPage.applicationSummaryPage().getDBAInformationHighTicket();
+			registrationStartPage.applicationSummaryPage().getDBAInformationAverageTicket();
+			registrationStartPage.applicationSummaryPage().getDBAInformationAddress();
 			registrationStartPage.applicationSummaryPage().verifyBeneficialOwners();
+			registrationStartPage.applicationSummaryPage().getBeneficialOwnersDropDown();
+			registrationStartPage.applicationSummaryPage().getBeneficialOwnerName();
+			registrationStartPage.applicationSummaryPage().getBeneficialDateOfBirth();
+			registrationStartPage.applicationSummaryPage().getBeneficialSocialSecurity();
+			registrationStartPage.applicationSummaryPage().getBeneficialOwnerShip();
+			registrationStartPage.applicationSummaryPage().getBeneficialOwnerAddress();
 			registrationStartPage.applicationSummaryPage().verifyBank();
+			registrationStartPage.applicationSummaryPage().getBankDetails();
 			registrationStartPage.applicationSummaryPage().verifyAgreements();
+			registrationStartPage.applicationSummaryPage().getAgreementsDetails();
+			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
 			registrationStartPage.applicationSummaryPage().clickSubmit();
 
 		} catch (Exception e) {
@@ -703,33 +730,52 @@ public class MerchantApplicationTest {
 			registrationStartPage.registrationCompanyInfoPage().getCompanyInformation();
 			registrationStartPage.registrationCompanyInfoPage().clickCancel();
 			registrationStartPage.clickContinueApplication();
-			// registrationStartPage.registrationCompanyInfoPage().
+			registrationStartPage.registrationCompanyInfoPage().clickCompanyName();
 			registrationStartPage.registrationCompanyInfoPage().clickNext();
 			registrationStartPage.registrationCompanyInfoPage().clickExit();
 			registrationStartPage.clickContinueApplication();
-			// registrationStartPage.registrationCompanyInfoPage().
+			registrationStartPage.registrationDBAInformationPage().clickDBAInformation();
 			registrationStartPage.registrationDBAInformationPage().clickBack();
 			registrationStartPage.registrationCompanyInfoPage().clickNext();
 			registrationStartPage.registrationDBAInformationPage().clickExit();
 			registrationStartPage.clickContinueApplication();
-			// registrationStartPage.registrationCompanyInfoPage().
+			registrationStartPage.registrationBeneficialOwnersPage().clickBeneficialOwners();
 			registrationStartPage.registrationBeneficialOwnersPage().clickBack();
 			registrationStartPage.registrationBeneficialOwnersPage().clickNext();
 			registrationStartPage.registrationBeneficialOwnersPage().clickExit();
 			registrationStartPage.clickContinueApplication();
-			// registrationStartPage.registrationCompanyInfoPage().
+			registrationStartPage.bankAccountPage().clickOnBankAccount();
 			registrationStartPage.bankAccountPage().clickBack();
 			registrationStartPage.bankAccountPage().clickBank();
 			registrationStartPage.bankAccountPage().clickExit();
 			registrationStartPage.clickContinueApplication();
-			// registrationStartPage.registrationCompanyInfoPage().
+			registrationStartPage.merchantAgreementsPage().clickMerchantAgreements();
 			registrationStartPage.merchantAgreementsPage().clickBack();
-			registrationStartPage.bankAccountPage().clickBank();
-			// registrationStartPage.registrationCompanyInfoPage().
-			registrationStartPage.merchantAgreementsPage().clickNext();
+			registrationStartPage.merchantAgreementsPage().clickExit();
+			registrationStartPage.clickContinueApplication();
+			// registrationStartPage.merchantAgreementsPage().clickNext();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantApplication failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationSubmission(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// registrationStartPage.verifyHeading(data.get("startPageHeading"));
+			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+			registrationStartPage.applicationSubmissionPage().verifyDescription();
+			registrationStartPage.applicationSubmissionPage().verifyStatus();
+			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
+			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationSubmission failed due to Exception " + e);
 		}
 	}
 }

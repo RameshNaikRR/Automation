@@ -21,7 +21,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnBack = By.xpath("//button[text()='Back']");
 	private By btnExit = By.xpath("//button[text()='Exit']");
 	private By lblMessage = By.xpath("//span[contains(text(),'All completed')]");
-
+	private By lblDBAInformation = By.xpath("//h6[text()='DBA Information']");
 	private By txtDBAName = By.cssSelector("#dba-name");
 	private By drpdwnBusinessType = By.xpath("//div[text()='Business Type']/following-sibling::div");
 	private By radBtnRetailLocation = By.xpath("//span[text()='Retail Location']/..");
@@ -52,13 +52,19 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	public void fillWebsite(String website) {
 		enterText(txtWebsite, website, "Website");
 	}
-	
+
+	public void clickDBAInformation() {
+		click(lblDBAInformation, "DBA Information");
+	}
+
 	public void fillMonthlyProcessingVolume(String processingVolume) {
 		enterText(txtMonthlyProcessingVolume, processingVolume, "Processing Volume");
 	}
+
 	public void fillHighTicket(String highTicket) {
 		enterText(txtHighTicket, highTicket, "High Ticket");
 	}
+
 	public void fillAverageTicket(String averageTicket) {
 		enterText(txtAvgTicket, averageTicket, "Avergare Ticket");
 	}
@@ -161,17 +167,17 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	}
 
 	public void verifyDBAName(String DBAName) {
-		//verifyElementDisable(txtDBAName, "DBA Name");
+		// verifyElementDisable(txtDBAName, "DBA Name");
 		verifyTextBoxValue(txtDBAName, "DBAName", DBAName);
 	}
 
 	public void verifyCompanyEmail(String companyEmail) {
-		//verifyElementDisable(txtCompanyEmail, "Company Service Email");
+		// verifyElementDisable(txtCompanyEmail, "Company Service Email");
 		verifyTextBoxValue(txtCompanyEmail, "Company Email", companyEmail);
 	}
 
 	public void verifyPhoneNumber(String phoneNumber) {
-		//verifyElementDisable(txtphoneNumber, "phone Number");
+		// verifyElementDisable(txtphoneNumber, "phone Number");
 		verifyTextBoxValue(txtphoneNumber, "Phone Number", phoneNumber);
 	}
 
@@ -194,5 +200,4 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	public void validatePhoneNumber(String phoneNumber) {
 		new RegistrationCompanyInfoPage().validateNumber(txtphoneNumber, "Phone Number", phoneNumber);
 	}
-	
 }

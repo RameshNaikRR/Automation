@@ -146,10 +146,90 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testPayOutsReceivedList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickPayOutsReceived();
+			// tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickTodayPayOutsReceived();
+			// add Total Amount count
+			// add Count of Total Transactions
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testTodayTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickYesterdayPayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testYesterDayTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickLast7DaysPayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testLast7DaysTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickMonthToDatePayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+
+			testMonthToDateTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickLastMonthPayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testLastMonthTrasactions(strParams, "date");
+			ExtentTestManager.setInfoMessageInReport(
+					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+
+//					
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayOutsReceivedList is failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCustomDateRangePayOutsReceived(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.tokenAccountActivityComponent().clickPayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+					.clickCustomDateRangePayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+					.setDateWithYear(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+			// verify CustomDateRange
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCustomDateRangePayOutsReceived is failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testTransactionPurchasedDetailsList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
+			Thread.sleep(3000);
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
 			// tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
@@ -297,6 +377,7 @@ public class TokenAccountTest {
 					.setFailMessageInReport("testCustomDateRangeWithdrawTransaction is failed due to exception " + e);
 		}
 	}
+
 
 	@Test
 	public void testTokenAccountActivityDetails() throws InterruptedException {

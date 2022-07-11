@@ -13,6 +13,7 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 	private By lblHeading = By.cssSelector("div[class*='CompanyInformation']>h4");
 	private By lblDescription = By.cssSelector("div[class*='CompanyInformation']>p");
 	private By txtCompanyName = By.cssSelector("#company-name");
+	private By companyName = By.xpath("//h6[text()='Company Information']");
 	private By drpdwnBusinessEntity = By.xpath("(//div[contains(@class,'FormField_selected_option')])[1]");
 	private By txtSSN_EIN_TIN = By.cssSelector("input[id='ssn/ein-tin']");
 	private By txtCompanyEmail = By.cssSelector("#email");
@@ -29,6 +30,10 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 
 	public void clickExit() {
 		click(btnExit, "Exit");
+	}
+	
+	public void clickCompanyName() {
+		click(companyName, "Company Name");
 	}
 
 	private By getRemoveDocumentElement(String num) {

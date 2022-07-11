@@ -32,6 +32,7 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 
 	public void getTextField(By ele, String text, String eleName, int i) {
 		List<WebElement> eleList = DriverFactory.getDriver().findElements(ele);
+		eleList.get(i).clear();
 		eleList.get(i).sendKeys(text);
 		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
 	}
@@ -148,5 +149,4 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		}
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
 	}
-
 }

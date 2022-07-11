@@ -265,7 +265,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		return new DaysMonthsDropDownComponent();
 	}
 
-	public PayOutsReceivedDetailsComponent tokensSentDetailsComponent() {
+	public PayOutsReceivedDetailsComponent payOutsReceivedDetailsComponent() {
 		return new PayOutsReceivedDetailsComponent();
 	}
 

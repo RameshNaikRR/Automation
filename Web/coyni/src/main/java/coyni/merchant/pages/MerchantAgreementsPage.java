@@ -11,6 +11,7 @@ public class MerchantAgreementsPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h4[text()='Agreements']");
 	private By lblMerchantAgreementsView = By.xpath("//button[text()='View']");
+	private By lblMerchantAgreement = By.xpath("//h6[text()='Merchant Agreements']");
 	private By lblPrivacyPolicy = By.xpath("//p[text()='Privacy Policy']");
 	private By lblTermsOfService = By.xpath("//p[text()='Terms of Service']");
 	private By lblESignature = By.xpath("//div[text()='eSignature']");
@@ -27,6 +28,10 @@ public class MerchantAgreementsPage extends BrowserFunctions {
 
 	public void clickMerchantAgreement() {
 		click(lblMerchantAgreementsView, "Merchant Agreements");
+	}
+
+	public void clickMerchantAgreements() {
+		click(lblMerchantAgreement, "Agreements");
 	}
 
 	public void clickSave() {
