@@ -9,7 +9,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ViewMerchantfeeStructurePage extends BrowserFunctions {
 	private By lblViewHeading = By.cssSelector(".rounded-full");
 	private By lblFirstRowHeading = By
-			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-3 bg-cm1 rounded-xl')]");
+			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-3 bg-cm1 rounded-xl token_bar')]");
 //	private By btnView = By.xpath(
 //			"//button[contains(@class,'icon-button  icon-icon-View-Icon-and-Tooltip icon-View-Icon-and-Tooltip')]");
 //	private By btnEdit = By.xpath("//div[contains(@class,'button-row-row show')]");

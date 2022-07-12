@@ -113,10 +113,10 @@ public class SystemSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			// homePage.sideBarComponent().feeStructurePage().verifyHeading(data.get("expHeading"));
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			sideBarComponent.feeStructurePage().clickEdit();
 			sideBarComponent.feeStructurePage().viewMerchantfeeStructurePage()
 					.verifyHeading(data.get("expEditHeading"));

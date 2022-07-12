@@ -8,10 +8,10 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//span[text()='Edit Personal Fee Structure']");
-	private By lblFirstRowHeading =By.xpath("// div[contains(@class,'grid w-full h-10 grid-cols-4 mt-3 bg-cm1 rounded-xl')]");
+	private By lblFirstRowHeading =By.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-4 bg-cm1 rounded-xl')]");
 	private By lnkEdit = By.xpath("//a[text()='Edit All']");
 	private By getSideHeading(String HeadingNum) {
-		return By.xpath(String.format("(//h1[contains(@class,'font-bold text-cgy8')])[%s]", HeadingNum));
+		return By.xpath(String.format("(//span[contains(@class,'font-bold text-cgy8')])[%s]", HeadingNum));
 	}
 	public void verifyWithdrawals() {
 		new CommonFunctions().elementView(getSideHeading("1"),"Withdrawals");

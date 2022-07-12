@@ -22,7 +22,7 @@ public class BalanceReportsPage extends BrowserFunctions {
 	private By lblBusinessAccountsBalance = By
 			.xpath("( //div[contains(@class,'w-full flex flex-col items-center cursor-default undefined')])[2]");
 
-	private By btnExport = By.xpath("//button[contains(@class,'Button')]");
+	private By btnExport = By.xpath("//div[text()='Export']");
 
 	public void verifyHeading(String expHeading) {
 

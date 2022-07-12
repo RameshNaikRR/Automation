@@ -59,8 +59,9 @@ public class BalanceReportsTest {
 	public void testExportSelectedTransactions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			homePage.sideBarComponent().clickBalanceReports();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			homePage.sideBarComponent().balanceReportsPage().clickExport();
 			Thread.sleep(2000);
 			if (data.get("dropDown").equalsIgnoreCase("Default (3)")) {

@@ -40,6 +40,7 @@ public class LoginTest {
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
 			//loginPage.authyComponent().verifyMessage(data.get("message"));
+			Thread.sleep(2000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
