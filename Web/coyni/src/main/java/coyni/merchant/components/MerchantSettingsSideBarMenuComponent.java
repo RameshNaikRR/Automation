@@ -2,6 +2,7 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.pages.AgreementsPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -128,8 +129,8 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 //		new CommonFunctions().verifyLabelText(lblAccountStatus, AccountStatus, "AccountStatus");
 //	}
 
-	public AgreementsComponent agreementsComponent() {
-		return new AgreementsComponent();
+	public AgreementsPage agreementsComponent() {
+		return new AgreementsPage();
 	}
 
 	public TeamComponent teamComponent() {

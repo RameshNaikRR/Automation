@@ -3,14 +3,14 @@ package coyni.merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.AuthyComponent;
-import coyni.merchant.components.ChangePasswordComponent;
-import coyni.merchant.components.PreferencesComponent;
+import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.ToastComponent;
 import coyni.merchant.components.UserDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class MerchantProfilePage extends BrowserFunctions {
+
 	private By imageImg = By.cssSelector(" ");
 	private By lblAccountId = By.xpath("//div[contains(text(),'Account ID:')]");
 	private By lblUserName = By.xpath("//div[contains(text(),'Account ID:')]/preceding-sibling::div ");
@@ -27,24 +27,28 @@ public class MerchantProfilePage extends BrowserFunctions {
 		new CommonFunctions().elementView(lblUserName, "AccountUser");
 	}
 
-	public UserDetailsPage userDetailsPage() {
-		return new UserDetailsPage();
+	public MerchantMenuComponent merchantMenuComponent() {
+		return new MerchantMenuComponent();
 	}
 
 	public UserDetailsComponent userDetailsComponent() {
 		return new UserDetailsComponent();
 	}
 
-	public PreferencesComponent preferencesComponent() {
-		return new PreferencesComponent();
+	public PreferencesPage preferencesPage() {
+		return new PreferencesPage();
+	}
+
+	public AgreementsPage agreementsPage() {
+		return new AgreementsPage();
 	}
 
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}
 
-	public ChangePasswordComponent changePasswordComponent() {
-		return new ChangePasswordComponent();
+	public ChangePasswordPage changePasswordPage() {
+		return new ChangePasswordPage();
 	}
 
 	public CommonFunctions commonFunctions() {

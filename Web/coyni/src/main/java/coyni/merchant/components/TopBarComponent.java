@@ -37,4 +37,12 @@ public class TopBarComponent extends BrowserFunctions {
 	public TopBarDrpDwnComponent topBarDrpDwnComponent() {
 		return new TopBarDrpDwnComponent();
 	}
+
+	public UserDetailsComponent userDetailsComponent() {
+		return new UserDetailsComponent();
+	}
+
+	public UserNameDropDownComponent userNameDropDownComponent() {
+		return new UserNameDropDownComponent();
+	}
 }

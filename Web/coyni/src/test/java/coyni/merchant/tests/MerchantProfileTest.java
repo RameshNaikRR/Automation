@@ -11,9 +11,10 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.merchant.components.AuthyComponent;
-import coyni.merchant.components.ChangePasswordComponent;
 import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.TopBarComponent;
+import coyni.merchant.pages.ChangePasswordPage;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.MerchantProfilePage;
@@ -32,8 +33,9 @@ public class MerchantProfileTest {
 	EditEmailAddressPopup editEmailAddressPopup;
 	MerchantMenuComponent merchantMenuComponent;
 	AuthyComponent authyComponent;
-	ChangePasswordComponent changePasswordComponent;
+	ChangePasswordPage changePasswordPage;
 	TokenAccountPage tokenAccountPage;
+	TopBarComponent topBarComponent;
 	NavigationComponent navigationComponent;
 	HomePage homePage;
 	LoginPage loginPage;
@@ -42,12 +44,13 @@ public class MerchantProfileTest {
 	public void init() {
 
 		merchantProfilePage = new MerchantProfilePage();
+		topBarComponent = new TopBarComponent();
 		navigationMenuPage = new NavigationMenuPage();
 		editPhoneNumberPopup = new EditPhoneNumberPopup();
 		editEmailAddressPopup = new EditEmailAddressPopup();
 		merchantMenuComponent = new MerchantMenuComponent();
 		authyComponent = new AuthyComponent();
-		changePasswordComponent = new ChangePasswordComponent();
+		changePasswordPage = new ChangePasswordPage();
 		tokenAccountPage = new TokenAccountPage();
 		homePage = new HomePage();
 		loginPage = new LoginPage();
@@ -452,7 +455,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
-			merchantProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			// customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
 
@@ -499,7 +502,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
@@ -644,24 +647,42 @@ public class MerchantProfileTest {
 
 	@Test // added
 	@Parameters({ "strParams" })
+	public void testAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			// topBarComponent.userNameDropDownComponent().clickDropDown();
+			topBarComponent.userNameDropDownComponent().clickAgreements();
+			merchantProfilePage.agreementsPage().verifyHeading(data.get("heading"));
+			merchantProfilePage.agreementsPage().clickTermsOfServices();
+			merchantProfilePage.agreementsPage().getTermsOfService();
+			merchantProfilePage.agreementsPage().verifyDownloadPDFlnk();
+			merchantProfilePage.agreementsPage().clickOnAgreements();
+			merchantProfilePage.agreementsPage().clickPrivacyPolicy();
+			merchantProfilePage.agreementsPage().getPrivacyPolicy();
+			merchantProfilePage.agreementsPage().verifyDownloadPDFlnk();
+			merchantProfilePage.agreementsPage().clickOnAgreements();
+			Thread.sleep(3000);
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
 	public void testPreferences(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPreferences();
-			merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
-			merchantProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount"));
-			// customerProfilePage.preferencesComponent().verifyDefaultAccountBackGroundColor(data.get(""),
-			// strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			// topBarComponent.userNameDropDownComponent().clickDropDown();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			// merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
 			Thread.sleep(3000);
-			merchantProfilePage.preferencesComponent().clickSave();
-			// customerProfilePage.preferencesComponent().verifyLocalCurrency("Local
-			// Currency");
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
 
-			merchantProfilePage.preferencesComponent().verifyLabelSuccessMessage();
-			merchantProfilePage.preferencesComponent().verifyLabelPreferences(data.get("expHeading"));
+			merchantProfilePage.preferencesPage().clickSave();
+			merchantProfilePage.preferencesPage().verifyLabelSuccessMessage();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
@@ -675,14 +696,12 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickPreferences();
-			merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
-			merchantProfilePage.preferencesComponent().verifyTimeZoneView();
-			merchantProfilePage.preferencesComponent().verifyPSTTickMark();
-			// customerProfilePage.preferencesComponent().selectDefaultAccount("defaultAccount");
-			// customerProfilePage.preferencesComponent().verifyDefaultAccountBackGroundColor(data.get("expColor"),
+			topBarComponent.clickUserNameDrpDwn();
+			// topBarComponent.userNameDropDownComponent().clickUserName();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			// merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			// merchantProfilePage.preferencesComponent().verifyTimeZoneView();
+			// merchantProfilePage.preferencesComponent().verifyPSTTickMark();
 			// data.get("expCssProp"));
 
 			// customerProfilePage.preferencesComponent().verifyDefautAccountTickMark();
@@ -699,20 +718,16 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			merchantMenuComponent.clickUserName();
+			topBarComponent.clickUserNameDrpDwn();
 			Thread.sleep(2000);
-			merchantMenuComponent.clickChangePassword();
+			topBarComponent.userNameDropDownComponent().clickChangePassword();
 			Thread.sleep(2000);
-			// customerProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			// customerProfilePage.changePasswordComponent().verifyHeading("heading1");
-			// customerProfilePage.changePasswordComponent().verifyContent(data.get("content"));
-			merchantProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
-			merchantProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
-			merchantProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
-			merchantProfilePage.changePasswordComponent().clickIcon();
-			merchantProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
-			merchantProfilePage.changePasswordComponent().clickSave();
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
+			merchantProfilePage.changePasswordPage().clickIcon();
+			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
+			merchantProfilePage.changePasswordPage().clickSave();
 			Thread.sleep(3000);
 			// customerProfilePage.changePasswordComponent().verifyContaint(data.get("successContent"));
 			// homePage.verifyLandingPageHeading(data.get("createHeading"));
@@ -731,16 +746,17 @@ public class MerchantProfileTest {
 			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
 			Thread.sleep(1000);
-			merchantProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
+			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
 			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.changePasswordComponent().authyComponent().fillInput(data.get("code"));
-			merchantProfilePage.changePasswordComponent().fillCurrentPassword(data.get("currentPassword"));
-			merchantProfilePage.changePasswordComponent().clickIcon();
-			merchantProfilePage.changePasswordComponent().viewCurrentPassword();
-			merchantProfilePage.changePasswordComponent().fillNewPassword(data.get("newPassword"));
-			merchantProfilePage.changePasswordComponent().fillConfirmNewPassword(data.get("confirmPassword"));
-			merchantProfilePage.changePasswordComponent().clickTab();
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			merchantProfilePage.changePasswordPage().clickIcon();
+			merchantProfilePage.changePasswordPage().viewCurrentPassword();
+			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
+			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
+			merchantProfilePage.changePasswordPage().clickTab();
 			// customerProfilePage.changePasswordComponent().clickSave();
+			Thread.sleep(3000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 //				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
@@ -749,7 +765,7 @@ public class MerchantProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"test change password with invalis  credentials failed due to exception " + e);
+					"test change password with invalid  credentials failed due to exception " + e);
 		}
 	}
 
@@ -765,7 +781,7 @@ public class MerchantProfileTest {
 			tokenAccountPage.userNameDropDownComponent().clickPreferences();
 			// customerProfilePage.preferencesComponent().verifyPreferencesBackGroundColor(data.get("cssProp"),
 			// data.get("expValue"), data.get("expColor"));
-			merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
+			merchantProfilePage.preferencesPage().selectTimeZone(data.get("timeZone"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testPreferencesSelectTimeZone is failed due to Exception " + e);
@@ -779,12 +795,11 @@ public class MerchantProfileTest {
 		try {
 
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			Thread.sleep(1000);
 			merchantMenuComponent.clickUserName();
 			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
-			merchantProfilePage.changePasswordComponent().verifyAuthyHeading(data.get("heading"));
+			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
 			// customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),

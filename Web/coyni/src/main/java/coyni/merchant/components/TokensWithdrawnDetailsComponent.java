@@ -6,12 +6,12 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensWithdrawnDetailsComponent extends BrowserFunctions {
-	
+
 	private By lblTranscationsCount = By.cssSelector("");
 
 	private By lblTokensWithdrawTransactions = By.xpath("//h1[text()='Token Withdraw Details']");
 
-	private By lblTokensWithdrawn = By.xpath("//span[contains(text(),'Withdrawn')]");
+	private By lblTokensWithdrawn = By.xpath("//span[text='Tokens Withdrawn')]");
 
 	public String getTokensWithdrawn() {
 		return getText(lblTokensWithdrawn, "Tokens Withdrawn");

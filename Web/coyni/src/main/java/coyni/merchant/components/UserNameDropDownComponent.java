@@ -24,6 +24,10 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 
 	}
 
+	public void clickDropDown() {
+		click(dropwnUserName, "Drop Down");
+	}
+
 	public void verifyUserDetailsNameHeading() {
 		new CommonFunctions().elementView(userDetailsNameHeading, "user name");
 	}
@@ -68,9 +72,9 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(dropwnUserName, "Request");
 	}
 
-//		public void verifysignOutView() {
-//			new CommonFunctions().elementView(signOutIcon, "SignOut");
-//		}
+//			public void verifysignOutView() {
+//				new CommonFunctions().elementView(signOutIcon, "SignOut");
+//			}
 
 	public void verifyUserNameView() {
 		new CommonFunctions().elementView(dropwnUserName, "UserName");

@@ -27,7 +27,7 @@ public class BankAccountPage extends BrowserFunctions {
 	private By txtPassword = By.xpath("//input[@name='acctForm:j_idt149:0:password_']");
 	private By btnSelectAnotherInst = By.xpath("//a[@id='acctForm:selectFI']");
 	private By btnBankNext = By.xpath("//a[@id='acctForm:addFiNext']");
-	private By chkbxBank = By.xpath("(//div[@class='custom-control custom-checkbox'])");
+	private By chkbxBank = By.xpath("(//div[@class='custom-control custom-checkbox'])[3]");
 	private By next = By.xpath("//span[.='Next']");
 	private By informationAboutFiesrvHdg = By.xpath("//h1[text()='Information About Fiserv']");
 	private By lblAddBankAccount = By.xpath("//h1[text()='Add Bank Account']");
@@ -75,7 +75,7 @@ public class BankAccountPage extends BrowserFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next");
+		click(next, "Next");
 	}
 
 	public void clickExit() {
@@ -130,4 +130,5 @@ public class BankAccountPage extends BrowserFunctions {
 	public void switchTab() {
 		new CommonFunctions().switchTodWindow();
 	}
+
 }
