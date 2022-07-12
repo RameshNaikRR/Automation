@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.ChangePasswordComponent;
-import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.PreferencesComponent;
 import coyni.merchant.components.ToastComponent;
 import coyni.merchant.components.UserDetailsComponent;
@@ -28,8 +27,8 @@ public class MerchantProfilePage extends BrowserFunctions {
 		new CommonFunctions().elementView(lblUserName, "AccountUser");
 	}
 
-	public MerchantMenuComponent merchantMenuComponent() {
-		return new MerchantMenuComponent();
+	public UserDetailsPage userDetailsPage() {
+		return new UserDetailsPage();
 	}
 
 	public UserDetailsComponent userDetailsComponent() {

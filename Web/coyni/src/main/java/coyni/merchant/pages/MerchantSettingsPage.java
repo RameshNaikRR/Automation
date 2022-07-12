@@ -2,6 +2,7 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.MerchantSettingsSideBarMenuComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -11,4 +12,9 @@ public class MerchantSettingsPage extends BrowserFunctions {
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Merchant settings page heading ", Heading);
 	}
+
+	public MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent() {
+		return new MerchantSettingsSideBarMenuComponent();
+	}
+	
 }

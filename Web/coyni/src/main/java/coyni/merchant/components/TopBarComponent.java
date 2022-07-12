@@ -10,12 +10,12 @@ public class TopBarComponent extends BrowserFunctions {
 	private By drpdwnUserName = By.xpath("//span[contains(@class,'cursor-pointer')]/..");
 	private By iconNotification = By.xpath("//button[contains(@class,'icon-notification')]");
 
-	public void VerifyTitle(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTitle, "Title Heading", expHeading);
+	public void VerifyTitle() {
+		new CommonFunctions().elementView(lblTitle, "Title has been ");
 	}
 
 	public void clickUserNameDrpDwn() {
-		click(drpdwnUserName, "User Name");
+		click(drpdwnUserName, "User Name Drop Down ");
 	}
 
 	public void verifyUserNameDrpDwn() {
@@ -34,7 +34,7 @@ public class TopBarComponent extends BrowserFunctions {
 		return new AuthyComponent();
 	}
 
-	public UserDetailsComponent userDetailsComponent() {
-		return new UserDetailsComponent();
+	public TopBarDrpDwnComponent topBarDrpDwnComponent() {
+		return new TopBarDrpDwnComponent();
 	}
 }

@@ -23,7 +23,6 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions {
 
-	
 	private By txtEmail = By.name("email");
 	private By txtPassword = By.name("password");
 	private By lnkForgotEmail = By.xpath("//button[text()='Forgot Email?']");
@@ -187,6 +186,7 @@ public class LoginPage extends BrowserFunctions {
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
 	}
+
 	public ForgotPasswordComponent forgotPasswordComponent() {
 		return new ForgotPasswordComponent();
 	}

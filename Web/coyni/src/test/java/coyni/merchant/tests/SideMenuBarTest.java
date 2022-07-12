@@ -53,24 +53,15 @@ public class SideMenuBarTest {
 	public void testMerchantActivityDrpDwnBtns(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			for (int i = 0; i < 1; i++) {
-				sideMenuBarComponent.clickMerchantActivityDrpDwn();
-				for (int j = 1; j <= 4; j++) {
-					if (1 == j) {
-						sideMenuBarComponent.clickDashboard();
-						sideMenuBarComponent.dashBoardPage().verifyHeading(data.get("dashboardHeading"));
-					} else if (2 == j) {
-						sideMenuBarComponent.clickTransactions();
-						sideMenuBarComponent.transactionsPage().verifyHeading(data.get("transactionsHeading"));
-					} else if (3 == j) {
-						sideMenuBarComponent.clickPayoutHistory();
-						sideMenuBarComponent.payOutHistoryPage().verifyHeading(data.get("payOutHistoryHeading"));
-					} else {
-						sideMenuBarComponent.clickReserveHistory();
-						sideMenuBarComponent.reserveHistoryPage().verifyHeading(data.get("reserveHistoryHeading"));
-					}
-				}
-			}
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickDashboard();
+			sideMenuBarComponent.dashBoardPage().verifyHeading(data.get("dashboardHeading"));
+			sideMenuBarComponent.clickTransactions();
+			sideMenuBarComponent.transactionsPage().verifyHeading(data.get("transactionsHeading"));
+			sideMenuBarComponent.clickPayoutHistory();
+			sideMenuBarComponent.payOutHistoryPage().verifyHeading(data.get("payOutHistoryHeading"));
+			sideMenuBarComponent.clickReserveHistory();
+			sideMenuBarComponent.reserveHistoryPage().verifyHeading(data.get("reserveHistoryHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantActivityDrpDwnBtns failed due to " + e);
 		}
@@ -81,21 +72,14 @@ public class SideMenuBarTest {
 	public void testSideMenuBarBtns(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			for (int i = 0; i < 4; i++) {
-				if (0 == i) {
-					sideMenuBarComponent.clickTokenAccount();
-					sideMenuBarComponent.tokenAccountPage().verifyHeading(data.get("tokenAccountHeading"));
-				} else if (1 == i) {
-					sideMenuBarComponent.clickExportFiles();
-					sideMenuBarComponent.exportfilesPage().verifyHeading(data.get("exportFilesHeading"));
-				} else if (2 == i) {
-					sideMenuBarComponent.clickMerchantSettings();
-					sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("merchantSettingsHeading"));
-				} else {
-					sideMenuBarComponent.clickGetHelp();
-					sideMenuBarComponent.getHelpPage().verifyHeading(data.get("getHelpHeading"));
-				}
-			}
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.tokenAccountPage().verifyHeading(data.get("tokenAccountHeading"));
+			sideMenuBarComponent.clickExportFiles();
+			sideMenuBarComponent.exportfilesPage().verifyHeading(data.get("exportFilesHeading"));
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("merchantSettingsHeading"));
+			sideMenuBarComponent.clickGetHelp();
+			sideMenuBarComponent.getHelpPage().verifyHeading(data.get("getHelpHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBarBtns failed due to " + e);
 		}

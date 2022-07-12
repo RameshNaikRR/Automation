@@ -1,6 +1,7 @@
 package coyni.merchant.pages;
 
 import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.BankAccountsComponent;
@@ -60,7 +61,6 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public void verifyLabelYourTokenAccount() {
 		new CommonFunctions().elementView(lblYourTokenAccount, "Your Token Account");
-
 	}
 
 	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
@@ -278,10 +278,6 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new TransactionsListComponent();
 	}
 
-	public UserNameDropDownComponent userNameDropDownComponent() {
-		return new UserNameDropDownComponent();
-	}
-
 	public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
 		return new TokensPurchasedDetailsComponent();
 	}
@@ -321,5 +317,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
+	}
+
+	public UserNameDropDownComponent userNameDropDownComponent() {
+		return new UserNameDropDownComponent();
 	}
 }
