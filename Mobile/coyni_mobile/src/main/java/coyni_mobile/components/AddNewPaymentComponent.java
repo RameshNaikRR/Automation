@@ -11,13 +11,17 @@ import io.appium.java_client.MobileBy;
 public class AddNewPaymentComponent extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
-	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
-	private By btnDebitCard = MobileBy
-			.xpath("//*[@text='Debit Card']");
-	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'imgCCardArrowC')]");
+	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'tvBankHead')]");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvBDCHead')]");
+	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCCard')]");
+	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+		if (getElementList(lblHeading, "Heading").size() > 0) {
+			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+
+		}
+
 	}
 
 	public void clickExternalBankAcount() {
@@ -32,12 +36,21 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		click(btnCreditCard, "Credit Card");
 	}
 
+	public void clickSignetAccount() {
+		click(btnSignetAccount, "Signet Account");
+	}
+
 	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
 		return new AddExternalBankAccountComponent();
 	}
 
+//	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
+//		return new AddExternalBankAccountComponent();
+//	}
+
 	public AddCardPage addCardPage() {
 		return new AddCardPage();
 	}
+
 	
 }

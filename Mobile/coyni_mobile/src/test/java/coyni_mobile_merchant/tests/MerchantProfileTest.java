@@ -1825,4 +1825,172 @@ public class MerchantProfileTest {
 			ExtentTestManager.setFailMessageInReport("testLogOut failed due to exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			businessTokenAccountPage.clickProfile();
+			Thread.sleep(1000);
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+			Thread.sleep(1000);
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyHeading(data.get("addPaymentHeading"));
+			Thread.sleep(1000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine1(data.get("addressLine1"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine2(data.get("addressLine2"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			Thread.sleep(5000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickAddCard();
+			Thread.sleep(8000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.allDonePage().verifyAllDone(data.get("doneHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.allDonePage().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters("strParams")
+	public void testEditDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			// customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCVVorCVC(data.get("cvvOrCVC"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine1(data.get("addressLine1"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine2(data.get("addressLine2"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			Thread.sleep(2000);
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickRemove();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickYes();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+		
+	}
+    @Test
+	@Parameters({"strParams"})
+	public void testDebitCardWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			Thread.sleep(2000);
+			merchantProfilePage.clickPaymentMethods();
+			Thread.sleep(3000);
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			DriverFactory.getDriver().hideKeyboard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			if (data.get("validateAddress").equalsIgnoreCase("yes")) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillCity(data.get("city"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().selectState(data.get("state"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddCard();
+			}
+
+			if (!data.get("errMsg").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+			}
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+    @Test
+    @Parameters({"strParams"})
+    public void testAddSignetAccount(String strParams) {
+    	try {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		businessTokenAccountPage.clickProfile();
+		Thread.sleep(2000);
+		merchantProfilePage.clickPaymentMethods();
+		Thread.sleep(3000);
+		merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+		merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
+		merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillNameOnCard(data.get("nameOnCard"));
+		merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillSignetWalletId(data.get("signetWalletID"));
+		merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillCity(data.get("city"));
+        Thread.sleep(2000);
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().selectState(data.get("state"));
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddCard();
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));  
+        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().allDonePage().clickDone();
+		} catch (Exception e) {
+		    ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+    }
+	
 }

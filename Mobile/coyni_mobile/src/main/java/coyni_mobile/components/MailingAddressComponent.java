@@ -2,6 +2,7 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.pages.AllDonePage;
 import coyni_mobile.pages.PreAuthorizationPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
@@ -22,7 +23,7 @@ public class MailingAddressComponent extends MobileFunctions {
 			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
 	private By lblCountry = MobileBy
 			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
-	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')]");
+	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
 	private By txtState = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
@@ -31,7 +32,6 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
 
-//	private By txtCurrentState = MobileBy.xpath("//*[contains(@text,'California')]");
 	private By txtCurrentState(String currentState) {
 		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
 	}
@@ -91,15 +91,29 @@ public class MailingAddressComponent extends MobileFunctions {
 		new CommonFunctions().clickTab();
 		DriverFactory.getDriver().hideKeyboard();
 	}
+    public void scrollDownToAddress2() {
+    	scrollDownToElement(txtAddressLine2, "Address2");
+    }
+	public void scrollDownToSave() {
+		scrollDownToElement(btnSave, "Save");
+	}
+
+//	public void fillZipCode(String zipCode) {
+//		click(txtZipCode, "zip Code");
+//		enterText(txtZipCode, zipCode, "Zip Code");
+//		new CommonFunctions().clickEnter();
+//		// DriverFactory.getDriver().hideKeyboard();
+//
+//	}
 
 	public void verifyCountry(String expCountry) {
+		scrollDownToElement(btnSave, "Save");
 		new CommonFunctions().verifyLabelText(lblCountry, "Country", expCountry);
 	}
 
 	public void clickAddCard() {
 		scrollDownToElement(btnAddCard, "Add Card");
 		click(btnAddCard, "Add Card");
-
 	}
 
 	public void clickSave() {
@@ -143,5 +157,9 @@ public class MailingAddressComponent extends MobileFunctions {
 	public PreAuthorizationPage preAuthorizationPage() {
 		return new PreAuthorizationPage();
 	}
+	public AllDonePage allDonePage() {
+		return new AllDonePage();
+	}
+
 
 }

@@ -16,18 +16,23 @@ public class AddCardPage extends MobileFunctions {
 	private By txtCVVorCVC = MobileBy.xpath("//*[contains(@resource-id,'etCVV')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
 	private By iconCamera = MobileBy.xpath("//*[contains(@resource-id,'readCardIV')]");
+	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 	
 	public void fillNameOnCard(String nameOnCard) {
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 	public void fillCardNumber(String cardNumber) {
 		click(txtCardNumber, "Card Number");
 		enterText(txtCardNumber, cardNumber, "Card Number");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 	public void fillCardExp(String cardExp) {
 		click(txtCardExp, "CardExp");
 		enterText(txtCardExp, cardExp, "CardExp");
+		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clickEnter();
 	}
 	public void fillCVVorCVC(String cVVorCVC) {
 		click(txtCVVorCVC, "CVVorCVC");
@@ -35,9 +40,12 @@ public class AddCardPage extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().clickEnter();
 	}
+	public void fillSignetWalletId(String signetWalletId) {
+		click(txtSignetWalletId, "Signet Wallet ID");
+		enterText(txtSignetWalletId, signetWalletId, "Signet Wallet ID");
+	}
 	public void clickNext() {
-//		scrollDownToElement(btnNext,"Next");
-//		DriverFactory.getDriver().hideKeyboard();
+		scrollDownToElement(btnNext,"Next");
 		click(btnNext, "Next");
 	}
 	public void clickCamera() {

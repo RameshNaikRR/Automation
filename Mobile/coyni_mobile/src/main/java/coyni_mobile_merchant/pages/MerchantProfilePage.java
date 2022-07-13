@@ -269,5 +269,8 @@ public class MerchantProfilePage extends MobileFunctions {
 	public SetUpTouchIDPopup setUpTouchIDPopup() {
 		return new SetUpTouchIDPopup();
 	}
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
 
 }
