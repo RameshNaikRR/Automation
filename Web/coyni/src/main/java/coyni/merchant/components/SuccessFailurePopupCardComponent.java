@@ -13,9 +13,11 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 	private By lblTransactionFailed = By.cssSelector("");
 	private By tryAgain = By.xpath("");
 	private By lblFailedMessage = By.xpath("");
+	private By lblSignetDeleted = By.xpath("//h1[text()='Signet Account']");
 	private By btnBuyCoyni = By.xpath("//button[contains(text(),'Buy Coyni')]");
 	private By lblTransactionSuccessful = By.xpath("//div[text()='Transaction Successful']");
 	private By lblRequestSuccessful = By.xpath("//div[text()='Tokens Requested Successfully']");
+	private By lblSignetDeleted1 = By.xpath("//h1[text()='Removed Successfully']");
 	private By lblRemovedSuccessfully = By.xpath("//h1[contains(text(),'Payment Method Removed Successfully')]");
 	private By lblMessage = By.xpath("//h2[text()='You successfully sent']");
 	private By btnDone = By.xpath("//button[text()='Done']");
@@ -81,6 +83,14 @@ public class SuccessFailurePopupCardComponent extends BrowserFunctions {
 
 	public void clickClose() {
 		click(btnClose, "Close");
+	}
+
+	public void verifySignetDeleteHeading(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(lblSignetDeleted, "Signet Account Added Successfully", expSignetHeading);
+	}
+
+	public void verifySignetDeleteHeading2(String expSignetHeading) {
+		new CommonFunctions().verifyLabelText(lblSignetDeleted1, "Signet Account Added Successfully", expSignetHeading);
 	}
 
 //

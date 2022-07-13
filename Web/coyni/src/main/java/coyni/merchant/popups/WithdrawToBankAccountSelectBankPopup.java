@@ -17,8 +17,8 @@ public class WithdrawToBankAccountSelectBankPopup extends BrowserFunctions {
     public void clickOnAddPayment() {
     	click(lnkAddpayment, "Click AddPayment");
     }
-    public AddExternalBankAccountPopup addExternalBankAccountPopup() {
-    	return new AddExternalBankAccountPopup();
+    public AddBankAccountPopup addExternalBankAccountPopup() {
+    	return new AddBankAccountPopup();
     }
     public void clickNext() {
     	click(btnNext, "Next");

@@ -11,8 +11,8 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class AddNewDebitCardPopup extends BrowserFunctions{
-	
+public class AddNewDebitCardPopup extends BrowserFunctions {
+
 	private By txtNameOnCard = By.xpath("//input[@id ='name-on-card']");
 	private By txtCardNumber = By.name("cardNumber");
 	private By lblCardType = By.xpath("//input[@id='card-number']/../following-sibling::*[1]");
@@ -42,6 +42,7 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 		new CommonFunctions().verifyLabelText(lblErrorMsg, "Error Message", expErrorMsg);
 
 	}
+
 	public void verifyAddNewDebitCardHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Add New Credit Card PopUp Heading", expHeading);
 	}
@@ -49,10 +50,12 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
+
 	public void clickClose() {
 		new NavigationComponent().clickClose();
-	
+
 	}
+
 	public void clickBack() {
 		new NavigationComponent().clickBack();
 	}
@@ -68,7 +71,7 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 			ExtentTestManager.setFailMessageInReport("invalid card type: " + cardType.toUpperCase());
 		}
 	}
-	
+
 	/**
 	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
 	 * spaces maxiPlus
@@ -76,43 +79,45 @@ public class AddNewDebitCardPopup extends BrowserFunctions{
 	public void validateNameOnCard(String nameOnCard) {
 		new SignupPage().validateNameField(txtNameOnCard, "Name on Card", nameOnCard);
 	}
-	
+
 	public void validateCardNumber(String cardNumber) {
 		validateCardNumberAndCvv(txtCardNumber, "Card Number", cardNumber);
 	}
+
 	public void validateCardExpiry(String cardExpiry) {
 		new SignupPage().validateNumber(txtCardExp, "Card Expiry", cardExpiry);
 	}
+
 	public void validateCVVorCVC(String cvvOrCVC) {
 		validateCardNumberAndCvv(txtCVVorCVC, "CVV or CVC", cvvOrCVC);
 	}
+
 	/**
-	 * Order -minChar, maxChar, specialChar, alphabets,
-	 * spaces ,maxiPlus
+	 * Order -minChar, maxChar, specialChar, alphabets, spaces ,maxiPlus
 	 */
-	public void validateCardNumberAndCvv(By ele,String eleName, String textField) {
+	public void validateCardNumberAndCvv(By ele, String eleName, String textField) {
 		String[] field = textField.split(",");
-		for(int i=0;i<2;i++) {
-		new CommonFunctions().validateField(ele, eleName, field[i]);
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
 		}
 		for (int i = 2; i < 5; i++) {
 			new CommonFunctions().validateTextFeild(ele, eleName, field[i]);
 		}
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[5]);
 	}
-	
+
 	public void selectState(String expOption) {
-	       new CommonFunctions().selectCustomDropDown(expOption, "Alasak");
+		new CommonFunctions().selectCustomDropDown(expOption, "Alasak");
 	}
 
 	public void clickNext() {
-		click(btnNext,"click Next");
+		click(btnNext, "click Next");
 	}
-	
+
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
 	}
-	
+
 	public PreAuthorizationPopup preAuthorizationPopup() {
 		return new PreAuthorizationPopup();
 	}

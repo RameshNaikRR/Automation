@@ -378,7 +378,6 @@ public class TokenAccountTest {
 		}
 	}
 
-
 	@Test
 	public void testTokenAccountActivityDetails() throws InterruptedException {
 		try {
@@ -761,13 +760,11 @@ public class TokenAccountTest {
 			tokenAccountPage.verifyLabelYourTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup()
-					.verifyHeading();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup()
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup().verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
 					.navigationComponent().clickBack();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addExternalBankAccountPopup()
-					.verifyHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup().verifyHeading();
 			// tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickClose();
 			tokenAccountPage.verifyLabelYourTokenAccount();
 
@@ -783,7 +780,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickaddExternalBankAccount();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
 //			merchantSettingTest.testAddExternalBankAccount(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);

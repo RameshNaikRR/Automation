@@ -11,15 +11,20 @@ import ilabs.WebFramework.BrowserFunctions;
 public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	private By headingAddNewPaymentMethod = By.xpath("//h1[contains(text(),'Add New Payment Method')]");
-	private By btnExternalBankAccount = By.xpath("//span[contains(text(),'Bank Account')]");
+	private By btnBankAccount = By.xpath("//span[contains(text(),'Bank Account')]");
+	private By btnSignetAccount = By.xpath("//span[contains(text(),'Signet Account')]");
 	private By btnDebitCard = By.xpath("//span[text()='Debit Card'] | //span[text()='Add New Debit Card']");
-	private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
-	private By lblExternalBankAccountCount = By.xpath("(//span[@class='count'])[1]");
+	private By lblBankAccountCount = By.xpath("(//span[@class='count'])[1]");
 	private By lblDebitCardCount = By.xpath("(//span[@class='count'])[2]");
-	private By lblCreditCardCount = By.xpath("(//span[@class='count'])[3]");
 
-	public void clickaddExternalBankAccount() {
-		click(btnExternalBankAccount, "Click ExternaBankAccount");
+	public void clickBankAccount() {
+
+		click(btnBankAccount, "Click Bank Account");
+
+	}
+	
+	public void clickAddSignetAccount() {
+		click(btnSignetAccount, "Click Signet Account");
 
 	}
 
@@ -28,20 +33,12 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	}
 
-	public void clickCreditCard() {
-		click(btnCreditCard, "Click CreditCard");
-	}
-
-	public String getExternalBankAccountCount() {
-		return getText(lblExternalBankAccountCount, "External Bank Account Count");
+	public String getBankAccountCount() {
+		return getText(lblBankAccountCount, "Bank Account Count");
 	}
 
 	public String getDebitCardCount() {
 		return getText(lblDebitCardCount, "Debit Card Count");
-	}
-
-	public String getCreditCardCount() {
-		return getText(lblCreditCardCount, "Credit Card Count");
 	}
 
 	public AddCardComponent addCardComponent() {
@@ -64,8 +61,11 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		return new NavigationComponent();
 	}
 
-	public AddExternalBankAccountPopup addExternalBankAccountPopup() {
-		return new AddExternalBankAccountPopup();
+	public AddBankAccountPopup addBankAccountPopup() {
+		return new AddBankAccountPopup();
 	}
 
+	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
+		return new AddNewSignetAccountPopup();
+	}
 }
