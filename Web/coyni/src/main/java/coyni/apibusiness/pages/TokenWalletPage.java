@@ -3,7 +3,6 @@ package coyni.apibusiness.pages;
 import org.openqa.selenium.By;
 
 import coyni.api.business.popups.TokenWalletTransferTokenPopup;
-import coyni.api.business.popups.WithdrawCoyniToUSDPopup;
 import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.PaymentMethodComponent;

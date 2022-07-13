@@ -136,11 +136,20 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(getLblIDheadings("3"), "DepositID      ", DepositID);
 	}
 
+	public void verifyLblWithdrawId(String withdrawID) {
+		new CommonFunctions().verifyLabelText(getLblIDheadings(withdrawID), "WithdrawID", withdrawID);
+	}
+
 //	public void getBuyTokenTransactionType() {
 //		new CommonFunctions().verifyLabelText(verifyTransactionType("Buy Token"), "Buy Token", "Buy Token");
 //	}
 	public void getBuyTokenTransactionType() {
 		String TransactionType = getText(verifyTransactionType("Buy Token"), "");
+		ExtentTestManager.setInfoMessageInReport("Transaction Type:   " + TransactionType);
+	}
+
+	public void getWithdrawTransactionType() {
+		String TransactionType = getText(verifyTransactionType("Withdraw"), "");
 		ExtentTestManager.setInfoMessageInReport("Transaction Type:   " + TransactionType);
 	}
 
@@ -163,6 +172,11 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getBuyTokenTransactionSubType() {
+		String TransactionsubType = getText(verifyLblTransactionSubType, "");
+		ExtentTestManager.setInfoMessageInReport("TransactionsubType:   " + TransactionsubType);
+	}
+
+	public void getWithdrawTransactionSubType() {
 		String TransactionsubType = getText(verifyLblTransactionSubType, "");
 		ExtentTestManager.setInfoMessageInReport("TransactionsubType:   " + TransactionsubType);
 	}
@@ -217,6 +231,15 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public void getBuyTokenCreatedDate() {
 		String date = getText(getCreatedDate("3"), "");
+		if (!date.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Wallet Transfer Created date: " + date);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Wallet Transfer Created date: " + date);
+		}
+	}
+
+	public void getWithdrawCreatedDate() {
+		String date = getText(getCreatedDate("4"), "");
 		if (!date.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Wallet Transfer Created date: " + date);
 		} else {
@@ -283,6 +306,42 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void getBuyTokenAccountBalance() {
+		String AccountBalance = getText(getAmountDetails("4"), "");
+		if (!AccountBalance.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Account Balance: " + AccountBalance);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Account Balance: " + AccountBalance);
+		}
+	}
+
+	public void getWithdrawPurchaseAmount() {
+		String PurchaseAmount = getText(getAmountDetails("1"), "");
+		if (!PurchaseAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + PurchaseAmount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Purchase Amount: " + PurchaseAmount);
+		}
+	}
+
+	public void getWithdrawProcessingFee() {
+		String ProcessingFee = getText(getAmountDetails("2"), "");
+		if (!ProcessingFee.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Processing Fee: " + ProcessingFee);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
+		}
+	}
+
+	public void getWithdrawTotalAmount() {
+		String TotalAmount = getText(getAmountDetails("3"), "");
+		if (!TotalAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Total Amount: " + TotalAmount);
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
+		}
+	}
+
+	public void getWithdrawAccountBalance() {
 		String AccountBalance = getText(getAmountDetails("4"), "");
 		if (!AccountBalance.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Account Balance: " + AccountBalance);
@@ -450,6 +509,9 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public void verifyBuyTokenType() {
 		new CommonFunctions().elementView(getType("Buy Token"), "Buy Token");
 	}
+	public void verifyWithdrawType() {
+		new CommonFunctions().elementView(getType("Withdraw"), "Withdraw");
+	}
 
 	public void verifyWalletTransferSubType() {
 		new CommonFunctions().elementView(getSubType("Transfer"), "Transfer");
@@ -460,6 +522,9 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyBuyTokenSubType() {
+		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
+	}
+	public void verifyWithdrawSubType() {
 		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
 	}
 

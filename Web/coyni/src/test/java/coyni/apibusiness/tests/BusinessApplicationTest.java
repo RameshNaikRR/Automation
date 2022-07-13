@@ -632,4 +632,18 @@ public class BusinessApplicationTest {
 			ExtentTestManager.setFailMessageInReport("testDBAInformation failed due to Exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationSubmission(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("expHeading"));
+			registrationStartPage.applicationSubmissionPage().verifyDescription();
+			registrationStartPage.applicationSubmissionPage().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
+		}
+	}
 }

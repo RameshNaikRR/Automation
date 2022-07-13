@@ -245,6 +245,7 @@ public class TokenWalletTest {
 			tokenWalletPage.clickWallet(data.get("walletNum"));
 			tokenWalletPage.filterComponent().clickFilter();
 			tokenWalletPage.filterComponent().clickBuyTokenChkBx();
+			tokenWalletPage.filterComponent().clickInprogressChkbx();
 			tokenWalletPage.filterComponent().clickApplyFilter();
 			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenType();
 			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenSubType();
@@ -1119,58 +1120,136 @@ public class TokenWalletTest {
 		}
 	}
 
-}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawInProgressBankAccountTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickWithdrawChkbx();
+			tokenWalletPage.filterComponent().clickBankAccountChkbx();
+			tokenWalletPage.filterComponent().clickInprogressChkbx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawType();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
+			Thread.sleep(2000);
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "In Progress");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawId(data.get("lblWithdrawID"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionSubType();
+			tokenWalletPage.transactionDetailsComponent().getReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
+			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().getBankName();
+			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
+			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWithdrawBankAccountInProgressTransactionDetails failed due to " + e);
+		}
+	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testTokenWalletBalance(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenwalletPage.verifyTokenWalletBalanceView(data.get("walletBalanceHeading"));
-//			tokenwalletPage.getWalletBalance();
-//			tokenwalletPage.verifyCurrencyView();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testTransferTokensView(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenwalletPage.clickItem(data.get("walletName"));
-//			tokenwalletPage.verifyMouseActionTransferTokens();
-//			tokenwalletPage.clickTransferTokens();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokensView(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenwalletPage.clickItem(data.get("walletName"));
-//			tokenwalletPage.verifyMouseActionBuyTokens();
-//			tokenwalletPage.clickBuyTokens();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUsdView(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenwalletPage.clickItem(data.get("walletName"));
-//			tokenwalletPage.verifyMouseActionWithdrawToUsd();
-//			tokenwalletPage.clickWithdrawToUsd();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawFailedBankAccountTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickWithdrawChkbx();
+			tokenWalletPage.filterComponent().clickBankAccountChkbx();
+			tokenWalletPage.filterComponent().clickFailedChkbx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawType();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
+			Thread.sleep(2000);
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "Failed");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawId(data.get("lblWithdrawID"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionSubType();
+			tokenWalletPage.transactionDetailsComponent().getReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
+			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().getBankName();
+			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
+			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWithdarwBankAccountFailedTransactionDetails failed due to " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawCancelledBankAccountTransactionDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.clickWallet(data.get("walletNum"));
+			tokenWalletPage.filterComponent().clickFilter();
+			tokenWalletPage.filterComponent().clickWithdrawChkbx();
+			tokenWalletPage.filterComponent().clickBankAccountChkbx();
+			tokenWalletPage.filterComponent().clickCancelledChkbx();
+			tokenWalletPage.filterComponent().clickApplyFilter();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawType();
+			tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
+			Thread.sleep(2000);
+			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "Cancelled");
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawId(data.get("lblWithdrawID"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionType();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionSubType();
+			tokenWalletPage.transactionDetailsComponent().getReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
+			tokenWalletPage.transactionDetailsComponent().verifyAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
+			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
+			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().getBankName();
+			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
+			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWithdarwBankAccountCancelledTransactionDetails failed due to " + e);
+		}
+	}
+
+}

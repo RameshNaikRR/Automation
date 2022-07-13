@@ -203,6 +203,38 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testDBAInformation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.phoneNumberView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.companyEmailView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.customerServiceView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.businessTypeView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.clickEditIcon();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().addressView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.fillPhoneNumber(data.get("phoneNumber"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.fillCompanyEmail(data.get("companyEmail"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.clickSaveEnabled();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test DBA Information Edit  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testDBAInformationEdit(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -227,6 +259,52 @@ public class BusinessSettingsTest {
 					.fillCompanyEmail(data.get("companyEmail"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
 					.clickSaveEnabled();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test DBA Information Edit  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDBAInformationInvalidInfo(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.phoneNumberView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.companyEmailView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.customerServiceView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.businessTypeView();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.clickEditIcon();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().addressView();
+//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+//					.fillPhoneNumber(data.get("phoneNumber"));
+//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+//					.fillCompanyEmail(data.get("companyEmail"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+					.clickSaveEnabled();
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(500);
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+						.fillCompanyEmail(data.get("companyEmail"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+						data.get("elementName"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(500);
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+						.fillCompanyEmail(data.get("phoneNumber"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+						data.get("elementName"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
@@ -278,6 +356,7 @@ public class BusinessSettingsTest {
 			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testCompanyInformationEdit(String strParams) {
@@ -306,7 +385,7 @@ public class BusinessSettingsTest {
 					.clickSaveEnabled();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("test Company Information  Failed due to Exception " + e);
 		}
 	}
 
@@ -352,7 +431,8 @@ public class BusinessSettingsTest {
 			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("test Companny Information  Failed due to Exception " + e);
 		}
 	}
+
 }
