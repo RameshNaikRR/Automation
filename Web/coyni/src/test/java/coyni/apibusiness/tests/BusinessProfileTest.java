@@ -1000,20 +1000,22 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyAgreementsView();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+//					.verifyBusinessAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.verifyMerchantAgreements(data.get("merchantAg"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickMerchantAgreement();
+					.clickBusinessAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyDownloadPDFlnk();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickDownloadPDF();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.VerifyAgreements();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.clickLinkAgreements();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+//					.verifyVersionMerchant();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.verifyVersionMerchant();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownload();
+					.clickiconDownloadBusiness();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyPrivacyPolicy();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
@@ -1025,7 +1027,7 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyVersionPrivacyPolicy();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownload();
+					.clickiconDownloadPrivacyPolicy();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyTermsOfService();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
@@ -1037,7 +1039,7 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyVersionTermsOfService();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownload();
+					.clickiconDownloadTermsOfService();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings Agreements failed due to Exception " + e);
 		}

@@ -31,6 +31,10 @@ public class FilterComponent extends BrowserFunctions {
 		}
 	}
 
+	public void scrollDownFilter() {
+		scrollToElement(btnFilter, "Filter");
+	}
+
 	public void verifyEndDate(String expectedDate) {
 		String actualDate = getText(txtEndDate, "end Date");
 		if (actualDate.equals(expectedDate)) {
@@ -41,12 +45,12 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public By getCheckkBoxes(String text) {
-		return By.xpath(
-				String.format("//span[text()='%s']/preceding-sibling::input", text));
+		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", text));
 	}
-    public void clickCheckBox(String text) {
-    	click(getCheckkBoxes(text), text);
-    }
+
+	public void clickCheckBox(String text) {
+		click(getCheckkBoxes(text), text);
+	}
 
 	private By getClearItems(String eleName) {
 		return By.xpath(String.format("(//button[text()='Clear'])['%s']", eleName));
@@ -65,7 +69,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void verifyFilterCursorAction() {
-		new CommonFunctions().verifyCursorAction(btnApplyFilters, "Apply Filters");
+		new CommonFunctions().verifyCursorAction(btnFilter, "Filter");
 	}
 
 	public void verifyLabelDate(String date) {
@@ -217,7 +221,11 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickApplyFilter() {
-		click(btnApplyFilters, "Apply Filters");
+		if (getElement(btnApplyFilters, "Apply Filters").isEnabled()) {
+			click(btnApplyFilters, "Apply Filters ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Apply Filters is in disabled mode");
+		}
 	}
 
 	public void clickPendingChkbx() {
@@ -287,6 +295,7 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickStartDate() {
 		click(txtStartDate, "start Date");
 	}
+
 	public CalendarComponponent calendarComponponent() {
 		return new CalendarComponponent();
 	}
