@@ -505,8 +505,8 @@ public class TokenWalletTest {
 			sideBarMenuComponent.clickTokenwallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.exportComponent().clickExport();
-			sideBarMenuComponent.exportComponent().verifyExportBackgroundColor(data.get("backgroundColor"),
-					data.get("border"));
+//			sideBarMenuComponent.exportComponent().verifyExportBackgroundColor(data.get("backgroundColor"),
+//					data.get("border"));
 			sideBarMenuComponent.exportComponent().verifyExportCursorAction();
 			sideBarMenuComponent.exportComponent().verifyExportsSelectedOptionsView();
 			sideBarMenuComponent.exportComponent().verifyDateRangeView();
