@@ -16,6 +16,7 @@ public class AgreementComponent extends MobileFunctions {
 	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@text,'Merchant’s')]");
 	private By headingPastAgreements = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'canceled')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
@@ -45,11 +46,13 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyMerchantAgreementView() {
 		new CommonFunctions().elementView(lblMerchantAgreements, "Merchant Agreements");
 		ExtentTestManager.setInfoMessageInReport("Merchant Agreements : " + getText(lblMerchantAgreements));
+		click(lblMerchantAgreements, "Merchant Agreements");
 	}
 
 	public void verifyPrivacyPolicyView() {
 		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
 		ExtentTestManager.setInfoMessageInReport("Privacy Policy : " + getText(privacyPolicy));
+		click(privacyPolicy, "Privacy Policy");
 	}
 //
 //	public void clickPrivacyPolicy() {
@@ -59,6 +62,7 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyTermsOfServiceView() {
 		new CommonFunctions().elementView(termsOfService, "Terms of Service");
 		ExtentTestManager.setInfoMessageInReport("Terms of service : " + getText(termsOfService));
+		click(termsOfService, "Terms Of Service");
 	}
 
 //	public void clickTermsOfService() {
@@ -67,7 +71,11 @@ public class AgreementComponent extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
-
+	
+	public void clickClose() {
+		click(btnClose, "Close");
+	}
+	
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

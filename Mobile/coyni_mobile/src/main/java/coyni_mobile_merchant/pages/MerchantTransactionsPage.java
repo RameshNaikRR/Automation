@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.FilterPopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -15,9 +16,18 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
 
-	private By filtersIcon = MobileBy.xpath("//*[contains(@resource-id,'filtericonIV')]");
+	private By btnfiltersIcon = MobileBy.xpath("//*[contains(@resource-id,'filter')]");
 
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'closeBtnIV')]");
+	
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+	
+	private By btnTransaction= MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
+
+
+	public int verifyTransactionsCount() {
+		 return DriverFactory.getDriver().findElements(lblNoTransactions).size();
+	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -29,7 +39,7 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	}
 
 	public void clickMerchantTransctions() {
-		click(lblMerchantTansactions, "Merchant Transactions");
+		click(btnTransaction, "Transaction");
 	}
 
 	public void verifySearchOption() {
@@ -37,7 +47,7 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	}
 
 	public void clickFilterIcon() {
-		click(filtersIcon, "Filter Icon");
+		click(btnfiltersIcon, "Filter Icon");
 	}
 
 	public FilterPopup filterPopup() {
@@ -46,6 +56,9 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	public void clickClose() {
 		click(btnCloseIcon, "Close Icon");
+	}
+	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
+		return new MerchantTransactionDetailsPage();
 	}
 
 }

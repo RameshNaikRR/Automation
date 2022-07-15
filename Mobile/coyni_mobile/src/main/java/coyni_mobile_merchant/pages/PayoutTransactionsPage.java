@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.FilterPopup;
+import freemarker.core.ReturnInstruction.Return;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class PayOutTransactionsPage extends MobileFunctions {
+public class PayoutTransactionsPage extends MobileFunctions {
 
 	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
 
@@ -18,6 +19,9 @@ public class PayOutTransactionsPage extends MobileFunctions {
 	private By lblPayOutID = MobileBy.xpath("//*[@text='Payout ID']");
 
 	private By lblPayOutTransactions = MobileBy.xpath("//*[@text='Payout Transactions']");
+	
+	private By btnPayoutTransaction = MobileBy.xpath("(//*[contains(@resource-id,'payoutSent')])[1]");
+			
 
 	public void verifySearchOption() {
 		new CommonFunctions().elementView(searchOption, "Search Option");
@@ -31,7 +35,14 @@ public class PayOutTransactionsPage extends MobileFunctions {
 		new CommonFunctions().elementView(filtersIcon, "Filters Icon");
 	}
 
+	public void clickPayoutTransaction() {
+		click(btnPayoutTransaction, "Payout Transaction");
+	}
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
+	}
+	
+	public PayoutTransactionDetailsPage payoutTransactionDetailsPage() {
+		return new PayoutTransactionDetailsPage();
 	}
 }

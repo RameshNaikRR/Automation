@@ -3,153 +3,263 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.components.NavigationComponent;
+import coyni_mobile_merchant.popups.RefundPopUp;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class MerchantTransactionDetailsPage extends MobileFunctions {
 
-	private By btnDashBoard = MobileBy.xpath("//*[contains(@resource-id,'ll_dashboard_tab')]");
+	private By lblMerchantTransactionDetailHeading = MobileBy.xpath("//*[contains(@text,'Transaction Details')]");
 
-	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'userNameTV')]");
+	private By lblTransactionType = MobileBy.xpath("//*[contains(@resource-id,'header')]");
 
-	private By lblAccountVerified = MobileBy.xpath("//*[contains(@resource-id,'tv_officially_verified')]");
+	private By lblTransactionAmount = MobileBy.xpath("(//*[contains(@resource-id,'amount')])[1]");
 
-	private By btnIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
+	private By lblStatus = MobileBy.xpath("//*[contains(@text,'Status')]/following-sibling::*[1]");
 
-	private By btnCompanyName = MobileBy.xpath("//*[contains(@resource-id,'title')]");
+	private By lblDateTime = MobileBy
+			.xpath("//*[contains(@resource-id,'Date')]|//*[contains(@resource-id,'merchantdate')]");
 
-	private By monthlyVolumeLimit = MobileBy.xpath("(//*[contains(@resource-id,'tv_monthly_volume')])[2]");
+	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'mPayoutIdTV')]");
 
-	private By highTicketLimit = MobileBy.xpath("//*[contains(@resource-id,'tv_high_tickets')]");
+	private By lblReferenceID = MobileBy
+			.xpath("//*[contains(@resource-id,'reference')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
 
-	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'merchant_balance_tv')]");
+	private By lblPayoutInformation = MobileBy.xpath("//*[contains(@text,'Payout Information')]");
 
-	private By name = MobileBy.xpath("//*[contains(@resource-id,'tvUserInfo')]");
+	private By lblPayoutdate = MobileBy.xpath("//*[contains(@resource-id,'merchantPIdateTV')]");
 
-	private By btnNotificationIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
+	private By lblTotalAmount = MobileBy.xpath(
+			"//*[contains(@resource-id,'mPItotalamountTV')] | //*[contains(@resource-id,'refundtotalAmountTV')]");
 
-	private By lblMerchant = MobileBy.xpath("//*[@text='Merchant Balance']");
+	private By lblTotalTransactions = MobileBy.xpath("//*[contains(@resource-id,'mPItotaltransactionsTV')]");
 
-	private By lblProcessingVolume = MobileBy.xpath("//*[@text='Processing Volume']");
+	private By lblDepositTo = MobileBy.xpath("//*[contains(@resource-id,'mPIdeposittoTV')]");
 
-	private By lblSaleOrderDetails = MobileBy.xpath("//*[contains(@resource-id,'tv_floating_text')]");
+	private By lblOriginlTranInfo = MobileBy.xpath("//*[contains(@text,'Original Transaction')]");
 
-	private By lblRefunds = MobileBy.xpath("//*[contains(@resource-id,'gross_amount')]");
+	private By lblFees = MobileBy.xpath("//*[contains(@resource-id,'fee')]");
 
-	private By lblMISCFees = MobileBy.xpath("//*[contains(@resource-id,'misc_fee')]");
+	private By lblRecipientName = MobileBy.xpath("//*[contains(@resource-id,'reciptantName')]");
 
-	private By lblNetAmount = MobileBy.xpath("//*[contains(@resource-id,'net_amount')]");
+	private By lblRecipientEmail = MobileBy.xpath("//*[contains(@resource-id,'ReciptantEmail')]");
 
-	private By lblProcessingFees = MobileBy.xpath("//*[contains(@resource-id,'processing_fees')]");
+	private By lblOTIDateTime = MobileBy.xpath("//*[contains(@resource-id,'OTIdate')]");
 
-	private By lblHighTicket = MobileBy.xpath("//*[contains(@resource-id,'highest_ticket')]");
+	private By lblGrossAmount = MobileBy.xpath("//*[contains(@resource-id,'grossamount')]");
 
-	private By lblAverageTicket = MobileBy.xpath("//*[contains(@resource-id,'average_ticket')]");
+	private By lblOTIFees = MobileBy.xpath("//*[contains(@resource-id,'OTIFee')]");
 
-	private By lnkViewMerchantTransactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
+	private By lblNetAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'Netamount')]| //*[contains(@resource-id,'SalesnetamountTV')]");
 
-	public void clickDashBoard() {
-		click(btnDashBoard, "DashBoard");
+	private By lblOTIReferenceID = MobileBy.xpath("//*[contains(@resource-id,'OTIrefrence')]");
+
+	private By lblSaleTranAmount = MobileBy.xpath("//*[contains(@resource-id,'SalesAmount_TV')]");
+
+	private By lblReserveAmount = MobileBy.xpath("//*[contains(@resource-id,'SalesreserveTV')]");
+
+	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'Balance')]");
+
+	private By lblSenderName = MobileBy.xpath("//*[contains(@resource-id,'sendername')]");
+
+	private By lblSenderEmail = MobileBy.xpath("//*[contains(@resource-id,'senderemail')]");
+
+	private By btnRefund = MobileBy.xpath("//*[contains(@resource-id,'RefundIV')]");
+
+	public void verifyMerchantDetails(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblMerchantTransactionDetailHeading,
+				"Merchant Transaction Details Heading", expHeading);
 	}
 
-	public void clickMerchantTransactions() {
-		scrollDownToElement(lnkViewMerchantTransactions, "Merchant Transactions");
-		click(lnkViewMerchantTransactions, "Merchant Transactions");
+	public void getTransactionType() {
+		ExtentTestManager.setInfoMessageInReport("Transaction Type : " + getText(lblTransactionType));
 	}
 
-	public void clickNotification() {
-		click(btnNotificationIcon, "Notification");
+	public void getTransactionAmount() {
+		ExtentTestManager.setInfoMessageInReport("Transaction Amount is : " + getText(lblTransactionAmount));
 	}
 
-	public void clickIcon() {
-		click(btnIcon, "Profile Icon");
+	public void getStatus() {
+		ExtentTestManager.setInfoMessageInReport("Status is " + getText(lblStatus));
 	}
 
-	public void clickCompanyName() {
-		click(btnCompanyName, "Company Name");
+	public void getDateTime() {
+		String text = getText(lblDateTime);
+		ExtentTestManager.setInfoMessageInReport("Date and Time is : " + text);
 	}
 
-	public void getMonthlyVolumeLimit() {
-		String text = getText(monthlyVolumeLimit);
-		ExtentTestManager.setInfoMessageInReport("Monthly Volume Limit: " + text);
+	public void getPayoutID() {
+		ExtentTestManager.setInfoMessageInReport("Payout ID is : " + getText(lblPayoutID));
 	}
 
-	public void getHighTicketLimit() {
-		String text = getText(highTicketLimit);
-		ExtentTestManager.setInfoMessageInReport("High Ticket Limit: " + text);
+	public void getReferenceID() {
+		String text = getText(lblReferenceID);
+		ExtentTestManager.setInfoMessageInReport("Reference ID is : " + text);
 	}
 
-	public void getName() {
-		String text = getText(name);
-		ExtentTestManager.setInfoMessageInReport("Name: " + text);
+	public void getPayoutInformation() {
+		String text = getText(lblPayoutInformation);
+		ExtentTestManager.setInfoMessageInReport("Payout Information is : " + text);
 	}
 
-	public void getUserName() {
-		String text = getText(lblUserName);
-		ExtentTestManager.setInfoMessageInReport("User Name: " + text);
+	public void getPayoutdate() {
+		String text = getText(lblPayoutdate);
+		ExtentTestManager.setInfoMessageInReport("Payout Date is : " + text);
 	}
 
-	public void getAccountVerified() {
-		String text = getText(lblAccountVerified);
-		ExtentTestManager.setInfoMessageInReport("Account Verified: " + text);
+	public void getTotalAmount() {
+		String text = getText(lblTotalAmount);
+		ExtentTestManager.setInfoMessageInReport("Total Amount is: " + text);
 	}
 
-	public void getMerchantBalance() {
-		String text = getText(lblMerchantBalance);
-		ExtentTestManager.setInfoMessageInReport("Merchant Balance " + text);
+	public void getTotalTransactions() {
+		String text = getText(lblTotalTransactions);
+		ExtentTestManager.setInfoMessageInReport("Total Transactions is : " + text);
 	}
 
-	public void verifyLabelMerchantBalance(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblMerchant, expHeading, "Merchant Balance");
-
+	public void getDepositTo() {
+		String text = getText(lblDepositTo);
+		ExtentTestManager.setInfoMessageInReport("Deposit To : " + text);
 	}
 
-	public void verifyLabelProcessingVolume(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblProcessingVolume, expHeading, "Processing Volume");
-
+	public void getMerchantPayoutDetails() {
+		getTransactionType();
+		getTransactionAmount();
+		getStatus();
+		getDateTime();
+		getPayoutID();
+		getReferenceID();
+		getPayoutInformation();
+		getPayoutdate();
+		getTotalAmount();
+		getTotalTransactions();
+		getDepositTo();
 	}
 
-	public void getRefund() {
-		scrollDownToElement(lblRefunds, "Refunds");
-		ExtentTestManager.setInfoMessageInReport("Refund " + getText(lblRefunds));
-
+//
+//	public void verifyRecentTransaction() {
+//		if (DriverFactory.getDriver().findElements(lblNoTransactions).size() == 0) {
+//			new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
+//		} else {
+//			ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+//		}
+//	}
+//
+	public void getOriginlTranInfo() {
+		ExtentTestManager
+				.setInfoMessageInReport("Original transaction information Heading is : " + getText(lblOriginlTranInfo));
 	}
 
-	public void getSaleOrder() {
-		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
-		ExtentTestManager.setInfoMessageInReport("Sale Order " + getText(lblSaleOrderDetails));
+	public void getFees() {
+		ExtentTestManager.setInfoMessageInReport("Deposit To : " + getText(lblFees));
 	}
 
-	public void getMISCFee() {
-		scrollDownToElement(lblMISCFees, "MISC Fees");
-		ExtentTestManager.setInfoMessageInReport("MISC Fee " + getText(lblMISCFees));
+	public void getRecipientName() {
+		ExtentTestManager.setInfoMessageInReport("Recipient Name : " + getText(lblRecipientName));
+	}
+
+	public void getRecipientEmail() {
+		ExtentTestManager.setInfoMessageInReport("Recipient Email : " + getText(lblRecipientEmail));
+	}
+
+	public void getOTIDateTime() {
+		ExtentTestManager.setInfoMessageInReport(
+				"Original transaction information Date and Time is : " + getText(lblOTIDateTime));
+	}
+
+	public void getGrossAmount() {
+		scrollDownToElement(lblGrossAmount, "Gross Amount");
+		ExtentTestManager.setInfoMessageInReport("Gross Amount : " + getText(lblGrossAmount));
+	}
+
+	public void getOTIFees() {
+		scrollDownToElement(lblOTIFees, "OTI Fees");
+		ExtentTestManager.setInfoMessageInReport("Original transaction information Fees is : " + getText(lblOTIFees));
 	}
 
 	public void getNetAmount() {
 		scrollDownToElement(lblNetAmount, "Net Amount");
-		ExtentTestManager.setInfoMessageInReport("Net Amount " + getText(lblNetAmount));
+		ExtentTestManager
+				.setInfoMessageInReport("Original transaction information Net Amount is : " + getText(lblNetAmount));
 	}
 
-	public void getProcessingFees() {
-		scrollDownToElement(lblProcessingFees, "Processing Fees");
-		ExtentTestManager.setInfoMessageInReport("Processing Fees " + getText(lblProcessingFees));
+	public void getOTIReferenceID() {
+		scrollDownToElement(lblOTIReferenceID, "OTI Reference ID");
+		ExtentTestManager.setInfoMessageInReport(
+				"Original transaction information Reference ID is : " + getText(lblOTIReferenceID));
 	}
 
-	public void getHighTicket() {
-		ExtentTestManager.setInfoMessageInReport("High Ticket " + getText(lblHighTicket));
+	public void clickRefund() {
+		click(btnRefund, "Refund");
 	}
 
-	public void getAverageTicket() {
-		ExtentTestManager.setInfoMessageInReport("Average Ticket " + getText(lblAverageTicket));
+	public void getRefundSentDetails() {
+		getTransactionType();
+		getTransactionAmount();
+		getStatus();
+		getDateTime();
+		getReferenceID();
+		getFees();
+		getTotalAmount();
+		getRecipientName();
+		getRecipientEmail();
+		getOriginlTranInfo();
+		getOTIDateTime();
+		getGrossAmount();
+		getOTIFees();
+		getNetAmount();
+		getOTIReferenceID();
 	}
 
-	public MerchantTransactionsPage merchantTransactionsPage() {
-		return new MerchantTransactionsPage();
+	public void getMonthlyServiceFee() {
+
 	}
 
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
+	public void getSaleOrderTokenAmount() {
+		ExtentTestManager.setInfoMessageInReport("Sale Order Token Amount : " + getText(lblSaleTranAmount));
 	}
+
+	public void getReserveAmount() {
+
+		ExtentTestManager.setInfoMessageInReport("Reserve Amount : " + getText(lblReserveAmount));
+	}
+
+	public void getMerchantBalance() {
+		ExtentTestManager.setInfoMessageInReport("Merchant Balance is : " + getText(lblMerchantBalance));
+	}
+
+	public void getSenderName() {
+		scrollDownToElement(lblSenderName, "Sender Name");
+		ExtentTestManager.setInfoMessageInReport("Sender Name is : " + getText(lblSenderName));
+	}
+
+	public void getSenderEmail() {
+		scrollDownToElement(lblSenderEmail, "Sender Email");
+		ExtentTestManager.setInfoMessageInReport("Sender Email is : " + getText(lblSenderEmail));
+	}
+
+	public void getSaleOrderTokenDetails() {
+		getTransactionType();
+		getSaleOrderTokenAmount();
+		getStatus();
+		getDateTime();
+		getReferenceID();
+		getFees();
+		getReserveAmount();
+		getNetAmount();
+		getMerchantBalance();
+		getSenderName();
+		getSenderEmail();
+	}
+
+	public RefundTransactionPage refundTransactionPage() {
+		return new RefundTransactionPage();
+	}
+
+	public RefundPopUp refundPopUp() {
+		return new RefundPopUp();
+	}
+
 }

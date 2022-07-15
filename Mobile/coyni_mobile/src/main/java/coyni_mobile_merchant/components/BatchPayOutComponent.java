@@ -3,7 +3,7 @@ package coyni_mobile_merchant.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.pages.PayOutTransactionsPage;
+import coyni_mobile_merchant.pages.PayoutTransactionsPage;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -25,7 +25,6 @@ public class BatchPayOutComponent extends MobileFunctions {
 		scrollDownToElement(lblBatchPayOuts, "Batch PayOuts");
 		new CommonFunctions().verifyLabelText(lblBatchPayOuts, "Batch PayOuts", expHeading);
 	}
-
 	public void clickBatchNow() {
 		scrollDownToElement(btnBatchNow, "Batch Now");
 		if (verifyElementDisplayed(btnBatchNow, "Click Batch Now")) {
@@ -54,8 +53,8 @@ public class BatchPayOutComponent extends MobileFunctions {
 		return new NavigationComponent();
 	}
 
-	public PayOutTransactionsPage payOutTransactionsPage() {
-		return new PayOutTransactionsPage();
+	public PayoutTransactionsPage payoutTransactionsPage() {
+		return new PayoutTransactionsPage();
 	}
 
 	public FilterPopup filterPopup() {

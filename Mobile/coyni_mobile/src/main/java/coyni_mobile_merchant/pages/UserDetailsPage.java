@@ -22,6 +22,14 @@ public class UserDetailsPage extends MobileFunctions {
 	private By btnPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'/b_phoneLL')]");
 	private By btnAddress = MobileBy.xpath("//*[contains(@resource-id,'b_addressLL')]");
 	private By lblDefault = MobileBy.xpath("//*[contains(@text,'Default Account')]");
+	private By lblDefaultAccountName = MobileBy.xpath("//*[contains(@resource-id,'b_accountET')]");
+	private By lblChildAccountName=MobileBy.xpath("(//*[contains(@resource-id,'title')])[2]");
+	private By lblTickIcon = MobileBy.xpath("//*[contains(@resource-id,'tickIcon')]");
+	private By btnSelectAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
+	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
+	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
+	private By btnChildAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[2]");
+	private By btnSave = MobileBy.xpath("//*[contains(@text,'Save')]");
 
 	public void clickBack() {
 		click(btnBack, "Back");
@@ -36,10 +44,49 @@ public class UserDetailsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
+	public void clickDefaultAccount() {
+		ExtentTestManager.setInfoMessageInReport("Default Account is : " + getText(lblDefaultAccountName));
+		click(lblDefaultAccountName, "Default Account");
+	}
+
+	public void clickSelectAccount1() {
+		click(btnSelectAccount1, "Select Account 1");
+	}
+
+	public void clickChildAccount1() {
+		click(btnChildAccount1, "Child Account 1");
+	}
+
+	public void clickChildAccount2() {
+		click(btnChildAccount2, "Child Account 2");
+	}
+
+	public void clickSelectAccount2() {
+		click(btnSelectAccount2, "Select Account 2");
+	}
+
+	public void clickSave() {
+		new CommonFunctions().elementEnabled(btnSave, "Save");
+		click(btnSave, "Save");
+	}
+	
+	public void verifyTickIcon() {
+		new CommonFunctions().elementView(lblTickIcon, "Tick Icon");
+	}
+
 	public void verifyDefaultAccount(String expHeading) {
 		new CommonFunctions().elementView(lblDefault, "Default Acccount");
 		new CommonFunctions().verifyLabelText(lblDefault, "Default Acccount Heading ", expHeading);
 	}
+	
+	public void getDefaultAccountName() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblDefaultAccountName));
+	}
+	
+	public void getChildAccountName() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblChildAccountName));
+	}
+
 	public void verifyEmail() {
 		new CommonFunctions().elementView(lblEmail, "Email");
 	}
@@ -78,6 +125,7 @@ public class UserDetailsPage extends MobileFunctions {
 	public void clickAddress() {
 		click(btnAddress, "Address");
 	}
+
 	public CurrentDetailsComponent currentDetailsComponent() {
 		return new CurrentDetailsComponent();
 	}

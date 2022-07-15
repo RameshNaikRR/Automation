@@ -207,7 +207,7 @@ public class LoginTest {
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
-			if (data.get("errPopUpMsg").contains("issue with your OTP")) {
+			if (data.get("validatePopUpMsg").contains("yes")) {
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("emailVerificationHeading"));
 			for (int i = 0; i < 4; i++) {
@@ -484,7 +484,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			if (data.get("errPopUpMsg").contains("issue with your OTP")) {
+			if (data.get("validatePopUpMsg").contains("yes")) {
 				loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
 						.verifyPhoneHeading(data.get("phoneHeading"));
 				for (int i = 0; i <= 4; i++) {
@@ -642,7 +642,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			if (data.get("errPopUpMsg").contains("issue with your OTP")) {
+			if (data.get("validatePopUpMsg").contains("yes")) {
 				loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent()
 						.verifyEmailHeading(data.get("verifyEmailHeading"));
 				Thread.sleep(2000);

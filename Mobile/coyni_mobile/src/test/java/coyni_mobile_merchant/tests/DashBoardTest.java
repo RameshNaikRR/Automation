@@ -57,8 +57,9 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickAccount();
-			businessTokenAccountPage.businessTransactionsPage().verifyPageHeading(data.get("tokenAccountHeading"));
-			businessTokenAccountPage.businessTransactionsPage()
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageHeading(data.get("tokenAccountHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageDescription(data.get("tokenAccountDescription"));
 			businessTokenAccountPage.clickProfile();
 			businessTokenAccountPage.merchantProfilePage().getAccountDetails();
@@ -71,7 +72,7 @@ public class DashBoardTest {
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickDashBoard();
 			businessTokenAccountPage.getUserName();
-			businessTokenAccountPage.dashBoardPage().getDashBoardHeading();
+//			businessTokenAccountPage.dashBoardPage().getDashBoardHeading();
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().viewScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().viewReceivePayment();
@@ -90,19 +91,20 @@ public class DashBoardTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getAccountVerified();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickNotification();
-			businessTokenAccountPage.merchantTransactionDetailsPage().navigationComponent().clickBack();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickIcon();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getName();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getUserName();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickCompanyName();
-			businessTokenAccountPage.merchantTransactionDetailsPage().navigationComponent().clickBack();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMonthlyVolumeLimit();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getHighTicketLimit();
-			businessTokenAccountPage.merchantTransactionDetailsPage().verifyLabelMerchantBalance(data.get("label"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMerchantBalance();
+			businessTokenAccountPage.clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().getAccountVerified();
+			businessTokenAccountPage.dashBoardPage().clickNotification();
+			businessTokenAccountPage.dashBoardPage().navigationComponent().clickBack();
+			businessTokenAccountPage.dashBoardPage().clickIcon();
+			businessTokenAccountPage.dashBoardPage().getName();
+			businessTokenAccountPage.dashBoardPage().getUserName();
+			businessTokenAccountPage.dashBoardPage().clickCompanyName();
+			businessTokenAccountPage.dashBoardPage().navigationComponent().clickBack();
+			businessTokenAccountPage.dashBoardPage().getMonthlyVolumeLimit();
+			businessTokenAccountPage.dashBoardPage().getHighTicketLimit();
+			businessTokenAccountPage.dashBoardPage().verifyLabelMerchantBalance(data.get("label"));
+			businessTokenAccountPage.dashBoardPage().getDashBoardDescription();
+			businessTokenAccountPage.dashBoardPage().getMerchantBalance();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantBalance Failed due to this Exception" + e);
@@ -115,32 +117,32 @@ public class DashBoardTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().verifyLabelProcessingVolume(data.get("label"));
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().verifyLabelProcessingVolume(data.get("label"));
 			businessTokenAccountPage.daysDropDownComponent().clickOnToday();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.dashBoardPage().getRefund();
+			businessTokenAccountPage.dashBoardPage().getProcessingFees();
+			businessTokenAccountPage.dashBoardPage().getNetAmount();
+			businessTokenAccountPage.dashBoardPage().getMISCFee();
+			businessTokenAccountPage.dashBoardPage().getSaleOrder();
 			businessTokenAccountPage.daysDropDownComponent().clickOnYesterday();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
+			businessTokenAccountPage.dashBoardPage().getRefund();
+			businessTokenAccountPage.dashBoardPage().getProcessingFees();
+			businessTokenAccountPage.dashBoardPage().getNetAmount();
+			businessTokenAccountPage.dashBoardPage().getMISCFee();
+			businessTokenAccountPage.dashBoardPage().getSaleOrder();
 			businessTokenAccountPage.daysDropDownComponent().clickOnMonthToDate();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
+			businessTokenAccountPage.dashBoardPage().getRefund();
+			businessTokenAccountPage.dashBoardPage().getProcessingFees();
+			businessTokenAccountPage.dashBoardPage().getNetAmount();
+			businessTokenAccountPage.dashBoardPage().getMISCFee();
 			businessTokenAccountPage.daysDropDownComponent().clickOnLastMonth();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getHighTicket();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getAverageTicket();
+			businessTokenAccountPage.dashBoardPage().getRefund();
+			businessTokenAccountPage.dashBoardPage().getProcessingFees();
+			businessTokenAccountPage.dashBoardPage().getNetAmount();
+			businessTokenAccountPage.dashBoardPage().getMISCFee();
+			businessTokenAccountPage.dashBoardPage().getHighTicket();
+			businessTokenAccountPage.dashBoardPage().getAverageTicket();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testProcessingVolume Failed due to this Exception" + e);
@@ -149,29 +151,104 @@ public class DashBoardTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testFiltersForMerchantTransactions(String strParams) {
+	public void testMerchantTransactionsWithOneFilter(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getRefund();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getProcessingFees();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getMISCFee();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getNetAmount();
-			businessTokenAccountPage.merchantTransactionDetailsPage().getSaleOrder();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickMerchantTransactions();
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage()
-					.verifyLabelMerchanTransactions(data.get("label"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().clickFilterIcon();
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
-					.selectMerchantTransactionsFilter(data.get("filterTransactiontype"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
-					.selectMerchantTransactionsFilter(data.get("filterTransactionStatus"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickMerchantTransactions();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage()
+					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickFilterIcon();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+					.selectMerchantTransactionsFilter(data.get("filterType"));
+//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+//					.selectMerchantTransactionsFilter(data.get("filterTransactionStatus"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillFromMerchantAmount(data.get("fromAmount"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToMerchantAmount(data.get("toAmount"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
-					.clickApplyfilters();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
+
+			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+						.verifyMerchantDetails(data.get("merchantTransDetails"));
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+						.getTransactionType();
+
+				if (data.get("filterType").equalsIgnoreCase("TransactionTypeRefund")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+							.getRefundSentDetails();
+
+				} else if (data.get("filterType").equalsIgnoreCase("Merchant Payout")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+							.getMerchantPayoutDetails();
+				} else if (data.get("filterType").equalsIgnoreCase("Monthly Service Fee")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+							.getMonthlyServiceFee();
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testFiltersForMerchantTransactions Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantTransactionsWithTwoFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickMerchantTransactions();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage()
+					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickFilterIcon();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+					.selectMerchantTransactionsFilter(data.get("filterType"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+					.selectMerchantTransactionsFilter(data.get("filterType1"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+					.fillFromMerchantAmount(data.get("fromAmount"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
+					.fillToMerchantAmount(data.get("toAmount"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
+
+			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+						.verifyMerchantDetails(data.get("merchantTransDetails"));
+				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+						.getTransactionType();
+
+				if (data.get("filterType").equalsIgnoreCase("Sale Order - Token")
+						&& data.get("filterType1").equalsIgnoreCase("Completed")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+							.getSaleOrderTokenDetails();
+//					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+//					.clickRefund();
+//					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+//					.refundTransactionPage().verifyHeading(data.get("refundHeading"));
+//					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+//					.refundTransactionPage().clickClose();
+//					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+//					.verifyMerchantDetails(data.get("merchantTransDetails"));
+
+				} else if (data.get("filterType").equalsIgnoreCase("Sale Order - Token")
+						&& data.get("filterType1").equalsIgnoreCase("Partial Refund")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+					.getSaleOrderTokenDetails();
+				} else if (data.get("filterType").equalsIgnoreCase("Sale Order - Token")
+						&& data.get("filterType1").equalsIgnoreCase("TransactionStatusRefund")) {
+					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+					.getSaleOrderTokenDetails();
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -184,24 +261,22 @@ public class DashBoardTest {
 	public void testResetFiltersForMerchantTransactions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickMerchantTransactions();
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage()
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickMerchantTransactions();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage()
 					.verifyLabelMerchanTransactions(data.get("label"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.verifyTransactionType(data.get("label"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
-					.clickFilterIcon();
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickFilterIcon();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.selectMerchantTransactionsFilter(data.get("filterTransactiontype"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.selectMerchantTransactionsFilter(data.get("filterTransactionStatus"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillFromAmount(data.get("fromAmount"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToAmount(data.get("toAmount"));
-			businessTokenAccountPage.merchantTransactionDetailsPage().merchantTransactionsPage().filterPopup()
-					.clickResetAllFilters();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickResetAllFilters();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -211,16 +286,39 @@ public class DashBoardTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testRefund(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.merchantTransactionDetailsPage().clickRefund();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().verifyHeading(data.get("refundHeading"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().getTransactionAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().fillAmount(data.get("amount"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickFullAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickHalfAmount();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickReason();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().fillReason(data.get("reason"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickCancel();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickReason();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().fillReason(data.get("reason"));
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickDone();
+			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickRefund();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBatchPayOuts(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 
 		} catch (Exception e) {
@@ -233,19 +331,37 @@ public class DashBoardTest {
 	public void testBatchPayOutApplyFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+//			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
+//			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickFilterIcon();
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().selectFilter(data.get("filterType"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickApplyfilters();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
+			Thread.sleep(1000);
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate(data.get("toDate"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickApplyfilters();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+					.verifyPageHeading(data.get("payoutHeading"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+					.getPayoutTransactionAllDetails();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOutResetFilters Failed due to this Exception" + e);
 		}
@@ -256,18 +372,30 @@ public class DashBoardTest {
 	public void testBatchPayOutResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
+//			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payOutTransactionsPage()
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickFilterIcon();
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().selectFilter(data.get("filterType"));
-			businessTokenAccountPage.batchPayOutComponent().filterPopup().clickResetAllFilters();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
+			Thread.sleep(1000);
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate(data.get("toDate"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup()
+					.clickResetAllFilters();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOutResetFilters Failed due to this Exception" + e);
 		}
@@ -278,7 +406,7 @@ public class DashBoardTest {
 	public void testReserveBalance(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
 			businessTokenAccountPage.reserveBalanceComponent().getReserveRule();
 			businessTokenAccountPage.reserveBalanceComponent().getNextRelease();
@@ -290,10 +418,10 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickManual();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickRolling();
-			// businessTokenAccountPage.reserveBalanceComponent().navigationComponent().clickClose();
-			// businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickDrpDwn();
-			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickManual();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
+			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
+			businessTokenAccountPage.getUserName();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveBalance Failed due to this Exception" + e);
 		}
@@ -304,17 +432,60 @@ public class DashBoardTest {
 	public void testReserveBalanceFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
 			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.clickFilterIcon();
+			Thread.sleep(1000);
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.selectFilter(data.get("filterType"));
+			Thread.sleep(1000);
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickCalendar();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickCalendar();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().selectToDate(data.get("toDate"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickDone();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.clickApplyfilters();
+			if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyTransactionsCount() == 0) {
+
+				if (data.get("filterType").equalsIgnoreCase("Open")) {
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.getFailedorOpenTransactionDetails();
+
+				} else if (data.get("filterType").equalsIgnoreCase("Released")) {
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.reserveReleaseDetailsPage().getReserveReleasedDetails();
+
+				} else if (data.get("filterType").equalsIgnoreCase("On Hold")) {
+
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.reserveReleaseDetailsPage().getReserveOnHoldDetails();
+
+				} else if (data.get("filterType").equalsIgnoreCase("Canceled")) {
+
+				} else if (data.get("filterType").equalsIgnoreCase("Failed")) {
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+							.getFailedorOpenTransactionDetails();
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveBalanceFilters Failed due to this Exception" + e);
 		}
@@ -325,52 +496,33 @@ public class DashBoardTest {
 	public void testReserveBalanceResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
 			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.clickFilterIcon();
+			Thread.sleep(1000);
+			String[] filterType = data.get("filterType").split(",");
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.selectFilter(data.get("filterType"));
+					.validateReserveBalanceFilters(filterType[0], filterType[1], filterType[2], filterType[3],
+							filterType[4]);
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickCalendar();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickCalendar();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().selectToDate(data.get("toDate"));
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.datePickerComponent().clickDone();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.clickResetAllFilters();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveBalanceResetFilters Failed due to this Exception" + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testReserveReleaseDetails(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.merchantTransactionDetailsPage().clickDashBoard();
-			businessTokenAccountPage.reserveBalanceComponent().verifyLabelReserveBalance(data.get("label"));
-			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getReserveID();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getReserveAmount();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getStatus();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getDailyBatchIDs();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getBatchDate();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getReserveRule();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().getReserve();
-			// businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-			// .reserveReleaseDetailsPage().getRecentTransactionsList();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testReserveReleaseDetails Failed due to this Exception" + e);
 		}
 	}
 

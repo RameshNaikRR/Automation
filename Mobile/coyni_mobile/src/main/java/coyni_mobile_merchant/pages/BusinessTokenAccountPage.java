@@ -69,8 +69,8 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		return new BatchPayOutComponent();
 	}
 
-	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
-		return new MerchantTransactionDetailsPage();
+	public DashBoardPage dashBoardPage() {
+		return new DashBoardPage();
 	}
 
 	public DaysDropDownComponent daysDropDownComponent() {
@@ -85,19 +85,22 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		return new TokenMenuIconPopUp();
 	}
 
-	public BusinessTransactionsPage businessTransactionsPage() {
-		return new BusinessTransactionsPage();
+	public BusinessRecentTokenTransactionsPage businessRecentTokenTransactionsPage() {
+		return new BusinessRecentTokenTransactionsPage();
 	}
 
 	public MerchantTransactionsPage merchantTransactionsPage() {
 		return new MerchantTransactionsPage();
 	}
 
-	public DashBoardPage dashBoardPage() {
-		return new DashBoardPage();
-	}
+//	public DashBoardPage dashBoardPage() {
+//		return new DashBoardPage();
+//	}
 
 	public NotificationComponent notificationComponent() {
 		return new NotificationComponent();
+	}
+	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
+		return new MerchantTransactionDetailsPage();
 	}
 }

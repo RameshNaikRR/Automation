@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -28,7 +30,29 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	private By lblRecentTransactionsList = MobileBy
 			.xpath("//*[@text='Recent Transactions']/../following-sibling::*[1]");
 
-	private By txtReserve = MobileBy.xpath("//*[contains(@resource-id,'onHoldAmtTV')]");
+	private By txtAmountReleased = MobileBy.xpath("//*[contains(@resource-id,'releasedAMT')]");
+
+	private By lblReleaseOn = MobileBy.xpath("//*[contains(@resource-id,'ReleasedDate')]");
+
+	private By lblReleaseTransactionID = MobileBy.xpath("//*[contains(@resource-id,'trans')]");
+
+	private By lblToTokenAccount = MobileBy.xpath("//*[contains(@resource-id,'DBA')]");
+
+	private By lblTransactionType = MobileBy.xpath("//*[contains(@resource-id,'header')]");
+
+	private By lblReserveHeld = MobileBy.xpath("//*[contains(@text,'Reserve Held')]");
+
+	private By lblHeldHeading = MobileBy.xpath("//*[contains(@text,'Still Being')]");
+
+	private By lblHeldDescription = MobileBy.xpath("//*[contains(@resource-id,'HoldAmt')]");
+
+	private By lblRecentTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
+
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+
+	public void verifyReserveDetail(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblReserveDetail, "Reserve Detail", expHeading);
+	}
 
 	public void getRecentTransactionsList() {
 		List<WebElement> elementList = getElementList(lblRecentTransactionsList, " ");
@@ -37,15 +61,15 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	}
 
 	public void getReserveAmount() {
-		ExtentTestManager.setInfoMessageInReport("Reserve Amount " + getText(txtAmount));
+		ExtentTestManager.setInfoMessageInReport("Reserve Amount is " + getText(txtAmount));
 	}
 
 	public void getReserveID() {
-		ExtentTestManager.setInfoMessageInReport("Reserve ID " + getText(txtReserveID));
+		ExtentTestManager.setInfoMessageInReport("Reserve ID is " + getText(txtReserveID));
 	}
 
 	public void getStatus() {
-		ExtentTestManager.setInfoMessageInReport("Status " + getText(lblStatus));
+		ExtentTestManager.setInfoMessageInReport("Status is " + getText(lblStatus));
 	}
 
 	public void getDailyBatchIDs() {
@@ -55,18 +79,92 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	public void getBatchDate() {
 		String text = getText(lblBatchDate);
-		ExtentTestManager.setInfoMessageInReport("Batch Date " + text);
+		ExtentTestManager.setInfoMessageInReport("Batch Date is " + text);
 	}
 
 	public void getReserveRule() {
 		String text = getText(lblReserveRule);
-		ExtentTestManager.setInfoMessageInReport("Reserve Rule" + text);
+		ExtentTestManager.setInfoMessageInReport("Reserve Rule is " + text);
 	}
 
 	public void getReserve() {
-		String text = getText(txtReserve);
-		ExtentTestManager.setInfoMessageInReport("Reserve Rule" + text);
+		String text = getText(txtAmountReleased);
+		ExtentTestManager.setInfoMessageInReport("Reserve Rule is " + text);
 
+	}
+
+	public void getReserveReleasedDetails() {
+		getReserveID();
+		getReserveAmount();
+		getStatus();
+		getDailyBatchIDs();
+		getBatchDate();
+		getReserveRule();
+		getReserve();
+		getReleaseOn();
+		getReleaseTransactionID();
+		getToTokenAccount();
+	}
+
+	public void getReserveOnHoldDetails() {
+		getTransactionType();
+		getReserveID();
+		getReserveHeld();
+		getStatus();
+		getDailyBatchIDs();
+		getBatchDate();
+		getReserveRule();
+		getHeldHeading();
+		getHeldDescription();
+	}
+
+	public void getBuyTokenDetails() {
+		getReserveID();
+		getReserveAmount();
+		getStatus();
+		getDailyBatchIDs();
+		getBatchDate();
+		getReserveRule();
+		getReserve();
+		getReleaseOn();
+		getReleaseTransactionID();
+		getToTokenAccount();
+	}
+
+	public void verifyRecentTransaction() {
+		if (DriverFactory.getDriver().findElements(lblNoTransactions).size() == 0) {
+			new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+		}
+	}
+
+	public void getTransactionType() {
+		ExtentTestManager.setInfoMessageInReport("Transaction Type : " + getText(lblTransactionType));
+	}
+
+	public void getReserveHeld() {
+		ExtentTestManager.setInfoMessageInReport("Reserve Held : " + getText(lblReserveHeld));
+	}
+
+	public void getHeldHeading() {
+		ExtentTestManager.setInfoMessageInReport("Reserve Held : " + getText(lblHeldHeading));
+	}
+
+	public void getHeldDescription() {
+		ExtentTestManager.setInfoMessageInReport("Reserve Held Description : " + getText(lblHeldDescription));
+	}
+
+	public void getReleaseOn() {
+		ExtentTestManager.setInfoMessageInReport("Release On is " + getText(lblReleaseOn));
+	}
+
+	public void getReleaseTransactionID() {
+		ExtentTestManager.setInfoMessageInReport("Release Transaction ID is " + getText(lblReleaseTransactionID));
+	}
+
+	public void getToTokenAccount() {
+		ExtentTestManager.setInfoMessageInReport("To Token Account is " + getText(lblToTokenAccount));
 	}
 
 }

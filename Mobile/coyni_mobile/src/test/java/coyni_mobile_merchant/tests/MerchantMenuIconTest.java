@@ -68,8 +68,7 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
-//			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyPageDescription(data.get("description"));
@@ -92,7 +91,6 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getShareReceiptentAddress();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickShareCopy();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
 			businessTokenAccountPage.getUserName();
@@ -247,7 +245,7 @@ public class MerchantMenuIconTest {
 					.slideToConfirm();
 			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
+					.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()

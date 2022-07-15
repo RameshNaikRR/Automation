@@ -40,6 +40,37 @@ public class MerchantProfileTest {
 		}
 	}
 
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDefaultAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//
+////			businessTokenAccountPage.clickProfile();
+////			merchantProfilePage.getAccountDetails();
+////			merchantProfilePage.getAccountId();
+////			merchantProfilePage.clickUserDetails();
+////			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+////			merchantProfilePage.userDetailsPage().getUserDetails();
+////			merchantProfilePage.userDetailsPage().verifyDefaultAccount(data.get("defaultAccount"));
+////			merchantProfilePage.userDetailsPage().clickDefaultAccount();
+////			if (merchantProfilePage.userDetailsPage().getDefaultAccountName() == 0) {
+////				
+////			}else {
+////			merchantProfilePage.userDetailsPage().clickSelectAccount2();
+////			merchantProfilePage.userDetailsPage().clickChildAccount2();
+////			merchantProfilePage.userDetailsPage().clickSave();
+//			
+//			}
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDefaultAccount failed due to Exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testChangeEmailWithValidDetails(String strParams) {
@@ -199,6 +230,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().getUserDetails();
 			merchantProfilePage.userDetailsPage().verifyEmail();
 			merchantProfilePage.userDetailsPage().getCurrentEmail();
+			merchantProfilePage.userDetailsPage().clickBack();
+			merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeEmailWithNavigationView failed due to Exception " + e);
@@ -367,6 +403,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().navigationComponent().clickBack();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+			merchantProfilePage.userDetailsPage().clickBack();
+			merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -519,6 +560,13 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().clickBack();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
 			merchantProfilePage.userDetailsPage().getUserDetails();
+			merchantProfilePage.userDetailsPage().clickBack();
+			merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
+
+			
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testChangeAddressWithNavigationView failed due to Exception " + e);
@@ -640,6 +688,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickClose();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordWithNavigation failed due to Exception " + e);
@@ -704,6 +754,8 @@ public class MerchantProfileTest {
 			navigationComponent.clickClose();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testResetPinCodeWithNavigationView failed due to Exception " + e);
@@ -843,6 +895,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAEditEmailWithNavigationView failed due to Exception " + e);
 		}
@@ -958,6 +1012,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testDBAEditPhoneNumberWithNavigationView failed due to Exception " + e);
@@ -1099,6 +1155,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testComapanyInfoEditEmailWithNavigationView failed due to Exception " + e);
@@ -1215,6 +1273,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testComapanyInfoEditPhoneNumberWithNavigationView failed due to Exception " + e);
@@ -1294,6 +1354,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBenificialOwnersNavigationView Failed due to exception " + e);
 
@@ -1404,6 +1466,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddTeamMember Failed due to exception " + e);
@@ -1576,6 +1640,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditTeamMemberNavigationView Failed due to exception " + e);
@@ -1717,6 +1783,8 @@ public class MerchantProfileTest {
 			navigationComponent.clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -1743,10 +1811,12 @@ public class MerchantProfileTest {
 			merchantProfilePage.accountLimitsComponent().getWithdrawBankAcc();
 			merchantProfilePage.accountLimitsComponent().getWithdrawInstantPay();
 			merchantProfilePage.accountLimitsComponent().getWithdrawGiftcard();
-			merchantProfilePage.accountLimitsComponent().getWithdrawSignetAcc();
+//			merchantProfilePage.accountLimitsComponent().getWithdrawSignetAcc();
 			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimits Failed due to exception " + e);
 
@@ -1764,11 +1834,17 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickAgreements();
 			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
 			merchantProfilePage.agreementComponent().verifyPrivacyPolicyView();
+			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().verifyTermsOfServiceView();
+			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().verifyMerchantAgreementView();
+			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements Failed due to exception " + e);
 
@@ -1803,6 +1879,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.feesComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickBack();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeesWithNavigationOptions Failed due to this Exception" + e);

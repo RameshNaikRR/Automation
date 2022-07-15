@@ -16,7 +16,7 @@ public class ReserveBalanceComponent extends MobileFunctions {
 
 	private By lblLastRelease = MobileBy.xpath("//*[contains(@resource-id,'lastReleaseAmountTV')]");
 
-	private By txtReserveRule = MobileBy.xpath("//*[contains(@text,'Reserve')]/following-sibling::*[1]");
+	private By txtReserveRule = MobileBy.xpath("//*[contains(@resource-id,'reserveRule')]");
 
 	private By lnkViewFullReserveReleaseHistory = MobileBy.xpath("//*[contains(@resource-id,'tv_reserve_list')]");
 
@@ -33,6 +33,7 @@ public class ReserveBalanceComponent extends MobileFunctions {
 	}
 
 	public void getReserveRule() {
+		scrollDownToElement(txtReserveRule, "Reserve Rule");
 		ExtentTestManager.setInfoMessageInReport("Next Release " + getText(txtReserveRule));
 
 	}
