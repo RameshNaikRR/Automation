@@ -61,4 +61,8 @@ public class TeamComponent extends BrowserFunctions {
 
 	}
 
+	public AddTeamMemberComponent addTeamMemberComponent() {
+		return new AddTeamMemberComponent();
+	}
+
 }
