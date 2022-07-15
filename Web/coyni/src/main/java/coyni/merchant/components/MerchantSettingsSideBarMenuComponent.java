@@ -2,14 +2,22 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.pages.AccountLimitsPage;
 import coyni.merchant.pages.AgreementsPage;
-import coyni.merchant.pages.PaymentMethodPage;
+import coyni.merchant.pages.ApiKeysPage;
+import coyni.merchant.pages.BeneficiaryOwnersPage;
+import coyni.merchant.pages.CompanyInformationPage;
+import coyni.merchant.pages.DBAInformationPage;
+import coyni.merchant.pages.FeesPage;
+import coyni.merchant.pages.PaymentMethodsPage;
+import coyni.merchant.pages.PreferencesPage;
+import coyni.merchant.pages.TeamSharedPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
-	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
+//	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
 //	private By lblAccountStatus = By.xpath("//div[text()='Account Status:']");
 //	private By lblActive = By.xpath("//div[.='Active']");
 	private By lblUserName = By.xpath("//div[@class='px-3 lg:px-1']/div[1]/div[2]/div[1]");
@@ -23,10 +31,6 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public void verifyUserName() {
 		new CommonFunctions().elementView(lblUserName, "User Name");
-	}
-
-	public void clickMerchantSettings() {
-		click(lblMerchantSettings, "Merchant Settings");
 	}
 
 	public void verifyAccountId() {
@@ -122,8 +126,8 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getSideMenuBarItems("API Keys"), "Api Key");
 	}
 
-	public PaymentMethodPage paymentMethodPage() {
-		return new PaymentMethodPage();
+	public PaymentMethodComponent paymentMethodComponent() {
+		return new PaymentMethodComponent();
 	}
 
 //	public void verifyIdInformation(String Idinformation) {
@@ -134,9 +138,9 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 //		new CommonFunctions().verifyLabelText(lblAccountStatus, AccountStatus, "AccountStatus");
 //	}
 
-	public AgreementsPage agreementsComponent() {
-		return new AgreementsPage();
-	}
+//	public AgreementsComponent agreementsComponent() {
+//		return new AgreementsComponent();
+//	}
 
 	public TeamComponent teamComponent() {
 		return new TeamComponent();
@@ -150,4 +154,43 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 		return new APIKeyComponent();
 	}
 
+	public CompanyInformationPage companyInformationPage() {
+		return new CompanyInformationPage();
+	}
+
+	public DBAInformationPage dbaInformationPage() {
+		return new DBAInformationPage();
+	}
+
+	public BeneficiaryOwnersPage beneficiaryOwnersPage() {
+		return new BeneficiaryOwnersPage();
+	}
+
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
+
+	public PreferencesPage preferencesPage() {
+		return new PreferencesPage();
+	}
+
+	public AgreementsPage agreementsPage() {
+		return new AgreementsPage();
+	}
+
+	public FeesPage feesPage() {
+		return new FeesPage();
+	}
+
+	public AccountLimitsPage accountLimitsPage() {
+		return new AccountLimitsPage();
+	}
+
+	public TeamSharedPage teamSharedPage() {
+		return new TeamSharedPage();
+	}
+
+	public ApiKeysPage apiKeysPage() {
+		return new ApiKeysPage();
+	}
 }

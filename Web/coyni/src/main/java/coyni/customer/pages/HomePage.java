@@ -272,7 +272,7 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	/**
-	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
+	 * Order:- minChar, minCharPlus, maxCharMinus, maxChar, specialChar, Number,
 	 * spaces maxiPlus
 	 */
 	public void validateNameField(By ele, String eleName, String textField) {

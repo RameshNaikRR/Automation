@@ -1,9 +1,13 @@
 package coyni.merchant.tests;
 
+import java.util.Map;
+
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.merchant.components.TopBarComponent;
+import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TopBarTest {
@@ -26,8 +30,10 @@ public class TopBarTest {
 	}
 
 	@Test
-	public void testTopBarDrpDwnBtns() {
+	@Parameters({"strParams"})
+	public void testTopBarDrpDwnBtns(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			for (int i = 1; i <= 7; i++) {
 				topBarComponent.clickUserNameDrpDwn();
 				if (1 == i) {
@@ -38,10 +44,10 @@ public class TopBarTest {
 					topBarComponent.topBarDrpDwnComponent().merchantAccountsPage().verifyHeading();
 				} else if (3 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickPreferences();
-					topBarComponent.topBarDrpDwnComponent().preferencesPage().verifyHeading();
+					topBarComponent.topBarDrpDwnComponent().preferencesPage().verifyHeading(data.get("preferenccesHeading"));
 				} else if (4 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickAgreements();
-					topBarComponent.topBarDrpDwnComponent().agreementsPage().verifyHeading();
+					topBarComponent.topBarDrpDwnComponent().agreementsPage().verifyHeading(data.get("agreementsHeading"));
 				} else if (5 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickChangePassword();
 					topBarComponent.topBarDrpDwnComponent().changePasswordPage().verifyHeading();
