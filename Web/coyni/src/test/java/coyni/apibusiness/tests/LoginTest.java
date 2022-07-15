@@ -119,6 +119,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			if (!data.get("code").isEmpty()) {
+				Thread.sleep(1000);
 				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
 			if (!data.get("message").isEmpty()) {

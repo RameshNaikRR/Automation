@@ -27,13 +27,14 @@ public class BusinessSettingsTest {
 	}
 
 	@Test
-	public void testBusinessSettingsSideBarView() {
-		Map<String, String> data = Runner.getKeywordParameters(null);
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsSideBarView(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		sideBarMenuComponent.clickBusinessSettings();
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyHeading(data.get("heading"));
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyUserImageView();
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountIdView();
-		sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountId(data.get("accountID"));
+//		sideBarMenuComponent.businessSettingsSideBarMenuComponent().getAccountId(data.get("accountID"));
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountStatusView();
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyAccountStatus(data.get("accountStatus"));
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyCompanyInformationView();

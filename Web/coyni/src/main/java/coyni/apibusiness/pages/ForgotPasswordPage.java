@@ -12,7 +12,7 @@ public class ForgotPasswordPage extends BrowserFunctions {
 	private By lblDescription = By.xpath("//span[@class=\"forgot-password__sub-title\"]");
 	private By txtEmail = By.id("Email-id");
 	private By btnNext = By.xpath("//button[text()='Next']");
-	private By lnkBackToLogin = By.xpath("//span[text()='Back to Login']");
+	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password Heading ", expHeading);

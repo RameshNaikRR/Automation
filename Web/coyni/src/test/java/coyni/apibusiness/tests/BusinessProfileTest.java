@@ -58,7 +58,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
 			tokenWalletPage.topBarComponent().authyComponent()
 					.verifyYourIdentityDescription(data.get("identityDescription"));
-			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
+			tokenWalletPage.topBarComponent().authyComponent().fillAuthyInput(data.get("pin"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.verifyPageHeading(data.get("changePasswordHeading"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()

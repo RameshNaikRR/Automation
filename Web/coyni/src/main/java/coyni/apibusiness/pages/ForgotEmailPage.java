@@ -14,7 +14,7 @@ public class ForgotEmailPage extends BrowserFunctions {
 	private By txtPhoneNumber = By.cssSelector("#Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
-	private By lnkForgotEmailunderline = By.xpath("//span[.='Forgot Email?']");
+	private By lnkForgotEmailunderline = By.xpath("//button[.='Forgot Email?']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);

@@ -138,7 +138,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void verifyHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Heading");
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
 	public void verifyApplication(String Application) {

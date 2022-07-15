@@ -18,8 +18,8 @@ public class LoginPage extends BrowserFunctions {
 	private By txtPassword = By.cssSelector("#Password");
 	private By eyeIcon = By.xpath("//button[@type='button']");
 	private By btnNext = By.cssSelector(".business-login__login-button");
-	private By lnkForgotEmail = By.xpath("//span[.='Forgot Email?']");
-	private By lnkForgotPassword = By.xpath("//span[.='Forgot Password?']");
+	private By lnkForgotEmail = By.xpath("//button[.='Forgot Email?']");
+	private By lnkForgotPassword = By.xpath("//button[.='Forgot Password?']");
 
 //	public Robot robot() throws AWTException
 //	{
