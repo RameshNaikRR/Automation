@@ -1,7 +1,6 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.pages.AccountLimitsPage;
 import coyni.merchant.pages.AgreementsPage;
 import coyni.merchant.pages.ApiKeysPage;
@@ -17,7 +16,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
-//	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
+	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
 //	private By lblAccountStatus = By.xpath("//div[text()='Account Status:']");
 //	private By lblActive = By.xpath("//div[.='Active']");
 	private By lblUserName = By.xpath("//div[@class='px-3 lg:px-1']/div[1]/div[2]/div[1]");
@@ -35,6 +34,10 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public void verifyAccountId() {
 		new CommonFunctions().elementView(lblAccountId, "Account-ID");
+	}
+
+	public void clickMerchantSettings() {
+		click(lblMerchantSettings, "Merchant Settings");
 	}
 
 	public void verifyLblAccountStatus() {
