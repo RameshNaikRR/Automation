@@ -11,8 +11,9 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ApplicationSubmissionPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h1[text()='Merchant Application Under Review']");
-	
-	private By lblDescription =By.xpath("//h1[contains(text(),'Merchant Application Under Review')]/following-sibling::*");
+
+	private By lblUnderReviewDescription = By
+			.xpath("//h1[contains(text(),'Merchant Application Under Review')]/following-sibling::*");
 
 	private By lblStatus = By.xpath("//p[contains(text(),'Status')]");
 
@@ -22,12 +23,11 @@ public class ApplicationSubmissionPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, Heading, "Heading");
 	}
 
-	
-	public void verifyDescription() {
-		String text = getText(lblDescription, "Description");
+	public void verifyUnderReviewDescription() {
+		String text = getText(lblUnderReviewDescription, "Description");
 		ExtentTestManager.setInfoMessageInReport("Description " + text);
 	}
-	
+
 	public void verifyStatus() {
 		String text = getText(lblStatus, "Status");
 		ExtentTestManager.setInfoMessageInReport("Status " + text);

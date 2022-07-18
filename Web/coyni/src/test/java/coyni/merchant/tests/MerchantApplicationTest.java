@@ -20,7 +20,6 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantApplicationTest {
-	
 
 	SideMenuBarComponent sideMenuBarComponent;
 	RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage;
@@ -48,7 +47,7 @@ public class MerchantApplicationTest {
 			Thread.sleep(5000);
 			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
 			sideMenuBarComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
-			//sideMenuBarComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+			// sideMenuBarComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
 			String[] id = data.get("id").split(",");
@@ -767,7 +766,7 @@ public class MerchantApplicationTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// registrationStartPage.verifyHeading(data.get("startPageHeading"));
 			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
-			registrationStartPage.applicationSubmissionPage().verifyDescription();
+			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
 			registrationStartPage.applicationSubmissionPage().verifyStatus();
 			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
 			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
@@ -778,4 +777,99 @@ public class MerchantApplicationTest {
 			ExtentTestManager.setFailMessageInReport("testApplicationSubmission failed due to Exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationDeclined(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.applicationDeclinedPage().verifyDeclinedDescription();
+			registrationStartPage.applicationDeclinedPage().verifyDescription();
+			registrationStartPage.applicationDeclinedPage().verifyStatus();
+			registrationStartPage.applicationDeclinedPage().getMerchantTrackerApplication();
+//			registrationStartPage.applicationDeclinedPage().verifyMouseHoverChangedColor(data.get("expCssProp"),
+//					data.get("expValue"), data.get("expColor"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationDeclined failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationCancelled(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.applicationCancelledPage().verifyCancelledDescription();
+			registrationStartPage.applicationCancelledPage().verifyStatus();
+			registrationStartPage.applicationCancelledPage().getMerchantTrackerApplication();
+//			registrationStartPage.applicationCancelledPage().verifyMouseHoverChangedColor(data.get("expCssProp"),
+//					data.get("expValue"), data.get("expColor"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationCancelled failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationApproveReserve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.applicationApprovedReservedPage().verifyApprovedReserveDescription();
+			registrationStartPage.applicationApprovedReservedPage().verifyStatus();
+			registrationStartPage.applicationApprovedReservedPage().getMerchantTrackerApplication();
+//			registrationStartPage.applicationApprovedReservedPage().verifyMouseHoverChangedColor(data.get("expCssProp"),
+//					data.get("expValue"), data.get("expColor"));
+			registrationStartPage.applicationApprovedReservedPage().verifyName();
+			registrationStartPage.applicationApprovedReservedPage().verifyMonthlyVolume();
+			registrationStartPage.applicationApprovedReservedPage().verifyHighTicket();
+			registrationStartPage.applicationApprovedReservedPage().verifyReserveRule();
+			registrationStartPage.applicationApprovedReservedPage().clickAcceptReserve();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationApproveReserve failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationDeclineReserve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.applicationApprovedReservedPage().verifyApprovedReserveDescription();
+			registrationStartPage.applicationApprovedReservedPage().verifyStatus();
+			registrationStartPage.applicationApprovedReservedPage().getMerchantTrackerApplication();
+//			registrationStartPage.applicationApprovedReservedPage().verifyMouseHoverChangedColor(data.get("expCssProp"),
+//					data.get("expValue"), data.get("expColor"));
+			registrationStartPage.applicationApprovedReservedPage().verifyName();
+			registrationStartPage.applicationApprovedReservedPage().verifyMonthlyVolume();
+			registrationStartPage.applicationApprovedReservedPage().verifyHighTicket();
+			registrationStartPage.applicationApprovedReservedPage().verifyReserveRule();
+			registrationStartPage.applicationApprovedReservedPage().clickDeclineReserve();
+			registrationStartPage.applicationApprovedReservedPage().declinedReserveRulePopup()
+					.verifyHeading(data.get("heading"));
+			registrationStartPage.applicationApprovedReservedPage().declinedReserveRulePopup().clickGoBack();
+			registrationStartPage.applicationApprovedReservedPage().declinedReserveRulePopup().clickYes();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationApproveReserve failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationAdditionalInfo(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.applicationAdditionalInfoReqPage().verifyAdditionalInfoRequiredDescription();
+			registrationStartPage.applicationAdditionalInfoReqPage().verifyStatus();
+			registrationStartPage.applicationAdditionalInfoReqPage().getMerchantTrackerApplication();
+			registrationStartPage.applicationAdditionalInfoReqPage().clickUploadImage();
+			registrationStartPage.applicationAdditionalInfoReqPage().clickDBA();
+			registrationStartPage.applicationAdditionalInfoReqPage().clickBeneficialOwners();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationAdditionalInfo failed due to Exception " + e);
+		}
+	}
+
 }

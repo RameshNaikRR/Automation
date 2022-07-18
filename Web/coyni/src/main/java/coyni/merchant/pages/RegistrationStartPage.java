@@ -8,7 +8,6 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RegistrationStartPage extends BrowserFunctions {
 
-
 	private By lblHeading = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>h1");
 	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>p");
 	private By lblMerchantApplication = By.xpath("//p[text()='Merchant']");
@@ -66,5 +65,21 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	public ApplicationSubmissionPage applicationSubmissionPage() {
 		return new ApplicationSubmissionPage();
+	}
+
+	public ApplicationDeclinedPage applicationDeclinedPage() {
+		return new ApplicationDeclinedPage();
+	}
+
+	public ApplicationCancelledPage applicationCancelledPage() {
+		return new ApplicationCancelledPage();
+	}
+
+	public ApplicationApprovedReservedPage applicationApprovedReservedPage() {
+		return new ApplicationApprovedReservedPage();
+	}
+
+	public ApplicationAdditionalInfoReqPage applicationAdditionalInfoReqPage() {
+		return new ApplicationAdditionalInfoReqPage();
 	}
 }
