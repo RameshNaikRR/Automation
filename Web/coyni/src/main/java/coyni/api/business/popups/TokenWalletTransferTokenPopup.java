@@ -16,7 +16,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[.='Transfer Token']");
 	private By lblDescription = By.xpath("//span[contains(.,'Transfer coyni token')]");
 	private By txtAmount = By.cssSelector("#amount");
-	private By lblAvailableBalance = By.xpath("//div[contains(@class,'relative flex-grow')]/div[1]");
+	private By lblAvailableBalance = By.xpath("//span[text()='Available Balance:']/following-sibling::span");
 	private By lblErrorMessage = By.xpath("//span[.='Amount is required.']");
 	private By drpdwnTransferTo = By.cssSelector("div[class*='FormField_selected_option_wallet']");
 	private By btnNext = By.xpath("//button[.='Next']");
@@ -30,8 +30,17 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	public void clickWallet1() {
 		click(getWallets("1"), "Wallet 1 is clicked");
 	}
+
 	public void verifyWallet1View() {
-		new CommonFunctions().elementView(getWallets("1"), "Wallet 1");
+		new CommonFunctions().elementView(getWallets("1"), "Wallet 2");
+	}
+
+	public void clickWallet2() {
+		click(getWallets("2"), "Wallet 2 is clicked");
+	}
+
+	public void verifyWallet2View() {
+		new CommonFunctions().elementView(getWallets("2"), "Wallet 2");
 	}
 
 	public void verifytxtAmountView() {
@@ -66,6 +75,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Amount is not verified");
 		}
 	}
+
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
@@ -85,8 +95,13 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next");
+		if (getElement(btnNext, "Next").isEnabled()) {
+			click(btnNext, "Next ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
+		}
 	}
+
 	public void clickClose() {
 		click(btnClose, "close");
 	}
@@ -110,6 +125,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	public CommonFunctions commonFunctions() {
 		return new CommonFunctions();
 	}
+
 	public VerifyYourIdentityPopup verifyYourIdentityPopup() {
 		return new VerifyYourIdentityPopup();
 	}

@@ -588,16 +588,18 @@ public class BusinessProfileTest {
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().verifyCountry(data.get("country"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().clickSave();
+					.mailingAddressComponent().clickNext();
 			Thread.sleep(4000);
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
-//			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().cardAddedSuccessfullyPopup().navigationComponent()
+					.clickClose();
+////			Thread.sleep(3000);
 //			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent().switchToWindow();
-			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().verifyHeading();
-			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
-			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
-			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent()
-					.navigationComponent().clickClose();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().verifyHeading();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent()
+//					.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -809,7 +811,7 @@ public class BusinessProfileTest {
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().verifyCountry(data.get("country"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().clickSave();
+					.mailingAddressComponent().clickNext();
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.successFailureComponent().verifyPaymentEditSuccess(data.get("successHeading"));
 		} catch (Exception e) {
@@ -903,28 +905,35 @@ public class BusinessProfileTest {
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickSave();
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickTab();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickNext();
 			Thread.sleep(3000);
 
 			System.out.println(data.get("errMessage"));
 			String[] msg = data.get("errMessage").split(",");
 			for (int i = 0; i < msg.length; i++) {
-				Thread.sleep(2000);
-				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-						.preAuthorizationPopup().fillAmount(data.get("amount"));
-				Thread.sleep(2000);
-				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-						.preAuthorizationPopup().clickTab();
-				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-						.preAuthorizationPopup().clickOnVerify();
+//				Thread.sleep(2000);
+//				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//						.preAuthorizationPopup().fillAmount(data.get("amount"));
+//				Thread.sleep(2000);
+//				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//						.preAuthorizationPopup().clickTab();
+//				homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//						.preAuthorizationPopup().clickOnVerify();
 				new CommonFunctions().validateFormErrorMessage(msg[i]);
 			}
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.preAuthorizationPopup().fillAmount(data.get("amount"));
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickNext();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.preAuthorizationPopup().clickTab();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.preAuthorizationPopup().clickOnVerify();
+					.cardAddedSuccessfullyPopup().navigationComponent().clickClose();
+			;
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.preAuthorizationPopup().fillAmount(data.get("amount"));
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.preAuthorizationPopup().clickTab();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.preAuthorizationPopup().clickOnVerify();
 //			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 //					.preAuthorizationPopup().successFailureComponent()
 //					.verifyFailedHeadingView(data.get("failedHeading"));
@@ -961,9 +970,9 @@ public class BusinessProfileTest {
 					.fillAddress2(data.get("address2"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
-					.selectState(data.get("state"));
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
+//					.selectState(data.get("state"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
@@ -1014,8 +1023,8 @@ public class BusinessProfileTest {
 					.clickLinkAgreements();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 //					.verifyVersionMerchant();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownloadBusiness();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+//					.clickiconDownloadBusiness();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyPrivacyPolicy();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
@@ -1026,8 +1035,8 @@ public class BusinessProfileTest {
 					.clickLinkAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyVersionPrivacyPolicy();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownloadPrivacyPolicy();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+//					.clickiconDownloadPrivacyPolicy();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyTermsOfService();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
@@ -1038,8 +1047,8 @@ public class BusinessProfileTest {
 					.clickLinkAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
 					.verifyVersionTermsOfService();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
-					.clickiconDownloadTermsOfService();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+//					.clickiconDownloadTermsOfService();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings Agreements failed due to Exception " + e);
 		}

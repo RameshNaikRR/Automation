@@ -7,10 +7,8 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.pages.RegistrationDBAInformationPage;
-import coyni.customer.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MailingAddressComponent extends BrowserFunctions {
@@ -24,23 +22,26 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtCountry = By.xpath("//div[text()='Country']/following-sibling::*[1]");
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
 	private By lblState = By.xpath("//div[text()='State']/parent::div");
-	//private By zipCode = By.cssSelector("#zip-code");
-	private By txtDateOfBirth =By.name("dateOfBirth");
-	private By txtSocialSecurity =By.name("ssn");
+	// private By zipCode = By.cssSelector("#zip-code");
+	private By txtDateOfBirth = By.name("dateOfBirth");
+	private By txtSocialSecurity = By.name("ssn");
 	private By txtOwnership = By.name("ownership");
 	private By txtAddress1 = By.name("addressLine1");
 	private By txtAddress2 = By.name("addressLine2");
-	private By lblgetState =By.xpath("//div[text()='State']/following-sibling::*[1]");
-	
+	private By lblgetState = By.xpath("//div[text()='State']/following-sibling::*[1]");
+
 	public By getElement(String state) {
 		return By.xpath(String.format("//div[text()='%s']", state));
 	}
+
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "firstName");
 	}
+
 	public void fillLastName(String lastName) {
 		enterText(txtLastName, lastName, "lastName");
 	}
+
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
 	}
@@ -57,9 +58,10 @@ public class MailingAddressComponent extends BrowserFunctions {
 		click(drpDwnState, "State DropDown");
 		click(getElement(state), state);
 	}
+
 	public void clickStateDropdown() {
 		click(drpDwnState, "State DropDown");
-		
+
 	}
 
 	public void fillZipCode(String zipCode) {
@@ -69,6 +71,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 	public void verifyCountry(String country) {
 		new CommonFunctions().verifyLabelText(txtCountry, country, "United States");
 	}
+
 	public void fillOwnerShip(String ownerShip) {
 		enterText(txtOwnership, ownerShip, "ownerShip");
 	}
@@ -81,6 +84,14 @@ public class MailingAddressComponent extends BrowserFunctions {
 		click(btnSave, "click save");
 	}
 
+	public void clickNext() {
+		if (getElement(btnSave, "Next").isEnabled()) {
+			click(btnSave, "Next ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
+		}
+	}
+
 	public void clickstate() {
 		click(lblState, "State");
 	}
@@ -91,11 +102,11 @@ public class MailingAddressComponent extends BrowserFunctions {
 	public void fillDateOfBirth(String dateOfBirth) {
 		enterText(txtDateOfBirth, dateOfBirth, "Date of Birth");
 	}
+
 	public void fillSocialSecurityNum(String socialSecurityNum) {
 		enterText(txtSocialSecurity, socialSecurityNum, "Social Security Number");
 	}
 
-	
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
@@ -111,87 +122,107 @@ public class MailingAddressComponent extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("invalid card type: " + cardType.toUpperCase());
 		}
 	}
-	
+
 	public void validateAddress1(String address1) {
 		validateTextField(txtAddress1, "Address1", address1);
 	}
+
 	public void validateAddress2(String address2) {
 		validateTextField(txtAddress2, "Address2", address2);
 	}
+
 	public void validateCity(String city) {
 		validateTextField(txtCity, "City", city);
 	}
+
 	public void validateZipCode(String zipCode) {
 		validateNumberfield(txtZipCode, "ZipCode", zipCode);
 	}
+
 	public void verifyFirstNameView() {
 		new CommonFunctions().elementView(txtFirstName, "FirstName");
 	}
+
 	public void verifyLastNameView() {
 		new CommonFunctions().elementView(txtLastName, "LastName");
 	}
+
 	public void verifyDOBView() {
 		new CommonFunctions().elementView(txtDateOfBirth, "Date Of Birth");
 	}
+
 	public void verifySSNView() {
 		new CommonFunctions().elementView(txtSocialSecurity, "SSN");
 	}
+
 	public void verifyOwnershipView() {
 		new CommonFunctions().elementView(txtOwnership, "OwnerShip");
 	}
+
 	public void verifyAddressLine1View() {
 		new CommonFunctions().elementView(txtAddress1, "Mailing Address Line 1");
 	}
+
 	public void verifyAddressLine2View() {
 		new CommonFunctions().elementView(txtAddress2, "Mailing AddressLine 2");
 	}
+
 	public void verifyCityView() {
 		new CommonFunctions().elementView(txtCity, "City");
 	}
+
 	public void verifyDrpdwnStateView() {
 		new CommonFunctions().elementView(drpDwnState, "State Dropdown");
 	}
+
 	public void verifyZipCodeView() {
 		new CommonFunctions().elementView(txtZipCode, "ZipCode");
 	}
+
 	public void verifyUnitedStatesView() {
 		new CommonFunctions().elementView(txtCountry, "Country-UnitedStates");
 	}
 
-public void validateTextField(By ele, String eleName, String text) {
-	String[] field = text.split(",");
-	for (int i = 0; i < 4; i++) {
-		new CommonFunctions().validateField(ele, eleName, field[i]);
+	public void validateTextField(By ele, String eleName, String text) {
+		String[] field = text.split(",");
+		for (int i = 0; i < 4; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
 	}
-	new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
-}
-public void validateNumberfield(By ele,String elename,String text) {
-	String[] field = text.split(",");
-	new CommonFunctions().validateField(ele, elename, field[0]);
-	new CommonFunctions().validateFieldMaxichar(ele, elename, field[1]);
-}
-public void verifyAddline1(String addline1) {
-new RegistrationDBAInformationPage().verifyElementDisable(txtAddress1, "addline1");	
-new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress1, "addline1", addline1);
-}
-public void verifyAddline2(String addline2) {
-	new RegistrationDBAInformationPage().verifyElementDisable(txtAddress2, "addline2");
-	new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress2, "addline2", addline2);
-}
-public void verifyCity(String city) {
-	new RegistrationDBAInformationPage().verifyElementDisable(txtCity, "city");
-	new RegistrationDBAInformationPage().verifyTextBoxValue(txtCity, "city", city);
-}
-public void verifyState(String state) {
-	new RegistrationDBAInformationPage().verifyElementDisable(lblgetState, "state");
-	if(getText(lblgetState, "").equals(state)) {
-		ExtentTestManager.setPassMessageInReport(state+"is displayed");
-	}else {
-		ExtentTestManager.setFailMessageInReport(state+"is not displayed");
+
+	public void validateNumberfield(By ele, String elename, String text) {
+		String[] field = text.split(",");
+		new CommonFunctions().validateField(ele, elename, field[0]);
+		new CommonFunctions().validateFieldMaxichar(ele, elename, field[1]);
 	}
-}
-public void verifyZipCode(String zipcode) {
-	new RegistrationDBAInformationPage().verifyElementDisable(txtZipCode, "zipcode");
-	new RegistrationDBAInformationPage().verifyTextBoxValue(txtZipCode, "zipcode", zipcode);
-}
+
+	public void verifyAddline1(String addline1) {
+		new RegistrationDBAInformationPage().verifyElementDisable(txtAddress1, "addline1");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress1, "addline1", addline1);
+	}
+
+	public void verifyAddline2(String addline2) {
+		new RegistrationDBAInformationPage().verifyElementDisable(txtAddress2, "addline2");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtAddress2, "addline2", addline2);
+	}
+
+	public void verifyCity(String city) {
+		new RegistrationDBAInformationPage().verifyElementDisable(txtCity, "city");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtCity, "city", city);
+	}
+
+	public void verifyState(String state) {
+		new RegistrationDBAInformationPage().verifyElementDisable(lblgetState, "state");
+		if (getText(lblgetState, "").equals(state)) {
+			ExtentTestManager.setPassMessageInReport(state + "is displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport(state + "is not displayed");
+		}
+	}
+
+	public void verifyZipCode(String zipcode) {
+		new RegistrationDBAInformationPage().verifyElementDisable(txtZipCode, "zipcode");
+		new RegistrationDBAInformationPage().verifyTextBoxValue(txtZipCode, "zipcode", zipcode);
+	}
 }

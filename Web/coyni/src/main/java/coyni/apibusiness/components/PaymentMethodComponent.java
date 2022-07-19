@@ -3,6 +3,7 @@ package coyni.apibusiness.components;
 import org.openqa.selenium.By;
 
 import coyni.api.business.popups.AddNewPaymentMethodPopup;
+import coyni.api.business.popups.CardAddedSuccessfullyPopup;
 import coyni.api.business.popups.PreAuthorizationPopup;
 import coyni.api.business.popups.RemovePaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
@@ -54,6 +55,10 @@ public class PaymentMethodComponent extends BrowserFunctions {
 
 	public RemovePaymentMethodPopup removePaymentMethodPopup() {
 		return new RemovePaymentMethodPopup();
+	}
+
+	public CardAddedSuccessfullyPopup cardAddedSuccessfullyPopup() {
+		return new CardAddedSuccessfullyPopup();
 	}
 
 	public PreAuthorizationPopup preAuthorizationPopup() {
