@@ -1,9 +1,7 @@
 package coyni.merchant.tests;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -427,6 +425,24 @@ public class MerchantSettingsTest<V> {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInfoInavlidEmail failed due to " + e);
 		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testFeesView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyHeading(data.get("feesHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyLabels();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFeesView failed due to "+ e);
+		}
+
 	}
 
 //	@Test
