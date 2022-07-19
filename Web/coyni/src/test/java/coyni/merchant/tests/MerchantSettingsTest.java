@@ -1089,101 +1089,28 @@ public class MerchantSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testDebitCardFieldValidations is" + e);
 		}
 	}
-//
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testAddIpAddress(String strParams) {
-////		try {
-////			Map<String, String> data = Runner.getKeywordParameters(strParams);
-////			sideBarMenuComponent.clickBusinessSettings();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickIpAddresses();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickIpAddress();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyIpHeading(data.get("ipHeading"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyAccountId();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyAccountName();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.fillIpAddress(data.get("ipAddress"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.fillDescription(data.get("description"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.clickSubmit();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifySuccessHeading(data.get("successHeading"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.clickClose();
-////		} catch (Exception e) {
-////			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
-////		}
-////
-////	}
-//
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testAddIpAddressInvalidScenario(String strParams) {
-////		try {
-////			Map<String, String> data = Runner.getKeywordParameters(strParams);
-////			sideBarMenuComponent.clickBusinessSettings();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickIpAddresses();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickIpAddress();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyIpHeading(data.get("ipHeading"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyAccountId();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.verifyAccountName();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.fillIpAddress(data.get("ipAddress"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.fillDescription(data.get("description"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-////					.clickOutSide();
-////			if (!data.get("errMessage").isEmpty()) {
-////				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-////				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-////			}
-////		} catch (Exception e) {
-////			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
-////		}
-////
-////	}
-////
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testDeleteAddIpAddress(String strParams) {
-////		try {
-////			Map<String, String> data = Runner.getKeywordParameters(strParams);
-////			sideBarMenuComponent.clickBusinessSettings();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickIpAddresses();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickDelete();
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
-////					.verifyRemoveHeading(data.get("removeHeading"));
-////			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickYes();
-////		} catch (Exception e) {
-////			ExtentTestManager.setFailMessageInReport("test Remove ip address  Failed due to Exception " + e);
-////		}
-
-	/// }
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsNoTeamMember(String strParams) {
+	public void testMerchantSettingsNoTeamMember(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
+			// merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
 
-		merchantSettingsSideBarMenuComponent.clickMerchantSettings();
-		merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-		merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifySearch(data.get("search"));
-		merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
-		merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
-		merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
-
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsNoTeamMember failed due to Exception " + e);
+		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsAddTeamMember(String strParams) {
+	public void testMerchantSettingsAddTeamMember(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
@@ -1233,7 +1160,7 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsTeamFilters(String strParams) {
+	public void testMerchantSettingsTeamFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
@@ -1259,7 +1186,7 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsTeamSearch(String strParams) {
+	public void testMerchantSettingsTeamSearch(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
@@ -1273,7 +1200,7 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsTeamEdit(String strParams) {
+	public void testMerchantSettingsTeamEdit(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
@@ -1284,4 +1211,5 @@ public class MerchantSettingsTest {
 			ExtentTestManager.setFailMessageInReport("test Business Settings Team Edit  failed due to Exception " + e);
 		}
 	}
+
 }

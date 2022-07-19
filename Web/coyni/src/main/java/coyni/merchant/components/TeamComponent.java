@@ -6,18 +6,19 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TeamComponent extends BrowserFunctions {
-	private By lblTeam = By.xpath("(//span[text()='Team'])[2]");
+
+	private By lblTeam = By.xpath("//span[text()='Team']");
 	private By lnkAddTeam = By.xpath("//span[text()='Add New Team Member']");
 	private By lnkFilter = By.xpath("//div[text()='Filter']");
 	private By search = By.xpath("placeholder=\"Search by Name, Email, or Phone\"");
 	private By iconSearch = By.xpath("//button[@type='submit']");
 	private By checkBox = By.xpath("//input[@type='checkbox']");
-	private By noRecordFound = By.xpath("//p[text()='No Records Found'])");
+	private By noRecordFound = By.xpath("//div[text()='No Records Found']");
 	private By editIcon = By.xpath("//div[@data-tip='Edit']");
 	private By sendInvite = By.xpath("//button[@type='button']");
 
-	public void verifyTeamHeading() {
-		new CommonFunctions().elementView(lblTeam, "Team");
+	public void verifyTeamHeading(String Heading) {
+		new CommonFunctions().verifyLabelText(lblTeam, Heading, "Heading");
 	}
 
 	public void clickAddTeamMember() {
