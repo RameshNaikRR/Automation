@@ -36,14 +36,16 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void fillCity(String city) {
 		enterText(txtCity, city, "city");
+		
 	}
 
 	public void selectState(String state) {
-		click(drpDwnState, "State DropDown");
+	//	click(drpDwnState, "State DropDown");
 		new CommonFunctions().selectCustomDropDown(state, "State");
 	}
 
 	public void fillZipCode(String zipCode) {
+		click(txtZipCode, "zipCode");
 		enterText(txtZipCode, zipCode, "ZipCode");
 	}
 

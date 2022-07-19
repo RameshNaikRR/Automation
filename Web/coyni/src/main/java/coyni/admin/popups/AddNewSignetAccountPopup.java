@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.customer.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class AddNewSignetAccountPopup extends BrowserFunctions {
 	public By lblHeading = By.xpath("//label[text()='Name On Signet Account']");
@@ -12,9 +13,10 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 	public By lnkPaste = By.xpath("//span[text()='Withdraw Amount']");
 	public By txtSignetWalletID = By.xpath("//input[@id='wallet-id']");
 	public By btnSave = By.xpath("//button[text()='Save']");
+	public By lblAddSignet = By.xpath("//h1[text()='Add New Signet Account']");
 
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Add New signet Account Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblAddSignet, "Add New signet Account Heading", expHeading);
 	}
 
 	public void fillName(String message) {
@@ -26,7 +28,12 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 	}
 
 	public void clickSave() {
-		click(btnSave, "Click on Save");
+		if (getElement(btnSave, "save").isEnabled()) {
+
+			click(btnSave, "Click on Save");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Save button is disble");
+		}
 	}
 
 	public void clickPaste() {

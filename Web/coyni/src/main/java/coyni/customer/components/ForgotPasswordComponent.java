@@ -87,7 +87,7 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 	}
 
 	public void clickSubmit() {
-		if (getElement(btnSubmit, "Sunmit").isEnabled()) {
+		if (getElement(btnSubmit, "Submit").isEnabled()) {
 			click(btnSubmit, "Submit");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Submit button is Disabled");

@@ -29,7 +29,7 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	private By lblSignetWithdraw = By.xpath("//span[.='Signet Withdraws']/../following-sibling::*[1]/span");
 
-	private By lnkWithdrawToSignet = By.xpath("//span[text()='Withdraw To Signet']");
+	private By lnkWithdrawToSignet = By.xpath("//button[text()='Withdraw To Signet']");
 
 	private By btnFilter = By.xpath("//button[text()='Filter']");
 

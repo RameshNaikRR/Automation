@@ -14,6 +14,10 @@ public class NoSignetAccountsExistPopup extends BrowserFunctions {
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "No signet Accounts Exist Heading", expHeading);
 	}
+	
+	public int getLabelsize() {
+		return getElementsList(lblHeading, "").size();
+	}
 
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Add New signet Account Heading", expDescription);

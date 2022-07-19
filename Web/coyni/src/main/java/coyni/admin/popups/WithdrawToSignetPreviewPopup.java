@@ -25,8 +25,10 @@ public class WithdrawToSignetPreviewPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Withdraw to signet Heading", expHeading);
 	}
 
-	public void verifyAmount(String amount) {
-		new CommonFunctions().verifyLabelText(lblAmount, "Amount", amount);
+	public void verifyAmount() {
+
+		ExtentTestManager.setInfoMessageInReport(getText(lblAmount, "Amount"));
+		// new CommonFunctions().verifyLabelText(lblAmount, "Amount", amount);
 	}
 
 	public void getWithdrawAmount() {

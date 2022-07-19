@@ -2,6 +2,7 @@ package coyni.admin.tests;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -31,13 +32,13 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			//homePage.sideBarComponent().clickCoyniPortal();
+			// homePage.sideBarComponent().clickCoyniPortal();
 			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
 			// "expValue", "expColor");
 			homePage.sideBarComponent().clickTokenAccount();
 			Thread.sleep(2000);
-			//homePage.sideBarComponent().clickCoyniPortal();
-			//homePage.sideBarComponent().clickCommissionAccount();
+			// homePage.sideBarComponent().clickCoyniPortal();
+			// homePage.sideBarComponent().clickCommissionAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCoyniPortal Failed due to Exception " + e);
@@ -83,8 +84,7 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccount Failed due to Exception " + e);
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTokenAccountActivity(String strParams) {
@@ -121,7 +121,6 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountActivity Failed due to Exception " + e);
 		}
 	}
-	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -154,7 +153,6 @@ public class CoyniPortalTest {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
-	
 
 	public void testFilters(String strParams) {
 		try {
@@ -302,53 +300,60 @@ public class CoyniPortalTest {
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
+	public void addSignet(String strParams) throws InterruptedException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
+		// tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+		Thread.sleep(1000);
+		tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
+		Thread.sleep(1000);
+		// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading
+		// "));
+		tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+		tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
+		tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+		tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+		tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
+		tokenAccountPage.mailingAddressComponent().clickstate();
+		Thread.sleep(500);
+		tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+
+		tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+		tokenAccountPage.addNewSignetAccountPopup().clickSave();
+
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
-//			homePage.sideBarComponent().clickCoyniPortal();
-//			homePage.sideBarComponent().clickTokenAccount();
+
 			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
-//			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
-			Thread.sleep(1000);
-			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-			Thread.sleep(1000);
-//			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading "));
-			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
-			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
-			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
-			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
-			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
-			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-//			tokenAccountPage.mailingAddressComponent().clickstate();
-			Thread.sleep(500);
-			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
-			Thread.sleep(1000);
-			tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-			tokenAccountPage.addNewSignetAccountPopup().clickSave();
+			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
+				addSignet(strParams);
+			} else {
+				testWithdrawToSignetAccount(strParams);
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
 	public void testWithdrawToSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			System.out.println("--------------------------------------");
+			// tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
 			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
 			tokenAccountPage.withdrawToSignetPopup().clickNext();
 			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
 					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount(data.get("amount"));
+			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
 			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
 			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
 			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
@@ -372,7 +377,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
 			tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
 					.verifyPageHeading(data.get("removeSignetAccountHeading"));
@@ -392,32 +397,12 @@ public class CoyniPortalTest {
 	public void testAddSignetAccountInvalidDataValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
 			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
-//			tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
-			tokenAccountPage.noSignetAccountsExistPopup().clickAddSignet();
-//			tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading"));
-			tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
-			tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
-			// tokenAccountPage.addNewSignetAccountPopup().clickPaste();
-			tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
-			tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
-			tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-//			tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
-
-			if (data.get("state").isEmpty()) {
-				tokenAccountPage.mailingAddressComponent().clickstate();
-				tokenAccountPage.mailingAddressComponent().clickTab();
-			}
-			if (!data.get("state").isEmpty()) {
-				tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-				tokenAccountPage.mailingAddressComponent().clickTab();
-				// tokenAccountPage.mailingAddressComponent().clickSave();
-			}
+			addSignet(strParams);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
@@ -426,15 +411,14 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawSignetAccountFieldValidations(String strParams) {
+	public void testAddSignetAccountInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickWithdrawToSignet();
-			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading(data.get("withdrawToSignetAccountHeading"));
+			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("transDescription"));
+			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
 			tokenAccountPage.withdrawToSignetPopup().clickNext();
-			Thread.sleep(1000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}

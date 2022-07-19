@@ -29,7 +29,7 @@ public class TopBarComponent extends BrowserFunctions {
 	}
 
 	public By getDropDownItems(String elementName) {
-		return By.xpath(String.format("//span[(contains(@class,'user' ) or contains(@class,'text'))and text()='%s']",
+		return By.xpath(String.format("//button[(contains(@class,'user' ) or contains(@class,'text'))and text()='%s']",
 				elementName));
 	}
 
