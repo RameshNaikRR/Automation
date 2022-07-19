@@ -2,7 +2,6 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
-
 import coyni.merchant.components.AddCardComponent;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
@@ -14,6 +13,7 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	private By btnBankAccount = By.xpath("//span[contains(text(),'Bank Account')]");
 	private By btnSignetAccount = By.xpath("//span[contains(text(),'Signet Account')]");
 	private By btnDebitCard = By.xpath("//span[text()='Debit Card'] | //span[text()='Add New Debit Card']");
+	private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
 	private By lblBankAccountCount = By.xpath("(//span[@class='count'])[1]");
 	private By lblDebitCardCount = By.xpath("(//span[@class='count'])[2]");
 
@@ -22,7 +22,7 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		click(btnBankAccount, "Click Bank Account");
 
 	}
-	
+
 	public void clickAddSignetAccount() {
 		click(btnSignetAccount, "Click Signet Account");
 
@@ -30,6 +30,11 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 
 	public void clickDebitCard() {
 		click(btnDebitCard, "Click DebitCard");
+
+	}
+
+	public void clickCreditCard() {
+		click(btnCreditCard, "Click DebitCard");
 
 	}
 
