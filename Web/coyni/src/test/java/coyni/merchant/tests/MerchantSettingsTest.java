@@ -1110,6 +1110,22 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testMerchantSettingsTeamSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifySearch(data.get("searchingKey"));
+			merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamSearch failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsAddTeamMember(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1126,35 +1142,69 @@ public class MerchantSettingsTest {
 					.verifyEmail(data.get("email"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().clickAddRole();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().addCustomRolePopup()
-					.verifyHeading(data.get("customHeading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().addCustomRolePopup()
-					.verifyRoleName(data.get("roleName"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().addCustomRolePopup()
-					.clickAdd();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.addCustomRolePopup().navigationComponent().clickClose();
-
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().clickEdit();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyTokenWalletAccess();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyTransferToken();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyBuyToken();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyWithdrawToken();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyEcosystemActivity();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyExportedFiles();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().verifyBusinessSettings();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().clickSave();
-			Thread.sleep(2000);
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().saveChangePopUp()
-					.verifyHeading(data.get("expHeading"));
-
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().saveChangePopUp().clickYes();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickSendInvitation();
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().clickSendInvitation();
 
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsAddTeamMember failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsTeamMember(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsTeamMemberRemove(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
+			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickGoBack();
+			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickYes();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsTeamMemberDelete(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickDelete();
+			merchantSettingsSideBarMenuComponent.teamComponent().deleteUserPopup().clickRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
 		}
 	}
 
@@ -1163,52 +1213,100 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage().verifyActive();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage().verifyPending();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage().verifyExpired();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage()
-					.verifyClearAll();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamFilters failed due to Exception " + e);
+		}
+	}
 
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage()
-					.verifyApplyFilters();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage()
-					.getNoRecordsFound();
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().filtersPage()
-					.verifyResetFilters();
+	public void testMerchantSettingsTeamActiveFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+					.setFailMessageInReport("testMerchantSettingsTeamActiveFilters failed due to Exception " + e);
+		}
+	}
+
+	public void testMerchantSettingsTeamInvitationPendingFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testMerchantSettingsTeamInvitationPendingFilters failed due to Exception " + e);
+		}
+	}
+
+	public void testMerchantSettingsTeamInvitationExpiredFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testMerchantSettingsTeamInvitationExpiredFilters failed due to Exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testMerchantSettingsTeamSearch(String strParams) {
+	public void testMerchantSettingsTeamResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifySearch(data.get("searchingKey"));
-			merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testMerchantSettingsTeamEdit(String strParams) {
+	public void testMerchantSettingsTeamActiveResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyEditIcon();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Business Settings Team Edit  failed due to Exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testMerchantSettingsTeamActiveResetFilters failed due to Exception " + e);
+		}
+	}
+
+	public void testMerchantSettingsTeamResetPendingFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testMerchantSettingsTeamResetPendingFilters failed due to Exception " + e);
+		}
+	}
+
+	public void testMerchantSettingsTeamResetExpiredFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
+			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testMerchantSettingsTeamResetExpiredFilters failed due to Exception " + e);
 		}
 	}
 
