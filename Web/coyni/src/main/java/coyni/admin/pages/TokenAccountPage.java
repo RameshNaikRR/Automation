@@ -36,6 +36,12 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnExport = By.xpath("//button[text()='Export']");
 
 	private By lblTransactions = By.xpath("//h2[text()='Transactions']");
+	
+	private By lblTokenAccount = By.xpath("//p[text()='Token Account']");
+	
+	public void clickTokenAccount() {
+		click(lblTokenAccount, "Token Account");
+	}
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelTextContains(lblHeading, "Heading", expHeading);

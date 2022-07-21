@@ -16,7 +16,7 @@ public class TransactionPage extends BrowserFunctions {
 
 	private By lblBusiness = By.xpath("//div[text()='Business']");
 
-	private By lblDateTime = By.xpath("//span[text()='Date / Time']");
+	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
 
 	private By lblUserType = By.xpath("//span[text()='User Type']");
 
@@ -26,7 +26,7 @@ public class TransactionPage extends BrowserFunctions {
 
 	private By lblDescription = By.xpath("//span[text()='Description']");
 
-	private By lblAmount = By.xpath("//span[text()='Amount(CYN)']");
+	private By lblAmount = By.xpath("//span[text()='Amount']");
 
 	private By lblStatus = By.xpath("//span[text()='Status']");
 

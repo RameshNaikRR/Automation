@@ -37,9 +37,11 @@ public class AccountingTest {
 		homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
 //		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
 		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
-		//Thread.sleep(2000);
+		// Thread.sleep(2000);
 		homePage.sideBarComponent().accountTableComponent().clickSearch();
+		Thread.sleep(1000);
 		homePage.sideBarComponent().accountTableComponent().clickDetails();
+		Thread.sleep(2000);
 		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
 		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
 		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
@@ -47,35 +49,53 @@ public class AccountingTest {
 		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
 		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
 		homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
-//		Thread.sleep(2000);
+		Thread.sleep(2000);
 //		homePage.sideBarComponent().accountTableComponent().batchIDComponent().paginationAndEntriesComponent()
 //		.verifyPageNumbersWithCount();
 
 	}
 
+	public void disableFilter(String strParams) {
+
+	}
+
 	public void testFilters(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
-				.fillWithdrawID(data.get("withdrawId"));
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
-				.fillReferenceId(data.get("refrenceId"));
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
-				.fillUserId(data.get("userId"));
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
-				.fillNameOnAccount(data.get("nameOnBank"));
+		// if(
+		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters().)
+		// {
+
+		if (homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.noTransaction() != 0) {
+			ExtentTestManager.setInfoMessageInReport("Filter button is disable because no transactions");
+		} else {
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+					.fillWithdrawID(data.get("withdrawId"));
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+					.fillReferenceId(data.get("refrenceId"));
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+					.fillUserId(data.get("userId"));
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+					.fillNameOnAccount(data.get("nameOnBank"));
+		}
 	}
 
 	public void testExport(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickExport();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
-				.verifyExport(data.get("heading"));
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickExportButton();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
-				.verifyExportPrepared(data.get("exportPrepared"));
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickClose();
-
+		if (homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+				.noTransaction() != 0) {
+			ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
+		} else {
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickExport();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
+					.verifyExport(data.get("heading"));
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
+					.clickExportButton();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent()
+					.verifyExportPrepared(data.get("exportPrepared"));
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().exportComponent().clickClose();
+		}
 	}
 
 	@Test
@@ -89,8 +109,8 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
 			totalWithdraw(strParams);
-			testFilters(strParams);
-			testExport(strParams);
+			// testFilters(strParams);
+			// testExport(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -115,36 +135,6 @@ public class AccountingTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-
-//	@Test
-//	@Parameters("strParams")
-//	public void testTotalWithdrawWithBankAccountsWithExports(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			homePage.sideBarComponent().clickAccounting();
-//			homePage.sideBarComponent().clickTotalWithdraw();
-//			totalWithdraw(strParams);
-//			coyniPortalTest.testExportSelectedTransactionToday(strParams);
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//		}
-//	}
-
-//	@Test
-//	@Parameters("strParams")
-//	public void testTotalWithdrawWithBankAccountsWithFilters(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			homePage.sideBarComponent().clickAccounting();
-//			homePage.sideBarComponent().clickTotalWithdraw();
-//			totalWithdraw(strParams);
-//			coyniPortalTest.testFilters(strParams);
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//		}
-//	}
 
 	@Test
 	@Parameters("strParams")
@@ -177,7 +167,6 @@ public class AccountingTest {
 			testFilters(strParams);
 			testExport(strParams);
 
-			totalWithdraw(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
@@ -206,7 +195,7 @@ public class AccountingTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
 //			homePage.sideBarComponent().verifyTotalDepositsView();
-			Thread.sleep(1000);
+			// Thread.sleep(1000);
 			homePage.sideBarComponent().clickTotalDeposits();
 			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickBankAccount();

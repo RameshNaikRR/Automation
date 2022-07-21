@@ -94,7 +94,7 @@ public class TransactionTest {
 		homePage.sideBarComponent().clickTransactions();
 		homePage.sideBarComponent().exportComponent().clickExport();
 		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
-		coyniPortalTest.testExportSelectedTransactions(strParams, "Last Seven Days");
+		coyniPortalTest.testExportSelectedTransactions(strParams, "Last 7 Days");
 
 	}
 

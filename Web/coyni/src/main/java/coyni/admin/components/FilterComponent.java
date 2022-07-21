@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class FilterComponent extends BrowserFunctions {
 
@@ -47,8 +48,7 @@ public class FilterComponent extends BrowserFunctions {
 			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 
 	public void fillWithdrawID(String id) {
-		enterText(getTextFieldElements("Deposit ID"), id, "Deposit Id");
-		// enterText(lblEmployeeName, id, id);
+		enterText(getTextFieldElements("Withdraw ID"), id, "Withdraw ID");
 	}
 
 	public void verifyDate(String expHeading) {
@@ -60,7 +60,15 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickFilters() {
+
 		click(lblFilters, "Filters");
+
+	}
+
+	private By lblNoTransaction = By.xpath("//span[text()='No Transactions Found']");
+
+	public int noTransaction() {
+		return getElementsList(lblNoTransaction, "").size();
 	}
 
 	public By getElement(String elementName) {

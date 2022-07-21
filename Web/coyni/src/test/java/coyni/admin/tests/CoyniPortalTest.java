@@ -90,8 +90,8 @@ public class CoyniPortalTest {
 	public void testTokenAccountActivity(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			// homePage.sideBarComponent().clickTokenAccount();
+			// homePage.sideBarComponent().clickCoyniPortal();
+			homePage.sideBarComponent().clickTokenAccount();
 			homePage.sideBarComponent().tokenAccountPage().verifyTokenAccountActivityView(data.get("heading"));
 //			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
 //			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
@@ -225,7 +225,7 @@ public class CoyniPortalTest {
 			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnYesterday();
 
-			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
+			} else if (strParams1.equalsIgnoreCase("Last 7 Days")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOn7Days();
 			} else if (strParams1.equalsIgnoreCase("Last Month")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnLastMonth();
@@ -329,7 +329,7 @@ public class CoyniPortalTest {
 	public void testAddSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
 			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
 				addSignet(strParams);
@@ -376,6 +376,7 @@ public class CoyniPortalTest {
 	public void testRemoveSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
@@ -397,6 +398,7 @@ public class CoyniPortalTest {
 	public void testAddSignetAccountInvalidDataValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
 			addSignet(strParams);
 			if (!data.get("errMessage").isEmpty()) {
@@ -433,8 +435,8 @@ public class CoyniPortalTest {
 	public void testCommissionAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickCommissionAccount();
+//			homePage.sideBarComponent().clickCoyniPortal();
+//			homePage.sideBarComponent().clickCommissionAccount();
 			homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
 			homePage.sideBarComponent().commissionAccountPage().daysMonthsDropDownComponent().clickOnToday();
 			homePage.sideBarComponent().commissionAccountPage().getAccountBalance();

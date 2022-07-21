@@ -99,7 +99,7 @@ public class AccountTableComponent extends BrowserFunctions {
 	}
 
 	private By getTabItemLoc(String elementName) {
-		return By.xpath(String.format("//div[contains(@class,'tabs__tab') and text()='%s']", elementName));
+		return By.xpath(String.format("//button[ text()='%s']", elementName));
 	}
 
 	public void clickBankAccount() {

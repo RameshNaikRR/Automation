@@ -144,8 +144,8 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
 			Thread.sleep(2000);
 			homePage.sideBarComponent().feeStructurePage().clickView();
-			// homePage.viewMerchantfeeStructurePage().verifyHeading(data.get("expViewHeading"));
-			homePage.sideBarComponent().viewMerchantfeeStructurePage().getDefaultFirstRowHeading();
+			 homePage.viewMerchantfeeStructurePage().verifyHeading(data.get("expViewHeading"));
+			//homePage.sideBarComponent().viewMerchantfeeStructurePage().getDefaultFirstRowHeading();
 			homePage.sideBarComponent().feeStructurePage().viewMerchantfeeStructurePage().verifyTransction();
 			homePage.sideBarComponent().feeStructurePage().viewMerchantfeeStructurePage().verifyTokenAccount();
 			homePage.sideBarComponent().feeStructurePage().viewMerchantfeeStructurePage().verifyOtherfees();
@@ -165,7 +165,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickFeatureControls();
 			Thread.sleep(2000);
 			homePage.sideBarComponent().featureControlPage().verifyActivityHeading(data.get("expActivityHeading"));
-			homePage.sideBarComponent().featureControlPage().verifyActivityDescription();
+	//		homePage.sideBarComponent().featureControlPage().verifyActivityDescription();
 			Thread.sleep(2000);
 			// homePage.sideBarComponent().featureControlPage().verifyAllTransactionsControls();
 			// homePage.sideBarComponent().featureControlPage().verifyCreditCard();
