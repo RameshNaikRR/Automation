@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.api.business.popups.BuyCoyniTokensNoPaymentPopup;
+import coyni.api.business.popups.BuyTokensPaymentPopup;
 import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.HomePage;
@@ -23,6 +25,8 @@ public class TokenWalletTest {
 	SideBarMenuComponent sideBarMenuComponent;
 	FilterComponent filterComponent;
 	HomePage homePage;
+	BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup;
+	BuyTokensPaymentPopup buyTokensPaymentPopup;
 
 	@BeforeMethod
 	public void init() {
@@ -31,6 +35,8 @@ public class TokenWalletTest {
 		homePage = new HomePage();
 		sideBarMenuComponent = new SideBarMenuComponent();
 		filterComponent = new FilterComponent();
+		buyCoyniTokensNoPaymentPopup = new BuyCoyniTokensNoPaymentPopup();
+		buyTokensPaymentPopup = new BuyTokensPaymentPopup();
 	}
 
 	@Test
@@ -727,46 +733,66 @@ public class TokenWalletTest {
 		}
 	}
 
+	public void tokenWalletBuyTokensSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenWalletPage.buyTokensPaymentPopup().verifyHeading(data.get("heading"));
+			tokenWalletPage.buyTokensPaymentPopup().verifySubHeading(data.get("subHeading"));
+			tokenWalletPage.buyTokensPaymentPopup().fillAmount(data.get("amount"));
+			tokenWalletPage.buyTokensPaymentPopup().clickCovert();
+			tokenWalletPage.buyTokensPaymentPopup().clickChange();
+			tokenWalletPage.buyTokensPaymentPopup().clickNext();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet Buy Tokens is failed due to Exception" + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTokenWalletBuyTokensSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideBarMenuComponent.clickTokenwallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.tokenWalletActivityComponent().clickBuyTokens();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
-					.VerifyHeading(data.get("heading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickAddnewpaymentmethod();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
-					.verifyHeading(data.get("addNewPaymenthdg"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
-					.clickSignetAccount();
-
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.verifyPageHeading(data.get("signetAccounthdg"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.fillName(data.get("nameOnSignetAccount"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.fillSignetWalletId(data.get("walletID"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().fillAddress1(data.get("address1"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().fillAddress2(data.get("address2"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().fillCity(data.get("city"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().selectState(data.get("state"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-////			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-////					.mailingAddressComponent().verifyCountry(data.get("country"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
-//					.mailingAddressComponent().clickSave();
-
+			if (sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensNoPaymentPopup().getLabelsize() > 0) {
+				addSignet(strParams);
+			} else {
+				tokenWalletBuyTokensSignetAccount(strParams);
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Token Wallet Buy Tokens is failed due to Exception" + e);
 		}
+	}
+
+	public void addSignet(String strParams) throws InterruptedException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().VerifyHeading(data.get("heading"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickAddnewpaymentmethod();
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
+				.verifyHeading(data.get("addNewPaymenthdg"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
+				.clickSignetAccount();
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.verifyPageHeading(data.get("signetAccounthdg"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.fillName(data.get("nameOnSignetAccount"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.fillSignetWalletId(data.get("walletID"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().fillAddress1(data.get("address1"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().fillAddress2(data.get("address2"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().fillCity(data.get("city"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().selectState(data.get("state"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+//					.mailingAddressComponent().verifyCountry(data.get("country"));
+		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
+				.mailingAddressComponent().clickSave();
 	}
 
 	@Test

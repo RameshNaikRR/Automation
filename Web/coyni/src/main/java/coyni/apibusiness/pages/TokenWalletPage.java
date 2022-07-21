@@ -2,6 +2,7 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.api.business.popups.BuyTokensPaymentPopup;
 import coyni.api.business.popups.TokenWalletTransferTokenPopup;
 import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.FilterComponent;
@@ -159,6 +160,10 @@ public class TokenWalletPage extends BrowserFunctions {
 
 	public ExportFilesPage exportFilesPage() {
 		return new ExportFilesPage();
+	}
+
+	public BuyTokensPaymentPopup buyTokensPaymentPopup() {
+		return new BuyTokensPaymentPopup();
 	}
 
 	public TransactionListComponent transactionListComponent() {

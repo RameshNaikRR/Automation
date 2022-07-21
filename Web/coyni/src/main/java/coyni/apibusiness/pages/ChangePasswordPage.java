@@ -9,12 +9,12 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ChangePasswordPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("(//span[text()='Change Password'])[2]");
 	private By lblDescription = By.xpath("//p[contains(text(),'you will be logged out')]");
-	private By txtCurrentPassword = By.id("CurrentPassword");
-	private By txtNewPassword = By.id("NewPassword");
-	private By txtConfirmNewPassword = By.id("ConfirmNewPassword");
-	private By eyeIconCurrent = By.xpath("(//button[@type='button'])[1]");
-	private By eyeIconNew = By.xpath("(//button[@type='button'])[2]");
-	private By eyeIconConfirm = By.xpath("(//button[@type='button'])[3]");
+	private By txtCurrentPassword = By.xpath("//input[@name='oldPassword']");
+	private By txtNewPassword = By.xpath("//input[@name='newPassword']");
+	private By txtConfirmNewPassword = By.xpath("//input[@id='ConfirmNewPassword']");
+	private By eyeIconCurrent = By.xpath("(//button[@data-tip='View'])[1]");
+	private By eyeIconNew = By.xpath("(//button[@data-for='button'])[2]");
+	private By eyeIconConfirm = By.xpath("(//button[@data-for='button'])[3]");
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By reddot = By.cssSelector(".red-dot");

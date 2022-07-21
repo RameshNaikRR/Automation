@@ -58,7 +58,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
 			tokenWalletPage.topBarComponent().authyComponent()
 					.verifyYourIdentityDescription(data.get("identityDescription"));
-			tokenWalletPage.topBarComponent().authyComponent().fillAuthyInput(data.get("pin"));
+			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.verifyPageHeading(data.get("changePasswordHeading"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
@@ -66,9 +66,11 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillCurrentPassword(data.get("currentPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconCurrentPassword();
+			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.verifyNewPassword(data.get("newPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconNewPassowrd();
+			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
@@ -92,8 +94,10 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.verifyPageHeading(data.get("changePasswordHeading"));
+			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillCurrentPassword(data.get("currentPassword"));
+			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillNewPassword(data.get("newPassword"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
@@ -130,8 +134,10 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconCurrentPassword();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyCurrentPasswordMaskedView();
+			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillNewPassword(data.get("newPassword"));
+			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconNewPassowrd();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyNewPasswordMaskedView();
@@ -143,8 +149,8 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
-			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
 			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().clickEyeIconConfirmPassword();
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage().verifyConfirmPasswordMaskedView();
 
 		} catch (Exception e) {
