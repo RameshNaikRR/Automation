@@ -10,6 +10,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddTeamMemberComponent extends BrowserFunctions {
+	
 
 	private By lblAddTeam = By.xpath("//span[text()='Add New Team Member']");
 	private By txtFirstName = By.xpath("//input[@name='firstName']");

@@ -10,9 +10,10 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TeamComponent extends BrowserFunctions {
+	
 
 	private By lblTeam = By.xpath("//span[text()='Team']");
-	private By lnkAddTeam = By.xpath("//span[text()='Add New Team Member']");
+	private By lnkAddTeam = By.xpath("//button[text()='Add New Team Member']");
 	private By lnkFilter = By.xpath("//div[text()='Filter']");
 	private By search = By.xpath("//input[@placeholder='Search by Name, Email or Phone']");
 	private By iconSearch = By.xpath("//button[@type='submit']");
@@ -93,5 +94,4 @@ public class TeamComponent extends BrowserFunctions {
 	public FiltersPage filtersPage() {
 		return new FiltersPage();
 	}
-
 }

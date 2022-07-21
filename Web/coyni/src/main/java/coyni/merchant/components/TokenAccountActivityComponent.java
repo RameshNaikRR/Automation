@@ -3,6 +3,7 @@ package coyni.merchant.components;
 import java.sql.SQLException;
 import org.openqa.selenium.By;
 
+import coyni.merchant.pages.ExportfilesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -279,5 +280,9 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	public DatePickerComponent datePickerComponent() {
 		return new DatePickerComponent();
+	}
+
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
 	}
 }

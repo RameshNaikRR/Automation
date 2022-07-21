@@ -2,12 +2,13 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.pages.ExportfilesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensPurchasedDetailsComponent extends BrowserFunctions {
 
-	private By lblTokensPurchased = By.xpath("//span[text='Tokens Purchased']");
+	private By lblTokensPurchased = By.xpath("//span[text()='Tokens Purchased']");
 
 	private By lblTokensPurchaseTransactions = By.xpath("//h1[text()='Tokens Purchased Details']");
 
@@ -36,5 +37,9 @@ public class TokensPurchasedDetailsComponent extends BrowserFunctions {
 
 	public TransactionsListComponent transactionsListComponent() {
 		return new TransactionsListComponent();
+	}
+
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
 	}
 }

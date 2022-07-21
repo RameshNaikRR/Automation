@@ -7,6 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensWithdrawnDetailsComponent extends BrowserFunctions {
 
+	
 	private By lblTranscationsCount = By.cssSelector("");
 
 	private By lblTokensWithdrawTransactions = By.xpath("//h1[text()='Token Withdraw Details']");

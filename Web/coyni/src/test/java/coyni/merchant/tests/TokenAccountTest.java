@@ -69,6 +69,21 @@ public class TokenAccountTest {
 
 	}
 
+	public void exports(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+			tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+		} else {
+			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().clickExport();
+			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
+					.verifyHeading(data.get("heading"));
+			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
+					.clickOnExport();
+			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
+					.clickClose();
+		}
+	}
+
 	public void testTodayTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -159,6 +174,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -167,6 +183,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -175,6 +192,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -184,6 +202,7 @@ public class TokenAccountTest {
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 
 			testMonthToDateTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -192,6 +211,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -239,6 +259,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -247,6 +268,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -255,6 +277,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -264,6 +287,7 @@ public class TokenAccountTest {
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 
 			testMonthToDateTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -272,6 +296,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -319,6 +344,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
@@ -327,6 +353,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
@@ -334,6 +361,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
@@ -341,6 +369,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testMonthToDateTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
@@ -348,6 +377,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+			exports(strParams);
 			ExtentTestManager.setInfoMessageInReport(
 					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 

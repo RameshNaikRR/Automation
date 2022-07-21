@@ -1,6 +1,8 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
+
+import coyni.merchant.pages.ExportfilesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -34,6 +36,10 @@ public class PayOutsReceivedDetailsComponent extends BrowserFunctions {
 
 	public TransactionsListComponent transactionsListComponent() {
 		return new TransactionsListComponent();
+	}
+
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
 	}
 
 }
