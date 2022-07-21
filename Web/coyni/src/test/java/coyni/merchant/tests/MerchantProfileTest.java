@@ -590,13 +590,9 @@ public class MerchantProfileTest {
 			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			Thread.sleep(2000);
-			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
-			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
-			merchantProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
@@ -625,23 +621,28 @@ public class MerchantProfileTest {
 	}
 
 	@Test
-	@Parameters({ "strParams" })
-	public void testCancelNotifications(String strParams) {
+	public void testNotificationsDelete() {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			merchantProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
-			merchantProfilePage.userDetailsComponent().notificationsComponent().verifybtnCancelView();
-			merchantProfilePage.userDetailsComponent().notificationsComponent()
-					.verifyReminderfirstMsg(data.get("initialMsg"));
-			Thread.sleep(1000);
-			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyCancelBorderColor(data.get("CssProp"),
-			// data.get("CssValue"), data.get("Color"));
-			merchantProfilePage.userDetailsComponent().notificationsComponent().clickCancel();
-			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCancelMsg(data.get("finalMsg"));
+			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
+			merchantProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Cancel notifications failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	// @Parameters({ "strParams" })
+	public void testClearAllNotifications() {
+		try {
+			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			merchantProfilePage.userDetailsComponent().notificationsComponent().clickClearAll();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Clear all Notifications failed due to Exception " + e);
 		}
 	}
 

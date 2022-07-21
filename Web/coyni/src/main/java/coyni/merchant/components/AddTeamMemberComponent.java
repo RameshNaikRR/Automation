@@ -10,7 +10,6 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddTeamMemberComponent extends BrowserFunctions {
-	
 
 	private By lblAddTeam = By.xpath("//span[text()='Add New Team Member']");
 	private By txtFirstName = By.xpath("//input[@name='firstName']");
@@ -24,19 +23,19 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	}
 
 	public void verifyFirstName(String name) {
-		enterText(txtFirstName, "Name", name);
+		enterText(txtFirstName, name, "Name");
 	}
 
 	public void verifyLastName(String lastName) {
-		enterText(txtLastName, "LastName", lastName);
+		enterText(txtLastName, lastName, "LastName");
 	}
 
 	public void verifyEmail(String email) {
-		enterText(txtEmail, "Email", email);
+		enterText(txtEmail, email, "Email");
 	}
 
 	public void verifyPhone(String Phone) {
-		enterText(txtPhone, "Phone", Phone);
+		enterText(txtPhone, Phone, "Phone");
 	}
 
 	public void clickSendInvitation() {

@@ -1159,8 +1159,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
@@ -1177,8 +1175,8 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
+//			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
+//			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
 			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickGoBack();
 			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickYes();
@@ -1196,10 +1194,10 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
+//			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+//			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
+//			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
+//			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickDelete();
 			merchantSettingsSideBarMenuComponent.teamComponent().deleteUserPopup().clickRemove();
 
