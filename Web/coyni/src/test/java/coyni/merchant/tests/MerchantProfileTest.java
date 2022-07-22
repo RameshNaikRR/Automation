@@ -648,6 +648,26 @@ public class MerchantProfileTest {
 
 	@Test // added
 	@Parameters({ "strParams" })
+	public void testMerchantAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
+			merchantProfilePage.merchantAccountsPage().verifyHeading(data.get("heading"));
+			merchantProfilePage.merchantAccountsPage().clickSettings();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
+			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();
+
+			Thread.sleep(3000);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
 	public void testAgreements(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

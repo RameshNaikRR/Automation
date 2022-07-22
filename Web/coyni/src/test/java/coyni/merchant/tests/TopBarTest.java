@@ -30,7 +30,7 @@ public class TopBarTest {
 	}
 
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testTopBarDrpDwnBtns(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -41,13 +41,16 @@ public class TopBarTest {
 					topBarComponent.topBarDrpDwnComponent().userDetailsPage().verifyHeading();
 				} else if (2 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickMerchantAccounts();
-					topBarComponent.topBarDrpDwnComponent().merchantAccountsPage().verifyHeading();
+					topBarComponent.topBarDrpDwnComponent().merchantAccountsPage()
+							.verifyHeading(data.get("merchantAccountsHeading"));
 				} else if (3 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickPreferences();
-					topBarComponent.topBarDrpDwnComponent().preferencesPage().verifyHeading(data.get("preferenccesHeading"));
+					topBarComponent.topBarDrpDwnComponent().preferencesPage()
+							.verifyHeading(data.get("preferenccesHeading"));
 				} else if (4 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickAgreements();
-					topBarComponent.topBarDrpDwnComponent().agreementsPage().verifyHeading(data.get("agreementsHeading"));
+					topBarComponent.topBarDrpDwnComponent().agreementsPage()
+							.verifyHeading(data.get("agreementsHeading"));
 				} else if (5 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickChangePassword();
 					topBarComponent.topBarDrpDwnComponent().changePasswordPage().verifyHeading();

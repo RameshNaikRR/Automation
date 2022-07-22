@@ -14,6 +14,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By lnkUserDetails = By.xpath("(//span[text()='User Details'])[1]");
 	private By lnkPaymentMethods = By.xpath("(//span[text()='Payment Methods'])[1]");
 	private By lnkPreferences = By.xpath("(//span[text()='Preferences'])[1]");
+	private By lnkMerchantAccounts = By.xpath("(//span[text()='Merchant Accounts'])[1]");
 	private By lnkAccountLimits = By.xpath("//span[text()='Account Limits']");
 	private By lnkAgreements = By.xpath("//span[text()='Agreements']");
 	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
@@ -26,6 +27,10 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 
 	public void clickDropDown() {
 		click(dropwnUserName, "Drop Down");
+	}
+
+	public void clickMerchantAccounts() {
+		click(lnkMerchantAccounts, "Merchant Accounts");
 	}
 
 	public void verifyUserDetailsNameHeading() {

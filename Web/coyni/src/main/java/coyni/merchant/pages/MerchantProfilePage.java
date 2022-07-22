@@ -35,6 +35,10 @@ public class MerchantProfilePage extends BrowserFunctions {
 		return new UserDetailsComponent();
 	}
 
+	public MerchantAccountsPage merchantAccountsPage() {
+		return new MerchantAccountsPage();
+	}
+
 	public PreferencesPage preferencesPage() {
 		return new PreferencesPage();
 	}
