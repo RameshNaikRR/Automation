@@ -6,12 +6,14 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class FilterComponent extends BrowserFunctions {
+
 	private By txtStartDate = By
 			.cssSelector("custom-date-picker-filter relative mb-0 flex items-center justify-between group  Date");
 	private By txtEndDate = By.cssSelector(
 			"custom-date-picker-filter relative mb-0 flex items-center justify-between group  relative Date");
 	private By lnkClearCreatedDate = By.xpath("//label[text()='Date']/button");
 	private By lnkClearAllTransactionType = By.xpath("//span[text()='Transaction Type']/button");
+	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By lnkClearAllTransactionSubtype = By.xpath("//span[text()='Transaction Subtype']/button");
 	private By txtFromAmount = By.cssSelector("div[class $='group__from']>input");
 	private By txtToAmount = By.cssSelector("div[class $='group__to']>input");
@@ -138,6 +140,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickApplyFilters() {
 		click(btnApplyFilters, "Apply Filters");
+	}
+
+	public void clickResetAllFilters() {
+		click(lnkResetAllFilters, "Reset All Filters");
 	}
 
 	public void scroolDownToElement() {

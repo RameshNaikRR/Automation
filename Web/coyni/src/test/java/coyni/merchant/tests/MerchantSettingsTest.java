@@ -1126,6 +1126,38 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testMerchantSettingsAddTeamMemberWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
+//			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+//					.verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyFirstName(data.get("firstName"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyLastName(data.get("lastName"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyEmail(data.get("email1"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyPhone(data.get("phone"));
+			if (!data.get("errMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			} else if (!data.get("toastMessage").isEmpty()) {
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testMerchantSettingsAddTeamMemberWithInvalidData Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsAddTeamMember(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

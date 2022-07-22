@@ -451,24 +451,18 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			Thread.sleep(5000);
-			tokenAccountPage.verifyLabelYourTransactions(data.get("expHeading"));
+			// tokenAccountPage.verifyLabelYourTransactions(data.get("expHeading"));
 			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 			tokenAccountPage.verifyLabelTransactionListDetails();
-			// tokenAccountPage.verifyLabelPostedTransactions(data.get("expPostedTransactionHeading"));
-			// tokenAccountPage.verifyTransactionList();
 			tokenAccountPage.verifyTableItemsCount(data.get("query"));
-			// tokenAccountPage.verifyPostedTransactions(data.get("count"));
-			// tokenAccountPage.verifyBracesCount(data.get("query"));
 			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
 			tokenAccountPage.clickDropDownEntriesPage();
-			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-					data.get("expColor"));
-			// tokenAccountPage.getEntryOptions();
+//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+//					data.get("expColor"));
 			tokenAccountPage.verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport("Entries is displayed as " + tokenAccountPage.getEntriesMessage());
 			tokenAccountPage.clickOnPages();
@@ -476,6 +470,105 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testTransactionList failed due to exception " + e);
 		}
+
+	}
+
+	public void testExportSelectedTransactions(String strParams, String strParams1) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			if (strParams1.equalsIgnoreCase("Today")) {
+				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnToday();
+			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
+				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnYesterday();
+
+			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
+				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOn7Days();
+			} else if (strParams1.equalsIgnoreCase("Last Month")) {
+				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
+			} else {
+				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
+			}
+			Thread.sleep(2000);
+			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnExport();
+			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().verifyTitle(data.get("exportHeading"));
+			Thread.sleep(2000);
+			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickExportPage();
+			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionToday(String strParams) {
+		testExportSelectedTransactions(strParams, "Today");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionYesterday(String strParams) {
+		testExportSelectedTransactions(strParams, "Yesterday");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+		testExportSelectedTransactions(strParams, "Last Seven Days");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionLastMonth(String strParams) {
+		testExportSelectedTransactions(strParams, "Last Month");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testExportSelectedTransactionMonthToDate(String strParams) {
+		testExportSelectedTransactions(strParams, "Month to Date");
+	}
+
+	public void testFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+//			tokenAccountPage.filterComponent().viewFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionListFilters(String strParams) {
+		testFilters(strParams);
+
+	}
+
+	public void testResetFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountResetFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionListResetFilters(String strParams) {
+		testResetFilters(strParams);
 
 	}
 

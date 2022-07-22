@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.BankAccountsComponent;
+import coyni.merchant.components.FilterComponent;
 import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.TokenAccountActivityComponent;
 import coyni.merchant.components.TokensPurchasedDetailsComponent;
@@ -108,12 +109,12 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public void verifyTransactionList() {
-//			List<WebElement> elements = getElementsList(lblPostedTransactions, "Posted Transactions List");
-//			int noOfTransactions = elements.size();
-//			for (int i = 0; i < noOfTransactions; i++) {
-//				elements.get(i);
+//				List<WebElement> elements = getElementsList(lblPostedTransactions, "Posted Transactions List");
+//				int noOfTransactions = elements.size();
+//				for (int i = 0; i < noOfTransactions; i++) {
+//					elements.get(i);
 		//
-//			}
+//				}
 		new CommonFunctions().elementView(lblPostedTransactions, "Posted Transaction");
 	}
 
@@ -185,9 +186,9 @@ public class TokenAccountPage extends BrowserFunctions {
 		}
 	}
 
-//		public String getTransactionList() {
-//			return getText(transaction, "Transaction");
-//		}
+//			public String getTransactionList() {
+//				return getText(transaction, "Transaction");
+//			}
 
 	public void viewBuyTokens() {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
@@ -206,10 +207,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Token account page heading ", Heading);
 	}
 
-//	public List<String> getEntryOptions() {
-//		return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
-//				.collect(Collectors.toList());
-//	}
+//		public List<String> getEntryOptions() {
+//			return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
+//					.collect(Collectors.toList());
+//		}
 
 	// added
 	public void verifyLabelYourTransactions(String expHeading) {
@@ -256,7 +257,7 @@ public class TokenAccountPage extends BrowserFunctions {
 		click(pagination, "Pagination");
 	}
 	// public TokenAccountActivityComponent tokenAccountActivityComponent() {
-//				 	return new TokenAccountActivityComponent(); }
+//					 	return new TokenAccountActivityComponent(); }
 	// public TransactionsListComponent transactionsListComponent() {
 	// return new TransactionsListComponent(); }
 	// public TokensSentDetailsComponent tokensSentDetailsComponent() {
@@ -265,7 +266,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	// return new TokensReceivedDetailsComponent(); }
 	// public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
 	// return new TokensPurchasedDetailsComponent() ;}
-//				 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
+//					 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
 	// return new TokensWithdrawnDetailsComponent();}
 	// public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
 	// return new TokenPaidOrdersDetailsComponent(); }
@@ -286,9 +287,9 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new TokensWithdrawnDetailsComponent();
 	}
 
-//	public NavigationMenuPage navigationMenuPage() {
-//		return new NavigationMenuPage();
-//	}
+//		public NavigationMenuPage navigationMenuPage() {
+//			return new NavigationMenuPage();
+//		}
 
 	public BuyCoyniTokensPaymentMethodPopup buyCoyniTokensPaymentMethodPopup() {
 		return new BuyCoyniTokensPaymentMethodPopup();
@@ -313,6 +314,10 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public ExportfilesPage exportfilesPage() {
 		return new ExportfilesPage();
+	}
+
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
 	}
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
