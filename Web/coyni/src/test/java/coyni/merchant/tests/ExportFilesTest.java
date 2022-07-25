@@ -26,8 +26,9 @@ public class ExportFilesTest {
 	@Parameters({ "strParams" })
 	public void testExportFiles(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportFilesPage.clickExport();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			exportFilesPage.clickExportFiles();
+			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(1000);
 			exportFilesPage.exportIdView();
 			exportFilesPage.exportDateView();
@@ -37,9 +38,6 @@ public class ExportFilesTest {
 			exportFilesPage.verifyIdFormat();
 			exportFilesPage.clickIconDownload();
 			exportFilesPage.successView();
-//			exportfilesPage.clickCheckBox();
-//			exportfilesPage.clickDownload();
-//			exportfilesPage.clickApply();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
@@ -51,15 +49,15 @@ public class ExportFilesTest {
 	public void testExportFilesBulkDownload(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			exportFilesPage.clickExport();
+			exportFilesPage.clickExportFiles();
+			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
 			exportFilesPage.clickCheckBox();
 			exportFilesPage.clickBulkActionDropDown();
 			exportFilesPage.clickDownload();
 			exportFilesPage.clickApply();
-			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
-					data.get("expColour"));
+//			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
+//					data.get("expColour"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesBulkDownload failed due to exception ");
@@ -70,8 +68,9 @@ public class ExportFilesTest {
 	@Parameters({ "strParams" })
 	public void testExportFilesBulkTrash(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportFilesPage.clickExport();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			exportFilesPage.clickExportFiles();
+			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
 			exportFilesPage.clickCheckBox();
 			exportFilesPage.clickBulkActionDropDown();
@@ -87,8 +86,7 @@ public class ExportFilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			exportFilesPage.clickExport();
-			exportFilesPage.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
+			exportFilesPage.clickExportFiles();
 			if (strParams1.equalsIgnoreCase("Today")) {
 				exportFilesPage.exportSelectedTransactionsPopup().clickOnToday();
 			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
@@ -103,7 +101,7 @@ public class ExportFilesTest {
 			}
 			Thread.sleep(2000);
 			exportFilesPage.exportSelectedTransactionsPopup().clickOnExport();
-			exportFilesPage.exportSelectedTransactionsPopup().verifyTitle(data.get("exportHeading"));
+			exportFilesPage.exportSelectedTransactionsPopup().verifyTitle(data.get("heading"));
 			Thread.sleep(2000);
 			exportFilesPage.exportSelectedTransactionsPopup().clickExportPage();
 			exportFilesPage.exportSelectedTransactionsPopup().clickClose();

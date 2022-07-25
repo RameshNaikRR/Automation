@@ -7,6 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ExportfilesPage extends BrowserFunctions {
+
 	private By lblHeading = By.xpath("//h1[.='Export Files']");
 	private By lblExportID = By.xpath("//span[text()='EXPORT ID']");
 	private By lblReportName = By.xpath("//span[text()='REPORT NAME']");
@@ -22,14 +23,18 @@ public class ExportfilesPage extends BrowserFunctions {
 	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
 	private By lblSuccess = By.xpath("//span[text()='Success']");
 	private By downloadIcon = By.xpath("(//span[@data-tip='Download'])[1]");
+	private By btnExportFiles = By.xpath("(//span[text()='Export Files'])[1]");
 	private By btnExport = By.xpath("//button[text()='Export']");
+
+	public void clickExportFiles() {
+		click(btnExportFiles, "Export Files");
+	}
 
 	public void clickExport() {
 		click(btnExport, "Export");
 	}
 
 	public void successView() {
-
 		ExtentTestManager.setInfoMessageInReport(getText(lblSuccess, "Success Message") + " is displayed");
 		// new CommonFunctions().elementView(lblSuccess, "Success");
 	}

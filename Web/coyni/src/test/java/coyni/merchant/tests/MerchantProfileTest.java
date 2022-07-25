@@ -662,7 +662,7 @@ public class MerchantProfileTest {
 			Thread.sleep(3000);
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testMerchantAccounts is failed due to Exception " + e);
 		}
 	}
 
@@ -686,7 +686,7 @@ public class MerchantProfileTest {
 			Thread.sleep(3000);
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testAgreements is failed due to Exception " + e);
 		}
 	}
 

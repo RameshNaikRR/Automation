@@ -42,6 +42,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By lblPostedTransactions = By.xpath("//span[@class='posted']");
 	// private By transaction = By.xpath("(//tr[@class=' hovered'])[1]");
 	private By lblItemsPerPage = By.cssSelector(".entries-container .entries-message");
+	private By btnExport = By.xpath("//button[text()='Export']");
+	private By btnFilter = By.xpath("//button[text()='Filter']");
 	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 	private By transaction = By.xpath("//tr[@class='  hovered']");
 	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
@@ -58,6 +60,14 @@ public class TokenAccountPage extends BrowserFunctions {
 		String str = getText(lblBracesCount, "braces Count");
 		return str;
 
+	}
+
+	public void clickExport() {
+		click(btnExport, "Export");
+	}
+
+	public void clickFilter() {
+		click(btnFilter, "Filter");
 	}
 
 	public void verifyLabelYourTokenAccount() {
@@ -109,12 +119,12 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public void verifyTransactionList() {
-//				List<WebElement> elements = getElementsList(lblPostedTransactions, "Posted Transactions List");
-//				int noOfTransactions = elements.size();
-//				for (int i = 0; i < noOfTransactions; i++) {
-//					elements.get(i);
+//					List<WebElement> elements = getElementsList(lblPostedTransactions, "Posted Transactions List");
+//					int noOfTransactions = elements.size();
+//					for (int i = 0; i < noOfTransactions; i++) {
+//						elements.get(i);
 		//
-//				}
+//					}
 		new CommonFunctions().elementView(lblPostedTransactions, "Posted Transaction");
 	}
 
@@ -186,9 +196,9 @@ public class TokenAccountPage extends BrowserFunctions {
 		}
 	}
 
-//			public String getTransactionList() {
-//				return getText(transaction, "Transaction");
-//			}
+//				public String getTransactionList() {
+//					return getText(transaction, "Transaction");
+//				}
 
 	public void viewBuyTokens() {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
@@ -207,10 +217,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Token account page heading ", Heading);
 	}
 
-//		public List<String> getEntryOptions() {
-//			return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
-//					.collect(Collectors.toList());
-//		}
+//			public List<String> getEntryOptions() {
+//				return getElementsList(entriesPerPageDropDown, "options").stream().map(WebElement::getText)
+//						.collect(Collectors.toList());
+//			}
 
 	// added
 	public void verifyLabelYourTransactions(String expHeading) {
@@ -257,7 +267,7 @@ public class TokenAccountPage extends BrowserFunctions {
 		click(pagination, "Pagination");
 	}
 	// public TokenAccountActivityComponent tokenAccountActivityComponent() {
-//					 	return new TokenAccountActivityComponent(); }
+//						 	return new TokenAccountActivityComponent(); }
 	// public TransactionsListComponent transactionsListComponent() {
 	// return new TransactionsListComponent(); }
 	// public TokensSentDetailsComponent tokensSentDetailsComponent() {
@@ -266,7 +276,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	// return new TokensReceivedDetailsComponent(); }
 	// public TokensPurchasedDetailsComponent tokensPurchasedDetailsComponent() {
 	// return new TokensPurchasedDetailsComponent() ;}
-//					 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
+//						 	public  TokensWithdrawnDetailsComponent okensWithdrawnDetailsComponent() {
 	// return new TokensWithdrawnDetailsComponent();}
 	// public TokenPaidOrdersDetailsComponent tokenPaidOrdersDetailsComponent() {
 	// return new TokenPaidOrdersDetailsComponent(); }
@@ -287,9 +297,9 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new TokensWithdrawnDetailsComponent();
 	}
 
-//		public NavigationMenuPage navigationMenuPage() {
-//			return new NavigationMenuPage();
-//		}
+//			public NavigationMenuPage navigationMenuPage() {
+//				return new NavigationMenuPage();
+//			}
 
 	public BuyCoyniTokensPaymentMethodPopup buyCoyniTokensPaymentMethodPopup() {
 		return new BuyCoyniTokensPaymentMethodPopup();
