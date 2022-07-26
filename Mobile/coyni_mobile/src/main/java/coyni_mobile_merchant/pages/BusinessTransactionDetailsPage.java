@@ -3,57 +3,73 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
-import ilabs.MobileFramework.MobileFunctions;
+import coyni_mobile_merchant.popups.ErrorMessagePopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class BusinessTransactionDetailsPage extends MobileFunctions {
+public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By lblHeading = MobileBy.xpath("//*[contains(@text,'Transaction Details')]");
 	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Payout Information')]");
-	private By lblTransactionType = MobileBy.xpath("//*[contains(@resource-id,'Payoutheader')]|//*[contains(@resource-id,'BankHeader')]|//*[contains(@resource-id,'header')]|//*[contains(@resource-id,'Gifthead')]");
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'merchantamount')]| //*[contains(@resource-id,'bankamount')]|//*[contains(@resource-id,'BankAmount')]");
-	private By lblStatus = MobileBy.xpath("//*[contains(@resource-id,'merchantstatus')]|//*[contains(@resource-id,'Status')]");
-	private By lblDate = MobileBy.xpath("//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]");
+	private By lblTransactionType = MobileBy.xpath(
+			"//*[contains(@resource-id,'Payoutheader')]|//*[contains(@resource-id,'BankHeader')]|//*[contains(@resource-id,'header')]|//*[contains(@resource-id,'Gifthead')]|//*[contains(@resource-id,'reserve_type')]");
+	private By lblAmount = MobileBy.xpath(
+			"//*[contains(@resource-id,'merchantamount')]| //*[contains(@resource-id,'bankamount')]|//*[contains(@resource-id,'BankAmount')]");
+	private By lblStatus = MobileBy.xpath("//*[contains(@resource-id,'status')]|//*[contains(@resource-id,'Status')]");
+	private By lblDate = MobileBy
+			.xpath("//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
-	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'mreferenceIdTV')]");
+	private By lblReferenceID = MobileBy.xpath(
+			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'reference')]");
 	private By lblPayoutDate = MobileBy.xpath("//*[contains(@resource-id,'merchantPIdate')]");
-	private By lblTotalAmount = MobileBy.xpath("//*[contains(@resource-id,'mPItotalamountTV')]|//*[contains(@resource-id,'Total')]");
+	private By lblTotalAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'mPItotalamountTV')]|//*[contains(@resource-id,'Total')]");
 	private By lblTotalTransactions = MobileBy.xpath("//*[contains(@resource-id,'mPItotaltransactions')]");
 	private By lblDepositTo = MobileBy.xpath("//*[contains(@text,'Token Account')]");
 
-	
-	private By lblNameOnAccount = MobileBy.xpath("//*[contains(@resource-id,'banknameAC')]|//*[contains(@resource-id,'NameOnAccount')]");
-	private By lblBankName = MobileBy.xpath("//*[contains(@resource-id,'banknameTV')]|//*[contains(@resource-id,'withBankBanknameTV')]");
+	private By lblNameOnAccount = MobileBy
+			.xpath("//*[contains(@resource-id,'banknameAC')]|//*[contains(@resource-id,'NameOnAccount')]");
+	private By lblBankName = MobileBy
+			.xpath("//*[contains(@resource-id,'banknameTV')]|//*[contains(@resource-id,'withBankBanknameTV')]");
 	private By lblBankAccount = MobileBy.xpath("//*[contains(@resource-id,'bankaccount')]");
 	private By lblPurchaseAmount = MobileBy.xpath("//*[contains(@resource-id,'purchase')]");
 	private By lblDepositID = MobileBy.xpath("//*[contains(@resource-id,'DepositIDTV')]");
 	private By lblDescriptorName = MobileBy.xpath("//*[contains(@resource-id,'Descrptor')]");
-	private By lblProcessingFee = MobileBy.xpath("//*[contains(@resource-id,'processingfee')]|//*[contains(@resource-id,'ProcessFee')]");
+	private By lblProcessingFee = MobileBy
+			.xpath("//*[contains(@resource-id,'processingfee')]|//*[contains(@resource-id,'ProcessFee')]");
 
 	private By lblWithdrawAmount = MobileBy.xpath("//*[contains(@resource-id,'WithdrawAmount')]");
 	private By lblWithdrawID = MobileBy.xpath("//*[contains(@resource-id,'withBankWithdrawidTV')]");
 	private By lblAccountBalance = MobileBy.xpath("//*[contains(@resource-id,'AccBalance')]");
-	
+
 	private By lblCardHolderName = MobileBy.xpath("//*[contains(@resource-id,'holdername')]");
 	private By lblCardNumber = MobileBy.xpath("//*[contains(@resource-id,'cardnum')]");
 	private By lblExpirationDate = MobileBy.xpath("//*[contains(@resource-id,'expdate')]");
-	
-	
+
 	private By lblGiftCardName = MobileBy.xpath("//*[contains(@resource-id,'Giftcardname')]");
 	private By lblSubTotal = MobileBy.xpath("//*[contains(@resource-id,'Giftsubtotatl')]");
 	private By lblRecipientName = MobileBy.xpath("//*[contains(@resource-id,'RecipientName')]");
 	private By lblRecipientEmail = MobileBy.xpath("//*[contains(@resource-id,'GiftReciEmail')]");
-	
-	
+
 	private By btnCancel = MobileBy.xpath("//*[contains(@text,'Cancel')]");
+	private By lblCancelTranHeading = MobileBy.xpath("//*[contains(@text,'Cancel')]");
+	private By lblCancelDescription = MobileBy.xpath("//*[contains(@text,'want to cancel this')]");
+	private By btnCancelNo = MobileBy.xpath("//*[contains(@resource-id,'No')]");
+	private By btnCancelYes = MobileBy.xpath("//*[contains(@resource-id,'Yes')]");
+	private By btnReserveRelease = MobileBy.xpath("(//*[contains(@text,'Reserve Release')])[1]");
+	private By lblReservedOn = MobileBy.xpath("//*[contains(@resource-id,'reserved_on')]");
+	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release')]");
+
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ",expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
 	}
 
-	public void getTransactionType() {
-//		scrollDownToElement(lblTotalAmount, "Total Availble Funds : ");
-		ExtentTestManager.setInfoMessageInReport("Transaction Type : " + getText(lblTransactionType));
+	public void verifyTranStatus(String expStatus) {
+		new CommonFunctions().verifyLabelText(lblStatus, "Transaction Status ", expStatus);
+	}
 
+	public void verifyTransactionType(String expType) {
+		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type ", expType);
 	}
 
 	public void getAmount() {
@@ -102,7 +118,6 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void getMerchantPayoutTransactionDetails() {
-		getTransactionType();
 		getAmount();
 		getDate();
 		getPayoutID();
@@ -121,6 +136,7 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	public void getProcessingFee() {
 		ExtentTestManager.setInfoMessageInReport("Processing Fee is : " + getText(lblProcessingFee));
 	}
+
 	public void getBankName() {
 		scrollDownToElement(lblBankName, "Bank Name is : ");
 		ExtentTestManager.setInfoMessageInReport("Bank Name is : " + getText(lblBankName));
@@ -142,10 +158,10 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	public void getDescriptorName() {
 		ExtentTestManager.setInfoMessageInReport("Descriptor Name is : " + getText(lblDescriptorName));
 	}
+
 	public void getBuyTokenBankTransactionDetails() {
-		getTransactionType();
 		getAmount();
-		getStatus();
+//		getStatus();
 		getDate();
 		getPurchaseAmount();
 		getProcessingFee();
@@ -157,7 +173,7 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 		getBankName();
 		getBankAccount();
 	}
-	
+
 	public void getWithdrawAmount() {
 		ExtentTestManager.setInfoMessageInReport("Withdraw Amount is : " + getText(lblWithdrawAmount));
 	}
@@ -165,15 +181,14 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	public void getWithdrawID() {
 		ExtentTestManager.setInfoMessageInReport("Withdraw ID is : " + getText(lblWithdrawID));
 	}
-	
+
 	public void getAccountBalance() {
 		ExtentTestManager.setInfoMessageInReport("Account Balance is : " + getText(lblAccountBalance));
 	}
-	
+
 	public void getWithdrawTokenBankTransactionDetails() {
-		getTransactionType();
 		getAmount();
-		getStatus();
+//		getStatus();
 		getDate();
 		getWithdrawAmount();
 		getProcessingFee();
@@ -185,7 +200,7 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 		getBankName();
 		getBankAccount();
 	}
-	
+
 	public void getCardHolderName() {
 		ExtentTestManager.setInfoMessageInReport("Card Holder Name is : " + getText(lblCardHolderName));
 	}
@@ -193,11 +208,11 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	public void getCardNumber() {
 		ExtentTestManager.setInfoMessageInReport("Card Number is : " + getText(lblCardNumber));
 	}
-	
+
 	public void getExpirationDate() {
 		ExtentTestManager.setInfoMessageInReport("Expiration Date is : " + getText(lblExpirationDate));
 	}
-	
+
 	public void getWithdrawTokenInstantPayTransactionDetails() {
 		getTransactionType();
 		getAmount();
@@ -220,10 +235,11 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 	public void getSubTotal() {
 		ExtentTestManager.setInfoMessageInReport("Sub Total is : " + getText(lblSubTotal));
 	}
-	
+
 	public void getRecipientName() {
 		ExtentTestManager.setInfoMessageInReport("Recipient Name is : " + getText(lblRecipientName));
 	}
+
 	public void getRecipientEmail() {
 		ExtentTestManager.setInfoMessageInReport("Recipient Email is : " + getText(lblRecipientEmail));
 	}
@@ -240,5 +256,90 @@ public class BusinessTransactionDetailsPage extends MobileFunctions {
 		getReferenceID();
 		getRecipientName();
 		getRecipientEmail();
+	}
+
+	public void getReserveReleaseTransactionDetails() {
+		getReserveReleasedDetails();
+	}
+
+	public void clickCancelTransaction() {
+		click(btnCancel, "Cancel");
+	}
+
+	public void verifyCancelTransactionHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblCancelTranHeading, "Cancel Transaction Heading ", expHeading);
+	}
+
+	public void verifyCancelTransactionDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblCancelDescription, "Cancel Transaction Description ", expDescription);
+	}
+
+	public void cancelTransaction() {
+		clickCancelTransaction();
+	}
+
+	public void clickNo() {
+		click(btnCancelNo, "No");
+	}
+
+	public void clickYes() {
+		click(btnCancelYes, "Yes");
+	}
+
+	public void clickReserveRelease() {
+		click(btnReserveRelease, "Reserve Release");
+	}
+
+	public void getReservedOn() {
+		ExtentTestManager.setInfoMessageInReport("Reserved on : " + getText(lblReservedOn));
+	}
+
+//	public void getBusinessReserveReleasedDetails() {
+//		getTransactionType();
+//		getReserveAmount();
+//		getStatus();
+//		getReleaseOn();
+//		getReferenceID();
+//		getReserveRule();
+//		getDepositTo();
+//		getReserveHeld();
+//		getReservedOn();
+//		getReserveID();
+//	}
+
+	public void getBusinessTokenReserveReleaseTransaction(String expHeading, String expType, String expStatus) {
+		scrollDownToElement(lblReserveRelease, "Reserve Release");
+		clickReserveRelease();
+		verifyPageHeading(expHeading);
+		verifyTransactionType(expType);
+		verifyTranStatus(expStatus);
+		getReserveAmount();
+		getStatus();
+		getReleaseOn();
+		getReferenceID();
+		getReserveRule();
+		getDepositTo();
+		getReserveHeld();
+		getReservedOn();
+		getReserveID();
+
+	}
+
+	public void getWithdrawTokenSignetTransactionDetails() {
+		getTransactionType();
+		getAmount();
+		getStatus();
+		getDate();
+		getWithdrawAmount();
+		getProcessingFee();
+		getTotalAmout();
+		getAccountBalance();
+		getWithdrawID();
+		getReferenceID();
+		getNameonAccount();
+		getBankName();
+	}
+	public ErrorMessagePopup errorMessagePopup() {
+		return new ErrorMessagePopup();
 	}
 }

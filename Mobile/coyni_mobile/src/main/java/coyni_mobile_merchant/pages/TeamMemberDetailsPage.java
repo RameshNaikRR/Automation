@@ -26,7 +26,7 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	private By btnYes=MobileBy.xpath("//*[contains(@resource-id,'tv_positive_button')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelCv')]");
 	private By btnBack=MobileBy.xpath("//*[contains(@resource-id,'bpbackBtn')]");
-
+	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Team Member Details Heading", expHeading);
 	}
@@ -37,6 +37,11 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	public void verifyRemoveMemberPopupHeading(String expRemoveMemberPopupHeading) {
 		new CommonFunctions().verifyLabelText(lblRemoveMemberPopupHeading, "Remove Member Popup Heading", expRemoveMemberPopupHeading);
 	}
+
+	public void verifyRemoveMemberPopupDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblRemoveMemberPopupDescription, "Remove Team Member Description", expDescription);
+	}
+	
 	public void getRemoveMemberPopupDescription() {
 	  ExtentTestManager.setInfoMessageInReport("Description : " + getText(lblRemoveMemberPopupDescription));
 	}

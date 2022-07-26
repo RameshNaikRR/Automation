@@ -2,8 +2,8 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.EnterYourPINComponent;
-import coyni_mobile.popups.OrderPreviewPopup;
+import coyni_mobile_merchant.components.EnterYourPINComponent;
+import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -50,6 +50,7 @@ public class GiftCardPage extends MobileFunctions {
 
 	public void verifyWithdrawGiftCard(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawHeading, "Withdraw Gift Card", expHeading);
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void verifyDescription(String expHeading) {
@@ -89,34 +90,41 @@ public class GiftCardPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String firstName) {
+		DriverFactory.getDriver().hideKeyboard();
 		click(txtFirstName, "First Name");
 		enterText(txtFirstName, firstName, "First Name");
-		DriverFactory.getDriver().hideKeyboard();
+		
 		
 	}
 
 	public void fillLastName(String lastName) {
+		DriverFactory.getDriver().hideKeyboard();
 		click(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, "Last Name");
-		DriverFactory.getDriver().hideKeyboard();
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillEmail(String email) {
-		scrollDownToElement(txtEmail, "Email");
-		enterText(txtEmail, email, "Email");
-		click(txtEmail, "Email");
-		new CommonFunctions().clickTab();
 		DriverFactory.getDriver().hideKeyboard();
+		scrollDownToElement(txtEmail, "Email");
+		click(txtEmail, "Email");	
+		enterText(txtEmail, email, "Email");
+//		new CommonFunctions().clickTab();
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillAmount(String amount) {
-		click(txtAmount, "Amount");
-		enterText(txtAmount, amount, "Amount");
-		scrollDownToElement(txtLastName, "Last Name");
 		DriverFactory.getDriver().hideKeyboard();
+		click(txtAmount, "Amount");
+		DriverFactory.getDriver().hideKeyboard();
+		enterText(txtAmount, amount, "Amount");
+//		scrollDownToElement(txtLastName, "Last Name");
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void clickPurchase() {
+		DriverFactory.getDriver().hideKeyboard();
+		scrollDownToElement(btnPurchas, "Purchased");
 		if (getElement(btnPurchas, "Purchased").isEnabled()) {
 			click(btnPurchas, "Purchased");
 		} else {

@@ -137,7 +137,7 @@ public class TransactionPage extends MobileFunctions {
 		new CommonFunctions().elementView(amount, "amount " + getText(amount));
 	}
 
-	public void verifyStatus() {
+	public void getStatus() {
 		new CommonFunctions().elementView(status, "Status " + getText(status));
 	}
 

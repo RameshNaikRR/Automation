@@ -26,6 +26,8 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 	private By btnManual = MobileBy.xpath("//*[contains(@resource-id,'manualTV')]");
 
 	private By btnReserve = MobileBy.xpath("(//*[contains(@resource-id,'rl_base')])[1]");
+	
+	private By lblReleaseType= MobileBy.xpath(" //*[contains(@resource-id,'ChangeName')]");
 
 	private By lblTranHeading = MobileBy.xpath("(//*[contains(@resource-id,'name')])[1]");
 
@@ -43,6 +45,10 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	public void verifySearchOption() {
 		new CommonFunctions().elementView(searchOption, "Search Option");
+	}
+	
+	public void verifyReleaseType(String expReleaseType) {
+		new CommonFunctions().verifyLabelText(lblReleaseType, "Reserve Release Type",expReleaseType );
 	}
 	
 	public int verifyTransactionsCount() {

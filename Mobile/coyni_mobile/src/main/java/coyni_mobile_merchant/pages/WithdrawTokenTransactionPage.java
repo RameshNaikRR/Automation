@@ -1,21 +1,20 @@
-package coyni_mobile_merchant.popups;
+package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
+public class WithdrawTokenTransactionPage extends MobileFunctions {
 
-	private By visaCard = MobileBy.xpath("//*[contains(@text,'Visa')]");
-	private By masterCard = MobileBy.xpath("//*[contains(@text,'Mastercard')]");
-	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	private By lblPaymentMethodName = MobileBy
+			.xpath("//*[contains(@resource-id,'BankName')]|//*[contains(@resource-id,'PayHead')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
-	private By optionaltxt = MobileBy.xpath("//*[contains(@resource-id,'etRemarks')]");
+	private By btnOptionaltxt = MobileBy.xpath("//*[contains(@resource-id,'etRemarks')]");
 	private By txtmsg = MobileBy.xpath("//*[contains(@resource-id,'addNoteET')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelBtn')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneBtn')]");
@@ -30,11 +29,14 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
-		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
+	}
+
+	public void getAmount() {
+		ExtentTestManager.setInfoMessageInReport("After Convertion Amount is : " + getText(txtAmount));
 	}
 
 	public void enterMessage(String Message) {
-		click(optionaltxt, "optional message");
+		click(btnOptionaltxt, "optional message");
 		enterText(txtmsg, Message, "message");
 
 	}
@@ -43,23 +45,23 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
 
-	public void verifyAddInstantPayHeading(String expheading) {
-		new CommonFunctions().verifyLabelText(lblInstantPayHeading, "Instant Pay Heading", expheading);
-	}
-
+//	public void verifyAddInstantPayHeading(String expheading) {
+//		new CommonFunctions().verifyLabelText(lblInstantPayHeading, "Instant Pay Heading", expheading);
+//	}
+	
 	public String getAvailabeBalance() {
 		return getText(lblAvailableBalance);
 	}
 
-	public void verifyVisaCards() {
-		int size = getElementList(visaCard, "").size();
-		ExtentTestManager.setInfoMessageInReport(size + " Visa Card is there.");
-	}
-
-	public void verifyMasterCards() {
-		int size = getElementList(masterCard, "").size();
-		ExtentTestManager.setInfoMessageInReport(size + " Master card is there.");
-	}
+//	public void verifyVisaCards() {
+//		int size = getElementList(visaCard, "").size();
+//		ExtentTestManager.setInfoMessageInReport(size + " Visa Card is there.");
+//	}
+//
+//	public void verifyMasterCards() {
+//		int size = getElementList(masterCard, "").size();
+//		ExtentTestManager.setInfoMessageInReport(size + " Master card is there.");
+//	}
 
 	public void verifyCancelAndButton() {
 		new CommonFunctions().elementView(btnCancel, "Cancel");
@@ -87,6 +89,10 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	}
 
+	public void getPaymentMethodName() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblPaymentMethodName));
+	}
+
 	public void verifyWithdrawTokenHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawTokenHeading, "Withdraw Token", expHeading);
 	}
@@ -103,9 +109,9 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		click(getPaymentItems("Debit"), "Debit Card");
 	}
 
-	public void clickOnDebitCard() {
-		click(debitCard, "Debit card");
-	}
+//	public void clickOnDebitCard() {
+//		click(debitCard, "Debit card");
+//	}
 
 	public void VerifyErrorMessage(String ErrorMessage) {
 		new CommonFunctions().verifyLabelText(txtmsg, ErrorMessage, "ErrorMessage");
@@ -115,7 +121,27 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		click(lnkConvert, "Click Convert");
 	}
 
+	public void withdrawTokenTransaction(String expHeading, String Amount, String Message) {
+		verifyWithdrawTokenHeading(expHeading);
+		getPaymentMethodName();
+		fillAmount(Amount);
+		getAmount();
+		clickOnConvertLink();
+		getAmount();
+		getAvailabeBalance();
+		enterMessage(Message);
+		clickCancel();
+		enterMessage(Message);
+		clickDone();
+		clickWithdraw();
+
+	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+	public OrderPreviewPopup orderPreviewPopup() {
+		return new OrderPreviewPopup();
 	}
 }

@@ -871,7 +871,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().verifyReferenceID();
+					.enterYourPINComponent().successFailureComponent().getReferenceID();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().successFailureComponent().clickLearnMore();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
@@ -995,7 +995,7 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().getStatus();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.successFailureComponent().verifyReferenceID();
+						.successFailureComponent().getReferenceID();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().getReferenceID();
 //				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
@@ -1215,7 +1215,7 @@ public class TokenAccountTest {
 					.orderPreviewPopup().enterYourPINComponent().successFailureComponent()
 					.verifySuccessFailureHeading(data.get("successHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().verifyReferenceID();
+					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().getReferenceID();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {

@@ -15,9 +15,9 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	private By lblReserveDetail = MobileBy.xpath("//*[@text='Reserve Detail']");
 
-	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'tvamount')]");
+	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'tvamount')]|//*[contains(@resource-id,'reserve_amount')]");
 
-	private By txtReserveID = MobileBy.xpath("//*[contains(@resource-id,'tvReserveID')]");
+	private By txtReserveID = MobileBy.xpath("//*[contains(@resource-id,'tvReserveID')]|//*[contains(@resource-id,'reserveIDLL')]");
 
 	private By lblStatus = MobileBy.xpath("//*[contains(@text,'Status')]/following-sibling::*[1]");
 
@@ -32,13 +32,13 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	private By txtAmountReleased = MobileBy.xpath("//*[contains(@resource-id,'releasedAMT')]");
 
-	private By lblReleaseOn = MobileBy.xpath("//*[contains(@resource-id,'ReleasedDate')]");
+	private By lblReleaseOn = MobileBy.xpath("//*[contains(@resource-id,'ReleasedDate')]|//*[contains(@resource-id,'released')]");
 
 	private By lblReleaseTransactionID = MobileBy.xpath("//*[contains(@resource-id,'trans')]");
 
 	private By lblToTokenAccount = MobileBy.xpath("//*[contains(@resource-id,'DBA')]");
 
-	private By lblTransactionType = MobileBy.xpath("//*[contains(@resource-id,'header')]");
+	private By lblTransactionType = MobileBy.xpath("//*[contains(@resource-id,'head')]");
 
 	private By lblReserveHeld = MobileBy.xpath("//*[contains(@text,'Reserve Held')]");
 
@@ -49,7 +49,13 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	private By lblRecentTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+	
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]");
 
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
+	
 	public void verifyReserveDetail(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReserveDetail, "Reserve Detail", expHeading);
 	}
@@ -89,12 +95,13 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	public void getReserve() {
 		String text = getText(txtAmountReleased);
-		ExtentTestManager.setInfoMessageInReport("Reserve Rule is " + text);
+		ExtentTestManager.setInfoMessageInReport("Reserve Amount is " + text);
 
 	}
 
 	public void getReserveReleasedDetails() {
 		getReserveID();
+		getTransactionType();
 		getReserveAmount();
 		getStatus();
 		getDailyBatchIDs();
@@ -104,8 +111,8 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		getReleaseOn();
 		getReleaseTransactionID();
 		getToTokenAccount();
+		clickBack();
 	}
-
 	public void getReserveOnHoldDetails() {
 		getTransactionType();
 		getReserveID();
@@ -116,6 +123,7 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		getReserveRule();
 		getHeldHeading();
 		getHeldDescription();
+		clickBack();
 	}
 
 	public void getBuyTokenDetails() {

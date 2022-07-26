@@ -19,7 +19,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	private By lblStatus = MobileBy.xpath("//*[contains(@text,'Status')]/following-sibling::*[1]");
 
 	private By lblDateTime = MobileBy
-			.xpath("//*[contains(@resource-id,'Date')]|//*[contains(@resource-id,'merchantdate')]");
+			.xpath("//*[contains(@resource-id,'Date')]|//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'MSFdate')]");
 
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'mPayoutIdTV')]");
 
@@ -60,7 +60,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By lblReserveAmount = MobileBy.xpath("//*[contains(@resource-id,'SalesreserveTV')]");
 
-	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'Balance')]");
+	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'Balance')]|//*[contains(@resource-id,'MSFmerchantbalance')]");
 
 	private By lblSenderName = MobileBy.xpath("//*[contains(@resource-id,'sendername')]");
 
@@ -125,8 +125,8 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void getMerchantPayoutDetails() {
-		getTransactionType();
-		getTransactionAmount();
+//		getTransactionType();
+//		getTransactionAmount();
 		getStatus();
 		getDateTime();
 		getPayoutID();
@@ -196,8 +196,8 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void getRefundSentDetails() {
-		getTransactionType();
-		getTransactionAmount();
+//		getTransactionType();
+//		getTransactionAmount();
 		getStatus();
 		getDateTime();
 		getReferenceID();
@@ -214,7 +214,10 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void getMonthlyServiceFee() {
-
+		getStatus();
+		getDateTime();
+		getReferenceID();
+		getMerchantBalance();
 	}
 
 	public void getSaleOrderTokenAmount() {

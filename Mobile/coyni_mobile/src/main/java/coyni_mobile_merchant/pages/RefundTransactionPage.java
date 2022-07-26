@@ -9,17 +9,17 @@ import io.appium.java_client.MobileBy;
 
 public class RefundTransactionPage extends MobileFunctions{
 
-	private By lblHeading=MobileBy.xpath(getCopiedData());
-	private By txtAmount=MobileBy.xpath(getCopiedData());
-	private By lblTransactionAmount=MobileBy.xpath(getCopiedData());
-	private By btnFullAmount=MobileBy.xpath(getCopiedData());
-	private By btnHalfAmount=MobileBy.xpath(getCopiedData());
-	private By btnReason=MobileBy.xpath(getCopiedData());
-	private By btnCancel=MobileBy.xpath(getCopiedData());
-	private By btnDone=MobileBy.xpath(getCopiedData());
-	private By txtReason=MobileBy.xpath(getCopiedData());
-	private By btnClose=MobileBy.xpath(getCopiedData());
-	private By btnRefund=MobileBy.xpath(getCopiedData());
+	private By lblHeading=MobileBy.xpath("//*[contains(@text,'Refund Transaction')]");
+	private By txtAmount=MobileBy.xpath("//*[contains(@resource-id,'refundAmount')]");
+	private By lblTransactionAmount=MobileBy.xpath("//*[contains(@resource-id,'refundCurrency')]");
+	private By btnFullAmount=MobileBy.xpath("//*[contains(@text,'Full Amount')]");
+	private By btnHalfAmount=MobileBy.xpath("//*[contains(@text,'1/2 Amount')]");
+	private By btnReason=MobileBy.xpath("//*[contains(@text,'Reason for Refund')]");
+	private By btnCancel=MobileBy.xpath("//*[contains(@text,'Cancel')]");
+	private By btnDone=MobileBy.xpath("//*[contains(@text,'Done')]");
+	private By txtReason=MobileBy.xpath("(//*[contains(@resource-id,'Message')])[1]");
+	private By btnClose=MobileBy.xpath("//*[contains(@resource-id,'RefundbackIV')]");
+	private By btnRefund=MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 
 	
 	

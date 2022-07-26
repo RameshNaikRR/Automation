@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.popups.ErrorMessagePopup;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -162,6 +163,9 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
+	}
+	public ErrorMessagePopup errorMessagePopup() {
+		return new ErrorMessagePopup();
 	}
 
 }

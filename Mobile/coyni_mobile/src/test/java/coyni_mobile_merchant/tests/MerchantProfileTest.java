@@ -1746,7 +1746,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickbtnRemoveMember();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyRemoveMemberPopupHeading(data.get("popUpHeading"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getRemoveMemberPopupDescription();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().verifyRemoveMemberPopupDescription(data.get("popUpDescription"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickNo();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
@@ -1758,6 +1758,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickbtnRemoveMember();
+			
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickYes();
 
 		} catch (Exception e) {

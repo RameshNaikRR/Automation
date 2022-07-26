@@ -8,7 +8,6 @@ import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
@@ -22,7 +21,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]"); //
 
-	private By lblOrderPreview = MobileBy.xpath("//*[@text='Order Preview']");
+	private By lblOrderOverview = MobileBy.xpath("//*[contains(@text,'Order Overview')]");
 
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'tvGet')]");
 	private By lblPaymentMethod = MobileBy
@@ -34,7 +33,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[contains(@resource-id,'slideToConfirm')]");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblOrderPreview, "Popup Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblOrderOverview, "Popup Heading", expHeading);
 	}
 
 	public void verifyAmazonHeading(String expHeading) {

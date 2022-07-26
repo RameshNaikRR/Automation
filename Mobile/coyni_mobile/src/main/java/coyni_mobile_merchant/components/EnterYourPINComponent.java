@@ -80,7 +80,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 //	public SecurePayPopup securePayPopup() {
 //		return new SecurePayPopup();
 //	}
-//	public SuccessFailureComponent successFailureComponent() {
-//		return new SuccessFailureComponent();
-//	}
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
 }

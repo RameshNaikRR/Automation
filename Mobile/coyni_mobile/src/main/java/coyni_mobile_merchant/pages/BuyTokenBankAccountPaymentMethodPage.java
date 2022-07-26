@@ -13,9 +13,10 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	private By lblBuyTokenBankAccDescription = MobileBy.xpath("//*[contains(@text,'Payment Method')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By lblCurrency = MobileBy.xpath("//*[contains(@resource-id,'lyAmount')]");
-	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'Details')]");
+	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
+	private By lblBankNumber = MobileBy.xpath("//*[contains(@resource-id,'tvBAccNumber')]");
 	private By btnConverter = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
-	private By lblAmount=MobileBy.xpath("//*[contains(@resource-id,'lyAmount')]");
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By btnBuyToken = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 	private By lblAmountDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblLimitDescription = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
@@ -47,9 +48,10 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	}
 
 	public void getPaymentMethodDetails() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Details : " + getText(btnChangePaymentMethod));
+		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Name is : " + getText(btnChangePaymentMethod));
+		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Number is : " + getText(lblBankNumber));
 	}
-	
+
 	public void getAmount() {
 		ExtentTestManager.setInfoMessageInReport("after click on convertor Amount is : " + getText(lblAmount));
 	}
@@ -68,6 +70,20 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 
 	public void clickClose() {
 		click(btnClose, "Close");
+	}
+
+	public void buyTokenWithBankAccount(String expHeading,String expDescription,String amount) {
+		verifyPageHeading(expHeading);
+		verifyPageDescription(expDescription);
+		getPaymentMethodDetails();
+		getLimitDescription();
+		fillAmount(amount);
+		clickConvertor();
+		getAmount();
+		clickConvertor();
+		getAmount();
+		getExchangeRate();
+		clickBuyToken();
 	}
 
 	public OrderPreviewPopup orderPreviewPopup() {

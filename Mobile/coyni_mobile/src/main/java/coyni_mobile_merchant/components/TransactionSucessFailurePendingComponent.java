@@ -46,6 +46,14 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 				.setInfoMessageInReport("lblTransactionTimeDescription  : " + getText(lblTransactionTimeDescription));
 	}
 
+	public void getTokenTransactionStatusDetails() {
+		getPageHeading();
+		getAmount();
+//		getCurrency();
+		getPageDescription();
+		getReferenceID();
+		clickDone();
+	}
 //	public void viewLearnMore() {
 //		new CommonFunctions().elementView(lnkLearnMore, "Learn More ");
 ////		click(lnkLearnMore, "Link More");
