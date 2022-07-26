@@ -745,6 +745,53 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
+	
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddSignetAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.clickWithdrawToSignet();
+//			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
+//				addSignet(strParams);
+//			} else {
+//				testWithdrawToSignetAccount(strParams);
+//			}
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
+
+//	public void testWithdrawToSignetAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			System.out.println("--------------------------------------");
+//			// tokenAccountPage.clickWithdrawToSignet();
+//			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//			tokenAccountPage.withdrawToSignetPopup().clickNext();
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+//					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+//			// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//					.fillInput(data.get("code"));
+//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//					.successFailureComponent();
+//			Thread.sleep(2000);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })

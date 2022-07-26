@@ -19,10 +19,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By editUserImgToolTip = By.xpath("//img[@class='w-4 h-4']/../following-sibling::*[1]");
 	private By lnkRemoveImage = By.cssSelector("");
 	private By btnRemove = By.cssSelector("");
-	private By btnUploadNewImage = By.cssSelector("");
+	private By btnUploadNewImage = By.cssSelector("//button[contains(text(),'Upload New Image')]");
 	private By btnSave = By.cssSelector("");
-	private By lblUserName = By.xpath("//span[@class='text-2xl font-bold text-cgy8']");
-	private By lblAccountStatus = By.xpath("//div[@class='flex flex-row text-md text-cgy4']");
+	private By lblUserName = By.xpath("//span[@class='font-bold text-cgy8 UserDetails_largerName__NY3VX']");
+	private By lblAccountStatus = By.xpath("//div[@class='flex flex-wrap gap-1 ml-2 ']");
 	private By lblEmail = By.xpath("//h3[contains(@class,'UserDetails_email_address')]");
 	private By lblAddress = By.cssSelector("");
 	private By lnkEditAccountEmail = By.xpath("//div[text()='Edit Account Email']");
@@ -36,7 +36,8 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
-	private By lblAccountAddress = By.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
+	private By lblAccountAddress = By
+			.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
 	private By txtCode = By.cssSelector("input[class *= 'verification-input']");
 	private By txtNewPhoneNumber = By.xpath("//input[text()='New Phone Number']");
 	private By btnCross = By.cssSelector("button[class='self-end']");
@@ -87,7 +88,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public void verifyAccountAddressView() {
 		new CommonFunctions().elementView(lblAccountAddress, "AccountAddress");
 	}
-	
+
 	public VerifyCurrentPhoneNumberPopup verifyCurrentPhoneNumberPopup() {
 		return new VerifyCurrentPhoneNumberPopup();
 	}
@@ -177,7 +178,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public AccountProfileImagePopup accountProfileImagePopup() {
 		return new AccountProfileImagePopup();
 	}
-	
+
 	public EditPhoneNumberPopup editPhoneNumberPopup() {
 		return new EditPhoneNumberPopup();
 	}
@@ -199,26 +200,24 @@ public class UserDetailsComponent extends BrowserFunctions {
 		click(iconEditPhNum, "Clciked Edit Phone Number Icon");
 	}
 
-
 	public void verifyVerificationTextCodeBoxBorderColorAndDescription(String expColor, String expVerificationmsg) {
 
 		new CommonFunctions().verifyTextBoxBorderColor(expColor);
 		new CommonFunctions().verifyLabelText(lblVerificationSuccesful, "Verificational Succesful", expVerificationmsg);
 	}
-	
+
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
 		new CommonFunctions().validateTextFeild(txtNewPhoneNumber, expNewPhoneNumber, "New Phone Number");
 	}
-	
+
 	public void enterCode(String expCode) {
 		enterText(txtCode, expCode, "Verification Code");
 	}
-	
+
 	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
 		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
 				expNewPhoneNumberHeading);
 	}
-
 
 	public void verifyEditPhoneNumberScreen(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingEditPhoneNumber, "Edit Phone Number", expHeading);
@@ -243,5 +242,4 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(headingUserDetais, "User Details Heading", expUserDetailsHeading);
 
 	}
-
 }

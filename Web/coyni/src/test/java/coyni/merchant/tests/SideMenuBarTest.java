@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.merchant.components.SideMenuBarComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -84,4 +85,112 @@ public class SideMenuBarTest {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBarBtns failed due to " + e);
 		}
 	}
+
+	public void testMyQRCode(String strParams, String textBox) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().verifyCopy(); // data.get("copy")
+			Thread.sleep(1000);
+			sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			sideMenuBarComponent.myQRCodeComponent().clickShare();
+
+			if (textBox.equalsIgnoreCase("email")) {
+				sideMenuBarComponent.myQRCodeComponent().pasteOptionEmail(data.get("email"));
+				sideMenuBarComponent.myQRCodeComponent().fillTextEmail(data.get("email"));
+				// navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
+			} else {
+				sideMenuBarComponent.myQRCodeComponent().pasteOption(data.get("phoneNumber"));
+				sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
+				// navigationMenuPage.myQRCodeComponent().fillTextEmail(data.get("email"));
+			}
+			sideMenuBarComponent.myQRCodeComponent().fillTextMessage(data.get("containt"));
+			sideMenuBarComponent.myQRCodeComponent().clickShareButton();
+			sideMenuBarComponent.myQRCodeComponent().successFailurePopupCardComponent().clickDone();
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("Test My QR code is failed  due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testShareQRCodeWithEmail(String strParams) {
+		testMyQRCode(strParams, "email");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testShareQRCodeWithPhoneNumber(String strParams) {
+		testMyQRCode(strParams, "phoneNumber");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testShareQRCodeWithNagativeOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().verifyCopy(); // data.get("copy")
+			Thread.sleep(1000);
+			sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			sideMenuBarComponent.myQRCodeComponent().clickShare();
+			sideMenuBarComponent.myQRCodeComponent().fillTextEmail(data.get("email1"));
+			// Thread.sleep(3000);
+			sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
+			sideMenuBarComponent.myQRCodeComponent().clickTab();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testShareQRCodeWithNagativeOption due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMyQRCodeWithNavigationOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().clickDone();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().navigationComponent().clickClose();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().clickShare();
+			sideMenuBarComponent.myQRCodeComponent().navigationComponent().clickBack();
+			sideMenuBarComponent.myQRCodeComponent().clickShare();
+			sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
+			sideMenuBarComponent.myQRCodeComponent().fillTextMessage(data.get("containt"));
+			sideMenuBarComponent.myQRCodeComponent().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMyQRCodeWithNavigationOption " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMyQRCodeGeneratePrintable(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.myQRCodeComponent().clickGeneratePrintableQRCode();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().clickCheckBoxes();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().clickGenerate();
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testMyQRCodeGeneratePrintable failed  due to exception " + e);
+		}
+	}
+
 }

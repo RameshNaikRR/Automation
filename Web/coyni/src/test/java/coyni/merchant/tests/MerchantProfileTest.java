@@ -60,14 +60,32 @@ public class MerchantProfileTest {
 	@Parameters({ "strParams" })
 	public void testUserDetailsView(String strParams) {
 		try {
-//			customerProfilePage.customerMenuComponent().clickUserDetails();
-//			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-//			customerProfilePage.userDetailsComponent().verifyUserNameView();
-//			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
-//			customerProfilePage.userDetailsComponent().verifyAccountIDView();
-//			customerProfilePage.userDetailsComponent().verifyPhoneNumberView();
-//			customerProfilePage.userDetailsComponent().verifyEmailView();
-//			customerProfilePage.userDetailsComponent().verifyAddressView();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			merchantProfilePage.userDetailsComponent().verifyEditImageView();
+			merchantProfilePage.userDetailsComponent().verifyUserNameView();
+			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
+			merchantProfilePage.userDetailsComponent().verifyEditImageView();
+			merchantProfilePage.userDetailsComponent().verifyEmailAddressView();
+			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
+			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
+			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsAccountStatus(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
+			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
+			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
 		}

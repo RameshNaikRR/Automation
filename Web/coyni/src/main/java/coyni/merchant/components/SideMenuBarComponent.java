@@ -26,6 +26,8 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
 	private By merchnatApplicationTrackerToolTip = By.xpath("(//div[text()='Merchant Application step 4 of 6'])[2]");
 	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
+	private By qrCode = By
+			.xpath("(//button[@class='absolute bg-cwhite UserProfile_QR_main__7Go2P cursor-pointer false'])[1]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
@@ -33,6 +35,10 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void clickContinueApplication() {
 		click(btnContinueApplication, "Continue Application");
+	}
+
+	public void clickQRCode() {
+		click(qrCode, "QR Code");
 	}
 
 	private By getMerchantActivityDrpDwn(String Activity) {
@@ -200,5 +206,9 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public BankAccountPage bankAccountPage() {
 		return new BankAccountPage();
+	}
+
+	public MyQRCodeComponent myQRCodeComponent() {
+		return new MyQRCodeComponent();
 	}
 }

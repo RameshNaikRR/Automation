@@ -588,6 +588,89 @@ public class MerchantSettingsTest {
 //		}
 //	}
 
+//	public void addSignet(String strParams) throws InterruptedException {
+//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+//	MerchantSettingsPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
+//	// tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
+//	Thread.sleep(1000);
+//	MerchantSettingsPage.noSignetAccountsExistPopup().clickAddSignet();
+//	Thread.sleep(1000);
+//	// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading
+//	// "));
+//	tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+//	tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+////tokenAccountPage.addNewSignetAccountPopup().clickPaste();
+//	tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+//	tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+//	tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
+//	tokenAccountPage.mailingAddressComponent().clickstate();
+//	Thread.sleep(500);
+//	tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
+//
+//	tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+//	tokenAccountPage.addNewSignetAccountPopup().clickSave();
+//
+//}
+
+//@Test
+//@Parameters({ "strParams" })
+//public void testRemoveSignetAccount(String strParams) {
+//	try {
+//		Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		tokenAccountPage.clickTokenAccount();
+//		tokenAccountPage.clickWithdrawToSignet();
+//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//		tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
+//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
+//				.verifyPageHeading(data.get("removeSignetAccountHeading"));
+//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
+//				.verifyPageDescription(data.get("description"));
+//		// tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().verifyWalletIDView();
+//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().clickRemove();
+//
+//	} catch (Exception e) {
+//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//	}
+//}
+//
+//@Test
+//@Parameters({ "strParams" })
+//public void testAddSignetAccountInvalidDataValidations(String strParams) {
+//	try {
+//		Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		tokenAccountPage.clickTokenAccount();
+//		tokenAccountPage.clickWithdrawToSignet();
+//		addSignet(strParams);
+//		if (!data.get("errMessage").isEmpty()) {
+//			new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+//		}
+//
+//	} catch (Exception e) {
+//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//	}
+//}
+
+//@Test
+//@Parameters({ "strParams" })
+//public void testAddSignetAccountInvalidAmount(String strParams) {
+//	try {
+//		Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//		tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//		tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//		tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//		tokenAccountPage.withdrawToSignetPopup().clickNext();
+//		if (!data.get("errMessage").isEmpty()) {
+//			new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+//		}
+//	} catch (Exception e) {
+//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//	}
+//}
+
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
