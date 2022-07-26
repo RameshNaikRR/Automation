@@ -13,8 +13,6 @@ import coyni.api.business.popups.EditEmailAddressPopup;
 import coyni.api.business.popups.EmailAddressAuthenticationPopup;
 import coyni.api.business.popups.NewEmailAddressPopup;
 import coyni.customer.components.MailingAddressComponent;
-import coyni.customer.components.NavigationComponent;
-import coyni.customer.components.NotificationsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -49,7 +47,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblNewEmail = By.xpath("//h1[text()='Verify New Email Address']");
 	private By lblNewEmailDescription = By.xpath("");
 	private By lblPaymentMethod = By.xpath("//span[text()='Payment Methods']");
-	
+
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
@@ -213,7 +211,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public void clickPhoneSendCode() {
 		click(btnPhoneSendCode, "Send Code");
 	}
-	
+
 	public void clickPaymentMethods() {
 		click(lblPaymentMethod, "Payment Methods");
 	}

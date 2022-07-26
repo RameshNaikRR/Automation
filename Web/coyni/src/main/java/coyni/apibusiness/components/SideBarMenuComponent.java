@@ -3,6 +3,7 @@ package coyni.apibusiness.components;
 import org.openqa.selenium.By;
 
 import coyni.apibusiness.pages.BankAccountPage;
+import coyni.apibusiness.pages.BusinessSettingsPage;
 import coyni.apibusiness.pages.ExportFilesPage;
 import coyni.apibusiness.pages.GetHelpPage;
 import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
@@ -116,6 +117,10 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public ExportFilesPage exportfilesPage() {
 		return new ExportFilesPage();
+	}
+
+	public BusinessSettingsPage businessSettingsPage() {
+		return new BusinessSettingsPage();
 	}
 
 }

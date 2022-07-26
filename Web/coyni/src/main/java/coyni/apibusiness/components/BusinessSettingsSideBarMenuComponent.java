@@ -3,6 +3,7 @@ package coyni.apibusiness.components;
 import org.openqa.selenium.By;
 
 import coyni.api.business.popups.SecretKeyPopup;
+import coyni.apibusiness.pages.FeesPage;
 import coyni.apibusiness.pages.PreferencesPage;
 import coyni.apibusiness.pages.RegistrationDBAInformationPage;
 import coyni.uitilities.CommonFunctions;
@@ -194,6 +195,10 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public WebhookComponent webhookComponent() {
 		return new WebhookComponent();
+	}
+
+	public FeesPage feesPage() {
+		return new FeesPage();
 	}
 
 }

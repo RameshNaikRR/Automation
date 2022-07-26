@@ -83,4 +83,8 @@ public class AddIPAddressPopups extends BrowserFunctions {
 				"Account Name " + getElement(getItems("Account Name (DBA)"), "Account Name (DBA)"));
 	}
 
+	public int getLabelsize() {
+		return getElementsList(lblAddIp, "").size();
+	}
+
 }

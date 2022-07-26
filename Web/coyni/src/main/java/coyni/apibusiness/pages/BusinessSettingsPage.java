@@ -2,6 +2,7 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -84,6 +85,10 @@ public class BusinessSettingsPage extends BrowserFunctions {
 
 	public void verifyActive(String Active) {
 		new CommonFunctions().verifyLabelText(lblActive, Active, "Active");
+	}
+
+	public BusinessSettingsSideBarMenuComponent businessSettingsSideBarMenuComponent() {
+		return new BusinessSettingsSideBarMenuComponent();
 	}
 
 }
