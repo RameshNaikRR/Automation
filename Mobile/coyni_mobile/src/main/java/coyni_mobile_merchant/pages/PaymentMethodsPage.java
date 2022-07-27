@@ -2,13 +2,13 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
-import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.popups.CvvPopup;
 import coyni_mobile.popups.RemovingPopup;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.AddNewPaymentComponent;
+import coyni_mobile_merchant.components.NavigationComponent;
+import coyni_mobile_merchant.components.WithdrawMenuComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -32,6 +32,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[3]");
+	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
@@ -166,4 +167,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 		customerProfilePage().paymentMethodsPage().clickChkbxBank();
 		customerProfilePage().paymentMethodsPage().clickNext();
 	}
+	public By getSignetItems(String paymentMethod,String last4digits) {
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]//following::*[contains(@text,'%s')]", paymentMethod,last4digits));
+	}
+	public void clickSignetAccount(String last4digits) {
+		click(getSignetItems("Signet Account", last4digits), "Signet Account");
+	}
+	public void clickBankAccount() {
+		click(deleteBank, "Delete Bank");
+	}
+
 }

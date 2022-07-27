@@ -2,8 +2,9 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.MailingAddressComponent;
+
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.MailingAddressComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -22,6 +23,9 @@ public class AddCardPage extends MobileFunctions {
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
 		DriverFactory.getDriver().hideKeyboard();
+	}
+	public void scrollUpToNameOnCard() {
+		scrollUpToElement(txtNameOnCard, "Name On Card");
 	}
 	public void fillCardNumber(String cardNumber) {
 		click(txtCardNumber, "Card Number");

@@ -2053,6 +2053,7 @@ public class MerchantProfileTest {
 		businessTokenAccountPage.clickProfile();
 		Thread.sleep(2000);
 		merchantProfilePage.clickPaymentMethods();
+		merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 		Thread.sleep(3000);
 		merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 		merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
@@ -2071,5 +2072,101 @@ public class MerchantProfileTest {
 		    ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
     }
+    @Test
+    @Parameters({"strParams"})
+    public void testDeleteSignetAccount(String strParams) {
+    	try {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		businessTokenAccountPage.clickProfile();
+	    merchantProfilePage.clickPaymentMethods();
+	    merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+	    merchantProfilePage.paymentMethodsPage().clickSignetAccount(data.get("cardNumber"));
+	    merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickYes();
+		
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+    }
+    @Test
+   	@Parameters({"strParams"})
+   	public void testSignetAccountWithInvalidData(String strParams) {
+   		try {
+   			Map<String, String> data = Runner.getKeywordParameters(strParams);
+   			businessTokenAccountPage.clickProfile();
+   			Thread.sleep(2000);
+   			merchantProfilePage.clickPaymentMethods();
+   			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+   			Thread.sleep(3000);
+   			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+   			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
+   			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillNameOnCard(data.get("nameOnCard"));
+   			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().scrollUpToNameOnCard();
+   	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillSignetWalletId(data.get("signetWalletID"));
+   			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+   	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+   	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillCity(data.get("city"));
+   	        Thread.sleep(2000);
+   	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().selectState(data.get("state"));
+ 	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+// 	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddCard();
+
+            if (!data.get("errMsg").isEmpty()) {
+   				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+   			}
+   		} catch (Exception e) {
+
+   			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+   		}
+   	}
+    @Test
+    @Parameters({"strParams"})
+    public void testBankAccount(String strParams) {
+    	try {
+    		Map<String, String> data = Runner.getKeywordParameters(strParams);
+    		Thread.sleep(1000);
+			businessTokenAccountPage.clickProfile();
+			Thread.sleep(1000);
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+			Thread.sleep(1000);
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+			Thread.sleep(1000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyHeading(data.get("addExternalBankHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBankNext();
+			Thread.sleep(2000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().fillBankName(data.get("bankName"));
+			Thread.sleep(1000);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().ScrollToBank();
+		    merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().selectBank();
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBank();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().fillUserName(data.get("userName"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().fillPassword(data.get("bankPassword"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickCheckBox();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().allDonePage().clickDone();
+    		
+		} catch (Exception e) {
+			 ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+    }
+    @Test
+    @Parameters({"strParams"})
+    public void testDeleteBank(String strPrams) {
+    	try { 
+    		Map<String, String> data = Runner.getKeywordParameters(strPrams);
+    		businessTokenAccountPage.clickProfile();
+		    merchantProfilePage.clickPaymentMethods();
+		    merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+			merchantProfilePage.paymentMethodsPage().clickBankAccount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickYes();
+		} catch (Exception e) {
+			 ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+    }
+
 	
 }
