@@ -11,7 +11,10 @@ import coyni.admin.pages.TransactionPage;
 import coyni.admin.pages.ViewMerchantfeeStructurePage;
 import coyni.admin.pages.ViewPersonalFeeStructurePage;
 import coyni.admin.popups.ExportSelectedTransactions;
+import coyni.merchant.pages.DashBoardPage;
 import coyni.merchant.pages.ExportfilesPage;
+import coyni.merchant.pages.PayOutHistoryPage;
+import coyni.merchant.pages.ReserveHistoryPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -28,7 +31,7 @@ public class MerchantActivityComponent extends BrowserFunctions {
 	}
 
 	public By getSubMenuItems(String num) {
-		return By.xpath(String.format("(//div[@class='subitems-container'])[2]/a[%s]", num));
+		return By.xpath(String.format("(//div[@class='subitems-container'])[1]/a[%s]", num));
 
 	}
 
@@ -50,6 +53,18 @@ public class MerchantActivityComponent extends BrowserFunctions {
 
 	public TokenAccountPage tokenAccountPage() {
 		return new TokenAccountPage();
+	}
+
+	public DashBoardPage dashBoardPage() {
+		return new DashBoardPage();
+	}
+
+	public ReserveHistoryPage reserveHistoryPage() {
+		return new ReserveHistoryPage();
+	}
+
+	public PayOutHistoryPage payOutHistoryPage() {
+		return new PayOutHistoryPage();
 	}
 
 	public FilterComponent filterComponent() {

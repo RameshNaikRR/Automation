@@ -19,9 +19,12 @@ public class PayOutIDPage extends BrowserFunctions {
 	private By lblTransactionReferenceID = By
 			.xpath("//p[contains(text(),'Transaction Reference ID:')]/following-sibling::*[1]");
 
-	private By lblPaidToTokenAccount = By.xpath("//p[contains(text(),'Paid to Token Account:')]/following-sibling::*[1]");
-	
-	private By lblReserveID =By.xpath("//p[contains(text(),'Reserve ID:')]/following-sibling::*[1]");
+	private By lblPaidToTokenAccount = By
+			.xpath("//p[contains(text(),'Paid to Token Account:')]/following-sibling::*[1]");
+
+	private By lblReserveID = By.xpath("//p[contains(text(),'Reserve ID:')]/following-sibling::*[1]");
+
+	private By btnDownloadPDF = By.xpath("//div[contains(text(),'Download PDF')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -31,6 +34,11 @@ public class PayOutIDPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblPayOutDate, "Pay Out Date", expHeading);
 	}
 
+	public void verifyDownloadPDF() {
+		new CommonFunctions().elementView(btnDownloadPDF, "Download PDF");
+
+	}
+
 	public void getPayOutDate() {
 		ExtentTestManager.setInfoMessageInReport("PayOut Date: " + getText(lblPayOutDate, "Payout Date"));
 	}
@@ -38,15 +46,17 @@ public class PayOutIDPage extends BrowserFunctions {
 	public void getPayOutAmount() {
 		ExtentTestManager.setInfoMessageInReport("PayOut Amount: " + getText(lblPayOutAmount, "Payout Amount"));
 	}
-	
+
 	public void getTransactionReference() {
-		ExtentTestManager.setInfoMessageInReport("Transaction Reference: " + getText(lblTransactionReferenceID, "Transaction Reference"));
+		ExtentTestManager.setInfoMessageInReport(
+				"Transaction Reference: " + getText(lblTransactionReferenceID, "Transaction Reference"));
 	}
-	
+
 	public void getToTokenAccount() {
-		ExtentTestManager.setInfoMessageInReport("To Token Account: " + getText(lblPaidToTokenAccount, "Paid To Token Account"));
+		ExtentTestManager
+				.setInfoMessageInReport("To Token Account: " + getText(lblPaidToTokenAccount, "Paid To Token Account"));
 	}
-	
+
 	public void getReserveID() {
 		ExtentTestManager.setInfoMessageInReport("To Token Account: " + getText(lblReserveID, "Reserve ID"));
 	}

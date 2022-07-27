@@ -11,9 +11,9 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h1[.='Reserve Release History']");
 
-	private By btnRolling = By.xpath("//div[contains(text(),'Rolling')]");
+	private By btnRolling = By.xpath("//button[contains(text(),'Rolling')]");
 
-	private By btnManual = By.xpath("//div[contains(text(),'Manual')]");
+	private By btnManual = By.xpath("//button[contains(text(),'Manual')]");
 
 	private By btnAllStatuses = By.xpath("//p[text()='All Statuses']");
 
@@ -28,12 +28,19 @@ public class ReserveHistoryPage extends BrowserFunctions {
 	private By txtSearch = By
 			.cssSelector("EditSearchInput_form_input__iuhcE  MerchantReserveHistory_search_bar_gbox__PKxFs");
 
+	private By lblNoRecords = By.xpath("//span[contains(text(),'You do not have any records')]");
+
 	private By lnkRolling = By.cssSelector("tbody>tr:nth-of-type(5)>td:nth-of-type(1)");
 
 	private By lnkManual = By.cssSelector("tbody>tr:nth-of-type(5)>td:nth-of-type(1)");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Reserve History page heading", expHeading);
+	}
+
+	public String verifyNoRecordsFound() {
+		new CommonFunctions().elementView(lblNoRecords, "No Records");
+		return getText(lblNoRecords, "No Records");
 	}
 
 	public void fillSearch(String search) {
