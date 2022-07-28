@@ -13,14 +13,19 @@ public class FilterComponent extends BrowserFunctions {
 			"custom-date-picker-filter relative mb-0 flex items-center justify-between group  relative Date");
 	private By lnkClearCreatedDate = By.xpath("//label[text()='Date']/button");
 	private By lnkClearAllTransactionType = By.xpath("//span[text()='Transaction Type']/button");
+	private By lnkClearSenderName = By.xpath("//label[text()='Sender Name']/button");
 	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By lnkClearAllTransactionSubtype = By.xpath("//span[text()='Transaction Subtype']/button");
 	private By txtFromAmount = By.cssSelector("div[class $='group__from']>input");
 	private By txtToAmount = By.cssSelector("div[class $='group__to']>input");
+	private By txtSenderName = By.xpath("//input[@placeholder='Sender Name']");
+	private By txtReceiverName = By.xpath("//input[@placeholder='Receiver Name']");
 	private By lnkClearTransactionAmount = By.xpath("//label[text()='Transaction Amount']/button");
+	private By lnkClearAllTransactionStatus = By.xpath("//span[text()='Transaction Status']/button");
 	private By txtReferenceID = By.name("gbxTransactionId");
 	private By lnkClearReferenceID = By.xpath("//label[text()='Reference ID']/button");
 	private By txtReferencrID = By.xpath("//label[text()='Reference ID']");
+	private By btnFilter = By.xpath("//button[text()='Filter']");
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
 	private By tableRows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 	private By msgNoRecoreds = By.cssSelector(".message");
@@ -33,6 +38,14 @@ public class FilterComponent extends BrowserFunctions {
 		By checkCheckBoxes = By.xpath(String
 				.format("//input[@type='checkbox']/following::span[text()='%s']/preceding-sibling::input", checkBox));
 		click(checkCheckBoxes, checkBox + "Check Box ");
+	}
+
+	public void selectFilter(String type) {
+		click(getCheckBox(type), type);
+	}
+
+	private By getCheckBox(String elementName) {
+		return By.xpath(String.format("//span[text()='%s']//preceding-sibling::input", elementName));
 	}
 
 	public void clickStartDate() {
@@ -62,6 +75,14 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickClearAllTransactionType() {
 		click(lnkClearAllTransactionType, "All Transction Type");
+	}
+
+	public void clickClearAllTransactionStatus() {
+		click(lnkClearAllTransactionStatus, "All Transction Status");
+	}
+
+	public void clickClearSenderName() {
+		click(lnkClearSenderName, "Sender Name");
 	}
 
 	public void clickBankAccountCheckBox() {
@@ -98,6 +119,16 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void fillFromAmount(String amount) {
 		enterText(txtFromAmount, amount, "Amount");
+
+	}
+
+	public void fillSender(String sender) {
+		enterText(txtSenderName, sender, "Sender");
+
+	}
+
+	public void fillReceiver(String receiver) {
+		enterText(txtReceiverName, receiver, "Receiver");
 
 	}
 
@@ -140,6 +171,11 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickApplyFilters() {
 		click(btnApplyFilters, "Apply Filters");
+	}
+
+	public void clickFilters() {
+		scrollToElement(btnFilter, "Filter");
+		click(btnFilter, "Filter");
 	}
 
 	public void clickResetAllFilters() {

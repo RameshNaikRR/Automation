@@ -536,14 +536,19 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.filterComponent().clickApplyFilters();
-//			tokenAccountPage.filterComponent().viewFilters();
-//			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
-			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().clickStartDate();
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().clickApplyFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
 		}
 	}
 
@@ -558,10 +563,25 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().clickClearAllTransactionType();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
+			tokenAccountPage.filterComponent().clickClearAllTransactionSubType();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().clickClearTransactionAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().clickClearAllTransactionStatus();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTokenAccountResetFilters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
 		}
 	}
 
@@ -745,7 +765,7 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
-	
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testAddSignetAccount(String strParams) {

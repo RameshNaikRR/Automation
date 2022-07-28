@@ -209,15 +209,21 @@ public class MerchantActivityTest {
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
-			merchantTransactionsPage.filterComponent().clickApplyFilters();
-//			tokenAccountPage.filterComponent().viewFilters();
-//			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().clickStartDate();
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
 		}
 	}
 
@@ -231,11 +237,30 @@ public class MerchantActivityTest {
 	public void testResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().clickStartDate();
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+			merchantTransactionsPage.filterComponent().clickClearAllTransactionType();
+			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickClearTransactionAmount();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+			merchantTransactionsPage.filterComponent().clickClearSenderName();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+			merchantTransactionsPage.filterComponent().clickClearSenderName();
 			merchantTransactionsPage.filterComponent().clickResetAllFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTokenAccountResetFilters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
 		}
 	}
 
@@ -328,7 +353,7 @@ public class MerchantActivityTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDashBoardReserveHistory(String strParams) {
+	public void testDashBoardReserveHistoryNoRecords(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
@@ -338,6 +363,22 @@ public class MerchantActivityTest {
 			merchantActivityComponent.reserveHistoryPage().clickManual();
 			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
 			merchantActivityComponent.reserveHistoryPage().clickRolling();
+			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDashBoardReserveHistory failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistoryManul(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().clickManual();
 			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
 
 		} catch (Exception e) {
@@ -363,4 +404,168 @@ public class MerchantActivityTest {
 			ExtentTestManager.setFailMessageInReport("testDashBoardReserveHistory failed due to exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistory(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().clickOnHold();
+			merchantActivityComponent.reserveHistoryPage().clickOpen();
+			merchantActivityComponent.reserveHistoryPage().clickReleased();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDashBoardReserveHistory failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistoryAllStatuses(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testDashBoardReserveHistoryAllStatuses failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistoryOpenStatus(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().verifyStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testDashBoardReserveHistoryOpenStatus failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistoryOnHoldStatus(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().verifyStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testDashBoardReserveHistoryOpenStatus failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardReserveHistoryReleasedStatus(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().verifyStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testDashBoardReserveHistoryReleasedStatus failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveHistoryExports(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			if (merchantActivityComponent.reserveHistoryPage().verifyExports() != 0) {
+				merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
+			} else {
+				merchantActivityComponent.reserveHistoryPage().exportfilesPage().clickExport();
+				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
+						.verifyReserveExportHeading(data.get("heading"));
+				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
+						.clickOnReserveExport();
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveHistoryexports failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveHistorySearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().fillSearch(data.get("search"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveHistorySearch failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveHistoryIDDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getAmountReleased();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveHistoryIDDetails failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveHistoryIDViewDownload(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getAmountReleased();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
+			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testDashBoardPayOutHistoryViewDownload failed due to exception " + e);
+		}
+	}
+
 }

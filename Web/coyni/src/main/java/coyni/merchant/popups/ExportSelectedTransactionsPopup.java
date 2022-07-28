@@ -13,6 +13,7 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	private By radBtnMonthToDate = By.xpath("//span[contains(text(),'Month to Date')]");
 	private By radBtnLastMonth = By.xpath("//span[text()='Yesterday']");
 	private By btnExport = By.xpath("(//button[text()='Export'])[2]");
+	private By btnReserveExport = By.xpath("(//button[text()='Export'])[2]");
 	private By drpdwnDefault = By.xpath("(//div[text()='Default (8)'])[1]");
 	private By drpdwnCustom = By.xpath("//div[text()='Custom']");
 	private By chckbxReferenceId = By.xpath("//span[text()='Reference ID']");
@@ -24,9 +25,18 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	private By chckbxDescription = By.xpath("(//span[text()='Description'])[1]");
 	private By lnkDeselectAll = By.xpath("//span[text()='Deselect All']");
 	private By lblHeading = By.cssSelector(".modal__header__infos__title");
+	private By lblExportHeading = By.xpath("//h3[text()='Export Rolling Releases']");
 	private By btnclose = By.xpath("//button[text()='Close']");
 	private By pagetitle = By.xpath("//h2[text()='Your Export is Being Prepared']");
 	private By lnkExportPage = By.xpath("//strong[@class='underline cursor-pointer text-cbl5']");
+
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, expHeading, "Export Selected Transactions ");
+	}
+
+	public void verifyReserveExportHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblExportHeading, expHeading, "Export Selected Transactions ");
+	}
 
 	public void clickExportPage() {
 		click(lnkExportPage, "ExportPage");
@@ -66,6 +76,10 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 
 	public void clickOnExport() {
 		click(btnExport, "Export");
+	}
+
+	public void clickOnReserveExport() {
+		click(btnReserveExport, "Export");
 	}
 
 	public void clickOnReferenceIdCheckBox() {
@@ -126,10 +140,6 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 		click(drpdwnCustom, "Custom");
 
 		new CommonFunctions().selectCustomDropDown(Custom, "Custom");
-	}
-
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, expHeading, "Export Selected Transactions ");
 	}
 
 }

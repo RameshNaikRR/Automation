@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.FilterComponent;
-import coyni.admin.components.PaginationAndEntriesComponent;
+import coyni.merchant.components.FilterComponent;
+
 import coyni.merchant.components.ExportComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -139,9 +139,9 @@ public class MerchantTransactionsPage extends BrowserFunctions {
 		ExtentTestManager.setPassMessageInReport("Status is " + getElement(lblStatus, "Status"));
 	}
 
-	public PaginationAndEntriesComponent paginationAndEntriesComponent() {
-		return new PaginationAndEntriesComponent();
-	}
+//	public PaginationAndEntriesComponent paginationAndEntriesComponent() {
+//		return new PaginationAndEntriesComponent();
+//	}
 
 	public ExportfilesPage exportfilesPage() {
 		return new ExportfilesPage();

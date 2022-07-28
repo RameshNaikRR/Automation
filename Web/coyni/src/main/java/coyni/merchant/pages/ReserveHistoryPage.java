@@ -17,11 +17,19 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	private By btnAllStatuses = By.xpath("//p[text()='All Statuses']");
 
+	private By reserveHistory = By.cssSelector("tbody>tr:nth-of-type(4)>td:nth-of-type(1)");
+
 	private By btnOpen = By.xpath("//p[text()='Open']");
 
 	private By btnOnHold = By.xpath("//p[text()='On Hold']");
 
 	private By btnReleased = By.xpath("//p[text()='Released']");
+
+	private By openStatus = By.xpath("(//div[contains(text(),'Open')])[1]");
+
+	private By onHoldStatus = By.xpath("(//div[contains(text(),'On Hold')])[1]");
+
+	private By releaseStatus = By.xpath("(//div[contains(text(),'Released')])[1]");
 
 	private By btnCancelled = By.xpath("//p[text()='Cancelled']");
 
@@ -36,6 +44,24 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Reserve History page heading", expHeading);
+	}
+
+	public void verifyStatus() {
+		if (verifyElementDisplayed(openStatus, "Open Status")) {
+			clickOpen();
+		} else if (verifyElementDisplayed(onHoldStatus, "On Hold Status")) {
+			clickOnHold();
+		} else {
+			clickReleased();
+		}
+	}
+
+	public void clickReserveHistory() {
+		click(reserveHistory, "Reserve History");
+	}
+
+	public int verifyExports() {
+		return getElementsList(lblNoRecords, "").size();
 	}
 
 	public String verifyNoRecordsFound() {
@@ -77,6 +103,10 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	public ReserveHistoryIDPage reserveHistoryIDPage() {
 		return new ReserveHistoryIDPage();
+	}
+
+	public ExportfilesPage exportfilesPage() {
+		return new ExportfilesPage();
 	}
 
 }

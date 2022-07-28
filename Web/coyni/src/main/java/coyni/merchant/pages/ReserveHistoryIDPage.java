@@ -26,12 +26,20 @@ public class ReserveHistoryIDPage extends BrowserFunctions {
 
 	private By lblReleasedOn = By.xpath("//p[contains(text(),'Released On')]/following-sibling::*");
 
-	private By lblReleaseTransactionId = By.xpath("//p[contains(text(),'Release Transaction ID')]/following-sibling::*");
+	private By lblReleaseTransactionId = By
+			.xpath("//p[contains(text(),'Release Transaction ID')]/following-sibling::*");
+
+	private By btnDownloadPDF = By.xpath("//div[contains(text(),'Download PDF')]");
 
 	private By lblToTokenAccount = By.xpath("//p[contains(text(),'To Token Account')]/following-sibling::*");
 
 	public void verifyReserveHistory(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeadingReserveSummary, "Reserve Summary", expHeading);
+	}
+
+	public void verifyDownloadPDF() {
+		new CommonFunctions().elementView(btnDownloadPDF, "Download PDF");
+
 	}
 
 	public void getReserveHeld() {
@@ -49,7 +57,7 @@ public class ReserveHistoryIDPage extends BrowserFunctions {
 	public void getReserveRule() {
 		ExtentTestManager.setInfoMessageInReport("PayOut Date: " + getText(lblReserveRule, "Reserve Rule"));
 	}
-	
+
 	public void verifyReleaseHistory(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeadingReleaseSummary, "Release Summary", expHeading);
 	}
@@ -58,17 +66,16 @@ public class ReserveHistoryIDPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Amount Released: " + getText(lblAmountReleased, "Amount Released"));
 	}
 
-	public void getReleasedOn() {
+	public void getReleasedOn() {	
 		ExtentTestManager.setInfoMessageInReport("Released On: " + getText(lblReleasedOn, "Released On"));
 	}
 
 	public void getReleasedTransactionID() {
-		ExtentTestManager.setInfoMessageInReport("Released Transaction ID: " + getText(lblReleaseTransactionId, "Release Transaction ID"));
+		ExtentTestManager.setInfoMessageInReport(
+				"Released Transaction ID: " + getText(lblReleaseTransactionId, "Release Transaction ID"));
 	}
 
 	public void getToTokenAccount() {
 		ExtentTestManager.setInfoMessageInReport("To Token Account: " + getText(lblToTokenAccount, "To Token Account"));
 	}
-
-
 }
