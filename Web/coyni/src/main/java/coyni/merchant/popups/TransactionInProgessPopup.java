@@ -5,36 +5,64 @@ import org.openqa.selenium.By;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionInProgessPopup extends BrowserFunctions {
-
+	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//h1[text()='Transaction In Progress']");
-	private By lnkCopy = By.xpath("//span[@class='copy-image icon-copy']");
+	private By lblDescription = By.xpath("//p[contains(.,'We are processing')]");
+	private By lnkLearnMore = By.xpath("//span[.='Learn More']");
+	private By lblAmount = By.xpath("//div[contains(@class,'BankInstantPayWithdrawModal_a')]");
+	private By lblAmountMsg = By
+			.xpath("//div[contains(@class,'BankInstantPayWithdrawModal_a')]/../following-sibling::div[1]");
+	private By lblRecipient = By.xpath("//span[text()='Recipient']");
+	private By lblRecipientBank = By.xpath("//span[text()='Recipient']/following-sibling::span");
+	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
+	private By lnkReferenceID = By.xpath("//div[@class='copy-clipboard__content']");
 	private By btnDone = By.xpath("//button[text()='Done']");
-	private By lnkLearnmore = By.xpath("//span[text()='Learn More']");
-	private By referenceID = By.xpath("//span[text()='Reference ID']");
 
-	public void clickCopyLink() {
-		click(lnkCopy, "Click Copy");
+	public void verifyHeading(String expHeading) {
+		cf.verifyLabelText(lblHeading, "Transaction InProgress", expHeading);
+	}
+
+	public void verifyDescription(String Description) {
+		cf.verifyLabelText(lblDescription, "Description", Description);
+	}
+
+	public void lnkLearnmore() {
+		click(lnkLearnMore, "Click LearnMore");
+	}
+
+	public void verifyAmount() {
+		cf.elementView(lblAmount, "Amount");
+	}
+
+	public void verifyAmountMsg() {
+		String text = getText(lblAmountMsg, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyRecipientLbl() {
+		cf.elementView(lblRecipient, "Recipient Label");
+	}
+
+	public void verifyRecipientBankLbl() {
+		cf.elementView(lblRecipientBank, "Recipient Bank Label");
+	}
+
+	public void verifyReferenceIdLbl() {
+		cf.elementView(lblReferenceID, "ReferenceID Label ");
+	}
+
+	public void verifyReferenceID() {
+		click(lnkReferenceID, "ReferenceID Link");
+		ExtentTestManager.setInfoMessageInReport("Reference ID is :" + getCopiedData());
 	}
 
 	public void clickDone() {
 		click(btnDone, "Click Done");
 	}
 
-	public void lnkLearnmore() {
-		click(lnkLearnmore, "Click LearnMore");
-	}
-
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Transaction InProgress", expHeading);
-	}
-
-	public void verifyReferenceID() {
-		new CommonFunctions().elementView(referenceID, "Reference ID");
-
-	}
-	
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

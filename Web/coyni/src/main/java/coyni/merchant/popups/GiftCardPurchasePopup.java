@@ -10,7 +10,13 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class GiftCardPurchasePopup extends BrowserFunctions {
-
+	
+	private By giftCardHeading = By.xpath("//h1[text()='Gift Card Purchase']");
+	private By lblDescription = By.xpath("//span[.='Select Your Gift Card:']");
+	private By txtSearch = By.xpath("//input[@placeholder='Search By Keyword']");
+	private By btnGiftCard = By.xpath("(//div[@class='gift-card-list-item__wrapper'])[1]");
+	private By lblEntries = By.xpath("(//span[contains(@class,'entries-message')])[2]");
+	
 	private By txtFirstName = By.id("first-name");
 	private By txtLastName = By.id("last-name");
 	private By txtEmail = By.id("email-address");
@@ -19,8 +25,6 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 	private By lblErrorMsg = By.cssSelector("");
 	private By cardAmazon = By.xpath("//div[@class='gift-card-list-item__gift-image-container']");// amazon
 	private By cardVisa = By.xpath("(//button[@class='gift-card-list-item__link'])[2]");// Visa
-	private By txtSearch = By.xpath("//input[@placeholder='Search By Keyword']");
-	private By giftCardHeading = By.xpath("//h1[text()='Gift Card Purchase']");
 	private By labelOrderPreview = By.xpath("//p[text()='Order Preview']");
 
 	private By lblSuccess = By.xpath("//h1[text()='Transaction in Progress']");

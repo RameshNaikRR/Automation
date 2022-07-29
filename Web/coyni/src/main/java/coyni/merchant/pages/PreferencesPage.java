@@ -12,13 +12,36 @@ public class PreferencesPage extends BrowserFunctions {
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");
 	private By lblDescription = By.xpath("//span[contains(.,'Your merchant batch')]");
 
+	private By getTimeZones(String timeZone) {
+		return By.xpath(String.format("//span[normalize-space()='%s']", timeZone));
+	}
+
+	public void clickEastern() {
+		click(getTimeZones("Eastern (EST)"), "Eastern");
+	}
+
+	public void clickPacific() {
+		click(getTimeZones("Pacific (PST)"), "Pacific");
+	}
+
+	public void clickMountain() {
+		click(getTimeZones("Mountain (MST)"), "Mountain");
+	}
+
+	public void clickHawaii() {
+		click(getTimeZones("Hawaii (HST)"), "Hawaii");
+	}
+
+	public void clickAlaskan() {
+		click(getTimeZones("Alaskan (AST)"), "Alaskan");
+	}
+
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
 	public void selectTimeZone(String timeZone) {
 		click(drpDwnTime, "Time Zone DropDown");
-		// click(getElement(timeZone), timeZone);
 	}
 
 	public void verifyCurrency(String Currency) {

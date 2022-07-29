@@ -2,15 +2,8 @@ package coyni.merchant.components;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.pages.BalanceReportsPage;
-import coyni.admin.pages.CommissionAccountPage;
-import coyni.admin.pages.FeatureControlPage;
-import coyni.admin.pages.FeeStructurePage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
-import coyni.admin.pages.ViewMerchantfeeStructurePage;
-import coyni.admin.pages.ViewPersonalFeeStructurePage;
-import coyni.admin.popups.ExportSelectedTransactions;
 import coyni.merchant.pages.DashBoardPage;
 import coyni.merchant.pages.ExportfilesPage;
 import coyni.merchant.pages.PayOutHistoryPage;
@@ -55,18 +48,6 @@ public class MerchantActivityComponent extends BrowserFunctions {
 		return new TokenAccountPage();
 	}
 
-	public DashBoardPage dashBoardPage() {
-		return new DashBoardPage();
-	}
-
-	public ReserveHistoryPage reserveHistoryPage() {
-		return new ReserveHistoryPage();
-	}
-
-	public PayOutHistoryPage payOutHistoryPage() {
-		return new PayOutHistoryPage();
-	}
-
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
@@ -77,6 +58,17 @@ public class MerchantActivityComponent extends BrowserFunctions {
 
 	public ExportfilesPage exportfilesPage() {
 		return new ExportfilesPage();
+	}
+
+	public DashBoardPage dashBoardPage() {
+		return new DashBoardPage();
+	}
+
+	public PayOutHistoryPage payOutHistoryPage() {
+		return new PayOutHistoryPage();
+	}
+	public ReserveHistoryPage reserveHistoryPage() {
+		return new ReserveHistoryPage();
 	}
 
 }

@@ -23,7 +23,7 @@ public class WithdrawToBankAccountSelectBankPopup extends BrowserFunctions {
     public void clickNext() {
     	click(btnNext, "Next");
     }
-    public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
-    	return new WithdrawToBankAccountPopup();
+    public ChooseYourBankAccountPopup withdrawToBankAccountPopup() {
+    	return new ChooseYourBankAccountPopup();
     }
 }

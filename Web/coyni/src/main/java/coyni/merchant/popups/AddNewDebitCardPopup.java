@@ -12,14 +12,21 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddNewDebitCardPopup extends BrowserFunctions {
-
+	private By heading = By.cssSelector("//div[@class='modal__body']/h1");
 	private By txtNameOnCard = By.xpath("//input[@id ='name-on-card']");
 	private By txtCardNumber = By.name("cardNumber");
 	private By lblCardType = By.xpath("//input[@id='card-number']/../following-sibling::*[1]");
 	private By txtCardExp = By.name("expiryDate");
 	private By txtCVVorCVC = By.name("cvv");
+	private By txtBillingAddress1 = By.cssSelector("input[id='billing-address-line-1']");
+	private By txtBillingAddress2 = By.cssSelector("input[id='billing-address-line-2']");
+	private By txtCity = By.cssSelector("input[id='city']");
+	private By drpDwnState = By.xpath("//div[.='State']");
+//	private By 
+	private By txtZipCode = By.xpath("input[id='zip-code']");
+	private By txtCountry = By.xpath("//div[.='United States']");
+	
 	private By lblErrorMsg = By.cssSelector("span.text-crd5 ");
-	private By heading = By.cssSelector(".Heading_heading1__18f6i.mb-10.text-center");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 
 	public void fillNameOnCard(String nameOnCard) {

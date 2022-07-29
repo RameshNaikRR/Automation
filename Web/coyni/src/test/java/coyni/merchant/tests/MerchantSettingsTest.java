@@ -432,20 +432,31 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testFeesView(String strParams) {
+	public void testBeneficiaryOwners(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
-					.verifyHeading(data.get("feesHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
-					.verifyLabels();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
+					.clickBeneficiaryOwnerBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyHeading(data.get("beneficiaryOwnersHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getOwnerName(data.get("ownerName"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getDateOfBirth(data.get("dob"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getSocialSecurityNumber(data.get("ssnNumber"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getOwnerShip(data.get("ownership"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getAddressLine1();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getAddressLine2();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
 		}
-
 	}
 
 	@Test
@@ -460,19 +471,20 @@ public class MerchantSettingsTest {
 					.verifyHeading(data.get("preferencesHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.clickTimeDropdown();
+			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
-					.selectTimeZone(data.get("timeZone"));
+					.clickEastern();
+			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.clickSave();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
+			ExtentTestManager.setFailMessageInReport("testPreferences failed due to " + e);
 		}
-
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAgreements(String strParams) {
+	public void testAgreementsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
@@ -504,14 +516,32 @@ public class MerchantSettingsTest {
 					.verifyTermsOfServiceIpAddress();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
+			ExtentTestManager.setFailMessageInReport("testAgreements failed due to " + e);
 		}
-
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAccountLimits(String strParams) {
+	public void testFeesView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyHeading(data.get("feesHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyLabelHeadings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyFeesChargesLbl();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimitsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
@@ -520,26 +550,12 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
 					.verifyHeading(data.get("accountLimitsHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getMerchantProcessingVolume();
+					.verifyLables();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getHighTicket();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getBuyTokenBankAccount();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getBuyTokenSignetAccount();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getWithdrawBankAccount();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getWithdrawSignetAccount();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getInstantPay();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
-					.getGiftCard();
-
+					.verifyAccountLimits();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
 		}
-
 	}
 
 	@Test
@@ -587,89 +603,6 @@ public class MerchantSettingsTest {
 //			// 
 //		}
 //	}
-
-//	public void addSignet(String strParams) throws InterruptedException {
-//	Map<String, String> data = Runner.getKeywordParameters(strParams);
-//	MerchantSettingsPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
-//	// tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
-//	Thread.sleep(1000);
-//	MerchantSettingsPage.noSignetAccountsExistPopup().clickAddSignet();
-//	Thread.sleep(1000);
-//	// tokenAccountPage.addNewSignetAccountPopup().verifyPageHeading(data.get("addNewSignetAccountHeading
-//	// "));
-//	tokenAccountPage.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
-//	tokenAccountPage.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
-////tokenAccountPage.addNewSignetAccountPopup().clickPaste();
-//	tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
-//	tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
-//	tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-//	tokenAccountPage.mailingAddressComponent().clickstate();
-//	Thread.sleep(500);
-//	tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
-//
-//	tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-//	tokenAccountPage.addNewSignetAccountPopup().clickSave();
-//
-//}
-
-//@Test
-//@Parameters({ "strParams" })
-//public void testRemoveSignetAccount(String strParams) {
-//	try {
-//		Map<String, String> data = Runner.getKeywordParameters(strParams);
-//		tokenAccountPage.clickTokenAccount();
-//		tokenAccountPage.clickWithdrawToSignet();
-//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//		tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
-//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
-//				.verifyPageHeading(data.get("removeSignetAccountHeading"));
-//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
-//				.verifyPageDescription(data.get("description"));
-//		// tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().verifyWalletIDView();
-//		tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup().clickRemove();
-//
-//	} catch (Exception e) {
-//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//	}
-//}
-//
-//@Test
-//@Parameters({ "strParams" })
-//public void testAddSignetAccountInvalidDataValidations(String strParams) {
-//	try {
-//		Map<String, String> data = Runner.getKeywordParameters(strParams);
-//		tokenAccountPage.clickTokenAccount();
-//		tokenAccountPage.clickWithdrawToSignet();
-//		addSignet(strParams);
-//		if (!data.get("errMessage").isEmpty()) {
-//			new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-//		}
-//
-//	} catch (Exception e) {
-//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//	}
-//}
-
-//@Test
-//@Parameters({ "strParams" })
-//public void testAddSignetAccountInvalidAmount(String strParams) {
-//	try {
-//		Map<String, String> data = Runner.getKeywordParameters(strParams);
-//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//		tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//		tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//		tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//		tokenAccountPage.withdrawToSignetPopup().clickNext();
-//		if (!data.get("errMessage").isEmpty()) {
-//			new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-//		}
-//	} catch (Exception e) {
-//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//	}
-//}
 
 	public void testAddExternalBankAccount(String strParams) {
 		try {
@@ -1204,38 +1137,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamSearch failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testMerchantSettingsAddTeamMemberWithInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
-			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
-			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-//			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-//					.verifyHeading(data.get("heading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-					.verifyFirstName(data.get("firstName"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-					.verifyLastName(data.get("lastName"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-					.verifyEmail(data.get("email1"));
-			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-					.verifyPhone(data.get("phone"));
-			if (!data.get("errMessage").isEmpty()) {
-				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			} else if (!data.get("toastMessage").isEmpty()) {
-
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testMerchantSettingsAddTeamMemberWithInvalidData Failed due to Exception " + e);
 		}
 	}
 

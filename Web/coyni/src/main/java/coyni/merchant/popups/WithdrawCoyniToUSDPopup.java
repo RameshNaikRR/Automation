@@ -1,40 +1,56 @@
 package coyni.merchant.popups;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	private By withdrawToUSDHeading = By.xpath("//h1[contains(text(),'Withdraw coyni to USD')]");
-	private By btnWithdrawToUSD = By
-			.xpath("(//button[@class='group h-28 w-full flex flex-col justify-center items-center '])[3]");
-	private By btnExternalBankAccount = By.xpath("(//button[@class='payment-method-button '])[1]");
-	private By btnInstantPay = By.xpath("(//button[@class='payment-method-button '])[2]");
-	private By btnGiftCard = By.xpath("(//button[@class='payment-method-button '])[3]");
-	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
+	private By PaymentBtns = By.xpath("//span[@class='labelWithoutHover']");
 
-	public void clickOnExternalBankAccount() {
-		click(btnExternalBankAccount, "click ExternalBankAccount");
+	private By getPaymentBnts(String buttons) {
+		return By.xpath(String.format("(//button[@class='payment-method-button '])[1]", buttons));
 	}
 
-	public void cursorhoverWithdrawToUSD() {
-		new CommonFunctions().verifyCursorAction(btnGiftCard, "Gift Card");
+//	private By btnExternalBankAccount = By.xpath("(//button[@class='payment-method-button '])[1]");
+//	private By btnInstantPay = By.xpath("(//button[@class='payment-method-button '])[2]");
+//	private By btnGiftCard = By.xpath("(//button[@class='payment-method-button '])[3]");
+	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
+
+	public void verifyBtns() {
+		List<WebElement> elementsList = getElementsList(PaymentBtns, "");
+		for (WebElement webElement : elementsList) {
+			new CommonFunctions().verifyCursorAction((By) webElement, "");
+			boolean displayed = webElement.isDisplayed();
+			String text = webElement.getText();
+			ExtentTestManager.setInfoMessageInReport(displayed + "  " + text + "  " + "Button is displayed ");
+		}
+	}
+
+	public void clickOnExternalBankAccount() {
+		click(getPaymentBnts("1"), "click ExternalBankAccount");
 	}
 
 	public void clickOnInstantPay() {
-		click(btnInstantPay, "Click InstantPay");
+		click(getPaymentBnts("2"), "InstantPay");
 	}
 
 	public void clickOnGiftCard() {
-		click(btnGiftCard, "Click GiftCard");
+		click(getPaymentBnts("3"), "GiftCard");
 	}
 
-	public void verifyWithdrawToUSD() {
-		new CommonFunctions().elementView(btnExternalBankAccount, "External Bank Account");
-		new CommonFunctions().elementView(btnInstantPay, "Instant Pay");
-		new CommonFunctions().elementView(btnGiftCard, "Gift Card");
+	public void clickOnSignetAccount() {
+		click(getPaymentBnts("4"), "Signet Account");
+	}
+
+	public void cursorhoverWithdrawToUSD() {
+		new CommonFunctions().verifyCursorAction(getPaymentBnts("3"), "Gift Card");
 	}
 
 	public void verifyLabelWithdrawToUSDHeading(String expHeading) {
@@ -56,9 +72,9 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public GiftCardPurchasePopup giftCardPurchasePopup() {
 		return new GiftCardPurchasePopup();
 	}
-	
-	public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
-		return new WithdrawToBankAccountPopup();
+
+	public ChooseYourBankAccountPopup withdrawToBankAccountPopup() {
+		return new ChooseYourBankAccountPopup();
 	}
 
 }

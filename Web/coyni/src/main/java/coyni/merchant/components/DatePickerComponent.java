@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import ilabs.WebFramework.DriverFactory;
 
 public class DatePickerComponent {
-
+	
 	private static final String DATE_FORMAT = "MM dd yyyy";
 	private static final String DAY_FIRST = "01";
 	private static final String SPACE = " ";

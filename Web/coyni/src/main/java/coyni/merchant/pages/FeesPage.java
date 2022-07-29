@@ -10,31 +10,30 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class FeesPage extends BrowserFunctions {
+	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='Fees']");
-//	private By getFeesCharges(String feesCharges) {
-//		return By.xpath(String.format("(//div[contains(@class,'MerchantFees_fees_container')])[1]", feesCharges));
-//	}
-	private By getFeesCharges = By.xpath("//div[contains(@class,'MerchantFees_fees_container')]");
+
+	private By getFeesChargesLbl = By.xpath("//div[contains(@class,'MerchantFees_fees_container')]/span");
 	private By getLables = By.xpath("//div[contains(@class,'MerchantFees_head')]/span");
 
-	public void verifyFeesCharges(String type) {
-		List<WebElement> rows = getElementsList(getFeesCharges, "percentage");
+	public void verifyHeading(String Heading) {
+		cf.verifyLabelText(lblHeading, "Heading", Heading);
+	}
+
+	public void verifyFeesChargesLbl() {
+		List<WebElement> rows = getElementsList(getFeesChargesLbl, "percentage");
 		for (WebElement row : rows) {
-			String replace = row.getText().replace("\n", "");
-			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+			String ChargesLbl = row.getText();
+			ExtentTestManager.setInfoMessageInReport(ChargesLbl + "   Label is Displayed");
 		}
 	}
 
-	public void verifyLabels() {
+	public void verifyLabelHeadings() {
 		List<WebElement> rows = getElementsList(getLables, "Lables");
 		for (WebElement row : rows) {
-			String replace = row.getText();
-			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
-			break;
+			String Lables = row.getText();
+			ExtentTestManager.setInfoMessageInReport(Lables + "   Label is displayed");
 		}
 	}
 
-	public void verifyHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
-	}
 }
