@@ -35,7 +35,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By imgPhone = By.xpath("//h3[contains(@class,'UserDetails_phoneNumber')]");
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
-	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
+	private By lblEmailAddress = By.xpath("//div[text()='Edit Account Email']");
 	private By lblAccountAddress = By
 			.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
 	private By txtCode = By.cssSelector("input[class *= 'verification-input']");

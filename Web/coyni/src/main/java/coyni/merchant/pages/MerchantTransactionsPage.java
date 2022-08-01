@@ -13,6 +13,7 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class MerchantTransactionsPage extends BrowserFunctions {
+	
 
 	private By headingTransactionList = By.xpath("//span[text()='Merchant Transactions']");
 

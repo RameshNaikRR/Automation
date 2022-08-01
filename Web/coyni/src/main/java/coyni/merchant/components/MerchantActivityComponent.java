@@ -6,6 +6,7 @@ import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
 import coyni.merchant.pages.DashBoardPage;
 import coyni.merchant.pages.ExportfilesPage;
+import coyni.merchant.pages.MerchantTransactionsPage;
 import coyni.merchant.pages.PayOutHistoryPage;
 import coyni.merchant.pages.ReserveHistoryPage;
 import coyni.uitilities.CommonFunctions;
@@ -48,6 +49,18 @@ public class MerchantActivityComponent extends BrowserFunctions {
 		return new TokenAccountPage();
 	}
 
+	public DashBoardPage dashBoardPage() {
+		return new DashBoardPage();
+	}
+
+	public ReserveHistoryPage reserveHistoryPage() {
+		return new ReserveHistoryPage();
+	}
+
+	public PayOutHistoryPage payOutHistoryPage() {
+		return new PayOutHistoryPage();
+	}
+
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
@@ -56,19 +69,16 @@ public class MerchantActivityComponent extends BrowserFunctions {
 		return new TransactionPage();
 	}
 
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent();
+	}
+
+	public MerchantTransactionsPage merchantTransactionsPage() {
+		return new MerchantTransactionsPage();
+	}
+
 	public ExportfilesPage exportfilesPage() {
 		return new ExportfilesPage();
-	}
-
-	public DashBoardPage dashBoardPage() {
-		return new DashBoardPage();
-	}
-
-	public PayOutHistoryPage payOutHistoryPage() {
-		return new PayOutHistoryPage();
-	}
-	public ReserveHistoryPage reserveHistoryPage() {
-		return new ReserveHistoryPage();
 	}
 
 }

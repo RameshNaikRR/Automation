@@ -8,16 +8,21 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.utilities.FileHelper;
 
 public class CropYourImagePopup extends BrowserFunctions {
-	private By heading = By.cssSelector(".UserDetails_container__50Pke>h1");
-	private By btnSelectImage = By.cssSelector(".UserDetails_container__50Pke>form>input");
-	private By btnSave = By.cssSelector(".UserDetails_container__50Pke>div>button");
+
+	private By heading = By.xpath("//h1[contains(text(),'Crop Your Image')]");
+	private By btnSelectImage = By.xpath("//p[contains(text(),'Click to select Image')]");
+	private By btnSave = By.xpath("//button[contains(text(),'Save')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
 	}
 
-	public void uploadSelectImage(String folderName,String fileName) {
-		getElement(btnSelectImage, "select Image").sendKeys(FileHelper.getFilePath(folderName,fileName));
+	private By getUploadDocumentElement() {
+		return By.xpath(String.format("//*[contains(@class,'font-bold text-cwhite')]/../input"));
+	}
+
+	public void uploadSelectImage(String folderName, String fileName) {
+		getElement(getUploadDocumentElement(), "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 
 	public void clickSave() {
@@ -36,5 +41,4 @@ public class CropYourImagePopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
 }

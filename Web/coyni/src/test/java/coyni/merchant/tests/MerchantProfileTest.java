@@ -62,11 +62,12 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
 			merchantProfilePage.userDetailsComponent().verifyUserNameView();
 			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
-			merchantProfilePage.userDetailsComponent().verifyEmailAddressView();
+//			merchantProfilePage.userDetailsComponent().verifyEmailAddressView();
 			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
@@ -82,12 +83,13 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testUserDetailsAccountStatus failed due to exception " + e);
 		}
 	}
 
@@ -96,8 +98,8 @@ public class MerchantProfileTest {
 	public void testEditImageView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
 			// customerProfilePage.userDetailsComponent().verifyEditImageToolTip(data.get("toolTip"));
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
@@ -116,15 +118,15 @@ public class MerchantProfileTest {
 					.verifyHeading(data.get("removeProfileHeading"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.verifyRemoveView();
-			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
-					.navigationComponent().verifyBackView();
-			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
-					.navigationComponent().verifyCloseView();
+//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+//					.navigationComponent().verifyBackView();
+//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+//					.navigationComponent().verifyCloseView();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.navigationComponent().clickBack();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
-			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
+//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
@@ -134,10 +136,10 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.verifyHeading(data.get("cropYourImageHeading"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifySaveView();
-			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
-					.navigationComponent().verifyBackView();
-			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
-					.navigationComponent().verifyCloseView();
+//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+//					.navigationComponent().verifyBackView();
+//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+//					.navigationComponent().verifyCloseView();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.navigationComponent().clickBack();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
@@ -156,8 +158,8 @@ public class MerchantProfileTest {
 	public void testUserDetailsAddImage(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
@@ -169,10 +171,10 @@ public class MerchantProfileTest {
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
 			Thread.sleep(500);
-			if (!data.get("toastMessage").isEmpty()) {
-				// customerProfilePage.toastComponent().verifyToast(data.get("toastTitle"),
-				// data.get("toastMessage"));
-			}
+//			if (!data.get("toastMessage").isEmpty()) {
+//				// customerProfilePage.toastComponent().verifyToast(data.get("toastTitle"),
+//				// data.get("toastMessage"));
+//			}
 			Thread.sleep(2000);
 
 		} catch (Exception e) {
@@ -186,8 +188,8 @@ public class MerchantProfileTest {
 	public void testUserDetailsImageRemove(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			Thread.sleep(4000);
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
@@ -215,10 +217,8 @@ public class MerchantProfileTest {
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.customerMenuComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			;
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-//			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
@@ -255,12 +255,9 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.customerMenuComponent().clickUserDetails();
-
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			;
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-//			customerProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
@@ -399,7 +396,6 @@ public class MerchantProfileTest {
 			// Edit Email Address -Close Navigation
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().navigationComponent().verifyCloseView();
@@ -408,7 +404,6 @@ public class MerchantProfileTest {
 			// Current Email Address-Back Navigation Back
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
@@ -428,14 +423,6 @@ public class MerchantProfileTest {
 			Thread.sleep(10000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.authyComponent().fillInput(data.get("fillPinEmail"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-//			// Thread.sleep(3000);
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().fillNewEmailAddress(data.get("newEmailAddress"));
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-//			Thread.sleep(3000);
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
-//		    customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().fillInput(data.get("fillPinEmail"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
@@ -474,12 +461,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			// customerProfilePage.userDetailsComponent().authyComponent().verifyMessage(data.get("message"));
-
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
-			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
@@ -490,7 +473,6 @@ public class MerchantProfileTest {
 					.verifyCurrentEmail(data.get("currentEmail"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.authyComponent().fillInput(data.get("fillPinEmail"));
-			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().verifyMessage(data.get("message"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
@@ -499,9 +481,6 @@ public class MerchantProfileTest {
 					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
-			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-			// .verifyNewEmailAddressPopUp().successFailurePopupCardComponent()
-			// .verifyEmailAddressChanged(data.get("emailAddressChanged"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -519,7 +498,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
@@ -527,7 +505,6 @@ public class MerchantProfileTest {
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-			// customerProfilePage.userDetailsComponent().editEmailAddressPopup().fillNewEmailAddress(data.get("newEmailAddress"));
 
 			if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);

@@ -8,9 +8,9 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AccountProfileImagePopup extends BrowserFunctions {
 
-	private By heading = By.cssSelector(".UserDetails_container__50Pke>h1");
-	private By lnkRemoveImage = By.cssSelector(".UserDetails_container__50Pke>div:first-of-type>span");
-	private By btnUploadNewImage = By.cssSelector(".UserDetails_container__50Pke>div:nth-of-type(2)>button");
+	private By heading = By.xpath("//h1[contains(text(),'Account Profile Image')]");
+	private By lnkRemoveImage = By.xpath("//span[contains(text(),'Remove Image')]");
+	private By btnUploadNewImage = By.xpath("//button[contains(text(),'Upload New Image')]");
 
 	public void clickRemove() {
 		click(lnkRemoveImage, "Remove image");
@@ -41,6 +41,7 @@ public class AccountProfileImagePopup extends BrowserFunctions {
 	public RemoveProfileImagePopup removeProfileImagePopup() {
 		return new RemoveProfileImagePopup();
 	}
+
 	public CropYourImagePopup cropYourImagePopup() {
 		return new CropYourImagePopup();
 	}
