@@ -27,8 +27,8 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class MerchantProfileTest {
+
 	MerchantProfilePage merchantProfilePage;
-	NavigationMenuPage navigationMenuPage;
 	EditPhoneNumberPopup editPhoneNumberPopup;
 	EditEmailAddressPopup editEmailAddressPopup;
 	MerchantMenuComponent merchantMenuComponent;
@@ -45,7 +45,6 @@ public class MerchantProfileTest {
 
 		merchantProfilePage = new MerchantProfilePage();
 		topBarComponent = new TopBarComponent();
-		navigationMenuPage = new NavigationMenuPage();
 		editPhoneNumberPopup = new EditPhoneNumberPopup();
 		editEmailAddressPopup = new EditEmailAddressPopup();
 		merchantMenuComponent = new MerchantMenuComponent();
@@ -214,8 +213,8 @@ public class MerchantProfileTest {
 	public void testEditPhoneNumberWithValidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
@@ -253,8 +252,8 @@ public class MerchantProfileTest {
 	public void testEditPhoneNumberWithInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
@@ -285,8 +284,8 @@ public class MerchantProfileTest {
 	public void testEditPhoneNumberWithInvalidCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
@@ -325,8 +324,8 @@ public class MerchantProfileTest {
 	public void testEditPhoneNumberWithBackNavigation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.userNameDropDownComponent().clickUserName();
-			navigationMenuPage.customerMenuComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
@@ -381,9 +380,8 @@ public class MerchantProfileTest {
 	public void testEditEmailView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			// Authentication
@@ -453,9 +451,8 @@ public class MerchantProfileTest {
 	public void testEditEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
@@ -492,9 +489,8 @@ public class MerchantProfileTest {
 	public void testEditEmaiWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
@@ -524,9 +520,8 @@ public class MerchantProfileTest {
 	public void testEditEmailAddressWithInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			navigationMenuPage.clickTokenAccountMenu();
-			tokenAccountPage.userNameDropDownComponent().clickUserName();
-			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
@@ -591,27 +586,6 @@ public class MerchantProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testNotificationsCount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			System.out.println("id:" + navigationMenuPage.getCustId());
-			String dbCount = DBConnection.getDbCon()
-					.getColumnData(String.format(data.get("query"), navigationMenuPage.getCustId()));
-			System.out.println(dbCount);
-			String uiCount = merchantProfilePage.userDetailsComponent().notificationsComponent().getUiCount();
-			if (uiCount.equals(dbCount)) {
-				ExtentTestManager.setPassMessageInReport("Count is verified");
-			} else {
-				ExtentTestManager.setFailMessageInReport("Count is not verified");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotifications count failed due to Exception " + e);
 		}
 	}
 

@@ -583,12 +583,13 @@ public class MerchantActivityTest {
 		}
 	}
 
-	public void testRecords(String strParams) {
+	public void testRecords(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		Thread.sleep(3000);
 		if (merchantActivityComponent.transactionDetailsComponent().verifyRecords() != 0) {
 			merchantActivityComponent.transactionDetailsComponent().verifyNoRecordsFound();
 		} else {
-			merchantActivityComponent.merchantTransactionsPage().verifyTransactionHeading("heading");
+			merchantActivityComponent.merchantTransactionsPage().verifyTransactionHeading(data.get("heading"));
 			merchantActivityComponent.transactionDetailsComponent().clickRecord();
 		}
 	}
@@ -600,6 +601,7 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
+			Thread.sleep(2000);
 			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
@@ -622,18 +624,17 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
-			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
-			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
-			merchantActivityComponent.transactionDetailsComponent().getAmount();
-			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
-			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
+//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
+//			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
+//			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
+//			merchantActivityComponent.transactionDetailsComponent().getAmount();
+//			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
+//			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
 
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testTransactionDetailsMerchantPayOut Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testTransactionDetailsSaleOrder Failed due to Exception " + e);
 		}
 	}
 
@@ -644,18 +645,17 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
-			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
-			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
-			merchantActivityComponent.transactionDetailsComponent().getAmount();
-			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
-			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
+//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
+//			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
+//			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
+//			merchantActivityComponent.transactionDetailsComponent().getAmount();
+//			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
+//			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
 
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testTransactionDetailsMerchantPayOut Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testTransactionDetailsRefund Failed due to Exception " + e);
 		}
 	}
 
@@ -667,18 +667,13 @@ public class MerchantActivityTest {
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
 			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
 			merchantActivityComponent.transactionDetailsComponent().getAmount();
-			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
-			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("testTransactionDetailsMerchantPayOut Failed due to Exception " + e);
+					.setFailMessageInReport("testTransactionDetailsMonthlyServiceFee Failed due to Exception " + e);
 		}
 	}
-
 }

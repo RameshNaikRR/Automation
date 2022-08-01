@@ -14,18 +14,22 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By lblNoRecords = By.xpath("//span[contains(text(),'No Filter Data Found')]");
 
-	private By lblTransactionType = By.xpath("//span[contains(text(),'Transaction Type')]/../..//p |//span[text()='Transaction Type']/../following-sibling::*[1]");
+	private By lblTransactionType = By.xpath(
+			"//span[contains(text(),'Transaction Type')]/../..//p |//span[text()='Transaction Type']/../following-sibling::*[1] |//p[text()='Transaction Type']/following-sibling::*");
 
 	private By lblTransactionSubType = By
 			.xpath("//p[contains(text(),'Transaction Sub-type')]/following-sibling::*[1]/p");
 
-	private By lblReferenceID = By.xpath("//p[contains(text(),'Reference ID')]/following-sibling::*[1]/span[1] |//span[text()='Reference ID']/./following-sibling::*");
+	private By lblReferenceID = By.xpath(
+			"//p[contains(text(),'Reference ID')]/following-sibling::*[1]/span[1] |//span[text()='Reference ID']/./following-sibling::*|//p[contains(text(),'Reference ID')]/following-sibling::*[1]");
 
 	private By lblDepositID = By.xpath("//p[contains(text(),'Deposit')]/following-sibling::*[1]/span");
 
-	private By lblCreatedDate = By.xpath("//p[contains(text(),'Created')]/following-sibling::*[1]/span | //p[text()='Created Date']/./following-sibling::*");
+	private By lblCreatedDate = By.xpath(
+			"//p[contains(text(),'Created')]/following-sibling::*[1]/span | //p[text()='Created Date']/./following-sibling::*|//p[contains(text(),'Created Date')]/following-sibling::*[1]");
 
-	private By lblAmount = By.xpath("//div[contains(text(),'Amount Received')]/following-sibling::*[1]/span[1]|//span[text()='Amount Sent']/./following-sibling::*");
+	private By lblAmount = By.xpath(
+			"//div[contains(text(),'Amount Received')]/following-sibling::*[1]/span[1]|//span[text()='Amount Sent']/./following-sibling::*|//p[contains(text(),'Amount')]/following-sibling::*[1]");
 
 	private By lblPurchaseAmount = By
 			.xpath("//div[contains(text(),'Purchase Amount')]/following-sibling::*[1]/span[1]");
@@ -63,7 +67,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public int verifyRecords() {
-		return getElementsList(lblNoRecords, "").size();
+		int i = getElementsList(lblNoRecords, "").size();
+		return i;
 	}
 
 	public void verifyNoRecordsFound() {
@@ -122,7 +127,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("PayOut Date" + text);
 
 	}
-	
+
 	public void getDepositTo() {
 		String text = getText(lblDepositTo, "Deposit To");
 		ExtentTestManager.setInfoMessageInReport("Deposit To" + text);

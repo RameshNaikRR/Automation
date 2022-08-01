@@ -13,7 +13,6 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class MerchantTransactionsPage extends BrowserFunctions {
-	
 
 	private By headingTransactionList = By.xpath("//span[text()='Merchant Transactions']");
 
@@ -45,8 +44,8 @@ public class MerchantTransactionsPage extends BrowserFunctions {
 	private By entriesPerPageDropDown = By.xpath(
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
 
-	public void verifyTransactionHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", expHeading);
+	public void verifyTransactionHeading(String heading) {
+		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", heading);
 	}
 
 	public void clickExport() {

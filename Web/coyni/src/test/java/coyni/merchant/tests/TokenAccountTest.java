@@ -607,12 +607,44 @@ public class TokenAccountTest {
 		}
 	}
 
-	public void testRecords(String strParams) {
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetailsReserveMerchantPayOutFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().clickApplyFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testTransactionDetailsReserveMerchantPayOutFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetailsFiltersWithdraw(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().clickApplyFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionDetailsFilters Failed due to Exception " + e);
+		}
+	}
+
+	public void testRecords(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		Thread.sleep(3000);
 		if (tokenAccountPage.transactionDetailsComponent().verifyRecords() != 0) {
 			tokenAccountPage.transactionDetailsComponent().verifyNoRecordsFound();
 		} else {
-			tokenAccountPage.verifyHeading("heading");
+			tokenAccountPage.verifyHeading(data.get("heading"));
 			tokenAccountPage.transactionDetailsComponent().clickRecord();
 		}
 	}
@@ -622,11 +654,11 @@ public class TokenAccountTest {
 	public void testTransactionDetailsReserveRelease(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
+			testTransactionDetailsReserveMerchantPayOutFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -639,7 +671,7 @@ public class TokenAccountTest {
 	public void testTransactionDetailsMerchantPayOut(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
+			testTransactionDetailsReserveMerchantPayOutFilters(strParams);
 			testRecords(strParams);
 			tokenAccountPage.transactionDetailsComponent().getTransactionType();
 			tokenAccountPage.transactionDetailsComponent().getReferenceID();
@@ -694,10 +726,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
@@ -711,10 +743,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
@@ -728,10 +760,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
@@ -743,12 +775,12 @@ public class TokenAccountTest {
 	public void testTransactionDetailsWithdrawFailedBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
+			testTransactionDetailsFiltersWithdraw(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
@@ -760,12 +792,12 @@ public class TokenAccountTest {
 	public void testTransactionDetailsWithdrawCancelledBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
+			testTransactionDetailsFiltersWithdraw(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
@@ -779,10 +811,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
@@ -863,6 +895,56 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testBuyTokenTransactionSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			// tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
+			Thread.sleep(3000);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.verifyOrderViewHeading();
+			// tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup().orderPreviewBuyTokenWithBankView();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.clickConfirm();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.authyComponent().fillInput(data.get("code"));
+
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.transactionInProgessPopup().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenTransactionSignetAccountWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get(""));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup()
+					.verifyBuyCoyniTokenHeading(data.get(""));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get(""));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBuyTokenTransactionBankAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -926,7 +1008,37 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testBuyTokenAddSignet(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
+//			merchantSettingTest.testAddExternalBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBuyTokenDeleteBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().deleteBank();
+			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup()
+					.clickOnRemove();
+//			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenDeleteSignet(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickBuyTokens();
