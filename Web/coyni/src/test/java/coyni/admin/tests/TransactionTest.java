@@ -205,7 +205,7 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
 					.getRecipientPhoneNumber();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardholderName();
-			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
+			//sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyCardNumber();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyExpirationDate();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().verifyProcessorID();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()

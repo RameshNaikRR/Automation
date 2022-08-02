@@ -416,6 +416,7 @@ public class CoyniPortalTest {
 	public void testAddSignetAccountInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();

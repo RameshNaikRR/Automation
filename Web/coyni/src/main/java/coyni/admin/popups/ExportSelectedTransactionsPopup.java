@@ -9,7 +9,7 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 
 	private By radBtnToday = By.xpath("//span[text()='Today']");
 	private By radBtnYesterday = By.xpath("//span[text()='Yesterday']");
-	private By radBtn7Days = By.xpath("//span[text()='Last 7 Days'']");
+	private By radBtn7Days = By.xpath("//span[text()='Last 7 Days']");
 	private By radBtnMonthToDate = By.xpath("//span[text()='Month To Date']");
 	private By radBtnLastMonth = By.xpath("//span[text()='Yesterday']");
 	private By btnExport = By.xpath("(//button[text()='Export'])[2]");

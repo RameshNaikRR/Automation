@@ -128,7 +128,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTotalDeposits() {
-		clickAccounting();
+		
 		click(getSubMenuItems("Total Deposits"), "Total Deposits");
 	}
 
