@@ -478,6 +478,39 @@ public class BusinessSettingsTest {
 	}
 
 	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimitsView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent()
+			      .verifyHeading(data.get("heading"));  // Business Settings
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().clickAccountLimits();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+			      .verifYAccountLimitsHeading(data.get("accountLimitsHeading"));  // Account Limits 
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+                  .verifyYourLimitsHeading(data.get("yourLimitsHeading"));  // Your Account Limits
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+			      .verifyYourLimitsLabels();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+	              .verifyYourLimitsAccountlimits();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+	              .clickUserLimits();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+	              .verifyUserLimitsHeading(data.get("userLimitsHeading"));  //  User Account Limits
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+                  .verifyUserLimitsLabels();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+                  .verifyUserLimitsAccountlimits();
+	        
+				
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAccountLimitsView failed due to " + e);
+		}
+
+	}
+
+	@Test
 	public void testNotifications() {
 		try {
 			// Map<String, String> data = Runner.getKeywordParameters(strParams);
