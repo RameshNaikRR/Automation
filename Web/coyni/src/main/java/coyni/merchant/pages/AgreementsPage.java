@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AgreementsPage extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
-	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='Agreements']");
+	private By lblHeading = By.xpath("(//span[.='Agreements'])[2]");
 
 	private By getAgreements(String Agreements) {
 		return By.xpath(

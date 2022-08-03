@@ -46,17 +46,19 @@ public class TopBarTest {
 				} else if (3 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickPreferences();
 					topBarComponent.topBarDrpDwnComponent().preferencesPage()
-							.verifyHeading(data.get("preferenccesHeading"));
+							.verifyHeading(data.get("preferencesHeading"));
 				} else if (4 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickAgreements();
 					topBarComponent.topBarDrpDwnComponent().agreementsPage()
 							.verifyHeading(data.get("agreementsHeading"));
 				} else if (5 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickChangePassword();
-					topBarComponent.topBarDrpDwnComponent().changePasswordPage().verifyHeading();
+					topBarComponent.topBarDrpDwnComponent().changePasswordPage()
+							.verifyHeading(data.get("changePasswordHeading"));
 				} else if (6 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickTwoStepAuthentication();
-					topBarComponent.topBarDrpDwnComponent().twoStepAuthenticationPage().verifyHeading();
+					topBarComponent.topBarDrpDwnComponent().twoStepAuthenticationPage()
+							.verifyHeading(data.get("twoStepAuthenticationHeading"));
 				} else {
 					topBarComponent.topBarDrpDwnComponent().clickSignOut();
 				}

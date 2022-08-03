@@ -18,15 +18,12 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		return By.xpath(String.format("(//button[@class='payment-method-button '])[1]", buttons));
 	}
 
-//	private By btnExternalBankAccount = By.xpath("(//button[@class='payment-method-button '])[1]");
-//	private By btnInstantPay = By.xpath("(//button[@class='payment-method-button '])[2]");
-//	private By btnGiftCard = By.xpath("(//button[@class='payment-method-button '])[3]");
 	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
 
 	public void verifyBtns() {
 		List<WebElement> elementsList = getElementsList(PaymentBtns, "");
 		for (WebElement webElement : elementsList) {
-			new CommonFunctions().verifyCursorAction((By) webElement, "");
+//			new CommonFunctions().verifyCursorAction((By) webElement, "");
 			boolean displayed = webElement.isDisplayed();
 			String text = webElement.getText();
 			ExtentTestManager.setInfoMessageInReport(displayed + "  " + text + "  " + "Button is displayed ");
@@ -73,7 +70,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		return new GiftCardPurchasePopup();
 	}
 
-	public ChooseYourBankAccountPopup withdrawToBankAccountPopup() {
+	public ChooseYourBankAccountPopup chooseYourBankAccountPopup() {
 		return new ChooseYourBankAccountPopup();
 	}
 

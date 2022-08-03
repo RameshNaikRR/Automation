@@ -1,7 +1,9 @@
 package coyni.merchant.popups;
 
-import org.openqa.selenium.By;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
@@ -10,50 +12,69 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class GiftCardPurchasePopup extends BrowserFunctions {
-	
+	CommonFunctions cf = new CommonFunctions();
 	private By giftCardHeading = By.xpath("//h1[text()='Gift Card Purchase']");
 	private By lblDescription = By.xpath("//span[.='Select Your Gift Card:']");
 	private By txtSearch = By.xpath("//input[@placeholder='Search By Keyword']");
-	private By btnGiftCard = By.xpath("(//div[@class='gift-card-list-item__wrapper'])[1]");
+	private By GiftCards = By.xpath("//div[@class='gift-card-list-item__wrapper']");
 	private By lblEntries = By.xpath("(//span[contains(@class,'entries-message')])[2]");
-	
+	private By lblPagenator = By.xpath("(//ul[@class='paginator__pagination'])[2]");
+	private By lblDailyLimitMsg = By.xpath("//p[contains(.,'Your  limit')]");
+	private By lblGiftCardName = By.xpath("(//div/h2)[2]");
+	private By lblGiftCardDescription = By.xpath("(//div/p)[2]");
 	private By txtFirstName = By.id("first-name");
 	private By txtLastName = By.id("last-name");
 	private By txtEmail = By.id("email-address");
 	private By txtAmount = By.id("amount");
-	private By btnPurchase = By.cssSelector(".w-60");
-	private By lblErrorMsg = By.cssSelector("");
-	private By cardAmazon = By.xpath("//div[@class='gift-card-list-item__gift-image-container']");// amazon
-	private By cardVisa = By.xpath("(//button[@class='gift-card-list-item__link'])[2]");// Visa
+	private By lblMsg = By.xpath("//span[contains(.,'Please double')]");
+	private By btnPurchase = By.cssSelector("//button[.='Purchase']");
 	private By labelOrderPreview = By.xpath("//p[text()='Order Preview']");
+	private By lblPurchase = By.xpath("//div[@class='flex items-center justify-between']/span");
+//	private By PurchaseAmounts = By.xpath("//div[@class='flex items-center justify-between']/div");
 
-	private By lblSuccess = By.xpath("//h1[text()='Transaction in Progress']");
-
-	private By lnkCopy = By.cssSelector(".icon-copy");
-	private By btnDone = By.cssSelector(".w-60");
-
-	public void clickCopy() {
-		click(lnkCopy, "Copy");
+	public void verifyHeading(String Heading) {
+		cf.verifyLabelText(giftCardHeading, "Heading", Heading);
 	}
 
-	public void clickDone() {
-		click(btnDone, "Done");
+	public void verifyDescription(String Description) {
+		String text = getText(lblDescription, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
-	public void enterSearckey(String searchKey) {
-		enterText(txtSearch, searchKey, "Search Field");
+	public void verifySearchField() {
+		cf.elementView(txtSearch, "Search text field");
 	}
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(giftCardHeading, "Gift Card Purchase", expHeading);
+	public void verifyGiftCards() {
+		List<WebElement> list = getElementsList(GiftCards, "");
+		int size = list.size();
+		ExtentTestManager.setInfoMessageInReport(size + " Gift cards are displayed");
+		for (WebElement webElement : list) {
+			webElement.click();
+			break;
+		}
 	}
 
-	public void verifySuccessHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblSuccess, "Tokens Requested Successfully", expHeading);
+	public void verifyEntriesLbl() {
+		String text = getText(lblEntries, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
-	public void verifyHeadingOrderPreview(String expHeading) {
-		new CommonFunctions().verifyLabelText(labelOrderPreview, "Order preview Heading", expHeading);
+	public void verifyPagenator() {
+		cf.elementView(lblPagenator, "Pagenator");
+	}
+
+	public void verifyDailyMsg() {
+		getText(lblDailyLimitMsg, "Daily Limit Message");
+	}
+
+	public void verifyGiftCardName() {
+		String text = getText(lblGiftCardName, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyGiftCardDescription() {
+		cf.elementView(lblGiftCardDescription, "Gift card description");
 	}
 
 	public void fillFirstName(String Firstname) {
@@ -72,25 +93,27 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 		enterText(txtAmount, Amount, "Amount");
 	}
 
-	public void clickOnPurchase() {
-		if (getElement(btnPurchase, "Purchased").isEnabled()) {
-			click(btnPurchase, "Click Purchase");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("Purchased Button is disable");
+	public void verifyMsg() {
+		String text = getText(lblMsg, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyPurchaseBtn() {
+		cf.elementView(btnPurchase, "Purchase");
+	}
+
+	public void verifyOrderPreview() {
+		String text = getText(labelOrderPreview, "");
+		ExtentTestManager.setInfoMessageInReport(text);
+	}
+
+	public void verifyOrderPreviewDetails() {
+		List<WebElement> list = getElementsList(lblPurchase, "");
+		for (WebElement webElement : list) {
+			String text = webElement.getText();
+			String value = getText(By.xpath(String.format("//span[.='%s']/following-sibling::div", text)), "");
+			ExtentTestManager.setInfoMessageInReport(text + " value is " + value + " is displayed");
 		}
-
-	}
-
-	public void VerifyErrorMessage(String ErrorMessage) {
-		new CommonFunctions().verifyLabelText(lblErrorMsg, ErrorMessage, "ErrorMessage");
-	}
-
-	public void clickOnAmazon() {
-		click(cardAmazon, "Click Amazon");
-	}
-
-	public void clickOnVisa() {
-		click(cardVisa, "Click Visa");
 	}
 
 	public AuthyComponent authyComponent() {

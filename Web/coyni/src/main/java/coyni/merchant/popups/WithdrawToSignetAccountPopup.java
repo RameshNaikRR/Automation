@@ -9,10 +9,10 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class WithdrawToBankAccountPopUp extends BrowserFunctions {
+public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
-	private By lblHeading = By.xpath("//h1[.='Withdraw to Bank Account']");
-	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
+	private By lblHeading = By.xpath("//h1[.='Withdraw to Signet Account']");
+//	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
 	private By txtAmount = By.cssSelector("#amount");
 	private By IconCoyni = By.xpath("//input[@id='amount']/following-sibling::span");
 	private By IconDollar = By.xpath("//input[@id='amount']/preceding-sibling::span");
@@ -20,10 +20,10 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 	private By lblErrorMsg = By.xpath("//p[.='Amount is required']");
 	private By lblAvailableBlnc = By.xpath("//span[.='Available Balance:']/..");
 	private By lblConvertion = By.xpath("//span[.='Available Balance:']/../following-sibling::div");
-	private By lblBank = By.xpath("//span[contains(.,'CashEdge Test')]/../..");
+	private By lblBank = By.xpath("//span[contains(.,'Signet')]/../..");
 	private By txtMsg = By.xpath("#message");
 	private By txtPlaceHolder = By.xpath("//label[.='Transaction Description (Optional)']");
-	private By lblMsgTransaction = By.xpath("//p[contains(.,'Please allow')]");
+	private By lblMsgTransaction = By.xpath("//p[contains(.,'Your tr')]");
 	private By btnNext = By.xpath("//button[.='Next']");
 
 	private By lblTransactions = By.xpath("//span[@class='text-cgy4 text-sm']");
@@ -33,17 +33,8 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
-	public void verifyDailyLimitMsg() {
-		cf.elementView(lblDailyLimitMsg, "Daily Limit Message ");
-	}
-
-	public void verifyAmount() {
-		cf.elementView(txtAmount, "Amount text field");
-	}
-
-	public void clickAmount(String amount) {
+	public void clickAmount() {
 		click(txtAmount, "Amount text field");
-		enterText(txtAmount, amount, "Amount");
 	}
 
 	public void verifyCoyniIcon() {
@@ -82,10 +73,6 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 		click(txtMsg, "Message text field");
 	}
 
-	public void verifyTxtMsgField() {
-		cf.elementView(txtMsg, "Message text field ");
-	}
-
 	public void verifyTxtFieldPlaceHolder() {
 		String text = getText(txtPlaceHolder, "");
 		ExtentTestManager.setInfoMessageInReport(text + "Place Holder is displayed");
@@ -97,11 +84,7 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 	}
 
 	public void verifyNextBtn() {
-		if (verifyElementDisabled(btnNext, "")) {
-			ExtentTestManager.setInfoMessageInReport("Next button is in disabled mode");
-		} else {
-			cf.elementView(btnNext, "Next");
-		}
+		cf.elementView(btnNext, "Next");
 	}
 
 	public void clickNext() {
@@ -128,5 +111,4 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 	public WithdrawConfirmPopup withdrawConfirmPopup() {
 		return new WithdrawConfirmPopup();
 	}
-
 }

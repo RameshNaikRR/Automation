@@ -10,7 +10,6 @@ import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.TokenAccountActivityComponent;
 import coyni.merchant.components.TokensPurchasedDetailsComponent;
 import coyni.merchant.components.TokensWithdrawnDetailsComponent;
-import coyni.merchant.components.TransactionDetailsComponent;
 import coyni.merchant.components.TransactionsListComponent;
 import coyni.merchant.components.UserNameDropDownComponent;
 import coyni.merchant.popups.BuyCoyniTokensNoPaymentPopup;
@@ -204,7 +203,7 @@ public class TokenAccountPage extends BrowserFunctions {
 		click(btnBuyTokens, "BuyTokens");
 	}
 
-	public void clickWithdrawCoyniToUSD() {
+	public void clickWithdrawToUSD() {
 		click(btnWithdrawToUSD, "WithdrawToUSD");
 
 	}
@@ -317,7 +316,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	public BankAccountsComponent bankAccountsComponent() {
 		return new BankAccountsComponent();
 	}
-
+	
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
@@ -328,10 +327,6 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
-	}
-
-	public TransactionDetailsComponent transactionDetailsComponent() {
-		return new TransactionDetailsComponent();
 	}
 
 	public UserNameDropDownComponent userNameDropDownComponent() {

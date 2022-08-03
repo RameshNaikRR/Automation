@@ -42,7 +42,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	}
 
 	private By getMerchantActivityDrpDwn(String Activity) {
-		return By.xpath(String.format("(//span[.='Merchant Activity'])[1]", Activity));
+		return By.xpath(String.format("(//button[.='%s'])[1]", Activity));
 	}
 
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {

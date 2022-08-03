@@ -101,7 +101,7 @@ public class ChangePasswordPage extends BrowserFunctions {
 	}
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingChangePassword, "Change Password Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Change Password Heading", expHeading);
 	}
 
 	public void clickSave() {
@@ -122,7 +122,7 @@ public class ChangePasswordPage extends BrowserFunctions {
 
 	}
 
-	public void verifyHeading() {
-		new CommonFunctions().elementView(lblHeading, "Change Password Page ");
-	}
+//	public void verifyHeading() {
+//		new CommonFunctions().elementView(lblHeading, "Change Password Page ");
+//	}
 }

@@ -2,28 +2,27 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
-import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
-public class ChooseYourBankAccountPopup extends BrowserFunctions {
+public class ChooseYourSignetAccountPopup extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
-	private By lblHeading = By.xpath("//h1[.='Withdraw to Bank Account']");
-	private By lblDescription = By.xpath("//h3[contains(.,'Choose Your ')]");
-
-	private By getBtnRadio(String radio) {
-		return By.xpath(String.format("//input[@type='radio']", radio));
-	}
+	private By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
+	private By lblDescription = By.xpath("//h3[text()='Choose Your Signet Account:']");
 
 	private By getBanks(String Bank) {
 		return By.xpath(String.format("(//p[contains(@class,'font-semibold text-cgy4')])[%s]", Bank));
+	}
+
+	private By getBtnRadio(String radio) {
+		return By.xpath(String.format("//input[@type='radio']", radio));
 	}
 
 	private By getDeleteIcon(String Delete) {
 		return By.xpath(String.format("(//button[@data-tip='Delete'])[%s]", Delete));
 	}
 
-	private By btnAddNewBankAccount = By.xpath("//button[contains(@class,'AddPaymentButtons_payment')]");
+	private By btnAddNewSignetAccount = By.xpath("//button[contains(@class,'AddPaymentButtons_payment')]");
 	private By btnNext = By.xpath("//button[.='Next']");
 
 	public void verifyHeading(String Heading) {
@@ -53,11 +52,11 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void verifyAddNewBankAccountBtn() {
-		cf.elementView(btnAddNewBankAccount, "Add New Bank Account");
+		cf.elementView(btnAddNewSignetAccount, "Add New Bank Account");
 	}
 
 	public void clickAddNewBankAccountBtn() {
-		click(btnAddNewBankAccount, "Add New Bank Account");
+		click(btnAddNewSignetAccount, "Add New Bank Account");
 	}
 
 	public void verifyNextBtn() {
@@ -66,13 +65,5 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 
 	public void clickNextBtn() {
 		click(btnNext, "Next");
-	}
-
-	public WithdrawToBankAccountPopUp withdrawToBankAccountPopUp() {
-		return new WithdrawToBankAccountPopUp();
-	}
-
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
 	}
 }

@@ -8,6 +8,12 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class BeneficiaryOwnersPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='Beneficiary Owner(s)']");
+	private By lblBeneficiaryOwner1 = By
+			.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[1]/p[1]");
+	private By lblOwnerShip = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[2]/p[1]");
+	private By lblOwnerName = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[1]/div/p");
+	private By lblOwnerShipPercent = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[2]/p[2]");
+	private By drpdwnBeneficiaryOwner = By.xpath("//button[contains(@class,'BenificialOwnerAccordion')]");
 
 	private By getSideLables(String Lables) {
 		return By.xpath(String.format(
@@ -26,13 +32,6 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 				AddressDetails));
 	}
 
-	private By lblBeneficiaryOwner1 = By
-			.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[1]/p[1]");
-	private By lblOwnerShip = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[2]/p[1]");
-	private By lblOwnerName = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[1]/div/p");
-	private By lblOwnerShipPercent = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[2]/p[2]");
-	private By drpdwnBeneficiaryOwner = By.xpath("//button[contains(@class,'BenificialOwnerAccordion')]");
-
 	CommonFunctions cf = new CommonFunctions();
 
 	public void verifyHeading(String Heading) {
@@ -47,12 +46,14 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 		cf.elementView(lblOwnerShip, "OwnerShip Label ");
 	}
 
-	public void verifyOwnerName(String OwnerName) {
-		cf.verifyLabelText(lblOwnerName, "OwnerName", OwnerName);
+	public void verifyOwnerName() {
+		String ownerName = getText(lblOwnerName, "");
+		ExtentTestManager.setInfoMessageInReport(ownerName + " Name is displayed");
 	}
 
-	public void verifyOwnerShipPercentage(String OwnerShipPercentage) {
-		cf.verifyLabelText(lblOwnerShipPercent, "OwnerShipPercentage", OwnerShipPercentage);
+	public void verifyOwnerShipPercentage() {
+		String ownerPercentage = getText(lblOwnerShipPercent, "");
+		ExtentTestManager.setInfoMessageInReport(ownerPercentage + " percentage is displayed");
 	}
 
 	public void clickBeneficialOwnerDrpDwn() {
@@ -79,26 +80,30 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 		cf.elementView(getSideLables("Address"), "Address label ");
 	}
 
-	public void getOwnerName(String OwnerName) {
-		cf.verifyLabelText(getBeneficialOwnerDetails("Name"), "OwnerName", OwnerName);
+	public void getOwnerName() {
+		String name = getText(getBeneficialOwnerDetails("Name"), "");
+		ExtentTestManager.setInfoMessageInReport(name + " is displayed");
 	}
 
-	public void getDateOfBirth(String DateOfBirth) {
-		cf.verifyLabelText(getBeneficialOwnerDetails("Date of Birth"), "Date of Birth", DateOfBirth);
+	public void getDateOfBirth() {
+		String dob = getText(getBeneficialOwnerDetails("Date of Birth"), "");
+		ExtentTestManager.setInfoMessageInReport(dob + "date of birth is displayed");
 	}
 
-	public void getSocialSecurityNumber(String SocialSecurityNumber) {
-		cf.verifyLabelText(getBeneficialOwnerDetails("Social Security Number"), "Social Security Number",
-				SocialSecurityNumber);
+	public void getSocialSecurityNumber() {
+		String ssn = getText(getBeneficialOwnerDetails("Social Security Number"), "");
+		ExtentTestManager.setInfoMessageInReport(ssn + "number is displayed");
 	}
 
-	public void getOwnerShip(String Ownership) {
-		cf.verifyLabelText(getBeneficialOwnerDetails("Ownership"), "Ownership", Ownership);
+	public void getOwnerShip() {
+		String ownership = getText(getBeneficialOwnerDetails("Ownership"), "");
+		ExtentTestManager.setInfoMessageInReport(ownership + "number is displayed");
 	}
 
-	public void getAddress(String Address) {
-		cf.verifyLabelText(getBeneficialOwnerDetails("Address"), "Address", Address);
-	}
+//	public void getAddress(String Address) {
+//		String text = getText(getBeneficialOwnerDetails("Address"), "");
+//
+//	}
 
 	public void getAddressLine1() {
 		String AddressLine1 = getText(getAddressDetails("1"), "");

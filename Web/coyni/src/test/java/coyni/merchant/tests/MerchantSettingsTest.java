@@ -79,7 +79,7 @@ public class MerchantSettingsTest {
 					.verifyHeading(data.get("paymentMethodsHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPreferencesBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
-					.verifyHeading(data.get("preferenccesHeading"));
+					.verifyHeading(data.get("preferencesHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAgreementsBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyHeading(data.get("agreementsHeading"));
@@ -151,12 +151,14 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyHeading(data.get("companyInformationHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
-					.clickPhoneNumber(data.get("companyInfoPhoneNumber"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
-					.verifySaveBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
-					.clickSave();
+			String[] numbers = data.get("companyInfoPhoneNumber").split(",");
+			for (String number : numbers) {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
+						.companyInformationPage().clickPhoneNumber(number);
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
+						.companyInformationPage().verifySaveBtn();
+				Thread.sleep(2000);
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCompanyInfoEditPhoneNumber failed due to " + e);
 		}
@@ -234,7 +236,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifySaveBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
-					.clickSave();
+					.verifySaveBtn();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCompanyInfoEditEmail failed due to " + e);
 		}
@@ -254,7 +256,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifySaveBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
-					.clickSave();
+					.verifySaveBtn();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCompanyInfoEmailFieldValidations failed due to " + e);
 		}
@@ -316,12 +318,14 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyHeading(data.get("dbaInformationHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickPhoneNumber(data.get("dbaInfoPhoneNumber"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.verifySaveBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickSave();
+			String[] numbers = data.get("dbaInfoPhoneNumber").split(",");
+			for (String number : numbers) {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+						.clickPhoneNumber(number);
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+						.verifySaveBtn();
+				Thread.sleep(2000);
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditPhoneNumberDBAInfo failed due to " + e);
 		}
@@ -381,8 +385,6 @@ public class MerchantSettingsTest {
 					.clickEmail(data.get("dbaInfoEmail"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifySaveBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickSave();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInfoEditEmail failed due to " + e);
 		}
@@ -402,8 +404,6 @@ public class MerchantSettingsTest {
 					.verifyEmail(data.get("dbaInfoEmail"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifySaveBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickSave();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInfoEmailFieldValidations failed due to " + e);
 		}
@@ -442,18 +442,39 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyHeading(data.get("beneficiaryOwnersHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.getOwnerName(data.get("ownerName"));
+					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.getDateOfBirth(data.get("dob"));
+					.verifyOwnershipLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.getSocialSecurityNumber(data.get("ssnNumber"));
+					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.getOwnerShip(data.get("ownership"));
+					.verifyOwnerShipPercentage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.clickBeneficialOwnerDrpDwn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyBeneficialOwnernameLbl();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifySocialSecurityNumberLbl();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyOwnershipLbl();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyAddressLbl();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getOwnerName();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getDateOfBirth();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getSocialSecurityNumber();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getOwnerShip();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.getAddressLine1();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.getAddressLine2();
-
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getState_City_Zipcode();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.getCountry();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
 		}
@@ -514,7 +535,6 @@ public class MerchantSettingsTest {
 					.verifyPrivacyPolicyIpAddress();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyTermsOfServiceIpAddress();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements failed due to " + e);
 		}

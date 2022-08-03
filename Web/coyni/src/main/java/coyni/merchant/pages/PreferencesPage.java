@@ -6,7 +6,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class PreferencesPage extends BrowserFunctions {
-	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='Preferences']");
+	private By lblHeading = By.xpath("(//span[.='Preferences'])[2]");
 	private By drpDwnTime = By.xpath("//div[text()='Time Zone']/parent::div");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");

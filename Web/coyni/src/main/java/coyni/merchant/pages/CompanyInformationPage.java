@@ -89,12 +89,12 @@ public class CompanyInformationPage extends BrowserFunctions {
 	}
 
 	public void clickPhoneNumber(String phoneNumber) throws InterruptedException {
-		click(contactInformationDetails("phoneNumber"), "");
+		click(contactInformationDetails("phoneNumber"), "Phone Number text field");
 		enterText(contactInformationDetails("phoneNumber"), phoneNumber, "Phone Number text field");
 	}
 
 	public void verifyPhoneNumber(String PhoneNumber) {
-		click(contactInformationDetails("phoneNumber"), "");
+		click(contactInformationDetails("phoneNumber"), "Phone Number text field");
 		validateNumber(contactInformationDetails("phoneNumber"), "PhoneNumber", PhoneNumber);
 	}
 
@@ -163,18 +163,22 @@ public class CompanyInformationPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Country is : " + Country);
 	}
 
-	public void clickSave() {
-		click(btnSave, "Save button");
-	}
-
 	public void verifySaveBtn() {
-		new CommonFunctions().elementView(btnSave, "Save Button");
 		WebElement element = getElement(btnSave, "");
 		if (element.isEnabled()) {
-			ExtentTestManager.setInfoMessageInReport("Save button is in Enable mode");
+			click(btnSave, "Save button");
 		} else {
 			ExtentTestManager.setInfoMessageInReport("Save button is in disabled mode");
 		}
-
 	}
+
+//	public void verifySaveBtn() {
+//		new CommonFunctions().elementView(btnSave, "Save Button");
+//		WebElement element = getElement(btnSave, "");
+//		if (element.isEnabled()) {
+//			ExtentTestManager.setInfoMessageInReport("Save button is in Enable mode");
+//		} else {
+//			ExtentTestManager.setailMessageInReport("Save button is in disabled mode");
+//		}
+//	}
 }

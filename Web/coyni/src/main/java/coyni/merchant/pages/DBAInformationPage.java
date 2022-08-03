@@ -169,18 +169,22 @@ public class DBAInformationPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Country is : " + Country);
 	}
 
-	public void clickSave() {
-		click(btnSave, "Save button");
-	}
-
 	public void verifySaveBtn() {
-		new CommonFunctions().elementView(btnSave, "Save Button");
 		WebElement element = getElement(btnSave, "");
 		if (element.isEnabled()) {
-			ExtentTestManager.setInfoMessageInReport("Save button is in Enable mode");
+			click(btnSave, "Save button");
 		} else {
 			ExtentTestManager.setInfoMessageInReport("Save button is in disabled mode");
 		}
-
 	}
+
+//	public void verifySaveBtn() {
+//		new CommonFunctions().elementView(btnSave, "Save Button");
+//		WebElement element = getElement(btnSave, "");
+//		if (element.isEnabled()) {
+//			ExtentTestManager.setInfoMessageInReport("Save button is in Enable mode");
+//		} else {
+//			ExtentTestManager.setInfoMessageInReport("Save button is in disabled mode");
+//		}
+//	}
 }

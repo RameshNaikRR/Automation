@@ -8,7 +8,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class TwoStepAuthenticationPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("(//span[.='2-Step Authentication'])[2]");
 
-	public void verifyHeading() {
-		new CommonFunctions().elementView(lblHeading, "Two Step Authentication Page ");
+	public void verifyHeading(String Heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Two step authentication", Heading);
 	}
 }

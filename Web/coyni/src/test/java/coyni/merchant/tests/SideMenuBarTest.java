@@ -23,8 +23,8 @@ public class SideMenuBarTest {
 	public void testSideMenuBar() {
 		try {
 			sideMenuBarComponent.verifyUserName();
-			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
-			sideMenuBarComponent.verifyMerchnatTracker();
+//			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
+//			sideMenuBarComponent.verifyMerchnatTracker();
 			sideMenuBarComponent.verifyMerchantActivityDrpDwn();
 			sideMenuBarComponent.verifyTokenAccountPushBtn();
 			sideMenuBarComponent.verifyExportFilesPushBtn();
@@ -55,6 +55,7 @@ public class SideMenuBarTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			Thread.sleep(2000);
 			sideMenuBarComponent.clickDashboard();
 			sideMenuBarComponent.dashBoardPage().verifyHeading(data.get("dashboardHeading"));
 			sideMenuBarComponent.clickTransactions();
