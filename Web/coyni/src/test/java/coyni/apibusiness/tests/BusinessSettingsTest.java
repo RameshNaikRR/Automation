@@ -28,6 +28,7 @@ public class BusinessSettingsTest {
 	BusinessProfilePage businessProfilePage;
 	NavigationMenuPage navigationMenuPage;
 	HomePage homePage;
+	
 
 	@BeforeTest
 	public void init() {
@@ -37,6 +38,8 @@ public class BusinessSettingsTest {
 		businessProfilePage = new BusinessProfilePage();
 		navigationMenuPage = new NavigationMenuPage();
 		homePage = new HomePage();
+	
+		
 	}
 
 	@Test
@@ -463,16 +466,28 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent()
-					.verifyHeading(data.get("heading"));
+			      .verifyHeading(data.get("heading"));  // Business Settings
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().clickFees();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-					.verifyHeading(data.get("feesHeading"));
+			      .verifyFeesHeading(data.get("feesHeading"));  // Fees
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-					.verifyLabels();
-//			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-//					.verifyFeesCharges(data.get("feeCharges"));
+                  .verifyYourFeesHeading(data.get("yourFeesHeading"));  // Your Fees
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+			      .verifyYourFeesLabels();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+	              .verifyYourFeesCharges();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+	              .clickUserFees();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+	              .verifyUserFeesHeading(data.get("userFeesHeading"));  //  User Fees
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+                  .verifyUserFeesLabels();
+	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+                  .verifyUserFeesCharges();
+	        
+				
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testFeesView failed due to " + e);
+			ExtentTestManager.setFailMessageInReport("testAccountLimitsView failed due to " + e);
 		}
 
 	}
@@ -509,6 +524,7 @@ public class BusinessSettingsTest {
 		}
 
 	}
+	
 
 	@Test
 	public void testNotifications() {
