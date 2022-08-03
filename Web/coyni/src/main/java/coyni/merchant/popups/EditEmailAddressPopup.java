@@ -15,8 +15,8 @@ import ilabs.web.actions.WaitForElement;
 
 public class EditEmailAddressPopup extends BrowserFunctions {
 
-	private By txtOldEmailAddress = By.cssSelector(".FormField_disabled__3trnq");
-	private By txtNewEmailAddress = By.id("Email");
+	private By txtOldEmailAddress = By.xpath("//input[@id='EmailId']");
+	private By txtNewEmailAddress = By.xpath("//input[@name='email']");
 	private By btnSendcode = By.xpath("//button[text()='Send Code']");
 	private By lblEditEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
 
@@ -25,7 +25,7 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	}
 
 	public void fillNewEmailAddress(String newNumber) {
-		waitForElement(txtNewEmailAddress, waittime, WaitForElement.visibility);
+		// waitForElement(txtNewEmailAddress, waittime, WaitForElement.visibility);
 		enterText(txtNewEmailAddress, newNumber, "NewNumber");
 	}
 
@@ -54,10 +54,11 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
-		ExtentTestManager.setInfoMessageInReport("click on tab");
+		new CommonFunctions().clickOutSideElement();
+//		Robot robot = new Robot();
+//		robot.keyPress(KeyEvent.VK_TAB);
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		ExtentTestManager.setInfoMessageInReport("click on tab");
 	}
 
 }

@@ -29,8 +29,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lnkEditAccountPhNum = By.xpath("//div[text()='Edit Account Phone']");
 	private By lnkEditAccountAddress = By.xpath("//div[text()='Edit Account Address']");
 	private By iconEditEmail = By.xpath("//div[contains(@class,'UserDetails_edit_email_icon')]");
-	private By iconEditPhNum = By.xpath("//div[contains(@class,'UserDetails_edit_Phone_icon__1iIcs')]");
-	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
+	private By iconEditPhNum = By.xpath("//div[contains(@class,'UserDetails_edit_Phone_icon__mqwNd')]");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
 	private By imgPhone = By.xpath("//h3[contains(@class,'UserDetails_phoneNumber')]");
 	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
@@ -148,10 +147,6 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public void clickIconEditPhNum() {
 		click(iconEditPhNum, "Click Edit Phone Icon");
-	}
-
-	public void clickIconEditAddress() {
-		click(iconEditAddress, "Click Edit Address Icon");
 	}
 
 	public void verifyEditEmailAddress(String expheading) {

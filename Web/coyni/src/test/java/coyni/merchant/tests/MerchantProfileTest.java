@@ -220,11 +220,11 @@ public class MerchantProfileTest {
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
@@ -255,23 +255,30 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.fillInput(data.get("code"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.authyComponent().fillInput(data.get("code"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code1"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
+//					.fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.authyComponent().fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code1"));
+			if (!data.get("code").isEmpty()) {
+				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("errorMessage").isEmpty()) {
+				Thread.sleep(4000);
+				merchantProfilePage.authyComponent().verifyMessage(data.get("errorMessage"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -281,7 +288,7 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testEditPhoneNumberWithInvalidCode(String strParams) {
+	public void testEditPhoneNumberWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
@@ -289,32 +296,40 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
+//					.validateAuthyField(data.get("code"));
+			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.validateAuthyField(data.get("code"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expHeading"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyNewPhoneField(data.get("expNewPhoneNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("number"));
+					.fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyNewPhoneField(data.get("expNewPhoneNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifySendCodeButtonEnabled();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyCurrentPhoneNumberHeading(data.get("expHeadingCurrentNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyMultipleResend();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.authyComponent().fillInput("code");
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen("expNewPhoneNumberHeading");
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyNewPhoneNumberPopup().clickMultipleResend();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifySendCodeButtonEnabled();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyCurrentPhoneNumberHeading(data.get("expHeadingCurrentNumber"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyMultipleResend();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.authyComponent().fillInput("code");
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen("expNewPhoneNumberHeading");
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.verifyNewPhoneNumberPopup().clickMultipleResend();
+
+			if (!data.get("errorMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+
+			}
+			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+					data.get("elementName"));
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("testEditPhoneNumberWithValidCode is failed due to Exception " + e);
+					.setFailMessageInReport("testEditPhoneNumberWithInvalidCode is failed due to Exception " + e);
 		}
 	}
 
@@ -327,45 +342,50 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expHeading"));
+					.fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expHeading"));
+					.fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.navigationComponent().clickBack();
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expHeading"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-					.verifyPageHeadingWithValidCode(data.get("expHeading"));
+					.fillInput(data.get("code"));
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("expNewPhoneNumberHeading"));
+					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyNewPhoneNumberPopup().navigationComponent().clickClose();
 
@@ -420,12 +440,12 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			Thread.sleep(10000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.authyComponent().fillInput(data.get("fillPinEmail"));
+					.authyComponent().fillInput(data.get("code"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
+					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("code"));
 
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().navigationComponent().verifyBackView();
@@ -433,13 +453,13 @@ public class MerchantProfileTest {
 					.verifyNewEmailAddressPopUp().navigationComponent().clickBack();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.authyComponent().fillInput(data.get("fillPinEmail"));
+					.authyComponent().fillInput(data.get("code"));
 			Thread.sleep(3000);
-			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().verifyCloseView();
-			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().clickClose();
-			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().verifyCloseView();
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().clickClose();
+//			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -486,19 +506,21 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testEditEmaiWithInvalidData(String strParams) {
+	public void testEditEmailWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
-			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
+//			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
-			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
-			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddress(data.get("heading"));
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
+			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
 
@@ -525,7 +547,7 @@ public class MerchantProfileTest {
 			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
-			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
+//			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			if (!data.get("code").isEmpty()) {
 				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
@@ -538,26 +560,6 @@ public class MerchantProfileTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void editAddress(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantProfilePage.userDetailsComponent().clickIconEditAddress();
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().fillAddress1(data.get("address1"));
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().fillAddress2(data.get("address2"));
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().fillCity(data.get("city"));
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().selectState(data.get("state"));
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().fillZipCode(data.get("zipcode"));
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().verifyCountry("");
-			merchantProfilePage.userDetailsComponent().mailingAddressComponent().clickSave();
-			merchantProfilePage.toastComponent().verifyToast("", "");
-		} catch (Exception e) {
-
-		}
-
 	}
 
 	@Test
@@ -628,7 +630,23 @@ public class MerchantProfileTest {
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();
 
-			Thread.sleep(3000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantAccounts is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testLeaveAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
+			merchantProfilePage.merchantAccountsPage().clickDelete();
+			merchantProfilePage.merchantAccountsPage().leaveMerchantAccountPopup().verifyHeading(data.get("heading"));
+			merchantProfilePage.merchantAccountsPage().leaveMerchantAccountPopup().clickNoGoBack();
+			merchantProfilePage.merchantAccountsPage().clickDelete();
+			merchantProfilePage.merchantAccountsPage().leaveMerchantAccountPopup().clickLeaveAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantAccounts is failed due to Exception " + e);
