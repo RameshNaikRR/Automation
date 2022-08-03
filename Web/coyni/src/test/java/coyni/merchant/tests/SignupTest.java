@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.merchant.components.PhoneVerificationComponent;
+import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -17,11 +18,13 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupTest {
 	SignupPage signupPage;
+	SideMenuBarComponent sideMenuBarComponent;
 	PhoneVerificationComponent phoneVerificationComponent;
 
 	@BeforeMethod
 	public void init() {
 		signupPage = new SignupPage();
+		sideMenuBarComponent = new SideMenuBarComponent();
 		phoneVerificationComponent = new PhoneVerificationComponent();
 	}
 
@@ -298,6 +301,82 @@ public class SignupTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateCreateAccountFields Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testSignUpBusinessViaIndividual(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickPersonalAccount();
+			signupPage.createPersonalAccountPage().verifyHeading(data.get("heading"));
+			signupPage.createPersonalAccountPage().clickCreatePersonalAccount();
+			Thread.sleep(5000);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpBusinessViaIndividual Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testSignUpIndividualViaBusiness(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickMerchantAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+			Thread.sleep(3000);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpIndividualViaBusiness Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testSignUpBusinessViaShared(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickSharedDropDown();
+			sideMenuBarComponent.clickSharedAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+			Thread.sleep(3000);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpBusinessViaShared Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+
+	public void testSignUpIndividualViaShared(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickSharedDropDown();
+			sideMenuBarComponent.clickSharedAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+			Thread.sleep(3000);
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpIndividualViaShared Failed due to Exception " + e);
 		}
 	}
 

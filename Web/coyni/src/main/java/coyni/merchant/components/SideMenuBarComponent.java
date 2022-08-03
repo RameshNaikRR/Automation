@@ -21,6 +21,11 @@ import ilabs.WebFramework.BrowserFunctions;
 public class SideMenuBarComponent extends BrowserFunctions {
 
 	private By userNameDrpDwn = By.xpath("//div[contains(@class,'DashboardMenu_username')]");
+	private By btnPersonalAccount = By.xpath("//p[text()='Add Personal Account']");
+	private By btnMerchantAccount = By.xpath("(//div[@class='UserNameDropDown_image__jUgDC bg-cm3'])[2]");
+	private By sharedDropDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
+	private By merchantDropDown = By.xpath("//span[@class='UserNameDropDown_title__RKKVD']");
+	private By btnsharedAccount = By.xpath("(//p[@class='m-1 text-xs font-semibold text-cgy8'])[2]");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
@@ -41,6 +46,18 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		click(qrCode, "QR Code");
 	}
 
+	public void clickPersonalAccount() {
+		click(btnPersonalAccount, "Personal Account");
+	}
+
+	public void clickMerchantAccount() {
+		click(btnMerchantAccount, "Merchant Account");
+	}
+
+	public void clickSharedAccount() {
+		click(btnsharedAccount, "Shared Account");
+	}
+
 	private By getMerchantActivityDrpDwn(String Activity) {
 		return By.xpath(String.format("(//button[.='%s'])[1]", Activity));
 	}
@@ -52,6 +69,14 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void clickUserdrpdwn() {
 		click(userNameDrpDwn, "User drop down");
+	}
+
+	public void clickMerchantdrpdwn() {
+		click(merchantDropDown, "Merchant drop down");
+	}
+
+	public void clickSharedDropDown() {
+		click(sharedDropDown, "Shared Drop Down");
 	}
 
 	public void verifyUserName() {

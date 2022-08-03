@@ -11,7 +11,6 @@ import coyni.merchant.pages.ExportfilesPage;
 import coyni.merchant.pages.GetHelpPage;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.TokenAccountPage;
-import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -42,31 +41,16 @@ public class TokenAccountTest {
 			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().navigationComponent().clickClose();
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().navigationComponent().clickClose();
 
 		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("testAvailableBalance is failed due to exception " + e);
 		}
-	}
-
-	@Test
-	public void testBuyTokens() throws InterruptedException {
-		try {
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickBuyTokens();
-		} catch (InterruptedException e) {
-			ExtentTestManager.setFailMessageInReport("testBuyTokens is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	public void testWithdrawToUSD() throws InterruptedException {
-		try {
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToUSD();
-		} catch (InterruptedException e) {
-			ExtentTestManager.setFailMessageInReport("testWithdrawToUSD is failed due to exception " + e);
-		}
-
 	}
 
 	public void exports(String strParams) {
@@ -1329,26 +1313,26 @@ public class TokenAccountTest {
 //					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
 //		}
 //	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testWithdrawToUSDAddExternalBankAccount(String strParams) {
 		try {
-			Map<String, String> data= Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().verifyHeading(data.get("externalBankHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyHeading(data.get("externalBankHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().navigationComponent().clickBack();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().verifyDescription(data.get("externalBankDescription"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyDescription(data.get("externalBankDescription"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickAddNewBankAccountBtn();
-			
 
-
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDAddExternalBankAccountView(String strParams) {
@@ -1356,11 +1340,13 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().verifyHeading(data.get("externalBankHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().verifyDescription(data.get("externalBankDescription"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyHeading(data.get("externalBankHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyDescription(data.get("externalBankDescription"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickBank2RadioBtn();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickNextBtn();
-			
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.verifyDailyLimitMsg();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()

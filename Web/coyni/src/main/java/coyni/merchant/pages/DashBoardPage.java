@@ -3,6 +3,7 @@ package coyni.merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni.admin.components.DaysMonthsDropDownComponent;
+import coyni.merchant.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -130,6 +131,10 @@ public class DashBoardPage extends BrowserFunctions {
 
 	public DaysMonthsDropDownComponent daysMonthsDropDownComponent() {
 		return new DaysMonthsDropDownComponent();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 
 }

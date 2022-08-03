@@ -7,10 +7,16 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionDetailsComponent extends BrowserFunctions {
-
+	
 	private By lblHeadingTransactionDetails = By.cssSelector(".text");
 
 	private By record = By.cssSelector("tbody>tr:nth-of-type(2)");
+
+	private By btnRefund = By.xpath("//span[text()='Refund']");
+
+	private By fullAmount = By.xpath("//p[text()='Full Amount']");
+
+	private By halfAmount = By.xpath("//p[text()='1/2 Amount']");
 
 	private By lblNoRecords = By.xpath("//span[contains(text(),'No Filter Data Found')]");
 
@@ -62,8 +68,26 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By lblDepositTo = By.xpath("//span[text()='Deposit To']/following-sibling::*");
 
+	private By txtReasonForRefund = By.cssSelector("#message");
+
+	private By btnNext = By.xpath("//button[text()='Next']");
+
+	private By btnSubmit = By.xpath("//button[text()='Submit']");
+
+	public void fillReason(String refund) {
+		enterText(txtReasonForRefund, refund, "Reason For Refund");
+	}
+
 	public void clickCompleted() {
 		click(lblCompleted, "View Transaction Details");
+	}
+
+	public void clickNext() {
+		click(btnNext, "Next");
+	}
+
+	public void clickSubmit() {
+		click(btnSubmit, "Submit");
 	}
 
 	public int verifyRecords() {
@@ -78,6 +102,18 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public void clickRecord() {
 		click(record, "Record");
 
+	}
+
+	public void clickFullAmount() {
+		click(fullAmount, "Amount");
+	}
+
+	public void clickHalfAmount() {
+		click(halfAmount, "Half Amount");
+	}
+
+	public void clickRefund() {
+		click(btnRefund, "Refund");
 	}
 
 //	public By getLabelItem(String Type) {
@@ -217,5 +253,4 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
-
 }

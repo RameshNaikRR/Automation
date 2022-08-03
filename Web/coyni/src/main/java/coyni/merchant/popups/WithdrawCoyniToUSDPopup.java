@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -72,6 +73,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	public ChooseYourBankAccountPopup chooseYourBankAccountPopup() {
 		return new ChooseYourBankAccountPopup();
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }

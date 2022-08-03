@@ -336,4 +336,12 @@ public class SignupPage extends BrowserFunctions {
 	public LoginPage loginPage() {
 		return new LoginPage();
 	}
+
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
+	}
+
+	public CreatePersonalAccountPage createPersonalAccountPage() {
+		return new CreatePersonalAccountPage();
+	}
 }
