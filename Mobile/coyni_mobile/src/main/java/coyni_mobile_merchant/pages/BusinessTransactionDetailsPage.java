@@ -14,16 +14,16 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By lblTransactionType = MobileBy.xpath(
 			"//*[contains(@resource-id,'Payoutheader')]|//*[contains(@resource-id,'BankHeader')]|//*[contains(@resource-id,'header')]|//*[contains(@resource-id,'Gifthead')]|//*[contains(@resource-id,'reserve_type')]");
 	private By lblAmount = MobileBy.xpath(
-			"//*[contains(@resource-id,'merchantamount')]| //*[contains(@resource-id,'bankamount')]|//*[contains(@resource-id,'BankAmount')]");
+			"//*[contains(@resource-id,'merchantamount')]| //*[contains(@resource-id,'bankamount')]|//*[contains(@resource-id,'BankAmount')]|(//*[contains(@resource-id,'amount')])[1]");
 	private By lblStatus = MobileBy.xpath("//*[contains(@resource-id,'status')]|//*[contains(@resource-id,'Status')]");
-	private By lblDate = MobileBy
-			.xpath("//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]");
+	private By lblDate = MobileBy.xpath(
+			"//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]|//*[contains(@resource-id,'dateTime')]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
 	private By lblReferenceID = MobileBy.xpath(
-			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'reference')]");
+			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'reference')]|//*[contains(@resource-id,'withdrawGiftrefidTV')]|//*[contains(@resource-id,'withinrefid')]");
 	private By lblPayoutDate = MobileBy.xpath("//*[contains(@resource-id,'merchantPIdate')]");
 	private By lblTotalAmount = MobileBy
-			.xpath("//*[contains(@resource-id,'mPItotalamountTV')]|//*[contains(@resource-id,'Total')]");
+			.xpath("//*[contains(@resource-id,'totalamount')]|//*[contains(@resource-id,'Total')]");
 	private By lblTotalTransactions = MobileBy.xpath("//*[contains(@resource-id,'mPItotaltransactions')]");
 	private By lblDepositTo = MobileBy.xpath("//*[contains(@text,'Token Account')]");
 
@@ -35,11 +35,13 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By lblPurchaseAmount = MobileBy.xpath("//*[contains(@resource-id,'purchase')]");
 	private By lblDepositID = MobileBy.xpath("//*[contains(@resource-id,'DepositIDTV')]");
 	private By lblDescriptorName = MobileBy.xpath("//*[contains(@resource-id,'Descrptor')]");
-	private By lblProcessingFee = MobileBy
-			.xpath("//*[contains(@resource-id,'processingfee')]|//*[contains(@resource-id,'ProcessFee')]");
+	private By lblProcessingFee = MobileBy.xpath(
+			"//*[contains(@resource-id,'processingfee')]|//*[contains(@resource-id,'ProcessFee')]|//*[contains(@resource-id,'profee')]");
 
-	private By lblWithdrawAmount = MobileBy.xpath("//*[contains(@resource-id,'WithdrawAmount')]");
-	private By lblWithdrawID = MobileBy.xpath("//*[contains(@resource-id,'withBankWithdrawidTV')]");
+	private By lblWithdrawAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'WithdrawAmount')]|//*[contains(@resource-id,'withdrawamount')]");
+	private By lblWithdrawID = MobileBy.xpath(
+			"//*[contains(@resource-id,'withBankWithdrawidTV')]|//*[contains(@resource-id,'withgiftid')]|//*[contains(@resource-id,'withinwithdrawidTV')]");
 	private By lblAccountBalance = MobileBy.xpath("//*[contains(@resource-id,'AccBalance')]");
 
 	private By lblCardHolderName = MobileBy.xpath("//*[contains(@resource-id,'holdername')]");
@@ -58,7 +60,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By btnCancelYes = MobileBy.xpath("//*[contains(@resource-id,'Yes')]");
 	private By btnReserveRelease = MobileBy.xpath("(//*[contains(@text,'Reserve Release')])[1]");
 	private By lblReservedOn = MobileBy.xpath("//*[contains(@resource-id,'reserved_on')]");
-	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release')]");
+	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
@@ -214,9 +216,9 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getWithdrawTokenInstantPayTransactionDetails() {
-		getTransactionType();
+//		getTransactionType();
 		getAmount();
-		getStatus();
+//		getStatus();
 		getDate();
 		getWithdrawAmount();
 		getProcessingFee();
@@ -245,9 +247,9 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getWithdrawTokenGiftCardTransactionDetails() {
-		getTransactionType();
+//		getTransactionType();
 		getAmount();
-		getStatus();
+//		getStatus();
 		getDate();
 		getGiftCardName();
 		getSubTotal();
@@ -326,9 +328,9 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getWithdrawTokenSignetTransactionDetails() {
-		getTransactionType();
+//		getTransactionType();
 		getAmount();
-		getStatus();
+//		getStatus();
 		getDate();
 		getWithdrawAmount();
 		getProcessingFee();
@@ -339,6 +341,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getNameonAccount();
 		getBankName();
 	}
+
 	public ErrorMessagePopup errorMessagePopup() {
 		return new ErrorMessagePopup();
 	}

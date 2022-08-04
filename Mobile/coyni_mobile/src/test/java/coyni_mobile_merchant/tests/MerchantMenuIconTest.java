@@ -139,6 +139,17 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
+			testBuyTokenBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+	
+	
+	public void testBuyTokenBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().verifyPageHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
@@ -188,6 +199,81 @@ public class MerchantMenuIconTest {
 
 	}
 
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithBankAccoun(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
+			testBuyTokenBankAccount(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+	
+	
+	public void testBuyTokenBankAccountNavigationView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.buyTokenWithBankAccount(data.get("buyTokenHeading"), data.get("buyTokenDescription"),
+							data.get("amount"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+			.orderPreviewPopup().enterYourPINComponent().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+			.clickChangePaymentMethod();
+			
+			
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+			.clickClose();
+			
+			
+			
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickClose();
+			
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+			Thread.sleep(2000);
+			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
+					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawnToUSDGiftCard(String strParams) {

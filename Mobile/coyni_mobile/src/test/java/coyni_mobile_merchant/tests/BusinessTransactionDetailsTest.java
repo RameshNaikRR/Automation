@@ -81,6 +81,11 @@ public class BusinessTransactionDetailsTest {
 					businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
 					businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 							.verifyPageHeading(data.get("transactionDetailsHeading"));
+					businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+							.verifyTransactionType(data.get("transactionType"));
+					businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+							.getStatus();
+
 					if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
@@ -99,7 +104,7 @@ public class BusinessTransactionDetailsTest {
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Signet")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.getWithdrawTokenSignetTransactionDetails();
+								.getWithdrawTokenSignetTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Gift Card")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()

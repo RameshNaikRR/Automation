@@ -14,8 +14,8 @@ import io.appium.java_client.MobileBy;
 
 public class OrderPreviewPopup extends MobileFunctions {
 
-	private By lblOrderPageHeading = MobileBy.xpath("//*[contains(@text,'Order Preview')]");
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Get')]");
+	private By lblOrderPageHeading = MobileBy.xpath("//*[contains(@text,'Preview')]");
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Get')]|//*[contains(@resource-id,'amount')]");
 //	private By lblCurrency = MobileBy.xpath("//*[contains(@resource-id,'CYN')]");
 	private By lblPaymentMethod = MobileBy
 			.xpath("//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'PayMethod')]");
@@ -30,8 +30,8 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");
 	private By lblOrderOverview = MobileBy.xpath("//*[contains(@text,'Order Overview')]");
-//	private By btnConfirm = MobileBy
-//			.xpath("//*[contains(@resource-id,'tv_lable')]|//*[contains(@resource-id,'slideToConfirm')]");
+	private By lblReceiptentAddress = MobileBy.xpath("//*[contains(@resource-id,'recipAddre')]");
+	private By lblReasonForRefund = MobileBy.xpath("//*[contains(@resource-id,'messageNoteTV')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblOrderOverview, "Popup Heading", expHeading);
@@ -71,7 +71,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	public void slideToConfirm() {
 		new CommonFunctions().swipeElement(btnSideView, Direction.RIGHT);
-		
+
 	}
 
 	public SuccessFailureComponent successFailureComponent() {
@@ -94,6 +94,15 @@ public class OrderPreviewPopup extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Total: " + getText(lblTotalAmount) + "CYN");
 	}
 
+	public void getReceiptentAddress() {
+		ExtentTestManager.setInfoMessageInReport("Receiptent Address : " + getText(lblReceiptentAddress));
+	}
+	
+	public void getReasonForRefund() {
+		ExtentTestManager.setInfoMessageInReport("Reason For Refund : " + getText(lblReasonForRefund));
+	}
+
+	
 	public By getPaymentItems(String last4digits) {
 		return By.xpath(String.format("//*[contains(@text,'%s')]", last4digits));
 	}
@@ -144,6 +153,16 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getPurchaseAmount();
 		getProcessingFee();
 		getTotal();
+		swipeSlideToConfirm();
+	}
+	
+	public void refundPreviewDetails(String expHeading) {
+		verifyPageHeading(expHeading);
+		getAmount();
+		getReceiptentAddress();
+		getProcessingFee();
+		getTotal();
+		getReasonForRefund();
 		swipeSlideToConfirm();
 	}
 

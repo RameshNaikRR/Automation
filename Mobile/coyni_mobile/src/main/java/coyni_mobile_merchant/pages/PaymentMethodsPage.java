@@ -33,7 +33,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[3]");
 	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
-
+//	private By  = MobileBy.xpath("//*[contains(@resource-id,'AddPayment')]");
+	
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -45,6 +46,10 @@ public class PaymentMethodsPage extends MobileFunctions {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
 
+	public int verifyAddNewPaymentMethod() {
+		 return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
+	}
+	
 	public void clickExternalBankAccount() {
 		click(btnExternalBankAccount, "External Bank Account");
 	}

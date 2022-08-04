@@ -11,6 +11,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'imgBack')]");
 
 	private By getOneNumberOfPin(char num) {
 		return MobileBy.xpath(
@@ -28,6 +29,10 @@ public class EnterYourPINComponent extends MobileFunctions {
 		click(lnkForgotPin, "click Forgot Pin");
 	}
 
+	public void clickClose() {
+		click(btnClose, "Close");
+	}
+	
 	public void verifyPinView() {
 		new CommonFunctions().elementView(pinCircles, "Circles in Enter your PIN screen");
 	}

@@ -19,14 +19,13 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	private By btnfiltersIcon = MobileBy.xpath("//*[contains(@resource-id,'filter')]");
 
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'closeBtnIV')]");
-	
-	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
-	
-	private By btnTransaction= MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+
+	private By btnTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
 	public int verifyTransactionsCount() {
-		 return DriverFactory.getDriver().findElements(lblNoTransactions).size();
+		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 
 	public void verifyHeading(String expHeading) {
@@ -57,6 +56,7 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	public void clickClose() {
 		click(btnCloseIcon, "Close Icon");
 	}
+
 	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
 		return new MerchantTransactionDetailsPage();
 	}

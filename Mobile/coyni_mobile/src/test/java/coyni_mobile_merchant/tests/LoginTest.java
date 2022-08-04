@@ -210,7 +210,7 @@ public class LoginTest {
 			if (data.get("validatePopUpMsg").contains("yes")) {
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("emailVerificationHeading"));
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i <= 4; i++) {
 				loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 						.clickResend();
 			}

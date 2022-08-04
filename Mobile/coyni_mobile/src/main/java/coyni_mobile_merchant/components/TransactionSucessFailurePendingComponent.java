@@ -9,7 +9,8 @@ import io.appium.java_client.MobileBy;
 
 public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
-	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]");
+	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]|//*[contains(@text,'A new refund')]");
+	private By lblRefundDescription = MobileBy.xpath("//*[contains(@text,'A new refund')]");
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Amount')]");
 	private By lblCurrency = MobileBy.xpath("//*[contains(@text,'CYN')]");
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'ReferenceID')]");
@@ -21,16 +22,16 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Transaction Status : " + getText(lblPageHeading));
 	}
 
-//	public void TransactionStatus() {
-//		return getPageHeading();
-//	}
-
 	public void getPageDescription() {
 		ExtentTestManager.setInfoMessageInReport("Page Description : " + getText(lblPageDescription));
 	}
 
+	public void getRefundDescription() {
+		ExtentTestManager.setInfoMessageInReport("Refund Description : " + getText(lblRefundDescription));
+	}
+	
 	public void getAmount() {
-		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount));
+		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount)+ "CYN");
 	}
 
 	public void getCurrency() {
@@ -54,6 +55,15 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 		getReferenceID();
 		clickDone();
 	}
+	
+	public void getRefundTokenTransactionStatusDetails() {
+		getPageHeading();
+		getAmount();
+		getReferenceID();
+		getRefundDescription();
+		clickDone();
+	}
+	
 //	public void viewLearnMore() {
 //		new CommonFunctions().elementView(lnkLearnMore, "Learn More ");
 ////		click(lnkLearnMore, "Link More");

@@ -1915,7 +1915,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickPaymentMethods();
 			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 			Thread.sleep(1000);
+			if(merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
 			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifyHeading(data.get("addPaymentHeading"));
 			Thread.sleep(1000);
@@ -1947,7 +1949,7 @@ public class MerchantProfileTest {
 					.allDonePage().verifyAllDone(data.get("doneHeading"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.allDonePage().clickDone();
-
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
