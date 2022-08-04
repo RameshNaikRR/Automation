@@ -1,10 +1,6 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
-
-import coyni.merchant.popups.AddCustomRolePopup;
-import coyni.merchant.popups.FiltersPage;
-import coyni.merchant.popups.SaveChangePopUp;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;

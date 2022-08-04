@@ -26,7 +26,6 @@ public class LoginTest {
 
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
@@ -168,7 +167,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginWithResendOTP(String strParams) {

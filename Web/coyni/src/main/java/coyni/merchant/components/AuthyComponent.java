@@ -1,6 +1,7 @@
 package coyni.merchant.components;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,11 @@ public class AuthyComponent extends BrowserFunctions {
 	}
 
 	public void clickSms() {
-		click(sms, "SMS");
+		if (verifyElementDisplayed(sms, "Sms")) {
+			click(sms, "SMS");
+		}
+		ExtentTestManager.setInfoMessageInReport("SMs not entered in text field");
+
 	}
 
 	public void verifyHeading1(String expHeading) {

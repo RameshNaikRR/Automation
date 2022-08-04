@@ -306,7 +306,6 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testSignUpBusinessViaIndividual(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -325,15 +324,17 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testSignUpIndividualViaBusiness(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnPersonalAccount();
+			sideMenuBarComponent.clickOnPersonalAccountDropDown();
 			sideMenuBarComponent.clickMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantAccount();
-			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 
 		}
 
@@ -344,7 +345,6 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testSignUpBusinessViaShared(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -363,11 +363,12 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testSignUpIndividualViaShared(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnPersonalAccount();
+			sideMenuBarComponent.clickOnPersonalAccountDropDown();
 			sideMenuBarComponent.clickSharedDropDown();
 			sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
@@ -377,6 +378,50 @@ public class SignupTest {
 
 		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSignUpIndividualViaShared Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testSwitchingAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnPersonalAccount();
+			sideMenuBarComponent.clickOnPersonalAccountDropDown();
+			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickMerchantAccount();
+			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickSharedDropDown();
+			sideMenuBarComponent.clickSharedAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSwitchingAccounts Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDBAUnderBusinessAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickAddDBA();
+			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
+			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickBack();
+			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
+			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().clickAddDBA();
+			Thread.sleep(4000);
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
 

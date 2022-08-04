@@ -15,17 +15,21 @@ import coyni.merchant.pages.RegistrationStartPage;
 import coyni.merchant.pages.ReserveHistoryPage;
 import coyni.merchant.pages.TokenAccountPage;
 import coyni.merchant.pages.TransactionsPage;
+import coyni.merchant.popups.AddDBABusinessPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideMenuBarComponent extends BrowserFunctions {
 
 	private By userNameDrpDwn = By.xpath("//div[contains(@class,'DashboardMenu_username')]");
+	private By btnAddDBA = By.xpath("//button[text()='Add New DBA']");
+	private By personalAccount = By.xpath("//div[@class='UserNameDropDown_userName__oCwHu']");
 	private By btnPersonalAccount = By.xpath("//p[text()='Add Personal Account']");
 	private By btnMerchantAccount = By.xpath("(//div[@class='UserNameDropDown_image__jUgDC bg-cm3'])[2]");
+	private By btnPersonalDropDown = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__YA3Vr')]");
 	private By sharedDropDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
 	private By merchantDropDown = By.xpath("//span[@class='UserNameDropDown_title__RKKVD']");
-	private By btnsharedAccount = By.xpath("(//p[@class='m-1 text-xs font-semibold text-cgy8'])[2]");
+	private By btnsharedAccount = By.xpath("//p[@class='m-1 text-xs font-semibold text-cgy8']");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
@@ -44,6 +48,18 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void clickQRCode() {
 		click(qrCode, "QR Code");
+	}
+
+	public void clickAddDBA() {
+		click(btnAddDBA, "Add DBA");
+	}
+
+	public void clickOnPersonalAccount() {
+		click(personalAccount, "Personal Account");
+	}
+
+	public void clickOnPersonalAccountDropDown() {
+		click(btnPersonalDropDown, "Personal Account Drop Down");
 	}
 
 	public void clickPersonalAccount() {
@@ -235,5 +251,9 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public MyQRCodeComponent myQRCodeComponent() {
 		return new MyQRCodeComponent();
+	}
+
+	public AddDBABusinessPopup addDBABusinessPopup() {
+		return new AddDBABusinessPopup();
 	}
 }
