@@ -18,7 +18,6 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	private By lblDebitCardCount = By.xpath("(//span[@class='count'])[2]");
 
 	public void clickBankAccount() {
-
 		click(btnBankAccount, "Click Bank Account");
 
 	}

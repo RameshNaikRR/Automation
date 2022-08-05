@@ -8,12 +8,11 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class BuyCoyniTokensPopup extends BrowserFunctions {
-
+	
 	private By txtAmount = By.xpath("//input[@name='usd']");
-	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy Coyni Tokens')]");
+	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy coyni Tokens')]");
 	private By btnAddNewPaymentMethod = By.xpath("//span[contains(text(),'Add New Payment Method')]");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
-	private By lblErrorMessage = By.cssSelector("");
 	private By lnkChange = By.xpath("//span[contains(text(),'Change')]");
 	private By lblDollar = By.xpath("//span[contains(text(),'$')]");
 	private By lblCYN = By.xpath("(//span[text()='CYN'])[2]");
@@ -23,10 +22,6 @@ public class BuyCoyniTokensPopup extends BrowserFunctions {
 
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "");
-	}
-
-	public void verifyCountry(String ErrorMessage) {
-		new CommonFunctions().verifyLabelText(lblErrorMessage, ErrorMessage, "ErrorMessage");
 	}
 
 	public void viewChangeLink() {

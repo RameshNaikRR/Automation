@@ -6,59 +6,33 @@ import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 
-	private By lblBank = By.xpath("//p[contains(text(),'Bank')]");
-	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy Coyni Tokens')]");
-	private By radBtnDebit = By.xpath("//input[@name='buy-token-radio']");
-	private By radBtnCredit = By.xpath("//input[@name='buy-token-radio']");
+	private By lblBank = By.xpath("//p[contains(text(),'4219')]");
+	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy coyni Tokens')]");
 	private By lnkAddNewPayment = By.cssSelector("");
-	private By btnDeleteBank = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
-	private By btnDeleteCard = By.xpath("//button[@data-tip='Delete']");
-	private By btnEditCredit = By.cssSelector("");
-	private By btnEditDebit = By.cssSelector("");
+	private By btnDeleteBank = By.xpath("//p[contains(text(),'4567')]");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 	private By lblBankErrorMessage = By.cssSelector("");
-	private By lblCreditErrorMessage = By.cssSelector("");
-	private By lbldebitErrorMessage = By.cssSelector("");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
 	private By btnDelete = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
-	private By txtCvv = By.xpath("//input[@name='cvv']");
 
 	public void clickBank() {
 		click(lblBank, "Click Bank");
 	}
 
-	public void clickDebit() {
-		click(radBtnDebit, "Click Debit");
+	public void clickDelete(String number) {
+		click(By.xpath(String.format(
+				"//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-trash')]", number)),
+				number);
+		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
 	}
 
-	public void clickCredit() {
-		click(radBtnCredit, "Click Credit");
-	}
-
-	public void deleteBank() {
-		click(btnDeleteBank, "Click DeleteBank");
-	}
-
-	public void deleteDebit() {
-		moveToElement(radBtnDebit, "Delete Debit card");
-		click(btnDeleteCard, "Click DeleteDebit");
-	}
-
-	public void deleteCredit() {
-		moveToElement(radBtnCredit, getCopiedData());
-		click(btnDeleteCard, "Click DeleteCredit");
-	}
-
-	public void editDebit() {
-		click(btnEditDebit, "Click EditDebit");
-	}
-
-	public void editCredit() {
-		click(btnEditCredit, "Click EditCredit");
-	}
+//	public void deleteBank() {
+//		click(btnDeleteBank, "Click DeleteBank");
+//	}
 
 	public void clickDelete() {
 		click(btnDelete, "Click Delete");
@@ -74,14 +48,6 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 
 	public void VerifyBankErrorMessage(String BankErrorMessage) {
 		new CommonFunctions().verifyLabelText(lblBankErrorMessage, BankErrorMessage, "BankErrorMessage");
-	}
-
-	public void VerifyCreditErrorMessage(String CreditErrorMessage) {
-		new CommonFunctions().verifyLabelText(lblCreditErrorMessage, CreditErrorMessage, "CreditErrorMessage");
-	}
-
-	public void VerifydebitErrorMessage(String DebitErrorMessage) {
-		new CommonFunctions().verifyLabelText(lbldebitErrorMessage, DebitErrorMessage, "DebitErrorMessage");
 	}
 
 	public BuyCoyniTokensPopup buyCoyniTokensPopup() {
@@ -103,10 +69,6 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 
 	public RemovePaymentMethodPopup removePaymentMethodPopup() {
 		return new RemovePaymentMethodPopup();
-	}
-
-	public void fillCvv(String expCvv) {
-		enterText(txtCvv, expCvv, "Cvv");
 	}
 
 	public NavigationComponent navigationComponent() {
