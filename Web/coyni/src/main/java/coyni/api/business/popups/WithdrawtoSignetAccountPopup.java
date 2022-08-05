@@ -9,12 +9,12 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	
 	private By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	
-	private By SignetAccountDesc = By.xpath("//p[@class='text-center text-cgy4 text-sm mt-1.5']");
+	
 	
 	private By lnkAddNewSignetAccount = By.xpath("//span[text()='Add New Signet Account']");
 	private By rdbtnBankAccount = By.xpath("(//input[@name='buy-token-radio'])[1]");
-	private By btnNext = By.xpath("(//input[text()='Next'])");
-	private By txtAmount = By.xpath("#amount");
+	private By btnNext = By.xpath("//button[text()='Next']");
+	private By txtAmount = By.xpath("//input[@name='amount']");
 	private By lnkConverter = By.xpath("//button[@id='flip-button']");
 	private By txtTransactionDesc = By.xpath("//label[text()='Transaction Description (Optional)']");
 	private By lblErrMsg = By.xpath("//p[text()='Amount is required']");
@@ -31,12 +31,10 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 		click(iconDelete, "delete");
 	}
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(SignetAccountDesc, "Heading" , expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading" , expHeading);
 	}
-	public void verifylblDesc(String expDesc) {
-		new CommonFunctions().verifyLabelText(SignetAccountDesc, "Signet Account Description", expDesc);
-	}
-	public void clickfirstBank() {
+	
+	public void clickfirstSignet() {
 		click(rdbtnBankAccount, "BankAccount");
 	}
 	public void clickAddNewSignetAccount() {

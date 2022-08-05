@@ -14,10 +14,12 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblTransactionType = By.xpath("//span[text()='Transaction Type']");
 	private By lblTransactionSubType = By.xpath("//span[text()='Transaction Subtype']");
 	private By lblTransactionAmt = By.xpath("//label[text()='Transaction Amount']");
-	private By txtFromCYN = By.xpath("//span[text()='From (CYN)']");
-	private By txtToCYN = By.xpath("//span[text()='To (CYN)']");
+//	private By txtFromCYN = By.xpath("//div[@class='custom-range-filter__group__from']");
+//	private By txtToCYN = By.xpath("//div[@class='custom-range-filter__group__to']");
+	private By txtFromCYN = By.xpath("(//input[@type='text'])[1]");
+	private By txtToCYN = By.xpath("(//input[@type='text'])[2]");
 	private By lblReferenceID = By.xpath("//label[text()='Reference ID']");
-	private By txt15CharReferenceId = By.xpath("//input[@id='txt']");
+	private By txt15CharReferenceId = By.xpath("//input[@name='gbxTransactionId']");
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	private By btnResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
@@ -45,7 +47,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public By getCheckkBoxes(String text) {
-		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", text));
+		return By.xpath(String.format("//div[@class='relative flex flex-wrap gap-2']/div", text));
 	}
 
 	public void clickCheckBox(String text) {
@@ -117,7 +119,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickWalletTransferChkbx() {
-		click(getCheckkBoxes("wallet Transfer"), "wallet Transfer");
+		click(getCheckkBoxes("Wallet Transfer"), "wallet Transfer");
 	}
 
 	public void verifyWalletTransferChkbxView() {
@@ -149,7 +151,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void fillFromCYN(String FromCYN) {
-		enterText(txtToCYN, FromCYN, "From CYN");
+		enterText(txtFromCYN, FromCYN, "From CYN");
 	}
 
 	public void verifyFromCYNview() {

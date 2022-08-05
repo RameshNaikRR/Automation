@@ -20,27 +20,35 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	private By lblErrorMessage = By.xpath("//span[.='Amount is required.']");
 	private By drpdwnTransferTo = By.cssSelector("div[class*='FormField_selected_option_wallet']");
 	private By btnNext = By.xpath("//button[.='Next']");
+	private By btnConfirm = By.xpath("//button[.='Confirm']");
 	private By btnClose = By.xpath("//button[@type='button']/img");
+	private By lblSelectTrasanfer = By
+			.xpath("//div[contains(@class,'FormField_form_select_container')]/div/div/../div[3]");
+//	private By btnTransferWallet = By
+//			.xpath("//div[contains(@class,'FormField_form_select_container')]//*[text()='Info']");
+	private By btnTransferWallet = By
+			.xpath("//div[contains(@class,'FormField_form_select_container')]/div[1]/div[4]/div[%s]");
 
 	private By getWallets(String WalletNumber) {
-		return By.xpath(String.format("//div[@class='FormField_options_wrap_wallet__2KyLr undefined']/div[1]/div[%s]",
+		return By.xpath(String.format("//div[contains(@class,'FormField_form_select_container')]/div[1]/div[4]/div[%s]",
 				WalletNumber));
 	}
 
+	public void selectTransferWallet() {
+		click(lblSelectTrasanfer, "Click on Transfer");
+		click(btnTransferWallet, "Select Wallet");
+	}
+
 	public void clickWallet1() {
-		click(getWallets("1"), "Wallet 1 is clicked");
+		click(getWallets("2"), "Wallet 1 is clicked");
+	}
+
+	public void clickWallet3() {
+		click(getWallets("3"), "Wallet 1 is clicked");
 	}
 
 	public void verifyWallet1View() {
 		new CommonFunctions().elementView(getWallets("1"), "Wallet 2");
-	}
-
-	public void clickWallet2() {
-		click(getWallets("2"), "Wallet 2 is clicked");
-	}
-
-	public void verifyWallet2View() {
-		new CommonFunctions().elementView(getWallets("2"), "Wallet 2");
 	}
 
 	public void verifytxtAmountView() {
@@ -99,6 +107,14 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 			click(btnNext, "Next ");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
+		}
+	}
+
+	public void clickConfirm() {
+		if (getElement(btnConfirm, "Confirm").isEnabled()) {
+			click(btnConfirm, "Confirm ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Confirm button is in disabled mode");
 		}
 	}
 

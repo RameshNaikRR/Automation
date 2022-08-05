@@ -12,9 +12,14 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public By btnInstantPay = By.xpath("//span[text()='Instant Pay']");
 	public By btnSignetAccount = By.xpath("//span[text()=' Signet Account']");
 	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
+	private By SignetAccountDesc = By.xpath("//p[contains(text(),'Signet')]");
 
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	}
+
+	public void verifylblDesc(String expDesc) {
+		new CommonFunctions().verifyLabelText(SignetAccountDesc, "Signet Account Description", expDesc);
 	}
 
 	public void clickOnExternalBankAccount() {
@@ -29,9 +34,12 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		click(btnInstantPay, "Click InstantPay");
 	}
 
-
 	public void clickOnSignetAccount() {
 		click(btnSignetAccount, "Click Signet Account");
+	}
+
+	public void verifySignetHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(btnSignetAccount, "Signet Account", expHeading);
 	}
 
 	public void verifyBankAccountHeading(String expHeading) {

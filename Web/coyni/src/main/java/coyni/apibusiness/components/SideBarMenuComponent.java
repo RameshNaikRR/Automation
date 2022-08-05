@@ -14,7 +14,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class SideBarMenuComponent extends BrowserFunctions {
 
 	private By getDashBoardItems(String eleName) {
-		return By.xpath(String.format("//div[@class='DashboardMenu_menu__3PSTN']//span[text()='%s']", eleName));
+		return By.xpath(String.format("//div[@class='DashboardMenu_menu_items__WTmN5']//span[text()='%s']", eleName));
 	}
 
 	// business setting

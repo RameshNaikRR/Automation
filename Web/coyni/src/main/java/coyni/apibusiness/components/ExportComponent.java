@@ -1,23 +1,31 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.WaitForElement;
 
 public class ExportComponent extends BrowserFunctions {
-	private By btnExport = By.xpath("//button[text()='Export']");
+	BrowserFunctions objBrowserFunctions = new BrowserFunctions();
+	private By btnPopupExport = By.xpath("(//button[text()='Export'])[2]");
+	private By btnExport = By.xpath("(//button[text()='Export'])[1]");
 	private By lblExportSelectedOptions = By.xpath("//h3[text()='Export Selected Transactions']");
 	private By lblDateRange = By.xpath("//h3[text()='Date Range']");
 	private By lblColumns = By.xpath("//h3[text()='Columns']");
 	private By txtStartDate = By.xpath("//span[text()='Start Date']");
 	private By txtEndDate = By.xpath("//span[text()='End Date']");
-	private By imgDropdown = By.xpath("//div[text()='Default (8)']/following-sibling::img");
+	private By txtReceiver = By.xpath("//span[text()='Receiver']");
+	private By txtSender = By.xpath("//span[text()='Sender']");
+	private By imgDropdown = By.xpath("//div[text()='Default (10)']/following-sibling::img");
 	private By lnkCustom = By.xpath("//div[text()='Custom']");
 	private By lnkDeselectAll = By.xpath("//span[text()='Deselect All']");
-	private By lblDefault8 = By.xpath("//div[text()='Default (8)']");
-	private By txtdefault8Desc = By.xpath("//p[@class='export-modal__default-column-label']");
+	private By lblDefault10 = By.xpath("//div[text()='Default (10)']");
+	private By txtdefault10Desc = By.xpath("//p[@class='export-modal__default-column-label']");
 	private By lblpopuphdng = By.xpath("//h2[text()='Your Export is Being Prepared']");
 	private By lnkExportPage = By.xpath("//strong[text()='Export page.']");
 	private By btnClose = By.xpath("//button[text()='Close']");
@@ -65,20 +73,43 @@ public class ExportComponent extends BrowserFunctions {
 		click(getToggleInputs(text), text);
 	}
 
+//	public By getExportCheckBoxes(String text) {
+//		return By.xpath(String.format("(//span[text()='%s'])[2]/preceding-sibling::input", text));
+//	}
 	public By getExportCheckBoxes(String text) {
-		return By.xpath(String.format("(//span[text()='%s'])[2]/preceding-sibling::input", text));
+		return By.xpath(String.format("//input[@type='checkbox']", text));
+	}
+
+	public void ClickSelectAllCheckboxes() {
+		try {
+			By options = By.xpath("//input[@type='checkbox']");
+			boolean status = false;
+			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
+			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+			for (WebElement optionEle : optionsEles) {
+				optionEle.click();
+				status = true;
+			}
+			if (status) {
+				ExtentTestManager.setInfoMessageInReport("All checkBoxes are selected");
+			} else {
+				ExtentTestManager.setFailMessageInReport("CheckBox  is not selected");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
+		}
 	}
 
 	public void clickExportCheckBoxes(String text) {
 		click(getExportCheckBoxes(text), text);
 	}
 
-	public void verifyDefault8View() {
-		new CommonFunctions().elementView(lblDefault8, "Default8");
+	public void verifyDefault10View() {
+		new CommonFunctions().elementView(lblDefault10, "Default10");
 	}
 
 	public void clickDateandTimeChkbx() {
-		click(getExportCheckBoxes("Date & Time"), "Date & Time");
+		click(getExportCheckBoxes("Date & Time "), "Date & Time");
 	}
 
 	public void verifyDateandTimeChkbxView() {
@@ -141,8 +172,32 @@ public class ExportComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getExportCheckBoxes("Status"), "Status");
 	}
 
+	public void clickReceiverChkbx() {
+		click(getExportCheckBoxes("Receiver"), "Receiver");
+	}
+
+	public void verifyReceiverChkbxView() {
+		new CommonFunctions().elementView(getExportCheckBoxes("Receiver"), "Receiver");
+	}
+
+	public void clickSenderChkbx() {
+		click(getExportCheckBoxes("Sender"), "Sender");
+	}
+
+	public void verifySenderChkbxView() {
+		new CommonFunctions().elementView(getExportCheckBoxes("Sender"), "Sender");
+	}
+
 	public void clickExport() {
 		click(btnExport, "Export");
+	}
+
+	public void clickPopupExport() {
+		if (getElement(btnPopupExport, "Export").isEnabled()) {
+			click(btnPopupExport, "Export ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Export button is in disabled mode");
+		}
 	}
 
 	public void verifyExportBackgroundColor(String expColour) {
@@ -222,7 +277,8 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickCustom() {
-		//new CommonFunctions().verifyMouseHoverAction(lnkCustom, "Custom", getPageTitle(), getCopiedData());
+		// new CommonFunctions().verifyMouseHoverAction(lnkCustom, "Custom",
+		// getPageTitle(), getCopiedData());
 		moveToElement(lnkCustom, "Moved to custom");
 		click(lnkCustom, "Custom");
 	}
@@ -235,8 +291,8 @@ public class ExportComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lnkDeselectAll, "Deselect All");
 	}
 
-	public void verifyDefault8Desc(String description) {
-		new CommonFunctions().verifyLabelText(txtdefault8Desc, "description", "description");
+	public void verifyDefault10Desc(String description) {
+		new CommonFunctions().verifyLabelText(txtdefault10Desc, "description", "description");
 	}
 
 	public DatePickerComponent datePickerComponent() {

@@ -9,7 +9,7 @@ public class AgreementsComponent extends BrowserFunctions {
 	private By lblMerchantAgreements = By.xpath("//span[text()='Merchant Agreement']");
 	private By lblBusinessAgreements = By.xpath("//span[text()='Business Agreement']");
 	private By lblPrivacyPolicy = By.xpath("//span[text()='Privacy Policy']");
-	private By lblTermsOfService = By.xpath("//span[text()='Terms Of Service']");
+	private By lblTermsOfService = By.xpath("//span[text()='Terms of Service']");
 
 //	private By getAgreements(String Agreements) {
 //		return By.cssSelector(String.format(
