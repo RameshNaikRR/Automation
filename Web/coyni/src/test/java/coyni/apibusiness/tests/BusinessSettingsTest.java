@@ -28,7 +28,6 @@ public class BusinessSettingsTest {
 	BusinessProfilePage businessProfilePage;
 	NavigationMenuPage navigationMenuPage;
 	HomePage homePage;
-	
 
 	@BeforeTest
 	public void init() {
@@ -38,8 +37,7 @@ public class BusinessSettingsTest {
 		businessProfilePage = new BusinessProfilePage();
 		navigationMenuPage = new NavigationMenuPage();
 		homePage = new HomePage();
-	
-		
+
 	}
 
 	@Test
@@ -227,13 +225,13 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDBAInformation(String strParams) {
+	public void testDBAInformationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
+//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
 					.phoneNumberView();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
@@ -265,24 +263,11 @@ public class BusinessSettingsTest {
 			Thread.sleep(2000);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.phoneNumberView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.companyEmailView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.customerServiceView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.businessTypeView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickEditIcon();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().addressView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
 					.fillPhoneNumber(data.get("phoneNumber"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
 					.fillCompanyEmail(data.get("companyEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickSaveEnabled();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage().clickSave();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test DBA Information Edit  Failed due to Exception " + e);
@@ -294,93 +279,28 @@ public class BusinessSettingsTest {
 	public void testDBAInformationInvalidInfo(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.phoneNumberView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.companyEmailView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.customerServiceView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.businessTypeView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickEditIcon();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().addressView();
-//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-//					.fillPhoneNumber(data.get("phoneNumber"));
-//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-//					.fillCompanyEmail(data.get("companyEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickSaveEnabled();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
+					.fillPhoneNumber(data.get("phoneNumber"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
+					.fillCompanyEmail(data.get("companyEmail"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(500);
-				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-						.fillCompanyEmail(data.get("companyEmail"));
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
 						data.get("elementName"));
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(500);
-				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-						.fillCompanyEmail(data.get("phoneNumber"));
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
 						data.get("elementName"));
 			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("test DBAInfo  Failed due to Exception " + e);
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testDBAInformationInvalidInfoEdit(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			sideBarMenuComponent.clickBusinessSettings();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().dBANameView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.phoneNumberView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.companyEmailView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.customerServiceView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.businessTypeView();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickEditIcon();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage().addressView();
-//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-//					.fillPhoneNumber(data.get("phoneNumber"));
-//			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-//					.fillCompanyEmail(data.get("companyEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-					.clickSaveEnabled();
-			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(500);
-				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-						.fillCompanyEmail(data.get("companyEmail"));
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
-			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(500);
-				sideBarMenuComponent.businessSettingsSideBarMenuComponent().registrationDBAInformationPage()
-						.fillCompanyEmail(data.get("phoneNumber"));
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
-		}
-	}
-
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testCompanyInformationEdit(String strParams) {
@@ -466,26 +386,25 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent()
-			      .verifyHeading(data.get("heading"));  // Business Settings
+					.verifyHeading(data.get("heading")); // Business Settings
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().clickFees();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-			      .verifyFeesHeading(data.get("feesHeading"));  // Fees
+					.verifyFeesHeading(data.get("feesHeading")); // Fees
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-                  .verifyYourFeesHeading(data.get("yourFeesHeading"));  // Your Fees
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-			      .verifyYourFeesLabels();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-	              .verifyYourFeesCharges();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-	              .clickUserFees();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-	              .verifyUserFeesHeading(data.get("userFeesHeading"));  //  User Fees
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-                  .verifyUserFeesLabels();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
-                  .verifyUserFeesCharges();
-	        
-				
+					.verifyYourFeesHeading(data.get("yourFeesHeading")); // Your Fees
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.verifyYourFeesLabels();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.verifyYourFeesCharges();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.clickUserFees();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.verifyUserFeesHeading(data.get("userFeesHeading")); // User Fees
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.verifyUserFeesLabels();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().feesPage()
+					.verifyUserFeesCharges();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimitsView failed due to " + e);
 		}
@@ -499,32 +418,30 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent()
-			      .verifyHeading(data.get("heading"));  // Business Settings
+					.verifyHeading(data.get("heading")); // Business Settings
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().clickAccountLimits();
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-			      .verifYAccountLimitsHeading(data.get("accountLimitsHeading"));  // Account Limits 
+					.verifYAccountLimitsHeading(data.get("accountLimitsHeading")); // Account Limits
 			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-                  .verifyYourLimitsHeading(data.get("yourLimitsHeading"));  // Your Account Limits
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-			      .verifyYourLimitsLabels();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-	              .verifyYourLimitsAccountlimits();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-	              .clickUserLimits();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-	              .verifyUserLimitsHeading(data.get("userLimitsHeading"));  //  User Account Limits
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-                  .verifyUserLimitsLabels();
-	        sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
-                  .verifyUserLimitsAccountlimits();
-	        
-				
+					.verifyYourLimitsHeading(data.get("yourLimitsHeading")); // Your Account Limits
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyYourLimitsLabels();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyYourLimitsAccountlimits();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.clickUserLimits();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyUserLimitsHeading(data.get("userLimitsHeading")); // User Account Limits
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyUserLimitsLabels();
+			sideBarMenuComponent.businessSettingsPage().businessSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyUserLimitsAccountlimits();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAccountLimitsView failed due to " + e);
 		}
 
 	}
-	
 
 	@Test
 	public void testNotifications() {

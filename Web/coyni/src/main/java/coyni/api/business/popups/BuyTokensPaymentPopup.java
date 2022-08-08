@@ -1,12 +1,16 @@
 
 package coyni.api.business.popups;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class BuyTokensPaymentPopup extends BrowserFunctions {
-	private By lblHeading = By.xpath("//h1[text()='Buy Coyni Tokens']");
+	private By lblHeading = By.xpath("//h1[text()='Buy coyni Tokens']");
 	private By lblSubheading = By.className("mt-3 text-xs text-center text-cgy2");
 	private By txtAmount = By.cssSelector("#usd-amount-token");
 	private By btnCovert = By.cssSelector("#flip-button");
@@ -19,8 +23,8 @@ public class BuyTokensPaymentPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
 	}
 
-	public void verifySubHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblSubheading, "expHeading", expHeading);
+	public void verifySubHeading() {
+		new CommonFunctions().elementView(lblSubheading, "SubHeading");
 	}
 
 	public void clickCovert() {
@@ -53,5 +57,11 @@ public class BuyTokensPaymentPopup extends BrowserFunctions {
 
 	public BuyCoyniTokensPopup buyCoyniTokensPopup() {
 		return new BuyCoyniTokensPopup();
+	}
+
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 }

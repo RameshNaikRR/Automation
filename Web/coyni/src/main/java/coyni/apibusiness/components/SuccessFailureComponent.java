@@ -18,6 +18,11 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	private By failedHeading = By.xpath("");
 	private By btnDone = By.xpath("//button[text()='Done']");
 	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
+	private By referenceIdCopied = By.xpath("(//button[@data-event='click'])[2]");
+
+	public void clickReferenceID() {
+		click(referenceIdCopied, "Copied to ClipBoard");
+	}
 
 	public void verifyBankAddSuccesfulHeaading() {
 		new CommonFunctions().elementView(lblBankAddedSuccesful, "Bank Added Succesful");

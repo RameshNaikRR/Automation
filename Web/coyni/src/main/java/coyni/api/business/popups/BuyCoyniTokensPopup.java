@@ -6,7 +6,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class BuyCoyniTokensPopup extends BrowserFunctions {
-	private By lblHeading = By.xpath("//h1[text()='Buy Coyni Tokens']");
+	private By lblHeading = By.xpath("//h1[text()='Buy coyni Tokens']");
 	private By lblSubheading = By.xpath("//h2[text()='Choose Your Payment Method:']");
 	private By btnRadio = By.cssSelector("#radio-BANK-838");
 	private By lnkAddnewpaymentmethod = By.xpath("//span[text()='Add New Payment Method']");
@@ -49,5 +49,9 @@ public class BuyCoyniTokensPopup extends BrowserFunctions {
 
 	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
 		return new AddNewSignetAccountPopup();
+	}
+
+	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
+		return new BuyCoyniTokensNoPaymentPopup();
 	}
 }

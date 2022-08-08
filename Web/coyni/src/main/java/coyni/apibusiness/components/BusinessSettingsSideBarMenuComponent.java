@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.api.business.popups.SecretKeyPopup;
 import coyni.apibusiness.pages.AccountLimitsPage;
+import coyni.apibusiness.pages.DBAInfoEditPage;
 import coyni.apibusiness.pages.FeesPage;
 import coyni.apibusiness.pages.PreferencesPage;
 import coyni.apibusiness.pages.RegistrationDBAInformationPage;
@@ -197,13 +198,17 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	public WebhookComponent webhookComponent() {
 		return new WebhookComponent();
 	}
+
 	public FeesPage feesPage() {
 		return new FeesPage();
 	}
+
 	public AccountLimitsPage accountLimitsPage() {
 		return new AccountLimitsPage();
 	}
 
-	
+	public DBAInfoEditPage dbaInfoEditPage() {
+		return new DBAInfoEditPage();
+	}
 
 }

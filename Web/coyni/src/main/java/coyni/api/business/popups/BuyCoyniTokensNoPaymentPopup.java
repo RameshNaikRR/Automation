@@ -23,6 +23,10 @@ public class BuyCoyniTokensNoPaymentPopup extends BrowserFunctions {
 		return getElementsList(lblNoPayment, "").size();
 	}
 
+	public int getBankLabelSize() {
+		return getElementsList(BankAccounts, "").size();
+	}
+
 	public void selectBankAccount() {
 		objBrowserFunctions.waitForElement(BankAccounts, BrowserFunctions.waittime, WaitForElement.presence);
 		List<WebElement> optionsEles = objBrowserFunctions.getElementsList(BankAccounts, "BankAccounts");

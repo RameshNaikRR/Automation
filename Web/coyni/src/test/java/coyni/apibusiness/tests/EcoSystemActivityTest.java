@@ -30,7 +30,7 @@ public class EcoSystemActivityTest {
 	@Parameters({ "strParams" })
 	public void testEcosysyemActivityDashBoardView(String strParams) {
 
-		homePage.sideBarMenuComponent().clickEcosystemActivity();
+//		homePage.sideBarMenuComponent().clickEcosystemActivity();
 		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyHeading();
 		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyActivityDashBoard();
 		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyTransactionType();

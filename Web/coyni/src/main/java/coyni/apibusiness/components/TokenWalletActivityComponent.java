@@ -1,5 +1,9 @@
 package coyni.apibusiness.components;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni.api.business.popups.AddNewSignetAccountPopup;
@@ -245,4 +249,5 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
 	}
+
 }
