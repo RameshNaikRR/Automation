@@ -8,11 +8,13 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class BuyCoyniTokensPopup extends BrowserFunctions {
-	
+
 	private By txtAmount = By.xpath("//input[@name='usd']");
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy coyni Tokens')]");
 	private By btnAddNewPaymentMethod = By.xpath("//span[contains(text(),'Add New Payment Method')]");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
+	private By btnSignet = By.xpath("(//input[@name='buy-token-radio'])[3]");
+	private By btnBank = By.xpath("//input[@id='radio-BANK-301']");
 	private By lnkChange = By.xpath("//span[contains(text(),'Change')]");
 	private By lblDollar = By.xpath("//span[contains(text(),'$')]");
 	private By lblCYN = By.xpath("(//span[text()='CYN'])[2]");
@@ -26,6 +28,14 @@ public class BuyCoyniTokensPopup extends BrowserFunctions {
 
 	public void viewChangeLink() {
 		new CommonFunctions().elementView(lnkChange, "Change link");
+	}
+
+	public void clickBank() {
+		click(btnBank, "Bank");
+	}
+
+	public void clickSignet() {
+		click(btnSignet, "Signet");
 	}
 
 	public void clickChangeLink() {

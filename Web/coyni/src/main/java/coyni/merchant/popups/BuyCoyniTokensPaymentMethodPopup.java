@@ -1,7 +1,6 @@
 package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;

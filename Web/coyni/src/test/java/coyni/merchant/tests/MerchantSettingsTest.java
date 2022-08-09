@@ -667,6 +667,67 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testaddSignet(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.clickAddSignetAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().fillCity(data.get("city1"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().clickstate();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().selectState(data.get("state1"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode1"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.addNewSignetAccountPopup().clickSave();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testaddSignet failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddSignetAccount(String strParams) {
+		sideMenuBarComponent.clickMerchantSettings();
+		sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPaymentMethodsBtn();
+		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
+		testaddSignet(strParams);
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddSignetAccountInvalidDataValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.clickWithdrawToSignet();
+//			addSignet(strParams);
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testAddBankAccountWithOutPaymentMethod(String strParams) {
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 		testAddExternalBankAccount(strParams);

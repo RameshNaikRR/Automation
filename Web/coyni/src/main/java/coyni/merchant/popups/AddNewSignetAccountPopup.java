@@ -2,8 +2,8 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
-import coyni.apibusiness.components.SuccessFailureComponent;
-import coyni.customer.components.MailingAddressComponent;
+import coyni.merchant.components.MailingAddressComponent;
+import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -39,8 +39,8 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 		return new MailingAddressComponent();
 	}
 
-	public SuccessFailureComponent successFailureComponent() {
-		return new SuccessFailureComponent();
+	public SuccessFailurePopupCardComponent successFailureComponent() {
+		return new SuccessFailurePopupCardComponent();
 	}
 
 }

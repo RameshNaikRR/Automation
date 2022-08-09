@@ -148,7 +148,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
+//			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 //			String[] msg = data.get("errMessage").split(",");
