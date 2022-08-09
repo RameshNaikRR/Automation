@@ -1,4 +1,4 @@
-package coyni.admin.tests;
+	package coyni.admin.tests;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -172,12 +172,14 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickProfiles();
-			homePage.sideBarComponent().clickIndividuals();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.verifyID(data.get("expID"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().verifyID(data.get("expID"));
+				Thread.sleep(1000);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.verifyUserName(data.get("expUserName"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
@@ -216,28 +218,30 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickProfiles();
-			homePage.sideBarComponent().clickIndividuals();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.verifyID(data.get("expID"));
+		//	homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+			//		.clickUserDetails();
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.clickUserDetails();
+					.userDetailsComponent().verifyHeading(data.get("expUserHeading"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().verifyHeading(data.get("expHeading"));
+					.userDetailsComponent().verifyUserName(data.get("userName"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().verifyUserName(data.get("userName"));
+					.userDetailsComponent().verifyAccountID(data.get("expAccountID"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().verifyAccountID(data.get("expAccountID"));
+					.userDetailsComponent().verifyAccountStatus(data.get("expAccountStatus"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().verifyAccountStatus(data.get("expAccountStatus"));
+					.userDetailsComponent().getPhoneNumber();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().getPhoneNumber();
+					.userDetailsComponent().getEmail();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().getEmail();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.UserDetailsComponent().getAddress();
+					.userDetailsComponent().getAddress();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
@@ -250,16 +254,32 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickProfiles();
-			homePage.sideBarComponent().clickIndividuals();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.verifyID(data.get("expID"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.clickPaymentMethods();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.PaymentMethodsComponent().verifyHeading(data.get("expHeading"));
+			.paymentMethodsComponent().verifyHeading(data.get("expPaymentMethodHeading"));
+			Thread.sleep(2000);
+			if(homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().verifyNoPaymentMethods()==1) {
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().viewNoPaymentMethods();
+			}
+			if(homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().verifyCardslist()==1) {
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().cardDetails();
+			}
+			if(homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().verifyBankList()==1) {
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().paymentMethodsComponent().bankDetails();
+			}
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+			.paymentMethodsComponent().verifyHeading(data.get("expPaymentMethodHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
@@ -272,10 +292,12 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickProfiles();
-			homePage.sideBarComponent().clickIndividuals();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.verifyID(data.get("expID"));
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
@@ -293,7 +315,7 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickCoyniEmployees();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
@@ -317,7 +339,7 @@ public class ProfilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickCoyniEmployees();
-			homePage.sideBarComponent().profileComponent().verifyHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
 
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);

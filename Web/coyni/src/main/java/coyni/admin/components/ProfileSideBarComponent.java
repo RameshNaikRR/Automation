@@ -82,10 +82,10 @@ public class ProfileSideBarComponent extends BrowserFunctions{
 	public  void clickActivityLog() {
 		click(getMenuItems("Activity Log"), "Activity Log");
 	}
-public UserDetailsComponent UserDetailsComponent() {
-	return UserDetailsComponent();
+public UserDetailsComponent userDetailsComponent() {
+	return new UserDetailsComponent();
 }
-public PaymentMethodsComponent PaymentMethodsComponent() {
-	return PaymentMethodsComponent();
+public PaymentMethodsComponent paymentMethodsComponent() {
+	return new PaymentMethodsComponent();
 }
 }

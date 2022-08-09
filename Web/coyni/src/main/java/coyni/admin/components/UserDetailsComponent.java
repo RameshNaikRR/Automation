@@ -7,16 +7,16 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class UserDetailsComponent extends BrowserFunctions {
-	private By lblHeading = By.xpath("");
-	private By lblUserName = By.xpath("");
-	private By lblAccountStatus = By.xpath("");
-	private By lblAccountID = By.xpath("");
-	private By lblPhoneNumber = By.xpath("");
-	private By lblEmail = By.xpath("");
-	private By lblAddress = By.xpath("");
+	private By lblUserDetailsHeading = By.xpath("//div[contains(@class,'UserDetails_container')]//.//span[text()='User Details']");
+	private By lblUserName = By.xpath("//p[contains(text(),'Taraka Ma')]");
+	private By lblAccountStatus = By.xpath("//div[contains(@class,'UserDetails')]//span[text()='Active']");
+	private By lblAccountID = By.xpath("//p[contains(text(),'Account ID: C-253')]");
+	private By lblPhoneNumber = By.xpath("(//div[contains(@class,'flex-row')]//h3)[1]");
+	private By lblEmail = By.xpath("(//div[contains(@class,'flex-row')]//h3)[2]");
+	private By lblAddress = By.xpath("//div[contains(@class,'d break-words')]");
 	
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblUserDetailsHeading, "Heading", expHeading);
 	}
 	public void verifyUserName(String expUserName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "User Name", expUserName);

@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class ProfileComponent extends BrowserFunctions {
 
-	private By lblHeading = By.cssSelector("");
+	private By lblPersonalHeading = By.xpath("//span[contains(text(),'Personal')]");
 	private By txtSearch = By.cssSelector("input[class*='search_bar']");
 	private By btnFilter = By.cssSelector("//div[@class='flex flex-row mr-5']");
 	private By btnExport = By.cssSelector("");
@@ -22,8 +22,8 @@ public class ProfileComponent extends BrowserFunctions {
 		click(lblApiBusiness, "Api Business");
 	}
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading ", expHeading);
+	public void verifyPersonalHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblPersonalHeading, "Page Heading ", expHeading);
 	}
 
 	public void fillSearch(String text) {

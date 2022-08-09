@@ -87,9 +87,9 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSubMenuItems("Commission Account"), "Commission Account");
 	}
 
-	public void clickIndividuals() {
-		clickProfiles();
-		click(getSubMenuItems("Individuals"), "Individuals");
+	public void clickPersonals() {
+		//clickProfiles();
+		click(getSubMenuItems("Personal"), "Personal");
 	}
 
 	public void clickBusinesses() {
