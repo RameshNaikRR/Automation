@@ -123,7 +123,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTotalWithdraw() {
-		clickAccounting();
+		
 		click(getSubMenuItems("Total Withdraw"), "Total Withdraw");
 	}
 

@@ -229,8 +229,11 @@ public class CoyniPortalTest {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOn7Days();
 			} else if (strParams1.equalsIgnoreCase("Last Month")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnLastMonth();
-			} else {
+			} else if (strParams1.equalsIgnoreCase("Month to Date")){
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickMonthTODate();
+			}
+			else {
+				ExtentTestManager.setInfoMessageInReport("Export is done");
 			}
 			Thread.sleep(2000);
 			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnExport();

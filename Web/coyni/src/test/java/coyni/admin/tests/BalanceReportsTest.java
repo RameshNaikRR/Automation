@@ -73,8 +73,8 @@ public class BalanceReportsTest {
 			} else {
 				homePage.sideBarComponent().exportSelectedTransactions().clickDropDown(data.get("dropDown"));
 				//homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickDeselectAll();
-				homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions()
-						.clickCheckBox(data.get("checkBox"));
+//				homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions()
+//						.clickCheckBox(data.get("checkBox"));
 				
 				
 		 homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickExport();

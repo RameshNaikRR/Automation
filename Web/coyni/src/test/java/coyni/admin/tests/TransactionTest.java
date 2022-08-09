@@ -43,8 +43,8 @@ public class TransactionTest {
 			homePage.sideBarComponent().transactionPage().getDescription();
 			homePage.sideBarComponent().transactionPage().getAmount();
 			homePage.sideBarComponent().transactionPage().getStatus();
-			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
-					.verifyTableItemsCount(data.get("query"));
+//			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
+//					.verifyTableItemsCount(data.get("query"));
 			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
 					.verifyPageNumbersWithCount();
 			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
