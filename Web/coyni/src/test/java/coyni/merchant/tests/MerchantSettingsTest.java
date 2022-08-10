@@ -432,6 +432,66 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testDBAInformationAddRemoveImage(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.verifyHeading(data.get("dbaInformationHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickNoImage();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+//					.clickImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().navigationComponent().clickClose();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickNoImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().clickUploadNewImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().cropYourImagePopup().navigationComponent().clickClose();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickNoImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().clickUploadNewImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().cropYourImagePopup().navigationComponent().clickBack();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().clickUploadNewImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessImageLogoPopup().cropYourImagePopup()
+					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickSave();
+			Thread.sleep(5000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessLogoPopup().navigationComponent().clickClose();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessLogoPopup().clickRemove();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.businessLogoPopup().removeBusinessLogoPopup().clickRemove();
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testDBAInformationAddRemoveImage failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBeneficiaryOwners(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

@@ -3,6 +3,9 @@ package coyni.merchant.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.merchant.popups.AccountProfileImagePopup;
+import coyni.merchant.popups.BusinessImageLogoPopup;
+import coyni.merchant.popups.BusinessLogoPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -15,6 +18,9 @@ public class DBAInformationPage extends BrowserFunctions {
 		return By.xpath(String.format("//p[.='%s']", Lables));
 	}
 
+	private By lblNoImage = By.xpath("//div[contains(@class,'justify-between')]//span[contains(@class,'text-cwhite')]");
+	private By lblImage = By.xpath("//div[contains(@class,'justify-between')]//img[contains(@src,'profile-images')]");
+	private By btnEditIcon = By.xpath("//img[contains(@class,'w-4 h-4')]");
 	private By lblDBAname = By.xpath("(//div[contains(@class,'_sidehead')])[1]/following-sibling::div[1]/p");
 	private By lnkCancelMerchanytAccount = By.xpath("//button[.='Cancel Merchant Account']");
 	private By lblWebsiteName = By.xpath("(//div[contains(@class,'_sidehead')])[2]/following-sibling::div[1]/p");
@@ -23,6 +29,27 @@ public class DBAInformationPage extends BrowserFunctions {
 
 	private By customerServiceDetails(String csd) {
 		return By.xpath(String.format("//input[@name='%s']", csd));
+	}
+
+	public void clickSave() {
+		click(btnSave, "Save");
+	}
+
+	public void clickNoImage() {
+		click(lblNoImage, "No Image");
+	}
+
+	public void clickImage() {
+		// moveToElement(lblImage, "Image");
+		if (verifyElementDisplayed(lblImage, "Image")) {
+			click(lblImage, "Image");
+		} else {
+			click(lblNoImage, "No Image");
+		}
+	}
+
+	public void clickEditImage() {
+		click(btnEditIcon, "Edit Icon");
 	}
 
 	private By dbaAddressDetails(String Address) {
@@ -187,4 +214,16 @@ public class DBAInformationPage extends BrowserFunctions {
 //			ExtentTestManager.setInfoMessageInReport("Save button is in disabled mode");
 //		}
 //	}
+
+	public BusinessImageLogoPopup businessImageLogoPopup() {
+		return new BusinessImageLogoPopup();
+	}
+
+	public AccountProfileImagePopup accountProfileImagePopup() {
+		return new AccountProfileImagePopup();
+	}
+
+	public BusinessLogoPopup businessLogoPopup() {
+		return new BusinessLogoPopup();
+	}
 }
