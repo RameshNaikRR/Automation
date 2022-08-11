@@ -432,66 +432,6 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDBAInformationAddRemoveImage(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantSettings();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.verifyHeading(data.get("dbaInformationHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickNoImage();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-//					.clickImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickEditImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().navigationComponent().clickClose();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickNoImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickEditImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().clickUploadNewImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().cropYourImagePopup().navigationComponent().clickClose();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickNoImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickEditImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().clickUploadNewImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().cropYourImagePopup().navigationComponent().clickBack();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().clickUploadNewImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessImageLogoPopup().cropYourImagePopup()
-					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickSave();
-			Thread.sleep(5000);
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickEditImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessLogoPopup().navigationComponent().clickClose();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.clickEditImage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessLogoPopup().clickRemove();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.businessLogoPopup().removeBusinessLogoPopup().clickRemove();
-
-		} catch (Exception e) {
-
-			ExtentTestManager.setFailMessageInReport("testDBAInformationAddRemoveImage failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testBeneficiaryOwners(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -684,12 +624,13 @@ public class MerchantSettingsTest {
 //		}
 //	}
 
-	@Test
-	@Parameters({ "strParams" })
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
+			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickIamReady();
 			Thread.sleep(5000);
@@ -697,21 +638,24 @@ public class MerchantSettingsTest {
 			Thread.sleep(8000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.switchToWindow();
+
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.verifyNewWindowHeading();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.fillBankName(data.get("bankName"));
+					.enterBankName(data.get("expBankName"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.clickOnBankName();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.fillUserName(data.get("userName"));
-			Thread.sleep(2000);
+					.enterUserName(data.get("expUserName"));
+			;
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.fillPassword(data.get("password1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickEnter();
-			Thread.sleep(10000);
+					.enterPassword(data.get("expPassword"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickNext();
+			;
+			Thread.sleep(5000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().unSelectBank();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickBankNext();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+					.clickUncheckBank();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.switchToWindow();
 			Thread.sleep(2000);
@@ -722,67 +666,6 @@ public class MerchantSettingsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testaddSignet(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.clickAddSignetAccount();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("addressLine1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress2(data.get("addressLine2"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillCity(data.get("city1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().clickstate();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().selectState(data.get("state1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().clickSave();
-
-		}
-
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testaddSignet failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddSignetAccount(String strParams) {
-		sideMenuBarComponent.clickMerchantSettings();
-		sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPaymentMethodsBtn();
-		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
-		testaddSignet(strParams);
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddSignetAccountInvalidDataValidations(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickTokenAccount();
-//			tokenAccountPage.clickWithdrawToSignet();
-//			addSignet(strParams);
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-
 		}
 	}
 
@@ -799,8 +682,8 @@ public class MerchantSettingsTest {
 		try {
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyBankName();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickDeleteBank();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
-					.verifyRemovePaymentHeading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
+//					.verifyHeading(data.get);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();

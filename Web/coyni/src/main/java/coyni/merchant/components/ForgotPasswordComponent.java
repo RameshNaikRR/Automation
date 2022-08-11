@@ -1,8 +1,6 @@
 package coyni.merchant.components;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -42,8 +40,9 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(heading, "Forgot Password Heading", expHeading);
 	}
 
-	public void fillEmail(String email) {
+	public void fillEmail(String email) throws Exception {
 		enterText(txtEmail, email, "Email");
+		clickTab();
 	}
 
 	public void clickNext() {
@@ -82,8 +81,9 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 //		enterText(txtEnterPassword, "Enter Password", password);
 //	}
 
-	public void fillConfirmPassword(String confirmPassword) {
+	public void fillConfirmPassword(String confirmPassword) throws Exception {
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+		clickTab();
 	}
 
 	public void clickSubmit() {
@@ -144,10 +144,11 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 				"verification message is displayed");
 		new CommonFunctions().verifyLabelText(lblMessage, "Sucess/Failure Message", expMessage);
 	}
+
 	public void clickIcon() {
 		click(btnIcon, "Eye Icon");
 	}
-	
+
 	public void verifyPasswordMaskedView(String attribute, String password) {
 		String attributeValue = getAttributeValue(txtEnterPassword, attribute, password);
 		if (attributeValue.contains("password")) {

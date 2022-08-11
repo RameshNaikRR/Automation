@@ -11,6 +11,7 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//h1[text()='Transaction In Progress']");
 	private By lblDescription = By.xpath("//p[contains(.,'We are processing')]");
+
 	private By lnkLearnMore = By.xpath("//span[.='Learn More']");
 	private By lblAmount = By.xpath("//div[contains(@class,'BankInstantPayWithdrawModal_a')]");
 	private By lblAmountMsg = By
@@ -25,12 +26,17 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 		cf.verifyLabelText(lblHeading, "Transaction InProgress", expHeading);
 	}
 
-	public void verifyDescription(String Description) {
-		cf.verifyLabelText(lblDescription, "Description", Description);
+	public void verifyDescription() {
+		String text = getText(lblDescription, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
-	public void lnkLearnmore() {
+	public void clickLearnMoreLnk() {
 		click(lnkLearnMore, "Click LearnMore");
+	}
+
+	public void verifyLearnMoreLnk() {
+		cf.elementView(lnkLearnMore, "Learn more lnk");
 	}
 
 	public void verifyAmount() {
@@ -58,7 +64,11 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 		click(lnkReferenceID, "ReferenceID Link");
 		ExtentTestManager.setInfoMessageInReport("Reference ID is :" + getCopiedData());
 	}
-
+	
+	/**
+	 * this is used to perform click action
+	 */
+	
 	public void clickDone() {
 		click(btnDone, "Click Done");
 	}

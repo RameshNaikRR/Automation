@@ -1,46 +1,76 @@
 package coyni.merchant.popups;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
+import java.awt.RenderingHints.Key;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
+import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.WaitForElement;
 
-public class AddBankAccountPopup extends BrowserFunctions {
+public class AddBankAccountPopup<E> extends BrowserFunctions {
 
+	private By lblHeading = By.xpath("//h1[.='Add Bank Account']");
 	private By btnIamReady = By.xpath("//button[contains(text(),'Ready')]");
+	private By lblDoNotNavigate = By.xpath("//h2[contains(.,'Do Not')]");
+	private By lblDescription = By.xpath("//p[contains(.,'coyni uses')]");
+	private By lblDescription1 = By.xpath("//p[contains(.,'Please complete')]");
+	private By lnkLearnMore = By.xpath("//strong[.='Learn More']");
+
 	private By txtBankName = By.xpath("//input[@id='searchbar']");
-	private By lnkLearnMore = By.cssSelector(" ");
 	private By btnBack = By.cssSelector(" ");
 	private By headingNewPage = By.xpath("//h1[contains(text(),'Add Accounts')]");
-	private By headingAddBankAccount = By.xpath("//h1[contains(text(),'Add Bank Account')]");
+//	private By headingAddBankAccount = By.xpath("//h1[contains(text(),'Add Bank Account')]");
 	private By lnkBankName = By.xpath("(//div[@class='autoResultBankName'])[1]");
-	private By txtUserName = By.xpath("//input[@name='acctForm:j_idt145:0:login_']");
-	private By txtPassword = By.xpath("//input[@name='acctForm:j_idt149:0:password_']");
-	private By btnNext = By.xpath("//a[@id='acctForm:addFiNext']");
-	private By btnNextBank = By.xpath("//a[@id='acctForm:classNext']");
-	private By chckBoxBank1 = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
-	private By chckBoxBank2 = By.xpath("(//div[@class='custom-control custom-checkbox'])[2]");
-	private By chckBoxBank3 = By.xpath("(//div[@class='custom-control custom-checkbox'])[3]");
-	private By lnkBank = By.cssSelector("#filist>li:nth-of-type(1)");
+	private By txtUserName = By.xpath("//label[.='UserName']/following-sibling::input[1]");
+	private By txtPassword = By.xpath("//input[@type='password']");
+	private By btnNext = By.xpath("(//span[text()='Next'])[1]");
+	private By chckbox = By.xpath("//div[contains(@class,'custom-checkbox')]");
+//	private By chckBoxBank1 = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
+//	private By chckBoxBank2 = By.xpath("(//div[@class='custom-control custom-checkbox'])[2]");
 
-	public void clickIamReady() {
-		click(btnIamReady, "click IamReady");
+	public void verifyHeading() {
+		String text = getText(lblHeading, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyFiservBankDescription() {
+		String text = getText(lblDescription, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyLnkLearnMore() {
+		new CommonFunctions().elementView(lnkLearnMore, "Learn more link ");
 	}
 
 	public void clickLearnMore() {
 		click(lnkLearnMore, "Learm More");
 	}
 
-	public void clickEnter() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+	public void clickIamReady() {
+		click(btnIamReady, "click IamReady");
+	}
+
+	public void verifyDoNotNavigateLbl() {
+		String text = getText(lblDoNotNavigate, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyDescription() {
+		String text = getText(lblDescription1, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
 	public void clickBack() {
@@ -51,32 +81,26 @@ public class AddBankAccountPopup extends BrowserFunctions {
 		new CommonFunctions().switchTodWindow();
 	}
 
-	public void verifyHeading() {
-		new CommonFunctions().elementView(headingAddBankAccount, "Heading Add Account Bank");
-	}
-
 	public void verifyNewWindowHeading() {
 		new CommonFunctions().elementView(headingNewPage, "Heading New Page");
 	}
 
-	public void fillBankName(String bankName) throws AWTException {
-		enterText(txtBankName, bankName, "bankName");
-	}
-
-	public void selectBank() {
-		click(lnkBank, "Bank");
+	public void enterBankName(String expBanName) {
+		click(txtBankName, "");
+		enterText(txtBankName, expBanName, "Bank Name");
 	}
 
 	public void clickOnBankName() {
 		click(lnkBankName, "Bank Name");
 	}
 
-	public void fillUserName(String userName) {
-		enterText(txtUserName, userName, "userName");
+	public void enterUserName(String expUserName) {
+		enterText(txtUserName, expUserName, "User Name");
+//		click(txtPassword, "Password");
 	}
 
-	public void fillPassword(String password1) {
-		enterText(txtPassword, "cashedge1", "Password");
+	public void enterPassword(String expPassword) {
+		enterText(txtPassword, expPassword, " Password");
 	}
 
 	public void clickNext() {
@@ -84,19 +108,27 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void unSelectBank() {
-//		if (verifyElementDisplayed(chckBoxBank3, "Bank")) {
-//			click(chckBoxBank3, "Bank");
-//
-//		} else if (verifyElementDisplayed(chckBoxBank2, "Bank")) {
-//			click(chckBoxBank2, "UnSelect Bank");
-//		} else {
-//			//click(chckBoxBank1, "UnSelect Bank");
-		click(chckBoxBank2, "UnSelect Bank");
-
+		WebDriver driver = DriverFactory.getDriver();
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.loader")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.loader")));
+		List<WebElement> List = getElementsList(chckbox, "");
+		int size = List.size();
+		if (size == 1) {
+			ExtentTestManager.setInfoMessageInReport("We have only one bank");
+			Object[] windowHandles = driver.getWindowHandles().toArray();
+			driver.close();
+			driver.switchTo().window(windowHandles[0].toString());
+		} else {
+			List.get(0).click();
+			ExtentTestManager.setInfoMessageInReport("Unselected the extra bank");
+			click(btnNext, "Click Next");
+			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+		}
 	}
 
-	public void clickBankNext() {
-		click(btnNextBank, "Click Next");
+	public void clickUncheckBank() {
+		click(btnNext, "Click Next");
 	}
 
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
@@ -106,5 +138,4 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
 }

@@ -26,6 +26,7 @@ public class LoginTest {
 
 	}
 
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
@@ -95,7 +96,7 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			loginPage.clickTab();
+//			loginPage.clickTab();
 			loginPage.clickNext();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 //			 if (!data.get("invalidAttempts").isEmpty()) {
@@ -148,7 +149,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-//			loginPage.authyComponent().clickSms();
+			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 //			String[] msg = data.get("errMessage").split(",");
@@ -167,7 +168,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
 		}
 	}
-
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginWithResendOTP(String strParams) {
@@ -465,7 +466,7 @@ public class LoginTest {
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
-			loginPage.forgotPasswordComponent().clickTab();
+//			loginPage.forgotPasswordComponent().clickTab();
 			loginPage.forgotPasswordComponent().clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Thread.sleep(1000);
@@ -538,7 +539,7 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().verifyCreatePasswordHeading(data.get("CreatePasswordHeading"));
 			loginPage.forgotPasswordComponent().fillPassword(data.get("enterPassword"));
 			loginPage.forgotPasswordComponent().fillConfirmPassword(data.get("confirmPassword"));
-			loginPage.forgotPasswordComponent().clickTab();
+//			loginPage.forgotPasswordComponent().clickTab();
 			loginPage.forgotPasswordComponent().clickSubmit();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));

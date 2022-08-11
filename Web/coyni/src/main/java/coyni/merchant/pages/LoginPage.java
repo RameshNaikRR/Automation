@@ -42,8 +42,9 @@ public class LoginPage extends BrowserFunctions {
 		enterText(txtEmail, userName, "Email");
 	}
 
-	public void fillPassword(String password) {
+	public void fillPassword(String password) throws AWTException {
 		enterText(txtPassword, password, "Password");
+		clickTab();
 	}
 
 	public void clickForgotEmail() {

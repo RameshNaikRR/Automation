@@ -1,6 +1,11 @@
 package coyni.merchant.tests;
 
+import java.net.URL;
 import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -12,7 +17,6 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantActivityTest {
-
 	SideMenuBarComponent sideMenuBarComponent;
 	MerchantActivityComponent merchantActivityComponent;
 	MerchantTransactionsPage merchantTransactionsPage;
@@ -64,9 +68,8 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().getNetAmount();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testDashBoardMerchantBalance failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(" testDashBoardProcessingVolume failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -78,11 +81,9 @@ public class MerchantActivityTest {
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().getAccountBalance();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testDashBoardMerchantBalance failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -99,26 +100,8 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testDashBoardMerchantBalance failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(" testDashBoardBatchPayOut failed due to exception " + e);
 		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testDashBoardBatchPayOutBatchNow(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-			merchantActivityComponent.clickDashBoard();
-			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
-			merchantActivityComponent.dashBoardPage().clickBatchNow();
-			merchantActivityComponent.dashBoardPage().authyComponent().fillInput(data.get("code"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testDashBoardBatchPayOutBatchNow failed due to exception " + e);
-		}
-
 	}
 
 	@Test
@@ -132,9 +115,8 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().clickFullTransactionHistory();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testDashBoardMerchantBalance failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(" testDashBoardTransactions failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -160,7 +142,6 @@ public class MerchantActivityTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testTransactionList failed due to exception " + e);
 		}
-
 	}
 
 	public void testExportSelectedTransactions(String strParams, String strParams1) {
@@ -642,7 +623,7 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 //			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
@@ -653,43 +634,6 @@ public class MerchantActivityTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionDetailsSaleOrder Failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testTransactionRefund(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().clickRefund();
-			merchantActivityComponent.transactionDetailsComponent().clickFullAmount();
-			merchantActivityComponent.transactionDetailsComponent().fillReason(data.get("reason"));
-			merchantActivityComponent.transactionDetailsComponent().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionRefund Failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testTransactionPartialRefund(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().clickRefund();
-			merchantActivityComponent.transactionDetailsComponent().clickFullAmount();
-			merchantActivityComponent.transactionDetailsComponent().fillReason(data.get("reason"));
-			merchantActivityComponent.transactionDetailsComponent().clickNext();
-			merchantActivityComponent.transactionDetailsComponent().clickSubmit();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTransactionPartialRefund Failed due to Exception " + e);
 		}
 	}
 
@@ -731,4 +675,21 @@ public class MerchantActivityTest {
 					.setFailMessageInReport("testTransactionDetailsMonthlyServiceFee Failed due to Exception " + e);
 		}
 	}
+
+//	@Test
+//	public void DashBoardScreenResolutions() {
+//		try {
+//			DesiredCapabilities dc = new DesiredCapabilities();
+//			dc.setCapability("resolution", "1123x1080");
+//			URL url = new URL("www.facebook.com");
+//			WebDriver driver = new RemoteWebDriver(url, dc);
+//			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+//			merchantActivityComponent.clickDashBoard();
+//			merchantActivityComponent.dashBoardPage().verifyHeading("Merchant Dashboard");
+//			ExtentTestManager
+//					.setInfoMessageInReport("Merchant Dashboard heading is displayed as per screeen resolution");
+//		} catch (Exception e) {
+//			ExtentTestManager.setInfoMessageInReport("Screen resolutions is failed");
+//		}
+//	}
 }

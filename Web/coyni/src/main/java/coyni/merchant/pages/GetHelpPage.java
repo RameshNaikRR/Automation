@@ -20,7 +20,7 @@ public class GetHelpPage extends BrowserFunctions {
 
 	private By country = By.xpath("//div[text()='Country']/parent::div");
 
-	private By phoneNumber = By.xpath("(//input[@class='form-input'])[5]");
+	private By phoneNumber = By.cssSelector("input[aria-label='Phone number without country code']");
 
 	private By inquiryType = By.xpath("//div[@class=' css-tlfecz-indicatorContainer']");
 
@@ -90,6 +90,7 @@ public class GetHelpPage extends BrowserFunctions {
 	}
 
 	public void fillPhoneNumber(String PhoneNumber) {
+		click(phoneNumber, "Phone Number");
 		enterText(phoneNumber, PhoneNumber, "Phone Number");
 	}
 

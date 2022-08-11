@@ -1,6 +1,10 @@
 package coyni.merchant.popups;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
@@ -31,7 +35,13 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void verifyDescription(String Description) {
-		cf.verifyLabelText(lblDescription, "Description", Description);
+		int size = getElementsList(lblDescription, "").size();
+		if (size == 1) {
+			cf.verifyLabelText(lblDescription, "Description", Description);
+		} else {
+			new NavigationComponent().clickBack();
+			cf.verifyLabelText(lblDescription, "Description", Description);
+		}
 	}
 
 	public void clickBank1RadioBtn() {
@@ -52,12 +62,28 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 		cf.elementView(getDeleteIcon("2"), "Delete Icon ");
 	}
 
+	public void clickDelete() {
+		int size = getElementsList(getDeleteIcon("1"), "").size();
+		if (size == 1) {
+			click(getDeleteIcon("1"), "Delete icon");
+		} else {
+			new NavigationComponent().clickBack();
+			click(getDeleteIcon("1"), "Delete icon");
+		}
+	}
+
 	public void verifyAddNewBankAccountBtn() {
 		cf.elementView(btnAddNewBankAccount, "Add New Bank Account");
 	}
 
 	public void clickAddNewBankAccountBtn() {
-		click(btnAddNewBankAccount, "Add New Bank Account");
+		int size = getElementsList(btnAddNewBankAccount, "").size();
+		if (size == 1) {
+			click(btnAddNewBankAccount, "Add New Bank Account");
+		} else {
+			new NavigationComponent().clickBack();
+			click(btnAddNewBankAccount, "Add New Bank Account");
+		}
 	}
 
 	public void verifyNextBtn() {
@@ -74,5 +100,13 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+	public AddBankAccountPopup addBankAccountPopup() {
+		return new AddBankAccountPopup();
+	}
+
+	public RemovePaymentMethodPopup removePaymentMethodPopup() {
+		return new RemovePaymentMethodPopup();
 	}
 }

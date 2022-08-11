@@ -6,6 +6,7 @@ import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class VerifyYourIdentityPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[.='Verify Your Identity']");
@@ -17,12 +18,14 @@ public class VerifyYourIdentityPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
-	public void verifyDescription(String Description) {
-		new CommonFunctions().verifyLabelText(lblDescription, "Description", Description);
+	public void verifyDescription() {
+		String text = getText(lblDescription, "");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
-	public void verifyMsg(String Message) {
-		enterText(lblMsg, Message, "Message");
+	public void verifyMsg() {
+		String msg = getText(lblMsg, "");
+		ExtentTestManager.setInfoMessageInReport(msg+ " is displayed");
 	}
 
 	public void verifyLink() {
@@ -39,5 +42,9 @@ public class VerifyYourIdentityPopup extends BrowserFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+	
+	public TransactionInProgessPopup transactionInProgessPopup() {
+		return new TransactionInProgessPopup();
 	}
 }

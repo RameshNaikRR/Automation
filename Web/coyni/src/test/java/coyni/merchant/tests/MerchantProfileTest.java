@@ -1,4 +1,4 @@
-package coyni.merchant.tests;
+	package coyni.merchant.tests;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.customer.pages.NavigationMenuPage;
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.NavigationComponent;
@@ -24,7 +23,6 @@ import coyni.merchant.popups.EditPhoneNumberPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
-import ilabs.api.utilities.DBConnection;
 
 public class MerchantProfileTest {
 

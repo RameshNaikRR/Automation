@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import coyni.merchant.pages.ExportfilesPage;
 import coyni.merchant.pages.GetHelpPage;
 import coyni.merchant.pages.HomePage;
 import ilabs.WebFramework.Runner;
@@ -37,12 +36,12 @@ public class GetHelpTest {
 			getHelpPage.selectInquiryType(data.get("inquiryType"));
 			getHelpPage.fillAccountIDNumber(data.get("accountID"));
 			getHelpPage.selectCountry(data.get("country"));
+			Thread.sleep(2000);
 			getHelpPage.fillPhoneNumber(data.get("phoneNumber"));
 			getHelpPage.clickOnSubmit();
 			// getHelpPage.verifyMessage(data.get("getHelpmessage"));
 			getHelpPage.clickOnSubmitAgain();
 //			getHelpPage.verifyHeading(data.get("expHeading"));
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testGetHelp is failed due to exception " + e);
 		}
