@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.AddNewPaymentComponent;
 import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -21,6 +22,8 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	private By lblAmountDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblLimitDescription = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]");
+	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
+	
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblBuyTokenBankAccHeading, "Page Heading", expHeading);
@@ -47,6 +50,10 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 		click(btnChangePaymentMethod, "Change Payment Method");
 	}
 
+	public void clickAddNewPaymentMethod() {
+		click(btnAddNewPaymentMethod, "Add New Payment Method");
+	}
+	
 	public void getPaymentMethodDetails() {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Name is : " + getText(btnChangePaymentMethod));
 		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Number is : " + getText(lblBankNumber));
@@ -90,4 +97,11 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 		return new OrderPreviewPopup();
 	}
 
+	public AddNewPaymentComponent addNewPaymentComponent() {
+		return new AddNewPaymentComponent();
+	}
+	
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
 }

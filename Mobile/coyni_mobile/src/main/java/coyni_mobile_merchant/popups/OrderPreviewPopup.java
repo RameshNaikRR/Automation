@@ -71,7 +71,6 @@ public class OrderPreviewPopup extends MobileFunctions {
 
 	public void slideToConfirm() {
 		new CommonFunctions().swipeElement(btnSideView, Direction.RIGHT);
-
 	}
 
 	public SuccessFailureComponent successFailureComponent() {
@@ -97,12 +96,11 @@ public class OrderPreviewPopup extends MobileFunctions {
 	public void getReceiptentAddress() {
 		ExtentTestManager.setInfoMessageInReport("Receiptent Address : " + getText(lblReceiptentAddress));
 	}
-	
+
 	public void getReasonForRefund() {
 		ExtentTestManager.setInfoMessageInReport("Reason For Refund : " + getText(lblReasonForRefund));
 	}
 
-	
 	public By getPaymentItems(String last4digits) {
 		return By.xpath(String.format("//*[contains(@text,'%s')]", last4digits));
 	}
@@ -155,7 +153,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getTotal();
 		swipeSlideToConfirm();
 	}
-	
+
 	public void refundPreviewDetails(String expHeading) {
 		verifyPageHeading(expHeading);
 		getAmount();

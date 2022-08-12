@@ -8,6 +8,7 @@ import coyni_mobile_merchant.components.DaysDropDownComponent;
 import coyni_mobile_merchant.components.NotificationComponent;
 import coyni_mobile_merchant.components.ReserveBalanceComponent;
 import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -15,7 +16,7 @@ import io.appium.java_client.MobileBy;
 public class BusinessTokenAccountPage extends MobileFunctions {
 
 	private By btnDashBoard = MobileBy.xpath("//*[contains(@resource-id,'dashboard_tab')]");
-	private By btnProfile = MobileBy.xpath("//*[contains(@resource-id,'tv_profile_text')]");
+	private By btnProfile = MobileBy.xpath("//*[contains(@resource-id,'profile_icon')]");
 	private By btnMenuIcon = MobileBy.xpath("//*[contains(@resource-id,'iv_menu_tab')]");
 	private By btnAccount = MobileBy.xpath("//*[contains(@resource-id,'account_tab')]");
 	private By btnTransactions = MobileBy.xpath("//*[contains(@resource-id,'transactions_tab')]");
@@ -48,6 +49,10 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(btnProfile, "Profile");
 	}
 
+	public int verifyProfile() {
+		 return DriverFactory.getDriver().findElements(btnProfile).size();
+	}
+	
 	public void clickDashBoard() {
 		new CommonFunctions().elementView(btnDashBoard, "Dash Board");
 		click(btnDashBoard, "Dash Board");

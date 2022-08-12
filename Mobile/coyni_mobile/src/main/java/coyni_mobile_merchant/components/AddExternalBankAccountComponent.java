@@ -25,6 +25,7 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt149:0:password_')]");
 	private By btnNext = MobileBy.xpath("//*[@text='Next']");
 	private By chkbox = MobileBy.xpath("//*[contains(@resource-id,'acctForm:classifiList:1:accountCheckbox')]");
+	private By chkbox1 = MobileBy.xpath("//*[contains(@resource-id,'acctForm:classifiList:0:accountCheckbox')]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(heading, "Heading").size() > 0) {
@@ -77,6 +78,11 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	 public void clickCheckBox() {
 			click(chkbox, "Check Box");
      }	
+	 
+	 public void clickCheckBox1() {
+			click(chkbox1, "Check Box");
+  }	
+	 
 	 public AllDonePage allDonePage() {
 		 return new AllDonePage();
 	 }

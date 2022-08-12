@@ -24,9 +24,30 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	private By btnWithdrawBankMethod = MobileBy.xpath("//*[contains(@resource-id,'Account')]");
 	private By btnChooseSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'Account')]");
 	private By lblWithdrawMethod = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
+	private By lblAddPaymentHeading = MobileBy.xpath("//*[contains(@resource-id,'PayHead')]");
+	private By lblAddPaymentDesc = MobileBy.xpath("//*[contains(@resource-id,'PayMessage')]");
+	private By btnAddPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'PayClick')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'lySelBack')]");
+
+//	private By btnAddDebitCard = MobileBy.xpath("//*[contains(@resource-id,'PayClick')]");
+//	private By btnAddSignetAcc = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
+//	private By lblWithdrawMethod = MobileBy.xpath("//*[contains(@text,'Add Bank Account')]");
 
 	public void verifyWithdrawHeading(String expheading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawHeading, "Select Withdraw Method Heading", expheading);
+	}
+
+	public void verifyAddPaymentHeading(String expheading) {
+		new CommonFunctions().verifyLabelText(lblAddPaymentHeading, "Add Payment Method Heading", expheading);
+	}
+
+	public void verifyAddPaymentDesc(String expheading) {
+		new CommonFunctions().verifyLabelText(lblAddPaymentDesc, "Add Payment Method Description", expheading);
+	}
+
+	public void clickAddPaymentMethod() {
+		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnAddPaymentMethod));
+		click(btnAddPaymentMethod, getText(btnAddPaymentMethod));
 	}
 
 	public void clickInstantPay() {
@@ -39,7 +60,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 		click(btnGiftCard, getText(btnGiftCard));
 	}
 
-	public void clickChooseWithDrawPaymentMethod() {
+	public void clickBank() {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnChooseWithdrawBank));
 		click(btnChooseWithdrawBank, getText(btnChooseWithdrawBank));
 	}
@@ -47,6 +68,10 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	public void clickSignetAccount() {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnSignetAccount));
 		click(btnSignetAccount, getText(btnSignetAccount));
+	}
+
+	public void clickClose() {
+		click(btnClose, "close");
 	}
 
 	public void verifyWithdraMethodHeading(String expheading) {

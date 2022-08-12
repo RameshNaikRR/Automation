@@ -16,12 +16,12 @@ import io.appium.java_client.MobileBy;
 public class PaymentMethodsPage extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
-	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'cvAddPayment')]");
+	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
-	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
-	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
-	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
+//	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
+//	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
 	private By headingAddExternalBankAccount = MobileBy.xpath("//*[contains(@text,'Add External Bank Account')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
@@ -33,8 +33,11 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[3]");
 	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
+
 //	private By  = MobileBy.xpath("//*[contains(@resource-id,'AddPayment')]");
-	
+
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -42,14 +45,18 @@ public class PaymentMethodsPage extends MobileFunctions {
 		}
 	}
 
+	public int verifyPaymentMethodHeading() {
+		return DriverFactory.getDriver().findElements(lblHeading).size();
+	}
+
 	public void clickAddNewPaymentMethod() {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
 
 	public int verifyAddNewPaymentMethod() {
-		 return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
+		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
 	}
-	
+
 	public void clickExternalBankAccount() {
 		click(btnExternalBankAccount, "External Bank Account");
 	}
@@ -60,6 +67,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public void clickDebitCard() {
 		click(btnDebitCard, "Debit Card");
+	}
+
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
+
+	public void clickClose() {
+		click(btnClose, "Close");
 	}
 
 	public AddNewPaymentComponent addNewPaymentComponent() {
@@ -90,8 +105,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	}
 
-	public void verifyHeadingAddExternalBankAccount() {
-		new CommonFunctions().elementView(headingAddExternalBankAccount, "Add External Bank Account Heading is");
+	public void verifyAddExternalBankAccountHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(headingAddExternalBankAccount, "Add External Bank Account Heading is",
+				expHeading);
 	}
 
 	public void verifyHeadingAddAccount() {
@@ -102,11 +118,11 @@ public class PaymentMethodsPage extends MobileFunctions {
 		enterText(txtBankName, "CashEdge Test Bank (Agg) - Retail Non 2FA", "Enter Bank Name");
 	}
 
-	public void verify() {
-		new CommonFunctions().elementView(btnExternalBankAccount, "External Bank Account");
-		new CommonFunctions().elementView(btndebitCard, "Debit Card");
-		new CommonFunctions().elementView(btnCreditCard, "Credit Card");
-	}
+//	public void verify() {
+//		new CommonFunctions().elementView(btnExternalBankAccount, "External Bank Account");
+//		new CommonFunctions().elementView(btndebitCard, "Debit Card");
+//		new CommonFunctions().elementView(btnCreditCard, "Credit Card");
+//	}
 
 	public void clickCreditCard(String last4digits) {
 		click(getPaymentItems("Credit", last4digits), "Credit");
@@ -172,12 +188,16 @@ public class PaymentMethodsPage extends MobileFunctions {
 		customerProfilePage().paymentMethodsPage().clickChkbxBank();
 		customerProfilePage().paymentMethodsPage().clickNext();
 	}
-	public By getSignetItems(String paymentMethod,String last4digits) {
-		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]//following::*[contains(@text,'%s')]", paymentMethod,last4digits));
+
+	public By getSignetItems(String paymentMethod, String last4digits) {
+		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]//following::*[contains(@text,'%s')]",
+				paymentMethod, last4digits));
 	}
+
 	public void clickSignetAccount(String last4digits) {
 		click(getSignetItems("Signet Account", last4digits), "Signet Account");
 	}
+
 	public void clickBankAccount() {
 		click(deleteBank, "Delete Bank");
 	}

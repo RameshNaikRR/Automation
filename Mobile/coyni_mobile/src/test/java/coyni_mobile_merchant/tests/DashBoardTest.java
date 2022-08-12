@@ -20,7 +20,7 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
-public class DashBoardTest extends BusinessTransactionDetailsTest {
+public class DashBoardTest {
 
 	MerchantProfilePage merchantProfilePage;
 	BusinessTokenAccountPage businessTokenAccountPage;
@@ -352,24 +352,25 @@ public class DashBoardTest extends BusinessTransactionDetailsTest {
 						.verifyInsufficientFundsHeading(data.get("insufficientfundsHeading"));
 				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 						.verifyBuyTokenInsufficientFundsDescription(data.get("buyTokenInsufficientfundsDescription"));
-				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickBuyToken();
-				Thread.sleep(3000);
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-						.verifyPageHeading(data.get("heading"));
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-						.buyTokenBankAccountPaymentMethodPage().buyTokenWithBankAccount(data.get("buyTokenHeading"),
-								data.get("buyTokenDescription"), data.get("amount"));
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
-						.orderPreviewDetails(data.get("orderHeading"));
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().enterYourPINComponent()
-						.fillPin(data.get("pin"));
-				Thread.sleep(2000);
-				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
-						.transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
+				merchantMenuIconTest.testBuyTokenBankAccount(strParams);
+//				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickBuyToken();
+//				Thread.sleep(3000);
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//						.verifyPageHeading(data.get("heading"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//						.buyTokenBankAccountPaymentMethodPage().buyTokenWithBankAccount(data.get("buyTokenHeading"),
+//								data.get("buyTokenDescription"), data.get("amount"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
+//						.orderPreviewDetails(data.get("orderHeading"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().enterYourPINComponent()
+//						.fillPin(data.get("pin"));
+//				Thread.sleep(2000);
+//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
+//						.transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
 
 			} else if (businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 					.verifyBusinessAccountInsufficientFundsDescription() == 1) {
@@ -410,10 +411,26 @@ public class DashBoardTest extends BusinessTransactionDetailsTest {
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
-			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+			if(businessTokenAccountPage.batchPayOutComponent().verifyTransactionAmount() > 0.00) {
+				 businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+				 businessTokenAccountPage.batchPayOutComponent().verifyHeading(data.get("batchHeading"));
+				 businessTokenAccountPage.batchPayOutComponent().getBatchPayoutAmount();
+				 businessTokenAccountPage.batchPayOutComponent().getBatchPayoutSentto();
+				 businessTokenAccountPage.batchPayOutComponent().slideToConfirm();
+				 businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().fillPin(data.get("pin"));	 
+			}
+			else {
+				ExtentTestManager.setInfoMessageInReport("We don't have any amount to doing for Batch Now");
+			}
+			Thread.sleep(2000);
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+					.verifyPageHeading(data.get("payoutHeading"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+			.getPayoutTransactionAllDetails();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);

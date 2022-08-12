@@ -1,7 +1,6 @@
 package coyni_mobile_merchant.components;
 import org.openqa.selenium.By;
 
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -22,7 +21,10 @@ public class DatePickerComponent extends MobileFunctions {
 		// 1-January 2022
 		String day = fromDate.split("-")[0];
 		String monthAndYear = fromDate.split("-")[1];
-		//scrollUpToElement(getDate(monthAndYear, day), fromDate);
+		scrollDownToElement(getDate(monthAndYear, day), "fromDate");
+//		TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//		touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+//				.moveTo(PointOption.point(140, (int) (100))).release().perform();
 		System.out.println(day);
 		System.out.println(monthAndYear);
 		click(getDate(monthAndYear, day), fromDate);
@@ -34,13 +36,13 @@ public class DatePickerComponent extends MobileFunctions {
 		String monthAndYear = toDate.split("-")[1];
 		System.out.println(day);
 		System.out.println(monthAndYear);
-		//scrollDownToElement(getDate(monthAndYear, day), toDate);
+		scrollDownToElement(getDate(monthAndYear, day), "toDate");
 		click(getDate(monthAndYear, day), toDate);
 	}
 
 	public void clickDone() {
 //		DriverFactory.getDriver().manage().window().getSize();
-//        scrollUpToElement(btnDone, "Done");
+        scrollUpToElement(btnDone, "Done");
 		click(btnDone, "Done");
 	}
 

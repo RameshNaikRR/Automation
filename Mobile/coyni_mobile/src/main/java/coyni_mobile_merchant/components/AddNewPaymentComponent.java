@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.AddCardPage;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -22,6 +23,10 @@ public class AddNewPaymentComponent extends MobileFunctions{
 
 		}
 
+	}
+	
+	public int verifyAddNewPaymentHeading() {
+		 return DriverFactory.getDriver().findElements(lblHeading).size();
 	}
 
 	public void clickExternalBankAcount() {

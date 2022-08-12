@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.AddNewPaymentComponent;
 import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -26,6 +27,8 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblInstantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
+	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
+	private By btnClose=MobileBy.xpath("//*[contains(@resource-id,'Close')]");
 
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -45,6 +48,15 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
 
+	public void clickChangePaymentMethod() {
+		click(btnChangePaymentMethod, "Change Payment Method");
+	}
+	
+	public void clickClose() {
+		click(btnClose, "Close");
+	}
+	
+	
 //	public void verifyAddInstantPayHeading(String expheading) {
 //		new CommonFunctions().verifyLabelText(lblInstantPayHeading, "Instant Pay Heading", expheading);
 //	}
@@ -144,4 +156,13 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
 	}
+	
+	public AddNewPaymentComponent addNewPaymentComponent() {
+		return new AddNewPaymentComponent();
+	}
+	
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
+	}
+	
 }
