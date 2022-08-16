@@ -1,11 +1,7 @@
 package coyni.merchant.pages;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
-
 import coyni.merchant.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -72,9 +68,7 @@ public class ChangePasswordPage extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void clickIcon() {

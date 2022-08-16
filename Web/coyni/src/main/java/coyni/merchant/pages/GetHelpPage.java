@@ -91,6 +91,7 @@ public class GetHelpPage extends BrowserFunctions {
 
 	public void fillPhoneNumber(String PhoneNumber) {
 		click(phoneNumber, "Phone Number");
+		scrollToElement(phoneNumber, "Phone Number");
 		enterText(phoneNumber, PhoneNumber, "Phone Number");
 	}
 

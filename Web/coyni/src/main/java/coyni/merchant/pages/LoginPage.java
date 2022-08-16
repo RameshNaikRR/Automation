@@ -136,9 +136,7 @@ public class LoginPage extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public ToastComponent toastComponent() {

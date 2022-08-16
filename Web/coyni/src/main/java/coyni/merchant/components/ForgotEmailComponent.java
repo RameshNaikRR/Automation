@@ -1,10 +1,9 @@
 package coyni.merchant.components;
 
 import java.awt.AWTException;
-
 import org.openqa.selenium.By;
 
-import coyni.customer.pages.LoginPage;
+import coyni.merchant.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -12,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ForgotEmailComponent extends BrowserFunctions {
 
 	private By forgotHeading = By.cssSelector(".forgot-email__title");
-	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
 	private By txtPhoneNumber = By.id("Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtFirstName = By.xpath("//input[@name='first_name']");
