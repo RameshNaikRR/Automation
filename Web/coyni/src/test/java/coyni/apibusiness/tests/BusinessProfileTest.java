@@ -1,6 +1,7 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -567,16 +568,15 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickDebit();
-
+			apiAdminProfilePage.paymentMethodComponent().clickAddNewDebit();
 			Thread.sleep(3000);
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardNumber(data.get("cardNumber"));
 			Thread.sleep(3000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
-					.validateCardBrand(data.get("cardType"));
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+//					.validateCardBrand(data.get("cardType"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardExpiry(data.get("cardExpiry"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -616,7 +616,6 @@ public class BusinessProfileTest {
 	@Parameters({ "strParams" })
 	public void testAddDebitCard(String strParams) {
 		tokenWalletPage.topBarComponent().clickUserName();
-		;
 		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
 		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
 		testAddExternalBankAccount(strParams);
@@ -1060,8 +1059,6 @@ public class BusinessProfileTest {
 		}
 	}
 
-	
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportFiles(String strParams) {
@@ -1208,5 +1205,25 @@ public class BusinessProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteCard(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.verifylblHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickDeleteCardIcon();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().removePaymentMethodPopup().clickOnRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
 	}
 }

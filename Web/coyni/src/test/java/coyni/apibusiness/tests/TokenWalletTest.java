@@ -1,20 +1,13 @@
 package coyni.apibusiness.tests;
 
-import java.util.List;
-
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.google.common.util.concurrent.Uninterruptibles;
-
 import coyni.api.business.popups.BuyCoyniTokensNoPaymentPopup;
 import coyni.api.business.popups.BuyTokensPaymentPopup;
-import coyni.api.business.popups.WithdrawtoSignetAccountPopup;
 import coyni.apibusiness.components.FilterComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.HomePage;
@@ -23,7 +16,6 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
-import ilabs.web.actions.WaitForElement;
 
 public class TokenWalletTest {
 
@@ -1092,7 +1084,7 @@ public class TokenWalletTest {
 					.verifyHeading(data.get("authyVerificationHeading"));
 			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().orderPreviewPopup().verifyAuthy();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().authyComponent().fillAuthyInput(data.get("securityKey"));
+					.withdrawviaInstantPayPopup().authyComponent().fillInput(data.get("code"));
 //	homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().orderPreviewPopup()
 //			.verifyHeading(data.get("expTransactionInProgressHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
@@ -1119,12 +1111,13 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().enterAmount(data.get("amount"));
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup()
-			// .clickDebitCard(data.get("last4digits"));
+					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().txtMessage(data.get("transactionalmessage"));
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().clickOnNext();
+					.withdrawviaInstantPayPopup().clickOnNext();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().enterAmount(data.get("amount"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().txtMessage(data.get("transactionalmessage"));
 			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup()
 			// .verifyLabelHeading(data.get("instantPayHeading"));
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "

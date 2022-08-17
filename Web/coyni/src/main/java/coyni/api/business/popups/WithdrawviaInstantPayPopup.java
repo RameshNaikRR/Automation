@@ -17,7 +17,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 
 	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
-	private By txtAmount = By.xpath("//input[@class='CynField_cyn_input__31vZ6']");
+	private By txtAmount = By.xpath("//input[@name='amount']");
 	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
 	private By txtmsg = By.cssSelector(".FormField_form_textarea__2VA0I.false.undefined.false");
 	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
@@ -36,6 +36,7 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By btnAddNewDebit = By.xpath("//span[contains(text(),'Add New Debit Card')]");
 	private By toggle = By.xpath("//img[@src='/static/media/Flip-Icon.ec69897c.svg']");
 	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
+	private By iconDelete=By.xpath("//button[@data-tip='Delete']");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -65,18 +66,19 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	}
 
 	public void clickDebitCard(String last4Digits) {
-		//moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+		// moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]",
+		// last4Digits)), "Debit");
 		List<WebElement> lst = getElementsList(btnRadioDebit, "Debit");
 		int i = lst.size();
-		if(i<1) {
-		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
-		clickOnNext();
-		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
-	}
-		else {
+		if (i < 1) {
+			click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
+			clickOnNext();
+			ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
+		} else {
 			clickOnNext();
 		}
 	}
+
 	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {
 		new CommonFunctions().verifyChangedColor(toggle, "Toggle", cssProp, expValue, expColor);
 	}
@@ -87,6 +89,9 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 
 	public void clickEdit() {
 		click(editCard, "Edit Card");
+	}
+	public void clickDeleteCardIcon() {
+		click(iconDelete, "Edit Card");
 	}
 
 	public void clickDelete() {
@@ -165,18 +170,18 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 		return new PaymentMethodEditSuccessfullyPopup();
 	}
 
-    public void clickDebitCard() {
-		
+	public void clickDebitCard() {
+
 		List<WebElement> lst = getElementsList(btnRadioDebit, "Radio Button");
-	    int i = lst.size();
-	    for(int j=1;j<4;j++) {
-		  if(i==j) {
-		    clickDebitCard("5169");
-		  }
-	   }
-		  clickOnNext();		  
-    }
-	
+		int i = lst.size();
+		for (int j = 1; j < 4; j++) {
+			if (i == j) {
+				clickDebitCard("5169");
+			}
+		}
+		clickOnNext();
+	}
+
 	public void verifyAddDebitCard(String expCardName, String expCardNumber, String expCVV, String expiry,
 			String address1, String address2, String city, String state, String zipCode, String country)
 			throws InterruptedException {

@@ -15,9 +15,14 @@ public class PaymentMethodComponent extends BrowserFunctions {
 	private By lblbankName = By.xpath("//p[contains(text(),'3456')]");
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
+	private By btnAddNewDebit = By.xpath("//span[text()='Add New Debit Card']");
 
 	public void clickAddNewPayment() {
 		click(btnAddNewPayment, "Add New Payment Method");
+	}
+
+	public void clickAddNewDebit() {
+		click(btnAddNewDebit, "Add New Debit Card");
 	}
 
 	public void clickDeleteBank() {

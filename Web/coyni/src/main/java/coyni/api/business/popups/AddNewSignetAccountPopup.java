@@ -2,8 +2,8 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.MailingAddressComponent;
 import coyni.apibusiness.components.SuccessFailureComponent;
-import coyni.customer.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
