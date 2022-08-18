@@ -45,6 +45,14 @@ public class TeamComponent extends BrowserFunctions {
 		click(btnRemoveUser, "Remove User");
 	}
 
+	public void selectFilter(String type) {
+		click(getCheckBox(type), type);
+	}
+
+	private By getCheckBox(String elementName) {
+		return By.xpath(String.format("//span[text()='%s']//preceding-sibling::input", elementName));
+	}
+
 	public void verifyRecords() {
 		if (verifyElementDisplayed(noRecordFound, "No Record Found")) {
 			new CommonFunctions().elementView(noRecordFound, "No Records Found");

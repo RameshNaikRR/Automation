@@ -26,7 +26,6 @@ public class LoginTest {
 
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
@@ -168,7 +167,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginWithResendOTP(String strParams) {
@@ -238,7 +237,7 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
 			loginPage.phoneVerificationComponent().verifyPhoneNumber();
-			loginPage.phoneVerificationComponent().clickResend();
+			// loginPage.phoneVerificationComponent().clickResend();
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			// loginPage.phoneVerificationComponent().verifyChooseHeading(data.get("chooseAccount"));
 			loginPage.phoneVerificationComponent().clickEmail();
@@ -381,11 +380,6 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-			// loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
-//			loginPage.forgotEmailComponent().clickBackToLogin();
-//			loginPage.forgotEmailComponent().verifyFirstName();
-//			loginPage.forgotEmailComponent().verifyLastName();
-			// loginPage.clickNext();
 			Thread.sleep(1000);
 			loginPage.forgotEmailComponent().phoneVerificationComponent().authyComponent().fillInput(data.get("code"));
 			loginPage.forgotEmailComponent().phoneVerificationComponent()

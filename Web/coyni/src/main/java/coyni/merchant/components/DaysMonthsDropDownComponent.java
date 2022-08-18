@@ -24,7 +24,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnCustomDateRange = By.cssSelector("data[value='Custom-Date-Range']");
 
-	private By selectDropDown = By.xpath("//div[@class='font-semibold group-hover:text-cgy4 text-cgy3 text-base']");
+	private By selectDropDown = By.xpath("//div[contains(@class,'FloatingDropDown_downArrow__LiVFi')]");
 
 	private By selectDropDownToday = By
 			.xpath("//div[@class='font-semibold group-hover:text-cgy4 text-cgy3 text-base']");

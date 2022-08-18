@@ -229,10 +229,9 @@ public class CoyniPortalTest {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOn7Days();
 			} else if (strParams1.equalsIgnoreCase("Last Month")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickOnLastMonth();
-			} else if (strParams1.equalsIgnoreCase("Month to Date")){
+			} else if (strParams1.equalsIgnoreCase("Month to Date")) {
 				homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickMonthTODate();
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Export is done");
 			}
 			Thread.sleep(2000);
@@ -334,10 +333,14 @@ public class CoyniPortalTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
+			Thread.sleep(2000);
 			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
+				Thread.sleep(2000);
 				addSignet(strParams);
 			} else {
+				Thread.sleep(1000);
 				testWithdrawToSignetAccount(strParams);
+
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

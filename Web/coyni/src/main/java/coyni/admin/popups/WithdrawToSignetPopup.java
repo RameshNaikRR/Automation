@@ -6,11 +6,12 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawToSignetPopup extends BrowserFunctions {
+	
+	public By lnkDeleteSignet = By.xpath("//div[@data-tip='Delete' or data-for='delete']");
 	public By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	public By txtAmount = By.xpath("//input[@type='text']");
 	public By lblAvailableBalance = By.xpath("//span[@class='text-sm text-cgy4']");
 	public By lblSignetAccount = By.xpath("");
-	public By lnkDeleteSignet = By.xpath("//img[@class='cursor-pointer ml-3']");
 	public By txtMessage = By.xpath("//textarea[@id='message']");
 	public By btnNext = By.xpath("//button[text()='Next'] ");
 	public By lnkConvertOption = By.xpath("//div[@class='relative mt-14']//img[1]");

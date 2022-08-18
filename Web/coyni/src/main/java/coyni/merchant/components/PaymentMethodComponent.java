@@ -8,6 +8,7 @@ import coyni.merchant.popups.PreAuthorizationPopup;
 import coyni.merchant.popups.RemovePaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class PaymentMethodComponent extends BrowserFunctions {
 
@@ -24,6 +25,14 @@ public class PaymentMethodComponent extends BrowserFunctions {
 
 	public void verifyPaymentMethodsview() {
 		new CommonFunctions().elementView(lblPaymentMethods, "PaymentMethods");
+	}
+
+	public void clickDelete(String number) {
+		moveToElement(btnDelete, "Delete");
+		click(By.xpath(String.format(
+				"//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-trash')]", number)),
+				number);
+		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
 	}
 
 	public void clickDeleteBank() {
