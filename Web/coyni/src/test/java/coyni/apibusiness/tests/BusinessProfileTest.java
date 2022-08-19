@@ -788,7 +788,7 @@ public class BusinessProfileTest {
 		testEditCard(strParams, "debit");
 	}
 
-	private void testEditCard(String strParams, String string) {
+	public static void testEditCard(String strParams, String string) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
@@ -799,8 +799,8 @@ public class BusinessProfileTest {
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardNumber(data.get("cardNumber"));
 			Thread.sleep(3000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
-					.validateCardBrand(data.get("cardType"));
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+//					.validateCardBrand(data.get("cardType"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardExpiry(data.get("cardExpiry"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -821,6 +821,43 @@ public class BusinessProfileTest {
 					.successFailureComponent().verifyPaymentEditSuccess(data.get("successHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
+
+	}
+
+	public static void testEditDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
+
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillNameOnCard(data.get("nameOnCard"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+//					.validateCardBrand(data.get("cardType"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardExpiry(data.get("cardExpiry"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress1(data.get("address1"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress2(data.get("address2"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillCity(data.get("city"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().selectState(data.get("state"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().verifyCountry(data.get("country"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().clickNext();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.successFailureComponent().verifyPaymentEditSuccess(data.get("successHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test EditDebitCard failed due to Exception " + e);
 		}
 
 	}
@@ -1207,16 +1244,16 @@ public class BusinessProfileTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testDeleteCard(String strParams) {
+	public static void testDeleteCard(String strParams) {
 
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			HomePage homePage = new HomePage();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+					.withdrawviaInstantPayPopup().mouseHoverOnDebitCard(data.get("last4digits"));
+			Thread.sleep(3000);
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickDeleteCardIcon();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()

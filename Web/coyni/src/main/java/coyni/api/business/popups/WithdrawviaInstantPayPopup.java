@@ -36,7 +36,8 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By btnAddNewDebit = By.xpath("//span[contains(text(),'Add New Debit Card')]");
 	private By toggle = By.xpath("//img[@src='/static/media/Flip-Icon.ec69897c.svg']");
 	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
-	private By iconDelete=By.xpath("//button[@data-tip='Delete']");
+	private By iconDelete = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Delete']");
+	private By iconEdit = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Edit']");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -79,6 +80,19 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 		}
 	}
 
+	public void mouseHoverOnDebitCard(String last4Digits) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+//		List<WebElement> lst = getElementsList(btnRadioDebit, "Debit");
+//		int i = lst.size();
+//		if (i < 1) {
+//			click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
+//			clickOnNext();
+//			ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
+//		} else {
+//			clickOnNext();
+//		}
+	}
+
 	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {
 		new CommonFunctions().verifyChangedColor(toggle, "Toggle", cssProp, expValue, expColor);
 	}
@@ -90,8 +104,13 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	public void clickEdit() {
 		click(editCard, "Edit Card");
 	}
+
 	public void clickDeleteCardIcon() {
 		click(iconDelete, "Edit Card");
+	}
+
+	public void clickEditCardIcon() {
+		click(iconEdit, "Edit Card");
 	}
 
 	public void clickDelete() {

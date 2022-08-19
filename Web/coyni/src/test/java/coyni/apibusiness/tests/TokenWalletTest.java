@@ -395,8 +395,8 @@ public class TokenWalletTest {
 				sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
 				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
 				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("endDate"));
-				// sideBarMenuComponent.filterComponent().verifyStartDate(data.get("expStartDate"));
-				// sideBarMenuComponent.filterComponent().verifyEndDate(data.get("expEndDate"));
+				sideBarMenuComponent.filterComponent().verifyStartDate(data.get("expStartDate"));
+				sideBarMenuComponent.filterComponent().verifyEndDate(data.get("expEndDate"));
 			}
 			if (data.get("validateTransactionType").equalsIgnoreCase("Yes")) {
 				String[] checkBox = data.get("TransactionTypecheckBoxList").split(",");
@@ -1172,15 +1172,35 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickOnChangeLink();
-//			BusinessProfileTest.testDeleteCard(strParams);
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().removePaymentMethodPopup().navigationComponent().clickClose();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnChangeLink();
+			BusinessProfileTest.testDeleteCard(strParams);
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().removePaymentMethodPopup().navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport(" testWithdrawViaInstantPayDeleteCard failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawViaInstantPayEditDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickTokenwallet();
+			homePage.sideBarMenuComponent().tokenWalletPage().clickIndividualWalletsName();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().verifyWithdrawtoUsdCursorAction();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickWithdrawToUSD();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.verifylblHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.clickOnInstantPay();
+			BusinessProfileTest.testEditDebitCard(strParams);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" testWithdrawViaInstantPayEditDebitCard failed due to exception " + e);
 		}
 	}
 
