@@ -1,5 +1,6 @@
 package coyni.merchant.popups;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,7 +13,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	CommonFunctions cf = new CommonFunctions();
-	private By lblHeading = By.xpath("//h1[.='Withdraw to Bank Account']");
+	private By lblHeading = By.xpath("//h1[.='Withdraw via Instant Pay']");
+	private By lblNoDebitCards = By.xpath("//h2[.='No Debit Cards Exist']");
+	private By noDebitCardsDescription = By.xpath("//p[starts-with(.,'If')]");
+	private By btnAddNewDebitCard = By.id("small-add-payment-button");
+	private By lblChooseYourInstantPay = By.xpath("//h3[.='Choose Your Instant Pay Source:']");
+	private By lblMsg = By.xpath("//h2[starts-with(.,'Instant')]");
+
 	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
 	private By txtAmount = By.cssSelector("#amount");
 	private By IconCoyni = By.xpath("//input[@id='amount']/following-sibling::span");
@@ -33,6 +40,30 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	public void verifyHeading(String Heading) {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
+	}
+
+	public void verifyNoDebitCardsExistLbl() {
+		String lbl = getText(lblNoDebitCards, "");
+		ExtentTestManager.setInfoMessageInReport(lbl + " is displayed");
+	}
+
+	public void verifyNoDebitCardsDescription() {
+		String lbl = getText(noDebitCardsDescription, "");
+		ExtentTestManager.setInfoMessageInReport(lbl + " is displayed");
+	}
+
+	public void clickAddNewDebitCard() {
+		click(btnAddNewDebitCard, "Add New Debit Card");
+	}
+
+	public void verifyChooseYourInstantPaySource() {
+		String lbl = getText(lblChooseYourInstantPay, "");
+		ExtentTestManager.setInfoMessageInReport(lbl + " is displayed");
+	}
+
+	public void verifyChooseYourInstantPaySourceMsg() {
+		String lbl = getText(lblMsg, "");
+		ExtentTestManager.setInfoMessageInReport(lbl + " is displayed");
 	}
 
 	public void verifyDailyLimitMsg() {
@@ -113,6 +144,44 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 	public void clickConfirm() {
 		click(btnConfirm, "Confirm");
 	}
+
+	public AddNewDebitCardPopup addNewDebitCardPopup() {
+		return new AddNewDebitCardPopup();
+	}
+
+	public ChooseYourInstantPaySourcePopup chooseYourInstantPaySourcePopup() {
+		return new ChooseYourInstantPaySourcePopup();
+	}
+	
+	public void validateTextFields() {
+		
+				addNewDebitCardPopup().fillNameOnCard("cardName");
+				addNewDebitCardPopup().fillCardNumber("cardNumber");
+				new CommonFunctions().validateFormErrorMessage("Name is required");
+
+				addNewDebitCardPopup().fillCardExpiry("cardExpiry");
+				new CommonFunctions().validateFormErrorMessage("Card Number");
+
+				addNewDebitCardPopup().fillCardCVVorCVC("cardCVV");
+				new CommonFunctions().validateFormErrorMessage("Card Expiry");
+
+				addNewDebitCardPopup().fillBillingAddress1("billingAddress1");
+				new CommonFunctions().validateFormErrorMessage("Card CVV");
+
+				addNewDebitCardPopup().fillCity("city");
+				new CommonFunctions().validateFormErrorMessage("Billing Address 1");
+				
+				addNewDebitCardPopup().clickStateDrpDwn();
+				new CommonFunctions().validateFormErrorMessage("City");
+				
+				addNewDebitCardPopup().fillZipCode("zipCode");
+				new CommonFunctions().validateFormErrorMessage("State");
+				
+				new CommonFunctions().clickOutSideElement();
+				new CommonFunctions().validateFormErrorMessage("Zip code");
+	
+	}
+
 //	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
 //	private By txtAmount = By.xpath("//input[@name='amount']");
 //	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");

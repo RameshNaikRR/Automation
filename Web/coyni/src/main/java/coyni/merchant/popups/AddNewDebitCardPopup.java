@@ -1,11 +1,13 @@
 package coyni.merchant.popups;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.AddCardComponent;
 import coyni.merchant.components.MailingAddressComponent;
 import coyni.merchant.components.NavigationComponent;
-import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -22,12 +24,16 @@ public class AddNewDebitCardPopup extends BrowserFunctions {
 	private By txtBillingAddress2 = By.cssSelector("input[id='billing-address-line-2']");
 	private By txtCity = By.cssSelector("input[id='city']");
 	private By drpDwnState = By.xpath("//div[.='State']");
-//	private By 
+	private By states = By.xpath("//div[@class='flex items-center justify-between pr-3 cursor-pointer']");
 	private By txtZipCode = By.xpath("input[id='zip-code']");
 	private By txtCountry = By.xpath("//div[.='United States']");
-	
+
 	private By lblErrorMsg = By.cssSelector("span.text-crd5 ");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
+
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(heading, "Add New Credit Card PopUp Heading", expHeading);
+	}
 
 	public void fillNameOnCard(String nameOnCard) {
 		enterText(txtNameOnCard, nameOnCard, "Name On Card");
@@ -41,17 +47,50 @@ public class AddNewDebitCardPopup extends BrowserFunctions {
 		enterText(txtCardExp, cardExpiry, "Card Expiry");
 	}
 
-	public void fillCVVorCVC(String cvvOrCvc) {
+	public void fillCardCVVorCVC(String cvvOrCvc) {
 		enterText(txtCVVorCVC, cvvOrCvc, "CVV or CVC");
+	}
+
+	public void fillBillingAddress1(String CVV) {
+		enterText(txtBillingAddress1, CVV, "Card CVV");
+	}
+
+	public void fillBillingAddress2(String CVV) {
+		enterText(txtBillingAddress2, CVV, "Card CVV");
+	}
+
+	public void fillCity(String City) {
+		enterText(txtCity, City, "City");
+	}
+
+	public void verifyStateDrpDwn() {
+		new CommonFunctions().elementView(drpDwnState, "Drop down button");
+//		click(drpDwnState, "Drop down button");
+	}
+
+	public void clickStateDrpDwn() {
+		click(drpDwnState, "Drop down button");
+	}
+
+	public void clickStates() {
+		List<WebElement> list = getElementsList(states, "");
+		for (WebElement element : list) {
+			click(drpDwnState, "Drop down button");
+			element.click();
+		}
+	}
+
+	public void fillZipCode(String Zipcode) {
+		enterText(txtZipCode, Zipcode, "Zip code");
+	}
+
+	public void verifyCountryTxtField() {
+		new CommonFunctions().elementView(txtCountry, "country text field");
 	}
 
 	public void verifylblErrorMsg(String expErrorMsg) {
 		new CommonFunctions().verifyLabelText(lblErrorMsg, "Error Message", expErrorMsg);
 
-	}
-
-	public void verifyAddNewDebitCardHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "Add New Credit Card PopUp Heading", expHeading);
 	}
 
 	public MailingAddressComponent mailingAddressComponent() {
@@ -118,7 +157,15 @@ public class AddNewDebitCardPopup extends BrowserFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "click Next");
+//		WebDriver driver = DriverFactory.getDriver();
+//		driver.get(btnNext);
+		String text = getText(btnNext, "");
+		boolean parseBoolean = Boolean.parseBoolean(text);
+		if (parseBoolean) {
+			click(btnNext, "click Next");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Next button is in disabled mode");
+		}
 	}
 
 	public AddCardComponent addCardComponent() {
@@ -127,6 +174,10 @@ public class AddNewDebitCardPopup extends BrowserFunctions {
 
 	public PreAuthorizationPopup preAuthorizationPopup() {
 		return new PreAuthorizationPopup();
+	}
+
+	public CardAddedSuccessfullyPopup cardAddedSuccessfullyPopup() {
+		return new CardAddedSuccessfullyPopup();
 	}
 
 }

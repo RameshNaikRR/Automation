@@ -2,6 +2,7 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -58,6 +59,16 @@ public class ChooseYourInstantPaySourcePopup extends BrowserFunctions {
 		cf.elementView(getDeleteIcon("2"), "Delete Icon ");
 	}
 
+	public void clickDelete() {
+		int size = getElementsList(getDeleteIcon("1"), "").size();
+		if (size == 1) {
+			click(getDeleteIcon("1"), "Delete icon");
+		} else {
+			new NavigationComponent().clickBack();
+			click(getDeleteIcon("1"), "Delete icon");
+		}
+	}
+
 	public void verifyAddNewBankAccountBtn() {
 		cf.elementView(btnAddNewDebitCard, "Add New Bank Account");
 	}
@@ -72,5 +83,9 @@ public class ChooseYourInstantPaySourcePopup extends BrowserFunctions {
 
 	public void clickNextBtn() {
 		click(btnNext, "Next");
+	}
+
+	public RemovePaymentMethodPopup removePaymentMethodPopup() {
+		return new RemovePaymentMethodPopup();
 	}
 }
