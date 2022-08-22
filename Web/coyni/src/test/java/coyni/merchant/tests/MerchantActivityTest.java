@@ -238,11 +238,9 @@ public class MerchantActivityTest {
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
 			merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("heading"));
-			// merchantActivityComponent.payOutHistoryPage().clickPayOut();
 			merchantActivityComponent.payOutHistoryPage().clickPayOut();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
-			// merchantActivityComponent.payOutHistoryPage().payOutIDPage().getReserveID();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();

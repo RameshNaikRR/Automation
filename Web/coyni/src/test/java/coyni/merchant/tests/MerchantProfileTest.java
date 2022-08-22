@@ -1,6 +1,7 @@
-	package coyni.merchant.tests;
+package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -71,22 +72,6 @@ public class MerchantProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testUserDetailsAccountStatus(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			topBarComponent.clickUserNameDrpDwn();
-			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
-			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
-			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testUserDetailsAccountStatus failed due to exception " + e);
 		}
 	}
 
@@ -253,23 +238,6 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
-//					.fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.authyComponent().fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code1"));
 			if (!data.get("code").isEmpty()) {
 				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
@@ -305,19 +273,6 @@ public class MerchantProfileTest {
 //					.verifyNewPhoneField(data.get("expNewPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifySendCodeButtonEnabled();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSend();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyCurrentPhoneNumberHeading(data.get("expHeadingCurrentNumber"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyMultipleResend();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.authyComponent().fillInput("code");
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen("expNewPhoneNumberHeading");
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-//					.verifyNewPhoneNumberPopup().clickMultipleResend();
-
 			if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
@@ -453,11 +408,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.authyComponent().fillInput(data.get("code"));
 			Thread.sleep(3000);
-//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-//					.verifyNewEmailAddressPopUp().navigationComponent().verifyCloseView();
-//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-//					.verifyNewEmailAddressPopUp().navigationComponent().clickClose();
-//			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -595,24 +545,15 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
-		}
-
-	}
-
-	@Test
-	// @Parameters({ "strParams" })
-	public void testClearAllNotifications() {
-		try {
+			Thread.sleep(3000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickClearAll();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Clear all Notifications failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
 		}
+
 	}
 
 	@Test // added
@@ -735,8 +676,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
 			merchantProfilePage.changePasswordPage().clickSave();
 			Thread.sleep(3000);
-			// customerProfilePage.changePasswordComponent().verifyContaint(data.get("successContent"));
-			// homePage.verifyLandingPageHeading(data.get("createHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
 		}
@@ -753,7 +692,6 @@ public class MerchantProfileTest {
 			merchantMenuComponent.clickChangePassword();
 			Thread.sleep(1000);
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
 			merchantProfilePage.changePasswordPage().clickIcon();
@@ -761,7 +699,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
 			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
 			merchantProfilePage.changePasswordPage().clickTab();
-			// customerProfilePage.changePasswordComponent().clickSave();
 			Thread.sleep(3000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
@@ -785,9 +722,6 @@ public class MerchantProfileTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.userNameDropDownComponent().clickUserName();
 			tokenAccountPage.userNameDropDownComponent().clickPreferences();
-			// customerProfilePage.preferencesComponent().verifyPreferencesBackGroundColor(data.get("cssProp"),
-			// data.get("expValue"), data.get("expColor"));
-//			merchantProfilePage.preferencesPage().selectTimeZone(data.get("timeZone"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testPreferencesSelectTimeZone is failed due to Exception " + e);
@@ -806,7 +740,6 @@ public class MerchantProfileTest {
 			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));

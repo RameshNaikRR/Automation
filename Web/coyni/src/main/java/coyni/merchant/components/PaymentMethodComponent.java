@@ -89,6 +89,10 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		return new AddBankAccountPopup();
 	}
 
+	public EditCardComponent editCardComponent() {
+		return new EditCardComponent();
+	}
+
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
 	}
