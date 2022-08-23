@@ -7,11 +7,11 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensReceivedDetailsComponent extends BrowserFunctions {
 
-	private By lblTokensReceived = By.xpath("//span[text()='Tokens Received']");
+	private By lblTokensReceived = By.xpath("//span[text()='Tokens Received']|//span[text()='Token Received']");
 
 	private By lblTranscationsCount = By.cssSelector("");
 
-	private By lblTokensReceiveTransactions = By.xpath("//h1[text()='Tokens Received Transactions']");
+	private By lblTokensReceiveTransactions = By.xpath("//h1[text()='Tokens Received Transactions']|//span[text()='Tokens Received Transactions']");
 
 //	private By ReceivedAmount = By.xpath("(//div[@class='TokenAccountDetail_widthDivide__8Bwmr'])[1]");
 

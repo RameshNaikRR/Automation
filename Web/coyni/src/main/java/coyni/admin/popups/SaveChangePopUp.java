@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class SaveChangePopUp extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[text()='Save Changes']");
@@ -26,6 +27,7 @@ public class SaveChangePopUp extends BrowserFunctions {
 
 	public void clickYes() {
 		click(btnYes, "Yes");
+		ExtentTestManager.setInfoMessageInReport("Changes are Saved");
 	}
 
 	public void clickCross() {

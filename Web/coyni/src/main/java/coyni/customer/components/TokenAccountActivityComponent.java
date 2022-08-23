@@ -57,7 +57,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
 
 	private By lblEntriesMessage = By.xpath("//span[contains(@class,'entries-message')]");
-	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')]");
+	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')] | //span[contains(text(),'No Records Found')]");
 	
 	String s;
 
@@ -121,7 +121,8 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 	public String verifyNoTrasactionsFound() {
 		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
-	       return getText(lblNoTrasactons, "No Trasactions");
+	       ExtentTestManager.setInfoMessageInReport("No Trasactions Found");
+              return getText(lblNoTrasactons, "No Trasactions"); 	       
 	}
 
 //	public void verifyPaginations() throws InterruptedException {
@@ -158,6 +159,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 
 		if (verifyElementDisplayed(nextPage, "Next Page")) {
 			click(nextPage, "Clicked Next Page");
+			
 			new CommonFunctions().verifyChangedColor(seconPage, "Second Page", cssProp, expValue, expColor);
 			ExtentTestManager.setPassMessageInReport("Page is Highlighted when clicked on Page number");
 		} else {
@@ -195,7 +197,7 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		}
 	}
 	
-	public String testGetEntriesMessage( ) {
+	public String testGetEntriesMessage( ){
 		int i = getElementsList(lblNoTrasactons, "Entries Message").size() ;
 		if (i != 0) {
 			 s = verifyNoTrasactionsFound();

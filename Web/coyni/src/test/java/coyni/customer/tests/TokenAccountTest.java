@@ -127,6 +127,8 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionReceiveDetailsList(String strParams) {
+		TokenAccountPage tokenAccountPage = new TokenAccountPage();
+		TokenAccountActivityComponent tokenAccountActivityComponent = new TokenAccountActivityComponent();
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
@@ -194,6 +196,7 @@ public class TokenAccountTest {
 	}
 
 	public void testTodayTrasactions(String strParams, String today) {
+		TokenAccountPage tokenAccountPage = new TokenAccountPage();
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
@@ -210,6 +213,7 @@ public class TokenAccountTest {
 
 	public void testYesterDayTrasactions(String strParams, String today) {
 		try {
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
@@ -225,6 +229,7 @@ public class TokenAccountTest {
 
 	public void testLast7DaysTrasactions(String strParams, String today) {
 		try {
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
@@ -240,6 +245,7 @@ public class TokenAccountTest {
 
 	public void testMonthToDateTrasactions(String strParams, String today) {
 		try {
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
@@ -254,6 +260,7 @@ public class TokenAccountTest {
 	}
 
 	public void testLastMonthTrasactions(String strParams, String today) {
+		TokenAccountPage tokenAccountPage = new TokenAccountPage();
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
@@ -273,6 +280,8 @@ public class TokenAccountTest {
 	public void testTransactionSentDetailsList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
+			TokenAccountActivityComponent tokenAccountActivityComponent = new TokenAccountActivityComponent();
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
 			// tokenAccountPage.tokenAccountActivityComponent().tokensSentDetailsComponent().getTokensSent();
@@ -348,6 +357,8 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionPurchasedDetailsList(String strParams) {
+		TokenAccountPage tokenAccountPage = new TokenAccountPage();
+		TokenAccountActivityComponent tokenAccountActivityComponent = new TokenAccountActivityComponent();
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
@@ -429,6 +440,8 @@ public class TokenAccountTest {
 	@Parameters({ "strParams" })
 	public void testTransactionWithdrawDetailsList(String strParams) {
 		try {
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
+			TokenAccountActivityComponent tokenAccountActivityComponent = new TokenAccountActivityComponent();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
@@ -502,6 +515,7 @@ public class TokenAccountTest {
 	@Test
 	public void testTokenAccountActivityDetails() throws InterruptedException {
 		try {
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
 			tokenAccountPage.tokenAccountActivityComponent().clickTokensSentDetails();
@@ -556,6 +570,7 @@ public class TokenAccountTest {
 	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			TokenAccountPage tokenAccountPage = new TokenAccountPage();
 			tokenAccountPage.clickTokenAccount();
 			Thread.sleep(5000);
 			tokenAccountPage.verifyLabelYourTransactions(data.get("expHeading"));
@@ -568,12 +583,12 @@ public class TokenAccountTest {
 			tokenAccountPage.verifyTableItemsCount(data.get("query"));
 			// tokenAccountPage.verifyPostedTransactions(data.get("count"));
 			// tokenAccountPage.verifyBracesCount(data.get("query"));
-			tokenAccountPage.verifyPageNumbersWithCount();
+		//	tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
 			tokenAccountPage.clickDropDownEntriesPage();
-			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-					data.get("expColor"));
+		//	tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
+			//		data.get("expColor"));
 			// tokenAccountPage.getEntryOptions();
 			tokenAccountPage.verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport("Entries is displayed as " + tokenAccountPage.getEntriesMessage());

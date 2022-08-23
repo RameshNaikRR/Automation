@@ -7,12 +7,12 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class TokensSentDetailsComponent extends BrowserFunctions {
 
-	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent']");
+	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent']|//span[text()='Token Sent']");
 
 	// private By sentAmount =
 	// By.xpath("(//div[@class='TokenAccountDetail_widthDivide__8Bwmr'])[1]");
 
-	private By lblTokensSentTransactions = By.xpath("//h1[text()='Tokens Sent Transactions']");
+	private By lblTokensSentTransactions = By.xpath("//span[text()='Tokens Sent Transactions']");
 
 	private By lblTranscationsCount = By.cssSelector("");
 

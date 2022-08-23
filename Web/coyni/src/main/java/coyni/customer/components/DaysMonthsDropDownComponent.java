@@ -7,13 +7,13 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
-	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent']");
+	private By lblTokensSent = By.xpath("//span[text()='Token Sent']");
 
-	private By lblTokensReceive = By.xpath("//span[text()='Tokens Received']");
+	private By lblTokensReceive = By.xpath("//span[text()='Tokens Received']|//span[text()='Token Received']");
 
-	private By lblTokensPurchased = By.xpath("//span[text()='Tokens Purchased']");
+	private By lblTokensPurchased = By.xpath("//span[text()='Token Purchased']");
 
-	private By lblTokensWithdraw = By.xpath("//span[text()='Tokens Withdraw']");
+	private By lblTokensWithdraw = By.xpath("//span[text()='Token Withdrawn']|//p[text()='Tokens Withdrawn Details']");
 
 	private By btnToday = By.cssSelector("data[value='Today']");
 
@@ -27,7 +27,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnCustomDateRange = By.cssSelector("data[value='Custom-Date-Range']");
 
-	private By selectDropDown = By.xpath("//div[@class='h-8 flex items-center space-x-4 cursor-pointer ']");
+	private By selectDropDown = By.xpath("//div[contains(@class,'FloatingDropDown_downArrow')]");
 
 	// private By selectDropDownforReceive =
 	// By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");

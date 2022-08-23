@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.pages.HomePage;
+import coyni.customer.tests.TokenAccountTest;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -222,7 +223,9 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
 			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.verifyID(data.get("expID"));
 		//	homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
@@ -247,6 +250,25 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualUserDetailsViewWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			homePage.sideBarComponent().profileComponent().verifyNoRecords();
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
+		}
+	}
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -285,6 +307,292 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountTrasactionList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTransactionList(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountTrasactionPurchasedDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTransactionPurchasedDetailsList(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountTrasactionSentDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTransactionSentDetailsList(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountTrasactionWithdarwDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTransactionWithdrawDetailsList(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountTrasactionRecieveDetailsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTransactionReceiveDetailsList(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTokenAccountActivityDetalis(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+	    	TokenAccountTest tokenAccountTest = new TokenAccountTest();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			tokenAccountTest.testTokenAccountActivityDetails();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsPreferencesView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickPreferencesControl();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().viewHeading();
+			Thread.sleep(1000);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().verifyTimeZone();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().verifyLocalCurrency();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsPreferencesDisableAllControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickPreferencesControl();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().viewHeading();
+			Thread.sleep(1000);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickDisable();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickSave();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickYes();
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsPreferencesEnableAllControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickPreferencesControl();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().viewHeading();
+			Thread.sleep(5000);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickEnable();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickSave();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickYes();
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsPreferencesandControlsnavigations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickPreferencesControl();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().viewHeading();
+			Thread.sleep(5000);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().verifyAllControls();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickSave();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickCross();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().preferencesandControlsComponent().clickCancel();
+			
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsPrivacyPolicyAgreement(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickAgreements();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().verifyHeading();
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().clickPrivacyPolicy();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().verifyPrivacyPolicyHeading();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().viewAgreement();
+			
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsTermsofServiceAgreement(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickAgreements();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().verifyHeading();
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().clickTermsofService();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().verifyTermsofServiceHeading();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().agreementsComponent().viewAgreement();
+			
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testIndividualsAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonals();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickAccountLimits();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyHeading();
+			
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitBuyTokenBankAccount();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitBuyTokenCreditCard();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitBuyTokenDebitCard();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitWithdrawToUSDBankAccount();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitWithdrawToUSDGiftCard();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().accountLimitsComponent().verifyDailyLimitWithdrawToUSDInstantPay();
+			
+			} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	
+	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -294,15 +602,27 @@ public class ProfilesTest {
 			homePage.sideBarComponent().clickProfiles();
 			homePage.sideBarComponent().clickPersonals();
 			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
-			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 			
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.verifyID(data.get("expID"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.clickActivityLog();
-			// homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().A
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().clickActivityLog();
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyHeading();
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().clickSatuses();
+				if(homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyNoActivityLog()==1) {
+					homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyNoActivityLog();
+				}
+				else{
+					homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyActivityLogStatuses();
+				}
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().clickControls();
+				if(homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyNoActivityLog()==1) {
+					homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyNoActivityLog();
+				}
+				else{
+					homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent().activityLogComponent().verifyActivityLogControls();
+				}
+ 			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);

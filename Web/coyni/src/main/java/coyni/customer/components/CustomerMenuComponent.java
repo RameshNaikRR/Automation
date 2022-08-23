@@ -23,7 +23,7 @@ public class CustomerMenuComponent extends BrowserFunctions {
 
 	private By lnkAgreements = By.cssSelector("");
 
-	private By lnkChangePassword = By.xpath("//span[text()='Change Password'] | //button[text()='Change Password']");
+	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
 
 	private By lblUserDetails = By.cssSelector("div.dropdown-container>div:nth-of-type(2)");
 	private By lblPaymentMethods = By.cssSelector(" ");

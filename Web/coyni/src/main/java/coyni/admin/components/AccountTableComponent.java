@@ -1,12 +1,8 @@
 package coyni.admin.components;
 
 import java.util.List;
-
-import javax.xml.xpath.XPath;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import coyni.admin.popups.ActionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;

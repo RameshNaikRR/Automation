@@ -38,7 +38,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
-	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]");
+	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]|//span[contains(text(),'Token Transactions')]");
 	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
 	private By lblType = By.xpath("//span[text()='Type']");
 	private By lblSubType = By.xpath("//span[text()='SUB TYPE']");
@@ -69,11 +69,11 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
 
-	private By seconPage = By.xpath("//a[@aria-label='Go to page number 2']");
+	private By seconPage = By.xpath("//li[contains(@class,'paginator__pagination__item active')]//span[text()='2']");
 
 	private By prevPage = By.xpath("//a[contains(@aria-label, 'previous page') or text() = '❮']");
 
-	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
+	private By nextPage = By.xpath("//a[contains(@aria-label, 'Next') or text() = '❯']");
 
 	private By lastPage = By.xpath("//a[contains(@aria-label, 'last page') and text() = '»']");
 
@@ -182,10 +182,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
 		if (count == expCount) {
 			ExtentTestManager.setPassMessageInReport(
-					"Number of transactions in table matches with number of entries selected i.e ");
+					"Number of" + count+" transactions in table matches with number of entries selected i.e ");
 		} else {
-			ExtentTestManager.setFailMessageInReport(
-					"Number of transactions in table doesnot match with numer of entries selected");
+			ExtentTestManager.setWarningMessageInReport(
+					"Number of" + count+ " transactions in table doesnot match with numer of entries selected");
 		}
 	}
 
