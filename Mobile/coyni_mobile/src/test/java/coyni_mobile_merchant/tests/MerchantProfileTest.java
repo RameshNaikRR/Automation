@@ -111,7 +111,16 @@ public class MerchantProfileTest {
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
-
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.successFailureComponent().verifyPageHeading(data.get("changeEmailSuccessHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.successFailureComponent().verifyPageDescription(data.get("changeEmailSuccessDescription"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.successFailureComponent().clickLogout();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+			.successFailureComponent().landingPage().verifyLandingPage();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+			.successFailureComponent().landingPage().verifyLoginbtnView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeEmailWithValidDetails failed due to Exception " + e);
 		}
@@ -283,6 +292,15 @@ public class MerchantProfileTest {
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
+//			Thread.sleep(1000);
+//			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+//					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
+//			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+//					.verifyPageDescription(data.get("currentPhoneNumberDescription"));
+//			merchantProfilePage.userDetailsPage().currentDetailsComponent().getCurrentDetails();
+//			
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -449,6 +467,8 @@ public class MerchantProfileTest {
 					.fillZipCode(data.get("zipCode"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage().getDefaultCountry();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage().clickSave();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeAddressWithValidDetails failed due to Exception " + e);
@@ -813,6 +833,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
 					.fillEmail(data.get("newEmail"));
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent().clickSave();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAEditEmailWithValidDetails failed due to Exception " + e);
@@ -927,6 +949,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
 					.fillPhoneNumber(data.get("newPhoneNumber"));
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent().clickSave();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1071,6 +1095,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
 					.fillEmail(data.get("newEmail"));
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent().clickSave();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1188,6 +1214,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
 					.fillPhoneNumber(data.get("newPhoneNumber"));
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent().clickSave();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -2003,7 +2031,7 @@ public class MerchantProfileTest {
 	public void testDeleteDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			
+
 			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
@@ -2201,7 +2229,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
 			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-			
+
 			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
 				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			}
@@ -2211,9 +2239,10 @@ public class MerchantProfileTest {
 				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
 			}
-			
+
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.verifyHeading(data.get("addExternalBankHeading"));
+			Thread.sleep(2000);
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.clickBankNext();
 
@@ -2232,10 +2261,16 @@ public class MerchantProfileTest {
 					.fillPassword(data.get("bankPassword"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.clickNext();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickCheckBox();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickCheckBox1();
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.verifyBankAccounts() == 3) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+						.clickCheckBox1();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+						.clickCheckBox();
+			} else {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+						.clickCheckBox1();
+			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.clickNext();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()

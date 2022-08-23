@@ -73,7 +73,7 @@ public class SignUpTest {
 					.tokenAccountPage().verifyRegistration();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("testSignUp Failed due to this Exception" + e);
 		}
 
 	}
@@ -102,7 +102,7 @@ public class SignUpTest {
 //			}
 //
 //		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//			ExtentTestManager.setFailMessageInReport("testSignUpWithInvalidData Failed due to this Exception" + e);
 //		}
 //	}
 

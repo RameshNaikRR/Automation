@@ -8,6 +8,7 @@ import coyni_mobile_merchant.pages.WithdrawTokenTransactionPage;
 import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import coyni_mobile_merchant.popups.WithdrawToUSDBankAccountPopup;
 import coyni_mobile_merchant.popups.WithdrawTokenTransactionPopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -26,9 +27,9 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	private By lblWithdrawMethod = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By lblAddPaymentHeading = MobileBy.xpath("//*[contains(@resource-id,'PayHead')]");
 	private By lblAddPaymentDesc = MobileBy.xpath("//*[contains(@resource-id,'PayMessage')]");
-	private By btnAddPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'PayClick')]");
+	private By btnAddPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'PayClick')]|//*[contains(@text,'New Payment ')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'lySelBack')]");
-
+	
 //	private By btnAddDebitCard = MobileBy.xpath("//*[contains(@resource-id,'PayClick')]");
 //	private By btnAddSignetAcc = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 //	private By lblWithdrawMethod = MobileBy.xpath("//*[contains(@text,'Add Bank Account')]");
@@ -49,7 +50,11 @@ public class WithdrawMenuComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnAddPaymentMethod));
 		click(btnAddPaymentMethod, getText(btnAddPaymentMethod));
 	}
-
+	
+	public int verifyAddNewPaymentMethod() {
+		return DriverFactory.getDriver().findElements(btnAddPaymentMethod).size();
+	}
+	
 	public void clickInstantPay() {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnInstantPay));
 		click(btnInstantPay, getText(btnInstantPay));

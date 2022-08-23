@@ -90,7 +90,7 @@ public class PayoutTransactionDetailsPage extends MobileFunctions {
 		getPayoutDate();
 		getPayoutReferenceID();
 		getToTokenAccount();
-		getReserveID();
+//		getReserveID();
 		verifyRecentTransaction();
 	}
 }

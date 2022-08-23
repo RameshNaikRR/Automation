@@ -285,36 +285,6 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCompanyInformation(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-			loginPage.VerifyLoginPageView();
-			loginPage.verifyEmailview();
-			loginPage.verifyPasswordview();
-			loginPage.verifyRememberMeView();
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
-			// loginPage.clickRememberMe();
-			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(2000);
-			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
-			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage()
-					.verifyHeading(data.get("RegHeading"));
-			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().clickStart();
-			loginPage.enterYourPINComponent().enableFaceIDpage().registrationPage().registrationCompanyInformationPage()
-					.verifyHeading(data.get("companyInfoHeading"));
-
-		} catch (Exception e) {
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testRetrieveEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -340,7 +310,7 @@ public class LoginTest {
 			loginPage.verifyEmail(data.get("email"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Exception happens due to this " + e);
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail due to this Exception " + e);
 		}
 	}
 
