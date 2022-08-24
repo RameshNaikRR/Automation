@@ -29,9 +29,6 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 	private By selectDropDownToday = By
 			.xpath("//div[@class='font-semibold group-hover:text-cgy4 text-cgy3 text-base']");
 
-	// private By selectDropDownforReceive =
-	// By.xpath("//div[@class='FloatingDropDown_SmallArrow__xxSi7 w-3 h-1.5']");
-
 	public void clickOnToday() {
 		click(selectDropDown, "Click Select DropDOwn");
 		click(btnToday, "Click Today");

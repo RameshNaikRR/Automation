@@ -59,6 +59,10 @@ public class MerchantProfilePage extends BrowserFunctions {
 		return new CommonFunctions();
 	}
 
+	public TwoStepAuthenticationPage twoStepAuthenticationPage() {
+		return new TwoStepAuthenticationPage();
+	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}

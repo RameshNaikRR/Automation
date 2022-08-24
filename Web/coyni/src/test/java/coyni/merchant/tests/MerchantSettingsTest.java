@@ -627,10 +627,7 @@ public class MerchantSettingsTest {
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
-			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
-			// customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickIamReady();
 			Thread.sleep(5000);
@@ -638,7 +635,6 @@ public class MerchantSettingsTest {
 			Thread.sleep(8000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.switchToWindow();
-
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.verifyNewWindowHeading();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
@@ -647,11 +643,9 @@ public class MerchantSettingsTest {
 					.clickOnBankName();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.enterUserName(data.get("expUserName"));
-			;
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.enterPassword(data.get("expPassword"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickNext();
-			;
 			Thread.sleep(5000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().unSelectBank();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
@@ -779,7 +773,6 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
-
 			Thread.sleep(2000);
 			if (card.equalsIgnoreCase("credit")) {
 				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
@@ -853,7 +846,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardNumber(data.get("cardNumber"));
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
-			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().validateCardBrand(data.get("cardType"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillCardExpiry(data.get("cardExpiry"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -899,7 +891,6 @@ public class MerchantSettingsTest {
 		sideMenuBarComponent.clickMerchantSettings();
 		merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
-		// merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
 		testAddCardWihInvalidData(strParams, "debit");
 	}
 
@@ -981,12 +972,9 @@ public class MerchantSettingsTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testCardsFieldValidations(String strParams, String card) {
-
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
-			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
 			if (card.equalsIgnoreCase("credit")) {
 				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 						.clickDebitCard();
@@ -994,7 +982,6 @@ public class MerchantSettingsTest {
 				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 						.clickDebitCard();
 			}
-
 			Thread.sleep(3000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.validateNameOnCard(data.get("nameOnCard"));
@@ -1011,9 +998,6 @@ public class MerchantSettingsTest {
 					.mailingAddressComponent().validateAddress2(data.get("address2"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().validateCity(data.get("city"));
-			// customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-			// .mailingAddressComponent()
-			// .validateZipCode(data.get("zipCode"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to" + e);
 		}
@@ -1023,12 +1007,10 @@ public class MerchantSettingsTest {
 	@Parameters({ "strParams" })
 	public void testDebitCardFieldValidations(String strParams) {
 		try {
-
 			Thread.sleep(2000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 			Thread.sleep(2000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
-
 			testCardsFieldValidations(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDebitCardFieldValidations is" + e);
@@ -1048,7 +1030,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().verifySearch(data.get("searchingKey"));
 			merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
-			// merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
 			merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
 
 		} catch (Exception e) {
@@ -1061,12 +1042,9 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsAddTeamMemberWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-//			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-//					.verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
 					.verifyFirstName(data.get("firstName"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
@@ -1096,8 +1074,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
-//			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
-//					.verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
 					.verifyFirstName(data.get("firstName"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()

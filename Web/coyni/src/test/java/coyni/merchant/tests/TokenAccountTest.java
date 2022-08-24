@@ -164,8 +164,8 @@ public class TokenAccountTest {
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayPayOutsReceived();
@@ -173,8 +173,8 @@ public class TokenAccountTest {
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysPayOutsReceived();
@@ -182,8 +182,8 @@ public class TokenAccountTest {
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDatePayOutsReceived();
@@ -192,8 +192,8 @@ public class TokenAccountTest {
 
 			testMonthToDateTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthPayOutsReceived();
@@ -201,8 +201,8 @@ public class TokenAccountTest {
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 //					
 
@@ -249,8 +249,8 @@ public class TokenAccountTest {
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensPurchased();
@@ -258,8 +258,8 @@ public class TokenAccountTest {
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensPurchased();
@@ -267,8 +267,8 @@ public class TokenAccountTest {
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensPurchased();
@@ -277,8 +277,8 @@ public class TokenAccountTest {
 
 			testMonthToDateTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensPurchased();
@@ -286,8 +286,8 @@ public class TokenAccountTest {
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 //					
 
@@ -334,8 +334,8 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensWithdraw();
@@ -343,32 +343,32 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testMonthToDateTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
 			exports(strParams);
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as" + tokenAccountActivityComponent.testGetEntriesMessage());
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -402,12 +402,6 @@ public class TokenAccountTest {
 		try {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
-			// tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-			// tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent().getTokensPurchased();
-			// tokenAccountPage.clickTokenAccount();
-			// tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
-			// tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent().getTokensWithdrawn();
-			// tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnToday();
 			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
@@ -857,8 +851,8 @@ public class TokenAccountTest {
 	public void testBuyTokenTransactionBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
-			// tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
 			Thread.sleep(3000);
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
@@ -866,12 +860,10 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.verifyOrderViewHeading();
-			// tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup().orderPreviewBuyTokenWithBankView();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.clickConfirm();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.authyComponent().fillInput(data.get("code"));
-
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.transactionInProgessPopup().clickDone();
 
@@ -887,6 +879,7 @@ public class TokenAccountTest {
 	public void testBuyTokenTransactionBankAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get(""));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank();
@@ -907,6 +900,7 @@ public class TokenAccountTest {
 	public void testBuyTokenViewWithOutPaymentMethods(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescrpWithOutPaymentMethods();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
@@ -937,6 +931,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
@@ -952,6 +947,7 @@ public class TokenAccountTest {
 	public void testBuyTokenDeleteBank(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("heading"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
@@ -968,6 +964,7 @@ public class TokenAccountTest {
 	public void testBuyTokenViewWithPaymentMethods(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().viewChangeLink();
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
@@ -991,6 +988,7 @@ public class TokenAccountTest {
 	public void testBuyTokenTransactionSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
@@ -1022,6 +1020,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
 //			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickAddSignetAccount();
@@ -1037,12 +1036,12 @@ public class TokenAccountTest {
 	public void testBuyTokenTransactionSignetAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickChangeLink();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
-			;
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
@@ -1063,6 +1062,7 @@ public class TokenAccountTest {
 	public void testRemoveSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();

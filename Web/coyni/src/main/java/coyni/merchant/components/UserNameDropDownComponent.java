@@ -18,11 +18,16 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	private By lnkAccountLimits = By.xpath("//span[text()='Account Limits']");
 	private By lnkAgreements = By.xpath("//span[text()='Agreements']");
 	private By lnkChangePassword = By.xpath("//span[text()='Change Password']");
+	private By lnkTwoStepAuthentication = By.xpath("//span[contains(text(),'2-Step Authentication')]");
 	private By lnkSignOut = By.xpath("//span[text()='Sign Out']");
 
 	public void cursorhoverUserName() {
 		new CommonFunctions().verifyCursorAction(dropwnUserName, "drop down");
 
+	}
+
+	public void clickTwoStepAuthentication() {
+		click(lnkTwoStepAuthentication, "Two Step Authentication");
 	}
 
 	public void clickDropDown() {

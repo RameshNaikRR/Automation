@@ -34,8 +34,6 @@ public class SignupTest {
 	public void testcreateAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
-			// homePage.clic();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
@@ -57,14 +55,6 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
 
-//			if (!data.get("errMessage").isEmpty()) {
-//				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
-//				homePage.phoneVerificationComponent().verifyMessage(data.get("errMessage"));
-//			}
-//			homePage.phoneVerificationComponent().clickResend();
-//			homePage.phoneVerificationComponent().clickGoBack();
-//			homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
-//			 verify data presence
 		}
 
 		catch (Exception e) {
@@ -78,7 +68,6 @@ public class SignupTest {
 	public void testcreateAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -108,7 +97,6 @@ public class SignupTest {
 	public void testcreateAccountPhoneVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -158,7 +146,6 @@ public class SignupTest {
 	public void testcreateAccountEmailVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -215,7 +202,6 @@ public class SignupTest {
 	public void testSignUpWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -232,7 +218,6 @@ public class SignupTest {
 			for (int i = 0; i < msg.length; i++) {
 				signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 				signupPage.phoneVerificationComponent().verifyMessage(msg[i]);
-				// verify screen presence
 			}
 
 		}
@@ -260,22 +245,6 @@ public class SignupTest {
 			signupPage.verifyFirstNameAutoFocus();
 			// homePage.verifyElementOpacity();
 
-//			
-//			homePage.fillFirstName(data.get("firstName"));
-//			homePage.fillLastName(data.get("lastName"));
-//			homePage.fillPhoneNumber(data.get("phoneNumber"));
-//			homePage.fillEmail(data.get("email"));
-//			Thread.sleep(1000);
-//			homePage.fillCreatePassword(data.get("createPassword"));
-//			homePage.fillConfirmPassword(data.get("confirmPassword"));
-//			homePage.clickNext();
-//			homePage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-//			homePage.phoneVerificationComponent().verifyPhoneNumber(data.get("verifyPhoneNumber"));
-//			String[] msg = data.get("errMessage").split(",");
-//			for(int i=0;i<msg.length;i++) {
-//				homePage.phoneVerificationComponent().fillpin(data.get("code"));
-//				homePage.phoneVerificationComponent().verifyMessage(msg[i]);
-//				//verify screen presence
 //			}
 		}
 
@@ -290,7 +259,6 @@ public class SignupTest {
 	public void testValidateCreateAccountFields(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.validateFirstNameField(data.get("firstName"));
@@ -413,7 +381,7 @@ public class SignupTest {
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickAddDBA();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
-			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickBack();
+			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickClose();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().clickAddDBA();
