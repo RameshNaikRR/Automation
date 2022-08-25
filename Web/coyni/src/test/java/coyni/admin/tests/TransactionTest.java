@@ -381,5 +381,149 @@ public class TransactionTest {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testverifyFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().filtersComponent(data.get("filters"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
+		}
+	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testgenerateDisputes(String strParams) {
+		try {
+
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().clickchkbxPersonal();
+			sideBarComponent.transactionPage().filterComponent().clickCreditCard();
+			sideBarComponent.transactionPage().filterComponent().clickDebitCard();
+			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
+			Thread.sleep(5000);
+
+			String transactionDetailsAmount = sideBarComponent.transactionPage().filterComponent()
+					.transactionDetailsComponent().verifyAmount();
+			String transactionDetailsDate = sideBarComponent.transactionPage().filterComponent()
+					.transactionDetailsComponent().verifyDate();
+			String transactionDetailsReferenceID = sideBarComponent.transactionPage().filterComponent()
+					.transactionDetailsComponent().verifyReferenceID();
+			String transactionDetailsTSubType = sideBarComponent.transactionPage().filterComponent()
+					.transactionDetailsComponent().verifySubType();
+			if (!(sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
+					.chargebackComponent().verifyElementChargeBackButton() == 0)) {
+				Thread.sleep(2000);
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.chargeBackLink();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().getCaseID();
+
+				String caseDetailsAmount = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifyAmount();
+				String caseDetailsDate = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifyDate();
+				String caseDetailsReferenceID = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent()
+						.verifyReferenceID();
+				String caseDetailsTSubType = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifySubType();
+				Thread.sleep(2000);
+
+				if (transactionDetailsAmount.contains(caseDetailsAmount)) {
+					ExtentTestManager.setPassMessageInReport(
+							"TransactionDetalis Amount " + transactionDetailsAmount + "  matched ");
+				} else {
+					ExtentTestManager.setWarningMessageInReport(
+							"TransactionDetalis Amount " + transactionDetailsAmount + "  matched ");
+				}
+				if (transactionDetailsDate.contains(caseDetailsDate)) {
+					ExtentTestManager.setPassMessageInReport("Date Is " + transactionDetailsDate + "  matched");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("Date Is " + transactionDetailsDate + " not matched");
+				}
+				if (transactionDetailsReferenceID.contains(caseDetailsReferenceID)) {
+					ExtentTestManager
+							.setPassMessageInReport("ReferenceId Is " + transactionDetailsReferenceID + " matched");
+				} else {
+					ExtentTestManager.setWarningMessageInReport(
+							"ReferenceId Is " + transactionDetailsReferenceID + " not matched");
+				}
+				if (transactionDetailsTSubType.contains(caseDetailsTSubType)) {
+					ExtentTestManager.setPassMessageInReport(
+							"Transaction Subtype is " + transactionDetailsTSubType + " Matched");
+				} else {
+					ExtentTestManager.setWarningMessageInReport(
+							"Transaction Subtype is " + transactionDetailsTSubType + " Not Matched");
+				}
+
+			} else {
+				Thread.sleep(2000);
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickChargeBack();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.verifyHeading(data.get("chargeBackHeading"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.fillCaseNumber(data.get("caseNumber"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickEndDate();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.datePickerComponent().setDate(data.get("endDate"));
+				Thread.sleep(2000);
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickStartDate();
+				Thread.sleep(2000);
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.datePickerComponent().setDate(data.get("startDate"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickReason();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickReasonText();
+				Thread.sleep(5000);
+
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.clickOpen();
+				Thread.sleep(2000);
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().verifyTableData(data.get("tableData"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().verifyName(data.get("nameOfUser"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().clickPending();
+				String caseDetailsAmount = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifyAmount();
+				String caseDetailsDate = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifyDate();
+				String caseDetailsReferenceID = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent()
+						.verifyReferenceID();
+				String caseDetailsTSubType = sideBarComponent.transactionPage().filterComponent()
+						.transactionDetailsComponent().chargebackComponent().disputesDetailsComponent().verifySubType();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().enterMessage(data.get("message"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().clickWon();
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().disputesWonAndLostComponent().verifyHeading(data.get("wonHeading"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().disputesWonAndLostComponent().verifyContent(data.get("content"));
+				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
+						.disputesDetailsComponent().disputesWonAndLostComponent().clickYes();
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
+		}
+	}
 }
+
+
+

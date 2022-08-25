@@ -20,11 +20,18 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By headingBankInformation = By.xpath("//span[text()='Bank Information']");
 
-	private By headingBankAccountInformation = By.xpath("//span[text()='Bank Account Information']");//Card Information
-	
-	private By headingCardInformation= By.xpath("//span[text()='Card Information']");
+	private By headingBankAccountInformation = By.xpath("//span[text()='Bank Account Information']");// Card Information
+
+	private By headingCardInformation = By.xpath("//span[text()='Card Information']");
 
 	private By lblCompleted = By.xpath("(//div[text()='Completed'])[1]");
+	private By lblAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value')]");
+
+	private By lblDate = By.xpath("//div[contains(@class,'TransactionDetailBuyToken_create_column__3AOvd')][2]");
+	private By lblReferenceId = By
+			.xpath("(//span[contains(@class,'TransactionDetailBuyToken_copy_button_texts_ledger__31v_I')])[1]");
+	private By lblTransactionSubType = By
+			.xpath("//div[contains(@class,'TransactionDetailBuyToken_create_column__3AOvd')][1]");
 
 	public void clickCompleted() {
 		click(lblCompleted, "View Transaction Details");
@@ -35,10 +42,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 				"//p[text()='%s']/following-sibling::div[1]/p  | //p[text()='%s']//following-sibling::span | //p[text()='%s']//following-sibling::p",
 				Type, Type, Type));// | //p[text()='%s']//following-sibling::span
 	}
+
 	public void verifyCardInformation(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingCardInformation, "card Information", expHeading);
 	}
-
 
 	public void verifyRecipientInformation(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingRecipientInformation, "Recipient Information", expHeading);
@@ -185,6 +192,37 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
+	}
+
+	public String verifyAmount() {
+		String transactionDetailsAmount = getText(lblAmount, "Amount");
+		ExtentTestManager.setInfoMessageInReport("The Amount is" + transactionDetailsAmount);
+		return transactionDetailsAmount;
+	}
+
+	public String verifyDate() {
+		String transactionDetailsDate = getText(lblDate, "Amount");
+		ExtentTestManager.setInfoMessageInReport("Date is" + transactionDetailsDate);
+		return transactionDetailsDate;
+	}
+
+	public String verifySubType() {
+		String transactionDetailsSubType = getText(lblTransactionSubType, "Amount");
+		ExtentTestManager.setInfoMessageInReport("Transadction Sub Type is" + transactionDetailsSubType);
+		return transactionDetailsSubType;
+	}
+
+	public String verifyReferenceID() {
+		String transactionDetailsRef = getText(lblReferenceId, "Ref");
+		ExtentTestManager.setInfoMessageInReport("Transadction Sub Type is" + transactionDetailsRef);
+		return transactionDetailsRef;
+	}
+
+	public CaseDetailsComponent caseDetailsComponent() {
+		return new CaseDetailsComponent();
+	}
+	public ChargebackComponent chargebackComponent() {
+		return new ChargebackComponent();
 	}
 
 }

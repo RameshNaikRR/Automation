@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.admin.components.UploadIMGComponent;
 import coyni.admin.pages.AdminUserDetailsPage;
 import coyni.admin.pages.HomePage;
 import coyni.admin.pages.LoginPage;
@@ -19,13 +20,13 @@ public class HomeTest {
     HomePage homePage;
 	AdminUserDetailsPage adminUserDetailsPage;
 	LoginPage loginPage;
-	
+	UploadIMGComponent imgComponent;
 
 	@BeforeTest
 	public void init() {
 		adminUserDetailsPage = new AdminUserDetailsPage();
 		homePage = new HomePage();
-
+		imgComponent = new UploadIMGComponent();
 	}
 	
 	@Test // added
@@ -162,5 +163,24 @@ public class HomeTest {
 			ExtentTestManager.setFailMessageInReport("testverifyYourPhoneNumberWithInvalid i sfailed due to"+e);
 		}
 }
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void uploadImg(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			imgComponent.clickUserName();
+			imgComponent.clickUserDetails();
+			imgComponent.clickEditUserImage();
+			imgComponent.verifyHeading(data.get("accountProfileHeading"));
+			imgComponent.clickUploadNewImage();
+			imgComponent.verifyHeadingsCrop(data.get("cropYourImageHeading"));
+			Thread.sleep(2000);
+			imgComponent.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			imgComponent.clickSave();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception" + e);
+		}
+	}
 	
 }

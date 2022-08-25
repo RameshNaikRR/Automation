@@ -1,6 +1,9 @@
 package coyni.admin.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -46,7 +49,7 @@ public class FilterComponent extends BrowserFunctions {
 			.xpath("//span[text()='Failed']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 	private By lblInProgress = By
 			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
-
+	private By lblFiltersList = By.xpath("//button[.='Clear All']/../following-sibling::div[1]/div");
 	public void fillWithdrawID(String id) {
 		enterText(getTextFieldElements("Withdraw ID"), id, "Withdraw ID");
 	}
@@ -297,7 +300,29 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickchkbxInprogress() {
 		click(getCheckBox("In Progress"), "In Progress");
 	}
+	public void filtersComponent(String data) {
+		List<WebElement> elementsList = getElementsList(lblFiltersList, "Filters List");
+		for (WebElement webElement : elementsList) {
+			String text = webElement.getText();
+			String[] split = data.split(",");
+			int count=0;
+			for (int i = 0; i < split.length; i++) {
+				if (text.equalsIgnoreCase(split[i])) {
+					ExtentTestManager.setPassMessageInReport( text +" Filter Data match");
+					break;
+				} 
+				
+				else {
+					count++;
+					if(count==split.length) {
+						ExtentTestManager.setWarningMessageInReport(text+" Filter Data Not Found");
+					}
+				}
+			}
 
+		}
+
+	}
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
