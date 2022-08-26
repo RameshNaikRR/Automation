@@ -2,8 +2,9 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
-import coyni.api.business.popups.SecretKeyPopup;
 import coyni.apibusiness.pages.AccountLimitsPage;
+import coyni.apibusiness.pages.BeneficialOwnersPage;
+import coyni.apibusiness.pages.CompanyInfoEditPage;
 import coyni.apibusiness.pages.DBAInfoEditPage;
 import coyni.apibusiness.pages.FeesPage;
 import coyni.apibusiness.pages.PreferencesPage;
@@ -209,6 +210,14 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public DBAInfoEditPage dbaInfoEditPage() {
 		return new DBAInfoEditPage();
+	}
+
+	public CompanyInfoEditPage companyInfoEditPage() {
+		return new CompanyInfoEditPage();
+	}
+
+	public BeneficialOwnersPage beneficialOwnersPage() {
+		return new BeneficialOwnersPage();
 	}
 
 }

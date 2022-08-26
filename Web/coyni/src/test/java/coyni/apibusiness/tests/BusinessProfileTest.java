@@ -696,7 +696,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinenssSettingsSignetAccount(String strParams) {
+	public void testBusinenssSettingsAddSignetAccount(String strParams) {
 		try {
 			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().clickBusinessSettings();

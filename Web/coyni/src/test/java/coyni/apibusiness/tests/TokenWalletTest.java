@@ -993,7 +993,7 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
-					.clickfirstSignet();
+					.selectSignetAccount();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));

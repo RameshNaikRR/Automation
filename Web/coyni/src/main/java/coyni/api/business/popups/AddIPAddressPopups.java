@@ -13,16 +13,17 @@ public class AddIPAddressPopups extends BrowserFunctions {
 
 	private By txtIpAddress = By.xpath("//label[text()='IP Address']/following-sibling::input");
 	private By txtDescription = By.xpath("//label[text()='IP Address Description']/following-sibling::textarea");
-
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	private By lblAddIp = By.xpath("//button[text()='Add IP Address']");
 	private By lblNoIPHeading = By.xpath("//p[text()='No IP Address Exists']");
 
 	private By headindIpSuccess = By.xpath("//h1[text()='IP Address Request Submitted Successfully']");
 	private By btnClose = By.xpath("//button[text()='Close']");
+	private By lblAccountID = By.xpath("//div[contains(@class,'items-center mb-5 ')]");
+	private By lblAccountName = By.xpath("//div[contains(@class,'items-center mb-5')][2]");
 
 	public void verifySuccessHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headindIpSuccess, expHeading, "Success");
+		new CommonFunctions().verifyLabelText(headindIpSuccess, "SuccessMessage",expHeading);
 	}
 
 	public void clickClose() {
@@ -69,18 +70,13 @@ public class AddIPAddressPopups extends BrowserFunctions {
 		enterText(txtDescription, data, "Description");
 	}
 
-	public By getItems(String item) {
-		return By.xpath(String.format("//p[text()='%s']/following-sibling::h2", item));
-
-	}
-
 	public void verifyAccountId() {
-		ExtentTestManager.setPassMessageInReport("Account ID IS " + getElement(getItems("Account ID"), "Account ID"));
+		new CommonFunctions().elementView(lblAccountID, "Account ID");
 	}
 
 	public void verifyAccountName() {
-		ExtentTestManager.setPassMessageInReport(
-				"Account Name " + getElement(getItems("Account Name (DBA)"), "Account Name (DBA)"));
+		new CommonFunctions().elementView(lblAccountName, "Account Name");
+
 	}
 
 	public int getLabelsize() {

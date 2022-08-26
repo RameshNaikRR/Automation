@@ -12,10 +12,10 @@ import ilabs.WebFramework.BrowserFunctions;
 public class PaymentMethodComponent extends BrowserFunctions {
 
 	private By btnAddNewPayment = By.xpath("//button[@id='big-add-payment-button']");
-	private By lblbankName = By.xpath("//p[contains(text(),'3456')]");
+	private By lblbankName = By.xpath("//p[contains(text(),'%s')]");
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
-	private By btnAddNewDebit = By.xpath("//span[text()='Add New Debit Card']");
+	private By btnAddNewDebit = By.xpath("//span[text()='Debit Card']");
 
 	public void clickAddNewPayment() {
 		click(btnAddNewPayment, "Add New Payment Method");

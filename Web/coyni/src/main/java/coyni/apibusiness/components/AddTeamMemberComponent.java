@@ -10,6 +10,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class AddTeamMemberComponent extends BrowserFunctions {
 	private By lblAddTeam = By.xpath("(//span[text()='Add New Team Member'])[2]");
+	private By btnAddTeam = By.xpath("(//button[text()='Add New Team Member'])");
 	private By txtFirstName = By.xpath("//input[@name='firstName']");
 	private By txtLastName = By.xpath("//input[@name='lastName']");
 	private By txtEmail = By.xpath("//input[@name='email']");
@@ -62,6 +63,10 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblAddTeam, "Add New Team", expHeading);
 	}
 
+	public void clickAddTeam() {
+		click(btnAddTeam, "Add Team Member");
+	}
+
 	public void verifyFirstName(String name) {
 		enterText(txtFirstName, "Name", name);
 	}
@@ -104,6 +109,10 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 
 	public FiltersPage filtersPage() {
 		return new FiltersPage();
+	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }
