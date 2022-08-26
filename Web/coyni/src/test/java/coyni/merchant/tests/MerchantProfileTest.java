@@ -337,6 +337,22 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testEditPhoneNumberWithResendVerificationCode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberScreen(data.get("verifyPhoneNumber"));
+			merchantProfilePage.userDetailsComponent().clickIconEditPhNum();
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testEditEmailView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -433,6 +449,22 @@ public class MerchantProfileTest {
 					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditEmailWithResendVerificationCode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
+			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
+			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

@@ -16,7 +16,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	private By PaymentBtns = By.xpath("//span[@class='labelWithoutHover']");
 
 	private By getPaymentBnts(String buttons) {
-		return By.xpath(String.format("(//button[@class='payment-method-button '])[1]", buttons));
+		return By.xpath(String.format("(//button[@class='payment-method-button '])[%s]", buttons));
 	}
 
 	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");

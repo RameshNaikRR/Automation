@@ -8,8 +8,6 @@ import org.testng.annotations.Test;
 
 import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.TokenAccountActivityComponent;
-import coyni.merchant.pages.ExportfilesPage;
-import coyni.merchant.pages.GetHelpPage;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
@@ -17,10 +15,9 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenAccountTest {
+
 	TokenAccountPage tokenAccountPage;
 	LoginPage loginPage;
-	GetHelpPage getHelpPage;
-	ExportfilesPage exportfilesPage;
 	TokenAccountActivityComponent tokenAccountActivityComponent;
 	MerchantSettingsTest merchantSettingTest;
 	SideMenuBarComponent sideMenuBarComponent;
@@ -29,8 +26,6 @@ public class TokenAccountTest {
 	public void init() {
 		tokenAccountPage = new TokenAccountPage();
 		loginPage = new LoginPage();
-		getHelpPage = new GetHelpPage();
-		exportfilesPage = new ExportfilesPage();
 		tokenAccountActivityComponent = new TokenAccountActivityComponent();
 		merchantSettingTest = new MerchantSettingsTest();
 		sideMenuBarComponent = new SideMenuBarComponent();
@@ -1076,36 +1071,125 @@ public class TokenAccountTest {
 
 		}
 	}
-
 //	public void testWithdrawToSignetAccount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			System.out.println("--------------------------------------");
-//			// tokenAccountPage.clickWithdrawToSignet();
-//			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//			tokenAccountPage.withdrawToSignetPopup().clickNext();
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-//					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-//			// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//					.fillInput(data.get("code"));
-//			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//					.successFailureComponent();
-//			Thread.sleep(2000);
+//	try {
+//		Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		System.out.println("--------------------------------------");
+//		// tokenAccountPage.clickWithdrawToSignet();
+//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//		tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//		tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//		tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//		tokenAccountPage.withdrawToSignetPopup().clickNext();
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+//				.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+//		// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//				.fillInput(data.get("code"));
+//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//				.successFailureComponent();
+//		Thread.sleep(2000);
 //
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//	} catch (Exception e) {
+//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 //
-//		}
 //	}
+//}
+
+//public void testWithdrawToUSDDelete	SignetAccount(String strParams) {
+//try {
+//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+//	System.out.println("--------------------------------------");
+//	// tokenAccountPage.clickWithdrawToSignet();
+//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//	tokenAccountPage.withdrawToSignetPopup().clickNext();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.fillInput(data.get("code"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.successFailureComponent();
+//	Thread.sleep(2000);
+//
+//} catch (Exception e) {
+//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//}
+//}
+
+//public void testWithdrawToUSDAddSignetAccount(String strParams) {
+//try {
+//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+//	System.out.println("--------------------------------------");
+//	// tokenAccountPage.clickWithdrawToSignet();
+//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//	tokenAccountPage.withdrawToSignetPopup().clickNext();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.fillInput(data.get("code"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.successFailureComponent();
+//	Thread.sleep(2000);
+//
+//} catch (Exception e) {
+//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//}
+//}
+
+//public void testWithdrawToUSDAddSignetAccountInvalidData(String strParams) {
+//try {
+//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+//	System.out.println("--------------------------------------");
+//	// tokenAccountPage.clickWithdrawToSignet();
+//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
+//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
+//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
+//	tokenAccountPage.withdrawToSignetPopup().clickNext();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.fillInput(data.get("code"));
+//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+//			.successFailureComponent();
+//	Thread.sleep(2000);
+//
+//} catch (Exception e) {
+//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//}
+//}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1159,34 +1243,83 @@ public class TokenAccountTest {
 		}
 	}
 
+//@Test
+//@Parameters({ "strParams" })
+//public void testWithdrawToUSDViaInstantPayDeleteDebitCards(String strParams) {
+//	try {
+//		Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		sideMenuBarComponent.clickTokenAccount();
+//		tokenAccountPage.clickWithdrawToUSD();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.verifyDescription(data.get("description"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.clickDelete();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.removePaymentMethodPopup().verifyHeading(data.get("removePaymentPopupHeading"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.removePaymentMethodPopup().clickOnRemove();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup()
+//				.verifyHeading(data.get("paymentMethodRemovesdSuccessfullyHeading"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().clickWithdrawCoyniBtn();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
+//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().withdrawCoyniToUSDPopup()
+//				.verifyLabelWithdrawToUSDHeading(data.get("heading"));
+//	} catch (Exception e) {
+//		ExtentTestManager.setFailMessageInReport(
+//				"testWithdrawToUSDViaInstantPayWithNoDebitCards failed due to exception " + e);
+//	}
+//}
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDViaInstantPayDeleteDebitCards(String strParams) {
+	public void testWithdrawToUSDViaInstantPay(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.verifyDescription(data.get("description"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.clickDelete();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.removePaymentMethodPopup().verifyHeading(data.get("removePaymentPopupHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.removePaymentMethodPopup().clickOnRemove();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup()
-					.verifyHeading(data.get("paymentMethodRemovesdSuccessfullyHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().clickWithdrawCoyniBtn();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-					.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().withdrawCoyniToUSDPopup()
-					.verifyLabelWithdrawToUSDHeading(data.get("heading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//				.verifyLabelHeading(data.get("instantPayHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//				.verifyLabelHeading(data.get("instantPayHeading"));
+//		ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
+//				+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			Thread.sleep(3000);
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+//				.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyOrderPreviewForWithdraw();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyHeading(data.get("authyVerificationHeading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().verifyAuthy();
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
+					.fillInput(data.get("code1"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
+//				.verifyHeading(data.get("expTransactionInProgressHeading"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+//				.successFailurePopupCardComponent().verifyReferenceID();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.successFailurePopupCardComponent().clickDone();
+			tokenAccountPage.verifyLabelYourTokenAccount();
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(
-					"testWithdrawToUSDViaInstantPayWithNoDebitCards failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testWithdrawToUSDViaInstantPay failed due to exception " + e);
 		}
 	}
 
@@ -1214,337 +1347,411 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
 		}
 	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDViaInstantPayWithNavigationOptions(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-////			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
-////					data.get("expValue"), data.get("expColor"));
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-////			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
-////					data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickBack();
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
-//
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//			// .verifyLabelHeading(data.get("instantPayHeading"));
-//
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//			// .clickDebitCard(data.get("last4digits"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnDebitCard();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-////			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as " + tokenAccountPage
-////					.withdrawCoyniToUSDPopup().withdrawViaInstantPay().accountLimitsComponent().getInstantPay());
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
-////			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
-////					.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.enterMessage(data.get("transactionalmessage"));
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
-//					.verifyOrderPreviewForWithdraw();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
-//					.navigationComponent().clickBack();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-//			Thread.sleep(3000);
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.enterMessage(data.get("transactionalmessage"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
-//					.navigationComponent().clickClose();
-//			tokenAccountPage.verifyLabelYourTokenAccount();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayWithNavigationOptions failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDViaInstantPayWithAddNewDebitCard(String strParams) {
-//
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-////			merchantSettingTest.testAddCard(strParams, "Debit");
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayWithAddNewDebitCard failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawViaInstantPayEditCard(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-////			merchantSettingTest.testEditCard(strParams);
-//
-//		} catch (Exception e) {
-//
-//			ExtentTestManager
-//					.setFailMessageInReport("testWithdrawViaInstantPayEditCard Failed due to this Exception" + e);
-//
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawViaInstantPayDeleteCard(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-////			merchantSettingTest.testDeleteCard(strParams);
-////			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
-////					.navigationComponent().clickClose();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport(" testWithdrawViaInstantPayDeleteCard failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-//			Thread.sleep(2000);
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-////			merchantSettingTest.testCardsFieldValidations(strParams, "Debit");
-//
-//			/*
-//			 * if (!data.get("errMessage").isEmpty()) { new
-//			 * CommonFunctions().validateFormErrorMessage(data.get("errMessage"),
-//			 * data.get("color"), data.get("elementName")); }
-//			 */
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDViaInstantPayAddDebritCardWithinvailddata(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			Thread.sleep(2000);
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-//			Thread.sleep(2000);
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-////			merchantSettingTest.testAddCardWihInvalidData(strParams, "Debit");
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDViaInstantPayInvalidVerificationCode(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup()
-//					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.verifyLabelHeading(data.get("instantPayHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
-//
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//			// .clickDebitCard(data.get("last4digits"));
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//			// .verifyLabelHeading(data.get("instantPayHeading"));
-////			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-////					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-//			Thread.sleep(3000);
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.enterMessage(data.get("transactionalmessage"));
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
-//					.verifyOrderPreviewForWithdraw();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
-//					.verifyHeading(data.get("authyVerificationHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().authyComponent()
-//					.fillAuthyInputInvalid(data.get("code"), data.get("character"));
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickBuyTokens();
-//			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
-//			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
-//			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescription(data.get("buyCoyniTokenDescrp"));
-//			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
-//					.verifyAddNewDebitCardHeading(data.get("expHeading"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.validateNameOnCard(data.get("cardName"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.validateCardNumber(data.get("cardNumber"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.validateCardExpiry(data.get("cardExpiry"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.validateCVVorCVC(data.get("cardCVV"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.mailingAddressComponent().validateAddress1(data.get("addressLine1"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.mailingAddressComponent().validateAddress1(data.get("addressLine2"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.mailingAddressComponent().validateCity(data.get("city"));
-//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
-//					.mailingAddressComponent().validateZipCode(data.get("zipCode"));
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport(
-//					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
-//		}
-//
-//	}
-//
-//	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
-//			if (giftCard.equalsIgnoreCase("Amazon")) {
-//				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
-//				Thread.sleep(1000);
-//				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
-//			} else {
-//				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
-//						.enterSearckey(data.get("searchKey1"));
-//				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
-//			}
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
-//					.verifyHeadingOrderPreview(data.get("orderHeading"));
-//
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
-//					.verifyHeading1(data.get("authyHeading1"));
-//			Thread.sleep(2000);
-//			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
-//			// .fillAuthyInput(data.get("securityKey"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
-//					.fillInput(data.get("code"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
-//					.verifySuccessHeading(data.get("successHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDGiftCardWithAmazon(String strParams) {
-//		testWithdrawToUSDGiftCard(strParams, "Amazon");
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDGiftCardWithVisa(String strParams) {
-//		testWithdrawToUSDGiftCard(strParams, "Visa");
-//	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDAmazonInvalidData(String strParams) {
-//		testWithdrawToUSD(strParams, "Amazon");
-//	}
+////
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//		tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawBackgroundcolor(data.get("cssProp"),
+//				data.get("expValue"), data.get("expColor"));
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyInstantPayDebitCardBackgroundcolor(
+//				data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().navigationComponent().clickBack();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().verifyDebitCardFlow();
+
+			// tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .clickDebitCard(data.get("last4digits"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clicNext();
+
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//				.verifyLabelHeading(data.get("instantPayHeading"));
+//		ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as " + tokenAccountPage
+//				.withdrawCoyniToUSDPopup().withdrawViaInstantPay().accountLimitsComponent().getInstantPay());
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay()
+//				.verifyToggleBackgroundColor(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnConvertLink();
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//				.enterMessage(data.get("transactionalmessage"));
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyOrderPreviewForWithdraw();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.navigationComponent().clickBack();
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			Thread.sleep(3000);
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//				.enterMessage(data.get("transactionalmessage"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.navigationComponent().clickClose();
+			tokenAccountPage.verifyLabelYourTokenAccount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithNavigationOptions failed due to exception " + e);
+		}
+	}
+
 //
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDVisaInvalidData(String strParams) {
-//		testWithdrawToUSD(strParams, "Visa");
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithAddNewDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+			merchantSettingTest.testAddCard(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithAddNewDebitCard failed due to exception " + e);
+		}
+	}
+
+//
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawViaInstantPayEditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			merchantSettingTest.testEditCard(strParams);
+
+		} catch (Exception e) {
+
+			ExtentTestManager
+					.setFailMessageInReport("testWithdrawViaInstantPayEditCard Failed due to this Exception" + e);
+
+		}
+	}
+
+//
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawViaInstantPayDeleteCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			merchantSettingTest.testDeleteCard(strParams);
+//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().removePaymentMethodPopup()
+//				.navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" testWithdrawViaInstantPayDeleteCard failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+			Thread.sleep(2000);
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			merchantSettingTest.testCardsFieldValidations(strParams, "Debit");
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+		}
+
+	}
+
+//
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayAddDebritCardWithinvailddata(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			Thread.sleep(2000);
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+			Thread.sleep(2000);
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			merchantSettingTest.testAddCardWihInvalidData(strParams, "Debit");
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithDebitCardFieldValidations failed due to exception " + e);
+		}
+
+	}
+
+//
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayInvalidVerificationCode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().verifyWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.clickDebitCard(data.get("last4digits"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyDebitCardFlow();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			// .verifyLabelHeading(data.get("instantPayHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnChangeLink();
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyOrderPreviewForWithdraw();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyHeading(data.get("authyVerificationHeading"));
+
+			if (!data.get("code1").isEmpty()) {
+				tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
+						.fillAuthyInputInvalid(data.get("code1"), data.get("char"));
+			}
+//		if (!data.get("errMessage").isEmpty()) {
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
+//					.verifyMessage(data.get("errMessage"));
+//		}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayInvalidVerificationCode failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyCoyniTokenDebitCardFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expBuyCoyniTokenHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescription(data.get("buyCoyniTokenDescrp"));
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
+//		tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup()
+//				.verifyAddNewDebitCardHeading(data.get("expHeading"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateNameOnCard(data.get("cardName"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCardNumber(data.get("cardNumber"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCardExpiry(data.get("cardExpiry"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.validateCVVorCVC(data.get("cardCVV"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress1(data.get("addressLine1"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateAddress1(data.get("addressLine2"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateCity(data.get("city"));
+			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
+					.mailingAddressComponent().validateZipCode(data.get("zipCode"));
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testBuyCoyniTokenDebitCardFieldValidations failed due to exception " + e);
+		}
+
+	}
+
+//
+	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			if (giftCard.equalsIgnoreCase("Amazon")) {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+				Thread.sleep(1000);
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			} else {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+						.enterSearckey(data.get("searchKey1"));
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
+			}
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
+	public void testWithdrawToUSDGiftCardInvalid(String strParams, String giftCard) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			if (giftCard.equalsIgnoreCase("Amazon")) {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+				Thread.sleep(1000);
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			} else {
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+						.enterSearckey(data.get("searchKey1"));
+				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
+			}
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawToUSDGiftCardInvalid failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDGiftCardWithAmazon(String strParams) {
+		testWithdrawToUSDGiftCard(strParams, "Amazon");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDGiftCardWithVisa(String strParams) {
+		testWithdrawToUSDGiftCard(strParams, "Visa");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDAmazonInvalidData(String strParams) {
+		testWithdrawToUSDGiftCardInvalid(strParams, "Amazon");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDVisaInvalidData(String strParams) {
+		testWithdrawToUSDGiftCardInvalid(strParams, "Visa");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDNavigationOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.navigationComponent().clickClose();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.navigationComponent().clickBack();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillAuthyInput(data.get("securityKey"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" testWithdrawToUSDNavigationOption  failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1661,7 +1868,7 @@ public class TokenAccountTest {
 					.verifyTransactions();
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);
+					.setFailMessageInReport("testWithdrawToUSDExternalBankAccountView failed due to exception " + e);
 		}
 	}
 
@@ -1763,8 +1970,7 @@ public class TokenAccountTest {
 					.clickAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.verifyErrorMsg(data.get("errMessage"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.getAmount();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDExternalBankAccountInvalidAmount  failed due to exception " + e);
@@ -1782,8 +1988,6 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
 					.verifyHeading(data.get("externalBankHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-//					.verifyDescription(data.get("externalBankDescription"));
 			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickDelete();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
@@ -1806,27 +2010,5 @@ public class TokenAccountTest {
 					.setFailMessageInReport("testWithdrawToUSDRemoveExternalBankAccount  failed due to exception " + e);
 		}
 	}
-
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testWithdrawToUSDRemoveExternalBankAccount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().cursorhoverWithdrawToUSD();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-////			tokenAccountPage.bankAccountsComponent().clickOnBank(data.get("last4Digits"));
-////			tokenAccountPage.bankAccountsComponent().ClickNext();
-//			tokenAccountPage.bankAccountsComponent().clickDelete();
-//			tokenAccountPage.bankAccountsComponent().verifyRemoveHeading(data.get("removeHeading"));
-//			tokenAccountPage.bankAccountsComponent().clickRemove();
-//			tokenAccountPage.bankAccountsComponent().removeHeading(data.get("removeHeading1"));
-//			tokenAccountPage.bankAccountsComponent().navigationComponent().clickClose();
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport(" test Remove External Bank Transaction  failed due to exception " + e);
-//		}
-//	}
-//
 
 }

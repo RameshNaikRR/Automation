@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
@@ -148,20 +149,10 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
+			// loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-//			String[] msg = data.get("errMessage").split(",");
-//			for (int i = 0; i < msg.length; i++) {
-//				loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-//				loginPage.phoneVerificationComponent().verifyMessage(msg[i]);
-//			}
-//			loginPage.phoneVerificationComponent().clickResend();
-//			loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
-//			for (int i = 0; i <= 3; i++) {
-//				Thread.sleep(5000);
-//				loginPage.phoneVerificationComponent().clickResend();
-//				loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
+
 //			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
@@ -241,9 +232,6 @@ public class LoginTest {
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			// loginPage.phoneVerificationComponent().verifyChooseHeading(data.get("chooseAccount"));
 			loginPage.phoneVerificationComponent().clickEmail();
-//			Thread.sleep(1000);
-//			loginPage.verifyHeading(data.get("loginHeading"));
-//			loginPage.viewEmail();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);
 		}

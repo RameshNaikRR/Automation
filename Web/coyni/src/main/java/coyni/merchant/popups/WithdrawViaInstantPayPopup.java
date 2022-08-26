@@ -6,6 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.merchant.components.AuthyComponent;
+import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -14,12 +16,12 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//h1[.='Withdraw via Instant Pay']");
+	private By btnDebitCard = By.xpath("(//input[@name='buy-token-radio'])[1]");
 	private By lblNoDebitCards = By.xpath("//h2[.='No Debit Cards Exist']");
 	private By noDebitCardsDescription = By.xpath("//p[starts-with(.,'If')]");
 	private By btnAddNewDebitCard = By.id("small-add-payment-button");
 	private By lblChooseYourInstantPay = By.xpath("//h3[.='Choose Your Instant Pay Source:']");
 	private By lblMsg = By.xpath("//h2[starts-with(.,'Instant')]");
-
 	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
 	private By txtAmount = By.cssSelector("#amount");
 	private By IconCoyni = By.xpath("//input[@id='amount']/following-sibling::span");
@@ -128,6 +130,10 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		click(btnNext, "Next");
 	}
 
+	public void clickTab() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+
 	public void verifyTransactions() {
 		List<WebElement> list = getElementsList(lblTransactions, "");
 		for (WebElement one : list) {
@@ -149,41 +155,46 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		return new AddNewDebitCardPopup();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
 	public ChooseYourInstantPaySourcePopup chooseYourInstantPaySourcePopup() {
 		return new ChooseYourInstantPaySourcePopup();
 	}
-	
+
 	public void validateTextFields() {
-		
-				addNewDebitCardPopup().fillNameOnCard("cardName");
-				addNewDebitCardPopup().fillCardNumber("cardNumber");
-				new CommonFunctions().validateFormErrorMessage("Name is required");
 
-				addNewDebitCardPopup().fillCardExpiry("cardExpiry");
-				new CommonFunctions().validateFormErrorMessage("Card Number");
+		addNewDebitCardPopup().fillNameOnCard("cardName");
+		addNewDebitCardPopup().fillCardNumber("cardNumber");
+		new CommonFunctions().validateFormErrorMessage("Name is required");
 
-				addNewDebitCardPopup().fillCardCVVorCVC("cardCVV");
-				new CommonFunctions().validateFormErrorMessage("Card Expiry");
+		addNewDebitCardPopup().fillCardExpiry("cardExpiry");
+		new CommonFunctions().validateFormErrorMessage("Card Number");
 
-				addNewDebitCardPopup().fillBillingAddress1("billingAddress1");
-				new CommonFunctions().validateFormErrorMessage("Card CVV");
+		addNewDebitCardPopup().fillCardCVVorCVC("cardCVV");
+		new CommonFunctions().validateFormErrorMessage("Card Expiry");
 
-				addNewDebitCardPopup().fillCity("city");
-				new CommonFunctions().validateFormErrorMessage("Billing Address 1");
-				
-				addNewDebitCardPopup().clickStateDrpDwn();
-				new CommonFunctions().validateFormErrorMessage("City");
-				
-				addNewDebitCardPopup().fillZipCode("zipCode");
-				new CommonFunctions().validateFormErrorMessage("State");
-				
-				new CommonFunctions().clickOutSideElement();
-				new CommonFunctions().validateFormErrorMessage("Zip code");
-	
+		addNewDebitCardPopup().fillBillingAddress1("billingAddress1");
+		new CommonFunctions().validateFormErrorMessage("Card CVV");
+
+		addNewDebitCardPopup().fillCity("city");
+		new CommonFunctions().validateFormErrorMessage("Billing Address 1");
+
+		addNewDebitCardPopup().clickStateDrpDwn();
+		new CommonFunctions().validateFormErrorMessage("City");
+
+		addNewDebitCardPopup().fillZipCode("zipCode");
+		new CommonFunctions().validateFormErrorMessage("State");
+
+		new CommonFunctions().clickOutSideElement();
+		new CommonFunctions().validateFormErrorMessage("Zip code");
+
 	}
 
 //	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
 //	private By txtAmount = By.xpath("//input[@name='amount']");
+
 //	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
 //	private By txtmsg = By.xpath("//textarea[@name='message']");
 //	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
@@ -198,15 +209,17 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 //			.xpath("(//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE'])[1]");
 //	private By debitCardView = By.xpath("(//span[@class='text-xs font-semibold text-cgy4'])[2]");
 //	private By lbldailyLimit = By.xpath("//h2[@class='text-cgy2 text-xs font-sans text-center mt-3']");
-//	private By btnRadioDebit = By.xpath("(//input[@name='buy-token-radio'])[1]");
+	private By btnRadioDebit = By.xpath("(//input[@name='buy-token-radio'])[1]");
+
 //	private By btnAddNewDebit = By.xpath("//span[contains(text(),'Add New Debit Card')]");
 //	private By toggle = By.xpath("//img[@src='/static/media/Flip-Icon.ec69897c.svg']");
 //	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
 //
-//	public void enterAmount(String Amount) {
-//		enterText(txtAmount, Amount, "Amount");
-//
-//	}
+	public void enterAmount(String Amount) {
+		enterText(txtAmount, Amount, "Amount");
+
+	}
+
 //
 //	public void enterMessage(String Message) {
 //		enterText(txtmsg, Message, "Message");
@@ -229,20 +242,29 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 //	public By getPaymentItems(String last4digits) {
 //		return By.xpath(String.format("//p[contains(text(),'%s')]", last4digits));
 //	}
-//
-//	public void clickDebitCard(String last4Digits) {
-//		//moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), "Debit");
+
+	public void clickDebitCard(String number) {
+		// click(btnDebitCard, "Debit Card");
+		// moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)),
+		// "card");
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
+		ExtentTestManager.setInfoMessageInReport("button clicked for card " + (number));
+	}
+
+	// public void clickDebitCard(String last4Digits) {
+	// moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]",
+	// last4Digits)), "Debit");
 //		List<WebElement> lst = getElementsList(btnRadioDebit, "Debit");
 //		int i = lst.size();
-//		if(i<1) {
-//		click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
-//		clickOnNext();
-//		ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
-//	}
-//		else {
-//			clickOnNext();
+//		if (i < 1) {
+//			click(By.xpath(String.format("//p[contains(text(),'%s')]", last4Digits)), last4Digits);
+//			clickNext();
+//			ExtentTestManager.setInfoMessageInReport("Button clicked for card " + (last4Digits));
+//		} else {
+//			clickNext();
 //		}
 //	}
+
 //	public void verifyToggleBackgroundColor(String cssProp, String expValue, String expColor) {
 //		new CommonFunctions().verifyChangedColor(toggle, "Toggle", cssProp, expValue, expColor);
 //	}
@@ -287,13 +309,14 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 //		click(btnNext, "Next");
 //	}
 //
-//	public OrderPreviewPopup orderPreviewPopup() {
-//		return new OrderPreviewPopup();
-//	}
+	public OrderPreviewPopup orderPreviewPopup() {
+		return new OrderPreviewPopup();
+	}
+
 //
-//	public AuthyComponent authyComponent() {
-//		return new AuthyComponent();
-//	}
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
 //
 //	public NavigationComponent navigationComponent() {
 //		return new NavigationComponent();
@@ -411,5 +434,4 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 //		mailingAddressComponent().verifyCountry(country);
 //
 //	}
-
 }
