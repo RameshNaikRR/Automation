@@ -1,5 +1,6 @@
 package coyni.merchant.popups;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,9 +11,11 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawToSignetAccountPopup extends BrowserFunctions {
+
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//h1[.='Withdraw to Signet Account']");
 //	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
+	private By txtmsg = By.xpath("//textarea[@name='message']");
 	private By txtAmount = By.cssSelector("#amount");
 	private By IconCoyni = By.xpath("//input[@id='amount']/following-sibling::span");
 	private By IconDollar = By.xpath("//input[@id='amount']/preceding-sibling::span");
@@ -25,12 +28,41 @@ public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 	private By txtPlaceHolder = By.xpath("//label[.='Transaction Description (Optional)']");
 	private By lblMsgTransaction = By.xpath("//p[contains(.,'Your tr')]");
 	private By btnNext = By.xpath("//button[.='Next']");
-
+	private By btnAddNewSignetAccount = By.xpath("//span[contains(text(),'Add New Signet Account')]");
 	private By lblTransactions = By.xpath("//span[@class='text-cgy4 text-sm']");
 	private By btnConfirm = By.xpath("//button[.='Confirm']");
 
 	public void verifyHeading(String Heading) {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
+
+	}
+
+	public void enterMessage(String Message) {
+		enterText(txtmsg, Message, "Message");
+
+	}
+
+	public void enterAmount(String Amount) {
+		enterText(txtAmount, Amount, "Amount");
+
+	}
+
+	public void clickTab() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+
+	public void clickAddNewSignetAccount() {
+		click(btnAddNewSignetAccount, "Add New Signet Account");
+	}
+
+	public void clickSignet(String number) {
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
+		ExtentTestManager.setInfoMessageInReport("button clicked for Signet " + (number));
+	}
+
+	public void getAvailableBalance() {
+		String txt = getText(lblAvailableBlnc, "Available Balance");
+		ExtentTestManager.setInfoMessageInReport("Available Balance " + txt);
 	}
 
 	public void clickAmount() {
@@ -110,5 +142,13 @@ public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 
 	public WithdrawConfirmPopup withdrawConfirmPopup() {
 		return new WithdrawConfirmPopup();
+	}
+
+	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
+		return new AddNewSignetAccountPopup();
+	}
+
+	public WithdrawToSignetPreviewPopup withdrawToSignetPreviewPopup() {
+		return new WithdrawToSignetPreviewPopup();
 	}
 }

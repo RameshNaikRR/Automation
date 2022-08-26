@@ -342,9 +342,15 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberScreen(data.get("verifyPhoneNumber"));
-			merchantProfilePage.userDetailsComponent().clickIconEditPhNum();
-			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberScreen(data.get("authyEditPhoneHeading"));
+			// merchantProfilePage.userDetailsComponent().clickIconEditPhNum();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSMSCode();
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(3000);
+				merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().phoneVerificationComponent()
+						.clickResendCode();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -462,9 +468,15 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
-			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddress(data.get("heading"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSMSCode();
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(3000);
+				merchantProfilePage.userDetailsComponent().editEmailAddressPopup().phoneVerificationComponent()
+						.clickResendCode();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

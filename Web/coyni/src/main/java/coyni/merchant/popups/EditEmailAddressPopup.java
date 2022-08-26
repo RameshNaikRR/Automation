@@ -2,20 +2,18 @@ package coyni.merchant.popups;
 
 import java.awt.AWTException;
 
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
-import ilabs.web.actions.WaitForElement;
 
 public class EditEmailAddressPopup extends BrowserFunctions {
 
 	private By txtOldEmailAddress = By.xpath("//input[@id='EmailId']");
+	private By btnSMSCode = By.xpath("//span[contains(text(),'Get an SMS code.')]");
 	private By txtNewEmailAddress = By.xpath("//input[@name='email']");
 	private By btnSendcode = By.xpath("//button[text()='Send Code']");
 	private By lblEditEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
@@ -27,6 +25,10 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	public void fillNewEmailAddress(String newNumber) {
 		// waitForElement(txtNewEmailAddress, waittime, WaitForElement.visibility);
 		enterText(txtNewEmailAddress, newNumber, "NewNumber");
+	}
+
+	public void clickSMSCode() {
+		click(btnSMSCode, "Click SMSCode");
 	}
 
 	public void clickSendCode() {
@@ -59,6 +61,10 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 //		robot.keyPress(KeyEvent.VK_TAB);
 //		robot.keyRelease(KeyEvent.VK_TAB);
 //		ExtentTestManager.setInfoMessageInReport("click on tab");
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 }

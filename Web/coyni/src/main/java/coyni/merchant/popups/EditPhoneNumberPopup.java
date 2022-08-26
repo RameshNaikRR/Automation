@@ -2,23 +2,20 @@ package coyni.merchant.popups;
 
 import java.awt.AWTException;
 
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.api.reporting.ExtentTestManager;
-import ilabs.web.actions.WaitForElement;
 
 public class EditPhoneNumberPopup extends BrowserFunctions {
 
 	private By txtOldNumber = By.xpath("");
 	private By txtNewNumber = By.xpath("//input[@id='Phone_Number']");
 	private By btnSendCode = By.xpath("//button[text()='Send Code']");
+	private By btnSMSCode = By.xpath("//span[contains(text(),'Get an SMS code.')]");
 	private By lblAuthyEditPhone = By.xpath("//h1[text()='Edit Phone Number']");
 	private By lblEditPhoneNumberAuthenticationDescription = By
 			.xpath("//span[@class='mt-10 text-base text-center text-cgy4']");
@@ -58,6 +55,10 @@ public class EditPhoneNumberPopup extends BrowserFunctions {
 		click(btnSendCode, "Click SendCode");
 	}
 
+	public void clickSMSCode() {
+		click(btnSMSCode, "Click SMSCode");
+	}
+
 	public void verifyPageHeadingWithValidCode(String expHeding) {
 		new CommonFunctions().verifyLabelText(Heading, "Edit Phone Number", expHeding);
 	}
@@ -77,6 +78,10 @@ public class EditPhoneNumberPopup extends BrowserFunctions {
 //		robot.keyPress(KeyEvent.VK_TAB);
 //		robot.keyRelease(KeyEvent.VK_TAB);
 //		ExtentTestManager.setInfoMessageInReport("clicked on tab");
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 }

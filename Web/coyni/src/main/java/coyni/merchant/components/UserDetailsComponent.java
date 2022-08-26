@@ -43,7 +43,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By headingUserDetais = By.xpath("//span[@class='text-base text-cgy4']");
 	private By lblVerificationSuccesful = By.xpath("//span[text='Verification Successful']");
 	private By lblNewPhoneNumberHeading = By.xpath("//h1[text()='New Phone Number']");
-	private By headingEditPhoneNumber = By.xpath("//h1[@text()='Edit Phone Number']");
+	private By headingEditPhoneNumber = By.xpath("//h1[text()='Edit Phone Number']");
 
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();

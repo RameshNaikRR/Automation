@@ -17,6 +17,7 @@ import coyni.merchant.popups.BuyCoyniTokensNoPaymentPopup;
 import coyni.merchant.popups.BuyCoyniTokensPaymentMethodPopup;
 import coyni.merchant.popups.BuyCoyniTokensPopup;
 import coyni.merchant.popups.WithdrawCoyniToUSDPopup;
+import coyni.merchant.popups.WithdrawToSignetAccountPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -328,6 +329,10 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
+	}
+
+	public WithdrawToSignetAccountPopup withdrawToSignetAccountPopup() {
+		return new WithdrawToSignetAccountPopup();
 	}
 
 	public UserNameDropDownComponent userNameDropDownComponent() {

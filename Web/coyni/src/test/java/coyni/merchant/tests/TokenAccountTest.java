@@ -1071,125 +1071,128 @@ public class TokenAccountTest {
 
 		}
 	}
-//	public void testWithdrawToSignetAccount(String strParams) {
-//	try {
-//		Map<String, String> data = Runner.getKeywordParameters(strParams);
-//		System.out.println("--------------------------------------");
-//		// tokenAccountPage.clickWithdrawToSignet();
-//		tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//		tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//		tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//		tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//		tokenAccountPage.withdrawToSignetPopup().clickNext();
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-//				.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-//		// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//				.fillInput(data.get("code"));
-//		tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//				.successFailureComponent();
-//		Thread.sleep(2000);
-//
-//	} catch (Exception e) {
-//		ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//	}
-//}
 
-//public void testWithdrawToUSDDelete	SignetAccount(String strParams) {
-//try {
-//	Map<String, String> data = Runner.getKeywordParameters(strParams);
-//	System.out.println("--------------------------------------");
-//	// tokenAccountPage.clickWithdrawToSignet();
-//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//	tokenAccountPage.withdrawToSignetPopup().clickNext();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.fillInput(data.get("code"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.successFailureComponent();
-//	Thread.sleep(2000);
-//
-//} catch (Exception e) {
-//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//}
-//}
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.verifyHeading(data.get("heading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.clickSignet(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().getAvailableBalance();
+			// tokenAccountPage.withdrawToSignetAccountPopup().fillMessage(data.get("description"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+//					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+//					.verifyAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getWithdrawAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getProcessingFee();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getTotal();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.clickConfirm();
+			// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.authyComponent().fillInput(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.authyComponent().successFailureComponent();
 
-//public void testWithdrawToUSDAddSignetAccount(String strParams) {
-//try {
-//	Map<String, String> data = Runner.getKeywordParameters(strParams);
-//	System.out.println("--------------------------------------");
-//	// tokenAccountPage.clickWithdrawToSignet();
-//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//	tokenAccountPage.withdrawToSignetPopup().clickNext();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.fillInput(data.get("code"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.successFailureComponent();
-//	Thread.sleep(2000);
-//
-//} catch (Exception e) {
-//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//}
-//}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
-//public void testWithdrawToUSDAddSignetAccountInvalidData(String strParams) {
-//try {
-//	Map<String, String> data = Runner.getKeywordParameters(strParams);
-//	System.out.println("--------------------------------------");
-//	// tokenAccountPage.clickWithdrawToSignet();
-//	tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
-//	tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-//	tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
-//	tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-//	tokenAccountPage.withdrawToSignetPopup().clickNext();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-//			.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-//	// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.fillInput(data.get("code"));
-//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-//			.successFailureComponent();
-//	Thread.sleep(2000);
-//
-//} catch (Exception e) {
-//	ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//
-//}
-//}
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDDeleteSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			merchantSettingTest.testDeleteSignetAccount(strParams);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDAddSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickAddNewSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.fillName(data.get("newSignetAccount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.fillSignetWalletId(data.get("walletID"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillCity(data.get("city1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().clickstate();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().selectState(data.get("state1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDSignetAccountInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+//					.verifyHeading(data.get("heading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.clickSignet(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().getAvailableBalance();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.enterMessage(data.get("description"));
+			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1242,37 +1245,6 @@ public class TokenAccountTest {
 					"testWithdrawToUSDViaInstantPayWithNoDebitCards failed due to exception " + e);
 		}
 	}
-
-//@Test
-//@Parameters({ "strParams" })
-//public void testWithdrawToUSDViaInstantPayDeleteDebitCards(String strParams) {
-//	try {
-//		Map<String, String> data = Runner.getKeywordParameters(strParams);
-//		sideMenuBarComponent.clickTokenAccount();
-//		tokenAccountPage.clickWithdrawToUSD();
-//		tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
-//		tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.verifyDescription(data.get("description"));
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.clickDelete();
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.removePaymentMethodPopup().verifyHeading(data.get("removePaymentPopupHeading"));
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.removePaymentMethodPopup().clickOnRemove();
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup()
-//				.verifyHeading(data.get("paymentMethodRemovesdSuccessfullyHeading"));
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().clickWithdrawCoyniBtn();
-//		tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().chooseYourInstantPaySourcePopup()
-//				.removePaymentMethodPopup().paymentMethodRemovesdSuccessfullyPopup().withdrawCoyniToUSDPopup()
-//				.verifyLabelWithdrawToUSDHeading(data.get("heading"));
-//	} catch (Exception e) {
-//		ExtentTestManager.setFailMessageInReport(
-//				"testWithdrawToUSDViaInstantPayWithNoDebitCards failed due to exception " + e);
-//	}
-//}
 
 	@Test
 	@Parameters({ "strParams" })

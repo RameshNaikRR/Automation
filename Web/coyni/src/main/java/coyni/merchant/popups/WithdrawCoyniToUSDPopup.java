@@ -71,6 +71,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		return new GiftCardPurchasePopup();
 	}
 
+	public WithdrawToSignetAccountPopup withdrawToSignetAccountPopup() {
+		return new WithdrawToSignetAccountPopup();
+	}
+
 	public ChooseYourBankAccountPopup chooseYourBankAccountPopup() {
 		return new ChooseYourBankAccountPopup();
 	}
