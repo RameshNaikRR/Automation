@@ -29,8 +29,8 @@ public class MerchantActivityTest {
 	public void testDashBoardProcessingVolume(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-			// merchantActivityComponent.clickDashBoard();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().daysMonthsDropDownComponent().clickOnToday();
 			merchantActivityComponent.dashBoardPage().getTotalCommissionEarned();
@@ -83,7 +83,7 @@ public class MerchantActivityTest {
 	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			// merchantTransactionsPage.verifyLabelTransactionListDetails();
 			merchantTransactionsPage.verifyTableItemsCount(data.get("query"));
@@ -106,7 +106,7 @@ public class MerchantActivityTest {
 	public void testExportSelectedTransactions(String strParams, String strParams1) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.clickExport();
 			if (strParams1.equalsIgnoreCase("Today")) {
@@ -167,7 +167,7 @@ public class MerchantActivityTest {
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
@@ -195,7 +195,7 @@ public class MerchantActivityTest {
 	public void testResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
@@ -234,7 +234,7 @@ public class MerchantActivityTest {
 	public void testDashBoardPayOutHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
 			merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("heading"));
@@ -259,7 +259,7 @@ public class MerchantActivityTest {
 	public void testDashBoardReserveHistoryNoRecords(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
@@ -349,7 +349,7 @@ public class MerchantActivityTest {
 	public void testTransactionDetailsFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));

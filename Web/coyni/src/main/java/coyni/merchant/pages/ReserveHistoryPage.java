@@ -33,8 +33,7 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	private By btnCancelled = By.xpath("//p[text()='Cancelled']");
 
-	private By txtSearch = By
-			.cssSelector("EditSearchInput_form_input__iuhcE  MerchantReserveHistory_search_bar_gbox__PKxFs");
+	private By txtSearch = By.cssSelector("MerchantReserveHistory_search_bar_gbox__PKxFs");
 
 	private By lblNoRecords = By.xpath("//span[contains(text(),'You do not have any records')]");
 

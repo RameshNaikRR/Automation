@@ -71,7 +71,13 @@ public class TeamComponent extends BrowserFunctions {
 	}
 
 	public void clickSettings() {
-		click(btnSettings, "Settings");
+		if (verifyElementDisplayed(btnSettings, "Click Signet Account")) {
+			click(btnSettings, "Settings");
+
+		} else {
+			ExtentTestManager.setInfoMessageInReport(" Settings is not visible");
+		}
+
 	}
 
 	public void verifySearch(String expHeading) {
