@@ -33,9 +33,50 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By lblTransactionSubType = By
 			.xpath("//div[contains(@class,'TransactionDetailBuyToken_create_column__3AOvd')][1]");
 
+	// ---------------------------------------------
+	private By getBuyTokenData(String index) {
+		return By.xpath(String.format("(//tr[@class=' ']//td)[%s]", index));
+	}
+	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__1gF5W')]");
+	private By giftCardAmount = By.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__2HCeV')])[3]");
+	
+	public String amount() {
+		String text = getText(TDetailsAmount, "");
+	return	text.replaceAll("[A-Z ]", "");
+	}
+
+	public String verifyBuyTokenType() {
+		return getText(getBuyTokenData("3"), "");
+	}
+
+	public String verifyBuyTokenDescription() {
+		return getText(getBuyTokenData("5"), "");
+	}
+
+	public String verifyBuyTokenAmount() {
+		return getText(getBuyTokenData("6"), "");
+	}
+	
+	public String verifyWithDrawSubType() {
+		return getText(getBuyTokenData("4"), "");
+	}
+	public String verifyWithdrawDescription() {
+		return getText(getBuyTokenData("5"), "");
+	}
+	public String verifyWithdrawAmount() {
+		return getText(getBuyTokenData("6"), "");
+	}
+	public String giftCardAmount() {
+		String text = getText(giftCardAmount, "");
+	return	text.replaceAll("[A-Z ]", "");
+	}
+	
+
 	public void clickCompleted() {
 		click(lblCompleted, "View Transaction Details");
 	}
+	
+	//-------------------------------------------------
 
 	public By getLabelItem(String Type) {
 		return By.xpath(String.format(
@@ -47,6 +88,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(headingCardInformation, "card Information", expHeading);
 	}
 
+	
 	public void verifyRecipientInformation(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingRecipientInformation, "Recipient Information", expHeading);
 	}
@@ -214,13 +256,14 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public String verifyReferenceID() {
 		String transactionDetailsRef = getText(lblReferenceId, "Ref");
-		ExtentTestManager.setInfoMessageInReport("Transadction Sub Type is" + transactionDetailsRef);
+		ExtentTestManager.setInfoMessageInReport("Reference ID is " + transactionDetailsRef);
 		return transactionDetailsRef;
 	}
 
 	public CaseDetailsComponent caseDetailsComponent() {
 		return new CaseDetailsComponent();
 	}
+
 	public ChargebackComponent chargebackComponent() {
 		return new ChargebackComponent();
 	}

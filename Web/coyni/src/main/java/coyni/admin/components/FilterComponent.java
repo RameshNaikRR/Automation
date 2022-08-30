@@ -1,8 +1,10 @@
 package coyni.admin.components;
 
+import java.awt.Checkbox;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
@@ -10,6 +12,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class FilterComponent extends BrowserFunctions {
+	
+	public static  WebDriver driver;
 
 	private By lblFilters = By.xpath("//button[text()='Filter']");
 	private By lblDate = By.xpath("//label[text()='Date']");
@@ -323,6 +327,35 @@ public class FilterComponent extends BrowserFunctions {
 		}
 
 	}
+	
+	//----------------------
+	
+	private By getCancelDebitCard(String data) {
+		return By.xpath(String.format("//span[text()='%S']//following-sibling::button", data));
+	}
+	
+	
+	private By lbDebitCard=By.xpath("//span[text()='Debit Card']//following-sibling::button");
+	public void clickBackDebitCard() {
+		click(lbDebitCard, "");
+	}
+	
+	private By lblCheckBox=By.xpath("//span[text()='Debit Card']//preceding-sibling::input");
+	
+	//lblCheckBox.is
+	
+	public void verifyDebitCardCheckBox() {
+	if(	getElement(lblCheckBox, "Debit Card").isSelected()) {
+		ExtentTestManager.setFailMessageInReport("Check Box is Enabled");
+	}
+	
+	else {
+		ExtentTestManager.setInfoMessageInReport("CheckBox is Disabled");
+	}
+	}
+	
+	
+	
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
