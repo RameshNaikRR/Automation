@@ -13,7 +13,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 public class ToastComponent extends BrowserFunctions {
 
 	private By title = By.cssSelector("p.title");
-	private By message = By.cssSelector("p.message");
+	private By message = By.xpath("(//p[contains(@class,'message')])[2]");
 	private By btnClose = By.cssSelector("");
 
 	/**
@@ -22,7 +22,8 @@ public class ToastComponent extends BrowserFunctions {
 	 * @param expTitle is error or success
 	 */
 	public void verifyToastTitle(String expTitle) {
-		this.waitForCondition(ExpectedConditions.not(ExpectedConditions.textToBe(title,"")), "toast title not to be empty");
+		this.waitForCondition(ExpectedConditions.not(ExpectedConditions.textToBe(title, "")),
+				"toast title not to be empty");
 		String actTitle = getText(title, "toast title");
 		String actMessage = getText(message, "toast message");
 		if (actTitle.toLowerCase().contains(expTitle.toLowerCase())) {

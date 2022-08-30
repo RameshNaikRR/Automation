@@ -2,7 +2,7 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.DaysMonthsDropDownComponent;
+import coyni.merchant.components.DaysMonthsDropDownComponent;
 import coyni.merchant.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;

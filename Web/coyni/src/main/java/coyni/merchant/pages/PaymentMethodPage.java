@@ -1,7 +1,6 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.components.AddCardComponent;
 import coyni.merchant.components.CardsComponent;
 import coyni.merchant.popups.AddBankAccountPopup;

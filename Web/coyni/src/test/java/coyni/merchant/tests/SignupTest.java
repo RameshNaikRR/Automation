@@ -64,6 +64,45 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testcreateAccountWithNavigationOptions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			signupPage.clickMerchantAccount();
+			signupPage.fillFirstName(data.get("firstName"));
+			signupPage.fillLastName(data.get("lastName"));
+			signupPage.fillPhoneNumber(data.get("phoneNumber"));
+			signupPage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			signupPage.fillCreatePassword(data.get("createPassword"));
+			signupPage.fillConfirmPassword(data.get("confirmPassword"));
+			signupPage.clickCheckBox();
+			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+			// signupPage.phoneVerificationComponent().verifyPhoneNumber();//clickButtonGoBack
+			signupPage.phoneVerificationComponent().clickButtonGoBack();
+			signupPage.clickCheckBox();
+			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
+//			signupPage.phoneVerificationComponent().emailVerificationComponent()
+//					.verifyEmailHeading(data.get("emailHeading"));
+			signupPage.phoneVerificationComponent().emailVerificationComponent().clickGoBack();
+			signupPage.clickCheckBox();
+			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
+			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
+			signupPage.phoneVerificationComponent().emailVerificationComponent()
+					.verifyAccountCreated(data.get("createdAccountHeading"));
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 
 	public void testcreateAccountWithInvalidData(String strParams) {
 		try {
@@ -77,15 +116,14 @@ public class SignupTest {
 			signupPage.fillCreatePassword1(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
 			// new CommonFunctions().clickOutSideElement();
-			signupPage.clickNext();
 			signupPage.clickCheckBox();
+			signupPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 			} else if (!data.get("toastMessage").isEmpty()) {
-				// homePage.toastComponent().verifyToast(data.get("toastTitle"),
-				// data.get("toastMessage"));
+				signupPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccountWithInvalidData Failed due to Exception " + e);
@@ -392,5 +430,4 @@ public class SignupTest {
 			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
-
 }

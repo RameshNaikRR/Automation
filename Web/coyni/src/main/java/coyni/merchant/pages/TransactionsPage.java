@@ -1,9 +1,7 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
-
-import coyni.admin.components.FilterComponent;
-import coyni.admin.components.PaginationAndEntriesComponent;
+import coyni.merchant.components.FilterComponent;
 import coyni.merchant.components.ExportComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -75,10 +73,6 @@ public class TransactionsPage extends BrowserFunctions {
 
 	public void getStatus() {
 		ExtentTestManager.setPassMessageInReport("Status is " + getElement(lblStatus, "Status"));
-	}
-
-	public PaginationAndEntriesComponent paginationAndEntriesComponent() {
-		return new PaginationAndEntriesComponent();
 	}
 
 	public FilterComponent filterComponent() {

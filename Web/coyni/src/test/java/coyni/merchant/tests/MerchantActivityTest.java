@@ -72,6 +72,8 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().clickFullTransactionHistory();
 			merchantActivityComponent.clickDashBoard();
+			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
+			merchantActivityComponent.clickDashBoard();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testDashBoardProcessingVolume failed due to exception " + e);

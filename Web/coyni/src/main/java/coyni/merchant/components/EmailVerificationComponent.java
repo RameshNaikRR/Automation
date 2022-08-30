@@ -13,20 +13,25 @@ public class EmailVerificationComponent extends BrowserFunctions {
 	private By lblResendDescrp = By.xpath("//div[text()='New Verification Code Sent']");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 	private By lblAccountCreated = By.cssSelector(".account-success__title");
-	private By lblResendError  = By.xpath("//span[@class='text-base text-crd5']");
-	
+	private By lblResendError = By.xpath("//span[@class='text-base text-crd5']");
+	private By btnGoBack = By.xpath("//div[text()='Go Back']");
+
 	public void verifyEmailHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEmailHeading, "Email Verification PopUp Heading", expHeading);
 	}
-    
+
 	public void verifyEmailDescription() {
 		new CommonFunctions().elementView(lblEmail, "Email Verification Description");
 	}
-	
+
+	public void clickButtonGoBack() {
+		click(btnGoBack, "Click Go Back");
+	}
+
 	public void verifyfirstCodeBoxAutoFocused() {
 		new CommonFunctions().verifyAutoFocus(txtFirstCodeBox, "First Code Box is Auto Focused");
 	}
-	
+
 	public void verifyEmail(String expEmail) {
 		new CommonFunctions().verifyLabelText(lblEmail, "exp Email", expEmail);
 	}
@@ -34,11 +39,11 @@ public class EmailVerificationComponent extends BrowserFunctions {
 	public void clickResendVerificationCode() {
 		click(lnkResendVerificationCode, "Resend Verification Code");
 	}
-	
+
 	public void verifyResendDescription() {
 		new CommonFunctions().elementView(lblResendDescrp, "Resend Description");
 	}
-	
+
 	public void verifyResendError() {
 		new CommonFunctions().elementView(lblResendError, "Resend Error");
 	}
@@ -50,10 +55,11 @@ public class EmailVerificationComponent extends BrowserFunctions {
 	public void fillpin(String code) {
 		new AuthyComponent().fillInput(code);
 	}
+
 	public void verifyAccountCreated(String expHeading) {
-    	new CommonFunctions().verifyLabelText(lblAccountCreated, "Account Created PopUp Heading", expHeading);
-    }
-	
+		new CommonFunctions().verifyLabelText(lblAccountCreated, "Account Created PopUp Heading", expHeading);
+	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}

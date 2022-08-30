@@ -1,8 +1,6 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
-
-
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;

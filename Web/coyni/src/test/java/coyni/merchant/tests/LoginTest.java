@@ -251,15 +251,15 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			loginPage.phoneVerificationComponent().verifyPhoneNumber();
+			// loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
+			// loginPage.phoneVerificationComponent().verifyPhoneNumber();
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(3000);
 				loginPage.phoneVerificationComponent().clickResend();
 			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Forgot email test failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testForgotEmailWithResendOption failed due to exception " + e);
 		}
 	}
 
@@ -526,6 +526,28 @@ public class LoginTest {
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password test failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithResendOption(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().clickNext();
+			// loginPage.phoneVerificationComponent().verifyPhoneNumber();
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(3000);
+				loginPage.phoneVerificationComponent().emailVerificationComponent().clickResendVerificationCode();
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testForgotPasswordWithResendOption failed due to exception " + e);
 		}
 	}
 

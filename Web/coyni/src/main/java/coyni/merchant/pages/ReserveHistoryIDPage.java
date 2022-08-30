@@ -2,8 +2,6 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.ExportComponent;
-import coyni.admin.components.FilterComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
