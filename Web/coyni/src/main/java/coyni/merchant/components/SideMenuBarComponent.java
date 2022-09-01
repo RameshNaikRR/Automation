@@ -16,6 +16,7 @@ import coyni.merchant.pages.ReserveHistoryPage;
 import coyni.merchant.pages.TokenAccountPage;
 import coyni.merchant.pages.TransactionsPage;
 import coyni.merchant.popups.AddDBABusinessPopup;
+import coyni.merchant.popups.CompleteVerificationPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -251,6 +252,10 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public MyQRCodeComponent myQRCodeComponent() {
 		return new MyQRCodeComponent();
+	}
+
+	public CompleteVerificationPopup completeVerificationPopup() {
+		return new CompleteVerificationPopup();
 	}
 
 	public AddDBABusinessPopup addDBABusinessPopup() {

@@ -606,6 +606,8 @@ public class MerchantProfileTest {
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().verifyHeading(data.get("heading"));
 			merchantProfilePage.merchantAccountsPage().clickSettings();
+			merchantProfilePage.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
+					.verifyCompanyInformationLbl();
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();

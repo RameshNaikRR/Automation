@@ -877,6 +877,10 @@ public class MerchantSettingsTest {
 
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
+			} else if (!data.get("toastMessage").isEmpty()) {
+				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+						.addCardComponent().mailingAddressComponent().toastComponent()
+						.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
 
 		} catch (Exception e) {

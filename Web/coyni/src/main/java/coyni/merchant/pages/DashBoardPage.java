@@ -48,6 +48,9 @@ public class DashBoardPage extends BrowserFunctions {
 
 	private By lblViewFullPayOutHistory = By.xpath("//button[contains(text(),'View Full Payout History')]");
 
+	private By lblPayOutHistory = By
+			.xpath("//span[contains(text(),'Payout History')]/..//div[contains(@class,'mb-3.5')]");
+
 	private By lblViewFullTransactionHistory = By.xpath("//span[contains(text(),'View Full Transaction History')]");
 
 	private By lblViewFullReserveReleaseHistory = By
@@ -59,6 +62,11 @@ public class DashBoardPage extends BrowserFunctions {
 
 	public void getAccountBalance() {
 		ExtentTestManager.setInfoMessageInReport("Account Balance: " + getText(lblMerchantBalance, "Merchant Balance"));
+	}
+
+	public void getPayOutHistoryRecentTransactions() {
+		ExtentTestManager.setInfoMessageInReport(
+				"Pay Out History Recent Transactions: " + getText(lblPayOutHistory, "Pay Out History"));
 	}
 
 	public void getReserveBalance() {

@@ -186,7 +186,29 @@ public class SideMenuBarTest {
 			sideMenuBarComponent.myQRCodeComponent().clickGeneratePrintableQRCode();
 			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().clickCheckBoxes();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().clickBoxes();
 			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().clickGenerate();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().viewGeneratePDF();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().getName();
+			sideMenuBarComponent.myQRCodeComponent().generatePrintableQRCodePopup().getScanQRCode();
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testMyQRCodeGeneratePrintable failed  due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMyQRCodeWithOutGeneratePrintable(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.clickQRCode();
+			sideMenuBarComponent.completeVerificationPopup().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.completeVerificationPopup().verifyDescription();
+			sideMenuBarComponent.completeVerificationPopup().clickAccountVerification();
 
 		} catch (Exception e) {
 

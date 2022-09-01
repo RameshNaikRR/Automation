@@ -238,6 +238,7 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
+			merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
 			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
 			merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.payOutHistoryPage().clickPayOut();

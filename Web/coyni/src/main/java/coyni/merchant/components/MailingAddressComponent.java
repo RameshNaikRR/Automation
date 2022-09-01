@@ -221,4 +221,8 @@ public class MailingAddressComponent extends BrowserFunctions {
 		new RegistrationDBAInformationPage().verifyTextBoxValue(txtZipCode, "zipcode", zipcode);
 	}
 
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+
 }

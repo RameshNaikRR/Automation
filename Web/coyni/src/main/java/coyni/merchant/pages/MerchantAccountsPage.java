@@ -10,8 +10,7 @@ public class MerchantAccountsPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("(//span[.='Merchant Accounts'])[2]");
 
-	private By btnSettings = By
-			.xpath("//button[@class='p-0.5 icon-settings-gear-icon cursor-pointer text-cgy3 hover:text-cgy4  ']");
+	private By btnSettings = By.xpath("//button[contains(@class,'icon-settings-gear-icon cursor-p')]");
 
 	private By btnGoToMerchant = By
 			.xpath("//button[@class='p-0.5 icon-go-into cursor-pointer mr-5 text-cgy3 hover:text-cgy4 ']");

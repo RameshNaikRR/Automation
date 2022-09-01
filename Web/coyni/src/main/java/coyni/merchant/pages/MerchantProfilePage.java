@@ -1,7 +1,6 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.ToastComponent;
@@ -61,6 +60,10 @@ public class MerchantProfilePage extends BrowserFunctions {
 
 	public TwoStepAuthenticationPage twoStepAuthenticationPage() {
 		return new TwoStepAuthenticationPage();
+	}
+
+	public MerchantSettingsPage merchantSettingsPage() {
+		return new MerchantSettingsPage();
 	}
 
 	public AuthyComponent authyComponent() {
