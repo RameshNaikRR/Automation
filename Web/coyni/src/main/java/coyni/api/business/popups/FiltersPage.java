@@ -28,7 +28,7 @@ public class FiltersPage extends BrowserFunctions {
 	}
 
 	public void verifyResetFilters() {
-		click(resetFilters, "Apply Filters");
+		click(resetFilters, "Reset Filters");
 	}
 
 	public void verifyApplyFilters() {

@@ -561,8 +561,7 @@ public class BusinessSettingsTest {
 					.addCustomRolePopup().clickAdd();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.addCustomRolePopup().navigationComponent().clickClose();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.toastComponent().verifyToast(data.get("title"), data.get("message"));
+			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyTokenWalletAccess();
@@ -587,6 +586,8 @@ public class BusinessSettingsTest {
 					.saveChangePopUp().clickYes();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
 					.clickSendInvitation();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.toastComponent().checkToastMessage(data.get("toastMessage"));
 
 		} catch (Exception e) {
 			ExtentTestManager
