@@ -898,10 +898,10 @@ public class BusinessProfileTest {
 					.removePaymentMethodPopup().clickOnRemove();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.removePaymentMethodPopup().successFailureComponent()
-					.verifySignetDeleteHeading(data.get("DeleteHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.removePaymentMethodPopup().successFailureComponent()
-					.verifySignetDeleteHeading2(data.get("DeleteHeading1"));
+					.verifySignetDeleteHeading(data.get("deleteHeading"));
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+//					.removePaymentMethodPopup().successFailureComponent()
+//					.verifySignetDeleteHeading2(data.get("deleteHeading1"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.removePaymentMethodPopup().successFailureComponent().navigationComponent().clickClose();
 		} catch (Exception e) {
@@ -969,7 +969,7 @@ public class BusinessProfileTest {
 					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickNext();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.cardAddedSuccessfullyPopup().navigationComponent().clickClose();
-			;
+
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 //					.preAuthorizationPopup().fillAmount(data.get("amount"));
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()

@@ -165,7 +165,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void verifyAccountStatus(String accountStatus) {
-		new CommonFunctions().verifyLabelText(lblActive, accountStatus, "Account status");
+		new CommonFunctions().verifyLabelText(lblActive, "Account status", accountStatus);
 	}
 
 	public PreferencesPage preferencesPage() {

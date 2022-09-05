@@ -17,13 +17,13 @@ public class AddIPAddressPopups extends BrowserFunctions {
 	private By lblAddIp = By.xpath("//button[text()='Add IP Address']");
 	private By lblNoIPHeading = By.xpath("//p[text()='No IP Address Exists']");
 
-	private By headindIpSuccess = By.xpath("//h1[text()='IP Address Request Submitted Successfully']");
+	private By headingIpSuccess = By.xpath("//h1[text()='IP Address Request Submitted Successfully']");
 	private By btnClose = By.xpath("//button[text()='Close']");
 	private By lblAccountID = By.xpath("//div[contains(@class,'items-center mb-5 ')]");
 	private By lblAccountName = By.xpath("//div[contains(@class,'items-center mb-5')][2]");
 
 	public void verifySuccessHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headindIpSuccess, "SuccessMessage",expHeading);
+		new CommonFunctions().verifyLabelText(headingIpSuccess, "SuccessMessage",expHeading);
 	}
 
 	public void clickClose() {

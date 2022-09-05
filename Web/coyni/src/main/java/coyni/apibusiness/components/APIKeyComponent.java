@@ -11,17 +11,17 @@ public class APIKeyComponent extends BrowserFunctions {
 	private By lblApiKey = By.xpath("(//span[text()='API Keys'])[2]");
 	private By lnkGenerateAPiKey = By.xpath("//button[text()='Generate New Secret Key']");
 	private By iconCopy = By.xpath("//button[@data-event='click']");
-	private By btnrevealSecretKey = By.xpath("//span[text()='Reveal Secret Key']");
+	private By btnrevealSecretKey = By.xpath("(//span[contains(@class,'ApiKeys_reveal_secret_key__RA4a1')])[1]");
 	private By lblPublicKey = By.xpath("//span[text()='Public Key:']");
 	private By publicKey = By.xpath("//span[text()='Public Key:']/following-sibling::div[1]");
 	private By lblSecretKey = By.xpath("//span[text()='Secret Key']");
 	private By secretKey = By.xpath("//span[text()='Secret Key']/following-sibling::div[1]");
 	private By lblInactiveSecretKey = By.xpath("");
-	private By lblHideSecretKey = By.xpath("//span[text()='Hide Secret Key']");
-	private By txtEvents = By.xpath("//span[@class='text-xs font-bold text-cgy3'][text()]");
+	private By lblHideSecretKey = By.xpath("(//span[contains(@class,'ApiKeys_hide_secret_key__au2CL')])[1]");
+	private By txtEvents = By.xpath("(//span[@class='text-xs font-bold text-cgy3']//text())[1]");
 
 	public void verifyAPIKey(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblApiKey, expHeading, "API Key");
+		new CommonFunctions().verifyLabelText(lblApiKey, "API Keys", expHeading);
 	}
 
 	public void clickGenerateApiKey() {
@@ -78,6 +78,10 @@ public class APIKeyComponent extends BrowserFunctions {
 
 	public GenerateNewSecretKeyPopup generateNewSecretKeyPopup() {
 		return new GenerateNewSecretKeyPopup();
+	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }

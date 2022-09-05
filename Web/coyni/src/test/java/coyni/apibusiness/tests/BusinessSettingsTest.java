@@ -93,7 +93,7 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.fillIpAddress(data.get("ipAddress"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-					.fillDescription(data.get("description"));
+					.fillDescription(data.get("ipDescription"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.clickSubmit();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
@@ -122,7 +122,7 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.fillIpAddress(data.get("ipAddress"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-					.fillDescription(data.get("description"));
+					.fillDescription(data.get("ipDescription"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.clickSubmit();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
@@ -151,12 +151,12 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.fillIpAddress(data.get("ipAddress"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
-					.fillDescription(data.get("description"));
+					.fillDescription(data.get("ipDescription"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.clickOutSide();
 			if (!data.get("errMessage").isEmpty()) {
-				Thread.sleep(2000);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
@@ -175,7 +175,7 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
 					.verifyRemoveHeading(data.get("removeHeading"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
-					.verifydesc(data.get("description"));
+					.verifydesc(data.get("ipDescription"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickYes();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Remove ip address  Failed due to Exception " + e);
@@ -548,7 +548,7 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyLastName(data.get("lastName"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyEmail(data.get("email"));
+					.verifyEmail(data.get("emaildet"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -561,23 +561,23 @@ public class BusinessSettingsTest {
 					.addCustomRolePopup().clickAdd();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.addCustomRolePopup().navigationComponent().clickClose();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.toastComponent().verifyToast(data.get("title"), data.get("message"));
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.toastComponent().verifyToast(data.get("title"), data.get("message"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyTokenWalletAccess();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyTransferToken();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyBuyToken();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyWithdrawToken();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyEcosystemActivity();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyExportedFiles();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyBusinessSettings();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyTokenWalletAccess();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyTransferToken();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyBuyToken();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyWithdrawToken();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyEcosystemActivity();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyExportedFiles();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.verifyBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickSave();
 			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -599,7 +599,12 @@ public class BusinessSettingsTest {
 	public void testBusinessSettingsTeamFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifyTeamHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.teamComponent().clickFilter();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyActive();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -607,17 +612,17 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyExpired();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.filtersPage().verifyClearAll();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyApplyFilters();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.filtersPage().getNoRecordsFound();
+					.teamComponent().clickFilter();
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+//					.filtersPage().verifyClearAll();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.filtersPage().verifyResetFilters();
 
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
+					.setFailMessageInReport("test Business Settings Team Filters failed due to Exception " + e);
 		}
 	}
 
@@ -626,10 +631,29 @@ public class BusinessSettingsTest {
 	public void testBusinessSettingsTeamSearch(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
 					.verifySearch(data.get("searchingKey"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconSearch();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickSearchIcon();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsRemoveTeamMember(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconDelete();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickRemove();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().toastComponent()
+					.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
@@ -641,6 +665,7 @@ public class BusinessSettingsTest {
 	public void testBusinessSettingsTeamEdit(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyEditIcon();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickEdit();
@@ -685,76 +710,43 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsRevealSecretKey(String strParams) {
+	public void testBusinessSettingsRevealSecretKeyAndHideSecretKey(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
 					.verifyAPIKey(data.get("apiKeyHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.clickGenerateApiKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.generateNewSecretKeyPopup().verifyHeading(data.get("popupHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.generateNewSecretKeyPopup().getGenerateKeyDescription();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.generateNewSecretKeyPopup().clickGenerate();
-			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
-					.fillAuthyInput(data.get("code"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testBusinessSettingsInvalidVerificationRevealSecretKey(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.verifyAPIKey(data.get("apiKeyHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.clickGenerateApiKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.verifyHeading(data.get("secretKey"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.verifyDescription(data.get("description"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.clickGenerate();
-			Thread.sleep(2000);
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
-					.fillAuthyInput(data.get("pin"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testBusinessSettingsHideSecretKey(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.verifyAPIKey(data.get("apiKeyHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
-					.clickGenerateApiKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.verifyHeading(data.get("secretKey"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.verifyDescription(data.get("description"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().secretKeyPopup()
-					.clickGenerate();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
-					.fillAuthyInput(data.get("pin"));
+					.fillInput(data.get("code"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
 					.clickHideSecretKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickCopy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyCopy();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessSettingsGetSMSCodeRevealSecretKey(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().clickRevealKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
+					.clickSmsCode();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
+					.fillInput(data.get("pin"));
+			Thread.sleep(2000);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().toastComponent()
+					.verifyToast(data.get("title"), data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);
@@ -768,6 +760,8 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickApiKey();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent()
+					.verifyAPIKey(data.get("apiKeyHeading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyApiKeyView();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPIEvents();
 

@@ -17,7 +17,7 @@ public class AddCustomRolePopup extends BrowserFunctions {
 	}
 
 	public void verifyRoleName(String expRoleName) {
-		enterText(txtRoleName, "Role Name", expRoleName);
+		enterText(txtRoleName,expRoleName, "Role Name");
 	}
 
 	public void clickAdd() {

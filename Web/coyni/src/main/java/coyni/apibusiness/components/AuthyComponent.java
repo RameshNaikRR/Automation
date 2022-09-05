@@ -18,7 +18,7 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lblHeading = By.cssSelector("div[class*='VerifyYourIdentity_title']");
 	private By lblDescription = By.cssSelector("p[class*='VerifyYourIdentity_two_step__sub_title']");
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
-	private By lnkSmsCode = By.xpath("//span[contains(.,'Having')]");
+	private By lnkSmsCode = By.xpath("//button[text()='Get an SMS code.']");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 	private By lblVerifyYourIdentityHeading = By.xpath("//h1[contains(text(),' Your Identity')]");

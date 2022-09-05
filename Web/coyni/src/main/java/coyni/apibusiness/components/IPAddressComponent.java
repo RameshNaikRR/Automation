@@ -23,7 +23,7 @@ public class IPAddressComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(headingRemove, "Remove", expText);
 	}
 	public void verifydesc(String expText) {
-		new CommonFunctions().verifyLabelText(lbldesc, expText,"description");
+		new CommonFunctions().verifyLabelText(lbldesc, "description",expText);
 	}
 
 	public void clickDelete() {
@@ -31,7 +31,7 @@ public class IPAddressComponent extends BrowserFunctions {
 	}
 
 	public void verifyNoIp(String expText) {
-		new CommonFunctions().verifyLabelText(lblNoIPHeading, expText, "No Ip Address Exits");
+		new CommonFunctions().verifyLabelText(lblNoIPHeading, "No IP Address Exits",expText);
 	}
 
 	public void clickIpAddress() {
