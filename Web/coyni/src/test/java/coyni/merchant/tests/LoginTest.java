@@ -116,6 +116,45 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testLoginTerminatedUser(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+
+			if (!data.get("toastMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginTerminatedUser failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginWithUnverifiedUser(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.clickLogin();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			if (!data.get("toastMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginTerminatedUser failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testLoginWithInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

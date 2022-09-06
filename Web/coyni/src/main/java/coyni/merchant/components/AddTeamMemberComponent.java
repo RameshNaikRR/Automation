@@ -42,4 +42,8 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 		}
 
 	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 }

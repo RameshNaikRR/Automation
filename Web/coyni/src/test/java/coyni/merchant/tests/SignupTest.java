@@ -103,6 +103,37 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testcreateAccountWithPhoneNumber(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			signupPage.clickMerchantAccount();
+			signupPage.fillFirstName(data.get("firstName"));
+			signupPage.fillLastName(data.get("lastName"));
+			signupPage.fillPhoneNumber(data.get("phoneNumber"));
+			signupPage.fillEmail(data.get("email"));
+			Thread.sleep(1000);
+			signupPage.fillCreatePassword(data.get("createPassword"));
+			signupPage.fillConfirmPassword(data.get("confirmPassword"));
+			signupPage.clickCheckBox();
+			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
+			// signupPage.phoneVerificationComponent().verifyPhoneNumber();//clickButtonGoBack
+			signupPage.phoneVerificationComponent().clickButtonGoBack();
+			signupPage.clickCheckBox();
+			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
+			signupPage.phoneVerificationComponent().clickReturnToLogin();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testcreateAccountWithPhoneNumber Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 
 	public void testcreateAccountWithInvalidData(String strParams) {
 		try {

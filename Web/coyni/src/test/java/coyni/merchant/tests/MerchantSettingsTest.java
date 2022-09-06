@@ -610,6 +610,25 @@ public class MerchantSettingsTest {
 
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testAPIKeysInactiveRecords(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyTableItemsCount(data.get("query"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
 //	@Test
 //	@Parameters({"strParams"})
 //	public void testCompanyInforScreenResloutions(String strParams) {
@@ -1067,6 +1086,32 @@ public class MerchantSettingsTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testMerchantSettingsAddTeamMemberWithInvalidData Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsAddedTeamMember(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickAddTeamMember();
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyFirstName(data.get("firstName"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyLastName(data.get("lastName"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyEmail(data.get("email1"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
+					.verifyPhone(data.get("phone"));
+			if (!data.get("toastMessage").isEmpty()) {
+				merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().toastComponent()
+						.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsNoTeamMember failed due to Exception " + e);
 		}
 	}
 
