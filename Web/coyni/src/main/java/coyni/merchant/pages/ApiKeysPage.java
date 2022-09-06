@@ -1,11 +1,14 @@
 package coyni.merchant.pages;
 
+import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class ApiKeysPage extends BrowserFunctions {
 
@@ -23,6 +26,8 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By lblAPIKeyLogs = By.xpath("//span[text()='API Key Log']/following-sibling::*");
 
+	private By lblInActiveAPIKeys = By.cssSelector(".chip__text--orange");
+
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
@@ -34,11 +39,27 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	}
 
+	public String getInActiveAPIKeys() {
+		return getText(lblInActiveAPIKeys, "API Keys InActive");
+	}
+
 	public void getSecretKey() {
 		new CommonFunctions().elementView(lblSecretKey, "Secret Key");
 		String text = getText(lblSecretKey, "Description");
 		ExtentTestManager.setInfoMessageInReport("Description " + text);
 
+	}
+
+	public void verifyTableItemsCount(String query) throws SQLException {
+		int count = DBConnection.getDbCon().getCount(String.format(query));
+		int expCount = Integer.parseInt(getInActiveAPIKeys());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Number of" + count
+					+ " InActive API Keys in table matches with number of InActive API Keys selected");
+		} else {
+			ExtentTestManager.setWarningMessageInReport("Number of" + count
+					+ " InActive API Keys in table doesn't matches with number of InActive API Keys selected");
+		}
 	}
 
 	public void getAPIKeysLogs() {

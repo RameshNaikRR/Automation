@@ -11,6 +11,8 @@ public class PreferencesPage extends BrowserFunctions {
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");
 	private By lblDescription = By.xpath("//span[contains(.,'Your merchant batch')]");
+	private By drpDwnDefaultAccount = By
+			.xpath("//div[text()='Default Account']/../div[contains(@class,'FormField_selected_option')]");
 
 	private By getTimeZones(String timeZone) {
 		return By.xpath(String.format("//span[normalize-space()='%s']", timeZone));
@@ -18,6 +20,11 @@ public class PreferencesPage extends BrowserFunctions {
 
 	public void clickEastern() {
 		click(getTimeZones("Eastern (EST)"), "Eastern");
+	}
+
+	public void selectDefaultAccount(String defaultAccount) {
+		click(drpDwnDefaultAccount, "Default Account DropDown");
+		new CommonFunctions().selectCustomDropDown(defaultAccount, "Default Account");
 	}
 
 	public void clickPacific() {

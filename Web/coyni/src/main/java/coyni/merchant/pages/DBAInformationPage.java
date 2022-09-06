@@ -27,6 +27,8 @@ public class DBAInformationPage extends BrowserFunctions {
 	private By lblBusinessType = By.xpath("(//div[contains(@class,'_sidehead')])[3]/following-sibling::div[1]/p");
 	private By btnSave = By.xpath("//button[.='Save']");
 
+	private By lblCompanyName = By.xpath("//p[contains(text(),'Vishnu')]");
+
 	private By customerServiceDetails(String csd) {
 		return By.xpath(String.format("//input[@name='%s']", csd));
 	}
@@ -37,6 +39,19 @@ public class DBAInformationPage extends BrowserFunctions {
 
 	public void clickNoImage() {
 		click(lblNoImage, "No Image");
+	}
+
+	public void getCompanyAndDBAname() {
+		String companyName = getText(lblCompanyName, "Company Name");
+		String DBAname = getText(lblDBAname, "DBA Name");
+		if (companyName == DBAname) {
+			ExtentTestManager.setInfoMessageInReport("Company Name and DBA Name is matched");
+
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Company Name and DBA Name not matched");
+
+		}
+
 	}
 
 	public void clickImage() {
