@@ -15,6 +15,7 @@ public class ToastComponent extends BrowserFunctions {
 	private By title = By.cssSelector("p.title");
 	private By message = By.cssSelector("p.message");
 	private By btnClose = By.cssSelector("");
+	private By toastMessage=By.xpath("");
 
 	/**
 	 * verify toast is success or error
@@ -35,6 +36,14 @@ public class ToastComponent extends BrowserFunctions {
 
 	public void verifyToastMessage(String expMessage) {
 		String actMessage = getText(message, "toast message").toLowerCase();
+		if (actMessage.contains(expMessage.toLowerCase())) {
+			ExtentTestManager.setPassMessageInReport("Toast message is: " + actMessage);
+		} else {
+			ExtentTestManager.setFailMessageInReport(actMessage + " does not contains exp message: " + expMessage);
+		}
+	}
+	public void checkToastMessage(String expMessage) {
+		String actMessage = getText(toastMessage, "toast message").toLowerCase();
 		if (actMessage.contains(expMessage.toLowerCase())) {
 			ExtentTestManager.setPassMessageInReport("Toast message is: " + actMessage);
 		} else {
