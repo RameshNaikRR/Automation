@@ -1,6 +1,10 @@
 package coyni.admin.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import coyni.admin.components.DaysMonthsDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -25,7 +29,7 @@ public class CommissionAccountPage extends BrowserFunctions {
 
 	private By lnkBatchNow = By.xpath("//button[text()='Batch Now']");
 
-	private By lblViewFullPayOutHistory = By.xpath("//span[contains(text(),'View Full Payout History')]");
+	private By lblViewFullPayOutHistory = By.xpath("//button[text()='View Full Payout History']");
 
 	private By lblViewFullTransactionHistory = By.xpath("//span[contains(text(),'View Full Transactions History')]");
 
@@ -73,4 +77,49 @@ public class CommissionAccountPage extends BrowserFunctions {
 	public PayOutsPage payOutsPage() {
 		return new PayOutsPage();
 	}
+	private By lblTransactionList = By.xpath("//td[contains(@class,'businessData cell-col-0 createdAt')]");
+	private By lblPatoutTransactions = By.xpath("//td[contains(@class,'cell-col-0 createdAt')]");
+	private By btnCommissionAccount = By.xpath("//a[text()='Commission Account']");
+
+	public void clickCommssion() {
+		click(btnCommissionAccount, "");
+	}
+
+	List<WebElement> elementsList;
+	List<WebElement> payOutElementsList;
+
+	public void verifyTransactionList() throws InterruptedException {
+
+		elementsList = getElementsList(lblTransactionList, "Transaction List in Commission Account");
+
+		for (int i = 0; i < 6; i++) {
+			Thread.sleep(2000);
+			String tec = elementsList.get(i).getText();
+			System.out.println(tec);
+			Thread.sleep(2000);
+			clickFullPayOutHistory();
+			payOutElementsList = getElementsList(lblPatoutTransactions,
+					"Transaction payout List in Commission Account");
+			for (int j = 1; j < 6; j++) {
+
+				String text = payOutElementsList.get(j).getText();
+				System.out.println(text);
+				if (tec.equals(text)) {
+					ExtentTestManager.setInfoMessageInReport(tec + " is matched");
+					System.out.println("ok");
+
+				} else {
+					ExtentTestManager.setWarningMessageInReport(tec + " not matched");
+					System.out.println("Not Ok");
+				}
+
+			}
+
+			clickCommssion();
+
+		}
+
+	}
+
 }
+

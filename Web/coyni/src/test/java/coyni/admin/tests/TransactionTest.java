@@ -635,4 +635,22 @@ public class TransactionTest {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testVerifyFiltersDataInTransaction(String strParams) {
+		try {
+
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().clickWithdraw();
+			sideBarComponent.transactionPage().filterComponent().clickCompleted();
+			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
+			sideBarComponent.transactionPage().filterComponent().verifyTableItemsCount(data.get("query"));
+
+	} catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
+	}
+}
+
 }

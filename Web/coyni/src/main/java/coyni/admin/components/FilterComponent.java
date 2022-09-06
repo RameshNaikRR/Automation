@@ -1,6 +1,6 @@
 package coyni.admin.components;
 
-import java.awt.Checkbox;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,10 +10,11 @@ import org.openqa.selenium.WebElement;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class FilterComponent extends BrowserFunctions {
-	
-	public static  WebDriver driver;
+
+	public static WebDriver driver;
 
 	private By lblFilters = By.xpath("//button[text()='Filter']");
 	private By lblDate = By.xpath("//label[text()='Date']");
@@ -54,6 +55,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblInProgress = By
 			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 	private By lblFiltersList = By.xpath("//button[.='Clear All']/../following-sibling::div[1]/div");
+
 	public void fillWithdrawID(String id) {
 		enterText(getTextFieldElements("Withdraw ID"), id, "Withdraw ID");
 	}
@@ -304,22 +306,23 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickchkbxInprogress() {
 		click(getCheckBox("In Progress"), "In Progress");
 	}
+
 	public void filtersComponent(String data) {
 		List<WebElement> elementsList = getElementsList(lblFiltersList, "Filters List");
 		for (WebElement webElement : elementsList) {
 			String text = webElement.getText();
 			String[] split = data.split(",");
-			int count=0;
+			int count = 0;
 			for (int i = 0; i < split.length; i++) {
 				if (text.equalsIgnoreCase(split[i])) {
-					ExtentTestManager.setPassMessageInReport( text +" Filter Data match");
+					ExtentTestManager.setPassMessageInReport(text + " Filter Data match");
 					break;
-				} 
-				
+				}
+
 				else {
 					count++;
-					if(count==split.length) {
-						ExtentTestManager.setWarningMessageInReport(text+" Filter Data Not Found");
+					if (count == split.length) {
+						ExtentTestManager.setWarningMessageInReport(text + " Filter Data Not Found");
 					}
 				}
 			}
@@ -327,36 +330,63 @@ public class FilterComponent extends BrowserFunctions {
 		}
 
 	}
-	
-	//----------------------
-	
+
 	private By getCancelDebitCard(String data) {
 		return By.xpath(String.format("//span[text()='%S']//following-sibling::button", data));
 	}
-	
-	
-	private By lbDebitCard=By.xpath("//span[text()='Debit Card']//following-sibling::button");
+
+	private By lbDebitCard = By.xpath("//span[text()='Debit Card']//following-sibling::button");
+
 	public void clickBackDebitCard() {
 		click(lbDebitCard, "");
 	}
-	
-	private By lblCheckBox=By.xpath("//span[text()='Debit Card']//preceding-sibling::input");
-	
-	//lblCheckBox.is
-	
+
+	private By lblCheckBox = By.xpath("//span[text()='Debit Card']//preceding-sibling::input");
+
+	// lblCheckBox.is
+
 	public void verifyDebitCardCheckBox() {
-	if(	getElement(lblCheckBox, "Debit Card").isSelected()) {
-		ExtentTestManager.setFailMessageInReport("Check Box is Enabled");
+		if (getElement(lblCheckBox, "Debit Card").isSelected()) {
+			ExtentTestManager.setFailMessageInReport("Check Box is Enabled");
+		}
+
+		else {
+			ExtentTestManager.setInfoMessageInReport("CheckBox is Disabled");
+		}
 	}
-	
-	else {
-		ExtentTestManager.setInfoMessageInReport("CheckBox is Disabled");
-	}
-	}
-	
-	
-	
+
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
+
+	// --------------------------
+
+	private By countWithdrawTransaction = By.cssSelector(".entries-message");
+
+	public String count() {
+		return getText(countWithdrawTransaction, "");
+
+	}
+
+
+	
+	public void verifyTableItemsCount(String query) throws SQLException {
+		int count = DBConnection.getDbCon().getCount(String.format(query));
+		int expCount = Integer.parseInt(count().split(" ")[3]);
+		if (count == expCount) {
+			ExtentTestManager
+					.setPassMessageInReport("Number of transactions in table matches with number of entries selected ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("No Transaction Found");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

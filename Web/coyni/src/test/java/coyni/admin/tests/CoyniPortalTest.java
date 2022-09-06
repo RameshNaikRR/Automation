@@ -703,5 +703,15 @@ public class CoyniPortalTest {
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testVerifyPayoutTransactionHistory(String strParams) throws InterruptedException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		//homePage.sideBarComponent().clickTokenAccount();
+		//homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
+		homePage.sideBarComponent().commissionAccountPage().verifyTransactionList();
+	
+	}
 
 }

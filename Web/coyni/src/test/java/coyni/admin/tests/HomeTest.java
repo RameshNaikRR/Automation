@@ -174,12 +174,33 @@ public class HomeTest {
 			imgComponent.clickEditUserImage();
 			imgComponent.verifyHeading(data.get("accountProfileHeading"));
 			imgComponent.clickUploadNewImage();
-			imgComponent.verifyHeadingsCrop(data.get("cropYourImageHeading"));
+			//imgComponent.verifyHeadingsCrop(data.get("cropYourImageHeading"));
 			Thread.sleep(2000);
-			imgComponent.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			imgComponent.uploadSelectImage();//data.get("folderName"), data.get("fileName")
+			Thread.sleep(2000);
 			imgComponent.clickSave();
+			imgComponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception" + e);
+		}
+	}
+	@Test // added
+	@Parameters({ "strParams" })
+	public void testRemoveUploadedImg(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			imgComponent.clickUserName();
+			imgComponent.clickUserDetails();
+			imgComponent.clickEditUserImage();
+			imgComponent.verifyHeading(data.get("accountProfileHeading"));
+			imgComponent.clickRemoveImg();
+			imgComponent.verifyRemoveHeading(data.get("removeHeading"));
+			imgComponent.verifyContent(data.get("content"));
+			imgComponent.clickRemove();
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testUserDetails Remove failed due to exception" + e);
 		}
 	}
 	
