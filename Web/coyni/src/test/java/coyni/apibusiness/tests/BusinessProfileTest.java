@@ -1,7 +1,6 @@
 package coyni.apibusiness.tests;
 
 import java.util.Map;
-
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -519,18 +518,14 @@ public class BusinessProfileTest {
 					.enterPassword(data.get("expPassword"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickNext();
 			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.clickUncheckBank();
+			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().unSelectBank();
+			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().clickUncheckBank();
+			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().switchToWindow();
 			Thread.sleep(2000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.clickUncheckBank();
-			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.switchToWindow();
-			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.successFailureComponent().verifyBankAddSuccesfulHeaading();
-
+			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
+					.verifyBankAddSuccesfulHeaading();
+			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
+					.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
@@ -552,12 +547,11 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenWalletPage.topBarComponent().clickUserName();
-			;
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
-			apiAdminProfilePage.paymentMethodComponent().clickDeleteBank();
+			apiAdminProfilePage.paymentMethodComponent().clickDeleteBankAccount(data.get("bankNumber"));
 			apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			apiAdminProfilePage.paymentMethodComponent().removePaymentMethodPopup().successFailureComponent()
-					.verifyPaymnetRemovedSuccessfulHeading(data.get(""));
+					.verifyPaymnetRemovedSuccessfulHeading(data.get("removeHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
 		}
@@ -676,16 +670,12 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.clickDeleteBankAccount(data.get("deleteBank"));
-			Thread.sleep(1000);
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.removePaymentMethodPopup().successFailureComponent()
-					.verifyPaymnetRemovedSuccessfulHeading(data.get("heading"));
+					.clickDeleteBankAccount(data.get("bankNumber"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.removePaymentMethodPopup().clickOnRemove();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.removePaymentMethodPopup().successFailureComponent()
-					.verifyPaymnetRemovedSuccessfulHeading(data.get("successHeading"));
+					.verifyPaymnetRemovedSuccessfulHeading(data.get("removeHeading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.removePaymentMethodPopup().successFailureComponent().clickClose();
 		} catch (Exception e) {

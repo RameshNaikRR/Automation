@@ -21,11 +21,11 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	private By txtSave = By.xpath("//span[text()='Save']");
 
 	private By getUserPermissions(String permissions) {
-		return By.xpath(String.format("(//div[contains(@class,'react-toggle-track-check')])[%s]", permissions));
+		return By.xpath(String.format("(//div[contains(@class,'react-toggle-track-x')])[%s]", permissions));
 	}
 
 	public void verifyTokenWalletAccess() {
-		new CommonFunctions().elementView(getUserPermissions("1"), "Token Wallet Access");
+//		new CommonFunctions().elementView(getUserPermissions("1"), "Token Wallet Access");
 		click(getUserPermissions("1"), "Token Wallet Access");
 	}
 

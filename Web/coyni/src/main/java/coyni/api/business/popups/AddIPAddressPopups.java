@@ -1,5 +1,9 @@
 package coyni.api.business.popups;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
@@ -21,9 +25,11 @@ public class AddIPAddressPopups extends BrowserFunctions {
 	private By btnClose = By.xpath("//button[text()='Close']");
 	private By lblAccountID = By.xpath("//div[contains(@class,'items-center mb-5 ')]");
 	private By lblAccountName = By.xpath("//div[contains(@class,'items-center mb-5')][2]");
+	private By errIPAddress = By.xpath("//div[text()='IP Address is required']");
+	private By errIPAddress1 = By.xpath("//div[text()='Description is required']");
 
 	public void verifySuccessHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingIpSuccess, "SuccessMessage",expHeading);
+		new CommonFunctions().verifyLabelText(headingIpSuccess, "SuccessMessage", expHeading);
 	}
 
 	public void clickClose() {
@@ -36,6 +42,14 @@ public class AddIPAddressPopups extends BrowserFunctions {
 
 	public void verifyNoIp(String expText) {
 		new CommonFunctions().verifyLabelText(lblNoIPHeading, expText, "No Ip Address Exits");
+	}
+
+	public void verifyerrMsg(String expText) {
+		new CommonFunctions().verifyLabelText(errIPAddress, "IP Address", expText);
+	}
+
+	public void verifyerrMsg1(String expText) {
+		new CommonFunctions().verifyLabelText(errIPAddress1, "Description", expText);
 	}
 
 	public void clickSubmit() {
@@ -83,4 +97,9 @@ public class AddIPAddressPopups extends BrowserFunctions {
 		return getElementsList(lblAddIp, "").size();
 	}
 
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+	}
 }

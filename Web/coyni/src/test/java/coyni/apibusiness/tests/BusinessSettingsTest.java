@@ -2,13 +2,9 @@ package coyni.apibusiness.tests;
 
 import java.util.Map;
 
-import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.api.business.popups.AddIPAddressPopups;
 import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
@@ -151,13 +147,21 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.fillIpAddress(data.get("ipAddress"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
+					.clickOutSide();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
+					.verifyerrMsg(data.get("errMessage"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
+					.clickTab();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.fillDescription(data.get("ipDescription"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.clickOutSide();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
+					.verifyerrMsg1(data.get("errMsg"));
+
+//			if (!data.get("errMessage").isEmpty()) 
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
 		}
@@ -563,8 +567,8 @@ public class BusinessSettingsTest {
 //					.addCustomRolePopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.verifyTokenWalletAccess();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.verifyTokenWalletAccess();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyTransferToken();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -577,11 +581,11 @@ public class BusinessSettingsTest {
 //					.verifyExportedFiles();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyBusinessSettings();
+			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickSave();
 			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.saveChangePopUp().verifyHeading(data.get("expHeading"));
-
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.saveChangePopUp().clickYes();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
