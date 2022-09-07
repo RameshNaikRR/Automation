@@ -101,11 +101,9 @@ public class SideMenuBarTest {
 			if (textBox.equalsIgnoreCase("email")) {
 				sideMenuBarComponent.myQRCodeComponent().pasteOptionEmail(data.get("email"));
 				sideMenuBarComponent.myQRCodeComponent().fillTextEmail(data.get("email"));
-				// navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
 			} else {
 				sideMenuBarComponent.myQRCodeComponent().pasteOption(data.get("phoneNumber"));
 				sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
-				// navigationMenuPage.myQRCodeComponent().fillTextEmail(data.get("email"));
 			}
 			sideMenuBarComponent.myQRCodeComponent().fillTextMessage(data.get("containt"));
 			sideMenuBarComponent.myQRCodeComponent().clickShareButton();
@@ -141,7 +139,6 @@ public class SideMenuBarTest {
 			sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			sideMenuBarComponent.myQRCodeComponent().clickShare();
 			sideMenuBarComponent.myQRCodeComponent().fillTextEmail(data.get("email1"));
-			// Thread.sleep(3000);
 			sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
 			sideMenuBarComponent.myQRCodeComponent().clickTab();
 			if (!data.get("errMessage").isEmpty()) {
@@ -215,5 +212,4 @@ public class SideMenuBarTest {
 			ExtentTestManager.setFailMessageInReport("testMyQRCodeGeneratePrintable failed  due to exception " + e);
 		}
 	}
-
 }

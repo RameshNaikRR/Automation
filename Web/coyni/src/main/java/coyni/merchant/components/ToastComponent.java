@@ -13,7 +13,8 @@ import com.google.common.util.concurrent.Uninterruptibles;
 public class ToastComponent extends BrowserFunctions {
 
 	private By title = By.cssSelector("p.title");
-	private By message = By.xpath("(//p[contains(@class,'message')])[2]");
+	private By message = By.xpath("//p[contains(@class,'message')]");
+	private By signupMessage = By.xpath("(//p[contains(@class,'message')])[2]");
 	private By btnClose = By.cssSelector("");
 
 	/**
@@ -43,6 +44,15 @@ public class ToastComponent extends BrowserFunctions {
 		}
 	}
 
+	public void verifyToastSignupMessage(String expMessage) {
+		String actMessage = getText(signupMessage, "toast message").toLowerCase();
+		if (actMessage.contains(expMessage.toLowerCase())) {
+			ExtentTestManager.setPassMessageInReport("Toast message is: " + actMessage);
+		} else {
+			ExtentTestManager.setFailMessageInReport(actMessage + " does not contains exp message: " + expMessage);
+		}
+	}
+
 	/**
 	 * verify toast message
 	 * 
@@ -55,8 +65,13 @@ public class ToastComponent extends BrowserFunctions {
 		verifyToastMessage(expMessage);
 	}
 
+	public void verifyToastSignup(String expTitle, String expMessage) {
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		verifyToastTitle(expTitle);
+		verifyToastSignupMessage(expMessage);
+	}
+
 	public void clickCloseToastButton() {
 		click(btnClose, "close button");
 	}
-
 }

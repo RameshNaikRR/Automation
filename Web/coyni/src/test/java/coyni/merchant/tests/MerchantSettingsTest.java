@@ -1187,6 +1187,7 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamFilters failed due to Exception " + e);
 		}
@@ -1195,6 +1196,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamActiveFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
@@ -1208,6 +1210,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamInvitationPendingFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
@@ -1221,6 +1224,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamInvitationExpiredFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
@@ -1239,6 +1243,7 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
@@ -1248,6 +1253,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamActiveResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamResetFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
 
@@ -1260,6 +1266,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamResetPendingFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamResetFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
 
@@ -1272,6 +1279,7 @@ public class MerchantSettingsTest {
 	public void testMerchantSettingsTeamResetExpiredFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testMerchantSettingsTeamResetFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyResetFilters();
 
@@ -1280,5 +1288,4 @@ public class MerchantSettingsTest {
 					.setFailMessageInReport("testMerchantSettingsTeamResetExpiredFilters failed due to Exception " + e);
 		}
 	}
-
 }

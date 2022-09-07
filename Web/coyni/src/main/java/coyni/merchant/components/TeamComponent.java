@@ -1,7 +1,6 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.pages.FiltersPage;
 import coyni.merchant.popups.DeleteUserPopup;
 import coyni.merchant.popups.RemoveUserPopup;
@@ -94,6 +93,10 @@ public class TeamComponent extends BrowserFunctions {
 
 	public AddTeamMemberComponent addTeamMemberComponent() {
 		return new AddTeamMemberComponent();
+	}
+
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
 	}
 
 	public RemoveUserPopup removeUserPopup() {

@@ -13,11 +13,13 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.MerchantMenuComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.TopBarComponent;
 import coyni.merchant.pages.ChangePasswordPage;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.MerchantProfilePage;
+import coyni.merchant.pages.SignupPage;
 import coyni.merchant.pages.TokenAccountPage;
 import coyni.merchant.popups.EditEmailAddressPopup;
 import coyni.merchant.popups.EditPhoneNumberPopup;
@@ -28,6 +30,8 @@ import ilabs.api.reporting.ExtentTestManager;
 public class MerchantProfileTest {
 
 	MerchantProfilePage merchantProfilePage;
+	SideMenuBarComponent sideMenuBarComponent;
+	SignupPage signupPage;
 	EditPhoneNumberPopup editPhoneNumberPopup;
 	EditEmailAddressPopup editEmailAddressPopup;
 	MerchantMenuComponent merchantMenuComponent;
@@ -43,6 +47,8 @@ public class MerchantProfileTest {
 	public void init() {
 
 		merchantProfilePage = new MerchantProfilePage();
+		sideMenuBarComponent = new SideMenuBarComponent();
+		signupPage = new SignupPage();
 		topBarComponent = new TopBarComponent();
 		editPhoneNumberPopup = new EditPhoneNumberPopup();
 		editEmailAddressPopup = new EditEmailAddressPopup();
@@ -687,14 +693,18 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			topBarComponent.clickUserNameDrpDwn();
-			// topBarComponent.userNameDropDownComponent().clickUserName();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
-			// merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
-			// merchantProfilePage.preferencesComponent().verifyTimeZoneView();
-			// merchantProfilePage.preferencesComponent().verifyPSTTickMark();
-			// data.get("expCssProp"));
-
-			// customerProfilePage.preferencesComponent().verifyDefautAccountTickMark();
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickPersonalAccount();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount1"));
+			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickMerchantAccount();
+			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testPreferencesDisplayed is failed due to Exception " + e);

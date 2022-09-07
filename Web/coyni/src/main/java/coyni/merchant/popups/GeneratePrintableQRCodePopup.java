@@ -15,7 +15,7 @@ public class GeneratePrintableQRCodePopup extends BrowserFunctions {
 
 	private By btnDownloadPDF = By.xpath("//div[contains(text(),'Download PDF')]");
 
-	private By lblNameCode = By.xpath("//span[contains(@class,'capitalize h-7')]");
+	private By lblNameCode = By.xpath("//span[contains(@class,'relative  h-7')]");
 
 	private By lblScanQRCode = By.xpath("//div[contains(text(),'Scan QR Code')]/following-sibling::*");
 

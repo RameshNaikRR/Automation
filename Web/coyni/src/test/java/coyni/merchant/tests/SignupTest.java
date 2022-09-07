@@ -81,12 +81,13 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			// signupPage.phoneVerificationComponent().verifyPhoneNumber();//clickButtonGoBack
 			signupPage.phoneVerificationComponent().clickButtonGoBack();
+			Thread.sleep(2000);
 			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 //			signupPage.phoneVerificationComponent().emailVerificationComponent()
 //					.verifyEmailHeading(data.get("emailHeading"));
-			signupPage.phoneVerificationComponent().emailVerificationComponent().clickGoBack();
+			signupPage.phoneVerificationComponent().emailVerificationComponent().clickButtonGoBack();
 			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
@@ -97,7 +98,8 @@ public class SignupTest {
 		}
 
 		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testcreateAccountWithNavigationOptions Failed due to Exception " + e);
 		}
 	}
 
@@ -154,7 +156,7 @@ public class SignupTest {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 			} else if (!data.get("toastMessage").isEmpty()) {
-				signupPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+				signupPage.toastComponent().verifyToastSignup(data.get("toastTitle"), data.get("toastMessage"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccountWithInvalidData Failed due to Exception " + e);
@@ -292,7 +294,7 @@ public class SignupTest {
 		}
 
 		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testSignUpWithInvalidPhoneOTP Failed due to Exception " + e);
 		}
 	}
 
@@ -461,4 +463,5 @@ public class SignupTest {
 			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
+
 }
