@@ -61,7 +61,12 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By btnReserveRelease = MobileBy.xpath("(//*[contains(@text,'Reserve Release')])[1]");
 	private By lblReservedOn = MobileBy.xpath("//*[contains(@resource-id,'reserved_on')]");
 	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release']");
-
+	private By btnInstantPayBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
+	private By btnBankSignetBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
+	private By btnBuyBankBack = MobileBy.xpath("//*[contains(@resource-id,'btbankprevious')]");
+	
+			
+	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
 	}
@@ -249,7 +254,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	public void getWithdrawTokenGiftCardTransactionDetails() {
 //		getTransactionType();
 		getAmount();
-//		getStatus();
+		getStatus();
 		getDate();
 		getGiftCardName();
 		getSubTotal();
@@ -268,6 +273,20 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		click(btnCancel, "Cancel");
 	}
 
+	
+	public void clickInstantPayBack() {
+		click(btnInstantPayBack, "Back");
+	}
+	
+	public void clickBankSignetBack() {
+		click(btnBankSignetBack, "Back");
+	}
+
+	
+	public void clickbtnBuyBankBack() {
+		click(btnBuyBankBack, "Back");
+	}
+	
 	public void verifyCancelTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblCancelTranHeading, "Cancel Transaction Heading ", expHeading);
 	}
@@ -330,7 +349,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	public void getWithdrawTokenSignetTransactionDetails() {
 //		getTransactionType();
 		getAmount();
-//		getStatus();
+		getStatus();
 		getDate();
 		getWithdrawAmount();
 		getProcessingFee();

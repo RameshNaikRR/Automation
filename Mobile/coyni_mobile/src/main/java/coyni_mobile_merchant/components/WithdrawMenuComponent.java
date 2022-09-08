@@ -47,7 +47,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	}
 
 	public void clickAddPaymentMethod() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnAddPaymentMethod));
+//		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnAddPaymentMethod));
 		click(btnAddPaymentMethod, getText(btnAddPaymentMethod));
 	}
 	

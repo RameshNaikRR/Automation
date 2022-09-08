@@ -42,6 +42,9 @@ public class ChoosePinComponent extends MobileFunctions {
 	public EnableFaceIDpage enableFaceIDpage() {
 		return new EnableFaceIDpage();
 	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 	public void verifyPinMatching(String expPinMatchingText) {
 	    new CommonFunctions().verifyLabelText(lblPinMatching,"Pin Matching Text", expPinMatchingText );     	
 	}

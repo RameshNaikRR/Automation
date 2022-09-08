@@ -344,7 +344,7 @@ public class DashBoardTest {
 						.fillAmount(data.get("refundAmount"));
 			}
 			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickRefund();
-			
+
 			if (businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 					.verifyBuyTokenInsufficientFundsDsecription() == 1) {
 
@@ -411,26 +411,26 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
-			if(businessTokenAccountPage.batchPayOutComponent().verifyTransactionAmount() > 0.00) {
-				 businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-				 businessTokenAccountPage.batchPayOutComponent().verifyHeading(data.get("batchHeading"));
-				 businessTokenAccountPage.batchPayOutComponent().getBatchPayoutAmount();
-				 businessTokenAccountPage.batchPayOutComponent().getBatchPayoutSentto();
-				 businessTokenAccountPage.batchPayOutComponent().slideToConfirm();
-				 businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().fillPin(data.get("pin"));	 
+			if (businessTokenAccountPage.batchPayOutComponent().verifyTransactionAmount() > 0.00) {
+				businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
+				businessTokenAccountPage.batchPayOutComponent().verifyHeading(data.get("batchHeading"));
+				businessTokenAccountPage.batchPayOutComponent().getBatchPayoutAmount();
+				businessTokenAccountPage.batchPayOutComponent().getBatchPayoutSentto();
+				businessTokenAccountPage.batchPayOutComponent().slideToConfirm();
+				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().fillPin(data.get("pin"));
+				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().toastComponent().verifyToastMsg(data.get("batchToastMsg"));
+				Thread.sleep(2000);
+				businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+						.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.verifyPageHeading(data.get("payoutHeading"));
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.getPayoutTransactionAllDetails();
+			} else {
+				ExtentTestManager.setInfoMessageInReport("We don't have any amount to do for Batch Now");
 			}
-			else {
-				ExtentTestManager.setInfoMessageInReport("We don't have any amount to doing for Batch Now");
-			}
-			Thread.sleep(2000);
-			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
-					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.verifyPageHeading(data.get("payoutHeading"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-			.getPayoutTransactionAllDetails();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);

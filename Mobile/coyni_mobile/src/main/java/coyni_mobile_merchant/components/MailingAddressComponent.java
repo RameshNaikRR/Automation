@@ -161,6 +161,9 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 	public AllDonePage allDonePage() {
 		return new AllDonePage();
-	}	
+	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 
 }

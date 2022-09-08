@@ -19,7 +19,7 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	private By btnBankNext = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lnkLearnMore = MobileBy.xpath("//*[contains(@resource-id,'tvLearnMore')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
-	private By btnBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-11')]");
+	private By btnBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-2')]|//*[contains(@resource-id,'ul-div-id-11')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt145:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt149:0:password_')]");
 	private By btnNext = MobileBy.xpath("//*[@text='Next']");
@@ -63,7 +63,7 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	}
 
 	public void selectBank() {
-		scrollDownToElement(btnBank, "Bank");
+//		scrollDownToElement(btnBank, "Bank");
 		click(btnBank, "Bank");
 	}
 

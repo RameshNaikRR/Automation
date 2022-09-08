@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.MailingAddressComponent;
+import coyni_mobile_merchant.components.ToastComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -92,6 +93,9 @@ public class AddNewTeamMemberPage extends MobileFunctions {
 		click(btnBack, "Back");
 	}
 
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}

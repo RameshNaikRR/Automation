@@ -84,6 +84,7 @@ public class FilterPopup extends MobileFunctions {
 	}
 
 	public void validateReserveBalanceFilters(String type1, String type2, String type3, String type4, String type5) {
+
 		click(getElement(type1), type1);
 		click(getElement(type2), type2);
 		click(getElement(type3), type3);

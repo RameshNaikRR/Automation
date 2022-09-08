@@ -43,6 +43,17 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By txtToAmount = MobileBy.xpath("//*[contains(@resource-id,'AmountEnd')]");
 
+	private By recentTransType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessage')])[1]");
+
+	private By recentTransMethod = MobileBy.xpath("(//*[contains(@resource-id,'latestmessagTV')])[1]");
+
+	private By recentTransAmount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[1]");
+
+	private By recentTransBalance = MobileBy.xpath("(//*[contains(@resource-id,'balanceTV')])[1]");
+	
+	private By lblNoMoreTransactions = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]");
+	
+
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Business Recent Token Transactions Heading", expHeading);
 
@@ -79,9 +90,9 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Amount is " + getText(lblAmount));
 	}
 
-	public void getRecentTransactionType() {
+	public void getRecentTransAmount() {
 //		scrollDownToElement(lblAmount, "Amount");
-		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(lblRecentTransactionType));
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Amount is " + getText(recentTransAmount));
 	}
 
 	public void clickTransaction() {
@@ -98,6 +109,12 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		return DriverFactory.getDriver().findElements(btnViewMore).size();
 	}
 
+	public void scrollToNoMoreTransactions() {
+		scrollDownToElement(lblNoMoreTransactions, "NoMoreTransactions");
+		ExtentTestManager.setInfoMessageInReport("Transaction list scrolled down to no more transactions");
+//		return DriverFactory.getDriver().findElements(lblNoMoreTransactions).size();
+	}
+	
 	public void ScrollToViewMore() {
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
@@ -127,6 +144,30 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public void fillToAmount(String toAmount) {
 		scrollDownToElement(txtToAmount, "To Amount");
 		enterText(txtToAmount, toAmount, "To Amount");
+	}
+	
+	public void getRecentTransType() {
+		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(recentTransType));
+	}
+
+	public void getRecentTransMethod() {
+//		scrollDownToElement(lblAmount, "Amount");
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Method is " + getText(recentTransMethod));
+	}
+
+	public void getRecentTransactionType() {
+//		scrollDownToElement(lblAmount, "Amount");
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(lblRecentTransactionType));
+	}
+
+	public void getRecentTransBalance() {
+//		scrollDownToElement(lblAmount, "Amount");
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Balance is " + getText(recentTransBalance));
+	}
+
+	public void clickRecentTransaction() {
+		click(recentTransType, "Transaction");
 	}
 
 //	public void getNetAmount() {
@@ -164,6 +205,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
 	}
+
 	public ErrorMessagePopup errorMessagePopup() {
 		return new ErrorMessagePopup();
 	}

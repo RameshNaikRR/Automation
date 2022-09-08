@@ -82,9 +82,9 @@ public class EnterYourPINComponent extends MobileFunctions {
 //	public NavigationComponent navigationComponent() {
 //		return new NavigationComponent();
 //	}
-//	public SecurePayPopup securePayPopup() {
-//		return new SecurePayPopup();
-//	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}

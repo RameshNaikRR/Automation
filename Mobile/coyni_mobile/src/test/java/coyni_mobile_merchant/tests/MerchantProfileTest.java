@@ -118,9 +118,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.successFailureComponent().clickLogout();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.successFailureComponent().landingPage().verifyLandingPage();
+					.successFailureComponent().landingPage().verifyLandingPage();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.successFailureComponent().landingPage().verifyLoginbtnView();
+					.successFailureComponent().landingPage().verifyLoginbtnView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeEmailWithValidDetails failed due to Exception " + e);
 		}
@@ -622,6 +622,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().successFailureComponent()
 					.verifyPageDescription(data.get("changePwdSuccessDescription"));
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().successFailureComponent().clickLogout();
+			merchantProfilePage.confirmPasswordPage().changePasswordPage().successFailureComponent().landingPage()
+					.verifyLandingPage();
+			merchantProfilePage.confirmPasswordPage().changePasswordPage().successFailureComponent().landingPage()
+					.verifyLoginbtnView();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordWithValidDetails failed due to Exception " + e);
 		}
@@ -733,6 +738,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
 			merchantProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("pin"));
+			merchantProfilePage.enterYourPINComponent().choosePinComponent().toastComponent()
+					.verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testResetPinCodeWithValidDetails failed due to Exception " + e);
@@ -817,10 +824,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
+			Thread.sleep(15000);
 			merchantProfilePage.dbaInformationPage().clickEmail();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -853,10 +861,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
+			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickEmail();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -892,10 +901,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
+			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickEmail();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -933,10 +943,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickPhoneNumber();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -970,10 +981,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickPhoneNumber();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1010,10 +1022,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-			merchantProfilePage.dbaInformationPage().getDescription();
+//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickPhoneNumber();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1083,6 +1096,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyEmail();
 			merchantProfilePage.companyInformationPage().getCurrentEmail();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickEmail();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -1120,6 +1134,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyEmail();
 			merchantProfilePage.companyInformationPage().getCurrentEmail();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickEmail();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -1160,6 +1175,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyEmail();
 			merchantProfilePage.companyInformationPage().getCurrentEmail();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickEmail();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -1202,6 +1218,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyPhoneNumber();
 			merchantProfilePage.companyInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickPhoneNumber();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1239,6 +1256,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyPhoneNumber();
 			merchantProfilePage.companyInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickPhoneNumber();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1279,6 +1297,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
 			merchantProfilePage.companyInformationPage().verifyPhoneNumber();
 			merchantProfilePage.companyInformationPage().getCurrentPhoneNumber();
+			Thread.sleep(2000);
 			merchantProfilePage.companyInformationPage().clickPhoneNumber();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1410,6 +1429,15 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().addNewTeamMemberPage().fillPhoneNumber(data.get("phoneNumber"));
 			merchantProfilePage.teamPage().addNewTeamMemberPage().getNoteMsg();
 			merchantProfilePage.teamPage().addNewTeamMemberPage().clickSend();
+			merchantProfilePage.teamPage().addNewTeamMemberPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
+			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
+			if (data.get("firstName")
+					.equalsIgnoreCase(merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName())) {
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddTeamMember Failed due to exception " + e);
 
@@ -1538,6 +1566,15 @@ public class MerchantProfileTest {
 					.fillPhoneNumber(data.get("phoneNumber"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getNoteMsg();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().clickSend();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().toastComponent()
+					.verifyToastMsg(data.get("toastMsg"));
+			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
+			if (data.get("firstName")
+					.contains("merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName()")) {
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
+				merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditTeamMember Failed due to exception " + e);
 
@@ -1697,6 +1734,10 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickCancel();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().toastComponent()
+					.verifyToastMsg(data.get("toastMsg"));
+			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCancelTeamMember Failed due to exception " + e);
 
@@ -2020,6 +2061,8 @@ public class MerchantProfileTest {
 					.fillZipCode(data.get("zipCode"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickSave();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.toastComponent().verifyToastMsg(data.get("debitEditToastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -2031,7 +2074,7 @@ public class MerchantProfileTest {
 	public void testDeleteDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
+			Thread.sleep(2000);
 			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
@@ -2042,6 +2085,8 @@ public class MerchantProfileTest {
 					.clickRemove();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.toastComponent().verifyToastMsg(data.get("debitDeleteToastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -2154,7 +2199,7 @@ public class MerchantProfileTest {
 	public void testDeleteSignetAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
+			Thread.sleep(2000);
 			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
@@ -2163,6 +2208,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().clickSignetAccount(data.get("cardNumber"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.toastComponent().verifyToastMsg(data.get("signetDeleteToastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
@@ -2250,8 +2297,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.fillBankName(data.get("bankName"));
 			Thread.sleep(1000);
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.ScrollToBank();
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.ScrollToBank();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.selectBank();
 //	merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBank();
@@ -2287,6 +2334,7 @@ public class MerchantProfileTest {
 	public void testDeleteBank(String strPrams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			Thread.sleep(2000);
 			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
@@ -2295,6 +2343,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().clickBankAccount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+			.toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.ErrorMessagePopupComponent;
+import coyni_mobile_merchant.components.ToastComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -118,8 +119,8 @@ public class ReceivePaymentPage extends MobileFunctions {
 	}
 
 	public void clickClose() {
-		new CommonFunctions().elementView(btnClose, "btnClose");
-		click(btnClose, "btnClose");
+		new CommonFunctions().elementView(btnClose, "Close");
+		click(btnClose, "Close");
 	}
 
 	public void clickAllow() {
@@ -129,6 +130,9 @@ public class ReceivePaymentPage extends MobileFunctions {
 	
 	public ErrorMessagePopupComponent errorMessagePopupComponent() {
 		return new ErrorMessagePopupComponent();
+	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }

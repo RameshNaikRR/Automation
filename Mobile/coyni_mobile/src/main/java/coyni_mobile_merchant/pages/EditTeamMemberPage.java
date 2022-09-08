@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.ToastComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -68,6 +69,10 @@ public class EditTeamMemberPage extends MobileFunctions {
 
 	public void clickBack() {
 		click(btnBack, "Back");
+	}
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }

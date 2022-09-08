@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.MailingAddressComponent;
+import coyni_mobile_merchant.components.ToastComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -45,19 +46,20 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	public void getRemoveMemberPopupDescription() {
 	  ExtentTestManager.setInfoMessageInReport("Description : " + getText(lblRemoveMemberPopupDescription));
 	}
-	public void getTeamMemberName() {
+	public String getTeamMemberName() {
 		String str = getText(lblTeamMemberName);
-		ExtentTestManager.setInfoMessageInReport("Team Member Name is" + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Name is " + str);
+		return str;
 	}
 
 	public void getTeamMemberStatus() {
 		String str = getText(lblTeamMemberStatus);
-		ExtentTestManager.setInfoMessageInReport("Team Member Status is" + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Status is " + str);
 	}
 
 	public void getTeamMemberDesc() {
 		String str = getText(lblTeamMemberDesc);
-		ExtentTestManager.setInfoMessageInReport("Team Member Description is" + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Description is " + str);
 	}
 
 	public void getEmail() {
@@ -94,5 +96,9 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	}
 	public EditTeamMemberPage editTeamMemberPage() {
 		return new EditTeamMemberPage();
+	}
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 }

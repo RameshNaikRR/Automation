@@ -320,4 +320,131 @@ public class BusinessTransactionDetailsTest {
 		}
 	}
 
+	public void testVerifyWithdrawBankTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			testVerifyTransaction(strParams);
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getWithdrawTokenBankTransactionDetails();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.clickBankSignetBack();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testVerifyWithdrawBankTransaction failed due to Exception " + e);
+		}
+	}
+
+	public void testVerifyTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			businessTokenAccountPage.clickAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageHeading(data.get("businessTokenHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyTotalAvailableFunds(data.get("fundsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageDescription(data.get("businessTokenDescription"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransMethod();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyPageHeading(data.get("transactionDetailsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyTransactionType(data.get("transactionType"));
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);
+		}
+	}
+
+	public void testVerifyWithdrawInstantPayTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			testVerifyTransaction(strParams);
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getWithdrawTokenInstantPayTransactionDetails();
+			;
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.clickInstantPayBack();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);
+		}
+	}
+
+	public void testVerifyWithdrawSignetTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			testVerifyTransaction(strParams);
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getWithdrawTokenSignetTransactionDetails();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.clickBankSignetBack();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testVerifyWithdrawSignetTransaction failed due to Exception " + e);
+		}
+	}
+
+	public void testVerifyWithdrawGiftCardTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			testVerifyTransaction(strParams);
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getWithdrawTokenGiftCardTransactionDetails();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testVerifyWithdrawGiftCardTransaction failed due to Exception " + e);
+		}
+	}
+
+	public void testVerifyBuyTokenBankTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			testVerifyTransaction(strParams);
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getBuyTokenBankTransactionDetails();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.clickbtnBuyBankBack();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testVerifyBuyTokenBankTransaction failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessTokenTransactionList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageHeading(data.get("businessTokenHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyTotalAvailableFunds(data.get("fundsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageDescription(data.get("businessTokenDescription"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
+			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyViewMore() == 1) {
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
+			} else {
+				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+			}
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testVerifyBuyTokenBankTransaction failed due to Exception " + e);
+		}
+	}
 }

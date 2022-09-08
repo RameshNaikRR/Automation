@@ -47,7 +47,7 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format(
-				"//*[contains(@resource-id,'com.greenbox.coyni:id/profileSV')]//*[contains(@text,'%s')]", eleName));
+				"//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
 
 	public void clickTogggle() {
@@ -156,7 +156,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickBeneficialOwners() {
-		scrollDownToElement(getDashBoardItems("Beneficial Owners"), "Beneficial Owners");
+//		scrollDownToElement(getDashBoardItems("Beneficial Owners"), "Beneficial Owners");
 		click(getDashBoardItems("Beneficial Owners"), "Beneficial Owners");
 	}
 
