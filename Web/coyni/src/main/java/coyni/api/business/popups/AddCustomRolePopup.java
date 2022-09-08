@@ -16,12 +16,14 @@ public class AddCustomRolePopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Add Custom Role", expHeading);
 	}
 
-	public void verifyRoleName(String expRoleName) {
+	public void verifyRoleName(String expRoleName) throws InterruptedException {
 		enterText(txtRoleName,expRoleName, "Role Name");
+		Thread.sleep(3000);
 	}
 
-	public void clickAdd() {
+	public void clickAdd() throws InterruptedException {
 		click(btnAdd, "Add");
+		Thread.sleep(2000);
 	}
 
 	public void clickGoBack() {

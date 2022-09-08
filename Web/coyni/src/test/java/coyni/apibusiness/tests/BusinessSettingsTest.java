@@ -539,6 +539,18 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void addCustomRole(String strParams) throws InterruptedException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+				.addCustomRolePopup().verifyHeading(data.get("customHeading"));
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+				.addCustomRolePopup().verifyRoleName(data.get("roleName"));
+		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+				.addCustomRolePopup().clickAdd();
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBusinessSettingsAddTeamMember(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -556,25 +568,13 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.clickAddRole();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.addCustomRolePopup().verifyHeading(data.get("customHeading"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.addCustomRolePopup().verifyRoleName(data.get("roleName"));
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.addCustomRolePopup().clickAdd();
+					.getUserPermission(data.get("option"), data.get("eleName"));
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.addCustomRolePopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.verifyTokenWalletAccess();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.verifyTransferToken();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.verifyBuyToken();
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-//					.verifyWithdrawToken();
+//					.verifyTokenWalletAccess();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyEcosystemActivity();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -591,9 +591,10 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
 					.clickSendInvitation();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.toastComponent().checkToastMessage(data.get("toastMessage"));
+					.toastComponent().verifyToast(data.get("title"), data.get("message"));
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			ExtentTestManager
 					.setFailMessageInReport("test Business Settings Add Team Member failed due to Exception " + e);
 		}

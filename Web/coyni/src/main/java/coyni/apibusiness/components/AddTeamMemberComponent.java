@@ -1,12 +1,20 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.api.business.popups.AddCustomRolePopup;
 import coyni.api.business.popups.FiltersPage;
 import coyni.api.business.popups.SaveChangePopUp;
+import coyni.apibusiness.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
+import ilabs.WebFramework.Runner;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class AddTeamMemberComponent extends BrowserFunctions {
 	private By lblAddTeam = By.xpath("(//span[text()='Add New Team Member'])[2]");
@@ -97,6 +105,28 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 
 	public void clickSave() {
 		click(txtSave, "Save");
+	}
+
+	public void getUserPermission(String option, String eleName) {
+		By options = By.xpath("//div[@class='TeamNewMember_add_role__hYYn2 px-2 py-3']/div");
+		BrowserFunctions objBrowserFunctions = new BrowserFunctions();
+		boolean status = false;
+		List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+		for (WebElement optionEle : optionsEles) {
+			if (optionEle.getText().equalsIgnoreCase(option)) {
+				optionEle.click();
+				status = true;
+
+				if (status) {
+					ExtentTestManager.setInfoMessageInReport(option + " selected from" + eleName + "  List");
+					break;
+				} else {
+					ExtentTestManager.setInfoMessageInReport(option + " not available in " + eleName + " List");
+					clickAddRole();
+					break;
+				}
+			}
+		}
 	}
 
 	public AddCustomRolePopup addCustomRolePopup() {

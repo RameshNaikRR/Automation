@@ -2,10 +2,14 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import com.aventstack.extentreports.reporter.ExtentReporter;
+
 import coyni.api.business.popups.GenerateNewSecretKeyPopup;
 import coyni.api.business.popups.SecretKeyPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentManager;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class APIKeyComponent extends BrowserFunctions {
 	private By lblApiKey = By.xpath("(//span[text()='API Keys'])[2]");
@@ -18,7 +22,7 @@ public class APIKeyComponent extends BrowserFunctions {
 	private By secretKey = By.xpath("//span[text()='Secret Key']/following-sibling::div[1]");
 	private By lblInactiveSecretKey = By.xpath("");
 	private By lblHideSecretKey = By.xpath("(//span[contains(@class,'ApiKeys_hide_secret_key__au2CL')])[1]");
-	private By txtEvents = By.xpath("(//span[@class='text-xs font-bold text-cgy3']//text())[1]");
+	private By txtEvents = By.xpath("//span[@class='text-xs font-bold text-cgy3']");
 
 	public void verifyAPIKey(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblApiKey, "API Keys", expHeading);
@@ -69,7 +73,8 @@ public class APIKeyComponent extends BrowserFunctions {
 	}
 
 	public void verifyAPIEvents() {
-		new CommonFunctions().elementView(txtEvents, "Events");
+		String events = getText(txtEvents, "No of Events");
+		ExtentTestManager.setInfoMessageInReport(events + " is displayed");
 	}
 
 	public AuthyComponent authyComponent() {
