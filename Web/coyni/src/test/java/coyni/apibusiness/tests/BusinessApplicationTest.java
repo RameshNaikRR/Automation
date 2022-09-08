@@ -240,7 +240,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(7000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -284,7 +284,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(7000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -316,7 +316,7 @@ public class BusinessApplicationTest {
 					data.get("fileName"), data.get("businessEntity"));
 			registrationStartPage.registrationCompanyInfoPage().removeFile(data.get("businessEntity"));
 			registrationStartPage.registrationCompanyInfoPage().clickCancel();
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			Thread.sleep(10000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCompanyInformation failed due to Exception " + e);
@@ -329,7 +329,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();
@@ -371,7 +371,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();
@@ -406,7 +406,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -417,7 +417,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().verifyLabelNo(data.get("noDes"));
 			registrationStartPage.registrationDBAInformationPage().verifyMessage(data.get("expMessage"));
 			registrationStartPage.registrationDBAInformationPage().clickExit();
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformationView failed due to Exception " + e);
 		}
@@ -429,7 +429,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -465,7 +465,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -534,7 +534,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -574,7 +574,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -614,7 +614,7 @@ public class BusinessApplicationTest {
 	public void testProcessingFeeView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationStartPage.verifyHeading();
+//			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();

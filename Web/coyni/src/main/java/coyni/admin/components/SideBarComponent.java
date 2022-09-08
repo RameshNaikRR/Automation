@@ -6,6 +6,7 @@ import coyni.admin.pages.BalanceReportsPage;
 import coyni.admin.pages.CommissionAccountPage;
 import coyni.admin.pages.FeatureControlPage;
 import coyni.admin.pages.FeeStructurePage;
+import coyni.admin.pages.ReserveManagementPage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
 import coyni.admin.pages.ViewMerchantfeeStructurePage;
@@ -52,6 +53,10 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSideBarItems("Disputes"), "Disputes");
 	}
 
+	public void clickReserveManagement() {
+		click(getSideBarItems("Reserve Mgmt."), "Reserve Management");
+	}
+
 	public void clickAccounting() {
 		click(getSideBarItems("Accounting"), "Accounting");
 	}
@@ -88,7 +93,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickPersonals() {
-		//clickProfiles();
+		// clickProfiles();
 		click(getSubMenuItems("Personal"), "Personal");
 	}
 
@@ -123,12 +128,12 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickTotalWithdraw() {
-		
+
 		click(getSubMenuItems("Total Withdraw"), "Total Withdraw");
 	}
 
 	public void clickTotalDeposits() {
-		
+
 		click(getSubMenuItems("Total Deposits"), "Total Deposits");
 	}
 
@@ -215,6 +220,11 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public FeeStructurePage feeStructurePage() {
 		return new FeeStructurePage();
+	}
+
+	public ReserveManagementPage reserveManagementPage() {
+		return new ReserveManagementPage();
+
 	}
 
 	public ViewPersonalFeeStructurePage viewPersonalFeeStructurePage() {

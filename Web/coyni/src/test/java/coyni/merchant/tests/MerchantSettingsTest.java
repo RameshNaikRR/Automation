@@ -1186,13 +1186,17 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
 			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
+			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickApplyFilters();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamFilters failed due to Exception " + e);
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamActiveFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1207,6 +1211,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamInvitationPendingFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1221,6 +1227,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamInvitationExpiredFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1242,14 +1250,18 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
 			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
+			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickResetAllFilters();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamActiveResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1263,6 +1275,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamResetPendingFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1276,6 +1290,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamResetExpiredFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1288,4 +1304,5 @@ public class MerchantSettingsTest {
 					.setFailMessageInReport("testMerchantSettingsTeamResetExpiredFilters failed due to Exception " + e);
 		}
 	}
+
 }
