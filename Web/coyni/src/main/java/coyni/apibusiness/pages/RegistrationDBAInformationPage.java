@@ -18,7 +18,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By lblYesDes = By.xpath("//span[text()='Yes']/following-sibling::*[1]");
 	private By lblNoDes = By.xpath("//span[text()='No']/following-sibling::*[1]");
 	private By btnBack = By.xpath("//Button[text()='Back']");
-	private By btnExit = By.xpath("//span[text()='Exit']");
+	private By btnExit = By.xpath("//button[text()='Exit']");
 	private By lblMessage = By.xpath("//span[contains(text(),'All completed')]");
 	private By btnSave = By.xpath("//button/span[text()='Save']");
 	private By lblBusinessType = By.xpath("//p[text()='Business Type']");

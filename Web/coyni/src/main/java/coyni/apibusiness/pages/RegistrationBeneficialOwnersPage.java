@@ -105,7 +105,9 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
     public void ClickDrpDwn() {
     	click(drpdwn, "beneficial dropdown");
     }
-    
+    public void clickBeneficialOwners() {
+		click(lblBeneficialOwner1, "Beneficial Owners");
+	}
     
     public void clickSave(int i) {
     	List<WebElement> list = DriverFactory.getDriver().findElements(btnSave);

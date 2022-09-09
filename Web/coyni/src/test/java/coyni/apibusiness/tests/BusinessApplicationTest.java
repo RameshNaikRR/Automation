@@ -43,7 +43,8 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
-			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
+			 sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage().
+			 clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
@@ -78,7 +79,7 @@ public class BusinessApplicationTest {
 				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 						.selectState(data.get("state"), num1);
 				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillZipCode(data.get("zipcode"), num1);
+						.fillZipCode(data.get("zipCode"), num1);
 //				sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent()
 //						.verifyCountry(data.get("country"));
 				sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
@@ -107,7 +108,8 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
-			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
+//			 sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+//				.clickBeneficialOwners();
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillFirstName(data.get("firstName"), 0);
@@ -130,22 +132,22 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipcode"), 0);
+					.fillZipCode(data.get("zipCode"), 0);
 			// Thread.sleep(1000);
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent().clickCountry();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.verifyCountry(data.get("country"));
 			new CommonFunctions().clickOutSideElement();
-			if (!data.get("errMessage").isEmpty()) {
+			if (!data.get("errMsg").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
 				if (!data.get("elementName").equalsIgnoreCase("ownership")) {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+					new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("color"),
 							data.get("elementName"));
 				}
 				if (data.get("elementName").equalsIgnoreCase("ownership")) {
 					sideBarMenuComponent.registrationBeneficialOwnersPage()
-							.validateBeneificalOwnersError(data.get("errMessage"), data.get("elementName"));
+							.validateBeneificalOwnersError(data.get("errMsg"), data.get("elementName"));
 				}
 			}
 
@@ -201,8 +203,9 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
-			// sideBarMenuComponent.registrationSideBarMenuComponent().clickBeneficialOwners();
-			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+					.clickBeneficialOwners();
+//			sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.validateFirstNameField(data.get("firstName"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -240,7 +243,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(7000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -284,7 +287,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(7000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -314,9 +317,10 @@ public class BusinessApplicationTest {
 					.verifyCountry(data.get("country"));
 			registrationStartPage.registrationCompanyInfoPage().uploadDocument(data.get("folderName"),
 					data.get("fileName"), data.get("businessEntity"));
+			Thread.sleep(5000);
 			registrationStartPage.registrationCompanyInfoPage().removeFile(data.get("businessEntity"));
 			registrationStartPage.registrationCompanyInfoPage().clickCancel();
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			Thread.sleep(10000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCompanyInformation failed due to Exception " + e);
@@ -329,7 +333,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();
@@ -371,7 +375,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();
@@ -406,7 +410,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -417,7 +421,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().verifyLabelNo(data.get("noDes"));
 			registrationStartPage.registrationDBAInformationPage().verifyMessage(data.get("expMessage"));
 			registrationStartPage.registrationDBAInformationPage().clickExit();
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformationView failed due to Exception " + e);
 		}
@@ -429,7 +433,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
@@ -465,12 +469,12 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
+//			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(1000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			if (!data.get("elementName").equalsIgnoreCase("businessType")) {
@@ -534,12 +538,12 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
+//			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().validateDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -556,12 +560,12 @@ public class BusinessApplicationTest {
 					.validateCity(data.get("city"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.selectState(data.get("state"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-					.validateZipCode(data.get("zipCode"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+//					.validateZipCode(data.get("zipCode"));
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
-					data.get("fileName"));
-			registrationStartPage.registrationDBAInformationPage().removeFile();
+//			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
+//					data.get("fileName"));
+//			registrationStartPage.registrationDBAInformationPage().removeFile();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformationFields failed due to Exception " + e);
@@ -574,12 +578,12 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
+//			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -599,8 +603,10 @@ public class BusinessApplicationTest {
 					.fillZipCode(data.get("zipCode"));
 
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
-					data.get("fileName"));
+//			Thread.sleep(5000);
+//			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
+//					data.get("fileName"));
+			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().clickNext();
 			Thread.sleep(5000);
 
@@ -614,7 +620,7 @@ public class BusinessApplicationTest {
 	public void testProcessingFeeView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();

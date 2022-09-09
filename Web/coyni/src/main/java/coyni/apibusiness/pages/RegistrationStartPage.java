@@ -8,15 +8,16 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RegistrationStartPage extends BrowserFunctions {
 
-	private By lblHeading = By.cssSelector("div[class*=BusinessApplicationBanner_container]>div>h1");
+	private By lblHeading = By.xpath("//h1");
 	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container]>div>p");
-	private By lblBusinessApplication = By.xpath("//p[text()='Business Application']");
+	private By lblBusinessApplication = By.xpath("//p[@class='text-xl font-bold leading-5 text-cgy4']");
 	private By btnStartApplication = By.xpath("//button[text()='Start Application']");
 	private By btnContinueApplication = By.xpath("//Button[text()='Continue Application']");
 	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	public void verifyHeading() {
+		String heading=getText(lblHeading, "Heading");
+		ExtentTestManager.setInfoMessageInReport(heading + " is displayed");
 	}
 
 	public void verifyPageDescription(String expDesc) {
@@ -32,7 +33,8 @@ public class RegistrationStartPage extends BrowserFunctions {
 	}
 
 	public void verifyBusinessApplicationView() {
-		new CommonFunctions().elementView(lblBusinessApplication, "Business Application");
+		String businessApp=getText(lblBusinessApplication, "Business Application");
+		ExtentTestManager.setInfoMessageInReport(businessApp + " is displayed");
 	}
 
 	public void getStatus() {

@@ -23,10 +23,10 @@ public class RegistrationCompanyInfoPage  extends BrowserFunctions{
 	private By btnNext =By.xpath("//button[text()='Next']");
 	private By btnCancel =By.xpath("//button[text()='Cancel']");
 	private By getUploadDocumentElement(String num) {
-		return By.xpath(String.format("(//div[contains(@class,'FormFile_form_file')]/input)[%s]", num));
+		return By.xpath(String.format("(//button[contains(@class,'FormFile_form_file')]/input)[1]", num));
 	}
 	private By getRemoveDocumentElement(String num) {
-		return By.xpath(String.format("(//span[contains(@class,'FormFile_file_cross')])[%s]", num));
+		return By.xpath(String.format("(//span[contains(@class,'FormFile_file_cross__jNPjD')])[%s]", num));
 	}
 	public By getElement(String state) {
 		return By.xpath(String.format("//div[text()='%s']", state));
@@ -78,7 +78,7 @@ public class RegistrationCompanyInfoPage  extends BrowserFunctions{
 		if(!businessEntity.equalsIgnoreCase("Sole Proprietorship / Single LLC")) {
 		for(int i=1;i<=3;i++) {
 			String num = Integer.toString(i);
-		click(getRemoveDocumentElement("1"), "Remove File"+i);
+		click(getRemoveDocumentElement(num), "Remove File"+i);
 		Thread.sleep(2000);
 		}
 		}
