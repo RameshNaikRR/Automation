@@ -11,4 +11,11 @@ public class ScanQRCodePayMerchantPage extends BrowserFunctions {
 		click(btnContinueWithBrowser, "Continue With Browser");
 	}
 
+	public IdentityVerificationPage identityVerificationPage() {
+		return new IdentityVerificationPage();
+	}
+	public LoginPage loginPage() {
+		return new LoginPage();
+
+	}
 }

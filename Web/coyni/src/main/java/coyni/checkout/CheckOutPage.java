@@ -1,12 +1,18 @@
 package coyni.checkout;
 
-import org.openqa.selenium.By;
+import java.math.BigInteger;
+import java.util.Random;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class CheckOutPage extends BrowserFunctions {
-
 	private By txtDomain = By.xpath("//input[@id='domain']");
 	private By txtOrderId = By.xpath("//input[@id='order-id']");
 	private By txtPublicKey = By.xpath("//input[@id='public-key']");
@@ -31,9 +37,30 @@ public class CheckOutPage extends BrowserFunctions {
 		enterText(txtDomain, text, "Domain");
 	}
 
-	public void enterOrderId(String text) {
-		enterText(txtOrderId, text, "Order ID");
+	public void enterOrderId() {
+		enterText(txtOrderId, genrearteRandomNumbers(), "Order ID");
 	}
+	public void enterOrderIdContent(String test) {
+		enterText(txtOrderId, test, "Order ID");
+	}
+	
+	
+	public String genrearteRandomNumbers() {
+		BigInteger maxLimit = new BigInteger("5000000000000");
+		BigInteger minLimit = new BigInteger("25000000000");
+		BigInteger bigInteger = maxLimit.subtract(minLimit);
+		Random randNum = new Random();
+		int len = maxLimit.bitLength();
+		BigInteger res = new BigInteger(len, randNum);
+		if (res.compareTo(minLimit) < 0)
+	         res = res.add(minLimit);
+		if (res.compareTo(bigInteger) >= 0)
+	         res = res.mod(bigInteger).add(minLimit);
+		String d="SOT"+res;
+		return d;
+	}
+	
+	
 
 	public void enterPublicKey(String text) {
 		enterText(txtPublicKey, text, "Public key");
@@ -86,7 +113,7 @@ public class CheckOutPage extends BrowserFunctions {
 
 	public int getTotalFirstCardAmount() {
 		String text = getText(lblAmountFirst, "Amount ");
-		int replaceAll =Integer.parseInt(text.replaceAll("[^0-9]", ""));
+		int replaceAll = Integer.parseInt(text.replaceAll("[^0-9]", ""));
 		ExtentTestManager.setInfoMessageInReport("First Card Amount is : " + replaceAll);
 		return replaceAll;
 	}
@@ -102,6 +129,23 @@ public class CheckOutPage extends BrowserFunctions {
 	public int sumOfAmount() {
 		int s = getTotalFirstCardAmount() + getTotalSecondCardAmount();
 		return s;
+	}
+
+	public void switchToWindoe() throws InterruptedException {
+		new CommonFunctions().switchTodWindow();
+		Thread.sleep(3000);
+	}
+
+	public ScanQRCodePayMerchantPage scanQRCodePayMerchantPage() {
+		return new ScanQRCodePayMerchantPage();
+	}
+
+	public void verifyPopUp() {
+	WebDriver driver = DriverFactory.getDriver();
+		Alert alert = driver.switchTo().alert();
+		String text = alert.getText();
+		ExtentTestManager.setInfoMessageInReport(text + " text is present");
+		alert.accept();
 	}
 
 }
