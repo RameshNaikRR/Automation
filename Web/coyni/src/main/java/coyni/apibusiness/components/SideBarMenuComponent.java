@@ -2,6 +2,7 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.api.business.popups.AddNewPaymentMethodPopup;
 import coyni.apibusiness.pages.BankAccountPage;
 import coyni.apibusiness.pages.BusinessSettingsPage;
 import coyni.apibusiness.pages.ExportFilesPage;
@@ -121,6 +122,10 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public BusinessSettingsPage businessSettingsPage() {
 		return new BusinessSettingsPage();
+	}
+
+	public AddNewPaymentMethodPopup addNewPaymentMethodPopup() {
+		return new AddNewPaymentMethodPopup();
 	}
 
 }

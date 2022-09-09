@@ -12,6 +12,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.BankAccountPage;
 import coyni.apibusiness.pages.ProcessingFeesPage;
+import coyni.apibusiness.pages.RegistrationAgreementsPage;
 import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
 import coyni.apibusiness.pages.RegistrationStartPage;
 import coyni.uitilities.CommonFunctions;
@@ -24,6 +25,7 @@ public class BusinessApplicationTest {
 	BankAccountPage bankAccountPage;
 	RegistrationStartPage registrationStartPage;
 	ProcessingFeesPage processingFeesPage;
+	RegistrationAgreementsPage registrationAgreementsPage;
 
 	@BeforeTest
 	public void init() {
@@ -32,6 +34,7 @@ public class BusinessApplicationTest {
 		sideBarMenuComponent = new SideBarMenuComponent();
 		registrationStartPage = new RegistrationStartPage();
 		processingFeesPage = new ProcessingFeesPage();
+		registrationAgreementsPage = new RegistrationAgreementsPage();
 	}
 
 	@Test
@@ -43,8 +46,8 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
-			 sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage().
-			 clickBeneficialOwners();
+			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+					.clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
@@ -167,10 +170,10 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
 			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
 			// sideBarMenuComponent.bankAccountPage().VerifyAddBankAccountDesc(data.get("bankAccountDesc"));
-			sideBarMenuComponent.bankAccountPage().clickLearnMore();
-			sideBarMenuComponent.bankAccountPage().verifyFiesrvHeading(data.get("fiesrvhdg"));
-			sideBarMenuComponent.bankAccountPage().clickBack();
-			Thread.sleep(5000);
+//			sideBarMenuComponent.bankAccountPage().clickLearnMore();
+//			sideBarMenuComponent.bankAccountPage().verifyFiesrvHeading(data.get("fiesrvhdg"));
+//			sideBarMenuComponent.bankAccountPage().clickBack();
+//			Thread.sleep(5000);
 			sideBarMenuComponent.bankAccountPage().clickImReady();
 			sideBarMenuComponent.bankAccountPage().verifyAddBankAccountView();
 			sideBarMenuComponent.bankAccountPage().verifyDoNotNavigateView();
@@ -178,15 +181,19 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.bankAccountPage().switchTab();
 			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
 			Thread.sleep(1000);
-			sideBarMenuComponent.bankAccountPage().fillUserName(data.get("userName"));
-			sideBarMenuComponent.bankAccountPage().fillPassword(data.get("password1"));
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterUserName(data.get("userName"));
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterPassword(data.get("password1"));
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
 			Thread.sleep(5000);
-			sideBarMenuComponent.bankAccountPage().clickEnter();
-			Thread.sleep(10000);
-			// sideBarMenuComponent.bankAccountPage().clickBankNext();
-			sideBarMenuComponent.bankAccountPage().clickChkbxBank();
-			sideBarMenuComponent.bankAccountPage().clickEnter();
-			// sideBarMenuComponent.bankAccountPage().clickBankNext();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
+			Thread.sleep(2000);
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().successFailureComponent()
+					.verifyBankAddSuccesfulHeaading();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().successFailureComponent().navigationComponent()
+					.clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
@@ -623,33 +630,125 @@ public class BusinessApplicationTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickStartApplication();
+			registrationStartPage.clickContinueApplication();
 			processingFeesPage.verifyHeading(data.get("heading"));
-			processingFeesPage.verifysubHeading(data.get("subHeading"));
-			processingFeesPage.verifyWithdraws(data.get("withdraw"));
-			processingFeesPage.verifyBankAccount(data.get("bankAccountHeading"));
-			processingFeesPage.verifyInstantPay(data.get("instantPay"));
-			processingFeesPage.verifySignet(data.get("signet"));
-			processingFeesPage.verifyGiftCard(data.get("giftCard"));
-			processingFeesPage.verifyFailedBankWithdraw(data.get("failedWithdrawHeading"));
+			processingFeesPage.verifysubHeading();
+			processingFeesPage.verifyYourFeesCharges();
+			processingFeesPage.clickCheckBox();
 			processingFeesPage.clickNext();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testDBAInformation failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testprocessingFee failed due to Exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testApplicationSubmission(String strParams) {
+	public void testAgreementsSignatureView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("expHeading"));
-			registrationStartPage.applicationSubmissionPage().verifyDescription();
-			registrationStartPage.applicationSubmissionPage().clickDone();
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickContinueApplication();
+			registrationAgreementsPage.verifyHeading(data.get("heading"));
+			registrationAgreementsPage.verifyAgreementsDescription(data.get("description"));
+			registrationAgreementsPage.clickBusinessAgreement();
+			registrationAgreementsPage.AgreementSign(data.get("sign"));
+			registrationAgreementsPage.clickSave();
+			registrationAgreementsPage.clickPrivacyPolicy();
+			registrationAgreementsPage.clickCheckBox();
+			registrationAgreementsPage.clickAgree();
+			registrationAgreementsPage.clickTermsOfServices();
+			registrationAgreementsPage.clickCheckBox();
+			registrationAgreementsPage.clickAgree();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAgreementsFlow failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationSubmissionView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickContinueApplication();
+			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
+			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();
+			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
+			registrationStartPage.applicationSubmissionPage().clickSubmit();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessAppTokenWalletView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletPage().verifyTotalWalletBalanceView();
+			sideBarMenuComponent.tokenWalletPage().getWalletBalance();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenWalletFirstUserView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickEditWallet();
+			sideBarMenuComponent.tokenWalletPage().clickIconSuccess();
+			Thread.sleep(3000);
+			sideBarMenuComponent.tokenWalletPage().clickCopyAddress();
+			Thread.sleep(3000);
+			sideBarMenuComponent.tokenWalletPage().clickTransferTokensFirstUser();
+			Thread.sleep(3000);
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup()
+					.verifyDescription(data.get("description"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().clickAccountVerification();
+			sideBarMenuComponent.clickTokenwallet();
+			Thread.sleep(2000);
+			sideBarMenuComponent.tokenWalletPage().clickBuyTokensFirstUser();
+			Thread.sleep(3000);
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup()
+					.verifyDescription(data.get("description"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().clickAccountVerification();
+			sideBarMenuComponent.clickTokenwallet();
+			Thread.sleep(2000);
+			sideBarMenuComponent.tokenWalletPage().clickWithdrawFirstUser();
+			Thread.sleep(3000);
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup()
+					.verifyDescription(data.get("description"));
+			sideBarMenuComponent.tokenWalletPage().pleaseCompleteVerificationPopup().clickAccountVerification();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet view  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMultipleTokenWallets(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletPage().verifyTokenWalletView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Token Wallet view  Failed due to Exception " + e);
 		}
 	}
 }

@@ -1,9 +1,13 @@
 package coyni.apibusiness.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.api.business.popups.BuyCoyniTokensNoPaymentPopup;
 import coyni.api.business.popups.BuyTokensPaymentPopup;
+import coyni.api.business.popups.PleaseCompleteVerificationPopup;
 import coyni.api.business.popups.TokenWalletTransferTokenPopup;
 import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.FilterComponent;
@@ -23,6 +27,13 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By walletBalance = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(1)");
 	private By lblcurrency = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(2)");
 	private By walletsList = By.cssSelector("div[class*='TokenAccountWallets_Wallets_Table']>div");
+	private By editWalletName = By.xpath("//div[contains(@class,'icon-edit')]");
+	private By iconSuccess = By.xpath("//span[contains(@class,'icon-success text-cm3 ')]");
+	private By copyAddress = By.xpath("//button[@data-tip='Copied to clipboard']");
+	private By clickTransfer = By.xpath("//span[text()='Transfer Tokens']");
+	private By clickBuyTokens = By.xpath("//span[text()='Buy Tokens']");
+	private By clickWithdrawTokens = By.xpath("//span[text()='Withdraw to USD']");
+	private By lblWallets = By.xpath("//div[@class='text-sm TokenAccountWallets_Wallet_Id_Cyn__7pYfp text-cgy4 font-semibold']");
 
 	private By getWallet(String walletNum) {
 		return By.xpath(String.format(
@@ -102,6 +113,31 @@ public class TokenWalletPage extends BrowserFunctions {
 		click(getTranferLnk(walletNum), "Transfer");
 	}
 
+	public void clickEditWallet() {
+		click(editWalletName, "Edit Wallet Name");
+	}
+
+	public void clickCopyAddress() {
+		new CommonFunctions().elementView(copyAddress, "Copied to clipBoard");
+		click(copyAddress, "Copy Address");
+	}
+
+	public void clickIconSuccess() {
+		click(iconSuccess, "Icon Success");
+	}
+
+	public void clickTransferTokensFirstUser() {
+		click(clickTransfer, "Transfer Tokens");
+	}
+
+	public void clickBuyTokensFirstUser() {
+		click(clickBuyTokens, "Buy Tokens");
+	}
+
+	public void clickWithdrawFirstUser() {
+		click(clickWithdrawTokens, "Withdraw to USD");
+	}
+
 	public void verifyTransfer() {
 		new CommonFunctions().elementView(getTranferLnk("walletNum"), "Transfer");
 	}
@@ -125,6 +161,14 @@ public class TokenWalletPage extends BrowserFunctions {
 	public void getWalletBalance() {
 		ExtentTestManager.setInfoMessageInReport(
 				"Total Wallet Balance " + getText(walletBalance, "") + " " + getText(lblcurrency, ""));
+	}
+
+	public void verifyTokenWalletView() {
+		List<WebElement> rows = getElementsList(lblWallets, " ");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+		}
 	}
 
 	public TopBarComponent topBarComponent() {
@@ -173,6 +217,11 @@ public class TokenWalletPage extends BrowserFunctions {
 
 	public TransactionListComponent transactionListComponent() {
 		return new TransactionListComponent();
+	}
+
+	public PleaseCompleteVerificationPopup pleaseCompleteVerificationPopup() {
+		return new PleaseCompleteVerificationPopup();
+
 	}
 
 }

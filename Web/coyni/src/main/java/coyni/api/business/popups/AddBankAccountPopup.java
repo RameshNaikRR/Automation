@@ -11,7 +11,7 @@ public class AddBankAccountPopup extends BrowserFunctions{
 	private By btnIamReady = By.cssSelector(".w-60");
     private By headingNewWindow = By.xpath("//h1[text()='Add Accounts']");
     private By txtBankName = By.xpath("//input[@id='searchbar']");
-    private By lnkBankName = By.xpath("(//div[@class='autoResultBankName'])[1]");
+    private By lnkBankName = By.xpath("//p[text()='CashEdge Test Bank (Agg) - Retail Non 2FA']");
 	private By txtUserName = By.xpath("//input[@id='acctForm:j_idt145:0:login_']");
 	private By txtPassword = By.xpath("//input[@id='acctForm:j_idt149:0:password_']");
 	private By btnNext = By.xpath("(//span[text()='Next'])[1]");
