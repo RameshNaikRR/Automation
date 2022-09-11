@@ -31,9 +31,9 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By txtCompanyEmail = By.cssSelector("#email");
 	private By txtphoneNumber = By.cssSelector("#phone-number");
 	private By txtWebsite = By.cssSelector("#website");
-	private By drpdwnTimeZone = By.xpath("//div[text()='Select Time Zone']/..");
+	private By drpdwnTimeZone = By.xpath("//div[text()='Select Time Zone']/following-sibling::div");
 	private By btnNext = By.xpath("//button[text()='Next']");
-	private By btnUploadFile = By.cssSelector("div[class*='DbaInformation_dba_file']>input");
+	private By btnUploadFile = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]");
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
 	private By btnEdit = By.xpath("");
 
@@ -54,7 +54,11 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next");
+		if (getElement(btnNext, "Next").isEnabled()) {
+			click(btnNext, "Next ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
+		}
 	}
 
 	public void clickSave() {
@@ -99,9 +103,10 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 
 	}
 
-	public void selectTimeZone(String timeZone) {
+	public void selectTimeZone(String timeZone) throws InterruptedException {
 		click(drpdwnTimeZone, "TimeZone Drop down");
-		click(getElement(timeZone), timeZone);
+//		click(getElement(timeZone), timeZone);
+//		Thread.sleep(2000);
 	}
 
 	public MailingAddressComponent mailingAddressComponent() {
