@@ -31,7 +31,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By txtCompanyEmail = By.cssSelector("#email");
 	private By txtphoneNumber = By.cssSelector("#phone-number");
 	private By txtWebsite = By.cssSelector("#website");
-	private By drpdwnTimeZone = By.xpath("//div[text()='Select Time Zone']/following-sibling::div");
+	private By drpdwnTimeZone = By.xpath("//div[text()='Select Time Zone']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By btnUploadFile = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]");
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
@@ -212,10 +212,11 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		}
 	}
 
-	public void uploadFile(String folderName, String fileName) {
+	public void uploadFile(String folderName, String fileName) throws InterruptedException {
 		getElement(btnUploadFile, "select File").sendKeys(FileHelper.getFilePath(folderName, fileName));
+		Thread.sleep(3000);
+		ExtentTestManager.setInfoMessageInReport("upload Image");
 	}
-
 	public void removeFile() {
 		click(btnRemoveFile, "Remove File");
 	}

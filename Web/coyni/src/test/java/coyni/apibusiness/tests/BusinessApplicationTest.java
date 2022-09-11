@@ -46,8 +46,8 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
-			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
-					.clickBeneficialOwners();
+//			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+//					.clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
@@ -181,7 +181,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.bankAccountPage().switchTab();
 			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
 			Thread.sleep(1000);
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterUserName(data.get("userName"));
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterPassword(data.get("password1"));
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
@@ -189,11 +189,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
-			Thread.sleep(2000);
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().successFailureComponent()
-					.verifyBankAddSuccesfulHeaading();
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().successFailureComponent().navigationComponent()
-					.clickClose();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
@@ -481,7 +477,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-//			registrationStartPage.registrationDBAInformationPage().clickNo();
+			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(1000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			if (!data.get("elementName").equalsIgnoreCase("businessType")) {
@@ -550,7 +546,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-//			registrationStartPage.registrationDBAInformationPage().clickNo();
+			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().validateDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -590,7 +586,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-//			registrationStartPage.registrationDBAInformationPage().clickNo();
+			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -610,9 +606,10 @@ public class BusinessApplicationTest {
 					.fillZipCode(data.get("zipCode"));
 
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-//			Thread.sleep(5000);
-//			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
-//					data.get("fileName"));
+			Thread.sleep(5000);
+			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
+					data.get("fileName"));
+			System.out.println("Upload File Successfully");
 			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().clickNext();
 			Thread.sleep(5000);
@@ -662,6 +659,7 @@ public class BusinessApplicationTest {
 			registrationAgreementsPage.clickTermsOfServices();
 			registrationAgreementsPage.clickCheckBox();
 			registrationAgreementsPage.clickAgree();
+			registrationAgreementsPage.clickNext();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreementsFlow failed due to Exception " + e);
 		}
@@ -677,10 +675,13 @@ public class BusinessApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
-			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
+//			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
 			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();
 			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
 			registrationStartPage.applicationSubmissionPage().clickSubmit();
+			registrationStartPage.applicationSummaryPage().verifyHeading(data.get("sumHeading"));
+			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));
+			registrationStartPage.applicationSummaryPage().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
 		}

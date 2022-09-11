@@ -16,7 +16,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
 
 	public void verifyHeading() {
-		String heading=getText(lblHeading, "Heading");
+		String heading = getText(lblHeading, "Heading");
 		ExtentTestManager.setInfoMessageInReport(heading + " is displayed");
 	}
 
@@ -33,8 +33,12 @@ public class RegistrationStartPage extends BrowserFunctions {
 	}
 
 	public void verifyBusinessApplicationView() {
-		String businessApp=getText(lblBusinessApplication, "Business Application");
+		String businessApp = getText(lblBusinessApplication, "Business Application");
 		ExtentTestManager.setInfoMessageInReport(businessApp + " is displayed");
+	}
+
+	public ApplicationSummaryPage applicationSummaryPage() {
+		return new ApplicationSummaryPage();
 	}
 
 	public void getStatus() {

@@ -13,6 +13,7 @@ public class RegistrationAgreementsPage extends BrowserFunctions {
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By btnAgree = By.xpath("//button[text()='Agree']");
+	private By btnNext=By.xpath("//button[text()='Next']");
 	private By clickBusinessAgreementView = By.xpath("(//button[text()='View'])[1]");
 	private By clickPrivacyPolicyView = By.xpath("(//button[text()='View'])[2]");
 	private By clickTermsOfService = By.xpath("(//button[text()='View'])[3]");
@@ -54,10 +55,17 @@ public class RegistrationAgreementsPage extends BrowserFunctions {
 	}
 
 	public void clickAgree() {
-		if (getElement(btnAgree, "Next").isEnabled()) {
-			click(btnAgree, "Next ");
+		if (getElement(btnAgree, "Agree").isEnabled()) {
+			click(btnAgree, "Agree ");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Agree button is in disabled mode");
+		}
+	}
+	public void clickNext() {
+		if (getElement(btnNext, "Next").isEnabled()) {
+			click(btnNext, "Next ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
 		}
 	}
 
