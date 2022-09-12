@@ -183,13 +183,15 @@ public class BusinessApplicationTest {
 			Thread.sleep(1000);
 //			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterUserName(data.get("userName"));
+			Thread.sleep(2000);
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterPassword(data.get("password1"));
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
+			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickBankNext();
 			Thread.sleep(5000);
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
+//			Thread.sleep(3000);
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
@@ -321,7 +323,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationCompanyInfoPage().uploadDocument(data.get("folderName"),
 					data.get("fileName"), data.get("businessEntity"));
 			Thread.sleep(5000);
-			registrationStartPage.registrationCompanyInfoPage().removeFile(data.get("businessEntity"));
+//			registrationStartPage.registrationCompanyInfoPage().removeFile(data.get("businessEntity"));
 			registrationStartPage.registrationCompanyInfoPage().clickCancel();
 			registrationStartPage.verifyHeading();
 			Thread.sleep(10000);
@@ -680,7 +682,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
 			registrationStartPage.applicationSubmissionPage().clickSubmit();
 			registrationStartPage.applicationSummaryPage().verifyHeading(data.get("sumHeading"));
-			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));
+//			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));
 			registrationStartPage.applicationSummaryPage().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);

@@ -15,7 +15,8 @@ public class AddBankAccountPopup extends BrowserFunctions {
 			.xpath("//div[@class='autoResultBankName']/p[text()='CashEdge Test Bank (Agg) - Retail Non 2FA']");
 	private By txtUserName = By.xpath("//input[@id='acctForm:j_idt145:0:login_']");
 	private By txtPassword = By.xpath("//input[@id='acctForm:j_idt149:0:password_']");
-	private By btnNext = By.xpath("(//span[text()='Next'])[1]");
+	private By btnBankNext = By.xpath("(//span[text()='Next'])[1]");
+	private By btnNext = By.xpath("//button[text()='Next']");
 	private By chckBoxBank1 = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
 	private By chckBoxBank2 = By.xpath("(//div[@class='custom-control custom-checkbox'])[2]");
 
@@ -40,11 +41,15 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void enterPassword(String expPassword) {
-		enterText(txtPassword, expPassword, "User Name");
+		enterText(txtPassword, expPassword, "password");
 	}
 
 	public void clickNext() {
 		click(btnNext, "Click Next");
+	}
+
+	public void clickBankNext() {
+		click(btnBankNext, "Click Next");
 	}
 
 	public void unSelectBank() {
@@ -58,7 +63,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void clickUncheckBank() {
-		click(btnNext, "Click Next");
+		click(btnBankNext, "Click Next");
 	}
 
 	public SuccessFailureComponent successFailureComponent() {
