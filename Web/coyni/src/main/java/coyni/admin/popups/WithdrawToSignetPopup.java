@@ -6,7 +6,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawToSignetPopup extends BrowserFunctions {
-	
+
 	public By lnkDeleteSignet = By.xpath("//div[@data-tip='Delete' or data-for='delete']");
 	public By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	public By txtAmount = By.xpath("//input[@type='text']");
@@ -23,6 +23,12 @@ public class WithdrawToSignetPopup extends BrowserFunctions {
 
 		// new CommonFunctions().verifyLabelText(lblHeading, "Withdraw To Signet Account
 		// Heading", expHeading);
+	}
+
+	private By lblInsufficent = By.xpath("//p[text()='Insufficient funds.']");
+
+	public int lblError() {
+		return getElementsList(lblInsufficent, "").size();
 	}
 
 	public void getAvailableBalance() {

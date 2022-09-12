@@ -83,6 +83,10 @@ public class AdminUserDetailsPage extends BrowserFunctions {
     	click(lnkChangePassword,"Change Password");
     }
     
+    public void fillNewPsw(String newPassword) {
+    	enterText(txtNewPassword, newPassword, "");
+    }
+    
     public AuthyComponent authyComponent() {
     	return new AuthyComponent();
     }
@@ -166,6 +170,10 @@ public class AdminUserDetailsPage extends BrowserFunctions {
     
     public AccountProfileImagePopup accountProfileImagePopup() {
     	return new AccountProfileImagePopup();
+    }
+    
+    public void clickOutSide() {
+    	new CommonFunctions().clickOutSideElement();
     }
     
 	public void clickTab() throws AWTException {

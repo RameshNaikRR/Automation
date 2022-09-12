@@ -318,10 +318,12 @@ public class CoyniPortalTest {
 		tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 		tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
 		tokenAccountPage.mailingAddressComponent().clickstate();
+		
 		Thread.sleep(500);
 		tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
 
 		tokenAccountPage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+		tokenAccountPage.mailingAddressComponent().clickOutSide();
 		tokenAccountPage.addNewSignetAccountPopup().clickSave();
 
 	}
@@ -354,22 +356,30 @@ public class CoyniPortalTest {
 			// tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+			
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
 			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
-			tokenAccountPage.withdrawToSignetPopup().clickNext();
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
-					.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
-			// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-					.fillInput(data.get("code"));
-			tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
-					.successFailureComponent();
-			Thread.sleep(2000);
+			int lblError = tokenAccountPage.withdrawToSignetPopup().lblError();
+			if (lblError > 0) {
+				ExtentTestManager.setInfoMessageInReport("Don't have amount in Total withdraw");
+			} else {
+
+				
+				tokenAccountPage.withdrawToSignetPopup().clickNext();
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
+						.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
+				// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent().verifyPageHeading(data.get("authyHeading1"));
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+						.fillInput(data.get("code"));
+				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().authyComponent()
+						.successFailureComponent();
+				Thread.sleep(2000);
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -423,6 +433,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
@@ -703,15 +714,15 @@ public class CoyniPortalTest {
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testVerifyPayoutTransactionHistory(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		//homePage.sideBarComponent().clickTokenAccount();
-		//homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
+		// homePage.sideBarComponent().clickTokenAccount();
+		// homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
 		homePage.sideBarComponent().commissionAccountPage().verifyTransactionList();
-	
+
 	}
 
 }

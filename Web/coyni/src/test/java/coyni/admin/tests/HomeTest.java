@@ -75,11 +75,11 @@ public class HomeTest {
 			homePage.authyComponent().fillInput(data.get("code"));
 			homePage.adminUserDetailsPage().verifyChangePasswordHeading();
 			homePage.adminUserDetailsPage().verifyChangePasswordDescp();
-			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("expCurrentPassword"));
+			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("currentPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconCurrentPassword();
 			homePage.adminUserDetailsPage().fillNewPassword(data.get("newPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconNewPassword();
-			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("expConfirmPassword"));
+			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("confirmPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconConfirmPassword();
 			homePage.adminUserDetailsPage().clickSave();
 			
@@ -100,10 +100,10 @@ public class HomeTest {
 			homePage.authyComponent().fillInput(data.get("code"));
 			homePage.adminUserDetailsPage().verifyChangePasswordHeading();
 			homePage.adminUserDetailsPage().verifyChangePasswordDescp();
-			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("expCurrentPassword"));
-			homePage.adminUserDetailsPage().fillNewPassword(data.get("newPassword"));
-			homePage.adminUserDetailsPage().fillConfirmPassword("expConfirmPassword");
-			homePage.adminUserDetailsPage().clickTab();
+			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("currentPassword"));
+			homePage.adminUserDetailsPage().fillNewPsw(data.get("newPassword"));
+			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("confirmPassword"));
+			homePage.adminUserDetailsPage().clickOutSide();
             
 			// customerProfilePage.changePasswordComponent().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
