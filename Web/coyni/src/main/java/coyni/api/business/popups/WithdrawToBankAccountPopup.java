@@ -1,8 +1,5 @@
 package coyni.api.business.popups;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
 public class WithdrawToBankAccountPopup extends BrowserFunctions {
@@ -22,9 +20,8 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtAmount = By.xpath("//input[@name='amount']");
 	private By txtDescription = By.xpath("//textarea[@id='message']");
-	private By wtdAmount = By.xpath("//span[text()='Withdraw Amount']/parent::div");
-	private By lblProcessingFee = By.xpath("//span[text()='Processing Fee']/parent::div");
-	private By lblTotal = By.xpath("//span[text()='Total']/parent::div");
+	private By wtdBankAmount = By.xpath("//div[@class='flex items-center justify-between py-1']");
+
 	private By btnConfrim = By.xpath("//button[text()='Confirm']");
 
 	private By lnkAddNewBankAccount = By.xpath("//span[text()='Add New Bank Account']");
@@ -34,9 +31,11 @@ public class WithdrawToBankAccountPopup extends BrowserFunctions {
 //		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 //	}
 	public void verifyOrderPreviewForWithdraw() {
-		new CommonFunctions().elementView(wtdAmount, "Withdraw Amount");
-		new CommonFunctions().elementView(lblProcessingFee, "ProcessingFee");
-		new CommonFunctions().elementView(lblTotal, "Total");
+		List<WebElement> rows = getElementsList(wtdBankAmount, "Order Preview");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+		}
 	}
 
 	public void clickConfrim() {

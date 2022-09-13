@@ -694,18 +694,18 @@ public class TokenWalletTest {
 			sideBarMenuComponent.tokenWalletActivityComponent().clickBuyTokens();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
 					.VerifyHeading(data.get("heading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
-					.VerifySubHeading(data.get("subHeading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().buyCoyniTokensNoPaymentPopup()
-					.selectBankAccount();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
-					.verifyHeading(data.get("heading"));
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+//					.VerifySubHeading(data.get("subHeading"));
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().buyCoyniTokensNoPaymentPopup()
+//					.selectBankAccount();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
+//					.verifyHeading(data.get("heading"));
 //				sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
 //						.verifySubHeading();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().fillAmount(data.get("amount"));
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickChange();
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickCovert();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickCovert();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickTab();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().orderPreviewPopup()
@@ -769,15 +769,15 @@ public class TokenWalletTest {
 			sideBarMenuComponent.tokenWalletActivityComponent().clickBuyTokens();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
 					.VerifyHeading(data.get("heading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
-					.VerifySubHeading(data.get("subHeading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().buyCoyniTokensNoPaymentPopup()
-					.selectSignetAccount();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
-					.verifyHeading(data.get("heading"));
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
+//					.VerifySubHeading(data.get("subHeading"));
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().buyCoyniTokensNoPaymentPopup()
+//					.selectSignetAccount();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
+//					.verifyHeading(data.get("heading"));
 			tokenWalletPage.buyTokensPaymentPopup().fillAmount(data.get("amount"));
-//			tokenWalletPage.buyTokensPaymentPopup().clickCovert();
+			tokenWalletPage.buyTokensPaymentPopup().clickCovert();
 //			tokenWalletPage.buyTokensPaymentPopup().clickChange();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickTab();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
@@ -845,11 +845,11 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnExternalBankAccount();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
-					.verifyWithdrawToBankAccountHeading(data.get("popupHeading"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
-					.selectBankAccount();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup().clickNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
+//					.verifyWithdrawToBankAccountHeading(data.get("popupHeading"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
+//					.selectBankAccount();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
 					.verifyWithdrawToBankAccountHeading(data.get("popupHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()
@@ -893,14 +893,14 @@ public class TokenWalletTest {
 					.clickOnSignetAccount();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
-					.selectSignetAccount();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.selectSignetAccount();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.fillAmount(data.get("amount"));
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickOutside();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
-					.verifyDescription(data.get("description"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.verifyDescription(data.get("description"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("popupHeading"));
@@ -944,9 +944,9 @@ public class TokenWalletTest {
 					.clickOnSignetAccount();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
-					.selectSignetAccount();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.selectSignetAccount();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
@@ -992,15 +992,16 @@ public class TokenWalletTest {
 					.clickOnSignetAccount();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
-					.selectSignetAccount();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.selectSignetAccount();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.verifyHeading(data.get("signetAccountHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.fillAmount(data.get("amount"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.clickConverter();
+			Thread.sleep(2000);
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 //					.fillTransactionDesc(data.get("description"));
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
@@ -1063,10 +1064,10 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickOnNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().verifyLabelHeading(data.get("instantPayHeading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
@@ -1080,13 +1081,9 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().orderPreviewPopup().clickConfrim();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().orderPreviewPopup()
-					.verifyHeading(data.get("authyVerificationHeading"));
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().orderPreviewPopup().verifyAuthy();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().authyComponent().fillInput(data.get("code"));
-//	homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().orderPreviewPopup()
-//			.verifyHeading(data.get("expTransactionInProgressHeading"));
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().transactionInProgessPopup()
+					.verifyHeading(data.get("transactionInProgHdg"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().orderPreviewPopup().successFailureComponent().verifyReferenceID();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
@@ -1110,27 +1107,16 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickOnNext();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().enterAmount(data.get("amount"));
-//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-//					.withdrawviaInstantPayPopup().txtMessage(data.get("transactionalmessage"));
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup()
-			// .verifyLabelHeading(data.get("instantPayHeading"));
-//			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
-//					+ homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().getDailyLimit());
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().enterAmount(data.get("amount"));
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().verifyLabelDebitCardView();
-			Thread.sleep(1000);
-
-			// homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup().withdrawviaInstantPayPopup().verifyErrorMessage();
-
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-			}
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickTab();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().verifyErrMsg(data.get("errMessage"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1152,6 +1138,12 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().verifyLabelHeading(data.get("instantPayHeading"));
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickOnChangeLink();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickOnAddNewDebitCard();
 			BusinessProfileTest.testAddCard(strParams, "Debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1172,11 +1164,9 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
-//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-//					.withdrawviaInstantPayPopup().clickOnChangeLink();
-			BusinessProfileTest.testDeleteCard(strParams);
-//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-//					.withdrawviaInstantPayPopup().removePaymentMethodPopup().navigationComponent().clickClose();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickOnChangeLink();
+			BusinessProfileTest.testEditCard(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1197,6 +1187,10 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickOnChangeLink();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickEdit();
 			BusinessProfileTest.testEditDebitCard(strParams);
 		} catch (Exception e) {
 			ExtentTestManager

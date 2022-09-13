@@ -1,5 +1,8 @@
 package coyni.api.business.popups;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -19,7 +22,7 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By debitCard = By.xpath("(//p[@class='text-sm font-semibold text-cgy4'])[1]");
 	private By txtAmount = By.xpath("//input[@name='amount']");
 	private By lblmsg = By.xpath("//label[text()='Transaction Description (Optional)']");
-	private By txtmsg = By.cssSelector(".FormField_form_textarea__2VA0I.false.undefined.false");
+	private By txtmsg = By.xpath("//textarea[@name='message']");
 	private By instantPayColor = By.xpath("(//button[@class='payment-method-button '])[2]");
 	private By lnkConvert = By.xpath("//button[@class='group flex flex-col justify-center items-center ']");
 	private By lnkChange = By.xpath("//span[text()='Change']");
@@ -27,9 +30,8 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By lblheading = By.xpath("//h1[text()='Withdraw via Instant Pay']");
 	private By lblChooseHeading = By
 			.xpath("//h3[@class=' mt-10 text-xl font-bold text-center text-cgy4 tracking-wide']");
-	private By editCard = By.xpath("(//button[@class='ml-2 icon-edit BuyTokenPaymentMethod_action_icon__2nonE'])[1]");
-	private By deleteCard = By
-			.xpath("(//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE'])[1]");
+	private By editCard = By.xpath("//button[@data-tip='Edit']");
+	private By deleteCard = By.xpath("//button[@data-tip='Delete']");
 	private By debitCardView = By.xpath("(//span[@class='text-xs font-semibold text-cgy4'])[2]");
 	private By lbldailyLimit = By.xpath("//h2[@class='text-cgy2 text-xs font-sans text-center mt-3']");
 	private By btnRadioDebit = By.xpath("(//input[@name='buy-token-radio'])[1]");
@@ -38,6 +40,7 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
 	private By iconDelete = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Delete']");
 	private By iconEdit = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Edit']");
+	private By errMsg = By.xpath("//p[contains(text(),'You are above')]");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -56,6 +59,10 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 
 	public void verifyErrorMessage() {
 		new CommonFunctions().elementView(errMessageforInsufficientFunds, "Error Message");
+	}
+
+	public void verifyErrMsg(String errorMessage) {
+		new CommonFunctions().verifyLabelText(errMsg, "Error Message", errorMessage);
 	}
 
 	public void txtMessage(String txt) {
@@ -236,6 +243,12 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	public void clickOnAddNewDebitCard() {
 		click(btnAddNewDebit, "Add New Debit Card");
 
+	}
+
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 	public void verifyAddNewDebitCard(String expCardName, String expCardNumber, String expiry, String expCVV,

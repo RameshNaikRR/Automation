@@ -516,7 +516,8 @@ public class BusinessProfileTest {
 					.enterUserName(data.get("expUserName"));
 			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
 					.enterPassword(data.get("expPassword"));
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickNext();
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+					.clickBankNext();
 			Thread.sleep(5000);
 			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().unSelectBank();
 			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().clickUncheckBank();
@@ -606,16 +607,16 @@ public class BusinessProfileTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddDebitCard(String strParams) {
-		tokenWalletPage.topBarComponent().clickUserName();
-		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
-		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
-		testAddExternalBankAccount(strParams);
-
-		testAddCard(strParams, "debit");
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddDebitCard(String strParams) {
+//		tokenWalletPage.topBarComponent().clickUserName();
+//		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
+//		apiAdminProfilePage.paymentMethodComponent().clickAddNewPayment();
+//		testAddExternalBankAccount(strParams);
+//
+//		testAddCard(strParams, "debit");
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1239,15 +1240,34 @@ public class BusinessProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			HomePage homePage = new HomePage();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.verifylblHeading(data.get("heading"));
+					.withdrawviaInstantPayPopup().mouseHoverOnDebitCard(data.get("last4digits"));
+			Thread.sleep(3000);
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickDeleteCardIcon();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().clickDelete();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+					.withdrawviaInstantPayPopup().removePaymentMethodPopup().clickOnRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	public static void testEditCard(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			HomePage homePage = new HomePage();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().mouseHoverOnDebitCard(data.get("last4digits"));
 			Thread.sleep(3000);
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickDeleteCardIcon();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().removePaymentMethodPopup().clickOnRemove();
+					.withdrawviaInstantPayPopup().clickEdit();
+			testEditDebitCard(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

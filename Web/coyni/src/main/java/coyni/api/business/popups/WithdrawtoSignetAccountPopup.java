@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
 public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
@@ -21,9 +22,7 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	private By txtTransactionDesc = By.xpath("//label[text()='Transaction Description (Optional)']");
 	private By lblErrMsg = By.xpath("//p[text()='Amount is required']");
 	private By txtDescription = By.xpath("//textarea[@id='message']");
-	private By wtdAmount = By.xpath("//span[text()='Withdraw Amount']/parent::div");
-	private By lblProcessingFee = By.xpath("//span[text()='Processing Fee']/parent::div");
-	private By lblTotal = By.xpath("//span[text()='Total']/parent::div");
+	private By wtdSignetAmount = By.xpath("//div[@class='flex items-center justify-between py-1']");
 	private By btnConfrim = By.xpath("//button[text()='Confirm']");
 	private By iconDelete = By.xpath("//img[@data-tip='Delete']");
 	private By btnCross = By.xpath("//button[@class='self-end']");
@@ -40,9 +39,11 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	}
 
 	public void verifyOrderPreviewForWithdraw() {
-		new CommonFunctions().elementView(wtdAmount, "Withdraw Amount");
-		new CommonFunctions().elementView(lblProcessingFee, "ProcessingFee");
-		new CommonFunctions().elementView(lblTotal, "Total");
+		List<WebElement> rows = getElementsList(wtdSignetAmount, "Order Preview");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+		}
 	}
 
 	public void verifyDescription(String description) throws InterruptedException {
@@ -101,14 +102,6 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 
 	public void verifyNote(String expNote) {
 		new CommonFunctions().verifyLabelText(lblNote, "Note", expNote);
-	}
-
-	public void verifyProcessingFeeView() {
-		new CommonFunctions().elementView(lblProcessingFee, "Processing Fee");
-	}
-
-	public void verifyTotalView() {
-		new CommonFunctions().elementView(lblTotal, "Total");
 	}
 
 	public void clickConfirm() {
