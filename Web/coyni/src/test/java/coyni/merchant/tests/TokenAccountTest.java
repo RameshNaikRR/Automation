@@ -849,6 +849,8 @@ public class TokenAccountTest {
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			Thread.sleep(3000);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank(data.get("number"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
@@ -876,16 +878,19 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().verifyBuyCoyniTokenHeading(data.get(""));
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup()
-					.verifyBuyCoyniTokenHeading(data.get(""));
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get(""));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickChangeLink();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank(data.get("number"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
-					"test Buy Token Transaction with bank account failed due to exception " + e);
+					"testBuyTokenTransactionBankAccountWithInvalidData failed due to exception " + e);
 		}
 
 	}
@@ -928,7 +933,7 @@ public class TokenAccountTest {
 			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
-			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+			// tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
 			merchantSettingsTest.testAddExternalBankAccount(strParams);
 			Thread.sleep(2000);
@@ -1620,7 +1625,6 @@ public class TokenAccountTest {
 
 	}
 
-//
 	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1967,8 +1971,11 @@ public class TokenAccountTest {
 					.verifyAmountTxtField();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.clickAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyErrorMsg(data.get("errMessage"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyErrorMsg(data.get("errMessage"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(

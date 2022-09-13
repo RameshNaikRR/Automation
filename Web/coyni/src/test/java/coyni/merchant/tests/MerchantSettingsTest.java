@@ -1161,6 +1161,27 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testMerchantSettingsTeamMemberRemoveUsers(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickCheckBox();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickActions();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickApplyAction();
+			merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().getDescription();
+			merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().clickRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testMerchantSettingsTeamMemberDelete(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

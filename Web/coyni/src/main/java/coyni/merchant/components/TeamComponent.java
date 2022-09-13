@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import coyni.merchant.pages.FiltersPage;
 import coyni.merchant.popups.DeleteUserPopup;
 import coyni.merchant.popups.RemoveUserPopup;
+import coyni.merchant.popups.TeamMemberRemoveUserPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -22,7 +23,11 @@ public class TeamComponent extends BrowserFunctions {
 	private By lblName = By.xpath("//p[text()='Vishnu Pav...']");
 	private By lblActivation = By.xpath("//p[text()='Vishnu Pav...']/following-sibling::*[2]");
 	private By btnRemoveUser = By.xpath("//span[text()='Remove User']");
-	private By btnDelete = By.xpath("(//div[text()='Delete'])[2]");
+	private By btnDelete = By.xpath(".Team_icon__ai-o3");
+	private By btnCheckBox = By.xpath("(//label[contains(@class,'custom-checkbox')])[2]");
+	private By btnActions = By.xpath("//div[contains(text(),'Actions')]");
+	private By btnRemoveUsers = By.xpath("//data[contains(text(),'Remove Users')]");
+	private By btnApplyAction = By.xpath("//div[contains(text(),'Apply Action')]");
 
 	public void verifyTeamHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblTeam, Heading, "Heading");
@@ -32,16 +37,24 @@ public class TeamComponent extends BrowserFunctions {
 		click(lnkAddTeam, "Add New Member");
 	}
 
+	public void clickApplyAction() {
+		click(btnApplyAction, "Apply Action");
+	}
+
 	public void clickFilter() {
 		click(lnkFilter, "Filter");
 	}
 
-	public void clickDelete() {
-		click(btnDelete, "Delete");
+	public void clickActions() {
+		click(btnActions, "Actions");
 	}
 
 	public void clickRemoveUser() {
-		click(btnRemoveUser, "Remove User");
+		click(btnRemoveUsers, "Remove Users");
+	}
+
+	public void clickDelete() {
+		click(btnDelete, "Delete");
 	}
 
 	public void selectFilter(String type) {
@@ -88,7 +101,7 @@ public class TeamComponent extends BrowserFunctions {
 	}
 
 	public void clickCheckBox() {
-		click(checkBox, "CheckBox");
+		click(btnCheckBox, "CheckBox");
 	}
 
 	public AddTeamMemberComponent addTeamMemberComponent() {
@@ -101,6 +114,10 @@ public class TeamComponent extends BrowserFunctions {
 
 	public RemoveUserPopup removeUserPopup() {
 		return new RemoveUserPopup();
+	}
+
+	public TeamMemberRemoveUserPopup teamMemberRemoveUserPopup() {
+		return new TeamMemberRemoveUserPopup();
 	}
 
 	public DeleteUserPopup deleteUserPopup() {

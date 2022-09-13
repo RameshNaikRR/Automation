@@ -29,6 +29,11 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
 	}
 
+	public void clickBank(String number) {
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
+		ExtentTestManager.setInfoMessageInReport("button clicked for Bank " + (number));
+	}
+
 //	public void deleteBank() {
 //		click(btnDeleteBank, "Click DeleteBank");
 //	}

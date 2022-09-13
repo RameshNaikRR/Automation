@@ -20,6 +20,7 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 	private By lblPhoneNumber = By.xpath("//p[contains(text(),'We sent you a 6-digit')]/span[1]");
 	private By chooseHeading = By.xpath("//span[text()='Choose Account']");
 	private By btnMail = By.cssSelector(".rounded-lg");
+	private By btnLogin = By.xpath("//button[text()='Login']");
 	private By btnReturnToLogin = By.xpath("//div[text()='Return to Login']");
 	private By phoneVerificationHeading = By.xpath("//div[text()='Phone Verification']");
 	private By phoneVerificationNumber = By.xpath("//span[@class='text-base font-bold text-cgy4']");
@@ -34,6 +35,10 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 
 	public void verifPhoneVericationDescription() {
 		new CommonFunctions().elementView(phoneVerificationNumber, "Phone Verification Description");
+	}
+
+	public void clickLogin() {
+		click(btnLogin, "Login");
 	}
 
 	public void clickResendCode() {
