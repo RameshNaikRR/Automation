@@ -44,7 +44,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	}
 
 	public void clickWallet3() {
-		click(getWallets("3"), "Wallet 1 is clicked");
+		click(getWallets("3"), "Wallet 3 is clicked");
 	}
 
 	public void verifyWallet1View() {

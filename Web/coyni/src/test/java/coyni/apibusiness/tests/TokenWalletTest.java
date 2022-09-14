@@ -53,7 +53,7 @@ public class TokenWalletTest {
 			tokenWalletPage.tokenWalletTransferPopup().verifyDescription(data.get("transferPopupDescription"));
 			tokenWalletPage.tokenWalletTransferPopup().fillAmount(data.get("amount"));
 			tokenWalletPage.tokenWalletTransferPopup().clickTransferToDropDown();
-			tokenWalletPage.tokenWalletTransferPopup().clickWallet1();
+			tokenWalletPage.tokenWalletTransferPopup().clickWallet3();
 			tokenWalletPage.tokenWalletTransferPopup().clickNext();
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
 					.verifyHeading(data.get("walletTransferPopupHeading"));
@@ -206,11 +206,11 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().verifyWalletType();
 			tokenWalletPage.transactionDetailsComponent().verifyWalletRecievedSubType();
 			tokenWalletPage.transactionDetailsComponent().clickTransactions("Wallet", "Received");
-			tokenWalletPage.transactionDetailsComponent()
-					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
-			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
-			tokenWalletPage.transactionDetailsComponent()
-					.verifyLblWalletTransferCreatedDate(data.get("lblCreatedDate"));
+//			tokenWalletPage.transactionDetailsComponent()
+//					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+//			tokenWalletPage.transactionDetailsComponent()
+//					.verifyLblWalletTransferCreatedDate(data.get("lblCreatedDate"));
 			tokenWalletPage.transactionDetailsComponent().getWalletReceivedTransactionType();
 			tokenWalletPage.transactionDetailsComponent().getWalletRecievedCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
@@ -273,7 +273,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().getBuyTokenTotalAmount();
 			tokenWalletPage.transactionDetailsComponent().getBuyTokenAccountBalance();
 			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
-			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+//			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
 			tokenWalletPage.transactionDetailsComponent().getBankName();
 			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
 			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
@@ -1216,18 +1216,19 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent()
 					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
 			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
-			tokenWalletPage.transactionDetailsComponent()
-					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
-			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
-			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawId(data.get("lblWithdrawID"));
+//			tokenWalletPage.transactionDetailsComponent()
+//					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
+//			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawId(data.get("lblWithdrawID"));
 //			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionType();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionSubType();
-			tokenWalletPage.transactionDetailsComponent().getReferenceID();
-			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawDepositID();
+//			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
 			tokenWalletPage.transactionDetailsComponent().verifyAmount();
-			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
@@ -1271,7 +1272,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
 			tokenWalletPage.transactionDetailsComponent().verifyAmount();
-			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
@@ -1315,7 +1316,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
 			tokenWalletPage.transactionDetailsComponent().verifyAmount();
-			tokenWalletPage.transactionDetailsComponent().getWithdrawPurchaseAmount();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawProcessingFee();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTotalAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawAccountBalance();
@@ -1324,6 +1325,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().getBankName();
 			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
 			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testWithdarwBankAccountCancelledTransactionDetails failed due to " + e);

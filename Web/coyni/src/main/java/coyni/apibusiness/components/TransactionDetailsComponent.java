@@ -10,16 +10,16 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionDetailsComponent extends BrowserFunctions {
-	private By lblHeading = By.cssSelector("p[class*='TokenTransactionDetails_MainTitle']");
+	private By lblHeading = By.xpath("//p[@class='TokenTransactionDetails_MainTitle__N089R']");
 	private By lblTransactionType = By.xpath("//span[.='Transaction Type']");
 //	private By verifylblTransactionType(String lblTransactionType) {
 //		return By.xpath(String.format("//span[.='Transaction Type']", lblTransactionType));
 //	}
-	private By lblTransactionSubType = By.xpath("(//p[contains(@class,'TokenBuyTokenDetails_row')])[1]");
+	private By lblTransactionSubType = By.xpath("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[1]");
 
 	// Reference ID is 2 and Deposit ID is 3 (Lables)
 	private By getLblIDheadings(String lblIdHeadings) {
-		return By.xpath(String.format("(//p[contains(@class,'TokenBuyTokenDetails_row')])[%s]", lblIdHeadings));
+		return By.xpath(String.format("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[%s]", lblIdHeadings));
 	}
 
 	private By getlblCreatedDate(String CreatedDateNum) {
@@ -49,8 +49,13 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //	}
 
 	// Reference ID and Deposit ID
-	private By verifyIdLnks(String IdLnks) {
-		return By.xpath(String.format("(//span[contains(@class,'copy-image icon-copy')])[%s]", IdLnks));
+	private By verifyBuyTokensIdLnks(String IdLnks) {
+		return By.xpath(String.format("(//span[contains(@class,'TokenBuyTokenDetails')])[%s]", IdLnks));
+	}
+
+	// Reference ID and Deposit ID
+	private By verifyWithdrawIdLnks(String IdLnks) {
+		return By.xpath(String.format("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[%s]", IdLnks));
 	}
 
 //	private By verifyCreatedDate = By.xpath("(//span[contains(@class,'referenceTitle')])[3]");
@@ -59,11 +64,19 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		return By.xpath(String.format("(//span[contains(@class,'referenceTitle')])[%s]", Date));
 	}
 
+	private By withdrawAccountBalance(String getAccountBal) {
+		return By.xpath("//div[contains(@class,'account_amount')][1]");
+	}
+
 	private By lblAmountCategory = By.cssSelector("div[class*='amount'][class*='cyn']>div:nth-of-type(1)");
 	private By lblAmount = By.cssSelector("div[class*='amount'][class*='cyn']>div:nth-of-type(2)>span:nth-of-type(1)");
 
 	private By getAmountDetails(String AmountDetailsNum) {
 		return By.xpath(String.format("(//div[contains(@class,'account_amount')])[%s]", AmountDetailsNum));
+	}
+
+	private By getWithdrawAmountDetails(String AmountDetails) {
+		return By.xpath(String.format("//div[@class='flex justify-between mt-6'][%s]", AmountDetails));
 	}
 
 	private By getInformationHeadings(String Headings) {
@@ -194,13 +207,27 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //	}
 
 	public void getReferenceID() {
-		click(verifyIdLnks("1"), "");
-		ExtentTestManager.setInfoMessageInReport("ReferenceID:  " + getCopiedData());
+		String idLink = getText(verifyBuyTokensIdLnks("1"), "");
+		click(verifyBuyTokensIdLnks("1"), idLink);
+		ExtentTestManager.setInfoMessageInReport("ReferenceID:  " + idLink);
 	}
 
 	public void getDepositID() {
-		click(verifyIdLnks("2"), "");
-		ExtentTestManager.setInfoMessageInReport("DepositID:    " + getCopiedData());
+		String idLink = getText(verifyBuyTokensIdLnks("2"), "");
+		click(verifyBuyTokensIdLnks("2"), idLink);
+		ExtentTestManager.setInfoMessageInReport("DepositID:    " + idLink);
+	}
+
+	public void getWithdrawReferenceID() {
+		String idLink = getText(verifyWithdrawIdLnks("2"), "");
+		click(verifyWithdrawIdLnks("2"), idLink);
+		ExtentTestManager.setInfoMessageInReport("ReferenceID:  " + idLink);
+	}
+
+	public void getWithdrawDepositID() {
+		String idLink = getText(verifyWithdrawIdLnks("3"), "");
+		click(verifyWithdrawIdLnks("3"), idLink);
+		ExtentTestManager.setInfoMessageInReport("DepositID:    " + idLink);
 	}
 
 //	public void getCreatedDateValue() {
@@ -314,35 +341,35 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		}
 	}
 
-	public void getWithdrawPurchaseAmount() {
-		String PurchaseAmount = getText(getAmountDetails("1"), "");
-		if (!PurchaseAmount.isEmpty()) {
-			ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + PurchaseAmount);
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Purchase Amount: " + PurchaseAmount);
-		}
+	public void getWithdrawAmount() {
+		String withdrawAmount = getText(getWithdrawAmountDetails("1"), "");
+//		if (!withdrawAmount.isEmpty()) {
+			ExtentTestManager.setInfoMessageInReport("Withdraw Amount: " + withdrawAmount);
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Withdraw Amount: " + withdrawAmount);
+//		}
 	}
 
 	public void getWithdrawProcessingFee() {
-		String ProcessingFee = getText(getAmountDetails("2"), "");
+		String ProcessingFee = getText(getWithdrawAmountDetails("2"), "");
 		if (!ProcessingFee.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Processing Fee: " + ProcessingFee);
 		} else {
-			ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
+		ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
 		}
 	}
 
 	public void getWithdrawTotalAmount() {
-		String TotalAmount = getText(getAmountDetails("3"), "");
-		if (!TotalAmount.isEmpty()) {
+		String TotalAmount = getText(getWithdrawAmountDetails("3"), "");
+//		if (!TotalAmount.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Total Amount: " + TotalAmount);
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
-		}
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
+//		}
 	}
 
 	public void getWithdrawAccountBalance() {
-		String AccountBalance = getText(getAmountDetails("4"), "");
+		String AccountBalance = getText(withdrawAccountBalance("1"), "");
 		if (!AccountBalance.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Account Balance: " + AccountBalance);
 		} else {
@@ -509,6 +536,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public void verifyBuyTokenType() {
 		new CommonFunctions().elementView(getType("Buy Token"), "Buy Token");
 	}
+
 	public void verifyWithdrawType() {
 		new CommonFunctions().elementView(getType("Withdraw"), "Withdraw");
 	}
@@ -524,6 +552,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public void verifyBuyTokenSubType() {
 		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
 	}
+
 	public void verifyWithdrawSubType() {
 		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
 	}

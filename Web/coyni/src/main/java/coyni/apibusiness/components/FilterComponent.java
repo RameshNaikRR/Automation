@@ -24,6 +24,38 @@ public class FilterComponent extends BrowserFunctions {
 	private By btnResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
 
+	private By transactionTypeCheckbox(String Type) {
+		return By.xpath(String.format("//div[@class='flex items-center mr-3'][%s]", Type));
+	}
+
+	private By transactionSubTypeCheckbox(String SubTypecheckBox) {
+		return By.xpath(String.format("(//div[@class='flex items-center mr-3'])[%s]", SubTypecheckBox));
+	}
+
+	public void clickWalletTransferChkbx() {
+		click(transactionTypeCheckbox("1"), "wallet Transfer");
+	}
+
+	public void clickWithdrawChkbx() {
+		click(transactionTypeCheckbox("3"), "Withdraw");
+	}
+
+	public void clickBuyTokenChkBx() {
+		click(transactionTypeCheckbox("2"), "Buy Token");
+	}
+
+	public void clickBankAccountChkbx() {
+		click(transactionSubTypeCheckbox("4"), "Bank Account");
+	}
+
+	public void clickInstantPayChkbx() {
+		click(transactionSubTypeCheckbox("5"), "Instant Pay");
+	}
+
+	public void clickSignetChkbx() {
+		click(transactionSubTypeCheckbox("6"), "Signet");
+	}
+
 	public void verifyStartDate(String expectedDate) {
 		String actualDate = getText(txtStartDate, "start Date");
 		if (actualDate.equals(expectedDate)) {
@@ -118,24 +150,12 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(txt15CharReferenceId, "15 Char Reference Id");
 	}
 
-	public void clickWalletTransferChkbx() {
-		click(getCheckkBoxes("Wallet Transfer"), "wallet Transfer");
-	}
-
 	public void verifyWalletTransferChkbxView() {
 		new CommonFunctions().elementView(getCheckkBoxes("Wallet Transfer"), "Wallet Transfer");
 	}
 
-	public void clickBuyTokenChkBx() {
-		click(getCheckkBoxes("Buy Token"), "Buy Token");
-	}
-
 	public void verifyBuyTokenChkbxView() {
 		new CommonFunctions().elementView(getCheckkBoxes("Buy Token"), "Buy Token");
-	}
-
-	public void clickWithdrawChkbx() {
-		click(getCheckkBoxes("Withdraw"), "Withdraw");
 	}
 
 	public void verifyWithdrawChkbxView() {
@@ -190,24 +210,12 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblTransactionSubType, "Transaction subtype");
 	}
 
-	public void clickBankAccountChkbx() {
-		click(getCheckkBoxes("Bank Account"), "Bank Account");
-	}
-
 	public void verifyBankAccountChkbxView() {
 		new CommonFunctions().elementView(getCheckkBoxes("Bank Account"), "BankAccount");
 	}
 
-	public void clickInstantPayChkbx() {
-		click(getCheckkBoxes("Instant Pay"), "Instant Pay");
-	}
-
 	public void verifyInstantPayChkbxView() {
 		new CommonFunctions().elementView(getCheckkBoxes("Instant Pay"), "Instant Pay");
-	}
-
-	public void clickSignetChkbx() {
-		click(getCheckkBoxes("Signet"), "Signet");
 	}
 
 	public void verifySignetChkbxView() {
