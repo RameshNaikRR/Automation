@@ -72,7 +72,7 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 	}
 
 	private By tblData = By.xpath("//thead[@class='rounded-full']//following-sibling::th");
-	private By statusPending = By.xpath("(//div[text()='Pending'])[1]");
+	private By statusPending = By.xpath("(//div[text()='Pending'])[2]");
 	private By lblName = By.xpath("//td[text()='Test Test']");
 
 	public void verifyName(String nameOfUser) {

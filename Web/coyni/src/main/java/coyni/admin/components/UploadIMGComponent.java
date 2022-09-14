@@ -2,7 +2,6 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -44,25 +43,13 @@ public class UploadIMGComponent extends BrowserFunctions {
 		//click(btnUploadNewImage, "Upload New Image");
 		new CommonFunctions().verifyLabelText(headings, "heading", expHeading);
 	}
-
-	public void uploadSelectImage() {
-		
-		getElement(btnUploadNewIm, "fileName").sendKeys("C:\\Users\\ideyaLabs\\Desktop\\pic.png");
-
-//		WebElement chooseFile = driver.findElement(By.xpath("//button[text()='Upload New Image']"));
-//		chooseFile.sendKeys("D:\\Automation-web\\WebRegression(17-08-2022)\\coyni-automation\\Web\\coyni\\Images.jpg");
-
+	private By getUploadDocumentElement() {
+		return By.xpath(String.format("//*[contains(@class,'font-bold text-cwhite')]/../input"));
 	}
-	
-	
-//public void uploadSelectImage(String folderName, String fileName) {
-//		
-//		getElement(btnUploadNewImage, "fileName").sendKeys(folderName, fileName);
-//
-////		WebElement chooseFile = driver.findElement(By.xpath("//button[text()='Upload New Image']"));
-////		chooseFile.sendKeys("D:\\Automation-web\\WebRegression(17-08-2022)\\coyni-automation\\Web\\coyni\\Images.jpg");
-//
-//	}
+
+	public void uploadSelectImage(String folderName, String fileName) {
+		getElement(getUploadDocumentElement(), "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
+	}
 
 
 	public void clickSave() {

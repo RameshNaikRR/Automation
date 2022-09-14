@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.admin.components.GobalSearchComponent;
 import coyni.admin.components.UploadIMGComponent;
 import coyni.admin.pages.AdminUserDetailsPage;
 import coyni.admin.pages.HomePage;
@@ -21,12 +22,14 @@ public class HomeTest {
 	AdminUserDetailsPage adminUserDetailsPage;
 	LoginPage loginPage;
 	UploadIMGComponent imgComponent;
+	GobalSearchComponent gobalSearchComponent;
 
 	@BeforeTest
 	public void init() {
 		adminUserDetailsPage = new AdminUserDetailsPage();
 		homePage = new HomePage();
 		imgComponent = new UploadIMGComponent();
+		gobalSearchComponent=new GobalSearchComponent();
 	}
 	
 	@Test // added
@@ -174,9 +177,8 @@ public class HomeTest {
 			imgComponent.clickEditUserImage();
 			imgComponent.verifyHeading(data.get("accountProfileHeading"));
 			imgComponent.clickUploadNewImage();
-			//imgComponent.verifyHeadingsCrop(data.get("cropYourImageHeading"));
 			Thread.sleep(2000);
-			imgComponent.uploadSelectImage();//data.get("folderName"), data.get("fileName")
+			imgComponent.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			Thread.sleep(2000);
 			imgComponent.clickSave();
 			imgComponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
@@ -201,6 +203,77 @@ public class HomeTest {
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUserDetails Remove failed due to exception" + e);
+		}
+	}
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithID(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillProfileID(data.get("userId"));
+			Thread.sleep(2000);
+			gobalSearchComponent.clickSearch();
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
+			} else {
+				String accountID = gobalSearchComponent.getAccountID();
+				if (accountID.contains(data.get("userId"))) {
+					ExtentTestManager.setPassMessageInReport("Gobal search is working");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Gobal search is not working");
+				}
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithProfileDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillProfileDetails();
+			gobalSearchComponent.clickIndivisuals(data.get("profileDetails"));
+			gobalSearchComponent.clickSearch();
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
+			} else {
+				String accountID = gobalSearchComponent.getEmail();
+				if (accountID.contains(data.get("profileDetails"))) {
+					ExtentTestManager.setPassMessageInReport("Gobal search is working with Profile Details");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Gobal search is not working");
+				}
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+	
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithReferenceId(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillReferenceID(data.get("referenceID"));
+			gobalSearchComponent.clickSearch();
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
+			} else {
+				String accountID = gobalSearchComponent.getReferenceID();
+				if (accountID.contains(data.get("referenceID"))) {
+					ExtentTestManager.setPassMessageInReport("Gobal search is working with Profile Details");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Gobal search is not working");
+				}
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
 		}
 	}
 	
