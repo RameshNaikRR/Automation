@@ -1,6 +1,5 @@
 package coyni.merchant.popups;
 
-import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -47,8 +46,9 @@ public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 
 	}
 
-	public void clickTab() throws AWTException {
-		new CommonFunctions().clickTab();
+	public void clickOutside() {
+		new CommonFunctions().clickOutSideElement();
+
 	}
 
 	public void clickAddNewSignetAccount() {

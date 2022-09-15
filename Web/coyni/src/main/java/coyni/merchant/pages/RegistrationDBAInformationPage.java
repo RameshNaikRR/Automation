@@ -2,7 +2,6 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
-
 import coyni.merchant.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -37,19 +36,23 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnUploadFile = By.cssSelector("//span[.='DBA Filing']");
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
 
-	public void fillDBAName(String dbaName) {
+	public void fillDBAName(String dbaName) throws InterruptedException {
+		clearText(txtDBAName, "DBA Name");
 		enterText(txtDBAName, dbaName, "DBA Name");
 	}
 
-	public void fillCompanyEmail(String companyName) {
+	public void fillCompanyEmail(String companyName) throws InterruptedException {
+		clearText(txtCompanyEmail, "Company Email");
 		enterText(txtCompanyEmail, companyName, "Company Name");
 	}
 
-	public void fillPhoneNumber(String phoneNumber) {
+	public void fillPhoneNumber(String phoneNumber) throws InterruptedException {
+		clearText(txtphoneNumber, "Phone Number");
 		enterText(txtphoneNumber, phoneNumber, "Phone Number");
 	}
 
-	public void fillWebsite(String website) {
+	public void fillWebsite(String website) throws InterruptedException {
+		clearText(txtWebsite, "Website");
 		enterText(txtWebsite, website, "Website");
 	}
 
@@ -57,15 +60,18 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		click(lblDBAInformation, "DBA Information");
 	}
 
-	public void fillMonthlyProcessingVolume(String processingVolume) {
+	public void fillMonthlyProcessingVolume(String processingVolume) throws InterruptedException {
+		clearText(txtMonthlyProcessingVolume, "Processing Volume");
 		enterText(txtMonthlyProcessingVolume, processingVolume, "Processing Volume");
 	}
 
-	public void fillHighTicket(String highTicket) {
+	public void fillHighTicket(String highTicket) throws InterruptedException {
+		clearText(txtHighTicket, "High Ticket");
 		enterText(txtHighTicket, highTicket, "High Ticket");
 	}
 
-	public void fillAverageTicket(String averageTicket) {
+	public void fillAverageTicket(String averageTicket) throws InterruptedException {
+		clearText(txtAvgTicket, "Average Ticket");
 		enterText(txtAvgTicket, averageTicket, "Avergare Ticket");
 	}
 
@@ -134,7 +140,15 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	}
 
 	public void clickNo() {
-		click(btnNo, "No");
+		if (verifyElementDisplayed(btnNo, "No")) {
+			click(btnNo, "No");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Next button is in disabled mode");
+		}
+	}
+
+	public int getSize() {
+		return getElementsList(btnNo, "No").size();
 	}
 
 	public void clickBack() {
@@ -166,8 +180,9 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		}
 	}
 
-	public void verifyDBAName(String DBAName) {
+	public void verifyDBAName(String DBAName) throws InterruptedException {
 		// verifyElementDisable(txtDBAName, "DBA Name");
+		clearText(txtDBAName, "DBA Name");
 		verifyTextBoxValue(txtDBAName, "DBAName", DBAName);
 	}
 

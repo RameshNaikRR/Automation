@@ -17,6 +17,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
 	private By lnkClearAllTransactionSubtype = By.xpath("//span[text()='Transaction Subtype']/button");
 	private By txtFromAmount = By.cssSelector("div[class $='group__from']>input");
+	private By btnResetFilters = By.xpath("//button[text()='Reset filters']");
 	private By txtToAmount = By.cssSelector("div[class $='group__to']>input");
 	private By txtSenderName = By.xpath("//input[@placeholder='Sender Name']");
 	private By txtReceiverName = By.xpath("//input[@placeholder='Receiver Name']");
@@ -32,6 +33,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	private By getCheckBoxes(String checkBox) {
 		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", checkBox));
+	}
+
+	public void clickResetFilters() {
+		click(btnResetFilters, "Reset Filters");
 	}
 
 	public void clickCheckBox(String checkBox) {

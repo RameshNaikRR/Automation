@@ -12,6 +12,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TeamComponent extends BrowserFunctions {
 
 	private By lblTeam = By.xpath("//span[text()='Team']");
+	private By btnTeam = By.xpath("(//span[contains(text(),'Team')])[2]");
 	private By lnkAddTeam = By.xpath("//button[text()='Add New Team Member']");
 	private By lnkFilter = By.xpath("//div[text()='Filter']");
 	private By search = By.xpath("//input[@placeholder='Search by Name, Email or Phone']");
@@ -23,11 +24,13 @@ public class TeamComponent extends BrowserFunctions {
 	private By lblName = By.xpath("//p[text()='Vishnu Pav...']");
 	private By lblActivation = By.xpath("//p[text()='Vishnu Pav...']/following-sibling::*[2]");
 	private By btnRemoveUser = By.xpath("//span[text()='Remove User']");
-	private By btnDelete = By.xpath(".Team_icon__ai-o3");
+	private By btnDelete = By.cssSelector(".Team_icon__ai-o3");
 	private By btnCheckBox = By.xpath("(//label[contains(@class,'custom-checkbox')])[2]");
 	private By btnActions = By.xpath("//div[contains(text(),'Actions')]");
 	private By btnRemoveUsers = By.xpath("//data[contains(text(),'Remove Users')]");
 	private By btnApplyAction = By.xpath("//div[contains(text(),'Apply Action')]");
+	private By btnResendInvitation = By.xpath("//div[@data-tip='Resend Invitation']");
+	private By btnEdit = By.xpath("//div[@data-tip='Edit']");
 
 	public void verifyTeamHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblTeam, Heading, "Heading");
@@ -35,6 +38,18 @@ public class TeamComponent extends BrowserFunctions {
 
 	public void clickAddTeamMember() {
 		click(lnkAddTeam, "Add New Member");
+	}
+
+	public void clickEdit() {
+		click(btnEdit, "Edit");
+	}
+
+	public void clickEditTeam() {
+		click(btnTeam, "Team");
+	}
+
+	public void clickResendInvitation() {
+		click(btnResendInvitation, "Resend Invitation");
 	}
 
 	public void clickApplyAction() {

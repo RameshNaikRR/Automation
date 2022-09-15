@@ -1,6 +1,9 @@
 package coyni.merchant.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
@@ -23,6 +26,67 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By btnCancel = By.xpath("//button[text()='Cancel']");
 	private By btnExit = By.xpath("//button[text()='Exit']");
+	private By merchantApplicationSteps = By.xpath("//div[contains(@class,'BusinessApplicationProcess')]/h6");
+
+	public void verifyCompanyInformation() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(0).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
+
+	public void verifyDBAInformation() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(1).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
+
+	public void verifyBeneficialOwners() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(2).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
+
+	public void verifyBankAccountInformation() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(3).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
+
+	public void verifyMerchantAgreements() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(4).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
+
+	public void verifyApplicationSummary() {
+		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
+		boolean enabled = list.get(5).isEnabled();
+		if (enabled) {
+			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+		}
+	}
 
 	private By getUploadDocumentElement(String num) {
 		return By.xpath(String.format("(//*[contains(@class,'FormFile_form_file__-SKGD')]/input)[%s]", num));
@@ -31,7 +95,7 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 	public void clickExit() {
 		click(btnExit, "Exit");
 	}
-	
+
 	public void clickCompanyName() {
 		click(companyName, "Company Name");
 	}

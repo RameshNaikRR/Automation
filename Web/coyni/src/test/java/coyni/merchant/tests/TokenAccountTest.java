@@ -1089,7 +1089,7 @@ public class TokenAccountTest {
 					.verifyHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
 					.clickSignet(data.get("signetNumber"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickOutside();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().getAvailableBalance();

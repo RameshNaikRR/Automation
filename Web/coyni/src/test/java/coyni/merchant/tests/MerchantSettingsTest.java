@@ -1240,7 +1240,8 @@ public class MerchantSettingsTest {
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
-			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1256,7 +1257,7 @@ public class MerchantSettingsTest {
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
-			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(

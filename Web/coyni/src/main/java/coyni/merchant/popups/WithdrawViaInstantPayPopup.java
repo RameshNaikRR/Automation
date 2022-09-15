@@ -131,7 +131,7 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		new CommonFunctions().clickTab();
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void verifyTransactions() {

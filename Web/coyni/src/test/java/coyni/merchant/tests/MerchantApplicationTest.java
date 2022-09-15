@@ -479,7 +479,12 @@ public class MerchantApplicationTest {
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
+			int size = registrationStartPage.registrationDBAInformationPage().getSize();
+			if (size > 0) {
+				registrationStartPage.registrationDBAInformationPage().clickNo();
+			} else {
+				ExtentTestManager.setInfoMessageInReport("Clicked on No");
+			}
 			Thread.sleep(1000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			if (!data.get("elementName").equalsIgnoreCase("businessType")) {
