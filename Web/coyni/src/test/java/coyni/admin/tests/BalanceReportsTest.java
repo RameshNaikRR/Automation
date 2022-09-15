@@ -22,12 +22,15 @@ public class BalanceReportsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBalanceReportsTest(String strParams) {
+	public void testVerifyCountAndBalanceReportsTest(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickBalanceReports();
+			homePage.sideBarComponent().balanceReportsPage().getTotalCustomerCount(data.get("customerCountQuery"));
+			homePage.sideBarComponent().balanceReportsPage().getTotalBalance(data.get("customerBalanceQuery"));
+			homePage.sideBarComponent().balanceReportsPage().getPersonalBalance(data.get("personalBalanceCount"));
+			homePage.sideBarComponent().balanceReportsPage().getBusinessBalance(data.get("businessBalanceQuery"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBalanceReportsTest Failed due to Exception " + e);

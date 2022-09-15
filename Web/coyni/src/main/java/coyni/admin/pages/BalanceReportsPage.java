@@ -1,10 +1,13 @@
 package coyni.admin.pages;
 
+import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class BalanceReportsPage extends BrowserFunctions {
 
@@ -68,5 +71,85 @@ public class BalanceReportsPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport(
 				"Business Accounts Balance: " + getText(lblBusinessAccountsBalance, "Business Accounts Balance"));
 	}
+	
+	private By getCount = By.cssSelector(".BalanceReport_customer_count__2Tobq");
+	private By getTotalBalance = By.xpath(
+			"//span[contains(@class,'BalanceReport_wallet_balance_larger__2lM5w font-bold cursor-default text-cgy4 ')]");
+	private By getPersonalBalance = By
+			.cssSelector("(//span[contains(@class,'font-bold text-cgy4 AccountActivity_balance__dRNlX')])[1]");
+	private By getBusinessBalance = By
+			.cssSelector("(//span[contains(@class,'font-bold text-cgy4 AccountActivity_balance__dRNlX')])[2]");
+
+	public String getCount() {
+		String text = getText(getCount, "Users Count");
+		return text;
+	}
+
+	public String getBusinessBalance() {
+		String text = getText(getBusinessBalance, "Business Balance");
+		return text;
+	}
+	
+	public String getPersonalBalance() {
+		String text = getText(getPersonalBalance, "Personal Balance");
+		return text;
+	}
+	
+	
+	
+	
+	public String getBalance() {
+		String text = getText(getTotalBalance, "Total Balance");
+		return text;
+	}
+
+	public void getTotalCustomerCount(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getCount());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Number of users  matches with number of entries in DB ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Number of users not matches with number of entries in DB ");
+		}
+	}
+
+	public void getTotalBalance(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getBalance());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Total Balance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Total Balance is not matched");
+		}
+	}
+	
+	public void getPersonalBalance(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getPersonalBalance());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Total Personal Balance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Total  Personal Balance is not matched");
+		}
+	}
+	
+	public void getBusinessBalance(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getBusinessBalance());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Total Business Balance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Total Business Balance is not matched");
+		}
+	}
+
+	
+	
+	
+	
 
 }

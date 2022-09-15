@@ -11,6 +11,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
+import ilabs.web.actions.WaitForElement;
 
 public class FilterComponent extends BrowserFunctions {
 
@@ -368,8 +369,6 @@ public class FilterComponent extends BrowserFunctions {
 
 	}
 
-
-	
 	public void verifyTableItemsCount(String query) throws SQLException {
 		int count = DBConnection.getDbCon().getCount(String.format(query));
 		int expCount = Integer.parseInt(count().split(" ")[3]);
@@ -380,13 +379,53 @@ public class FilterComponent extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("No Transaction Found");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public void containsInList(By listXpath, String data) {
+		List<WebElement> elementsList = getElementsList(listXpath, "filtersHeadings");
+		for (WebElement webElement : elementsList) {
+			String text = webElement.getText();
+			String[] split = data.split(",");
+			int count = 0;
+			for (int i = 0; i < split.length; i++) {
+				if (text.equalsIgnoreCase(split[i])) {
+					ExtentTestManager.setPassMessageInReport(text + " Filter Haedings match");
+					break;
+				}
+
+				else {
+					count++;
+					if (count == split.length) {
+						ExtentTestManager.setWarningMessageInReport(text + " Filter Haedings Not Found");
+					}
+				}
+			}
+		}
+	}
+
+	private By txtfiltersHeadings = By.xpath("//label[contains(@class,'text-sm font-semibold')]");
+
+	public void verifyFiltersHeadings(String data) {
+		containsInList(txtfiltersHeadings, data);
+	}
+
+	private By txtcaseNum = By.xpath("//input[@name='caseNumber']");
+	public String a;
+
+	public void enterCaseNum(String caseNum) {
+		enterText(txtcaseNum, caseNum, "caseNumber");
+	}
+
+	private By txtResultsCaseNum = By.xpath("//h1[@class='font-semibold']");
+
+	public String getCaseNum() {
+		return getText(txtResultsCaseNum, "CaseNumber");
+	}
+
+	private By txtStatusCaseID = By.xpath("//span[@class='ml-1 text-xs font-bold text-cm3']");
+
+	public void verifyDisputesExportStatusCaseID(String data) {
+		waitForElement(txtStatusCaseID, waittime, WaitForElement.presence);
+		containsInList(txtStatusCaseID, data);
+	}
 
 }
