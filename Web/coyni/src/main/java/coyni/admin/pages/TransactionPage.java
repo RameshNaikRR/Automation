@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.admin.components.FilterComponent;
 import coyni.admin.components.PaginationAndEntriesComponent;
+import coyni.admin.components.TransactionDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -97,8 +98,21 @@ public class TransactionPage extends BrowserFunctions {
 	public PaginationAndEntriesComponent paginationAndEntriesComponent() {
 		return new PaginationAndEntriesComponent();
 	}
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent();
+	}
 
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
+	}
+	private By txtSearch=By.cssSelector(".form-input");
+	private By btnSearch=By.xpath("//button[@class='icon-search']");
+	public void clickSearch() {
+		click(btnSearch, "");
+	}
+	
+	public void fillSearch(String text) {
+		click(txtSearch,"");
+		enterText(txtSearch, text,"Search Data");
 	}
 }

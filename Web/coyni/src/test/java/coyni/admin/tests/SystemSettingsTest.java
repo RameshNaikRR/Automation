@@ -240,6 +240,33 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalFeeStructure Failed due to Exception " + e);
 		}
 	}
-	
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().fillSearch(data.get("data"));
+			sideBarComponent.transactionPage().clickSearch();
+			Thread.sleep(1000);
+			int size = sideBarComponent.transactionPage().transactionDetailsComponent().getSize();
+			if (size > 0) {
+				ExtentTestManager.setWarningMessageInReport("No Search data Found in the System");
+			} else {
+				sideBarComponent.transactionPage().transactionDetailsComponent().clickDetails();
+				String verifySearchData = sideBarComponent.transactionPage().transactionDetailsComponent()
+						.verifySearchData();
+				if (data.get("data").contains(verifySearchData)) {
+					ExtentTestManager.setInfoMessageInReport("Data is matched");
+				} else {
+					ExtentTestManager.setInfoMessageInReport("Data is not matched");
+				}
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionSearch Failed due to Exception " + e);
+		}
+	}
+
 	
 }

@@ -267,5 +267,23 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public ChargebackComponent chargebackComponent() {
 		return new ChargebackComponent();
 	}
+	private By lblNoTransaction = By.xpath("//span[text()='No Transactions Found']");
+
+	public int getSize() {
+		return getElementsList(lblNoTransaction, "").size();
+	}
+
+	private By lblTrabsactionDetails = By.className("cell-col-0");
+
+	public void clickDetails() {
+		click(lblTrabsactionDetails, "Transaction Details");
+	}
+
+	private By getData = By
+			.xpath("(//span[contains(@class,'TransactionDetailInstantPay_copy_button_text_send__tmu8S')])[1]");
+
+	public String verifySearchData() {
+		return getText(getData, "");
+	}
 
 }
