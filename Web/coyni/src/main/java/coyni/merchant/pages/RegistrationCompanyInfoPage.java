@@ -32,9 +32,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(0).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The company Information tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The company Information tracker is in disabled mode");
 		}
 	}
 
@@ -42,9 +42,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(1).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The DBA Information tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The DBA Information tracker is in disabled mode");
 		}
 	}
 
@@ -52,9 +52,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(2).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Beneficial Owners tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Beneficial Owners tracker is in disabled mode");
 		}
 	}
 
@@ -62,9 +62,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(3).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Bank Account tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Bank Account tracker is in disabled mode");
 		}
 	}
 
@@ -72,9 +72,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(4).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Merchant Agreements tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Merchant Agreements tracker is in disabled mode");
 		}
 	}
 
@@ -82,9 +82,9 @@ public class RegistrationCompanyInfoPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(merchantApplicationSteps, " ");
 		boolean enabled = list.get(5).isEnabled();
 		if (enabled) {
-			ExtentTestManager.setInfoMessageInReport("The element is in enabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Application Summary tracker is in enabled mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("The element is in disabled mode");
+			ExtentTestManager.setInfoMessageInReport("The Application Summary tracker is in disabled mode");
 		}
 	}
 

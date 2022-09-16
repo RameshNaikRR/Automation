@@ -2,7 +2,6 @@ package coyni.merchant.pages;
 
 import java.util.List;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,8 +13,8 @@ import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.FileHelper;
 
-public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
-	
+public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
+
 	private By lblBeneficialOwners = By.xpath("//h4[text()='Beneficial Owner(s)']");
 	private By BeneficialOwnersDesc = By.xpath("//h4[text()='Beneficial Owner(s)']/following-sibling::p");
 	private By lblUploadDocumentsHdg = By.xpath("//span[text()='Upload Required Documents']");
@@ -32,10 +31,12 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 			"(//div[contains(@class,'BeneficialOwners_owners_wrap')]/details)[1]//p[text()='Select Identification to Upload:']/../following-sibling::*[1]/input");
 	private By lblBeneficialOwner1 = By.xpath("(//summary[contains(@class,'BeneficialOwners_summary')])[1]//p");
 
-	private By getUploadDocument(String num) {
-		return By.xpath(String.format(
-				"(//div[contains(@class,'BeneficialOwners_owners_wrap')]/details)[%s]//p[text()='Select Identification to Upload:']/../following-sibling::*[1]/input",
-				num));
+	private By getUploadDocumentElement = By
+			.xpath(String.format("//div[@class='flex items-center justify-center']/../input"));
+
+	public void uploadSelectImage(String folderName, String fileName) {
+//		getElement(getUploadDocumentElement, "select Image").click();
+		getElement(getUploadDocumentElement, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 
 	private By getBeneficialOwnerLabel(String num) {
@@ -54,6 +55,13 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 		return By.xpath(String.format("((//summary[contains(@class,'BeneficialOwners_summary')])[%s]//p)[4]", num));
 	}
 
+	private By radioIdentificaton = By.xpath("//p[starts-with(.,'Select')]/following-sibling::div/label/input");
+
+	public void selectID() {
+		List<WebElement> list = getElementsList(radioIdentificaton, "");
+		list.get(0).click();
+	}
+
 	public void clickBeneficialOwners() {
 		click(lblBeneficialOwners, "Beneficial OWners");
 	}
@@ -66,20 +74,20 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 		new CommonFunctions().verifyLabelText(getOwnershipValue(num), "ownership value", ownerShipValue);
 	}
 
-	public By getID(String id) {
-		return By.cssSelector(String.format("#%s", id));
-	}
+//	public By getID(String id) {
+//		return By.cssSelector(String.format("#%s", id));
+//	}
 
-	public void selectID(String id, int num1) {
-		String i = Integer.toString(num1);
-		if (id.equalsIgnoreCase("drivers license")) {
-			click(getID(String.format("drivers-license-%s", i)), id);
-		} else if (id.equalsIgnoreCase("state issued id")) {
-			click(getID(String.format("state-id-%s", i)), id);
-		} else {
-			click(getID(String.format("passport-%s", i)), id);
-		}
-	}
+//	public void selectID(String id, int num1) {
+//		String i = Integer.toString(num1);
+//		if (id.equalsIgnoreCase("drivers license")) {
+//			click(getID(String.format("drivers-license-%s", i)), id);
+//		} else if (id.equalsIgnoreCase("state issued id")) {
+//			click(getID(String.format("state-id-%s", i)), id);
+//		} else {
+//			click(getID(String.format("passport-%s", i)), id);
+//		}
+//	}
 
 	public void clickUploadImg() {
 		click(lnkUploadImg, "upload Image");
@@ -126,9 +134,8 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 		click(drpdwn, "beneficial dropdown");
 	}
 
-	public void clickSave(int i) {
-		List<WebElement> list = DriverFactory.getDriver().findElements(btnSave);
-		list.get(i).click();
+	public void clickSave() {
+		DriverFactory.getDriver().findElement(By.xpath("//button[.='Save']")).click();
 	}
 
 	public void clickAddBtn() {
@@ -160,9 +167,5 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions{
 
 	public void verifyUploadRequiredDocumentsView() {
 		new CommonFunctions().elementView(lblUploadDocumentsHdg, "Upload Required Documents");
-	}
-
-	public void uploadSelectImage(String folderName, String fileName, String num) {
-		getElement(getUploadDocument(num), "Upload Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 }
