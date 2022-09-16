@@ -247,4 +247,8 @@ public class SideBarComponent extends BrowserFunctions {
 		return new ExportSelectedTransactions();
 	}
 
+	public AccountLimitsComponent accountLimitsComponent() {
+		return new AccountLimitsComponent();
+	}
+
 }

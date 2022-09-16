@@ -76,7 +76,7 @@ public class AccountTableComponent extends BrowserFunctions {
 
 		List<WebElement> elements = getElementsList(lblTableHeadings, "");
 		int size = elements.size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < 5; i++) {
 			String label = elements.get(i).getText();
 			if (label.equals(list[i])) {
 				ExtentTestManager.setPassMessageInReport(list[i] + " column is displayed in Table ");

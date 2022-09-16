@@ -2,20 +2,31 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AccountLimitsComponent extends BrowserFunctions {
 
-	private By heading = By.xpath("//div[contains(@class,'card AccountLimits')]//span[text()='Account Limits']");
+	private By heading = By.xpath("(//p[text()='Account Limits'])[2]");
 	private By lblBuyTokenBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span[text()='10.00'])[1]");
 	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span[text()='10.00']");
 	private By lblBuyTokenCreditCardDailyLimit = By.xpath("//div[text()='Credit Card']/..//span[text()='10.00']");
 	private By lbWithdrawToUSDBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span[text()='10.00'])[2]");
 	private By lbWithdrawToUSDInstantPayDailyLimit = By.xpath("(//div[text()='Instant Pay']/..//span[text()='10.00'])[1]");
 	private By lbWithdrawToUSDGidtCardDailyLimit = By.xpath("(//div[text()='Gift Card']/..//span[text()='10.00'])[1]");
+	private By btnView = By.xpath("//button[contains(@data-tip,'View')]");
+	public void clickView() {
+		click(btnView, "view");
+	}
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(heading, "expHeading", expHeading);
+		
+	}
 	
-	
+	public AccountTableComponent accountTableComponent() {
+		return new AccountTableComponent();
+	}
 	
 	public String verifyHeading() {
 		String str = getText(heading, "Heading");

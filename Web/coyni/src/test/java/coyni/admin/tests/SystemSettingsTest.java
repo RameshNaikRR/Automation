@@ -55,7 +55,7 @@ public class SystemSettingsTest {
 			Thread.sleep(3000);
 			homePage.sideBarComponent().feeStructurePage().accountTableComponent()
 					.verifyTableLabels(data.get("labelColumn"));
-			homePage.sideBarComponent().feeStructurePage().accountTableComponent().getRowElements(data.get("firstRow"));
+			//homePage.sideBarComponent().feeStructurePage().accountTableComponent().getRowElements(data.get("firstRow"));
 			// sideBarComponent.feeStructurePage().accountTableComponent().verifylblHeading(data.get("Status"));
 			sideBarComponent.feeStructurePage().statusView();
 
@@ -198,4 +198,47 @@ public class SystemSettingsTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAccountLimits();;
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expHeading"));
+			// homePage.sideBarComponent().feeStructurePage().clickPersonal();
+			Thread.sleep(3000);
+			homePage.sideBarComponent().accountLimitsComponent().accountTableComponent()
+					.verifyTableLabels(data.get("labelColumn"));
+			//homePage.sideBarComponent().feeStructurePage().accountTableComponent().getRowElements(data.get("firstRow"));
+			// sideBarComponent.feeStructurePage().accountTableComponent().verifylblHeading(data.get("Status"));
+			sideBarComponent.feeStructurePage().statusView();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFeeStructure Failed due to Exception " + e);
+		}
+	}
+
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testViewPersonalAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAccountLimits();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().accountLimitsComponent().clickView();
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
+			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
+			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
+			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyDispute();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testViewPersonalFeeStructure Failed due to Exception " + e);
+		}
+	}
+	
+	
 }
