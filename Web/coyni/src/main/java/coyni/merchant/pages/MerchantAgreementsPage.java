@@ -33,7 +33,7 @@ public class MerchantAgreementsPage extends BrowserFunctions {
 	}
 
 	public void clickSave() {
-		click(btnSave, "Save");
+		click(btnSave, " Save Button");
 	}
 
 	public void clickBack() {

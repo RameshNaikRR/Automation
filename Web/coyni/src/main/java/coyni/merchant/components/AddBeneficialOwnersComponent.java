@@ -30,32 +30,50 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	private By txtAddress1 = By.name("addressLine1");
 	private By txtAddress2 = By.name("addressLine2");
 
-	public void getTextField(By ele, String text, String eleName, int i) {
-		List<WebElement> eleList = DriverFactory.getDriver().findElements(ele);
-		eleList.get(i).clear();
-		eleList.get(i).sendKeys(text);
-		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
+//	public void getTextField(By ele, String text, String eleName, int i) {
+//		List<WebElement> eleList = DriverFactory.getDriver().findElements(ele);
+//		// eleList.get(i).clear();
+//		eleList.get(i).sendKeys(text);
+//		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
+//	}
+
+	public void fillFirstName(String firstName) throws InterruptedException {
+		// clearText(txtFirstName, "First Name");
+		enterText(txtFirstName, firstName, "First Name");
+		// getTextField(txtFirstName, firstName, "firstName", i);
 	}
 
-	public void fillFirstName(String firstName, int i) {
-
-		getTextField(txtFirstName, firstName, "firstName", i);
+	public void fillLastName(String lastName) throws InterruptedException {
+		// clearText(txtLastName, "Last Name");
+		enterText(txtLastName, lastName, "Last Name");
+		// getTextField(txtLastName, lastName, "lastName", i);
 	}
 
-	public void fillLastName(String lastName, int i) {
-		getTextField(txtLastName, lastName, "lastName", i);
+	public void fillAddress1(String address1) throws InterruptedException {
+		// clearText(txtAddress1, "address line 1");
+		enterText(txtAddress1, address1, "address line 1");
+		// getTextField(txtAddress1, address1, "address line 1", i);
 	}
 
-	public void fillAddress1(String address1, int i) {
-		getTextField(txtAddress1, address1, "address line 1", i);
+	public void fillAddress2(String address2) throws InterruptedException {
+		// clearText(txtAddress2, "address line 2");
+		enterText(txtAddress2, address2, "address line 2");
+		// getTextField(txtAddress2, address2, "address line 2", i);
 	}
 
-	public void fillAddress2(String address2, int i) {
-		getTextField(txtAddress2, address2, "address line 2", i);
+	public void fillCity(String city) throws InterruptedException {
+		// clearText(txtCity, "city");
+		enterText(txtCity, city, "city");
+		// getTextField(txtCity, city, "city", i);
 	}
 
-	public void fillCity(String city, int i) {
-		getTextField(txtCity, city, "city", i);
+	public void selectState(String state) {
+		click(drpDwnState, "State DropDown");
+		click(getElement(state), state);
+	}
+
+	public By getElement(String state) {
+		return By.xpath(String.format("//div[text()='%s']", state));
 	}
 
 	public void selectState(String state, int i) {
@@ -66,18 +84,22 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		click(getElement(state), state);
 	}
 
-	public void fillZipCode(String zipCode, int i) {
-		getTextField(txtZipCode, zipCode, "ZipCode", i);
+	public void fillZipCode(String zipCode) throws InterruptedException {
+		// clearText(txtZipCode, "ZipCode");
+		// enterText(txtZipCode, zipCode, "Zipcode");
+		enterText(txtZipCode, zipCode, "ZipCode");
+		// getTextField(txtZipCode, zipCode, "ZipCode", i);
 	}
 
 	public void verifyCountry(String country) {
 		new CommonFunctions().verifyLabelText(txtCountry, "country", country);
 	}
 
-	public void fillOwnerShip(String ownerShip, int i) {
-		getTextField(txtOwnership, ownerShip, "ownerShip", i);
+	public void fillOwnerShip(String ownerShip) throws InterruptedException {
+		// clearText(txtOwnership, "Ownership");
+		enterText(txtOwnership, ownerShip, "Ownership");
+		// getTextField(txtOwnership, ownerShip, "ownerShip", i);
 	}
-
 
 	public void clickSave() {
 		click(btnSave, "click save");
@@ -86,21 +108,27 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	public void clickstate() {
 		click(lblState, "State");
 	}
+
 	public void clickCountry() {
 		click(txtCountry, "Country");
 	}
 
-	public void fillDateOfBirth(String dateOfBirth, int i) {
-		getTextField(txtDateOfBirth, dateOfBirth, "Date of Birth", i);
+	public void fillDateOfBirth(String dateOfBirth) throws InterruptedException {
+		// clearText(txtDateOfBirth, "Date of Birth");
+		enterText(txtDateOfBirth, dateOfBirth, "Date of Birth");
+		// getTextField(txtDateOfBirth, dateOfBirth, "Date of Birth", i);
 	}
 
-	public void fillSocialSecurityNum(String socialSecurityNum, int i) {
-		getTextField(txtSocialSecurity, socialSecurityNum, "Social Security Number", i);
+	public void fillSocialSecurityNum(String socialSecurityNum) throws InterruptedException {
+		// clearText(txtSocialSecurity, "Social Security Number");
+		enterText(txtSocialSecurity, socialSecurityNum, "Social Security Number");
+		// getTextField(txtSocialSecurity, socialSecurityNum, "Social Security Number",
+		// i);
 	}
 
-	public By getElement(String state) {
-		return By.xpath(String.format("//div[text()='%s']", state));
-	}
+//	public By getElement(String state) {
+//		return By.xpath(String.format("//div[text()='%s']", state));
+//	}
 
 	/**
 	 * Order -minChar, minCharPlus, maxCharMinus, maxChar, maxiPlus

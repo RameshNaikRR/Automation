@@ -83,8 +83,12 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		click(drpdwnBusinessType, "Business Type Drop down");
 	}
 
-	public By getElement(String businessType) {
+	private By getElement(String businessType) {
 		return By.xpath(String.format("//div[text()='%s']", businessType));
+	}
+
+	private By timeZone(String timeZone) {
+		return By.xpath(String.format("//span[normalize-space()='%s']", timeZone));
 	}
 
 	public void selectBusinessType(String businessType) {
@@ -108,7 +112,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	public void selectTimeZone(String timeZone) throws InterruptedException {
 		click(drpdwnTimeZone, "TimeZone Drop down");
 		Thread.sleep(3000);
-		click(getElement(timeZone), timeZone);
+		click(timeZone(timeZone), timeZone);
 	}
 
 	public MailingAddressComponent mailingAddressComponent() {
