@@ -18,6 +18,7 @@ public class AccountLimitsComponent extends BrowserFunctions {
 	private By btnView = By.xpath("//button[contains(@data-tip,'View')]");
 	public void clickView() {
 		click(btnView, "view");
+		
 	}
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "expHeading", expHeading);
