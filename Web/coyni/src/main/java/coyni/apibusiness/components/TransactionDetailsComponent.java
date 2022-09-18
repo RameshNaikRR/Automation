@@ -150,7 +150,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyLblWithdrawId(String withdrawID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings(withdrawID), "WithdrawID", withdrawID);
+		new CommonFunctions().verifyLabelText(getLblIDheadings("4"), "WithdrawID", withdrawID);
 	}
 
 //	public void getBuyTokenTransactionType() {

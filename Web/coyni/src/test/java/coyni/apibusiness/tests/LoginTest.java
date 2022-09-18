@@ -395,15 +395,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickOutSide();
 			loginPage.forgotPasswordPage().clickNext();
-			if (data.get("errMessage").contains("not registered")) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-			} else {
-				if (!data.get("errMessage").isEmpty()) {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-							data.get("elementName"));
-				}
-			}
-
+			loginPage.forgotPasswordPage().verifyErrMessage(data.get("message"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testForgotPasswordWithoutSetPassword failed due to exception " + e);

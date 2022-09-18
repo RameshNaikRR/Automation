@@ -13,9 +13,13 @@ public class ForgotPasswordPage extends BrowserFunctions {
 	private By txtEmail = By.id("Email-id");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
+	private By errMsg=By.xpath("//div[contains(text(),'User has not completed')]");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Forgot Password Heading ", expHeading);
+	}
+	public void verifyErrMessage(String message) {
+		new CommonFunctions().verifyLabelText(errMsg, "Error Message ", message);
 	}
 
 	public void verifyPageDescription(String expDescription) {

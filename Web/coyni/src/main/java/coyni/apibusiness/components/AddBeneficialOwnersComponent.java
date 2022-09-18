@@ -35,17 +35,17 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
 	}
 
-	public void fillFirstName(String firstName, int i) {
+	public void fillFirstName(String firstName,int i) {
 
-		getTextField(txtFirstName, firstName, "firstName", i);
+		getTextField(txtFirstName, firstName, "firstName",i);
 	}
 
-	public void fillLastName(String lastName, int i) {
-		getTextField(txtLastName, lastName, "lastName", i);
+	public void fillLastName(String lastName,int i) {
+		getTextField(txtLastName, lastName, "lastName",i);
 	}
 
-	public void fillAddress1(String address1, int i) {
-		getTextField(txtAddress1, address1, "address line 1", i);
+	public void fillAddress1(String address1,int i) {
+		getTextField(txtAddress1, address1, "address line 1",i);
 	}
 
 	public void fillAddress2(String address2, int i) {
@@ -76,7 +76,6 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		getTextField(txtOwnership, ownerShip, "ownerShip", i);
 	}
 
-
 	public void clickSave() {
 		click(btnSave, "click save");
 	}
@@ -84,6 +83,7 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	public void clickstate() {
 		click(lblState, "State");
 	}
+
 	public void clickCountry() {
 		click(txtCountry, "Country");
 	}
