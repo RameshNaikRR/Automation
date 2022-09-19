@@ -90,6 +90,7 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().emailVerificationComponent().clickButtonGoBack();
 			signupPage.clickCheckBox();
 			signupPage.clickNext();
+			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent()

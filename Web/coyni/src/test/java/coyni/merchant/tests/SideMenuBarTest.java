@@ -22,6 +22,7 @@ public class SideMenuBarTest {
 	@Test
 	public void testSideMenuBar() {
 		try {
+			Thread.sleep(3000);
 			sideMenuBarComponent.verifyUserName();
 //			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
 //			sideMenuBarComponent.verifyMerchnatTracker();

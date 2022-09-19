@@ -124,6 +124,8 @@ public class AddBankAccountPopup<E> extends BrowserFunctions {
 			ExtentTestManager.setInfoMessageInReport("Unselected the extra bank");
 			click(btnNext, "Click Next");
 			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+			Object[] windowHandles = driver.getWindowHandles().toArray();
+			driver.switchTo().window(windowHandles[0].toString());
 		}
 	}
 

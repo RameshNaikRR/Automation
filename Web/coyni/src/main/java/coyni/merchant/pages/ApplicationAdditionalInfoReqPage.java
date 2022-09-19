@@ -21,8 +21,7 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 
 	private By lblBeneficialOwners = By.xpath("(//button[text()='Approve'])[2]");
 
-	private By lnkUploadImg = By.xpath(
-			"(//div[contains(@class,'BeneficialOwners_owners_wrap')]/details)[1]//p[text()='Select Identification to Upload:']/../following-sibling::*[1]/input");
+	private By lnkUploadImg = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]/input");
 
 	public void verifyAdditionalInfoRequiredDescription() {
 		String text = getText(lblAdditionalReqDescription, "Description");
@@ -61,8 +60,8 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 				expColor);
 	}
 
-	public void clickUploadImage() {
-		click(lnkUploadImg, "Upload Image");
+	public void clickUploadImage(String folderName, String fileName) {
+		getElement(lnkUploadImg, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 
 }

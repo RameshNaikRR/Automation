@@ -1,7 +1,6 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -1022,7 +1021,8 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationAdditionalInfoReqPage().verifyAdditionalInfoRequiredDescription();
 			registrationStartPage.applicationAdditionalInfoReqPage().verifyStatus();
 			registrationStartPage.applicationAdditionalInfoReqPage().getMerchantTrackerApplication();
-			registrationStartPage.applicationAdditionalInfoReqPage().clickUploadImage();
+			registrationStartPage.applicationAdditionalInfoReqPage().clickUploadImage(data.get("folderName"),
+					data.get("fileName"));
 			registrationStartPage.applicationAdditionalInfoReqPage().clickDBA();
 			registrationStartPage.applicationAdditionalInfoReqPage().clickBeneficialOwners();
 

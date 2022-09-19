@@ -208,14 +208,6 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().clickSms();
-			// loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
-//			String[] msg = data.get("errMessage").split(",");
-//			for (int i = 0; i < msg.length; i++) {
-//				loginPage.phoneVerificationComponent().fillpin(data.get("code"));
-//				loginPage.phoneVerificationComponent().verifyMessage(msg[i]);
-//			}
-//			loginPage.phoneVerificationComponent().clickResend();
-//			loginPage.phoneVerificationComponent().verifyResend(data.get("resendMsg"));
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.phoneVerificationComponent().clickResend();
@@ -290,7 +282,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
 			// loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
-			// loginPage.phoneVerificationComponent().verifyPhoneNumber();
+
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(3000);
 				loginPage.phoneVerificationComponent().clickResend();

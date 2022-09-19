@@ -1031,6 +1031,8 @@ public class MerchantSettingsTest {
 	public void testDebitCardFieldValidations(String strParams) {
 		try {
 			Thread.sleep(2000);
+			sideMenuBarComponent.clickMerchantSettings();
+			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 			Thread.sleep(2000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
@@ -1223,7 +1225,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
-			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+		//	merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
 
 		} catch (Exception e) {
@@ -1239,7 +1241,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
-			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+		//	merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
 
@@ -1256,7 +1258,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
-			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			//merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
 
 		} catch (Exception e) {
