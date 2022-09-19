@@ -201,7 +201,7 @@ public class CommonFunctions {
 		} else {
 
 			ExtentTestManager
-					.setFailMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
+					.setInfoMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
 		}
 
 	}

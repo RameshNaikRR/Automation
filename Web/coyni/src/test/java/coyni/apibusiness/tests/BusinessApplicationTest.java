@@ -37,6 +37,71 @@ public class BusinessApplicationTest {
 		registrationAgreementsPage = new RegistrationAgreementsPage();
 	}
 
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBeneficialsOwners(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			Thread.sleep(5000);
+//			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+//					.clickBeneficialOwners();
+//			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
+////			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
+//			Thread.sleep(7000);
+//			String[] id = data.get("id").split(",");
+//			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
+//			String[] ownerName = data.get("ownerName").split(",");
+//			String[] ownerShipValue = data.get("ownerShipValue").split(",");
+//			String[] firstName = data.get("firstName").split(",");
+//			String[] lastName = data.get("lastName").split(",");
+//			String[] ownerShip = data.get("ownerShip").split(",");
+//			for (int i = 0; i < 1; i++) {
+//				String num = Integer.toString(i + 1);
+//				int num1 = i;
+//				// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBenificialOwner1(data.get("owner1"));
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillFirstName(firstName[i], num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillLastName(lastName[i], num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillDateOfBirth(data.get("dateOfBirth"), num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillSocialSecurityNum(data.get("ssn_ein_tin"), num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillOwnerShip(ownerShip[i], num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillAddress1(data.get("addressline1"), num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillAddress2(data.get("addressline2"), num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillCity(data.get("city"), num1);
+//				// sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.selectState(data.get("state"), num1);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//						.fillZipCode(data.get("zipCode"), num1);
+////				sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent()
+////						.verifyCountry(data.get("country"));
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
+//				Thread.sleep(10000);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
+//						data.get("fileName"));
+//				Thread.sleep(10000);
+//				sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave();
+//				Thread.sleep(10000);
+////				sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnerDetails(num,
+////						expOwnerlabel[i], ownerName[i], data.get("ownerShipLabel"), ownerShipValue[i]);
+//			}
+//			sideBarMenuComponent.registrationBeneficialOwnersPage().clickNext();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Beneficial Owners flow failed due to Exception " + e);
+//		}
+//
+//	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testBeneficialsOwners(String strParams) {
@@ -46,58 +111,50 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
-//			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
-//					.clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
-			// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
 			Thread.sleep(7000);
 			String[] id = data.get("id").split(",");
 			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
 			String[] ownerName = data.get("ownerName").split(",");
-			String[] ownerShipValue = data.get("ownerShipValue").split(",");
+			String[] ownerShipValue = data.get("ownerShip").split(",");
 			String[] firstName = data.get("firstName").split(",");
 			String[] lastName = data.get("lastName").split(",");
 			String[] ownerShip = data.get("ownerShip").split(",");
-			for (int i = 0; i < 3; i++) {
-				String num = Integer.toString(i + 1);
-				int num1 = i;
-				// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBenificialOwner1(data.get("owner1"));
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillFirstName(firstName[i], num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillLastName(lastName[i], num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillDateOfBirth(data.get("dateOfBirth"), num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillSocialSecurityNum(data.get("ssn"), num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillOwnerShip(ownerShip[i], num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillAddress1(data.get("addline1"), num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillAddress2(data.get("addline2"), num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillCity(data.get("city"), num1);
-				// sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.selectState(data.get("state"), num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-						.fillZipCode(data.get("zipCode"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent()
-//						.verifyCountry(data.get("country"));
-				sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
-						data.get("fileName"), num);
-
-				sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave(num1);
-				Thread.sleep(6000);
-				sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnerDetails(num,
-						expOwnerlabel[i], ownerName[i], data.get("ownerShipLabel"), ownerShipValue[i]);
-			}
+			int i=0;
+			String num = Integer.toString(i + 1);
+			int num1 = i;
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillFirstName(data.get("firstName"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillLastName(data.get("lastName"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillDateOfBirth(data.get("dateOfBirth"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillSocialSecurityNum(data.get("ssn_ein_tin"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillOwnerShip(data.get("ownerShip"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillAddress1(data.get("addressline1"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillAddress2(data.get("addressline2"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillCity(data.get("city"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.selectState(data.get("state"),0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillZipCode(data.get("zipCode"),0);
+			Thread.sleep(6000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i],num1);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
+					data.get("fileName"));
+			Thread.sleep(20000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave();
+			Thread.sleep(10000);
+			Thread.sleep(10000);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().clickNext();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Beneficial Owners flow failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("Beneficial Owners  failed due to Exception " + e);
 		}
 
 	}
@@ -111,9 +168,11 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
-//			 sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
-//				.clickBeneficialOwners();
-			// sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+					.clickBeneficialOwners();
+			Thread.sleep(3000);
+//			 sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+			Thread.sleep(3000);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillFirstName(data.get("firstName"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -121,13 +180,13 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillDateOfBirth(data.get("dateOfBirth"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillSocialSecurityNum(data.get("ssn"), 0);
+					.fillSocialSecurityNum(data.get("ssn_ein_tin"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillOwnerShip(data.get("ownerShip"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress1(data.get("addline1"), 0);
+					.fillAddress1(data.get("addressline1"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress2(data.get("addline2"), 0);
+					.fillAddress2(data.get("addressline2"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillCity(data.get("city"), 0);
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
@@ -190,7 +249,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
 			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
-//			Thread.sleep(3000);
+			Thread.sleep(3000);
 //			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
 
 		} catch (Exception e) {
@@ -208,9 +267,11 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
-			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
-					.clickBeneficialOwners();
-//			sideBarMenuComponent.registrationBeneficialOwnersPage().ClickDrpDwn();
+//			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
+//					.clickBeneficialOwners();
+//			sideBarMenuComponent.registrationBeneficialOwnersPage().clickBeneficialOwners();
+//			Thread.sleep(3000);
+//			sideBarMenuComponent.registrationBeneficialOwnersPage().clickBeneficialOwners();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.validateFirstNameField(data.get("firstName"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -218,13 +279,13 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillDateOfBirth(data.get("dateOfBirth"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.validateSSNField(data.get("ssn"));
+					.validateSSNField(data.get("ssn_ein_tin"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillOwnerShip(data.get("ownerShip"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.validateAddline1Field(data.get("addline1"));
+					.validateAddline1Field(data.get("addressline1"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.validateAddline2Field(data.get("addline2"));
+					.validateAddline2Field(data.get("addressline2"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.validateCityField(data.get("city"));
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
@@ -232,7 +293,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipcode"), 0);
+					.fillZipCode(data.get("zipCode"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.verifyCountry(data.get("country"));
 

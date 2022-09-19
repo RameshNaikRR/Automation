@@ -1302,8 +1302,8 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
 			Thread.sleep(2000);
 			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "Cancelled");
-			tokenWalletPage.transactionDetailsComponent()
-					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+//			tokenWalletPage.transactionDetailsComponent()
+//					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
 			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
 			tokenWalletPage.transactionDetailsComponent()
 					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
@@ -1312,8 +1312,8 @@ public class TokenWalletTest {
 //			tokenWalletPage.transactionDetailsComponent().verifyLblWithdrawCreatedDate();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionType();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawTransactionSubType();
-			tokenWalletPage.transactionDetailsComponent().getReferenceID();
-			tokenWalletPage.transactionDetailsComponent().getWithdrawCreatedDate();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawReferenceID();
+			tokenWalletPage.transactionDetailsComponent().getWithdrawDepositID();
 			tokenWalletPage.transactionDetailsComponent().verifyAmountCategory(data.get("lblAmount"));
 			tokenWalletPage.transactionDetailsComponent().verifyAmount();
 			tokenWalletPage.transactionDetailsComponent().getWithdrawAmount();
