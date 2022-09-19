@@ -560,13 +560,13 @@ public class TransactionTest {
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickEndDate();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
-						.datePickerComponent().setDate(data.get("endDate"));
+						.datePickerComponent().generateDate();
 				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickStartDate();
 				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
-						.datePickerComponent().setDate(data.get("startDate"));
+						.datePickerComponent().generateDate();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickReason();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()

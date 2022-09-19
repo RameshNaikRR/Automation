@@ -1,7 +1,9 @@
 package coyni.admin.tests;
 
+import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -267,6 +269,59 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testTransactionSearch Failed due to Exception " + e);
 		}
 	}
+	@SuppressWarnings("unlikely-arg-type")
+    @Test
+    @Parameters({ "strParams" })
+    public void testFeeStructuresActiveToSheduled(String strParams) {
+        try {
+            Map<String, String> data = Runner.getKeywordParameters(strParams);
+            homePage.sideBarComponent().clickFeeStructure();
+            homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
+            homePage.sideBarComponent().feeStructurePage().enterTextDebit(data.get("debitAmnt"));
+            homePage.sideBarComponent().feeStructurePage().clickSheduled();
+            homePage.sideBarComponent().feeStructurePage().clickSelectDate(data.get("selectDate"));
+            homePage.sideBarComponent().feeStructurePage().clickSheduled2();
+            Thread.sleep(1000);
+            homePage.sideBarComponent().accountLimitsComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));;
+            
+            Thread.sleep(3000);
+            List<WebElement> ActStartDates=homePage.sideBarComponent().feeStructurePage().getStartDate();
+            if(ActStartDates.contains(data.get("selectDate"))) {
+        
+            ExtentTestManager.setFailMessageInReport("Given date in sheduled fee structure is present in fee structure");
+            }
+        
+        } catch (Exception e) {
+            ExtentTestManager.setFailMessageInReport("testFeeStructuresActiveToSheduled Failed due to Exception " + e);
+        }
+    }
+    @SuppressWarnings("unlikely-arg-type")
+    @Test
+    @Parameters({ "strParams" })
+    public void testAccountLimitsActiveToSheduled(String strParams) {
+        try {
+            Map<String, String> data = Runner.getKeywordParameters(strParams);
+            homePage.sideBarComponent().clickAccountLimits();
+            homePage.sideBarComponent().accountLimitsComponent().clickActiveEdit();
+            homePage.sideBarComponent().accountLimitsComponent().enterTextDebit(data.get("debitAmnt"));
+            homePage.sideBarComponent().accountLimitsComponent().clickSheduled();
+            homePage.sideBarComponent().accountLimitsComponent().clickSelectDate(data.get("selectDate"));
+            homePage.sideBarComponent().accountLimitsComponent().clickSheduled2();
+            homePage.sideBarComponent().accountLimitsComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));;
+            
+            
+            Thread.sleep(3000);
+            List<WebElement> ActStartDates=homePage.sideBarComponent().feeStructurePage().getStartDate();
+            if(ActStartDates.contains(data.get("selectDate"))) {
+        
+            ExtentTestManager.setFailMessageInReport("Given date in sheduled fee structure is present in fee structure");
+            }
+            
+    
+        } catch (Exception e) {
+            ExtentTestManager.setFailMessageInReport("testAccountLimitsActiveToSheduled Failed due to Exception " + e);
+        }
+    }
 
 	
 }

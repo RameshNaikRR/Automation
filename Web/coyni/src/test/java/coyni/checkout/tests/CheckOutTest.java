@@ -215,6 +215,24 @@ public class CheckOutTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+
+	public void tesCheckOutWithOutAddingProducts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			checkOutPage.enterDomain(data.get("domain"));
+			checkOutPage.enterOrderIdContent(data.get("orderId"));
+			checkOutPage.enterPublicKey(data.get("publicKey"));
+			checkOutPage.enterSecretKey(data.get("secretKey"));
+			checkOutPage.clickSaveDetails();
+			checkOutPage.clickCheckOut();
+			checkOutPage.verifyPopUp();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test CheckOut transaction is failed due to Exception " + e);
+		}
+
+	}
 
 	@Test
 	@Parameters({ "strParams" })

@@ -1,6 +1,7 @@
 package coyni.admin.components;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +18,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
-public class DatePickerComponent  extends BrowserFunctions{
+public class DatePickerComponent extends BrowserFunctions {
 	private static final String DATE_FORMAT = "MM dd yyyy";
 	private static final String DAY_FIRST = "01";
 	private static final String SPACE = " ";
@@ -54,6 +55,30 @@ public class DatePickerComponent  extends BrowserFunctions{
 		System.out.println(date);
 		long diff = this.getDateDifferenceInMonths(date);
 		int day = this.getDay(date);
+		WebElement arrow = (diff >= 0 ? next : prev);
+		diff = Math.abs(diff);
+
+		// click the arrows
+		LongStream.range(0, diff).forEach(i -> arrow.click());
+
+		// select the date
+		dates.stream().filter(ele -> !ele.getText().equals("")).filter(ele -> Integer.parseInt(ele.getText()) == day)
+				.findFirst().ifPresent(WebElement::click);
+		System.out.println(temp + " selected from Calendar");
+	}
+
+	public String date() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		return dtf.format(now);
+	}
+
+	public void generateDate() {
+		String temp = date();
+		String date1 = date().replace("/", " ");
+		System.out.println(date1);
+		long diff = this.getDateDifferenceInMonths(date1);
+		int day = this.getDay(date1);
 		WebElement arrow = (diff >= 0 ? next : prev);
 		diff = Math.abs(diff);
 
@@ -147,18 +172,20 @@ public class DatePickerComponent  extends BrowserFunctions{
 				.filter(ele -> Integer.parseInt(ele.getText()) == day).findAny().ifPresent(WebElement::click);
 
 	}
-	
-	//-----------------------------
-	private By txtStartDate = By.xpath("(//span[text()='Select Date'])[1]");//span[text()='Select Date']/following-sibling::span
-	private By txtEndDate = By.xpath("(//span[text()='Select Date'])[2]");//span[text()='End Date']/following-sibling::span
+
+	// -----------------------------
+	private By txtStartDate = By.xpath("(//span[text()='Select Date'])[1]");// span[text()='Select
+																			// Date']/following-sibling::span
+	private By txtEndDate = By.xpath("(//span[text()='Select Date'])[2]");// span[text()='End
+																			// Date']/following-sibling::span
 
 	private void VerifyDate(By dateEle, String date, String eleName) {
 		String dateValue = getAttributeValue(dateEle, "value", eleName);
 		if (dateValue.equals(date)) {
 			ExtentTestManager.setInfoMessageInReport(String.format("%s %s selected", eleName, date));
 		} else {
-			ExtentTestManager.setFailMessageInReport(
-					String.format("%s %s selected instead of %s", eleName, dateValue, date));
+			ExtentTestManager
+					.setFailMessageInReport(String.format("%s %s selected instead of %s", eleName, dateValue, date));
 		}
 	}
 
@@ -181,8 +208,8 @@ public class DatePickerComponent  extends BrowserFunctions{
 	}
 
 	private By getDate(String date) {
-		return By.xpath(String
-				.format("//div[contains(@class,\"react-datepicker__day react-datepicker__day--007\")]", date));
+		return By.xpath(
+				String.format("//div[contains(@class,\"react-datepicker__day react-datepicker__day--007\")]", date));
 	}
 
 	public void clickSelectDate(String date) {
@@ -190,9 +217,4 @@ public class DatePickerComponent  extends BrowserFunctions{
 
 	}
 
-	
-	
-	
 }
-
-
