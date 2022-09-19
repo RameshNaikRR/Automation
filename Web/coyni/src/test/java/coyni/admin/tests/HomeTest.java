@@ -79,11 +79,11 @@ public class HomeTest {
 			homePage.adminUserDetailsPage().verifyChangePasswordHeading();
 			homePage.adminUserDetailsPage().verifyChangePasswordDescp();
 			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("currentPassword"));
-			homePage.adminUserDetailsPage().clickEyeIconCurrentPassword();
+			//homePage.adminUserDetailsPage().clickEyeIconCurrentPassword();
 			homePage.adminUserDetailsPage().fillNewPassword(data.get("newPassword"));
-			homePage.adminUserDetailsPage().clickEyeIconNewPassword();
+			//homePage.adminUserDetailsPage().clickEyeIconNewPassword();
 			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("confirmPassword"));
-			homePage.adminUserDetailsPage().clickEyeIconConfirmPassword();
+			//homePage.adminUserDetailsPage().clickEyeIconConfirmPassword();
 			homePage.adminUserDetailsPage().clickSave();
 			
 	}

@@ -19,7 +19,8 @@ public class ForgotEmailPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
 	}
 
-	public void verifyPageDescription(String expDescription) {
+	public void verifyPageDescription(String expDescription) throws InterruptedException {
+		Thread.sleep(2000);
 		new CommonFunctions().verifyLabelTextContains(lblDescription, "expDescription", expDescription);
 	}
 
