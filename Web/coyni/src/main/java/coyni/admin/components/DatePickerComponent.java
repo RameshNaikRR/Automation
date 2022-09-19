@@ -72,6 +72,7 @@ public class DatePickerComponent extends BrowserFunctions {
 		LocalDateTime now = LocalDateTime.now();
 		return dtf.format(now);
 	}
+	
 
 	public void generateDate() {
 		String temp = date();
