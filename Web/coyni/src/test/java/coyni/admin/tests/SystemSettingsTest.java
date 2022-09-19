@@ -295,6 +295,7 @@ public class SystemSettingsTest {
             ExtentTestManager.setFailMessageInReport("testFeeStructuresActiveToSheduled Failed due to Exception " + e);
         }
     }
+	
     @SuppressWarnings("unlikely-arg-type")
     @Test
     @Parameters({ "strParams" })

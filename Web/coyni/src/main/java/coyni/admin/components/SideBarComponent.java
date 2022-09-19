@@ -98,32 +98,32 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickBusinesses() {
-		clickProfiles();
+
 		click(getSubMenuItems("Businesses"), "Businesses");
 	}
 
 	public void clickCoyniEmployees() {
-		clickProfiles();
+
 		click(getSubMenuItems("Coyni Employees"), "Coyni Employees");
 	}
 
 	public void clickLedgers() {
-		clickProfiles();
+
 		click(getSubMenuItems("Ledgers"), "Ledgers");
 	}
 
 	public void clickAPIBusinessess() {
-		clickProfiles();
+
 		click(getSubMenuItems("API Users"), "API Businesses");
 	}
 
 	public void clickPersonal() {
-		clickUnderWriting();
+
 		click(getSubMenuItems("Personal"), "Personal");
 	}
 
 	public void clickBusiness() {
-		clickUnderWriting();
+
 		click(getSubMenuItems("Business"), "Business");
 	}
 
@@ -138,17 +138,17 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickPaymentGateways() {
-		clickGatewaySettings();
+
 		click(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 	}
 
 	public void clickLoadBalancer() {
-		clickGatewaySettings();
+
 		click(getSubMenuItems("Load Balancer"), "Load Balancer");
 	}
 
 	public void clickAgreements() {
-		clickSystemSettings();
+
 		click(getSubMenuItems("Agreements"), "Agreements");
 	}
 
@@ -158,12 +158,12 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickAccountLimits() {
-		clickSystemSettings();
+
 		click(getSubMenuItems("Account Limits"), "Account Limits");
 	}
 
 	public void clickPermissions() {
-		clickSystemSettings();
+
 		click(getSubMenuItems("Permissions"), "Permissions");
 	}
 
@@ -173,12 +173,12 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickCardBlackList() {
-		clickSystemSettings();
+
 		click(getSubMenuItems("Card BlackList"), "Card BlackList");
 	}
 
 	public void clickPushNotifications() {
-		clickSystemSettings();
+
 		click(getSubMenuItems("Push Notifications"), "Push Notifications");
 	}
 

@@ -224,4 +224,9 @@ public class AccountTableComponent extends BrowserFunctions {
 	public void clickAction() {
 		click(btnAction, "Action");
 	}
+	private By lblText = By.xpath("//span[text()='It seems we can’t find any results based on your search.']");
+
+	public int getSize() {
+		return getElementsList(lblText, "").size();
+	}
 }

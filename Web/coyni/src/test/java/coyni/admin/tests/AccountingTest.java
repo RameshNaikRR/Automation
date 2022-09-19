@@ -40,19 +40,24 @@ public class AccountingTest {
 		// Thread.sleep(2000);
 		homePage.sideBarComponent().accountTableComponent().clickSearch();
 		Thread.sleep(1000);
-		homePage.sideBarComponent().accountTableComponent().clickDetails();
-		Thread.sleep(2000);
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getFailedCount();
-		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
-		homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
-		Thread.sleep(2000);
+		int size = homePage.sideBarComponent().accountTableComponent().getSize();
+		if (size > 0) {
+			ExtentTestManager.setPassMessageInReport("Transaction Details are not found");
+		} else {
+			homePage.sideBarComponent().accountTableComponent().clickDetails();
+
+			Thread.sleep(2000);
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getFailedCount();
+			// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
+			homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
+			Thread.sleep(2000);
 //		homePage.sideBarComponent().accountTableComponent().batchIDComponent().paginationAndEntriesComponent()
 //		.verifyPageNumbersWithCount();
-
+		}
 	}
 
 	public void disableFilter(String strParams) {

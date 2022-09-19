@@ -434,6 +434,7 @@ public class CoyniPortalTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToSignet();
+			Thread.sleep(2000);
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
@@ -443,7 +444,7 @@ public class CoyniPortalTest {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("testAddSignetAccountInvalidAmount Failed due to this Exception" + e);
 
 		}
 	}

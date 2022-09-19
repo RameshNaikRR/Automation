@@ -95,23 +95,30 @@ public class TransactionTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionLastMonth(String strParams) {
-
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickTransactions();
 		homePage.sideBarComponent().exportComponent().clickExport();
 		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
 		coyniPortalTest.testExportSelectedTransactions(strParams, "Last Month");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testExportSelectedTransactionMonthToDate Failed due to Exception " + e);
+		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionMonthToDate(String strParams) {
-
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickTransactions();
+		Thread.sleep(2000);
 		homePage.sideBarComponent().exportComponent().clickExport();
 		homePage.sideBarComponent().exportComponent().verifyExport(data.get("heading"));
 		coyniPortalTest.testExportSelectedTransactions(strParams, "Month to Date");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testExportSelectedTransactionMonthToDate Failed due to Exception " + e);
+		}
 	}
 
 	@Test
