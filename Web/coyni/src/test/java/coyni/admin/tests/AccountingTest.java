@@ -133,8 +133,8 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickBankAccount();
 			totalWithdraw(strParams);
-			testFilters(strParams);
-			testExport(strParams);
+//			testFilters(strParams);
+//			testExport(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -151,8 +151,8 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickInstantPay();
 			totalWithdraw(strParams);
-			testFilters(strParams);
-			testExport(strParams);
+//			testFilters(strParams);
+//			testExport(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -169,8 +169,8 @@ public class AccountingTest {
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
 			homePage.sideBarComponent().accountTableComponent().clickGiftCard();
 			totalWithdraw(strParams);
-			testFilters(strParams);
-			testExport(strParams);
+//			testFilters(strParams);
+//			testExport(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

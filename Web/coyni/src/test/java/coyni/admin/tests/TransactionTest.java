@@ -150,6 +150,7 @@ public class TransactionTest {
 		try {
 
 			sideBarComponent.clickTransactions();
+			Thread.sleep(2000);
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
 			testTransactionDetailsBuyToken(strParams, "debit");
@@ -165,6 +166,7 @@ public class TransactionTest {
 		try {
 
 			sideBarComponent.clickTransactions();
+			Thread.sleep(2000);
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
 			testTransactionDetailsBuyToken(strParams, "credit");

@@ -90,8 +90,8 @@ public class CoyniPortalTest {
 	public void testTokenAccountActivity(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.sideBarComponent().clickCoyniPortal();
 			homePage.sideBarComponent().clickTokenAccount();
+			Thread.sleep(2000);
 			homePage.sideBarComponent().tokenAccountPage().verifyTokenAccountActivityView(data.get("heading"));
 //			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
 //			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();

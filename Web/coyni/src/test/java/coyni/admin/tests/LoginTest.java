@@ -145,6 +145,7 @@ public class LoginTest {
 			loginPage.forgotEmailPage().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.forgotEmailPage().clickNext();
 			loginPage.forgotEmailPage().forgotEmailNamePage().verifyPageHeading(data.get("forgotEmailNameHeading"));
+			Thread.sleep(2000);
 			loginPage.forgotEmailPage().forgotEmailNamePage()
 					.verifyPageDescription(data.get("forgotEmailNameDescription"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillFirstName(data.get("firstName"));
