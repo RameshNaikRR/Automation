@@ -57,5 +57,10 @@ public class ToastComponent extends BrowserFunctions {
 	public void clickCloseToastButton() {
 		click(btnClose, "close button");
 	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 
 }

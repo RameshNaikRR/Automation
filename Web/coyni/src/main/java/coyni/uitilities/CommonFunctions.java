@@ -331,5 +331,9 @@ public class CommonFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
+	
+	public void switchtoUrl(String url) {
+		DriverFactory.getDriver().navigate().to(url);
+	}
 
 }

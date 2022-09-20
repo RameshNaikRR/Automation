@@ -277,4 +277,89 @@ public class HomeTest {
 		}
 	}
 	
+	//Customer SignUp for under Writings
+		@Test // added
+		@Parameters({ "strParams" })
+		public void testSignUpCustomer(String strParams) {
+			try {
+				Map<String, String> data = Runner.getKeywordParameters(strParams);
+				//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
+				Thread.sleep(3000);
+				new CommonFunctions().switchtoUrl(data.get("urlCustomer"));
+				homePage.clickPersonalAccount();
+					homePage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+					homePage.fillFirstName(data.get("firstName"));
+					homePage.fillLastName(data.get("lastName"));
+					homePage.fillPhoneNumber(data.get("phoneNumber")); 
+					homePage.fillEmail(data.get("emailCustm"));
+					Thread.sleep(1000);
+					homePage.fillCreatePassword(data.get("createPassword"));
+					
+					homePage.fillConfirmPassword(data.get("confirmPassword"));
+					homePage.clickCheckBox();
+					homePage.clickNext();
+					Thread.sleep(3000);
+					homePage.phoneEmailVerificationComponent().fillpin(data.get("code"));
+					Thread.sleep(3000);
+					homePage.phoneEmailVerificationComponent().verifEmailVerificationHeading();
+				///	homePage.phoneEmailVerificationComponent().verifEmailVerificationHeading();
+					homePage.phoneEmailVerificationComponent().fillpin(data.get("code"));
+					Thread.sleep(2000);
+					homePage.clickTwoStepAuthentication();
+					  homePage.verifyTwoStepHeading();
+					  homePage.phoneEmailVerificationComponent().fillpin(data.get("code"));
+					  homePage.verifyTwoStepSucessHeading();
+					 
+					homePage.clickVerifyIdentity();
+					homePage.mailingAddressComponent().fillAddress1(data.get("address1"));
+					homePage.mailingAddressComponent().fillAddress2(data.get("address2"));
+					homePage.mailingAddressComponent().fillCity(data.get("city"));
+					homePage.mailingAddressComponent().selectState(data.get("state"));
+					homePage.mailingAddressComponent().fillDateOfBirth(data.get("dateOfBirth"));
+					homePage.mailingAddressComponent().fillSocialSecurityNum(data.get("SSNNumber"));
+					homePage.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+					homePage.selectidentifcation();
+					//Thread.sleep(3000);
+					homePage.uploadDocument(data.get("folderName"), data.get("fileName"));
+					homePage.clickSubmit();
+					Thread.sleep(2000);
+					homePage.clickCustUserName();
+					homePage.clickCustSignOut();
+					
+
+							}
+	        catch(Exception e) {
+				ExtentTestManager.setFailMessageInReport("testverifyYourPhoneNumberWithInvalid i sfailed due to"+e);
+			}
+			
+			
+	}
+
+		//Customer SignUp for under Writings
+			@Test // added
+			@Parameters({ "strParams" })
+			public void testLoginCustomer(String strParams) {
+				try {
+					Map<String, String> data = Runner.getKeywordParameters(strParams);
+					//	homePage.verifyLandingPageHeading(data.get("landingHeading"));
+					Thread.sleep(3000);
+					new CommonFunctions().switchtoUrl(data.get("urlCustomer"));
+					homePage.clickLogin();
+			//		loginPage.verifyHeading(data.get("loginHeading"));
+					homePage.loginPage().fillEmail(data.get("emailCustm"));
+					homePage.loginPage().fillPassword(data.get("custPassword"));
+				    homePage.loginPage().clickNext();
+				//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+	                homePage.loginPage().authyComponent().fillInput(data.get("code"));
+							Thread.sleep(3000);
+											}
+		        catch(Exception e) {
+					ExtentTestManager.setFailMessageInReport("testverifyYourPhoneNumberWithInvalid i sfailed due to"+e);
+				}
+				
+				
+		}
+
+
+	
 }

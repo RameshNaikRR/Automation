@@ -250,5 +250,9 @@ public class SideBarComponent extends BrowserFunctions {
 	public AccountLimitsComponent accountLimitsComponent() {
 		return new AccountLimitsComponent();
 	}
+	
+	public UnderWritingPersonalComponent underWritingPersonalComponent() {
+		return new UnderWritingPersonalComponent();
+	}
 
 }

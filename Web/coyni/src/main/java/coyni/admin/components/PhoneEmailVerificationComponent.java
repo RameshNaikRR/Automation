@@ -19,11 +19,16 @@ public class PhoneEmailVerificationComponent extends BrowserFunctions {
 	private By lnkLogin = By.xpath("");
 	private By lnkCoyni = By.xpath("");
 	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By headingEmailVerification = By.xpath("//div[text()='Email Verification']");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Email Verification", expHeading);
 	}
 
+	public void verifEmailVerificationHeading() {
+		new CommonFunctions().elementView(headingEmailVerification, "Email Verification");
+	}
+	
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Email Verification", expDescription);
 	}
