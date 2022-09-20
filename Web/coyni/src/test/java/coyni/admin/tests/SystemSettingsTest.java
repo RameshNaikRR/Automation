@@ -275,6 +275,7 @@ public class SystemSettingsTest {
     public void testFeeStructuresActiveToSheduled(String strParams) {
         try {
             Map<String, String> data = Runner.getKeywordParameters(strParams);
+            homePage.sideBarComponent().clickSystemSettings();
             homePage.sideBarComponent().clickFeeStructure();
             homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
             homePage.sideBarComponent().feeStructurePage().enterTextDebit(data.get("debitAmnt"));
@@ -302,6 +303,7 @@ public class SystemSettingsTest {
     public void testAccountLimitsActiveToSheduled(String strParams) {
         try {
             Map<String, String> data = Runner.getKeywordParameters(strParams);
+            homePage.sideBarComponent().clickSystemSettings();
             homePage.sideBarComponent().clickAccountLimits();
             homePage.sideBarComponent().accountLimitsComponent().clickActiveEdit();
             homePage.sideBarComponent().accountLimitsComponent().enterTextDebit(data.get("debitAmnt"));

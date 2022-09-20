@@ -332,6 +332,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	}
 
+	public boolean filterEna() {
+		return getElement(lblFilters, "").isEnabled();
+	}
+
 	private By getCancelDebitCard(String data) {
 		return By.xpath(String.format("//span[text()='%S']//following-sibling::button", data));
 	}

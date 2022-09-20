@@ -10,7 +10,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ViewPersonalFeeStructurePage extends BrowserFunctions {
 	private By lblViewHeading = By.xpath("//span[text()='View Personal Fee Structure']");
 	private By lblFirstRowHeading = By
-			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-3 bg-cm1 rounded-xl token_bar')]");
+			.xpath("//span[text()='Pay / Request']");
 	private By btnBack = By.xpath("//button[text()='Back']");
 
 	private By getSideHeading(String HeadingNum) {

@@ -1,6 +1,7 @@
 package coyni.admin.components;
 
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,39 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 	private By btnViewMore = By.xpath("(//button[text()='View Wallet'])[1]");
 
 	private By lblAvaliableBalance = By.xpath("//h2[text()='Available Balance']/following-sibling::span");
+
+	private By btnAddNewWallet = By.xpath("//button[text()='Add New Token Wallet']");
+
+	private By lblAddnewToken = By.xpath("//h1[text()='Add New Token Wallet']");
+	private By txtTokenWallet = By.xpath("//input[@id='Walletname']");
+	private By btnAddWallet = By.xpath("//button[text()='Add Wallet']");
+
+	public void verifyTokenHeading(String text) {
+		new CommonFunctions().verifyLabelText(lblAddnewToken, "Add New Token Wallet", text);
+	}
+
+	public void enterTokenWallet(String text) {
+		enterText(txtTokenWallet, randomLetters(), "Token Wallet");
+	}
+
+	public String randomLetters() {
+		int len = 8;
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++)
+			sb.append(chars.charAt(rnd.nextInt(chars.length())));
+		return sb.toString();
+
+	}
+
+	public void clickAddWallet() {
+		click(btnAddWallet, "Add Wallet");
+	}
+
+	public void clickAddNewWallet() {
+		click(btnAddNewWallet, "");
+	}
 
 	public void getAvaliableBalance() {
 		getElement(lblAvaliableBalance, "");
