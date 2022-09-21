@@ -12,8 +12,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
 	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'tvBankHead')]");
-	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvBDCHead')]");
-	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCCard')]");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'layoutDCard')]");
+	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 
 	public void verifyHeading(String expHeading) {
@@ -44,13 +44,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		return new AddExternalBankAccountComponent();
 	}
 
-//	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
-//		return new AddExternalBankAccountComponent();
-//	}
-
 	public AddCardPage addCardPage() {
 		return new AddCardPage();
 	}
 
-	
 }

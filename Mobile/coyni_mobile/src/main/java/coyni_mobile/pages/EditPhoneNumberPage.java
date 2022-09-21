@@ -12,7 +12,7 @@ public class EditPhoneNumberPage extends MobileFunctions {
 
 	private By heading = MobileBy.xpath("//*[contains(@text,'Edit Phone')]");
 	private By txtCurrentPhone = MobileBy.xpath("(//*[contains(@resource-id,'pnET')])[1]");
-	private By txtNewPhone = MobileBy.xpath("(//*[contains(@resource-id,'pnET')])[2]");
+	private By txtNewPhone = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@text,'access')]");
 	private By lnkContactUs = MobileBy.xpath("//*[@text='Contact Us']");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'save')]");

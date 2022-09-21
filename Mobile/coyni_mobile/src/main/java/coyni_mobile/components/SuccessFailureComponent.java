@@ -16,13 +16,13 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'giftCardAmount')]");
 	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvDone')]");//
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvBDone')]");//
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'refID')]");
 	private By lnkReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]/following-sibling::*[1]");
 	private By lblTrasactionStatus = MobileBy.xpath("//*[contains(@text,'Trasactions')]");
 	private By lblEmailSucessFul = MobileBy.xpath("//*[contains(@text,'Change Email Successful')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]");
-	
+
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblHeading));
 	}
@@ -53,9 +53,11 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
+
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
+
 	public void verifyRecipentEmail(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReceipentEmail, "Email", expHeading);
 	}
@@ -78,7 +80,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 		click(btnLogout, "LogOut");
 	}
 
-	public void getTransactionDetails(){
+	public void getTransactionDetails() {
 		getStatus();
 		getAmount();
 		getDescription();
@@ -88,6 +90,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 		clickClose();
 		clickDone();
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

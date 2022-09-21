@@ -78,9 +78,11 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
+			Thread.sleep(5000);
+			DriverFactory.getDriver().hideKeyboard();
 			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			// loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
@@ -106,12 +108,14 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().navigationComponent().verifyBackView();
 			loginPage.enterYourPINComponent().navigationComponent().clickBack();
 			loginPage.VerifyLoginPageView();
 			loginPage.fillPassword(loginData.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			// navigation LoginPage - Forgot Your PIN Component
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
@@ -143,6 +147,7 @@ public class LoginTest {
 			loginPage.VerifyLoginPageView();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			if (loginData.get("password").length() < 8) {
 				loginPage.clickEmail();
 			}
@@ -159,11 +164,9 @@ public class LoginTest {
 			if (!loginData.get("popUpMsg").isEmpty()) {
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				loginPage.minimizePopupByClikingOK();
-				// clicking login button once again to verify Swipe down action
 				Thread.sleep(2000);
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
-				// loginPage.minimizePopupBySwipeDown();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
@@ -212,18 +215,12 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			// loginPage.forgotPasswordPage().verifyEmailComponent()
-			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
-			// loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
-			// loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
 			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
 			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
@@ -242,6 +239,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.forgotPasswordPage().clickNext();
 //			Thread.sleep(2000);
 //			if (!loginData.get("errMessage").isEmpty()) {
@@ -271,15 +269,11 @@ public class LoginTest {
 			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-//			loginPage.forgotPasswordPage().verifyEmailComponent()
-//					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			Thread.sleep(2000);
-			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-//				 loginPage.forgotPasswordPage().verifyEmailComponent()
-//				 .verifyResentMsg(loginData.get("resendMessage"));
+
 			}
 			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
 		} catch (Exception e) {
@@ -302,12 +296,8 @@ public class LoginTest {
 			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			// loginPage.forgotPasswordPage().verifyEmailComponent()
-			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
-			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-
 //			loginPage.forgotPasswordPage().clickNext();
 //			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 //			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
@@ -353,7 +343,6 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
-			// loginPage.retrieveEmailPage().pasteOption(loginData.get("code"));
 			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
 			loginPage.retrieveEmailPage().clickCoyniAccount();
@@ -451,16 +440,12 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-//			loginPage.retrieveEmailPage().verifyErrorMessage();
-//			loginPage.retrieveEmailPage().clickOk();
-//			loginPage.retrieveEmailPage().clickNext();
 			// Thread.sleep(5000);
 			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
 			}
-			// loginPage.retrieveEmailPage().verifyErrorMessage();
 			loginPage.retrieveEmailPage().clickOk();
 		} catch (Exception e) {
 			ExtentTestManager
@@ -492,11 +477,6 @@ public class LoginTest {
 //		}
 //	}
 
-	private EnterYourPINComponent retrieveEmailPage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginFieldValidation(String strParams) {
@@ -526,15 +506,10 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
-
 			loginPage.enterYourPINComponent().clickForgotPin();
-
-//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-//			loginPage.enterYourPINComponent().forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
-//			loginPage.enterYourPINComponent().forgotPinComponent().emailFieldTiltle();
-//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			// verifying email
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
@@ -560,9 +535,6 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyPinMatching(data.get("pinMatchingText"));
 
-			// enterYourPINComponent.forgotPinComponent().crossIconView();
-			// enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
 		}
@@ -576,10 +548,10 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
-//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 //			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
@@ -624,13 +596,10 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
-
 			loginPage.enterYourPINComponent().clickForgotPin();
-
-//			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
-//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
 			// verifying email
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()

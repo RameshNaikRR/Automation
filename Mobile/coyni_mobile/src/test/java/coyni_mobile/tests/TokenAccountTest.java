@@ -76,6 +76,7 @@ public class TokenAccountTest {
 			landingPage.clickLogin();
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin1"));
@@ -213,91 +214,6 @@ public class TokenAccountTest {
 		}
 
 	}
-	
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokenBank(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.btnDashBoard();
-//			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
-//			tokenAccountPage.buyTokenMenuComponent()
-//					.verifyLabelSelectPaymentMethod(data.get("selectPaymentmethodexpHeading"));
-//			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
-//			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
-//			tokenAccountPage.buyTokenMenuComponent().btnPaymentBuyToken();
-//			tokenAccountPage.buyTokenMenuComponent().verifyLabelOrderPreview(data.get("orderPreviewexpHeading"));
-//			tokenAccountPage.buyTokenMenuComponent().Swipe();
-//			tokenAccountPage.buyTokenMenuComponent()
-//					.verifyLabelTransactionPending(data.get("transactionPendingexpHeading"));
-//			tokenAccountPage.buyTokenMenuComponent().Done();
-//			tokenAccountPage.buyTokenMenuComponent()
-//					.verifyLabelAvailableBalance(data.get("availableBalanceExpHeading"));
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  faield due to exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokenBankWithInvalidDetails(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.btnDashBoard();
-//			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
-//			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
-//			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
-//			tokenAccountPage.buyTokenMenuComponent().crossIcon();
-//			tokenAccountPage.buyTokenMenuComponent()
-//					.verifyLabelSelectPaymentMethod(data.get("selectPaymentExpHeading"));
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport("testBuyTokenBankWithInvalidDetails  failed due to exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokenBankWithInvalidAmount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.btnDashBoard();
-//			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
-//			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
-//			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
-//			if (!data.get("amount").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-//			}
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBuyTokenBankWithInvalidAmount  failed due to exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokenBankTransactionFailed(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.btnDashBoard();
-//			tokenAccountPage.buyTokenMenuComponent().btnBuyToken();
-//			tokenAccountPage.buyTokenMenuComponent().clickBankAccount();
-//			tokenAccountPage.buyTokenMenuComponent().fillAmount(data.get("amount"));
-//			tokenAccountPage.buyTokenMenuComponent().verifyLabelOrderPreview(data.get("orderPreviewExpHeading"));
-//			tokenAccountPage.buyTokenMenuComponent().Swipe();
-//			tokenAccountPage.buyTokenMenuComponent()
-//					.verifyLabelTransactionFailed(data.get("tansactionFailedExpHeading"));
-//			tokenAccountPage.buyTokenMenuComponent().clickTryAgain();
-//			tokenAccountPage.buyTokenMenuComponent().verifyLabelPaymentMethod(data.get("paymentMethodExpHeadig"));
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBuyTokenBankTransactionFailed  failed due to exception " + e);
-//		}
-//
-//	}
 
 	@Test // added
 	@Parameters({ "strParams" })
@@ -371,14 +287,12 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
 			tokenAccountPage.transactionPage().verifySearchOption();
 			tokenAccountPage.transactionPage().verifyFiltersIcon();
-			tokenAccountPage.transactionPage().verifyReferenceID();
 			tokenAccountPage.transactionPage().verifyCloseView();
-			tokenAccountPage.transactionPage().verifySendTransactions(data.get("sendFunds"));
 			tokenAccountPage.transactionPage().clickOnMessage();
-			tokenAccountPage.transactionPage().verifyTransactionReferenceID(data.get("referenceID"));
-			tokenAccountPage.transactionPage().verifyReceivedTransactions(data.get("receivedFunds"));
-			// tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
-			tokenAccountPage.transactionPage().verifyTransactions(data.get("noMoreTransactions"));
+//			tokenAccountPage.transactionPage().verifyTransactionReferenceID(data.get("referenceID"));
+//			tokenAccountPage.transactionPage().verifyReceivedTransactions(data.get("receivedFunds"));
+//			// tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
+//			tokenAccountPage.transactionPage().verifyTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList faield due to exception " + e);
 		}
@@ -396,7 +310,6 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
 			tokenAccountPage.transactionPage().verifySearchOption();
 			tokenAccountPage.transactionPage().verifyFiltersIcon();
-			tokenAccountPage.transactionPage().verifyReferenceID();
 			tokenAccountPage.transactionPage().verifyCloseView();
 			tokenAccountPage.transactionPage().clickOnMessage();
 			tokenAccountPage.transactionPage().transactionDetailsComponent()
@@ -411,9 +324,6 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().transactionDetailsComponent()
 					.verifyBuyTokenDebitCardTransactionDetails(data.get("transactionBuyTokenDebitCardHeading"));
 			tokenAccountPage.transactionPage().transactionDetailsComponent().clickBuyTokenDebitBackIcon();
-//			tokenAccountPage.transactionPage().transactionDetailsComponent()
-//					.verifyBuyTokenCreditCardTransactionDetails(data.get("transactionBuyTokenCreditCardHeading"));
-//			tokenAccountPage.transactionPage().transactionDetailsComponent().clickBuyTokenCreditBackIcon();
 			tokenAccountPage.transactionPage().transactionDetailsComponent()
 					.verifyWithdrawBankTransactionDetails(data.get("transactionWithdrawBankHeading"));
 			tokenAccountPage.transactionPage().transactionDetailsComponent().clickWithdrawBankBackIcon();
@@ -444,7 +354,6 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickFlashLight();
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().navigationComponent().clickClose();
-
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickScan();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickOnAlbum();
@@ -473,12 +382,6 @@ public class TokenAccountTest {
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent().clickOk();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickClearAmount();
-
-//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSetAmount();
-//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent()
-//					.fillAmount(data.get("amount"));
-//			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent().clickOk();
-
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSaveToAlbum();
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
@@ -507,7 +410,6 @@ public class TokenAccountTest {
 					.verifyName(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
-			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.payRequestOptionalPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
@@ -515,11 +417,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.swipeConfirm();
-			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().enterYourPINComponent().verifyHeading("enterPinHeading");
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
-//			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
-//					.enterYourPINComponent().securePayPopup().clickNotNow();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.clickDone();
 
@@ -540,7 +439,6 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().navigationComponent().clickClose();
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickPayRequest();
-			// tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
@@ -573,12 +471,9 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
-
 			if (!data.get("errMessage").isEmpty()) {
 				tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 						.verifyErrorMessage(data.get("errMessage"));
-				// new CommonFunctions().validateFormErrorMessage(data.get("errMessage"),
-				// data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -603,7 +498,6 @@ public class TokenAccountTest {
 					.verifyName(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
-			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickMessageButton();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.payRequestOptionalPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
@@ -613,8 +507,7 @@ public class TokenAccountTest {
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.clickDone();
-			tokenAccountPage.verifyAvailableBalanceView();
-			// tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().securePayPopup().clickNotNow();
+			// tokenAccountPage.verifyAvailableBalanceView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRequest  failed due to exception " + e);
@@ -688,17 +581,13 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
-					.verifyPayment(data.get("paymentMethod"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.verifyHeading(data.get("previewHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.successFailureComponent().getStatus();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
+					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.successFailureComponent().clickDone();
 		} catch (Exception e) {
@@ -715,21 +604,14 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
-					.verifyHeading(data.get("buyTokenHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup()
-					.fillCvv(data.get("expCvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.verifyHeading(data.get("previewHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
-					.verifyTrasactionsStatus();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
 					.clickDone();
 		} catch (Exception e) {
@@ -745,22 +627,15 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
-					.verifyHeading(data.get("buyTokenHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup()
-					.fillCvv(data.get("expCvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.verifyHeading(data.get("previewHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
-					.verifyTrasactionsStatus();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
 					.clickDone();
 
@@ -781,24 +656,18 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
 			}
 			if (!method.equalsIgnoreCase("bank")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup()
-						.verifyPopupHeading(data.get("cvvPopupHeading"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().clickOk();
 			}
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
-					.verifyPayment(data.get("paymentMethod"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("Amount"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.verifyHeading(data.get("previewHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.successFailureComponent().getStatus();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
+					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.successFailureComponent().clickDone();
 		} catch (Exception e) {
@@ -808,11 +677,32 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBuyTokenWithBank(String strParams) {
-		tokenAccountPage.btnHome();
-		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-		testBuyTokenwithPayments(strParams, "bank");
+	public void testBuyTokenBankAccountWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
 	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBuyTokenWithBank(String strParams) {
+//		tokenAccountPage.btnHome();
+//		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+//		testBuyTokenwithPayments(strParams, "bank");
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -832,6 +722,52 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testBuyTokenDebitCardWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenCreditCardWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testWithdrawnToUSDGiftCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -842,7 +778,6 @@ public class TokenAccountTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
@@ -894,7 +829,6 @@ public class TokenAccountTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
@@ -904,7 +838,6 @@ public class TokenAccountTest {
 					.fillFirstName(data.get("firstName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillLastName(data.get("lastName"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
-			// tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
@@ -926,12 +859,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().navigationComponent().clickClose();
-//			tokenAccountPage.btnHome();
-//			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().navigationComponent().clickBack();
-//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
@@ -966,8 +895,6 @@ public class TokenAccountTest {
 						.withdrawToUSDInstantPayPopup().clickDebitCard();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
-//				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-//						.withdrawToUSDInstantPayPopup().clickDebitCard();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().getDailyLimit();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -984,8 +911,6 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().clickWithdraw();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.verifyHeading(data.get("previewHeading"));
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.getAmount();
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.verifySlideText();
@@ -994,18 +919,7 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.enterYourPINComponent().fillPin(data.get("pin"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.successFailureComponent().getStatus();
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.successFailureComponent().getReferenceID();
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.successFailureComponent().getReferenceID();
-//				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-//						.successFailureComponent().clickLearnMore();
-//				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-//						.successFailureComponent().navigationComponent().clickClose();
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.successFailureComponent().clickDone();
-				tokenAccountPage.verifyAvailableBalanceView();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawToken failed due to exception " + e);
@@ -1047,10 +961,8 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().navigationComponent().clickBack();
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("withdrawMethodHeading"));
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickDebitCard();
@@ -1060,7 +972,6 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().getDailyLimit();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -1068,25 +979,18 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickCancel();
 			DriverFactory.getDriver().hideKeyboard();
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickWithdraw();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-					.verifyHeading(data.get("previewHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.getAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.swipeConfirm();
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.enterYourPINComponent().navigationComponent().clickClose();
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().navigationComponent().clickBack();
-
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
 					.clickClose();
 
@@ -1105,12 +1009,6 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().navigationComponent()
-//					.clickClose();
-
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-//					.withdrawToUSDInstantPayPopup().verifyAddInstantPayHeading(data.get("instantPayHeading"));
 			customerProfileTest.testAddCardWithNoCards(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1131,7 +1029,6 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().clickOnAddNewPaymentMethod();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().verify();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
-//			customerProfileTest.testAddDebitCard("debit");
 			customerProfileTest.testAddCardWithExsistingCards(strParams);
 
 		} catch (Exception e) {
@@ -1156,14 +1053,10 @@ public class TokenAccountTest {
 					.withdrawToUSDInstantPayPopup().clickDebitCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-//					.withdrawToUSDInstantPayPopup().clickDebitCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().getDailyLimit();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-//					.withdrawToUSDInstantPayPopup().verifyExchangeRate();
 			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
@@ -1213,11 +1106,6 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.orderPreviewPopup().enterYourPINComponent().successFailureComponent()
-					.verifySuccessFailureHeading(data.get("successHeading"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().getReferenceID();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1262,7 +1150,6 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
-//			Thread.sleep(10000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.clickOnBank(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
@@ -1356,8 +1243,6 @@ public class TokenAccountTest {
 					.orderPreviewPopup().slideToConfirm();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().clickForgotPin();
-//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-//					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().clickNext();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
 					.fillInputBoxes(data.get("code"));

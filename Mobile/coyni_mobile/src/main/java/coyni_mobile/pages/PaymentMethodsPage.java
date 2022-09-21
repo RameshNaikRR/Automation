@@ -1,7 +1,6 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
-
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.components.NavigationComponent;

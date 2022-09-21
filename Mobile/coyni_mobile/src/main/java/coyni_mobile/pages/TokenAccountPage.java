@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 
+import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.components.WithdrawMenuComponent;
@@ -53,8 +54,8 @@ public class TokenAccountPage extends MobileFunctions {
 			int x = size.getWidth();
 			int y = size.getHeight();
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
-			touch.press(PointOption.point(x/2, y/2)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-					.moveTo(PointOption.point(x/2, (int)(y * 0.2))).release().perform();
+			touch.press(PointOption.point(x / 2, y / 2)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(x / 2, (int) (y * 0.2))).release().perform();
 		}
 //		ExtentTestManager.setInfoMessageInReport("Size" + size);
 //		scrollDownToElement(btnViewMore, "View More");
@@ -149,6 +150,10 @@ public class TokenAccountPage extends MobileFunctions {
 	public SignUpPage signUpPage() {
 		return new SignUpPage();
 
+	}
+
+	public BuyTokenComponent buyTokenComponent() {
+		return new BuyTokenComponent();
 	}
 
 	public WithdrawMenuComponent withdrawMenuComponent() {
