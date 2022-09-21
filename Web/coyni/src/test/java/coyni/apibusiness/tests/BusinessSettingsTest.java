@@ -659,10 +659,10 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconDelete();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickRemove();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().toastComponent()
-					.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+					.verifyToast(data.get("title"), data.get("message"));
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+					.setFailMessageInReport("test Business Settings Remove Team member failed due to Exception " + e);
 		}
 	}
 
@@ -770,6 +770,7 @@ public class BusinessSettingsTest {
 					.verifyAPIKey(data.get("apiKeyHeading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyApiKeyView();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPIEvents();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPICount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);

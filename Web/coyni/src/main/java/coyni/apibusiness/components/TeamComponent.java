@@ -16,7 +16,7 @@ public class TeamComponent extends BrowserFunctions {
 	private By noRecordFound = By.xpath("//div[text()='No Records Found']");
 	private By editIcon = By.xpath("//span[text()='Edit']");
 	private By sendInvite = By.xpath("//button[text()='Send Invitation']");
-	private By iconDelete = By.xpath("//div[@id='t50951a5d-c131-466a-8b47-90f8f42d0698']");
+	private By iconDelete = By.xpath("//div[@data-tip='Delete']");
 	private By btnRemove = By.xpath("//button[text()='Remove']");
 
 	public void verifyTeamHeading(String expHeading) {

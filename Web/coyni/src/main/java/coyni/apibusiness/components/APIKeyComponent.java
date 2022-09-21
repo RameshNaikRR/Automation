@@ -1,6 +1,9 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.aventstack.extentreports.reporter.ExtentReporter;
 
@@ -22,6 +25,8 @@ public class APIKeyComponent extends BrowserFunctions {
 	private By secretKey = By.xpath("//span[text()='Secret Key']/following-sibling::div[1]");
 	private By lblInactiveSecretKey = By.xpath("");
 	private By lblHideSecretKey = By.xpath("(//span[contains(@class,'ApiKeys_hide_secret_key__au2CL')])[1]");
+	private By apiEvents = By.xpath(
+			"//div[@class='flex items-center justify-between pl-6 pr-4 mb-4 pb-4 ApiKeys_border_bottom__Whqjj']");
 	private By txtEvents = By.xpath("//span[@class='text-xs font-bold text-cgy3']");
 
 	public void verifyAPIKey(String expHeading) {
@@ -73,6 +78,14 @@ public class APIKeyComponent extends BrowserFunctions {
 	}
 
 	public void verifyAPIEvents() {
+		List<WebElement> rows = getElementsList(apiEvents, "API Events");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+		}
+	}
+
+	public void verifyAPICount() {
 		String events = getText(txtEvents, "No of Events");
 		ExtentTestManager.setInfoMessageInReport(events + " is displayed");
 	}

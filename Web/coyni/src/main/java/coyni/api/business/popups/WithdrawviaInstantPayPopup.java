@@ -40,7 +40,7 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
 	private By iconDelete = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Delete']");
 	private By iconEdit = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Edit']");
-	private By errMsg = By.xpath("//p[contains(text(),'You are above')]");
+	private By errMsg = By.xpath("//p[contains(text(),'Insufficient funds.')]");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
