@@ -389,52 +389,52 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().clickIconEditEmail();
 			customerProfilePage.userDetailsComponent().authyComponent().fillInput(data.get("code"));
 			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
-					.fillNewEmailAddress(data.get("newEmailAddress"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.navigationComponent().verifyBackView();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.navigationComponent().clickBack();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.navigationComponent().clickClose();
-			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
-			// Verify New Email Address -Navigation back
-			customerProfilePage.userDetailsComponent().clickIconEditEmail();
-			Thread.sleep(10000);
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.authyComponent().fillInput(data.get("fillPinEmail"));
-			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
-//			// Thread.sleep(3000);
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().fillNewEmailAddress(data.get("newEmailAddress"));
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup()
+//					.fillNewEmailAddress(data.get("newEmailAddress"));
 //			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
 //			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.navigationComponent().verifyBackView();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.navigationComponent().clickBack();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.navigationComponent().clickClose();
+//			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
+//			// Verify New Email Address -Navigation back
+//			customerProfilePage.userDetailsComponent().clickIconEditEmail();
+//			Thread.sleep(10000);
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.authyComponent().fillInput(data.get("fillPinEmail"));
+//			// customerProfilePage.changePasswordComponent().authyComponent().fillAuthyInput(data.get("securityKey"));
+////			// Thread.sleep(3000);
+////			customerProfilePage.userDetailsComponent().editEmailAddressPopup().fillNewEmailAddress(data.get("newEmailAddress"));
+////			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
+////			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+////			Thread.sleep(3000);
+////			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
+////		    customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().fillInput(data.get("fillPinEmail"));
+//			Thread.sleep(2000);
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
+//
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().verifyBackView();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().clickBack();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.authyComponent().fillInput(data.get("fillPinEmail"));
 //			Thread.sleep(3000);
-//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
-//		    customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().authyComponent().fillInput(data.get("fillPinEmail"));
-			Thread.sleep(2000);
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
-
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().verifyBackView();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().clickBack();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.authyComponent().fillInput(data.get("fillPinEmail"));
-			Thread.sleep(3000);
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().verifyCloseView();
-			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().navigationComponent().clickClose();
-			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().verifyCloseView();
+//			customerProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().navigationComponent().clickClose();
+//			customerProfilePage.userDetailsComponent().verifyUserDetailsView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
