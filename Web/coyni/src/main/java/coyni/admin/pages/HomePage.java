@@ -19,7 +19,7 @@ public class HomePage extends BrowserFunctions {
 	private By lblCustUserName = By.xpath("//span[contains(@class,'hover:underline')]");
 	private By btnCustSignOut = By.xpath("//span[text()='Sign Out']/..");
 	private By lnkUserDetails = By.xpath("//span[contains(text(),'User Details')]");
-	private By lnkChangePassword = By.xpath("//span[contains(text(),'Change Password')]");
+	private By lnkChangePassword = By.xpath("//button[contains(text(),'Change Password')]");
 	private By heading = By.xpath("//span[text()='Verify Your Phone Number']");
 	private By txtPhoneNumber = By.xpath("//input[@id='Phone_Number']");
 	private By btnNext = By.xpath("//button[text()='Next']");
