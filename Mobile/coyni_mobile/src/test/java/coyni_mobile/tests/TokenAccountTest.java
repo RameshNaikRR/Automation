@@ -59,7 +59,6 @@ public class TokenAccountTest {
 			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
 			tokenAccountPage.clickNotificationsIcon();
 			tokenAccountPage.notificationComponent().swipeNotificationLeft();
-			// tokenAccountPage.notificationComponent().verifyRead();
 			tokenAccountPage.notificationComponent().clickRead();
 
 		} catch (Exception e) {
@@ -289,10 +288,6 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().verifyFiltersIcon();
 			tokenAccountPage.transactionPage().verifyCloseView();
 			tokenAccountPage.transactionPage().clickOnMessage();
-//			tokenAccountPage.transactionPage().verifyTransactionReferenceID(data.get("referenceID"));
-//			tokenAccountPage.transactionPage().verifyReceivedTransactions(data.get("receivedFunds"));
-//			// tokenAccountPage.transactionPage().verifyGiftCardTransactions(data.get("giftCard"));
-//			tokenAccountPage.transactionPage().verifyTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionList faield due to exception " + e);
 		}
@@ -507,7 +502,6 @@ public class TokenAccountTest {
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.clickDone();
-			// tokenAccountPage.verifyAvailableBalanceView();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRequest  failed due to exception " + e);
@@ -528,8 +522,7 @@ public class TokenAccountTest {
 			Thread.sleep(15000);
 			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent()
 					.paymentMethodsPage().AddBankFromBuyToken();
-//			testBuyTokenBank(strParams);
-//			customerProfileTest.testDeleteBankAccount(strParams);
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBankWithOutPayments  failed due to exception " + e);
 		}
@@ -695,14 +688,6 @@ public class TokenAccountTest {
 		}
 
 	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBuyTokenWithBank(String strParams) {
-//		tokenAccountPage.btnHome();
-//		tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-//		testBuyTokenwithPayments(strParams, "bank");
-//	}
 
 	@Test
 	@Parameters({ "strParams" })
