@@ -171,8 +171,10 @@ public class PaymentMethodsTest {
 	         CustomerProfilePage customerProfilePage = new CustomerProfilePage(); 
 			Thread.sleep(2000);
 			if (card.equalsIgnoreCase("credit")) {
+				Thread.sleep(2000);
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
 			} else {
+				Thread.sleep(2000);
 				customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			}
 			Thread.sleep(3000);

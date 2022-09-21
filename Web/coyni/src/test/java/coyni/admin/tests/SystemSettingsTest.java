@@ -76,7 +76,7 @@ public class SystemSettingsTest {
 			Thread.sleep(2000);
 			homePage.sideBarComponent().feeStructurePage().clickView();
 			homePage.viewPersonalFeeStructurePage().verifyHeading(data.get("expViewHeading"));
-			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
+			//homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyDispute();
@@ -146,7 +146,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
 			Thread.sleep(2000);
 			homePage.sideBarComponent().feeStructurePage().clickView();
-			 homePage.viewMerchantfeeStructurePage().verifyHeading(data.get("expViewHeading"));
+			 homePage.viewMerchantfeeStructurePage().verifyViewHeading(data.get("expViewHeading"));
 			//homePage.sideBarComponent().viewMerchantfeeStructurePage().getDefaultFirstRowHeading();
 			homePage.sideBarComponent().feeStructurePage().viewMerchantfeeStructurePage().verifyTransction();
 			homePage.sideBarComponent().feeStructurePage().viewMerchantfeeStructurePage().verifyTokenAccount();

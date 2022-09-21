@@ -17,12 +17,12 @@ public class EditPhoneNumberPopup extends BrowserFunctions {
 	
 
 	private By txtOldNumber = By.xpath("");
-	private By txtNewNumber = By.xpath("//input[@class='Input_form_input__3qrhS text-cgy4']");
+	private By txtNewNumber = By.xpath("//input[@class='Input_form_input__yl3pD text-cgy4']");
 	private By btnSendCode = By.xpath("//button[contains(text(),'Send Code')]");
 	
 	private By lblAuthyEditPhone = By.xpath("//h1[text()='Edit Phone Number']");
 	private By lblEditPhoneNumberAuthenticationDescription = By.xpath("//span[@class='mt-10 text-base text-center text-cgy4']");
-	private By Heading = By.xpath("//h1[@class='text-cm3 tracking-normal Heading_heading1__18f6i mt-4 text-center']");
+	private By Heading = By.xpath("//h1[text()='Edit Phone Number']");
 	
 	
 	

@@ -5,11 +5,13 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import coyni.customer.components.AuthyComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
@@ -54,10 +56,9 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
-		ExtentTestManager.setInfoMessageInReport("click on tab");
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.moveByOffset(10, 10).click().build().perform();
+		ExtentTestManager.setInfoMessageInReport("clicked outside");
 	}
 
 }

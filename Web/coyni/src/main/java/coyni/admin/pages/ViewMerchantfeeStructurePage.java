@@ -7,7 +7,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ViewMerchantfeeStructurePage extends BrowserFunctions {
-	private By lblViewHeading = By.xpath("//span[text()='View Merchant Fee Structure']");
+	private By lblEditHeading = By.xpath("//span[text()='Edit Merchant Fee Structure']");
+    private By lblViewHeading = By.xpath("//span[text()='View Merchant Fee Structure']");
 	private By lblFirstRowHeading = By
 			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-3 bg-cm1 rounded-xl token_bar')]");
 //	private By btnView = By.xpath(
@@ -30,8 +31,12 @@ public class ViewMerchantfeeStructurePage extends BrowserFunctions {
 	}
 
 	public void verifyHeading(String expViewHeading) {
-		new CommonFunctions().verifyLabelText(lblViewHeading, "expViewHeading", expViewHeading);
-	}
+        new CommonFunctions().verifyLabelText(lblEditHeading, "expViewHeading", expViewHeading);
+    }
+    public void verifyViewHeading(String expViewHeading) {
+        new CommonFunctions().verifyLabelText(lblViewHeading, "expViewHeading", expViewHeading);
+    }
+    
 	public void getDefaultFirstRowHeading() {
 		String str = getText(lblFirstRowHeading, "FirstRowHeading");
 		ExtentTestManager.setInfoMessageInReport(str);

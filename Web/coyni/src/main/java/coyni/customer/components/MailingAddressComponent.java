@@ -5,10 +5,12 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import coyni.customer.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MailingAddressComponent extends BrowserFunctions {
@@ -90,9 +92,9 @@ public class MailingAddressComponent extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.moveByOffset(10, 10).click().build().perform();
+		ExtentTestManager.setInfoMessageInReport("clicked outside");
 	}
 
 	public void validateCardBrand(String cardType) {
