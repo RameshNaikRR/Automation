@@ -116,7 +116,6 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
-//			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserLogoText();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifyPageDescription(data.get("description"));
@@ -224,7 +223,6 @@ public class MerchantMenuIconTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			// businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -278,7 +276,6 @@ public class MerchantMenuIconTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			// businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().fillSearchBox(data.get("enterCard"));
 			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -306,7 +303,6 @@ public class MerchantMenuIconTest {
 						.fillAmount(data.get("amount"));
 			}
 
-			// businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
@@ -329,12 +325,8 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickGiftCard();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().navigationComponent().clickClose();
-//			tokenAccountPage.btnHome();
-//			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawToUSD();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickGiftCard();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().navigationComponent().clickBack();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillAmount(data.get("amount"));
@@ -367,19 +359,6 @@ public class MerchantMenuIconTest {
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
 			Thread.sleep(2000);
-//			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyAddNewPaymentMethod() == 0) {
-////				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			} else {
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.testAddBankAccount(strParams);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
@@ -574,8 +553,6 @@ public class MerchantMenuIconTest {
 					.addNewPaymentComponent().verifyHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickDebitCard();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-//			.paymentMethodsPage().verify
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickBack();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()

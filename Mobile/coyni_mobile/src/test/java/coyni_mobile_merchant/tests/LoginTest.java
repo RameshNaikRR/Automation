@@ -47,7 +47,6 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
 
 		} catch (Exception e) {
@@ -67,14 +66,13 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			// loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+	
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -101,47 +99,6 @@ public class LoginTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testLoginNavigationView(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			landingPage.verifyLoginbtnView();
-//			landingPage.clickLogin();
-//			loginPage.VerifyLoginPageView();
-//			loginPage.navigationComponent().verifyCloseView();
-//			loginPage.navigationComponent().clickClose();
-//			landingPage.verifyLandingPage();
-//			// navigation LoginPage - Enter Your PIN Component
-//			landingPage.clickLogin();
-//			loginPage.fillEmail(data.get("email"));
-//			loginPage.fillPassword(data.get("password"));
-//			loginPage.clickLogin();
-//			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-//			loginPage.enterYourPINComponent().navigationComponent().verifyCloseView();
-//			loginPage.enterYourPINComponent().navigationComponent().clickClose();
-//			loginPage.VerifyLoginPageView();
-//			loginPage.fillPassword(data.get("password"));
-//			// navigation LoginPage - Forgot Your PIN Component
-//			loginPage.clickLogin();
-//			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-//			loginPage.enterYourPINComponent().clickForgotPin();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
-//			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickClose();
-//			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-//			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
-//			Thread.sleep(2000);
-//			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIDButtonView();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().verifyNotNowButtonView();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().verifyDontRemindButtonView();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test LoginNavigation view failed due to Exception " + e);
-//		}
-//	}
-
 	@Test
 	@Parameters({ "strParams" })
 
@@ -166,12 +123,9 @@ public class LoginTest {
 			if (!data.get("popUpMsg").isEmpty()) {
 				loginPage.verifyPopupMsg(data.get("popUpMsg"));
 				loginPage.minimizePopupByClikingOK();
-				// clicking login button once again to verify Swipe down action
 				Thread.sleep(2000);
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(data.get("popUpMsg"));
-//				loginPage.minimizePopupBySwipeDown();
-
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
@@ -209,7 +163,6 @@ public class LoginTest {
 					.choosePinComponent().verifyConfirmPinHeading(data.get("confirmPinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.choosePinComponent().fillPin(data.get("pin"));
-			// verify dashboard
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotPin failed due to Exception " + e);
 		}
@@ -540,12 +493,6 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageDescription(data.get("sucessDescription"));
 			Thread.sleep(3000);
-//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
-//					.successFailureComponent().clickLogin();
-//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
-//			.successFailureComponent().landingPage().verifyLandingPage();
-//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
-//			.successFailureComponent().landingPage().verifyLoginbtnView();
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
@@ -583,7 +530,6 @@ public class LoginTest {
 					loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
 							.VerifyPasswordErrMessage(data.get("expPasswordMessage"));
 				}
-//				loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage().clickSave();
 
 			}
 

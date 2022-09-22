@@ -2,8 +2,6 @@ package coyni_mobile_merchant.tests;
 
 import java.util.Map;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -15,7 +13,6 @@ import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
-import io.appium.java_client.MobileBy;
 
 public class BusinessTransactionDetailsTest {
 

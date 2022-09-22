@@ -593,8 +593,7 @@ public class MerchantProfileTest {
 	@Parameters({ "strParams" })
 	public void testChangePasswordWithValidDetails(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			
+			Map<String, String> data = Runner.getKeywordParameters(strParams);			
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -636,8 +635,7 @@ public class MerchantProfileTest {
 	@Parameters({ "strParams" })
 	public void testChangePasswordWithInvalidData(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			
+			Map<String, String> data = Runner.getKeywordParameters(strParams);		
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -687,8 +685,7 @@ public class MerchantProfileTest {
 	@Parameters({ "strParams" })
 	public void testChangePasswordWithNavigation(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			
+			Map<String, String> data = Runner.getKeywordParameters(strParams);			
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -824,7 +821,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
@@ -861,7 +857,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
@@ -901,7 +896,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
@@ -943,7 +937,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
@@ -981,7 +974,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
@@ -1022,7 +1014,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
-//			merchantProfilePage.dbaInformationPage().getDescription();
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
@@ -1879,7 +1870,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.accountLimitsComponent().getWithdrawBankAcc();
 			merchantProfilePage.accountLimitsComponent().getWithdrawInstantPay();
 			merchantProfilePage.accountLimitsComponent().getWithdrawGiftcard();
-//			merchantProfilePage.accountLimitsComponent().getWithdrawSignetAcc();
 			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
 			merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -1965,7 +1955,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickLogOut();
 			merchantProfilePage.landingPage().verifyLandingPage();
 			merchantProfilePage.landingPage().verifyLoginbtnView();
-			// merchantProfilePage.signUpPage().verifyGetStarted();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLogOut failed due to exception " + e);
@@ -2048,7 +2037,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().clickDebitCard();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
-			// customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fillCVVorCVC(data.get("cvvOrCVC"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.fillAddressLine1(data.get("addressLine1"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -2248,8 +2236,6 @@ public class MerchantProfileTest {
 					.selectState(data.get("state"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
-// 	        merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddCard();
-
 			if (!data.get("errMsg").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
 			}
@@ -2297,11 +2283,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.fillBankName(data.get("bankName"));
 			Thread.sleep(1000);
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-//					.ScrollToBank();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.selectBank();
-//	merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBank();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.fillUserName(data.get("userName"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()

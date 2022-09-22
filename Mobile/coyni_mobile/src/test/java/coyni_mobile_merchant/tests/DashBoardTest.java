@@ -164,8 +164,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickFilterIcon();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.selectMerchantTransactionsFilter(data.get("filterType"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
-//					.selectMerchantTransactionsFilter(data.get("filterTransactionStatus"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillFromMerchantAmount(data.get("fromAmount"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
@@ -256,15 +254,6 @@ public class DashBoardTest {
 		}
 	}
 
-	public void testMerchantRefundTransaction(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testResetFiltersForMerchantTransactions Failed due to this Exception" + e);
-		}
-	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -294,30 +283,6 @@ public class DashBoardTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testRefundWithBuyToken(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			businessTokenAccountPage.merchantTransactionDetailsPage().clickRefund();
-//			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
-//					.verifyHeading(data.get("refundHeading"));
-//			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().getTransactionAmount();
-////			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().fillTransactionAmount();
-//			if (data.get("validateRefund").equalsIgnoreCase("yes")) {
-//				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickFullAmount();
-//			} else if (data.get("validateRefund").equalsIgnoreCase("no")) {
-//				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickHalfAmount();
-//			} else {
-//				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
-//						.fillAmount(data.get("refundAmount"));
-//			}
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBatchPayOuts Failed due to this Exception" + e);
-//		}
-//	}
-
 	public void testRefund(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -334,7 +299,7 @@ public class DashBoardTest {
 			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 					.fillReason(data.get("reason"));
 			businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickDone();
-//			if(data.get("errMessage").isEmpty()) {
+
 			if (data.get("validateRefund").equalsIgnoreCase("yes")) {
 				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickFullAmount();
 			} else if (data.get("validateRefund").equalsIgnoreCase("no")) {
@@ -353,24 +318,6 @@ public class DashBoardTest {
 				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 						.verifyBuyTokenInsufficientFundsDescription(data.get("buyTokenInsufficientfundsDescription"));
 				merchantMenuIconTest.testBuyTokenBankAccount(strParams);
-//				businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage().clickBuyToken();
-//				Thread.sleep(3000);
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//						.verifyPageHeading(data.get("heading"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//						.buyTokenBankAccountPaymentMethodPage().buyTokenWithBankAccount(data.get("buyTokenHeading"),
-//								data.get("buyTokenDescription"), data.get("amount"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
-//						.orderPreviewDetails(data.get("orderHeading"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().enterYourPINComponent()
-//						.fillPin(data.get("pin"));
-//				Thread.sleep(2000);
-//				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
-//						.transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
 
 			} else if (businessTokenAccountPage.merchantTransactionDetailsPage().refundTransactionPage()
 					.verifyBusinessAccountInsufficientFundsDescription() == 1) {
@@ -447,17 +394,13 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
-			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-//			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
-//			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
 			Thread.sleep(1000);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
-//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-//					.clickCalendar();
+
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.selectFromDate(data.get("fromDate"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -487,8 +430,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().verifyLabelBatchPayOuts(data.get("label"));
 			businessTokenAccountPage.batchPayOutComponent().getNextPayOut();
 			businessTokenAccountPage.batchPayOutComponent().getLastPayOut();
-			// businessTokenAccountPage.batchPayOutComponent().clickBatchNow();
-//			businessTokenAccountPage.batchPayOutComponent().navigationComponent().clickBack();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
@@ -612,8 +553,6 @@ public class DashBoardTest {
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 							.getFailedorOpenTransactionDetails();
 				}
-//				businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-//				.reserveReleaseDetailsPage().clickBack();
 				businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 						.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
 
@@ -691,7 +630,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
 			businessTokenAccountPage.clickNotifications();
 			businessTokenAccountPage.notificationComponent().swipeNotificationLeft();
-			// tokenAccountPage.notificationComponent().verifyRead();
 			businessTokenAccountPage.notificationComponent().clickRead();
 
 		} catch (Exception e) {

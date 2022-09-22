@@ -99,13 +99,13 @@ public class RegistrationTest {
 //		}
 //
 //	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testRegistrationReviewApplication(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-//			registrationProcessPage.clickGetStarted();
 			registrationProcessPage.clickMerchantAgreement();
 			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
 			Thread.sleep(4000);
