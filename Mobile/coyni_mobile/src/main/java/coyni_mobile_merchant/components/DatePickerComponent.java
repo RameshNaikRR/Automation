@@ -5,11 +5,11 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class DatePickerComponent extends MobileFunctions {
-	private By btnDone = By.xpath("//*[contains(@resource-id,'done')]");
+	private By btnDone = By.xpath("//*[contains(@text,'Done')]");
 	private By btnClose = By.xpath("//*[@name='Choose range']/preceding-sibling::XCUIElementTypeButton[@name='close']");
 	private By iconClear = By.xpath("//*[@name='icon clear']");
 	private By lblDateRange = By.xpath("//*[@name='icon clear']/preceding-sibling::*[1]");
-	private By btnCalendar = MobileBy.xpath("//*[contains(@resource-id,'datePick')]");
+	private By btnCalendar = MobileBy.xpath("//*[contains(@resource-id,'datePickIV')]");
 
 	public By getDate(String monthAndYear, String day) {
 		return MobileBy.xpath(String.format(
@@ -42,7 +42,7 @@ public class DatePickerComponent extends MobileFunctions {
 
 	public void clickDone() {
 //		DriverFactory.getDriver().manage().window().getSize();
-        scrollUpToElement(btnDone, "Done");
+//        scrollUpToElement(btnDone, "Done");
 		click(btnDone, "Done");
 	}
 
@@ -54,7 +54,7 @@ public class DatePickerComponent extends MobileFunctions {
 		click(iconClear, "clear icon");
 	}
 	public void clickCalendar() {
-		scrollDownToElement(btnCalendar, "Calendar");
+//		scrollDownToElement(btnCalendar, "Calendar");
     	click(btnCalendar, "Calendar");
     }
 	

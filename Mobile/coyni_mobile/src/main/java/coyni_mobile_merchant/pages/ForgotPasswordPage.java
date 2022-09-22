@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -25,9 +26,11 @@ public class ForgotPasswordPage extends MobileFunctions {
 
 	public void fillEmail(String email) {
 		enterText(txtEmail, email, "Email");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void clickNext() {
+		DriverFactory.getDriver().hideKeyboard();
 		if (getElement(btnNext, "Next").isEnabled()) {
 			click(btnNext, " Next ");
 		} else {

@@ -2320,8 +2320,11 @@ public class MerchantProfileTest {
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.clickNext();
+			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.allDonePage().verifyDone()==1) {		
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.allDonePage().verifyAllDone(data.get("doneHeading"));
+			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 					.allDonePage().clickDone();
 		} catch (Exception e) {

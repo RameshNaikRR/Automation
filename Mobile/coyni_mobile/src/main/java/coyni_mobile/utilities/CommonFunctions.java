@@ -288,6 +288,27 @@ public class CommonFunctions {
 			ExtentTestManager.setInfoMessageInReport(eleName + " is not enabled");
 		}
 	}
+	
+	public void selectState(String state) throws InterruptedException {	
+		
+		By drpDwnState = MobileBy
+				.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
+	    By txtState = MobileBy
+				.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
+	    By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+		
+		
+		DriverFactory.getDriver().hideKeyboard();
+		mobileFunctions.click(drpDwnState, "State Drop down");
+		mobileFunctions.enterText(txtState, state, "State");
+		Thread.sleep(2000);
+		new CommonFunctions().clickEnter();
+		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
+		new CommonFunctions().clickEnter();
+		mobileFunctions.click(btnConfirmState, "Done");
+	}
+	
+	
 
 	public String getTextBoxValue(By ele) {
 		return mobileFunctions.getAttribute(ele, "text");

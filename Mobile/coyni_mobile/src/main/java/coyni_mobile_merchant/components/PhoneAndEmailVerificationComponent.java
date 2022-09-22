@@ -2,6 +2,7 @@ package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile_merchant.pages.*;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.CreatePasswordPage;
 import coyni_mobile_merchant.pages.FoundAccountPage;
@@ -151,6 +152,9 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
+	}
+	public SecureAccountPage secureAccountPage() {
+		return new SecureAccountPage();
 	}
 
 }

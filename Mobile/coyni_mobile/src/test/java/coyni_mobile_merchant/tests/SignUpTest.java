@@ -6,9 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.LandingPage;
+import coyni_mobile_merchant.pages.RegistrationDBAPage;
+import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import coyni_mobile_merchant.pages.SignUpPage;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -17,11 +18,15 @@ public class SignUpTest {
 
 	SignUpPage signUpPage;
 	LandingPage landingPage;
+	RegistrationProcessPage registrationProcessPage;
+	RegistrationDBAPage registrationDBAPage;
 
 	@BeforeMethod
 	public void init() {
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
+		registrationProcessPage = new RegistrationProcessPage();
+		registrationDBAPage = new RegistrationDBAPage();
 	}
 
 	@Test
@@ -45,9 +50,11 @@ public class SignUpTest {
 			// DriverFactory.getDriver().hideKeyboard();
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
+			signUpPage.clickAgreeCheckBox();
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
@@ -67,10 +74,10 @@ public class SignUpTest {
 					.clickNotNow();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().clickSkip();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.tokenAccountPage().verifyRegistration();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.accountCreatedPage().clickSkip();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.tokenAccountPage().verifyRegistration();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSignUp Failed due to this Exception" + e);
@@ -125,7 +132,8 @@ public class SignUpTest {
 				ExtentTestManager.setPassMessageInReport("password is invalid");
 			}
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickNext();
+			signUpPage.scrollUpToFirstName();
+//			signUpPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				if (new CommonFunctions().isPlatformiOS()) {
 					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
@@ -158,7 +166,266 @@ public class SignUpTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistration(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
 
 	}
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationCompanyInformation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+            registrationProcessPage.clickCompanyInfo();
+			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationDBAInformation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+ 			Thread.sleep(1000);
+//			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+			registrationProcessPage.clickDBAInfo();
+			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationBeneficialOwners(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+//			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+			registrationProcessPage.clickBeneficialOwners();
+		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+//			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationADDBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+//			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+			registrationProcessPage.clickAddBank();
+			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+//			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationMerchantAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+//			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+			registrationProcessPage.clickMerchantAgreement();
+			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationReviewApplication(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+//			registrationProcessPage.clickGetStarted();
+//			Thread.sleep(2000);
+//          registrationProcessPage.clickCompanyInfo();
+//			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),data.get("compName"),data.get("compEmail"),data.get("compPhNum"),data.get("compSSN"),data.get("compAddress1"),data.get("compAddress2"),data.get("compCity"),data.get("compState"),data.get("compZipCode"));
+//			registrationProcessPage.clickDBAInfo();
+//			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"),
+//					data.get("dbaName"), data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"), data.get("dbaVolume"), data.get("dbaHighTicket"),data.get("dbaAverageTicket"),
+//					data.get("dbaAddress1"), data.get("dbaAddress2"), data.get("dbaCity"), data.get("dbaState"),data.get("dbaZipCode"));
+//			registrationProcessPage.clickBeneficialOwners();
+//		    registrationProcessPage.registrationBeneficialOwnerPage().AddEditBeneficialOwner(data.get("beneficialHeading"),
+//					data.get("firstName"), data.get("lastName"), data.get("ssn"), data.get("ownership"),
+//					data.get("address1"), data.get("address2"), data.get("city"), data.get("zipCode"),data.get("state"));
+//			registrationProcessPage.clickAddBank();
+//			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+//			merchantProfileTest.testAddBankAccount(strParams);
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+//			registrationProcessPage.clickReviewApplication();
+//			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("companyInfoHeading"), data.get("dbaHeading"), data.get("beneficialHeading"), data.get("agreeHeading"));
+			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRegistrationDBA(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			
+//			registrationCompanyInfoPage.clickGetStarted();
+//			registrationDBAPage.clickDBAInfo();
+//			DriverFactory.getDriver().hideKeyboard();
+//			registrationCompanyInfoPage.clickNext();
+//			DriverFactory.getDriver().hideKeyboard();
+//			registrationCompanyInfoPage.clickNext();
+//			registrationCompanyInfoPage.clickArticles();
+//			registrationCompanyInfoPage.clickTakePhoto();
+//			registrationCompanyInfoPage.clickCapture();
+//			registrationCompanyInfoPage.clickSave();
+//			
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//
+//	}
 
 }

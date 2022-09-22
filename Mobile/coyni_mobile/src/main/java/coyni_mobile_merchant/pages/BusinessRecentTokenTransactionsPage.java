@@ -19,6 +19,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'TokenAccount')]");
 
 	private By lblTotalFunds = MobileBy.xpath("//*[contains(@resource-id,'Balance')]");
+
 	private By lblTotalFundsHeading = MobileBy.xpath("//*[contains(@resource-id,'BalHead')]");
 	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Recent Token ')]");
 	private By lblTransactionStatus = MobileBy.xpath("//*[contains(@resource-id,'misc_fee')]");
@@ -110,9 +111,13 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public void scrollToNoMoreTransactions() {
-		scrollDownToElement(lblNoMoreTransactions, "NoMoreTransactions");
-		ExtentTestManager.setInfoMessageInReport("Transaction list scrolled down to no more transactions");
+		scrollDownToElement(lblNoMoreTransactions, "No More Transactions");
+//		ExtentTestManager.setInfoMessageInReport("Transaction list scrolled down to no more transactions");
 //		return DriverFactory.getDriver().findElements(lblNoMoreTransactions).size();
+	}
+	
+	public void verifyNoMoreTransactions(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblNoMoreTransactions, "Scrolled down to No More Transactions", expHeading);
 	}
 	
 	public void ScrollToViewMore() {

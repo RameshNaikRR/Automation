@@ -10,7 +10,6 @@ import coyni_mobile_merchant.components.FeesComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PreferencesComponent;
 import coyni_mobile_merchant.popups.SetUpTouchIDPopup;
-import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;

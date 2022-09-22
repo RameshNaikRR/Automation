@@ -1,9 +1,5 @@
 package coyni_mobile_merchant.components;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
 
 import coyni_mobile.pages.PreAuthorizationPage;
@@ -15,10 +11,10 @@ import io.appium.java_client.MobileBy;
 
 public class MailingAddressComponent extends MobileFunctions {
 	private By txtAddressLine1 = MobileBy
-			.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]");
+			.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]|//*[contains(@resource-id,'companyaddressET')]");
 	private By txtAddressLine2 = MobileBy
-			.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]");
-	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]");
+			.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]|//*[contains(@resource-id,'companyaddress2ET')]");
+	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]|//*[contains(@resource-id,'cityET')]");
 	private By drpDwnState = MobileBy
 			.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
 	private By txtZipCode = MobileBy.xpath(
@@ -34,6 +30,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
 
+	
 	private By txtCurrentState(String currentState) {
 		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
 	}
@@ -61,20 +58,7 @@ public class MailingAddressComponent extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
-	public void selectState(String state) throws InterruptedException {
-//		scrollDownToElement(txtCity, "City");
-//		click(drpDwnState, "State Drop down");
-////		click(txtState, "state");
-////		Thread.sleep(2000);
-//		enterText(txtState, state, "State");
-//		new CommonFunctions().clickEnter();
-//		Thread.sleep(2000);
-//		clickCurrentState();
-//		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
-////		new CommonFunctions().clickTab();
-//		click(btnConfirmState, "Done");
-		
-		
+	public void selectState(String state) throws InterruptedException {		
 		scrollDownToElement(txtCity, "City");
 		click(drpDwnState, "State Drop down");
 		enterText(txtState, state, "State");

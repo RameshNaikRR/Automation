@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -18,4 +19,9 @@ public class AllDonePage extends MobileFunctions{
 		new CommonFunctions().verifyLabelText(txtAllDone, "All Done",expHeading );
 	}
 
+	public int verifyDone() {
+		return DriverFactory.getDriver().findElements(txtAllDone).size();	
+	}
+
+	
 }

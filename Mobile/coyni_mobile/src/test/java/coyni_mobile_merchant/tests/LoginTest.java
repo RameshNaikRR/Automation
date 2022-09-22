@@ -539,8 +539,14 @@ public class LoginTest {
 					.successFailureComponent().verifyPageHeading(data.get("sucessHeading"));
 			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageDescription(data.get("sucessDescription"));
-			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
-					.successFailureComponent().clickLogin();
+			Thread.sleep(3000);
+//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
+//					.successFailureComponent().clickLogin();
+//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
+//			.successFailureComponent().landingPage().verifyLandingPage();
+//			loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
+//			.successFailureComponent().landingPage().verifyLoginbtnView();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);
 		}
@@ -577,7 +583,7 @@ public class LoginTest {
 					loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage()
 							.VerifyPasswordErrMessage(data.get("expPasswordMessage"));
 				}
-				loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage().clickSave();
+//				loginPage.forgotPasswordPage().phoneEmailAndVerificationComponent().createPasswordPage().clickSave();
 
 			}
 

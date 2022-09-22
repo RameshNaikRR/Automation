@@ -2,6 +2,7 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile_merchant.pages.*;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -52,13 +53,9 @@ public class EnableFaceIDpage extends MobileFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEnableFaceId, "heading", expHeading);
 	}
-//  public  TokenAccountPage tokenAccountPage() {
-//	   return new TokenAccountPage();
-//  }
-//  public AccountCreatedPage accountCreatedPage() {
-//	  return new AccountCreatedPage();
-//  }
-	public RegistrationPage registrationPage() {
-		return new RegistrationPage();
-	}
+	
+	public AccountCreatedPage accountCreatedPage() {
+		  return new AccountCreatedPage();
+	  }
+
 }

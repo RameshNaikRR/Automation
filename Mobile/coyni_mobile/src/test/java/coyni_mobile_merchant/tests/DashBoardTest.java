@@ -456,8 +456,8 @@ public class DashBoardTest {
 			Thread.sleep(1000);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.clickCalendar();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+//					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.selectFromDate(data.get("fromDate"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -660,6 +660,23 @@ public class DashBoardTest {
 		}
 	}
 
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantTransactionsList(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.getUserName();
+			businessTokenAccountPage.clickTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().verifyHeading(data.get("merchantHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNoMoreTransactions(data.get("noMoreTransactions"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testFiltersForMerchantTransactions Failed due to this Exception" + e);
+		}
+	}
+	
 	@Test
 	public void testNotifications() {
 		try {
@@ -836,5 +853,7 @@ public class DashBoardTest {
 		}
 
 	}
+	
+	
 
 }

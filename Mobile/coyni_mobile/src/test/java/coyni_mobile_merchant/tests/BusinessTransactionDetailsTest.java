@@ -442,6 +442,7 @@ public class BusinessTransactionDetailsTest {
 				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNoMoreTransactions(data.get("noMoreTransactions"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testVerifyBuyTokenBankTransaction failed due to Exception " + e);

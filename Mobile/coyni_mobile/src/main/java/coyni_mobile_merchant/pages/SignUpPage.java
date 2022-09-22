@@ -1,13 +1,20 @@
 package coyni_mobile_merchant.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
-import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class SignUpPage extends MobileFunctions {
 
@@ -32,7 +39,8 @@ public class SignUpPage extends MobileFunctions {
 	private By iconBackArrow = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
-
+	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
+	
 	public void clickDone() {
 		if (new CommonFunctions().isPlatformiOS()) {
 			click(btnDone, "Done");
@@ -43,6 +51,10 @@ public class SignUpPage extends MobileFunctions {
 		click(btnGetStarted, "Get Started");
 	}
 
+	public void clickAgreeCheckBox() {
+		click(chboxAgree, "Terms of service and Privacy");
+	}
+	
 	public void verifyGetStarted() {
 		new CommonFunctions().elementView(btnGetStarted, "Get Started");
 	}
@@ -62,6 +74,17 @@ public class SignUpPage extends MobileFunctions {
 	public void fillFirstName(String firstName) {
 		click(txtFirstName, "firstName");
 		enterText(txtFirstName, firstName, "FirstName");
+		
+		
+//		Dimension  a =DriverFactory.getDriver().findElement(txtFirstName).getSize();	
+//		ExtentTestManager.setInfoMessageInReport(""+a);
+//		
+		Dimension size = DriverFactory.getDriver().manage().window().getSize();
+		int x = size.getWidth();
+		int y = size.getHeight();
+		ExtentTestManager.setInfoMessageInReport(x+ " "+ y);
+
+	
 	}
 
 	public void fillLastName(String lastName) {
@@ -95,12 +118,19 @@ public class SignUpPage extends MobileFunctions {
 			pressBack();
 		}
 		clickDone();
+//		scrollUpToElement(txtFirstName, "firstName");
 	}
-
+	
+	public void scrollUpToFirstName() {
+	TouchAction touch = new TouchAction(DriverFactory.getDriver());
+	touch.press(PointOption.point(200, 900)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+			.moveTo(PointOption.point(200, (int) (1400))).release().perform();
+	}
+	
 	public void clickNext() {
 		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
-		scrollUpToElement(txtFirstName, "First Name");
+//		scrollUpToElement(txtFirstName, "First Name");
 	}
 
 	public int fieldBarCount() {

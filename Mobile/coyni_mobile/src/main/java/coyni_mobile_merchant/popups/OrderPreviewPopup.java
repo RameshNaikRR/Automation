@@ -1,6 +1,13 @@
 package coyni_mobile_merchant.popups;
 
+import java.sql.Driver;
+
+import javax.lang.model.element.Element;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.graphbuilder.curve.Point;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
@@ -8,9 +15,11 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.TransactionSucessFailurePendingComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class OrderPreviewPopup extends MobileFunctions {
 
@@ -143,6 +152,12 @@ public class OrderPreviewPopup extends MobileFunctions {
 		new CommonFunctions().swipeElement(btnSlideToConfirm, Direction.RIGHT);
 //		click(btnSlideToConfirm, "Slide To Confirm");
 	}
+	
+//	public PointOption swipeSlideToConfirmLocation() {
+//		WebElement element = DriverFactory.getDriver().findElement(By.xpath("//*[contains(@resource-id,'slideToConfirm')]"));
+//		location = eleme
+//		return (PointOption) location;
+//	}
 
 	public void orderPreviewDetails(String expHeading) {
 		verifyPageHeading(expHeading);
@@ -151,7 +166,9 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getPurchaseAmount();
 		getProcessingFee();
 		getTotal();
+//		swipeSlideToConfirmLocation();
 		swipeSlideToConfirm();
+		
 	}
 
 	public void refundPreviewDetails(String expHeading) {

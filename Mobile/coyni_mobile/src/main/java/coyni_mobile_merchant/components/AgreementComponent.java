@@ -11,9 +11,9 @@ public class AgreementComponent extends MobileFunctions {
 
 	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-	private By privacyPolicy = MobileBy.xpath("//*[contains(@text,'Privacy')]");
-	private By termsOfService = MobileBy.xpath("//*[contains(@text,'Terms')]");
-	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@text,'Merchant’s')]");
+	private By privacyPolicy = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]");
+	private By termsOfService = MobileBy.xpath("//*[contains(@resource-id,'terms_of_service')]");
+	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'merchant_agreements')]");
 	private By headingPastAgreements = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'canceled')]");
@@ -44,12 +44,14 @@ public class AgreementComponent extends MobileFunctions {
 
 	
 	public void verifyMerchantAgreementView() {
+		scrollDownToElement(lblMerchantAgreements, "Merchant Agreements");
 		new CommonFunctions().elementView(lblMerchantAgreements, "Merchant Agreements");
 		ExtentTestManager.setInfoMessageInReport("Merchant Agreements : " + getText(lblMerchantAgreements));
 		click(lblMerchantAgreements, "Merchant Agreements");
 	}
 
 	public void verifyPrivacyPolicyView() {
+		scrollDownToElement(privacyPolicy, "Privacy Policy");
 		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
 		ExtentTestManager.setInfoMessageInReport("Privacy Policy : " + getText(privacyPolicy));
 		click(privacyPolicy, "Privacy Policy");
@@ -60,6 +62,7 @@ public class AgreementComponent extends MobileFunctions {
 //	}
 
 	public void verifyTermsOfServiceView() {
+		scrollDownToElement(termsOfService, "Terms Of Service");
 		new CommonFunctions().elementView(termsOfService, "Terms of Service");
 		ExtentTestManager.setInfoMessageInReport("Terms of service : " + getText(termsOfService));
 		click(termsOfService, "Terms Of Service");

@@ -2,7 +2,7 @@ package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.pages.EnableFaceIDpage;
+import coyni_mobile_merchant.pages.*;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;

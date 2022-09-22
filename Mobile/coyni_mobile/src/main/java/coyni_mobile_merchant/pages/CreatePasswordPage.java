@@ -3,8 +3,8 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile_merchant.components.SuccessFailureComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -29,15 +29,18 @@ public class CreatePasswordPage extends MobileFunctions {
 
 	public void clickNewPassword() {
 		click(txtNewPassword, " New Password");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillNewPassword(String newPassword) {
 		enterText(txtNewPassword, newPassword, "New Password");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
 		click(txtConfirmPassword, " Confirm Password");
+		DriverFactory.getDriver().hideKeyboard();
 
 	}
 

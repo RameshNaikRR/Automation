@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.FilterPopup;
-import freemarker.core.ReturnInstruction.Return;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 

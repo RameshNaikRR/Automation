@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.ErrorMessagePopup;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
