@@ -76,6 +76,7 @@ public class TokenAccountTest {
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));
 			DriverFactory.getDriver().hideKeyboard();
+			Thread.sleep(5000);
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin1"));
@@ -789,12 +790,12 @@ public class TokenAccountTest {
 					.enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().getReferenceID();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().clickLearnMore();
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+//					.enterYourPINComponent().successFailureComponent().verifyRecipentEmail(data.get("content"));
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+//					.enterYourPINComponent().successFailureComponent().getReferenceID();
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+//					.enterYourPINComponent().successFailureComponent().clickLearnMore();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {

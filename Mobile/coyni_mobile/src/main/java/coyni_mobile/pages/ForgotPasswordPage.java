@@ -21,8 +21,15 @@ public class ForgotPasswordPage extends MobileFunctions {
 	private By popErrorMessage = MobileBy.xpath("//*[contains(@resource-id,'textTV')]"); //
 	private By popHeading = MobileBy.xpath("//*[@text='Coyni']");
 
+	private By errMessage = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+
 	public void verifyPopEHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(popHeading, "PopUp Heading ", expHeading);
+	}
+
+	public void verifyErrorMessage() {
+		new CommonFunctions().elementView(errMessage, "Error message");
+
 	}
 
 	public void verifyPopErrMessa(String expHeading) {

@@ -43,6 +43,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void fillAddressLine1(String addressLine1) {
 		click(txtAddressLine1, "Address Line1");
 		enterText(txtAddressLine1, addressLine1, "Address Line1");
+		scrollUpToElement(txtAddressLine1, "Address Line1");
 	}
 
 	public void fillAddressLine2(String addressLine2) {

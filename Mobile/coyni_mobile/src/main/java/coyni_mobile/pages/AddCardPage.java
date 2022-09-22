@@ -22,6 +22,7 @@ public class AddCardPage extends MobileFunctions {
 	public void fillNameOnCard(String nameOnCard) {
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
+		scrollUpToElement(txtNameOnCard, "Name On Card");
 		DriverFactory.getDriver().hideKeyboard();
 	}
 	public void scrollUpToNameOnCard() {

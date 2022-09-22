@@ -362,7 +362,6 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipcode"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().clickSave();
-			// Toast Message
 			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit Address failed due to exception " + e);
