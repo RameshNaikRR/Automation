@@ -218,7 +218,11 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 	private By btnRev = By.xpath("//span[text()='Reveal Key']");
 
 	public void clickRevealKey() {
+		if(getElement(btnRev, "").isDisplayed()) {
 		click(btnRev, "Reveal Key");
+		}else {
+			ExtentTestManager.setPassMessageInReport("Reveaval key is not displayed");
+		}
 	}
 
 	public void getPublicKey() {
