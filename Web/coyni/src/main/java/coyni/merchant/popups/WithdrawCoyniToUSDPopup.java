@@ -31,6 +31,16 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		}
 	}
 
+	public void clickDelete(String number) {
+		click(By.xpath(String.format("//p[contains(text(),'%s')]/following-sibling::button", number)), number);
+		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
+	}
+
+	public void clickEdit(String number) {
+		click(By.xpath(String.format("(//p[contains(text(),'%s')]/following-sibling::button)[2]", number)), number);
+		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
+	}
+
 	public void clickOnExternalBankAccount() {
 		click(getPaymentBnts("1"), "click ExternalBankAccount");
 	}
@@ -73,6 +83,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	public WithdrawToSignetAccountPopup withdrawToSignetAccountPopup() {
 		return new WithdrawToSignetAccountPopup();
+	}
+
+	public RemovePaymentMethodPopup removePaymentMethodPopup() {
+		return new RemovePaymentMethodPopup();
 	}
 
 	public ChooseYourBankAccountPopup chooseYourBankAccountPopup() {

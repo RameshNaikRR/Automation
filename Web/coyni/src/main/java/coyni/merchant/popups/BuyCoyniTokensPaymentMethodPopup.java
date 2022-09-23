@@ -78,5 +78,4 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
 }

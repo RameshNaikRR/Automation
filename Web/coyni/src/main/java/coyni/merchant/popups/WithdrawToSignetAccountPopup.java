@@ -13,7 +13,6 @@ public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//h1[.='Withdraw to Signet Account']");
-//	private By lblDailyLimitMsg = By.xpath("//h2[contains(@class,'font-sans ')]");
 	private By txtmsg = By.xpath("//textarea[@name='message']");
 	private By txtAmount = By.cssSelector("#amount");
 	private By IconCoyni = By.xpath("//input[@id='amount']/following-sibling::span");

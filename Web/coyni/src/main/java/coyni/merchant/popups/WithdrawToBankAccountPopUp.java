@@ -46,11 +46,10 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 		enterText(txtAmount, amount, "Amount");
 		cf.clickOutSideElement();
 	}
-	
 
 	public void getAmount() {
 		String amoun = getText(amount, "");
-		ExtentTestManager.setInfoMessageInReport("Amount is: "+ amoun);
+		ExtentTestManager.setInfoMessageInReport("Amount is: " + amoun);
 	}
 
 	public void verifyCoyniIcon() {
@@ -141,7 +140,7 @@ public class WithdrawToBankAccountPopUp extends BrowserFunctions {
 	public VerifyYourIdentityPopup verifyYourIdentityPopup() {
 		return new VerifyYourIdentityPopup();
 	}
-	
+
 	public PaymentMethodRemovesdSuccessfullyPopup paymentMethodRemovesdSuccessfullyPopup() {
 		return paymentMethodRemovesdSuccessfullyPopup();
 	}

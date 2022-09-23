@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ChooseYourBankAccountPopup extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
@@ -60,6 +61,18 @@ public class ChooseYourBankAccountPopup extends BrowserFunctions {
 	public void verifyBank2() {
 		cf.verifyCursorAction(getBanks("2"), "Bank two ");
 		cf.elementView(getDeleteIcon("2"), "Delete Icon ");
+	}
+
+	public void clickBank(String number) {
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
+		ExtentTestManager.setInfoMessageInReport("button clicked for Bank " + (number));
+	}
+
+	public void clickDelete(String number) {
+		click(By.xpath(String.format(
+				"//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-trash')]", number)),
+				number);
+		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
 	}
 
 	public void clickDelete() {
