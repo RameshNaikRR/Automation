@@ -40,7 +40,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyPersonalAccountView();
 			navigationMenuPage.verifyAccountIDView();
 			navigationMenuPage.verifyAccountID(data.get("AccountID"));
-			//navigationMenuPage.verifyUserImageView();//
+			// navigationMenuPage.verifyUserImageView();//
 			navigationMenuPage.verifyQRCodeView();
 			navigationMenuPage.verifyTokenAccountView();
 			navigationMenuPage.verifyExportFilesView();
@@ -187,10 +187,10 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().verifyUserDetailsNameHeading();
 			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
-			//navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
+			// navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			// navigationMenuPage.verifyNotificationsIcon();
 			navigationMenuPage.userNameDropDownComponent().clickSignOut();
-		//	homePage.clickPersonalAccount();
+			// homePage.clickPersonalAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Progress Bar is failed due to exception " + e);
@@ -212,21 +212,21 @@ public class NavigationMenuTest {
 			navigationMenuPage.userNameDropDownComponent().verifyDropDownElements();
 			// navigationMenuPage.userNameDropDownComponent().verifyRequestDot();
 			navigationMenuPage.userNameDropDownComponent().clickRequest();
-			//navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
+			// navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickRequests();
 			navigationMenuPage.userNameDropDownComponent().notificationsComponent().clickCloseIcon();
 
-			// navigationMenuPage.userNameDropDownComponent().clickUserName();
+			navigationMenuPage.userNameDropDownComponent().clickUserName();
 			navigationMenuPage.userNameDropDownComponent().clickUserDetails();
 			navigationMenuPage.userNameDropDownComponent().clickPaymentMethods();
 			navigationMenuPage.userNameDropDownComponent().clickPreferences();
 			navigationMenuPage.userNameDropDownComponent().clickAccountLimits();
 			navigationMenuPage.userNameDropDownComponent().clickAgreements();
 			navigationMenuPage.userNameDropDownComponent().clickChangePassword();
-			//navigationMenuPage.verifyAccountHolderNameView();
-		//	navigationMenuPage.clickOnRefresh();
-			//navigationMenuPage.verifyAccountHolderNameView();
-			//navigationMenuPage.userNameDropDownComponent().clickUserName();
-			//navigationMenuPage.userNameDropDownComponent().clickSignOut();
+			// navigationMenuPage.verifyAccountHolderNameView();
+			// navigationMenuPage.clickOnRefresh();
+			// navigationMenuPage.verifyAccountHolderNameView();
+			// navigationMenuPage.userNameDropDownComponent().clickUserName();
+			// navigationMenuPage.userNameDropDownComponent().clickSignOut();
 //			loginPage.verifyHeading(data.get("loginHeading"));
 
 			// navigationMenuPage.verifyNotificationsIcon();

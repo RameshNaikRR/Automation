@@ -820,15 +820,15 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickNext();
 
 			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
-					.verifyHeading(data.get("authyPayHeading"));
-			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
-			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
-			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickBack();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
-			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
-			// tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
-			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup()
+//					.verifyHeading(data.get("authyPayHeading"));
+//			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyBackView();
+//			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().verifyCloseView();
+//			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickBack();
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().verifyAmount();
+//			tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().clickPay();
+//			// tokenAccountPage.payAndRequestTokensPopup().payingAccountHolderNamePopup().getProcessingFee();
+//			tokenAccountPage.payAndRequestTokensPopup().navigationComponent().clickClose();
 
 		}
 
@@ -905,6 +905,8 @@ public class TokenAccountTest {
 			tokenAccountPage.payAndRequestTokensPopup().clickRequest();
 			tokenAccountPage.payAndRequestTokensPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientAddress(data.get("address"));
+			Thread.sleep(100);
+			tokenAccountPage.payAndRequestTokensPopup().clickTab();
 			tokenAccountPage.payAndRequestTokensPopup().fillRecipientMessage(data.get("recipientMessage"));
 			// tokenAccountPage.payAndRequestTokensPopup().verifyAccountHolderName(data.get("accountHolderName"));
 			Thread.sleep(1000);

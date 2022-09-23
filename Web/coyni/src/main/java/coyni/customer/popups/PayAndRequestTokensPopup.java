@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -56,9 +57,9 @@ public class PayAndRequestTokensPopup extends BrowserFunctions {
 	}
 	
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.moveByOffset(10, 10).click().build().perform();
+		ExtentTestManager.setInfoMessageInReport("clicked outside");
 	}
 
 //	public void checkAmountWithSpecialAndNull(String amount) {

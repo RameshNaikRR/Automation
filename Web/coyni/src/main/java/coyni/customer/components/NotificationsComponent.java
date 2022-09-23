@@ -34,7 +34,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By btnCross = By.xpath("//span[@class='cross-icon']//img ");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
-	private By closeIcon = By.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
+	private By closeIcon = By.xpath("//span[@class='icon-close']");
 	// private By notificationCOunt = By.xpath("//span[@class='text']");
 	// private By todayNotifications =
 	// By.xpath("//span/parent::div[@class=\"parent\"]");
