@@ -22,6 +22,10 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 		enterText(txtFirstName, name, "Name");
 	}
 
+	public void switchTab() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public void verifyLastName(String lastName) {
 		enterText(txtLastName, lastName, "LastName");
 	}

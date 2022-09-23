@@ -100,9 +100,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 	}
 
 	public void clickTab() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_TAB);
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void validateCardBrand(String cardType) {

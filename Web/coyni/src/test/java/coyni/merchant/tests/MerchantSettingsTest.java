@@ -284,8 +284,6 @@ public class MerchantSettingsTest {
 					.verifyAddressLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.getDBAname();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-//					.verifyCancelMerchnatAccountLnk();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.getWebsiteName();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
@@ -727,8 +725,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 					.addNewSignetAccountPopup().mailingAddressComponent().fillCity(data.get("city1"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().clickstate();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 					.addNewSignetAccountPopup().mailingAddressComponent().selectState(data.get("state1"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 					.addNewSignetAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode"));
@@ -1078,6 +1074,7 @@ public class MerchantSettingsTest {
 					.verifyEmail(data.get("email1"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().switchTab();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
@@ -1225,7 +1222,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
-		//	merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().getNoRecordsFound();
 
 		} catch (Exception e) {
@@ -1241,7 +1238,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
-		//	merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
 
@@ -1258,7 +1255,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
 			merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
-			//merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
+			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyApplyFilters();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
 
 		} catch (Exception e) {
