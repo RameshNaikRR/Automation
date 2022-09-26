@@ -21,7 +21,7 @@ public class TeamComponent extends BrowserFunctions {
 	private By noRecordFound = By.xpath("//div[text()='No Records Found']");
 	private By btnSettings = By
 			.xpath("//div[@class='cursor-pointer icon-settings-gear-icon text-cgy3 hover:text-cgy4']");
-	private By lblName = By.xpath("//p[text()='Vishnu Pav...']");
+	private By lblName = By.xpath("//div[contains(@class,'flex')]/p");
 	private By lblActivation = By.xpath("//p[text()='Vishnu Pav...']/following-sibling::*[2]");
 	private By btnRemoveUser = By.xpath("//span[text()='Remove User']");
 	private By btnDelete = By.cssSelector(".Team_icon__ai-o3");
@@ -87,9 +87,10 @@ public class TeamComponent extends BrowserFunctions {
 
 	}
 
-	public void verifyName() {
-		String text = getText(lblName, "Description");
-		ExtentTestManager.setInfoMessageInReport("Description " + text);
+	public void verifyName() throws InterruptedException {
+		Thread.sleep(2000);
+		String text = getText(lblName, "");
+		ExtentTestManager.setInfoMessageInReport("Name " + text);
 	}
 
 	public void verifyActivation() {

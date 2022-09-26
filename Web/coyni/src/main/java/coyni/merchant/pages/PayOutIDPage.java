@@ -40,25 +40,27 @@ public class PayOutIDPage extends BrowserFunctions {
 	}
 
 	public void getPayOutDate() {
-		ExtentTestManager.setInfoMessageInReport("PayOut Date: " + getText(lblPayOutDate, "Payout Date"));
+		String payout = getText(lblPayOutDate, "Payout Date");
+		ExtentTestManager.setInfoMessageInReport("PayOut Date: " + payout);
 	}
 
 	public void getPayOutAmount() {
-		ExtentTestManager.setInfoMessageInReport("PayOut Amount: " + getText(lblPayOutAmount, "Payout Amount"));
+		String payoutAmount = getText(lblPayOutAmount, "Payout Amount");
+		ExtentTestManager.setInfoMessageInReport("PayOut Amount: " + payoutAmount);
 	}
 
 	public void getTransactionReference() {
-		ExtentTestManager.setInfoMessageInReport(
-				"Transaction Reference: " + getText(lblTransactionReferenceID, "Transaction Reference"));
+		String reference = getText(lblTransactionReferenceID, "Transaction Reference");
+		ExtentTestManager.setInfoMessageInReport("Transaction Reference: " + reference);
 	}
 
 	public void getToTokenAccount() {
-		ExtentTestManager
-				.setInfoMessageInReport("To Token Account: " + getText(lblPaidToTokenAccount, "Paid To Token Account"));
+		String tokenAccount = getText(lblPaidToTokenAccount, "Paid To Token Account");
+		ExtentTestManager.setInfoMessageInReport("To Token Account: " + tokenAccount);
 	}
 
 	public void getReserveID() {
-		ExtentTestManager.setInfoMessageInReport("To Token Account: " + getText(lblReserveID, "Reserve ID"));
+		String reserveID = getText(lblReserveID, "Reserve ID");
+		ExtentTestManager.setInfoMessageInReport("To Token Account: " + reserveID);
 	}
-
 }

@@ -29,7 +29,6 @@ public class MerchantActivityTest {
 	public void testDashBoardProcessingVolume(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().daysMonthsDropDownComponent().clickOnToday();
@@ -85,9 +84,7 @@ public class MerchantActivityTest {
 	public void testTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
-			// merchantTransactionsPage.verifyLabelTransactionListDetails();
 			merchantTransactionsPage.verifyTableItemsCount(data.get("query"));
 			merchantTransactionsPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
@@ -108,7 +105,6 @@ public class MerchantActivityTest {
 	public void testExportSelectedTransactions(String strParams, String strParams1) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.clickExport();
 			if (strParams1.equalsIgnoreCase("Today")) {
@@ -169,7 +165,6 @@ public class MerchantActivityTest {
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
@@ -197,7 +192,6 @@ public class MerchantActivityTest {
 	public void testResetFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
@@ -262,7 +256,6 @@ public class MerchantActivityTest {
 	public void testDashBoardReserveHistoryNoRecords(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
@@ -281,7 +274,6 @@ public class MerchantActivityTest {
 	public void testDashBoardFullReserveHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().getReserveBalance();
@@ -305,15 +297,12 @@ public class MerchantActivityTest {
 	public void testReserveHistoryExports(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
 			if (merchantActivityComponent.reserveHistoryPage().verifyExports() != 0) {
 				merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
 			} else {
 				merchantActivityComponent.reserveHistoryPage().exportfilesPage().clickExport();
-//				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
-//						.verifyReserveExportHeading(data.get("heading"));
 				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
 						.clickOnReserveExport();
 
@@ -328,10 +317,8 @@ public class MerchantActivityTest {
 	public void testReserveHistoryIDDetails(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
-			// merchantActivityComponent.reserveHistoryPage().fillSearch(data.get("search"));
 			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
@@ -341,7 +328,6 @@ public class MerchantActivityTest {
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
-//			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveHistoryIDDetails failed due to exception " + e);
@@ -353,7 +339,6 @@ public class MerchantActivityTest {
 	public void testTransactionDetailsFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
 			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));

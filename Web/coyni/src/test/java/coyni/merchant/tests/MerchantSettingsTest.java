@@ -1301,7 +1301,7 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
 			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
-			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickResetAllFilters();
+			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickResetFilters();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
