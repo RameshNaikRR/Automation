@@ -307,12 +307,13 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
 			if (merchantActivityComponent.reserveHistoryPage().verifyExports() != 0) {
 				merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
 			} else {
 				merchantActivityComponent.reserveHistoryPage().exportfilesPage().clickExport();
-				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
-						.verifyReserveExportHeading(data.get("heading"));
+//				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
+//						.verifyReserveExportHeading(data.get("heading"));
 				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
 						.clickOnReserveExport();
 
@@ -330,8 +331,8 @@ public class MerchantActivityTest {
 			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
-			merchantActivityComponent.reserveHistoryPage().fillSearch(data.get("search"));
-//			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
+			// merchantActivityComponent.reserveHistoryPage().fillSearch(data.get("search"));
+			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();

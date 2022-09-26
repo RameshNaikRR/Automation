@@ -219,13 +219,13 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
 			registrationStartPage.applicationSummaryPage().clickSubmit();
 
-			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
-			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
-			registrationStartPage.applicationSubmissionPage().verifyStatus();
-			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
-			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
+//			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+//			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
+//			registrationStartPage.applicationSubmissionPage().verifyStatus();
+//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
+//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
 
 			registrationStartPage.registrationCompanyInfoPage().verifyApplicationSummary();
 
