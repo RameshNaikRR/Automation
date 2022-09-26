@@ -226,7 +226,6 @@ public class MerchantApplicationTest {
 //			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
 //			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
 //			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
-
 			registrationStartPage.registrationCompanyInfoPage().verifyApplicationSummary();
 
 		} catch (Exception e) {

@@ -247,10 +247,10 @@ public class MerchantActivityTest {
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
-			merchantActivityComponent.payOutHistoryPage().fillSearch(data.get("search"));
-			merchantActivityComponent.payOutHistoryPage().clickRecord();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
+//			merchantActivityComponent.payOutHistoryPage().fillSearch(data.get("search"));
+//			merchantActivityComponent.payOutHistoryPage().clickRecord();
+//			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
+//			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDashBoardPayOutHistory failed due to exception " + e);

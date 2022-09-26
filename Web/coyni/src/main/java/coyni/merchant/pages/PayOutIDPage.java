@@ -17,12 +17,12 @@ public class PayOutIDPage extends BrowserFunctions {
 	private By lblPayOutAmount = By.xpath("//h3[contains(text(),'Payout Amount')]/following-sibling::*[1]");
 
 	private By lblTransactionReferenceID = By
-			.xpath("//p[contains(text(),'Transaction Reference ID:')]/following-sibling::*[1]");
+			.xpath("//p[contains(text(),'Transaction Reference ID:')]/following-sibling::*[1]/p");
 
 	private By lblPaidToTokenAccount = By
-			.xpath("//p[contains(text(),'Paid to Token Account:')]/following-sibling::*[1]");
+			.xpath("//p[contains(text(),'Paid to Token Account:')]/following-sibling::*[1]/p");
 
-	private By lblReserveID = By.xpath("//p[contains(text(),'Reserve ID:')]/following-sibling::*[1]");
+	private By lblReserveID = By.xpath("//p[contains(text(),'Reserve ID:')]/following-sibling::*[1]/p");
 
 	private By btnDownloadPDF = By.xpath("//div[contains(text(),'Download PDF')]");
 
