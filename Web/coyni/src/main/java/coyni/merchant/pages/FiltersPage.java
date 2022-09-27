@@ -1,6 +1,8 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
+
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -12,7 +14,7 @@ public class FiltersPage extends BrowserFunctions {
 	private By lnkClearAll = By.xpath("//button[text()='Clear All']");
 	private By resetFilters = By.xpath("(//button[@type='button'])[3]");
 	private By applyFilters = By.xpath("//button[text()='Apply Filters']");
-	private By msgNoRecords = By.cssSelector("//p[text()='No Records Found']");
+	private By msgNoRecords = By.xpath("//div[contains(text(),'No Records Found')]");
 
 	public void verifyClearAll() {
 		click(lnkClearAll, "Clear All");
@@ -38,12 +40,12 @@ public class FiltersPage extends BrowserFunctions {
 		click(checkBoxExpired, "Expired");
 	}
 
-	public void getNoRecordsFound() {
-		if (getElementsList(msgNoRecords, "No Records Found").size() > 0) {
-			ExtentTestManager.setInfoMessageInReport("Table contains Records");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("Table does not contains any records");
-		}
+	public int verifyRecords() {
+		return getElementsList(msgNoRecords, "").size();
 	}
 
+	public String verifyNoRecordsFound() {
+		new CommonFunctions().elementView(msgNoRecords, "No Records");
+		return getText(msgNoRecords, "No Records");
+	}
 }

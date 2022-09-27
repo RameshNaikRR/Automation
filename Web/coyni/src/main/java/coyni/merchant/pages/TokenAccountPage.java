@@ -29,7 +29,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnTokenAccount = By.xpath("(//span[text()='Token Account'])[1]");
 	private By lblYourTokenAccount = By.xpath("//h1[text()='Merchant Token Account']");
 	private By lblTotalFunds = By.xpath("//span[contains(text(),'Total Available Funds')]");
-	private By lblHeading = By.xpath("//h1[text()='Merchant Token Account']");
+	private By lblHeading = By.xpath("(//span[text()='Token Account'])[1]");
 	private By amount = By.xpath("//span[contains(@class,'wallet_balance')]");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");

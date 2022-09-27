@@ -203,8 +203,9 @@ public class SideMenuBarTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			sideMenuBarComponent.clickTokenAccount();
+			sideMenuBarComponent.tokenAccountPage().verifyHeading(data.get("tokenAccountHeading"));
 			sideMenuBarComponent.clickQRCode();
-			sideMenuBarComponent.completeVerificationPopup().verifyHeading(data.get("heading"));
+			// sideMenuBarComponent.completeVerificationPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.completeVerificationPopup().verifyDescription();
 			sideMenuBarComponent.completeVerificationPopup().clickAccountVerification();
 

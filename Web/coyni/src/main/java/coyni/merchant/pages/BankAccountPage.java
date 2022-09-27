@@ -47,10 +47,8 @@ public class BankAccountPage extends BrowserFunctions {
 		click(lblBankAccount, "Bank Account");
 	}
 
-	public void clickEnter() throws AWTException {
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+	public void clickEnter() {
+		click(next, "Next");
 	}
 
 	public void verifyLabelHeading(String heading) {

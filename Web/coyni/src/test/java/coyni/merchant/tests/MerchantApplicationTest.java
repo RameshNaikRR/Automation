@@ -3,6 +3,7 @@ package coyni.merchant.tests;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -178,6 +179,11 @@ public class MerchantApplicationTest {
 			Thread.sleep(10000);
 			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
 			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
+			sideMenuBarComponent.bankAccountPage().switchTab();
+			WebDriver driver = DriverFactory.getDriver();
+			WebDriverWait wait = new WebDriverWait(driver, 120);
+			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h4[text()='Add Bank Account']")));
 			sideMenuBarComponent.bankAccountPage().clickBank();
 
 			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
