@@ -138,8 +138,15 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
-			testFilters(strParams);
-			testExportSelectedTransactions(strParams);
+			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
+					.getNoTransactionSize() > 0) {
+				ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
+			} else {
+				testFilters(strParams);
+				testExportSelectedTransactions(strParams);
+
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test verify Api Business details Failed due to Exception " + e);
 		}
@@ -170,8 +177,13 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getBenefiAddress();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickAPIKeys();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getPublicKey();
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickRevealKey();
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getSecretKey();
+			int reSize = homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().reSize();
+			if (reSize > 0) {
+				homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickRevealKey();
+				homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getSecretKey();
+			} else {
+				ExtentTestManager.setInfoMessageInReport("Reveal ");
+			}
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickAgreements();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickTermOfService();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickDownloadAgreement();

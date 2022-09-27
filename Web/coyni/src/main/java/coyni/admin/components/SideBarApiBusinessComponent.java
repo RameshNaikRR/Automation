@@ -218,12 +218,14 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 	private By btnRev = By.xpath("//span[text()='Reveal Key']");
 
 	public void clickRevealKey() {
-		if(getElement(btnRev, "").isDisplayed()) {
+
 		click(btnRev, "Reveal Key");
-		}else {
-			ExtentTestManager.setPassMessageInReport("Reveaval key is not displayed");
-		}
+
 	}
+	public int reSize() throws InterruptedException {
+        Thread.sleep(3000);
+       return getElementsList(btnRev, "").size();
+   }
 
 	public void getPublicKey() {
 		ExtentTestManager.setInfoMessageInReport(getText(lblPublicKey, "Public Key"));
@@ -244,6 +246,12 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 
 	public void clickDownloadAgreement() {
 		click(lblDownload, "Download PDF");
+	}
+
+	private By lbl = By.xpath("//span[text()='You do not have any transactions.']");
+
+	public int getNoTransactionSize() {
+		return getElementsList(lbl, "").size();
 	}
 
 	// WebBook

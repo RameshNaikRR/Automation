@@ -93,7 +93,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public By getTextFieldElements(String elementId) {
-		return By.xpath(String.format("//input[@id='%s']", elementId));
+		return By.xpath(String.format("//input[@placeholder='%s']", elementId));
 
 	}
 
@@ -106,7 +106,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void fillUserId(String UserId) {
-		enterText(getTextFieldElements("User ID"), UserId, "User Id");
+		enterText(getTextFieldElements("ID"), UserId, "User Id");
 	}
 
 	public void fillNameOnAccount(String Name) {

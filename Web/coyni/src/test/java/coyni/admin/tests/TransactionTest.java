@@ -42,13 +42,13 @@ public class TransactionTest {
 			homePage.sideBarComponent().transactionPage().getStatus();
 //			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
 //					.verifyTableItemsCount(data.get("query"));
-			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent().verifyPageNumbersWithCount();
-			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
-					.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			homePage.sideBarComponent().transactionPage().verifyEntriesMessage();
-			ExtentTestManager.setInfoMessageInReport(
-					"Entries is displayed as " + homePage.sideBarComponent().transactionPage().getEntriesMessage());
-			homePage.sideBarComponent().transactionPage().clickOnPages();
+//			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent().verifyPageNumbersWithCount();
+//			homePage.sideBarComponent().transactionPage().paginationAndEntriesComponent()
+//					.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+//			homePage.sideBarComponent().transactionPage().verifyEntriesMessage();
+//			ExtentTestManager.setInfoMessageInReport(
+//					"Entries is displayed as " + homePage.sideBarComponent().transactionPage().getEntriesMessage());
+//			homePage.sideBarComponent().transactionPage().clickOnPages();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);

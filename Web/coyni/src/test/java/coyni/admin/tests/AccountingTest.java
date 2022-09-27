@@ -39,7 +39,7 @@ public class AccountingTest {
 		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
 		// Thread.sleep(2000);
 		homePage.sideBarComponent().accountTableComponent().clickSearch();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		int size = homePage.sideBarComponent().accountTableComponent().getSize();
 		if (size > 0) {
 			ExtentTestManager.setPassMessageInReport("Transaction Details are not found");
@@ -75,8 +75,8 @@ public class AccountingTest {
 			ExtentTestManager.setInfoMessageInReport("Filter button is disable because no transactions");
 		} else {
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
-					.fillWithdrawID(data.get("withdrawId"));
+//			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
+//					.fillWithdrawID(data.get("withdrawId"));
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
 					.fillReferenceId(data.get("refrenceId"));
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent()
