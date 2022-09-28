@@ -128,4 +128,7 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		return new AddNewPaymentMethodPopup();
 	}
 
+	public ExportFilesPage exportFilesPage() {
+		return new ExportFilesPage();
+	}
 }

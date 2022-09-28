@@ -247,7 +247,6 @@ public class TokenWalletTest {
 			tokenWalletPage.clickWallet(data.get("walletNum"));
 			tokenWalletPage.filterComponent().clickFilter();
 			tokenWalletPage.filterComponent().clickBuyTokenChkBx();
-			tokenWalletPage.filterComponent().clickBankAccountChkbx();
 			tokenWalletPage.filterComponent().clickInprogressChkbx();
 			tokenWalletPage.filterComponent().clickApplyFilter();
 			tokenWalletPage.transactionDetailsComponent().verifyBuyTokenType();
@@ -274,7 +273,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().getBuyTokenTotalAmount();
 			tokenWalletPage.transactionDetailsComponent().getBuyTokenAccountBalance();
 			tokenWalletPage.transactionDetailsComponent().verifyBankAccountInfoHeading();
-//			tokenWalletPage.transactionDetailsComponent().getNameOnAccount();
+			tokenWalletPage.transactionDetailsComponent().verifyAccountName();
 			tokenWalletPage.transactionDetailsComponent().getBankName();
 			tokenWalletPage.transactionDetailsComponent().getBankAccountNumber();
 			tokenWalletPage.transactionDetailsComponent().verifyActivityLogHeading();
@@ -1002,6 +1001,11 @@ public class TokenWalletTest {
 					.fillAmount(data.get("amount"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.clickConverter();
+			Thread.sleep(2000);
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.fillTransactionDesc(data.get("description"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
+//					.verifyNote(data.get("note"));
 			Thread.sleep(1000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
@@ -1092,16 +1096,6 @@ public class TokenWalletTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddDebitCardToInstantPay(String strParams) {
-		homePage.sideBarMenuComponent().clickBusinessSettings();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-				.clickAddNewPayment();
-		BusinessProfileTest.testAddCard(strParams, "debit");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testWithdrawToUSDViaInstantPayWithInvalidDetails(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1115,12 +1109,14 @@ public class TokenWalletTest {
 					.clickOnInstantPay();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().enterAmount(data.get("amount"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickTab();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().verifyErrMsg(data.get("errMessage"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().verifyErrMsg(data.get("errMessage"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1142,13 +1138,13 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().verifyLabelHeading(data.get("instantPayHeading"));
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickOnChangeLink();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().verifyLabelHeading(data.get("instantPayHeading"));
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnChangeLink();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickOnAddNewDebitCard();
-			BusinessProfileTest.testAddCard(strParams, "Debit");
+			BusinessProfileTest.testWithdrawAddDebitCard(strParams, "Debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDViaInstantPayWithAddNewDebitCard failed due to exception " + e);
@@ -1191,8 +1187,10 @@ public class TokenWalletTest {
 					.verifylblHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnInstantPay();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//					.withdrawviaInstantPayPopup().clickOnChangeLink();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.withdrawviaInstantPayPopup().clickOnChangeLink();
+			.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickEdit();
 			BusinessProfileTest.testEditDebitCard(strParams);
@@ -1217,9 +1215,9 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
 			Thread.sleep(2000);
 			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "In Progress");
-//			tokenWalletPage.transactionDetailsComponent()
-//					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
-//			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent()
+					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
 //			tokenWalletPage.transactionDetailsComponent()
 //					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
 //			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));
@@ -1308,7 +1306,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().clickTransactions("Withdraw", "Bank Account", "Cancelled");
 //			tokenWalletPage.transactionDetailsComponent()
 //					.verifyLblTransactionDetailsHeading(data.get("transactionDetailsHeading"));
-//			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
+			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
 			tokenWalletPage.transactionDetailsComponent()
 					.verifyLblTransactionSubType(data.get("lblTransactionSubtype"));
 			tokenWalletPage.transactionDetailsComponent().verifyLblReferenceID(data.get("lblReferenceID"));

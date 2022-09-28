@@ -8,19 +8,19 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ExportFilesPage extends BrowserFunctions {
-	private By lnkExportFiles = By.xpath("//span[text()='Export Files']");
+	private By lblExportFiles = By.xpath("//h1[text()='Export Files']");
 	private By lblExportID = By.xpath("//span[text()='EXPORT ID']");
 	private By lblReportName = By.xpath("//span[text()='REPORT NAME']");
 	private By lblExportDate = By.xpath("//span[text()='EXPORT DATE']");
 	private By lblDateRange = By.xpath("//span[text()='DATE RANGE']");
 	private By lblStatus = By.xpath("//span[text()='STATUS']");
-	private By idCheckBox = By.xpath("(//td[@class=\"cell-col-0\"])[1]");// Bulk Actions
+	private By idCheckBox = By.xpath("//th[@class='col-0 id']");// Bulk Actions
 	private By btnBulkAction = By.xpath("//div[text()='Bulk Actions']");// (//input[@type='checkbox'])[1]
 	private By chkBox = By.xpath("(//input[@type='checkbox'])[1]");
 	private By btnDownload = By.xpath("//data[@value='download']");
 	private By btnTrash = By.xpath("//data[@value='trash']");
 	private By btnApply = By.xpath("//div[text()='Apply']");
-	private By nextPage = By.xpath("//a[contains(@aria-label, 'next page') or text() = '❯']");
+	private By nextPage = By.xpath("(//a[contains(@class,'page-link')])[2]");
 	private By lblSuccess = By.xpath("//span[text()='Success']");
 
 	private By downloadIcon = By.xpath("(//span[@data-tip='Download'])[1]");
@@ -60,8 +60,8 @@ public class ExportFilesPage extends BrowserFunctions {
 		click(btnBulkAction, "Bulk Action Drop Down");
 	}
 
-	public void clickExportfiles() {
-		click(lnkExportFiles, "Export files");
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblExportFiles, "Export Files", expHeading);
 	}
 
 	public void exportIdView() {

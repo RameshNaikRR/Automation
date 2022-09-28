@@ -10,11 +10,11 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
 
 public class EcoSystemActivityComponent extends BrowserFunctions {
-	private By lblHeading = By.xpath("");
-	private By txtActivityDashboard = By.xpath("");
-	private By transactionType = By.xpath("");
-	private By transCount = By.xpath("");
-	private By volume = By.xpath("");
+	private By lblHeading = By.xpath("//h1[text()='Ecosytem Activity']");
+	private By txtActivityDashboard = By.xpath("//span[text()='Activity Dashboard']");
+	private By transactionType = By.xpath("//h3[text()='TRANSACTION TYPE']");
+	private By transCount = By.xpath("//h3[text()='TRANS. COUNT']");
+	private By volume = By.xpath("//h3[text()='VOLUME (CYN)']");
 	private By slectDropDownWallets = By.xpath("");
 	private By slectDropDownDeposits = By.xpath("");
 	private By dateRangeDropDown = By.xpath("");
@@ -40,6 +40,8 @@ public class EcoSystemActivityComponent extends BrowserFunctions {
 	private By entriesPerPageDropDown = By.xpath(
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
 	private By lblApiCallHistory = By.xpath("//h1[text()= 'API Call History']");
+	private By apicallscount = By
+			.xpath("//span[@class='text-base font-bold w-80 text-cgn8']");
 	private By lblMethod = By.xpath("//span[text()='METHOD']");
 	private By lblIpAddress = By.xpath("//span[text()='IP ADDRESS']");
 	private By lblUserName = By.xpath("//span[text()='USERNAME']");
@@ -48,6 +50,11 @@ public class EcoSystemActivityComponent extends BrowserFunctions {
 		String str = getText(lblBracesCount, "braces Count");
 		return str;
 
+	}
+
+	public void apiCallsCount() {
+		String callsCount = getText(apicallscount, "");
+		ExtentTestManager.setInfoMessageInReport(callsCount + " are Displayed");
 	}
 
 	private By firstPage = By.xpath("//a[contains(@aria-label, 'first page') or text() = '«']");
@@ -169,6 +176,10 @@ public class EcoSystemActivityComponent extends BrowserFunctions {
 
 	public void verifyHeading() {
 		new CommonFunctions().elementView(lblHeading, "Ecosysyem Activity");
+	}
+
+	public void verifyEcosystemHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "EcoSystem Activity", expHeading);
 	}
 
 	public void verifyActivityDashBoard() {

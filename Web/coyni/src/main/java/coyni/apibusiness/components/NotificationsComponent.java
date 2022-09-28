@@ -11,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class NotificationsComponent extends BrowserFunctions {
 
 	// added
-	private By notificationsIcon = By.xpath("//div[contains(@class,'internal-header__notification')]");
+	private By notificationsIcon = By.xpath("//button[@class='icon-notification-bold img-notifications']");
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
 	private By btnRequests = By.xpath("//button[contains(text(),'Pay/Req')]");
@@ -118,7 +118,7 @@ public class NotificationsComponent extends BrowserFunctions {
 //	}
 
 	public void clickNotifications() {
-		click(btnNotifications, "Notifications ");
+		click(notificationsIcon, "Notifications ");
 	}
 
 	public void clickRequests() {

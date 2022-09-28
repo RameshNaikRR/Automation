@@ -607,6 +607,53 @@ public class BusinessProfileTest {
 
 	}
 
+	public static void testWithdrawAddDebitCard(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
+			Thread.sleep(3000);
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillNameOnCard(data.get("nameOnCard"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+//					.validateCardBrand(data.get("cardType"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardExpiry(data.get("cardExpiry"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCVVorCVC(data.get("cvvNumber"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress1(data.get("address1"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress2(data.get("address2"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillCity(data.get("city"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().selectState(data.get("state"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().verifyCountry(data.get("country"));
+			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().clickNext();
+			Thread.sleep(4000);
+			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
+			apiAdminProfilePage.paymentMethodComponent().cardAddedSuccessfullyPopup().navigationComponent()
+					.clickClose();
+////			Thread.sleep(3000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent().switchToWindow();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().verifyHeading();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().clickOnVerify();
+//			apiAdminProfilePage.paymentMethodComponent().preAuthorizationPopup().successFailureComponent()
+//					.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
+
+	}
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testAddDebitCard(String strParams) {
@@ -1085,126 +1132,6 @@ public class BusinessProfileTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings Agreements failed due to Exception " + e);
 		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFiles(String strParams) {
-		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportFilesPage.clickExportfiles();
-			Thread.sleep(1000);
-			exportFilesPage.exportIdView();
-			exportFilesPage.exportDateView();
-			exportFilesPage.dateRangeView();
-			exportFilesPage.reportNameView();
-			exportFilesPage.statusView();
-			exportFilesPage.verifyIdFormat();
-			exportFilesPage.clickIconDownload();
-			exportFilesPage.successView();
-//			exportfilesPage.clickCheckBox();
-//			exportfilesPage.clickDownload();
-//			exportfilesPage.clickApply();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkDownload(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			exportFilesPage.clickExportfiles();
-			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			exportFilesPage.clickDownload();
-			exportFilesPage.clickApply();
-			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
-					data.get("expColour"));
-			// tokenAccountPage.verifyTableItemsCount(data.get("query"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkTrash(String strParams) {
-		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportFilesPage.clickExportfiles();
-			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			exportFilesPage.clickTrash();
-			exportFilesPage.clickApply();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	public void testExportSelectedTransactions(String strParams, String strParams1) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			tokenWalletPage.exportFilesPage().clickExport();
-			tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
-			if (strParams1.equalsIgnoreCase("Today")) {
-				tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickOnToday();
-			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
-				tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickOnYesterday();
-
-			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
-				tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickOn7Days();
-			} else if (strParams1.equalsIgnoreCase("Last Month")) {
-				tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
-			} else {
-				tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
-			}
-			Thread.sleep(2000);
-			tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickOnExport();
-			tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().verifyTitle(data.get("exportHeading"));
-			Thread.sleep(2000);
-			tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickExportPage();
-			tokenWalletPage.exportFilesPage().exportSelectedTransactionsPopup().clickClose();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionToday(String strParams) {
-		testExportSelectedTransactions(strParams, "Today");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionYesterday(String strParams) {
-		testExportSelectedTransactions(strParams, "Yesterday");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastSevenDays(String strParams) {
-		testExportSelectedTransactions(strParams, "Last Seven Days");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastMonth(String strParams) {
-		testExportSelectedTransactions(strParams, "Last Month");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionMonthToDate(String strParams) {
-		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
 	@Test

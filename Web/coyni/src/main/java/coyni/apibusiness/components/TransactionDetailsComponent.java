@@ -15,11 +15,12 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 //	private By verifylblTransactionType(String lblTransactionType) {
 //		return By.xpath(String.format("//span[.='Transaction Type']", lblTransactionType));
 //	}
-	private By lblTransactionSubType = By.xpath("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[1]");
+	private By lblTransactionSubType = By.xpath("//p[text()='Transaction Sub-type']");
+	private By verifyAccountname = By.xpath("//p[text()='Name On Account']");
 
 	// Reference ID is 2 and Deposit ID is 3 (Lables)
 	private By getLblIDheadings(String lblIdHeadings) {
-		return By.xpath(String.format("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[%s]", lblIdHeadings));
+		return By.xpath(String.format("(//p[@class='TokenBuyTokenDetails_row_title_sub__zlwva'])[%s]", lblIdHeadings));
 	}
 
 	private By getlblCreatedDate(String CreatedDateNum) {
@@ -344,7 +345,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public void getWithdrawAmount() {
 		String withdrawAmount = getText(getWithdrawAmountDetails("1"), "");
 //		if (!withdrawAmount.isEmpty()) {
-			ExtentTestManager.setInfoMessageInReport("Withdraw Amount: " + withdrawAmount);
+		ExtentTestManager.setInfoMessageInReport("Withdraw Amount: " + withdrawAmount);
 //		} else {
 //			ExtentTestManager.setWarningMessageInReport("Withdraw Amount: " + withdrawAmount);
 //		}
@@ -355,14 +356,14 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		if (!ProcessingFee.isEmpty()) {
 			ExtentTestManager.setInfoMessageInReport("Processing Fee: " + ProcessingFee);
 		} else {
-		ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
+			ExtentTestManager.setWarningMessageInReport("Processing Fee: " + ProcessingFee);
 		}
 	}
 
 	public void getWithdrawTotalAmount() {
 		String TotalAmount = getText(getWithdrawAmountDetails("3"), "");
 //		if (!TotalAmount.isEmpty()) {
-			ExtentTestManager.setInfoMessageInReport("Total Amount: " + TotalAmount);
+		ExtentTestManager.setInfoMessageInReport("Total Amount: " + TotalAmount);
 //		} else {
 //			ExtentTestManager.setWarningMessageInReport("Total Amount: " + TotalAmount);
 //		}
@@ -535,6 +536,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public void verifyBuyTokenType() {
 		new CommonFunctions().elementView(getType("Buy Token"), "Buy Token");
+	}
+
+	public void verifyAccountName() {
+		new CommonFunctions().elementView(verifyAccountname, "Name on Account");
 	}
 
 	public void verifyWithdrawType() {

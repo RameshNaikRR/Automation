@@ -460,21 +460,19 @@ public class BusinessSettingsTest {
 	}
 
 	@Test
-	public void testNotifications() {
+	@Parameters({ "strParams" })
+	public void testNotifications(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// businessProfilePage.userDetailsComponent().notificationsComponent()
-			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.topBarComponent().VerifyTitle(data.get("heading"));
 			Thread.sleep(2000);
-			businessProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			// businessProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
+//			businessProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
+//			businessProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
 			businessProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			Thread.sleep(2000);
 			// businessProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
 			businessProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
-			// businessProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
-			businessProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
-
+			businessProfilePage.countNotify();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}
@@ -485,17 +483,8 @@ public class BusinessSettingsTest {
 	public void testNotificationsCount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			System.out.println("id:" + navigationMenuPage.getCustId());
-			String dbCount = DBConnection.getDbCon()
-					.getColumnData(String.format(data.get("query"), navigationMenuPage.getCustId()));
-			System.out.println(dbCount);
-			String uiCount = businessProfilePage.userDetailsComponent().notificationsComponent().getUiCount();
-			if (uiCount.equals(dbCount)) {
-				ExtentTestManager.setPassMessageInReport("Count is verified");
-			} else {
-				ExtentTestManager.setFailMessageInReport("Count is not verified");
-			}
+			homePage.topBarComponent().VerifyTitle(data.get("heading"));
+			businessProfilePage.countNotify();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNotifications count failed due to Exception " + e);
 		}
@@ -507,8 +496,6 @@ public class BusinessSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			businessProfilePage.userDetailsComponent().notificationsComponent().clickRequests();
-			businessProfilePage.userDetailsComponent().notificationsComponent().verifybtnCancelView();
 			businessProfilePage.userDetailsComponent().notificationsComponent()
 					.verifyReminderfirstMsg(data.get("initialMsg"));
 			Thread.sleep(1000);
@@ -659,10 +646,10 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconDelete();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickRemove();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().toastComponent()
-					.verifyToast(data.get("title"), data.get("message"));
+					.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Remove Team member failed due to Exception " + e);
+					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
 		}
 	}
 
@@ -770,7 +757,6 @@ public class BusinessSettingsTest {
 					.verifyAPIKey(data.get("apiKeyHeading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyApiKeyView();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPIEvents();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPICount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Business Settings API Keys  failed due to Exception " + e);

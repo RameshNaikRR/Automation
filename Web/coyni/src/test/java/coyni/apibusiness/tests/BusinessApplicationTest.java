@@ -120,31 +120,31 @@ public class BusinessApplicationTest {
 			String[] firstName = data.get("firstName").split(",");
 			String[] lastName = data.get("lastName").split(",");
 			String[] ownerShip = data.get("ownerShip").split(",");
-			int i=0;
+			int i = 0;
 			String num = Integer.toString(i + 1);
 			int num1 = i;
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillFirstName(data.get("firstName"),0);
+					.fillFirstName(data.get("firstName"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillLastName(data.get("lastName"),0);
+					.fillLastName(data.get("lastName"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillDateOfBirth(data.get("dateOfBirth"),0);
+					.fillDateOfBirth(data.get("dateOfBirth"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillSocialSecurityNum(data.get("ssn_ein_tin"),0);
+					.fillSocialSecurityNum(data.get("ssn_ein_tin"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillOwnerShip(data.get("ownerShip"),0);
+					.fillOwnerShip(data.get("ownerShip"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress1(data.get("addressline1"),0);
+					.fillAddress1(data.get("addressline1"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress2(data.get("addressline2"),0);
+					.fillAddress2(data.get("addressline2"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillCity(data.get("city"),0);
+					.fillCity(data.get("city"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.selectState(data.get("state"),0);
+					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"),0);
+					.fillZipCode(data.get("zipCode"), 0);
 			Thread.sleep(6000);
-			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i],num1);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
 					data.get("fileName"));
 			Thread.sleep(20000);
@@ -679,6 +679,30 @@ public class BusinessApplicationTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformation failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessApplicationArrow();
+			sideBarMenuComponent.clickContinueApplication();
+			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+			sideBarMenuComponent.bankAccountPage().getAccountName();
+			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("CnfrmAccName"));
+			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+			sideBarMenuComponent.bankAccountPage().clickNext();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
 		}
 	}
 

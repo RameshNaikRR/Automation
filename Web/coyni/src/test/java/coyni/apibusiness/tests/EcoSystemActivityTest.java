@@ -29,16 +29,21 @@ public class EcoSystemActivityTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testEcosysyemActivityDashBoardView(String strParams) {
-
-//		homePage.sideBarMenuComponent().clickEcosystemActivity();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyHeading();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyActivityDashBoard();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyTransactionType();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyTransCount();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyVolume();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickDateRange();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickWallets();
-		homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickDeposits();
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickEcosystemActivity();
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyHeading();
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyEcosystemHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyActivityDashBoard();
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyTransactionType();
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyTransCount();
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyVolume();
+//			homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickDateRange();
+//			homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickWallets();
+//			homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickDeposits();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testTransactionList failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -125,133 +130,12 @@ public class EcoSystemActivityTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportFiles(String strParams) {
-		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportfilesPage.clickExportfiles();
-			Thread.sleep(1000);
-			exportfilesPage.exportIdView();
-			exportfilesPage.exportDateView();
-			exportfilesPage.dateRangeView();
-			exportfilesPage.reportNameView();
-			exportfilesPage.statusView();
-			exportfilesPage.verifyIdFormat();
-			exportfilesPage.clickIconDownload();
-			exportfilesPage.successView();
-//			exportfilesPage.clickCheckBox();
-//			exportfilesPage.clickDownload();
-//			exportfilesPage.clickApply();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkDownload(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			exportfilesPage.clickExportfiles();
-			Thread.sleep(2000);
-			exportfilesPage.clickCheckBox();
-			exportfilesPage.clickBulkActionDropDown();
-			exportfilesPage.clickDownload();
-			exportfilesPage.clickApply();
-			exportfilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
-					data.get("expColour"));
-			// tokenAccountPage.verifyTableItemsCount(data.get("query"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkTrash(String strParams) {
-		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			exportfilesPage.clickExportfiles();
-			Thread.sleep(2000);
-			exportfilesPage.clickCheckBox();
-			exportfilesPage.clickBulkActionDropDown();
-			exportfilesPage.clickTrash();
-			exportfilesPage.clickApply();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
-		}
-	}
-
-	public void testExportSelectedTransactions(String strParams, String strParams1) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			homePage.sideBarMenuComponent().exportfilesPage().clickExport();
-			homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup()
-					.verifyHeading(data.get("heading"));
-			if (strParams1.equalsIgnoreCase("Today")) {
-				homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickOnToday();
-			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
-				homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickOnYesterday();
-
-			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
-				homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickOn7Days();
-			} else if (strParams1.equalsIgnoreCase("Last Month")) {
-				homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
-			} else {
-				homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
-			}
-			Thread.sleep(2000);
-			homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickOnExport();
-			homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup()
-					.verifyTitle(data.get("exportHeading"));
-			Thread.sleep(2000);
-			homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickExportPage();
-			homePage.sideBarMenuComponent().exportfilesPage().exportSelectedTransactionsPopup().clickClose();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionToday(String strParams) {
-		testExportSelectedTransactions(strParams, "Today");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionYesterday(String strParams) {
-		testExportSelectedTransactions(strParams, "Yesterday");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastSevenDays(String strParams) {
-		testExportSelectedTransactions(strParams, "Last Seven Days");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastMonth(String strParams) {
-		testExportSelectedTransactions(strParams, "Last Month");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionMonthToDate(String strParams) {
-		testExportSelectedTransactions(strParams, "Month to Date");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testEcosystemActivityAPICallHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickEcosystemActivity();
 			homePage.sideBarMenuComponent().ecoSystemActivityComponent().verifyAPIHeading(data.get("apiHeading"));
+			homePage.sideBarMenuComponent().ecoSystemActivityComponent().apiCallsCount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);

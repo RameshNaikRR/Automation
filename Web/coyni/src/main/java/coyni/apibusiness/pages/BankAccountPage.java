@@ -9,12 +9,22 @@ import org.openqa.selenium.By;
 import coyni.api.business.popups.AddBankAccountPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class BankAccountPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h4[text()='Add Bank Account']");
+	private By lblHeading = By.xpath("//div[text()='Add Bank Account']");
 	private By lnkLearnMore = By.xpath("//strong[text()='Learn More']");
-	private By lblAddBankAccountDesc = By.xpath("//p[@class='text-sm text-cgy13 leading-5']");
+	private By lblAddBankAccountDesc = By.xpath("//span[contains(text(),'Please add your')]");
+	private By lblFindAccount = By.xpath("//h2[contains(text(),'Where to Find')]");
+	private By findAccDesc = By.xpath("//p[contains(text(),'You can find your')]");
+	private By btnAccountBack = By.xpath("(//button[text()='Back'])[1]");
+	private By selfEnd = By.cssSelector(".self-end");
+	private By lblAccountName = By.xpath("//input[@id='accountName']");
+	private By routingNum = By.xpath("//input[@id='routingNumber']");
+	private By confirmRoutNum = By.xpath("//input[@id='confirmRoutingNumber']");
+	private By AccountNumber = By.xpath("//input[@id='accountNumber']");
+	private By cnfrmAccNum = By.xpath("//input[@id='confirmAccountNumber']");
 	private By btnImReady = By.xpath("//button[text()='I’m Ready']");
 	private By btnNext = By.xpath("//a[@id='acctForm:addFiNext']");
 	private By lnkExit = By.xpath("//Strong[text()='Exit']");
@@ -26,7 +36,7 @@ public class BankAccountPage extends BrowserFunctions {
 	private By btnSelectAnotherInst = By.xpath("//a[@id='acctForm:selectFI']");
 	private By btnBankNext = By.xpath("//a[@id='acctForm:addFiNext']");
 	private By chkbxBank = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
-	private By NextButton = By.xpath(" ");
+	private By NextButton = By.xpath("//button[text()='Next']");
 	private By informationAboutFiesrvHdg = By.xpath("//h1[text()='Information About Fiserv']");
 	private By lblAddBankAccount = By.xpath("//h1[text()='Add Bank Account']");
 	private By lblDoNotNavigate = By.xpath("//h2[text()='Do Not Navigate Away From This Page']");
@@ -42,8 +52,45 @@ public class BankAccountPage extends BrowserFunctions {
 		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
 
+	public void getAccountName() {
+		String accName = getText(lblAccountName, "");
+		ExtentTestManager.setInfoMessageInReport(accName + "is displayed");
+	}
+
+	public void enterAccName(String accName) {
+		enterText(lblAccountName, "Account Name", accName);
+	}
+
+	public void enterRoutingNum(String routingNumber) {
+		enterText(routingNum, "Routing Number", routingNumber);
+	}
+
+	public void enterConfrmRouteNum(String cnfrmRoutingNum) {
+		enterText(confirmRoutNum, "Confirm Routing Number", cnfrmRoutingNum);
+	}
+
+	public void enterAccountNum(String AccNum) {
+		enterText(AccountNumber, "Account Number", AccNum);
+	}
+
+	public void enterConfrmAccNum(String cnfrmAccNumber) {
+		enterText(cnfrmAccNum, "Confirm Account Number", cnfrmAccNumber);
+	}
+
+	public void clickNext() {
+		click(NextButton, "Next");
+	}
+
+	public void selfEnd() {
+		click(selfEnd, "Self-End");
+	}
+
 	public void verifyLabelHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", heading);
+	}
+
+	public void verifyFindAccHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblFindAccount, "Heading", heading);
 	}
 
 	public void clickLearnMore() {
@@ -54,12 +101,12 @@ public class BankAccountPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblAddBankAccountDesc, AddBankAccountDesc, "Add Bank Account Desc");
 	}
 
-	public void clickImReady() {
-		click(btnImReady, "IM Ready");
+	public void VerifyFindAccountDesc(String findAccountDesc) {
+		new CommonFunctions().verifyLabelText(findAccDesc, findAccountDesc, "Add Bank Account Desc");
 	}
 
-	public void clickNext() {
-		click(btnNext, "Next");
+	public void clickImReady() {
+		click(btnImReady, "IM Ready");
 	}
 
 	public void clickExit() {
