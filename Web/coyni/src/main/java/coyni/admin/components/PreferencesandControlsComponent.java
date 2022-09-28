@@ -82,9 +82,9 @@ public class PreferencesandControlsComponent extends BrowserFunctions {
 		click(btnBuyTokensexternalBankAccount, "BuyToken ExternalBankAccount");
 		Thread.sleep(1000);
 		
-		click(btnPaymentCreditCard, "Payment Credit Card");
-		click(btnPaymentDebitCard,"Payment Debit Card");
-		click(btnPaymentExternalBankAccount, "Payment ExternalBankAccount");
+//		click(btnPaymentCreditCard, "Payment Credit Card");
+//		click(btnPaymentDebitCard,"Payment Debit Card");
+//		click(btnPaymentExternalBankAccount, "Payment ExternalBankAccount");
 	}
 	
 	public void clickSave() {

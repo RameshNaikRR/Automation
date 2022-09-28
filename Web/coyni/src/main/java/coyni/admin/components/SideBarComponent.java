@@ -46,7 +46,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickUnderWriting() {
-		click(getSideBarItems("UnderWriting"), "UnderWriting");
+		click(getSideBarItems("Underwriting"), "UnderWriting");
 	}
 
 	public void clickDisputes() {
@@ -250,7 +250,7 @@ public class SideBarComponent extends BrowserFunctions {
 	public AccountLimitsComponent accountLimitsComponent() {
 		return new AccountLimitsComponent();
 	}
-	
+
 	public UnderWritingPersonalComponent underWritingPersonalComponent() {
 		return new UnderWritingPersonalComponent();
 	}

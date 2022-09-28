@@ -192,6 +192,50 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testIndividualSideBarView Failed due to Exception " + e);
 		}
 	}
+	@Test
+    @Parameters({ "strParams" })
+    public void testIndividualUserDetailsView(String strParams) {
+        try {
+            Map<String, String> data = Runner.getKeywordParameters(strParams);
+            homePage.sideBarComponent().clickProfiles();
+            homePage.sideBarComponent().clickPersonals();
+            homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+            Thread.sleep(2000);
+            homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+            Thread.sleep(4000);
+            int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoRecSize();
+            if(Size==0) {
+            homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .verifyID(data.get("expID"));
+            // homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+            // .clickUserDetails();
+            Thread.sleep(2000);
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().verifyHeading(data.get("expUserHeading"));
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().verifyUserName(data.get("userName"));
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().verifyAccountID(data.get("expAccountID"));
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().verifyAccountStatus(data.get("expAccountStatus"));
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().getPhoneNumber();
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().getEmail();
+            homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+                    .userDetailsComponent().getAddress();
+            }
+            else {
+                ExtentTestManager.setPassMessageInReport("No data found ");
+            }
+
+
+
+       } catch (Exception e) {
+            ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
+        }
+    }
 
 	@Test
 	@Parameters({ "strParams" })
@@ -240,43 +284,7 @@ public class ProfilesTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testIndividualUserDetailsView(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickProfiles();
-			homePage.sideBarComponent().clickPersonals();
-			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
-			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
-			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.verifyID(data.get("expID"));
-			// homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-			// .clickUserDetails();
-			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().verifyHeading(data.get("expUserHeading"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().verifyUserName(data.get("userName"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().verifyAccountID(data.get("expAccountID"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().verifyAccountStatus(data.get("expAccountStatus"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().getPhoneNumber();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().getEmail();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.userDetailsComponent().getAddress();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testIndividualUserDetailsView Failed due to Exception " + e);
-		}
-	}
+	
 
 	@Test
 	@Parameters({ "strParams" })

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
@@ -120,5 +122,6 @@ public class AuthyComponent extends BrowserFunctions {
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
+	
 
 }

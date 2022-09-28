@@ -14,12 +14,11 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	private By lblDate = By.xpath("//tr//td[contains(@class,'updatedDate')]");
 	private By lblCustomerId = By.xpath("//tr//td[contains(@class,'customerId')]");
 	private By lblCustomerName = By.xpath("//tr//td[contains(@class,'customerFullName')]");
-	private By lblCaseStatus = By.xpath("//tr//div[contains(text(),'New')]");
 	private By lblDueDate = By.xpath("//div[contains(@class,'PersonalUsers_dueFont')]");
     private By lblHeading = By.xpath("//span[text()='Underwriting - Personal']");
     private By btnInReview = By.xpath("//button//div[contains(text(),'In Review')]");
 	
-	
+    private By lblCaseStatus = By.xpath(" //span[contains(text(), 'case Status')]");
 	
 		
 	

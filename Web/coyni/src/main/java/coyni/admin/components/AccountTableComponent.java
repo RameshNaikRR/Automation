@@ -62,6 +62,12 @@ public class AccountTableComponent extends BrowserFunctions {
 		}
 	}
 
+	private By lblNoRecord = By.xpath("//span[text()='No Records Found']");
+
+	public int getNoRecSize() {
+		return getElementsList(lblNoRecord, "").size();
+	}
+
 	public void verifyLabelHeading(String labelHeading) {
 		new CommonFunctions().verifyLabelText(lblBatchDetails, "label heading", labelHeading);
 
@@ -154,9 +160,9 @@ public class AccountTableComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(drpdwnReferenceId, "Reference Id");
 	}
 
-	public void verifyEnter8charIdView() { //String expBatchID
-		
-		//enterText(lblEnter8CharId, "BatchID", expBatchID);
+	public void verifyEnter8charIdView() { // String expBatchID
+
+		// enterText(lblEnter8CharId, "BatchID", expBatchID);
 		new CommonFunctions().elementView(lblEnter8CharId, "Enter8CharId");
 	}
 
@@ -186,7 +192,7 @@ public class AccountTableComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getTableColumns("In Progress"), "in Progress");
 		new CommonFunctions().elementView(getTableColumns("Paid"), "paid");
 		new CommonFunctions().elementView(getTableColumns("Failed"), "Failed");
-		//new CommonFunctions().elementView(getTableColumns("Pending"), "Pending");
+		// new CommonFunctions().elementView(getTableColumns("Pending"), "Pending");
 		new CommonFunctions().elementView(getTableColumns("Status"), "Status");
 	}
 
@@ -224,6 +230,7 @@ public class AccountTableComponent extends BrowserFunctions {
 	public void clickAction() {
 		click(btnAction, "Action");
 	}
+
 	private By lblText = By.xpath("//span[text()='It seems we can’t find any results based on your search.']");
 
 	public int getSize() {
