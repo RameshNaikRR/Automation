@@ -20,8 +20,8 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginPage extends BrowserFunctions {
 
-	private By txtEmail = By.name("email");
-	private By txtPassword = By.name("password");
+	private By txtEmail = By.xpath("//input[@id='Email']");
+	private By txtPassword = By.xpath("//input[@id='Password']");
 	private By lnkForgotEmail = By.xpath("//button[text()='Forgot Email?']");
 	private By lnkForgotPassword = By.xpath("//button[text()='Forgot Password?']");
 	private By btnNext = By.xpath("//button[text()='Next']");

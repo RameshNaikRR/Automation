@@ -1,6 +1,8 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.ToastComponent;
@@ -9,6 +11,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupPage extends BrowserFunctions {
+	public static WebDriver driver;
+	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By lnkBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]");
 	private By lnkLogin = By.xpath("//button[contains(text(),'Log In')]");
 	private By lblCreateAccount = By.cssSelector(".disclaimer");
@@ -32,6 +36,7 @@ public class SignupPage extends BrowserFunctions {
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By chkBox = By.cssSelector(".custom-checkbox ");
+	private By termsOfService = By.xpath("(//p[contains(text(),'Terms of Service')])[1]");
 	private By eyeIconCreatePassword = By.xpath(
 			"(//button[@class='icon-button  icon-password-hide-new  view-password text-cgy2 hover:text-cgy3'])[1]");
 	private By eyeIconConfirmPassword = By.xpath(
@@ -76,6 +81,16 @@ public class SignupPage extends BrowserFunctions {
 //	}
 	public void fillCreatePassword1(String createPassword) {
 		enterText(txtCreatePassword, createPassword, "Create Password");
+	}
+
+	public void clickOnTermsOfService() {
+		click(termsOfService, "Terms Of Service");
+
+	}
+
+	public void clickOnCheckBox() {
+		click(checkbox, "Check Box");
+
 	}
 
 	public void clickLogin() {
@@ -343,5 +358,18 @@ public class SignupPage extends BrowserFunctions {
 
 	public CreatePersonalAccountPage createPersonalAccountPage() {
 		return new CreatePersonalAccountPage();
+	}
+
+	public void scrollDownTermsOfService() {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollBy(0,1112)");
+
+	}
+
+	public void scrollDownPrivacyPolicy() {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollBy(0,1112)");
+		click(checkbox, "checkBox");
+
 	}
 }

@@ -3,10 +3,17 @@ package coyni.merchant.pages;
 import org.openqa.selenium.By;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class GetHelpPage extends BrowserFunctions {
 
 	private By lblHeading = By.cssSelector(".header>span");
+
+	private By lblContent = By.xpath("//p[text()='Need help with coyni?']");
+
+	private By getHelpContent = By.xpath("(//p['text-[16px'])[2]");
+
+	private By lblMessage = By.xpath("(//p['text-[14px]'])[3]");
 
 	private By btnGetHelp = By.xpath("(//span[text()='Get Help'])[1]");
 
@@ -87,6 +94,21 @@ public class GetHelpPage extends BrowserFunctions {
 		click(country, "Country");
 		click(getElement(Country), Country);
 
+	}
+
+	public void getContent() {
+		String content = getText(lblContent, "Content");
+		ExtentTestManager.setInfoMessageInReport("Get Help : " + content);
+	}
+
+	public void getContentHelp() {
+		String contentHelp = getText(getHelpContent, "Content");
+		ExtentTestManager.setInfoMessageInReport("Get Help : " + contentHelp);
+	}
+
+	public void getMessage() {
+		String message = getText(lblMessage, "Message");
+		ExtentTestManager.setInfoMessageInReport("Get Help Message : " + message);
 	}
 
 	public void fillPhoneNumber(String PhoneNumber) {

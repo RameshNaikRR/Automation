@@ -32,7 +32,7 @@ public class LoginTest {
 	public void testLoginView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.verifyEmailView();
 			loginPage.verifyPasswordView();
@@ -71,7 +71,7 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -89,7 +89,7 @@ public class LoginTest {
 	public void testLoginInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -112,7 +112,7 @@ public class LoginTest {
 	public void testLoginTerminatedUser(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -131,7 +131,7 @@ public class LoginTest {
 	public void testLoginWithUnverifiedUser(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -150,7 +150,7 @@ public class LoginTest {
 	public void testLoginWithInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -175,7 +175,7 @@ public class LoginTest {
 	public void testLoginWithPhoneNumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -195,7 +195,7 @@ public class LoginTest {
 	public void testLoginWithResendOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -215,7 +215,7 @@ public class LoginTest {
 	public void testLoginWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -239,7 +239,7 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -262,7 +262,7 @@ public class LoginTest {
 	public void testForgotEmailWithResendOption(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -288,7 +288,7 @@ public class LoginTest {
 	public void testForgotEmailWithInvalidPhonenumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -313,7 +313,7 @@ public class LoginTest {
 	public void testForgotEmailWithInvalidFirstAndLastName(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -341,7 +341,7 @@ public class LoginTest {
 	public void testForgotEmailwithBackActions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -368,7 +368,7 @@ public class LoginTest {
 	public void testForgotEmailWithPhoneNumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -395,7 +395,7 @@ public class LoginTest {
 	public void testForgotPassword(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+			//homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -424,7 +424,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -445,7 +445,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -488,7 +488,7 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidPasswordFiled(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
@@ -515,7 +515,7 @@ public class LoginTest {
 	public void testForgotPasswordWithResendOption(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));

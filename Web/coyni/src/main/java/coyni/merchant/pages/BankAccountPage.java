@@ -13,6 +13,11 @@ import ilabs.WebFramework.BrowserFunctions;
 public class BankAccountPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h4[text()='Add Bank Account']");
+	private By txtnameOnBankAccount = By.name("fullName");
+	private By txtRoutingNumber = By.xpath("//input[contains(@id,'routingNumber')]");
+	private By txtConfirmRoutingNumber = By.xpath("//input[contains(@name,'confirmRouting')]");
+	private By txtCheckingAccountNumber = By.xpath("//input[contains(@id,'accountNumber')]");
+	private By txtConfirmAccountNumber = By.xpath("//input[contains(@id,'confirmAccountNumber')]");
 	private By lblBankAccount = By.xpath("//h6[text()='Bank Account']");
 	private By lnkLearnMore = By.xpath("//strong[text()='Learn More']");
 	private By lblAddBankAccountDesc = By.xpath("//p[@class='text-sm text-cgy13 leading-5']");
@@ -88,6 +93,26 @@ public class BankAccountPage extends BrowserFunctions {
 		click(lnkBank, "Bank");
 	}
 
+	public void fillNameOnBankAccount(String bankName) {
+		enterText(txtnameOnBankAccount, bankName, "bankName");
+	}
+
+	public void fillRoutingNumber(String routingNumber) {
+		enterText(txtRoutingNumber, routingNumber, "Routing Number");
+	}
+
+	public void fillConfirmRoutingNumber(String confirmRoutingNumber) {
+		enterText(txtConfirmRoutingNumber, confirmRoutingNumber, "Confirm Routing Number");
+	}
+
+	public void fillAccountNumber(String accountNumber) {
+		enterText(txtCheckingAccountNumber, accountNumber, "Account Number");
+	}
+
+	public void fillConfirmAccountNumber(String confirmAccountNumber) {
+		enterText(txtConfirmAccountNumber, confirmAccountNumber, "Confirm Account Number");
+	}
+
 	public void fillBankName(String bankName) throws AWTException {
 		enterText(txtBankName, bankName, "bankName");
 		selectBank();
@@ -128,5 +153,4 @@ public class BankAccountPage extends BrowserFunctions {
 	public void switchTab() {
 		new CommonFunctions().switchTodWindow();
 	}
-
 }

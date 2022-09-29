@@ -91,7 +91,7 @@ public class MerchantApplicationTest {
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
-			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+			registrationStartPage.registrationDBAInformationPage().clickRetailLocation();
 			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
 			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
 			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
@@ -160,31 +160,33 @@ public class MerchantApplicationTest {
 			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
 
 			Thread.sleep(5000);
-			sideMenuBarComponent.clickContinueApplication();
-			Thread.sleep(5000);
-			sideMenuBarComponent.bankAccountPage().verifyHeadingView();
-			sideMenuBarComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-			Thread.sleep(5000);
-			sideMenuBarComponent.bankAccountPage().clickImReady();
-			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
-			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
-			Thread.sleep(15000);
-			sideMenuBarComponent.bankAccountPage().switchTab();
-			sideMenuBarComponent.bankAccountPage().fillBankName(data.get("bankName"));
-			Thread.sleep(1000);
-			sideMenuBarComponent.bankAccountPage().fillUserName(data.get("userName"));
-			sideMenuBarComponent.bankAccountPage().fillPassword(data.get("password1"));
-			Thread.sleep(5000);
+			// sideMenuBarComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+			// sideMenuBarComponent.bankAccountPage().fillNameOnBankAccount(data.get("bankAccountName"));
+			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
+			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
+			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			sideMenuBarComponent.bankAccountPage().clickEnter();
-			Thread.sleep(10000);
-			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
-			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
-			sideMenuBarComponent.bankAccountPage().switchTab();
-			WebDriver driver = DriverFactory.getDriver();
-			WebDriverWait wait = new WebDriverWait(driver, 120);
-			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h4[text()='Add Bank Account']")));
-			sideMenuBarComponent.bankAccountPage().clickBank();
+//			sideMenuBarComponent.bankAccountPage().clickImReady();
+//			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
+//			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
+//			Thread.sleep(20000);
+//			sideMenuBarComponent.bankAccountPage().switchTab();
+//			sideMenuBarComponent.bankAccountPage().fillBankName(data.get("bankName"));
+//			Thread.sleep(1000);
+//			sideMenuBarComponent.bankAccountPage().fillUserName(data.get("userName"));
+//			sideMenuBarComponent.bankAccountPage().fillPassword(data.get("password1"));
+//			Thread.sleep(5000);
+//			sideMenuBarComponent.bankAccountPage().clickEnter();
+//			Thread.sleep(10000);
+//			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
+//			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
+//			sideMenuBarComponent.bankAccountPage().switchTab();
+//			WebDriver driver = DriverFactory.getDriver();
+//			WebDriverWait wait = new WebDriverWait(driver, 120);
+//			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+//			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h4[text()='Add Bank Account']")));
+//			sideMenuBarComponent.bankAccountPage().clickBank();
 
 			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
 			registrationStartPage.merchantAgreementsPage().clickSave();
@@ -225,17 +227,18 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
 			registrationStartPage.applicationSummaryPage().clickSubmit();
 
-//			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
-//			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
-//			registrationStartPage.applicationSubmissionPage().verifyStatus();
-//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
-//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
+			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
+			registrationStartPage.applicationSubmissionPage().verifyStatus();
+			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
+			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
+
 			registrationStartPage.registrationCompanyInfoPage().verifyApplicationSummary();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Beneficial Owners  failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRegistrationTracker  failed due to Exception " + e);
 		}
 
 	}
@@ -352,26 +355,31 @@ public class MerchantApplicationTest {
 			Thread.sleep(5000);
 			sideMenuBarComponent.bankAccountPage().verifyHeadingView();
 			sideMenuBarComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-			Thread.sleep(5000);
-			sideMenuBarComponent.bankAccountPage().clickImReady();
-			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
-			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
-			Thread.sleep(15000);
-			sideMenuBarComponent.bankAccountPage().switchTab();
-			sideMenuBarComponent.bankAccountPage().fillBankName(data.get("bankName"));
-			Thread.sleep(1000);
-			sideMenuBarComponent.bankAccountPage().fillUserName(data.get("userName"));
-			sideMenuBarComponent.bankAccountPage().fillPassword(data.get("password1"));
-			Thread.sleep(5000);
+			sideMenuBarComponent.bankAccountPage().fillNameOnBankAccount(data.get("bankAccountName"));
+			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
+			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
+			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			sideMenuBarComponent.bankAccountPage().clickEnter();
-			Thread.sleep(10000);
-			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
-			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
-			sideMenuBarComponent.bankAccountPage().switchTab();
-			WebDriver driver = DriverFactory.getDriver();
-			WebDriverWait wait = new WebDriverWait(driver, 120);
-			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-			sideMenuBarComponent.bankAccountPage().clickBank();
+//			sideMenuBarComponent.bankAccountPage().clickImReady();
+//			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
+//			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
+//			Thread.sleep(15000);
+//			sideMenuBarComponent.bankAccountPage().switchTab();
+//			sideMenuBarComponent.bankAccountPage().fillBankName(data.get("bankName"));
+//			Thread.sleep(1000);
+//			sideMenuBarComponent.bankAccountPage().fillUserName(data.get("userName"));
+//			sideMenuBarComponent.bankAccountPage().fillPassword(data.get("password1"));
+//			Thread.sleep(5000);
+//			sideMenuBarComponent.bankAccountPage().clickEnter();
+//			Thread.sleep(10000);
+//			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
+//			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
+//			sideMenuBarComponent.bankAccountPage().switchTab();
+//			WebDriver driver = DriverFactory.getDriver();
+//			WebDriverWait wait = new WebDriverWait(driver, 120);
+//			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+//			sideMenuBarComponent.bankAccountPage().clickBank();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);

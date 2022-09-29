@@ -646,40 +646,60 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickIamReady();
-			Thread.sleep(5000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().verifyHeading();
-			Thread.sleep(8000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.switchToWindow();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.verifyNewWindowHeading();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.enterBankName(data.get("expBankName"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.clickOnBankName();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.enterUserName(data.get("expUserName"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.enterPassword(data.get("expPassword"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickNext();
-			Thread.sleep(5000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().unSelectBank();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.clickUncheckBank();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.switchToWindow();
-			Thread.sleep(2000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-					.successFailurePopupCardComponent().navigationComponent().clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillNameOnBankAccount(data.get("bankAccountName"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillRoutingNumber(data.get("routingNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillAccountNumber(data.get("accountNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.verifyHeading();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.verifyNameOnAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.verifyInstitution();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.verifyRoutingNumber();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.verifyAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+					.clickDone();
+
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.switchToWindow();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.verifyNewWindowHeading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.enterBankName(data.get("expBankName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.clickOnBankName();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.enterUserName(data.get("expUserName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.enterPassword(data.get("expPassword"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickNext();
+//			Thread.sleep(5000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().unSelectBank();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.clickUncheckBank();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.switchToWindow();
+//			Thread.sleep(2000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.successFailurePopupCardComponent().navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBankAccountWithOutPaymentMethod(String strParams) {

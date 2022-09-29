@@ -11,18 +11,21 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.SideMenuBarComponent;
+import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupTest {
+	LoginPage loginPage;
 	SignupPage signupPage;
 	SideMenuBarComponent sideMenuBarComponent;
 	PhoneVerificationComponent phoneVerificationComponent;
 
 	@BeforeMethod
 	public void init() {
+		loginPage = new LoginPage();
 		signupPage = new SignupPage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		phoneVerificationComponent = new PhoneVerificationComponent();
@@ -34,7 +37,8 @@ public class SignupTest {
 	public void testcreateAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
+			loginPage.clickSignUp();
+			// signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
 			signupPage.fillLastName(data.get("lastName"));
@@ -50,7 +54,7 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyEmailHeading(data.get("emailHeading"));
-			signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
+			// signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
@@ -67,6 +71,7 @@ public class SignupTest {
 	public void testcreateAccountWithNavigationOptions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
@@ -109,6 +114,7 @@ public class SignupTest {
 	public void testcreateAccountWithPhoneNumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
@@ -141,6 +147,7 @@ public class SignupTest {
 	public void testcreateAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -169,6 +176,7 @@ public class SignupTest {
 	public void testcreateAccountPhoneVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -218,6 +226,7 @@ public class SignupTest {
 	public void testcreateAccountEmailVerification(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
@@ -274,6 +283,7 @@ public class SignupTest {
 	public void testSignUpWithInvalidPhoneOTP(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickSignUp();
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.fillFirstName(data.get("firstName"));
