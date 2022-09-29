@@ -344,7 +344,7 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageDescription(data.get("businessTokenDescription"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransMethod();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
@@ -366,7 +366,6 @@ public class BusinessTransactionDetailsTest {
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.getWithdrawTokenInstantPayTransactionDetails();
-			;
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickInstantPayBack();
 
@@ -439,10 +438,11 @@ public class BusinessTransactionDetailsTest {
 				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNoMoreTransactions(data.get("noMoreTransactions"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyNoMoreTransactions(data.get("noMoreTransactions"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testVerifyBuyTokenBankTransaction failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
 		}
 	}
 }

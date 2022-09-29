@@ -1,6 +1,9 @@
 package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.BatchPayOutComponent;
@@ -45,6 +48,10 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickProfile() {
+//		WebDriver driver = DriverFactory.getDriver();		
+//        WebDriverWait wait = new WebDriverWait(driver, 120);
+////        wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(@resource-id,'profile_icon')]")));
 		new CommonFunctions().elementView(btnProfile, "Profile");
 		click(btnProfile, "Profile");
 	}

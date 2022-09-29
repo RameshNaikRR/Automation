@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class FeesComponent extends MobileFunctions {
 
-	private By headingFees = MobileBy.xpath("//*[contains(@text,'Fes')]");
+	private By headingFees = MobileBy.xpath("//*[contains(@text,'Fees')]");
 	private By headingTransactions = MobileBy.xpath("//*[@text='Transactions']");
 	private By lblSaleOrderDollr = MobileBy.xpath("//*[contains(@text,'Sale Order: Token')]/following-sibling::*[1]");
 	private By lblSaleOrder = MobileBy.xpath("//*[contains(@text,'Sale Order: Token')]/following-sibling::*[2]");

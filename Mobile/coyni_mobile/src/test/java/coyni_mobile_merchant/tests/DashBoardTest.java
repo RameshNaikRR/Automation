@@ -168,8 +168,16 @@ public class DashBoardTest {
 					.fillFromMerchantAmount(data.get("fromAmount"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToMerchantAmount(data.get("toAmount"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			Thread.sleep(1000);
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate(data.get("toDate"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
-
 			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
@@ -218,6 +226,15 @@ public class DashBoardTest {
 					.fillFromMerchantAmount(data.get("fromAmount"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToMerchantAmount(data.get("toAmount"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			Thread.sleep(1000);
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate(data.get("fromDate"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate(data.get("toDate"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
 
 			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
@@ -253,7 +270,6 @@ public class DashBoardTest {
 					.setFailMessageInReport("testFiltersForMerchantTransactions Failed due to this Exception" + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -365,7 +381,8 @@ public class DashBoardTest {
 				businessTokenAccountPage.batchPayOutComponent().getBatchPayoutSentto();
 				businessTokenAccountPage.batchPayOutComponent().slideToConfirm();
 				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().fillPin(data.get("pin"));
-				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().toastComponent().verifyToastMsg(data.get("batchToastMsg"));
+				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().toastComponent()
+						.verifyToastMsg(data.get("batchToastMsg"));
 				Thread.sleep(2000);
 				businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
@@ -400,7 +417,6 @@ public class DashBoardTest {
 			Thread.sleep(1000);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
-
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.selectFromDate(data.get("fromDate"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -435,8 +451,6 @@ public class DashBoardTest {
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
 			Thread.sleep(1000);
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -516,8 +530,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickCalendar();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().clickCalendar();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().selectFromDate(data.get("fromDate"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().selectToDate(data.get("toDate"));
@@ -584,8 +596,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickCalendar();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().clickCalendar();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().selectFromDate(data.get("fromDate"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().selectToDate(data.get("toDate"));
@@ -599,7 +609,6 @@ public class DashBoardTest {
 		}
 	}
 
-	
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTransactionsList(String strParams) {
@@ -609,13 +618,14 @@ public class DashBoardTest {
 			businessTokenAccountPage.clickTransactions();
 			businessTokenAccountPage.merchantTransactionsPage().verifyHeading(data.get("merchantHeading"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNoMoreTransactions(data.get("noMoreTransactions"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyNoMoreTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testFiltersForMerchantTransactions Failed due to this Exception" + e);
 		}
 	}
-	
+
 	@Test
 	public void testNotifications() {
 		try {
@@ -791,7 +801,5 @@ public class DashBoardTest {
 		}
 
 	}
-	
-	
 
 }

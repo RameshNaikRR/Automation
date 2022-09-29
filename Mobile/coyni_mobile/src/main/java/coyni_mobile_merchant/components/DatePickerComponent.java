@@ -9,7 +9,8 @@ public class DatePickerComponent extends MobileFunctions {
 	private By btnClose = By.xpath("//*[@name='Choose range']/preceding-sibling::XCUIElementTypeButton[@name='close']");
 	private By iconClear = By.xpath("//*[@name='icon clear']");
 	private By lblDateRange = By.xpath("//*[@name='icon clear']/preceding-sibling::*[1]");
-	private By btnCalendar = MobileBy.xpath("//*[contains(@resource-id,'datePickIV')]");
+	private By btnCalendar = MobileBy.xpath("//*[contains(@class,'ImageView')]");
+//	private By btnCalendar = MobileBy.xpath("//*[contains(@resource-id,'datePickET')]");
 
 	public By getDate(String monthAndYear, String day) {
 		return MobileBy.xpath(String.format(
@@ -22,9 +23,6 @@ public class DatePickerComponent extends MobileFunctions {
 		String day = fromDate.split("-")[0];
 		String monthAndYear = fromDate.split("-")[1];
 		scrollDownToElement(getDate(monthAndYear, day), "fromDate");
-//		TouchAction touch = new TouchAction(DriverFactory.getDriver());
-//		touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-//				.moveTo(PointOption.point(140, (int) (100))).release().perform();
 		System.out.println(day);
 		System.out.println(monthAndYear);
 		click(getDate(monthAndYear, day), fromDate);
@@ -41,8 +39,6 @@ public class DatePickerComponent extends MobileFunctions {
 	}
 
 	public void clickDone() {
-//		DriverFactory.getDriver().manage().window().getSize();
-//        scrollUpToElement(btnDone, "Done");
 		click(btnDone, "Done");
 	}
 
@@ -53,8 +49,9 @@ public class DatePickerComponent extends MobileFunctions {
 	public void clickClear() {
 		click(iconClear, "clear icon");
 	}
-	public void clickCalendar() {
-//		scrollDownToElement(btnCalendar, "Calendar");
+	public void clickCalendar() throws InterruptedException {
+		scrollDownToElement(btnCalendar, "Calendar");
+		Thread.sleep(3000);
     	click(btnCalendar, "Calendar");
     }
 	

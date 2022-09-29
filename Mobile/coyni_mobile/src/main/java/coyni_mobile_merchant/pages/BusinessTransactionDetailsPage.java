@@ -59,7 +59,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By btnCancelYes = MobileBy.xpath("//*[contains(@resource-id,'Yes')]");
 	private By btnReserveRelease = MobileBy.xpath("(//*[contains(@text,'Reserve Release')])[1]");
 	private By lblReservedOn = MobileBy.xpath("//*[contains(@resource-id,'reserved_on')]");
-	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release']");
+	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release')]");
 	private By btnInstantPayBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
 	private By btnBankSignetBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
 	private By btnBuyBankBack = MobileBy.xpath("//*[contains(@resource-id,'btbankprevious')]");

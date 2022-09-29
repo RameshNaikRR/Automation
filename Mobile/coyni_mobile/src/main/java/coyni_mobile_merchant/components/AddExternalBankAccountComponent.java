@@ -3,12 +3,14 @@ package coyni_mobile_merchant.components;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 
 import coyni_mobile.components.AddAccountsComponent;
 import coyni_mobile.pages.AllDonePage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
@@ -19,13 +21,14 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	private By btnBankNext = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lnkLearnMore = MobileBy.xpath("//*[contains(@resource-id,'tvLearnMore')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
-	private By btnBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-2')]|//*[contains(@resource-id,'ul-div-id-11')]");
+	private By btnBank = MobileBy
+			.xpath("//*[contains(@resource-id,'ul-div-id-2')]|//*[contains(@resource-id,'ul-div-id-11')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt145:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt149:0:password_')]");
 	private By btnNext = MobileBy.xpath("//*[@text='Next']");
-	private By chkbox = MobileBy.xpath("//*[contains(@resource-id,'acctForm:classifiList:2:accountCheckbox')]");
+	private By chkbox = MobileBy.xpath("//*[contains(@resource-id,'acctForm:classifiList:1:accountCheckbox')]");
 	private By chkbox1 = MobileBy.xpath("//*[contains(@resource-id,'acctForm:classifiList:0:accountCheckbox')]");
-	private By chkboxes = MobileBy.xpath("//*[contains(@text,'Other Asset: Other Assets')]");
+	private By chkboxes = MobileBy.xpath("//*[contains(@text,'Other Assets')]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(heading, "Heading").size() > 0) {
@@ -90,8 +93,15 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 		click(chkbox, "Check Box");
 	}
 
-	public int verifyBankAccounts() {
-		return DriverFactory.getDriver().findElements(chkboxes).size();
+	public int verifyBankAccounts() throws InterruptedException {
+		scrollDownToElement(btnNext, "Next");
+		Thread.sleep(4000);
+		int a = DriverFactory.getDriver().findElements(chkboxes).size();
+		ExtentTestManager.setInfoMessageInReport("Check Boxes  " + a);
+		return a;
+
+//		scrollDownToElement(btnNext, "Next");
+//		return DriverFactory.getDriver().findElement(chkboxes).getSize();
 	}
 
 	public void clickCheckBox1() {

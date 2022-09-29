@@ -33,6 +33,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[3]");
 	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
+	private By deleteSignet = MobileBy.xpath("(//*[contains(@text,'Signet Account')])[1]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
 
@@ -194,8 +195,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 				paymentMethod, last4digits));
 	}
 
-	public void clickSignetAccount(String last4digits) {
-		click(getSignetItems("Signet Account", last4digits), "Signet Account");
+	public void clickDeleteSignetAccount() {
+		click(deleteSignet, "Signet Account");
 	}
 
 	public void clickBankAccount() {

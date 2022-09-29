@@ -59,12 +59,41 @@ public class LoginTest {
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			LandingPage landingPage=new LandingPage();
 			landingPage.clickLogin();
+			LoginPage loginPage=new LoginPage();
 			loginPage.VerifyLoginPageView();
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
+			Thread.sleep(2000);
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+	
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginFor(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			LandingPage landingPage=new LandingPage();
+			landingPage.clickLogin();
+			LoginPage loginPage=new LoginPage();
+			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			loginPage.fillEmail(data.get("newEmail"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();

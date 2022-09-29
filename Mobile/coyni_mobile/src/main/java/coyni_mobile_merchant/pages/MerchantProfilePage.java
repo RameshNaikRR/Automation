@@ -10,6 +10,7 @@ import coyni_mobile_merchant.components.FeesComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PreferencesComponent;
 import coyni_mobile_merchant.popups.SetUpTouchIDPopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -43,10 +44,10 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
 	private By lblAccId = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
+	private By btnInformation = MobileBy.xpath("//*[contains(@text,'Information')]");
 
 	private By getDashBoardItems(String eleName) {
-		return By.xpath(String.format(
-				"//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
+		return By.xpath(String.format("//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
 
 	public void clickTogggle() {
@@ -148,6 +149,15 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public void clickCompanyInformation() {
 		click(lnkCompanyInformation, "Company Information");
+	}
+
+	public int verifyInformation() {
+//		scrollDownToElement(btnInformation, "Next")
+
+		int a = DriverFactory.getDriver().findElements(btnInformation).size();
+		ExtentTestManager.setInfoMessageInReport("elements" + a);
+		return a;
+
 	}
 
 	public void clickDBAInformation() {
@@ -268,6 +278,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	public SetUpTouchIDPopup setUpTouchIDPopup() {
 		return new SetUpTouchIDPopup();
 	}
+
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}

@@ -46,7 +46,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By recentTransType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessage')])[1]");
 
-	private By recentTransMethod = MobileBy.xpath("(//*[contains(@resource-id,'latestmessagTV')])[1]");
+	private By recentTranStatus = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[1]");
 
 	private By recentTransAmount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[1]");
 
@@ -156,9 +156,9 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(recentTransType));
 	}
 
-	public void getRecentTransMethod() {
+	public void getRecentTranStatus() {
 //		scrollDownToElement(lblAmount, "Amount");
-		ExtentTestManager.setInfoMessageInReport("Recent Transaction Method is " + getText(recentTransMethod));
+		ExtentTestManager.setInfoMessageInReport("Recent Transaction Method is " + getText(recentTranStatus));
 	}
 
 	public void getRecentTransactionType() {

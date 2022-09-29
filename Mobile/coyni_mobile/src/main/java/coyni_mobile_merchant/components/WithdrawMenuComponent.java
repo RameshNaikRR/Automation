@@ -56,22 +56,22 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	}
 	
 	public void clickInstantPay() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnInstantPay));
+//		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnInstantPay));
 		click(btnInstantPay, getText(btnInstantPay));
 	}
 
 	public void clickGiftCard() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnGiftCard));
+//		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnGiftCard));
 		click(btnGiftCard, getText(btnGiftCard));
 	}
 
 	public void clickBank() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnChooseWithdrawBank));
+//		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnChooseWithdrawBank));
 		click(btnChooseWithdrawBank, getText(btnChooseWithdrawBank));
 	}
 
 	public void clickSignetAccount() {
-		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnSignetAccount));
+//		ExtentTestManager.setInfoMessageInReport("Payment Method Name is : " + getText(btnSignetAccount));
 		click(btnSignetAccount, getText(btnSignetAccount));
 	}
 

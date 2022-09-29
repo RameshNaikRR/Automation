@@ -46,28 +46,30 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	}
 	public String getTeamMemberName() {
 		String str = getText(lblTeamMemberName);
-		ExtentTestManager.setInfoMessageInReport("Team Member Name is " + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Name is : " + str);
 		return str;
 	}
 
 	public void getTeamMemberStatus() {
 		String str = getText(lblTeamMemberStatus);
-		ExtentTestManager.setInfoMessageInReport("Team Member Status is " + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Status is : " + str);
 	}
 
 	public void getTeamMemberDesc() {
 		String str = getText(lblTeamMemberDesc);
-		ExtentTestManager.setInfoMessageInReport("Team Member Description is " + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Description is : " + str);
 	}
 
-	public void getEmail() {
+	public String getEmail() {
 		String str = getText(lblEmail);
 		ExtentTestManager.setInfoMessageInReport(str);
+		return str;
 	}
 
-	public void getPhoneNumber() {
+	public String getPhoneNumber() {
 		String str = getText(lblPhoneNumber);
 		ExtentTestManager.setInfoMessageInReport(str);
+		return str;
 	}
 
 	public void clickEdit() {
