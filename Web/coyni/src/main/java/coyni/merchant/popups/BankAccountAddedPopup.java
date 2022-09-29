@@ -3,6 +3,7 @@ package coyni.merchant.popups;
 import org.openqa.selenium.By;
 
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class BankAccountAddedPopup extends BrowserFunctions {
@@ -20,6 +21,10 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 	private By accountNumber = By.xpath("//span[contains(text(),'Account Number')]/following-sibling::*");
 
 	private By btnDone = By.xpath("//span[contains(text(),'Done')]");
+
+	private By btnBuyCoyni = By.xpath("//button[contains(text(),'Buy coyni')]");
+
+	private By btnWithdraw = By.xpath("//button[contains(text(),'Withdraw')]");
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "Headinf");
@@ -52,6 +57,14 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 	}
 
 	public void clickDone() {
-		click(btnDone, "Dones");
+		if (DriverFactory.getDriver().findElements(btnDone).size() > 0) {
+			click(btnDone, "Click Done");
+		} else if (DriverFactory.getDriver().findElements(btnBuyCoyni).size() > 0) {
+			click(btnBuyCoyni, "Buy Coyni");
+		} else {
+			click(btnWithdraw, "Withdraw");
+
+		}
+
 	}
 }

@@ -9,7 +9,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class BuyCoyniTokensPopup extends BrowserFunctions{
 	
-	private By txtAmount = By.xpath("//input[@name='cyn']");
+	private By txtAmount = By.xpath("//input[@id='cyn-amount-token']");
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy Coyni Tokens')]");
 	private By btnAddNewPaymentMethod = By.xpath("//span[contains(text(),'Add New Payment Method')]");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");

@@ -881,6 +881,7 @@ public class TokenAccountTest {
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
 			merchantSettingsTest.testAddExternalBankAccount(strParams);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
@@ -944,7 +945,6 @@ public class TokenAccountTest {
 					.clickConfirm();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.authyComponent().fillInput(data.get("code"));
-
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.transactionInProgessPopup().clickDone();
 
@@ -1117,7 +1117,8 @@ public class TokenAccountTest {
 					.clickSignet(data.get("signetNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickOutside();
+			Thread.sleep(5000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickCoyniConvertion();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
 					.enterMessage(data.get("description"));
 
@@ -1163,8 +1164,8 @@ public class TokenAccountTest {
 					.fillCity(data.get("city"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().addNewDebitCardPopup()
 					.verifyStateDrpDwn();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().addNewDebitCardPopup()
-					.clickStates();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().addNewDebitCardPopup()
+//					.clickStates();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().addNewDebitCardPopup()
 					.fillZipCode(data.get("zipCode"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().addNewDebitCardPopup()
@@ -1629,43 +1630,25 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
+			Thread.sleep(5000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-					.verifyHeading(data.get("externalBankHeading"));
-			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-					.verifyDescription(data.get("externalBankDescription"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+//					.verifyHeading(data.get("externalBankHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickAddNewBankAccountBtn();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyHeading();
+					.fillRoutingNumber(data.get("routingNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyFiservBankDescription();
+					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyLnkLearnMore();
+					.fillAccountNumber(data.get("accountNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.clickIamReady();
+					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup().clickAdd();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyHeading();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyDoNotNavigateLbl();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.verifyDescription();
-			Thread.sleep(10000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.switchToWindow();
-			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.enterBankName(data.get("bankName"));// CashEdge Test Bank (Agg) - Retail Non 2FA
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.clickOnBankName();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.enterUserName(data.get("bankUserName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.enterPassword(data.get("bankPassword"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
-					.unSelectBank();
+					.bankAccountAddedPopup().clickDone();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().navigationComponent().clickClose();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDAddExternalBankAccount failed due to this exception " + e);
@@ -1750,18 +1733,18 @@ public class TokenAccountTest {
 					.clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.getAmount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyLblBank();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyTransactions();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyLblBank();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyTransactions();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.clickConfirm();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyYourIdentityPopup().verifyHeading(data.get("verifyYourIdentityHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyYourIdentityPopup().verifyDescription();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-					.verifyYourIdentityPopup().verifyMsg();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyYourIdentityPopup().verifyHeading(data.get("verifyYourIdentityHeading"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyYourIdentityPopup().verifyDescription();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+//					.verifyYourIdentityPopup().verifyMsg();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.verifyYourIdentityPopup().authyComponent().fillInput(data.get("code"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
@@ -1781,14 +1764,21 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-					.verifyHeading(data.get("externalBankHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-					.verifyDescription(data.get("externalBankDescription"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+//					.verifyHeading(data.get("externalBankHeading"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+//					.verifyDescription(data.get("externalBankDescription"));
+			Thread.sleep(5000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickBank(data.get("number"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickNextBtn();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.clickAmount(data.get("amount"));
+			Thread.sleep(5000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickCoyniConvertion();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickTxtMsgField(data.get("message"));
+
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
@@ -1808,25 +1798,13 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-					.verifyHeading(data.get("externalBankHeading"));
-			Thread.sleep(2000);
+//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+//					.verifyHeading(data.get("externalBankHeading"));
+			Thread.sleep(5000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickDelete(data.get("number"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.verifyHeading(data.get("removePaymentMethodHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.verifyDescription();
-			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.verifyBank();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.clickOnRemove(); 
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.paymentMethodRemovesdSuccessfullyPopup().verifyHeading(data.get("paymentMethodRemovedHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.paymentMethodRemovesdSuccessfullyPopup().verifyWithdrawCoyniBtn();
-			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().removePaymentMethodPopup()
-					.paymentMethodRemovesdSuccessfullyPopup().clickWithdrawCoyniBtn();
+					.clickOnRemove();
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testWithdrawToUSDRemoveExternalBankAccount  failed due to exception " + e);

@@ -47,7 +47,6 @@ public class SignupTest {
 			Thread.sleep(1000);
 			signupPage.fillCreatePassword(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
-			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			signupPage.phoneVerificationComponent().verifyPhoneNumber();
@@ -56,6 +55,15 @@ public class SignupTest {
 					.verifyEmailHeading(data.get("emailHeading"));
 			// signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
+			Thread.sleep(10000);
+			signupPage.clickOnTermsOfService();
+			signupPage.scrollDownTermsOfService();
+			signupPage.clickOnCheckBox();
+			signupPage.clickNext();
+			Thread.sleep(10000);
+			signupPage.scrollDownTermsOfService();
+			signupPage.clickOnCheckBox();
+			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
 
