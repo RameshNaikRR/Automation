@@ -58,23 +58,23 @@ public class BankAccountPage extends BrowserFunctions {
 	}
 
 	public void enterAccName(String accName) {
-		enterText(lblAccountName, "Account Name", accName);
+		enterText(lblAccountName, accName,"Account Name");
 	}
 
 	public void enterRoutingNum(String routingNumber) {
-		enterText(routingNum, "Routing Number", routingNumber);
+		enterText(routingNum,routingNumber, "Routing Number");
 	}
 
 	public void enterConfrmRouteNum(String cnfrmRoutingNum) {
-		enterText(confirmRoutNum, "Confirm Routing Number", cnfrmRoutingNum);
+		enterText(confirmRoutNum,cnfrmRoutingNum, "Confirm Routing Number");
 	}
 
 	public void enterAccountNum(String AccNum) {
-		enterText(AccountNumber, "Account Number", AccNum);
+		enterText(AccountNumber,AccNum, "Account Number");
 	}
 
 	public void enterConfrmAccNum(String cnfrmAccNumber) {
-		enterText(cnfrmAccNum, "Confirm Account Number", cnfrmAccNumber);
+		enterText(cnfrmAccNum, cnfrmAccNumber,"Confirm Account Number");
 	}
 
 	public void clickNext() {

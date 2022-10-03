@@ -29,45 +29,15 @@ public class GetHelpTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			sideBarMenuComponent.clickGetHelp();
-			// getHelpPage.view();
-			Thread.sleep(3000);
-			// getHelpPage.fillFullName(data.get("fullName"));
-			getHelpPage.fillAccountIDNumber(data.get("accountID"));
-			getHelpPage.fillEmail(data.get("email"));
-			getHelpPage.selectCountry(data.get("country"));
-			getHelpPage.fillPhoneNumber(data.get("phoneNumber"));
-			getHelpPage.selectInquiryType(data.get("inquiryType"));
-			getHelpPage.selectdrpDwnCustomertopics(data.get("customerTopics"));
-			getHelpPage.fillDetails(data.get("details"));
-			// getHelpPage.clickOnFiles();
-			getHelpPage.clickOnSubmit();
-			getHelpPage.verifyMessage(data.get("getHelpmessage"));
-			getHelpPage.clickOnSubmitAgain();
-			getHelpPage.verifyHeading(data.get("expHeading"));
-
+			getHelpPage.verifyHeading(data.get("heading"));
+			getHelpPage.verifyCaption(data.get("caption"));
+			getHelpPage.verifyDescription();
+			getHelpPage.verifyHelpElements();
+			getHelpPage.verifyGetHelpElements();
 		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("testGetHelp is failed due to exception " + e);
 		}
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testGetHelpWithInvalidData(String strParams) throws InterruptedException {
-		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		sideBarMenuComponent.clickGetHelp();
-		getHelpPage.clickGetHelp();
-		// getHelpPage.view();
-		getHelpPage.fillFullName(data.get("fullName"));
-		getHelpPage.fillAccountIDNumber(data.get("accountID"));
-		getHelpPage.fillEmail(data.get("email"));
-		getHelpPage.selectCountry(data.get("country"));
-		getHelpPage.fillPhoneNumber(data.get("phoneNumber"));
-		getHelpPage.selectInquiryType(data.get("inquiryType"));
-		getHelpPage.selectdrpDwnCustomertopics(data.get("customerTopics"));
-		getHelpPage.fillDetails(data.get("details"));
-		// getHelpPage.clickOnFiles();
-		getHelpPage.clickOnSubmit();
-		getHelpPage.verifyErrorMessage(data.get("errMessage"));
-	}
 }

@@ -692,10 +692,55 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
 			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
-			sideBarMenuComponent.bankAccountPage().getAccountName();
+//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
 			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("CnfrmAccName"));
+			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+			sideBarMenuComponent.bankAccountPage().clickExit();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccountInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessApplicationArrow();
+			sideBarMenuComponent.clickContinueApplication();
+			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
+			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+			if (!data.get("errMsg").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"));
+			}
+			sideBarMenuComponent.bankAccountPage().clickExit();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccountValidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessApplicationArrow();
+			sideBarMenuComponent.clickContinueApplication();
+			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
 			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
 			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
 			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
