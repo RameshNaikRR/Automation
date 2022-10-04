@@ -1,17 +1,25 @@
 package coyni.merchant.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupPage extends BrowserFunctions {
-	public static WebDriver driver;
+	WebDriver driver = DriverFactory.getDriver();
+	WebDriverWait wait = new WebDriverWait(driver, 120);
+
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By lnkBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]");
 	private By lnkLogin = By.xpath("//button[contains(text(),'Log In')]");
@@ -47,9 +55,18 @@ public class SignupPage extends BrowserFunctions {
 	private String Email;
 	private String CreatePassword;
 	private String ConfirmPassword;
+	private By popupPDF = By.xpath("//div[contains(@class,'Agreements_apiData')]");
+	private By PDFpages = By.cssSelector(".react-pdf__Page");
+	private By PDFtermsOfServices = By.xpath("(//span[.='Agreement'])[1]");
+	private By PDFprivacyPolicy = By.xpath("(//span[.='Privacy'])[2]");
 
 	public void clickCheckBox() {
 		click(chkBox, "CheckBox");
+	}
+
+	public void clickOnTermsOfService() {
+		click(termsOfService, "Terms Of Service");
+
 	}
 
 	public void verifyBusinessAccountView() {
@@ -62,6 +79,11 @@ public class SignupPage extends BrowserFunctions {
 	public void verifyLoginView() {
 		new CommonFunctions().elementView(lnkLogin, "Login link");
 		new CommonFunctions().verifyCursorAction(lnkLogin, "Login");
+	}
+
+	public void clickOnCheckBox() {
+		click(checkbox, "Check Box");
+
 	}
 
 	public void verifyCreateAccountSubTitleView() {
@@ -81,16 +103,6 @@ public class SignupPage extends BrowserFunctions {
 //	}
 	public void fillCreatePassword1(String createPassword) {
 		enterText(txtCreatePassword, createPassword, "Create Password");
-	}
-
-	public void clickOnTermsOfService() {
-		click(termsOfService, "Terms Of Service");
-
-	}
-
-	public void clickOnCheckBox() {
-		click(checkbox, "Check Box");
-
 	}
 
 	public void clickLogin() {
@@ -360,16 +372,35 @@ public class SignupPage extends BrowserFunctions {
 		return new CreatePersonalAccountPage();
 	}
 
-	public void scrollDownTermsOfService() {
-		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("window.scrollBy(0,1112)");
-
+	public void scrollDownTermsOfService() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFtermsOfServices));
+		WebElement ele = getElement(popupPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(PDFpages, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (int i = 0; i <= noOfPages; i++) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
 	}
 
-	public void scrollDownPrivacyPolicy() {
-		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("window.scrollBy(0,1112)");
-		click(checkbox, "checkBox");
-
+	public void scrollDownPrivacyPolicy() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFprivacyPolicy));
+		WebElement ele = getElement(popupPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickOnCheckBox();
+		clickNext();
 	}
+
 }

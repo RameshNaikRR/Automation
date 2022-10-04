@@ -3,6 +3,7 @@ package coyni.merchant.tests;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,6 +15,7 @@ import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.SignupPage;
 import coyni.uitilities.CommonFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -33,9 +35,9 @@ public class SignupTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testcreateAccount(String strParams) {
 		try {
+			WebDriver driver = DriverFactory.getDriver();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.clickSignUp();
 			// signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
@@ -55,21 +57,15 @@ public class SignupTest {
 					.verifyEmailHeading(data.get("emailHeading"));
 			// signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
-			Thread.sleep(10000);
-			signupPage.clickOnTermsOfService();
+
 			signupPage.scrollDownTermsOfService();
 			signupPage.clickOnCheckBox();
 			signupPage.clickNext();
-			Thread.sleep(10000);
-			signupPage.scrollDownTermsOfService();
-			signupPage.clickOnCheckBox();
-			signupPage.clickNext();
+			signupPage.scrollDownPrivacyPolicy();
+
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
-
-		}
-
-		catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
 		}
 	}
