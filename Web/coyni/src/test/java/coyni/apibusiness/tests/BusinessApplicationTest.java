@@ -508,7 +508,7 @@ public class BusinessApplicationTest {
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().verifyDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
-			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+//			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
 			registrationStartPage.registrationDBAInformationPage().verifyCompanyEmail(data.get("companyEmail"));
 			registrationStartPage.registrationDBAInformationPage().verifyPhoneNumber(data.get("companyPhoneNumber"));
 			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
@@ -546,7 +546,7 @@ public class BusinessApplicationTest {
 			if (!data.get("elementName").equalsIgnoreCase("businessType")) {
 				registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
 			}
-			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+//			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
 			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
 			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
 			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
@@ -613,7 +613,7 @@ public class BusinessApplicationTest {
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().validateDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
-			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+//			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
 			registrationStartPage.registrationDBAInformationPage()
 					.validateCompanyServiceEmail(data.get("companyEmail"));
 			// registrationStartPage.registrationDBAInformationPage().validatePhoneNumber(data.get("companyPhoneNumber"));
@@ -626,8 +626,8 @@ public class BusinessApplicationTest {
 					.validateCity(data.get("city"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.selectState(data.get("state"));
-//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-//					.validateZipCode(data.get("zipCode"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.validateZipCode(data.get("zipCode"));
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
 //			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
 //					data.get("fileName"));
@@ -653,7 +653,7 @@ public class BusinessApplicationTest {
 			Thread.sleep(10000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
-			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+//			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
 			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
 			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
 			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
@@ -667,8 +667,8 @@ public class BusinessApplicationTest {
 
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
-
-			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
 			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
 					data.get("fileName"));
