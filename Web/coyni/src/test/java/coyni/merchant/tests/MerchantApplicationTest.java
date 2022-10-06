@@ -159,14 +159,12 @@ public class MerchantApplicationTest {
 			registrationStartPage.registrationCompanyInfoPage().verifyBankAccountInformation();
 			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
 
-			Thread.sleep(5000);
-			// sideMenuBarComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-			// sideMenuBarComponent.bankAccountPage().fillNameOnBankAccount(data.get("bankAccountName"));
 			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
 			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
 			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideMenuBarComponent.bankAccountPage().clickEnter();
+			sideMenuBarComponent.bankAccountPage().clickAdd();
+			sideMenuBarComponent.bankAccountPage().bankAccountAddedPopup().clickDone();
 //			sideMenuBarComponent.bankAccountPage().clickImReady();
 //			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
 //			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
@@ -360,7 +358,9 @@ public class MerchantApplicationTest {
 			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
 			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideMenuBarComponent.bankAccountPage().clickEnter();
+			sideMenuBarComponent.bankAccountPage().clickAdd();
+			sideMenuBarComponent.bankAccountPage().bankAccountAddedPopup().clickDone();
+			
 //			sideMenuBarComponent.bankAccountPage().clickImReady();
 //			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
 //			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();

@@ -56,8 +56,6 @@ public class ExportFilesTest {
 			exportFilesPage.clickBulkActionDropDown();
 			exportFilesPage.clickDownload();
 			exportFilesPage.clickApply();
-//			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
-//					data.get("expColour"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesBulkDownload failed due to exception ");

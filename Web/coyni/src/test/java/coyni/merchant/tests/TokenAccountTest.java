@@ -1478,44 +1478,6 @@ public class TokenAccountTest {
 
 	}
 
-	public void testWithdrawToUSDGiftCard(String strParams, String giftCard) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
-			if (giftCard.equalsIgnoreCase("Amazon")) {
-				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
-				Thread.sleep(1000);
-				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
-			} else {
-				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
-						.enterSearckey(data.get("searchKey1"));
-				tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
-			}
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
-			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
-					.verifyHeading1(data.get("authyHeading1"));
-			Thread.sleep(2000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
-					.fillInput(data.get("code"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
-					.verifySuccessHeading(data.get("successHeading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
-		}
-	}
-
 	public void testWithdrawToUSDGiftCardInvalid(String strParams, String giftCard) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1549,13 +1511,70 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDGiftCardWithAmazon(String strParams) {
-		testWithdrawToUSDGiftCard(strParams, "Amazon");
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+
+		} catch (
+
+		Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDGiftCardWithVisa(String strParams) {
-		testWithdrawToUSDGiftCard(strParams, "Visa");
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.verifyHeading1(data.get("authyHeading1"));
+			Thread.sleep(2000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+					.fillInput(data.get("code"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -1733,18 +1752,8 @@ public class TokenAccountTest {
 					.clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.getAmount();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.verifyLblBank();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.verifyTransactions();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.clickConfirm();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.verifyYourIdentityPopup().verifyHeading(data.get("verifyYourIdentityHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.verifyYourIdentityPopup().verifyDescription();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
-//					.verifyYourIdentityPopup().verifyMsg();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.verifyYourIdentityPopup().authyComponent().fillInput(data.get("code"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
@@ -1764,10 +1773,6 @@ public class TokenAccountTest {
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-//					.verifyHeading(data.get("externalBankHeading"));
-//			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
-//					.verifyDescription(data.get("externalBankDescription"));
 			Thread.sleep(5000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickBank(data.get("number"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickNextBtn();

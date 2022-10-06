@@ -85,23 +85,22 @@ public class SignupTest {
 			Thread.sleep(1000);
 			signupPage.fillCreatePassword(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
-			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-			// signupPage.phoneVerificationComponent().verifyPhoneNumber();//clickButtonGoBack
 			signupPage.phoneVerificationComponent().clickButtonGoBack();
 			Thread.sleep(2000);
-			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
-//			signupPage.phoneVerificationComponent().emailVerificationComponent()
-//					.verifyEmailHeading(data.get("emailHeading"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().clickButtonGoBack();
-			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
+			signupPage.scrollDownTermsOfService();
+			signupPage.clickOnCheckBox();
+			signupPage.clickNext();
+			signupPage.scrollDownPrivacyPolicy();
+
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
 
@@ -131,7 +130,6 @@ public class SignupTest {
 			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
-			// signupPage.phoneVerificationComponent().verifyPhoneNumber();//clickButtonGoBack
 			signupPage.phoneVerificationComponent().clickButtonGoBack();
 			signupPage.clickCheckBox();
 			signupPage.clickNext();
@@ -160,8 +158,7 @@ public class SignupTest {
 			signupPage.fillEmail(data.get("email"));
 			signupPage.fillCreatePassword1(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
-			// new CommonFunctions().clickOutSideElement();
-			signupPage.clickCheckBox();
+			new CommonFunctions().clickOutSideElement();
 			signupPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);

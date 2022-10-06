@@ -11,6 +11,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.pages.HomePage;
+import coyni.merchant.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
@@ -18,11 +19,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class HomeTest {
 
 	HomePage homePage;
+	LoginPage loginPage;
 	PhoneVerificationComponent phoneVerificationComponent;
 
 	@BeforeMethod
 	public void init() {
 		homePage = new HomePage();
+		loginPage = new LoginPage();
 		phoneVerificationComponent = new PhoneVerificationComponent();
 	}
 
@@ -30,15 +33,15 @@ public class HomeTest {
 	@Parameters({ "strParams" })
 	public void testHomePage(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		loginPage.clickSignUp();
 		homePage.verifyHeading(data.get("homePageHeading"));
-		homePage.verifyDescription(data.get("description"));
 		homePage.verifyPersonalAccount();
 		homePage.verifyPersonalAccountDesription();
 		homePage.verifyMerchantAccount();
 		homePage.verifyMerchantAccountDesription();
 		homePage.verifyAlreadyRegistered();
 		homePage.verifyLoginLnk();
-//		homePage.clickLogin();
+
 	}
 
 	@Test

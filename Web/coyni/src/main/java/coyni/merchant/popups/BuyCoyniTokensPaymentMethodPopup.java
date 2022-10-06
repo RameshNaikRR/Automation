@@ -9,18 +9,12 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 
-	private By lblBank = By.xpath("//p[contains(text(),'4219')]");
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy coyni Tokens')]");
 	private By lnkAddNewPayment = By.cssSelector("");
-	private By btnDeleteBank = By.xpath("//p[contains(text(),'4567')]");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 	private By lblBankErrorMessage = By.cssSelector("");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
 	private By btnDelete = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
-
-	public void clickBank() {
-		click(lblBank, "Click Bank");
-	}
 
 	public void clickDelete(String number) {
 		click(By.xpath(String.format(
@@ -33,10 +27,6 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
 		ExtentTestManager.setInfoMessageInReport("button clicked for Bank " + (number));
 	}
-
-//	public void deleteBank() {
-//		click(btnDeleteBank, "Click DeleteBank");
-//	}
 
 	public void clickDelete() {
 		click(btnDelete, "Click Delete");

@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.popups.BankAccountAddedPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -14,15 +15,16 @@ public class BankAccountPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//h4[text()='Add Bank Account']");
 	private By txtnameOnBankAccount = By.name("fullName");
-	private By txtRoutingNumber = By.xpath("//input[contains(@id,'routingNumber')]");
+	private By txtRoutingNumber = By.xpath("//input[contains(@name,'routing')]");
 	private By txtConfirmRoutingNumber = By.xpath("//input[contains(@name,'confirmRouting')]");
-	private By txtCheckingAccountNumber = By.xpath("//input[contains(@id,'accountNumber')]");
-	private By txtConfirmAccountNumber = By.xpath("//input[contains(@id,'confirmAccountNumber')]");
+	private By txtCheckingAccountNumber = By.xpath("//input[contains(@name,'accountNumber')]");
+	private By txtConfirmAccountNumber = By.xpath("//input[contains(@name,'confirmAccountNumber')]");
 	private By lblBankAccount = By.xpath("//h6[text()='Bank Account']");
 	private By lnkLearnMore = By.xpath("//strong[text()='Learn More']");
 	private By lblAddBankAccountDesc = By.xpath("//p[@class='text-sm text-cgy13 leading-5']");
 	private By btnImReady = By.xpath("//button[text()='I’m Ready']");
 	private By btnNext = By.xpath("//a[@id='acctForm:addFiNext']");
+	private By btnAdd = By.xpath("//button[contains(text(),'Add')]");
 	private By btnBank = By.xpath("//button[text()='Next']");
 	private By lnkExit = By.xpath("//Strong[text()='Exit']");
 	private By btnBack = By.xpath("//button[text()='Back']");
@@ -46,6 +48,10 @@ public class BankAccountPage extends BrowserFunctions {
 	public void clickBank() {
 		click(btnBank, "Bank Next");
 
+	}
+
+	public void clickAdd() {
+		click(btnAdd, "Addt");
 	}
 
 	public void clickOnBankAccount() {
@@ -148,6 +154,10 @@ public class BankAccountPage extends BrowserFunctions {
 
 	public void verifyAddBankAccountView() {
 		new CommonFunctions().elementView(lblAddBankAccount, "Add Bank Account");
+	}
+
+	public BankAccountAddedPopup bankAccountAddedPopup() {
+		return new BankAccountAddedPopup();
 	}
 
 	public void switchTab() {
