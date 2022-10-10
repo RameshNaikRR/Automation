@@ -117,7 +117,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 	
 	public void verifyNoMoreTransactions(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblNoMoreTransactions, "Scrolled down to No More Transactions", expHeading);
+		new CommonFunctions().verifyLabelText(lblNoMoreTransactions, "Scrolled down to until", expHeading);
 	}
 	
 	public void ScrollToViewMore() {

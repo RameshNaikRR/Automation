@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.AgreementComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -15,27 +16,16 @@ public class ReviewApplicationPage extends MobileFunctions {
 	private By btnCompanyEdit = MobileBy.xpath("//*[contains(@resource-id,'edit1')]");
 	private By lnlCompanyDocView = MobileBy.xpath("(//*[contains(@text,'View')])[1]");
 	private By btnDocumentClose = MobileBy.xpath("//*[contains(@resource-id,'closeBtn')]");
-
 	private By lblDBAInfo = MobileBy.xpath("//*[contains(@text,'DBA Info')]");
 	private By btnDBAEdit = MobileBy.xpath("//*[contains(@resource-id,'edit2')]");
 	private By lnkDBADocView = MobileBy.xpath("//*[contains(@resource-id,'llDBADocuments')]");
-
 	private By lblBeneficialHeading = MobileBy.xpath("(//*[contains(@text,'Beneficial Owner')])");
 	private By btnBeneficialEdit = MobileBy.xpath("//*[contains(@resource-id,'edit3TV')]");
 	private By lnkBeneficial1DocView = MobileBy.xpath("(//*[contains(@resource-id,'llUploadDocument')])[1]");
-//	private By btnBeneficial2DocView = MobileBy.xpath("(//*[contains(@resource-id,'llUploadDocument')])[2]");
-
 	private By lblBankAccountHeading = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
-//	private By lblBankAcc1 = MobileBy.xpath("");
-//	private By lblBankAcc2 = MobileBy.xpath("//*[contains(@resource-id,'closeBtn')]");
-
 	private By lblMerchantHeading = MobileBy.xpath("//*[contains(@text,'Merchant Agreements')]");
-//	private By lnkPrivacyPolicy = MobileBy.xpath("//*[contains(@text,'Company Info')]");
-//	private By lnkTermsofService = MobileBy.xpath("//*[contains(@text,'DBA Info')]");
-//	private By lnkMerchantAgreement = MobileBy.xpath("//*[contains(@resource-id,'edit1')]");
-//	private By btnCloseAgreement = MobileBy.xpath("//*[contains(@resource-id,'canceled')]");
 	private By chkBoxReviewAppli = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
-	private By btnSubmit = MobileBy.xpath("//*[contains(@text,'Submit')]");	
+	private By btnSubmit = MobileBy.xpath("//*[contains(@text,'Submit')]");
 
 	public void verifyReviewApplicationHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReviewApplication, "Review Application Heading", expHeading);
@@ -43,6 +33,10 @@ public class ReviewApplicationPage extends MobileFunctions {
 
 	public void verifyCompanyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblCompanyInfo, "Company Info Heading", expHeading);
+	}
+
+	public int verifyCompanyHeading() {
+		return DriverFactory.getDriver().findElements(lblCompanyInfo).size();
 	}
 
 	public void clickCompanyEdit() {
@@ -68,6 +62,10 @@ public class ReviewApplicationPage extends MobileFunctions {
 	public void clickDBADocView() {
 		scrollDownToElement(lnkDBADocView, "DBA Info Documents View");
 		click(lnkDBADocView, "DBA Info Documents View");
+	}
+
+	public int verifyDBADocView() {
+		return DriverFactory.getDriver().findElements(lnkDBADocView).size();
 	}
 
 	public void clickDocumentClose() {
@@ -129,19 +127,26 @@ public class ReviewApplicationPage extends MobileFunctions {
 		scrollDownToElement(btnSubmit, "Submit");
 		click(btnSubmit, "Submit");
 	}
-	
-	public void verifyReviewApplication(String expReviewHeading,String expCompHeading,String expDBAHeading,String expBeneficialHeading,String expBankHeading,String expAgrrementsHeading) throws InterruptedException {
+
+	public void verifyReviewApplication(String expReviewHeading, String expCompHeading, String expDBAHeading,
+			String expBeneficialHeading, String expBankHeading, String expAgrrementsHeading)
+			throws InterruptedException {
 		Thread.sleep(2000);
 		verifyReviewApplicationHeading(expReviewHeading);
-		verifyCompanyHeading(expCompHeading);
+		Thread.sleep(2000);
+		if (verifyCompanyHeading() == 1) {
+			verifyCompanyHeading(expCompHeading);
 //		clickCompanyEdit();
 //		registrationCompanyInfoPage().AddCompanyInfo(expCompHeading, expAgrrementsHeading, expAgrrementsHeading, expAgrrementsHeading, expAgrrementsHeading, expReviewHeading, expCompHeading, expDBAHeading, expBeneficialHeading, expAgrrementsHeading);
-		clickCompanyDocView();
-		clickDocumentClose();
-		Thread.sleep(2000);
+			clickCompanyDocView();
+			clickDocumentClose();
+		}
 		verifyDBAInfoHeading(expDBAHeading);
-		clickDBADocView();
-		clickDocumentClose();
+		Thread.sleep(2000);
+		if (verifyDBADocView() == 1) {
+			clickDBADocView();
+			clickDocumentClose();
+		}
 		Thread.sleep(2000);
 		verifyBeneficialHeading(expBeneficialHeading);
 		clickBeneficialDocView();
@@ -160,11 +165,13 @@ public class ReviewApplicationPage extends MobileFunctions {
 		Thread.sleep(2000);
 		clickReviewApplicationCheckBox();
 		clickSubmit();
-		
+
 	}
+
 	public AgreementComponent agreementComponent() {
 		return new AgreementComponent();
 	}
+
 	public RegistrationCompanyInfoPage registrationCompanyInfoPage() {
 		return new RegistrationCompanyInfoPage();
 	}

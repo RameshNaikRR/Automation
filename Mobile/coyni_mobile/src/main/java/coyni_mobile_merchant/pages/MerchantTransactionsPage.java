@@ -10,8 +10,6 @@ import io.appium.java_client.MobileBy;
 
 public class MerchantTransactionsPage extends MobileFunctions {
 
-	private By lblHeading = MobileBy.xpath("//*[contains(@text,'Merchant Transactions')]");
-
 	private By lblMerchantTansactions = MobileBy.xpath("//*[@text='Merchant Transactions']");
 
 	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
@@ -26,10 +24,6 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	public int verifyTransactionsCount() {
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
-	}
-
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
 
 	public void verifyLabelMerchanTransactions(String expHeading) {

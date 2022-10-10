@@ -16,10 +16,6 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class MerchantProfilePage extends MobileFunctions {
-//	private By btnUserDetails = MobileBy.xpath("//*[contains(@resource-id,'business_UserDetailsLL')]");
-//	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
-//	private By btnResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'businessResetPin')]");
-//	
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'AccountStatusTV')]");
@@ -45,6 +41,9 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By lblAccId = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 	private By btnInformation = MobileBy.xpath("//*[contains(@text,'Information')]");
+	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
+	
+	
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
@@ -214,6 +213,11 @@ public class MerchantProfilePage extends MobileFunctions {
 		click(btnChangePassword, "Change Password");
 	}
 
+	public void clickGetHelp() {
+		scrollDownToElement(btnGetHelp, "Get Help");
+		click(btnGetHelp, "Get Help");
+	}
+	
 	public void clickLogOut() {
 		scrollDownToElement(btnLogOut, "Log Out");
 		click(btnLogOut, "Log Out");
@@ -281,6 +285,10 @@ public class MerchantProfilePage extends MobileFunctions {
 
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
+	}
+	
+	public GetHelpPage getHelpPage() {
+		return new GetHelpPage();
 	}
 
 }

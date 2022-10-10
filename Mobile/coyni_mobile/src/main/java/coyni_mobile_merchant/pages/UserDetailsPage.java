@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.CurrentDetailsComponent;
+import coyni_mobile_merchant.components.ToastComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -25,11 +27,13 @@ public class UserDetailsPage extends MobileFunctions {
 	private By lblDefaultAccountName = MobileBy.xpath("//*[contains(@resource-id,'b_accountET')]");
 	private By lblChildAccountName=MobileBy.xpath("(//*[contains(@resource-id,'title')])[2]");
 	private By lblTickIcon = MobileBy.xpath("//*[contains(@resource-id,'tickIcon')]");
+	private By btnDefaultAccounts = MobileBy.xpath("//*[contains(@resource-id,'arrow')]");
 	private By btnSelectAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
-	private By btnChildAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[2]");
+	private By btnChildAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2](//*[contains(@resource-id,'ll_child_view')])[1]");
 	private By btnSave = MobileBy.xpath("//*[contains(@text,'Save')]");
+	private By btnTickIcon = MobileBy.xpath("//*[contains(@resource-id,'tickIcon')]");
 
 	public void clickBack() {
 		click(btnBack, "Back");
@@ -49,8 +53,13 @@ public class UserDetailsPage extends MobileFunctions {
 		click(lblDefaultAccountName, "Default Account");
 	}
 
-	public void clickSelectAccount1() {
-		click(btnSelectAccount1, "Select Account 1");
+	public int verifyDefaultAccounts() {
+		return 	DriverFactory.getDriver().findElements(btnDefaultAccounts).size();
+	}
+	
+	public void clickPrimaryAccount1() {
+		click(btnSelectAccount1, "Primary Account 1");
+		
 	}
 
 	public void clickChildAccount1() {
@@ -61,8 +70,8 @@ public class UserDetailsPage extends MobileFunctions {
 		click(btnChildAccount2, "Child Account 2");
 	}
 
-	public void clickSelectAccount2() {
-		click(btnSelectAccount2, "Select Account 2");
+	public void clickPrimaryAccount2() {
+		click(btnSelectAccount2, "Primary Account 2");
 	}
 
 	public void clickSave() {
@@ -87,6 +96,32 @@ public class UserDetailsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport(getText(lblChildAccountName));
 	}
 
+	public int verifyChildAccount1() {
+		return DriverFactory.getDriver().findElements(btnTickIcon).size();
+	
+	}
+	
+	public void changeDefaultAccount(String expText,String expToast) throws InterruptedException {
+	verifyDefaultAccount(expText);	
+	clickDefaultAccount();
+	Thread.sleep(2000);
+	if(verifyDefaultAccounts()>1) {
+	clickPrimaryAccount1();
+	if(verifyChildAccount1() == 0) {
+	clickChildAccount1();
+	clickSave();
+	toastComponent().verifyToastMsg(expToast);
+	}else {
+	clickPrimaryAccount1();
+	clickPrimaryAccount2();
+	clickChildAccount1();
+	clickSave();
+	toastComponent().verifyToastMsg(expToast);
+	}
+	}else {
+		ExtentTestManager.setFailMessageInReport("in this credentials have only one default account, so unable to execute following test method");
+	}
+	}
 	public void verifyEmail() {
 		new CommonFunctions().elementView(lblEmail, "Email");
 	}
@@ -129,4 +164,9 @@ public class UserDetailsPage extends MobileFunctions {
 	public CurrentDetailsComponent currentDetailsComponent() {
 		return new CurrentDetailsComponent();
 	}
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+	
 }

@@ -44,15 +44,22 @@ public class SignUpTest {
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickAgreeCheckBox();
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
 			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			Thread.sleep(4000);
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
+			signUpPage.clickAgreeCheckBox();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
+			Thread.sleep(4000);
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
+			signUpPage.clickAgreeCheckBox();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyHeading(data.get("secureYourAccountHeading"));
+			.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 					.verifyChoosePinHeading(data.get("choosePinHeading"));

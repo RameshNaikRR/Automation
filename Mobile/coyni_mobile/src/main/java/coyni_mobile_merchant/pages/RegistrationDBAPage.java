@@ -41,6 +41,11 @@ public class RegistrationDBAPage extends MobileFunctions {
 		click(btnDifferent, "Different");
 	}
 
+
+	public int verifyDifferent() {
+		return DriverFactory.getDriver().findElements(btnDifferent).size();
+	}
+	
 	public void clickSame() {
 		click(btnSame, "Same");
 	}
@@ -117,10 +122,12 @@ public class RegistrationDBAPage extends MobileFunctions {
 	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,String expWebsite, String expVolume, String expHighTicket, String expAvgTicket,
 			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
 			throws InterruptedException {
-		
+		Thread.sleep(2000);
+		if(verifyDifferent()==1) {
 		verifyHeading(expHeading);
 		verifyDBADescription();
 		clickDifferent();
+		}
 		verifyHeading(expHeading);
 		fillDBAName(expName);
 		fillEmail(expEmail);
@@ -128,7 +135,6 @@ public class RegistrationDBAPage extends MobileFunctions {
 		fillNum(expNum);
 		DriverFactory.getDriver().hideKeyboard();
 		selectBusinessType(expBusinessType);
-		clickRetailLocation();
 		fillWebsite(expWebsite);
 		DriverFactory.getDriver().hideKeyboard();
 		fillProcessingVolume(expVolume);
@@ -138,8 +144,8 @@ public class RegistrationDBAPage extends MobileFunctions {
 		fillAvgHighTicket(expAvgTicket);
 		DriverFactory.getDriver().hideKeyboard();
 		clickTimeZone();
-		Thread.sleep(2000);
 		clickUpload();
+		Thread.sleep(2000);
 		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
 		uploadDocumentComponent().clickUsingApp();
 		uploadDocumentComponent().clickAllow();
@@ -157,6 +163,55 @@ public class RegistrationDBAPage extends MobileFunctions {
         clickDone();
 	}
 
+//	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,String expWebsite, String expVolume, String expHighTicket, String expAvgTicket,
+//			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
+//			throws InterruptedException {
+//		
+//		verifyHeading(expHeading);
+//		verifyDBADescription();
+//		clickDifferent();
+//		verifyHeading(expHeading);
+//		fillDBAName(expName);
+//		fillEmail(expEmail);
+//		DriverFactory.getDriver().hideKeyboard();
+//		fillNum(expNum);
+//		DriverFactory.getDriver().hideKeyboard();
+//		selectBusinessType(expBusinessType);
+//		clickRetailLocation();
+//		fillWebsite(expWebsite);
+//		DriverFactory.getDriver().hideKeyboard();
+//		fillProcessingVolume(expVolume);
+//		DriverFactory.getDriver().hideKeyboard();
+//		fillHighTicket(expHighTicket);
+//		DriverFactory.getDriver().hideKeyboard();
+//		fillAvgHighTicket(expAvgTicket);
+//		DriverFactory.getDriver().hideKeyboard();
+//		clickTimeZone();
+//		Thread.sleep(2000);
+//		clickUpload();
+//		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
+//		uploadDocumentComponent().clickUsingApp();
+//		uploadDocumentComponent().clickAllow();
+//		}
+////		uploadDocumentComponent().clickBrowseFiles();
+////		DriverFactory.getDriver().context("NATIVE_APP");
+////		Thread.sleep(2000);
+////		uploadDocumentComponent().clickFile();
+////		DriverFactory.getDriver().context("coyni");
+//		uploadDocumentComponent().clickTakePhoto();
+//		uploadDocumentComponent().clickCapture();
+//		uploadDocumentComponent().clickSave();
+//		Thread.sleep(2000);
+//	    clickNext();
+//		mailingAddressComponent().fillAddressLine1(expAddress1);
+//		mailingAddressComponent().fillAddressLine2(expAddress2);
+//		mailingAddressComponent().fillCity(expCity);
+//		mailingAddressComponent().selectState(expState);
+//		mailingAddressComponent().fillZipCode(expZipcode);
+//        clickDone();
+//	}
+	
+	
 	public UploadDocumentComponent uploadDocumentComponent() {
 		return new UploadDocumentComponent();
 	}

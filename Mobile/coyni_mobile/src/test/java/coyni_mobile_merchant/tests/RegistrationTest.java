@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import ilabs.MobileFramework.Runner;
@@ -14,11 +15,13 @@ import ilabs.mobile.reporting.ExtentTestManager;
 public class RegistrationTest {
 	RegistrationProcessPage registrationProcessPage;
 	RegistrationDBAPage registrationDBAPage;
+	BusinessTokenAccountPage businessTokenAccountPage; 
 
 	@BeforeMethod
 	public void init() {
 		registrationProcessPage = new RegistrationProcessPage();
 		registrationDBAPage = new RegistrationDBAPage();
+		businessTokenAccountPage=new BusinessTokenAccountPage();
 	}
 
 	
@@ -108,12 +111,39 @@ public class RegistrationTest {
 			Thread.sleep(2000);
 			registrationProcessPage.clickMerchantAgreement();
 			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			registrationProcessPage.clickReviewApplication();
 			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"), data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"), data.get("reviewBeneficialHeading"), data.get("reviewBankHeading"),data.get("reviewAgreeHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
-
 	}
+	
+	@Test
+	public void testAddDBA() {
+		try {
+			businessTokenAccountPage.clickChooseUser();
+			businessTokenAccountPage.clickPrimaryAccount1();
+			businessTokenAccountPage.clickAddDBA();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
+		}
+	}
+	
+	@Test
+	public void testOpenNewAccount() {
+		try {
+			businessTokenAccountPage.clickChooseUser();
+			Thread.sleep(3000);
+			businessTokenAccountPage.clickOpenNewAccount();
+			businessTokenAccountPage.clickBusinessAccount();
+			businessTokenAccountPage.clickNewDBA();
+			businessTokenAccountPage.clickEnabledAccount();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
+		}
+	}
+	
+
 }

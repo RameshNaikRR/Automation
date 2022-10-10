@@ -50,23 +50,13 @@ public class MerchantProfileTest {
 	public void testDefaultAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//
-////			businessTokenAccountPage.clickProfile();
-////			merchantProfilePage.getAccountDetails();
-////			merchantProfilePage.getAccountId();
-////			merchantProfilePage.clickUserDetails();
-////			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
-////			merchantProfilePage.userDetailsPage().getUserDetails();
-////			merchantProfilePage.userDetailsPage().verifyDefaultAccount(data.get("defaultAccount"));
-////			merchantProfilePage.userDetailsPage().clickDefaultAccount();
-////			if (merchantProfilePage.userDetailsPage().getDefaultAccountName() == 0) {
-////				
-////			}else {
-////			merchantProfilePage.userDetailsPage().clickSelectAccount2();
-////			merchantProfilePage.userDetailsPage().clickChildAccount2();
-////			merchantProfilePage.userDetailsPage().clickSave();
-//			
-//			}
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+			merchantProfilePage.userDetailsPage().getUserDetails();
+			merchantProfilePage.userDetailsPage().changeDefaultAccount(data.get("defaultAccount"),
+					data.get("defaultAccToastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDefaultAccount failed due to Exception " + e);
@@ -816,6 +806,27 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
 			merchantProfilePage.dbaInformationPage().verifyAddress();
 			merchantProfilePage.dbaInformationPage().getCurrentAddress();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDBAInformationView failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUploadDBAProfile(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickDBAInformation();
+			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
+			merchantProfilePage.dbaInformationPage().getCompanyName();
+			merchantProfilePage.dbaInformationPage().getDescription();
+			merchantProfilePage.dbaInformationPage().uploadDBAProfile(data.get("profileToastMsg"),
+					data.get("dbaPageHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformationView failed due to Exception " + e);
@@ -2411,7 +2422,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
 			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-
+			Thread.sleep(2000);
 			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
 				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			}
@@ -2419,55 +2430,100 @@ public class MerchantProfileTest {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.verifyHeading(data.get("addPaymentHeading"));
 				Thread.sleep(1000);
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
 			}
-
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.verifyHeading(data.get("addExternalBankHeading"));
+			
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(
+					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
+					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
 			Thread.sleep(2000);
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickBankNext();
-
-			Thread.sleep(4000);
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.fillBankName(data.get("bankName"));
-			Thread.sleep(1000);
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-//					.ScrollToBank();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.selectBank();
-//	merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBank();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.fillUserName(data.get("userName"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.fillPassword(data.get("bankPassword"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickNext();
-			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.verifyBankAccounts() == 3) {
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-						.clickCheckBox1();
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-						.clickCheckBox();
+			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().verifyBankSucessHeading() == 1) {
+				
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
+			String nameOnBank = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.addBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
+			String routingNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.addBankAccountComponent().bankAccountAddedPage().getRoutingNum();
+			String accNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().getAccNum();
+			if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
+					&& data.get("routingNum").equalsIgnoreCase(routingNum) && data.get("accountNum").contains(accNum)) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.bankAccountAddedPage().getBankDetails();
 			} else {
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-						.clickCheckBox1();
+				ExtentTestManager.setFailMessageInReport("Bank Account Details are not updated");
 			}
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickNext();
-			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.allDonePage().verifyDoneHeading()==1) {		
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.allDonePage().verifyAllDone(data.get("doneHeading"));
-			}
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.allDonePage().clickDone();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+//
+
+		} }catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
 		}
 	}
 
-	
+//	public void testAddBankAccount(String strPrams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+//			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+//
+//			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+//				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+//			}
+//			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//						.verifyHeading(data.get("addPaymentHeading"));
+//				Thread.sleep(1000);
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
+//			}
+//
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.verifyHeading(data.get("addExternalBankHeading"));
+//			Thread.sleep(2000);
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.clickBankNext();
+//
+//			Thread.sleep(4000);
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.fillBankName(data.get("bankName"));
+//			Thread.sleep(1000);
+////			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+////					.ScrollToBank();
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.selectBank();
+////	merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickBank();
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.fillUserName(data.get("userName"));
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.fillPassword(data.get("bankPassword"));
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.clickNext();
+//			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.verifyBankAccounts() == 3) {
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//						.clickCheckBox1();
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//						.clickCheckBox();
+//			} else {
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//						.clickCheckBox1();
+//			}
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.clickNext();
+//			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.allDonePage().verifyDoneHeading()==1) {		
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.allDonePage().verifyAllDone(data.get("doneHeading"));
+//			}
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.allDonePage().clickDone();
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+//		}
+//	}
+
 //	public void testAddBankAccount(String strPrams) {
 //		try {
 //			Map<String, String> data = Runner.getKeywordParameters(strPrams);
@@ -2565,6 +2621,22 @@ public class MerchantProfileTest {
 					.clickYes();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testGetHelp(String strPrams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			Thread.sleep(2000);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickGetHelp();
+			merchantProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
+			merchantProfilePage.getHelpPage().getHelpDetails();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}

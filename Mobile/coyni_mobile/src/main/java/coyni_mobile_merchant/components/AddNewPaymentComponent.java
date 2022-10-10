@@ -63,8 +63,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		return DriverFactory.getDriver().findElements(lblHeading).size();
 	}
 
-	public void clickExternalBankAcount() {
-		click(btnExternalBank, "External Bank Account");
+	public void clickBankAcount() {
+		click(btnExternalBank, "Bank Account");
 	}
 
 	public void clickDebitCard() {
@@ -145,8 +145,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		return qty;
 	}
 
-	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
-		return new AddExternalBankAccountComponent();
+	public AddBankAccountComponent addBankAccountComponent() {
+		return new AddBankAccountComponent();
 	}
 //	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
 //		return new AddExternalBankAccountComponent();

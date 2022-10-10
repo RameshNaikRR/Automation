@@ -48,7 +48,7 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	private By lblRecentTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
-	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'MoreTransactions')]");
 	
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]");
 
@@ -147,6 +147,8 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		}
 	}
 
+	
+	
 	public void getTransactionType() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Type : " + getText(lblTransactionType));
 	}

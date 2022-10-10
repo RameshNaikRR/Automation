@@ -11,7 +11,7 @@ import io.appium.java_client.MobileBy;
 
 public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
-	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
+	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
 
 	private By filtersIcon = MobileBy.xpath("//*[contains(@resource-id,'filterIconIV')]");
 
@@ -37,14 +37,31 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By lblDate = MobileBy.xpath("(//*[contains(@resource-id,'dateTime')])[1]");
 
-	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'MoreTransactions')]");
+	
+	private By lnkTrans = MobileBy.xpath("(//*[contains(@text,'On Hold')])[1]|(//*[contains(@text,'Released')])[1]");
+	
+	private By txtReserveID = MobileBy.xpath("//*[contains(@resource-id,'tvReserveID')]|//*[contains(@resource-id,'reserveIDLL')]");
+	
 
 	public void clickReserve() {
 		click(btnReserve, "Reserve");
 	}
 
-	public void verifySearchOption() {
-		new CommonFunctions().elementView(searchOption, "Search Option");
+	public void clickTransaction() {
+		scrollDownToElement(lnkTrans, "Transaction");
+		click(lnkTrans, "Transaction");
+	}
+	
+	public String getReserveID() {
+		String a=getText(txtReserveID);
+		return a;
+	}		
+	public void fillSearchOption(String expValue) {	
+		enterText(searchOption, expValue,"Search Option");
+//		String a=getReserveID();
+//		new CommonFunctions().elementView(searchOption, "Search Option");
+//		DriverFactory.getDriver().findElement(searchOption).sendKeys(a);	
 	}
 	
 	public void verifyReleaseType(String expReleaseType) {
@@ -107,6 +124,12 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 		}
 	}
 
+	public void verifyNoMoreTransaction(String expValue) {
+		scrollDownToElement(lblNoTransactions, "no more transactions");
+		new CommonFunctions().verifyLabelText(lblNoTransactions, "Reserve Releases transaction list scroll down to",expValue);
+	}
+
+	
 	public void getFailedorOpenTransactionDetails() {
 		getTranHeading();
 		getStatus();

@@ -16,7 +16,8 @@ public class UploadDocumentComponent extends MobileFunctions{
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'saveLL')]");
 	private By btnUsingApp = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
 	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
-	
+//	private By btnU = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
+	private By btn = MobileBy.xpath("(//*[contains(@resource-id,'thumbnail')])[1]");
 	
 	public void clickTakePhoto() {
 		click(lnkTakePhoto, "Take a Photo");
@@ -53,4 +54,7 @@ public class UploadDocumentComponent extends MobileFunctions{
 		click(btnAllow, "Allow");
 	}
 
+	public void clickFile() {	
+		click(btn, "file");
+	}
 }

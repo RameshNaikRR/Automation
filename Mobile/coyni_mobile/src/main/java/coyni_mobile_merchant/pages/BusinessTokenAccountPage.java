@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +17,9 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class BusinessTokenAccountPage extends MobileFunctions {
 
@@ -26,6 +31,18 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'businessTrackerCloseIV')]");
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tv_user_name')]");
 	private By btnNotifications = MobileBy.xpath("");
+	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
+	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
+	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Open New Account']");
+	private By lnKBusinessAccount = MobileBy.xpath("//*[contains(@resource-id,'id/businessAccontLL')]");
+	private By btnNewDBA = MobileBy.xpath("//*[contains(@resource-id,'ll_new_dba')]");
+	private By btnNewCompany = MobileBy.xpath("//*[contains(@resource-id,'ll_new_company')]");
+	private By lnkSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'title')]");
+	private By btnAddNewDBA = MobileBy.xpath("//*[@text='Add DBA']");
+
+	private By btnSelectAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[5]");
+	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
+	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
@@ -47,6 +64,40 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(btnTransactions, "Transactions");
 	}
 
+	public void clickChooseUser() {
+		click(btnChooseUser, "Choose User");
+	}
+
+	public void clickAddDBA() {
+		click(btnAddDBA, "Add DBA");
+	}
+
+	public void clickBusinessAccount() {
+		click(lnKBusinessAccount, "Business Account");
+	}
+
+	public void clickOpenNewAccount() {
+		while (getElementList(btnOpenNewAccount, "Open New Account").size() == 0) {
+			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+		}
+		click(btnOpenNewAccount, "Open New Account");
+	}
+
+	public void clickPrimaryAccount1() {
+		click(btnSelectAccount1, "Primary Account 1");
+
+	}
+
+	public void clickChildAccount1() {
+		click(btnChildAccount1, "Child Account 1");
+	}
+
+	public void clickPrimaryAccount2() {
+		click(btnSelectAccount2, "Primary Account 2");
+	}
+
 	public void clickProfile() {
 //		WebDriver driver = DriverFactory.getDriver();		
 //        WebDriverWait wait = new WebDriverWait(driver, 120);
@@ -57,9 +108,9 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public int verifyProfile() {
-		 return DriverFactory.getDriver().findElements(btnProfile).size();
+		return DriverFactory.getDriver().findElements(btnProfile).size();
 	}
-	
+
 	public void clickDashBoard() {
 		new CommonFunctions().elementView(btnDashBoard, "Dash Board");
 		click(btnDashBoard, "Dash Board");
@@ -71,6 +122,44 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 
 	public void clickClose() {
 		click(btnCloseIcon, "Close Icon");
+	}
+
+	public int verifyNumOfAccounts() throws InterruptedException {
+		Thread.sleep(2000);
+		return DriverFactory.getDriver().findElements(lnkSelectAccount).size();
+	}
+
+	private By getAccounts(String num) {
+		return By.xpath(String.format("(//*[contains(@resource-id,'title')])['%s']",num));
+	}
+//
+//	private By getDashBoardItems(String eleName) {
+//		return By.xpath(String.format("//div[@class='DashboardMenu_menu__3PSTN']//span[text()='%s']", eleName));
+//	}
+
+	public void clickEnabledAccount() throws InterruptedException {
+		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
+			ExtentTestManager.setInfoMessageInReport("Hiiii");
+			Thread.sleep(2000);
+			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+				ExtentTestManager.setInfoMessageInReport("Hello "+i);
+//				click(lnkSelectAccount,"Choose Account");
+				click(getAccounts("i"), "Slected an Account");
+				click(btnAddNewDBA, "Add New DBA");
+				break;
+			}else {
+				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
+			}
+		}
+		ExtentTestManager.setInfoMessageInReport("Tarak Tarak");
+	}
+
+	public void clickNewCompany() {
+		click(btnNewCompany, "New Company");
+	}
+
+	public void clickNewDBA() {
+		click(btnNewDBA, "New DBA");
 	}
 
 	public MerchantProfilePage merchantProfilePage() {
@@ -112,6 +201,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	public NotificationComponent notificationComponent() {
 		return new NotificationComponent();
 	}
+
 	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
 		return new MerchantTransactionDetailsPage();
 	}

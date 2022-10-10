@@ -1,11 +1,18 @@
 package coyni_mobile_merchant.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.FilterPopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class PayoutTransactionsPage extends MobileFunctions {
 
@@ -18,12 +25,23 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	private By lblPayOutID = MobileBy.xpath("//*[@text='Payout ID']");
 
 	private By lblPayOutTransactions = MobileBy.xpath("//*[@text='Payout Transactions']");
-	
-	private By btnPayoutTransaction = MobileBy.xpath("(//*[contains(@resource-id,'payoutSent')])[1]");
-			
 
-	public void verifySearchOption() {
+	private By btnPayoutTransaction = MobileBy.xpath("(//*[contains(@resource-id,'payoutSent')])[1]");
+
+	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
+
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'payoutNoMore')]");
+
+	public String getPayoutID() {
+		String a = getText(lblPayoutID);
+		return a;
+	}
+
+	public void fillSearchField(String expValue) {
 		new CommonFunctions().elementView(searchOption, "Search Option");
+		enterText(searchOption, expValue, "Search Option");
+//		DriverFactory.getDriver().context("NATIVE_APP");
+//		DriverFactory.getDriver().context("CHROMIUM");
 	}
 
 	public void verifyLabelPayOutTransactions(String expHeading) {
@@ -37,10 +55,26 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	public void clickPayoutTransaction() {
 		click(btnPayoutTransaction, "Payout Transaction");
 	}
+
+	public void verifyScroll(String expText) {
+		
+		scrollDownToElement(lblNoTransactions, "no more Transactions");
+		new CommonFunctions().verifyLabelText(lblNoTransactions, expText, "payout transaction list scroll down to until ");
+	}
+
+	public void scrollToNoMoreTransactions(String expText) {
+		while (getElementList(lblNoTransactions, "no more Transactions").size() == 0) {
+			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+		}
+		new CommonFunctions().verifyLabelText(lblNoTransactions, "payout transaction list scroll down to until ",expText);
+	}
+	
 	public FilterPopup filterPopup() {
 		return new FilterPopup();
 	}
-	
+
 	public PayoutTransactionDetailsPage payoutTransactionDetailsPage() {
 		return new PayoutTransactionDetailsPage();
 	}

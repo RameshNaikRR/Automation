@@ -22,6 +22,7 @@ public class PayoutTransactionDetailsPage extends MobileFunctions {
 	private By lblReserveID= MobileBy.xpath("//*[contains(@resource-id,'ReserveId')]");
 	private By lblRecentTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
+	private By btnBack=MobileBy.xpath("//*[contains(@resource-id,'payoytBackLL')]");
 
 
 //	private By lblNameOnAccount = MobileBy.xpath("//*[contains(@resource-id,'banknameAC')]");
@@ -54,6 +55,11 @@ public class PayoutTransactionDetailsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Payout ID : " + getText(lblPayoutID));
 	}
 
+	public String PayoutID() {
+		String a=getText(lblPayoutID);
+		return a;
+	}
+	
 	public void getPayoutReferenceID() {
 		ExtentTestManager.setInfoMessageInReport("Payout Reference ID : " + getText(lblPayoutReferenceID));
 	}
@@ -75,6 +81,9 @@ public class PayoutTransactionDetailsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Reserve ID : " + getText(lblReserveID));
 	}
 	
+	public void clickBack() {
+		click(btnBack,"Back");
+	}
 	public void verifyRecentTransaction() {
 		if (DriverFactory.getDriver().findElements(lblNoTransactions).size() == 0) {
 		new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
