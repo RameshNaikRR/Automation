@@ -793,6 +793,7 @@ public class MerchantProfileTest {
 			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
+			
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));

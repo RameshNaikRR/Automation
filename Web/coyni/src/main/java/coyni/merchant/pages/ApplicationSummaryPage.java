@@ -48,6 +48,7 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 	private By btnApplicationSummary = By.xpath("//h6[text()='Application Summary']");
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	private By btnView = By.xpath("//button[text()='View']");
+	private By btnDone = By.xpath("//button[text()='Done");
 
 	public void clickEdit1() {
 		click(btnEdit1, "Edit");
@@ -55,6 +56,10 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 
 	public void clickEdit2() {
 		click(btnEdit2, "Edit");
+	}
+
+	public void clickDone() {
+		click(btnDone, "Done");
 	}
 
 	public void clickEdit3() {

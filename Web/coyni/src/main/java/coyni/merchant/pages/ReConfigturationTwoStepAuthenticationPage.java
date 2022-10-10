@@ -12,7 +12,7 @@ public class ReConfigturationTwoStepAuthenticationPage extends BrowserFunctions 
 
 	private By inputBox = By.cssSelector("input[class*= 'verification-input']");
 
-	private By btnManualEntry = By.xpath("//div[text()='Use Manual Entry']");
+	private By btnManualEntry = By.xpath("//button[text()='Use Manual Entry']");
 
 	public void clickManualEntry() {
 		click(btnManualEntry, "Manual Entry");

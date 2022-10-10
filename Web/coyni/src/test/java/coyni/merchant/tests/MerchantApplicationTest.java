@@ -163,8 +163,8 @@ public class MerchantApplicationTest {
 			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
 			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideMenuBarComponent.bankAccountPage().clickAdd();
-			sideMenuBarComponent.bankAccountPage().bankAccountAddedPopup().clickDone();
+			sideMenuBarComponent.bankAccountPage().clickEnter();
+
 //			sideMenuBarComponent.bankAccountPage().clickImReady();
 //			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
 //			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
@@ -186,6 +186,7 @@ public class MerchantApplicationTest {
 //			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h4[text()='Add Bank Account']")));
 //			sideMenuBarComponent.bankAccountPage().clickBank();
 
+			registrationStartPage.merchantAgreementsPage().clickView();
 			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
 			registrationStartPage.merchantAgreementsPage().clickSave();
 
@@ -213,27 +214,28 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationSummaryPage().getDBAInformationAddress();
 			registrationStartPage.applicationSummaryPage().verifyBeneficialOwners();
 			registrationStartPage.applicationSummaryPage().getBeneficialOwnersDropDown();
-			registrationStartPage.applicationSummaryPage().getBeneficialOwnerName();
-			registrationStartPage.applicationSummaryPage().getBeneficialDateOfBirth();
-			registrationStartPage.applicationSummaryPage().getBeneficialSocialSecurity();
-			registrationStartPage.applicationSummaryPage().getBeneficialOwnerShip();
-			registrationStartPage.applicationSummaryPage().getBeneficialOwnerAddress();
-			registrationStartPage.applicationSummaryPage().verifyBank();
-			registrationStartPage.applicationSummaryPage().getBankDetails();
-			registrationStartPage.applicationSummaryPage().verifyAgreements();
+//			registrationStartPage.applicationSummaryPage().getBeneficialOwnerName();
+//			registrationStartPage.applicationSummaryPage().getBeneficialDateOfBirth();
+//			registrationStartPage.applicationSummaryPage().getBeneficialSocialSecurity();
+//			registrationStartPage.applicationSummaryPage().getBeneficialOwnerShip();
+//			registrationStartPage.applicationSummaryPage().getBeneficialOwnerAddress();
+//			registrationStartPage.applicationSummaryPage().verifyBank();
+//			registrationStartPage.applicationSummaryPage().getBankDetails();
+//			registrationStartPage.applicationSummaryPage().verifyAgreements();
 			registrationStartPage.applicationSummaryPage().getAgreementsDetails();
 			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
 			registrationStartPage.applicationSummaryPage().clickSubmit();
 
-			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
-			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
-			registrationStartPage.applicationSubmissionPage().verifyStatus();
-			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
-			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
-			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
-
-			registrationStartPage.registrationCompanyInfoPage().verifyApplicationSummary();
+			registrationStartPage.applicationSummaryPage().clickDone();
+//			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+//			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
+//			registrationStartPage.applicationSubmissionPage().verifyStatus();
+//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickBack();
+//			registrationStartPage.applicationSubmissionPage().clickCancelApplication();
+//			registrationStartPage.applicationSubmissionPage().cancelMerchantApplicationPopup().clickCancelApplication();
+//
+//			registrationStartPage.registrationCompanyInfoPage().verifyApplicationSummary();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRegistrationTracker  failed due to Exception " + e);
@@ -360,7 +362,7 @@ public class MerchantApplicationTest {
 			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			sideMenuBarComponent.bankAccountPage().clickAdd();
 			sideMenuBarComponent.bankAccountPage().bankAccountAddedPopup().clickDone();
-			
+
 //			sideMenuBarComponent.bankAccountPage().clickImReady();
 //			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
 //			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();

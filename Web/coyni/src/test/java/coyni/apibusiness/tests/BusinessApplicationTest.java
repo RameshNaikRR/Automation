@@ -668,7 +668,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
 //			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
+//			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
 			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
 					data.get("fileName"));

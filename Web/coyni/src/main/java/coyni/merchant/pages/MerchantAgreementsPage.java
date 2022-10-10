@@ -18,6 +18,7 @@ public class MerchantAgreementsPage extends BrowserFunctions {
 	private By btnBack = By.xpath("//button[text()='Back']");
 	private By btnExit = By.xpath("//button[text()='Exit']");
 	private By btnNext = By.xpath("//button[text()='Next']");
+	private By btnView = By.xpath("//button[text()='View']");
 
 	public By getAgreements(String Agreements) {
 		return By.cssSelector(String.format(
@@ -26,6 +27,10 @@ public class MerchantAgreementsPage extends BrowserFunctions {
 
 	public void clickMerchantAgreement() {
 		click(lblMerchantAgreementsView, "Merchant Agreements");
+	}
+
+	public void clickView() {
+		click(btnView, "View");
 	}
 
 	public void clickMerchantAgreements() {

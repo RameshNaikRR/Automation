@@ -700,6 +700,7 @@ public class MerchantSettingsTest {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBankAccountWithOutPaymentMethod(String strParams) {
@@ -1157,6 +1158,7 @@ public class MerchantSettingsTest {
 					.verifyEmail(data.get("email1"));
 			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
+			merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().clickSendInvitation();
 			if (!data.get("toastMessage").isEmpty()) {
 				merchantSettingsSideBarMenuComponent.teamComponent().addTeamMemberComponent().toastComponent()
 						.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
@@ -1271,6 +1273,7 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
+			records(strParams);
 			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
 
 		} catch (Exception e) {
@@ -1335,6 +1338,15 @@ public class MerchantSettingsTest {
 			ExtentTestManager
 					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
 		}
+	}
+
+	public void records(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		merchantSettingsSideBarMenuComponent.clickMerchantSettings();
+		sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+		merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+		merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
+
 	}
 
 	@Test
