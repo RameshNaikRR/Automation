@@ -1,12 +1,16 @@
 package coyni.apibusiness.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.apibusiness.components.MailingAddressComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.FileHelper;
+import ilabs.web.actions.WaitForElement;
 
 public class RegistrationDBAInformationPage extends BrowserFunctions {
 
@@ -36,6 +40,11 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnUploadFile = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]");
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
 	private By btnEdit = By.xpath("");
+	private By dropdwnTimeZone = By.xpath("//div[text()='Pacific (PST)'");
+
+	private By dropdwnTimeZone(String timezone) {
+		return By.xpath(String.format("//div[@class='FormField_options_wrap__wE188']", timezone));
+	}
 
 	public void fillDBAName(String dbaName) {
 		enterText(txtDBAName, dbaName, "DBA Name");
@@ -98,13 +107,41 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		click(radBtneCommerce, "eCommerce");
 	}
 
-	public void clickTimeZoneDropdown() {
-		click(drpdwnTimeZone, "TimeZone Drop down");
-
+	public By getElement1(String timeZone) {
+		return By.xpath(String.format("//div[text()='%s']", timeZone));
 	}
 
-	public void selectTimeZone(String timeZone) throws InterruptedException {
+	public void selectTimeZone(String option, String timeZone) {
+		BrowserFunctions objBrowserFunctions = new BrowserFunctions();
 		click(drpdwnTimeZone, "TimeZone Drop down");
+		try {
+			By options = By.xpath("//div[@class='FormField_options_wrap__wE188']");
+			boolean status = false;
+			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
+			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+			for (WebElement optionEle : optionsEles) {
+				if (optionEle.getText().equalsIgnoreCase(option)) {
+					optionEle.click();
+					status = true;
+					break;
+				}
+			}
+			if (status) {
+				ExtentTestManager.setInfoMessageInReport(option + " selected from " + timeZone + " drop down");
+			} else {
+				ExtentTestManager.setFailMessageInReport(option + " not available in " + timeZone + " dropdown");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
+		}
+		
+//		click(getElement1(timeZone), timeZone);
+//		Thread.sleep(2000);
+	}
+
+	public void clickTimeZone() {
+		click(drpdwnTimeZone, "TimeZone Drop down");
+		click(dropdwnTimeZone, "TimeZone Drop down");
 //		click(getElement(timeZone), timeZone);
 //		Thread.sleep(2000);
 	}
@@ -217,6 +254,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		Thread.sleep(3000);
 		ExtentTestManager.setInfoMessageInReport("upload Image");
 	}
+
 	public void removeFile() {
 		click(btnRemoveFile, "Remove File");
 	}

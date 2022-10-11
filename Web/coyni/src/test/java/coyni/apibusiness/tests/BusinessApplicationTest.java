@@ -521,7 +521,7 @@ public class BusinessApplicationTest {
 			// registrationStartPage.registrationDBAInformationPage().mailingAddressComponent().verifyState(data.get("state"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.verifyZipCode(data.get("zipCode"));
-			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
 			registrationStartPage.registrationDBAInformationPage().clickBack();
 
 		} catch (Exception e) {
@@ -562,7 +562,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
 			if (!data.get("elementName").equalsIgnoreCase("timeZone")) {
-				registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//				registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
 			}
 			new CommonFunctions().clickOutSideElement();
 			if (!data.get("errMsg").isEmpty() && !data.get("elementName").equalsIgnoreCase("businessType")
@@ -586,7 +586,7 @@ public class BusinessApplicationTest {
 						data.get("elementName"));
 			}
 			if (!data.get("errMsg").isEmpty() && data.get("elementName").equalsIgnoreCase("timeZone")) {
-				registrationStartPage.registrationDBAInformationPage().clickTimeZoneDropdown();
+//				registrationStartPage.registrationDBAInformationPage().clickTimeZoneDropdown();
 				new CommonFunctions().clickOutSideElement();
 				Thread.sleep(500);
 				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("color"),
@@ -628,7 +628,7 @@ public class BusinessApplicationTest {
 					.selectState(data.get("state"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.validateZipCode(data.get("zipCode"));
-			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
 //			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
 //					data.get("fileName"));
 //			registrationStartPage.registrationDBAInformationPage().removeFile();
@@ -667,7 +667,8 @@ public class BusinessApplicationTest {
 
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
-//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("option"),
+					data.get("timezone"));
 //			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
 			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
