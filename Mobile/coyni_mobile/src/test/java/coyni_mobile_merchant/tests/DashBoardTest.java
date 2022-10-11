@@ -187,6 +187,7 @@ public class DashBoardTest {
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
 					.clickDone();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
+			Thread.sleep(2000);
 			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()

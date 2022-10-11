@@ -50,7 +50,7 @@ public class SignUpTest {
 			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
 			signUpPage.clickAgreeCheckBox();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();

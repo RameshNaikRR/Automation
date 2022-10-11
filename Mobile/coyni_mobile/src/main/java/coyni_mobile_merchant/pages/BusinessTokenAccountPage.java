@@ -138,18 +138,31 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 //	}
 
 	public void clickEnabledAccount() throws InterruptedException {
+		
 		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
 			ExtentTestManager.setInfoMessageInReport("Hiiii");
 			Thread.sleep(2000);
-			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+//			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
 				ExtentTestManager.setInfoMessageInReport("Hello "+i);
-//				click(lnkSelectAccount,"Choose Account");
-				click(getAccounts("i"), "Slected an Account");
+				String str1 = Integer.toString(i);
+				click(getAccounts(str1), "Slected an Account");
 				click(btnAddNewDBA, "Add New DBA");
-				break;
-			}else {
-				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
-			}
+//				break;
+//			}else {
+//				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
+//			}
+//		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
+//			ExtentTestManager.setInfoMessageInReport("Hiiii");
+//			Thread.sleep(2000);
+//			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+//				ExtentTestManager.setInfoMessageInReport("Hello "+i);
+////				click(lnkSelectAccount,"Choose Account");
+//				click(getAccounts("i"), "Slected an Account");
+//				click(btnAddNewDBA, "Add New DBA");
+//				break;
+//			}else {
+//				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
+//			}
 		}
 		ExtentTestManager.setInfoMessageInReport("Tarak Tarak");
 	}

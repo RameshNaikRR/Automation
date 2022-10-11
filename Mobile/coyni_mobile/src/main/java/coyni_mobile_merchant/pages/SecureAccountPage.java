@@ -25,19 +25,34 @@ public class SecureAccountPage extends MobileFunctions{
 	}
 	
 	public void scrollTermsOfService() {
-		for (int i=1;i<10;i++) {
+		
+		while (getElementList(btnNext, "Next").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 					.moveTo(PointOption.point(540, (int) (300))).release().perform();
 		}
+//		for (int i=1;i<10;i++) {
+//			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+//					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+//		}
+		
 	}
 	
 	public void scrollPrivacyPolicy() {
-		for (int i=1;i<8;i++) {
+		
+		while (getElementList(btnFinishSignup, "Finish Signup").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 					.moveTo(PointOption.point(540, (int) (300))).release().perform();
 		}
+//		for (int i=1;i<8;i++) {
+//			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+//					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+//		}
+		
+		
 	}
 	public void clickNext() {
 		click(btnNext, "Next");
