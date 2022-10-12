@@ -15,7 +15,7 @@ public class PaymentMethodsComponent extends BrowserFunctions {
 	private By lblNoActivePaymentMethods =By.cssSelector("");
 	private By lblPaymentMethods = By.xpath("//span[contains(@class,'text-base text-cgy4')]");
 	private By lblAddNewPaymentMethods = By.xpath("//h1[text()='Add New Payment Method']");
-	private By lblBankName = By.xpath("//p[contains(text(),'Bank')]");
+	private By lblBankName = By.xpath(" //p[contains(text(),'BANK')]");
 	private By btnDelete = By.xpath("//button[contains(@class,'icon-trash')]");
 	
 	public void clickAddNewPaymentMethod() {

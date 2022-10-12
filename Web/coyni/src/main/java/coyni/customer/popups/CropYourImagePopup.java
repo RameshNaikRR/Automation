@@ -8,12 +8,16 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.utilities.FileHelper;
 
 public class CropYourImagePopup extends BrowserFunctions {
-	private By heading = By.cssSelector(".UserDetails_container__50Pke>h1");
-	private By btnSelectImage = By.cssSelector(".UserDetails_container__50Pke>form>input");
-	private By btnSave = By.cssSelector(".UserDetails_container__50Pke>div>button");
+	private By heading = By.xpath("//h1[text()='Crop Your Image']");
+	private By btnSelectImage = By.xpath("//input[@type='file']");
+	private By btnSave = By.xpath("//button[text()='Save']");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
+	}
+	
+	public void clickSelectImage() {
+		click(btnSelectImage,"Select Image");
 	}
 
 	public void uploadSelectImage(String folderName,String fileName) {

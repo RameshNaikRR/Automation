@@ -7,7 +7,7 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class RemoveProfileImagePopup extends BrowserFunctions {
-	private By heading = By.cssSelector(".UserDetails_container__50Pke>h1");
+	private By heading = By.xpath("//h1[text()='Remove Profile Image']");
 	private By btnRemoveImage = By.xpath("//button[text()='Remove']");
 
 	public void verifyHeading(String expHeading) {

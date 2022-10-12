@@ -41,7 +41,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.verifyAccountIDView();
 			navigationMenuPage.verifyAccountID(data.get("AccountID"));
 			// navigationMenuPage.verifyUserImageView();//
-			navigationMenuPage.verifyQRCodeView();
+		//	navigationMenuPage.verifyQRCodeView();
 			navigationMenuPage.verifyTokenAccountView();
 			navigationMenuPage.verifyExportFilesView();
 			navigationMenuPage.verifyGetHelpView();
@@ -104,9 +104,10 @@ public class NavigationMenuTest {
 			Thread.sleep(1000);
 			navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			navigationMenuPage.myQRCodeComponent().clickShare();
+			navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
 			navigationMenuPage.myQRCodeComponent().fillTextEmail(data.get("email1"));
 			// Thread.sleep(3000);
-			navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
+			
 			navigationMenuPage.myQRCodeComponent().clickTab();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));

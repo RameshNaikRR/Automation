@@ -17,8 +17,8 @@ public class AddExternalBankAccountPopup extends BrowserFunctions {
 	private By headingNewPage = By.xpath("//h1[contains(text(),'Add Accounts')]");
 	private By headingAddBankAccount = By.xpath("//h1[contains(text(),'Add Bank Account')]");
 	private By lnkBankName = By.xpath("(//div[@class='autoResultBankName'])[1]");
-	private By txtUserName = By.xpath("//input[@name='acctForm:j_idt143:0:login_']");
-	private By txtPassword = By.xpath("//input[@name='acctForm:j_idt147:0:password_']");
+	private By txtUserName = By.xpath("(//div[@class='form-group']//input[contains(@name,'acctForm:j_')] )[1]");
+	private By txtPassword = By.xpath("(//div[@class='form-group']//input[contains(@name,'acctForm:j_')] )[2]");
 	private By btnNext = By.xpath("(//span[text()='Next'])[1]");
 	private By chckBoxBank1 = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
 	private By chckBoxBank2 = By.xpath("(//div[@class='custom-control custom-checkbox'])[2]");

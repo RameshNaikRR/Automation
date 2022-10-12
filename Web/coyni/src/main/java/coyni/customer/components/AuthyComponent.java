@@ -22,7 +22,7 @@ public class AuthyComponent extends BrowserFunctions {
 
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 
-	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
+	private By lnkGoBack = By.xpath("//button[text()='Go Back']");
 	private By heading1 = By.xpath("//h1[text()='Verify Your Identity']");
 	private static Map<String, String> prevCode = new HashMap<>();
 

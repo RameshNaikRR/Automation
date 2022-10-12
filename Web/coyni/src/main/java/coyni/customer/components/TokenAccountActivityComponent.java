@@ -14,19 +14,19 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 	private By btnTokensSentDetails = By.xpath("(//button[text()='Details'])[1]");
 
 	private By tokenSentDetailsList = By
-			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[1]");
+			.xpath("(//span[contains(@class,'font-bold text-cgy4 AccountActivity')])[1]");
 
 	private By tokenReceivedDetailsList = By
-			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[2]");
+			.xpath("(//span[contains(@class,'font-bold text-cgy4 AccountActivity')])[2]");
 
 	private By tokenPurchasedDetailsList = By
-			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[3]");
+			.xpath("(//span[contains(@class,'font-bold text-cgy4 AccountActivity')])[3]");
 
 	private By tokenWithdrawDetailsList = By
-			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[4]");
+			.xpath("(//span[contains(@class,'font-bold text-cgy4 AccountActivity')])[4]");
 
 	private By tokenPaidOrdersDetailsList = By
-			.xpath("(//span[@class='font-bold text-cgy4 AccountActivity_balance__dRNlX'])[5]");
+			.xpath("(//span[contains(@class,'font-bold text-cgy4 AccountActivity')])[5]");
 
 	private By btnTokensReceivedDetails = By.xpath("(//button[text()='Details'])[2]");
 

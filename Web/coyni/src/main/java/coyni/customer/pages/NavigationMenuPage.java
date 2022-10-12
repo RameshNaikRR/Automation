@@ -22,13 +22,13 @@ public class NavigationMenuPage extends BrowserFunctions {
 	private By lblAccountId = By.xpath("(//span[contains(text(),'Account ID:')])[1]");
 	private By lnkTokenAccount = By.cssSelector("#token-dashboard");
 	private By ImgQRcode = By
-			.xpath("(//div[contains(@class,'UserProfile_QR_main__')])[1]");
+			.xpath("(//button[contains(@class,'UserProfile_QR_main__')])[1]");
 	private By lblUserNameHead = By
-			.xpath("//div[contains(@class,'DashboardMenu_downArrow__JM4Nk')]/preceding-sibling::*[1]");
+			.xpath("//div[contains(@class,'DashboardMenu_downArrow')]/preceding-sibling::*[1]");
 	private By ImgNotifications = By.cssSelector(" ");
 	private By imgUser = By.xpath("//div[contains(@class,'bg-cm3 rounded-full UserProfile_image_navbar__1d_ht')]");
-	private By drpDwnAccount = By.xpath("//div[(contains(@class,'DashboardMenu_downArrow__JM4Nk'))]");
-	private By lblPersonalAccount = By.xpath("(//span[text()='Personal'])[1]");
+	private By drpDwnAccount = By.xpath("//div[contains(@class,'DashboardMenu_downArrow')]");
+	private By lblPersonalAccount = By.xpath("(//div[text()='Personal Account'])[1]");
 	private By lnkBusinessAccount = By.xpath("");
 	private By lblBusinessAccount = By.cssSelector("");
 	private By lnkAddNewBusiness = By.xpath("//div[text()=' Add New Business']");

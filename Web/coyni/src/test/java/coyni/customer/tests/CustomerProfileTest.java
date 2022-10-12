@@ -144,6 +144,8 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.verifyHeading(data.get("cropYourImageHeading"));
+			//customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSelectImage();
+			//Thread.sleep(3000);
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			customerProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
@@ -607,7 +609,7 @@ public class CustomerProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
-			homePage.clickLogin();
+		//	homePage.clickLogin();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));

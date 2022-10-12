@@ -38,25 +38,56 @@ public class PaymentMethodsTest {
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickLearnMore();
 			//customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickBack();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickaddExternalBankAccount();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickIamReady();
-			Thread.sleep(5000);
-           customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyHeading();
-            Thread.sleep(8000);
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
-			
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().verifyNewWindowHeading();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterBankName(data.get("expBankName"));
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickOnBankName();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterUserName(data.get("expUserName"));;
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().enterPassword(data.get("expPassword"));
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickNext();;   
-			Thread.sleep(5000);
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().unSelectBank();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().clickUncheckBank();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().switchToWindow();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().verifyHeading();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().verifyNameOnAccount();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterRoutingNumber(data.get("routingNumber"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterConfirmRouting(data.get("confirmRouting"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterAccountNumber(data.get("accountNumber"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().enterConfirmAccountNumber(data.get("confirmAccountNumber"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickFindYourAccount();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().findYourAccountNumbersPopup().verifyHeading();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().findYourAccountNumbersPopup().clickBack();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().clickAdd();
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-			customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().successFailurePopupCardComponent().navigationComponent().clickClose();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyHeading();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyFullName();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyRoutingNumber(data.get("rountingNumber"));
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyStatus();
+			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickDone();
+			/*
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * clickIamReady(); Thread.sleep(5000);
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * verifyHeading(); Thread.sleep(8000);
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * switchToWindow();
+			 * 
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * verifyNewWindowHeading();
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * enterBankName(data.get("expBankName"));
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * clickOnBankName();
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * enterUserName(data.get("expUserName"));;
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * enterPassword(data.get("expPassword"));
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * clickNext();; Thread.sleep(5000);
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * unSelectBank();
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * clickUncheckBank();
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * switchToWindow(); Thread.sleep(2000);
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
+			 * successFailurePopupCardComponent().navigationComponent().clickClose();
+			 */
+			
+			
+			
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
@@ -344,7 +375,7 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
 					.fillCity(data.get("city"));
 			customerProfilePage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
-					.selectState(data.get("state"));
+					.editSelectState (data.get("state"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);

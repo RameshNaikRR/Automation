@@ -44,10 +44,17 @@ public class MailingAddressComponent extends BrowserFunctions {
 		enterText(txtCity, city, "city");
 
 	}
+	
+	public void editSelectState(String state) {
+		click(drpDwnState, "State DropDown");
+		By stateName=By.xpath(String.format("(//*[text()='%s'])[2]", state));
+		click(stateName,state);
+	}
 
 	public void selectState(String state) {
-		// click(drpDwnState, "State DropDown");
-		new CommonFunctions().selectCustomDropDown(state, "State");
+		click(drpDwnState, "State DropDown");
+		By stateName=By.xpath(String.format("(//*[text()='%s'])[1]", state));
+		click(stateName,state);
 	}
 
 	public void fillZipCode(String zipCode) {

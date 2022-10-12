@@ -26,10 +26,10 @@ public class LoginPage extends BrowserFunctions {
 
 	private By txtEmail = By.name("email");
 	private By txtPassword = By.name("password");
-	private By lnkForgotEmail = By.xpath("//span[text()='Forgot Email?']");
-	private By lnkForgotPassword = By.xpath("//span[text()='Forgot Password?']");
+	private By lnkForgotEmail = By.xpath("//button[text()='Forgot Email?']");
+	private By lnkForgotPassword = By.xpath("//button[text()='Forgot Password?']");
 	private By btnNext = By.xpath("//button[text()='Next']");
-	private By lnkSignUp = By.xpath("//span[text()='Sign Up']");
+	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
 
 	private By lblerrorMsg = By.cssSelector("span.error");

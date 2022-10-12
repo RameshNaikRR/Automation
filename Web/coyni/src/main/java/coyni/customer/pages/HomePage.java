@@ -14,7 +14,7 @@ public class HomePage extends BrowserFunctions {
 	private By landingPageHeading = By.xpath("//span[text()='Create a Coyni Account']");
 	private By lnkpersonalAccount = By.xpath("//div[contains(text(),'Personal Account')]");
 	private By lnkBusinessAccount =By.xpath("//div[contains(text(),'Merchant Account')]");
-	private By lnkLogin = By.xpath("//span[contains(text(),'Log In')]");
+	private By lnkLogin = By.xpath("//button[contains(text(),'Log In')] ");
 	private By lblCreateAccount =By.cssSelector(".disclaimer");
 	private By lblPersonalAccount =By.xpath("//div[contains(text(),'Personal Account')]/following-sibling::*[1]");
 	private By lblBusinessAccount =By.xpath("//div[contains(text(),'Merchant Account')]/following-sibling::*[1]");

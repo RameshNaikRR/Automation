@@ -17,7 +17,7 @@ import ilabs.web.actions.WaitForElement;
 
 public class EditEmailAddressPopup extends BrowserFunctions {
 
-	private By txtOldEmailAddress = By.cssSelector(".FormField_disabled__3trnq");
+	private By txtOldEmailAddress = By.xpath("//input[@id='EmailId']");
 	private By txtNewEmailAddress = By.id("Email");
 	private By btnSendcode = By.xpath("//button[text()='Send Code']");
 	private By lblEditEmailAddress = By.xpath("//h1[text()='Edit Email Address']");

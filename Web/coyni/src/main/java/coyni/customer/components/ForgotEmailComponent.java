@@ -9,11 +9,11 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ForgotEmailComponent extends BrowserFunctions {
 
 	private By forgotHeading = By.cssSelector(".forgot-email__title");
-	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
 	private By txtPhoneNumber = By.id("Phone_Number");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtFirstName = By.xpath("//input[@name='first_name']");
-	private By txtLastName = By.name("//input[@name='last_name']");
+	private By txtLastName = By.xpath("//input[@name='last_name']");
 
 	public void clickforgot() {
 		if (getElement(forgotHeading, "click forgot").isDisplayed()) {

@@ -12,7 +12,7 @@ public class TokensSentDetailsComponent extends BrowserFunctions {
 	// private By sentAmount =
 	// By.xpath("(//div[@class='TokenAccountDetail_widthDivide__8Bwmr'])[1]");
 
-	private By lblTokensSentTransactions = By.xpath("//span[text()='Tokens Sent Transactions']");
+	private By lblTokensSentTransactions = By.xpath("//h1[text()='Tokens Sent Transactions']");
 
 	private By lblTranscationsCount = By.cssSelector("");
 

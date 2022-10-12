@@ -86,7 +86,7 @@ public class HomeTest {
 			homePage.fillConfirmPassword(data.get("confirmPassword"));
 			// new CommonFunctions().clickOutSideElement();
 			homePage.clickNext();
-			homePage.clickCheckBox();
+	//		homePage.clickCheckBox();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),data.get("elementName"));

@@ -67,4 +67,7 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		return new AddExternalBankAccountPopup();
 	}
 
+	public AddBankAccountPopup addBankAccountPopup() {
+		return new AddBankAccountPopup();
+	}
 }
