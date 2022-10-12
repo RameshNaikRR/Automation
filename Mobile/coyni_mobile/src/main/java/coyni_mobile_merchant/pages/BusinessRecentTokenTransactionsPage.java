@@ -51,9 +51,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By recentTransAmount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[1]");
 
 	private By recentTransBalance = MobileBy.xpath("(//*[contains(@resource-id,'balanceTV')])[1]");
-	
+
 	private By lblNoMoreTransactions = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]");
-	
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Business Recent Token Transactions Heading", expHeading);
@@ -105,8 +104,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		click(btnViewMore, "View More");
 	}
 
-	public int verifyViewMore() {
-//		scrollDownToElement(btnViewMore, "View More");
+	public int verifyViewMore() throws InterruptedException {
+		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(btnViewMore).size();
 	}
 
@@ -115,12 +114,13 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 //		ExtentTestManager.setInfoMessageInReport("Transaction list scrolled down to no more transactions");
 //		return DriverFactory.getDriver().findElements(lblNoMoreTransactions).size();
 	}
-	
+
 	public void verifyNoMoreTransactions(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblNoMoreTransactions, "Scrolled down to until", expHeading);
 	}
-	
-	public void ScrollToViewMore() {
+
+	public void ScrollToViewMore() throws InterruptedException {
+		Thread.sleep(2000);
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
@@ -150,7 +150,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		scrollDownToElement(txtToAmount, "To Amount");
 		enterText(txtToAmount, toAmount, "To Amount");
 	}
-	
+
 	public void getRecentTransType() {
 		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(recentTransType));

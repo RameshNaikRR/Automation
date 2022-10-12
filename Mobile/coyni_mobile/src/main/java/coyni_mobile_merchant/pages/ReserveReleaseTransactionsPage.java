@@ -68,7 +68,8 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblReleaseType, "Reserve Release Type",expReleaseType );
 	}
 	
-	public int verifyTransactionsCount() {
+	public int verifyTransactionsCount() throws InterruptedException {
+		Thread.sleep(3000);
 		 return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 

@@ -22,7 +22,8 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	private By btnTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
-	public int verifyTransactionsCount() {
+	public int verifyTransactionsCount() throws InterruptedException {
+		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 
