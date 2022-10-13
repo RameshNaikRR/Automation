@@ -5,9 +5,12 @@ import org.openqa.selenium.By;
 import coyni.apibusiness.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class AddBankAccountPopup extends BrowserFunctions {
 
+	private By lblHeading = By.xpath("//h1[.='Add Bank Account']");
 	private By btnIamReady = By.cssSelector(".w-60");
 	private By headingNewWindow = By.xpath("//h1[text()='Add Accounts']");
 	private By txtBankName = By.xpath("//input[@id='searchbar']");
@@ -19,9 +22,108 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By chckBoxBank1 = By.xpath("(//div[@class='custom-control custom-checkbox'])[1]");
 	private By chckBoxBank2 = By.xpath("(//div[@class='custom-control custom-checkbox'])[2]");
+	private By heading = By.xpath("//h2[contains(text(),'Where to Find My Account Information?')]");
+	private By txtnameOnBankAccount = By.name("fullName");
+	private By btnFindAccountNumbers = By.xpath("//button[contains(text(),'Find Your Account Numbers')]");
+	private By txtRoutingNumber = By.xpath("(//input[contains(@id,'Routing Number')])[1]");
+	private By txtConfirmRoutingNumber = By.xpath("//input[contains(@name,'confirmRouting')]");
+	private By txtCheckingAccountNumber = By.xpath("//input[contains(@name,'accountNumber')]");
+	private By txtConfirmAccountNumber = By.xpath("//input[contains(@name,'confirmAccountNumber')]");
+
+	private By status = By.xpath("//span[contains(text(),'Status')]/following-sibling::*");
+
+	private By nameOnAccount = By.xpath("//span[contains(text(),'Name on Account')]/following-sibling::*");
+
+	private By institution = By.xpath("//span[contains(text(),'Institution')]/following-sibling::*");
+
+	private By routingNumber = By.xpath("//span[contains(text(),'Routing Number')]/following-sibling::*");
+
+	private By accountNumber = By.xpath("//span[contains(text(),'Account Number')]/following-sibling::*");
+
+	private By btnDone = By.xpath("//span[contains(text(),'Done')]");
+
+	private By btnBuyCoyni = By.xpath("//button[contains(text(),'Buy coyni')]");
+
+	private By btnWithdraw = By.xpath("//button[contains(text(),'Withdraw')]");
+	private By clickAdd = By.xpath("//button[text()='Add']");
+
+	public void verifyHeading() {
+		String text = getText(lblHeading, "Heading");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyStatus() {
+		String lstatus = getText(status, "Status");
+		ExtentTestManager.setInfoMessageInReport(lstatus + " is displayed");
+	}
+
+	public void verifyNameOnAccount() {
+		String name = getText(nameOnAccount, "Name");
+		ExtentTestManager.setInfoMessageInReport(name + " is displayed");
+	}
+
+	public void verifyRoutingNumber() {
+		String routingNumberl = getText(routingNumber, "Routing Number");
+		ExtentTestManager.setInfoMessageInReport(routingNumberl + " is displayed");
+	}
+
+	public void verifyAccount() {
+		String account = getText(accountNumber, "Institution");
+		ExtentTestManager.setInfoMessageInReport(account + " is displayed");
+	}
+
+	public void verifyInstitution() {
+		String inst = getText(institution, "Institution");
+		ExtentTestManager.setInfoMessageInReport(inst + " is displayed");
+	}
+
+	public void clickDone() {
+		if (DriverFactory.getDriver().findElements(btnDone).size() > 0) {
+			click(btnDone, "Click Done");
+		} else if (DriverFactory.getDriver().findElements(btnBuyCoyni).size() > 0) {
+			click(btnBuyCoyni, "Buy Coyni");
+		} else {
+			click(btnWithdraw, "Withdraw");
+
+		}
+
+	}
+
+	public void fillNameOnBankAccount(String bankName) {
+		enterText(txtnameOnBankAccount, bankName, "bankName");
+	}
+
+	public void fillRoutingNumber(String routingNumber) {
+		enterText(txtRoutingNumber, routingNumber, "Routing Number");
+	}
+
+	public void fillConfirmRoutingNumber(String confirmRoutingNumber) {
+		enterText(txtConfirmRoutingNumber, confirmRoutingNumber, "Confirm Routing Number");
+	}
+
+	public void fillAccountNumber(String accountNumber) {
+		enterText(txtCheckingAccountNumber, accountNumber, "Account Number");
+	}
+
+	public void fillConfirmAccountNumber(String confirmAccountNumber) {
+		enterText(txtConfirmAccountNumber, confirmAccountNumber, "Confirm Account Number");
+	}
+
+	public void clickFindYourAccountNumbers() {
+		click(btnFindAccountNumbers, "Find Account Numbers");
+	}
+
+	public void getFindMyAccountInfo() {
+		String text = getText(heading, "Heading");
+		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
 
 	public void clickIamReady() {
 		click(btnIamReady, "I am Ready");
+	}
+
+	public void clickAdd() {
+		click(clickAdd, "Add");
 	}
 
 	public void switchToWindow() {

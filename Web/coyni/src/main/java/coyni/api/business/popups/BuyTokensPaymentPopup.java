@@ -12,7 +12,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class BuyTokensPaymentPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[text()='Buy coyni Tokens']");
 	private By lblSubheading = By.className("mt-3 text-xs text-center text-cgy2");
-	private By txtAmount = By.cssSelector("#usd-amount-token");
+	private By txtAmount = By.xpath("//input[@id='cyn-amount-token']");
 	private By btnCovert = By.cssSelector("#flip-button");
 	private By lnkChange = By.xpath("//span[text()='Change']");
 	private By btnNext = By.xpath("//button[text()='Next']");

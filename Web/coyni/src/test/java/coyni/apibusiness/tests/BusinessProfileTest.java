@@ -11,6 +11,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
+import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.components.TransactionListComponent;
 import coyni.apibusiness.components.UserDetailsComponent;
@@ -257,9 +258,6 @@ public class BusinessProfileTest {
 			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup().authyComponent()
 					.fillInput(data.get("code"));
-			Thread.sleep(1000);
-			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup().authyComponent()
-					.verifyMessage(data.get("message"));
 			Thread.sleep(2000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().newEmailAddressPopup()
 					.verifyNewEmailAddressHeading((data.get("newEmailPopUp")));
@@ -423,6 +421,7 @@ public class BusinessProfileTest {
 					.phoneVerificationPopup().verifySmsVerificationCode(data.get("resend"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.phoneVerificationPopup().authyComponent().fillInput(data.get("input"));
+			Thread.sleep(3000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.phoneVerificationPopup().toastComponent().verifyToast(data.get("title"), data.get("msg"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
@@ -496,37 +495,57 @@ public class BusinessProfileTest {
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			SideBarMenuComponent sideBarMenuComponent = new SideBarMenuComponent();
+			sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillNameOnBankAccount(data.get("bankAccountName"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillRoutingNumber(data.get("routingNumber"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillAccountNumber(data.get("accountNumber"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
+//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyNameOnAccount();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyInstitution();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyRoutingNumber();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyAccount();
+//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickDone();
 
-			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
-
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.clickIamReady();
-			Thread.sleep(8000);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.switchToWindow();
-			Thread.sleep(5000);
+//			BusinessProfilePage apiAdminProfilePage = new BusinessProfilePage();
+//
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 //			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-//					.verifyNewHeading(strParams);
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.enterBankName(data.get("expBankName"));
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.clickOnBankName();
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.enterUserName(data.get("expUserName"));
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.enterPassword(data.get("expPassword"));
-			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
-					.clickBankNext();
-			Thread.sleep(5000);
-			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().unSelectBank();
-			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().clickUncheckBank();
-			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().switchToWindow();
-			Thread.sleep(2000);
-			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
-					.verifyBankAddSuccesfulHeaading();
-			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
-					.navigationComponent().clickClose();
+//					.clickIamReady();
+//			Thread.sleep(8000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.switchToWindow();
+//			Thread.sleep(5000);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//				.verifyNewHeading(strParams);
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.enterBankName(data.get("expBankName"));
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.clickOnBankName();
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.enterUserName(data.get("expUserName"));
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.enterPassword(data.get("expPassword"));
+//			apiAdminProfilePage.paymentMethodComponent().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.clickBankNext();
+//			Thread.sleep(5000);
+//			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().unSelectBank();
+//			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().clickUncheckBank();
+//			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().switchToWindow();
+//			Thread.sleep(2000);
+//			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
+//					.verifyBankAddSuccesfulHeaading();
+//			apiAdminProfilePage.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
+//					.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}

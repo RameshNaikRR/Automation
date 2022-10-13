@@ -22,7 +22,7 @@ public class ExportComponent extends BrowserFunctions {
 	private By txtReceiver = By.xpath("//span[text()='Receiver']");
 	private By txtSender = By.xpath("//span[text()='Sender']");
 	private By imgDropdown = By.xpath("//div[text()='Default (10)']/following-sibling::img");
-	private By lnkCustom = By.xpath("//div[text()='Custom']");
+	private By lnkCustom = By.xpath("//div[@class='FormField_selected_option__7Rw29 text-sm  undefined']");
 	private By lnkDeselectAll = By.xpath("//span[text()='Deselect All']");
 	private By lblDefault10 = By.xpath("//div[text()='Default (10)']");
 	private By txtdefault10Desc = By.xpath("//p[@class='export-modal__default-column-label']");

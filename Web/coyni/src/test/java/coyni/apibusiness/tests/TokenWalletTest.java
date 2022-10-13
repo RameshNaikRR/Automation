@@ -78,7 +78,7 @@ public class TokenWalletTest {
 	public void testTokenWalletTransferNavigationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenWalletPage.sideBarMenuComponent().clickTokenwallet();
+			tokenWalletPage.sideBarMenuComponent().clickTokenwallet();
 //			tokenWalletPage.sideBarMenuComponent().verifyTokenWalletCursorAction();
 			sideBarMenuComponent.verifyTokenWalletView();
 			sideBarMenuComponent.verifyHandCursorAction();
@@ -330,8 +330,9 @@ public class TokenWalletTest {
 	public void testTokenWalletView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.verifyTokenWalletView();
-			sideBarMenuComponent.verifyHandCursorAction();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
+//			sideBarMenuComponent.verifyTokenWalletView();
+//			sideBarMenuComponent.verifyHandCursorAction();
 //			sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
 //			sideBarMenuComponent.clickTokenwallet();
 			Thread.sleep(5000);
@@ -348,7 +349,7 @@ public class TokenWalletTest {
 	public void testTokenWalletFiltersView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 //			sideBarMenuComponent.filterComponent().verifyFilterBackgroundColor(data.get("backGround color"),
 //					data.get("border"));
@@ -388,7 +389,7 @@ public class TokenWalletTest {
 	public void testTokenWalletFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.filterComponent().clickFilter();
 			if (data.get("validateDate").equalsIgnoreCase("Yes")) {
@@ -436,7 +437,7 @@ public class TokenWalletTest {
 	public void testTokenWalletFiltersClearAllFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.filterComponent().clickFilter();
 			sideBarMenuComponent.filterComponent().scrollDownFilter();
@@ -473,7 +474,7 @@ public class TokenWalletTest {
 	public void testTokenWalletResetAllFiltersFlow(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.filterComponent().clickFilter();
 			sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
@@ -505,7 +506,7 @@ public class TokenWalletTest {
 	public void testTokenWalletExportsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.exportComponent().clickExport();
 //			sideBarMenuComponent.exportComponent().verifyExportBackgroundColor(data.get("backgroundColor"),
@@ -544,7 +545,7 @@ public class TokenWalletTest {
 	public void testTokenWalletExports(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.exportComponent().clickExport();
 			if (data.get("validate").equalsIgnoreCase("Today")) {
@@ -553,16 +554,16 @@ public class TokenWalletTest {
 			if (data.get("validate").equalsIgnoreCase("Yesterday")) {
 				sideBarMenuComponent.exportComponent().clickYesterday();
 			}
-			if (data.get("validate").equalsIgnoreCase("Last7Days")) {
+			if (data.get("validate").equalsIgnoreCase("Last 7 Days")) {
 				sideBarMenuComponent.exportComponent().clickLast7Days();
 			}
-			if (data.get("validate").equalsIgnoreCase("MonthToDate")) {
+			if (data.get("validate").equalsIgnoreCase("Month to Date")) {
 				sideBarMenuComponent.exportComponent().clickMonthtoDate();
 			}
-			if (data.get("validate").equalsIgnoreCase("LastMonth")) {
+			if (data.get("validate").equalsIgnoreCase("Last Month")) {
 				sideBarMenuComponent.exportComponent().clickLastMonth();
 			}
-			if (data.get("validate").equalsIgnoreCase("CustomDateRange")) {
+			if (data.get("validate").equalsIgnoreCase("Custom Date Range")) {
 				sideBarMenuComponent.exportComponent().clickCustomDateRange();
 				sideBarMenuComponent.filterComponent().calendarComponponent().clickStartDate();
 				sideBarMenuComponent.filterComponent().datePickerComponent().setDate(data.get("startDate"));
@@ -581,11 +582,13 @@ public class TokenWalletTest {
 	public void testTokenWalletExportsCustom(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.exportComponent().clickExport();
 			sideBarMenuComponent.exportComponent().clickToday();
 			sideBarMenuComponent.exportComponent().clickimgDropdown();
+			sideBarMenuComponent.exportComponent().clickCustom();
+//			sideBarMenuComponent.exportComponent().clickimgDropdown();
 			sideBarMenuComponent.exportComponent().clickDateandTimeChkbx();
 			sideBarMenuComponent.exportComponent().clickReferenceIDChkbx();
 			sideBarMenuComponent.exportComponent().clickTypeChkbx();
@@ -615,7 +618,7 @@ public class TokenWalletTest {
 	public void testTokenWalletTransferTokens(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			// sideBarMenuComponent.tokenWalletActivityComponent().verifyTransferTokenBackgroundColor(data.get("backgroundcolor"),
 			// data.get("border"));
@@ -664,7 +667,7 @@ public class TokenWalletTest {
 	public void testTokenWalletTransferTokenWithInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.tokenWalletPage().clickTokenWallet();
 			sideBarMenuComponent.tokenWalletPage().clickIndividualWalletsName();
 			sideBarMenuComponent.tokenWalletActivityComponent().clickTransferTokens();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
@@ -1190,7 +1193,7 @@ public class TokenWalletTest {
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 //					.withdrawviaInstantPayPopup().clickOnChangeLink();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-			.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
+					.withdrawviaInstantPayPopup().clickDebitCard(data.get("last4digits"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickEdit();
 			BusinessProfileTest.testEditDebitCard(strParams);

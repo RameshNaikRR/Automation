@@ -23,6 +23,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenWalletPage extends BrowserFunctions {
 	private By lblHeading = By.cssSelector("#token-account-wallets-page>h1");
+	private By btnTokenWallet = By.xpath("//button[text()='Token Wallet']");
 	private By lblTotalWalletBalance = By.xpath("//h3[text()='Total Wallet Balance']");
 	private By walletBalance = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(1)");
 	private By lblcurrency = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(2)");
@@ -33,7 +34,8 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By clickTransfer = By.xpath("//span[text()='Transfer Tokens']");
 	private By clickBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By clickWithdrawTokens = By.xpath("//span[text()='Withdraw to USD']");
-	private By lblWallets = By.xpath("//div[@class='text-sm TokenAccountWallets_Wallet_Id_Cyn__7pYfp text-cgy4 font-semibold']");
+	private By lblWallets = By
+			.xpath("//div[@class='text-sm TokenAccountWallets_Wallet_Id_Cyn__7pYfp text-cgy4 font-semibold']");
 
 	private By getWallet(String walletNum) {
 		return By.xpath(String.format(
@@ -115,6 +117,10 @@ public class TokenWalletPage extends BrowserFunctions {
 
 	public void clickEditWallet() {
 		click(editWalletName, "Edit Wallet Name");
+	}
+
+	public void clickTokenWallet() {
+		click(btnTokenWallet, "Token Wallet");
 	}
 
 	public void clickCopyAddress() {

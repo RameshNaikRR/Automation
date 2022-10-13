@@ -15,7 +15,8 @@ import ilabs.WebFramework.BrowserFunctions;
 public class SideBarMenuComponent extends BrowserFunctions {
 
 	private By getDashBoardItems(String eleName) {
-		return By.xpath(String.format("//div[@class='DashboardMenu_menu_items__WTmN5']//span[text()='%s']", eleName));
+		return By.xpath(
+				String.format("(//div[@class='DashboardMenu_menu_items__WTmN5']//span[text()='%s'])[1]", eleName));
 	}
 
 	// business setting
@@ -130,5 +131,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public ExportFilesPage exportFilesPage() {
 		return new ExportFilesPage();
+	}
+
+	public PaymentMethodComponent paymentMethodComponent() {
+		return new PaymentMethodComponent();
 	}
 }

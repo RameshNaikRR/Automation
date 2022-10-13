@@ -39,4 +39,8 @@ public class BusinessProfilePage extends BrowserFunctions {
 		return new UserDetailsComponent();
 	}
 
+	public BankAccountPage bankAccountPage() {
+		return new BankAccountPage();
+	}
+
 }
