@@ -25,6 +25,7 @@ public class ExportfilesPage extends BrowserFunctions {
 	private By downloadIcon = By.xpath("(//span[@data-tip='Download'])[1]");
 	private By btnExportFiles = By.xpath("(//span[text()='Export Files'])[1]");
 	private By btnExport = By.xpath("//button[text()='Export']");
+	private By msgNoRecords = By.xpath("//div[contains(text(),'No Records Found')]");
 
 	public void clickExportFiles() {
 		click(btnExportFiles, "Export Files");
@@ -34,9 +35,17 @@ public class ExportfilesPage extends BrowserFunctions {
 		click(btnExport, "Export");
 	}
 
+	public int verifyTeamMemberRecords() {
+		return getElementsList(msgNoRecords, "").size();
+	}
+
+	public String verifyNoRecordsFound() {
+		new CommonFunctions().elementView(msgNoRecords, "No Records");
+		return getText(msgNoRecords, "No Records");
+	}
+
 	public void successView() {
 		ExtentTestManager.setInfoMessageInReport(getText(lblSuccess, "Success Message") + " is displayed");
-		// new CommonFunctions().elementView(lblSuccess, "Success");
 	}
 
 	public void clickIconDownload() {

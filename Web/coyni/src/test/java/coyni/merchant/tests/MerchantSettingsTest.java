@@ -63,8 +63,6 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
-//					.clickCompanyInformationBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyHeading(data.get("companyInformationHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
@@ -627,74 +625,22 @@ public class MerchantSettingsTest {
 
 	}
 
-//	@Test
-//	@Parameters({"strParams"})
-//	public void testCompanyInforScreenResloutions(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideMenuBarComponent.clickMerchantSettings();
-//			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-//				HashMap<String, Object> deviceMetrics = new HashMap<String, Object>();
-//				deviceMetrics.put("Width", );
-//		} catch (Exception e) {
-//			// 
-//		}
-//	}
-
 	public void testAddExternalBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-//					.fillNameOnBankAccount(data.get("bankAccountName"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.fillRoutingNumber(data.get("routingNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.fillAccountNumber(data.get("accountNumber"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
-					.verifyHeading();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
-					.verifyNameOnAccount();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
-					.verifyInstitution();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
-					.verifyRoutingNumber();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
-					.verifyAccount();
+
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
 					.clickDone();
-
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.switchToWindow();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.verifyNewWindowHeading();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.enterBankName(data.get("expBankName"));
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.clickOnBankName();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.enterUserName(data.get("expUserName"));
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.enterPassword(data.get("expPassword"));
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().clickNext();
-//			Thread.sleep(5000);
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup().unSelectBank();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.clickUncheckBank();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.switchToWindow();
-//			Thread.sleep(2000);
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.successFailurePopupCardComponent().navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
@@ -1101,11 +1047,14 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifySearch(data.get("searchingKey"));
-			merchantSettingsSideBarMenuComponent.teamComponent().iconSearch();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsNoTeamMember failed due to Exception " + e);
@@ -1200,11 +1149,17 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
-			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickGoBack();
-			merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickYes();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
+				merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickGoBack();
+				merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickYes();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
@@ -1219,13 +1174,19 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().clickCheckBox();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickActions();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickApplyAction();
-			merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().getDescription();
-			merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().clickRemove();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickCheckBox();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickActions();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickApplyAction();
+				merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().getDescription();
+				merchantSettingsSideBarMenuComponent.teamComponent().teamMemberRemoveUserPopup().clickRemove();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
@@ -1240,11 +1201,15 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-//			merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-//			merchantSettingsSideBarMenuComponent.teamComponent().verifyName();
-//			merchantSettingsSideBarMenuComponent.teamComponent().verifyActivation();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickDelete();
-			merchantSettingsSideBarMenuComponent.teamComponent().deleteUserPopup().clickRemove();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickDelete();
+				merchantSettingsSideBarMenuComponent.teamComponent().deleteUserPopup().clickRemove();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamMember failed due to Exception " + e);
@@ -1259,9 +1224,17 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
-			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
-			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+				merchantSettingsSideBarMenuComponent.teamComponent().filterComponent()
+						.selectFilter(data.get("filterType"));
+				merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickApplyFilters();
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantSettingsTeamFilters failed due to Exception " + e);
 		}
@@ -1273,8 +1246,6 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-			records(strParams);
-			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyActive();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1288,16 +1259,18 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyPending();
-			if (merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyRecords() == 0) {
-				merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyNoRecordsFound();
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
 			} else {
-				sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 				merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
 				merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
 			}
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testMerchantSettingsTeamInvitationPendingFilters failed due to Exception " + e);
 		}
@@ -1309,13 +1282,8 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-			// merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyExpired();
-			if (merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyRecords() == 0) {
-				merchantSettingsSideBarMenuComponent.teamComponent().filtersPage().verifyNoRecordsFound();
-			} else {
-				sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-				merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
-			}
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1331,22 +1299,21 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
-			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().selectFilter(data.get("filterType"));
-			merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickResetFilters();
+			Thread.sleep(2000);
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickFilter();
+				merchantSettingsSideBarMenuComponent.teamComponent().filterComponent()
+						.selectFilter(data.get("filterType"));
+				merchantSettingsSideBarMenuComponent.teamComponent().filterComponent().clickResetFilters();
+			}
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testMerchantSettingsTeamResetFilters failed due to Exception " + e);
 		}
-	}
-
-	public void records(String strParams) {
-		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		merchantSettingsSideBarMenuComponent.clickMerchantSettings();
-		sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-		merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-		merchantSettingsSideBarMenuComponent.teamComponent().verifyRecords();
-
 	}
 
 	@Test

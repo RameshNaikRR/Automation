@@ -86,7 +86,6 @@ public class SignupTest {
 			signupPage.fillCreatePassword(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
 			signupPage.clickNext();
-			// signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			signupPage.phoneVerificationComponent().clickButtonGoBack();
 			Thread.sleep(2000);
 			signupPage.clickNext();
@@ -94,7 +93,6 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().emailVerificationComponent().clickButtonGoBack();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
-			// signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
 			signupPage.scrollDownTermsOfService();
 			signupPage.clickOnCheckBox();

@@ -294,7 +294,6 @@ public class LoginTest {
 		}
 	}
 
-// Added worked
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmailWithInvalidFirstAndLastName(String strParams) {

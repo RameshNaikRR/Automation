@@ -31,6 +31,7 @@ public class TeamComponent extends BrowserFunctions {
 	private By btnApplyAction = By.xpath("//div[contains(text(),'Apply Action')]");
 	private By btnResendInvitation = By.xpath("//div[@data-tip='Resend Invitation']");
 	private By btnEdit = By.xpath("//div[@data-tip='Edit']");
+	private By msgNoRecords = By.xpath("//div[contains(text(),'No Records Found')]");
 
 	public void verifyTeamHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblTeam, Heading, "Heading");
@@ -60,6 +61,15 @@ public class TeamComponent extends BrowserFunctions {
 		click(lnkFilter, "Filter");
 	}
 
+	public int verifyTeamMemberRecords() {
+		return getElementsList(msgNoRecords, "").size();
+	}
+
+	public String verifyNoRecordsFound() {
+		new CommonFunctions().elementView(msgNoRecords, "No Records");
+		return getText(msgNoRecords, "No Records");
+	}
+
 	public void clickActions() {
 		click(btnActions, "Actions");
 	}
@@ -83,6 +93,8 @@ public class TeamComponent extends BrowserFunctions {
 	public void verifyRecords() {
 		if (verifyElementDisplayed(noRecordFound, "No Record Found")) {
 			new CommonFunctions().elementView(noRecordFound, "No Records Found");
+		} else {
+			click(btnSettings, "Settings");
 		}
 
 	}

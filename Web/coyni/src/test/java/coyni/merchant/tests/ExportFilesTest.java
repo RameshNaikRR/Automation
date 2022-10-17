@@ -30,14 +30,19 @@ public class ExportFilesTest {
 			exportFilesPage.clickExportFiles();
 			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(1000);
-			exportFilesPage.exportIdView();
-			exportFilesPage.exportDateView();
-			exportFilesPage.dateRangeView();
-			exportFilesPage.reportNameView();
-			exportFilesPage.statusView();
-			exportFilesPage.verifyIdFormat();
-			exportFilesPage.clickIconDownload();
-			exportFilesPage.successView();
+			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				exportFilesPage.verifyNoRecordsFound();
+			} else {
+				exportFilesPage.exportIdView();
+				exportFilesPage.exportDateView();
+				exportFilesPage.dateRangeView();
+				exportFilesPage.reportNameView();
+				exportFilesPage.statusView();
+				exportFilesPage.verifyIdFormat();
+				exportFilesPage.clickIconDownload();
+				exportFilesPage.successView();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
@@ -52,10 +57,15 @@ public class ExportFilesTest {
 			exportFilesPage.clickExportFiles();
 			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			exportFilesPage.clickDownload();
-			exportFilesPage.clickApply();
+			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				exportFilesPage.verifyNoRecordsFound();
+			} else {
+				exportFilesPage.clickCheckBox();
+				exportFilesPage.clickBulkActionDropDown();
+				exportFilesPage.clickDownload();
+				exportFilesPage.clickApply();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesBulkDownload failed due to exception ");
@@ -70,10 +80,15 @@ public class ExportFilesTest {
 			exportFilesPage.clickExportFiles();
 			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			exportFilesPage.clickTrash();
-			exportFilesPage.clickApply();
+			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				exportFilesPage.verifyNoRecordsFound();
+			} else {
+				exportFilesPage.clickCheckBox();
+				exportFilesPage.clickBulkActionDropDown();
+				exportFilesPage.clickTrash();
+				exportFilesPage.clickApply();
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesBulkTrash failed due to exception ");
 		}
