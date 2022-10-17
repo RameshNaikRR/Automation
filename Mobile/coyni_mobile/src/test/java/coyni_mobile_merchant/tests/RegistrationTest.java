@@ -123,7 +123,7 @@ public class RegistrationTest {
 	public void testAddDBA() {
 		try {
 			businessTokenAccountPage.clickChooseUser();
-			businessTokenAccountPage.clickPrimaryAccount1();
+			businessTokenAccountPage.clickSelectAccount();
 			businessTokenAccountPage.clickAddDBA();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
@@ -131,19 +131,31 @@ public class RegistrationTest {
 	}
 	
 	@Test
-	public void testOpenNewAccount() {
+	public void testOpenNewAccountWithNewCompany() {
 		try {
 			businessTokenAccountPage.clickChooseUser();
 			Thread.sleep(3000);
 			businessTokenAccountPage.clickOpenNewAccount();
 			businessTokenAccountPage.clickBusinessAccount();
-			businessTokenAccountPage.clickNewDBA();
-			businessTokenAccountPage.clickEnabledAccount();
+			businessTokenAccountPage.clickNewCompany();
+//			businessTokenAccountPage.clickEnabledAccount();
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
 		}
 	}
-	
-
-}
+		@Test
+		public void testOpenNewAccountWithNewDBA() {
+			try {
+				businessTokenAccountPage.clickChooseUser();
+				Thread.sleep(3000);
+				businessTokenAccountPage.clickOpenNewAccount();
+				businessTokenAccountPage.clickBusinessAccount();
+				businessTokenAccountPage.clickNewDBA();
+				businessTokenAccountPage.clickEnabledAccount();
+				
+			} catch (Exception e) {
+				ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
+			}
+	}
+	}

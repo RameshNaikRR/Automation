@@ -46,10 +46,10 @@ public class SignUpTest {
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
 			signUpPage.clickAgreeCheckBox();

@@ -107,22 +107,22 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblNewCode, "Message", expMessage);
 	}
 
-	public void verifyRemove(String invalidPin, By ele) {
-		fillPin(invalidPin);
-		click(btnBackspace, "Backspace");
-		String text = new CommonFunctions().getTextBoxValue(ele);
-		if (text.equalsIgnoreCase(invalidPin)) {
-			ExtentTestManager.setPassMessageInReport("Backspace is working");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Backspace is not working");
-		}
-	}
+//	public void verifyRemove(String invalidPin, By ele) {
+//		fillPin(invalidPin);
+//		click(btnBackspace, "Backspace");
+//		String text = new CommonFunctions().getTextBoxValue(ele);
+//		if (text.equalsIgnoreCase(invalidPin)) {
+//			ExtentTestManager.setPassMessageInReport("Backspace is working");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("Backspace is not working");
+//		}
+//	}
 
-	public void verifyRemoveCode(String invalidPin) {
-		verifyRemove(invalidPin, txtCode);
-	}
+//	public void verifyRemoveCode(String invalidPin) {
+//		verifyRemove(invalidPin, txtCode);
+//	}
 
-	public void fillPin(String pin) {
+	public void fillOtp(String pin) {
 		enterText(txtCode, pin, "pin");
 	}
 

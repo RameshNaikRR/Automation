@@ -54,7 +54,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
 
-	public int verifyAddNewPaymentMethod() {
+	public int verifyAddNewPaymentMethod() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
 	}
 

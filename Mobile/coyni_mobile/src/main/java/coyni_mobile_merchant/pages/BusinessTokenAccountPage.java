@@ -38,11 +38,12 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnNewDBA = MobileBy.xpath("//*[contains(@resource-id,'ll_new_dba')]");
 	private By btnNewCompany = MobileBy.xpath("//*[contains(@resource-id,'ll_new_company')]");
 	private By lnkSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'title')]");
-	private By btnAddNewDBA = MobileBy.xpath("//*[@text='Add DBA']");
+	private By btnAddNewDBA = MobileBy.xpath("//*[contains(@text,'Add DBA')]");
 
-	private By btnSelectAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[5]");
+	private By btnSelectAccount = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
+	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[3]");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
@@ -76,7 +77,8 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(lnKBusinessAccount, "Business Account");
 	}
 
-	public void clickOpenNewAccount() {
+	public void clickOpenNewAccount() throws InterruptedException {
+		Thread.sleep(1500);
 		while (getElementList(btnOpenNewAccount, "Open New Account").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
@@ -85,9 +87,8 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(btnOpenNewAccount, "Open New Account");
 	}
 
-	public void clickPrimaryAccount1() {
-		click(btnSelectAccount1, "Primary Account 1");
-
+	public void clickSelectAccount() {
+		click(btnSelectAccount, "Select Account");
 	}
 
 	public void clickChildAccount1() {
@@ -130,7 +131,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	private By getAccounts(String num) {
-		return By.xpath(String.format("(//*[contains(@resource-id,'title')])['%s']",num));
+		return By.xpath(String.format("(//*[contains(@resource-id,'title')])[%s]",num));
 	}
 //
 //	private By getDashBoardItems(String eleName) {
@@ -142,31 +143,48 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
 			ExtentTestManager.setInfoMessageInReport("Hiiii");
 			Thread.sleep(2000);
-//			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+			if (DriverFactory.getDriver().findElement(btnEnabledAcc).isEnabled()) {
 				ExtentTestManager.setInfoMessageInReport("Hello "+i);
 				String str1 = Integer.toString(i);
-				click(getAccounts(str1), "Slected an Account");
+				scrollDownToElement(getAccounts(str1), "Slected an Account");
+				click(btnEnabledAcc, "Slected an Account");
+				scrollDownToElement(btnAddNewDBA, "Add New DBA");
 				click(btnAddNewDBA, "Add New DBA");
-//				break;
-//			}else {
-//				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
-//			}
-//		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
-//			ExtentTestManager.setInfoMessageInReport("Hiiii");
-//			Thread.sleep(2000);
-//			if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
-//				ExtentTestManager.setInfoMessageInReport("Hello "+i);
-////				click(lnkSelectAccount,"Choose Account");
-//				click(getAccounts("i"), "Slected an Account");
-//				click(btnAddNewDBA, "Add New DBA");
-//				break;
-//			}else {
-//				ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
-//			}
+				break;
+			}else {
+				ExtentTestManager.setInfoMessageInReport(i +" User in disabled mode");	
+			}
+
 		}
 		ExtentTestManager.setInfoMessageInReport("Tarak Tarak");
 	}
 
+//	if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+//		ExtentTestManager.setInfoMessageInReport("Hello "+i);
+//		String str1 = Integer.toString(i);
+//		scrollDownToElement(getAccounts(str1), "Slected an Account");
+//		click(getAccounts(str1), "Slected an Account");
+//		scrollDownToElement(btnAddNewDBA, "Add New DBA");
+//		click(btnAddNewDBA, "Add New DBA");
+//		break;
+//	}else {
+//		ExtentTestManager.setInfoMessageInReport(i +" User in disabled mode");	
+//	}
+
+	
+//	for (int i = 1; verifyNumOfAccounts() >= i; i++) {
+//	ExtentTestManager.setInfoMessageInReport("Hiiii");
+//	Thread.sleep(2000);
+//	if (DriverFactory.getDriver().findElement(getAccounts("i")).isEnabled()) {
+//		ExtentTestManager.setInfoMessageInReport("Hello "+i);
+////		click(lnkSelectAccount,"Choose Account");
+//		click(getAccounts("i"), "Slected an Account");
+//		click(btnAddNewDBA, "Add New DBA");
+//		break;
+//	}else {
+//		ExtentTestManager.setInfoMessageInReport("User in disabled mode");	
+//	}
+	
 	public void clickNewCompany() {
 		click(btnNewCompany, "New Company");
 	}
@@ -174,6 +192,32 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	public void clickNewDBA() {
 		click(btnNewDBA, "New DBA");
 	}
+	
+	
+	public void chooseDBA() throws InterruptedException {
+		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
+			clickSelectAccount();
+
+		if(DriverFactory.getDriver().findElement(btnEnabledAcc).isEnabled()) {
+		clickAddDBA();	
+		}else {
+			clickSelectAccount();
+		}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public MerchantProfilePage merchantProfilePage() {
 		return new MerchantProfilePage();

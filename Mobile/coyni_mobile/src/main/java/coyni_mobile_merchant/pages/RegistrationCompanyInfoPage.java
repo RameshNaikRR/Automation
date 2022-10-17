@@ -24,7 +24,6 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'cityET')]");
 	private By btnState = MobileBy.xpath("//*[contains(@resource-id,'stateET')]");
 	private By txtZipCode = MobileBy.xpath("//*[contains(@resource-id,'zipcodeET')]");
-
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'Next')]");
 	private By btnArticles = MobileBy.xpath("//*[contains(@resource-id,'aoiLL')]");
 	private By btnEIN = MobileBy.xpath("//*[contains(@resource-id,'einLetterLL')]");
@@ -33,11 +32,8 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 	private By lnkTakePhoto = MobileBy.xpath("//*[contains(@resource-id,'takePhotoTV')]");
 	private By lnkBrowseFiles = MobileBy.xpath("//*[contains(@resource-id,'browseFileTV')]");
 	private By lnkLibrary = MobileBy.xpath("//*[contains(@resource-id,'libraryTV')]");
-	private By btnCapture = MobileBy.xpath("//*[contains(@resource-id,'capture_image_button')]");
-	private By btnSelectFile = MobileBy.xpath("//*[contains(@resource-id,'icon_thumb')]");
-	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'saveLL')]");
-	private By btnUsingApp = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
-	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
+
+
 
 	public void clickGetStarted() {
 		click(btnGetStarted, "Get Started");
@@ -128,25 +124,6 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 		click(lnkLibrary, "Choose From Library");
 	}
 
-	public void clickCapture() {
-		click(btnCapture, "Capture Image");
-	}
-
-	public void clickSelectFile() {
-		click(btnSelectFile, "Select File through browse files");
-	}
-
-	public void clickSave() {
-		click(btnSave, "Save");
-	}
-
-	public void clickUsingApp() {
-		click(btnUsingApp, "Using App");
-	}
-
-	public void clickAllow() {
-		click(btnAllow, "Allow");
-	}
 
 	public void AddCompanyInfo(String expHeading, String expName, String expEmail, String expNum, String expSSN,
 			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
@@ -173,9 +150,9 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 			uploadDocumentComponent().clickUsingApp();
 			uploadDocumentComponent().clickAllow();
 		}
-		clickTakePhoto();
-		clickCapture();
-		clickSave();
+		uploadDocumentComponent().clickTakePhoto();
+		uploadDocumentComponent().clickCapture();
+		uploadDocumentComponent().clickSave();
 		clickDone();
 	}
 

@@ -22,7 +22,8 @@ public class BankAccountAddedPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(heading, "Bank Heading", expHeading);
 	}
 
-	public int verifyBankSucessHeading() {
+	public int verifyBankSucessHeading() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(heading).size();
 	}
 	

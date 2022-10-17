@@ -70,7 +70,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -98,14 +98,14 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("verifyNewEmailHeading"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.successFailureComponent().verifyPageHeading(data.get("changeEmailSuccessHeading"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
@@ -130,7 +130,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -177,7 +177,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -205,7 +205,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("verifyNewEmailHeading"));
@@ -234,7 +234,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().verifyEmail();
 			merchantProfilePage.userDetailsPage().getCurrentEmail();
 			merchantProfilePage.userDetailsPage().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -251,7 +251,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -280,7 +280,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(3000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent()
@@ -288,7 +288,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.verifyToastMsg(data.get("toastMsg"));
 			Thread.sleep(1000);
@@ -318,7 +318,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -360,7 +360,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -389,7 +389,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-					.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent()
@@ -422,7 +422,7 @@ public class MerchantProfileTest {
 					.phoneAndEmailVerificationComponent().navigationComponent().clickBack();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
 			merchantProfilePage.userDetailsPage().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -440,7 +440,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -485,7 +485,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -541,7 +541,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
@@ -581,7 +581,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
 			merchantProfilePage.userDetailsPage().getUserDetails();
 			merchantProfilePage.userDetailsPage().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -598,7 +598,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickChangePassword();
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
@@ -640,7 +640,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickChangePassword();
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
@@ -690,7 +690,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickChangePassword();
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
@@ -708,7 +708,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.confirmPasswordPage().verifyPageHeading(data.get("confirmPasswordHeading"));
 			merchantProfilePage.confirmPasswordPage().verifyPageDescription(data.get("confirmPasswordDescription"));
 			merchantProfilePage.navigationComponent().clickClose();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -725,7 +725,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickResetPINCode();
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
@@ -753,7 +753,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickResetPINCode();
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
@@ -770,13 +770,13 @@ public class MerchantProfileTest {
 			merchantProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyChoosePinHeading(data.get("choosePinHeading"));
 			navigationComponent.clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickResetPINCode();
 			Thread.sleep(2000);
 			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
 			navigationComponent.clickClose();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -793,7 +793,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -819,7 +819,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -840,7 +840,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -876,7 +876,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -915,7 +915,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -940,7 +940,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().clickBack();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -956,7 +956,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -993,7 +993,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -1033,7 +1033,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickDBAInformation();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
@@ -1059,7 +1059,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1076,7 +1076,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.verifyInformation();
 			merchantProfilePage.clickCompanyInformation();
@@ -1103,7 +1103,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1141,7 +1141,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1182,7 +1182,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1208,7 +1208,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().clickBack();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
 			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1225,7 +1225,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1263,7 +1263,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1304,7 +1304,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickCompanyInformation();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
@@ -1331,7 +1331,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.navigationComponent().clickBack();
 			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
 			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1348,7 +1348,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBeneficialOwners();
 			merchantProfilePage.benificialOwnersPage().verifyPageHeading(data.get("benificialHeading"));
@@ -1384,7 +1384,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBeneficialOwners();
 			merchantProfilePage.benificialOwnersPage().verifyPageHeading(data.get("benificialHeading"));
@@ -1412,7 +1412,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.benificialOwnersPage().getOwnerName();
 			merchantProfilePage.benificialOwnersPage().getOwnerShipPercentage();
 			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1429,7 +1429,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1472,7 +1472,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1524,7 +1524,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1538,7 +1538,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
 			merchantProfilePage.teamPage().verifyDescription(data.get("teamPageDescription"));
 			merchantProfilePage.teamPage().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1556,7 +1556,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1620,7 +1620,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1697,7 +1697,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1732,7 +1732,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
 			merchantProfilePage.teamPage().verifyDescription(data.get("teamPageDescription"));
 			merchantProfilePage.teamPage().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1750,7 +1750,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1782,7 +1782,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1826,7 +1826,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickTeam();
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
@@ -1872,7 +1872,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickPreferences();
 			merchantProfilePage.preferencesComponent().verifyPreferencesHeading(data.get("heading"));
@@ -1881,7 +1881,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.preferencesComponent().getDecscription();
 			merchantProfilePage.preferencesComponent().getLocalCurrency();
 			navigationComponent.clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1897,7 +1897,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickAccountLimits();
 			merchantProfilePage.accountLimitsComponent().verifyHeading(data.get("accLimitsHeading"));
@@ -1912,7 +1912,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.accountLimitsComponent().getWithdrawInstantPay();
 			merchantProfilePage.accountLimitsComponent().getWithdrawGiftcard();
 			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1928,7 +1928,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+//			 merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickAgreements();
 			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
@@ -1939,7 +1939,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.agreementComponent().verifyMerchantAgreementView();
 			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1956,7 +1956,7 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickFees();
 			merchantProfilePage.feesComponent().verifyHeading(data.get("heading"));
@@ -1976,7 +1976,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.feesComponent().verifyOtherFees(data.get("otherFeesHeading"));
 			merchantProfilePage.feesComponent().getMonthlyFee();
 			merchantProfilePage.feesComponent().clickBack();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickBack();
 			businessTokenAccountPage.dashBoardPage().getUserName();
@@ -1990,7 +1990,7 @@ public class MerchantProfileTest {
 	public void testLogOut() {
 		try {
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountDetails();
+			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.verifyLogOut();
 			merchantProfilePage.clickLogOut();
@@ -2432,34 +2432,36 @@ public class MerchantProfileTest {
 				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
 			}
-			
+
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(
 					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
 					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
 			Thread.sleep(2000);
-			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
 					.bankAccountAddedPage().verifyBankSucessHeading() == 1) {
-				
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
-			String nameOnBank = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
-			String routingNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addBankAccountComponent().bankAccountAddedPage().getRoutingNum();
-			String accNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.bankAccountAddedPage().getAccNum();
-			if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
-					&& data.get("routingNum").equalsIgnoreCase(routingNum) && data.get("accountNum").contains(accNum)) {
+
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-						.bankAccountAddedPage().getBankDetails();
-			} else {
-				ExtentTestManager.setFailMessageInReport("Bank Account Details are not updated");
-			}
+						.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
+				String nameOnBank = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
+				String routingNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getRoutingNum();
+				String accNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getAccNum();
+				if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
+						&& data.get("routingNum").equalsIgnoreCase(routingNum)
+						&& data.get("accountNum").contains(accNum)) {
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+							.bankAccountAddedPage().getBankDetails();
+				} else {
+					ExtentTestManager.setFailMessageInReport("Bank Account Details are Wrong");
+				}
 //
 
-		} }catch (Exception e) {
+			}
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
 		}
 	}

@@ -119,7 +119,7 @@ public class DBAInformationPage extends MobileFunctions {
 		click(btnCrop, "Crop");
 	}
 
-	public void uploadDBAProfile(String expText,String expTex) {
+	public void uploadDBAProfile(String expText,String expTex) throws InterruptedException {
 		clickEditProfile();
 		if (uploadDocumentComponent().verifyUsingApp() == 1) {
 			uploadDocumentComponent().clickUsingApp();

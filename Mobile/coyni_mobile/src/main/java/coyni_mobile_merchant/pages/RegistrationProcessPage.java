@@ -23,9 +23,11 @@ public class RegistrationProcessPage extends MobileFunctions {
 	private By btnMerchantAgreement = MobileBy.xpath("//*[contains(@resource-id,'aggrementsIncompleteLL')]");
 	private By btnReviewApplication = MobileBy.xpath("//*[contains(@resource-id,'reviewCv')]");
 
-	public void clickGetStarted() {
+	public void clickGetStarted() throws InterruptedException {
+		Thread.sleep(2000);
+		if (DriverFactory.getDriver().findElements(btnGetStarted).size()==1) {
 		click(btnGetStarted, "Get Started");
-
+		}
 	}
 
 	public void clickCompanyInfo() {

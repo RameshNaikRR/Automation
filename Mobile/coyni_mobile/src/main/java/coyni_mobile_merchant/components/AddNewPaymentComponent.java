@@ -59,7 +59,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	public int verifyAddNewPaymentHeading() {
+	public int verifyAddNewPaymentHeading() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(lblHeading).size();
 	}
 

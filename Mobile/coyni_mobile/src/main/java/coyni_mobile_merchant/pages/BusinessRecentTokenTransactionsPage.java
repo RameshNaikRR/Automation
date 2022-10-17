@@ -137,7 +137,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		click(btnFiltersIcon, "Filter Icon");
 	}
 
-	public int verifyTransactionsCount() {
+	public int verifyTransactionsCount() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 

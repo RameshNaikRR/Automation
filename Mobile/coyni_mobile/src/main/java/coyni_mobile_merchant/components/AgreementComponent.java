@@ -11,9 +11,9 @@ public class AgreementComponent extends MobileFunctions {
 
 	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-	private By privacyPolicy = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]");
-	private By termsOfService = MobileBy.xpath("//*[contains(@resource-id,'terms_of_service')]");
-	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'merchant_agreements')]");
+	private By privacyPolicy = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+	private By termsOfService = MobileBy.xpath("//*[contains(@resource-id,'terms_of_service')]|//*[contains(@text,'Terms of Service')]");
+	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'merchant_agreements')]|//*[contains(@text,'Merchant’s Agreement')]");
 	private By headingPastAgreements = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'canceled')]");

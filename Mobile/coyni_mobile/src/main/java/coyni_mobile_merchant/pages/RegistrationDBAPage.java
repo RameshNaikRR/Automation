@@ -145,7 +145,6 @@ public class RegistrationDBAPage extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 		clickTimeZone();
 		clickUpload();
-		Thread.sleep(2000);
 		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
 		uploadDocumentComponent().clickUsingApp();
 		uploadDocumentComponent().clickAllow();

@@ -47,7 +47,8 @@ public class UploadDocumentComponent extends MobileFunctions{
 	public void clickUsingApp() {
 		click(btnUsingApp, "Using App");
 	}
-	public int verifyUsingApp() {
+	public int verifyUsingApp() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(btnUsingApp).size();
 	}
 	public void clickAllow() {	

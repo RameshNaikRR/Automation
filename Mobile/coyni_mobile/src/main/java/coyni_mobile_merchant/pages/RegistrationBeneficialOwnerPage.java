@@ -22,8 +22,6 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 	private By lnkLicense = MobileBy.xpath("//*[contains(@resource-id,'driverlicensetxt')]");
 	private By lnkPassport = MobileBy.xpath("//*[contains(@resource-id,'passporttxt')]");
 	private By lnkIssuedCard = MobileBy.xpath("//*[contains(@resource-id,'sictxt')]");
-	private By btnCapture = MobileBy.xpath("//*[contains(@resource-id,'capture_image_button')]");
-	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'saveLL')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'nextcv')]");
 	private By btnOnlyThisTime = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_one_time_button')]");
 	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
@@ -33,6 +31,14 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 	private By btnState = MobileBy.xpath("//*[contains(@resource-id,'stateET')]");
 	private By txtZipCode = MobileBy.xpath("//*[contains(@resource-id,'Zip_ET')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@text,'Done')]");
+	private By lblAdditionalBeneficialHeading = MobileBy.xpath("//*[contains(@text,'Additional Beneficial')]");
+	private By btnBeneficialOwners = MobileBy.xpath("//*[contains(@resource-id,'moreIV')]");
+	private By btnBeneficialOwnerMore1 = MobileBy.xpath("(//*[contains(@resource-id,'moreIV')])[1]");
+	private By btnBeneficialOwnerMore2 = MobileBy.xpath("(//*[contains(@resource-id,'moreIV')])[2]");
+	private By btnAddBeneficial = MobileBy.xpath("//*[contains(@resource-id,'addNewBOLL')]");
+	private By lnkViewEdit = MobileBy.xpath("//*[contains(@text,'View/Edit')]");
+	private By lnkDelete = MobileBy.xpath("//*[contains(@text,'Delete')]");
+	private By lblAdditionalDescription = MobileBy.xpath("//*[contains(@resource-id,'boDescTV')]");
 
 	public void fillFirstName(String expText) {
 		enterText(txtFirstName, expText, "First Name");
@@ -74,14 +80,6 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 		click(lnkIssuedCard, "State Issued Card");
 	}
 
-	public void clickCapture() {
-		click(btnCapture, "Capture Image");
-	}
-
-	public void clickSave() {
-		click(btnSave, "Save");
-	}
-
 	public void clickOnlyThisTime() {
 		click(btnOnlyThisTime, "Only This Time");
 	}
@@ -119,19 +117,13 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 		enterText(txtZipCode, expText, "Zip Code");
 	}
 
-	public void clickDone() {
+	public void clickDone() throws InterruptedException {
+		Thread.sleep(2000);
 		scrollDownToElement(btnDone, "Done");
 		click(btnDone, "Done");
 	}
 
-	private By lblAdditionalBeneficialHeading = MobileBy.xpath("//*[contains(@text,'Additional Beneficial')]");
-	private By btnBeneficialOwners = MobileBy.xpath("//*[contains(@resource-id,'moreIV')]");
-	private By btnBeneficialOwnerMore1 = MobileBy.xpath("(//*[contains(@resource-id,'moreIV')])[1]");
-	private By btnBeneficialOwnerMore2 = MobileBy.xpath("(//*[contains(@resource-id,'moreIV')])[2]");
-	private By btnAddBeneficial = MobileBy.xpath("//*[contains(@resource-id,'addNewBOLL')]");
-	private By lnkViewEdit = MobileBy.xpath("//*[contains(@text,'View/Edit')]");
-	private By lnkDelete = MobileBy.xpath("//*[contains(@text,'Delete')]");
-	private By lblAdditionalDescription = MobileBy.xpath("//*[contains(@resource-id,'boDescTV')]");
+	
 	
 	public void clickBeneficialOwnerMore1() {
 		click(btnBeneficialOwnerMore1, "Beneficial Owner 1");
@@ -167,6 +159,7 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 	
 	public void BeneficialOwner(String heading, String expFirstName, String expLastName, String expSSN,
 			String expOwnership,String expAddress1, String expAddress2,String expCity,String expZipCode, String expState) throws InterruptedException {
+		Thread.sleep(2000);	
 		verifyHeading(heading);
 		fillFirstName(expFirstName);
 		fillLastName(expLastName);
@@ -182,8 +175,8 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 			uploadDocumentComponent().clickAllow();
 			}
 		clickLicense();
-		clickCapture();
-		clickSave();
+		uploadDocumentComponent().clickCapture();
+		uploadDocumentComponent().clickSave();
 		clickNext();
 		fillAddress1(expAddress1);
 		fillAddress2(expAddress2);
@@ -193,7 +186,7 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 		fillZipCode(expZipCode);
 		DriverFactory.getDriver().hideKeyboard();
 		clickDone();
-		Thread.sleep(3000);	
+//		Thread.sleep(3000);	
 		}
 	
 	
