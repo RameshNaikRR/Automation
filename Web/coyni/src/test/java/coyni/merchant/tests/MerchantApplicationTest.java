@@ -196,7 +196,7 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationSummaryPage().clickSubmit();
 
 			registrationStartPage.applicationSummaryPage().clickDone();
-			
+
 //			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
 //			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();
 //			registrationStartPage.applicationSubmissionPage().verifyStatus();
@@ -332,26 +332,6 @@ public class MerchantApplicationTest {
 			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			sideMenuBarComponent.bankAccountPage().clickAdd();
 			sideMenuBarComponent.bankAccountPage().bankAccountAddedPopup().clickDone();
-
-//			sideMenuBarComponent.bankAccountPage().clickImReady();
-//			sideMenuBarComponent.bankAccountPage().verifyAddBankAccountView();
-//			sideMenuBarComponent.bankAccountPage().verifyDoNotNavigateView();
-//			Thread.sleep(15000);
-//			sideMenuBarComponent.bankAccountPage().switchTab();
-//			sideMenuBarComponent.bankAccountPage().fillBankName(data.get("bankName"));
-//			Thread.sleep(1000);
-//			sideMenuBarComponent.bankAccountPage().fillUserName(data.get("userName"));
-//			sideMenuBarComponent.bankAccountPage().fillPassword(data.get("password1"));
-//			Thread.sleep(5000);
-//			sideMenuBarComponent.bankAccountPage().clickEnter();
-//			Thread.sleep(10000);
-//			sideMenuBarComponent.bankAccountPage().clickChkbxBank();
-//			sideMenuBarComponent.bankAccountPage().clickNextButtonBank();
-//			sideMenuBarComponent.bankAccountPage().switchTab();
-//			WebDriver driver = DriverFactory.getDriver();
-//			WebDriverWait wait = new WebDriverWait(driver, 120);
-//			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-//			sideMenuBarComponent.bankAccountPage().clickBank();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
@@ -981,8 +961,6 @@ public class MerchantApplicationTest {
 			registrationStartPage.applicationApprovedReservedPage().verifyApprovedReserveDescription();
 			registrationStartPage.applicationApprovedReservedPage().verifyStatus();
 			registrationStartPage.applicationApprovedReservedPage().getMerchantTrackerApplication();
-//			registrationStartPage.applicationApprovedReservedPage().verifyMouseHoverChangedColor(data.get("expCssProp"),
-//					data.get("expValue"), data.get("expColor"));
 			registrationStartPage.applicationApprovedReservedPage().verifyName();
 			registrationStartPage.applicationApprovedReservedPage().verifyMonthlyVolume();
 			registrationStartPage.applicationApprovedReservedPage().verifyHighTicket();

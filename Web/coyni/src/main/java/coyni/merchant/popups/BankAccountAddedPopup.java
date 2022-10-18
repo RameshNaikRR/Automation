@@ -57,14 +57,17 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 	}
 
 	public void clickDone() {
-		if (DriverFactory.getDriver().findElements(btnDone).size() > 0) {
-			click(btnDone, "Click Done");
-		} else if (DriverFactory.getDriver().findElements(btnBuyCoyni).size() > 0) {
-			click(btnBuyCoyni, "Buy Coyni");
-		} else {
-			click(btnWithdraw, "Withdraw");
+		click(btnDone, "Click Done");
 
-		}
+	}
+
+	public void clickBuyCoyni() {
+		click(btnBuyCoyni, "Buy Coyni");
+
+	}
+
+	public void clickWithdraw() {
+		click(btnWithdraw, "Withdraw");
 
 	}
 }

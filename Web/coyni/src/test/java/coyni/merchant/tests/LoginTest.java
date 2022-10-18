@@ -29,43 +29,6 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testLoginView(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.verifyEmailView();
-			loginPage.verifyPasswordView();
-			loginPage.verifyForgotEmailView();
-			loginPage.verifyForgotPasswordView();
-			loginPage.verifySignUpView();
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
-			loginPage.clickeyeIcon();
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
-			loginPage.clickNext();
-			loginPage.authyComponent().clickGoBack();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Login test view failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testLoginPageFieldValidation(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.clickLogin();
-			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.validateEmailTextField(data.get("email"));
-			loginPage.validatePasswordText(data.get("password"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testLoginPageFieldValidation failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

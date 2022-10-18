@@ -40,7 +40,6 @@ public class SignupTest {
 			WebDriver driver = DriverFactory.getDriver();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.clickSignUp();
-			// signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
 			signupPage.fillLastName(data.get("lastName"));
@@ -55,7 +54,6 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyEmailHeading(data.get("emailHeading"));
-			// signupPage.phoneVerificationComponent().emailVerificationComponent().verifyEmail(data.get("newEmail"));
 			signupPage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code"));
 
 			signupPage.scrollDownTermsOfService();
@@ -314,19 +312,12 @@ public class SignupTest {
 	public void testCreateAccountView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// homePage.verifyLandingPageHeading(data.get("landingHeading"));
 			signupPage.verifyBusinessAccountView();
-			// homePage.verifyPersonalAccountView();
 			signupPage.verifyLoginView();
-			// homePage.verifyCreateAccountSubTitleView();
-			// homePage.verifyPersonalAccountSubTitleView();
-			// homePage.verifyBusinessAccountSubTitleView();
 			signupPage.clickMerchantAccount();
 			signupPage.verifyCreateAccountPageHeading(data.get("createAccountHeading"));
 			signupPage.verifyFirstNameAutoFocus();
-			// homePage.verifyElementOpacity();
 
-//			}
 		}
 
 		catch (Exception e) {
