@@ -37,9 +37,11 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
-			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
-			loginPage.authyComponent().fillInput(data.get("code"));
-			//loginPage.authyComponent().verifyMessage(data.get("message"));
+			if(data.get("securityKey").equalsIgnoreCase("123456")) {
+                loginPage.authyComponent().fillInput(data.get("securityKey"));    
+            }else {
+                loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+            }
 			Thread.sleep(2000);
 
 		} catch (Exception e) {
