@@ -37,7 +37,7 @@ public class GeneratePrintableQRCodePopup extends BrowserFunctions {
 	public void clickBoxes() {
 		List<WebElement> list = getElementsList(lblElements, "CheckBoxes");
 		list.get(0).click();
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= 4; i++) {
 			list.get(1).click();
 			list.get(2).click();
 			list.get(3).click();

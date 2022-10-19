@@ -13,6 +13,8 @@ public class EditandDeleteComponent extends BrowserFunctions {
 	private By cardNumber = By.xpath("//p[contains(@class,'text-base')]");
 	private By btnConfirmDelete = By.xpath("//button[text()='Confirm Remove']");
 	private By txtaddress = By.xpath("//p[text()='address1']");
+	private By lblDebitCard = By.xpath("//p[contains(text(),'Mastercard')]");
+	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
 
 	public String getCardNumber(int number) {
 		List<WebElement> cardNumbers = getElementsList(cardNumber, "card number");
@@ -22,10 +24,14 @@ public class EditandDeleteComponent extends BrowserFunctions {
 	}
 
 	public void clickEdit(String number) {
-		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)), "card");
-		click(By.xpath(String
-				.format("//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-edit')]", number)),
-				number);
+		moveToElement(lblDebitCard, "Debit Card");
+		// moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)),
+		// "card");
+		click(btnEdit, "Edit");
+		// click(By.xpath(String
+		// .format("//p[contains(text(),'%s')]/following-sibling::button[contains(@class,
+		// 'icon-edit')]", number)),
+		// number);
 		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
 	}
 

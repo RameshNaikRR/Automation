@@ -33,7 +33,6 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 	private By labelOrderPreview = By.xpath("//p[text()='Order Preview']");
 	private By cardAmazon = By.xpath("//div[@class='gift-card-list-item__gift-image-container']");// amazon
 	private By cardVisa = By.xpath("(//button[@class='gift-card-list-item__link'])[2]");// Visa
-//	private By PurchaseAmounts = By.xpath("//div[@class='flex items-center justify-between']/div");
 	private By lnkCopy = By.cssSelector(".icon-copy");
 	private By btnDone = By.cssSelector(".w-60");
 
@@ -45,7 +44,8 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 		click(btnDone, "Done");
 	}
 
-	public void enterSearckey(String searchKey) {
+	public void enterSearckey(String searchKey) throws InterruptedException {
+		Thread.sleep(2000);
 		enterText(txtSearch, searchKey, "Search Field");
 	}
 

@@ -20,7 +20,7 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 
 	private By accountNumber = By.xpath("//span[contains(text(),'Account Number')]/following-sibling::*");
 
-	private By btnDone = By.xpath("//span[contains(text(),'Done')]");
+	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
 
 	private By btnBuyCoyni = By.xpath("//button[contains(text(),'Buy coyni')]");
 

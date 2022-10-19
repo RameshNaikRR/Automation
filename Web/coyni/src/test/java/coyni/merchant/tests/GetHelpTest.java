@@ -27,6 +27,7 @@ public class GetHelpTest {
 	public void testGetHelp(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			getHelpPage.verifyHeading(data.get("heading"));
 			getHelpPage.clickGetHelp();
 			Thread.sleep(3000);
 			getHelpPage.getContent();
@@ -36,6 +37,7 @@ public class GetHelpTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testGetHelp is failed due to exception " + e);
 		}
+
 
 	}
 

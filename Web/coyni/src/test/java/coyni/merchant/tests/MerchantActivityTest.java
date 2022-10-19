@@ -230,7 +230,6 @@ public class MerchantActivityTest {
 	public void testDashBoardPayOutHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
 			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
@@ -241,10 +240,6 @@ public class MerchantActivityTest {
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
 			merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
-//			merchantActivityComponent.payOutHistoryPage().fillSearch(data.get("search"));
-//			merchantActivityComponent.payOutHistoryPage().clickRecord();
-//			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
-//			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDashBoardPayOutHistory failed due to exception " + e);
@@ -274,7 +269,7 @@ public class MerchantActivityTest {
 	public void testDashBoardFullReserveHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantActivityComponent.clickDashBoard();
+			// merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().getReserveBalance();
 			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
@@ -323,7 +318,6 @@ public class MerchantActivityTest {
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getAmountReleased();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
 			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
@@ -439,22 +433,5 @@ public class MerchantActivityTest {
 					.setFailMessageInReport("testTransactionDetailsMonthlyServiceFee Failed due to Exception " + e);
 		}
 	}
-
-//	@Test
-//	public void DashBoardScreenResolutions() {
-//		try {
-//			DesiredCapabilities dc = new DesiredCapabilities();
-//			dc.setCapability("resolution", "1123x1080");
-//			URL url = new URL("www.facebook.com");
-//			WebDriver driver = new RemoteWebDriver(url, dc);
-//			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-//			merchantActivityComponent.clickDashBoard();
-//			merchantActivityComponent.dashBoardPage().verifyHeading("Merchant Dashboard");
-//			ExtentTestManager
-//					.setInfoMessageInReport("Merchant Dashboard heading is displayed as per screeen resolution");
-//		} catch (Exception e) {
-//			ExtentTestManager.setInfoMessageInReport("Screen resolutions is failed");
-//		}
-//	}
 
 }

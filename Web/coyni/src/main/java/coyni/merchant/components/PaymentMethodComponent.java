@@ -1,14 +1,12 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
-
 import coyni.merchant.popups.AddBankAccountPopup;
 import coyni.merchant.popups.AddNewPaymentMethodPopup;
 import coyni.merchant.popups.PreAuthorizationPopup;
 import coyni.merchant.popups.RemovePaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.api.reporting.ExtentTestManager;
 
 public class PaymentMethodComponent extends BrowserFunctions {
 
@@ -18,6 +16,9 @@ public class PaymentMethodComponent extends BrowserFunctions {
 	private By lblBankName = By.xpath("//p[contains(text(),'Bank')]");
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
+	private By lblSignetAccount = By.xpath("(//p[contains(text(),'Signet Wallet ID')])[1]");
+	private By lblBankAccount = By.xpath("(//p[contains(text(),'WELLS FARGO BANK NA (ARIZ')])[1]");
+	private By lblDebitCard = By.xpath("//p[contains(text(),'Mastercard')]");
 
 	public void clickAddNewPayment() {
 		click(btnAddNewPayment, "Add New Payment Method");
@@ -27,32 +28,24 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblPaymentMethods, "PaymentMethods");
 	}
 
-//	public void clickDelete(String number) {
-//		moveToElement(btnDelete, "Delete");
-//		click(By.xpath(String.format(
-//				"//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-trash')]", number)),
-//				number);
-//		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
-//	}
+	public void clickDeleteSignetAccount(String number) {
+		moveToElement(lblSignetAccount, "Signet Account");
+		click(btnDelete, "Delete");
+	}
+
+	public void clickOnDeleteBankAccount(String number) {
+		moveToElement(lblBankAccount, "Bank Account");
+		click(btnDelete, "Delete");
+	}
+
+	public void clickDeleteDebitCard(String number) {
+		moveToElement(lblDebitCard, "Debit Card");
+		click(btnDelete, "Delete");
+	}
 
 	public void clickDeleteBank() {
 		moveToElement(lblBankName, "Move to Bank name");
 		click(btnDelete, "Click Delete");
-	}
-
-	public void clickDeleteSignet(String SignetAccountNumber) {
-		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", SignetAccountNumber)), "Signet Account");
-		click(btnDelete, "Delete Signet");
-	}
-
-	public void clickDebitCard(String DeleteDebit) {
-		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteDebit)), "Delete Debit Card");
-		click(btnDelete, "Delete Debit");
-	}
-
-	public void clickDeleteBankAccount(String DeleteBank) {
-		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteBank)), "Delete Bank Account");
-		click(btnDelete, "Delete Bank ");
 	}
 
 	public void verifyAddNewPaymentMethods(String expHeading) {
@@ -69,20 +62,20 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		moveToElement(lblBankName, "Bank Name");
 	}
 
-//	public void clickDeleteSignet(String SignetAccountNumber) {
-//		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", SignetAccountNumber)), "Signet Account");
-//		click(btnDelete, "Delete Signet");
-//	}
+	public void clickDeleteSignet(String SignetAccountNumber) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", SignetAccountNumber)), "Signet Account");
+		click(btnDelete, "Delete Signet");
+	}
 
-//	public void clickDebitCard(String DeleteDebit) {
-//		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteDebit)), "Delete Debit Card");
-//		click(btnDelete, "Delete Debit");
-//	}
-//
-//	public void clickDeleteBankAccount(String DeleteBank) {
-//		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteBank)), "Delete Bank Account");
-//		click(btnDelete, "Delete Bank ");
-//	}
+	public void clickDebitCard(String DeleteDebit) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteDebit)), "Delete Debit Card");
+		click(btnDelete, "Delete Debit");
+	}
+
+	public void clickDeleteBankAccount(String DeleteBank) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", DeleteBank)), "Delete Bank Account");
+		click(btnDelete, "Delete Bank ");
+	}
 
 	public void verifyAddNewPayment() {
 		new CommonFunctions().elementView(btnDelete, getCopiedData());

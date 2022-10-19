@@ -637,8 +637,9 @@ public class MerchantSettingsTest {
 					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.fillAccountNumber(data.get("accountNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
-
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
 					.clickDone();
 
@@ -663,7 +664,8 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickDeleteBankAccount(data.get("bankNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent()
+					.clickDeleteBankAccount(data.get("bankNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();

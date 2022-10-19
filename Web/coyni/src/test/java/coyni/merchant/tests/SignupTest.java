@@ -127,7 +127,6 @@ public class SignupTest {
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			signupPage.phoneVerificationComponent().clickButtonGoBack();
-			signupPage.clickCheckBox();
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.phoneVerificationComponent().clickLogin();
