@@ -10,8 +10,8 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
-	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
-	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'tvBankHead')]");
+	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']|//*[@text='Add Bank Account']");
+	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'tvBankHead')]|//*[contains(@resource-id,'tvPayMethod')]");
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvBDCHead')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCCard')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
@@ -21,11 +21,22 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By errMsgMaxBankAccounts = MobileBy.xpath("//*[contains(@resource-id,'tvBBankError')]");
 	private By errMsgMaxDebit = MobileBy.xpath("//*[contains(@resource-id,'tvBDCardError')]");
 	private By errMsgMaxSignet = MobileBy.xpath("//*[contains(@resource-id,'tvSignetError')]");
-
+	private By withdrawAddBankHeading = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	
 	public void verifyHeading(String expHeading) {
-		if (getElementList(lblHeading, "Heading").size() > 0) {
+//		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 
+//		}
+
+	}
+
+	public void verifywithdrawAddBankHeading(String expHeading) throws InterruptedException {
+//		Thread.sleep(2000);
+		if (getElementList(withdrawAddBankHeading, "Heading").size() > 0) {
+//				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
+			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+			click(btnExternalBank, "Bank");
 		}
 
 	}

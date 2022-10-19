@@ -2105,10 +2105,10 @@ public class MerchantProfileTest {
 								.mailingAddressComponent().selectState(data.get("state"));
 						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 								.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-						Thread.sleep(5000);
+						Thread.sleep(1000);
 						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 								.mailingAddressComponent().clickAddCard();
-						Thread.sleep(8000);
+						Thread.sleep(1000);
 						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 								.mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
 						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -2432,7 +2432,8 @@ public class MerchantProfileTest {
 				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
 			}
-
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifywithdrawAddBankHeading(data.get("withdrawAddBank"));
+			
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(
 					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
 					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
