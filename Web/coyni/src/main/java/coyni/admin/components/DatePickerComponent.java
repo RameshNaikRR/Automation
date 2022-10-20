@@ -74,7 +74,7 @@ public class DatePickerComponent extends BrowserFunctions {
 	}
 	
 
-	public void generateDate() {
+	public void generateDate() throws InterruptedException {
 		String temp = date();
 		String date1 = date().replace("/", " ");
 		System.out.println(date1);
@@ -87,6 +87,7 @@ public class DatePickerComponent extends BrowserFunctions {
 		LongStream.range(0, diff).forEach(i -> arrow.click());
 
 		// select the date
+		Thread.sleep(2000);
 		dates.stream().filter(ele -> !ele.getText().equals("")).filter(ele -> Integer.parseInt(ele.getText()) == day)
 				.findFirst().ifPresent(WebElement::click);
 		System.out.println(temp + " selected from Calendar");

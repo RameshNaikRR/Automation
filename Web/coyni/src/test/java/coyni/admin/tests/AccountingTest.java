@@ -34,7 +34,7 @@ public class AccountingTest {
 		homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
 		// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
 		homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
-		homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
+	//	homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
 //		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
 		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
 		// Thread.sleep(2000);
