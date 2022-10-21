@@ -743,7 +743,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickDeleteSignet(data.get("signetNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickDeleteSignetAccount(data.get("signetNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();

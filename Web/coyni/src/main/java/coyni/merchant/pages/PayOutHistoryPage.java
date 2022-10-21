@@ -11,7 +11,7 @@ public class PayOutHistoryPage extends BrowserFunctions {
 
 	private By txtSearch = By.xpath("//input[@placeholder='Search By Payout Date or Payout ID']");
 
-	private By payOut = By.cssSelector("tbody>tr:nth-of-type(5)>td:nth-of-type(1)");
+	private By payOut = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(1)");
 
 	private By lblRecord = By.xpath("//div[text()='Business Token Account']");
 

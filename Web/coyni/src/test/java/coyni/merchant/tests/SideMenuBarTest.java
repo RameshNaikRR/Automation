@@ -205,7 +205,6 @@ public class SideMenuBarTest {
 			sideMenuBarComponent.clickTokenAccount();
 			sideMenuBarComponent.tokenAccountPage().verifyHeading(data.get("tokenAccountHeading"));
 			sideMenuBarComponent.clickQRCode();
-			// sideMenuBarComponent.completeVerificationPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.completeVerificationPopup().verifyDescription();
 			sideMenuBarComponent.completeVerificationPopup().clickAccountVerification();
 

@@ -42,7 +42,6 @@ public class GeneratePrintableQRCodePopup extends BrowserFunctions {
 			list.get(2).click();
 			list.get(3).click();
 			list.get(4).click();
-			list.get(5).click();
 
 		}
 	}

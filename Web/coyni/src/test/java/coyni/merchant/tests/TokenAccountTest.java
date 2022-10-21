@@ -1266,7 +1266,6 @@ public class TokenAccountTest {
 		}
 	}
 
-////
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDViaInstantPayWithNavigationOptions(String strParams) {
@@ -1383,7 +1382,6 @@ public class TokenAccountTest {
 
 	}
 
-//
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDViaInstantPayAddDebritCardWithinvailddata(String strParams) {

@@ -38,8 +38,12 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
-			loginPage.authyComponent().fillInput(data.get("code"));
-			Thread.sleep(3000);
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				ExtentTestManager.setInfoMessageInReport("ok ");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}

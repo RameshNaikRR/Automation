@@ -361,14 +361,14 @@ public class MerchantActivityTest {
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
 			Thread.sleep(2000);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
-			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
-			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
-			merchantActivityComponent.transactionDetailsComponent().getAmount();
-			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
-			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
-			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
+//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
+//			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
+//			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
+//			merchantActivityComponent.transactionDetailsComponent().getAmount();
+//			merchantActivityComponent.transactionDetailsComponent().getTotalTransctions();
+//			merchantActivityComponent.transactionDetailsComponent().getPayOutDate();
+//			merchantActivityComponent.transactionDetailsComponent().getDepositTo();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -423,10 +423,10 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
-			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
-			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
-			merchantActivityComponent.transactionDetailsComponent().getAmount();
+//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+//			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
+//			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
+//			merchantActivityComponent.transactionDetailsComponent().getAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager
