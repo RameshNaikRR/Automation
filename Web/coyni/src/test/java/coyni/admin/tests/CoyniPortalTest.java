@@ -317,7 +317,7 @@ public class CoyniPortalTest {
 		tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 		tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 		tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-		tokenAccountPage.mailingAddressComponent().clickstate();
+	//	tokenAccountPage.mailingAddressComponent().clickstate();
 		Thread.sleep(500);
 		tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
 
