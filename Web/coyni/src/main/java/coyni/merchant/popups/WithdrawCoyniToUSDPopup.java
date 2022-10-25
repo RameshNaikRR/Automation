@@ -14,6 +14,9 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	private By withdrawToUSDHeading = By.xpath("//h1[contains(text(),'Withdraw coyni to USD')]");
 	private By PaymentBtns = By.xpath("//span[@class='labelWithoutHover']");
+	private By lblSignetAccount = By.xpath("(//p[contains(text(),'Signet Wallet ID')])[1]");
+	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
+	private By lblDebitCard = By.xpath("//p[contains(text(),'Mastercard')]");
 
 	private By getPaymentBnts(String buttons) {
 		return By.xpath(String.format("(//button[@class='payment-method-button '])[%s]", buttons));
@@ -29,6 +32,16 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 			String text = webElement.getText();
 			ExtentTestManager.setInfoMessageInReport(displayed + "  " + text + "  " + "Button is displayed ");
 		}
+	}
+
+	public void clickDeleteDebitCard(String number) {
+		moveToElement(lblDebitCard, "Debit Card");
+		click(btnDelete, "Delete");
+	}
+
+	public void clickDeleteSignetAccount(String number) {
+		moveToElement(lblSignetAccount, "Signet Account");
+		click(btnDelete, "Delete");
 	}
 
 	public void clickDelete(String number) {

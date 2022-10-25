@@ -1062,7 +1062,7 @@ public class TokenAccountTest {
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickDelete(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickDeleteSignetAccount(data.get("signetNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().clickOnRemove();
 			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().successFailurePopupCardComponent()
 					.verifyPaymnetRemovedSuccessfulHeading();

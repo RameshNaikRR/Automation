@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.pages.LoginPage;
@@ -24,6 +25,7 @@ public class SignupTest {
 	SignupPage signupPage;
 	SideMenuBarComponent sideMenuBarComponent;
 	PhoneVerificationComponent phoneVerificationComponent;
+	MerchantActivityComponent merchantActivityComponent;
 
 	@BeforeMethod
 	public void init() {
@@ -31,6 +33,7 @@ public class SignupTest {
 		signupPage = new SignupPage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		phoneVerificationComponent = new PhoneVerificationComponent();
+		merchantActivityComponent = new MerchantActivityComponent();
 	}
 
 	@Test
@@ -449,10 +452,13 @@ public class SignupTest {
 	public void testDBAUnderBusinessAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickDashBoard();
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickAddDBA();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
 			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickClose();
+			merchantActivityComponent.clickDashBoard();
+			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().clickAddDBA();
@@ -464,4 +470,24 @@ public class SignupTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testDBAUnderBusiness(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickDashBoard();
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickDBAOrMerchant();
+			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
+			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().navigationComponent().clickBack();
+			sideMenuBarComponent.clickDBAOrMerchant();
+			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().selectCompany(data.get("dba"));
+			Thread.sleep(4000);
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
+		}
+	}
 }

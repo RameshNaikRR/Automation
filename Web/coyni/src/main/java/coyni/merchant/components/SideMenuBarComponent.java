@@ -24,6 +24,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	private By userNameDrpDwn = By.xpath("//div[contains(@class,'DashboardMenu_username')]");
 	private By btnAddDBA = By.xpath("//button[text()='Add New DBA']");
+	private By btnDBA = By.xpath("//p[contains(text(),'New Merchant / DBA')]");
 	private By personalAccount = By.xpath("//div[@class='UserNameDropDown_userName__oCwHu']");
 	private By btnPersonalAccount = By.xpath("//p[text()='Add Personal Account']");
 	private By btnMerchantAccount = By.xpath("(//div[@class='UserNameDropDown_image__jUgDC bg-cm3'])[2]");
@@ -52,6 +53,10 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	}
 
 	public void clickAddDBA() {
+		click(btnAddDBA, "Add DBA");
+	}
+
+	public void clickDBAOrMerchant() {
 		click(btnAddDBA, "Add DBA");
 	}
 

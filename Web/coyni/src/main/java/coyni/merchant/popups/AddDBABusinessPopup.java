@@ -26,6 +26,10 @@ public class AddDBABusinessPopup extends BrowserFunctions {
 		click(btnNewMerchantDBA, "New Merchant DBA");
 	}
 
+	public AddNewDBAPopup addNewDBAPopup() {
+		return new AddNewDBAPopup();
+	}
+
 	public AddDBAUnderNewCompanyPopup addDBAUnderNewCompanyPopup() {
 		return new AddDBAUnderNewCompanyPopup();
 	}
