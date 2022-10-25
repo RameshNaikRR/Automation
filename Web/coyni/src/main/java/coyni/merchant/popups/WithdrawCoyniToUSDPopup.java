@@ -27,7 +27,6 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public void verifyBtns() {
 		List<WebElement> elementsList = getElementsList(PaymentBtns, "");
 		for (WebElement webElement : elementsList) {
-//			new CommonFunctions().verifyCursorAction((By) webElement, "");
 			boolean displayed = webElement.isDisplayed();
 			String text = webElement.getText();
 			ExtentTestManager.setInfoMessageInReport(displayed + "  " + text + "  " + "Button is displayed ");

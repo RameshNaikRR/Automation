@@ -7,7 +7,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class GetHelpPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("(//span[contains(text(),'Get Help')])[2]");
+	private By lblHeading = By.xpath("(//span[text()='Get Help'])[1]");
 
 	private By lblContent = By.xpath("//p[text()='Need help with coyni?']");
 

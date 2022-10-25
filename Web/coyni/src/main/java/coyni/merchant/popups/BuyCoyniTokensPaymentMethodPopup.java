@@ -12,15 +12,22 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	private By headingBuyCoyniToken = By.xpath("//h1[contains(text(),'Buy coyni Tokens')]");
 	private By lnkAddNewPayment = By.cssSelector("");
 	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
+	private By lblSignetAccount = By.xpath("(//p[contains(text(),'Signet Wallet ID')])[1]");
 	private By lblBankErrorMessage = By.cssSelector("");
 	private By buyCoyniTokensDescp = By.xpath("//h2[contains(text(),'Choose Your Payment Method:')]");
 	private By btnDelete = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
+	private By btnDeleteSignet = By.xpath("//button[@data-tip='Delete'][1]");
 
 	public void clickDelete(String number) {
 		click(By.xpath(String.format(
 				"//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-trash')]", number)),
 				number);
 		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
+	}
+
+	public void clickDeleteSignetAccount(String number) {
+		moveToElement(lblSignetAccount, "Signet Account");
+		click(btnDelete, "Delete");
 	}
 
 	public void clickBank(String number) {

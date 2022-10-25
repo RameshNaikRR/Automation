@@ -455,10 +455,8 @@ public class SignupTest {
 			merchantActivityComponent.clickDashBoard();
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickAddDBA();
-			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
-			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickClose();
-			merchantActivityComponent.clickDashBoard();
-			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
+			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickBack();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().clickAddDBA();
@@ -477,10 +475,10 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickDashBoard();
 			sideMenuBarComponent.clickUserdrpdwn();
-			sideMenuBarComponent.clickDBAOrMerchant();
+			sideMenuBarComponent.clickAddDBA();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
 			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().navigationComponent().clickBack();
-			sideMenuBarComponent.clickDBAOrMerchant();
+			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
 			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().selectCompany(data.get("dba"));
 			Thread.sleep(4000);
@@ -490,4 +488,5 @@ public class SignupTest {
 			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
+
 }

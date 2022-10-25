@@ -1007,7 +1007,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDelete(data.get("number"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("number"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
 
 		} catch (Exception e) {
@@ -1029,11 +1029,8 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
 					.clickSignet(data.get("signetNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickConvert();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickOutside();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().getAvailableBalance();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
 					.getWithdrawAmount();
@@ -1415,8 +1412,6 @@ public class TokenAccountTest {
 					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickDebitCard(data.get("number"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickConvert();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
