@@ -1049,7 +1049,6 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
-			merchantSettingsSideBarMenuComponent.teamComponent().verifyTeamHeading(data.get("teamSharedHeading"));
 			Thread.sleep(2000);
 			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
 					.verifyTeamMemberRecords();
