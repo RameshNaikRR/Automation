@@ -743,7 +743,8 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickDeleteSignetAccount(data.get("signetNumber"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent()
+					.clickDeleteSignetAccount(data.get("signetNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
@@ -1261,14 +1262,14 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
-					.verifyTeamMemberRecords();
-			if (verifyTeamMemberRecords > 0) {
-				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
-			} else {
-				merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
-				merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
-			}
+//			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+//					.verifyTeamMemberRecords();
+//			if (verifyTeamMemberRecords > 0) {
+//				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+//			} else {
+			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
+			merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
+//			}
 
 		} catch (
 
@@ -1284,8 +1285,13 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-			merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickResendInvitation();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(

@@ -1665,6 +1665,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup().clickAdd();
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().addBankAccountPopup()
 					.bankAccountAddedPopup().clickWithdraw();
+			Thread.sleep(4000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().navigationComponent().clickClose();
 
 		} catch (Exception e) {
