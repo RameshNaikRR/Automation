@@ -36,7 +36,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By deleteSignet = MobileBy.xpath("(//*[contains(@text,'Signet Account')])[1]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
+//	private By numOfDebitCards = MobileBy.xpath("//*[contains(@resource-id,'layoutBack')]");
 
+	
 //	private By  = MobileBy.xpath("//*[contains(@resource-id,'AddPayment')]");
 
 	public void verifyHeading(String expHeading) {
@@ -71,6 +73,13 @@ public class PaymentMethodsPage extends MobileFunctions {
 		click(btnDebitCard, "Debit Card");
 	}
 
+	public int verifyNumOfCard() {
+//		if(getElementList(btnDebitCard, "Debit Card").size()>0) {
+		return getElementList(btnDebitCard, "Debit Card").size();
+//		}
+//		return 0;
+	}
+	
 	public void clickBack() {
 		click(btnBack, "Back");
 	}

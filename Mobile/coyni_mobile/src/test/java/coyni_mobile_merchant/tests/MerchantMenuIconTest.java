@@ -384,18 +384,18 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
-			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyAddNewPaymentMethod() == 0) {
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-			} else {
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-			}
+//			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyAddNewPaymentMethod() == 0) {
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
+//			} else {
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
+//			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.AddDebitCard(strParams);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();

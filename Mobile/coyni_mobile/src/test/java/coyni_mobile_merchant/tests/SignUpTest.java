@@ -50,11 +50,11 @@ public class SignUpTest {
 			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(6000);
+			Thread.sleep(8000);
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
 			signUpPage.clickAgreeCheckBox();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
 			signUpPage.clickAgreeCheckBox();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();

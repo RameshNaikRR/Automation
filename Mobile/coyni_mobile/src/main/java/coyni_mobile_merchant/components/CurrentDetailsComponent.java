@@ -23,7 +23,8 @@ public class CurrentDetailsComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Current Details Description", expDescription);
 	}
 
-	public String getCurrentDetails() {
+	public String getCurrentDetails() throws InterruptedException {
+		Thread.sleep(2000);
 		String str = getText(lblCurrentComponent);
 		ExtentTestManager.setInfoMessageInReport(str);
 		return str;

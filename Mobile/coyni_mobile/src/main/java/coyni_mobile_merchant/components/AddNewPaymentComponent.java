@@ -12,7 +12,7 @@ import io.appium.java_client.MobileBy;
 public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']|//*[@text='Add Bank Account']");
 	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'tvBankHead')]|//*[contains(@resource-id,'tvPayMethod')]");
-	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvBDCHead')]");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvBDCHead')]|//*[contains(@resource-id,'tvPayMethod')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'layoutCCard')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 	private By numberOfBankAccounts = MobileBy.xpath("//*[contains(@resource-id,'tvBankCount')]");
@@ -22,6 +22,10 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By errMsgMaxDebit = MobileBy.xpath("//*[contains(@resource-id,'tvBDCardError')]");
 	private By errMsgMaxSignet = MobileBy.xpath("//*[contains(@resource-id,'tvSignetError')]");
 	private By withdrawAddBankHeading = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	private By btnInstantPay = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	private By btnSignet = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	private By withdrawInstantPayHeading = MobileBy.xpath("//*[@text='Add Instant Pay']");
+	private By withdrawSignetHeading = MobileBy.xpath("//*[@text='Add Signet Account']");
 	
 	public void verifyHeading(String expHeading) {
 //		if (getElementList(lblHeading, "Heading").size() > 0) {
@@ -41,7 +45,25 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	
+	public void verifywithdrawAddInstantHeading(String expHeading) throws InterruptedException {
+//		Thread.sleep(2000);
+		if (getElementList(withdrawInstantPayHeading, "Heading").size() > 0) {
+//				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
+			new CommonFunctions().verifyLabelText(withdrawInstantPayHeading, "Heading", expHeading);
+//			click(btnInstantPay, "Instant Pay");
+		}
+
+	}
+
+	public void verifywithdrawAddSignetHeading(String expHeading) throws InterruptedException {
+//		Thread.sleep(2000);
+		if (getElementList(withdrawSignetHeading, "Heading").size() > 0) {
+//				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
+			new CommonFunctions().verifyLabelText(withdrawSignetHeading, "Heading", expHeading);
+			click(btnSignet, "Signet Account");
+		}
+
+	}
 
 	public void verifyErrorMessageOfDebitCard(String expHeading) {
 		new CommonFunctions().verifyLabelText(errMsgMaxDebit, "", expHeading);
@@ -80,7 +102,9 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickDebitCard() {
+//		if(getElementList(btnDebitCard, "Debit Card").size()>0) {
 		click(btnDebitCard, "Debit Card");
+//	}
 	}
 
 	public void clickCreditCard() {
@@ -97,9 +121,16 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifyDebitCards(String expDebitCards) {
+		if(getElementList(numberOfDebitCards, "Present Debit Cards number").size()>0) {
 		new CommonFunctions().verifyLabelText(numberOfDebitCards, "Present Debit Cards number", expDebitCards);
 	}
+		}
 
+	public int verifyNumberOfDebitCards() {
+		return getElementList(numberOfDebitCards, "Present Debit Cards number").size();
+	
+		}
+	
 	public void verifySignetAccounts(String expSignetAccount) {
 		new CommonFunctions().verifyLabelText(numberOfSignetAccounts, "Present Signet Account number", expSignetAccount);
 	}

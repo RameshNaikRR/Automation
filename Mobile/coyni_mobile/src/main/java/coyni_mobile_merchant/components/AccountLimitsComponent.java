@@ -27,6 +27,7 @@ public class AccountLimitsComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Account Limits Heading", expHeading);
 	}
 
+	
 	public void verifyMerchantProcessingHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblMerchantProcessingHeading, "Merchant Processing Heading", expHeading);
 	}

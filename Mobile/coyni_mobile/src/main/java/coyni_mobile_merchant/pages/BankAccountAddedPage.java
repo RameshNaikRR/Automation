@@ -23,8 +23,8 @@ public class BankAccountAddedPage extends MobileFunctions {
 	}
 
 	public int verifyBankSucessHeading() throws InterruptedException {
-		Thread.sleep(2000);
-		return DriverFactory.getDriver().findElements(heading).size();
+	int str=getElementList(heading, "Heading").size();
+		return str;
 	}
 	
 	public void verifyStatus(String expStatus) {
