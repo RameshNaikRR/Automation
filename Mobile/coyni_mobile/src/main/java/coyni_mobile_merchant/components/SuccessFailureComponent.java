@@ -57,9 +57,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
-	public void clickClose() {
-		click(btnClose, "Close");
-	}
+
 	public void verifyRecipentEmail(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReceipentEmail, "Email", expHeading);
 	}
@@ -70,7 +68,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 	}
 
 	public void clickLearnMore() {
-		click(btnClickMore, "Click More");
+		if(getElementList(btnClickMore, "Click More").size()>0) {
+			click(btnClickMore, "Click More");	
+			click(btnClose, "Close");
+		}
 	}
 
 	public void getReferenceID() {
@@ -85,7 +86,6 @@ public class SuccessFailureComponent extends MobileFunctions {
 		getReferenceID();
 		getProcessingDescription();
 		clickLearnMore();
-		clickClose();
 		clickDone();
 	}
 	public NavigationComponent navigationComponent() {

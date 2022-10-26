@@ -60,7 +60,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		if (getElementList(withdrawSignetHeading, "Heading").size() > 0) {
 //				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
 			new CommonFunctions().verifyLabelText(withdrawSignetHeading, "Heading", expHeading);
-			click(btnSignet, "Signet Account");
+//			click(btnSignet, "Signet Account");
 		}
 
 	}

@@ -43,7 +43,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnSelectAccount = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
-	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[3]");
+	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[+ i +]");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
@@ -131,7 +131,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	private By getAccounts(String num) {
-		return By.xpath(String.format("(//*[contains(@resource-id,'title')])[%s]",num));
+		return By.xpath(String.format("(//*[contains(@resource-id,'title')])[+ i +]",num));
 	}
 //
 //	private By getDashBoardItems(String eleName) {
@@ -141,12 +141,14 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	public void clickEnabledAccount() throws InterruptedException {
 		
 		for (int i = 1; verifyNumOfAccounts() >= i; i++) {
-			ExtentTestManager.setInfoMessageInReport("Hiiii");
+			ExtentTestManager.setInfoMessageInReport("Hiiii"+i);
 			Thread.sleep(2000);
 			if (DriverFactory.getDriver().findElement(btnEnabledAcc).isEnabled()) {
 				ExtentTestManager.setInfoMessageInReport("Hello "+i);
-				String str1 = Integer.toString(i);
-				scrollDownToElement(getAccounts(str1), "Slected an Account");
+//				String str1 = Integer.toString(i);
+//		scrollDownToElement(DriverFactory.getDriver().findElement(By.xpath("(//*[contains(@resource-id,'title')])[%s]")),"");
+						
+//				scrollDownToElement(getAccounts("+ i +"), "Slected an Account");
 				click(btnEnabledAcc, "Slected an Account");
 				scrollDownToElement(btnAddNewDBA, "Add New DBA");
 				click(btnAddNewDBA, "Add New DBA");

@@ -224,7 +224,12 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
 			Thread.sleep(2000);
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			if(data.get("validateGiftCard").equalsIgnoreCase("yes")) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();	
+			}else {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickVisa();
+			}
+			
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -239,7 +244,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.verifyHeading(data.get("orderOverview"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.verifyAmazonHeading(data.get("amazonGift"));
+					.verifyGiftCardHeading(data.get("amazonGift"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.verifyRecipentEmail(data.get("recipentEmail"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
@@ -361,10 +366,10 @@ public class MerchantMenuIconTest {
 			Thread.sleep(2000);
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.testAddBankAccount(strParams);
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
 			testWithdrawTokenProcedure(strParams);
 			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawBankTransaction(strParams);
@@ -398,10 +403,10 @@ public class MerchantMenuIconTest {
 //			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.AddDebitCard(strParams);
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
 			testWithdrawTokenProcedure(strParams);
 			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
@@ -626,18 +631,18 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();
-			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyAddNewPaymentMethod() == 0) {
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-			} else {
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-			}
+//			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyAddNewPaymentMethod() == 0) {
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
+//			} else {
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
+//			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.AddSignetAccount(strParams);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();

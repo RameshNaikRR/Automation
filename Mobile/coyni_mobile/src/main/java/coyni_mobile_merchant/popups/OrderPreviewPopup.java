@@ -46,7 +46,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblOrderOverview, "Popup Heading", expHeading);
 	}
 
-	public void verifyAmazonHeading(String expHeading) {
+	public void verifyGiftCardHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblAmazon, "Amazon", expHeading);
 	}
 
