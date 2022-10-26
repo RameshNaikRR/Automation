@@ -646,6 +646,7 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.clickAccountLimits();
+			Thread.sleep(4000);
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.accountLimitsComponent().verifyHeading();
 

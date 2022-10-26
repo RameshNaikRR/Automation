@@ -150,7 +150,7 @@ public class TransactionTest {
 		try {
 
 			sideBarComponent.clickTransactions();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickBuyToken();
 			testTransactionDetailsBuyToken(strParams, "debit");
@@ -198,6 +198,7 @@ public class TransactionTest {
 						"Transaction Type is " + type + " And " + " Transaction Description is " + description);
 				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
+				Thread.sleep(4000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
 						.verifyTransactionDetailsHeading(data.get("transactionHeading"));
 				Thread.sleep(2000);

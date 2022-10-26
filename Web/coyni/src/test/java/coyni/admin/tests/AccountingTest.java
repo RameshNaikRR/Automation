@@ -34,7 +34,7 @@ public class AccountingTest {
 		homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
 		// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
 		homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
-	//	homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
+		// homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
 //		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
 		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
 		// Thread.sleep(2000);
@@ -44,9 +44,10 @@ public class AccountingTest {
 		if (size > 0) {
 			ExtentTestManager.setPassMessageInReport("Transaction Details are not found");
 		} else {
+			Thread.sleep(4000);
 			homePage.sideBarComponent().accountTableComponent().clickDetails();
 
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
 			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();

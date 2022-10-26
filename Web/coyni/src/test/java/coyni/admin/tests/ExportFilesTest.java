@@ -78,7 +78,7 @@ public class ExportFilesTest {
             Map<String, String> data = Runner.getKeywordParameters(strParams);
             homePage.sideBarComponent().clickExportedFiles();
             exportfilecomponent.clickchkboxFirstExport();
-            exportfilecomponent.clickBulkActions();
+            exportfilecomponent.clickBulkAction();
             exportfilecomponent.clickchkboxTrash();
             exportfilecomponent.clickApply();
             exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));

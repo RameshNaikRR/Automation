@@ -258,6 +258,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public String getDefaultEntriesPerPage() {
+		moveToElement(defaultEntries, "defaultEntries");
 		return getText(defaultEntries, "Default Entries");
 
 	}

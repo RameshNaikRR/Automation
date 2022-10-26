@@ -12,18 +12,17 @@ import ilabs.web.actions.WaitForElement;
 
 public class AccountLimitsComponent extends BrowserFunctions {
 
-	//private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
-	private By lblBuyTokenBankAccountDailyLimit = By
-			.xpath("(//div[text()='Bank Account']/..//span[text()='10.00'])[1]");
-	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span[text()='10.00']");
-	private By lblBuyTokenCreditCardDailyLimit = By.xpath("//div[text()='Credit Card']/..//span[text()='10.00']");
-	private By lbWithdrawToUSDBankAccountDailyLimit = By
-			.xpath("(//div[text()='Bank Account']/..//span[text()='10.00'])[2]");
-	private By lbWithdrawToUSDInstantPayDailyLimit = By
-			.xpath("(//div[text()='Instant Pay']/..//span[text()='10.00'])[1]");
-	private By lbWithdrawToUSDGidtCardDailyLimit = By.xpath(" (//div[text()='Gift Card']/..//span[text()='1.00'])[1]");
+	// private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
+
+	private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
+	private By lblBuyTokenBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span)[1]");
+	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span");
+	private By lblBuyTokenCreditCardDailyLimit = By.xpath("//div[text()='Credit Card']/..//span");
+	private By lbWithdrawToUSDBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span)[2]");
+	private By lbWithdrawToUSDInstantPayDailyLimit = By.xpath("(//div[text()='Instant Pay']/..//span)");
+	private By lbWithdrawToUSDGidtCardDailyLimit = By.xpath("(//div[text()='Gift Card']/..//span)");
 	private By btnView = By.xpath("//button[contains(@data-tip,'View')]");
-	private By heading = By.xpath("(//p[text()='Account Limits'])[2]");
+
 	public void clickView() {
 		click(btnView, "view");
 

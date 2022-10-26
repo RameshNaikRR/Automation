@@ -9,6 +9,7 @@ public class ExportFileComponent extends BrowserFunctions {
 	private By txtSuccess = By.xpath("//span[text()='Success']");
 	private By chkboxBulkActions = By.xpath("//input[@type='checkbox']");
 	private By btnBulkActions = By.xpath("//div[text()='Bulk Actions']");
+	private By btnBulkAction = By.xpath("//div[text()='Bulk Action']");
 	private By btnBulkDownload = By.xpath("//data[text()='Download']");
 	private By chkboxFirstExport = By.xpath("(//input[@type='checkbox'])[2]");
 	private By chkboxTrash = By.xpath("//data[text()='Trash']");
@@ -28,6 +29,10 @@ public class ExportFileComponent extends BrowserFunctions {
 
 	public void clickBulkActions() {
 		click(btnBulkActions, "BulkActions");
+	}
+
+	public void clickBulkAction() {
+		click(btnBulkAction, "BulkAction");
 	}
 
 	public void clickBulkDownload() {
