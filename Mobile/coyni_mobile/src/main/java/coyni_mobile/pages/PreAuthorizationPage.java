@@ -12,7 +12,7 @@ public class PreAuthorizationPage extends MobileFunctions {
 	private By btnVerify = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 	
 
-	public void fillAmount(String amount) {
+	public void fillAmount(String amount) throws InterruptedException {
 		new EnterYourPINComponent().fillPin(amount);
 		
 	}

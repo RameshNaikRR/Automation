@@ -41,7 +41,7 @@ public class BuyTokenComponent extends MobileFunctions {
 		click(btnChangePayment, "Arrow");
 	}
 
-	public void fillAmount(String Amount) {
+	public void fillAmount(String Amount) throws InterruptedException {
 		new EnterYourPINComponent().fillPin(Amount);
 		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
 	}

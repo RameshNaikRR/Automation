@@ -40,7 +40,7 @@ public class ChoosePinComponent extends MobileFunctions {
 		new CommonFunctions().elementView(heading2, "Confirm your Pin");
 	}
 
-	public void fillPin(String pin) {
+	public void fillPin(String pin) throws InterruptedException {
 		new EnterYourPINComponent().fillPin(pin);
 	}
 

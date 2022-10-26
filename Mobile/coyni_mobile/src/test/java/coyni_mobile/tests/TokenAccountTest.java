@@ -519,10 +519,11 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
 			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().clickExternalBankAcount();
-			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
-			Thread.sleep(15000);
-			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent()
-					.paymentMethodsPage().AddBankFromBuyToken();
+//			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent().clickNext();
+//			Thread.sleep(15000);
+			customerProfileTest.testAddBankAccoun(strParams);
+//			tokenAccountPage.tokenHomePopUp().addNewPaymentComponent().addExternalBankAccountComponent()
+//					.paymentMethodsPage().AddBankFromBuyToken();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBankWithOutPayments  failed due to exception " + e);
@@ -572,7 +573,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -643,7 +644,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			if (method.equalsIgnoreCase("bank")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			} else if (method.equalsIgnoreCase("credit")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
 			} else {
@@ -676,7 +677,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -872,7 +873,7 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			if (method.equalsIgnoreCase("bank")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount(data.get("last4Digits"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			}
 
 			if (!method.equalsIgnoreCase("bank")) {
@@ -1066,7 +1067,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
@@ -1111,7 +1112,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
@@ -1137,14 +1138,14 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickArrow();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyPaymentHeading(data.get("paymentMethod"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits1"));
+					.clickOnBank();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test WithdrawToUSD Via External Bank  failed due to exception " + e);
@@ -1183,12 +1184,12 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.navigationComponent().clickBack();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();
@@ -1221,7 +1222,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank(data.get("last4Digits"));
+					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup().clickWithdraw();

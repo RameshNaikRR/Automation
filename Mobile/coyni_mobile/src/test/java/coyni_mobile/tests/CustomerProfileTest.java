@@ -574,6 +574,16 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testAddBankAccoun(String strParams) {
+		try {
+			testAddBankAccoun(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
+		}
+
+	}
+	
+	
 	public void testAddBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -583,30 +593,35 @@ public class CustomerProfileTest {
 //			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
 //					.verifyHeading("addBankHeading");
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.clickNext();
+			.addBank(
+					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
+					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().enterBankName(data.get("expBankName"));
+			.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().selectBank();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().fillUserName(data.get("expUserName"));
-			DriverFactory.getDriver().hideKeyboard();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().fillPassword(data.get("expPassword"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().clickNext();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().unSelectBank1();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().clickNext();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.addAccountsComponent().clickDone();
+			.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
+			
+			String nameOnBank = customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.bankAccountAddedPage().getNameOnAccount();
+			String routingNum = customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.bankAccountAddedPage().getRoutingNum();
+			String accNum =customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+					.bankAccountAddedPage().getAccNum();
+			if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
+					&& data.get("routingNum").equalsIgnoreCase(routingNum) && data.get("accountNum").contains(accNum)) {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
+				.bankAccountAddedPage().getBankDetails();
+			} else {
+				ExtentTestManager.setFailMessageInReport("Bank Account Details are not updated");
+			}
+//			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
 		}
 
 	}
+	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -622,17 +637,22 @@ public class CustomerProfileTest {
 		}
 	}
 
+
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 			customerProfilePage.paymentMethodsPage().selectBank();
 			customerProfilePage.paymentMethodsPage().removingPopup().verifyHeading();
 			customerProfilePage.paymentMethodsPage().removingPopup().clickYes();
+			customerProfilePage.paymentMethodsPage().removingPopup().toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
+			
 		} catch (Exception e) {
 
 		}
@@ -865,7 +885,7 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddDebitCard(String strParams) {
+	public void testAddDebitCard(String strParams) throws InterruptedException {
 		tokenAccountPage.clickProfile();
 		customerProfilePage.clickPaymentMethods();
 		customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
@@ -874,7 +894,7 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddCreditCard(String strParams) {
+	public void testAddCreditCard(String strParams) throws InterruptedException {
 		tokenAccountPage.clickProfile();
 		customerProfilePage.clickPaymentMethods();
 		customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();

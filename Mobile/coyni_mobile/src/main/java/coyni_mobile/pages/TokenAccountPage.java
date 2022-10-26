@@ -120,9 +120,11 @@ public class TokenAccountPage extends MobileFunctions {
 
 	// added
 	public void clickProfile() {
+		if (getElementList(btnProfile, "Profile").size() > 0) {
 		click(btnProfile, "Profile");
 	}
-
+	}
+	
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();
 	}

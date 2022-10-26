@@ -2,10 +2,13 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile.components.UploadDocumentComponent;
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
@@ -16,6 +19,7 @@ public class SignUpTest {
 
 	SignUpPage signUpPage;
 	LandingPage landingPage;
+	UploadDocumentComponent uploadDocumentComponent;
 
 	@BeforeMethod
 	public void init() {
@@ -23,6 +27,11 @@ public class SignUpTest {
 		landingPage = new LandingPage();
 	}
 
+	@AfterMethod
+	public void DenyPermission() throws InterruptedException {
+		uploadDocumentComponent.clickDeny();
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testSignUp(String strParams) {
@@ -46,9 +55,16 @@ public class SignUpTest {
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			Thread.sleep(3000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillPin(data.get("code"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickAgreeCheckBox();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickAgreeCheckBox();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
@@ -66,10 +82,10 @@ public class SignUpTest {
 					.clickNotNow();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().clickSkip();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.tokenAccountPage().verifyRegistration();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.accountCreatedPage().clickSkip();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.tokenAccountPage().verifyRegistration();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -159,5 +175,25 @@ public class SignUpTest {
 		}
 
 	}
+	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testIdentityVerificationTest(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+			.accountCreatedPage().clickGetStarted();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+			.accountCreatedPage().identityVerificationPage().verifyIdentity(data.get("verifyHeading"),data.get("identityHeading"),data.get("SSN"),
+					data.get("addressLine1"), data.get("addressLine2"), data.get("city"),data.get("state"),data.get("zipCode"),data.get("identitySuccess"));
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	
 
 }

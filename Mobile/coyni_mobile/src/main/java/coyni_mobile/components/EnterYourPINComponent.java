@@ -20,7 +20,8 @@ public class EnterYourPINComponent extends MobileFunctions {
 				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 	}
 
-	public void fillPin(String pin) {
+	public void fillPin(String pin) throws InterruptedException {
+	    Thread.sleep(2000);
 		System.out.println(pin.length());
 		for (int i = 0; i < pin.length(); i++) {
 			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));

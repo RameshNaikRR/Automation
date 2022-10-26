@@ -16,7 +16,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'giftCardAmount')]");
 	private By btnLogout = MobileBy.xpath("//*[contains(@resource-id,'Logout')]");
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");//
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvBDone')]");//
+	private By btnDone = MobileBy.xpath("//*[@text='Done']|//*[contains(@resource-id,'doneCV')]|//*[contains(@resource-id,'cvBDone')]");//
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'refID')]");
 	private By lnkReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]/following-sibling::*[1]");
 	private By lblTrasactionStatus = MobileBy.xpath("//*[contains(@text,'Trasactions')]");

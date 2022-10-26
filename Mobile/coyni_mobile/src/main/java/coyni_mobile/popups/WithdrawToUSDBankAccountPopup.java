@@ -24,6 +24,7 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 	private By lblPaymentHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By btnExternalbank = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btnAddPayment = MobileBy.xpath("//*[contains(@resource-id,'lyAddPay')]");
+	private By selectBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]|(//*[contains(@resource-id,'tvBankName')])[1]");
 
 	public void fillAmount(String amount) {
 		enterText(txtAmount, amount, "Amount");
@@ -87,9 +88,8 @@ public class WithdrawToUSDBankAccountPopup extends MobileFunctions {
 		return By.xpath(String.format("//*[contains(@text,'%s')]", last4digits));
 	}
 
-	public void clickOnBank(String last4Digits) {
-		click(By.xpath(String.format("//*[contains(@text,'%s')]", last4Digits)), last4Digits);
-		ExtentTestManager.setInfoMessageInReport(" clicked on Bank " + (last4Digits));
+	public void clickOnBank() {	
+			click(selectBank, "Bank");
 	}
 	
 	public OrderPreviewPopup orderPreviewPopup() {

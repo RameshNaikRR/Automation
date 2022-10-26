@@ -24,7 +24,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
-	private By selectBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-2')]");
+	private By selectBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]|(//*[contains(@resource-id,'tvBankName')])[1]");
 	private By HeadingBankName = MobileBy.xpath("//*[contains(@resource-id,'selectedBankName')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
@@ -63,8 +63,10 @@ public class PaymentMethodsPage extends MobileFunctions {
 		enterText(txtBankName, "CashEdge Test Bank (Agg) - Retail Non 2FA", "Enter Bank Name");
 	}
 
-	public void clickAddNewPaymentMethod() {
-		click(btnAddNewPaymentMethod, "Add New Payment Method");
+	public void clickAddNewPaymentMethod() throws InterruptedException {
+		if (getElementList(btnAddNewPaymentMethod, "Add New Payment Method").size() > 0) {
+			click(btnAddNewPaymentMethod, "Add New Payment Method");
+		}
 	}
 
 	public By getPaymentItems(String paymentMethod, String last4digits) {
@@ -86,10 +88,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 		click(getPaymentItems("Debit", last4digits), "Debit");
 	}
 
-	public void clickBankAccount(String last4digits) {
-		click(getPaymentItems("Bank", last4digits), "Bank");
-	}
+//	public void clickBankAccount(String last4digits) {
+//		click(getPaymentItems("Bank", last4digits), "Bank");
+//	}
 
+	public void clickBankAccount() {
+		click(selectBank, "Bank");
+	}
+	
 	public BuyTokenComponent buyTokenComponent() {
 		return new BuyTokenComponent();
 	}

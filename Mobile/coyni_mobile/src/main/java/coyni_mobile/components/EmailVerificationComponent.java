@@ -102,7 +102,7 @@ public class EmailVerificationComponent extends MobileFunctions {
 		}
 	}
 
-	public void fillInputBoxes(String otp) {
+	public void fillInputBoxes(String otp) throws InterruptedException {
 		if (!new CommonFunctions().isPlatformiOS()) {
 			enterText(txtInputBoxes, otp, "OTP");
 		} else {
