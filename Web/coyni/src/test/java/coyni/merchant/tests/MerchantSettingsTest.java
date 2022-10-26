@@ -608,6 +608,40 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testAPIKeysRevealSecretInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getPublicKey();
+			Thread.sleep(2000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickGenerateNewSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ClickGenerate();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickRevealSecretKey();
+			if (!data.get("code").isEmpty()) {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+						.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+						.authyComponent().verifyMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testAPIKeysInactiveRecords(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1261,14 +1295,14 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testMerchantSettingsTeamFilters(strParams);
-//			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
-//					.verifyTeamMemberRecords();
-//			if (verifyTeamMemberRecords > 0) {
-//				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
-//			} else {
-			merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
-			merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
-//			}
+			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()
+					.verifyTeamMemberRecords();
+			if (verifyTeamMemberRecords > 0) {
+				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
+			} else {
+				merchantSettingsSideBarMenuComponent.teamComponent().clickEdit();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickEditTeam();
+			}
 
 		} catch (
 

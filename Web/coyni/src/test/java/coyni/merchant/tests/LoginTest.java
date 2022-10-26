@@ -142,7 +142,11 @@ public class LoginTest {
 			loginPage.clickNext();
 			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
-			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test login with phone number failed due to exception " + e);
