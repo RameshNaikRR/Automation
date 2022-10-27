@@ -90,8 +90,6 @@ public class MerchantActivityTest {
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + merchantTransactionsPage.getDefaultEntriesPerPage());
 			merchantTransactionsPage.clickDropDownEntriesPage();
-//			tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-//					data.get("expColor"));
 			merchantTransactionsPage.verifyEntriesMessage();
 			ExtentTestManager
 					.setInfoMessageInReport("Entries is displayed as " + merchantTransactionsPage.getEntriesMessage());
@@ -269,7 +267,6 @@ public class MerchantActivityTest {
 	public void testDashBoardFullReserveHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().getReserveBalance();
 			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
@@ -348,7 +345,7 @@ public class MerchantActivityTest {
 		if (merchantActivityComponent.transactionDetailsComponent().verifyRecords() != 0) {
 			merchantActivityComponent.transactionDetailsComponent().verifyNoRecordsFound();
 		} else {
-			merchantActivityComponent.merchantTransactionsPage().verifyTransactionHeading(data.get("heading"));
+			// merchantActivityComponent.merchantTransactionsPage().verifyTransactionHeading(data.get("heading"));
 			merchantActivityComponent.transactionDetailsComponent().clickRecord();
 		}
 	}

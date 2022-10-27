@@ -793,13 +793,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 			Thread.sleep(2000);
-			if (card.equalsIgnoreCase("credit")) {
-				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-						.clickCreditCard();
-			} else {
-				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-						.clickDebitCard();
-			}
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickDebitCard();
 			Thread.sleep(3000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
@@ -822,8 +816,6 @@ public class MerchantSettingsTest {
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().selectState(data.get("state1"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().verifyCountry(data.get("country"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().clickSave();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().preAuthorizationPopup()

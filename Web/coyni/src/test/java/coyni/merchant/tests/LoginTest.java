@@ -355,7 +355,6 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
 			loginPage.forgotPasswordComponent().clickNext();
 			loginPage.forgotPasswordComponent().verifyEmailVerificationHeading(data.get("verificationHeading"));
-			loginPage.forgotPasswordComponent().verifyEmail(data.get("lblEmail") + ".");
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
 			loginPage.forgotPasswordComponent().verifyCreatePasswordHeading(data.get("CreatePasswordHeading"));
 			loginPage.forgotPasswordComponent().fillPassword(data.get("enterPassword"));
@@ -403,7 +402,6 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
 			loginPage.forgotPasswordComponent().clickNext();
 			loginPage.forgotPasswordComponent().verifyEmailVerificationHeading(data.get("verificationHeading"));
-			loginPage.forgotPasswordComponent().verifyEmail(data.get("lblEmail") + ".");
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
