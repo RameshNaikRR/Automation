@@ -114,5 +114,9 @@ public class EmailVerificationComponent extends MobileFunctions {
 	public void clickClose() {
 		click(btnClose, "click Close");
 	}
+	
+	public ErrorMessagePopupComponent errorMessagePopupComponent() {
+		return new ErrorMessagePopupComponent();
+	}
 
 }

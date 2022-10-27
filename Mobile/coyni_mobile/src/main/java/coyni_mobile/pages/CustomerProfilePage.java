@@ -209,7 +209,8 @@ public class CustomerProfilePage extends MobileFunctions {
 		click(lnkUserDetails, "User Details");
 	}
 
-	public void clickPaymentMethods() {
+	public void clickPaymentMethods() throws InterruptedException {
+		Thread.sleep(3000);
 		if (getElementList(lnkPaymentMethods, "Payment Methods").size() > 0) {
 			click(lnkPaymentMethods, "Payment Methods");
 		}

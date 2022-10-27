@@ -270,26 +270,52 @@ public class LoginTest {
 	@Parameters({ "strParams" })
 	public void testForgotPasswordInvalidOTPCredentials(String strParams) {
 		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
-			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyHeading(data.get("forgotHeading"));
 			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
-			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
+			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-//			loginPage.forgotPasswordPage().verifyEmailComponent()
-//					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			Thread.sleep(2000);
-			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(5000);
-				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-				loginPage.forgotPasswordPage().verifyErrorMessage();
+			
+			if (data.get("validatePopUpMsg").contains("yes")) {
+				loginPage.forgotPasswordPage().verifyEmailComponent()
+						.verifyEmailHeadingview();
+				Thread.sleep(2000);
+				for (int i = 0; i <= 4; i++) {
+					loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+				}
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.verifyPopUpMsg(data.get("errPopUpMsg"));
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.clickOk();
+				loginPage.forgotPasswordPage().verifyEmailComponent()
+				.verifyEmailHeadingview();
+			} else {
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.verifyPopUpMsg(data.get("errPopUpMsg"));
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
+						.clickOk();
+				loginPage.forgotPasswordPage().verifyHeading(data.get("forgotHeading"));
 			}
-			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
+//			
+////			loginPage.forgotPasswordPage().verifyEmailComponent()
+////					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+//			Thread.sleep(2000);
+//			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+//			for (int i = 0; i <= 4; i++) {
+//				Thread.sleep(5000);
+//				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
+//				loginPage.forgotPasswordPage().verifyErrorMessage();
+//			}
+//			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+					.setFailMessageInReport("testForgotPasswordInvalidOTPCredentials due to exception " + e);
 		}
 	}
 

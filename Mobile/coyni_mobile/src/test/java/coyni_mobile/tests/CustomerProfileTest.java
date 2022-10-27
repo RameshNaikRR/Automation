@@ -186,7 +186,7 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
 					.successFailureComponent().viewEmailSuccessHeading();
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().verifyEmailPage()
-					.successFailureComponent().clickLogOut();
+					.successFailureComponent().clickLogout();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit Email failed due to exception " + e);
 		}
@@ -1030,7 +1030,6 @@ public class CustomerProfileTest {
 						.mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().preAuthorizationPage().clickVerify();
-
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().preAuthorizationPage().preAuthorizationFailedPage()
 						.verifyHeading(data.get("statusHeading"));
@@ -1055,6 +1054,16 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCreditCardWithInvalidData(String strParams) {
+		try {
+			testAddCardWithInvalidData(strParams, "credit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddDebitCardWithInvalidData failed due to " + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBank(String strParams) {

@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.EnterYourPINComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -14,11 +15,12 @@ public class PreAuthorizationPage extends MobileFunctions {
 
 	public void fillAmount(String amount) throws InterruptedException {
 		new EnterYourPINComponent().fillPin(amount);
-		
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void clickVerify() {
 		click(btnVerify, "Verify");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public AllDonePage allDonePage() {
