@@ -13,6 +13,7 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 	private By lblStatus = By.xpath("//span[text()='Approved']");
 	private By heading = By.xpath("//h1[text()='Bank Account Added']");
 	private By btnDone = By.xpath("//button[text()='Done']");
+	private By btnBuyToken = By.xpath("//button[text()='Buy coyni']");
 	
 	public void verifyHeading() {
 		new CommonFunctions().elementView(heading, "Heading");
@@ -37,6 +38,15 @@ public class BankAccountAddedPopup extends BrowserFunctions {
 	public void verifyStatus() {
 		String str = getText(lblStatus, "Statuus");
 		ExtentTestManager.setInfoMessageInReport("Status is"+str);
+	}
+	
+	public int verifyBuyTokenButton() {
+		int i = getElementsList(btnBuyToken, "Buy Token").size();
+		return i;
+	}
+	
+	public void clickBuyToken() {
+		click(btnBuyToken, "Buy Token");
 	}
 	
 	public void clickDone() {

@@ -53,7 +53,13 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyFullName();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyRoutingNumber(data.get("rountingNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyStatus();
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickDone();
+			   int j = customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyBuyTokenButton();		
+				if (j==0) {
+	            customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickDone();
+				}
+				else {
+					customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickBuyToken();
+				}
 			/*
 			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
 			 * clickIamReady(); Thread.sleep(5000);

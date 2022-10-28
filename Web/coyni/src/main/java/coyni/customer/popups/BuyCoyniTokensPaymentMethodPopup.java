@@ -13,7 +13,7 @@ public class BuyCoyniTokensPaymentMethodPopup extends BrowserFunctions {
 	private By radBtnDebit = By.xpath("//input[@name='buy-token-radio']");
 	private By radBtnCredit = By.xpath("//input[@name='buy-token-radio']");
 	private By lnkAddNewPayment = By.cssSelector("");
-	private By btnDeleteBank = By.xpath("//button[@class=' ml-2 icon-trash BuyTokenPaymentMethod_action_icon__2nonE']");
+	private By btnDeleteBank = By.xpath("//button[contains(@class,' ml-2 icon-trash BuyTokenPaymentMethod')]");
 	private By btnDeleteCard = By.xpath("//button[@data-tip='Delete']");
 	private By btnEditCredit = By.cssSelector("");
 	private By btnEditDebit = By.cssSelector("");

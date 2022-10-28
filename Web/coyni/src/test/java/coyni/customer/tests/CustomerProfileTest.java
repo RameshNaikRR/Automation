@@ -588,10 +588,10 @@ public class CustomerProfileTest {
 			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// customerProfilePage.userDetailsComponent().notificationsComponent()
 			// .verifyBellIconMouseHoverAction(data.get("background"), strParams);
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
 			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotification();
-			customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
+			//customerProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			Thread.sleep(2000);
 			// customerProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
 			customerProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();

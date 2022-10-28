@@ -34,7 +34,7 @@ public class UserNameDropDownComponent extends BrowserFunctions {
 	}
 
 	public void clickUserName() {
-		click(dropwnUserName, "UserName");
+		click(userDetailsNameHeading, "UserName");
 	}
 
 	public void clickUserDetails() {

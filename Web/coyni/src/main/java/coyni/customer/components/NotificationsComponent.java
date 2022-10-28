@@ -11,9 +11,9 @@ import ilabs.api.reporting.ExtentTestManager;
 public class NotificationsComponent extends BrowserFunctions {
 
 	// added
-	private By notificationsIcon = By.xpath("//div[contains(@class,'internal-header__notification')]");
+	private By notificationsIcon = By.xpath("//button[contains(@class,'icon-notification')]");
 	private By notificationCount = By.cssSelector(".notification-count");
-	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
+	private By btnNotifications = By.xpath("//button[contains(@class,'icon-notification')]");
 	private By btnRequests = By.xpath("//button[contains(text(),'Pay/Req')]");
 	private By btnPay = By.xpath("(//button[text()='Pay'])[1]");
 	private By btnDeny = By.xpath("(//div[text()='Deny'])[2]");
@@ -40,7 +40,8 @@ public class NotificationsComponent extends BrowserFunctions {
 	// By.xpath("//span/parent::div[@class=\"parent\"]");
 
 	// added
-	public void clickNotificationsIcon() {
+	public void clickNotificationsIcon() throws InterruptedException {
+		Thread.sleep(2000);
 		click(notificationsIcon, "NotificationIcon");
 
 	}
