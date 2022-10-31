@@ -2,21 +2,24 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
-
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ProfileSideBarComponent extends BrowserFunctions {
-	
+
 	private By lblID = By.xpath("//div[@id='admin-customer-details-page']/preceding-sibling::*[1]/span");
 	private By drpdwnStatus = By.cssSelector("");
 	private By lblUserName = By.cssSelector(".username-label");
 	private By lblAccountID = By.cssSelector(".id-label");
-	private By btnWebLastSeen =By.xpath("//img[contains(@alt,'monitor_active')]");
-	private By lblWebLastSeen =By.xpath("(//div[contains(@class,'date-Visit')])[1]");
-	private By btnMobileLastSeen =By.xpath("//img[contains(@alt,'phone_inactive')]");
-	private By lblMobileLastSeen =By.xpath("(//div[contains(@class,'date-Visit')])[2]");
+	private By btnWebLastSeen = By.xpath("//img[contains(@alt,'monitor_active')]");
+	private By lblWebLastSeen = By.xpath("(//div[contains(@class,'date-Visit')])[1]");
+	private By btnMobileLastSeen = By.xpath("//img[contains(@alt,'phone_inactive')]");
+	private By lblMobileLastSeen = By.xpath("(//div[contains(@class,'date-Visit')])[2]");
+
+	public void clickMobileIcon() {
+		click(btnMobileLastSeen, "Mobile Icon");
+	}
 
 	public void verifyID(String expID) {
 		new CommonFunctions().verifyLabelText(lblID, "ID", expID);
@@ -36,10 +39,6 @@ public class ProfileSideBarComponent extends BrowserFunctions {
 
 	public void getWebLastSeen() {
 		ExtentTestManager.setInfoMessageInReport("Web Icon Message: " + getText(lblWebLastSeen, ""));
-	}
-
-	public void clickMobileIcon() {
-		click(btnMobileLastSeen, "Web Icon");
 	}
 
 	public void getMobileLastSeen() {
@@ -117,18 +116,18 @@ public class ProfileSideBarComponent extends BrowserFunctions {
 	public PreferencesandControlsComponent preferencesandControlsComponent() {
 		return new PreferencesandControlsComponent();
 	}
-	
+
 	public AgreementsComponent agreementsComponent() {
 		return new AgreementsComponent();
 	}
-	
+
 	public AccountLimitsComponent accountLimitsComponent() {
-		
+
 		return new AccountLimitsComponent();
 	}
-	
+
 	public ActivityLogComponent activityLogComponent() {
 		return new ActivityLogComponent();
 	}
-	
-	}
+
+}

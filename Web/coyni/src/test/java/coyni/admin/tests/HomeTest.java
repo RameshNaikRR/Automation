@@ -98,6 +98,7 @@ public class HomeTest {
 	public void testUserDetailsChangePasswordInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			homePage.clickUserName();
 			homePage.clickChangePassword();
 			homePage.authyComponent().fillInput(data.get("code"));

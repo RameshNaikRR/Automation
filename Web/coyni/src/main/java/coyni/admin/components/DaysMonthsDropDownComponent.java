@@ -13,6 +13,9 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
 	private By btnLast7Days = By.cssSelector("data[value='Last-7-Days']");
 
+	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent Transactions']");
+
+	private By lblTokensWithdraw = By.xpath("//span[text()='Tokens Withdraw'] |//span[text()='Token Withdrawn']");
 	private By btnMonthToDate = By.cssSelector("data[value='Month-To-Date']");
 
 	private By btnLastMonth = By.cssSelector("data[value='Last-Month']");

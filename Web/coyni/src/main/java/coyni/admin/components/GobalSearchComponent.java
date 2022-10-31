@@ -21,6 +21,11 @@ public class GobalSearchComponent extends BrowserFunctions {
 		return getElementsList(lblNoTransaction, "").size();
 	}
 
+	public void fillProfileDetails() {
+		click(btnProfileDetails, "Profile Details");
+
+	}
+
 	public String getAccountID() {
 		String text = getText(lblId, "");
 		return text;
@@ -39,11 +44,6 @@ public class GobalSearchComponent extends BrowserFunctions {
 
 	public void clickSearch() {
 		click(btnSearch, "");
-	}
-
-	public void fillProfileDetails() {
-		click(btnProfileDetails, "Profile ID");
-		
 	}
 
 	public void fillReferenceID(String profileDetails) {
@@ -70,22 +70,23 @@ public class GobalSearchComponent extends BrowserFunctions {
 		click(btnUnderWritingCaseID, "UnderWritingCaseID");
 		enterText(btnGobalSearch, profileDetails, "UnderWritingCaseID");
 	}
-	private By lblIndividuals=By.xpath("//label[text()='Individuals']");
-	
+
+	private By lblIndividuals = By.xpath("//label[text()='Individuals']");
+
 	public void clickIndivisuals(String profileDetails) {
 		click(lblIndividuals, "");
 		enterText(btnGobalSearch, profileDetails, "profile Details");
 	}
-	private By lblEmail=By.className("cell-col-2");
-	
+
+	private By lblEmail = By.className("cell-col-2");
+
 	public String getEmail() {
 		String text = getText(lblEmail, "");
 		return text;
 	}
-	
-	
-	private By getReferenceId=By.className("cell-col-7");
-	
+
+	private By getReferenceId = By.className("cell-col-7");
+
 	public String getReferenceID() {
 		String text = getText(getReferenceId, "");
 		return text;

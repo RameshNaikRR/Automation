@@ -275,6 +275,7 @@ public class TransactionTest {
 				ExtentTestManager.setInfoMessageInReport("WithDraw Description is:" + withdrawDescription + " and "
 						+ "Transaction SubType is : " + withdrawSubType);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
+				Thread.sleep(3000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
 						.verifyTransactionDetailsHeading(data.get("transactionHeading"));
 				Thread.sleep(2000);

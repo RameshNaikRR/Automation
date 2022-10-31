@@ -260,8 +260,8 @@ public class ProfilesTest {
 					.clickWebIcon();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.getWebLastSeen();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.clickMobileIcon();
+//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+//					.clickMobileIcon();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.getMobileLastSeen();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
