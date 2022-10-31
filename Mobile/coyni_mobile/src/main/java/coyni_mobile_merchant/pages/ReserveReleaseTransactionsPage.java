@@ -37,7 +37,7 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By lblDate = MobileBy.xpath("(//*[contains(@resource-id,'dateTime')])[1]");
 
-	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'MoreTransactions')]");
+	private By lblNoTransactions = MobileBy.xpath("//*[contains(@text,'You have no')]");
 	
 	private By lnkTrans = MobileBy.xpath("(//*[contains(@text,'On Hold')])[1]|(//*[contains(@text,'Released')])[1]");
 	

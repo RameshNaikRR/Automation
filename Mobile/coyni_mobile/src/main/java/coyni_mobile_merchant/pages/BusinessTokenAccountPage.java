@@ -3,9 +3,6 @@ package coyni_mobile_merchant.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.BatchPayOutComponent;

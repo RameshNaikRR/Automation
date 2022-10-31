@@ -161,6 +161,23 @@ public class DashBoardTest {
 		}
 	}
 	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantTransactionsSearchValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.getUserName();
+			businessTokenAccountPage.clickTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
+//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testMerchantTransactionsList Failed due to this Exception" + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTransactionsWithOneFilter(String strParams) {

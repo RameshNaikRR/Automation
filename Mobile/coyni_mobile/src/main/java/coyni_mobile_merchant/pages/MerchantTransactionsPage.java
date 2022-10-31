@@ -21,6 +21,10 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
 
 	private By btnTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
+	
+	private By btnRefernceCopy = MobileBy.xpath("");
+	
+	
 
 	public int verifyTransactionsCount() throws InterruptedException {
 		Thread.sleep(3000);

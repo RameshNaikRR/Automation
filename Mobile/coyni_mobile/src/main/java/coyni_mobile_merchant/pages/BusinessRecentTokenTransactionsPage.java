@@ -32,7 +32,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By lblTokensHeading = MobileBy.xpath("//*[contains(@text,'Transaction')]");
 
-	private By btnSearch = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
+	private By txtSearch = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
 
 	private By btnFiltersIcon = MobileBy.xpath("//*[contains(@resource-id,'filter')]");
 
@@ -128,9 +128,10 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		}
 	}
 
-	public void clickSearch() {
-		scrollDownToElement(btnSearch, "Search");
-		click(btnSearch, "Search");
+	
+	public void fillSearch() {
+//		click(txtSearch, "Search");
+		enterText(txtSearch, getCopiedData(),"Search");
 	}
 
 	public void clickFilterIcon() {

@@ -86,6 +86,12 @@ public class BusinessTransactionDetailsTest {
 					if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickBuyBankReferenceID();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickbtnBuyBankBack();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 								.getBuyTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Signet")) {
@@ -93,9 +99,21 @@ public class BusinessTransactionDetailsTest {
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickWithBankReferenceID();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickWithBankSignetBack();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 								.getWithdrawTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Instant Pay")) {
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickInstantPayReferenceID();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+								.clickInstantPayBack();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 								.getWithdrawTokenInstantPayTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
@@ -109,10 +127,10 @@ public class BusinessTransactionDetailsTest {
 					}
 
 				} else {
-					ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+					ExtentTestManager.setWarningMessageInReport("You Have No More Transactions");
 				}
 			} else {
-				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+				ExtentTestManager.setFailMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 
 		} catch (Exception e) {
@@ -190,10 +208,10 @@ public class BusinessTransactionDetailsTest {
 					}
 
 				} else {
-					ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+					ExtentTestManager.setWarningMessageInReport("You Have No More Transactions");
 				}
 			} else {
-				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+				ExtentTestManager.setFailMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 
 		} catch (Exception e) {
@@ -275,10 +293,10 @@ public class BusinessTransactionDetailsTest {
 					}
 
 				} else {
-					ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
+					ExtentTestManager.setWarningMessageInReport("You Have No More Transactions");
 				}
 			} else {
-				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+				ExtentTestManager.setFailMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 
 		} catch (Exception e) {
@@ -325,7 +343,7 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.getWithdrawTokenBankTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.clickBankSignetBack();
+					.clickWithBankSignetBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testVerifyWithdrawBankTransaction failed due to Exception " + e);
 		}
@@ -383,7 +401,7 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.getWithdrawTokenSignetTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.clickBankSignetBack();
+					.clickWithBankSignetBack();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawSignetTransaction failed due to Exception " + e);
@@ -445,4 +463,38 @@ public class BusinessTransactionDetailsTest {
 			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
 		}
 	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBusinessTokenTransactionValidateSearch(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//
+//			businessTokenAccountPage.clickAccount();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+//					.verifyPageHeading(data.get("businessTokenHeading"));
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+//					.verifyTotalAvailableFunds(data.get("fundsHeading"));
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+//					.verifyPageDescription(data.get("businessTokenDescription"));
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
+//			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyViewMore() == 1) {
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+//			}
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//					.verifyPageHeading(data.get("transactionDetailsHeading"));
+//
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//					.clickReferenceID();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage().clickBack();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
+//		}
+//	}
 }

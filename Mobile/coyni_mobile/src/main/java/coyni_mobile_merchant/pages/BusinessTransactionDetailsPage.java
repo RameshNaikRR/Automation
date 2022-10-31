@@ -61,10 +61,13 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By lblReservedOn = MobileBy.xpath("//*[contains(@resource-id,'reserved_on')]");
 	private By lblReserveRelease = MobileBy.xpath("//*[contains(@text,'Reserve Release')]");
 	private By btnInstantPayBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
-	private By btnBankSignetBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
+	private By btnWithBankSignetBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
 	private By btnBuyBankBack = MobileBy.xpath("//*[contains(@resource-id,'btbankprevious')]");
-	
-			
+	private By btnBuyBankReferenceCopy = MobileBy.xpath("//*[contains(@resource-id,'btbankrefIV')]|//*[contains(@resource-id,'referenceCopyIV')]");
+	private By btnWithBankReferenceCopy = MobileBy.xpath("//*[contains(@resource-id,'withBankReferenceIDIV')]");
+//	private By btnWithBankBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
+	private By btnWithInstaReference = MobileBy.xpath("//*[contains(@resource-id,'withinrefIDIV')]");
+//	private By btnWithInstaBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
 	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
@@ -123,6 +126,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		ExtentTestManager.setInfoMessageInReport("Deposit To : " + getText(lblDepositTo));
 	}
 
+	public void clickBuyBankReferenceID() {
+		click(btnBuyBankReferenceCopy,"Buy Bank Reference Id Copy");
+	}
+	
+	public void clickInstantPayReferenceID() {
+		click(btnWithInstaReference," Instant Pay Reference Id Copy");
+	}
+	
+	public void clickWithBankReferenceID() {
+		click(btnWithBankReferenceCopy,"Withdraw Bank Reference Id Copy");
+	}
+	
 	public void getMerchantPayoutTransactionDetails() {
 		getAmount();
 		getDate();
@@ -277,8 +292,8 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		click(btnInstantPayBack, "Back");
 	}
 	
-	public void clickBankSignetBack() {
-		click(btnBankSignetBack, "Back");
+	public void clickWithBankSignetBack() {
+		click(btnWithBankSignetBack, "Back");
 	}
 
 	
