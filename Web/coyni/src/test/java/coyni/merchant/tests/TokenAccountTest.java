@@ -424,6 +424,9 @@ public class TokenAccountTest {
 			Thread.sleep(2000);
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickExportPage();
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickClose();
+			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent().clickNotifications();
+			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+					.verifyNotificationText(data.get("notificationText"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
 

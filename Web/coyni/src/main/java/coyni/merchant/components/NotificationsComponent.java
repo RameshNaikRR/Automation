@@ -20,9 +20,20 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
 	private By closeIcon = By
 			.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
+	private By lblnotification = By.xpath("(//div[@class=' flex flex-wrap undefined']//span[1])[1]");
 
 	public void clickNotificationsIcon() {
 		click(notificationsIcon, "NotificationIcon");
+
+	}
+
+	public void verifyNotificationText(String expText) {
+		String actText = getText(lblnotification, "Notificaion Text");
+		if (actText.equals(expText)) {
+			ExtentTestManager.setPassMessageInReport("The Heading is " + actText);
+		} else {
+			ExtentTestManager.setFailMessageInReport("the heading is not matched");
+		}
 
 	}
 

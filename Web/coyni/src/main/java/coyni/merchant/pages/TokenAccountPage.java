@@ -342,4 +342,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
+
+	public MerchantProfilePage merchantProfilePage() {
+		return new MerchantProfilePage();
+	}
 }

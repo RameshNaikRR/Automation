@@ -19,6 +19,7 @@ import coyni.merchant.popups.AddDBABusinessPopup;
 import coyni.merchant.popups.CompleteVerificationPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class SideMenuBarComponent extends BrowserFunctions {
 
@@ -39,9 +40,15 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
 	private By qrCode = By
 			.xpath("(//button[@class='absolute bg-cwhite UserProfile_QR_main__7Go2P cursor-pointer false'])[1]");
+	private By lblColor = By.xpath("//div[contains(@class,'justify-center rounded-l-full')]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyColor() {
+		String str = getElement(lblColor, "Color").getCssValue("background-color");
+		ExtentTestManager.setInfoMessageInReport("the Color is " + str);
 	}
 
 	public void clickContinueApplication() {

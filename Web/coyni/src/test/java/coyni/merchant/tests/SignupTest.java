@@ -371,6 +371,7 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickOnPersonalAccount();
+			sideMenuBarComponent.verifyColor();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
 			sideMenuBarComponent.clickMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantAccount();
