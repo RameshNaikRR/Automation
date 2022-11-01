@@ -360,8 +360,8 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
 			Thread.sleep(2000);
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
@@ -386,8 +386,8 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
 //			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyAddNewPaymentMethod() == 0) {
@@ -628,8 +628,8 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();
 //			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyAddNewPaymentMethod() == 0) {

@@ -36,7 +36,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifywithdrawAddBankHeading(String expHeading) throws InterruptedException {
-//		Thread.sleep(2000);
+		Thread.sleep(2000);
 		if (getElementList(withdrawAddBankHeading, "Heading").size() > 0) {
 //				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -46,7 +46,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifywithdrawAddInstantHeading(String expHeading) throws InterruptedException {
-//		Thread.sleep(2000);
+		Thread.sleep(2000);
 		if (getElementList(withdrawInstantPayHeading, "Heading").size() > 0) {
 //				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
 			new CommonFunctions().verifyLabelText(withdrawInstantPayHeading, "Heading", expHeading);
@@ -56,7 +56,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifywithdrawAddSignetHeading(String expHeading) throws InterruptedException {
-//		Thread.sleep(2000);
+		Thread.sleep(2000);
 		if (getElementList(withdrawSignetHeading, "Heading").size() > 0) {
 //				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
 			new CommonFunctions().verifyLabelText(withdrawSignetHeading, "Heading", expHeading);
@@ -101,10 +101,11 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		click(btnExternalBank, "Bank Account");
 	}
 
-	public void clickDebitCard() {
-//		if(getElementList(btnDebitCard, "Debit Card").size()>0) {
+	public void clickDebitCard() throws InterruptedException {
+		Thread.sleep(2000);
+	if(getElementList(btnDebitCard, "Debit Card").size()>0) {
 		click(btnDebitCard, "Debit Card");
-//	}
+	}
 	}
 
 	public void clickCreditCard() {
