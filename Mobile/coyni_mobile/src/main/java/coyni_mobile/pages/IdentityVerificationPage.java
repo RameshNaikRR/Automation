@@ -144,8 +144,8 @@ public class IdentityVerificationPage extends MobileFunctions{
 		DriverFactory.getDriver().hideKeyboard();
 		clickSubmit();
 		clickDone();
-//		verifyTransactionHeading(expSuccessHeading);
-//		getUserName();
+		verifyTransactionHeading(expSuccessHeading);
+		getUserName();
 		
 		
 	}

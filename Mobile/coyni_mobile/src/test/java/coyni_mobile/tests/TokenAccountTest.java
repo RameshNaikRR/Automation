@@ -598,7 +598,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -622,7 +622,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -632,7 +632,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
-					.getTransactionDetails();
+					.clickDone();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
@@ -664,7 +664,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.successFailureComponent().getTransactionDetails();
+					.successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenCard  failed due to exception " + e);
 		}
@@ -766,11 +766,6 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
 			Thread.sleep(2000);
-			if(data.get("validateAmazonGiftCard").equalsIgnoreCase("yes")) {
-				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-			}else {
-				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickVisa();
-			}
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
