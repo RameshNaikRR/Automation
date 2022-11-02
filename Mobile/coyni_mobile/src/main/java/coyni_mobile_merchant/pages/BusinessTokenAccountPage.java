@@ -30,8 +30,9 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnNotifications = MobileBy.xpath("");
 	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
 	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
-	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Open New Account']");
-	private By lnKBusinessAccount = MobileBy.xpath("//*[contains(@resource-id,'id/businessAccontLL')]");
+	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
+	private By lnKBusinessAccount = MobileBy.xpath("//*[contains(@resource-id,'id/businessAccontLL')]|//*[contains(@text,'Merchant')]");
+	private By lnKPersonalAccount = MobileBy.xpath("//*[@text='Personal']");
 	private By btnNewDBA = MobileBy.xpath("//*[contains(@resource-id,'ll_new_dba')]");
 	private By btnNewCompany = MobileBy.xpath("//*[contains(@resource-id,'ll_new_company')]");
 	private By lnkSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'title')]");
@@ -74,6 +75,10 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(lnKBusinessAccount, "Business Account");
 	}
 
+	public void clickPersonalAccount() {
+		click(lnKPersonalAccount, "Personal Account");
+	}
+	
 	public void clickOpenNewAccount() throws InterruptedException {
 		Thread.sleep(1500);
 		while (getElementList(btnOpenNewAccount, "Open New Account").size() == 0) {

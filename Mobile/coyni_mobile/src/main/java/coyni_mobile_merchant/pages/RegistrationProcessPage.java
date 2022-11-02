@@ -50,14 +50,8 @@ public class RegistrationProcessPage extends MobileFunctions {
 		click(btnMerchantAgreement, "Merchant's Agreement");
 	}
 
-	public void clickReviewApplication() {
-//		scrollDownToElement(btnReviewApplication, "Review Application");
-//Thread.sleep(2000);
-//		Dimension size = DriverFactory.getDriver().manage().window().getSize();
-//		int x = size.getWidth();
-//		int y = size.getHeight();
-//		ExtentTestManager.setInfoMessageInReport(x+ " "+ y);
-		
+	public void clickReviewApplication() throws InterruptedException {
+		Thread.sleep(2000);
 		TouchAction touch = new TouchAction(DriverFactory.getDriver());
 		touch.press(PointOption.point(300, 1500)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(100, (int) (1200))).release().perform();

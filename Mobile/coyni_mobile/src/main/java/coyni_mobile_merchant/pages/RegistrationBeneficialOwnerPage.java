@@ -206,6 +206,7 @@ public class RegistrationBeneficialOwnerPage extends MobileFunctions {
 		clickAddBeneficial();
 		BeneficialOwner(heading, expFirstName, expLastName, expSSN, expOwnership, expAddress1, expAddress2, expCity, expZipCode, expState);		
 		}
+		Thread.sleep(2000);
 		clickDone();
 	}
 	

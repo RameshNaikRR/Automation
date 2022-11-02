@@ -159,9 +159,9 @@ public class MerchantMenuIconTest {
 	public void testBuyTokenBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-					.verifyPageHeading(data.get("selectPaymentMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
+//			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+//					.verifyPageHeading(data.get("selectPaymentMethodHeading"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.buyTokenWithBankAccount(data.get("buyTokenHeading"), data.get("buyTokenDescription"),
 							data.get("amount"));
