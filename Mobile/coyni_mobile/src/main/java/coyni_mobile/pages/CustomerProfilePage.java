@@ -211,10 +211,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickPaymentMethods() {
-		if (getElementList(lnkPaymentMethods, "Payment Methods").size() > 0) {
 			click(lnkPaymentMethods, "Payment Methods");
-		}
-		
 	}
 
 	public void clickPreferences() {

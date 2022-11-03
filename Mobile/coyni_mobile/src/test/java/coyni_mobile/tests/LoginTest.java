@@ -77,14 +77,12 @@ public class LoginTest {
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(loginData.get("email"));
-			loginPage.fillPassword(loginData.get("password"));
-			Thread.sleep(5000);
+			loginPage.fillPassword(loginData.get("password"));	
 			DriverFactory.getDriver().hideKeyboard();
 			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
 			// loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
-			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();

@@ -694,8 +694,8 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickChangePassword();
-			customerProfilePage.navigationComponent().clickBack();
-			customerProfilePage.clickChangePassword();
+//			customerProfilePage.navigationComponent().clickBack();
+//			customerProfilePage.clickChangePassword();
 			customerProfilePage.changePasswordPage().enterYourPINComponent().fillPin(data.get("pin"));
 			customerProfilePage.changePasswordPage().navigationComponent().clickClose();
 
