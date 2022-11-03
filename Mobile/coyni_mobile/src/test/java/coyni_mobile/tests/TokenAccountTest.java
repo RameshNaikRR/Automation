@@ -104,9 +104,9 @@ public class TokenAccountTest {
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
-			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent().clickForgotPin();
-			tokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent().navigationComponent()
-					.clickBack();
+//			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent().clickForgotPin();
+//			tokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent().navigationComponent()
+//					.clickBack();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 
@@ -403,7 +403,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.verifyName(data.get("user"));
+					.verifyName();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
@@ -438,7 +438,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.verifyName(data.get("user"));
+					.verifyName();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().navigationComponent()
 					.clickClose();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
@@ -463,7 +463,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.verifyName(data.get("user"));
+					.verifyName();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
@@ -491,7 +491,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
-					.verifyName(data.get("user"));
+					.verifyName();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
@@ -598,7 +598,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -622,7 +622,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -646,9 +646,9 @@ public class TokenAccountTest {
 			if (method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			} else if (method.equalsIgnoreCase("credit")) {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
 			} else {
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
 			}
 			if (!method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
@@ -714,7 +714,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
@@ -737,7 +737,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard(data.get("last4Digits"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
@@ -766,7 +766,11 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
 			Thread.sleep(2000);
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			if(data.get("validateGiftCard").equalsIgnoreCase("yes")) {
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			}else {
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickVisa();
+			}
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmount(data.get("amount"));
@@ -788,7 +792,7 @@ public class TokenAccountTest {
 					.slideToConfirm();
 			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().verifyHeading(data.get(data.get("pinHeading")));
+					.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
 //			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()

@@ -29,6 +29,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
+	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Mastercard Debit ')])[1]");
+	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Visa Credit')])[1]");
+	
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
@@ -64,6 +67,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickAddNewPaymentMethod() throws InterruptedException {
+		Thread.sleep(3000);
 		if (getElementList(btnAddNewPaymentMethod, "Add New Payment Method").size() > 0) {
 			click(btnAddNewPaymentMethod, "Add New Payment Method");
 		}
@@ -80,12 +84,12 @@ public class PaymentMethodsPage extends MobileFunctions {
 		new CommonFunctions().elementView(btnCreditCard, "Credit Card");
 	}
 
-	public void clickCreditCard(String last4digits) {
-		click(getPaymentItems("Credit", last4digits), "Credit");
+	public void clickCreditCard() {
+		click(btncreditCard,"Credit Card");
 	}
 
-	public void clickDebitCard(String last4digits) {
-		click(getPaymentItems("Debit", last4digits), "Debit");
+	public void clickDebitCard() {
+		click(btnDebitCard, "Debit Card");
 	}
 
 //	public void clickBankAccount(String last4digits) {

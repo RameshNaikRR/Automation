@@ -9,8 +9,8 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class IdentityVerificationPage extends MobileFunctions{
-	
+public class IdentityVerificationPage extends MobileFunctions {
+
 	private By btnDateofBirth = MobileBy.xpath("//*[contains(@resource-id,'idveriDOBET')]");
 	private By txtSSN = MobileBy.xpath("//*[contains(@resource-id,'idVeriSSNET')]");
 	private By btnUpload = MobileBy.xpath("//*[contains(@resource-id,'clickBottomSheet')]");
@@ -28,12 +28,10 @@ public class IdentityVerificationPage extends MobileFunctions{
 	private By lblIdentitySuccess = MobileBy.xpath("//*[contains(@text,'Successful')]");
 	private By btnDone = MobileBy.xpath("//*[@text='Done']");
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
-	private By btnVerifyNext= MobileBy.xpath("//*[@text='Next']");
+	private By btnVerifyNext = MobileBy.xpath("//*[@text='Next']");
 	private By lblVerifyHeading = MobileBy.xpath("//*[contains(@text,'Please Verify')]");
 	private By lblIdentityHeading = MobileBy.xpath("//*[@text='Identity Verification']");
-	
-	
-	
+
 	public void fillSSN(String expText) {
 		enterText(txtSSN, expText, "SSN");
 	}
@@ -45,11 +43,11 @@ public class IdentityVerificationPage extends MobileFunctions{
 	public void clickUpload() {
 		click(btnUpload, "Upload");
 	}
-	
+
 	public void clickContinue() {
 		click(lnkContinue, "Continue");
 	}
-	
+
 	public void clickLicense() {
 		click(lnkLicense, "Driver's License");
 	}
@@ -61,12 +59,12 @@ public class IdentityVerificationPage extends MobileFunctions{
 	public void clickIssuedCard() {
 		click(lnkIssuedCard, "State Issued Card");
 	}
-	
+
 	public void clickNext() {
 		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
-	
+
 	public void fillAddress1(String expText) {
 		enterText(txtAddress1, expText, " Mailling Address Line 1");
 	}
@@ -94,32 +92,35 @@ public class IdentityVerificationPage extends MobileFunctions{
 
 	public int verifyIdentityHeading(String expHeading) throws InterruptedException {
 		Thread.sleep(2000);
-		int a=DriverFactory.getDriver().findElements(lblVerifyHeading).size();
-		if(a==1) {
-		new CommonFunctions().verifyLabelText(lblVerifyHeading, " Verify your Identity Heading ", expHeading);
-		click(btnVerifyNext, "Verify Next");
+		int a = DriverFactory.getDriver().findElements(lblVerifyHeading).size();
+		if (a == 1) {
+			new CommonFunctions().verifyLabelText(lblVerifyHeading, " Verify your Identity Heading ", expHeading);
+			click(btnVerifyNext, "Verify Next");
 		}
 		return a;
 	}
 
 	public void verifyTransactionHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblIdentitySuccess, "Identity Verification Successful Heading ", expHeading);
+		new CommonFunctions().verifyLabelText(lblIdentitySuccess, "Identity Verification Successful Heading ",
+				expHeading);
 	}
-	
+
 	public void verifyIdentityVerificationHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblIdentityHeading, "Identity Verification  Heading ", expHeading);
 	}
-	
+
 	public void getUserName() {
-		ExtentTestManager.setInfoMessageInReport(" User Name is : "+getText(lblUserName));
+		ExtentTestManager.setInfoMessageInReport(" User Name is : " + getText(lblUserName));
 	}
-	
+
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
-	
-	public void verifyIdentity(String expHeading,String expIdentityHeading,String expSSN,String expAddress1,String expAddress2,String expCity,String expState,String expZipCode,String expSuccessHeading) throws InterruptedException {
-		
+
+	public void verifyIdentity(String expHeading, String expIdentityHeading, String expSSN, String expAddress1,
+			String expAddress2, String expCity, String expState, String expZipCode, String expSuccessHeading)
+			throws InterruptedException {
+
 		verifyIdentityHeading(expHeading);
 		verifyIdentityVerificationHeading(expIdentityHeading);
 		clickDateofBirth();
@@ -128,10 +129,10 @@ public class IdentityVerificationPage extends MobileFunctions{
 		DriverFactory.getDriver().hideKeyboard();
 		clickUpload();
 		clickLicense();
-		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
 			uploadDocumentComponent().clickUsingApp();
 			uploadDocumentComponent().clickAllow();
-			}
+		}
 		uploadDocumentComponent().clickCapture();
 		uploadDocumentComponent().clickSave();
 		clickNext();
@@ -143,12 +144,12 @@ public class IdentityVerificationPage extends MobileFunctions{
 		fillZipCode(expZipCode);
 		DriverFactory.getDriver().hideKeyboard();
 		clickSubmit();
-		clickDone();
 		verifyTransactionHeading(expSuccessHeading);
+		clickDone();
 		getUserName();
-		
-		
+
 	}
+
 	public UploadDocumentComponent uploadDocumentComponent() {
 		return new UploadDocumentComponent();
 	}

@@ -119,10 +119,12 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	// added
-	public void clickProfile() {
+	public void clickProfile() throws InterruptedException {
+		Thread.sleep(3000);
 		if (getElementList(btnProfile, "Profile").size() > 0) {
 		click(btnProfile, "Profile");
 	}
+		
 	}
 	
 	public TokenHomePopUp tokenHomePopUp() {

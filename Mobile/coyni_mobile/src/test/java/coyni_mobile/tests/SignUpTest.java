@@ -56,7 +56,7 @@ public class SignUpTest {
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
@@ -184,6 +184,7 @@ public class SignUpTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 			.accountCreatedPage().clickGetStarted();
+			
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 			.accountCreatedPage().identityVerificationPage().verifyIdentity(data.get("verifyHeading"),data.get("identityHeading"),data.get("SSN"),
 					data.get("addressLine1"), data.get("addressLine2"), data.get("city"),data.get("state"),data.get("zipCode"),data.get("identitySuccess"));

@@ -746,6 +746,7 @@ public class CustomerProfileTest {
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
 			customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
+			customerProfilePage.toastComponent().verifyToastMsg(data.get("toastMsg"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Reset Pin Code failed due to Exception " + e);
@@ -909,7 +910,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().clickDebitCard();
 			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
@@ -940,7 +941,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().clickDebitCard();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickRemove();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -959,7 +960,7 @@ public class CustomerProfileTest {
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickCreditCard(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().clickCreditCard();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickRemove();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -1055,6 +1056,16 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCreditCardWithInvalidData(String strParams) {
+		try {
+			testAddCardWithInvalidData(strParams, "credit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddDebitCardWithInvalidData failed due to " + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBank(String strParams) {

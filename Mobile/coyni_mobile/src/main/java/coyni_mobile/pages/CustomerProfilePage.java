@@ -7,6 +7,7 @@ import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PreferencesComponent;
+import coyni_mobile.components.ToastComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.popups.SetUpTouchIDPopup;
 import coyni_mobile.utilities.CommonFunctions;
@@ -368,5 +369,9 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public SetUpTouchIDPopup setUpTouchIDPopup() {
 		return new SetUpTouchIDPopup();
+	}
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 }

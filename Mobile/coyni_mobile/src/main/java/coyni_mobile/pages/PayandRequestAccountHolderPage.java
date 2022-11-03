@@ -7,6 +7,7 @@ import coyni_mobile.components.PayRequestConfirmPopup;
 import coyni_mobile.components.PayRequestOptionalPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class PayandRequestAccountHolderPage extends MobileFunctions {
@@ -21,8 +22,9 @@ public class PayandRequestAccountHolderPage extends MobileFunctions {
 	private By lnkConverter = MobileBy.xpath(" ");
 	private By errorMessage = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 
-	public void verifyName(String expName) {
-		new CommonFunctions().verifyLabelText(lblName, "Name", expName);
+	public void verifyName() {
+		ExtentTestManager.setInfoMessageInReport("User Name is : "+ getText(lblName));
+//		new CommonFunctions().verifyLabelText(lblName, "Name", expName);
 	}
 
 	public void verifyErrorMessage(String errMessage) {

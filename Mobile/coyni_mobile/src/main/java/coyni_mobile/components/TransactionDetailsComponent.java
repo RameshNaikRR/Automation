@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class TransactionDetailsComponent extends MobileFunctions {
 
-	private By transactions = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+	private By transactions = MobileBy.xpath("//*[contains(@text,'Transaction Details')]|//*[contains(@resource-id,'headerTV')]");
 	private By buyTokenBankTransactions = MobileBy.xpath("//*[contains(@resource-id,'btbankheaderTV')]");
 	private By buyTokenDebitTransactions = MobileBy.xpath("//*[contains(@resource-id,'headTV')]");
 	private By withdrawBankTransactions = MobileBy.xpath("//*[contains(@resource-id,'withbankheaderTV')]");
