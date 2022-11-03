@@ -1,5 +1,6 @@
 package coyni.merchant.tests;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -51,151 +52,175 @@ public class MerchantApplicationTest {
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyMerchantApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickStartApplication();
-			registrationStartPage.registrationCompanyInfoPage().verifyCompanyInformation();
-			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
-			registrationStartPage.registrationCompanyInfoPage()
-					.verifyPageDescription(data.get("companyInfoDescription"));
-			Thread.sleep(2000);
-			registrationStartPage.registrationCompanyInfoPage().fillCompanyName(data.get("companyName"));
-			registrationStartPage.registrationCompanyInfoPage().clickBusinessEntityDropdown();
-			Thread.sleep(500);
-			registrationStartPage.registrationCompanyInfoPage().selectBusinessEntity(data.get("businessEntity"));
-			Thread.sleep(500);
-			registrationStartPage.registrationCompanyInfoPage().fillSSN_EIN_TIN(data.get("ssn_ein_tin"));
-			registrationStartPage.registrationCompanyInfoPage().fillCompanyEmail(data.get("companyEmail"));
-			registrationStartPage.registrationCompanyInfoPage().fillCompanyPhoneNumber(data.get("companyPhoneNumber"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
-					.fillAddress1(data.get("addressline1"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
-					.fillAddress2(data.get("addressline2"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent().fillCity(data.get("city"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
-					.selectState(data.get("state"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
-					.fillZipCode(data.get("zipCode"));
-			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
-					.verifyCountry(data.get("country"));
-			registrationStartPage.registrationCompanyInfoPage().uploadDocument(data.get("folderName"),
-					data.get("fileName"), data.get("businessEntity"));
+			registrationStartPage.clickContinueApplication();
+			Thread.sleep(4000);
 
-			registrationStartPage.registrationCompanyInfoPage().clickNext();
-			Thread.sleep(10000);
-			registrationStartPage.registrationCompanyInfoPage().verifyDBAInformation();
-			Thread.sleep(3000);
-			registrationStartPage.registrationCompanyInfoPage().verifyCompanyInformation();
+			ArrayList<String> str = sideMenuBarComponent.verifyColorOfSideMenuBar();
+			ArrayList<String> str1 = registrationStartPage.verifyColorOfRegistration();
+			ArrayList<String> str2 = registrationStartPage.VerifyChangeColorofRegistration();
+			if (str1.contains(str2)) {
+				ExtentTestManager.setInfoMessageInReport("Contains" + str2);
+			} else {
+				ExtentTestManager.setFailMessageInReport("Fail");
+			}
+			/*
+			 * if (str.containsAll(str1)) { ExtentTestManager.setPassMessageInReport(str
+			 * +"Hex value is matched with" + str1); } else if() {
+			 * ExtentTestManager.setPassMessageInReport(str2 +"Hex value is matched with" +
+			 * str1);
+			 * 
+			 * 
+			 * }
+			 * 
+			 * else { ExtentTestManager.setFailMessageInReport(str +
+			 * "Hex value is not matched with" + str1); }
+			 */
 
-			Thread.sleep(10000);
-			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
-			Thread.sleep(10000);
-			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
-			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
-			registrationStartPage.registrationDBAInformationPage().clickRetailLocation();
-			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
-			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
-			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
-			registrationStartPage.registrationDBAInformationPage()
-					.fillMonthlyProcessingVolume(data.get("monthlyProcessingVolume"));
-			registrationStartPage.registrationDBAInformationPage().fillHighTicket(data.get("highTicket"));
-			registrationStartPage.registrationDBAInformationPage().fillAverageTicket(data.get("averageTicket"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-					.fillAddress1(data.get("addressline1"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-					.fillAddress2(data.get("addressline2"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent().fillCity(data.get("city"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-					.selectState(data.get("state"));
-			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
-					.fillZipCode(data.get("zipCode"));
-			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
-			registrationStartPage.registrationDBAInformationPage().clickNext();
-			Thread.sleep(5000);
-			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
-			registrationStartPage.registrationCompanyInfoPage().verifyDBAInformation();
-			Thread.sleep(5000);
-			Thread.sleep(7000);
-			String[] id = data.get("id").split(",");
-			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
-			String[] ownerName = data.get("ownerName").split(",");
-			String[] ownerShipValue = data.get("ownerShip").split(",");
-			String[] firstName = data.get("firstName").split(",");
-			String[] lastName = data.get("lastName").split(",");
-			String[] ownerShip = data.get("ownerShip").split(",");
-
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillFirstName(data.get("firstName"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillLastName(data.get("lastName"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillDateOfBirth(data.get("dateOfBirth"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillSocialSecurityNum(data.get("ssn_ein_tin"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillOwnerShip(data.get("ownerShip"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress1(data.get("addressline1"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress2(data.get("addressline2"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillCity(data.get("city"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.selectState(data.get("state"));
-			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"));
-			Thread.sleep(6000);
-
-			sideMenuBarComponent.registrationBeneficialOwnersPage().selectID();
-			sideMenuBarComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
-					data.get("fileName"));
-			Thread.sleep(10000);
-			sideMenuBarComponent.registrationBeneficialOwnersPage().clickSave();
-			Thread.sleep(10000);
-
-			Thread.sleep(10000);
-			sideMenuBarComponent.registrationBeneficialOwnersPage().clickNext();
-			registrationStartPage.registrationCompanyInfoPage().verifyBankAccountInformation();
-			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
-
-			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
-			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
-			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
-			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideMenuBarComponent.bankAccountPage().clickEnter();
-
-			registrationStartPage.merchantAgreementsPage().clickView();
-			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
-			registrationStartPage.merchantAgreementsPage().clickSave();
-
-			registrationStartPage.merchantAgreementsPage().clickNext();
-
-			Thread.sleep(7000);
-
-			registrationStartPage.registrationCompanyInfoPage().verifyMerchantAgreements();
-
-			registrationStartPage.applicationSummaryPage().verifyCompanyInformation();
-			registrationStartPage.applicationSummaryPage().getCompanyInformation();
-			registrationStartPage.applicationSummaryPage().getCompanyInformationBusinessEntity();
-			registrationStartPage.applicationSummaryPage().getCompanyInformationEINNumber();
-			registrationStartPage.applicationSummaryPage().getCompanyInformationEmailAddress();
-			registrationStartPage.applicationSummaryPage().getCompanyInformationPhoneNumber();
-			registrationStartPage.applicationSummaryPage().getCompanyInformationAddress();
-			registrationStartPage.applicationSummaryPage().verifyDBAInformation();
-			registrationStartPage.applicationSummaryPage().getDBAInfomation();
-			registrationStartPage.applicationSummaryPage().getDBAInformationEmail();
-			registrationStartPage.applicationSummaryPage().getDBAInformationPhoneNumber();
-			registrationStartPage.applicationSummaryPage().getDBAInformationWebsite();
-			registrationStartPage.applicationSummaryPage().getDBAInformationMonthlyProcessingVolume();
-			registrationStartPage.applicationSummaryPage().getDBAInformationHighTicket();
-			registrationStartPage.applicationSummaryPage().getDBAInformationAverageTicket();
-			registrationStartPage.applicationSummaryPage().getDBAInformationAddress();
-			registrationStartPage.applicationSummaryPage().verifyBeneficialOwners();
-			registrationStartPage.applicationSummaryPage().getBeneficialOwnersDropDown();
-			registrationStartPage.applicationSummaryPage().getAgreementsDetails();
-			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
-			registrationStartPage.applicationSummaryPage().clickSubmit();
-
-			registrationStartPage.applicationSummaryPage().clickDone();
+			// sideMenuBarComponent.verifyColor(data.get("expColor"));
+//			registrationStartPage.registrationCompanyInfoPage().verifyCompanyInformation();
+//			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
+//			registrationStartPage.registrationCompanyInfoPage()
+//					.verifyPageDescription(data.get("companyInfoDescription"));
+//			Thread.sleep(2000);
+//			registrationStartPage.registrationCompanyInfoPage().fillCompanyName(data.get("companyName"));
+//			registrationStartPage.registrationCompanyInfoPage().clickBusinessEntityDropdown();
+//			Thread.sleep(500);
+//			registrationStartPage.registrationCompanyInfoPage().selectBusinessEntity(data.get("businessEntity"));
+//			Thread.sleep(500);
+//			registrationStartPage.registrationCompanyInfoPage().fillSSN_EIN_TIN(data.get("ssn_ein_tin"));
+//			registrationStartPage.registrationCompanyInfoPage().fillCompanyEmail(data.get("companyEmail"));
+//			registrationStartPage.registrationCompanyInfoPage().fillCompanyPhoneNumber(data.get("companyPhoneNumber"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+//					.fillAddress1(data.get("addressline1"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+//					.fillAddress2(data.get("addressline2"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent().fillCity(data.get("city"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+//					.selectState(data.get("state"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+//					.fillZipCode(data.get("zipCode"));
+//			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+//					.verifyCountry(data.get("country"));
+//			registrationStartPage.registrationCompanyInfoPage().uploadDocument(data.get("folderName"),
+//					data.get("fileName"), data.get("businessEntity"));
+//
+//			registrationStartPage.registrationCompanyInfoPage().clickNext();
+//			Thread.sleep(10000);
+//			registrationStartPage.registrationCompanyInfoPage().verifyDBAInformation();
+//			Thread.sleep(3000);
+//			registrationStartPage.registrationCompanyInfoPage().verifyCompanyInformation();
+//
+//			Thread.sleep(10000);
+//			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
+//			registrationStartPage.registrationDBAInformationPage().clickNo();
+//			Thread.sleep(10000);
+//			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
+//			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
+//			registrationStartPage.registrationDBAInformationPage().clickRetailLocation();
+//			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
+//			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
+//			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
+//			registrationStartPage.registrationDBAInformationPage()
+//					.fillMonthlyProcessingVolume(data.get("monthlyProcessingVolume"));
+//			registrationStartPage.registrationDBAInformationPage().fillHighTicket(data.get("highTicket"));
+//			registrationStartPage.registrationDBAInformationPage().fillAverageTicket(data.get("averageTicket"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+//					.fillAddress1(data.get("addressline1"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+//					.fillAddress2(data.get("addressline2"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent().fillCity(data.get("city"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+//					.selectState(data.get("state"));
+//			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+//					.fillZipCode(data.get("zipCode"));
+//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//			registrationStartPage.registrationDBAInformationPage().clickNext();
+//			Thread.sleep(5000);
+//			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
+//			registrationStartPage.registrationCompanyInfoPage().verifyDBAInformation();
+//			Thread.sleep(5000);
+//			Thread.sleep(7000);
+//			String[] id = data.get("id").split(",");
+//			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
+//			String[] ownerName = data.get("ownerName").split(",");
+//			String[] ownerShipValue = data.get("ownerShip").split(",");
+//			String[] firstName = data.get("firstName").split(",");
+//			String[] lastName = data.get("lastName").split(",");
+//			String[] ownerShip = data.get("ownerShip").split(",");
+//
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillFirstName(data.get("firstName"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillLastName(data.get("lastName"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillDateOfBirth(data.get("dateOfBirth"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillSocialSecurityNum(data.get("ssn_ein_tin"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillOwnerShip(data.get("ownerShip"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillAddress1(data.get("addressline1"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillAddress2(data.get("addressline2"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillCity(data.get("city"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.selectState(data.get("state"));
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+//					.fillZipCode(data.get("zipCode"));
+//			Thread.sleep(6000);
+//
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().selectID();
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
+//					data.get("fileName"));
+//			Thread.sleep(10000);
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().clickSave();
+//			Thread.sleep(10000);
+//
+//			Thread.sleep(10000);
+//			sideMenuBarComponent.registrationBeneficialOwnersPage().clickNext();
+//			registrationStartPage.registrationCompanyInfoPage().verifyBankAccountInformation();
+//			registrationStartPage.registrationCompanyInfoPage().verifyBeneficialOwners();
+//
+//			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
+//			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+//			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
+//			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+//			sideMenuBarComponent.bankAccountPage().clickEnter();
+//
+//			registrationStartPage.merchantAgreementsPage().clickView();
+//			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
+//			registrationStartPage.merchantAgreementsPage().clickSave();
+//
+//			registrationStartPage.merchantAgreementsPage().clickNext();
+//
+//			Thread.sleep(7000);
+//
+//			registrationStartPage.registrationCompanyInfoPage().verifyMerchantAgreements();
+//
+//			registrationStartPage.applicationSummaryPage().verifyCompanyInformation();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformation();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformationBusinessEntity();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformationEINNumber();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformationEmailAddress();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformationPhoneNumber();
+//			registrationStartPage.applicationSummaryPage().getCompanyInformationAddress();
+//			registrationStartPage.applicationSummaryPage().verifyDBAInformation();
+//			registrationStartPage.applicationSummaryPage().getDBAInfomation();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationEmail();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationPhoneNumber();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationWebsite();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationMonthlyProcessingVolume();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationHighTicket();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationAverageTicket();
+//			registrationStartPage.applicationSummaryPage().getDBAInformationAddress();
+//			registrationStartPage.applicationSummaryPage().verifyBeneficialOwners();
+//			registrationStartPage.applicationSummaryPage().getBeneficialOwnersDropDown();
+//			registrationStartPage.applicationSummaryPage().getAgreementsDetails();
+//			registrationStartPage.applicationSummaryPage().getAgreementsSignedDetails();
+//			registrationStartPage.applicationSummaryPage().clickSubmit();
+//
+//			registrationStartPage.applicationSummaryPage().clickDone();
 
 //			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
 //			registrationStartPage.applicationSubmissionPage().verifyUnderReviewDescription();

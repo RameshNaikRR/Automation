@@ -315,6 +315,23 @@ public class CommonFunctions {
 
 	}
 
+	public String convertRgbaToHex(String a) {
+
+		String replaceAll = a.replaceAll("[a-zA-Z]", "");
+		int length = replaceAll.length();
+		String substring = replaceAll.substring(1, length - 1);
+		String str = substring.replaceAll("[ ]", "");
+		String[] split = str.split(",");
+		System.out.println(split);
+		int R = Integer.parseInt(split[0]);
+		int G = Integer.parseInt(split[1]);
+		int B = Integer.parseInt(split[2]);
+
+		String hex = String.format("#%02X%02X%02X", R, G, B);
+		System.out.println(hex);
+		return hex;
+	}
+
 	public void verifyPasswordMaskedView(By ele, String eleName) {
 		String attributeValue = objBrowserFunctions.getElement(ele, eleName).getAttribute("type");
 		if (attributeValue.contains("password")) {
@@ -331,7 +348,7 @@ public class CommonFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
-	
+
 	public void switchtoUrl(String url) {
 		DriverFactory.getDriver().navigate().to(url);
 	}

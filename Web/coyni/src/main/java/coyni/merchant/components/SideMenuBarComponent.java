@@ -1,6 +1,10 @@
 package coyni.merchant.components;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.pages.BankAccountPage;
 import coyni.merchant.pages.DashBoardPage;
@@ -41,6 +45,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By qrCode = By
 			.xpath("(//button[@class='absolute bg-cwhite UserProfile_QR_main__7Go2P cursor-pointer false'])[1]");
 	private By lblColor = By.xpath("//div[contains(@class,'justify-center rounded-l-full')]");
+	private By lbllColor = By.xpath("//div[@data-tip='merchant-application']//button");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
@@ -49,6 +54,26 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	public void verifyColor() {
 		String str = getElement(lblColor, "Color").getCssValue("background-color");
 		ExtentTestManager.setInfoMessageInReport("the Color is " + str);
+	}
+
+	public ArrayList<String> verifyColorOfSideMenuBar() {
+		List<WebElement> eles = getElementsList(lbllColor, " ");
+		ArrayList<String> st = new ArrayList<>();
+		// String hexValue= null;
+		for (WebElement ele : eles) {
+			String str = ele.getCssValue("background-color");
+
+			ExtentTestManager.setInfoMessageInReport("the Color of rgba value is " + str);
+			// String sd = new CommonFunctions().convertRgbaToHex(str);
+			// ExtentTestManager.setInfoMessageInReport("the Color of hex value is " + str);
+			st.add(str);
+
+		}
+		return st;
+
+//		int i = this.Color.size();
+		// ExtentTestManager.setInfoMessageInReport("the color count is" + );
+		// return this.Color;
 	}
 
 	public void clickContinueApplication() {
