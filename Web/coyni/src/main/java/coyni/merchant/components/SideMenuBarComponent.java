@@ -149,14 +149,10 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		new CommonFunctions().verifyCursorAction(merchnatApplicationTracker, "Merchant Application tracker");
 		new CommonFunctions().elementView(merchnatApplicationTracker, "Merchant Application tracker");
 
-//		String toolTip = getText(merchnatApplicationTrackerToolTip, "");
-//		ExtentTestManager.setInfoMessageInReport("toolTip for Merchant Application tracker: " + toolTip);
 	}
 
 	public void verifyMerchnatTracker() {
 		new CommonFunctions().elementView(merchnatApplicationTracker, "Merchant Application tracker");
-//		String tracker = getText(merchnatApplicationTracker, "");
-//		ExtentTestManager.setInfoMessageInReport("Tracker status is displayed" + tracker);
 	}
 
 	public void clickMerchantActivityDrpDwn() {

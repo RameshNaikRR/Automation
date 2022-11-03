@@ -140,12 +140,12 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
-			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
-			if (data.get("securityKey").equalsIgnoreCase("123456")) {
-				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			// loginPage.authyComponent().clickSms();
+			// loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
+			if (data.get("code").equalsIgnoreCase("123456")) {
+				loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			} else {
-				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			}
 
 		} catch (Exception e) {
@@ -162,9 +162,9 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			loginPage.authyComponent().clickSms();
+			// loginPage.authyComponent().clickSms();
 			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				loginPage.phoneVerificationComponent().clickResend();
 			}
 		} catch (Exception e) {
@@ -230,10 +230,9 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-
-			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(3000);
-				loginPage.phoneVerificationComponent().clickResend();
+			for (int i = 0; i <= 2; i++) {
+				Thread.sleep(2000);
+				loginPage.phoneVerificationComponent().clickResendCode();
 			}
 
 		} catch (Exception e) {
@@ -241,7 +240,6 @@ public class LoginTest {
 		}
 	}
 
-//Worked
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmailWithInvalidPhonenumber(String strParams) {
@@ -291,7 +289,6 @@ public class LoginTest {
 		}
 	}
 
-//Added now
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmailwithBackActions(String strParams) {
@@ -317,7 +314,6 @@ public class LoginTest {
 		}
 	}
 
-	// Added now
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmailWithPhoneNumber(String strParams) {

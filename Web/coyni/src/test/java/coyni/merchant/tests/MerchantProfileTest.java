@@ -71,7 +71,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyUserNameView();
 			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
-//			merchantProfilePage.userDetailsComponent().verifyEmailAddressView();
 			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
@@ -104,15 +103,10 @@ public class MerchantProfileTest {
 					.verifyHeading(data.get("removeProfileHeading"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.verifyRemoveView();
-//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
-//					.navigationComponent().verifyBackView();
-//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
-//					.navigationComponent().verifyCloseView();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.navigationComponent().clickBack();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
-//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().clickRemove();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
 					.navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
@@ -122,10 +116,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.verifyHeading(data.get("cropYourImageHeading"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().verifySaveView();
-//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
-//					.navigationComponent().verifyBackView();
-//			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
-//					.navigationComponent().verifyCloseView();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.navigationComponent().clickBack();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
@@ -202,8 +192,6 @@ public class MerchantProfileTest {
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expEditPhoneNumberHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
@@ -294,14 +282,10 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().navigationComponent().clickClose();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
@@ -309,8 +293,6 @@ public class MerchantProfileTest {
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.navigationComponent().clickBack();
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
@@ -321,8 +303,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
-//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
-//					.verifyPageHeadingWithValidCode(data.get("expHeading"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
@@ -350,7 +330,6 @@ public class MerchantProfileTest {
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberScreen(data.get("authyEditPhoneHeading"));
-			// merchantProfilePage.userDetailsComponent().clickIconEditPhNum();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSMSCode();
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(3000);
@@ -498,11 +477,9 @@ public class MerchantProfileTest {
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
-//			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
-//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyOldEmailAddress();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
 			Thread.sleep(2000);
@@ -532,7 +509,6 @@ public class MerchantProfileTest {
 			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
-//			merchantProfilePage.userDetailsComponent().verifyEditEmailAddress(data.get("heading"));
 			if (!data.get("code").isEmpty()) {
 				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
@@ -671,14 +647,9 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
-			// topBarComponent.userNameDropDownComponent().clickDropDown();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
-			// merchantProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone"));
 			Thread.sleep(3000);
 //			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
-//
-//			merchantProfilePage.preferencesPage().clickSave();
-//			merchantProfilePage.preferencesPage().verifyLabelSuccessMessage();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
@@ -712,7 +683,7 @@ public class MerchantProfileTest {
 
 	}
 
-	@Test // added M
+	@Test
 	@Parameters({ "strParams" })
 	public void testChangePassword(String strParams) {
 		try {
@@ -734,7 +705,7 @@ public class MerchantProfileTest {
 		}
 	}
 
-	@Test // added
+	@Test
 	@Parameters({ "strParams" })
 	public void testChangePasswordInvalidCredentials(String strParams) {
 		try {
@@ -755,8 +726,6 @@ public class MerchantProfileTest {
 			Thread.sleep(3000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-//				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-//						data.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -793,7 +762,7 @@ public class MerchantProfileTest {
 			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
-			
+
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));

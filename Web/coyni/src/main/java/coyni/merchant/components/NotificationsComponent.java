@@ -14,7 +14,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
 	private By notification = By.xpath("(//span[text()='Export Report Successful'])[1]");
-	private By btnCancel = By.xpath("(//div[@class='SingleNotificationCard_trash__w2Hnj text-base  icon-trash  '])[1]");
+	private By btnCancel = By.xpath("//div[contains(@class,'SingleNotificationCard_trash__w2Hnj')]");
 	private By btnClearAll = By.xpath("//span[text()='Clear All']");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");

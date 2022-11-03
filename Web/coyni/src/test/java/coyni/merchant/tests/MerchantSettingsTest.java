@@ -615,8 +615,6 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.verifyHeading(data.get("apiKeysHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
 			Thread.sleep(2000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()

@@ -15,7 +15,7 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 			"div[class *= 'SmsValidation_phone_validation_sub']>div:first-of-type,div[class *= 'SmsValidationTwillo_phone_validation_sub']>div:first-of-type");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code']");
 	private By lnkResend = By.xpath("//button[contains(text(),'Resend Verification Code')]");
-	private By lnkResendCode = By.xpath("//button[contains(text(),'Resend verification code.')]");
+	private By lnkResendCode = By.xpath("//div[contains(text(),'Resend Verification Code')]");
 	private By lnkGoBack = By.xpath("//div[text()='Back to Login']");
 	private By lblPhoneNumber = By.xpath("//p[contains(text(),'We sent you a 6-digit')]/span[1]");
 	private By chooseHeading = By.xpath("//span[text()='Choose Account']");

@@ -393,7 +393,7 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickSharedDropDown();
-			sideMenuBarComponent.clickSharedAccount();
+			// sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);
 
