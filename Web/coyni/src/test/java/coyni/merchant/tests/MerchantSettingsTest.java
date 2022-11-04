@@ -614,6 +614,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.verifyHeading(data.get("apiKeysHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
 			Thread.sleep(2000);
@@ -709,28 +711,28 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testaddSignet(String strParams) {
+	public void testaddCogent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.clickAddSignetAccount();
+					.clickAddCognetAccount();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+					.addNewCogentAccountPopup().fillName(data.get("newCogentAccount"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+					.addNewCogentAccountPopup().fillCognetWalletId(data.get("walletID"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+					.addNewCogentAccountPopup().mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+					.addNewCogentAccountPopup().mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillCity(data.get("city1"));
+					.addNewCogentAccountPopup().mailingAddressComponent().fillCity(data.get("city1"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().selectState(data.get("state1"));
+					.addNewCogentAccountPopup().mailingAddressComponent().selectState(data.get("state1"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+					.addNewCogentAccountPopup().mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-					.addNewSignetAccountPopup().clickSave();
+					.addNewCogentAccountPopup().clickSave();
 
 		}
 
@@ -741,22 +743,22 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccount(String strParams) {
+	public void testAddCognetAccount(String strParams) {
 		sideMenuBarComponent.clickMerchantSettings();
 		merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
-		testaddSignet(strParams);
+		testaddCogent(strParams);
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccountInvalidDataValidations(String strParams) {
+	public void testAddCogentAccountInvalidDataValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPaymentMethodsBtn();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
-			testaddSignet(strParams);
+			testaddCogent(strParams);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
@@ -769,14 +771,13 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDeleteSignetAccount(String strParams) {
-
+	public void testDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent()
-					.clickDeleteSignetAccount(data.get("signetNumber"));
+					.clickDeleteSignetAccount(data.get("cogentNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
@@ -791,7 +792,13 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
 			Thread.sleep(2000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickDebitCard();
+			if (card.equalsIgnoreCase("credit")) {
+				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+						.clickCreditCard();
+			} else {
+				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+						.clickDebitCard();
+			}
 			Thread.sleep(3000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.fillNameOnCard(data.get("nameOnCard"));
@@ -814,6 +821,8 @@ public class MerchantSettingsTest {
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().selectState(data.get("state1"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().verifyCountry(data.get("country"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().clickSave();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().preAuthorizationPopup()
@@ -1182,7 +1191,7 @@ public class MerchantSettingsTest {
 				merchantSettingsSideBarMenuComponent.teamComponent().verifyNoRecordsFound();
 			} else {
 				merchantSettingsSideBarMenuComponent.teamComponent().clickSettings();
-				merchantSettingsSideBarMenuComponent.teamComponent().clickRemoveUser();
+				merchantSettingsSideBarMenuComponent.teamComponent().clickRemove();
 				merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickGoBack();
 				merchantSettingsSideBarMenuComponent.teamComponent().removeUserPopup().clickYes();
 			}

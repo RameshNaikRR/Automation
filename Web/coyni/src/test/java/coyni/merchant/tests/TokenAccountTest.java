@@ -960,14 +960,14 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBuyTokenAddSignet(String strParams) {
+	public void testBuyTokenAddCogent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			merchantSettingsTest.testaddSignet(strParams);
+			merchantSettingsTest.testaddCogent(strParams);
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
@@ -976,7 +976,7 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBuyTokenTransactionSignetAccountWithInvalidData(String strParams) {
+	public void testBuyTokenTransactionCogentAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
@@ -1002,7 +1002,7 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testRemoveSignetAccount(String strParams) {
+	public void testRemoveCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
@@ -1010,7 +1010,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("number"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("signetNumber"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
 
 		} catch (Exception e) {
@@ -1021,31 +1021,31 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDSignetAccount(String strParams) {
+	public void testWithdrawToUSDCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
 					.verifyHeading(data.get("heading"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
-					.clickSignet(data.get("signetNumber"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickOutside();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.clickCogent(data.get("cogentNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickOutside();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.getWithdrawAmount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.getProcessingFee();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.getTotal();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.clickConfirm();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().fillInput(data.get("code1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().successFailureComponent();
 
 		} catch (Exception e) {
@@ -1056,13 +1056,13 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDDeleteSignetAccount(String strParams) {
+	public void testWithdrawToUSDDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickDeleteSignetAccount(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickDeleteCogentAccount(data.get("cogentNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().clickOnRemove();
 			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().successFailurePopupCardComponent()
 					.verifyPaymnetRemovedSuccessfulHeading();
@@ -1075,28 +1075,28 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDAddSignetAccount(String strParams) {
+	public void testWithdrawToUSDAddCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickAddNewSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
-					.fillName(data.get("newSignetAccount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
-					.fillSignetWalletId(data.get("walletID"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickAddNewSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
+					.fillName(data.get("newCogentAccount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
+					.fillCognetWalletId(data.get("walletID"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.mailingAddressComponent().fillCity(data.get("city1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.mailingAddressComponent().selectState(data.get("state1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().addNewCogentAccountPopup()
 					.clickSave();
 
 		} catch (Exception e) {
@@ -1107,19 +1107,19 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawToUSDSignetAccountInvalidData(String strParams) {
+	public void testWithdrawToUSDCogentAccountInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
-					.clickSignet(data.get("signetNumber"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.clickCogent(data.get("cogentNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
 			Thread.sleep(5000);
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickCoyniConvertion();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickCoyniConvertion();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
 					.enterMessage(data.get("description"));
 
 			if (!data.get("errMessage").isEmpty()) {

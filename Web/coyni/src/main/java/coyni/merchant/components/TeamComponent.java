@@ -78,6 +78,10 @@ public class TeamComponent extends BrowserFunctions {
 		click(btnRemoveUsers, "Remove Users");
 	}
 
+	public void clickRemove() {
+		click(btnRemoveUser, "Remove User");
+	}
+
 	public void clickDelete() {
 		click(btnDelete, "Delete");
 	}

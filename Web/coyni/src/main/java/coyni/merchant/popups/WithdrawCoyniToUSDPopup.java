@@ -15,6 +15,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	private By withdrawToUSDHeading = By.xpath("//h1[contains(text(),'Withdraw coyni to USD')]");
 	private By PaymentBtns = By.xpath("//span[@class='labelWithoutHover']");
 	private By lblSignetAccount = By.xpath("(//p[contains(text(),'Signet Wallet ID')])[1]");
+	private By lblCogentAccount = By.xpath("(//p[contains(text(),'Cogent Wallet ID')])[1]");
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By lblDebitCard = By.xpath("//p[contains(text(),'Mastercard')]");
 
@@ -43,6 +44,11 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		click(btnDelete, "Delete");
 	}
 
+	public void clickDeleteCogentAccount(String number) {
+		moveToElement(lblCogentAccount, "Cogent Account");
+		click(btnDelete, "Delete");
+	}
+
 	public void clickDelete(String number) {
 		click(By.xpath(String.format("//p[contains(text(),'%s')]/following-sibling::button", number)), number);
 		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
@@ -65,7 +71,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		click(getPaymentBnts("3"), "GiftCard");
 	}
 
-	public void clickOnSignetAccount() {
+	public void clickOnCogentAccount() {
 		click(getPaymentBnts("4"), "Signet Account");
 	}
 
@@ -99,6 +105,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
 	public RemovePaymentMethodPopup removePaymentMethodPopup() {
 		return new RemovePaymentMethodPopup();
+	}
+
+	public WithdrawToCogentAccountPopup withdrawToCogentAccountPopup() {
+		return new WithdrawToCogentAccountPopup();
 	}
 
 	public ChooseYourBankAccountPopup chooseYourBankAccountPopup() {
