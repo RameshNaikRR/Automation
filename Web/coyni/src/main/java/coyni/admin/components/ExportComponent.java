@@ -20,7 +20,7 @@ public class ExportComponent extends BrowserFunctions {
 	private By lnkDeSelectAll = By.xpath("//span[text()='Deselect All']");
 
 	private By btnExport = By.xpath("//button[text()='Export']");
-	private By lblCustom = By.xpath("//div[text()='Custom']");
+	private By lnkCustom = By.xpath("//span[text()='Custom']");
 	private By ExportButton = By.xpath("//div[@class='export-modal__button-row']//button[text()='Export']");
 
 	private By lblHeadingExport = By.xpath("//h2[text()='Your Export is Being Prepared']");
@@ -45,7 +45,7 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clicklblCustom() {
-		click(lblCustom, "Custom");
+		click(lnkCustom, "Custom");
 	}
 
 	public void clickToday() {

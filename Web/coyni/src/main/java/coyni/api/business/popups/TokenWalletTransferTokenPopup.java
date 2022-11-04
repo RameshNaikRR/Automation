@@ -30,7 +30,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 			.xpath("//div[contains(@class,'FormField_form_select_container')]/div[1]/div[4]/div[%s]");
 
 	private By getWallets(String WalletNumber) {
-		return By.xpath(String.format("//div[contains(@class,'FormField_form_select_container')]/div[1]/div[4]/div[%s]",
+		return By.xpath(String.format(" //div[contains(@class,'FormField_options_wrap_wallet__xaQiZ undefined')]/div[%s]",
 				WalletNumber));
 	}
 

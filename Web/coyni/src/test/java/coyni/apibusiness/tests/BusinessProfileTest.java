@@ -91,11 +91,12 @@ public class BusinessProfileTest {
 			// APIAdminMenuComponent.clickUserName();
 			tokenWalletPage.topBarComponent().clickUserName();
 			tokenWalletPage.topBarComponent().clickChangePassword();
+			Thread.sleep(4000);
 			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
 			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.verifyPageHeading(data.get("changePasswordHeading"));
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
 					.fillCurrentPassword(data.get("currentPassword"));
 			Thread.sleep(2000);

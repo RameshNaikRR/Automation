@@ -360,6 +360,7 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage()
 					.fillCompanyEmail(data.get("companyEmail"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			Thread.sleep(2000);
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickSaveEnabled();
 			if (!data.get("errMessage").isEmpty()) {

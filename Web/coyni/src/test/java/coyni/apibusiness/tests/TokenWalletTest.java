@@ -134,6 +134,7 @@ public class TokenWalletTest {
 	public void testTokenWalletTransferView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(4000);
 			sideBarMenuComponent.verifyTokenWalletView();
 			sideBarMenuComponent.verifyHandCursorAction();
 //			sideBarMenuComponent.verifyTokenWalletBackGroundColor(data.get("backgroundcolor"), data.get("border"));
@@ -1011,8 +1012,10 @@ public class TokenWalletTest {
 //					.verifyNote(data.get("note"));
 			Thread.sleep(1000);
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
+				//new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+				//		data.get("elementName"));
+				homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().verifyInsufficientfunds(data.get("Insufficientfunds"), data.get("MaxWithdrawAmount"));
+				
 			}
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickClose();

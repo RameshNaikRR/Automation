@@ -26,6 +26,9 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	private By btnConfrim = By.xpath("//button[text()='Confirm']");
 	private By iconDelete = By.xpath("//img[@data-tip='Delete']");
 	private By btnCross = By.xpath("//button[@class='self-end']");
+	private By txtInsufficientfunds = By.xpath("//p[text()='Insufficient funds. ']");
+	private By txtMaxWithdrawAmount = By.xpath("//span[text()='Max Withdraw Amount']");
+	
 
 	private By lblNote = By.xpath("//p[@class='mt-4 text-xs text-center text-cgy4'] ");
 	private By BankAccounts = By.xpath("//div[@class='flex flex-col items-center justify-center mt-9']//p");
@@ -114,6 +117,10 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 
 	public void clickOutside() {
 		new CommonFunctions().clickOutSideElement();
+	}
+	public void verifyInsufficientfunds(String Insufficientfunds,String MaxWithdrawAmount) {
+		getElement(txtInsufficientfunds, "Insufficientfunds").getText().equals(Insufficientfunds);
+		getElement(txtMaxWithdrawAmount, "MaxWithdrawAmount").getText().equals(MaxWithdrawAmount);
 	}
 
 }

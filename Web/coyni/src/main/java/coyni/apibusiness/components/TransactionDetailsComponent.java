@@ -20,7 +20,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	// Reference ID is 2 and Deposit ID is 3 (Lables)
 	private By getLblIDheadings(String lblIdHeadings) {
-		return By.xpath(String.format("(//p[@class='TokenBuyTokenDetails_row_title_sub__zlwva'])[%s]", lblIdHeadings));
+		return By.xpath(String.format("(//p[@class='TokenWithdrawDetails_row_title_sub__ED6ct'])[%s]", lblIdHeadings));
 	}
 
 	private By getlblCreatedDate(String CreatedDateNum) {

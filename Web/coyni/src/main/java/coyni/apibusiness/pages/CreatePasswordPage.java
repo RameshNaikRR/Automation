@@ -21,7 +21,7 @@ public class CreatePasswordPage extends BrowserFunctions {
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
 	private By reddot = By.cssSelector(".red-dot");
 	private By btnSubmit = By.cssSelector(".update-password-password__login-button");
-	private By lnkBackToLogin = By.xpath("//div[text()='Back to Login']");
+	private By lnkBackToLogin = By.xpath("//span[text()='Back to Login']");
 	private By lblSucessHeading=By.cssSelector(".title");
 	private By lblSucessDescription=By.cssSelector(".subtitle");
 	private By btnLogin = By.xpath("//button[text()='Log In']");
