@@ -35,7 +35,6 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
 			.xpath(String.format("//div[@class='flex items-center justify-center']/../input"));
 
 	public void uploadSelectImage(String folderName, String fileName) {
-//		getElement(getUploadDocumentElement, "select Image").click();
 		getElement(getUploadDocumentElement, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 

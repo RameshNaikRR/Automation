@@ -42,9 +42,6 @@ public class RegistrationStartPage extends BrowserFunctions {
 		}
 		return st;
 
-//		int i = this.Color.size();
-		// ExtentTestManager.setInfoMessageInReport("the color count is" + );
-		// return this.Color;
 	}
 
 	public void verifyColor() {

@@ -1,13 +1,21 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni.admin.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class ApplicationSummaryPage extends BrowserFunctions {
+	WebDriver driver = DriverFactory.getDriver();
+	WebDriverWait wait = new WebDriverWait(driver, 120);
 
 	private By lblHeading = By.xpath("//h4[text()='Merchant Application Summary']");
 	private By lblCompanyInformation = By
@@ -48,7 +56,10 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 	private By btnApplicationSummary = By.xpath("//h6[text()='Application Summary']");
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	private By btnView = By.xpath("//button[text()='View']");
-	private By btnDone = By.xpath("//button[text()='Done");
+	private By btnDone = By.xpath("//button[text()='Done']");
+	private By lblMerchantAgreements = By.xpath("//span[contains(text(),'Merchant Agreement')]");
+	private By done = By.xpath("(//button[contains(text(),'Done')])[2]");
+	private By popupPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
 
 	public void clickEdit1() {
 		click(btnEdit1, "Edit");
@@ -60,6 +71,10 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 
 	public void clickDone() {
 		click(btnDone, "Done");
+	}
+
+	public void clickMerchantAgreementsDone() {
+		click(done, "Done");
 	}
 
 	public void clickEdit3() {
@@ -229,6 +244,21 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 	public void clickSubmit() {
 		scrollToElement(btnSubmit, "Submit");
 		click(btnSubmit, "Submit");
+	}
+
+	public void scrollDownPrivacyPolicy() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblMerchantAgreements));
+		WebElement ele = getElement(popupPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(done, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickMerchantAgreementsDone();
 	}
 
 	public NavigationComponent navigationComponent() {

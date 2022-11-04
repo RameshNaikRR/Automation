@@ -59,21 +59,15 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	public ArrayList<String> verifyColorOfSideMenuBar() {
 		List<WebElement> eles = getElementsList(lbllColor, " ");
 		ArrayList<String> st = new ArrayList<>();
-		// String hexValue= null;
 		for (WebElement ele : eles) {
 			String str = ele.getCssValue("background-color");
 
 			ExtentTestManager.setInfoMessageInReport("the Color of rgba value is " + str);
-			// String sd = new CommonFunctions().convertRgbaToHex(str);
-			// ExtentTestManager.setInfoMessageInReport("the Color of hex value is " + str);
 			st.add(str);
 
 		}
 		return st;
 
-//		int i = this.Color.size();
-		// ExtentTestManager.setInfoMessageInReport("the color count is" + );
-		// return this.Color;
 	}
 
 	public void clickContinueApplication() {

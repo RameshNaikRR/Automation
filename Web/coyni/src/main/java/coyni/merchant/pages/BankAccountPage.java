@@ -35,7 +35,7 @@ public class BankAccountPage extends BrowserFunctions {
 	private By btnSelectAnotherInst = By.xpath("//a[@id='acctForm:selectFI']");
 	private By btnBankNext = By.xpath("//a[@id='acctForm:addFiNext']");
 	private By chkbxBank = By.xpath("(//div[@class='custom-control custom-checkbox'])[3]");
-	private By next = By.xpath("(//span[.='Next'])[1]");
+	private By next = By.xpath("//button[contains(text(),'Next')]");
 	private By informationAboutFiesrvHdg = By.xpath("//h1[text()='Information About Fiserv']");
 	private By lblAddBankAccount = By.xpath("//h1[text()='Add Bank Account']");
 	private By lblDoNotNavigate = By.xpath("//h2[text()='Do Not Navigate Away From This Page']");
