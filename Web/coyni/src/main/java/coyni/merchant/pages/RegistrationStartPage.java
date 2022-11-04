@@ -38,7 +38,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 		for (WebElement ele : eles) {
 			String str = ele.getCssValue("background-color");
 			st.add(str);
-			ExtentTestManager.setInfoMessageInReport("the hex value is" + str);
+			ExtentTestManager.setInfoMessageInReport("the hex value is " + str);
 		}
 		return st;
 
@@ -59,7 +59,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 		for (WebElement ele : eles) {
 			String str = ele.getCssValue("background-color");
 			st.add(str);
-			ExtentTestManager.setInfoMessageInReport("the hex value is" + str);
+			ExtentTestManager.setInfoMessageInReport("the hex value is " + str);
 		}
 		return st;
 

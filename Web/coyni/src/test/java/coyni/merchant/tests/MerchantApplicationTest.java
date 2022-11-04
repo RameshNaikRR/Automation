@@ -58,24 +58,20 @@ public class MerchantApplicationTest {
 			ArrayList<String> str = sideMenuBarComponent.verifyColorOfSideMenuBar();
 			ArrayList<String> str1 = registrationStartPage.verifyColorOfRegistration();
 			ArrayList<String> str2 = registrationStartPage.VerifyChangeColorofRegistration();
-			if (str1.contains(str2)) {
-				ExtentTestManager.setInfoMessageInReport("Contains" + str2);
-			} else {
-				ExtentTestManager.setFailMessageInReport("Fail");
-			}
-			/*
-			 * if (str.containsAll(str1)) { ExtentTestManager.setPassMessageInReport(str
-			 * +"Hex value is matched with" + str1); } else if() {
-			 * ExtentTestManager.setPassMessageInReport(str2 +"Hex value is matched with" +
-			 * str1);
-			 * 
-			 * 
-			 * }
-			 * 
-			 * else { ExtentTestManager.setFailMessageInReport(str +
-			 * "Hex value is not matched with" + str1); }
-			 */
+			for (int i = 0; i < str.size(); i++) {
+				String string1 = str1.get(i);
+				String string2 = str.get(i);
+				if (string1.equals(string2)) {
+					ExtentTestManager.setPassMessageInReport(string1 + " is matched with " + string2);
+				}
+				else if (string1.equals(str2.get(0))) {
+					ExtentTestManager.setPassMessageInReport(string1 + " is matched with " + str2.get(0));
+				}
+				else {
+					ExtentTestManager.setInfoMessageInReport(string1 + " is not matched with " + string2);
+				}
 
+			}
 			// sideMenuBarComponent.verifyColor(data.get("expColor"));
 //			registrationStartPage.registrationCompanyInfoPage().verifyCompanyInformation();
 //			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
