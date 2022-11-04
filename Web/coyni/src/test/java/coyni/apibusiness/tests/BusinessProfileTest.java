@@ -92,6 +92,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().clickUserName();
 			tokenWalletPage.topBarComponent().clickChangePassword();
 			Thread.sleep(4000);
+			
 			tokenWalletPage.topBarComponent().authyComponent().verifyYourIdentityHeading(data.get("identityHeading"));
 			tokenWalletPage.topBarComponent().authyComponent().fillInput(data.get("code"));
 			tokenWalletPage.topBarComponent().authyComponent().changePasswordPage()
