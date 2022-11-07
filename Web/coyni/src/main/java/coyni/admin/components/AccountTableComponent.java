@@ -17,7 +17,7 @@ public class AccountTableComponent extends BrowserFunctions {
 	private By btnSearch = By.xpath("//div[text()='Search']");
 	private By lnkUser = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
 	private By lblEnter8CharId = By.xpath("//input[@placeholder='Enter 8 Characters ID']");
-	private By drpdwnBatchidimg = By.xpath("//img[@src='/static/media/arrow-right.3014e1fb.svg']");
+	private By drpdwnBatchidimg = By.xpath("//img[@src='/static/media/arrow-right.3014e1fb88e2fed86fbb76e783121d86.svg']");
 	private By drpdwnBatchId = By.xpath(
 			"//div[@class='flex items-center justify-between pr-3 cursor-pointer hover:text-cm3 text-xs text-cm4 font-semibold']");
 	private By drpdwnDepositId = By.xpath("//div[text()='Deposit ID']");
@@ -108,8 +108,8 @@ public class AccountTableComponent extends BrowserFunctions {
 		click(getTabItemLoc("Bank Accounts"), "Bank Accounts");
 	}
 
-	public void clickSignetAccount() {
-		click(getTabItemLoc("Signet Accounts"), "Signet Accounts");
+	public void clickCogentAccount() {
+		click(getTabItemLoc("Cogent Accounts"), "Cogent Accounts");
 	}
 
 	public void clickInstantPay() {

@@ -37,8 +37,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By getBuyTokenData(String index) {
 		return By.xpath(String.format("(//tr[@class=' ']//td)[%s]", index));
 	}
-	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__1gF5W')]");
-	private By giftCardAmount = By.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__2HCeV')])[3]");
+	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__SXaMW')]");
+	private By giftCardAmount = By.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__LER5V')])[3]");
 	
 	public String amount() {
 		String text = getText(TDetailsAmount, "");

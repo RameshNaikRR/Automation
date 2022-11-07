@@ -60,7 +60,7 @@ public class CreateNewApiBusinessUser extends BrowserFunctions {
 	}
 
 	public void fillBuySignetPercentage(String amount) {
-		enterText(getElementPercentage("Signet Account"), amount, "Signet Account");
+		enterText(getElementPercentage("Cogent Account"), amount, "Cogent Account");
 	}
 
 	public void clickNewApiBusiness() {

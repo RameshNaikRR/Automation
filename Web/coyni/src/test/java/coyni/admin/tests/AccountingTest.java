@@ -113,7 +113,7 @@ public class AccountingTest {
 			Thread.sleep(2000);
 			homePage.sideBarComponent().clickTotalWithdraw();
 			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
-			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+			homePage.sideBarComponent().accountTableComponent().clickCogentAccount();
 			totalWithdraw(strParams);
 			// testFilters(strParams);
 			// testExport(strParams);
@@ -222,7 +222,7 @@ public class AccountingTest {
 			homePage.sideBarComponent().clickAccounting();
 			homePage.sideBarComponent().clickTotalDeposits();
 			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("withdraw"));
-			homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+			homePage.sideBarComponent().accountTableComponent().clickCogentAccount();
 			totalWithdraw(strParams);
 			testFilters(strParams);
 			testExport(strParams);
@@ -396,7 +396,7 @@ public class AccountingTest {
 			homePage.sideBarComponent().clickTotalDeposits();
 			if (data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
 				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
-				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+				homePage.sideBarComponent().accountTableComponent().clickCogentAccount();
 
 			} else if (data.get("paymentMethod").equalsIgnoreCase("cards")) {
 				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();
@@ -429,7 +429,7 @@ public class AccountingTest {
 			homePage.sideBarComponent().clickTotalDeposits();
 			if (data.get("paymentMethod").equalsIgnoreCase("signetAccount")) {
 				homePage.sideBarComponent().accountTableComponent().verifySignetAccountView();
-				homePage.sideBarComponent().accountTableComponent().clickSignetAccount();
+				homePage.sideBarComponent().accountTableComponent().clickCogentAccount();
 
 			} else if (data.get("paymentMethod").equalsIgnoreCase("cards")) {
 				homePage.sideBarComponent().accountTableComponent().verifyCreditandDebitCardView();

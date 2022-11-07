@@ -6,7 +6,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class GobalSearchComponent extends BrowserFunctions {
 
-	private By btnGobalSearch = By.cssSelector(".Input_form_input__3qrhS");
+	private By btnGobalSearch = By.xpath("//input[contains(@class,'Input_form_input__yl3pD italic Header_mini_input__PGYO8 false')]");
 	private By btnProfileId = By.xpath("//label[text()='Profile ID:']");
 	private By btnProfileDetails = By.xpath("//label[text()='Profile Details:']");
 	private By btnReferenceId = By.xpath("//label[text()='Reference ID:']");

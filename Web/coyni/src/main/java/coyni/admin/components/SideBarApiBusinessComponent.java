@@ -74,8 +74,9 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 
 	private By lblWallet = By.xpath("//span[contains(@class,'w-40 font-bold text-cgy4 ')]");
 
-	public void viewWalletIdAndBalance() {
+	public void viewWalletIdAndBalance() throws InterruptedException {
 		List<WebElement> element = getElementsList(lblWallet, "");
+		Thread.sleep(2000);
 		for (WebElement ele : element) {
 			String text = ele.getText();
 			String walletBalance = getText(By.xpath(String.format(
@@ -228,7 +229,12 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
    }
 
 	public void getPublicKey() {
+		if(getElementsList(lblPublicKey, "").size()>0) {
 		ExtentTestManager.setInfoMessageInReport(getText(lblPublicKey, "Public Key"));
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("Public Key is not avaliable");
+		}
 	}
 
 	public void getSecretKey() {

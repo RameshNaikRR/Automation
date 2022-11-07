@@ -14,7 +14,7 @@ public class AccountLimitsComponent extends BrowserFunctions {
 
 	// private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
 
-	private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
+	private By heading = By.xpath("(//p[text()='Account Limits'])[2]");
 	private By lblBuyTokenBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span)[1]");
 	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span");
 	private By lblBuyTokenCreditCardDailyLimit = By.xpath("//div[text()='Credit Card']/..//span");
@@ -88,7 +88,8 @@ public class AccountLimitsComponent extends BrowserFunctions {
 	}
 
 	private By btnEditDebit = By.xpath(
-			"//p[@class='text-sm font-semibold cursor-pointer text-cgy4 CreateMerchantLimits_min_amount__29Bay']");
+			"(//button[contains(@class,'icon-button  icon-edit CreateMerchantLimits_edit_icon_limits__qRl+n')])[6]");
+	////p[@class='text-sm font-semibold cursor-pointer text-cgy4 CreateMerchantLimits_min_amount__29Bay']
 
 	public void enterTextDebit(String debitAmnt) throws InterruptedException {
 		Thread.sleep(2000);
