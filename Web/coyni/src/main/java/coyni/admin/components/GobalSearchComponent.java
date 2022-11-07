@@ -72,10 +72,12 @@ public class GobalSearchComponent extends BrowserFunctions {
 	}
 
 	private By lblIndividuals = By.xpath("//label[text()='Individuals']");
+	
+	private By btn=By.xpath("Input_form_input__yl3pD italic Header_mini_input__PGYO8 Header_swidth__9DZRw ");
 
 	public void clickIndivisuals(String profileDetails) {
 		click(lblIndividuals, "");
-		enterText(btnGobalSearch, profileDetails, "profile Details");
+		enterText(btn, profileDetails, "profile Details");
 	}
 
 	private By lblEmail = By.className("cell-col-2");
