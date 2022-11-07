@@ -77,7 +77,7 @@ public class ProfileComponent extends BrowserFunctions {
 	private By lblApiBusinessDetails = By.xpath("(//tr[contains(@class,'  businessRow mb-0')])[1]");
 
 	public void clickUser() {
-		click(lblApiBusinessDetails, "Click");
+		click(lblApiBusinessDetails, "User");
 	}
 
 }
