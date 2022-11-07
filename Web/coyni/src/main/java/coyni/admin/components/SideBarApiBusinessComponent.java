@@ -84,6 +84,7 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 					text)), "");
 			ExtentTestManager.setInfoMessageInReport(text + " Value is " + walletBalance);
 		}
+		
 
 	}
 

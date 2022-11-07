@@ -27,11 +27,11 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By lblCompleted = By.xpath("(//div[text()='Completed'])[1]");
 	private By lblAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value')]");
 
-	private By lblDate = By.xpath("//div[contains(@class,'TransactionDetailBuyToken_create_column__3AOvd')][2]");
+	private By lblDate = By.xpath("(//p[contains(@class,'TransactionDetailBuyToken_sub_title__8sISO')])[3]");
 	private By lblReferenceId = By
-			.xpath("(//span[contains(@class,'TransactionDetailBuyToken_copy_button_texts_ledger__31v_I')])[1]");
+			.xpath("(//p[contains(@class,'TransactionDetailBuyToken_row_title_ledger__MoUSE')])[1]");
 	private By lblTransactionSubType = By
-			.xpath("//div[contains(@class,'TransactionDetailBuyToken_create_column__3AOvd')][1]");
+			.xpath("(//p[contains(@class,'TransactionDetailBuyToken_row_titles__PhBDm')])[2]");
 
 	// ---------------------------------------------
 	private By getBuyTokenData(String index) {
@@ -243,13 +243,13 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public String verifyDate() {
-		String transactionDetailsDate = getText(lblDate, "Amount");
+		String transactionDetailsDate = getText(lblDate, "Created Date");
 		ExtentTestManager.setInfoMessageInReport("Date is" + transactionDetailsDate);
 		return transactionDetailsDate;
 	}
 
 	public String verifySubType() {
-		String transactionDetailsSubType = getText(lblTransactionSubType, "Amount");
+		String transactionDetailsSubType = getText(lblTransactionSubType, "Transadction Sub Type");
 		ExtentTestManager.setInfoMessageInReport("Transadction Sub Type is" + transactionDetailsSubType);
 		return transactionDetailsSubType;
 	}
