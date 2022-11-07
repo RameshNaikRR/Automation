@@ -51,7 +51,7 @@ public class RegistrationProcessPage extends MobileFunctions {
 	}
 
 	public void clickReviewApplication() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		TouchAction touch = new TouchAction(DriverFactory.getDriver());
 		touch.press(PointOption.point(300, 1500)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(100, (int) (1200))).release().perform();

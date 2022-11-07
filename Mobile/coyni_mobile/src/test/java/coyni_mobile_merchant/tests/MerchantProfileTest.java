@@ -2602,7 +2602,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(
 					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
 					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
 					.bankAccountAddedPage().verifyBankSucessHeading() == 1) {
 
