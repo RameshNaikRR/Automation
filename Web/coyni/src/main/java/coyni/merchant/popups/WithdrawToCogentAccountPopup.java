@@ -26,7 +26,7 @@ public class WithdrawToCogentAccountPopup extends BrowserFunctions {
 	private By txtPlaceHolder = By.xpath("//label[.='Transaction Description (Optional)']");
 	private By lblMsgTransaction = By.xpath("//p[contains(.,'Your tr')]");
 	private By btnNext = By.xpath("//button[.='Next']");
-	private By btnAddNewSignetAccount = By.xpath("//span[contains(text(),'Add New Signet Account')]");
+	private By btnAddNewCogentAccount = By.xpath("//span[contains(text(),'Add New Cogent Account')]");
 	private By lblTransactions = By.xpath("//span[@class='text-cgy4 text-sm']");
 	private By btnConfirm = By.xpath("//button[.='Confirm']");
 
@@ -50,8 +50,8 @@ public class WithdrawToCogentAccountPopup extends BrowserFunctions {
 
 	}
 
-	public void clickAddNewSignetAccount() {
-		click(btnAddNewSignetAccount, "Add New Signet Account");
+	public void clickAddNewCogentAccount() {
+		click(btnAddNewCogentAccount, "Add New Cogent Account");
 	}
 
 	public void clickCogent(String number) {

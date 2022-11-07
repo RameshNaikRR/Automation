@@ -96,7 +96,7 @@ public class SideMenuBarTest {
 			sideMenuBarComponent.clickQRCode();
 			sideMenuBarComponent.myQRCodeComponent().verifyCopy(); // data.get("copy")
 			Thread.sleep(1000);
-			sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			// sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			sideMenuBarComponent.myQRCodeComponent().clickShare();
 
 			if (textBox.equalsIgnoreCase("email")) {
@@ -137,7 +137,7 @@ public class SideMenuBarTest {
 			sideMenuBarComponent.clickQRCode();
 			sideMenuBarComponent.myQRCodeComponent().verifyCopy(); // data.get("copy")
 			Thread.sleep(1000);
-			sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			// sideMenuBarComponent.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			sideMenuBarComponent.myQRCodeComponent().clickShare();
 			sideMenuBarComponent.myQRCodeComponent().fillTextEmail(data.get("email1"));
 			sideMenuBarComponent.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));

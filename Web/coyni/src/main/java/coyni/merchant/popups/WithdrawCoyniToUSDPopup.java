@@ -55,7 +55,7 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	}
 
 	public void clickEdit(String number) {
-		click(By.xpath(String.format("(//p[contains(text(),'%s')]/following-sibling::button)[2]", number)), number);
+		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
 		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
 	}
 

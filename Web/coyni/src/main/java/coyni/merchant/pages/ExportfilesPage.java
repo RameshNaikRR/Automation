@@ -1,6 +1,8 @@
 package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
+
+import coyni.merchant.components.NotificationsComponent;
 import coyni.merchant.popups.ExportSelectedTransactionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -119,6 +121,10 @@ public class ExportfilesPage extends BrowserFunctions {
 
 	public ExportSelectedTransactionsPopup exportSelectedTransactionsPopup() {
 		return new ExportSelectedTransactionsPopup();
+	}
+
+	public NotificationsComponent notificationsComponent() {
+		return new NotificationsComponent();
 	}
 
 }

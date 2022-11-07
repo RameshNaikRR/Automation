@@ -12,7 +12,7 @@ public class NotificationsComponent extends BrowserFunctions {
 
 	private By notificationsIcon = By.xpath("//div[contains(@class,'internal-header__notification')]");
 	private By notificationCount = By.cssSelector(".notification-count");
-	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
+	private By btnNotifications = By.xpath("//button[contains(@class,'icon-notification-bold')]");
 	private By notification = By.xpath("(//span[text()='Export Report Successful'])[1]");
 	private By btnCancel = By.xpath("//div[contains(@class,'SingleNotificationCard_trash__w2Hnj')]");
 	private By btnClearAll = By.xpath("//span[text()='Clear All']");
@@ -28,7 +28,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	}
 
 	public void verifyNotificationText(String expText) {
-		String actText = getText(lblnotification, "Notificaion Text");
+		String actText = getText(lblnotification, "Notification Text");
 		if (actText.equals(expText)) {
 			ExtentTestManager.setPassMessageInReport("The Heading is " + actText);
 		} else {
