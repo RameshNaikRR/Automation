@@ -10,7 +10,7 @@ public class TokensWithdrawnDetailsComponent extends BrowserFunctions {
 
 	private By lblTokensWithdrawTransactions = By.xpath("//h1[text()='Tokens Withdrawn Transactions']|//span[text()='Tokens Withdrawn Transactions']");
 
-	private By lblTokensWithdrawn = By.xpath("//span[text()='Tokens Withdraw']|//span[text()='Token Withdraw']");
+	private By lblTokensWithdrawn = By.xpath("//span[text()='Tokens Withdraw']|//span[text()='Token Withdrawn']");
 
 	public String getTokensWithdrawn() {
 		return getText(lblTokensWithdrawn, "Tokens Withdrawn");

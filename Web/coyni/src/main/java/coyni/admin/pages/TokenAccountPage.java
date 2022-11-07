@@ -27,9 +27,9 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	private By lblPayOutsReceived = By.xpath("//span[.='Payouts Received']/../following-sibling::*[1]/span");
 
-	private By lblSignetWithdraw = By.xpath("//span[.='Signet Withdraws']/../following-sibling::*[1]/span");
+	private By lblSignetWithdraw = By.xpath("//span[.='Cogent Withdraws']/../following-sibling::*[1]/span");
 
-	private By lnkWithdrawToSignet = By.xpath("//button[text()='Withdraw To Signet']");
+	private By lnkWithdrawToCogent = By.xpath("//button[text()='Withdraw To Cogent']");
 
 	private By btnFilter = By.xpath("//button[text()='Filter']");
 
@@ -64,13 +64,13 @@ public class TokenAccountPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Payouts amount is " + Amount);
 	}
 
-	public void clickWithdrawToSignet() {
-		click(lnkWithdrawToSignet, "WithdrawToSignet");
+	public void clickWithdrawToCogent() {
+		click(lnkWithdrawToCogent, "WithdrawToCogent");
 	}
 
-	public void getSignetWithdraw() {
+	public void getCogentWithdraw() {
 		String Amount = getText(lblSignetWithdraw, "");
-		ExtentTestManager.setInfoMessageInReport("Signet Withdraw amount is " + Amount);
+		ExtentTestManager.setInfoMessageInReport("Cogent Withdraw amount is " + Amount);
 	}
 
 	public void clickFilter() {

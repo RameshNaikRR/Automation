@@ -65,7 +65,7 @@ public class DisputesTest {
 						.setInfoMessageInReport("Given " + caseNum + " is present in apply filter search results");
 			} else {
 				ExtentTestManager
-						.setFailMessageInReport("Given " + caseNum + " is not present in apply filter search results");
+						.setInfoMessageInReport("Given " + caseNum + " is not present in apply filter search results");
 			}
 
 		} catch (Exception e) {

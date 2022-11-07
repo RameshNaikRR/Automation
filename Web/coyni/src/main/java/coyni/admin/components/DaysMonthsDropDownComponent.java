@@ -23,7 +23,7 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 	private By btnCustomDateRange = By.cssSelector("data[value='Custom-Date-Range']");
 
 	private By selectDropDown = By.xpath(
-			"//div[@class='icon-small-arrow text-xs fill-current hover:text-cm3 mt-0.5 false FloatingDropDown_downArrow__3pCtF false']");
+			"//div[@class='icon-small-arrow text-xs fill-current hover:text-cm3 mt-0.5 false FloatingDropDown_downArrow__LiVFi false']");
 
 	public void clickOnToday() {
 		click(selectDropDown, "Click Select DropDOwn");

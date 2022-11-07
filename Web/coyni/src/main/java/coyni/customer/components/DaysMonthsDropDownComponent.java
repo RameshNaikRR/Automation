@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class DaysMonthsDropDownComponent extends BrowserFunctions {
 
-	private By lblTokensSent = By.xpath("//h1[text()='Tokens Sent Details']");
+	private By lblTokensSent = By.xpath("//span[text()='Tokens Sent Transactions']");
 
 	private By lblTokensReceive = By.xpath("//span[text()='Tokens Received']|//span[text()='Token Received']");
 

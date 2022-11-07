@@ -76,7 +76,7 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().clickTokenAccount();
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 			homePage.sideBarComponent().tokenAccountPage().getTotalAvailable();
-			homePage.sideBarComponent().tokenAccountPage().clickWithdrawToSignet();
+			homePage.sideBarComponent().tokenAccountPage().clickWithdrawToCogent();
 			homePage.sideBarComponent().tokenAccountPage().navigationComponent().clickClose();
 			homePage.sideBarComponent().tokenAccountPage().verifyPageHeading(data.get("heading"));
 
@@ -97,25 +97,25 @@ public class CoyniPortalTest {
 //			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnToday();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnYesterday();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnLast7Days();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnMonthToDate();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnMonthToDate();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnLastMonth();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 			homePage.sideBarComponent().tokenAccountPage().daysMonthsDropDownComponent().clickOnCustomDateRange();
 			homePage.sideBarComponent().tokenAccountPage().getPayOutsReceived();
-			homePage.sideBarComponent().tokenAccountPage().getSignetWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().getCogentWithdraw();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountActivity Failed due to Exception " + e);
@@ -176,7 +176,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTokenAccountFilters(String strParams) {
+	public void testTokenAccountFilters(String strParams) throws InterruptedException {
 
 		// Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
@@ -187,7 +187,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTokenAccountResetFilters(String strParams) {
+	public void testTokenAccountResetFilters(String strParams) throws InterruptedException {
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
@@ -249,7 +249,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionToday(String strParams) {
+	public void testExportSelectedTransactionToday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().exportComponent().clickExport();
@@ -260,7 +260,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionYesterday(String strParams) {
+	public void testExportSelectedTransactionYesterday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().exportComponent().clickExport();
@@ -271,7 +271,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+	public void testExportSelectedTransactionLastSevenDays(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().exportComponent().clickExport();
@@ -282,7 +282,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastMonth(String strParams) {
+	public void testExportSelectedTransactionLastMonth(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().exportComponent().clickExport();
@@ -293,7 +293,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionMonthToDate(String strParams) {
+	public void testExportSelectedTransactionMonthToDate(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().exportComponent().clickExport();
@@ -333,7 +333,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.clickWithdrawToCogent();
 			Thread.sleep(2000);
 			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
 				Thread.sleep(2000);
@@ -392,7 +392,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.clickWithdrawToCogent();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().clickDeleteSignetIcon();
 			tokenAccountPage.withdrawToSignetPopup().removeSignetAccountPopup()
@@ -414,7 +414,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.clickWithdrawToCogent();
 			addSignet(strParams);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
@@ -432,7 +432,7 @@ public class CoyniPortalTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToSignet();
+			tokenAccountPage.clickWithdrawToCogent();
 			Thread.sleep(2000);
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
@@ -530,7 +530,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedPayOutToday(String strParams) {
+	public void testCommissionExportSelectedPayOutToday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -543,7 +543,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedPayOutYesterday(String strParams) {
+	public void testCommissionExportSelectedPayOutYesterday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -556,7 +556,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedpayOutLastSevenDays(String strParams) {
+	public void testCommissionExportSelectedpayOutLastSevenDays(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -569,7 +569,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedPayOutLastMonth(String strParams) {
+	public void testCommissionExportSelectedPayOutLastMonth(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -582,7 +582,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedPayOutMonthToDate(String strParams) {
+	public void testCommissionExportSelectedPayOutMonthToDate(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -640,7 +640,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionResetFilters(String strParams) {
+	public void testCommissionResetFilters(String strParams) throws InterruptedException {
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
@@ -652,7 +652,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionToday(String strParams) {
+	public void testCommissionExportSelectedTransactionToday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -665,7 +665,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionYesterday(String strParams) {
+	public void testCommissionExportSelectedTransactionYesterday(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -678,7 +678,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionLastSevenDays(String strParams) {
+	public void testCommissionExportSelectedTransactionLastSevenDays(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -691,7 +691,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionLastMonth(String strParams) {
+	public void testCommissionExportSelectedTransactionLastMonth(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();
@@ -704,7 +704,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCommissionExportSelectedTransactionMonthToDate(String strParams) {
+	public void testCommissionExportSelectedTransactionMonthToDate(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickCoyniPortal();
 		homePage.sideBarComponent().clickCommissionAccount();

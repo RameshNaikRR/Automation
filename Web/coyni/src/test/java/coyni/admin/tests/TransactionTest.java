@@ -57,7 +57,7 @@ public class TransactionTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionToday(String strParams) {
+	public void testExportSelectedTransactionToday(String strParams) throws InterruptedException {
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickTransactions();
@@ -69,7 +69,7 @@ public class TransactionTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionYesterday(String strParams) {
+	public void testExportSelectedTransactionYesterday(String strParams) throws InterruptedException{
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarComponent().clickTransactions();
@@ -81,7 +81,7 @@ public class TransactionTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+	public void testExportSelectedTransactionLastSevenDays(String strParams) throws InterruptedException{
 
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 
