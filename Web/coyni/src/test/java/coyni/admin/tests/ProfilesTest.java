@@ -132,10 +132,11 @@ public class ProfilesTest {
 					.verifyTokenHeading(data.get("heading1"));
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
 					.enterTokenWallet(data.get("walletID"));
+			//Demo
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickAddWallet();
 			Thread.sleep(2000);
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().tokenAmount();
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
+	//		homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
 			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()

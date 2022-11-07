@@ -30,6 +30,10 @@ public class AccountingTest {
 		Thread.sleep(2000);
 
 		homePage.sideBarComponent().accountTableComponent().verifyColumnView();
+		int notransactionFound = homePage.sideBarComponent().accountTableComponent().notransactionFound();
+		if(notransactionFound>0) {
+			ExtentTestManager.setPassMessageInReport("No Transaction Found in the System");
+		}else {
 		homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
 		homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
 		// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
@@ -58,6 +62,7 @@ public class AccountingTest {
 			Thread.sleep(2000);
 //		homePage.sideBarComponent().accountTableComponent().batchIDComponent().paginationAndEntriesComponent()
 //		.verifyPageNumbersWithCount();
+		}
 		}
 	}
 
