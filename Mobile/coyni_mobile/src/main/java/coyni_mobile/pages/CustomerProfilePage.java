@@ -63,7 +63,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By btnBuyToken = MobileBy.xpath("//*[contains(@text,'Buy Tokens')]");// Buy Tokens
 	private By btnWithdrawToUSD = MobileBy.xpath("//*[contains(@text,'Withdraw to USD')]");// Withdraw to USD
 	private By popUp = MobileBy.xpath("");
-
+	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
 
 	public void clickViewMore() {
@@ -212,6 +212,11 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public void clickPaymentMethods() {
 			click(lnkPaymentMethods, "Payment Methods");
+	}
+	
+	public void clickGetHelp() {
+		scrollDownToElement(btnGetHelp, "Get Help");
+		click(btnGetHelp, "Get Help");
 	}
 
 	public void clickPreferences() {
@@ -370,5 +375,9 @@ public class CustomerProfilePage extends MobileFunctions {
 	
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
+	}
+	
+	public GetHelpPage getHelpPage() {
+		return new GetHelpPage();
 	}
 }

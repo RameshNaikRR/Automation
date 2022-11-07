@@ -25,5 +25,9 @@ public class AllDonePage extends MobileFunctions {
 		return a;
 
 	}
+	
+	public void verifyAllDoneHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(txtAllDone, "All Done",expHeading );
+	}
 
 }

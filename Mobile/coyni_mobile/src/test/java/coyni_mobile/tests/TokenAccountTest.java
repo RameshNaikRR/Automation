@@ -584,7 +584,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.successFailureComponent().clickDone();
+					.successFailureComponent().getTokenTransactionStatusDetails();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
 		}
@@ -608,7 +608,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
-					.clickDone();
+					.getTokenTransactionStatusDetails();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
 		}
@@ -632,7 +632,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
-					.clickDone();
+					.getTokenTransactionStatusDetails();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
@@ -664,7 +664,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
-					.successFailureComponent().clickDone();
+					.successFailureComponent().getTokenTransactionStatusDetails();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenCard  failed due to exception " + e);
 		}
@@ -802,7 +802,7 @@ public class TokenAccountTest {
 //			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 //					.enterYourPINComponent().successFailureComponent().clickLearnMore();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().clickDone();
+					.enterYourPINComponent().successFailureComponent().getGiftCardTransactionDetails();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
@@ -910,7 +910,7 @@ public class TokenAccountTest {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 						.enterYourPINComponent().fillPin(data.get("pin"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-						.successFailureComponent().clickDone();
+						.successFailureComponent().getTokenTransactionStatusDetails();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawToken failed due to exception " + e);
@@ -1097,7 +1097,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().clickDone();
+					.orderPreviewPopup().enterYourPINComponent().successFailureComponent().getTokenTransactionStatusDetails();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test WithdrawToUSDVia External Bank  failed due to exception " + e);

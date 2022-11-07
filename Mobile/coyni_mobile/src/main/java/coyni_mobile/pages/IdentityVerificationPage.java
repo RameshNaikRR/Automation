@@ -110,7 +110,7 @@ public class IdentityVerificationPage extends MobileFunctions {
 	}
 
 	public void getUserName() {
-		ExtentTestManager.setInfoMessageInReport(" User Name is : " + getText(lblUserName));
+		ExtentTestManager.setPassMessageInReport(" User Name is : " + getText(lblUserName));
 	}
 
 	public void clickDone() {

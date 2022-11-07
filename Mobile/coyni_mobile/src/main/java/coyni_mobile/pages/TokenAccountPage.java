@@ -33,7 +33,8 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']|//*[contains(@resource-id,'layoutMainMenu')]");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
-
+	
+	
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(transactionsHeading, "Transaction heading", expHeading);
 	}
@@ -69,7 +70,7 @@ public class TokenAccountPage extends MobileFunctions {
 			ExtentTestManager.setFailMessageInReport("Login failed");
 		}
 	}
-
+	
 	public void verifyRegistration() {
 		if (getElement(iconNotifications, "icon").isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Registration success");
@@ -123,9 +124,8 @@ public class TokenAccountPage extends MobileFunctions {
 		Thread.sleep(3000);
 		if (getElementList(btnProfile, "Profile").size() > 0) {
 		click(btnProfile, "Profile");
-	}
-		
-	}
+	}		
+	 }
 	
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();

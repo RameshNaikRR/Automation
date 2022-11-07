@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
+import coyni_mobile.components.ToastComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -60,4 +61,8 @@ public class VerifyPhoneNumberPage extends MobileFunctions {
 		return new SuccessFailureComponent();
 	}
 
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+	
 }

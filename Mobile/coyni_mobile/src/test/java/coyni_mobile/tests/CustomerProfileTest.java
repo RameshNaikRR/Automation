@@ -293,6 +293,8 @@ public class CustomerProfileTest {
 					.verifyNewPhoneHeading(data.get("newPhoneHeading"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
 					.fillPin(data.get("code"));
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editPhoneNumberPage().verifyPhoneNumberPage()
+			.toastComponent().verifyToastMsg(data.get("toastMsg"));
 			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit PhoneNumber view failed due to exception " + e);
@@ -362,7 +364,9 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipcode"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().clickSave();
+			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
 			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
+		
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Test Edit Address failed due to exception " + e);
 		}
@@ -878,6 +882,8 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.preAuthorizationPage().clickVerify();
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+			.preAuthorizationPage().allDonePage().verifyAllDoneHeading(data.get("successHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.preAuthorizationPage().allDonePage().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this " + e);
@@ -1087,4 +1093,21 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("testAddBank failed due to this Exception" + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testGetHelp(String strPrams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			Thread.sleep(2000);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickGetHelp();
+			customerProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
+			customerProfilePage.getHelpPage().getHelpDetails();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+	
 }

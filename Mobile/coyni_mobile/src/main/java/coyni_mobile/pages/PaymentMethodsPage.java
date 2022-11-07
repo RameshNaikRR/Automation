@@ -29,7 +29,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
-	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Mastercard Debit')])[1]");
+	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
 	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Visa Credit')])[1]");
 	
 
