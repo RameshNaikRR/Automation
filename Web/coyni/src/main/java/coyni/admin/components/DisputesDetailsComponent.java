@@ -49,7 +49,7 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 		return caseDetailsAmount;
 	}
 	private By lblDate=By.xpath("(//p[contains(@class,'mb-1 text-base text-cgy3')]//following-sibling::span)[3]");
-	private By lblReferenceId=By.xpath("(//span[contains(@class,'font-bold text-cgy16 flex flex-row Case_transactionValue__144St')])[1]");
+	private By lblReferenceId=By.xpath("(//p[contains(@class,'mb-1 text-base text-cgy3')])[4]");
 	private By lblTransactionSubType=By.xpath("(//p[contains(@class,'mb-1 text-base text-cgy3')]//following-sibling::span)[2]");
 	
 
