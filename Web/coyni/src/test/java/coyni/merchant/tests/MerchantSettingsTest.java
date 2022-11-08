@@ -777,7 +777,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent()
-					.clickDeleteSignetAccount(data.get("cogentNumber"));
+					.clickDeleteCogentAccount(data.get("cogentNumber"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup().clickOnRemove();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().removePaymentMethodPopup()
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();

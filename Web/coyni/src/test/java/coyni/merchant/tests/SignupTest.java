@@ -412,7 +412,7 @@ public class SignupTest {
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickOnPersonalAccount();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
-			sideMenuBarComponent.clickSharedDropDown();
+//			sideMenuBarComponent.clickSharedDropDown();
 			sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);

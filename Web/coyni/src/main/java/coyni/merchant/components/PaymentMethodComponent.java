@@ -17,6 +17,7 @@ public class PaymentMethodComponent extends BrowserFunctions {
 	private By btnDelete = By.xpath("//button[@data-tip='Delete'][1]");
 	private By btnEdit = By.xpath("//button[@data-tip='Edit'][1]");
 	private By lblSignetAccount = By.xpath("(//p[contains(text(),'Signet Wallet ID')])[1]");
+	private By lblCogentAccount = By.xpath("(//p[contains(text(),'Cogent Wallet ID')])[1]");
 	private By lblBankAccount = By.xpath("(//p[contains(text(),'WELLS FARGO BANK NA (ARIZ')])[1]");
 	private By lblDebitCard = By.xpath("//p[contains(text(),'Mastercard')]");
 
@@ -30,6 +31,11 @@ public class PaymentMethodComponent extends BrowserFunctions {
 
 	public void clickDeleteSignetAccount(String number) {
 		moveToElement(lblSignetAccount, "Signet Account");
+		click(btnDelete, "Delete");
+	}
+	
+	public void clickDeleteCogentAccount(String number) {
+		moveToElement(lblCogentAccount, "Cogent Account");
 		click(btnDelete, "Delete");
 	}
 

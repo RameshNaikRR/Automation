@@ -2,6 +2,7 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -140,6 +141,10 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 		click(drpdwnCustom, "Custom");
 
 		new CommonFunctions().selectCustomDropDown(Custom, "Custom");
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }
