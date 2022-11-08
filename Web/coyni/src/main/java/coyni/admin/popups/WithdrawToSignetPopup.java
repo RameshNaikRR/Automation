@@ -8,7 +8,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class WithdrawToSignetPopup extends BrowserFunctions {
 
 	public By lnkDeleteSignet = By.xpath("//div[@data-tip='Delete' or data-for='delete']");
-	public By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
+	public By lblHeading = By.xpath("//h1[text()='Withdraw to Cogent Account']");
 	public By txtAmount = By.xpath("//input[@type='text']");
 	public By lblAvailableBalance = By.xpath("//span[@class='text-sm text-cgy4']");
 	public By lblSignetAccount = By.xpath("");

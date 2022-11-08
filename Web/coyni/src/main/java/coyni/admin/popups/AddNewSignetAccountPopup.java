@@ -8,10 +8,10 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddNewSignetAccountPopup extends BrowserFunctions {
-	public By lblHeading = By.xpath("//label[text()='Name On Signet Account']");
-	public By txtName = By.xpath("//input[@id='name-on-signet']");
+	public By lblHeading = By.xpath("//label[text()='Name On Cogent Account']");
+	public By txtName = By.xpath("//input[@id='name-on-Cogent']");
 	public By lnkPaste = By.xpath("//span[text()='Withdraw Amount']");
-	public By txtSignetWalletID = By.xpath("//input[@id='wallet-id']");
+	public By txtCogentWalletID = By.xpath("//input[@id='wallet-id']");
 	public By btnSave = By.xpath("//button[text()='Save']");
 	public By lblAddSignet = By.xpath("//h1[text()='Add New Signet Account']");
 
@@ -24,7 +24,7 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 	}
 
 	public void fillSignetWalletId(String walletID) {
-		enterText(txtSignetWalletID, walletID, "walletID");
+		enterText(txtCogentWalletID, walletID, "walletID");
 	}
 
 	public void clickSave() {

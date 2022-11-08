@@ -7,12 +7,12 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class NoSignetAccountsExistPopup extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1[text()='No Signet Accounts Exist']");
+	private By lblHeading = By.xpath("//h1[text()='No Cogent Accounts Exist']");
 	private By lblDescription = By.xpath("//p[@class='mt-12 leading-6 text-center ']");
-	private By btnAddSignet = By.xpath("//span[@class='label text-cgy3']");
+	private By btnAddCogent = By.xpath("//p[contains(@class,'label text-cgy3')]");
 
 	public void verifyPageHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "No signet Accounts Exist Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "No Cogent Accounts Exist", expHeading);
 	}
 	
 	public int getLabelsize() {
@@ -24,7 +24,7 @@ public class NoSignetAccountsExistPopup extends BrowserFunctions {
 	}
 
 	public void clickAddSignet() {
-		click(btnAddSignet, "Click on Add Signet Account");
+		click(btnAddCogent, "Click on Add Cogent Account");
 	}
 
 	public AddNewSignetAccountPopup addNewSignetAccountPopup() {

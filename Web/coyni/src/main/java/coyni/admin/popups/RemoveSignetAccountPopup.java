@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class RemoveSignetAccountPopup extends BrowserFunctions {
-	public By lblHeading = By.xpath("//h1[text()='Remove Signet Account']");
+	public By lblHeading = By.xpath("//h1[text()='Remove Cogent Account']");
 	public By lblDescription = By.xpath("//p[@class='mt-12 text-sm leading-5 text-center text-cgy4']");
 	public By btnRemove = By.cssSelector(".w-60");
 	public By lblWalletID = By.xpath("//p[contains(text(), 'Signet Wallet ID')]/following-sibling::p");

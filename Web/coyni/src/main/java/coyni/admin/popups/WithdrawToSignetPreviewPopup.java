@@ -8,8 +8,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class WithdrawToSignetPreviewPopup extends BrowserFunctions {
-	public By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
-	public By lblAmount = By.cssSelector(".WithdrawToSignet_amount__3EkcQ ");
+	public By lblHeading = By.xpath("//h1[text()='Withdraw to Cogent Account']");
+	public By lblAmount = By.xpath("//span[contains(@class,'font-bold text-cgy4 text-sm')]");
 	// public By lblWithdrawAmount = By.xpath("//span[text()='Withdraw Amount']");
 	// public By lblSignetAccount = By.xpath("");
 	// public By lblProcessingFee = By.xpath("//span[text()='Processing Fee']");

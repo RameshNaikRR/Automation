@@ -302,7 +302,7 @@ public class CoyniPortalTest {
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
-	public void addSignet(String strParams) throws InterruptedException {
+	public void addCogent(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		tokenAccountPage.noSignetAccountsExistPopup().verifyPageHeading(data.get("noSignetAccountsExistHeading"));
 		// tokenAccountPage.noSignetAccountsExistPopup().verifyPageDescription(data.get("description"));
@@ -329,7 +329,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccount(String strParams) {
+	public void testAddCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
@@ -337,10 +337,10 @@ public class CoyniPortalTest {
 			Thread.sleep(2000);
 			if (tokenAccountPage.noSignetAccountsExistPopup().getLabelsize() > 0) {
 				Thread.sleep(2000);
-				addSignet(strParams);
+				addCogent(strParams);
 			} else {
 				Thread.sleep(1000);
-				testWithdrawToSignetAccount(strParams);
+				testWithdrawToCogentAccount(strParams);
 
 			}
 		} catch (Exception e) {
@@ -348,7 +348,7 @@ public class CoyniPortalTest {
 		}
 	}
 
-	public void testWithdrawToSignetAccount(String strParams) {
+	public void testWithdrawToCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			System.out.println("--------------------------------------");
@@ -368,7 +368,7 @@ public class CoyniPortalTest {
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
 						.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+			//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
@@ -388,7 +388,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testRemoveSignetAccount(String strParams) {
+	public void testRemoveCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
@@ -410,12 +410,12 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccountInvalidDataValidations(String strParams) {
+	public void testAddCogentAccountInvalidDataValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToCogent();
-			addSignet(strParams);
+			addCogent(strParams);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
@@ -428,7 +428,7 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccountInvalidAmount(String strParams) {
+	public void testAddCogentAccountInvalidAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
