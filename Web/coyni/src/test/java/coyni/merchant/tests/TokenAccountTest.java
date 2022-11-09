@@ -59,8 +59,8 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 		} else {
 			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().clickExport();
-			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
-					.verifyHeading(data.get("heading"));
+//			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
+//					.verifyHeading(data.get("heading"));
 			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
 					.clickOnExport();
 			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().exportSelectedTransactionsPopup()
@@ -1025,12 +1025,14 @@ public class TokenAccountTest {
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToUSD();
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
-//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
-//					.verifyHeading(data.get("heading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
 					.clickCogent(data.get("cogentNumber"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.getWithdrawAmount();
@@ -1414,6 +1416,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();

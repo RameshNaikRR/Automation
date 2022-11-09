@@ -64,6 +64,9 @@ public class SignupTest {
 			signupPage.clickNext();
 			signupPage.scrollDownPrivacyPolicy();
 
+			signupPage.PrivacyPolicyUpdate();
+			signupPage.TermsOfServiceUpdate();
+
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
 		} catch (Exception e) {

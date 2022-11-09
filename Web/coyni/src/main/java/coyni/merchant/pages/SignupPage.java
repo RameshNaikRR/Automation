@@ -56,9 +56,14 @@ public class SignupPage extends BrowserFunctions {
 	private String CreatePassword;
 	private String ConfirmPassword;
 	private By popupPDF = By.xpath("//div[contains(@class,'Agreements_apiData')]");
+	private By privacyPDF = By.xpath("//div[contains(@class,'PrivacyAgreements_apiData__ewNFA')]");
 	private By PDFpages = By.cssSelector(".react-pdf__Page");
+	private By pdfPagesUpdate = By.cssSelector(".react-pdf__Page");
+	private By PDFtermsOfServicesUpdate = By.xpath("(//span[.='California'])[2]");
 	private By PDFtermsOfServices = By.xpath("(//span[.='Agreement'])[1]");
-	private By PDFprivacyPolicy = By.xpath("(//span[.='Privacy'])[2]");
+	private By PDFprivacyPolicy = By.xpath("((//span[.='']))[1]");
+	private By privacyPolicyUpdate = By.xpath("//span[contains(text(),'Privacy Policy')]");
+	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
 
 	public void clickCheckBox() {
 		click(chkBox, "CheckBox");
@@ -72,8 +77,6 @@ public class SignupPage extends BrowserFunctions {
 	public void verifyBusinessAccountView() {
 		new CommonFunctions().elementView(lnkBusinessAccount, "Business Account link");
 		moveToElement(lnkBusinessAccount, "Business Account");
-		// verifyElementDisabled(lnkBusinessAccount, "Business Account");
-		// verifyElementPresence(lblBusinessAccountTooltip, "Tool tip");
 	}
 
 	public void verifyLoginView() {
@@ -380,16 +383,22 @@ public class SignupPage extends BrowserFunctions {
 		List<WebElement> list = getElementsList(PDFpages, "");
 		int noOfPages = list.size();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (int i = 0; i <= noOfPages; i++) {
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
 			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
 			height += temp;
 			Thread.sleep(200);
 		}
+//		for (int i = 0; i <= noOfPages+2; i++) {
+//			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+//			height += temp;
+//			Thread.sleep(200);
+//		}
 	}
 
 	public void scrollDownPrivacyPolicy() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(PDFprivacyPolicy));
-		WebElement ele = getElement(popupPDF, "");
+		WebElement ele = getElement(privacyPDF, "");
 		int height = ele.getSize().getHeight();
 		int temp = height;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -401,6 +410,35 @@ public class SignupPage extends BrowserFunctions {
 		}
 		clickOnCheckBox();
 		clickNext();
+	}
+
+	public void PrivacyPolicyUpdate() {
+		if (verifyElementPresence(privacyPolicyUpdate, "Privacy Policy")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
+	public void TermsOfServiceUpdate() {
+		if (verifyElementPresence(privacyPolicyUpdate, "Privacy Policy")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
+	public void scrollDownTermsOfServiceUpdate() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFtermsOfServicesUpdate));
+		WebElement ele = getElement(popupPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(pdfPagesUpdate, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (int i = 0; i <= noOfPages; i++) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
 	}
 
 }

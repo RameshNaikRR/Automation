@@ -163,10 +163,10 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			// loginPage.authyComponent().clickSms();
-			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(2000);
-				loginPage.phoneVerificationComponent().clickResend();
-			}
+//			for (int i = 0; i <= 4; i++) {
+//				Thread.sleep(2000);
+			loginPage.phoneVerificationComponent().clickResend();
+			// }
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLoginWithResendOTP failed due to exception " + e);
 		}
@@ -208,7 +208,6 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-			loginPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));//
 			loginPage.phoneVerificationComponent().verifyPhoneNumber();
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			loginPage.phoneVerificationComponent().clickEmail();

@@ -14,8 +14,9 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By notificationCount = By.cssSelector(".notification-count");
 	private By btnNotifications = By.xpath("//button[contains(@class,'icon-notification-bold')]");
 	private By notification = By.xpath("(//span[text()='Export Report Successful'])[1]");
-	private By btnCancel = By.xpath("//div[contains(@class,'SingleNotificationCard_trash__w2Hnj')]");
-	private By btnClearAll = By.xpath("//span[text()='Clear All']");
+	private By btnCancel = By.xpath("(//div[contains(@class,'SingleNotificationCard_trash__w2Hnj')])[1]");
+	private By cursorDeleteNotification = By.xpath("//div[contains(@class,'SingleNotificationCard_firstDiv__cMcd7')]");
+	private By btnClearAll = By.xpath("(//span[text()='Clear All'])[1]");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
 	private By closeIcon = By
@@ -54,7 +55,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	}
 
 	public void verifyCursorNotifications() {
-		click(notification, "Notification");
+		// click(notification, "Notification");
 		new CommonFunctions().verifyCursorAction(notification, "Notifications");
 	}
 
@@ -105,6 +106,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	}
 
 	public void clickDelete() {
+		new CommonFunctions().verifyCursorAction(cursorDeleteNotification, "Cursor ");
 		click(btnCancel, "Delete ");
 	}
 

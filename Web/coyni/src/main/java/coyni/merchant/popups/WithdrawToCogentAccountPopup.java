@@ -1,5 +1,6 @@
 package coyni.merchant.popups;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -78,6 +79,10 @@ public class WithdrawToCogentAccountPopup extends BrowserFunctions {
 
 	public void verifyCoyniConvertion() {
 		cf.elementView(btnCoyniConvert, "Coyni Convertion");
+	}
+	
+	public void clickTab() throws AWTException {
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void clickCoyniConvertion() {
