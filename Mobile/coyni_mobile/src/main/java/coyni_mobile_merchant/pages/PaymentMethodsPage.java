@@ -33,7 +33,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[3]");
 	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
-	private By deleteSignet = MobileBy.xpath("(//*[contains(@text,'Signet Account')])[1]");
+	private By deleteCogent = MobileBy.xpath("(//*[contains(@text,'Cogent Account')])[1]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
 //	private By numOfDebitCards = MobileBy.xpath("//*[contains(@resource-id,'layoutBack')]");
@@ -57,7 +57,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public int verifyAddNewPaymentMethod() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
 	}
 
@@ -205,8 +205,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 				paymentMethod, last4digits));
 	}
 
-	public void clickDeleteSignetAccount() {
-		click(deleteSignet, "Signet Account");
+	public void clickDeleteCogentAccount() {
+		click(deleteCogent, "Cogent Account");
 	}
 
 	public void clickBankAccount() {

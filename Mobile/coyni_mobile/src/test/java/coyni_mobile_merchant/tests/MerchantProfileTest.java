@@ -2,11 +2,6 @@ package coyni_mobile_merchant.tests;
 
 import java.util.Map;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -1892,8 +1887,6 @@ public class MerchantProfileTest {
 		}
 	}
 
-	
-
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testPreferences(String strParams) {
@@ -2355,22 +2348,18 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddSignetAccount(String strParams) {
+	public void testAddCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
-			}
-			Thread.sleep(3000);
-			AddSignetAccount(strParams);
+				AddCogentAccount(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
 	}
 
-	public void AddSignetAccount(String strParams) {
+	public void AddCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
@@ -2380,135 +2369,117 @@ public class MerchantProfileTest {
 			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.verifyHeading(data.get("addPaymentHeading"));
-				Thread.sleep(1000);
-				int presentSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.getPresentSignetAccounts();
-				int maxSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.getMaxSignetAccounts();
-				if (presentSignetAccount <= maxSignetAccount) {
+			}
+
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifywithdrawAddCogentHeading(data.get("withdrawSignetHeading"));
+
+			if (data.get("validateNumberOfCogentAccounts").equalsIgnoreCase("yes")) {
+				int presentCogentAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getPresentCogentAccounts();
+				int maxCogentAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getMaxCogentAccounts();
+				if (presentCogentAccount <= maxCogentAccount) {
 					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifySignetAccounts(data.get("presentSignetAccountNumber"));
-
-					if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
-						merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-					}
-					if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifyAddNewPaymentHeading() == 1) {
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-								.verifyHeading(data.get("addPaymentHeading"));
-					}
-					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifywithdrawAddSignetHeading(data.get("withdrawSignetHeading"));
-
-					if (data.get("validateNumberOfSignetAccs").equalsIgnoreCase("yes")) {
-						Thread.sleep(1000);
-						int presentCard = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-								.getPresentDebitCards();
-						int maxLimit = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-								.getMaxDebitCardsLimit();
-						if (presentCard <= maxLimit) {
-							merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-									.verifyDebitCards(data.get("presentDebitCardNumber"));
-						}
-					}
-
-					if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifyErrorMessageSignetAccount() == 0) {
-						Thread.sleep(1000);
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.fillNameOnCard(data.get("nameOnCard"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.fillSignetWalletId(data.get("signetWalletID"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillCity(data.get("city"));
-						Thread.sleep(2000);
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().selectState(data.get("state"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().clickAddCard();
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().allDonePage().clickDone();
-					} else {
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-								.verifyErrorMessageOfSignetAccount(data.get("maxSignetErrMsg"));
-					}
-				} else {
-					ExtentTestManager.setFailMessageInReport("Signet Accounts Added More Then Max Limit");
+							.verifyCogentAccounts(data.get("presentSignetAccountNumber"));
 				}
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Add Signet Accoun failed due to this Exception" + e);
-		}
-	}
 
-	public void AddSignetAccoun(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
-				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			}
-			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyErrorMessageSignetAccount() == 0) {
+				Thread.sleep(1000);
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.fillNameOnCard(data.get("nameOnCard"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.fillSignetWalletId(data.get("signetWalletID"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillCity(data.get("city"));
+				Thread.sleep(2000);
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().selectState(data.get("state"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickAddCard();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().allDonePage().clickDone();
+			} else {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.verifyHeading(data.get("addPaymentHeading"));
-				Thread.sleep(1000);
-				int presentSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.getPresentSignetAccounts();
-				int maxSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.getMaxSignetAccounts();
-				if (presentSignetAccount <= maxSignetAccount) {
-					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifySignetAccounts(data.get("presentSignetAccountNumber"));
-					if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifyErrorMessageSignetAccount() == 0) {
-						Thread.sleep(1000);
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.fillNameOnCard(data.get("nameOnCard"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.fillSignetWalletId(data.get("signetWalletID"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillCity(data.get("city"));
-						Thread.sleep(2000);
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().selectState(data.get("state"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().clickAddCard();
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-								.mailingAddressComponent().allDonePage().clickDone();
-					} else {
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-								.verifyErrorMessageOfSignetAccount(data.get("maxSignetErrMsg"));
-					}
-				} else {
-					ExtentTestManager.setFailMessageInReport("Signet Accounts Added More Then Max Limit");
-				}
+						.verifyErrorMessageOfSignetAccount(data.get("maxSignetErrMsg"));
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Add Signet Accoun failed due to this Exception" + e);
+
+			ExtentTestManager.setFailMessageInReport("Add Cogent Account failed due to this Exception" + e);
 		}
 	}
+
+//	public void AddSignetAccoun(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+//			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+//				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+//			}
+//			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//						.verifyHeading(data.get("addPaymentHeading"));
+//				Thread.sleep(1000);
+//				int presentSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//						.getPresentCogentAccounts();
+//				int maxSignetAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//						.getMaxCogentAccounts();
+//				if (presentSignetAccount <= maxSignetAccount) {
+//					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//							.verifyCogentAccounts(data.get("presentSignetAccountNumber"));
+//					if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//							.verifyErrorMessageSignetAccount() == 0) {
+//						Thread.sleep(1000);
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.fillNameOnCard(data.get("nameOnCard"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.fillSignetWalletId(data.get("signetWalletID"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().fillCity(data.get("city"));
+//						Thread.sleep(2000);
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().selectState(data.get("state"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().clickAddCard();
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().allDonePage().verifyAllDone(data.get("doneHeading"));
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//								.mailingAddressComponent().allDonePage().clickDone();
+//					} else {
+//						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//								.verifyErrorMessageOfSignetAccount(data.get("maxSignetErrMsg"));
+//					}
+//				} else {
+//					ExtentTestManager.setFailMessageInReport("Signet Accounts Added More Then Max Limit");
+//				}
+//			}
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Add Signet Accoun failed due to this Exception" + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDeleteSignetAccount(String strParams) {
+	public void testDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
@@ -2517,7 +2488,7 @@ public class MerchantProfileTest {
 				merchantProfilePage.clickPaymentMethods();
 			}
 			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
-			merchantProfilePage.paymentMethodsPage().clickDeleteSignetAccount();
+			merchantProfilePage.paymentMethodsPage().clickDeleteCogentAccount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -2543,7 +2514,7 @@ public class MerchantProfileTest {
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifyHeading(data.get("addPaymentHeading"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickSignetAccount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillNameOnCard(data.get("nameOnCard"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().scrollUpToNameOnCard();

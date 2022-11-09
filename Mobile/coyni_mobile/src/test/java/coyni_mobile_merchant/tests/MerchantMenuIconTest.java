@@ -584,7 +584,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseSignetAccount();
@@ -623,14 +623,14 @@ public class MerchantMenuIconTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawTokenWithSignetAccount(String strParams) {
+	public void testWithdrawTokenWithCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 //			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
 //			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyAddNewPaymentMethod() == 0) {
 //				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
@@ -644,11 +644,11 @@ public class MerchantMenuIconTest {
 //				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
 //			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			merchantProfileTest.AddSignetAccount(strParams);
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickSignetAccount();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseSignetAccount();
+			merchantProfileTest.AddCogentAccount(strParams);
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseSignetAccount();
 			testWithdrawTokenProcedure(strParams);
 			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawSignetTransaction(strParams);
