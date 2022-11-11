@@ -53,6 +53,7 @@ public class LoginPage extends BrowserFunctions {
 	public void clickNext() {
 		if (getElement(btnNext, "Enabled").isEnabled()) {
 			click(btnNext, "Next");
+			ExtentTestManager.setPassMessageInReport("Next button is Enabled");
 		}
 		else {
 			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
