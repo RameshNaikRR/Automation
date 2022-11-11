@@ -1,5 +1,7 @@
 package coyni.admin.pages;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
@@ -37,6 +39,11 @@ public class LoginPage extends BrowserFunctions {
 		click(eyeIcon, "EyeIcon");
 	}
 	
+	
+	public void clickOutSide() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+	
 	public void verifyPasswordMaskedView() {
 		new CommonFunctions().verifyPasswordMaskedView(txtPassword, "password");
 	}
@@ -49,6 +56,15 @@ public class LoginPage extends BrowserFunctions {
 		}
 		else {
 			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
+		}
+	}
+	public void verifyPasswordMaskedView(String attribute, String password) {
+		String attributeValue = getAttributeValue(txtPassword, attribute, password);
+		if (attributeValue.contains("password")) {
+
+			ExtentTestManager.setInfoMessageInReport(password + " masked with black circles");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
 		}
 	}
 

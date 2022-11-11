@@ -72,6 +72,7 @@ public class LoginTest {
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			loginPage.clickOutSide();
 			loginPage.clickNext();
 			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
@@ -98,12 +99,9 @@ public class LoginTest {
 			loginPage.verifyForgotPassword();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickEyeIcon();
-			Thread.sleep(1000);
-			loginPage.verifyPasswordMaskedView();
-			loginPage.clickEyeIcon();
-			Thread.sleep(1000);
-			loginPage.verifyPasswordMaskedView();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 
 		} catch (Exception e) {
