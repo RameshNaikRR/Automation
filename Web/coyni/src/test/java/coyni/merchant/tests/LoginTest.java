@@ -36,6 +36,9 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			//loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickeyeIcon();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
@@ -422,7 +425,11 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
 			loginPage.forgotPasswordComponent().verifyCreatePasswordHeading(data.get("CreatePasswordHeading"));
 			loginPage.forgotPasswordComponent().fillPassword(data.get("enterPassword"));
+			loginPage.forgotPasswordComponent().verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.forgotPasswordComponent().clickIcon();
 			loginPage.forgotPasswordComponent().fillConfirmPassword(data.get("confirmPassword"));
+			loginPage.forgotPasswordComponent().verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.forgotPasswordComponent().clickIcon();
 			loginPage.forgotPasswordComponent().clickSubmit();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));

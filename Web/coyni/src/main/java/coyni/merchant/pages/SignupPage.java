@@ -57,13 +57,21 @@ public class SignupPage extends BrowserFunctions {
 	private String ConfirmPassword;
 	private By popupPDF = By.xpath("//div[contains(@class,'Agreements_apiData')]");
 	private By privacyPDF = By.xpath("//div[contains(@class,'PrivacyAgreements_apiData__ewNFA')]");
+	private By termsOfServicePDF = By.xpath("//div[contains(@class,'AgreementModal_pdfSize__yrzAs')]");
+	private By termsOfmerchantPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
 	private By PDFpages = By.cssSelector(".react-pdf__Page");
+	private By termsofServicePDFPages = By.cssSelector(".react-pdf__Document");
+	private By termsOfMerchantPDFPages = By.cssSelector(".react-pdf__Document");
 	private By pdfPagesUpdate = By.cssSelector(".react-pdf__Page");
-	private By PDFtermsOfServicesUpdate = By.xpath("(//span[.='California'])[2]");
+	private By PDFtermsOfServicesUpdate = By.xpath("//div[.='Terms of Service']");
+	private By PDFmerchantAgreementsUpdate = By.xpath("//div[.='Merchant Agreement']");
 	private By PDFtermsOfServices = By.xpath("(//span[.='Agreement'])[1]");
 	private By PDFprivacyPolicy = By.xpath("((//span[.='']))[1]");
 	private By privacyPolicyUpdate = By.xpath("//span[contains(text(),'Privacy Policy')]");
+	private By merchantAgreementUpdate = By.xpath("//span[contains(text(),'Merchant Agreement')]");
 	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
+	private By btnAgree = By.xpath("//button[contains(text(),'Agree')]");
+	private By txtPassword = By.xpath("//input[@id='Password']");
 
 	public void clickCheckBox() {
 		click(chkBox, "CheckBox");
@@ -197,6 +205,15 @@ public class SignupPage extends BrowserFunctions {
 			click(btnNext, "Next");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
+		}
+	}
+	
+	public void verifyPasswordMaskedView(String attribute, String password) {
+		String attributeValue = getAttributeValue(txtPassword, attribute, password);
+		if (attributeValue.contains("password")) {
+			ExtentTestManager.setInfoMessageInReport(password + " masked with black circles");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
 		}
 	}
 
@@ -426,19 +443,56 @@ public class SignupPage extends BrowserFunctions {
 		}
 	}
 
+	public void merchantAgreementUpdate() {
+		if (verifyElementPresence(merchantAgreementUpdate, "Merchant Agreement")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
 	public void scrollDownTermsOfServiceUpdate() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(PDFtermsOfServicesUpdate));
-		WebElement ele = getElement(popupPDF, "");
+		WebElement ele = getElement(termsOfServicePDF, "");
 		int height = ele.getSize().getHeight();
 		int temp = height;
-		List<WebElement> list = getElementsList(pdfPagesUpdate, "");
+		List<WebElement> list = getElementsList(termsofServicePDFPages, "");
 		int noOfPages = list.size();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (int i = 0; i <= noOfPages; i++) {
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
 			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
 			height += temp;
 			Thread.sleep(200);
 		}
+		clickAgree();
+		clickDone();
+
+	}
+
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
+
+	public void clickAgree() {
+		click(btnAgree, "Agree");
+	}
+
+	public void scrollDownMerchantAgreementUpdate() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFmerchantAgreementsUpdate));
+		WebElement ele = getElement(termsOfmerchantPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickAgree();
+		clickDone();
 	}
 
 }
