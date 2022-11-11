@@ -27,11 +27,8 @@ public class LoginPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
-
 	private By lblerrorMsg = By.cssSelector("span.error");
-
 	private By lblEmail = By.cssSelector("");
-
 	private By txtOTP = By.cssSelector("");
 	private By iconeye = By.cssSelector(".icon-button");
 
@@ -99,7 +96,6 @@ public class LoginPage extends BrowserFunctions {
 	public void verifyPasswordMaskedView(String attribute, String password) {
 		String attributeValue = getAttributeValue(txtPassword, attribute, password);
 		if (attributeValue.contains("password")) {
-
 			ExtentTestManager.setInfoMessageInReport(password + " masked with black circles");
 		} else {
 			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
