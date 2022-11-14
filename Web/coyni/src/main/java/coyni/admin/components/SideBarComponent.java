@@ -19,7 +19,7 @@ public class SideBarComponent extends BrowserFunctions {
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
 
 	public void verifyCursorAction() {
-		new CommonFunctions().verifyCursorAction(handMark, "Hand Mark");
+		new CommonFunctions().verifyCursorAction(handMark, "Coyni  Portal");
 	}
 
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {

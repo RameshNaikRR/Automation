@@ -1,5 +1,7 @@
 package coyni.admin.pages;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -72,6 +74,13 @@ public class CommissionAccountPage extends BrowserFunctions {
 
 	public DaysMonthsDropDownComponent daysMonthsDropDownComponent() {
 		return new DaysMonthsDropDownComponent();
+	}
+	
+	
+	public String currentDate() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String format = simpleDateFormat.format(new Date());
+		return format;
 	}
 
 	public PayOutsPage payOutsPage() {

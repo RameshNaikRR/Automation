@@ -456,6 +456,7 @@ public class CoyniPortalTest {
 //			homePage.sideBarComponent().clickCoyniPortal();
 //			homePage.sideBarComponent().clickCommissionAccount();
 			homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().commissionAccountPage().currentDate();
 			homePage.sideBarComponent().commissionAccountPage().daysMonthsDropDownComponent().clickOnToday();
 			homePage.sideBarComponent().commissionAccountPage().getAccountBalance();
 			homePage.sideBarComponent().commissionAccountPage().getTotalCommissionEarned();

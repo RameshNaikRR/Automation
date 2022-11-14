@@ -23,9 +23,9 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	private By txtCurrentPassword = By.xpath("//input[@id='CurrentPassword']");
 	private By txtNewPassword = By.xpath("//input[@id='NewPassword']");
 	private By txtConfirmPassword = By.xpath("//input[@id='ConfirmNewPassword']");
-	private By iconEyeCurrentPassword = By.xpath("(//button[contains(@class,'icon-View')])[1]");
-	private By iconEyeConfirmPassword = By.xpath("(//button[contains(@class,'icon-View')])[3]");
-	private By iconEyeNewPassword = By.xpath("(//button[contains(@class,'icon-View')])[2]");
+	private By iconEyeCurrentPassword = By.xpath("(//button[contains(@class,'icon-button')])[1]");
+	private By iconEyeConfirmPassword = By.xpath("(//button[contains(@class,'icon-button')])[3]");
+	private By iconEyeNewPassword = By.xpath("(//button[contains(@class,'icon-button')])[2]");
 	private By reddot = By.cssSelector(".red-dot");
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
 	private By greendot1 = By.xpath("(//span[@class='green-dot']/parent::span)[2]");
@@ -84,7 +84,7 @@ public class AdminUserDetailsPage extends BrowserFunctions {
     }
     
     public void fillNewPsw(String newPassword) {
-    	enterText(txtNewPassword, newPassword, "");
+    	enterText(txtNewPassword, newPassword, "New Password");
     }
     
     public AuthyComponent authyComponent() {
@@ -140,7 +140,7 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	}
 
     public void fillConfirmPassword(String expConfirmPassword) {
-    	enterText(txtConfirmPassword, expConfirmPassword, "Current Phone Number");
+    	enterText(txtConfirmPassword, expConfirmPassword, "Confirm Password");
     }
     public void clickEyeIconCurrentPassword() {
     	click(iconEyeCurrentPassword,"Icon Eye Current Password ");
@@ -180,5 +180,15 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
+	}
+	
+	public void verifyPasswordMaskedView(String attribute, String password) {
+		String attributeValue = getAttributeValue(iconEyeCurrentPassword, attribute, password);
+		if (attributeValue.contains("password")) {
+
+			ExtentTestManager.setInfoMessageInReport(password + " masked with black circles");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
+		}
 	}
 }
