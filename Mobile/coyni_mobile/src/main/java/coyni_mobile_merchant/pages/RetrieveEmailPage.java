@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
@@ -100,4 +101,9 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public AccountNotFoundPage accountNotFoundPage() {
 		return new AccountNotFoundPage();
 	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+
 }

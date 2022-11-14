@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -216,6 +217,10 @@ public class SignUpPage extends MobileFunctions {
 
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
+	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 
 }

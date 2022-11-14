@@ -43,24 +43,24 @@ public class PayoutTransactionsPage extends MobileFunctions {
 
 	public void fillSearchField(String expValue) {
 		new CommonFunctions().elementView(searchOption, "Search Option");
-		Dimension si = DriverFactory.getDriver().findElement(size).getSize();
-		int xi = si.getWidth();
-		int yi = si.getHeight();
-		ExtentTestManager.setInfoMessageInReport("   win x : " + xi + "   win  y: " + yi);
+//		Dimension si = DriverFactory.getDriver().findElement(size).getSize();
+//		int xi = si.getWidth();
+//		int yi = si.getHeight();
+//		ExtentTestManager.setInfoMessageInReport("   win x : " + xi + "   win  y: " + yi);
 		
 		enterText(searchOption, expValue, "Search Option");
 //		DriverFactory.getDriver().context("NATIVE_APP");
 //		DriverFactory.getDriver().context("CHROMIUM");
 	}
 
-	public void fillSearchField() {
-		Dimension size = DriverFactory.getDriver().findElement(searchOption).getSize();
-		int x = size.getWidth();
-		int y = size.getHeight();
-		ExtentTestManager.setInfoMessageInReport("    x : " + x + "    y: " + y);
-		TouchAction touch = new TouchAction(DriverFactory.getDriver());
-		touch.longPress(PointOption.point(550, 530)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(3000))).release().perform();
-	}
+//	public void fillSearchField() {
+//		Dimension size = DriverFactory.getDriver().findElement(searchOption).getSize();
+//		int x = size.getWidth();
+//		int y = size.getHeight();
+//		ExtentTestManager.setInfoMessageInReport("    x : " + x + "    y: " + y);
+//		TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//		touch.longPress(PointOption.point(550, 530)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(3000))).release().perform();
+//	}
 
 	public void verifyLabelPayOutTransactions(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPayOutTransactions, "Pay Out Transactions", expHeading);

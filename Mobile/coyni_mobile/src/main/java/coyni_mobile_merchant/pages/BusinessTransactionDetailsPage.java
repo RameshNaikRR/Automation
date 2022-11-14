@@ -360,7 +360,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 
 	}
 
-	public void getWithdrawTokenSignetTransactionDetails() {
+	public void getWithdrawTokenCogentTransactionDetails() {
 //		getTransactionType();
 		getAmount();
 		getStatus();

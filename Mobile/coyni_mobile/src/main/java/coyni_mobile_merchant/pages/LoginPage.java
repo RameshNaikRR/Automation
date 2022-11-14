@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.EnterYourPINComponent;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 public class LoginPage extends MobileFunctions {
 
@@ -135,14 +137,26 @@ public class LoginPage extends MobileFunctions {
 //		
 //	}
 
-	public void clickLogin() {
+	public void clickLogin() {	
 		if (getElement(btnLogin, "login").isEnabled()) {
+			ExtentTestManager.setPassMessageInReport("login button  is enabled");
 			click(btnLogin, "login button");
 		} else {
 			ExtentTestManager.setInfoMessageInReport("login button  is disabled");
 		}
 	}
 
+	public void validateLogin() {
+		MobileElement element = (MobileElement)DriverFactory.getDriver().findElementByXPath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
+		boolean isEnabled = element.isEnabled();
+		ExtentTestManager.setPassMessageInReport(""+isEnabled);
+//		if (DriverFactory.getDriver().findElementByXPath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]").isEnabled()) {
+//			ExtentTestManager.setFailMessageInReport("login button  is enabled");
+//		} else {
+//			ExtentTestManager.setPassMessageInReport("login button  is disabled mode");
+//		}
+	}
+	
 	public void ViewCoyni() {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
 	}
@@ -179,23 +193,34 @@ public class LoginPage extends MobileFunctions {
 
 	}
 
-	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
-
-	}
-
-	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateField(txtPassword, "password", singleChar);
-		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateField(txtPassword, "password", maxChar);
-		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
-
-	}
+//	public void validateEmailField(String singleChar, String maxChar, String moreThanMax,String alphabet, String number, String specialChar) {
+//		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//		new CommonFunctions().validateFieldWithalphabet(txtEmail, "Email", alphabet);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//		new CommonFunctions().validateFieldWithNumber(txtEmail, "Email", number);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//		new CommonFunctions().validateFieldWithSpecialchar(txtEmail, "Email", specialChar);
+//		new CommonFunctions().clearText(txtEmail, "Email");
+//	}
+//
+//	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax, String alphabet, String number, String specialChar) {
+//		new CommonFunctions().validateField(txtPassword, "password", singleChar);
+//		new CommonFunctions().clearText(txtPassword, "password");
+//		new CommonFunctions().validateField(txtPassword, "password", maxChar);
+//		new CommonFunctions().clearText(txtPassword, "password");
+//		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
+//		new CommonFunctions().clearText(txtPassword, "password");
+//		new CommonFunctions().validateFieldWithalphabet(txtPassword, "password", alphabet);
+//		new CommonFunctions().clearText(txtPassword, "password");
+//		new CommonFunctions().validateFieldWithNumber(txtPassword, "password", number);
+//		new CommonFunctions().clearText(txtPassword, "password");
+//		new CommonFunctions().validateFieldWithSpecialchar(txtPassword, "password", specialChar);
+//	}
 
 	public RetrieveEmailPage retrieveEmailPage() {
 		return new RetrieveEmailPage();
@@ -204,5 +229,8 @@ public class LoginPage extends MobileFunctions {
     	return new ForgotPasswordPage();
     }
 	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 
 }

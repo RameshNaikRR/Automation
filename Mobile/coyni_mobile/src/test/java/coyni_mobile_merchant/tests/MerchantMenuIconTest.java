@@ -628,8 +628,6 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
 //			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyAddNewPaymentMethod() == 0) {

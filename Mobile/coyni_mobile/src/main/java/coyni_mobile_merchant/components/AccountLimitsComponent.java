@@ -16,11 +16,10 @@ public class AccountLimitsComponent extends MobileFunctions {
 	private By getProcessingVolume = MobileBy.xpath("//*[contains(@resource-id,'MonthlyProcessing')]");
 	private By getTicketLimit = MobileBy.xpath("//*[contains(@resource-id,'HighTicket')]");
 	private By getBuyBankAcc = MobileBy.xpath("//*[contains(@resource-id,'BUYBank')]");
-	private By getBuySignetAcc = MobileBy.xpath("//*[contains(@resource-id,'BuySignet')]");
 	private By getWithdrawBankAcc = MobileBy.xpath("//*[contains(@resource-id,'WithdrawBank')]");
 	private By getWithdrawInstantPay = MobileBy.xpath("//*[contains(@resource-id,'B_InstantPay')]");
 	private By getWithdrawGiftcard = MobileBy.xpath("//*[contains(@resource-id,'B_GiftCard')]");
-	private By getWithdrawSignetAcc = MobileBy.xpath("//*[contains(@resource-id,'WithdrawSignet')]");
+	private By getWithdrawCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Back')]");
 
 	public void verifyHeading(String expHeading) {
@@ -45,11 +44,6 @@ public class AccountLimitsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Buy Bank Account : " + str);
 	}
 
-	public void getBuySignetAcc() {
-		String str = getText(getBuySignetAcc);
-		ExtentTestManager.setInfoMessageInReport("Buy Signet Account : " + str);
-	}
-
 	public void getWithdrawBankAcc() {
 		String str = getText(getWithdrawBankAcc);
 		ExtentTestManager.setInfoMessageInReport("Withdraw Bank Account : " + str);
@@ -65,9 +59,9 @@ public class AccountLimitsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Withdraw Gift Card : " + str);
 	}
 
-	public void getWithdrawSignetAcc() {
-		String str = getText(getWithdrawSignetAcc);
-		ExtentTestManager.setInfoMessageInReport("Withdraw Signet Account : " + str);
+	public void getWithdrawCogentAcc() {
+		String str = getText(getWithdrawCogentAcc);
+		ExtentTestManager.setInfoMessageInReport("Withdraw Cogent Account : " + str);
 	}
 
 	public void getProcessingVolume() {

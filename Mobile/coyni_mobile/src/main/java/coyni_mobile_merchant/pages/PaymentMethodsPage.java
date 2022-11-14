@@ -57,7 +57,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public int verifyAddNewPaymentMethod() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
 	}
 

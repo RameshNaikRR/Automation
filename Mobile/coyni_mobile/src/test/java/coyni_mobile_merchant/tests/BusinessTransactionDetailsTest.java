@@ -94,7 +94,7 @@ public class BusinessTransactionDetailsTest {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 								.getBuyTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Buy Token")
-							&& data.get("filterType1").equalsIgnoreCase("Signet")) {
+							&& data.get("filterType1").equalsIgnoreCase("Cogent")) {
 
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")) {
@@ -117,9 +117,9 @@ public class BusinessTransactionDetailsTest {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 								.getWithdrawTokenInstantPayTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
-							&& data.get("filterType1").equalsIgnoreCase("Signet")) {
+							&& data.get("filterType1").equalsIgnoreCase("Cogent")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenSignetTransactionDetails();
+								.getWithdrawTokenCogentTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Gift Card")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
@@ -399,7 +399,7 @@ public class BusinessTransactionDetailsTest {
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenSignetTransactionDetails();
+					.getWithdrawTokenCogentTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickWithBankSignetBack();
 		} catch (Exception e) {

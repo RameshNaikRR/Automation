@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -42,26 +43,15 @@ public class ForgotPasswordPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblHeading, "Email Verification Page");
 	}
 
-	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
-		return new PhoneAndEmailVerificationComponent();
-	}
-
 	public void clickCloseIcon() {
 		click(btnCloseIcon, " Close Icon");
 	}
-
-	public void validateEmailField(String minChar, String minCharLess, String maxLessChar, String maxChar,
-			String moreThanMax) {
-
-		new CommonFunctions().validateField(txtEmail, "Email", minChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", minCharLess);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", maxChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxLessChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", moreThanMax);
-
+	
+	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
+	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

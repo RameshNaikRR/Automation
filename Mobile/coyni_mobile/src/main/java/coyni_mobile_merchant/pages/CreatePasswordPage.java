@@ -6,6 +6,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.SuccessFailureComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class CreatePasswordPage extends MobileFunctions {
@@ -47,10 +48,10 @@ public class CreatePasswordPage extends MobileFunctions {
 	public void clickEyeIconNewPassword() {
 		click(eyeIconNew, "Eye Icon New Password");
 	}
+
 	public void clickEyeIconConfirmPassword() {
 		click(eyeIconConfirm, "Eye Icon Confirm Password");
 	}
-	
 
 	public void VerifyPasswordErrMessage(String expPasswordMessage) {
 		new CommonFunctions().verifyLabelText(lblPasswordErrMessage, "Password Error Message  ", expPasswordMessage);
@@ -64,6 +65,17 @@ public class CreatePasswordPage extends MobileFunctions {
 		click(btnSave, "Save");
 	}
 
+	public void validateSave() {
+		if (getElementList(btnSave, "Save").size() > 0) {
+			if (getElement(btnSave, "Save").isEnabled()) {
+				ExtentTestManager.setFailMessageInReport("Save button  is enabled");
+			} else {
+				ExtentTestManager.setPassMessageInReport("Save button  is disabled");
+			}
+		}
+	}
+
+	
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}

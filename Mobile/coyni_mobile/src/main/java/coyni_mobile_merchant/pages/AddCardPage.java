@@ -46,6 +46,11 @@ public class AddCardPage extends MobileFunctions {
 		click(txtSignetWalletId, "Signet Wallet ID");
 		enterText(txtSignetWalletId, signetWalletId, "Signet Wallet ID");
 	}
+	
+	public void validateErrMsg() {
+	scrollUpToElement(txtNameOnCard, "NameOnCard");
+	}
+	
 	public void clickNext() {
 		scrollDownToElement(btnNext,"Next");
 		click(btnNext, "Next");

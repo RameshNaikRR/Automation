@@ -38,11 +38,10 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifywithdrawAddBankHeading(String expHeading) throws InterruptedException {
-		Thread.sleep(2000);
 		if (getElementList(withdrawAddBankHeading, "Heading").size() > 0) {
 //				DriverFactory.getDriver().findElements(withdrawAddBankHeading).size()==1
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
-			click(btnExternalBank, "Bank");
+//			click(btnExternalBank, "Bank");
 		}
 
 	}
@@ -89,7 +88,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(errMsgMaxBankAccounts, "", expHeading);
 	}
 
-	public int verifyErrorMessageBankAccount() {
+	public int verifyErrorMessageBankAccount() throws InterruptedException {
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(errMsgMaxBankAccounts).size();
 
 	}
@@ -138,14 +138,17 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifyCogentAccounts(String expCogentAccount) {
-		if (getElementList(numberOfDebitCards, "Present Debit Cards number").size() > 0) {
+		if (getElementList(numberOfCogentAccounts, "Present Cogent Accounts number").size() > 0) {
 			new CommonFunctions().verifyLabelText(numberOfCogentAccounts, "Present Cogent Accounts",
 					expCogentAccount);
 		}
 	}
 
 	public void verifyBankAccounts(String expBank) {
-		new CommonFunctions().verifyLabelText(numberOfBankAccounts, "Present Bank Account number", expBank);
+		if (getElementList(numberOfBankAccounts, "Present Bank Account number").size() > 0) {
+			new CommonFunctions().verifyLabelText(numberOfBankAccounts, "Present Bank Account number", expBank);
+		}
+		
 	}
 
 	public Integer getPresentDebitCards() {

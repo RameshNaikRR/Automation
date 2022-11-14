@@ -29,6 +29,7 @@ public class FeesComponent extends MobileFunctions {
 	private By lblMonthlyFee = MobileBy.xpath("//*[contains(@text,'Monthly Fee')]/following-sibling::*[1]");
 	private By lblMonthlyFeePer = MobileBy.xpath("//*[contains(@text,'Monthly Fee')]/following-sibling::*[2]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
+	private By lblCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingFees, "Fee Heading", expHeading);
@@ -41,14 +42,13 @@ public class FeesComponent extends MobileFunctions {
 	public void getSaleOrder() {
 		String saleOrderPer = getText(lblSaleOrder);
 		String saleOrderDoll = getText(lblSaleOrderDollr);
-		ExtentTestManager.setInfoMessageInReport("Sale Order Percentage : " + saleOrderDoll + "   "+saleOrderPer);
+		ExtentTestManager.setInfoMessageInReport("Sale Order Percentage : " + saleOrderDoll + "   " + saleOrderPer);
 	}
-	
+
 //	public void getSaleOrderDoll() {
 //		String saleOrder = getText(lblSaleOrderDollr);
 //		ExtentTestManager.setInfoMessageInReport("Sale Order Dollar: " + saleOrder);
 //	}
-
 
 //	public void verifySaleOrderLabel(String expHeading) {
 //		new CommonFunctions().verifyLabelText(lblSaleOrder, "Label", expHeading);
@@ -56,7 +56,7 @@ public class FeesComponent extends MobileFunctions {
 	public void getRefund() {
 		String refund = getText(lblRefund);
 		String refundDoll = getText(lblRefundDollr);
-		ExtentTestManager.setInfoMessageInReport("Refund : " + refundDoll+ "   "+ refund);
+		ExtentTestManager.setInfoMessageInReport("Refund : " + refundDoll + "   " + refund);
 	}
 
 	public void verifyRefundLabel(String expHeading) {
@@ -72,51 +72,40 @@ public class FeesComponent extends MobileFunctions {
 	}
 
 	private By verifyWithdrawExternalBankAccount(String Value) {
-		return By.xpath(String.format("(//*[contains(@text,'External Bank Account')])[1]/following-sibling::*[%s]", Value));
+		return By.xpath(
+				String.format("(//*[contains(@text,'External Bank Account')])[1]/following-sibling::*[%s]", Value));
 	}
 
 	private By verifyBuyTokenExternalBankAccount(String Value) {
-		return By.xpath(String.format("(//*[contains(@text,'External Bank Account')])[2]/following-sibling::*[%s]", Value));
+		return By.xpath(
+				String.format("(//*[contains(@text,'External Bank Account')])[2]/following-sibling::*[%s]", Value));
 	}
-	
+
 	public void getWithdrawsExternalBankAccount() {
 		String withdrawsExternalBankAccount = getText(verifyWithdrawExternalBankAccount("1"));
 		String withdrawsExternalBankAccountPer = getText(verifyWithdrawExternalBankAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("Withraws External Bank Account: " + withdrawsExternalBankAccount + "  : "+withdrawsExternalBankAccountPer);
+		ExtentTestManager.setInfoMessageInReport("Withraws External Bank Account: " + withdrawsExternalBankAccount
+				+ "  : " + withdrawsExternalBankAccountPer);
 	}
 
-
-	private By verifyWithdrawSignetAccount(String Value) {
-		return By.xpath(String.format("(//*[contains(@text,'Signet Account')])[1]/following-sibling::*[%s]", Value));
-	}
-	
-
-	public void getWithdrawsSignetAccount() {
-		String withdrawsSignetAccount = getText(verifyWithdrawSignetAccount("1"));
-		String withdrawsSignetAccountPer = getText(verifyWithdrawSignetAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("Withraws Signet Account: " + withdrawsSignetAccount + " :  " +withdrawsSignetAccountPer);
+	private By verifyWithdrawCogentAccount(String Value) {
+		return By.xpath(String.format("(//*[contains(@text,'Cogent Account')])[1]/following-sibling::*[1]", Value));
 	}
 
-//	public void getWithdrawsSignetAccountPer() {
-//		String withdrawsSignetAccount = getText(verifyWithdrawSignetAccount("2"));
-//		ExtentTestManager.setInfoMessageInReport("Withraws Signet Account: " + withdrawsSignetAccount);
-//	}
+	public void getWithdrawsCogentAccount() {
+		String withdrawCogentAccount = getText(lblCogentAcc);
+		String withdrawCogentAccountPer = getText(verifyWithdrawCogentAccount("1"));
+		ExtentTestManager.setInfoMessageInReport(
+				"Withraws Cogent Account: " + withdrawCogentAccount + " :  " + withdrawCogentAccountPer);
+	}
 
-	private By verifyBuyTokenSignetAccount(String Value) {
-		return By.xpath(String.format("(//*[contains(@text,'Signet Account')])[2]/following-sibling::*[%s]", Value));
-	}
-	
-	public void getBuyTokenSignetAccount() {
-		String buyTokenSignetAccount = getText(verifyBuyTokenSignetAccount("1"));
-		String buyTokenSignetAccountPer = getText(verifyBuyTokenSignetAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("BuyToken Signet Account : " + buyTokenSignetAccount + "   "+buyTokenSignetAccountPer);
-	}
-	
 	public void getBuyTokenExternalBankAccount() {
 		String buyTokenExternalBankAccount = getText(verifyBuyTokenExternalBankAccount("1"));
 		String buyTokenExternalBankAccountper = getText(verifyBuyTokenExternalBankAccount("2"));
-		ExtentTestManager.setInfoMessageInReport("Buy Token External Bank Account: " + buyTokenExternalBankAccount+ "   "+ buyTokenExternalBankAccountper);
+		ExtentTestManager.setInfoMessageInReport("Buy Token External Bank Account: " + buyTokenExternalBankAccount
+				+ "   " + buyTokenExternalBankAccountper);
 	}
+
 //	public void getBuyTokenSignetAccountPer() {
 //		String buyTokenSignetAccount = getText(verifyBuyTokenSignetAccount("2"));
 //		ExtentTestManager.setInfoMessageInReport("BuyToken Signet Account : " + buyTokenSignetAccount);
@@ -131,7 +120,8 @@ public class FeesComponent extends MobileFunctions {
 	public void getWithdrawInstantPayLabel() {
 		String withdrawInstantPay = getText(lblWithdrawInstantPay);
 		String withdrawInstantPayPer = getText(lblWithdrawInstantPayPer);
-		ExtentTestManager.setInfoMessageInReport("Withdraw Instant Pay : " + withdrawInstantPay+ "   " +withdrawInstantPayPer);
+		ExtentTestManager
+				.setInfoMessageInReport("Withdraw Instant Pay : " + withdrawInstantPay + "   " + withdrawInstantPayPer);
 	}
 
 //	public void verifyWithdrawGiftCardLabel(String expHeading) {
@@ -142,20 +132,22 @@ public class FeesComponent extends MobileFunctions {
 	public void getWithdrawGiftCardLabel() {
 		String withdrawGiftCard = getText(lblWithdrawGiftCard);
 		String withdrawGiftCardPer = getText(lblWithdrawGiftCardPer);
-		ExtentTestManager.setInfoMessageInReport("Withdraw Gift Card: " + withdrawGiftCard+ "   "+withdrawGiftCardPer);
+		ExtentTestManager
+				.setInfoMessageInReport("Withdraw Gift Card: " + withdrawGiftCard + "   " + withdrawGiftCardPer);
 	}
 
 	public void getWithdrawFailedBankAccountLabel() {
 		String withdrawFailedBank = getText(lblWithdrawFailedBank);
 		String withdrawFailedBankPer = getText(lblWithdrawFailedBankPer);
-		ExtentTestManager.setInfoMessageInReport("Failed Bank Withdraw : " + withdrawFailedBank+ "   "+ withdrawFailedBankPer);
+		ExtentTestManager
+				.setInfoMessageInReport("Failed Bank Withdraw : " + withdrawFailedBank + "   " + withdrawFailedBankPer);
 	}
 
 	public void getMonthlyFee() {
 		scrollDownToElement(lblMonthlyFee, "Monthly Fee");
 		String MonthlyFee = getText(lblMonthlyFee);
-		String MonthlyFeePer = getText(lblMonthlyFeePer);	
-		ExtentTestManager.setInfoMessageInReport(" Monthly Fee : " + MonthlyFee+ "          "+MonthlyFeePer);
+		String MonthlyFeePer = getText(lblMonthlyFeePer);
+		ExtentTestManager.setInfoMessageInReport(" Monthly Fee : " + MonthlyFee + "          " + MonthlyFeePer);
 	}
 
 	public void verifyHeadingBuyToken(String expHeading) {

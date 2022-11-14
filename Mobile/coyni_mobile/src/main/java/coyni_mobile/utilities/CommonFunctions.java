@@ -102,12 +102,11 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
-			clickEnter();
+			//clickEnter();
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
-			if (enterText.equalsIgnoreCase(actualtext)
-					&& mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0) {
+			if (enterText.equalsIgnoreCase(actualtext)) {
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {
@@ -119,6 +118,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validate field is failed due to exception " + e);
 
 		}
+		//&& mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0
 
 	}
 
@@ -127,7 +127,7 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
-			clickEnter();
+			//clickEnter();
 			String actualtext = mobileFunctions.getText(ele);
 			if (!enterText.equalsIgnoreCase(actualtext)) {
 
@@ -150,17 +150,51 @@ public class CommonFunctions {
 			String actualtext = mobileFunctions.getText(ele);
 			if (actualtext.length() == 0) {
 
-				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting alphabets");
+				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting alphabets");
 			} else {
 
-				ExtentTestManager.setInfoMessageInReport(eleName + " is accepting alphabets");
+				ExtentTestManager.setPassMessageInReport(eleName + " is accepting alphabets");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
 		}
 	}
 
+	public void validateFieldWithNotAcceptAlphabet(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter alphabets in " + eleName);
+			mobileFunctions.enterText(ele, enterText, eleName);
+			String actualtext = mobileFunctions.getText(ele);
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting alphabets");
+			} else {
+
+				ExtentTestManager.setFailMessageInReport(eleName + " is accepting alphabets");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
+		}
+	}
+	
 	public void validateFieldWithNumber(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
+			mobileFunctions.enterText(ele, enterText, eleName);
+			String actualtext = mobileFunctions.getText(ele);
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting Numbers");
+			} else {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is accepting Numbers");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
+		}
+	}
+
+	public void validateFieldWithNotAcceptNumber(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
@@ -170,14 +204,31 @@ public class CommonFunctions {
 				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
 			} else {
 
-				ExtentTestManager.setInfoMessageInReport(eleName + " is accepting Numbers");
+				ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
 		}
 	}
-
+	
 	public void validateFieldWithSpecialchar(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
+			mobileFunctions.enterText(ele, enterText, eleName);
+			String actualtext = mobileFunctions.getText(ele);
+			if (actualtext.length() == 0) {
+
+				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting Special characters");
+			} else {
+
+				ExtentTestManager.setPassMessageInReport(eleName + " is accepting Special characters");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
+		}
+	}
+
+	public void validateFieldWithNotAcceptSpecialchar(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
@@ -187,13 +238,13 @@ public class CommonFunctions {
 				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special characters");
 			} else {
 
-				ExtentTestManager.setInfoMessageInReport(eleName + " is accepting Special characters");
+				ExtentTestManager.setFailMessageInReport(eleName + " is accepting Special characters");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
 		}
 	}
-
+	
 	public boolean isPlatformiOS() {
 		return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
 
