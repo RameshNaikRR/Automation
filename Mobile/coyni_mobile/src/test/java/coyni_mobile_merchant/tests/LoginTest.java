@@ -68,6 +68,7 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+//			loginPage.verifyPasswordMaskedView(data.get("password"));
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
@@ -408,17 +409,15 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-			String[] phoneNumber = data.get("phoneNumber").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2],
-					phoneNumber[3], phoneNumber[4], phoneNumber[5]);
+//			String[] phoneNumber = data.get("phoneNumber").split(",");
+//			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
 			String[] firstName = data.get("firstName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],
-					firstName[3], firstName[4], firstName[5]);
-			String[] lastName = data.get("phoneNumber").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(lastName[0], lastName[1], lastName[2],
-					lastName[3], lastName[4], lastName[5]);
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],data.get("validateDataField"),data.get("validateDataType"),data.get("elementName"));
+//			String[] lastName = data.get("phoneNumber").split(",");
+//			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(lastName[0], lastName[1], lastName[2],
+//					lastName[3], lastName[4], lastName[5]);
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRetrieveWithInavlidData failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testRetrieveWithFieldValidations failed due to exception " + e);
 		}
 	}
 	
@@ -533,6 +532,8 @@ public class LoginTest {
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.fillNewPassword(data.get("newPassword"));
+			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+			.verifyPasswordMaskedView(data.get("newPassword"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.clickEyeIconNewPassword();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()

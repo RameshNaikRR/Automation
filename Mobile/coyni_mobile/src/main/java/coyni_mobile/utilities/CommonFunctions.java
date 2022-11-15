@@ -70,8 +70,8 @@ public class CommonFunctions {
 
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
 		try {
-			By errorMsgs = MobileBy
-					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
+			By errorMsgs = MobileBy.xpath(
+					"(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			// mobileFunctions.
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
@@ -102,7 +102,7 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
-			//clickEnter();
+			// clickEnter();
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
@@ -118,7 +118,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validate field is failed due to exception " + e);
 
 		}
-		//&& mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0
+		// && mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0
 
 	}
 
@@ -127,7 +127,7 @@ public class CommonFunctions {
 			ExtentTestManager
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
-			//clickEnter();
+			// clickEnter();
 			String actualtext = mobileFunctions.getText(ele);
 			if (!enterText.equalsIgnoreCase(actualtext)) {
 
@@ -176,7 +176,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
 		}
 	}
-	
+
 	public void validateFieldWithNumber(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
@@ -210,7 +210,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
 		}
 	}
-	
+
 	public void validateFieldWithSpecialchar(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
@@ -244,7 +244,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
 		}
 	}
-	
+
 	public boolean isPlatformiOS() {
 		return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
 
@@ -270,6 +270,61 @@ public class CommonFunctions {
 		System.out.println("clicked on tab");
 	}
 
+	public void enterSpecialKey(String specialKey) {
+		// AT: @, LEFT_BRACKET : ( and so on
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(specialKey)));
+	}
+
+	public void enterKeys(By ele,By inputPlace, String data, String type,String eleName) throws InterruptedException {
+		mobileFunctions.click(ele, "Field");
+		String[] keys = data.split("");
+		if (type.equalsIgnoreCase("alphanumeric")) {
+			// takes numbers from alpha numeric keyboard
+			for (String key : keys) {
+				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + key)));
+				String actualtext = mobileFunctions.getText(inputPlace);//BUTTON_
+				//Thread.sleep(2000);
+				ExtentTestManager.setPassMessageInReport(actualtext);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
+				} else {
+					ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");
+				}
+			}
+		} else if (type.equalsIgnoreCase("numeric")) {
+			// takes numbers from numeric keyboard
+			for (String key : keys) {
+				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("NUMPAD_" + key)));
+				String actualtext = mobileFunctions.getText(ele);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
+				} else {
+					ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");
+				}
+			}
+		} else if (type.equalsIgnoreCase("alpha")) {
+			// takes alphabets from alpha numeric keyboard
+			for (String key : keys) {
+				if (key.matches("/[A-Z]+/")) {
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.SHIFT_LEFT));
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(key)));
+				} else {
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(key)));
+				}
+				String actualtext = mobileFunctions.getText(ele);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Alphabets");
+				} else {
+					ExtentTestManager.setFailMessageInReport(eleName + " is accepting Alphabets");
+				}
+
+			}
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"type argument value should be either 'alphanumeric' or 'numeric' or 'alpha'");
+		}
+	}
+
 	public void swipeElement(By loc, Direction dir) {
 		System.out.println("swipeElementAndroid(): dir: '" + dir + "'");
 
@@ -277,7 +332,7 @@ public class CommonFunctions {
 		// - Android: 300 ms
 		// - iOS: 200 ms
 		// final value depends on your app and could be greater
-		final int ANIMATION_TIME = 200; // ms
+		final int ANIMATION_TIME = 200; // m
 
 		final int PRESS_TIME = 200; // ms
 
@@ -339,16 +394,13 @@ public class CommonFunctions {
 			ExtentTestManager.setInfoMessageInReport(eleName + " is not enabled");
 		}
 	}
-	
-	public void selectState(String state) throws InterruptedException {	
-		
-		By drpDwnState = MobileBy
-				.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
-	    By txtState = MobileBy
-				.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
-	    By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
-		
-		
+
+	public void selectState(String state) throws InterruptedException {
+
+		By drpDwnState = MobileBy.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
+		By txtState = MobileBy.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
+		By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+
 		DriverFactory.getDriver().hideKeyboard();
 		mobileFunctions.click(drpDwnState, "State Drop down");
 		mobileFunctions.enterText(txtState, state, "State");
@@ -358,8 +410,6 @@ public class CommonFunctions {
 		new CommonFunctions().clickEnter();
 		mobileFunctions.click(btnConfirmState, "Done");
 	}
-	
-	
 
 	public String getTextBoxValue(By ele) {
 		return mobileFunctions.getAttribute(ele, "text");

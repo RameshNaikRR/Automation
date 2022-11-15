@@ -2203,7 +2203,6 @@ public class MerchantProfileTest {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillCardExp(data.get("cardExp"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-				Thread.sleep(2000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -2236,6 +2235,7 @@ public class MerchantProfileTest {
 			ExtentTestManager.setFailMessageInReport("AddDebitCar Failed due to this Exception" + e);
 		}
 	}
+	
 
 	@Test
 	@Parameters("strParams")
@@ -2264,6 +2264,36 @@ public class MerchantProfileTest {
 					.clickSave();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.toastComponent().verifyToastMsg(data.get("debitEditToastMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+	
+	@Test
+	@Parameters("strParams")
+	public void testVerifyAllStates(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+				businessTokenAccountPage.clickProfile();
+				merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+			.fillNameOnCard(data.get("nameOnCard"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+			.fillCardNumber(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine1(data.get("addressLine1"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine2(data.get("addressLine2"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.validateAllStates();
+	
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

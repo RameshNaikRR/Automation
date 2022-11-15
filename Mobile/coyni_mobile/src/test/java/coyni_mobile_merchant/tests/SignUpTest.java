@@ -117,36 +117,36 @@ public class SignUpTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testFieldValidationCreateAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.clickBusinessAccount();
-			;
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			String[] firstName = data.get("firstName").split(",");
-			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],
-					firstName[3], firstName[4], firstName[5]);
-			String[] lastName = data.get("phoneNumber").split(",");
-			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2],
-					lastName[3], lastName[4], lastName[5]);
-			String[] email = data.get("email").split(",");
-			signUpPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2], email[3], email[4],
-					email[5]);
-			String[] phoneNumber = data.get("phoneNumber").split(",");
-			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
-					phoneNumber[2], phoneNumber[3], phoneNumber[4], phoneNumber[5]);
-			String[] password = data.get("password").split(",");
-			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
-					password[3], password[4], password[5]);
-			String[] confirmPassword = data.get("newPassword").split(",");
-			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
-					confirmPassword[1], confirmPassword[2], confirmPassword[3], confirmPassword[4], confirmPassword[5]);
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testFieldValidationCreateAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			landingPage.clickGetStarted();
+//			signUpPage.clickBusinessAccount();
+//			;
+//			signUpPage.verifyCreateAccount(data.get("createAccount"));
+//			String[] firstName = data.get("firstName").split(",");
+//			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],
+//					firstName[3], firstName[4], firstName[5]);
+//			String[] lastName = data.get("phoneNumber").split(",");
+//			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2],
+//					lastName[3], lastName[4], lastName[5]);
+//			String[] email = data.get("email").split(",");
+//			signUpPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2], email[3], email[4],
+//					email[5]);
+//			String[] phoneNumber = data.get("phoneNumber").split(",");
+//			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
+//					phoneNumber[2], phoneNumber[3], phoneNumber[4], phoneNumber[5]);
+//			String[] password = data.get("password").split(",");
+//			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
+//					password[3], password[4], password[5]);
+//			String[] confirmPassword = data.get("newPassword").split(",");
+//			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
+//					confirmPassword[1], confirmPassword[2], confirmPassword[3], confirmPassword[4], confirmPassword[5]);
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
 
 }

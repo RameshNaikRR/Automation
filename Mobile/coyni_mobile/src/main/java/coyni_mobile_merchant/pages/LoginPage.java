@@ -32,7 +32,8 @@ public class LoginPage extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'tvAction')]");
 	private By btnCross = MobileBy.xpath("");
-	private By iconFace = MobileBy.xpath("");
+	private By iconFace = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]");
+	private By eyeIcon = MobileBy.xpath("//*[contains(@resource-id,'endIconIV')]");
 
 	public void clickOk() {
 		click(btnOk, "ok");
@@ -58,6 +59,21 @@ public class LoginPage extends MobileFunctions {
 		click(btnCross, "Cross");
 	}
 
+	public void clickEyeIcon() {
+		click(eyeIcon, "eyeIcon");
+	}
+	
+	public void verifyPasswordMaskedView(String password) {
+		click(eyeIcon, "eyeIcon");
+		click(eyeIcon, "eyeIcon");
+//		int a= getText(txtPassword).length();
+		if(password.length()==getText(txtPassword).length() && getText(txtPassword).contains("........")) {
+		ExtentTestManager.setPassMessageInReport("Password is Masked by the : "+ getText(txtPassword));	
+		}else {
+			ExtentTestManager.setFailMessageInReport("Password is not masked  : "+ getText(txtPassword));	
+		}
+	}
+	
 	public void verifyEmailview() {
 		new CommonFunctions().elementView(txtEmail, "email");
 	}

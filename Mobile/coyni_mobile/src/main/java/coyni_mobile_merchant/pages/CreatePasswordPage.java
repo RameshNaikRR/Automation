@@ -38,6 +38,17 @@ public class CreatePasswordPage extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
+	public void verifyPasswordMaskedView(String password) {
+//		click(eyeIconNew, "eyeIcon");
+//		click(eyeIconNew, "eyeIcon");
+//		int a= getText(txtPassword).length();
+		if(password.length()==getText(txtNewPassword).length() && getText(txtNewPassword).contains("........")) {
+		ExtentTestManager.setPassMessageInReport("Password is Masked by the : "+ getText(txtNewPassword));	
+		}else {
+			ExtentTestManager.setFailMessageInReport("Password is not masked  : "+ getText(txtNewPassword));	
+		}
+	}
+	
 	public void fillConfirmPassword(String confirmPassword) {
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
 		click(txtConfirmPassword, " Confirm Password");
