@@ -36,7 +36,7 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			//loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			// loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
@@ -47,6 +47,47 @@ public class LoginTest {
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.clickRefresh();
+			loginPage.getEmail();
+			Thread.sleep(5000);
+			loginPage.viewForgotEmail();
+			loginPage.viewForgotPassword();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			// loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickeyeIcon();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickNext();
+			loginPage.authyComponent().clickGoBack();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+				Thread.sleep(3000);
+				// loginPage.authyComponent().verifyMessage(data.get("message"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				Thread.sleep(3000);
+				// loginPage.authyComponent().verifyMessage(data.get("message"));
+				ExtentTestManager.setInfoMessageInReport("ok ");
+			}
+			loginPage.tokenAccountPage().clickTokenAccount();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}

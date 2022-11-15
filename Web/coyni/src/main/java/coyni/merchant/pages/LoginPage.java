@@ -17,6 +17,7 @@ import coyni.merchant.components.UserNameDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.Navigation;
 
 public class LoginPage extends BrowserFunctions {
 
@@ -27,13 +28,34 @@ public class LoginPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
+
 	private By lblerrorMsg = By.cssSelector("span.error");
+
 	private By lblEmail = By.cssSelector("");
+
 	private By txtOTP = By.cssSelector("");
 	private By iconeye = By.cssSelector(".icon-button");
 
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
+	}
+
+	public void clickRefresh() {
+		navigate(Navigation.REFRESH);
+	}
+
+	public void getEmail() {
+		String text = getText(txtEmail, "Email");
+		ExtentTestManager.setInfoMessageInReport("No Text displayed " + text);
+
+	}
+
+	public void viewForgotEmail() {
+		new CommonFunctions().elementView(lnkForgotEmail, "Forgot Email");
+	}
+
+	public void viewForgotPassword() {
+		new CommonFunctions().elementView(lnkForgotPassword, "Forgot Password");
 	}
 
 	public void fillPassword(String password) throws AWTException {
@@ -177,6 +199,10 @@ public class LoginPage extends BrowserFunctions {
 
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
+	}
+
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
 	}
 
 	public ForgotPasswordComponent forgotPasswordComponent() {

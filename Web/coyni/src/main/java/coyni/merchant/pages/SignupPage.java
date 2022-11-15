@@ -207,7 +207,7 @@ public class SignupPage extends BrowserFunctions {
 			ExtentTestManager.setPassMessageInReport("Next button is Disabled");
 		}
 	}
-	
+
 	public void verifyPasswordMaskedView(String attribute, String password) {
 		String attributeValue = getAttributeValue(txtPassword, attribute, password);
 		if (attributeValue.contains("password")) {
@@ -406,11 +406,7 @@ public class SignupPage extends BrowserFunctions {
 			height += temp;
 			Thread.sleep(200);
 		}
-//		for (int i = 0; i <= noOfPages+2; i++) {
-//			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
-//			height += temp;
-//			Thread.sleep(200);
-//		}
+
 	}
 
 	public void scrollDownPrivacyPolicy() throws InterruptedException {
