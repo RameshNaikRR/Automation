@@ -109,9 +109,6 @@ public class SignupPage extends BrowserFunctions {
 		new CommonFunctions().verifyAutoFocus(txtFirstName, "First Name");
 	}
 
-//	public void verifyElementOpacity() {
-//		new CommonFunctions().verifyElementOpacity(lblLastName, "Last Name");
-//	}
 	public void fillCreatePassword1(String createPassword) {
 		enterText(txtCreatePassword, createPassword, "Create Password");
 	}
@@ -166,7 +163,6 @@ public class SignupPage extends BrowserFunctions {
 				ExtentTestManager
 						.setFailMessageInReport("Password field does not satisifies strength condition : " + text);
 			}
-//			new CommonFunctions().clearText(txtCreatePassword, "Create Password");
 
 			clearText(txtCreatePassword, "Create Password");
 		}

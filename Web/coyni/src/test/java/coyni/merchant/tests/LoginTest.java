@@ -12,6 +12,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
+import coyni.merchant.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
@@ -19,11 +20,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
+	TokenAccountPage tokenAccountPage;
 
 	@BeforeMethod
 	public void init() {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
+		tokenAccountPage = new TokenAccountPage();
 
 	}
 
@@ -36,7 +39,6 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			// loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
@@ -66,7 +68,6 @@ public class LoginTest {
 			loginPage.viewForgotPassword();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			// loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
@@ -79,11 +80,9 @@ public class LoginTest {
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
 				Thread.sleep(3000);
-				// loginPage.authyComponent().verifyMessage(data.get("message"));
 			} else {
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 				Thread.sleep(3000);
-				// loginPage.authyComponent().verifyMessage(data.get("message"));
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
 			loginPage.tokenAccountPage().clickTokenAccount();
@@ -206,7 +205,6 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
-			// loginPage.authyComponent().clickSms();
 //			for (int i = 0; i <= 4; i++) {
 //				Thread.sleep(2000);
 			loginPage.phoneVerificationComponent().clickResend();

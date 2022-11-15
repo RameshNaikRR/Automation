@@ -1000,61 +1000,6 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testRemoveCogentAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickTokenAccount();
-			tokenAccountPage.clickBuyTokens();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
-			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("signetNumber"));
-			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testWithdrawToUSDCogentAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickTokenAccount();
-			tokenAccountPage.clickWithdrawToUSD();
-			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
-					.clickCogent(data.get("cogentNumber"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.getWithdrawAmount();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.getProcessingFee();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.getTotal();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.clickConfirm();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.authyComponent().fillInput(data.get("code1"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
-					.authyComponent().successFailureComponent();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testWithdrawToUSDDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1119,6 +1064,194 @@ public class TokenAccountTest {
 			Thread.sleep(5000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickCoyniConvertion();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.enterMessage(data.get("description"));
+
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRemoveCogentAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideMenuBarComponent.clickTokenAccount();
+//			tokenAccountPage.clickBuyTokens();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
+//			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("signetNumber"));
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//		}
+//	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDCogentAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.clickCogent(data.get("cogentNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getWithdrawAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getProcessingFee();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getTotal();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.authyComponent().fillInput(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.authyComponent().successFailureComponent();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRemoveSignetAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideMenuBarComponent.clickTokenAccount();
+//			tokenAccountPage.clickBuyTokens();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickSignet();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
+//			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickDeleteSignetAccount(data.get("signetNumber"));
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().removePaymentMethodPopup().clickOnRemove();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//
+//		}
+//	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.clickSignet(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getWithdrawAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getProcessingFee();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.getTotal();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.authyComponent().fillInput(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().withdrawToSignetPreviewPopup()
+					.authyComponent().successFailureComponent();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDDeleteSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickDeleteSignetAccount(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().clickOnRemove();
+			tokenAccountPage.withdrawCoyniToUSDPopup().removePaymentMethodPopup().successFailurePopupCardComponent()
+					.verifyPaymnetRemovedSuccessfulHeading();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDAddSignetAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickAddNewSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.fillName(data.get("newCogentAccount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.fillSignetWalletId(data.get("walletID"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillCity(data.get("city1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().selectState(data.get("state1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().addNewSignetAccountPopup()
+					.clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDSignetAccountInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnSignetAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
+					.clickSignet(data.get("signetNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().enterAmount(data.get("amount"));
+			Thread.sleep(5000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup().clickCoyniConvertion();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToSignetAccountPopup()
 					.enterMessage(data.get("description"));
 
 			if (!data.get("errMessage").isEmpty()) {

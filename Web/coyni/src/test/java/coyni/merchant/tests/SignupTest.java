@@ -396,7 +396,6 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickSharedDropDown();
-			// sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);
 
@@ -415,7 +414,6 @@ public class SignupTest {
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickOnPersonalAccount();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
-//			sideMenuBarComponent.clickSharedDropDown();
 			sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);

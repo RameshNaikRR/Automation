@@ -72,6 +72,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	}
 
 	public void clickOnCogentAccount() {
+		click(getPaymentBnts("4"), "Cogent Account");
+	}
+
+	public void clickOnSignetAccount() {
 		click(getPaymentBnts("4"), "Signet Account");
 	}
 
