@@ -27,7 +27,7 @@ public class AccountLimitsComponent extends BrowserFunctions {
 		click(btnView, "view");
 
 	}
-
+//mm
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "expHeading", expHeading);
 
