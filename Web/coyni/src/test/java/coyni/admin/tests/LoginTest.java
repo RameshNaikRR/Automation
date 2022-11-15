@@ -483,4 +483,26 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testNewCodeUpto5Times(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.clickSms();
+			for(int i=1;i<=5;i++)
+			{
+			loginPage.clickResendVerification();
+			loginPage.verifyNewVerification();
+			}
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
 }

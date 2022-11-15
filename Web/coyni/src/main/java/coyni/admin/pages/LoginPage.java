@@ -9,6 +9,7 @@ import coyni.admin.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.WaitForElement;
 
 public class LoginPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//span[text()='Log In to coyni Admin']");
@@ -19,6 +20,11 @@ public class LoginPage extends BrowserFunctions {
 	private By btnNext = By.cssSelector(".business-login__login-button");
 	private By lnkForgotEmail = By.xpath("//button[.='Forgot Email?']");
 	private By lnkForgotPassword = By.xpath("//button[.='Forgot Password?']");
+	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
+	private By btnSms = By.xpath("//button[contains(@class,'text-x')]");
+	private By btnResendVerification = By.xpath("//button[contains(@class,'text-cm3 hover:underline mt')]");
+	private By btnNewVerification = By.xpath("//div[contains(@class,'text-cgn')]");
+	
 
 	public void verifyPageHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", heading);
@@ -106,5 +112,19 @@ public class LoginPage extends BrowserFunctions {
 		return new ForgotEmailPage();
 
 	}
+	public void clickSignUp() {
+		click(lnkSignUp, "SignUp");
+	}
+	public void clickSms() {
+		click(btnSms, "Sms");
+	}
+	public void clickResendVerification() {
+		click(btnResendVerification, "Resend Verification code");
+	}
+	public void verifyNewVerification() {
+	waitForElement(btnNewVerification, waittime, WaitForElement.presence);
+	ExtentTestManager.setInfoMessageInReport("New Verification code is sent");
+	}
+
 
 }

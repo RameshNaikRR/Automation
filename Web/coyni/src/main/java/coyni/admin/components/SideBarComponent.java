@@ -212,6 +212,12 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSubMenuItems("Push Notifications"), "Push Notifications");
 		Thread.sleep(4000);
 	}
+	public void clickMerchant() throws InterruptedException{
+
+		click(getSubMenuItems("Merchant"), "Merchant");
+		Thread.sleep(4000);
+	}
+
 
 	public void verifyTotalDepositsView() throws InterruptedException{
 		new CommonFunctions().elementView(getSubMenuItems("Total Deposits"), "TotalDeposits");
