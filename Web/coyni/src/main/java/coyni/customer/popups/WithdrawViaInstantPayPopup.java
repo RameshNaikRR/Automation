@@ -44,6 +44,20 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		enterText(txtAmount, Amount, "Amount");
 
 	}
+	
+	public String getProcessingFee(String amount) {
+		new ProcessingFeeComponent().getAmount(amount);
+		new ProcessingFeeComponent().getProcessingFeePercentageValue();
+		new ProcessingFeeComponent().getDollarAmount();
+		String totalProcessingFee = new ProcessingFeeComponent().getTotalProcessingFee(amount);
+		
+		return totalProcessingFee;
+		
+	}
+	
+	public void verifyProcessingFee(String amount, String processingFee, String totalAmount) {
+		new ProcessingFeeComponent().verifyProcessingFee(amount, processingFee,totalAmount);
+	}
 
 	public void enterMessage(String Message) {
 		enterText(txtmsg, Message, "Message");
