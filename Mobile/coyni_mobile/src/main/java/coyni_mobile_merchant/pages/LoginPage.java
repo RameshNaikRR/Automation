@@ -35,6 +35,8 @@ public class LoginPage extends MobileFunctions {
 	private By iconFace = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]");
 	private By eyeIcon = MobileBy.xpath("//*[contains(@resource-id,'endIconIV')]");
 
+	
+	//Login Page
 	public void clickOk() {
 		click(btnOk, "ok");
 	}

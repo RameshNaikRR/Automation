@@ -406,6 +406,7 @@ public class LoginTest {
 	public void testRetrieveWithFieldValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			//Retreive email
 			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));

@@ -24,7 +24,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Forgot Password Description ", expDescription);
 	}
-
+//forgot password
 	public void fillEmail(String email) {
 		enterText(txtEmail, email, "Email");
 		DriverFactory.getDriver().hideKeyboard();

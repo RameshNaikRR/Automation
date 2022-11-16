@@ -21,6 +21,8 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'reCardViewNextBtn')]");
 	private By iconCross = MobileBy.xpath("//*[contains(@resource-id,'imgREClose')]");
 
+	
+	//retrieve email page
 	public void clickRetrieveEmail() {
 		click(lnkRetrieveEmail, "Retrieve Email");
 	}

@@ -42,6 +42,7 @@ public class SignUpPage extends MobileFunctions {
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	
+	//sign up page
 	public void clickDone() {
 		if (new CommonFunctions().isPlatformiOS()) {
 			click(btnDone, "Done");
