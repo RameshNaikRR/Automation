@@ -53,12 +53,17 @@ public class PaymentMethodsTest {
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyFullName();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyRoutingNumber(data.get("rountingNumber"));
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyStatus();
-			   int j = customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyBuyTokenButton();		
-				if (j==0) {
+			 int j = customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyBuyTokenButton();		
+	            int k = customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().verifyWithdrawButton();
+				if (j==0 && k==0) {
 	            customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickDone();
 				}
-				else {
+				else if(k==0){
 					customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickBuyToken();
+				}
+				
+				else {
+					customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addBankAccountPopup().bankAccountAddedPopup().clickWithdraw();
 				}
 			/*
 			 * customerProfilePage.paymentMethodsComponent().addExternalBankAccountPopup().
@@ -480,8 +485,8 @@ public class PaymentMethodsTest {
 			//customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
 			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().verifyAddNewCreditCard(data.get("verifyAddNewCardHeading"));
-			customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().clickBack();
-			customerProfilePage.paymentMethodsComponent().verifyAddNewPaymentMethods(data.get("verifyHeading"));
+			//customerProfilePage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().clickBack();
+			//customerProfilePage.paymentMethodsComponent().verifyAddNewPaymentMethods(data.get("verifyHeading"));
 			customerProfilePage.paymentMethodsComponent().addCardComponent().clickClose();
 			customerProfilePage.paymentMethodsComponent().verifyPaymentMethodsview();
 			customerProfilePage.paymentMethodsComponent().clickAddNewPaymentMethod();

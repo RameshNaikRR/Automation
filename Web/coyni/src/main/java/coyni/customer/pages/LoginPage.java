@@ -31,6 +31,9 @@ public class LoginPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
+	private By btnDone =By.xpath("//button[text()='Done']");
+	private By btnAgree = By.xpath("//button[text()='Agree']");
+
 
 	private By lblerrorMsg = By.cssSelector("span.error");
 
@@ -184,6 +187,34 @@ public class LoginPage extends BrowserFunctions {
 		validateLoginField(txtPassword, "Password", passwordField);
 	}
 
+
+	public int verifyDoneButton() {
+		int i = getElementsList(btnDone, "Done").size();
+		return i;
+	}
+	
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
+	
+	public int verifyAgreeButton() {
+		int i = getElementsList(btnAgree, "").size();
+		return i;
+	}
+	
+	public void clickAgree() {
+		click(btnAgree, "Agree");
+	}
+	
+	public void verifyScroll() {
+		scrollToElement(btnAgree, getCopiedData());
+	}
+	
+	public boolean verifyDoneButtonDisabled() {
+	 boolean j =verifyElementDisabled(btnDone, "Button is disabled") ;
+	 return j;
+			}
+	
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
 	}

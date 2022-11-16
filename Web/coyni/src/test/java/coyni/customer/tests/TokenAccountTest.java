@@ -11,6 +11,7 @@ import coyni.customer.pages.ExportfilesPage;
 import coyni.customer.pages.GetHelpPage;
 import coyni.customer.pages.LoginPage;
 import coyni.customer.pages.TokenAccountPage;
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
@@ -1407,15 +1408,21 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.verifyLabelHeading(data.get("instantPayHeading"));
 
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.clickDebitCard(data.get("last4digits"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.verifyLabelHeading(data.get("instantPayHeading"));
+			/*
+			 * tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			 * .clickDebitCard(data.get("last4digits"));
+			 * tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().
+			 * clickOnNext();
+			 * tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+			 * .verifyLabelHeading(data.get("instantPayHeading"));
+			 */
 //			ExtentTestManager.setInfoMessageInReport("Daily Limit  is displayed as "
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			Thread.sleep(3000);
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.getPaymentItems(data.get("last4digits"));
@@ -1426,7 +1433,7 @@ public class TokenAccountTest {
 					.enterMessage(data.get("transactionalmessage"));
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-
+			 tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().processingFeeComponent().verifyProcessingFee(data.get("amount"), processingFee, totalAmount);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
@@ -1434,7 +1441,8 @@ public class TokenAccountTest {
 					.verifyHeading(data.get("authyVerificationHeading"));
 			// tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup().verifyAuthy();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
-					.fillAuthyInput(data.get("securityKey"));
+					.fillInput(data.get("code"));
+			Thread.sleep(2000);
 //			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().orderPreviewPopup()
 //					.verifyHeading(data.get("expTransactionInProgressHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
@@ -1865,7 +1873,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
 					.verifyHeadingOrderPreview(data.get("orderHeading"));
@@ -1877,7 +1885,7 @@ public class TokenAccountTest {
 			// tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
 					.verifyHeadingOrderPreview(data.get("orderHeading"));

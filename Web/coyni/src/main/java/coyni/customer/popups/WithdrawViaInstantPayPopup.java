@@ -12,6 +12,7 @@ import coyni.customer.components.EditandDeleteComponent;
 import coyni.customer.components.MailingAddressComponent;
 import coyni.customer.components.NavigationComponent;
 import coyni.customer.components.PaymentMethodsComponent;
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -36,7 +37,7 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 	private By lbldailyLimit = By.xpath("//h2[@class='text-cgy2 text-xs font-sans text-center mt-3']");
 	private By btnRadioDebit = By.xpath("(//input[@name='buy-token-radio'])[1]");
 	private By btnAddNewDebit = By.xpath("//span[contains(text(),'Add New Debit Card')]");
-	private By toggle = By.xpath("//img[@src='/static/media/Flip-Icon.ec69897c.svg']");
+	private By toggle = By.xpath("//button[@id='flip-button']");
 	private By errMessageforInsufficientFunds = By.xpath("//p[text()='Insufficient funds']");
 
 	public void enterAmount(String Amount) {
@@ -246,6 +247,10 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		mailingAddressComponent().fillZipCode(zipCode);
 		mailingAddressComponent().verifyCountry(country);
 
+	}
+	
+	public ProcessingFeeComponent processingFeeComponent() {
+		return new ProcessingFeeComponent();
 	}
 
 }

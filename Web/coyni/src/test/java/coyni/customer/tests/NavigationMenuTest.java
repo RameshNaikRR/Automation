@@ -59,7 +59,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.clickQRcode();
 			navigationMenuPage.myQRCodeComponent().verifyCopy(); // data.get("copy")
 			Thread.sleep(1000);
-			navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			//navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			navigationMenuPage.myQRCodeComponent().clickShare();
 
 			if (textBox.equalsIgnoreCase("email")) {
@@ -102,7 +102,7 @@ public class NavigationMenuTest {
 			navigationMenuPage.clickQRcode();
 			navigationMenuPage.myQRCodeComponent().verifyCopy(); // data.get("copy")
 			Thread.sleep(1000);
-			navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
+			//navigationMenuPage.myQRCodeComponent().verifytxtCopyToClipBoard(data.get("copyToClipBoard"));
 			navigationMenuPage.myQRCodeComponent().clickShare();
 			navigationMenuPage.myQRCodeComponent().fillPhoneNumber(data.get("phoneNumber"));
 			navigationMenuPage.myQRCodeComponent().fillTextEmail(data.get("email1"));

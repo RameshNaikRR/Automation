@@ -120,9 +120,9 @@ public class NavigationMenuPage extends BrowserFunctions {
 		String id = getText(lblAccountId, "Account ID").split(" ")[2];
 		System.out.println("id: " + id);
 		if (id.equals(expAccountID)) {
-			ExtentTestManager.setPassMessageInReport("Account Id is verified");
+			ExtentTestManager.setPassMessageInReport(id +" Account Id is verified");
 		} else {
-			ExtentTestManager.setWarningMessageInReport("Account Id is not verified");
+			ExtentTestManager.setWarningMessageInReport(id +" Account Id is not verified");
 		}
 	}
 

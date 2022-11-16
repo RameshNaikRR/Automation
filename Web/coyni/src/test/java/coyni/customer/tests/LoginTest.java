@@ -81,6 +81,14 @@ public class LoginTest {
 		//	loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
 					Thread.sleep(3000);
+					/*
+					 * int i = loginPage.verifyDoneButton(); int j = loginPage.verifyAgreeButton();
+					 * if(loginPage.verifyDoneButtonDisabled()==true) { loginPage.clickDone(); }
+					 * else if(!(i==0) || (j==0)) {
+					 * 
+					 * }
+					 */
+
 			//loginPage.authyComponent().verifyMessage(data.get("message"));
 			// loginPage.authyComponent().verifyLogin();
 		} catch (Exception e) {

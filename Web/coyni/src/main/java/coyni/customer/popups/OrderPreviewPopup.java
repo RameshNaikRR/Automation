@@ -18,7 +18,7 @@ public class OrderPreviewPopup extends BrowserFunctions {
 	private By processingFee = By.xpath("(//div[@class='flex items-center justify-between py-1'])[2]");
 	private By lblProcessinFee = By.xpath("//span[contains(text(),'Processing Fee')]");
 	private By total = By.xpath("(//div[@class='flex items-center justify-between py-1'])[3]");
-	private By heading = By.xpath("//h1[text()='Verify Your Identity']");
+	private By heading = By.xpath("//h1[text()='Transaction In Progress']");
 	private By lblOrderPreviewHeading = By.xpath("//h1[contains(text(),'Order Preview')]");
 	private By lblPurchaseAmount = By.xpath("//span[contains(text(),'Purchase Amount')]");
 	private By lblTotal = By.xpath("//span[contains(text(),'Total')]");
