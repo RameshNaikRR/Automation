@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -18,11 +19,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class LoginTest {
 
 	LoginPage loginPage;
+	SideBarComponent sidebarcomponent;
 
 	@BeforeMethod
 	public void init() {
 
 		loginPage = new LoginPage();
+		sidebarcomponent = new SideBarComponent();
 	}
 
 	@Test
@@ -499,6 +502,51 @@ public class LoginTest {
 			loginPage.verifyNewVerification();
 			}
 			
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void handSymbolHighlighted(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.handSymbolHighlightedCoyniPortal(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedTransactions(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedProfiles(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedUnderwriting(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedDisputes(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedReserveMgmt(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedAccounting(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedGatewaySettings(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedExportedFiles(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedBalanceReports(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedSystemSettings(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedCommissionAccount(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			
+			loginPage.handSymbolHighlightedPersonals(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedMerchant(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedAPIBusiness(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedCoyniEmployees(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			
+			//loginPage.handSymbolHighlightedUnderwritingPersonals(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedUnderwritingMerchant(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedAPIBusiness(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			
+			loginPage.handSymbolHighlightedTotalWithdraw(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedTotalDeposits(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			
+			loginPage.handSymbolHighlightedPaymentGateways(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedLoadBalancer(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			
+			loginPage.handSymbolHighlightedAgreements(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedFeeStructure(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedAccountLimits(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedFeatureControls(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedCardBlackList(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);

@@ -243,7 +243,7 @@ public class CommonFunctions {
 			ExtentTestManager.setPassMessageInReport(
 					String.format("%s css property value changed to ", cssProp) + "" + expColor);
 		} else {
-			ExtentTestManager.setFailMessageInReport(
+			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s css property value is not changed to ", cssProp) + "" + expColor);
 		}
 

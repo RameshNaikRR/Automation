@@ -1,11 +1,13 @@
 package coyni.admin.components;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeTest;
 
 import coyni.admin.pages.BalanceReportsPage;
 import coyni.admin.pages.CommissionAccountPage;
 import coyni.admin.pages.FeatureControlPage;
 import coyni.admin.pages.FeeStructurePage;
+import coyni.admin.pages.HomePage;
 import coyni.admin.pages.ReserveManagementPage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
@@ -16,6 +18,14 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarComponent extends BrowserFunctions {
+	CommonFunctions commonfunctions;
+
+	@BeforeTest
+	public void init() {
+		commonfunctions = new CommonFunctions();
+
+	}
+
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
 
 	public void verifyCursorAction() {
@@ -32,58 +42,69 @@ public class SideBarComponent extends BrowserFunctions {
 				"(//span[(contains(@class,'menu' ) or contains(@class,'label') or contains(@class,'Label'))and text()='%s'])[1]",
 				elementName));
 	}
-	
+
 	public void clickCoyniPortal() throws InterruptedException {
-		click(getSideBarItems("Coyni Portal"), "Coyni Portal");
+		commonfunctions.verifyCursorAction(getSideBarItems("coyni Portal"), "coyni Portal");
+		click(getSideBarItems("coyni Portal"), "coyni Portal");
 		Thread.sleep(4000);
 	}
 
-	public void clickTransactions() throws InterruptedException{
+	public void clickTransactions() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Transactions"), "Transactions");
 		click(getSideBarItems("Transactions"), "Transactions");
 		Thread.sleep(4000);
 	}
 
-	public void clickProfiles() throws InterruptedException{
+	public void clickProfiles() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Profiles"), "Profiles");
 		click(getSideBarItems("Profiles"), "Profiles");
 		Thread.sleep(4000);
 	}
 
-	public void clickUnderWriting() throws InterruptedException{
+	public void clickUnderWriting() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Underwriting"), "Underwriting ");
 		click(getSideBarItems("Underwriting"), "UnderWriting");
 		Thread.sleep(4000);
 	}
 
-	public void clickDisputes() throws InterruptedException{
+	public void clickDisputes() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Disputes"), "Disputes");
 		click(getSideBarItems("Disputes"), "Disputes");
 		Thread.sleep(4000);
 	}
 
-	public void clickReserveManagement() throws InterruptedException{
+	public void clickReserveManagement() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Reserve Mgmt."), "Reserve Mgmt.");
 		click(getSideBarItems("Reserve Mgmt."), "Reserve Management");
 		Thread.sleep(4000);
 	}
 
-	public void clickAccounting() throws InterruptedException{
+	public void clickAccounting() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Accounting"), "Accounting");
 		click(getSideBarItems("Accounting"), "Accounting");
 		Thread.sleep(4000);
 	}
 
-	public void clickGatewaySettings() throws InterruptedException{
+	public void clickGatewaySettings() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Gateway Settings"), "Gateway Settings");
 		click(getSideBarItems("Gateway Settings"), "Gateway Settings");
 		Thread.sleep(4000);
 	}
 
-	public void clickExportedFiles() throws InterruptedException{
+	public void clickExportedFiles() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Exported Files"), "Exported Files");
 		click(getSideBarItems("Exported Files"), "Exported Files");
 		Thread.sleep(4000);
 	}
 
-	public void clickBalanceReports() throws InterruptedException{
+	public void clickBalanceReports() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("Balance Reports"), "Balance Reports");
 		click(getSideBarItems("Balance Reports"), "Balance Reports");
 		Thread.sleep(4000);
 	}
 
-	public void clickSystemSettings() throws InterruptedException{
+	public void clickSystemSettings() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSideBarItems("System Settings"), "System Settings");
 		click(getSideBarItems("System Settings"), "System Settings");
 		Thread.sleep(4000);
 	}
@@ -93,133 +114,133 @@ public class SideBarComponent extends BrowserFunctions {
 
 	}
 
-	public void clickTokenAccount() throws InterruptedException{
-		// clickCoyniPortal();
+	public void clickTokenAccount() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Token Account"), "Token Account");
 		click(getSubMenuItems("Token Account"), "Token Account");
 		Thread.sleep(4000);
 	}
 
-	public void clickCommissionAccount() throws InterruptedException{
-		// clickCoyniPortal();
+	public void clickCommissionAccount() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Commission Account"), "Commission Account");
 		click(getSubMenuItems("Commission Account"), "Commission Account");
 		Thread.sleep(4000);
 	}
 
-	public void clickPersonals() throws InterruptedException{
-		// clickProfiles();
+	public void clickPersonals() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Personal"), "Personal");
 		click(getSubMenuItems("Personal"), "Personal");
 		Thread.sleep(4000);
 	}
 
-	public void clickBusinesses()throws InterruptedException {
-
+	public void clickBusinesses() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Businesses"), "Businesses");
 		click(getSubMenuItems("Businesses"), "Businesses");
 		Thread.sleep(4000);
 	}
 
-	public void clickCoyniEmployees() throws InterruptedException{
-
-		click(getSubMenuItems("Coyni Employees"), "Coyni Employees");
+	public void clickCoyniEmployees() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("coyni Employees"), "coyni Employees");
+		click(getSubMenuItems("coyni Employees"), "coyni Employees");
 		Thread.sleep(4000);
 	}
 
-	public void clickLedgers() throws InterruptedException{
-
+	public void clickLedgers() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Ledgers"), "Ledgers");
 		click(getSubMenuItems("Ledgers"), "Ledgers");
 		Thread.sleep(4000);
 	}
 
-	public void clickAPIBusinessess() throws InterruptedException{
-
-		click(getSubMenuItems("API Users"), "API Businesses");
+	public void clickAPIBusinessess() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API Users");
+		click(getSubMenuItems("API Business"), "API Businesses");
 		Thread.sleep(4000);
 	}
 
-	public void clickPersonal() throws InterruptedException{
-
+	public void clickPersonal() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Personal"), "Personal");
 		click(getSubMenuItems("Personal"), "Personal");
 		Thread.sleep(4000);
 	}
 
-	public void clickBusiness() throws InterruptedException{
-
+	public void clickBusiness() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Business"), "Business");
 		click(getSubMenuItems("Business"), "Business");
 		Thread.sleep(4000);
 	}
 
-	public void clickTotalWithdraw() throws InterruptedException{
-
+	public void clickTotalWithdraw() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Total Withdraw"), "Total Withdraw");
 		click(getSubMenuItems("Total Withdraw"), "Total Withdraw");
 		Thread.sleep(4000);
 	}
 
-	public void clickTotalDeposits() throws InterruptedException{
-
+	public void clickTotalDeposits() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Total Deposits"), "Total Deposits");
 		click(getSubMenuItems("Total Deposits"), "Total Deposits");
 		Thread.sleep(4000);
 	}
 
-	public void clickPaymentGateways() throws InterruptedException{
-
+	public void clickPaymentGateways() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 		click(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 		Thread.sleep(4000);
 	}
 
-	public void clickLoadBalancer() throws InterruptedException{
-
+	public void clickLoadBalancer() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Load Balancer"), "Load Balancer");
 		click(getSubMenuItems("Load Balancer"), "Load Balancer");
 		Thread.sleep(4000);
 	}
 
-	public void clickAgreements() throws InterruptedException{
-
+	public void clickAgreements() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Agreements"), "Agreements");
 		click(getSubMenuItems("Agreements"), "Agreements");
 		Thread.sleep(4000);
 	}
 
-	public void clickFeeStructure() throws InterruptedException{
-		// clickSystemSettings();
+	public void clickFeeStructure() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Fee Structure"), "Fee Structure");
 		click(getSubMenuItems("Fee Structure"), "Fee Structure");
 		Thread.sleep(4000);
 	}
 
-	public void clickAccountLimits() throws InterruptedException{
-
+	public void clickAccountLimits() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Account Limits"), "Account Limits");
 		click(getSubMenuItems("Account Limits"), "Account Limits");
 		Thread.sleep(4000);
 	}
 
-	public void clickPermissions() throws InterruptedException{
-
+	public void clickPermissions() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Permissions"), "Permissions");
 		click(getSubMenuItems("Permissions"), "Permissions");
 		Thread.sleep(4000);
 	}
 
-	public void clickFeatureControls() throws InterruptedException{
-		// clickSystemSettings();
+	public void clickFeatureControls() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Feature Controls"), "Feature Controls");
 		click(getSubMenuItems("Feature Controls"), "Feature Controls");
 		Thread.sleep(4000);
 	}
 
-	public void clickCardBlackList() throws InterruptedException{
-
-		click(getSubMenuItems("Card BlackList"), "Card BlackList");
+	public void clickCardBlackList() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Card Blacklist"), "Card Blacklist");
+		click(getSubMenuItems("Card Blacklist"), "Card Blacklist");
 		Thread.sleep(4000);
 	}
 
-	public void clickPushNotifications() throws InterruptedException{
-
+	public void clickPushNotifications() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Push Notifications"), "Push Notifications");
 		click(getSubMenuItems("Push Notifications"), "Push Notifications");
 		Thread.sleep(4000);
 	}
-	public void clickMerchant() throws InterruptedException{
 
-		click(getSubMenuItems("Merchant"), "Merchant");
+	public void clickMerchant() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Merchants"), "Merchants");
+		click(getSubMenuItems("Merchants"), "Merchants");
 		Thread.sleep(4000);
 	}
 
-
-	public void verifyTotalDepositsView() throws InterruptedException{
+	public void verifyTotalDepositsView() throws InterruptedException {
 		new CommonFunctions().elementView(getSubMenuItems("Total Deposits"), "TotalDeposits");
 		Thread.sleep(4000);
 	}
