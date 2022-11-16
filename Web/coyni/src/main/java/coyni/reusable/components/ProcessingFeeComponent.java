@@ -12,20 +12,6 @@ public class ProcessingFeeComponent extends BrowserFunctions {
 	String finalProcessingFeeAmount;
 	String finalTotal = null;
 
-	/*
-	 * float k = Float.valueOf(str4[1]); ExtentTestManager.
-	 * setInfoMessageInReport("The dollar amount for tracastion is "+" $"+k); float
-	 * amount1 =Float.valueOf(amount); float percentage = i/100*amount1; String s =
-	 * String.format("%.2f %n",percentage);
-	 * ExtentTestManager.setInfoMessageInReport("The Percentace Amount of " +amount
-	 * +"is" + s); float percentageAmount = Float.valueOf(s); float
-	 * totalProcessingAmount = percentageAmount + amount1; float totalvalue = k +
-	 * percentageAmount + amount1;
-	 * ExtentTestManager.setInfoMessageInReport("The Total amoount is" +
-	 * totalvalue); finalProcessingFeeAmount =
-	 * String.valueOf(totalProcessingAmount); finalAmount =String.valueOf(amount1);
-	 * finalTotal =String.valueOf(totalvalue);
-	 */
 	public float getProcessingFeePercentageValue() {
 		String lblFee = getText(lblProcessingFee, "Fee Amount");
 		ExtentTestManager.setInfoMessageInReport(lblFee);
