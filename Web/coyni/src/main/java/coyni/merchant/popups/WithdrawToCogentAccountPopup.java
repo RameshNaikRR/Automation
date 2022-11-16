@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -80,7 +81,7 @@ public class WithdrawToCogentAccountPopup extends BrowserFunctions {
 	public void verifyCoyniConvertion() {
 		cf.elementView(btnCoyniConvert, "Coyni Convertion");
 	}
-	
+
 	public void clickTab() throws AWTException {
 		new CommonFunctions().clickOutSideElement();
 	}
@@ -156,7 +157,8 @@ public class WithdrawToCogentAccountPopup extends BrowserFunctions {
 		return new WithdrawToCogentPreviewPopup();
 	}
 
-	public WithdrawToSignetPreviewPopup withdrawToSignetPreviewPopup() {
-		return new WithdrawToSignetPreviewPopup();
+	public ProcessingFeeComponent processingFeeComponent() {
+		return new ProcessingFeeComponent();
 	}
+
 }

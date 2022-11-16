@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -145,6 +146,10 @@ public class WithdrawToSignetAccountPopup extends BrowserFunctions {
 
 	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
 		return new AddNewSignetAccountPopup();
+	}
+
+	public ProcessingFeeComponent processingFeeComponent() {
+		return new ProcessingFeeComponent();
 	}
 
 	public WithdrawToSignetPreviewPopup withdrawToSignetPreviewPopup() {

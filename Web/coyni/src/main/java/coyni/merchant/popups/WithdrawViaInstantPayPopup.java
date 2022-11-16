@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -213,12 +214,14 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("button clicked for card " + (number));
 	}
 
-//
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
 	}
 
-//
+	public ProcessingFeeComponent processingFeeComponent() {
+		return new ProcessingFeeComponent();
+	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}
