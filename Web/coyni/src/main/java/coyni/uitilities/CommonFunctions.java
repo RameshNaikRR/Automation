@@ -150,9 +150,9 @@ public class CommonFunctions {
 	public void verifyTextUnderLine(By ele, String eleName) {
 		String text = objBrowserFunctions.getElement(ele, eleName).getAttribute("class");
 		if (text.contains("underline")) {
-			ExtentTestManager.setPassMessageInReport(eleName + "text is underlined when mouse hover on it");
+			ExtentTestManager.setPassMessageInReport(eleName + " text is underlined when mouse hover on it");
 		} else {
-			ExtentTestManager.setFailMessageInReport(eleName + "text is not underlined when mouse hover on it");
+			ExtentTestManager.setFailMessageInReport(eleName + " text is not underlined when mouse hover on it");
 		}
 	}
 

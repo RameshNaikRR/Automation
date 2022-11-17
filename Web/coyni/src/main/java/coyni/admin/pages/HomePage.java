@@ -63,6 +63,7 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	public void clickUserName() {
+		new CommonFunctions().verifyTextUnderLine(lbluserName, "User Name");
 		click(lbluserName, "User Name");
 	}
 

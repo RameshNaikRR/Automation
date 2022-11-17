@@ -65,10 +65,12 @@ public class CommissionAccountPage extends BrowserFunctions {
 	}
 
 	public void clickFullPayOutHistory() {
+		new CommonFunctions().verifyTextUnderLine(lblViewFullPayOutHistory, "Full PayOut History ");
 		click(lblViewFullPayOutHistory, "Full PayOut History");
 	}
 
 	public void clickFullTransactionHistory() {
+		new CommonFunctions().verifyTextUnderLine(lblViewFullTransactionHistory, "Full Transaction History ");
 		click(lblViewFullTransactionHistory, "Full Transaction History");
 	}
 
