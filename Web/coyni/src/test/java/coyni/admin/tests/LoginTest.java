@@ -161,12 +161,13 @@ public class LoginTest {
 					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
-			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
+			//loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.verifyPageHeading(data.get("chooseAccountHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.clickUser();
 			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.verifyEmail(data.get("email"));
 		//	loginPage.viewEmail();
 
 		} catch (Exception e) {
