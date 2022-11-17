@@ -316,8 +316,12 @@ public class LoginTest {
 					.verifyPageDescription(data.get("createPasswordDescription"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.verifyCreatePasswordAutoFocus();
+			loginPage.adminUserDetailsPage().clickEyeIconCurrentPassword();
+			loginPage.adminUserDetailsPage().verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillCreatePassword(data.get("createPassword"));
+			//loginPage.adminUserDetailsPage().clickEyeIconConfirmPassword();
+			loginPage.adminUserDetailsPage().verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();

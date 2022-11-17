@@ -315,4 +315,7 @@ public class LoginPage extends BrowserFunctions {
 	public void handSymbolHighlightedUnderwritingMerchant(String cssProp, String expValue, String expColor) {
 		commonfunctions.verifyChangedColor(getSubMenuItems("Merchants"), "Merchants", cssProp, expValue, expColor);
 	}
+	public AdminUserDetailsPage adminUserDetailsPage() {
+		return new AdminUserDetailsPage();
+	}
 }
