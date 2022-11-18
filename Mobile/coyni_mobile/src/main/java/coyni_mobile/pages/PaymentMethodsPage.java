@@ -10,12 +10,13 @@ import coyni_mobile.popups.RemovingPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class PaymentMethodsPage extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
-	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'cvAddPayment')]");
+	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment')]|//*[contains(@resource-id,'cvAddPayment')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
@@ -31,8 +32,38 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
 	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
 	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Visa Credit')])[1]");
+	private By btnDebitCards = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
+	private By btncreditCards = MobileBy.xpath("//*[contains(@text,'Credit')]");
+	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
+	private By numberOfBankAccounts = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankHead')]");
+	private By numberOfDebitCards = MobileBy.xpath("//*[contains(@resource-id,'tvDCardHead')]");
+	private By numberOfCreditCards = MobileBy.xpath("//*[contains(@resource-id,'tvCCardHead')]");
 	
 
+	public void verifyBankAccounts() {
+		ExtentTestManager.setPassMessageInReport("Deleted the All Bank Accounts and Present Bank Account Number is : "+getText(numberOfBankAccounts));	
+	}
+	
+	public void verifyDebitCards() {
+		ExtentTestManager.setPassMessageInReport("Deleted the All Debit Cards and Debit Card Number is : "+getText(numberOfDebitCards));	
+	}
+	
+	public void verifyCreditCards() {
+		ExtentTestManager.setPassMessageInReport("Deleted the All Credit Cards and Credit Card Number is : "+getText(numberOfCreditCards));	
+	}
+	
+	public int verifyNumOfDebitCards() {
+		return getElementList(btnDebitCards, "Debit Card").size();
+	}
+	
+	public int verifyNumOfCreditCards() {
+		return getElementList(btncreditCards, "Credit Cards").size();
+	}
+	
+	public int verifyNumOfBanks() {
+		return getElementList(btnBank, "Bank Account").size();
+	}
+	
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -67,7 +98,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickAddNewPaymentMethod() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		if (getElementList(btnAddNewPaymentMethod, "Add New Payment Method").size() > 0) {
 			click(btnAddNewPaymentMethod, "Add New Payment Method");
 		}

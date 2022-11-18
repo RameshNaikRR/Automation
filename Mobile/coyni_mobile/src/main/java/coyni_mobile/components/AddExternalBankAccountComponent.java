@@ -31,7 +31,6 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 	}
 
 	public void fillRoutingNum(String expRoutingNumber) {
-		scrollDownToElement(txtConfirmRouting, "Confirm Routing Number");
 		enterText(txtRoutingNumber, expRoutingNumber, "Routing Number");
 	}
 
@@ -52,7 +51,7 @@ public class AddExternalBankAccountComponent extends MobileFunctions {
 
 	public void clickAdd() {
 		DriverFactory.getDriver().hideKeyboard();
-		scrollDownToElement(btnAdd, "Add");
+		//scrollDownToElement(btnAdd, "Add");
 		click(btnAdd, "Add");
 	}
 

@@ -74,7 +74,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 
 	public void getReferenceID() {
 		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
-		ExtentTestManager.setPassMessageInReport("Reference ID : " + lblReferenceID);
+		ExtentTestManager.setPassMessageInReport("Reference ID : " + getText(lblReferenceID));
 	}
 
 	public void clickLogOut() {

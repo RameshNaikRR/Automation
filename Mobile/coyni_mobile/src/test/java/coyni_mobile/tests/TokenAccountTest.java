@@ -573,7 +573,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
+			
+			CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+			customerProfileTest.testAddBankAccount(strParams);
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
@@ -598,9 +601,11 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+			customerProfileTest.testAddCardWithNoCards(strParams, "debit");
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickDebitCard();
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
@@ -622,9 +627,11 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
+			CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+			customerProfileTest.testAddCardWithNoCards(strParams, "credit");	
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickCreditCard();
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().fillCvv(data.get("cvv"));
+//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
@@ -882,8 +889,11 @@ public class TokenAccountTest {
 
 			if (!method.equalsIgnoreCase("bank")) {
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
-				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-						.withdrawToUSDInstantPayPopup().clickDebitCard();
+				
+//				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+//						.withdrawToUSDInstantPayPopup().clickDebitCard();
+				CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+				customerProfileTest.testAddCardWithNoCards(strParams, "debit");	
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -920,6 +930,7 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testWithdrawTokenWithBank(String strParams) {
+		
 		testWithdrawToken(strParams, "bank");
 	}
 
@@ -1068,10 +1079,12 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickWithdrawBankAccount();
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
-			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
-					.clickOnBank();
+			CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+			customerProfileTest.testAddBankAccount(strParams);
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+//					.verifyWithdrawMethodHeading(data.get("withdrawMethod"));
+//			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
+//					.clickOnBank();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()
 					.verifyWithdrawTokenHeading(data.get("withdrawToken"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().withdrawToUSDBankAccountPopup()

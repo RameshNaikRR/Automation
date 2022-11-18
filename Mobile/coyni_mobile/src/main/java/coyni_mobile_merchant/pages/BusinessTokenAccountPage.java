@@ -1,6 +1,7 @@
 package coyni_mobile_merchant.pages;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
@@ -101,11 +102,9 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(btnSelectAccount2, "Primary Account 2");
 	}
 
-	public void clickProfile() {
-//		WebDriver driver = DriverFactory.getDriver();		
-//        WebDriverWait wait = new WebDriverWait(driver, 120);
-////        wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(@resource-id,'profile_icon')]")));
+	public void clickProfile()  {
+	//DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		new CommonFunctions().elementView(btnProfile, "Profile");
 		click(btnProfile, "Profile");
 	}

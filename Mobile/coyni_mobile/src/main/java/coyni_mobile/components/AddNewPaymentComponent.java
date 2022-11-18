@@ -11,8 +11,8 @@ import io.appium.java_client.MobileBy;
 public class AddNewPaymentComponent extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
-	private By btnExternalBank = MobileBy.xpath("//*[contains(@text,'External Bank')]");
-	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'layoutDCard')]");
+	private By btnExternalBank = MobileBy.xpath("//*[contains(@text,'External Bank')]|//*[contains(@resource-id,'tvExtBankMsg')]");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'layoutDCard')]|//*[contains(@resource-id,'tvPayMethod')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 
@@ -33,6 +33,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickCreditCard() {
+		scrollDownToElement(btnCreditCard, "Credit Card");
 		click(btnCreditCard, "Credit Card");
 	}
 

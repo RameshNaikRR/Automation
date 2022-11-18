@@ -1,6 +1,7 @@
 package coyni_mobile.pages;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -120,12 +121,23 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	// added
-	public void clickProfile() throws InterruptedException {
-		Thread.sleep(3000);
-		if (getElementList(btnProfile, "Profile").size() > 0) {
-		click(btnProfile, "Profile");
-	}		
+	public void clickProfile(){
+	//	DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		click(btnProfile, "Profile");	
 	 }
+	
+	public void clickProfileforPayments() {
+		if (getElementList(btnProfile, "Profile").size() > 0) {
+			click(btnProfile, "Profile");
+		}		
+	 }
+	
+	public int verifyProfile() throws InterruptedException {
+		Thread.sleep(2000);
+		int a=getElementList(btnProfile, "Profile").size();
+		return a;
+	}
+
 	
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();
