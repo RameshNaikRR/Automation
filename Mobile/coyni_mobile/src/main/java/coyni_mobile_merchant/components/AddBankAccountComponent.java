@@ -31,7 +31,7 @@ public class AddBankAccountComponent extends MobileFunctions {
 	}
 	
 	public void fillRoutingNum(String expRoutingNumber) {
-		scrollDownToElement(txtConfirmRouting, "Confirm Routing Number");
+		//scrollDownToElement(txtConfirmRouting, "Confirm Routing Number");
 		enterText(txtRoutingNumber, expRoutingNumber, "Routing Number");
 	}
 	

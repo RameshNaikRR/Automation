@@ -2310,7 +2310,6 @@ public class MerchantProfileTest {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
 			}
-			Thread.sleep(2000);
 			int numOfCards = merchantProfilePage.paymentMethodsPage().verifyNumOfCard();
 			for (int i = 1; i <= numOfCards; i++) {
 //				int a=merchantProfilePage.paymentMethodsPage().verifyNumOfCard();
@@ -2515,14 +2514,17 @@ public class MerchantProfileTest {
 			if (businessTokenAccountPage.verifyProfile() == 1) {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
+				Thread.sleep(1000);
 			}
+			int numOfCogentAccounts = merchantProfilePage.paymentMethodsPage().verifyNumOfCogentAccounts();
+			for (int i = 1; i <= numOfCogentAccounts; i++) {
 			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 			merchantProfilePage.paymentMethodsPage().clickDeleteCogentAccount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.toastComponent().verifyToastMsg(data.get("signetDeleteToastMsg"));
-
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
@@ -2723,12 +2725,15 @@ public class MerchantProfileTest {
 				businessTokenAccountPage.clickProfile();
 				merchantProfilePage.clickPaymentMethods();
 			}
+			int numOfBankAccs = merchantProfilePage.paymentMethodsPage().verifyNumOfBanks();
+			for (int i = 1; i <= numOfBankAccs; i++) {
 			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 			merchantProfilePage.paymentMethodsPage().clickBankAccount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.clickYes();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}

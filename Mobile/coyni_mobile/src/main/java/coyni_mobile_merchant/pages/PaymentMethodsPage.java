@@ -20,6 +20,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
+	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
+	private By btnCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 //	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 //	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
@@ -57,7 +59,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public int verifyAddNewPaymentMethod() throws InterruptedException {
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
 	}
 
@@ -74,10 +76,15 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public int verifyNumOfCard() {
-//		if(getElementList(btnDebitCard, "Debit Card").size()>0) {
 		return getElementList(btnDebitCard, "Debit Card").size();
-//		}
-//		return 0;
+	}
+	
+	public int verifyNumOfBanks() {
+		return getElementList(btnBank, "Bank Account").size();
+	}
+	
+	public int verifyNumOfCogentAccounts() {
+		return getElementList(btnCogentAcc, "Cogent Account").size();
 	}
 	
 	public void clickBack() {
