@@ -241,10 +241,10 @@ public class CommonFunctions {
 		System.out.println(initialValue + " : " + FinalValue);
 		if (FinalValue.equalsIgnoreCase(expValue)) {
 			ExtentTestManager.setPassMessageInReport(
-					String.format("%s css property value changed to ", cssProp) + "" + expColor);
+					String.format("%s element %s css property value changed to ",eleName, cssProp) + "" + expColor);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
-					String.format("%s css property value is not changed to ", cssProp) + "" + expColor);
+					String.format("%s element %s css property value changed to ",eleName, cssProp) + "" + expColor);
 		}
 
 	}
@@ -352,5 +352,26 @@ public class CommonFunctions {
 	public void switchtoUrl(String url) {
 		DriverFactory.getDriver().navigate().to(url);
 	}
+	public void verifyHeadings(List<WebElement> elementsList,String excelHeading,String eleName) {
+		for (WebElement webElement : elementsList) {
+			String text = webElement.getText();
+			String[] split = excelHeading.split("/");
+			int count = 0;
+			for (int i = 0; i < split.length; i++) {
+				if (text.equalsIgnoreCase(split[i])) {
+					ExtentTestManager.setPassMessageInReport(text + " Filter Data match");
+					break;
+				}
 
+				else {
+					count++;
+					if (count == split.length) {
+						ExtentTestManager.setWarningMessageInReport(text + " Filter Data Not Found");
+					}
+				}
+			}
+
+		}
+
+	}
 }

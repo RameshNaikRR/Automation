@@ -27,14 +27,15 @@ public class LoginPage extends BrowserFunctions {
 	private By btnResendVerification = By.xpath("//button[contains(@class,'text-cm3 hover:underline mt')]");
 	private By btnNewVerification = By.xpath("//div[contains(@class,'text-cgn')]");
 
+	CommonFunctions commonfunctions = new CommonFunctions();
+	SideBarComponent sidebarcomponent = new SideBarComponent();
+	
 	public By verifyEmail(String email) {
 		By lbl = By.xpath(String.format("//input[@value='%s']", email));
 		ExtentTestManager.setPassMessageInReport("User Email is displayed in the Email field");
 		return lbl;
 	}
 
-	CommonFunctions commonfunctions = new CommonFunctions();
-	SideBarComponent sidebarcomponent = new SideBarComponent();
 
 	public By getSideBarItems(String elementName) {
 		return By.xpath(String.format(

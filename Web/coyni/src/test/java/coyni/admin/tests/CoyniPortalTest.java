@@ -1,8 +1,6 @@
 package coyni.admin.tests;
 
 import java.util.Map;
-
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -36,6 +34,7 @@ public class CoyniPortalTest {
 			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
 			// "expValue", "expColor");
 			homePage.sideBarComponent().clickTokenAccount();
+			tokenAccountPage.verifyTokenAccountHeadings(data.get("headings"));
 			Thread.sleep(2000);
 			// homePage.sideBarComponent().clickCoyniPortal();
 			// homePage.sideBarComponent().clickCommissionAccount();
