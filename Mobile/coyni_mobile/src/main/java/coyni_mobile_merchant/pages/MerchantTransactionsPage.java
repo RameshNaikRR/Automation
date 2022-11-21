@@ -3,6 +3,7 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -12,7 +13,7 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	private By lblMerchantTansactions = MobileBy.xpath("//*[@text='Merchant Transactions']");
 
-	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'payoutSearchET')]");
+	private By searchOption = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
 
 	private By btnfiltersIcon = MobileBy.xpath("//*[contains(@resource-id,'filter')]");
 
@@ -21,11 +22,20 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'noTransactions')]");
 
 	private By btnTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
-	
-	private By btnRefernceCopy = MobileBy.xpath("");
-	
-	
 
+	private By btnRefernceCopy = MobileBy.xpath("");
+
+	private By lnkSearchTransaction = MobileBy.xpath("(//*[contains(@text,'Merchant Payout')])[1]");
+
+	public void clickSearchTransaction() {
+		scrollDownToElement(lnkSearchTransaction, "Transaction");
+		click(lnkSearchTransaction, "Transaction");
+	}
+
+	public void fillSearch() {
+		enterText(searchOption, getCopiedData(), "Search");
+	}
+	
 	public int verifyTransactionsCount() throws InterruptedException {
 		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
@@ -58,6 +68,10 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
 		return new MerchantTransactionDetailsPage();
+	}
+
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 
 }

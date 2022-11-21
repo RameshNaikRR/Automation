@@ -74,7 +74,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void selectState(String state) throws InterruptedException {
-		scrollDownToElement(txtCity, "City");
+		DriverFactory.getDriver().hideKeyboard();
 		click(drpDwnState, "State Drop down");
 		enterText(txtState, state, "State");
 		Thread.sleep(2000);

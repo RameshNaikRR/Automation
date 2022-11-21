@@ -24,19 +24,23 @@ public class LoginPage extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
 	private By chkBxRememberMe = MobileBy
 			.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
+	private By btnLogin = MobileBy
+			.xpath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
-	private By lblerrMsg = MobileBy
-			.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
+	private By lblerrMsg = MobileBy.xpath(
+			"(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
 	private By popUperror = MobileBy
 			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'tvAction')]");
+	private By btnOk = MobileBy
+			.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'tvAction')]");
 	private By btnCross = MobileBy.xpath("");
 	private By iconFace = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]");
 	private By eyeIcon = MobileBy.xpath("//*[contains(@resource-id,'endIconIV')]");
+	private By btnAppUpdate = MobileBy.xpath("//*[@text='UPDATE']");
+	private By lblAppUpdateDescription = MobileBy.xpath("//*[contains(@resource-id,'message')]");
+	private By lblAppUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'alertTitle')]");
 
-	
-	//Login Page
+	// Login Page
 	public void clickOk() {
 		click(btnOk, "ok");
 	}
@@ -64,18 +68,18 @@ public class LoginPage extends MobileFunctions {
 	public void clickEyeIcon() {
 		click(eyeIcon, "eyeIcon");
 	}
-	
+
 	public void verifyPasswordMaskedView(String password) {
 		click(eyeIcon, "eyeIcon");
 		click(eyeIcon, "eyeIcon");
 //		int a= getText(txtPassword).length();
-		if(password.length()==getText(txtPassword).length() && getText(txtPassword).contains("........")) {
-		ExtentTestManager.setPassMessageInReport("Password is Masked by the : "+ getText(txtPassword));	
-		}else {
-			ExtentTestManager.setFailMessageInReport("Password is not masked  : "+ getText(txtPassword));	
+		if (password.length() == getText(txtPassword).length() && getText(txtPassword).contains("........")) {
+			ExtentTestManager.setPassMessageInReport("Password is Masked by the : " + getText(txtPassword));
+		} else {
+			ExtentTestManager.setFailMessageInReport("Password is not masked  : " + getText(txtPassword));
 		}
 	}
-	
+
 	public void verifyEmailview() {
 		new CommonFunctions().elementView(txtEmail, "email");
 	}
@@ -119,6 +123,28 @@ public class LoginPage extends MobileFunctions {
 		enterText(txtPassword, password, "password ");
 	}
 
+	public void clickAppUpdate() {
+		click(btnAppUpdate, "Update");
+	}
+
+	public void getAppUpdateDescription() {
+		ExtentTestManager.setPassMessageInReport("Coyni App Update Headig is " + getText(lblAppUpdateDescription));
+	}
+
+	public void getAppUpdateHeading() {
+		ExtentTestManager.setPassMessageInReport("Coyni App Update Headig is " + getText(lblAppUpdateHeading));
+
+	}
+
+	public void AppUpdate() throws InterruptedException {
+		Thread.sleep(1000);
+		if (getElementList(btnAppUpdate, "Update").size() > 1) {
+			ExtentTestManager.setPassMessageInReport("Coyni App Update Headig is " + getText(lblAppUpdateHeading));
+			ExtentTestManager.setPassMessageInReport("Coyni App Update Headig is " + getText(lblAppUpdateDescription));
+			click(btnAppUpdate, "Update");
+		}
+	}
+
 	public void clickEmail() {
 		click(txtEmail, "email");
 	}
@@ -155,7 +181,7 @@ public class LoginPage extends MobileFunctions {
 //		
 //	}
 
-	public void clickLogin() {	
+	public void clickLogin() {
 		if (getElement(btnLogin, "login").isEnabled()) {
 			ExtentTestManager.setPassMessageInReport("login button  is enabled");
 			click(btnLogin, "login button");
@@ -165,16 +191,17 @@ public class LoginPage extends MobileFunctions {
 	}
 
 	public void validateLogin() {
-		MobileElement element = (MobileElement)DriverFactory.getDriver().findElementByXPath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
+		MobileElement element = (MobileElement) DriverFactory.getDriver().findElementByXPath(
+				"//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
 		boolean isEnabled = element.isEnabled();
-		ExtentTestManager.setPassMessageInReport(""+isEnabled);
+		ExtentTestManager.setPassMessageInReport("" + isEnabled);
 //		if (DriverFactory.getDriver().findElementByXPath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]").isEnabled()) {
 //			ExtentTestManager.setFailMessageInReport("login button  is enabled");
 //		} else {
 //			ExtentTestManager.setPassMessageInReport("login button  is disabled mode");
 //		}
 	}
-	
+
 	public void ViewCoyni() {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
 	}
@@ -243,10 +270,11 @@ public class LoginPage extends MobileFunctions {
 	public RetrieveEmailPage retrieveEmailPage() {
 		return new RetrieveEmailPage();
 	}
+
 	public ForgotPasswordPage forgotPasswordPage() {
-    	return new ForgotPasswordPage();
-    }
-	
+		return new ForgotPasswordPage();
+	}
+
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
 	}

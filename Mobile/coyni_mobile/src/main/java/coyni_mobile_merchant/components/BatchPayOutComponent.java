@@ -105,4 +105,7 @@ public class BatchPayOutComponent extends MobileFunctions {
 		return new EnterYourPINComponent();
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 }

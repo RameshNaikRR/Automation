@@ -37,7 +37,6 @@ public class SignUpTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
 			signUpPage.clickBusinessAccount();
-			;
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			signUpPage.fillFirstName(data.get("firstName"));
 			signUpPage.fillLastName(data.get("lastName"));
@@ -113,6 +112,37 @@ public class SignUpTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testSignUpFieldValidations(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickGetStarted();
+			signUpPage.clickBusinessAccount();
+			signUpPage.verifyCreateAccount(data.get("createAccount"));
+			String[] firstName = data.get("firstName").split(",");
+			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
+			String[] lastName = data.get("lastName").split(",");
+			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2]);
+			String[] email = data.get("email").split(",");
+			signUpPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
+					phoneNumber[2]);
+			String[] password = data.get("password").split(",");
+			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
+					password[3]);
+			String[] confirmPassword = data.get("confirmPassword").split(",");
+			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0], confirmPassword[1],
+					confirmPassword[2]);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpFieldValidations Failed due to this Exception" + e);
 		}
 
 	}

@@ -62,6 +62,7 @@ public class LoginTest {
 			LandingPage landingPage = new LandingPage();
 			landingPage.clickLogin();
 			LoginPage loginPage = new LoginPage();
+			loginPage.AppUpdate();
 			loginPage.VerifyLoginPageView();
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
@@ -119,10 +120,9 @@ public class LoginTest {
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();	
 			String[] email = data.get("email").split(",");
-			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2], email[3], email[4], email[5]);
+			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			String[] password = data.get("password").split(",");
-			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2], password[3], password[4],
-					password[5]);
+			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2], password[3]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLoginFieldValidation failed due to Exception " + e);
 		}
@@ -410,13 +410,12 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-//			String[] phoneNumber = data.get("phoneNumber").split(",");
-//			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
 			String[] firstName = data.get("firstName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],data.get("validateDataField"),data.get("validateDataType"),data.get("elementName"));
-//			String[] lastName = data.get("phoneNumber").split(",");
-//			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(lastName[0], lastName[1], lastName[2],
-//					lastName[3], lastName[4], lastName[5]);
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
+			String[] lastName = data.get("lastName").split(",");
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveWithFieldValidations failed due to exception " + e);
 		}
@@ -682,8 +681,7 @@ public class LoginTest {
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			String[] email = data.get("emailFieldValidations").split(",");
-			loginPage.forgotPasswordPage().fieldValidationsComponent().validateEmailField(email[0], email[1], email[2],
-					email[3], email[4], email[5]);
+			loginPage.forgotPasswordPage().fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent()
@@ -693,10 +691,10 @@ public class LoginTest {
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			String[] newPassword = data.get("newPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateNewPasswordField(newPassword[0],
-					newPassword[1], newPassword[2], newPassword[3], newPassword[4], newPassword[5]);
+					newPassword[1], newPassword[2]);
 			String[] confirmPassword = data.get("newPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
-					confirmPassword[1], confirmPassword[2], confirmPassword[3], confirmPassword[4], confirmPassword[5]);
+					confirmPassword[1], confirmPassword[2]);
 
 		} catch (Exception e) {
 			ExtentTestManager

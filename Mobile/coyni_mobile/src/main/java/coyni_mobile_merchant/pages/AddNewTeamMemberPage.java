@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.MailingAddressComponent;
 import coyni_mobile_merchant.components.ToastComponent;
 import ilabs.MobileFramework.DriverFactory;
@@ -98,6 +99,9 @@ public class AddNewTeamMemberPage extends MobileFunctions {
 	}
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 
 }

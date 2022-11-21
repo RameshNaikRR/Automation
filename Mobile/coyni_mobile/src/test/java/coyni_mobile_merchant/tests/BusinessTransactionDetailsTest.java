@@ -463,38 +463,45 @@ public class BusinessTransactionDetailsTest {
 			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
 		}
 	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBusinessTokenTransactionValidateSearch(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//
-//			businessTokenAccountPage.clickAccount();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyPageHeading(data.get("businessTokenHeading"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyTotalAvailableFunds(data.get("fundsHeading"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyPageDescription(data.get("businessTokenDescription"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
-//			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyViewMore() == 1) {
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
-//			} else {
-//				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
-//			}
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//					.verifyPageHeading(data.get("transactionDetailsHeading"));
-//
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//					.clickReferenceID();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage().clickBack();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
-//		}
-//	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessTokenTransactionValidateSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageHeading(data.get("businessTokenHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyTotalAvailableFunds(data.get("fundsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageDescription(data.get("businessTokenDescription"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
+			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyViewMore() == 1) {
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
+				String[] search = data.get("search").split(",");
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().fieldValidationsComponent()
+						.validateSearchField(search[0], search[1], search[2]);
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickSearchTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyPageHeading(data.get("transactionDetailsHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.getReferenceID();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.clickBack();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.getMerchantPayoutTransactionDetails();
+
+			} else {
+				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
+		}
+	}
 }

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.ErrorMessagePopupComponent;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -48,5 +49,10 @@ public class ConfirmPasswordPage extends MobileFunctions {
 		return new ErrorMessagePopupComponent();
 		
 	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 	}
 

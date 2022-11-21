@@ -34,7 +34,7 @@ public class EditDetailsComponent extends MobileFunctions {
 	public void clickOk() {
 		click(btnOk, "Ok");
 	}
-	
+
 	public void verifyToastMsg(String expHeading) {
 //		ExtentTestManager.setInfoMessageInReport("Toast Message : " + getText(lblSucessMsg));
 		new CommonFunctions().verifyLabelText(lblSucessMsg, "Toast Message", expHeading);
@@ -74,8 +74,13 @@ public class EditDetailsComponent extends MobileFunctions {
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
 	}
+
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
-	
+
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+
 }

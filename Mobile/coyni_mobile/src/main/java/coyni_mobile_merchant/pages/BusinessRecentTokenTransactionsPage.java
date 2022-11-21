@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.popups.ErrorMessagePopup;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
@@ -53,6 +54,13 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By recentTransBalance = MobileBy.xpath("(//*[contains(@resource-id,'balanceTV')])[1]");
 
 	private By lblNoMoreTransactions = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]");
+
+	private By lnkSearchTransaction = MobileBy.xpath("(//*[contains(@text,'Merchant Payout')])[1]");
+
+	public void clickSearchTransaction() {
+		scrollDownToElement(lnkSearchTransaction, "Transaction");
+		click(lnkSearchTransaction, "Transaction");
+	}
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Business Recent Token Transactions Heading", expHeading);
@@ -128,10 +136,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		}
 	}
 
-	
 	public void fillSearch() {
-//		click(txtSearch, "Search");
-		enterText(txtSearch, getCopiedData(),"Search");
+		enterText(txtSearch, getCopiedData(), "Search");
 	}
 
 	public void clickFilterIcon() {
@@ -217,4 +223,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		return new ErrorMessagePopup();
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 }

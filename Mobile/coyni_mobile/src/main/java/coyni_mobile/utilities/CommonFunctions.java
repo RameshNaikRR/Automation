@@ -103,7 +103,7 @@ public class CommonFunctions {
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
 			// clickEnter();
-			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "");
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
 			if (enterText.equalsIgnoreCase(actualtext)) {

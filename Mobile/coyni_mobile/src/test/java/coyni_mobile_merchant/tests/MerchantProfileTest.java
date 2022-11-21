@@ -120,6 +120,41 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testChangeEmailFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+			merchantProfilePage.userDetailsPage().getUserDetails();
+			merchantProfilePage.userDetailsPage().verifyEmail();
+			merchantProfilePage.userDetailsPage().getCurrentEmail();
+			merchantProfilePage.userDetailsPage().clickEmail();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentEmailDescription"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.verifyHeading(data.get("enterPinHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newEmailHeading"));
+			String[] newEmail = data.get("newEmail").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent().validateNewEmailField(newEmail[0], newEmail[1], newEmail[2]);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangeEmailWithValidDetails failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testChangeEmailWithInValidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -308,6 +343,43 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testChangePhoneNumberFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			// merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+			merchantProfilePage.userDetailsPage().getUserDetails();
+			merchantProfilePage.userDetailsPage().verifyPhoneNumber();
+			merchantProfilePage.userDetailsPage().getCurrentPhoneNumber();
+			merchantProfilePage.userDetailsPage().clickPhoneNumber();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentPhoneNumberDescription"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.verifyHeading(data.get("enterPinHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newPhoneNumberHeading"));
+			String[] newPhoneNumber = data.get("newPhoneNumber").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent()
+					.validatePhoneNumberField(newPhoneNumber[0], newPhoneNumber[1], newPhoneNumber[2]);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testChangePhoneNumberFieldValidations failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testChangePhoneNumberWithInValidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -475,6 +547,50 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testChangeAddressFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			// merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyPageHeading(data.get("userDetailsHeading"));
+			merchantProfilePage.userDetailsPage().getUserDetails();
+			merchantProfilePage.userDetailsPage().verifyAddress();
+			merchantProfilePage.userDetailsPage().getCurrentAddress();
+			merchantProfilePage.userDetailsPage().clickAddress();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentAddressHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentAddressDescription"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.verifyHeading(data.get("enterPinHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().enterYourPINComponent()
+					.fillPin(data.get("pin"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage()
+					.verifyPageHeading(data.get("editAddressHeading"));
+
+			String[] address = data.get("address").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage()
+					.fieldValidationsComponent().validateAddressLine1Field(address[0], address[1], address[2]);
+			String[] city = data.get("city").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage()
+					.fieldValidationsComponent().validateCityField(city[0], city[1], city[2]);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			String[] zipCode = data.get("zipCode").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editAddressPage()
+					.fieldValidationsComponent().validateZipCodeField(zipCode[0], zipCode[1], zipCode[2]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangeAddressWithValidDetails failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testChangeAddressWithInValidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -626,6 +742,46 @@ public class MerchantProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangePasswordWithValidDetails failed due to Exception " + e);
+		}
+	}
+
+//	String[] newPassword = data.get("newPassword").split(",");
+//	loginPage.forgotPasswordPage().fieldValidationsComponent().validateNewPasswordField(newPassword[0],
+//			newPassword[1], newPassword[2]);
+//	String[] confirmPassword = data.get("newPassword").split(",");
+//	loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
+//			confirmPassword[1], confirmPassword[2]);
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			// merchantProfilePage.getAccountDetails();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickChangePassword();
+			merchantProfilePage.enterYourPINComponent().verifyHeading(data.get("enterPinHeading"));
+			merchantProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
+			merchantProfilePage.confirmPasswordPage().verifyPageHeading(data.get("confirmPasswordHeading"));
+			merchantProfilePage.confirmPasswordPage().verifyPageDescription(data.get("confirmPasswordDescription"));
+			String[] currentPassword = data.get("currentPassword").split(",");
+			merchantProfilePage.confirmPasswordPage().fieldValidationsComponent().validatePasswordField(
+					currentPassword[0], currentPassword[1], currentPassword[2], currentPassword[3]);
+			merchantProfilePage.confirmPasswordPage().clickNext();
+			merchantProfilePage.confirmPasswordPage().changePasswordPage()
+					.verifyPageHeading(data.get("changePwdHeading"));
+			merchantProfilePage.confirmPasswordPage().changePasswordPage()
+					.verifyPageDescription(data.get("changePwdDescription"));
+			String[] newPassword = data.get("newPassword").split(",");
+			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
+					.validateNewPasswordField(newPassword[0], newPassword[1], newPassword[2]);
+			String[] confirmPassword = data.get("confirmPassword").split(",");
+			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
+					.validateConfirmPasswordField(confirmPassword[0], confirmPassword[1], confirmPassword[2]);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePasswordFieldValidations failed due to Exception " + e);
 		}
 	}
 
@@ -843,7 +999,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyEmail();
 			merchantProfilePage.dbaInformationPage().getCurrentEmail();
-			Thread.sleep(15000);
 			merchantProfilePage.dbaInformationPage().clickEmail();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentEmailHeading"));
@@ -859,6 +1014,55 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
 					.verifyToastMsg(data.get("toastMsg"));
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDBAEditEmailWithValidDetails failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDBAInformationFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickDBAInformation();
+			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
+			merchantProfilePage.dbaInformationPage().getCompanyName();
+			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
+			merchantProfilePage.dbaInformationPage().verifyEmail();
+			merchantProfilePage.dbaInformationPage().getCurrentEmail();
+			merchantProfilePage.dbaInformationPage().clickEmail();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentEmailDescription"));
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newEmailHeading"));
+			String[] newEmail = data.get("newEmail").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent().validateNewEmailField(newEmail[0], newEmail[1], newEmail[2]);
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent().clickBack();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().clickBack();
+			merchantProfilePage.dbaInformationPage().clickPhoneNumber();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentPhoneNumberDescription"));
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.dbaInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newPhoneNumberHeading"));
+			String[] newPhoneNumber = data.get("newPhoneNumber").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent()
+					.validatePhoneNumberField(newPhoneNumber[0], newPhoneNumber[1], newPhoneNumber[2]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAEditEmailWithValidDetails failed due to Exception " + e);
 		}
@@ -959,7 +1163,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().verifyCustomerService(data.get("dbaPageDescription"));
 			merchantProfilePage.dbaInformationPage().verifyPhoneNumber();
 			merchantProfilePage.dbaInformationPage().getCurrentPhoneNumber();
-			Thread.sleep(5000);
 			merchantProfilePage.dbaInformationPage().clickPhoneNumber();
 			merchantProfilePage.dbaInformationPage().currentDetailsComponent()
 					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
@@ -1122,6 +1325,59 @@ public class MerchantProfileTest {
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent().clickSave();
 			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
 					.verifyToastMsg(data.get("toastMsg"));
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testComapanyInfoEditEmailWithValidDetails failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testComapanyInformationFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickCompanyInformation();
+			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
+			merchantProfilePage.companyInformationPage().getCompanyName();
+			merchantProfilePage.companyInformationPage().getDescription();
+			merchantProfilePage.companyInformationPage().verifyCustomerService(data.get("companyInfoPageDescription"));
+			merchantProfilePage.companyInformationPage().verifyEmail();
+			merchantProfilePage.companyInformationPage().getCurrentEmail();
+			merchantProfilePage.companyInformationPage().clickEmail();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.companyInformationPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentEmailDescription"));
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newEmailHeading"));
+			String[] newEmail = data.get("newEmail").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent().validateNewEmailField(newEmail[0], newEmail[1], newEmail[2]);
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent().clickBack();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().clickBack();
+			merchantProfilePage.companyInformationPage().verifyPageHeading(data.get("companyInfoPageHeading"));
+			merchantProfilePage.companyInformationPage().clickPhoneNumber();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent()
+					.verifyPageHeading(data.get("currentPhoneNumberHeading"));
+			merchantProfilePage.companyInformationPage().currentDetailsComponent()
+					.verifyPageDescription(data.get("currentPhoneNumberDescription"));
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().getCurrentDetails();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().clickChange();
+			merchantProfilePage.companyInformationPage().currentDetailsComponent().editDetailsComponent()
+					.verifyEmailHeading(data.get("newPhoneNumberHeading"));
+			String[] newPhoneNumber = data.get("newPhoneNumber").split(",");
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.fieldValidationsComponent()
+					.validatePhoneNumberField(newPhoneNumber[0], newPhoneNumber[1], newPhoneNumber[2]);
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -1454,6 +1710,48 @@ public class MerchantProfileTest {
 				ExtentTestManager.setFailMessageInReport("Team Member not Added");
 			}
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddTeamMember Failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTeamMemberFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.clickTeam();
+			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
+			merchantProfilePage.teamPage().verifyDescription(data.get("teamPageDescription"));
+			String[] search = data.get("search").split(",");
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+					.validateSearchField(search[0], search[1], search[2]);
+			merchantProfilePage.teamPage().clickAddTeamMember();
+			merchantProfilePage.teamPage().addNewTeamMemberPage().verifyPageHeading(data.get("newTeamMemberHeading"));
+			merchantProfilePage.teamPage().addNewTeamMemberPage()
+					.verifyDescription(data.get("newTeamMemberDescription"));
+			merchantProfilePage.teamPage().addNewTeamMemberPage().getAdministratorDesc();
+			String[] firstName = data.get("firstName").split(",");
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+					.validateFirstNameField(firstName[0], firstName[1], firstName[2]);
+			String[] lastName = data.get("lastName").split(",");
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+					.validateLastNameField(lastName[0], lastName[1], lastName[2]);
+			String[] teamEmail = data.get("teamEmail").split(",");
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+					.validateEmailField(teamEmail[0], teamEmail[1], teamEmail[2]);
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+					.validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
+			
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fillLastName(data.get("lastName"));
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fillEmail(data.get("teamEmail"));
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fillPhoneNumber(data.get("phoneNumber"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddTeamMember Failed due to exception " + e);
 
@@ -2235,7 +2533,52 @@ public class MerchantProfileTest {
 			ExtentTestManager.setFailMessageInReport("AddDebitCar Failed due to this Exception" + e);
 		}
 	}
-	
+
+	@Test
+	@Parameters("strParams")
+	public void testDebitCardFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyHeading(data.get("addPaymentHeading"));
+			}
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			String[] nameOncard = data.get("nameOnCard").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateNameOnCardField(nameOncard[0], nameOncard[1], nameOncard[2]);
+			String[] cardNumber = data.get("cardNumber").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateCardNumberField(cardNumber[0], cardNumber[1], cardNumber[2]);
+			String[] cardExp = data.get("cardExp").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateCardExpField(cardExp[0], cardExp[1], cardExp[2]);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			String[] addressLine1 = data.get("addressLine1").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateAddressLine1Field(addressLine1[0], addressLine1[1], addressLine1[2]);
+			String[] addressLine2 = data.get("addressLine2").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateAddressLine2Field(addressLine2[0], addressLine2[1], addressLine2[2]);
+			String[] city = data.get("city").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateCityField(city[0], city[1], city[2]);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			String[] zipCode = data.get("zipCode").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateZipCodeField(zipCode[0], zipCode[1], zipCode[2]);
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("DebitCardFieldValidations Failed due to this Exception" + e);
+		}
+	}
 
 	@Test
 	@Parameters("strParams")
@@ -2269,19 +2612,19 @@ public class MerchantProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters("strParams")
 	public void testVerifyAllStates(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-				businessTokenAccountPage.clickProfile();
-				merchantProfilePage.clickPaymentMethods();
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-			.fillNameOnCard(data.get("nameOnCard"));
+					.fillNameOnCard(data.get("nameOnCard"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-			.fillCardNumber(data.get("cardNumber"));
+					.fillCardNumber(data.get("cardNumber"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
@@ -2293,7 +2636,6 @@ public class MerchantProfileTest {
 					.fillCity(data.get("city"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 					.validateAllStates();
-	
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -2449,6 +2791,48 @@ public class MerchantProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void CogentAccountFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyHeading(data.get("addPaymentHeading"));
+			}
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+			String[] nameOnCard = data.get("nameOnCard").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateNameOnCardField(nameOnCard[0], nameOnCard[1], nameOnCard[2]);
+			String[] signetWalletID = data.get("signetWalletID").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validatetCogentWalletIdField(signetWalletID[0], signetWalletID[1], signetWalletID[2]);
+			String[] addressLine1 = data.get("addressLine1").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateAddressLine1Field(addressLine1[0], addressLine1[1], addressLine1[2]);
+			String[] addressLine2 = data.get("addressLine2").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateAddressLine2Field(addressLine2[0], addressLine2[1], addressLine2[2]);
+			String[] city = data.get("city").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateCityField(city[0], city[1], city[2]);
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			String[] zipCode = data.get("zipCode").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
+					.validateZipCodeField(zipCode[0], zipCode[1], zipCode[2]);
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("CogentAccountFieldValidation failed due to this Exception" + e);
+		}
+	}
+
 //	public void AddSignetAccoun(String strParams) {
 //		try {
 //			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -2518,12 +2902,12 @@ public class MerchantProfileTest {
 			}
 			int numOfCogentAccounts = merchantProfilePage.paymentMethodsPage().verifyNumOfCogentAccounts();
 			for (int i = 1; i <= numOfCogentAccounts; i++) {
-			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
-			merchantProfilePage.paymentMethodsPage().clickDeleteCogentAccount();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickYes();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.toastComponent().verifyToastMsg(data.get("signetDeleteToastMsg"));
+				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+				merchantProfilePage.paymentMethodsPage().clickDeleteCogentAccount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickYes();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("signetDeleteToastMsg"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
@@ -2684,25 +3068,25 @@ public class MerchantProfileTest {
 //				if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
 //						.bankAccountAddedPage().verifyBankSucessHeading() == 1) {
 
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
+				String nameOnBank = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
+				String routingNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getRoutingNum();
+				String accNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.addBankAccountComponent().bankAccountAddedPage().getAccNum();
+				if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
+						&& data.get("routingNum").equalsIgnoreCase(routingNum)
+						&& data.get("accountNum").contains(accNum)) {
 					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-							.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
-					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-							.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
-					String nameOnBank = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.addBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
-					String routingNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.addBankAccountComponent().bankAccountAddedPage().getRoutingNum();
-					String accNum = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.addBankAccountComponent().bankAccountAddedPage().getAccNum();
-					if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
-							&& data.get("routingNum").equalsIgnoreCase(routingNum)
-							&& data.get("accountNum").contains(accNum)) {
-						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-								.bankAccountAddedPage().getBankDetails();
-					} else {
-						ExtentTestManager.setFailMessageInReport("Bank Account Details are Wrong");
-					}
-				//}
+							.bankAccountAddedPage().getBankDetails();
+				} else {
+					ExtentTestManager.setFailMessageInReport("Bank Account Details are Wrong");
+				}
+				// }
 			} else {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.verifyErrorMessageOfSignetAccount(data.get("maxBankErrMsg"));
@@ -2712,6 +3096,47 @@ public class MerchantProfileTest {
 
 		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBankAccountFieldValidations(String strPrams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+			Thread.sleep(2000);
+
+			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyHeading(data.get("addPaymentHeading"));
+			}
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
+			String[] nameOnBank = data.get("nameOnBank").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fieldValidationsComponent().validateNameOnBankField(nameOnBank[0], nameOnBank[1], nameOnBank[2]);
+			String[] routingNum = data.get("routingNum").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fieldValidationsComponent().validateRoutingNumField(routingNum[0], routingNum[1], routingNum[2]);
+			String[] confirmRoutingNum = data.get("confirmRoutingNum").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fieldValidationsComponent()
+					.validateConfirmRoutingField(confirmRoutingNum[0], confirmRoutingNum[1], confirmRoutingNum[2]);
+			String[] accountNum = data.get("accountNum").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fieldValidationsComponent()
+					.validateConfirmAccountNumField(accountNum[0], accountNum[1], accountNum[2]);
+			String[] confirmAccNum = data.get("confirmAccNum").split(",");
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fieldValidationsComponent()
+					.validateConfirmAccountNumField(confirmAccNum[0], confirmAccNum[1], confirmAccNum[2]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
 		}
 	}
 
@@ -2727,12 +3152,12 @@ public class MerchantProfileTest {
 			}
 			int numOfBankAccs = merchantProfilePage.paymentMethodsPage().verifyNumOfBanks();
 			for (int i = 1; i <= numOfBankAccs; i++) {
-			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
-			merchantProfilePage.paymentMethodsPage().clickBankAccount();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.clickYes();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
+				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+				merchantProfilePage.paymentMethodsPage().clickBankAccount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickYes();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);

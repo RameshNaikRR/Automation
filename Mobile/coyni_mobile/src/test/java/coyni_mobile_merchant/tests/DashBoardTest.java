@@ -71,7 +71,8 @@ public class DashBoardTest {
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickTransactions();
 			Thread.sleep(2000);
-			businessTokenAccountPage.merchantTransactionsPage().verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.merchantTransactionsPage()
+					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
 			businessTokenAccountPage.merchantTransactionsPage().clickClose();
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickDashBoard();
@@ -142,8 +143,6 @@ public class DashBoardTest {
 		}
 	}
 
-	
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTransactionsList(String strParams) {
@@ -151,17 +150,16 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickTransactions();
-			businessTokenAccountPage.merchantTransactionsPage().verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.merchantTransactionsPage()
+					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().scrollToNoMoreTransactions();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyNoMoreTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testMerchantTransactionsList Failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("testMerchantTransactionsList Failed due to this Exception" + e);
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTransactionsSearchValidation(String strParams) {
@@ -169,15 +167,28 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickTransactions();
-			businessTokenAccountPage.merchantTransactionsPage().verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage()
+					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
+			String[] search = data.get("search").split(",");
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().fieldValidationsComponent()
+					.validateSearchField(search[0], search[1], search[2]);
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickSearchTransaction();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+					.verifyMerchantDetails(data.get("merchantTransDetails"));
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+					.getReferenceID();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+			.clickBack();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().fillSearch();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
+					.getMerchantPayoutDetails();
+//			
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testMerchantTransactionsList Failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("testMerchantTransactionsList Failed due to this Exception" + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTransactionsWithOneFilter(String strParams) {
@@ -506,13 +517,16 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
+			String[] search = data.get("search").split(",");
+			businessTokenAccountPage.batchPayOutComponent().fieldValidationsComponent().validateSearchField(search[0],
+					search[1], search[2]);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
 					.verifyPageHeading(data.get("payoutHeading"));
 			String a = businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().getPayoutID();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
 					.clickBack();
-			//businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField();
+			// businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField(a);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
@@ -537,13 +551,13 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().scrollToNoMoreTransactions(data.get("noMoreTransactions"));
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+					.scrollToNoMoreTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayoutsScrollMethod Failed due to this Exception" + e);
 		}
 	}
 
-	
 	@Test
 	@Parameters({ "strParams" })
 	public void testReserveBalance(String strParams) {
@@ -696,6 +710,9 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
+			String[] search = data.get("search").split(",");
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.fieldValidationsComponent().validateSearchField(search[0], search[1], search[2]);
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickTransaction();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
@@ -726,14 +743,13 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.verifyLabelReserveReleases(data.get("labelReserveReleaseTransactions"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-			.verifyNoMoreTransaction(data.get("noMoreTransactions"));
+					.verifyNoMoreTransaction(data.get("noMoreTransactions"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveReleasesScroll Failed due to this Exception" + e);
 		}
 	}
 
-	
 	@Test
 	public void testNotifications() {
 		try {

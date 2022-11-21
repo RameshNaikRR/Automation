@@ -18,13 +18,13 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By lblStatus = MobileBy.xpath("//*[contains(@text,'Status')]/following-sibling::*[1]");
 
-	private By lblDateTime = MobileBy
-			.xpath("//*[contains(@resource-id,'Date')]|//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'MSFdate')]");
+	private By lblDateTime = MobileBy.xpath(
+			"//*[contains(@resource-id,'Date')]|//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'MSFdate')]");
 
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'mPayoutIdTV')]");
 
 	private By lblReferenceID = MobileBy
-			.xpath("//*[contains(@resource-id,'reference')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
+			.xpath("//*[contains(@resource-id,'mreferenceIdTV')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
 
 	private By lblPayoutInformation = MobileBy.xpath("//*[contains(@text,'Payout Information')]");
 
@@ -60,14 +60,22 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By lblReserveAmount = MobileBy.xpath("//*[contains(@resource-id,'SalesreserveTV')]");
 
-	private By lblMerchantBalance = MobileBy.xpath("//*[contains(@resource-id,'Balance')]|//*[contains(@resource-id,'MSFmerchantbalance')]");
+	private By lblMerchantBalance = MobileBy
+			.xpath("//*[contains(@resource-id,'Balance')]|//*[contains(@resource-id,'MSFmerchantbalance')]");
 
 	private By lblSenderName = MobileBy.xpath("//*[contains(@resource-id,'sendername')]");
 
 	private By lblSenderEmail = MobileBy.xpath("//*[contains(@resource-id,'senderemail')]");
 
 	private By btnRefund = MobileBy.xpath("//*[contains(@resource-id,'RefundIV')]");
-
+	
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Mpayoutll')]");
+	
+	
+	public void clickBack() {
+	click(btnBack, "Back");	
+	}
+	
 	public void verifyMerchantDetails(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblMerchantTransactionDetailHeading,
 				"Merchant Transaction Details Heading", expHeading);
@@ -97,6 +105,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	public void getReferenceID() {
 		String text = getText(lblReferenceID);
 		ExtentTestManager.setInfoMessageInReport("Reference ID is : " + text);
+		click(lblReferenceID, "Reference ID");
 	}
 
 	public void getPayoutInformation() {

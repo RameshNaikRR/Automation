@@ -50,7 +50,7 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'MoreTransactions')]");
 	
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'btbankprevious')]|//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Mpayoutll')]|//*[contains(@resource-id,'btbankprevious')]|//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]");
 
 	public void clickBack() {
 		click(btnBack, "Back");

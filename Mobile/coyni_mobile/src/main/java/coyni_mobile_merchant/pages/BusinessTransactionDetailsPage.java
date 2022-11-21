@@ -19,7 +19,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 			"//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]|//*[contains(@resource-id,'dateTime')]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
 	private By lblReferenceID = MobileBy.xpath(
-			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'reference')]|//*[contains(@resource-id,'withdrawGiftrefidTV')]|//*[contains(@resource-id,'withinrefid')]");
+			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'mreferenceIdTV')]|//*[contains(@resource-id,'withdrawGiftrefidTV')]|//*[contains(@resource-id,'withinrefid')]");
 	private By lblPayoutDate = MobileBy.xpath("//*[contains(@resource-id,'merchantPIdate')]");
 	private By lblTotalAmount = MobileBy
 			.xpath("//*[contains(@resource-id,'totalamount')]|//*[contains(@resource-id,'Total')]");
@@ -69,6 +69,8 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By btnWithInstaReference = MobileBy.xpath("//*[contains(@resource-id,'withinrefIDIV')]");
 //	private By btnWithInstaBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
 	
+	
+	
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
 	}
@@ -103,9 +105,10 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getReferenceID() {
+		click(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID" + getText(lblReferenceID));
 	}
-
+	
 	public void getPageDescription() {
 		ExtentTestManager.setInfoMessageInReport("Page Description is : " + getText(lblDescription));
 	}
