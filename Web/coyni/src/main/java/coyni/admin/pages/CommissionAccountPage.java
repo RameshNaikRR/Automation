@@ -41,7 +41,8 @@ public class CommissionAccountPage extends BrowserFunctions {
 
 	public void getAccountBalance() {
 		ExtentTestManager.setInfoMessageInReport("Account Balance: " + getText(lblAccountBalance, "Account Balance"));
-	}
+		verifyElementContainsText(lblAccountBalance, "CYN", "AccountBalance");
+		}
 
 	public void getBatchPayOuts() {
 		ExtentTestManager.setInfoMessageInReport("Batch PayOuts: " + getText(lblBatchPayOuts, "Batch PayOuts"));

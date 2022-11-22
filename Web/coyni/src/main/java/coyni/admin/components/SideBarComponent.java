@@ -18,16 +18,13 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarComponent extends BrowserFunctions {
-	CommonFunctions commonfunctions;
-
-	@BeforeTest
-	public void init() {
-		commonfunctions = new CommonFunctions();
-
-	}
-
+	
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
-
+	//(//label[contains(@class,'text-sm')])
+	//(//span[contains(@class,'text-sm')])
+	
+	CommonFunctions commonfunctions = new CommonFunctions();
+	
 	public void verifyCursorAction() {
 		new CommonFunctions().verifyCursorAction(handMark, "Coyni  Portal");
 	}

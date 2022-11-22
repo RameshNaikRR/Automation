@@ -70,8 +70,13 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickFilters() {
+		if (getElement(lblFilters, "Enabled").isEnabled()) {
+			click(lblFilters, "Filters");
+			ExtentTestManager.setPassMessageInReport("Filters button is Enabled");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Filters button is Disabled");
+		}
 
-		click(lblFilters, "Filters");
 
 	}
 
