@@ -8,7 +8,7 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class FieldValidationsComponent extends MobileFunctions {
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'Email')]|//*[contains(@resource-id,'emailET')]|//*[contains(@resource-id,'emailIdET')]");
+	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]|//*[contains(@resource-id,'emailET')]|//*[contains(@resource-id,'emailIdET')]");
 	private By txtNewEmail = MobileBy.xpath("//*[contains(@resource-id,'b_newEmailET')]");
 	private By txtNewPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
 	private By txtConfirmPassword = MobileBy

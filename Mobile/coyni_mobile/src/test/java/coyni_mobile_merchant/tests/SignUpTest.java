@@ -98,7 +98,7 @@ public class SignUpTest {
 			if (signUpPage.fieldBarCount() == 3) {
 				ExtentTestManager.setPassMessageInReport("Password is valid");
 			} else {
-				ExtentTestManager.setPassMessageInReport("password is invalid");
+				ExtentTestManager.setPassMessageInReport("Password is invalid");
 			}
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.scrollUpToFirstName();
@@ -140,7 +140,6 @@ public class SignUpTest {
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0], confirmPassword[1],
 					confirmPassword[2]);
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSignUpFieldValidations Failed due to this Exception" + e);
 		}
