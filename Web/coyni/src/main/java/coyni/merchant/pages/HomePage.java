@@ -12,11 +12,14 @@ public class HomePage extends BrowserFunctions {
 	private By lblDescription = By.cssSelector(".disclaimer");
 	private By lblPersonalAccount = By.xpath("//div[.='Personal Account']");
 	private By lblPersonalAccountDescription = By.xpath("//div[.='Personal Account']/following-sibling::p[1]");
-	private By lblMerchantAccount = By.xpath("//div[.='Merchant Account']");
+	private By lblMerchantAccount = By.xpath("//button[text()='Create a Merchant Account']");
+	private By btnMerchantAccount = By.xpath("//div[.='Merchant Account']");
 	private By lblMerchantAccountDescription = By.xpath("//div[.='Merchant Account']/following-sibling::p[1]");
 	private By lblAlreadyRegistered = By.xpath("//div[text()='Already registered?']");
 	private By lnkLogin = By.xpath("//button[.='Log In']");
 	private By lblLoginHeading = By.xpath("//span[.='Log In to coyni']");
+	private By logoLogin = By.cssSelector("._coyni_Logo");
+	private By login = By.xpath("(//a[text()='Log In'])[1]");////button[contains(text(),'Log In')]
 
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
@@ -30,8 +33,20 @@ public class HomePage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Description", Description);
 	}
 
+	public void clickCoyniLogin() {
+		click(login, "Login");
+	}
+
+	public void clickCoyniLogo() {
+		click(logoLogin, "Logo");
+	}
+
 	public void clickPersonalAccount() {
 		click(lblPersonalAccount, "Personal Account");
+	}
+	
+	public void clickOnMerchantAccount() {
+		click(btnMerchantAccount, "Merchant Account");
 	}
 
 	public void verifyPersonalAccount() {
@@ -51,8 +66,8 @@ public class HomePage extends BrowserFunctions {
 	}
 
 	public void verifyMerchantAccount() {
-		new CommonFunctions().elementView(lblMerchantAccount, "Merchant Account");
-		String text = getText(lblMerchantAccount, "");
+		new CommonFunctions().elementView(btnMerchantAccount, "Merchant Account");
+		String text = getText(btnMerchantAccount, "");
 		ExtentTestManager.setInfoMessageInReport("This is Merchant Account label Heading : " + text);
 	}
 

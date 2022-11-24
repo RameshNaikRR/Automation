@@ -51,6 +51,8 @@ public class SignupTest {
 			Thread.sleep(1000);
 			signupPage.fillCreatePassword(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
+			loginPage.clickeyeIcon();
+			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			signupPage.phoneVerificationComponent().verifyPhoneNumber();

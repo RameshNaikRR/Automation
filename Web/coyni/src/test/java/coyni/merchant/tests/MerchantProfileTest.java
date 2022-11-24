@@ -438,8 +438,8 @@ public class MerchantProfileTest {
 					.verifyNewEmailAddressPopUp().verifyNewEmail(data.get("newEmail"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
-			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);

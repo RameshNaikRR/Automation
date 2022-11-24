@@ -20,16 +20,30 @@ public class SideMenuBarTest {
 	}
 
 	@Test
-	public void testSideMenuBar() {
+	@Parameters({ "strParams" })
+	public void testSideMenuBar(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
 			sideMenuBarComponent.verifyUserName();
 //			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
 //			sideMenuBarComponent.verifyMerchnatTracker();
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
+			sideMenuBarComponent.handSymbolHighlightedMerchantActivity(data.get("cssProp"), data.get("value"),
+					data.get("color"));
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.verifyMerchantActivityDrpDwn();
+			sideMenuBarComponent.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("value"),
+					data.get("color"));
 			sideMenuBarComponent.verifyTokenAccountPushBtn();
+			sideMenuBarComponent.handSymbolHighlightedExportFiles(data.get("cssProp"), data.get("value"),
+					data.get("color"));
 			sideMenuBarComponent.verifyExportFilesPushBtn();
+			sideMenuBarComponent.handSymbolHighlightedBusinessSettings(data.get("cssProp"), data.get("value"),
+					data.get("color"));
 			sideMenuBarComponent.verifyMerchnatSettingsPushBtn();
+			sideMenuBarComponent.handSymbolHighlightedGetHelp(data.get("cssProp"), data.get("value"),
+					data.get("color"));
 			sideMenuBarComponent.verifyGetHelpPushBtn();
 
 		} catch (Exception e) {

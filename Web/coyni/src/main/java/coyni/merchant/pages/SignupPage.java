@@ -1,7 +1,6 @@
 package coyni.merchant.pages;
 
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -402,7 +401,11 @@ public class SignupPage extends BrowserFunctions {
 			height += temp;
 			Thread.sleep(200);
 		}
-
+//		for (int i = 0; i <= noOfPages+2; i++) {
+//			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+//			height += temp;
+//			Thread.sleep(200);
+//		}
 	}
 
 	public void scrollDownPrivacyPolicy() throws InterruptedException {
@@ -469,6 +472,7 @@ public class SignupPage extends BrowserFunctions {
 		click(btnAgree, "Agree");
 	}
 
+	
 	public void scrollDownMerchantAgreementUpdate() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(PDFmerchantAgreementsUpdate));
 		WebElement ele = getElement(termsOfmerchantPDF, "");

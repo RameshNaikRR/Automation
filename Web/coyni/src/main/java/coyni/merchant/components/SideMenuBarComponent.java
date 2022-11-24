@@ -37,6 +37,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By sharedDropDown = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
 	private By sharedDropsDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
 	private By merchantDropDown = By.xpath("//span[@class='UserNameDropDown_title__RKKVD']");
+	private By btnMerchantDropDown = By.xpath("(//span[@class='icon-arrow-down'])[1]");
 	private By btnsharedAccount = By.xpath("//div[contains(@class,'UserNameDropDown_arrowDown__1VWOu')]");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
@@ -62,7 +63,6 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		ArrayList<String> st = new ArrayList<>();
 		for (WebElement ele : eles) {
 			String str = ele.getCssValue("background-color");
-
 			ExtentTestManager.setInfoMessageInReport("the Color of rgba value is " + str);
 			st.add(str);
 
@@ -116,6 +116,36 @@ public class SideMenuBarComponent extends BrowserFunctions {
 				expColor);
 	}
 
+	public void handSymbolHighlightedMerchantActivity(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Merchant Activity"), "Merchant Activity");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
+
+	public void handSymbolHighlightedTokenAccount(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Token Account"), "Token Account");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
+
+	public void handSymbolHighlightedExportFiles(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Export Files"), "Export Files");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
+
+	public void handSymbolHighlightedBusinessSettings(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Business Settings"), "Business Settings");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
+
+	public void handSymbolHighlightedGetHelp(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Get Help"), "Get Help");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
+
 	public void clickUserdrpdwn() {
 		click(userNameDrpDwn, "User drop down");
 	}
@@ -123,10 +153,14 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	public void clickMerchantdrpdwn() {
 		click(merchantDropDown, "Merchant drop down");
 	}
-	
+
+	public void clickOnMerchantdrpdwn() {
+		click(btnMerchantDropDown, "Merchant drop down");
+	}
+
 	public void clickOnSharedDropDown() {
 		click(sharedDropsDown, "Shared Drop Down");
-		
+
 	}
 
 	public void clickSharedDropDown() {

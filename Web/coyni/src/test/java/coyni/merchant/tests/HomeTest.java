@@ -1,20 +1,15 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.google.common.util.concurrent.Uninterruptibles;
-
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
-import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
-import ilabs.api.reporting.ExtentTestManager;
 
 public class HomeTest {
 
@@ -33,6 +28,12 @@ public class HomeTest {
 	@Parameters({ "strParams" })
 	public void testHomePage(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		homePage.clickCoyniLogo();
+//		homePage.clickCoyniLogin();
+		loginPage.clickSignUp();
+		homePage.clickPersonalAccount();
+		homePage.clickMerchantAccount();
+		homePage.clickLogin();
 		loginPage.clickSignUp();
 		homePage.verifyHeading(data.get("homePageHeading"));
 		homePage.verifyPersonalAccount();

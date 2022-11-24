@@ -80,7 +80,6 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 	}
 
 	public void fillpin(String code) {
-
 		List<WebElement> inputs = getElementsList(inputBox, "input boxes");
 		int noOfInputs = inputs.size();
 		if (noOfInputs == 6) {

@@ -4,7 +4,11 @@ import java.awt.AWTException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -16,10 +20,13 @@ import coyni.merchant.components.ToastComponent;
 import coyni.merchant.components.UserNameDropDownComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.Navigation;
 
 public class LoginPage extends BrowserFunctions {
+	WebDriver driver = DriverFactory.getDriver();
+	WebDriverWait wait = new WebDriverWait(driver, 120);
 
 	private By txtEmail = By.xpath("//input[@id='Email']");
 	private By txtPassword = By.xpath("//input[@id='Password']");
@@ -28,13 +35,25 @@ public class LoginPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
 	private By heading = By.cssSelector(".business-login__title,.title");
-
 	private By lblerrorMsg = By.cssSelector("span.error");
-
 	private By lblEmail = By.cssSelector("");
-
 	private By txtOTP = By.cssSelector("");
 	private By iconeye = By.cssSelector(".icon-button");
+	private By PDFpages = By.cssSelector(".react-pdf__Page");
+	private By termsofServicePDFPages = By.cssSelector(".react-pdf__Document");
+	private By termsOfMerchantPDFPages = By.cssSelector(".react-pdf__Document");
+	private By pdfPagesUpdate = By.cssSelector(".react-pdf__Page");
+	private By PDFtermsOfServicesUpdate = By.xpath("//div[.='Terms of Service']");
+	private By PDFmerchantAgreementsUpdate = By.xpath("//div[.='Merchant Agreement']");
+	private By PDFtermsOfServices = By.xpath("(//span[.='Agreement'])[1]");
+	private By PDFprivacyPolicy = By.xpath("((//span[.='']))[1]");
+	private By privacyPolicyUpdate = By.xpath("//span[contains(text(),'Privacy Policy')]");
+	private By merchantAgreementUpdate = By.xpath("//span[contains(text(),'Merchant Agreement')]");
+	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
+	private By btnAgree = By.xpath("//button[contains(text(),'Agree')]");
+	private By checkbox = By.xpath("//input[@type='checkbox']");
+	private By termsOfServicePDF = By.xpath("//div[contains(@class,'AgreementModal_pdfSize__yrzAs')]");
+	private By termsOfmerchantPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
 
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
@@ -148,6 +167,72 @@ public class LoginPage extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Expected of number of remaining password attempts  are "
 					+ expAttempts + " but actual are " + text);
 		}
+	}
+
+	public void PrivacyPolicyUpdate() {
+		if (verifyElementPresence(privacyPolicyUpdate, "Privacy Policy")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
+	public void TermsOfServiceUpdate() {
+		if (verifyElementPresence(privacyPolicyUpdate, "Privacy Policy")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
+	public void merchantAgreementUpdate() {
+		if (verifyElementPresence(merchantAgreementUpdate, "Merchant Agreement")) {
+			click(btnDone, "Done");
+
+		}
+	}
+
+	public void scrollDownTermsOfServiceUpdate() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFtermsOfServicesUpdate));
+		WebElement ele = getElement(termsOfServicePDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsofServicePDFPages, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickAgree();
+		clickDone();
+
+	}
+
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
+
+	public void clickAgree() {
+		click(btnAgree, "Agree");
+	}
+
+	public void scrollDownMerchantAgreementUpdate() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFmerchantAgreementsUpdate));
+		WebElement ele = getElement(termsOfmerchantPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickAgree();
+		clickDone();
 	}
 
 	public void clickTab() throws AWTException {

@@ -39,9 +39,10 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			loginPage.clickeyeIcon();
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			// loginPage.clickeyeIcon();
+//			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
+			Thread.sleep(3000);
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
@@ -247,10 +248,12 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
 			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.clickNext();
+			Thread.sleep(2000);
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
-			loginPage.phoneVerificationComponent().verifyPhoneNumber();
+			// loginPage.phoneVerificationComponent().verifyPhoneNumber();
+			Thread.sleep(2000);
 			loginPage.phoneVerificationComponent().fillpin(data.get("code"));
 			loginPage.phoneVerificationComponent().clickEmail();
 		} catch (Exception e) {
