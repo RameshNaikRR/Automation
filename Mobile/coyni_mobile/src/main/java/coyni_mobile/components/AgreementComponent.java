@@ -14,7 +14,19 @@ public class AgreementComponent extends MobileFunctions {
 	private By backIconAgreement = MobileBy.xpath("//*[contains(@resource-id,'backAgreeIV')]");
 	private By lblActiveAgreements = MobileBy.xpath(" ");
 	private By lblPastAgreements = MobileBy.xpath(" ");
-
+	//Updates of Agreements after login
+		private By privacyPolicyUpdate = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+		private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
+		private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
+	
+	
+	public void verifyTermsOfServiceUpdate(String expHeading) {
+		if(getElementList(termsOfServiceUpdateHeading, "").size()>0) {
+		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading", expHeading);
+		click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+		}
+	}
+	
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}

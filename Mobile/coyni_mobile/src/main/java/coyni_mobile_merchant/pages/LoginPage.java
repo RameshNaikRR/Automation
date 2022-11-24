@@ -2,7 +2,9 @@ package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
 
+
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.AgreementComponent;
 import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.NavigationComponent;
@@ -277,6 +279,10 @@ public class LoginPage extends MobileFunctions {
 
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
+	}
+
+	public AgreementComponent agreementComponent() {
+		return new AgreementComponent();
 	}
 
 }

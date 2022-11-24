@@ -1,25 +1,68 @@
 package coyni_mobile_merchant.components;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class AgreementComponent extends MobileFunctions {
 
 	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-	private By privacyPolicy = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
-	private By termsOfService = MobileBy.xpath("//*[contains(@resource-id,'terms_of_service')]|//*[contains(@text,'Terms of Service')]");
-	private By lblMerchantAgreements = MobileBy.xpath("//*[contains(@resource-id,'merchant_agreements')]|//*[contains(@text,'Merchant’s Agreement')]");
+	private By privacyPolicy = MobileBy
+			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+	private By termsOfService = MobileBy
+			.xpath("//*[contains(@resource-id,'terms_of_service')]|//*[contains(@text,'Terms of Service')]");
+	private By lblMerchantAgreements = MobileBy
+			.xpath("//*[contains(@resource-id,'merchant_agreements')]|//*[contains(@text,'Merchant’s Agreement')]");
 	private By headingPastAgreements = MobileBy.xpath("");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'canceled')]");
 
+	// Updates of Agreements after login
+	private By privacyPolicyUpdate = MobileBy
+			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
+	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
+	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
+	}
+
+	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
+		Thread.sleep(2000);
+		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
+			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+					expHeading);
+			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+			clickAgreeCheckBox();
+			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+		}
+	}
+
+	public void scrollTermsOfService() {
+
+//		while (getElementList(termsOfServiceUpdateOk, "Next").size() == 0) {
+		scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+//			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+//					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+//		}
+	}
+
+	public void clickAgreeCheckBox() {
+		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
+		click(chboxAgree, "Terms of service and Privacy");
+		}
 	}
 
 	public void verifyActiveAgreementsView() {
@@ -42,7 +85,6 @@ public class AgreementComponent extends MobileFunctions {
 //		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
 //	}
 
-	
 	public void verifyMerchantAgreementView() {
 		scrollDownToElement(lblMerchantAgreements, "Merchant Agreements");
 		new CommonFunctions().elementView(lblMerchantAgreements, "Merchant Agreements");
@@ -74,11 +116,11 @@ public class AgreementComponent extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
-	
+
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
-	
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
