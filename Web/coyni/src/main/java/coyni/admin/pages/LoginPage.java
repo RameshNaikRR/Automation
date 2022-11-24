@@ -151,10 +151,17 @@ public class LoginPage extends BrowserFunctions {
 	public void clickResendVerification() {
 		click(btnResendVerification, "Resend Verification code");
 	}
+	
 
 	public void verifyNewVerification() {
 		waitForElement(btnNewVerification, waittime, WaitForElement.presence);
 		ExtentTestManager.setInfoMessageInReport("New Verification code is sent");
+	}
+	
+	private By lblfiveTimeResnd=By.xpath("//span[text()='Looks like something went wrong. Please try again later.']");
+	
+	public void verifyResendFiveTimes(String content) {
+		new CommonFunctions().verifyLabelText(lblfiveTimeResnd, "Looks like something went wrong. Please try again later.", content);
 	}
 
 	public void handSymbolHighlightedTransactions(String cssProp, String expValue, String expColor) {

@@ -34,30 +34,31 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
-			//loginPage.verifyPageDescription(data.get("loginDescription"));
+			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
-			if(data.get("securityKey").equalsIgnoreCase("123456")) {
-                loginPage.authyComponent().fillInput(data.get("securityKey"));    
-            }else {
-                loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
-            }
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			}
 			Thread.sleep(4000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminLoginWithInvalidEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
-			//loginPage.verifyPageDescription(data.get("loginDescription"));
+			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
@@ -141,7 +142,7 @@ public class LoginTest {
 	public void testForgotEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
@@ -161,14 +162,14 @@ public class LoginTest {
 					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
-			//loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
+			// loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.verifyPageHeading(data.get("chooseAccountHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.clickUser();
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.verifyEmail(data.get("email"));
-		//	loginPage.viewEmail();
+			// loginPage.viewEmail();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotEmail failed due to exception " + e);
@@ -196,7 +197,8 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().authyComponent()
 					.fillInput(data.get("code"));
 			if (!data.get("message").isEmpty()) {
-				loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
+				loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+						.verifyMessage(data.get("message"));
 			}
 
 		} catch (Exception e) {
@@ -211,7 +213,7 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyPageHeading(data.get("loginHeading"));
-		  //  loginPage.forgotEmailPage().verifyForgotEmailunderline();
+			// loginPage.forgotEmailPage().verifyForgotEmailunderline();
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
@@ -225,9 +227,9 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillLastName(data.get("lastName"));
 			loginPage.forgotEmailPage().clickNext();
-		Thread.sleep(1000);
-		loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
-		.verifyPhoneHeading(data.get("phoneEmailVerificationHeading"));
+			Thread.sleep(1000);
+			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneEmailVerificationHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
 			Thread.sleep(1000);
@@ -252,7 +254,7 @@ public class LoginTest {
 			loginPage.forgotEmailPage().validatePhoneNumber(data.get("phoneNumber"));
 			loginPage.forgotEmailPage().clickNext();
 			Thread.sleep(2000);
-			//loginPage.forgotEmailPage().forgotEmailNamePage().verifyPageHeading(data.get("forgotEmailNameHeading"));
+			// loginPage.forgotEmailPage().forgotEmailNamePage().verifyPageHeading(data.get("forgotEmailNameHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().validateFirstNameField(data.get("firstName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().validateLastNameField(data.get("lastName"));
 		} catch (Exception e) {
@@ -290,7 +292,6 @@ public class LoginTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPassword(String strParams) {
@@ -307,8 +308,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().clickNext();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyPageHeading(data.get("emailHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
-					.getEmailDescription();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().getEmailDescription();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.verifyPageHeading(data.get("createPasswordHeading"));
@@ -320,13 +320,15 @@ public class LoginTest {
 			loginPage.adminUserDetailsPage().verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillCreatePassword(data.get("createPassword"));
-			//loginPage.adminUserDetailsPage().clickEyeIconConfirmPassword();
+			// loginPage.adminUserDetailsPage().clickEyeIconConfirmPassword();
 			loginPage.adminUserDetailsPage().verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessHeading(data.get("successHeading"));
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessDescription(data.get("successDescription"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.verifySucessHeading(data.get("successHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.verifySucessDescription(data.get("successDescription"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickLogIn();
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 
@@ -375,6 +377,7 @@ public class LoginTest {
 		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordWithInvalidEmailVerificationCode(String strParams) {
@@ -482,7 +485,8 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.verifyConfirmPasswordMaskedView();
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickSubmit();
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().verifySucessHeading(data.get("successHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
+					.verifySucessHeading(data.get("successHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage().clickLogIn();
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 
@@ -491,71 +495,91 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Test login view method failed due to this exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testNewCodeUpto5Times(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.clickSms();
-			for(int i=1;i<=5;i++)
-			{
-			loginPage.clickResendVerification();
-			loginPage.verifyNewVerification();
+			for (int i = 1; i <= 5; i++) {
+				loginPage.clickResendVerification();
+				loginPage.verifyNewVerification();
 			}
-			
-			
-			
+
+			loginPage.verifyResendFiveTimes(data.get("fiveTimeContent"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void handSymbolHighlighted(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.handSymbolHighlightedCoyniPortal(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedTransactions(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedTransactions(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 			loginPage.handSymbolHighlightedProfiles(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedUnderwriting(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedUnderwriting(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 			loginPage.handSymbolHighlightedDisputes(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			loginPage.handSymbolHighlightedReserveMgmt(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			loginPage.handSymbolHighlightedAccounting(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedGatewaySettings(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedExportedFiles(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedBalanceReports(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedSystemSettings(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedCommissionAccount(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
+			loginPage.handSymbolHighlightedGatewaySettings(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedExportedFiles(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedBalanceReports(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedSystemSettings(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedCommissionAccount(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+
 			loginPage.handSymbolHighlightedPersonals(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			loginPage.handSymbolHighlightedMerchant(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
 			loginPage.handSymbolHighlightedAPIBusiness(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedCoyniEmployees(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
-			//loginPage.handSymbolHighlightedUnderwritingPersonals(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedUnderwritingMerchant(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedCoyniEmployees(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+
+			// loginPage.handSymbolHighlightedUnderwritingPersonals(data.get("cssProp"),
+			// data.get("expValue"), data.get("expColor"));
+			loginPage.handSymbolHighlightedUnderwritingMerchant(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
 			loginPage.handSymbolHighlightedAPIBusiness(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
-			loginPage.handSymbolHighlightedTotalWithdraw(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedTotalDeposits(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
-			loginPage.handSymbolHighlightedPaymentGateways(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedLoadBalancer(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
+
+			loginPage.handSymbolHighlightedTotalWithdraw(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedTotalDeposits(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+
+			loginPage.handSymbolHighlightedPaymentGateways(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedLoadBalancer(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+
 			loginPage.handSymbolHighlightedAgreements(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedFeeStructure(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedAccountLimits(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedFeatureControls(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			loginPage.handSymbolHighlightedCardBlackList(data.get("cssProp"), data.get("expValue"), data.get("expColor"));
-			
+			loginPage.handSymbolHighlightedFeeStructure(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedAccountLimits(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedFeatureControls(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+			loginPage.handSymbolHighlightedCardBlackList(data.get("cssProp"), data.get("expValue"),
+					data.get("expColor"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 }
