@@ -4,6 +4,8 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -50,8 +52,9 @@ public class RegistrationProcessPage extends MobileFunctions {
 		click(btnMerchantAgreement, "Merchant's Agreement");
 	}
 
+	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 20);
 	public void clickReviewApplication() throws InterruptedException {
-		Thread.sleep(3000);
+	wait.until(ExpectedConditions.elementToBeClickable(btnReviewApplication));
 		TouchAction touch = new TouchAction(DriverFactory.getDriver());
 		touch.press(PointOption.point(300, 1500)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(100, (int) (1200))).release().perform();

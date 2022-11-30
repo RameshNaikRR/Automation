@@ -1,6 +1,10 @@
 package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.MailingAddressComponent;
@@ -33,6 +37,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	private By btnDone = MobileBy.xpath("//*[contains(@text,'Done')]");
 	private By lblDBADescription = MobileBy.xpath("//*[contains(@text,' the same as your co')]");
 	
+	WebDriverWait wait= new WebDriverWait(DriverFactory.getDriver(), 20);
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblDBAHeading, "DBA  Info Heading", expHeading);
 	}
@@ -85,6 +90,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 
 	public void clickUpload() {
+		wait.until(ExpectedConditions.elementToBeClickable(btnUpload));
 		scrollDownToElement(btnUpload, "Upload DBA filling");
 		click(btnUpload, "Upload DBA filling");
 	}
