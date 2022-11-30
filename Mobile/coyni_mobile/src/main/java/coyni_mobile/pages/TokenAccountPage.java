@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.components.NotificationComponent;
@@ -35,6 +37,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
 	
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(transactionsHeading, "Transaction heading", expHeading);
@@ -122,7 +125,7 @@ public class TokenAccountPage extends MobileFunctions {
 
 	// added
 	public void clickProfile(){
-	//	DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait.until(ExpectedConditions.elementToBeClickable(btnProfile));
 		click(btnProfile, "Profile");	
 	 }
 	

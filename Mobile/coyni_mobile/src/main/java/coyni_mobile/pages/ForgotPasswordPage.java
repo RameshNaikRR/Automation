@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.EmailVerificationComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -89,4 +90,9 @@ public class ForgotPasswordPage extends MobileFunctions {
 		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
 
 	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 }

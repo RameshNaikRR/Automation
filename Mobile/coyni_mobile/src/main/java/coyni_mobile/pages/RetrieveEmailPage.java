@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -187,6 +188,11 @@ public class RetrieveEmailPage extends MobileFunctions {
 		new CommonFunctions().validateFieldWithNumber(txtLastName, "lastName", numbers);
 
 	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 	//
 	// public void validatePhoneNumberField(String minPhoneNumber) {// String
 	// minPhoneNumber, String maxPhoneNumber, String

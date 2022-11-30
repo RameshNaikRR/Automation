@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.FaceIDDisabledComponent;
 import coyni_mobile.components.FaceIDnotAvailableComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.ForgotPinComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.popups.CoyniInavlidEmailPopup;
@@ -203,4 +204,9 @@ public class LoginPage extends MobileFunctions {
 	public EmailOrPasswordIsIncorrectPopup emailOrPasswordIsIncorrectPopup() {
 		return new EmailOrPasswordIsIncorrectPopup();
 	}
+	
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 }

@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.xml.crypto.Data;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -77,7 +79,7 @@ public class LoginTest {
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(loginData.get("email"));
-			loginPage.fillPassword(loginData.get("password"));	
+			loginPage.fillPassword(loginData.get("password"));
 			DriverFactory.getDriver().hideKeyboard();
 			// loginPage.clickRememberMe();
 			loginPage.clickLogin();
@@ -173,6 +175,26 @@ public class LoginTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			String[] email = data.get("email").split(",");
+			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
+			String[] password = data.get("password").split(",");
+			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
+					password[3]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginFieldValidation failed due to Exception " + e);
+		}
+	}
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testForgotPin(String strParams) {
@@ -215,12 +237,12 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			// loginPage.forgotPasswordPage().verifyEmailComponent()
-			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			// loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
+			loginPage.forgotPasswordPage().verifyEmailComponent()
+					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
+//			 loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmail(loginData.get("labelEmail"));
 			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
@@ -243,7 +265,7 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.forgotPasswordPage().clickNext();
@@ -275,10 +297,9 @@ public class LoginTest {
 			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			
+
 			if (data.get("validatePopUpMsg").contains("yes")) {
-				loginPage.forgotPasswordPage().verifyEmailComponent()
-						.verifyEmailHeadingview();
+				loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailHeadingview();
 				Thread.sleep(2000);
 				for (int i = 0; i <= 4; i++) {
 					loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
@@ -287,17 +308,14 @@ public class LoginTest {
 						.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
 				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
 						.verifyPopUpMsg(data.get("errPopUpMsg"));
-				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
-						.clickOk();
-				loginPage.forgotPasswordPage().verifyEmailComponent()
-				.verifyEmailHeadingview();
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent().clickOk();
+				loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailHeadingview();
 			} else {
 				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
 						.verifyPopUpMsgHeading(data.get("errPopUpHeading"));
 				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
 						.verifyPopUpMsg(data.get("errPopUpMsg"));
-				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent()
-						.clickOk();
+				loginPage.forgotPasswordPage().verifyEmailComponent().errorMessagePopupComponent().clickOk();
 				loginPage.forgotPasswordPage().verifyHeading(data.get("forgotHeading"));
 			}
 //			
@@ -312,8 +330,7 @@ public class LoginTest {
 //			}
 //			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testForgotPasswordInvalidOTPCredentials due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testForgotPasswordInvalidOTPCredentials due to exception " + e);
 		}
 	}
 
@@ -357,12 +374,23 @@ public class LoginTest {
 	@Parameters({ "strParams" })
 	public void testForgotPasswordWithFieldValidation(String strParams) {
 		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
-			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			String[] email = loginData.get("email").split(",");
-			loginPage.forgotPasswordPage().validateEmailField(email[0], email[1], email[2], email[3], email[4]);
+			loginPage.forgotPasswordPage().verifyHeading(data.get("forgotHeading"));
+			String[] email = data.get("emailFieldValidations").split(",");
+			loginPage.forgotPasswordPage().fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
+			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(data.get("code"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(data.get("createHeading"));
+			String[] newPassword = data.get("newPassword").split(",");
+			loginPage.forgotPasswordPage().fieldValidationsComponent().validateNewPasswordField(newPassword[0],
+					newPassword[1], newPassword[2]);
+			String[] confirmPassword = data.get("newPassword").split(",");
+			loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
+					confirmPassword[1], confirmPassword[2]);
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
@@ -492,6 +520,29 @@ public class LoginTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveWithFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Retreive email
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0],
+					phoneNumber[1], phoneNumber[2]);
+			String[] firstName = data.get("firstName").split(",");
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1],
+					firstName[2]);
+			String[] lastName = data.get("lastName").split(",");
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1],
+					lastName[2]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveWithFieldValidations failed due to exception " + e);
+		}
+	}
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testRetrieveEmailFieldValidations(String strParams) {
@@ -521,26 +572,26 @@ public class LoginTest {
 		return null;
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testLoginFieldValidation(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
-			landingPage.clickLogin();
-			loginPage.VerifyLoginPageView();
-			loginPage.verifyEmailview();
-			loginPage.verifyPasswordview();
-			loginPage.verifyRememberMeView();
-			String[] email = data.get("email").split(",");
-			loginPage.validateEmailField(email[0], email[1], email[2]);
-			String[] password = data.get("password").split(",");
-			loginPage.validatePasswordField(password[0], password[1], password[2]);
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testLoginFieldValidation(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//
+//			landingPage.clickLogin();
+//			loginPage.VerifyLoginPageView();
+//			loginPage.verifyEmailview();
+//			loginPage.verifyPasswordview();
+//			loginPage.verifyRememberMeView();
+//			String[] email = data.get("email").split(",");
+//			loginPage.validateEmailField(email[0], email[1], email[2]);
+//			String[] password = data.get("password").split(",");
+//			loginPage.validatePasswordField(password[0], password[1], password[2]);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
