@@ -68,7 +68,7 @@ public class LoginTest {
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-//			loginPage.clickNext();
+			loginPage.clickNext();
 			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
@@ -264,6 +264,7 @@ public class LoginTest {
 			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailPage().validatePhoneNumber(data.get("phoneNumber"));
 			loginPage.forgotEmailPage().clickNext();
+			Thread.sleep(3000);
 			loginPage.forgotEmailPage().forgotEmailNamePage().verifyPageHeading(data.get("forgotEmailNameHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().validateFirstNameField(data.get("firstName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().validateLastNameField(data.get("lastName"));

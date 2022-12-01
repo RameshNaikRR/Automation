@@ -282,7 +282,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().clickUserName();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().clickUserDetails();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
 					.fillInput(data.get("code"));
@@ -315,7 +315,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().clickUserName();
 			tokenWalletPage.topBarComponent().clickUserDetails();
 			Thread.sleep(5000);
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.verifyEmailAddressAuthHeading1(data.get("emailHeading1"));
@@ -335,7 +335,7 @@ public class BusinessProfileTest {
 			}
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.navigationComponent().clickClose();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
@@ -368,7 +368,7 @@ public class BusinessProfileTest {
 			}
 			tokenWalletPage.topBarComponent().userDetailsComponent().currentEmailAddressPopup().navigationComponent()
 					.clickClose();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().authyComponent()
