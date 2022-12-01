@@ -48,7 +48,7 @@ public class EcoSystemActivityTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testEcoSystemActivityTransactionsListView(String strParams) {
+	public void testEcoSystemActivityTransactionsListView(String strParams)  throws InterruptedException {
 
 		homePage.sideBarMenuComponent().clickEcosystemActivity();
 		homePage.sideBarMenuComponent().ecoSystemActivityComponent().clickTransHistory();

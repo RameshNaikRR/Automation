@@ -38,7 +38,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsSideBarView(String strParams) {
+	public void testBusinessSettingsSideBarView(String strParams) throws InterruptedException  {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		sideBarMenuComponent.clickBusinessSettings();
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyHeading(data.get("heading"));
@@ -512,7 +512,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsNoTeamMember(String strParams) {
+	public void testBusinessSettingsNoTeamMember(String strParams) throws InterruptedException  {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarMenuComponent().clickBusinessSettings();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();

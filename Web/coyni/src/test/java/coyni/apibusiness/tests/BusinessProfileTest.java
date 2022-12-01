@@ -409,7 +409,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().clickUserName();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().clickUserDetails();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup()
 					.verifyEmailAddressAuthHeading1(data.get("emailHeading1"));
@@ -469,7 +469,7 @@ public class BusinessProfileTest {
 			tokenWalletPage.topBarComponent().clickUserName();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().clickUserDetails();
-			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email"));
+			tokenWalletPage.topBarComponent().userDetailsComponent().verifyEditAccountEmail(data.get("email1"));
 			tokenWalletPage.topBarComponent().userDetailsComponent().clickIconEditEmail();
 			Thread.sleep(1000);
 			tokenWalletPage.topBarComponent().userDetailsComponent().emailAddressAuthenticationPopup().smsCode();
@@ -688,7 +688,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsAddExternalBank(String strParams) {
+	public void testBusinessSettingsAddExternalBank(String strParams) throws InterruptedException {
 		homePage.sideBarMenuComponent().clickBusinessSettings();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
@@ -698,7 +698,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsAddDebitCard(String strParams) {
+	public void testBusinessSettingsAddDebitCard(String strParams) throws InterruptedException  {
 		homePage.sideBarMenuComponent().clickBusinessSettings();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
@@ -840,7 +840,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsEditDebitCard(String strParams) {
+	public void testBusinessSettingsEditDebitCard(String strParams) throws InterruptedException  {
 		homePage.sideBarMenuComponent().clickBusinessSettings();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent().clickEdit();

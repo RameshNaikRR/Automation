@@ -22,8 +22,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	// business setting
 	private By lblBusinessSetting = By.xpath("//span[text()='Business Settings']");
 
-	public void clickBusinessSettings() {
+	public void clickBusinessSettings() throws InterruptedException {
 		click(lblBusinessSetting, "Business Settings");
+		Thread.sleep(3000);
 		// click(getDashBoardItems("Business Settings"), "Business Settings");
 	}
 
@@ -48,12 +49,14 @@ public class SideBarMenuComponent extends BrowserFunctions {
 				border);
 	}
 
-	public void clickEcosystemActivity() {
+	public void clickEcosystemActivity() throws InterruptedException {
 		click(getDashBoardItems("Ecosystem Activity"), "Ecosystem Activity");
+		Thread.sleep(3000);
 	}
 
-	public void clickExportFiles() {
+	public void clickExportFiles() throws InterruptedException {
 		click(getDashBoardItems("Export Files"), "Export Files");
+		Thread.sleep(3000);
 	}
 
 	public void clickBusinessApplicationArrow() {
@@ -64,8 +67,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		click(btnContinueApplication, "Continue Application");
 	}
 
-	public void clickGetHelp() {
+	public void clickGetHelp() throws InterruptedException {
 		click(getDashBoardItems("Get Help"), "Get Help");
+		Thread.sleep(3000);
 	}
 
 	public RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage() {
