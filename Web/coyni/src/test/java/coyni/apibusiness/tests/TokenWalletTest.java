@@ -707,6 +707,7 @@ public class TokenWalletTest {
 //					.verifyHeading(data.get("heading"));
 //				sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
 //						.verifySubHeading();
+			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().fillAmount(data.get("amount"));
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickChange();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickCovert();
@@ -780,6 +781,7 @@ public class TokenWalletTest {
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
 //					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
 			tokenWalletPage.buyTokensPaymentPopup().fillAmount(data.get("amount"));
 			tokenWalletPage.buyTokensPaymentPopup().clickCovert();
 //			tokenWalletPage.buyTokensPaymentPopup().clickChange();
@@ -902,7 +904,7 @@ public class TokenWalletTest {
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 					.fillAmount(data.get("amount"));
-//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickOutside();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickOutside();
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup()
 //					.verifyDescription(data.get("description"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickNext();

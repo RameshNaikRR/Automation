@@ -51,6 +51,7 @@ public class LoginTest {
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			Thread.sleep(2000);
 			loginPage.authyComponent().fillInput(data.get("code"));
 //			Thread.sleep(2000);
 //			loginPage.authyComponent().verifyMessage(data.get("message"));

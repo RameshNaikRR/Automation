@@ -22,8 +22,8 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TokenWalletPage extends BrowserFunctions {
-	private By lblHeading = By.cssSelector("#token-account-wallets-page>h1");
-	private By btnTokenWallet = By.xpath("//button[text()='Token Wallet']");
+	private By lblHeading = By.xpath("//h1[text()='Token Wallets']");
+	private By btnTokenWallet = By.xpath("//span[text()='Token Wallets']");
 	private By lblTotalWalletBalance = By.xpath("//h3[text()='Total Wallet Balance']");
 	private By walletBalance = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(1)");
 	private By lblcurrency = By.cssSelector("div[class*=TokenAccountWallets_wallet_bal]>span:nth-of-type(2)");
@@ -58,7 +58,6 @@ public class TokenWalletPage extends BrowserFunctions {
 				"div[class*='TokenAccountWallets_Wallets_Table']>div:nth-of-type(%s)>div:nth-of-type(1)>div:nth-of-type(4)>div",
 				WalletElements));
 	}
-
 	public void getIndividualWalletsName(String rowNum) {
 		ExtentTestManager
 				.setInfoMessageInReport(rowNum + " WalletName: " + getText(getWalletListElements("2", rowNum), ""));
@@ -119,10 +118,10 @@ public class TokenWalletPage extends BrowserFunctions {
 		click(editWalletName, "Edit Wallet Name");
 	}
 
-	public void clickTokenWallet() {
+	public void clickTokenWallet() throws InterruptedException {
 		click(btnTokenWallet, "Token Wallet");
+		Thread.sleep(3000);
 	}
-
 	public void clickCopyAddress() {
 		new CommonFunctions().elementView(copyAddress, "Copied to clipBoard");
 		click(copyAddress, "Copy Address");
@@ -161,7 +160,7 @@ public class TokenWalletPage extends BrowserFunctions {
 	}
 
 	public void verifyTotalWalletBalanceView() {
-		new CommonFunctions().elementView(lblTotalWalletBalance, "Total Wallet Balance");
+		new CommonFunctions().elementView(lblTotalWalletBalance, "Available Balance");
 	}
 
 	public void getWalletBalance() {

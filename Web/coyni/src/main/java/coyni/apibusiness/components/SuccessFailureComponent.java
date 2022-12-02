@@ -18,7 +18,7 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	private By failedHeading = By.xpath("");
 	private By btnDone = By.xpath("//button[text()='Done']");
 	private By lblReferenceID = By.xpath("//span[text()='Reference ID']");
-	private By referenceIdCopied = By.xpath("(//button[@data-event='click'])[2]");
+	private By referenceIdCopied = By.xpath("(//button[@class='copy-image icon-copy fontColor'])[2]");
 
 	public void clickReferenceID() {
 		click(referenceIdCopied, "Copied to ClipBoard");
