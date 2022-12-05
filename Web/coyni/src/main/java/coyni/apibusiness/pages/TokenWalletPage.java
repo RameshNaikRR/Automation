@@ -36,6 +36,8 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By clickWithdrawTokens = By.xpath("//span[text()='Withdraw to USD']");
 	private By lblWallets = By
 			.xpath("//div[@class='text-sm TokenAccountWallets_Wallet_Id_Cyn__7pYfp text-cgy4 font-semibold']");
+	private By lblNoData = By.xpath("//span[text()='No Filter Data Found']");
+	
 
 	private By getWallet(String walletNum) {
 		return By.xpath(String.format(
@@ -69,7 +71,7 @@ public class TokenWalletPage extends BrowserFunctions {
 	}
 
 	public void clickIndividualWalletsName() {
-		click(getWalletListElements("2", "1"), "");
+		click(getWalletListElements("2", "1"), "IndividualWalletsName");
 	}
 
 	public void getIndividualWalletAddress(String rowNum) {
@@ -175,7 +177,11 @@ public class TokenWalletPage extends BrowserFunctions {
 			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
 		}
 	}
-
+	public int getTransactionsSize() {
+		return getElementsList(lblNoData, "No Data").size();
+		
+	}
+	
 	public TopBarComponent topBarComponent() {
 		return new TopBarComponent();
 	}

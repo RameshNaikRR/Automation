@@ -14,6 +14,8 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
 	private By SignetAccountDesc = By.xpath("//p[contains(text(),'Signet')]");
 	public By txtWithdrawSignetAccount = By.xpath("//h1[text()='Withdraw to Signet Account']");
+	public By btnChange = By.xpath("//span[text()='Change']");
+	
 	
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -38,9 +40,12 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public void clickOnSignetAccount() {
 		click(btnSignetAccount, "Click Signet Account");
 	}
+	public void clickOnChange() {
+		click(btnChange, "Change");
+	}
 
 	public void verifySignetHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(txtWithdrawSignetAccount, "Signet Account", expHeading);
+		new CommonFunctions().verifyLabelText(btnSignetAccount, "Signet Account", expHeading);
 	}
 
 	public void verifyBankAccountHeading(String expHeading) {

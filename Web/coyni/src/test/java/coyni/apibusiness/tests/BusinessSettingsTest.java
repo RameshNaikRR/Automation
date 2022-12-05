@@ -361,8 +361,9 @@ public class BusinessSettingsTest {
 					.fillCompanyEmail(data.get("companyEmail"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickSaveEnabled();
+			Thread.sleep(4000);
 			if (!data.get("errMessage").isEmpty()) {
 				Thread.sleep(2000);
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),

@@ -79,7 +79,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public By getCheckkBoxes(String text) {
-		return By.xpath(String.format("//div[@class='relative flex flex-wrap gap-2']/div", text));
+		return By.xpath(String.format("//span[text()='%s']", text));
 	}
 
 	public void clickCheckBox(String text) {

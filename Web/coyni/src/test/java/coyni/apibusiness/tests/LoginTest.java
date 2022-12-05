@@ -53,7 +53,7 @@ public class LoginTest {
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			Thread.sleep(2000);
 			loginPage.authyComponent().fillInput(data.get("code"));
-//			Thread.sleep(2000);
+			Thread.sleep(3000);
 //			loginPage.authyComponent().verifyMessage(data.get("message"));
 
 		} catch (Exception e) {

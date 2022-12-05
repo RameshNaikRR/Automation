@@ -28,9 +28,10 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	private By btnCross = By.xpath("//button[@class='self-end']");
 	private By txtInsufficientfunds = By.xpath("//p[text()='Insufficient funds. ']");
 	private By txtMaxWithdrawAmount = By.xpath("//span[text()='Max Withdraw Amount']");
+	private By verifyWithdrawSignet = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	
 
-	private By lblNote = By.xpath("//p[@class='mt-4 text-xs text-center text-cgy4'] ");
+	private By lblNote = By.xpath("//textarea[@name='message']");
 	private By BankAccounts = By.xpath("//div[@class='flex flex-col items-center justify-center mt-9']//p");
 
 	public void clickDelete() {
@@ -40,6 +41,10 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
+	public void verifyWithdrawHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(verifyWithdrawSignet, "WithdrawHeading", expHeading);
+	}
+
 
 	public void verifyOrderPreviewForWithdraw() {
 		List<WebElement> rows = getElementsList(wtdSignetAmount, "Order Preview");
