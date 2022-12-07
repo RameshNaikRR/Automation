@@ -27,6 +27,7 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	private By txtedit = By.xpath("//span[text()='Edit']");
 	private By txtCancel = By.xpath("//span[text()='Cancel']");
 	private By txtSave = By.xpath("//span[text()='Save']");
+	private By btnAdminRole = By.xpath("//p[text()='Admin']");
 
 	private By getUserPermissions(String permissions) {
 		return By.xpath(String.format("(//div[contains(@class,'react-toggle-track-x')])[%s]", permissions));
@@ -106,6 +107,11 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	public void clickSave() {
 		click(txtSave, "Save");
 	}
+	
+	public void clickAdminRole() {
+		click(btnAdminRole, "Admin Role");
+	}
+	
 
 	public void getUserPermission(String option, String eleName) {
 		By options = By.xpath("//div[@class='TeamNewMember_add_role__hYYn2 px-2 py-3']/div");

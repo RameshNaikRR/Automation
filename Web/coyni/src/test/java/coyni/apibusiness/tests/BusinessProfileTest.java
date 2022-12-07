@@ -88,7 +88,7 @@ public class BusinessProfileTest {
 	public void testChangePasswordWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			// APIAdminMenuComponent.clickUserName();
 			tokenWalletPage.topBarComponent().clickUserName();
 			tokenWalletPage.topBarComponent().clickChangePassword();
@@ -936,6 +936,7 @@ public class BusinessProfileTest {
 			Thread.sleep(4000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().preferencesPage()
 					.selectTimeZone(data.get("timeZone"));
+			
 			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().preferencesPage()
 					.verifyCurrency(data.get("currency"));
@@ -979,6 +980,7 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.clickAddNewPayment();
+			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().clickDebit();
 			Thread.sleep(3000);

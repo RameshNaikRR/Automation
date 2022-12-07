@@ -41,6 +41,8 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
 	private By btnEdit = By.xpath("");
 	private By dropdwnTimeZone = By.xpath("//div[text()='Pacific (PST)'");
+	private By drpdwnPacificTimeZone = By.xpath("//span[text()='Central (CST)']");
+	
 
 	private By dropdwnTimeZone(String timezone) {
 		return By.xpath(String.format("//div[@class='FormField_options_wrap__wE188']", timezone));
@@ -111,32 +113,32 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		return By.xpath(String.format("//div[text()='%s']", timeZone));
 	}
 
-	public void selectTimeZone(String option, String timeZone) {
+	public void selectTimeZone(String option, String timeZone) throws InterruptedException {
 		BrowserFunctions objBrowserFunctions = new BrowserFunctions();
 		click(drpdwnTimeZone, "TimeZone Drop down");
 		try {
-			By options = By.xpath("//div[@class='FormField_options_wrap__wE188']");
-			boolean status = false;
+			By options = By.xpath("//div[contains(@class,'flex items-center justify-between p')]");
+			//boolean status = false;
 			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
 			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
 			for (WebElement optionEle : optionsEles) {
 				if (optionEle.getText().equalsIgnoreCase(option)) {
 					optionEle.click();
-					status = true;
+					//status = true;
 					break;
 				}
 			}
-			if (status) {
-				ExtentTestManager.setInfoMessageInReport(option + " selected from " + timeZone + " drop down");
-			} else {
-				ExtentTestManager.setFailMessageInReport(option + " not available in " + timeZone + " dropdown");
-			}
+//			if (status) {
+				ExtentTestManager.setInfoMessageInReport("pacific selected from " + timeZone + " drop down");
+//			} else {
+//				ExtentTestManager.setFailMessageInReport(option + " not available in " + timeZone + " dropdown");
+//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
 		}
 		
 //		click(getElement1(timeZone), timeZone);
-//		Thread.sleep(2000);
+		Thread.sleep(2000);
 	}
 
 	public void clickTimeZone() {
@@ -145,6 +147,10 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 //		click(getElement(timeZone), timeZone);
 //		Thread.sleep(2000);
 	}
+	public void clickPacificTime() {
+		click(drpdwnPacificTimeZone, "Pacific");
+	}
+
 
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();

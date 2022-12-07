@@ -561,6 +561,8 @@ public class BusinessSettingsTest {
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.addCustomRolePopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+			.clickAdminRole();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyTokenWalletAccess();

@@ -63,6 +63,30 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testNewRegApiLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.verifyPageDescription(data.get("loginDescription"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyNewRegPageHeading(data.get("authyHeading"));
+			loginPage.authyComponent().verifyNewRegPageDescription(data.get("authyDescription"));
+			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			Thread.sleep(2000);
+			loginPage.authyComponent().fillInput(data.get("code"));
+			Thread.sleep(3000);
+//			loginPage.authyComponent().verifyMessage(data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testLoginInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

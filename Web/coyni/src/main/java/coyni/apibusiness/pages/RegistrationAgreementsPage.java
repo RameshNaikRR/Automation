@@ -12,6 +12,7 @@ public class RegistrationAgreementsPage extends BrowserFunctions {
 	private By agreementSign = By.xpath("//div[@contenteditable='true']");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By checkbox = By.xpath("//input[@type='checkbox']");
+	private By btnExit = By.xpath("//strong[text()='Exit']");
 	private By btnAgree = By.xpath("//button[text()='Agree']");
 	private By btnNext=By.xpath("//button[text()='Next']");
 	private By clickBusinessAgreementView = By.xpath("(//button[text()='View'])[1]");
@@ -72,4 +73,9 @@ public class RegistrationAgreementsPage extends BrowserFunctions {
 	public void clickCheckBox() {
 		click(checkbox, "checkbox");
 	}
+	
+	public void clickExit() {
+		click(btnExit, "Exit");
+	}
+	
 }

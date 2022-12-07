@@ -9,13 +9,15 @@ public class PreferencesPage extends BrowserFunctions {
 	private By drpDwnTime = By.xpath("//div[text()='Time Zone']/parent::div");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");
+	private By btnMountain = By.xpath("//span[text()='Mountain (MST)']");
+	
 
 	public By getElement(String timeZone) {
 		return By.xpath(String.format("//div[text()='%s']", timeZone));
 	}
 
 	public void selectTimeZone(String timeZone) {
-		click(drpDwnTime, "Time Zone DropDown");
+		click(btnMountain, "MST");
 	//	click(getElement(timeZone), timeZone);
 	}
 

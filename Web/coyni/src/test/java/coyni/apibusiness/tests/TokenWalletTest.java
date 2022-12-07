@@ -674,6 +674,7 @@ public class TokenWalletTest {
 			sideBarMenuComponent.tokenWalletActivityComponent().clickTransferTokens();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
 					.fillAmount(data.get("amount"));
+			Thread.sleep(2000);
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickTab();
 			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
@@ -708,7 +709,7 @@ public class TokenWalletTest {
 //					.verifyHeading(data.get("heading"));
 //				sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
 //						.verifySubHeading();
-			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().fillAmount(data.get("amount"));
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickChange();
 			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickCovert();
@@ -1083,9 +1084,14 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawtoSignetAccountPopup().clickConverter();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().txtMessage(data.get("message"));
-			
+			Thread.sleep(2000);
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+			.withdrawviaInstantPayPopup().clickTab();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().clickOnNext();
+			
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
+//			.withdrawviaInstantPayPopup().clickOnNext();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.withdrawviaInstantPayPopup().orderPreviewPopup().verifyOrderPreviewForWithdraw();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()

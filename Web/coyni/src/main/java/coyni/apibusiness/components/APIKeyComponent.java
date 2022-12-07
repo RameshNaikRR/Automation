@@ -17,7 +17,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class APIKeyComponent extends BrowserFunctions {
 	private By lblApiKey = By.xpath("(//span[text()='API Keys'])[2]");
 	private By lnkGenerateAPiKey = By.xpath("//button[text()='Generate New Secret Key']");
-	private By iconCopy = By.xpath("//button[@data-event='click']");
+	private By iconCopy = By.xpath("//button[contains(@class,'cop')]");
 	private By btnrevealSecretKey = By.xpath("(//span[contains(@class,'ApiKeys_reveal_secret_key__RA4a1')])[1]");
 	private By lblPublicKey = By.xpath("//span[text()='Public Key:']");
 	private By publicKey = By.xpath("//span[text()='Public Key:']/following-sibling::div[1]");

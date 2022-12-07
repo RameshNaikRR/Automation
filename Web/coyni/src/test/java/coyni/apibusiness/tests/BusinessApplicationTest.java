@@ -475,7 +475,7 @@ public class BusinessApplicationTest {
 	public void testDBAInformationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -643,14 +643,14 @@ public class BusinessApplicationTest {
 	public void testDBAInformation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-			registrationStartPage.registrationDBAInformationPage().clickNo();
-			Thread.sleep(10000);
+//			registrationStartPage.registrationDBAInformationPage().clickNo();
+			Thread.sleep(3000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
 //			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
@@ -669,14 +669,17 @@ public class BusinessApplicationTest {
 					.fillZipCode(data.get("zipCode"));
 			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("option"),
 					data.get("timezone"));
+//			
 //			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
+//			registrationStartPage.registrationDBAInformationPage().clickPacificTime();
+			Thread.sleep(3000);
 			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
 					data.get("fileName"));
 			System.out.println("Upload File Successfully");
 			Thread.sleep(5000);
 			registrationStartPage.registrationDBAInformationPage().clickNext();
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformation failed due to Exception " + e);
@@ -787,11 +790,15 @@ public class BusinessApplicationTest {
 			registrationAgreementsPage.AgreementSign(data.get("sign"));
 			registrationAgreementsPage.clickSave();
 			registrationAgreementsPage.clickPrivacyPolicy();
-			registrationAgreementsPage.clickCheckBox();
-			registrationAgreementsPage.clickAgree();
-			registrationAgreementsPage.clickTermsOfServices();
-			registrationAgreementsPage.clickCheckBox();
-			registrationAgreementsPage.clickAgree();
+//			Thread.sleep(4000);
+			
+//			registrationAgreementsPage.clickCheckBox();
+//			registrationAgreementsPage.clickAgree();
+//			registrationAgreementsPage.clickTermsOfServices();
+//			registrationAgreementsPage.clickCheckBox();
+//			registrationAgreementsPage.clickAgree();
+			registrationAgreementsPage.clickExit();
+			sideBarMenuComponent.clickContinueApplication();
 			registrationAgreementsPage.clickNext();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreementsFlow failed due to Exception " + e);

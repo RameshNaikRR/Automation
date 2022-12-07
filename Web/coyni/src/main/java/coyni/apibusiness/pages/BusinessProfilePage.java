@@ -12,10 +12,10 @@ public class BusinessProfilePage extends BrowserFunctions {
 	private By imageImg = By.cssSelector(" ");
 	private By lblAccountId = By.xpath("//div[contains(text(),'Account ID:')]");
 	private By lblUserName = By.xpath("//div[contains(text(),'Account ID:')]/preceding-sibling::div ");
-	private By countNotifications = By.xpath("//div[@class='notification-count']");
+	private By countNotifications = By.xpath("//span[@class='text']");
 
 	public void countNotify() {
-		String notifyCount = getText(countNotifications, "");
+		String notifyCount = getText(countNotifications, "countNotifications");
 		ExtentTestManager.setInfoMessageInReport(notifyCount + " Notifications are displayed");
 	}
 
