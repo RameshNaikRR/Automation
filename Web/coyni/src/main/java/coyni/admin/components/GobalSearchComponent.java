@@ -6,7 +6,8 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class GobalSearchComponent extends BrowserFunctions {
 
-	private By btnGobalSearch = By.xpath("//input[contains(@class,'Input_form_input__yl3pD italic Header_mini_input__PGYO8 false')]");
+	private By btnGobalSearch = By
+			.xpath("//input[contains(@class,'Input_form_input__yl3pD italic Header_mini_input__PGYO8 false')]");
 	private By btnProfileId = By.xpath("//label[text()='Profile ID:']");
 	private By btnProfileDetails = By.xpath("//label[text()='Profile Details:']");
 	private By btnReferenceId = By.xpath("//label[text()='Reference ID:']");
@@ -72,12 +73,18 @@ public class GobalSearchComponent extends BrowserFunctions {
 	}
 
 	private By lblIndividuals = By.xpath("//label[text()='Individuals']");
-	
-	private By btn=By.xpath("Input_form_input__yl3pD italic Header_mini_input__PGYO8 Header_swidth__9DZRw ");
 
-	public void clickIndivisuals(String profileDetails) {
+	private By btn = By.xpath("//input[@class='Input_form_input__yl3pD italic Header_mini_input__PGYO8 Header_swidth__9DZRw ']");
+
+	public void clickIndivisuals() {
 		click(lblIndividuals, "");
+//		Thread.sleep(2000);
+//		enterText(btn, profileDetails, "profile Details");
+	}
+
+	public void enterProfileDetails(String profileDetails) {
 		enterText(btn, profileDetails, "profile Details");
+
 	}
 
 	private By lblEmail = By.className("cell-col-2");
