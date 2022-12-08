@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.FaceIDDisabledComponent;
 import coyni_mobile.components.FaceIDnotAvailableComponent;
@@ -10,7 +11,6 @@ import coyni_mobile.components.ForgotPinComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.popups.CoyniInavlidEmailPopup;
 import coyni_mobile.popups.EmailOrPasswordIsIncorrectPopup;
-import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
