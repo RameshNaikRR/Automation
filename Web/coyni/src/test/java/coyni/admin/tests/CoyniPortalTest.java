@@ -417,6 +417,7 @@ public class CoyniPortalTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.clickWithdrawToCogent();
 			addCogent(strParams);
+			Thread.sleep(3000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
