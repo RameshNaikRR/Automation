@@ -12,8 +12,8 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 			.xpath("//span[text()='Bank Account']");
 	private By btnDebit = By
 			.xpath("//button[@class='payment-method-button ']/following-sibling::*[1]/div/span[text()='Debit Card']");
-	private By btnSignetAccount = By.xpath(
-			"//button[@class='payment-method-button ']/following-sibling::*[1]/div/span[text()='Signet Account']");
+	private By btnCogentAccount = By.xpath(
+			"//button[@class='payment-method-button ']/following-sibling::*[1]/div/span[text()='Cogent Account']");
 
 	public void clickBankAccount() {
 		click(btnBankAccount, "Bank Account");
@@ -23,8 +23,8 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		click(btnDebit, "Click Debit");
 	}
 
-	public void clickSignetAccount() {
-		click(btnSignetAccount, "Signet Account");
+	public void clickCogentAccount() {
+		click(btnCogentAccount, "Cogent Account");
 
 	}
 

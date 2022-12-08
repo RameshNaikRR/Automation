@@ -367,7 +367,7 @@ public class TokenWalletTest {
 			sideBarMenuComponent.filterComponent().verifyTransactionSubtypeView();
 			sideBarMenuComponent.filterComponent().verifyBankAccountChkbxView();
 			sideBarMenuComponent.filterComponent().verifyInstantPayChkbxView();
-			sideBarMenuComponent.filterComponent().verifySignetChkbxView();
+			sideBarMenuComponent.filterComponent().verifyCogentChkbxView();
 			sideBarMenuComponent.filterComponent().verifyTransactionAmountView();
 			sideBarMenuComponent.filterComponent().verifyReferenceIdView();
 			sideBarMenuComponent.filterComponent().verifyTransactionStatusView();
@@ -768,7 +768,7 @@ public class TokenWalletTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void tokenWalletBuyTokensSignetAccount(String strParams) {
+	public void tokenWalletBuyTokensCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickTokenwallet();
@@ -783,7 +783,7 @@ public class TokenWalletTest {
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickNext();
 //			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup()
 //					.verifyHeading(data.get("heading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
+//			sideBarMenuComponent.tokenWalletActivityComponent().buyTokensPaymentPopup().clickNext();
 			tokenWalletPage.buyTokensPaymentPopup().fillAmount(data.get("amount"));
 			tokenWalletPage.buyTokensPaymentPopup().clickCovert();
 //			tokenWalletPage.buyTokensPaymentPopup().clickChange();
@@ -817,7 +817,7 @@ public class TokenWalletTest {
 		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
 				.verifyHeading(data.get("addNewPaymenthdg"));
 		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
-				.clickSignetAccount();
+				.clickCogentAccount();
 		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()
 				.verifyPageHeading(data.get("signetAccounthdg"));
 		sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewSignetAccountPopup()

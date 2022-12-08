@@ -1,5 +1,9 @@
 package coyni.admin.components;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 
@@ -114,55 +118,55 @@ public class SideBarComponent extends BrowserFunctions {
 	public void clickTokenAccount() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Token Account"), "Token Account");
 		click(getSubMenuItems("Token Account"), "Token Account");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickCommissionAccount() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Commission Account"), "Commission Account");
 		click(getSubMenuItems("Commission Account"), "Commission Account");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickPersonals() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Personal"), "Personal");
 		click(getSubMenuItems("Personal"), "Personal");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickBusinesses() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Businesses"), "Businesses");
 		click(getSubMenuItems("Businesses"), "Businesses");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickCoyniEmployees() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("coyni Employees"), "coyni Employees");
 		click(getSubMenuItems("coyni Employees"), "coyni Employees");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickLedgers() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Ledgers"), "Ledgers");
 		click(getSubMenuItems("Ledgers"), "Ledgers");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickAPIBusinessess() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API Users");
 		click(getSubMenuItems("API Business"), "API Businesses");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickPersonal() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Personal"), "Personal");
 		click(getSubMenuItems("Personal"), "Personal");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickBusiness() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Business"), "Business");
 		click(getSubMenuItems("Business"), "Business");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickTotalWithdraw() throws InterruptedException {
@@ -174,67 +178,67 @@ public class SideBarComponent extends BrowserFunctions {
 	public void clickTotalDeposits() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Total Deposits"), "Total Deposits");
 		click(getSubMenuItems("Total Deposits"), "Total Deposits");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickPaymentGateways() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 		click(getSubMenuItems("Payment Gateways"), "Payment Gateways");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickLoadBalancer() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Load Balancer"), "Load Balancer");
 		click(getSubMenuItems("Load Balancer"), "Load Balancer");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickAgreements() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Agreements"), "Agreements");
 		click(getSubMenuItems("Agreements"), "Agreements");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickFeeStructure() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Fee Structure"), "Fee Structure");
 		click(getSubMenuItems("Fee Structure"), "Fee Structure");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickAccountLimits() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Account Limits"), "Account Limits");
 		click(getSubMenuItems("Account Limits"), "Account Limits");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickPermissions() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Permissions"), "Permissions");
 		click(getSubMenuItems("Permissions"), "Permissions");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickFeatureControls() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Feature Controls"), "Feature Controls");
 		click(getSubMenuItems("Feature Controls"), "Feature Controls");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickCardBlackList() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Card Blacklist"), "Card Blacklist");
 		click(getSubMenuItems("Card Blacklist"), "Card Blacklist");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickPushNotifications() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Push Notifications"), "Push Notifications");
 		click(getSubMenuItems("Push Notifications"), "Push Notifications");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void clickMerchant() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Merchants"), "Merchants");
 		click(getSubMenuItems("Merchants"), "Merchants");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 	}
 
 	public void verifyTotalDepositsView() throws InterruptedException {
@@ -309,6 +313,11 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public UnderWritingPersonalComponent underWritingPersonalComponent() {
 		return new UnderWritingPersonalComponent();
+	}
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 }

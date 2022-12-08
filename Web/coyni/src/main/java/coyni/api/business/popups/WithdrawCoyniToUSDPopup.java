@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
-	public By lblHeading = By.xpath("//h1[text()='Withdraw coyni to USD']");
+	public By lblHeading = By.xpath("//h1[text()='Buy coyni Tokens']");
 	public By btnBankAccount = By.xpath("//span[text()='Bank Account']");
 	public By btnInstantPay = By.xpath("//span[text()='Instant Pay']");
 	public By btnSignetAccount = By.xpath("//span[text()=' Signet Account']");
@@ -15,12 +15,16 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	private By SignetAccountDesc = By.xpath("//p[contains(text(),'Signet')]");
 	public By txtWithdrawSignetAccount = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	public By btnChange = By.xpath("//span[text()='Change']");
-	
+	private By btnBuyCoyni = By.xpath("//button[text()='Buy coyni']");
+
 	
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
-
+	
+	public void clickBuyCoyni() {
+		click(btnBuyCoyni, "Buy Coyni");
+	}
 	public void verifylblDesc(String expDesc) {
 		new CommonFunctions().verifyLabelText(SignetAccountDesc, "Signet Account Description", expDesc);
 	}

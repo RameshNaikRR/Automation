@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.CommissionAccountPage;
 import coyni.admin.pages.HomePage;
 import coyni.admin.pages.TokenAccountPage;
@@ -52,6 +53,7 @@ public class CoyniPortalTest {
 			// homePage.topBarComponent().fillSearch(data.get("search"));
 			homePage.topBarComponent().clickDropDownUserName();
 			// homePage.topBarComponent().verifyCursorAction();
+			Thread.sleep(3000);
 			homePage.topBarComponent().clickUserName();
 			homePage.topBarComponent().adminUserDetailsPage().verifyPageHeading(data.get("heading"));
 			// homePage.topBarComponent().verifyCursorAction();
@@ -435,6 +437,7 @@ public class CoyniPortalTest {
 			Thread.sleep(2000);
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
+			new SideBarComponent().clickTab();
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
 			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
 			tokenAccountPage.withdrawToSignetPopup().clickNext();

@@ -99,7 +99,7 @@ public class HomeTest {
 	public void testUserDetailsChangePasswordInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			homePage.clickUserName();
 			homePage.clickChangePassword();
 			homePage.authyComponent().fillInput(data.get("code"));
@@ -174,6 +174,7 @@ public class HomeTest {
 	public void uploadImg(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(4000);
 			imgComponent.clickUserName();
 			imgComponent.clickUserDetails();
 			imgComponent.clickEditUserImage();

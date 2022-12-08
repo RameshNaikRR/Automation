@@ -223,6 +223,7 @@ public class BusinessProfileTest {
 					.newEmailAddressPopup().verifyNewEmailAddressHeading(data.get("newEmailPopUp"));
 			tokenWalletPage.userDetailsComponent().editEmailAddressPopup().currentEmailAddressPopup()
 					.newEmailAddressPopup().authyComponent().fillInput(data.get("code"));
+			Thread.sleep(5000);
 			tokenWalletPage.userDetailsComponent().editEmailAddressPopup().currentEmailAddressPopup()
 					.newEmailAddressPopup().navigationComponent().clickClose();
 			tokenWalletPage.userDetailsComponent().verifyUserDetailsView();
@@ -757,7 +758,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinenssSettingsAddSignetAccount(String strParams) {
+	public void testBusinenssSettingsAddCogentAccount(String strParams) {
 		try {
 			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
@@ -765,8 +766,8 @@ public class BusinessProfileTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.clickAddNewPayment();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().clickSignetAccount();
-			testSignetAccount(strParams);
+					.addNewPaymentMethodPopup().clickCogentAccount();
+			testCogentAccount(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
@@ -775,7 +776,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testSignetAccount(String strParams) {
+	public void testCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);

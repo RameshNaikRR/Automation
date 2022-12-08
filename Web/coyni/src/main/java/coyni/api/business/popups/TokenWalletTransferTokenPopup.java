@@ -83,7 +83,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Amount is not verified");
 		}
 	}
-
+	
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);

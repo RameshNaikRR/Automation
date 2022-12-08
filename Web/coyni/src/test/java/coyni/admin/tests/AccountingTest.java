@@ -24,10 +24,12 @@ public class AccountingTest {
 		accountTableComponent = new AccountTableComponent();
 		coyniPortalTest = new CoyniPortalTest();
 	}
+	
 
 	public void totalWithdraw(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		Thread.sleep(2000);
+		
 
 		homePage.sideBarComponent().accountTableComponent().verifyColumnView();
 		int notransactionFound = homePage.sideBarComponent().accountTableComponent().notransactionFound();

@@ -218,8 +218,8 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getCheckkBoxes("Instant Pay"), "Instant Pay");
 	}
 
-	public void verifySignetChkbxView() {
-		new CommonFunctions().elementView(getCheckkBoxes("Signet"), "Signet");
+	public void verifyCogentChkbxView() {
+		new CommonFunctions().elementView(getCheckkBoxes("Cogent"), "Cogent");
 	}
 
 	public void verifyLabelTransactionStatus(String TransactionStatus) {

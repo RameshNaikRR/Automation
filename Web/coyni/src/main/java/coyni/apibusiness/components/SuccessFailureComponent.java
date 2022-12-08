@@ -11,7 +11,7 @@ public class SuccessFailureComponent extends BrowserFunctions {
 	private By lblRemovedSuccesful = By.xpath("//h1[text()='Payment Method Removed Successfully']");
 	private By btnClose = By.xpath("//button[text()='Close']");
 	private By editHeading = By.xpath("//h1[text()='Payment Method Edited Successfully']");
-	private By lblSignetAddedSuccessful1 = By.xpath("//h1[text()='Signet Account Added']");
+	private By lblSignetAddedSuccessful1 = By.xpath("//h1[text()='Cogent Account Added']");
 	private By lblSignetAddedSuccessful2 = By.xpath("//h1[text()='Successfully']");
 	private By lblSignetDeleted = By.xpath("//h1[text()='Payment Method Removed Successfully']");
 	private By lblSignetDeleted1 = By.xpath("//h1[text()='Removed Successfully']");
