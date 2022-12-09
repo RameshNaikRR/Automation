@@ -406,28 +406,34 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.clickExport();
-			if (strParams1.equalsIgnoreCase("Today")) {
-				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnToday();
-			} else if (strParams1.equalsIgnoreCase("Yesterday")) {
-				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnYesterday();
-
-			} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
-				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOn7Days();
-			} else if (strParams1.equalsIgnoreCase("Last Month")) {
-				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
+			if (tokenAccountPage.verifyTransactions() > 0) {
+				tokenAccountPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
-				tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
+				tokenAccountPage.clickExport();
+				if (strParams1.equalsIgnoreCase("Today")) {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnToday();
+				} else if (strParams1.equalsIgnoreCase("Yesterday")) {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnYesterday();
+
+				} else if (strParams1.equalsIgnoreCase("Last Seven Days")) {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOn7Days();
+				} else if (strParams1.equalsIgnoreCase("Last Month")) {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
+				} else {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
+				}
+				Thread.sleep(2000);
+
 			}
-			Thread.sleep(2000);
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnExport();
-			// tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().verifyTitle(data.get("heading"));
 			Thread.sleep(2000);
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().navigationComponent().clickClose();
-			tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
-			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
-					.verifyNotificationText(data.get("notificationText"));
-		} catch (Exception e) {
+//				tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
+//				tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+//						.verifyNotificationText(data.get("notificationText"));
+		} catch (
+
+		Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
 
 		}
@@ -466,17 +472,25 @@ public class TokenAccountTest {
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			Thread.sleep(10000);
 			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.filterComponent().clickFilters();
-//			tokenAccountPage.filterComponent().clickStartDate();
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
-			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
-			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
-			tokenAccountPage.filterComponent().clickApplyFilters();
+//			Thread.sleep(2000);
+			if (tokenAccountPage.filterComponent().verifyTransactionss() > 0) {
+				Thread.sleep(3000);
+				tokenAccountPage.filterComponent().verifyNoTrasactionsFound();
+			} else {
+				Thread.sleep(2000);
+				tokenAccountPage.filterComponent().clickFilters();
+//			    tokenAccountPage.filterComponent().clickStartDate();
+//			    tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+//			   tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+				tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
+				tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+				tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+				tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+				tokenAccountPage.filterComponent().clickApplyFilters();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
@@ -603,9 +617,9 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsReserveMerchantPayOutFilters(strParams);
 			testRecords(strParams);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
 
 		} catch (Exception e) {
 			ExtentTestManager

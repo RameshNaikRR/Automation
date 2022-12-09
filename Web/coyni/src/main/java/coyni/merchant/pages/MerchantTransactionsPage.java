@@ -49,7 +49,12 @@ public class MerchantTransactionsPage extends BrowserFunctions {
 	}
 
 	public void clickExport() {
-		click(btnExport, "Export");
+		if (getElement(btnExport, "Enabled").isEnabled()) {
+			click(btnExport, "Next");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Exoirt button is Disabled");
+		}
+
 	}
 
 	public void verifyLabelTransactionListDetails() {

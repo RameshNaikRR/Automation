@@ -39,7 +39,7 @@ public class ExportFilesTest {
 				exportFilesPage.dateRangeView();
 				exportFilesPage.reportNameView();
 				exportFilesPage.statusView();
-				exportFilesPage.verifyIdFormat();
+//				exportFilesPage.verifyIdFormat();
 				exportFilesPage.clickIconDownload();
 				exportFilesPage.successView();
 			}
@@ -64,7 +64,7 @@ public class ExportFilesTest {
 				exportFilesPage.clickCheckBox();
 				exportFilesPage.clickBulkActionDropDown();
 				exportFilesPage.clickDownload();
-				exportFilesPage.clickApply();
+//				exportFilesPage.clickApply();
 			}
 
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class ExportFilesTest {
 				exportFilesPage.clickCheckBox();
 				exportFilesPage.clickBulkActionDropDown();
 				exportFilesPage.clickTrash();
-				exportFilesPage.clickApply();
+//				exportFilesPage.clickApply();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesBulkTrash failed due to exception ");

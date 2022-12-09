@@ -59,7 +59,11 @@ public class ExportfilesPage extends BrowserFunctions {
 	}
 
 	public void clickApply() {
-		click(btnApply, "Apply");
+		if (getElement(btnApply, "Enabled").isEnabled()) {
+			click(btnApply, "Apply");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Apply button is Disabled");
+		}
 	}
 
 	public void clickTrash() {
