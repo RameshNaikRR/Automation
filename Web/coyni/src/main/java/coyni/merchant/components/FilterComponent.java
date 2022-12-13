@@ -1,7 +1,9 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -30,6 +32,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
 	private By tableRows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 	private By msgNoRecoreds = By.cssSelector(".message");
+	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')]");
 
 	private By getCheckBoxes(String checkBox) {
 		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", checkBox));
@@ -179,8 +182,33 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickFilters() {
-		scrollToElement(btnFilter, "Filter");
+//		if (getElement(btnFilter, "Enabled").isDisplayed()) {
+//			scrollToElement(btnFilter, "Filter");
 		click(btnFilter, "Filter");
+//		} else {
+//			ExtentTestManager.setPassMessageInReport("Export button is Disabled");
+//		}
+
+	}
+
+	public boolean verifyTransactions() {
+		WebElement ele = getElement(lblNoTrasactons, "");
+		boolean displayed = ele.isDisplayed();
+		return displayed;
+	}
+
+	public int verifyTransactionss() {
+		int ele = getElementsList(lblNoTrasactons, "").size();
+		return ele;
+	}
+
+	public void verifyNoTrasactionsFound() {
+		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
+//		return getText(lblNoTrasactons, "No Trasactions");
+	}
+
+	public int verifyFilters() {
+		return getElementsList(lblNoTrasactons, "").size();
 	}
 
 	public void clickResetAllFilters() {

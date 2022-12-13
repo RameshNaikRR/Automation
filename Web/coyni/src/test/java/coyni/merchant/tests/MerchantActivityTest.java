@@ -71,8 +71,8 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
 			merchantActivityComponent.dashBoardPage().clickFullTransactionHistory();
 			merchantActivityComponent.clickDashBoard();
-			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
-			merchantActivityComponent.clickDashBoard();
+//			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
+//			merchantActivityComponent.clickDashBoard();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testDashBoardProcessingVolume failed due to exception " + e);
@@ -164,17 +164,20 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
-			merchantTransactionsPage.filterComponent().clickFilters();
+			if (merchantTransactionsPage.filterComponent().verifyTransactions()) {
+				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
+			} else {
+				merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
 //			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
 //			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
-			merchantTransactionsPage.filterComponent().clickApplyFilters();
-
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
+				merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+				merchantTransactionsPage.filterComponent().clickApplyFilters();
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
 		}
@@ -191,25 +194,29 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
-			merchantTransactionsPage.filterComponent().clickFilters();
+			if (merchantTransactionsPage.filterComponent().verifyTransactions()) {
+				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
+			} else {
+				merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
 //			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
 //			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-			merchantTransactionsPage.filterComponent().clickClearAllTransactionType();
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().clickClearTransactionAmount();
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
-			merchantTransactionsPage.filterComponent().clickClearSenderName();
-			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
-			merchantTransactionsPage.filterComponent().clickClearSenderName();
-			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+				merchantTransactionsPage.filterComponent().clickClearAllTransactionType();
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+				merchantTransactionsPage.filterComponent().clickClearTransactionAmount();
+				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+				merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+				merchantTransactionsPage.filterComponent().clickClearSenderName();
+				merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
+				merchantTransactionsPage.filterComponent().fillSender(data.get("senderName"));
+				merchantTransactionsPage.filterComponent().clickClearSenderName();
+				merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
@@ -262,27 +269,27 @@ public class MerchantActivityTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testDashBoardFullReserveHistory(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
-			merchantActivityComponent.dashBoardPage().getReserveBalance();
-			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
-			merchantActivityComponent.dashBoardPage().getNextRelease();
-			merchantActivityComponent.dashBoardPage().getLastRelease();
-			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
-			merchantActivityComponent.reserveHistoryPage().clickOnHold();
-			merchantActivityComponent.reserveHistoryPage().clickOpen();
-			merchantActivityComponent.reserveHistoryPage().clickReleased();
-			merchantActivityComponent.reserveHistoryPage().clickManual();
-			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testDashBoardFullReserveHistory failed due to exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testDashBoardFullReserveHistory(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
+//			merchantActivityComponent.dashBoardPage().getReserveBalance();
+//			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
+//			merchantActivityComponent.dashBoardPage().getNextRelease();
+//			merchantActivityComponent.dashBoardPage().getLastRelease();
+//			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
+//			merchantActivityComponent.reserveHistoryPage().clickOnHold();
+//			merchantActivityComponent.reserveHistoryPage().clickOpen();
+//			merchantActivityComponent.reserveHistoryPage().clickReleased();
+//			merchantActivityComponent.reserveHistoryPage().clickManual();
+//			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testDashBoardFullReserveHistory failed due to exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -331,9 +338,14 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
-			merchantTransactionsPage.filterComponent().clickFilters();
-			merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-			merchantActivityComponent.filterComponent().clickApplyFilters();
+			if (merchantTransactionsPage.filterComponent().verifyTransactionss() > 0) {
+				Thread.sleep(3000);
+				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
+			} else {
+				merchantTransactionsPage.filterComponent().clickFilters();
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+				merchantActivityComponent.filterComponent().clickApplyFilters();
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionDetailsFilters Failed due to Exception " + e);
 		}

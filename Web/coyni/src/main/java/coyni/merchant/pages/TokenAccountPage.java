@@ -55,6 +55,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By entriesPerPageDropDown = By.xpath(
 			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
 
+	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')]");
+
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
 
 	public String getBracesCount() {
@@ -64,7 +66,21 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public void clickExport() {
-		click(btnExport, "Export");
+		if (getElement(btnExport, "Enabled").isEnabled()) {
+			click(btnExport, "Export");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Export button is Disabled");
+		}
+
+	}
+
+	public int verifyTransactions() {
+		return getElementsList(lblNoTrasactons, "").size();
+	}
+
+	public String verifyNoTrasactionsFound() {
+		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
+		return getText(lblNoTrasactons, "No Trasactions");
 	}
 
 	public void verifyLabelYourTokenAccount() {

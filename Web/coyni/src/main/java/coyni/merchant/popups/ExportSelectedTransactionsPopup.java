@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 
@@ -76,7 +77,12 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	}
 
 	public void clickOnExport() {
-		click(btnExport, "Export");
+		if (getElement(btnExport, "Enabled").isEnabled()) {
+			click(btnExport, "Export");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Export button is Disabled");
+		}
+
 	}
 
 	public void clickOnReserveExport() {
