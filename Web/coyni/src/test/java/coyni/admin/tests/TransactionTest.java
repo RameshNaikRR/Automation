@@ -375,6 +375,7 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickWithdraw();
 			sideBarComponent.transactionPage().filterComponent().clickInstantPay();
+			sideBarComponent.transactionPage().filterComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
@@ -418,7 +419,10 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickWithdraw();
 			sideBarComponent.transactionPage().filterComponent().clickExternalBankAccount();
+			sideBarComponent.transactionPage().filterComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
+			if(sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().noDataFound()==0) {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().clickCompleted();
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
 					.verifyTransactionDetailsHeading(data.get("transactionHeading"));
@@ -442,7 +446,10 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent()
 					.verifyBankAccountInformation(data.get("bankInformation"));
 			sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().getBankName();
-			;
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("No filter data found");
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);

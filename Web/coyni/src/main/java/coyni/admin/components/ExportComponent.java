@@ -18,7 +18,7 @@ public class ExportComponent extends BrowserFunctions {
 	private By lblColumns = By.xpath("//h3[text()='Columns']");
 
 	private By lnkDeSelectAll = By.xpath("//span[text()='Deselect All']");
-
+	private By lblNoData = By.xpath("//span[text()='No Filter Data Found']");
 	private By btnExport = By.xpath("//button[text()='Export']");
 	private By lnkCustom = By.xpath("//span[text()='Custom']");
 	private By ExportButton = By.xpath("//div[@class='export-modal__button-row']//button[text()='Export']");
@@ -29,6 +29,9 @@ public class ExportComponent extends BrowserFunctions {
 
 	public void clickClose() {
 		click(btnClose, "Close");
+	}
+	public int noData() {
+		return getElementsList(lblNoData, "No Data").size();
 	}
 
 	public void verifyExportPrepared(String expHeading) {
@@ -374,10 +377,12 @@ public class ExportComponent extends BrowserFunctions {
 		click(getCheckBox("OriginalTrans , Date"), "OriginalTrans , Date");
 	}
 
+	public int Export() {
+		return getElementsList(btnExport, "btnExport").size();
+	}
+
 	public void clickExport() {
-
 		click(btnExport, "Export");
-
 	}
 
 	public void clickExportDrpdwn() {

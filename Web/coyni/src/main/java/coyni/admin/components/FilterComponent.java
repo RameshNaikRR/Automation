@@ -80,10 +80,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	}
 
-	private By lblNoTransaction = By.xpath("//span[text()='No Transactions Found']");
+	private By lblNoTransaction = By.xpath("//span[text()='It seems we can’t find any results based on your search.']");
 
 	public int noTransaction() {
-		return getElementsList(lblNoTransaction, "").size();
+		return getElementsList(lblNoTransaction, "No Transactions Found").size();
 	}
 
 	public By getElement(String elementName) {

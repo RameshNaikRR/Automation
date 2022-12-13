@@ -39,6 +39,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__SXaMW')]");
 	private By giftCardAmount = By.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__LER5V')])[3]");
+	private By lblNoDataFound = By.xpath("//span[text()='No Filter Data Found']");
+	
 	
 	public String amount() {
 		String text = getText(TDetailsAmount, "");
@@ -48,6 +50,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public String verifyBuyTokenType() {
 		return getText(getBuyTokenData("3"), "");
 	}
+	public int noDataFound() {
+		return getElementsList(lblNoDataFound, "No Data Found").size();
+	}
+
 
 	public String verifyBuyTokenDescription() {
 		return getText(getBuyTokenData("5"), "");
@@ -73,11 +79,14 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	
 
 	public void clickCompleted() {
-		click(lblCompleted, "View Transaction Details");
+		if(getElementsList(lblCompleted,"lblCompleted").size()>0) {
+		click(lblCompleted, "Completed");
+		}
+		else {
+			ExtentTestManager.setPassMessageInReport("No Filter Data Found");
+		}
 	}
 	
-	//-------------------------------------------------
-
 	public By getLabelItem(String Type) {
 		return By.xpath(String.format(
 				"//p[text()='%s']/following-sibling::div[1]/p  | //p[text()='%s']//following-sibling::span | //p[text()='%s']//following-sibling::p",

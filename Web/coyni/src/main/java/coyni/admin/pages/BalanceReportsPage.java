@@ -72,7 +72,7 @@ public class BalanceReportsPage extends BrowserFunctions {
 				"Business Accounts Balance: " + getText(lblBusinessAccountsBalance, "Business Accounts Balance"));
 	}
 	
-	private By getCount = By.cssSelector(".BalanceReport_customer_count__2Tobq");
+	private By getCount = By.xpath("//span[@class='BalanceReport_customer_count__9gtmr']");
 	private By getTotalBalance = By.xpath(
 			"//span[contains(@class,'BalanceReport_wallet_balance_larger__2lM5w font-bold cursor-default text-cgy4 ')]");
 	private By getPersonalBalance = By

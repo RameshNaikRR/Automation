@@ -78,7 +78,7 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickOutSide();
 			loginPage.clickNext();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
@@ -162,6 +162,7 @@ public class LoginTest {
 					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.fillpin(data.get("code"));
+			Thread.sleep(3000);
 			// loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().verifyMessage(data.get("message"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent().chooseAccountPage()
 					.verifyPageHeading(data.get("chooseAccountHeading"));
@@ -191,6 +192,7 @@ public class LoginTest {
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillFirstName(data.get("firstName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().fillLastName(data.get("lastName"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().clickNext();
+			Thread.sleep(3000);
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.verifyPhoneHeading(data.get("phoneEmailVerificationHeading"));
 			Thread.sleep(3000);
@@ -309,7 +311,9 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 					.verifyPageHeading(data.get("emailHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().getEmailDescription();
+			Thread.sleep(5000);
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
+			Thread.sleep(5000);
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
@@ -352,6 +356,7 @@ public class LoginTest {
 				loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
 						.verifyPageHeading(data.get("emailHeading"));
 				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().fillpin(data.get("code"));
+				Thread.sleep(3000);
 				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()
 						.verifyPageHeading(data.get("createPasswordHeading"));
 				loginPage.forgotPasswordPage().phoneEmailVerificationComponent().createPasswordPage()

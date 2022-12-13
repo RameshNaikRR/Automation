@@ -236,7 +236,7 @@ public class CommonFunctions {
 
 		String initialValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
 		objBrowserFunctions.moveToElement(ele, eleName);
-		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
 		String FinalValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
 		System.out.println(initialValue + " : " + FinalValue);
 		if (FinalValue.equalsIgnoreCase(expValue)) {
@@ -244,7 +244,7 @@ public class CommonFunctions {
 					String.format("%s element %s css property value changed to ",eleName, cssProp) + "" + expColor);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
-					String.format("%s element %s css property value changed to ",eleName, cssProp) + "" + expColor);
+					String.format("%s element %s css property value not changed to ",eleName, cssProp) + "" + expColor);
 		}
 
 	}

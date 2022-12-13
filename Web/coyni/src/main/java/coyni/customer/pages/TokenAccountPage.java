@@ -53,12 +53,12 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By transaction = By.xpath("//tr[@class='  hovered']");
 	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
 	private By defaultEntries = By
-			.xpath("//div[@class='custom-pagination-select__single-value css-1uccc91-singleValue']");
+			.xpath("//span[@class='entries-message']");
 	private By lblEntriesMessage = By.xpath("//span[contains(@class,'entries-message')]");
 	private By pagination = By.xpath("//li[@class='paginator__pagination__item active']");
-	private By entriesPerPageDropDown = By.xpath(
-			"//div[@class='custom-pagination-select__indicator custom-pagination-select__dropdown-indicator css-tlfecz-indicatorContainer']");
-
+	private By entriesPerPageDropDown = By.xpath("//*[name()='svg'][@class='css-8mmkcg']");
+	private By lblNoRecordsFound = By.xpath("//span[text()='No Records Found']");
+	
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
 
 	public String getBracesCount() {
@@ -250,17 +250,23 @@ public class TokenAccountPage extends BrowserFunctions {
 	public void verifyEntriesMessage() {
 		new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
 	}
+	public int noRecordsFound() {
+		return getElementsList(lblNoRecordsFound, "No Records Found").size();
+	}
+	
 
 	public void clickDropDownEntriesPage() {
+		if(getElementsList(entriesPerPageDropDown, "entriesPerPageDropDown").size()>0) {
 		click(entriesPerPageDropDown, "Entries Per Page");
-		// new CommonFunctions().elementView(defaultEntries, "Default Entries");
-
-	}
+		}
+		else {
+			ExtentTestManager.setPassMessageInReport("There is no dropdown for entries per page");
+		}
+			}
 
 	public String getDefaultEntriesPerPage() {
 		moveToElement(defaultEntries, "defaultEntries");
 		return getText(defaultEntries, "Default Entries");
-
 	}
 
 	public String getEntriesMessage() {
