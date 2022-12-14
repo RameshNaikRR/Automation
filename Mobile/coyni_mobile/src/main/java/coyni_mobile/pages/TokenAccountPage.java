@@ -116,6 +116,7 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	public void btnHome() {
+		wait.until(ExpectedConditions.elementToBeClickable(btnHome));
 		click(btnHome, "Home");
 	}
 

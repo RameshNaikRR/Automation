@@ -634,7 +634,8 @@ public class LoginTest {
 					.fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyPinMatching(data.get("pinMatchingText"));
-
+			
+			// enterYourPINComponent.forgotPinComponent().crossIconView();
 			// enterYourPINComponent.forgotPinComponent().crossIconView();
 			// enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
 

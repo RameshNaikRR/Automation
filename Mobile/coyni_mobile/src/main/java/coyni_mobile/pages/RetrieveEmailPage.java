@@ -80,9 +80,9 @@ public class RetrieveEmailPage extends MobileFunctions {
 	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "First Name ");
 		new CommonFunctions().clickTab();
-		if (!new CommonFunctions().isPlatformiOS()) {
-			pressBack();
-		}
+//		if (!new CommonFunctions().isPlatformiOS()) {
+//			pressBack();
+//		}
 
 	}
 
@@ -188,11 +188,11 @@ public class RetrieveEmailPage extends MobileFunctions {
 		new CommonFunctions().validateFieldWithNumber(txtLastName, "lastName", numbers);
 
 	}
-	
+
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
 	}
-	
+
 	//
 	// public void validatePhoneNumberField(String minPhoneNumber) {// String
 	// minPhoneNumber, String maxPhoneNumber, String
