@@ -16,12 +16,16 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 	public By txtWithdrawSignetAccount = By.xpath("//h1[text()='Withdraw to Signet Account']");
 	public By btnChange = By.xpath("//span[text()='Change']");
 	private By btnBuyCoyni = By.xpath("//button[text()='Buy coyni']");
+	public By lblWithdrawCoyni = By.xpath("//h1[text()='Withdraw coyni to USD");
+	
 
 	
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
-	
+	public void verifylblHeadingWithdraw(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblWithdrawCoyni, "Heading", expHeading);
+	}
 	public void clickBuyCoyni() {
 		click(btnBuyCoyni, "Buy Coyni");
 	}

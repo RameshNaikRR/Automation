@@ -86,6 +86,7 @@ public class HomeTest {
 			homePage.adminUserDetailsPage().fillConfirmPassword(data.get("confirmPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconConfirmPassword();
 			homePage.adminUserDetailsPage().clickSave();
+			Thread.sleep(7000);
 			
 	}
 		catch(Exception e) {
@@ -217,6 +218,7 @@ public class HomeTest {
 			gobalSearchComponent.fillProfileID(data.get("userId"));
 			Thread.sleep(2000);
 			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
 			if (gobalSearchComponent.getTransaction() > 0) {
 				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
 			} else {
@@ -240,7 +242,9 @@ public class HomeTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			gobalSearchComponent.clickGobalSearch();
 			gobalSearchComponent.fillProfileDetails();
-			gobalSearchComponent.clickIndivisuals(data.get("profileDetails"));
+			Thread.sleep(300);
+			gobalSearchComponent.clickIndivisuals();
+		gobalSearchComponent.enterProfileDetails(data.get("profileDetails"));
 			gobalSearchComponent.clickSearch();
 			if (gobalSearchComponent.getTransaction() > 0) {
 				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
@@ -265,6 +269,7 @@ public class HomeTest {
 			gobalSearchComponent.clickGobalSearch();
 			gobalSearchComponent.fillReferenceID(data.get("referenceID"));
 			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
 			if (gobalSearchComponent.getTransaction() > 0) {
 				ExtentTestManager.setPassMessageInReport("No Search Result Found given profile ID");
 			} else {

@@ -850,7 +850,7 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().verifyWithdrawtoUsdCursorAction();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickWithdrawToUSD();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
-					.verifylblHeading(data.get("heading"));
+					.verifylblHeadingWithdraw(data.get("heading"));
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawCoyniToUSDPopup()
 					.clickOnExternalBankAccount();
 //			homePage.sideBarMenuComponent().tokenWalletActivityComponent().withdrawToBankAccountPopup()

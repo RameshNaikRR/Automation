@@ -24,7 +24,7 @@ public class DisputesTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDisputesTest(String strParams) {
+	public void testDisputesTest(String strParams){
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
@@ -78,12 +78,17 @@ public class DisputesTest {
 	public void verifyDisputesExportsStatusCaseID(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
+			if(exportcomponent.noData()==0) {
 			exportcomponent.clickExport();
 			homePage.sideBarComponent().filterComponent()
 					.verifyDisputesExportStatusCaseID(data.get("disputesExportsStatusCaseID"));
 			exportcomponent.clickExportButton();
 			exportcomponent.clickClose();
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("No Data Found");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("verifyDisputesExportsStatusCaseID Failed due to Exception " + e);
 		}
