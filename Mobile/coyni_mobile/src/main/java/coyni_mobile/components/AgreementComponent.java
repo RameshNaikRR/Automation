@@ -1,8 +1,11 @@
 package coyni_mobile.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -14,19 +17,40 @@ public class AgreementComponent extends MobileFunctions {
 	private By backIconAgreement = MobileBy.xpath("//*[contains(@resource-id,'backAgreeIV')]");
 	private By lblActiveAgreements = MobileBy.xpath(" ");
 	private By lblPastAgreements = MobileBy.xpath(" ");
-	//Updates of Agreements after login
-		private By privacyPolicyUpdate = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
-		private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
-		private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
+	// Updates of Agreements after login
+	private By privacyPolicyUpdate = MobileBy
+			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
+	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
+	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	
-	
-	public void verifyTermsOfServiceUpdate(String expHeading) {
-		if(getElementList(termsOfServiceUpdateHeading, "").size()>0) {
-		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading", expHeading);
-		click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+
+	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
+			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+					expHeading);
+			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+			clickAgreeCheckBox();
+			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
 		}
 	}
+
+	public void clickAgreeCheckBox() {
+		click(chboxAgree, "Terms of service and Privacy");
+	}
 	
+	public void verifyPrivacyPolicyHeading(String expHeading) throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
+		if (getElementList(privacyPolicyUpdate, "").size() > 0) {
+			new CommonFunctions().verifyLabelText(privacyPolicyUpdate, "Privacy Policy Update Heading", expHeading);
+			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
+			clickAgreeCheckBox();
+			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+		}
+	}
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}

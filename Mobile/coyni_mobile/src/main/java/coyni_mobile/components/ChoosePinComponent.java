@@ -10,9 +10,9 @@ import io.appium.java_client.MobileBy;
 
 public class ChoosePinComponent extends MobileFunctions {
 
-	private By heading1 = MobileBy.xpath("//*[@name='Choose your PIN'] | (//*[contains(@resource-id,'tvHead')])");
+	private By heading1 = MobileBy.xpath("//*[@text='Choose your PIN']");
 
-	private By heading2 = MobileBy.xpath("//*[@name='Confirm your PIN'] | (//*[contains(@resource-id,'tvHead')])");
+	private By heading2 = MobileBy.xpath("//*[@text='Confirm your PIN']");
 
 	private By lblPinMatching = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
 

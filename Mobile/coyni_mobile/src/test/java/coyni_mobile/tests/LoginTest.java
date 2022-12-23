@@ -88,6 +88,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -125,7 +126,6 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickBack();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
-			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIDButtonView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyNotNowButtonView();
@@ -165,7 +165,6 @@ public class LoginTest {
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				loginPage.minimizePopupByClikingOK();
 				// clicking login button once again to verify Swipe down action
-				Thread.sleep(2000);
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				// loginPage.minimizePopupBySwipeDown();
@@ -300,7 +299,6 @@ public class LoginTest {
 
 			if (data.get("validatePopUpMsg").contains("yes")) {
 				loginPage.forgotPasswordPage().verifyEmailComponent().verifyEmailHeadingview();
-				Thread.sleep(2000);
 				for (int i = 0; i <= 4; i++) {
 					loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
 				}
@@ -509,7 +507,6 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().clickNext();
 //			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
 			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(5000);
 				loginPage.retrieveEmailPage().clickResend();
 			}
 			loginPage.retrieveEmailPage().verifyErrorMessage();
@@ -723,7 +720,6 @@ public class LoginTest {
 					.verifyConfirmPinHeading(data.get("expConfirmYourPinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.fillPin(data.get("wrongPin"));
-			Thread.sleep(5000);
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyPinMissMatch();
 

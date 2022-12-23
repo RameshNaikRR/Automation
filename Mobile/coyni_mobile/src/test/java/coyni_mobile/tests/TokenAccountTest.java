@@ -76,11 +76,9 @@ public class TokenAccountTest {
 			loginPage.fillEmail(data.get("email1"));
 			loginPage.fillPassword(data.get("password1"));
 			DriverFactory.getDriver().hideKeyboard();
-			Thread.sleep(5000);
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin1"));
-			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
@@ -204,7 +202,6 @@ public class TokenAccountTest {
 	public void testNotificationsDelete() {
 		try {
 			tokenAccountPage.clickNotificationsIcon();
-			Thread.sleep(2000);
 			tokenAccountPage.notificationComponent().viewDots();
 			tokenAccountPage.notificationComponent().swipeNotificationRight();
 			tokenAccountPage.notificationComponent().clickDelete();
@@ -282,7 +279,6 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.verifyTransactionHeading(data.get("transactionHeading"));
-			Thread.sleep(3000);
 			tokenAccountPage.clickViewMore();
 			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
 			tokenAccountPage.transactionPage().verifySearchOption();
@@ -301,7 +297,6 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.verifyTransactionHeading(data.get("transactionHeading"));
-			Thread.sleep(3000);
 			tokenAccountPage.clickViewMore();
 			tokenAccountPage.transactionPage().verifyLabelTransactions(data.get("expHeading"));
 			tokenAccountPage.transactionPage().verifySearchOption();
@@ -341,14 +336,10 @@ public class TokenAccountTest {
 		try {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickScan();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().clickOnWhileUsingApp();
 			tokenAccountPage.tokenHomePopUp().scanPage().verifyScanCodeAndScanMe();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().clickScanCode();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().scanCodePage().clickFlashLight();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().scanPage().navigationComponent().clickClose();
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickScan();

@@ -79,7 +79,6 @@ public class CustomerProfileTest {
 			customerProfilePage.userDetailsPage().editUserImagePopup().verifyChooseFromLibraryView();
 			customerProfilePage.userDetailsPage().editUserImagePopup().verifyTakeAPhotoView();
 			customerProfilePage.userDetailsPage().editUserImagePopup().clickChooseFromLibrary();
-			Thread.sleep(5000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditImageView failed due to exception " + e);
@@ -210,7 +209,6 @@ public class CustomerProfileTest {
 					.fillNewEmail(data.get("newEmail"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editEmailPage().clickSave();
 			if (!data.get("errMessage").isEmpty()) {
-
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "New Email");
 			}
 
@@ -395,7 +393,6 @@ public class CustomerProfileTest {
 					.fillCity(data.get("city"));
 			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipcode"));
-			Thread.sleep(10000);
 			if (!data.get("errMessage").isEmpty()) {
 
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
@@ -468,7 +465,6 @@ public class CustomerProfileTest {
 	public void testDashboardTabBarMenu(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(3000);
 			customerProfilePage.viewDashboard();
 			customerProfilePage.viewProfile();
 			customerProfilePage.clickProfile();
@@ -775,15 +771,12 @@ public class CustomerProfileTest {
 			customerProfilePage.enterYourPINComponent().clickForgotPin();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-			Thread.sleep(2000);
 			customerProfilePage.clickResetPinCode();
 			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(1000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent().verifyChooseYourPinView();
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
 			customerProfilePage.clickResetPinCode();
 			customerProfilePage.enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(2000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyChoosePinHeading(data.get("choosePinHeading"));
 			customerProfilePage.enterYourPINComponent().choosePinComponent().fillPin(data.get("resetPin"));
@@ -791,12 +784,9 @@ public class CustomerProfileTest {
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
-			Thread.sleep(2000);
 			customerProfilePage.enterYourPINComponent().choosePinComponent()
 					.verifyChoosePinHeading(data.get("choosePinHeading"));
-			Thread.sleep(5000);
 			customerProfilePage.enterYourPINComponent().navigationComponent().clickBack();
-			Thread.sleep(5000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test ResetPinCodeView Flow failed due to Exception " + e);
@@ -972,7 +962,7 @@ public class CustomerProfileTest {
 				tokenAccountPage.clickProfileforPayments();
 				customerProfilePage.clickPaymentMethods();
 			}
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			int numOfDebitcards = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCards();
 			for (int i = 1; i <= numOfDebitcards; i++) {
 				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
@@ -1026,15 +1016,12 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
-			Thread.sleep(3000);
 			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-			Thread.sleep(3000);
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
 			} else {
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
 			}
-			Thread.sleep(2000);
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillNameOnCard(data.get("nameOnCard"));
 			DriverFactory.getDriver().hideKeyboard();
@@ -1044,7 +1031,6 @@ public class CustomerProfileTest {
 					.fillCardExp(data.get("cardExp"));
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCVVorCVC(data.get("cvvOrCVC"));
-			Thread.sleep(2000);
 			if (data.get("validateAddress").equalsIgnoreCase("yes")) {
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -1058,9 +1044,7 @@ public class CustomerProfileTest {
 						.mailingAddressComponent().selectState(data.get("state"));
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-
 			}
-			Thread.sleep(2000);
 			if (data.get("validatePreAuthy").equalsIgnoreCase("yes")) {
 
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -1083,7 +1067,6 @@ public class CustomerProfileTest {
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().preAuthorizationPage().preAuthorizationFailedPage()
 						.verifyHeading(data.get("statusHeading"));
-
 			}
 			if (!data.get("errMsg").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
@@ -1141,7 +1124,6 @@ public class CustomerProfileTest {
 	public void testGetHelp(String strPrams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
-			Thread.sleep(2000);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickGetHelp();
 			customerProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
