@@ -1,25 +1,28 @@
 package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile_merchant.pages.*;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.CreatePasswordPage;
 import coyni_mobile_merchant.pages.FoundAccountPage;
 import coyni_mobile_merchant.popups.ErrorMessagePopup;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
-	private By phoneHeading = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+	private By phoneHeading = MobileBy.xpath("//*[contains(@text,'Please Verify your')]");
 	private By phoneDescription = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 	private By txtCode = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
 	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']|//*[contains(@resource-id,'headerTV')]");
+	private By emailHeading = MobileBy.xpath("//*[contains(@text,'Please Verify your')]");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
 	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");
@@ -29,6 +32,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By errorPopuphdg = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By errorPopupDesc = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 
+	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 	public void verifyPopUpView() {
 		new CommonFunctions().elementView(lblPopupHeading, "Popup");
 	}
@@ -58,6 +62,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	}
 
 	public void verifyEmailHeading(String expHeading) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(emailHeading));
 		new CommonFunctions().verifyLabelText(emailHeading, "Page Heading", expHeading);
 	}
 
@@ -155,6 +160,10 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	}
 	public SecureAccountPage secureAccountPage() {
 		return new SecureAccountPage();
+	}
+	
+	public AgreementComponent agreementComponent() {
+		return new AgreementComponent();
 	}
 
 }

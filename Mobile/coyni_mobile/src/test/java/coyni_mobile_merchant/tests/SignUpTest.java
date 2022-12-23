@@ -47,17 +47,19 @@ public class SignUpTest {
 			signUpPage.clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(8000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
-			signUpPage.clickAgreeCheckBox();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
-			Thread.sleep(6000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
-			signUpPage.clickAgreeCheckBox();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();
+			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyTermsOfServiceUpdate(data.get("termsOfServiceHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyPolicyHeading"));
+//			Thread.sleep(8000);
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
+//			signUpPage.clickAgreeCheckBox();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
+//			Thread.sleep(6000);
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
+//			signUpPage.clickAgreeCheckBox();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();
+			
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();

@@ -103,8 +103,6 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickProfile()  {
-	//DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	//	DriverFactory.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		new CommonFunctions().elementView(btnProfile, "Profile");
 		click(btnProfile, "Profile");
 	}
