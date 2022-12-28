@@ -50,7 +50,7 @@ public class UnderWritingTest {
 			homePage.sideBarComponent().clickUnderWriting();
 			homePage.sideBarComponent().clickPersonal();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
-			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().clickUnderWriting();
 			homePage.sideBarComponent().clickAPIBusinessess();
 			homePage.sideBarComponent().verifyApiBusinessHeading(data.get("ApiHeading"));
 		} catch (Exception e) {

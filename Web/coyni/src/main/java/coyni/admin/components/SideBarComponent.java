@@ -165,7 +165,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickAPIBusinessess() throws InterruptedException {
-		commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API Users");
+		//commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API Users");
 		click(getSubMenuItems("API Business"), "API Businesses");
 		Thread.sleep(5000);
 	}
@@ -267,10 +267,15 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickMerchant() throws InterruptedException {
-		commonfunctions.verifyCursorAction(getSubMenuItems("Merchants"), "Merchants");
-		click(getSubMenuItems("Merchants"), "Merchants");
+	//	commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
+		click(getSubMenuItems("Merchants"), "Merchant");
 		Thread.sleep(5000);
 	}
+	public void clickuderMerchant() throws InterruptedException {
+		//	commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
+			click(getSubMenuItems("Merchant"), "Merchant");
+			Thread.sleep(5000);
+		}
 
 	public void verifyTotalDepositsView() throws InterruptedException {
 		new CommonFunctions().elementView(getSubMenuItems("Total Deposits"), "TotalDeposits");

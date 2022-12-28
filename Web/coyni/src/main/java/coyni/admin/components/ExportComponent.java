@@ -25,7 +25,7 @@ public class ExportComponent extends BrowserFunctions {
 
 	private By lblHeadingExport = By.xpath("//h2[text()='Your Export is Being Prepared']");
 
-	private By btnClose = By.xpath("//button[text()='Close']");
+	private By btnClose = By.cssSelector(".self-end");
 
 	public void clickClose() {
 		click(btnClose, "Close");

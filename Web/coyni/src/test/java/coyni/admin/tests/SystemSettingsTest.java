@@ -25,7 +25,7 @@ public class SystemSettingsTest {
 	}
 	
 
-
+//sanity test
 	@Test
 	@Parameters({ "strParams" })
 	public void testSystemSettings(String strParams) {
@@ -38,12 +38,12 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickFeeStructure();
 			homePage.sideBarComponent().feeStructurePage().verifyHeading(data.get("feeHeading"));
 			homePage.sideBarComponent().clickAccountLimits();
-			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("accountLimitHeading"));
-			homePage.sideBarComponent().clickPermissions();
+			//homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("accountLimitHeading"));
+		//	homePage.sideBarComponent().clickPermissions();
 			homePage.sideBarComponent().clickFeatureControls();
 		//	homePage.sideBarComponent().featureControlPage().verifyF(data.get("expActivityHeading"));
 			homePage.sideBarComponent().clickCardBlackList();
-			homePage.sideBarComponent().clickPushNotifications();
+		//	homePage.sideBarComponent().clickPushNotifications();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSystemSettings Failed due to Exception " + e);

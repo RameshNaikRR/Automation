@@ -151,6 +151,7 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().clickBackToLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordPage().clickBackToLogin();
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotEmail failed due to exception " + e);
