@@ -22,13 +22,13 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarComponent extends BrowserFunctions {
-	
+
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
-	//(//label[contains(@class,'text-sm')])
-	//(//span[contains(@class,'text-sm')])
-	
+	// (//label[contains(@class,'text-sm')])
+	// (//span[contains(@class,'text-sm')])
+
 	CommonFunctions commonfunctions = new CommonFunctions();
-	
+
 	public void verifyCursorAction() {
 		new CommonFunctions().verifyCursorAction(handMark, "Coyni  Portal");
 	}
@@ -74,6 +74,12 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(4000);
 	}
 
+	private By lblDisputes = By.xpath("(//span[text()='Disputes'])[2]");
+
+	public void verifyDisputes(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblDisputes, "Disputes", expHeading);
+	}
+
 	public void clickReserveManagement() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSideBarItems("Reserve Mgmt."), "Reserve Mgmt.");
 		click(getSideBarItems("Reserve Mgmt."), "Reserve Management");
@@ -96,6 +102,13 @@ public class SideBarComponent extends BrowserFunctions {
 		commonfunctions.verifyCursorAction(getSideBarItems("Exported Files"), "Exported Files");
 		click(getSideBarItems("Exported Files"), "Exported Files");
 		Thread.sleep(4000);
+	}
+	
+	
+	private By lblExportFile = By.xpath("//span[text()='Exported Files']");
+
+	public void verifyExportFiles(String exp) {
+		new CommonFunctions().verifyLabelText(lblExportFile, "Exported Files", exp);
 	}
 
 	public void clickBalanceReports() throws InterruptedException {
@@ -157,6 +170,12 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 	}
 
+	private By lblApiBusinessHeading = By.xpath("//span[text()='Underwriting - API Business']");
+
+	public void verifyApiBusinessHeading(String exp) {
+		new CommonFunctions().verifyLabelText(lblApiBusinessHeading, "Underwriting - API Business", exp);
+	}
+
 	public void clickPersonal() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Personal"), "Personal");
 		click(getSubMenuItems("Personal"), "Personal");
@@ -185,6 +204,18 @@ public class SideBarComponent extends BrowserFunctions {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 		click(getSubMenuItems("Payment Gateways"), "Payment Gateways");
 		Thread.sleep(5000);
+	}
+
+	private By lblPaymentGateWay = By.xpath("//span[text()='Payment Gateways']");
+
+	public void verifyPaymentGateWay(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblPaymentGateWay, "Payment Gateways", expHeading);
+	}
+
+	private By lblLoadBalancer = By.xpath("//span[text()='Load Balancer']");
+
+	public void verifyLoadBalancer(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblLoadBalancer, "Load Balancer", expHeading);
 	}
 
 	public void clickLoadBalancer() throws InterruptedException {
@@ -314,6 +345,7 @@ public class SideBarComponent extends BrowserFunctions {
 	public UnderWritingPersonalComponent underWritingPersonalComponent() {
 		return new UnderWritingPersonalComponent();
 	}
+
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);

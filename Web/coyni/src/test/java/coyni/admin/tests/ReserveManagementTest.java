@@ -20,6 +20,21 @@ public class ReserveManagementTest {
 		reserveManagementPage = new ReserveManagementPage();
 	}
 
+	// sanity testing
+	@Test
+	@Parameters({ "strParams" })
+	public void testReserveManagementLinks(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().reserveManagementPage().exportComponent().clickExport();
+			homePage.sideBarComponent().reserveManagementPage().exportComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReserveManagement failed due to exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testReserveManagement(String strParams) {

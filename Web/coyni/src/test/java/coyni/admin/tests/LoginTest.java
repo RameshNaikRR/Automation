@@ -137,6 +137,26 @@ public class LoginTest {
 		}
 	}
 
+	
+	//sanity test cases
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginWithForgotEmailAndForgotPassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.clickForgotEmail();
+			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
+			loginPage.forgotPasswordPage().clickBackToLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testForgotEmail failed due to exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmail(String strParams) {

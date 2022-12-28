@@ -39,6 +39,26 @@ public class UnderWritingTest {
 		sideMenuBarComponent = new SideMenuBarComponent();
 
 	}
+	
+	//sanity test
+	@Test
+	@Parameters({ "strParams" })
+	public void testUnderWritingTestWithLinks(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().clickAPIBusinessess();
+			homePage.sideBarComponent().verifyApiBusinessHeading(data.get("ApiHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
+		}
+	}
+	
+	
 
 	@Test
 	@Parameters({ "strParams" })

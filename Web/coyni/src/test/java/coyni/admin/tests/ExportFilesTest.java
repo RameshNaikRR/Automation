@@ -28,9 +28,10 @@ public class ExportFilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+	//		homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickExportedFiles();
-
+			homePage.sideBarComponent().verifyExportFiles(data.get("exportHeading"));
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);
 		}

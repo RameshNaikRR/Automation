@@ -26,11 +26,12 @@ public class GatewaySettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+		//	homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickGatewaySettings();
 			homePage.sideBarComponent().clickPaymentGateways();
+			homePage.sideBarComponent().verifyPaymentGateWay(data.get("paymenyMethod"));
 			homePage.sideBarComponent().clickLoadBalancer();
-
+			homePage.sideBarComponent().verifyLoadBalancer(data.get("loadBalancer"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testGatewaySettingsTest Failed due to Exception " + e);
 		}

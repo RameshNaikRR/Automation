@@ -25,6 +25,27 @@ public class AccountingTest {
 		coyniPortalTest = new CoyniPortalTest();
 	}
 	
+//sanity test
+	
+	@Test
+	@Parameters("strParams")
+	public void testAccounting(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().clickTotalWithdraw();
+			homePage.sideBarComponent().accountTableComponent().verifyWithdrawView(data.get("withdraw"));
+			homePage.sideBarComponent().clickTotalDeposits();
+			homePage.sideBarComponent().accountTableComponent().verifyDepositView(data.get("deposit"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+	
+	
+	
+	
+	
 
 	public void totalWithdraw(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);

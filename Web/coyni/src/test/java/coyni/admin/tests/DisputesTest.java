@@ -28,8 +28,9 @@ public class DisputesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+			
 			homePage.sideBarComponent().clickDisputes();
+			homePage.sideBarComponent().verifyDisputes(data.get("disputesHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDisputesTest Failed due to Exception " + e);

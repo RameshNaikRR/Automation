@@ -19,7 +19,25 @@ public class BalanceReportsTest {
 		homePage = new HomePage();
 
 	}
-
+	
+	
+	
+	
+	//sanity test
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testVerifyBalanceReport(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().verifyCursorAction();
+			homePage.sideBarComponent().clickBalanceReports();
+			homePage.sideBarComponent().balanceReportsPage().verifyHeading(data.get("expHeading"));
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBalanceReportsTest Failed due to Exception " + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testVerifyCountAndBalanceReportsTest(String strParams) {

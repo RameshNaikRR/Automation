@@ -12,6 +12,11 @@ public class FeatureControlPage extends BrowserFunctions {
 			.xpath("(// span[contains(@class,'text-sm font-bold tracking-wide text-cgy4')])[1]");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By btnCancel = By.xpath("//div[text()='Cancel']");
+	
+//	private By  lbl
+//	public void verifyFeatureControl(String expHeading) {
+//		new CommonFunctions().verifyLabelText(btnCancel, expHeading, expHeading);
+//	}
 
 	public void verifyActivityHeading(String expActivityHeading) {
 		new CommonFunctions().verifyLabelText(lblActivityHeading, "expActivityHeading", expActivityHeading);

@@ -23,6 +23,8 @@ public class SystemSettingsTest {
 		homePage = new HomePage();
 		sideBarComponent = new SideBarComponent();
 	}
+	
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -30,13 +32,16 @@ public class SystemSettingsTest {
 		try {
 			Map<String, String>data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-			homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+		//	homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickAgreements();
 			homePage.sideBarComponent().clickFeeStructure();
+			homePage.sideBarComponent().feeStructurePage().verifyHeading(data.get("feeHeading"));
 			homePage.sideBarComponent().clickAccountLimits();
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("accountLimitHeading"));
 			homePage.sideBarComponent().clickPermissions();
 			homePage.sideBarComponent().clickFeatureControls();
+		//	homePage.sideBarComponent().featureControlPage().verifyF(data.get("expActivityHeading"));
 			homePage.sideBarComponent().clickCardBlackList();
 			homePage.sideBarComponent().clickPushNotifications();
 
