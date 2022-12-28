@@ -1,7 +1,6 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
-
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
-
+import coyni.merchant.components.TopBarComponent;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.TokenAccountPage;
@@ -21,13 +20,34 @@ public class LoginTest {
 	LoginPage loginPage;
 	HomePage homePage;
 	TokenAccountPage tokenAccountPage;
+	TopBarComponent topBarComponent;
 
 	@BeforeMethod
 	public void init() {
 		loginPage = new LoginPage();
 		homePage = new HomePage();
 		tokenAccountPage = new TokenAccountPage();
+		topBarComponent = new TopBarComponent();
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginLinks(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickSignOut();
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.clickForgotEmail();
+			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotEmailHeading"));
+			loginPage.forgotEmailComponent().clickBackToLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotPasswordHeading"));
+			loginPage.forgotPasswordComponent().clickBackToLogin();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLoginLinks failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -501,4 +521,5 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("testForgotPasswordWithResendOption failed due to exception " + e);
 		}
 	}
+
 }

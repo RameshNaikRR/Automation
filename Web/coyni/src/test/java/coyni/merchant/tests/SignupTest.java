@@ -52,7 +52,6 @@ public class SignupTest {
 			signupPage.fillCreatePassword(data.get("createPassword"));
 			signupPage.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.clickeyeIcon();
-			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			signupPage.clickNext();
 			signupPage.phoneVerificationComponent().verifyHeading(data.get("verificationHeading"));
 			signupPage.phoneVerificationComponent().verifyPhoneNumber();
@@ -65,10 +64,6 @@ public class SignupTest {
 			signupPage.clickOnCheckBox();
 			signupPage.clickNext();
 			signupPage.scrollDownPrivacyPolicy();
-
-//			signupPage.PrivacyPolicyUpdate();
-//			signupPage.TermsOfServiceUpdate();
-
 			signupPage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyAccountCreated(data.get("createdAccountHeading"));
 		} catch (Exception e) {

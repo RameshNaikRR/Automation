@@ -28,7 +28,6 @@ import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantProfileTest {
-
 	MerchantProfilePage merchantProfilePage;
 	SideMenuBarComponent sideMenuBarComponent;
 	SignupPage signupPage;
@@ -45,7 +44,6 @@ public class MerchantProfileTest {
 
 	@BeforeTest
 	public void init() {
-
 		merchantProfilePage = new MerchantProfilePage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		signupPage = new SignupPage();
@@ -58,6 +56,26 @@ public class MerchantProfileTest {
 		tokenAccountPage = new TokenAccountPage();
 		homePage = new HomePage();
 		loginPage = new LoginPage();
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsLinks(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
+			merchantProfilePage.merchantAccountsPage().verifyHeading(data.get("heading"));
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			topBarComponent.userNameDropDownComponent().clickAgreements();
+			topBarComponent.userNameDropDownComponent().clickChangePassword();
+			topBarComponent.userNameDropDownComponent().clickTwoStepAuthentication();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testUserDetailsLinks failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -556,7 +574,7 @@ public class MerchantProfileTest {
 	public void testNotificationsDelete() {
 		try {
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-		//	merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
+			// merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
 
 		} catch (Exception e) {

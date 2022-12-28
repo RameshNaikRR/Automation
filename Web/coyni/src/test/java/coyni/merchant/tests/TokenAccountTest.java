@@ -805,9 +805,9 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank(data.get("number"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
-			String processingFee = tokenAccountPage.buyCoyniTokensPaymentMethodPopup().processingFeeComponent()
-					.getTotalProcessingFee(data.get("amount"));
-			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+//			String processingFee = tokenAccountPage.buyCoyniTokensPaymentMethodPopup().processingFeeComponent()
+//					.getTotalProcessingFee(data.get("amount"));
+//			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
@@ -1347,9 +1347,9 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickDebitCard(data.get("number"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
-			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+//			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+//					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+//			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
 			Thread.sleep(3000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();

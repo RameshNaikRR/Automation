@@ -388,7 +388,7 @@ public class SignupPage extends BrowserFunctions {
 	}
 
 	public void scrollDownTermsOfService() throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(PDFtermsOfServices));
+		wait.until(ExpectedConditions.presenceOfElementLocated(popupPDF));
 		WebElement ele = getElement(popupPDF, "");
 		int height = ele.getSize().getHeight();
 		int temp = height;

@@ -8,20 +8,57 @@ import org.testng.annotations.Test;
 
 import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.SideMenuBarComponent;
+import coyni.merchant.components.TopBarComponent;
+import coyni.merchant.pages.ExportfilesPage;
+import coyni.merchant.pages.GetHelpPage;
+import coyni.merchant.pages.LoginPage;
+import coyni.merchant.pages.MerchantSettingsPage;
 import coyni.merchant.pages.MerchantTransactionsPage;
+import coyni.merchant.pages.TokenAccountPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantActivityTest {
+	LoginPage loginPage;
 	SideMenuBarComponent sideMenuBarComponent;
 	MerchantActivityComponent merchantActivityComponent;
 	MerchantTransactionsPage merchantTransactionsPage;
+	TokenAccountPage tokenAccountPage;
+	TopBarComponent topBarComponent;
+	ExportfilesPage exportfilesPage;
+	MerchantSettingsPage merchantSettingsPage;
+	GetHelpPage getHelpPage;
 
 	@BeforeTest
 	public void init() {
+		loginPage = new LoginPage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		merchantActivityComponent = new MerchantActivityComponent();
 		merchantTransactionsPage = new MerchantTransactionsPage();
+		topBarComponent = new TopBarComponent();
+		tokenAccountPage = new TokenAccountPage();
+		exportfilesPage = new ExportfilesPage();
+		merchantSettingsPage = new MerchantSettingsPage();
+		getHelpPage = new GetHelpPage();
+		merchantActivityComponent = new MerchantActivityComponent();
+		sideMenuBarComponent = new SideMenuBarComponent();
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantActivityLinks(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickDashBoard();
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.clickTransactions();
+			merchantActivityComponent.clickPayOutHistory();
+			merchantActivityComponent.clickReserveHistory();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
+		}
 	}
 
 	@Test
