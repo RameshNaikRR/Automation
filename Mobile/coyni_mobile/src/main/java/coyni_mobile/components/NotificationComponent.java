@@ -28,16 +28,23 @@ public class NotificationComponent extends MobileFunctions {
 	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By lblRead = MobileBy.xpath("//*[contains(@resource-id,'readStatusTV')]");
+	private By lblNotifDate = MobileBy.xpath("//*[contains(@text,'Today')]");
+	
 
 	public void clickNotifications() {
 		click(btnNotifications, "Notification");
-
 	}
 
 	public void clickRequest() {
 		click(btnRequest, "Request");
+		new CommonFunctions().elementView(btnRequest, "Request");
 	}
 
+	public void verifyNotifdate() {
+		new CommonFunctions().elementView(btnNotifications, "Notifcations");
+//		new CommonFunctions().elementView(lblNotifDate, "Today");
+	}
+	
 	public void clickRead() {
 		click(lblRead, "Read");
 	}

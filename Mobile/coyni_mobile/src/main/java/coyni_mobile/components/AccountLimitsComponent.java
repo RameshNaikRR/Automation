@@ -23,6 +23,10 @@ public class AccountLimitsComponent extends MobileFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}
+	
+	public void verifyHeading() {
+		new CommonFunctions().elementView(lblHeading, "Page Heading");
+	}
 	public void verifyPayRequestLabel(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPayRequest, "Label", expHeading);
 	}

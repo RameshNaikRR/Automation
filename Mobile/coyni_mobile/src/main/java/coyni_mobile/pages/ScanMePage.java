@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SetAmountComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -67,5 +68,9 @@ public class ScanMePage extends MobileFunctions {
 
 	public void clickAllow() {
 		click(btnAllow, "Allow");
+	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

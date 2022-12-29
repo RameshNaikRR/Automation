@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.components.WithdrawMenuComponent;
@@ -29,13 +30,17 @@ public class TokenAccountPage extends MobileFunctions {
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
 	private By iconNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsLL')]");// *[@name='notifications_nobadge']
 	private By btnPayRequest = MobileBy.xpath(" ");
-	private By btnScan = MobileBy.xpath(" ");
+	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'scanQrLL')]");
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");
 	private By btnCrypto = MobileBy.xpath(" ");
 	private By btnProfile = MobileBy.xpath("//*[@text='Profile']");
 	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']|//*[contains(@resource-id,'layoutMainMenu')]");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
+	private By btnImgProfile= MobileBy.xpath("//*[contains(@resource-id, 'imgProfile')]");
+	private By btnprofile_img= MobileBy.xpath("//*[contains(@resource-id, 'profile_img')]");
+	private By btnprofile_tick= MobileBy.xpath("//*[contains(@resource-id, 'tickIcon')]");
+	
 	
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	
@@ -44,15 +49,6 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickViewMore() {
-		// scrollDownToElement(lblTransactionList, "Trasaction List");
-//		for (int i=0; i<10; i++) {
-//			new CommonFunctions().clickTab();
-//			if (getElement(btnViewMore, "").isDisplayed()) {
-//				click(btnViewMore, "View More");
-//				break;
-//			}
-//		}
-		// scrollDownToElement(btnViewMore, "View More");
 
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			Dimension size = DriverFactory.getDriver().manage().window().getSize();
@@ -62,11 +58,20 @@ public class TokenAccountPage extends MobileFunctions {
 			touch.press(PointOption.point(x / 2, y / 2)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 					.moveTo(PointOption.point(x / 2, (int) (y * 0.2))).release().perform();
 		}
-//		ExtentTestManager.setInfoMessageInReport("Size" + size);
-//		scrollDownToElement(btnViewMore, "View More");
 		click(btnViewMore, "View More");
 	}
 
+
+	public void clickImgProfile() {
+		click(btnImgProfile, "Img Profile");
+	}
+	
+	public void verifyImgProfile() {
+		new CommonFunctions().elementView(btnprofile_img, "Profile Img");
+//		new CommonFunctions().elementView(btnprofile_img, "btnprofile_tick");
+		
+	}
+	
 	public void verifyLogin() {
 		if (getElement(lblUserName, "UserName").isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Login success");
@@ -179,4 +184,9 @@ public class TokenAccountPage extends MobileFunctions {
 	public WithdrawMenuComponent withdrawMenuComponent() {
 		return new WithdrawMenuComponent();
 	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 }

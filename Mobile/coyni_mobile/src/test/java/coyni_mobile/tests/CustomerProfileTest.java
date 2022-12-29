@@ -1134,4 +1134,45 @@ public class CustomerProfileTest {
 		}
 	}
 
+	@Test
+//	@Parameters({ "strParams" })
+	public void testAllLinksInProfile() {
+		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.verifyUserProfile();
+			customerProfilePage.clickUserDetails();
+			customerProfilePage.userDetailsPage().verifyUserDetailsPageview();
+			customerProfilePage.userDetailsPage().navigationComponent().clickBack();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+			customerProfilePage.clickPreferences();
+			customerProfilePage.preferencesComponent().verifyPreferencesHeading();
+			customerProfilePage.preferencesComponent().clickBackArrow();
+			customerProfilePage.clickAccountLimits();
+			customerProfilePage.accountLimitsComponent().verifyHeading();
+			customerProfilePage.accountLimitsComponent().navigationComponent().clickBack();
+			customerProfilePage.clickAgreements();
+			customerProfilePage.agreementComponent().verifyHeading();
+			customerProfilePage.agreementComponent().clickBack();
+			customerProfilePage.clickGetHelp();
+			customerProfilePage.getHelpPage().verifyGetHelp();
+			customerProfilePage.getHelpPage().clickBack();
+			customerProfilePage.clickResetPinCode();
+			customerProfilePage.enterYourPINComponent().verifyEnterYourPinView();
+			customerProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			customerProfilePage.clickTogggle();
+			customerProfilePage.setUpTouchIDPopup().verifyHeading();
+			customerProfilePage.setUpTouchIDPopup().clickNotNow();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.changePasswordPage().enterYourPINComponent().verifyEnterYourPinView();
+			customerProfilePage.changePasswordPage().enterYourPINComponent().navigationComponent().clickClose();
+			customerProfilePage.clickLogOut();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
+	
 }

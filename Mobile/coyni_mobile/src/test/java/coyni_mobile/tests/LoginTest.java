@@ -165,8 +165,8 @@ public class LoginTest {
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				loginPage.minimizePopupByClikingOK();
 				// clicking login button once again to verify Swipe down action
-				loginPage.clickLogin();
-				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
+//				loginPage.clickLogin();
+//				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				// loginPage.minimizePopupBySwipeDown();
 			}
 		} catch (Exception e) {
@@ -723,6 +723,41 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyPinMissMatch();
 
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAllLinksOfCustomer(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().navigationComponent().clickClose();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
+			loginPage.clickRememberMe();
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().clickForgotPin();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().navigationComponent().clickBack();
+			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+//			tokenAccountPage.btnHome();
 		}
 
 		catch (Exception e) {

@@ -20,6 +20,11 @@ public class GetHelpPage extends MobileFunctions{
 		new CommonFunctions().verifyLabelText(heading, "Get Help Heading", expHeading);
 	}
 
+
+	public void verifyGetHelp() {
+		new CommonFunctions().elementView(heading, "Get Help Heading");
+	}
+	
 	public void clickBack() {
 	click(btnBack, "Back");
 	}

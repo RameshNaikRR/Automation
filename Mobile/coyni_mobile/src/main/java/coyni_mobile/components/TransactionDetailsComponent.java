@@ -166,6 +166,11 @@ public class TransactionDetailsComponent extends MobileFunctions {
 		click(referenceID, "Reference ID");
 	}
 
+	public void verifyTransactionDetails() {
+		new CommonFunctions().elementView(transactions, "Transaction Details Heading");
+	}
+
+	
 	public void clickSentBackIcon() {
 		click(backIconSent, "Sent Back Icon");
 	}
@@ -196,5 +201,9 @@ public class TransactionDetailsComponent extends MobileFunctions {
 
 	public void clickWithdrawGiftCardBackIcon() {
 		click(backIconWithdrawGiftCard, "Withdraw Instant Pay Back Icon");
+	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

@@ -1,6 +1,9 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.components.NavigationComponent;
@@ -40,6 +43,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By numberOfCreditCards = MobileBy.xpath("//*[contains(@resource-id,'tvCCardHead')]");
 	
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	public void verifyBankAccounts() {
 		ExtentTestManager.setPassMessageInReport("Deleted the All Bank Accounts and Present Bank Account Number is : "+getText(numberOfBankAccounts));	
 	}
@@ -61,6 +65,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 	
 	public int verifyNumOfBanks() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnBank));
 		return getElementList(btnBank, "Bank Account").size();
 	}
 	

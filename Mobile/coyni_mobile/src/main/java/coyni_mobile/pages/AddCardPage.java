@@ -42,7 +42,7 @@ public class AddCardPage extends MobileFunctions {
 		click(txtCVVorCVC, "CVVorCVC");
 		enterText(txtCVVorCVC, cVVorCVC, "CVVorCVC");
 		DriverFactory.getDriver().hideKeyboard();
-		//new CommonFunctions().clickEnter();
+		new CommonFunctions().clickEnter();
 	}
 	public void fillSignetWalletId(String signetWalletId) {
 		click(txtSignetWalletId, "Signet Wallet ID");

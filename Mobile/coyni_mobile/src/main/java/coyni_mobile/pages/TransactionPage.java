@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.FiltersComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.TransactionDetailsComponent;
 import coyni_mobile.popups.FilterPopup;
 import coyni_mobile.utilities.CommonFunctions;
@@ -21,7 +22,7 @@ public class TransactionPage extends MobileFunctions {
 
 	private By lblMerchantAndeferenceID = MobileBy.xpath("//*[@text='Reference ID.']");
 
-	private By message = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[3]");
+	private By message = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[3]|(//*[contains(@resource-id,'messageTV')])[1]");
 
 	private By btnfiltericon = MobileBy.xpath("//*[@name='filter']");
 
@@ -113,6 +114,10 @@ public class TransactionPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblTransactions, "Transactions", expHeading);
 	}
 
+	public void verifyTransactionsHeading() {
+		new CommonFunctions().elementView(lblTransactions, "Transactions");
+	}
+
 	public void verifySearchOption() {
 		new CommonFunctions().elementView(searchOption, "Search Option");
 	}
@@ -170,5 +175,8 @@ public class TransactionPage extends MobileFunctions {
 		return new FilterPopup();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 
 }

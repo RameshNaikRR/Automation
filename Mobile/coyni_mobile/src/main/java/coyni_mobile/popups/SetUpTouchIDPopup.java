@@ -12,7 +12,7 @@ public class SetUpTouchIDPopup extends MobileFunctions {
 
 	private By notNow = MobileBy.xpath("//*[contains(@resource-id,'notNowLL')]");
 
-	private By heading = MobileBy.xpath("//*[@text='Choose screen lock']");
+	private By heading = MobileBy.xpath("//*[@text='Set Up Touch ID']");
 
 	private By backIcon = MobileBy.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]");
 
@@ -27,7 +27,13 @@ public class SetUpTouchIDPopup extends MobileFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 	}
-
+	
+	public void verifyHeading() {
+		new CommonFunctions().elementView(heading, "Heading");
+		new CommonFunctions().elementView(setUpTouchID, "Set Up Touch ID");
+		new CommonFunctions().elementView(notNow, "Not Now");
+	}
+	
 	public void clickBackButton() {
 		click(backIcon, "Back Icon");
 	}

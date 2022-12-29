@@ -55,6 +55,10 @@ public class AgreementComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}
 
+	public void verifyHeading() {
+		new CommonFunctions().elementView(lblHeading, "Page Heading");
+	}
+	
 	public void verifyActiveAgreementsView() {
 		new CommonFunctions().elementView(lblActiveAgreements, "Active Agreements Label");
 	}

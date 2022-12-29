@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class PayRequestPage extends MobileFunctions {
@@ -32,7 +31,9 @@ public class PayRequestPage extends MobileFunctions {
 	}
 
 	public void clickAllow() {
-		click(allow, "Allow");
+		if (getElementList(allow, "Allow").size() > 0) {
+			click(allow, "Allow");	
+		}
 	}
 
 	public ScanPage scanPage() {

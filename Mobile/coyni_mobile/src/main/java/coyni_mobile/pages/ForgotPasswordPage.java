@@ -58,9 +58,9 @@ public class ForgotPasswordPage extends MobileFunctions {
 		boolean enabled = new MobileFunctions().getElement(btnNext, "").isEnabled();
 		if (enabled) {
 			click(btnNext, "Next");
-			ExtentTestManager.setPassMessageInReport("Next button is in Disabled mode");
+			ExtentTestManager.setPassMessageInReport("Next button is in Enable mode");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("Next button is in Enable mode");
+			ExtentTestManager.setInfoMessageInReport("Next button is in Disabled mode");
 		}
 	}
 

@@ -23,14 +23,18 @@ public class ScanPage extends MobileFunctions {
 	}
 
 	public void clickOnWhileUsingApp() {
+		if(getElementList(btnWhileUsingApp, "While Using App").size()>0) {
 		click(btnWhileUsingApp, "While Using App");
+		}
 	}
 
-	public void verifyScanCodeAndScanMe() {
-		new CommonFunctions().elementView(btnScanCode, "Scan Code");
+	public void verifyScanMe() {
 		new CommonFunctions().elementView(btnScanMe, "Scan Me");
 	}
 
+	public void verifyScanCode() {
+		new CommonFunctions().elementView(btnScanCode, "Scan Code");
+	}
 	public ScanCodePage scanCodePage() {
 		return new ScanCodePage();
 	}

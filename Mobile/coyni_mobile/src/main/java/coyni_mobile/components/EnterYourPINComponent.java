@@ -14,6 +14,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
+	
 
 	private By getOneNumberOfPin(char num) {
 		return MobileBy.xpath(
@@ -45,7 +46,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	}
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Enter Your PIN Heading", expHeading);
 	}
 
 	public EnableFaceIDpage enableFaceIDpage() {

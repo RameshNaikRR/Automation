@@ -32,7 +32,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By lnkAgreements = MobileBy.xpath("//*[contains(@resource-id,'cpAgreementsLL')]");
 	private By lblSecurity = MobileBy.xpath("//*[contains(@resource-id,'securityTV')]");
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'cpResetPin')]");
-	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'tvBMSetting')]");
+	private By btnTouchIDSetting = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
 	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
 	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'cpChangePassword')]");
 	private By btnLogOut = MobileBy.xpath("//*[contains(@resource-id,'cvLogout')]");
@@ -79,7 +79,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickTogggle() {
-		scrollDownToElement(btnFaceIDSetting, "FaceID Setting");
+		scrollDownToElement(btnTouchIDSetting, "Touch ID Setting");
 		click(btnToggle, "Toggle");
 	}
 
@@ -87,6 +87,13 @@ public class CustomerProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(btnPayRequest, "Request");
 	}
 
+	public void verifyUserProfile() {
+		new CommonFunctions().elementView(lblUserName, "User Name");
+		new CommonFunctions().elementView(lblAccountID, "Account ID");
+		new CommonFunctions().elementView(lblAccountStatus, "Account Status");
+	}
+
+	
 	public void verifyAvailableBalance() {
 		new CommonFunctions().elementView(lblAvaliableBalance, "Available Balance");
 	}
@@ -244,15 +251,17 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 
 	public void clickResetPinCode() {
+		scrollDownToElement(lnkResetPinCode, "Reset Pin Code");
 		click(lnkResetPinCode, "Reset Pin Code");
 	}
 
 	public void clickFaceIDSetting() {
-		click(btnFaceIDSetting, "FaceID Setting");
+		scrollDownToElement(btnTouchIDSetting, "Touch ID Setting");
+		click(btnTouchIDSetting, "Touch ID Setting");
 	}
 
 	public void clickChangePassword() {
-		scrollDownToElement(btnChangePassword, "Scrolled to element");
+		scrollDownToElement(btnLogOut, "Change Password");
 		click(btnChangePassword, "Change Password");
 	}
 
