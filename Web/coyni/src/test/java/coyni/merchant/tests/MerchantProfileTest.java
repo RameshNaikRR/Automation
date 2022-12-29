@@ -69,9 +69,13 @@ public class MerchantProfileTest {
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().verifyHeading(data.get("heading"));
 			topBarComponent.userNameDropDownComponent().clickPreferences();
+			merchantProfilePage.preferencesPage().verifyHeading(data.get("preferencesHeading"));
 			topBarComponent.userNameDropDownComponent().clickAgreements();
+			merchantProfilePage.agreementsPage().verifyHeading(data.get("agreementsHeading"));
 			topBarComponent.userNameDropDownComponent().clickChangePassword();
+			merchantProfilePage.changePasswordPage().verifyHeading(data.get("changePasswordHeading"));
 			topBarComponent.userNameDropDownComponent().clickTwoStepAuthentication();
+			merchantProfilePage.twoStepAuthenticationPage().verifyHeading(data.get("twoStepAuthenticationHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testUserDetailsLinks failed due to exception " + e);

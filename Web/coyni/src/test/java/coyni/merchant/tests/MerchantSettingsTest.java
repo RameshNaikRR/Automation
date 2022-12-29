@@ -28,31 +28,46 @@ public class MerchantSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testMerchantSettingsSideBar(String strParams) {
+	public void testMerchantSettingsLinks(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyUserName();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyAccountId();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyLblAccountStatus();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyAccountStatus();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
-					.verifyCompanyInformationBtn();
+					.clickCompanyInformationBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
+					.verifyHeading(data.get("companyInformationHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.verifyHeading(data.get("dbaInformationHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
-					.verifyDBAInformationBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
-					.verifyBeneficiaryOwnersBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent()
-					.verifyPaymentMethodsBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyPreferencesBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyAgreementsBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyFeesBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyAccountLimitsBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyTeamSharedBtn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().verifyApiKeyBtn();
+					.clickBeneficiaryOwnerBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyHeading(data.get("beneficiaryOwnersHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPaymentMethodsBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().paymentMethodsPage()
+					.verifyHeading(data.get("paymentMethodsHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPreferencesBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
+					.verifyHeading(data.get("preferencesHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAgreementsBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.verifyHeading(data.get("agreementsHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+					.verifyHeading(data.get("feesHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAccountLimitsBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
+					.verifyHeading(data.get("accountLimitsHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickTeamSharedBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().teamSharedPage()
+					.verifyHeading(data.get("teamSharedHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testMerchantSettingsSideBarView failed due to " + e);
+			ExtentTestManager.setFailMessageInReport(" testMerchantSettingsLinks failed due to exception " + e);
 		}
 	}
 
