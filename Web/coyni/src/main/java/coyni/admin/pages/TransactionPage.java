@@ -11,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionPage extends BrowserFunctions {
 
-	private By headingTransactionList = By.xpath("//span[text()='Transaction List ']");
+	private By headingTransactionList = By.xpath("//span[text()='Merchant Transactions']");
 
 	private By lblToken = By.xpath("//div[text()='Token']");
 
