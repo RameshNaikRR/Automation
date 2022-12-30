@@ -75,6 +75,10 @@ public class DashBoardPage extends MobileFunctions {
 		click(btnNotificationIcon, "Notification");
 	}
 
+	public void VerifyUser() {
+		new CommonFunctions().elementView(lblUserName, "User Name");
+	}
+	
 	public void clickIcon() {
 		click(btnIcon, "Profile Icon");
 	}

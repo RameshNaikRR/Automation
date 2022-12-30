@@ -2,6 +2,7 @@ package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.ReserveReleaseTransactionsPage;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.MobileFunctions;
@@ -22,10 +23,17 @@ public class ReserveBalanceComponent extends MobileFunctions {
 
 	public void verifyLabelReserveBalance(String expHeading) {
 		scrollDownToElement(lblReserveBalance, "Reserve Release");
-		ExtentTestManager.setInfoMessageInReport("Reserve Release " + getText(lblReserveBalance));
+		new CommonFunctions().elementView(lblReserveBalance, "Reserve Release");
+		ExtentTestManager.setPassMessageInReport("Reserve Release " + getText(lblReserveBalance));
+	}
+	
+	public void verifyReserveBalance() {
+		scrollDownToElement(lblReserveBalance, "Reserve Release");
+		new CommonFunctions().elementView(lblReserveBalance, "Reserve Release");
+		ExtentTestManager.setPassMessageInReport("Reserve Release " + getText(lblReserveBalance));
 		
 	}
-
+	
 	public void clickFullReserveReleaseHistory() {
 		scrollDownToElement(lnkViewFullReserveReleaseHistory, "Full Reserve Release");
 		click(lnkViewFullReserveReleaseHistory, "Full Reserve Release History");

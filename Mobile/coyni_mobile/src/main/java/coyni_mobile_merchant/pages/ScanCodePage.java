@@ -43,6 +43,11 @@ public class ScanCodePage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblSelectPhoto, expStatus, "Select photo");
 	}
 
+	public void verifyScanCode() {
+		new CommonFunctions().elementView(btnFlashLight, "Scan Code");
+		new CommonFunctions().elementView(btnAlbum, "Album");
+	}
+	
 	public void clickDeny() {
 		click(btnDeny, "Deny");
 

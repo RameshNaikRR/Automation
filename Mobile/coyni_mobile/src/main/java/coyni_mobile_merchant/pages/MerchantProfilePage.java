@@ -1,6 +1,8 @@
 package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.AccountLimitsComponent;
@@ -34,7 +36,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By lnkResetPinCode = MobileBy.xpath("//*[contains(@resource-id,'businessResetPin')]");
 	private By btnFaceIDSetting = MobileBy.xpath("//*[contains(@resource-id,'b_tvBMSetting')]");
 	private By btnToggle = MobileBy.xpath("//*[contains(@resource-id,'switchOff')]");
-	private By btnChangePassword = MobileBy.xpath("//*[contains(@resource-id,'b_cpChangePassword')]");
+	private By btnChangePassword = MobileBy.xpath("//*[contains(@text,'Change Password')]");
 	private By btnLogOut = MobileBy.xpath(
 			"//*[contains(@resource-id,'EmailLogoutCV')]|//*[contains(@resource-id,'btnCV')]|//*[contains(@resource-id,'Logout')]");
 	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
@@ -44,7 +46,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
 	
 	
-
+WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
@@ -59,6 +61,12 @@ public class MerchantProfilePage extends MobileFunctions {
 		new CommonFunctions().elementView(lnkResetPinCode, "Resent pin code");
 	}
 
+	public void verifyUserProfile() {
+		new CommonFunctions().elementView(lblUserName, "User Name");
+		new CommonFunctions().elementView(lblAccountID, "Account ID");
+		new CommonFunctions().elementView(lblAccountStatus, "Account Status");
+	}
+	
 	public void clickImg() {
 		click(imgUser, "Click Image");
 	}
@@ -88,6 +96,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickResetPinCode() {
+		scrollDownToElement(btnLogOut, "Log out");
 		click(lnkResetPinCode, "Reset Pin Code");
 	}
 
@@ -209,7 +218,8 @@ public class MerchantProfilePage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
-		scrollDownToElement(btnChangePassword, "Change Password");
+		scrollDownToElement(btnLogOut, "Log Out");
+		wait.until(ExpectedConditions.elementToBeClickable(btnChangePassword));
 		click(btnChangePassword, "Change Password");
 	}
 

@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
+import coyni_mobile_merchant.pages.DashBoardPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import ilabs.MobileFramework.Runner;
@@ -84,7 +85,6 @@ public class RegistrationTest {
 	public void testRegistrationADDBank(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
 			registrationProcessPage.clickAddBank();
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.testAddBankAccount(strParams);
@@ -113,14 +113,14 @@ public class RegistrationTest {
 	public void testRegistrationReviewApplication(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			registrationProcessPage.clickMerchantAgreement();
-			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
-			Thread.sleep(2000);
+			registrationProcessPage.clickGetStarted();
+//			registrationProcessPage.clickMerchantAgreement();
+//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
 			registrationProcessPage.clickReviewApplication();
 			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"),
 					data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"),
 					data.get("reviewBeneficialHeading"), data.get("reviewBankHeading"), data.get("reviewAgreeHeading"));
+			businessTokenAccountPage.dashBoardPage().VerifyUser();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}

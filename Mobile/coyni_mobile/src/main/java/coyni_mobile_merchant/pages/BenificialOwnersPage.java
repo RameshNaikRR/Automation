@@ -16,6 +16,10 @@ public class BenificialOwnersPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Benificial Owners Heading", expHeading);
 	}
 
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblHeading, "Benificial Owners Heading");
+	}
+	
 //	public void verifyCustomerService(String expHeading) {
 //		new CommonFunctions().verifyLabelText(lblCustomerService, "Customer Service Heading", expHeading);
 //	}

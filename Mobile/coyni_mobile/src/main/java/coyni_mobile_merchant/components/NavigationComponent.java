@@ -1,30 +1,40 @@
 package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class NavigationComponent extends MobileFunctions {
 
 	private By btnBack = MobileBy.xpath(
-			"//*[contains(@resource-id,'Back') or contains(@resource-id,'closeBtnIV') or contains(@resource-id,'otpValidationCloseIV') or contains(@resource-id,'Close') or contains(@resource-id,'cpbackBtn') or contains(@resource-id,'CLoseLL') or contains(@resource-id,'closeLL') or contains(@resource-id,'backLL') or contains(@resource-id,'accountsCloseIV') or contains(@resource-id,'notifBackbtn')]");
+			"//*[contains(@resource-id,'close')]|//*[contains(@resource-id,'Back') or contains(@resource-id,'closeBtnIV') or contains(@resource-id,'otpValidationCloseIV') or contains(@resource-id,'Close') or contains(@resource-id,'cpbackBtn') or contains(@resource-id,'CLoseLL') or contains(@resource-id,'closeLL') or contains(@resource-id,'backLL') or contains(@resource-id,'accountsCloseIV') or contains(@resource-id,'notifBackbtn')]");
 	private By btnClose = MobileBy.xpath(
-			"(//*[contains(@resource-id,'Close')][1]|//*[contains(@resource-id,'Close')][2]|//*[contains(@resource-id,'Close')])[3]|//*[contains(@resource-id,'layoutClose')]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
+			"//*[contains(@resource-id,'llClose')]|//*[contains(@resource-id,'accountsCloseIV')]|//*[contains(@resource-id,'closeBtnIV')]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
+
+	// *[contains(@resource-id,'imgFPClose')]
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void clickBack() {
-
-		if (!new CommonFunctions().isPlatformiOS()) {
-			click(btnBack, "Back");
-		}
+		click(btnBack, "Back");
 	}
 
 	public void clickClose() {
+//		wait.until(ExpectedConditions.elementSelectionStateToBe(btnClose, false));
+//		TouchActions action = new TouchActions(DriverFactory.getDriver());
+//		action.singleTap((WebElement) btnClose);
+//		action.perform();
 
-		if (!new CommonFunctions().isPlatformiOS()) {
 			click(btnClose, "Close");
-		}
+//			click(btnClose, "Close");
 	}
 
 	public void verifyBackView() {

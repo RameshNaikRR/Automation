@@ -23,6 +23,10 @@ public class TeamPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Team Heading", expHeading);
 	}
 
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblHeading, "Team Heading");
+	}
+	
 	public void verifyDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Team Description", expDescription);
 	}

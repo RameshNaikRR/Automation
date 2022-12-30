@@ -3,16 +3,14 @@ package coyni_mobile_merchant.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
@@ -66,7 +64,12 @@ public class PayoutTransactionsPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblPayOutTransactions, "Pay Out Transactions", expHeading);
 	}
 
+//	public void verifyPayOutTransactions() {
+//		
+//	}
+//	
 	public void verifyFiltersIcon() {
+		new CommonFunctions().elementView(btnPayoutTransaction, "Pay Out Transactions");
 		new CommonFunctions().elementView(filtersIcon, "Filters Icon");
 	}
 
@@ -95,6 +98,10 @@ public class PayoutTransactionsPage extends MobileFunctions {
 		return new FilterPopup();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 	public PayoutTransactionDetailsPage payoutTransactionDetailsPage() {
 		return new PayoutTransactionDetailsPage();
 	}

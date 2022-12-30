@@ -8,7 +8,7 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class CompanyInformationPage extends MobileFunctions{
+public class CompanyInformationPage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[contains(@text,'Company Information')]");
 	private By lblDescription = MobileBy.xpath("//*[contains(@resource-id,'business_entity')]");
 	private By lblCompanyName = MobileBy.xpath("//*[contains(@resource-id,'name_id')]");
@@ -24,6 +24,10 @@ public class CompanyInformationPage extends MobileFunctions{
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Company Infromation Heading", expHeading);
+	}
+
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblHeading, "Company Infromation Heading");
 	}
 
 	public void verifyCustomerService(String expHeading) {

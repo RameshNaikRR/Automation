@@ -25,6 +25,12 @@ public class FilterPopup extends MobileFunctions {
 		click(btnApplyfilter, "Apply filters");
 	}
 
+	public void verifyFilters() {
+		new CommonFunctions().elementView(btnApplyfilter, "Apply filters");
+		new CommonFunctions().elementView(btnResetAllFilters, "Reset All Filters");
+		click(btnApplyfilter, "Apply filters");
+	}
+	
 	public void clickDateRange() {
 		click(btnDateRange, "Date Range");
 	}

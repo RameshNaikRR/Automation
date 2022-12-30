@@ -49,8 +49,8 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyTermsOfServiceUpdate(data.get("termsOfServiceHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyPolicyHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().agreementComponent().verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 //			Thread.sleep(8000);
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
 //			signUpPage.clickAgreeCheckBox();

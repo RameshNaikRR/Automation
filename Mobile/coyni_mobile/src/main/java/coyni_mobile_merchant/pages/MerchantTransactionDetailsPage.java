@@ -68,17 +68,20 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	private By lblSenderEmail = MobileBy.xpath("//*[contains(@resource-id,'senderemail')]");
 
 	private By btnRefund = MobileBy.xpath("//*[contains(@resource-id,'RefundIV')]");
-	
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Mpayoutll')]");
-	
-	
+
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'close')]");
+
 	public void clickBack() {
-	click(btnBack, "Back");	
+		click(btnBack, "Back");
 	}
-	
+
 	public void verifyMerchantDetails(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblMerchantTransactionDetailHeading,
 				"Merchant Transaction Details Heading", expHeading);
+	}
+
+	public void verifyTransactionDetails() {
+		new CommonFunctions().elementView(lblMerchantTransactionDetailHeading, "Merchant Transaction Details Heading");
 	}
 
 	public void getTransactionType() {

@@ -28,7 +28,7 @@ public class AgreementComponent extends MobileFunctions {
 	private By privacyPolicyUpdate = MobileBy
 			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
 	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
-	private By privacyPolicyHeading = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]");
+	private By privacyPolicyHeading = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 
@@ -39,8 +39,8 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
 					expHeading);
 			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
@@ -50,8 +50,8 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyPrivacyPolicyHeading(String expHeading) throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
 		if (getElementList(privacyPolicyHeading, "").size() > 0) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
 			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
 			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
 			clickAgreeCheckBox();
@@ -59,6 +59,24 @@ public class AgreementComponent extends MobileFunctions {
 		}
 	}
 
+	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {
+			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+					expHeading);
+			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+			clickAgreeCheckBox();
+			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+	}
+
+	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
+			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
+			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
+			clickAgreeCheckBox();
+			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+		
+	}
+	
 	public void scrollTermsOfService() {
 
 //		while (getElementList(termsOfServiceUpdateOk, "Next").size() == 0) {
@@ -125,6 +143,9 @@ public class AgreementComponent extends MobileFunctions {
 		click(btnBack, "Back");
 	}
 
+	public void verifyHeading() {
+		new CommonFunctions().elementView(headingAgreements, "Page Heading");
+	}
 	public void clickClose() {
 		click(btnClose, "Close");
 	}

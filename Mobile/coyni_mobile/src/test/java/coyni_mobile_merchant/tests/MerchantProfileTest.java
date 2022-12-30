@@ -1747,7 +1747,7 @@ public class MerchantProfileTest {
 			String[] phoneNumber = data.get("phoneNumber").split(",");
 			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
 					.validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
-			
+
 //			merchantProfilePage.teamPage().addNewTeamMemberPage().fillFirstName(data.get("firstName"));
 //			merchantProfilePage.teamPage().addNewTeamMemberPage().fillLastName(data.get("lastName"));
 //			merchantProfilePage.teamPage().addNewTeamMemberPage().fillEmail(data.get("teamEmail"));
@@ -3002,7 +3002,6 @@ public class MerchantProfileTest {
 			Thread.sleep(2000);
 			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
 					.bankAccountAddedPage().verifyBankSucessHeading() == 1) {
-
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
 						.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
@@ -3178,6 +3177,57 @@ public class MerchantProfileTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
+	}
+
+	@Test
+	public void testAllLinksInProfile() {
+		try {
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.verifyUserProfile();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();
+			merchantProfilePage.userDetailsPage().clickBack();
+			merchantProfilePage.clickCompanyInformation();
+			merchantProfilePage.companyInformationPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickDBAInformation();
+			merchantProfilePage.dbaInformationPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickBeneficialOwners();
+			merchantProfilePage.benificialOwnersPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickTeam();
+			merchantProfilePage.teamPage().verifyPageHeading();
+			merchantProfilePage.teamPage().clickBack();
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+			merchantProfilePage.clickPreferences();
+			merchantProfilePage.preferencesComponent().verifyPreferencesHeading();
+			merchantProfilePage.preferencesComponent().clickBack();
+			merchantProfilePage.clickAccountLimits();
+			merchantProfilePage.accountLimitsComponent().verifyHeading();
+			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
+			merchantProfilePage.clickAgreements();
+			merchantProfilePage.agreementComponent().verifyHeading();
+			merchantProfilePage.agreementComponent().clickBack();
+			merchantProfilePage.clickGetHelp();
+			merchantProfilePage.getHelpPage().verifyGetHelp();
+			merchantProfilePage.getHelpPage().clickBack();
+			merchantProfilePage.clickResetPinCode();
+			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView();
+			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			merchantProfilePage.clickTogggle();
+			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
+			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
+			merchantProfilePage.clickChangePassword();
+			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView();
+			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			merchantProfilePage.clickLogOut();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
 	}
 
 }

@@ -21,11 +21,19 @@ public class DaysDropDownComponent extends MobileFunctions {
 	private By btnCustomDateRange = By.xpath("//*[contains(@resource-id,'tv_custom_date')]");
 
 	public void clickOnToday() {
-		click(drpdwn, "Drop Down");
 		click(btnToday, "Click Today");
-
 	}
 
+	public void clickDropDown() {
+		click(drpdwn, "Drop Down");
+	}
+	
+	public void verifyProcessingVolumeDrpdwn() {
+		new CommonFunctions().elementView(btnToday, "Today");
+		new CommonFunctions().elementView(btnCustomDateRange, "CustomDateRange");
+		click(btnToday, "Click Today");
+	}
+	
 	public void clickOnYesterday() {
 		click(drpdwn, "Drop Down");
 		click(btnYesterday, "Click Yesterday");

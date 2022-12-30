@@ -62,6 +62,10 @@ public class UserDetailsPage extends MobileFunctions {
 		
 	}
 
+	public void verifyUserDetailsPageview() {
+		new CommonFunctions().elementView(lblHeading, "User Details Page");
+	}
+	
 	public void clickChildAccount1() {
 		click(btnChildAccount1, "Child Account 1");
 	}

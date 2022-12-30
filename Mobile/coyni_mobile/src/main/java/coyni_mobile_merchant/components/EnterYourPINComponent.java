@@ -1,9 +1,12 @@
 package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.EnableFaceIDpage;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -13,6 +16,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'imgBack')]");
 
+	WebDriverWait wait= new WebDriverWait(DriverFactory.getDriver(), 60);
 	private By getOneNumberOfPin(char num) {
 		return MobileBy.xpath(
 				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
@@ -42,6 +46,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	}
 
 	public void verifyEnterYourPinView() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(heading));
 		new CommonFunctions().elementView(heading, "Enter Your PIN");
 	}
 

@@ -27,8 +27,8 @@ public class RegistrationProcessPage extends MobileFunctions {
 
 	public void clickGetStarted() throws InterruptedException {
 		Thread.sleep(2000);
-		if (DriverFactory.getDriver().findElements(btnGetStarted).size()==1) {
-		click(btnGetStarted, "Get Started");
+		if (DriverFactory.getDriver().findElements(btnGetStarted).size() == 1) {
+			click(btnGetStarted, "Get Started");
 		}
 	}
 
@@ -52,13 +52,15 @@ public class RegistrationProcessPage extends MobileFunctions {
 		click(btnMerchantAgreement, "Merchant's Agreement");
 	}
 
-	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 20);
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
+
 	public void clickReviewApplication() throws InterruptedException {
-	wait.until(ExpectedConditions.elementToBeClickable(btnReviewApplication));
+		Thread.sleep(2000);
+//		scrollDownToElement(btnReviewApplication, "Review Application");
+//	wait.until(ExpectedConditions.elementToBeClickable(btnReviewApplication));
 		TouchAction touch = new TouchAction(DriverFactory.getDriver());
 		touch.press(PointOption.point(300, 1500)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(100, (int) (1200))).release().perform();
-
 		click(btnReviewApplication, "Review Application");
 	}
 

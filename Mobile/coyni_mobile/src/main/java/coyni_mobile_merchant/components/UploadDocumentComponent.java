@@ -51,6 +51,12 @@ public class UploadDocumentComponent extends MobileFunctions{
 		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(btnUsingApp).size();
 	}
+	
+	public int verifyAllow() throws InterruptedException {
+		Thread.sleep(2000);
+		return DriverFactory.getDriver().findElements(btnAllow).size();
+	}
+	
 	public void clickAllow() {	
 		click(btnAllow, "Allow");
 	}

@@ -31,7 +31,8 @@ public class RegistrationDBAPage extends MobileFunctions {
 	private By txtAvgHighTicket = MobileBy.xpath("//*[contains(@resource-id,'avgTicketOET')]//*[contains(@resource-id,'volET')]");
 	private By drpdwnTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
 	private By lnkSelectTimeZone = MobileBy.xpath("//*[contains(@text,'Eastern')]");
-	private By btnUpload = MobileBy.xpath("//*[contains(@resource-id,'dbaFillingLL')]");
+	private By btnUpload = MobileBy.xpath("//*[contains(@text,'Upload DBA filling (Optional)')]");
+	//*[contains(@resource-id,'dbaFillinguploadTV')]
 	private By txtWebsite = MobileBy.xpath("//*[contains(@resource-id,'websiteET')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@text,'Done')]");
@@ -72,7 +73,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 
 	public void fillHighTicket(String expHighTicket) {
-		scrollDownToElement(txtHighTicket, "High Ticket");
+		scrollDownToElement(btnUpload, "Upload DBA filling");
 		enterText(txtHighTicket, expHighTicket, "High Ticket");
 	}
 
@@ -89,9 +90,10 @@ public class RegistrationDBAPage extends MobileFunctions {
 		click(btnNext, "Next");
 	}
 
-	public void clickUpload() {
+	public void clickUpload() throws InterruptedException {
+		scrollDownToElement(btnNext, "Next");
+		Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(btnUpload));
-		scrollDownToElement(btnUpload, "Upload DBA filling");
 		click(btnUpload, "Upload DBA filling");
 	}
 
@@ -122,6 +124,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 	
 	public void fillAvgHighTicket(String expAvgHighTicket) {	
+		scrollDownToElement(btnUpload, "Upload DBA filling");
 		enterText(txtAvgHighTicket, expAvgHighTicket, "Average Ticket");
 	}
 	

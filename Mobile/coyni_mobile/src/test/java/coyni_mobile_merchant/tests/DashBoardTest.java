@@ -70,7 +70,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.merchantProfilePage().clickBack();
 			businessTokenAccountPage.getUserName();
 			businessTokenAccountPage.clickTransactions();
-			Thread.sleep(2000);
 			businessTokenAccountPage.merchantTransactionsPage()
 					.verifyLabelMerchanTransactions(data.get("merchantHeading"));
 			businessTokenAccountPage.merchantTransactionsPage().clickClose();
@@ -110,7 +109,6 @@ public class DashBoardTest {
 	public void testProcessingVolume(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(3000);
 			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.dashBoardPage().verifyLabelProcessingVolume(data.get("label"));
 			businessTokenAccountPage.daysDropDownComponent().clickOnToday();
@@ -178,7 +176,7 @@ public class DashBoardTest {
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
 					.getReferenceID();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
-			.clickBack();
+					.clickBack();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().fillSearch();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
@@ -923,7 +921,81 @@ public class DashBoardTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
 		}
+	}
 
+	@Test
+	public void testAllLinksDashBoard() {
+		try {
+
+			businessTokenAccountPage.daysDropDownComponent().clickDropDown();
+			businessTokenAccountPage.daysDropDownComponent().verifyProcessingVolumeDrpdwn();
+			businessTokenAccountPage.clickViewMerchantTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().verifyMerchanTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().clickFilterIcon();
+			businessTokenAccountPage.merchantTransactionsPage().filterPopup().verifyFilters();
+			businessTokenAccountPage.merchantTransactionsPage().clickMerchantTransctions();
+			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage()
+					.verifyTransactionDetails();
+			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage().clickBack();
+			businessTokenAccountPage.merchantTransactionsPage().clickClose();
+			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().verifyFiltersIcon();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().verifyFilters();
+			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().navigationComponent().clickClose();
+			businessTokenAccountPage.reserveBalanceComponent().verifyReserveBalance();
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickFilterIcon();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.verifyFilters();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().verifyReserveDetail();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().clickBack();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent().verifyNotifications();
+			businessTokenAccountPage.navigationComponent().clickBack();
+			businessTokenAccountPage.clickChooseUser();
+			businessTokenAccountPage.getUserName();
+			businessTokenAccountPage.navigationComponent().clickClose();
+			businessTokenAccountPage.clickAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTokenAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyPageHeading();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyReserveDetails();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage().clickBack();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickFilterIcon();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().verifyFilters();
+			businessTokenAccountPage.navigationComponent().clickClose();
+			businessTokenAccountPage.clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().VerifyUser();
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifyScanCode();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
+			businessTokenAccountPage.dashBoardPage().VerifyUser();
+			businessTokenAccountPage.clickTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().verifyMerchanTransactions();
+			businessTokenAccountPage.merchantTransactionsPage().clickClose();
+			businessTokenAccountPage.dashBoardPage().VerifyUser();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAllLinksDashBoard  failed due to exception " + e);
+
+		}
 	}
 
 }

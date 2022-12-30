@@ -14,12 +14,12 @@ public class PreferencesComponent extends MobileFunctions {
 	private By lblTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
 	private By lblLocalCurrency = MobileBy.xpath("//*[contains(@resource-id,'currencyET')]");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'preferencesCloseLL')]");
 
 	public void verifyPreferencesHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblPreferencesHeading, "Preferences Heading is", heading);
 	}
-	
+
 	public void selectTimeZone(String timeZone) {
 		click(drpDwnTimeZone, "Time Zone DropDown");
 		ExtentTestManager.setInfoMessageInReport("Clicked on Element " + timeZone);
@@ -30,11 +30,15 @@ public class PreferencesComponent extends MobileFunctions {
 //		 selectDropdownOption(drpDwnTimeZone, txtTimeZone, "click on Drop Down", timeZone);
 //		 click(btnDone, "Done");
 	}
-	
+
 	public By getElement(String elementName) {
-			return MobileBy.xpath("//*[@text='']");
+		return MobileBy.xpath("//*[@text='']");
 	}
-	
+
+	public void verifyPreferencesHeading() {
+		new CommonFunctions().elementView(lblPreferencesHeading, "Preferences Heading");
+	}
+
 //	public void selectTimeZones(String timeZone) {
 //		click(drpDwnTimeZone, "Time Zone DropDown");
 //		ExtentTestManager.setInfoMessageInReport("Clicked on Element " + timeZone);
@@ -65,7 +69,7 @@ public class PreferencesComponent extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
-	
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}

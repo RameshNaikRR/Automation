@@ -702,4 +702,38 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAllLinksOfLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			loginPage.clickForgotPassword();
+			loginPage.navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.retrieveEmailPage().navigationComponent().clickClose();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			DriverFactory.getDriver().hideKeyboard();
+			loginPage.clickRememberMe();
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().clickForgotPin();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyEmailHeadingview();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().navigationComponent().clickBack();
+			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
+			loginPage.enterYourPINComponent().enableFaceIDpage().dashBoardPage().VerifyUser();
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Pin failed due to Exception " + e);
+		}
+
+	}
 }

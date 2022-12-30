@@ -37,6 +37,9 @@ public class DBAInformationPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "DBA Infromation Heading", expHeading);
 	}
 
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblHeading, "DBA Infromation Heading");
+	}
 	public void verifyCustomerService(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblCustomerService, "Customer Service Heading", expHeading);
 	}

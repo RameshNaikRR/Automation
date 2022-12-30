@@ -39,6 +39,11 @@ public class ReceivePaymentPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Receive Payment Page Heading", expHeading);
 	}
 
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblHeading, "Receive Payment Page Heading");
+		new CommonFunctions().elementView(lblUserName, "User Name");
+	}
+	
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Receive Payment Page Description", expDescription);
 	}

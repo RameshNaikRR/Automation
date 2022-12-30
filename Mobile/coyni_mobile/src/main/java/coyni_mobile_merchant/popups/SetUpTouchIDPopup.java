@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class SetUpTouchIDPopup extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[contains(@text,'Choose screen lock')]");//
+	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");//
 
 	private By setUpTouchID = MobileBy.xpath("//*[contains(@resource-id,'enableCV')]");
 
@@ -22,6 +22,12 @@ public class SetUpTouchIDPopup extends MobileFunctions {
 
 	public void clickNotNow() {
 		click(notNow, "Not Now");
+	}
+
+	public void verifyHeading() {
+		new CommonFunctions().elementView(heading, "Heading");
+		new CommonFunctions().elementView(setUpTouchID, "Set Up Touch ID");
+		new CommonFunctions().elementView(notNow, "Not Now");
 	}
 
 	public void verifyHeading(String expHeading) {

@@ -13,7 +13,7 @@ import io.appium.java_client.MobileBy;
 
 public class ReserveReleaseDetailsPage extends MobileFunctions {
 
-	private By lblReserveDetail = MobileBy.xpath("//*[@text='Reserve Detail']");
+	private By lblReserveDetail = MobileBy.xpath("//*[@text='Transaction Details']");
 
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'tvamount')]|//*[contains(@resource-id,'reserve_amount')]");
 
@@ -60,6 +60,16 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblReserveDetail, "Reserve Detail", expHeading);
 	}
 
+	public void verifyReserveDetails() {
+		new CommonFunctions().elementView(lblReserveDetail, "Transaction Details");
+//		new CommonFunctions().elementView(txtAmount, "Amount");
+	}
+	
+	public void verifyReserveDetail() {
+		new CommonFunctions().elementView(lblReleaseOn, "Reserve Detail");
+		new CommonFunctions().elementView(txtReserveID, "Reserve ID");
+	}
+	
 	public void getRecentTransactionsList() {
 		List<WebElement> elementList = getElementList(lblRecentTransactionsList, " ");
 		ExtentTestManager.setInfoMessageInReport("Recent Transactions List: " + elementList);
@@ -140,11 +150,7 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	}
 
 	public void verifyRecentTransaction() {
-		if (DriverFactory.getDriver().findElements(lblNoTransactions).size() == 0) {
 			new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("You Have No Transactions");
-		}
 	}
 
 	

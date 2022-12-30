@@ -20,7 +20,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'TokenAccount')]");
 
 	private By lblTotalFunds = MobileBy.xpath("//*[contains(@resource-id,'Balance')]");
-
+	private By lblTransHeading = MobileBy.xpath("//*[contains(@text,'Transactions')]");
 	private By lblTotalFundsHeading = MobileBy.xpath("//*[contains(@resource-id,'BalHead')]");
 	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Recent Token ')]");
 	private By lblTransactionStatus = MobileBy.xpath("//*[contains(@resource-id,'misc_fee')]");
@@ -45,7 +45,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By txtToAmount = MobileBy.xpath("//*[contains(@resource-id,'AmountEnd')]");
 
-	private By recentTransType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessage')])[1]");
+	private By recentTransType = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]|(//*[contains(@resource-id,'latestmessage')])[1]");
 
 	private By recentTranStatus = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[1]");
 
@@ -64,9 +64,17 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Business Recent Token Transactions Heading", expHeading);
-
 	}
 
+	public void verifyPageHeading() {
+		new CommonFunctions().elementView(lblTransHeading, "Business Recent Token Transactions Heading");
+	}
+	
+	public void verifyTokenAccount(){
+		new CommonFunctions().elementView(lblHeading, "Business Recent Token Transactions Heading");
+//		new CommonFunctions().elementView(lblTotalFunds, "Total Availble Funds");
+	}
+	
 	public void verifyTokenPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTokensHeading, "Token Transactions Heading", expHeading);
 

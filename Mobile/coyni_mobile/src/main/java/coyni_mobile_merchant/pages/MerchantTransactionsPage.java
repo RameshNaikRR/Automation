@@ -46,6 +46,10 @@ public class MerchantTransactionsPage extends MobileFunctions {
 
 	}
 
+	public void verifyMerchanTransactions() {
+		new CommonFunctions().elementView(lblMerchantTansactions,"Merchant Transactions");
+	}
+	
 	public void clickMerchantTransctions() {
 		click(btnTransaction, "Transaction");
 	}

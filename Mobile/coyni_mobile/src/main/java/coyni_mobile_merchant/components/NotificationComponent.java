@@ -28,12 +28,16 @@ public class NotificationComponent extends MobileFunctions {
 	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By lblRead = MobileBy.xpath("//*[contains(@resource-id,'readStatusTV')]");
-
+	private By lblNotifications = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+	
 	public void clickNotifications() {
 		click(btnNotifications, "Notification");
-
 	}
 
+	public void verifyNotifications() {
+		new CommonFunctions().elementView(lblNotifications, "Notification");
+	}
+	
 	public void clickRequest() {
 		click(btnRequest, "Request");
 	}

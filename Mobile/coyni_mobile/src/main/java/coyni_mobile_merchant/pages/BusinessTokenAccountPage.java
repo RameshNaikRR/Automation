@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.DaysDropDownComponent;
@@ -27,8 +28,8 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnAccount = MobileBy.xpath("//*[contains(@resource-id,'account_tab')]");
 	private By btnTransactions = MobileBy.xpath("//*[contains(@resource-id,'transactions_tab')]");
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'businessTrackerCloseIV')]");
-	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tv_user_name')]");
-	private By btnNotifications = MobileBy.xpath("");
+	private By lblUserName = MobileBy.xpath(" //*[contains(@resource-id,'userNameTV')]|//*[contains(@resource-id,'tv_user_name')]");
+	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
 	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
 	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
 	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
@@ -38,7 +39,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnNewCompany = MobileBy.xpath("//*[contains(@resource-id,'ll_new_company')]");
 	private By lnkSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'title')]");
 	private By btnAddNewDBA = MobileBy.xpath("//*[contains(@text,'Add DBA')]");
-
+	private By btnViewMerchantTransactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
 	private By btnSelectAccount = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
@@ -64,6 +65,12 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(btnTransactions, "Transactions");
 	}
 
+	public void clickViewMerchantTransactions() {
+		scrollDownToElement(btnViewMerchantTransactions, "View Merchant Transactions");
+		new CommonFunctions().elementView(btnViewMerchantTransactions, "View Merchant Transactions");
+		click(btnViewMerchantTransactions, "View Merchant Transactions");
+	}
+	
 	public void clickChooseUser() {
 		click(btnChooseUser, "Choose User");
 	}
@@ -117,6 +124,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public void getUserName() {
+		new CommonFunctions().elementView(lblUserName, "User Name");
 		ExtentTestManager.setInfoMessageInReport("User Name is : " + getText(lblUserName));
 	}
 
@@ -263,4 +271,9 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	public MerchantTransactionDetailsPage merchantTransactionDetailsPage() {
 		return new MerchantTransactionDetailsPage();
 	}
+	
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 }

@@ -31,6 +31,10 @@ public class AccountLimitsComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblMerchantProcessingHeading, "Merchant Processing Heading", expHeading);
 	}
 
+	public void verifyHeading() {
+		new CommonFunctions().elementView(lblHeading, "Page Heading");
+	}
+	
 	public void verifyBuyTokensHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblBuyTokensHeading, "Buy Tokens Heading", expHeading);
 	}

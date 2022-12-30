@@ -148,12 +148,15 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 		clickbtnW9();
 		if (uploadDocumentComponent().verifyUsingApp() == 1) {
 			uploadDocumentComponent().clickUsingApp();
+		}
+		if (uploadDocumentComponent().verifyAllow() == 1) {
 			uploadDocumentComponent().clickAllow();
 		}
 		uploadDocumentComponent().clickTakePhoto();
 		uploadDocumentComponent().clickCapture();
 		uploadDocumentComponent().clickSave();
 		clickDone();
+		
 	}
 
 	public UploadDocumentComponent uploadDocumentComponent() {
