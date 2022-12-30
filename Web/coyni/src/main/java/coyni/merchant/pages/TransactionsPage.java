@@ -8,7 +8,6 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionsPage extends BrowserFunctions {
-
 	private By lblHeading = By.xpath("//span[text()='Merchant Transactions']");
 
 	private By lblDateTime = By.xpath("//span[text()='Date / Time']");
@@ -71,6 +70,7 @@ public class TransactionsPage extends BrowserFunctions {
 		ExtentTestManager.setPassMessageInReport("Amount is " + getElement(lblAmount, "Amount"));
 	}
 
+	
 	public void getStatus() {
 		ExtentTestManager.setPassMessageInReport("Status is " + getElement(lblStatus, "Status"));
 	}

@@ -52,9 +52,13 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickTransactions();
+			merchantActivityComponent.transactionPage().verifyTransactionHeading(data.get("transactionHeading"));
 			merchantActivityComponent.clickPayOutHistory();
+			merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("payOutHistoryHeading"));
 			merchantActivityComponent.clickReserveHistory();
+			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("reserveHistoryHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
