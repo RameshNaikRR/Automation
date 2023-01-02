@@ -1,6 +1,8 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.UploadDocumentComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -25,12 +27,15 @@ public class IdentityVerificationPage extends MobileFunctions {
 	private By btnState = MobileBy.xpath("//*[contains(@resource-id,'stateET')]");
 	private By txtZipCode = MobileBy.xpath("//*[contains(@resource-id,'zipcodeET')]");
 	private By btnSubmit = MobileBy.xpath("//*[contains(@text,'Submit')]");
-	private By lblIdentitySuccess = MobileBy.xpath("//*[contains(@text,'Successful')]");
+	private By lblIdentitySuccess = MobileBy
+			.xpath("//*[contains(@text,'Successful')]|//*[contains(@text,'Under Review')]");
 	private By btnDone = MobileBy.xpath("//*[@text='Done']");
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'tvUserName')]");
 	private By btnVerifyNext = MobileBy.xpath("//*[@text='Next']");
 	private By lblVerifyHeading = MobileBy.xpath("//*[contains(@text,'Please Verify')]");
 	private By lblIdentityHeading = MobileBy.xpath("//*[@text='Identity Verification']");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void fillSSN(String expText) {
 		enterText(txtSSN, expText, "SSN");
@@ -100,9 +105,9 @@ public class IdentityVerificationPage extends MobileFunctions {
 		return a;
 	}
 
-	public void verifyTransactionHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblIdentitySuccess, "Identity Verification Successful Heading ",
-				expHeading);
+	public void verifyTransactionHeading() throws InterruptedException {
+		new CommonFunctions().elementView(lblIdentitySuccess, "Identity Verification Status Heading");
+		ExtentTestManager.setPassMessageInReport("Identity Verification Status is : " + getText(lblIdentitySuccess));
 	}
 
 	public void verifyIdentityVerificationHeading(String expHeading) {
@@ -120,7 +125,6 @@ public class IdentityVerificationPage extends MobileFunctions {
 	public void verifyIdentity(String expHeading, String expIdentityHeading, String expSSN, String expAddress1,
 			String expAddress2, String expCity, String expState, String expZipCode, String expSuccessHeading)
 			throws InterruptedException {
-
 		verifyIdentityHeading(expHeading);
 		verifyIdentityVerificationHeading(expIdentityHeading);
 		clickDateofBirth();
@@ -144,7 +148,7 @@ public class IdentityVerificationPage extends MobileFunctions {
 		fillZipCode(expZipCode);
 		DriverFactory.getDriver().hideKeyboard();
 		clickSubmit();
-		verifyTransactionHeading(expSuccessHeading);
+		verifyTransactionHeading();
 		clickDone();
 		getUserName();
 

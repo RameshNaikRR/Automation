@@ -10,9 +10,9 @@ import io.appium.java_client.MobileBy;
 
 public class PayRequestConfirmPopup extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[contains(@resource-id, 'payingToTV')]");
+	private By heading = MobileBy.xpath("//*[contains(@text, 'Transaction Successful')]|//*[contains(@resource-id, 'payingToTV')]");
 	private By lnkCopy = MobileBy.xpath(" ");
-	private By amount = MobileBy.xpath("//*[contains(@resource-id, 'amountTV')]");
+	private By amount = MobileBy.xpath("//*[contains(@resource-id, 'giftCardAmountTV')]|//*[contains(@resource-id, 'amountTV')]");
 	private By lblPayingMehtod = MobileBy.xpath("//*[@text='Paying Method']");
 	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']");
 	private By lblAvailabelBalance = MobileBy.xpath("//*[contains(@resource-id, 'balanceTV')]");
@@ -26,9 +26,13 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Paying", expHeading);
-
 	}
 
+	public void verifyHeading() {
+		new CommonFunctions().elementView(heading, "Tarnsaction sucessful heading");	
+		new CommonFunctions().elementView(amount, "Amount");	
+		}
+	
 	public void verifyLockSwipe() {
 		new CommonFunctions().elementView(lock, "Lock ");
 	}

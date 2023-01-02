@@ -39,18 +39,12 @@ public class SignUpTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
-//			signUpPage.clickCrossMark();
-//			signUpPage.clickGetStarted();
 			signUpPage.clickPersonalAccount();
-//			signUpPage.clickCrossMark();
-//			signUpPage.clickGetStarted();
-//			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			signUpPage.fillFirstName(data.get("firstName"));
 			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			// DriverFactory.getDriver().hideKeyboard();
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
@@ -58,12 +52,8 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollTermsOfService();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickAgreeCheckBox();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPolicy();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickAgreeCheckBox();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignup();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();

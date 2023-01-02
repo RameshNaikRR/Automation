@@ -387,7 +387,6 @@ public class TokenAccountTest {
 	public void testPay(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickPayRequest();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
@@ -405,6 +404,8 @@ public class TokenAccountTest {
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
+			.verifyHeading();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.clickDone();
 

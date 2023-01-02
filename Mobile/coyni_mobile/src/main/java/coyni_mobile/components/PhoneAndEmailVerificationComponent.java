@@ -11,13 +11,13 @@ import io.appium.java_client.MobileBy;
 public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	
-	private By phoneHeading = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+	private By phoneHeading = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]|//*[contains(@text,'Verify Phone Number')]");
 	private By phoneDescription = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 	private By txtCode = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
 	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']|//*[contains(@resource-id,'headerTV')]");
+	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']|//*[contains(@text,'Please Verify your Email')]");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
 	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");
