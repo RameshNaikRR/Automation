@@ -113,9 +113,8 @@ public class RegistrationTest {
 	public void testRegistrationReviewApplication(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationProcessPage.clickGetStarted();
-//			registrationProcessPage.clickMerchantAgreement();
-//			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+			registrationProcessPage.clickMerchantAgreement();
+			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
 			registrationProcessPage.clickReviewApplication();
 			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"),
 					data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"),

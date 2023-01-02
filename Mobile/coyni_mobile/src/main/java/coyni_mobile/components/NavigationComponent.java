@@ -23,7 +23,7 @@ public class NavigationComponent extends MobileFunctions {
 	}
 
 	public void clickClose() {
-		wait.until(ExpectedConditions.presenceOfElementLocated(btnClose));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(btnClose));
 			click(btnClose, "Close");
 	}
 

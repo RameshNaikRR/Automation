@@ -219,7 +219,7 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void clickChangePassword() {
 		scrollDownToElement(btnLogOut, "Log Out");
-		wait.until(ExpectedConditions.elementToBeClickable(btnChangePassword));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(btnChangePassword));
 		click(btnChangePassword, "Change Password");
 	}
 
