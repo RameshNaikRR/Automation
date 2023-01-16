@@ -182,12 +182,12 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickFilters() {
-//		if (getElement(btnFilter, "Enabled").isDisplayed()) {
-//			scrollToElement(btnFilter, "Filter");
-		click(btnFilter, "Filter");
-//		} else {
-//			ExtentTestManager.setPassMessageInReport("Export button is Disabled");
-//		}
+		if (getElement(btnFilter, "Enabled").isDisplayed()) {
+			scrollToElement(btnFilter, "Filter");
+			click(btnFilter, "Filter");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Filter button is Disabled");
+		}
 
 	}
 

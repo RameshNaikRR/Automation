@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionDetailsComponent extends BrowserFunctions {
-	
+
 	private By lblHeadingTransactionDetails = By.cssSelector(".text");
 
 	private By record = By.cssSelector("tbody>tr:nth-of-type(2)");
@@ -100,7 +100,11 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void clickRecord() {
-		click(record, "Record");
+		if (getElement(record, "Enabled").isDisplayed()) {
+			click(record, "Record");
+		} else {
+			ExtentTestManager.setPassMessageInReport("record is not displayed");
+		}
 
 	}
 

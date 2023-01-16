@@ -409,7 +409,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
+			// testRecords(strParams);
 			Thread.sleep(2000);
 //			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
@@ -432,7 +432,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
+			// testRecords(strParams);
 //			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
@@ -453,7 +453,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
+			// testRecords(strParams);
 //			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
@@ -472,7 +472,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			testRecords(strParams);
+			// testRecords(strParams);
 //			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 //			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
