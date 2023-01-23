@@ -55,7 +55,7 @@ public class RegistrationProcessPage extends MobileFunctions {
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
 	public void clickReviewApplication() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 //		scrollDownToElement(btnReviewApplication, "Review Application");
 //	wait.until(ExpectedConditions.elementToBeClickable(btnReviewApplication));
 		TouchAction touch = new TouchAction(DriverFactory.getDriver());

@@ -3219,6 +3219,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickTogggle();
 			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
 			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
+			Thread.sleep(2000);
 			merchantProfilePage.clickChangePassword();
 			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView();
 			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();

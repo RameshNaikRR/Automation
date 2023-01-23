@@ -17,7 +17,7 @@ public class NavigationComponent extends MobileFunctions {
 	private By btnBack = MobileBy.xpath(
 			"//*[contains(@resource-id,'close')]|//*[contains(@resource-id,'Back') or contains(@resource-id,'closeBtnIV') or contains(@resource-id,'otpValidationCloseIV') or contains(@resource-id,'Close') or contains(@resource-id,'cpbackBtn') or contains(@resource-id,'CLoseLL') or contains(@resource-id,'closeLL') or contains(@resource-id,'backLL') or contains(@resource-id,'accountsCloseIV') or contains(@resource-id,'notifBackbtn')]");
 	private By btnClose = MobileBy.xpath(
-			"//*[contains(@resource-id,'llClose')]|//*[contains(@resource-id,'accountsCloseIV')]|//*[contains(@resource-id,'closeBtnIV')]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'lyPayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
+			"//*[contains(@resource-id,'llClose')]|//*[contains(@resource-id,'accountsCloseIV')]|//*[contains(@resource-id,'closeBtnIV')]|//*[contains(@resource-id,'imgREClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'PayClose')]|//*[contains(@resource-id,'lyClose')]|//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeBtnSC')]");
 
 	// *[contains(@resource-id,'imgFPClose')]
 

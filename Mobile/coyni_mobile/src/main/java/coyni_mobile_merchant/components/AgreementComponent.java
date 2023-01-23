@@ -63,6 +63,7 @@ public class AgreementComponent extends MobileFunctions {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
 			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
 					expHeading);
+			Thread.sleep(2000);
 			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
 			clickAgreeCheckBox();
 			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
@@ -71,6 +72,7 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
 			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+			Thread.sleep(2000);
 			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
 			clickAgreeCheckBox();
 			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
