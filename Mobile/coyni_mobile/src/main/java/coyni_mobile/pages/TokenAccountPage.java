@@ -40,7 +40,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnImgProfile= MobileBy.xpath("//*[contains(@resource-id, 'imgProfile')]");
 	private By btnprofile_img= MobileBy.xpath("//*[contains(@resource-id, 'profile_img')]");
 	private By btnprofile_tick= MobileBy.xpath("//*[contains(@resource-id, 'tickIcon')]");
-	
+	private By lblAccountStatus= MobileBy.xpath("//*[contains(@text,'Under Review')]");
 	
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	
@@ -77,6 +77,15 @@ public class TokenAccountPage extends MobileFunctions {
 			ExtentTestManager.setPassMessageInReport("Login success");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Login failed");
+		}
+	}
+	
+
+	public void verifyAcccountStatus() {
+		if (getText(lblAccountStatus).equalsIgnoreCase("Active")) {
+			ExtentTestManager.setPassMessageInReport(getText(lblAccountStatus));
+		} else {
+			ExtentTestManager.setFailMessageInReport(" Account is in Under Review or Not Active Status. So we can't perform Token actions");
 		}
 	}
 	

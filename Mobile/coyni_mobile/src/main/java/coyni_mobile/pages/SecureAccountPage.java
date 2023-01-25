@@ -1,7 +1,5 @@
 package coyni_mobile.pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,9 +9,6 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class SecureAccountPage extends MobileFunctions {
 
@@ -60,7 +55,8 @@ public class SecureAccountPage extends MobileFunctions {
 
 	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {
 //		wait.until(ExpectedConditions.titleIs(expHeading));
-		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
 		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
 				expHeading);
 		scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
@@ -69,7 +65,8 @@ public class SecureAccountPage extends MobileFunctions {
 }
 
 public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
 		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
 		scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
 		clickAgreeCheckBox();

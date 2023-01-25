@@ -43,6 +43,7 @@ public class TokenAccountTest {
 		homePage = new HomePage();
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
+//		tokenAccountPage.verifyAcccountStatus();
 	}
 
 	@Test
