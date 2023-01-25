@@ -20,7 +20,7 @@ import io.appium.java_client.MobileBy;
 public class MerchantProfilePage extends MobileFunctions {
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
-	private By lblAccountStatus = MobileBy.xpath("//*[contains(@resource-id,'AccountStatusTV')]");
+	private By lblAccountStatus = MobileBy.xpath("//*[contains(@text,'Under Review')]|//*[contains(@resource-id,'AccountStatusTV')]");
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
 	private By imgUser = MobileBy.xpath("");
 	private By lblSettings = MobileBy.xpath("//*[contains(@resource-id,'userSettingsTV')]");
@@ -100,6 +100,14 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 		click(lnkResetPinCode, "Reset Pin Code");
 	}
 
+	public void verifyAcccountStatus() {
+		if (getText(lblAccountStatus).equalsIgnoreCase("Active")) {
+			ExtentTestManager.setPassMessageInReport(getText(lblAccountStatus));
+		} else {
+			ExtentTestManager.setFailMessageInReport(" Account is in Under Review or Not Active Status. So we can't perform Token actions");
+		}
+	}
+	
 	public void clickFaceIDSetting() {
 		click(btnFaceIDSetting, "FaceID Setting");
 	}

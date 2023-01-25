@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.BusinessRecentTokenTransactionsPage;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
+import coyni_mobile_merchant.pages.MerchantProfilePage;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -18,15 +19,18 @@ public class BusinessTransactionDetailsTest {
 
 	BusinessRecentTokenTransactionsPage businessRecentTokenTransactionsPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
-
+	MerchantProfilePage merchantProfilePage;
+	
 	@BeforeTest
 	public void init() {
+		merchantProfilePage=new MerchantProfilePage();
 		businessRecentTokenTransactionsPage = new BusinessRecentTokenTransactionsPage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
 
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
+//		merchantProfilePage.verifyAcccountStatus();
 	}
 
 	@AfterTest

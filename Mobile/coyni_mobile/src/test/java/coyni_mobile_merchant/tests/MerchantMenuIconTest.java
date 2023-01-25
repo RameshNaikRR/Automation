@@ -18,12 +18,14 @@ import ilabs.mobile.reporting.ExtentTestManager;
 public class MerchantMenuIconTest {
 
 	BusinessTokenAccountPage businessTokenAccountPage;
+	MerchantProfilePage merchantProfilePage;
 	TransactionSucessFailurePendingComponent transactionSucessFailurePendingComponent;
 	MerchantProfileTest merchantProfileTest;
 	BusinessTransactionDetailsTest businessTransactionDetailsTest;
 
 	@BeforeTest
 	public void init() {
+		merchantProfilePage=new MerchantProfilePage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
 		merchantProfileTest = new MerchantProfileTest();
 		transactionSucessFailurePendingComponent = new TransactionSucessFailurePendingComponent();
@@ -31,6 +33,7 @@ public class MerchantMenuIconTest {
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
+//		merchantProfilePage.verifyAcccountStatus();
 	}
 
 	@AfterTest

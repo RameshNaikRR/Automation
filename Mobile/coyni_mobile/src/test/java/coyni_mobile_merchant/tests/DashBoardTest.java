@@ -40,10 +40,10 @@ public class DashBoardTest {
 		batchPayOutComponent = new BatchPayOutComponent();
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
-
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
+//		merchantProfilePage.verifyAcccountStatus();
 	}
 
 	@AfterTest

@@ -34,6 +34,7 @@ public class MerchantTransactionDetailsTest {
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
+//		merchantProfilePage.verifyAcccountStatus();
 	}
 
 	@AfterTest
