@@ -6,6 +6,7 @@ import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.components.PreferencesComponent;
 import coyni_mobile.components.ToastComponent;
 import coyni_mobile.components.TokenHomePopUp;
@@ -65,6 +66,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	private By popUp = MobileBy.xpath("");
 	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
+	//////// 2.3 /////////
 
 	public void clickViewMore() {
 		scrollDownToElement(btnViewMore, "View More");
@@ -388,5 +390,11 @@ public class CustomerProfilePage extends MobileFunctions {
 	
 	public GetHelpPage getHelpPage() {
 		return new GetHelpPage();
+	}
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
+	}
+	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
 	}
 }

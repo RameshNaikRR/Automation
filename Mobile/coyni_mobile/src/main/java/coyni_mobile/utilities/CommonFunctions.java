@@ -103,7 +103,8 @@ public class CommonFunctions {
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
 			// clickEnter();
-			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
+					.replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
 			if (enterText.equalsIgnoreCase(actualtext)) {
@@ -275,15 +276,15 @@ public class CommonFunctions {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(specialKey)));
 	}
 
-	public void enterKeys(By ele,By inputPlace, String data, String type,String eleName) throws InterruptedException {
+	public void enterKeys(By ele, By inputPlace, String data, String type, String eleName) throws InterruptedException {
 		mobileFunctions.click(ele, "Field");
 		String[] keys = data.split("");
 		if (type.equalsIgnoreCase("alphanumeric")) {
 			// takes numbers from alpha numeric keyboard
 			for (String key : keys) {
 				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + key)));
-				String actualtext = mobileFunctions.getText(inputPlace);//BUTTON_
-				//Thread.sleep(2000);
+				String actualtext = mobileFunctions.getText(inputPlace);// BUTTON_
+				// Thread.sleep(2000);
 				ExtentTestManager.setPassMessageInReport(actualtext);
 				if (actualtext.length() == 0) {
 					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");

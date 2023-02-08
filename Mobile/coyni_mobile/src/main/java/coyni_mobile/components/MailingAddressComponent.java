@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.pages.AllDonePage;
 import coyni_mobile.pages.PreAuthorizationPage;
 import coyni_mobile.pages.SignUpPage;
+import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -23,7 +24,8 @@ public class MailingAddressComponent extends MobileFunctions {
 			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
 	private By lblCountry = MobileBy
 			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
-	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
+	private By btnAddCard = MobileBy
+			.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
 	private By txtState = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
@@ -31,6 +33,12 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
+    ////////////////////////2.3 //////////////////////////////
+	private By chkAddress = MobileBy.xpath("//*[contains(@resource-id,'saveAddressCB')]");
+	private By btnAddAddress = MobileBy.xpath("//*[contains(@resource-id,'editAddressSaveCV')]");
+	private By lblAddressAdded = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'cvDone')]");
+	private By lblAddressHeading = MobileBy.xpath("//*[@text='Add Address']");
 
 	private By txtCurrentState(String currentState) {
 		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
@@ -39,7 +47,9 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void clickCurrentState() {
 		click(txtCurrentState("California"), "California");
 	}
-
+    public void verifyAddress(String expHeading) {
+    	new CommonFunctions().verifyLabelText(lblAddressHeading, "Heading", expHeading);
+    }
 	public void fillAddressLine1(String addressLine1) {
 		click(txtAddressLine1, "Address Line1");
 		enterText(txtAddressLine1, addressLine1, "Address Line1");
@@ -72,8 +82,7 @@ public class MailingAddressComponent extends MobileFunctions {
 //		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
 ////		new CommonFunctions().clickTab();
 //		click(btnConfirmState, "Done");
-		
-		
+
 		scrollDownToElement(txtCity, "City");
 		click(drpDwnState, "State Drop down");
 		enterText(txtState, state, "State");
@@ -92,9 +101,11 @@ public class MailingAddressComponent extends MobileFunctions {
 		new CommonFunctions().clickTab();
 		DriverFactory.getDriver().hideKeyboard();
 	}
-    public void scrollDownToAddress2() {
-    	scrollDownToElement(txtAddressLine2, "Address2");
-    }
+
+	public void scrollDownToAddress2() {
+		scrollDownToElement(txtAddressLine2, "Address2");
+	}
+
 	public void scrollDownToSave() {
 		scrollDownToElement(btnSave, "Save");
 	}
@@ -111,12 +122,19 @@ public class MailingAddressComponent extends MobileFunctions {
 		scrollDownToElement(btnSave, "Save");
 		new CommonFunctions().verifyLabelText(lblCountry, "Country", expCountry);
 	}
-
+	public void clickChkAddress() {
+		click(chkAddress, "Save Address");
+	}
+	public void clickAddAddress() {
+		click(btnAddAddress, "Add Address");
+	}
 	public void clickAddCard() {
 		scrollDownToElement(btnAddCard, "Add Card");
 		click(btnAddCard, "Add Card");
 	}
-
+    public void clickDone() {
+    	click(btnDone, "Done");
+    }
 	public void clickSave() {
 		scrollDownToElement(btnSave, "Save");
 		click(btnSave, "Save");
@@ -134,7 +152,9 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void clickYes() {
 		click(btnYes, "Yes");
 	}
-
+    public void verifyAddressAdded(String expText) {
+    	new CommonFunctions().verifyLabelText(lblAddressAdded, "Address Added", expText);
+    }
 	public void verifyAddressLine1View() {
 		new CommonFunctions().elementView(txtAddressLine1, "Address line1 text field");
 	}
@@ -158,9 +178,12 @@ public class MailingAddressComponent extends MobileFunctions {
 	public PreAuthorizationPage preAuthorizationPage() {
 		return new PreAuthorizationPage();
 	}
+
 	public AllDonePage allDonePage() {
 		return new AllDonePage();
 	}
-
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
+	}
 
 }

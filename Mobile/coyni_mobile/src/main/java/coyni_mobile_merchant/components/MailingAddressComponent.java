@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import coyni_mobile.pages.PreAuthorizationPage;
+import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.AllDonePage;
 import ilabs.MobileFramework.DriverFactory;
@@ -221,6 +222,9 @@ public class MailingAddressComponent extends MobileFunctions {
 
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
+	}
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
 	}
 
 }
