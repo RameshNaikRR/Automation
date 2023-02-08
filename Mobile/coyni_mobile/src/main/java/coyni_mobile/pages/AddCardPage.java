@@ -2,9 +2,8 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
-
+import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.components.MailingAddressComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
@@ -18,6 +17,8 @@ public class AddCardPage extends MobileFunctions {
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By iconCamera = MobileBy.xpath("//*[contains(@resource-id,'readCardIV')]");
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
+	private By lblCountryName= MobileBy.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
+	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
 	
 	public void fillNameOnCard(String nameOnCard) {
 		click(txtNameOnCard, "NameOnCard");
@@ -60,6 +61,12 @@ public class AddCardPage extends MobileFunctions {
 	}
 	public void clickCardExp() {
 		click(txtCardNumber, "Card Number");
+	}
+	public void clickAddCardInAddress() {
+	click(btnAddCard, "Add Card");	
+	}
+	public void verifyCountryName(String countryName) {
+		new CommonFunctions().verifyLabelText(lblCountryName, "Country Name", countryName);
 	}
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();

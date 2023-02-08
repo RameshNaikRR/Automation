@@ -9,8 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.NotificationComponent;
+import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.components.TokenHomePopUp;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -37,13 +39,17 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']|//*[contains(@resource-id,'layoutMainMenu')]");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
-	private By btnImgProfile= MobileBy.xpath("//*[contains(@resource-id, 'imgProfile')]");
-	private By btnprofile_img= MobileBy.xpath("//*[contains(@resource-id, 'profile_img')]");
-	private By btnprofile_tick= MobileBy.xpath("//*[contains(@resource-id, 'tickIcon')]");
-	private By lblAccountStatus= MobileBy.xpath("//*[contains(@text,'Under Review')]");
-	
+	private By btnImgProfile = MobileBy.xpath("//*[contains(@resource-id, 'imgProfile')]");
+	private By btnprofile_img = MobileBy.xpath("//*[contains(@resource-id, 'profile_img')]");
+	private By btnprofile_tick = MobileBy.xpath("//*[contains(@resource-id, 'tickIcon')]");
+	private By lblAccountStatus = MobileBy.xpath("//*[contains(@text,'Under Review')]");
+	////////////// 2.3 ///////////////
+	private By btnAddPayment = MobileBy.xpath("//*[@text='Add payment method']");
+	private By btnAddAddress = MobileBy.xpath("//*[@text='Add an address']");
+	private By btnBuyToken = MobileBy.xpath("//*[@text='Buy Token']");
+
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
-	
+
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(transactionsHeading, "Transaction heading", expHeading);
 	}
@@ -61,17 +67,16 @@ public class TokenAccountPage extends MobileFunctions {
 		click(btnViewMore, "View More");
 	}
 
-
 	public void clickImgProfile() {
 		click(btnImgProfile, "Img Profile");
 	}
-	
+
 	public void verifyImgProfile() {
 		new CommonFunctions().elementView(btnprofile_img, "Profile Img");
 //		new CommonFunctions().elementView(btnprofile_img, "btnprofile_tick");
-		
+
 	}
-	
+
 	public void verifyLogin() {
 		if (getElement(lblUserName, "UserName").isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Login success");
@@ -79,16 +84,16 @@ public class TokenAccountPage extends MobileFunctions {
 			ExtentTestManager.setFailMessageInReport("Login failed");
 		}
 	}
-	
 
 	public void verifyAcccountStatus() {
 		if (getText(lblAccountStatus).equalsIgnoreCase("Active")) {
 			ExtentTestManager.setPassMessageInReport(getText(lblAccountStatus));
 		} else {
-			ExtentTestManager.setFailMessageInReport(" Account is in Under Review or Not Active Status. So we can't perform Token actions");
+			ExtentTestManager.setFailMessageInReport(
+					" Account is in Under Review or Not Active Status. So we can't perform Token actions");
 		}
 	}
-	
+
 	public void verifyRegistration() {
 		if (getElement(iconNotifications, "icon").isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Registration success");
@@ -139,24 +144,47 @@ public class TokenAccountPage extends MobileFunctions {
 	}
 
 	// added
-	public void clickProfile(){
+	public void clickProfile() {
 		wait.until(ExpectedConditions.elementToBeClickable(btnProfile));
-		click(btnProfile, "Profile");	
-	 }
-	
+		click(btnProfile, "Profile");
+	}
+
 	public void clickProfileforPayments() {
 		if (getElementList(btnProfile, "Profile").size() > 0) {
 			click(btnProfile, "Profile");
-		}		
-	 }
-	
+		}
+	}
+
+	public void verifyAddPaymentView() {
+		new CommonFunctions().elementView(btnAddPayment, "Add payment method");
+	}
+
+	public void verifyAddAddressView() {
+		new CommonFunctions().elementView(btnAddAddress, "Add Address");
+	}
+
+	public void verifyBuyTokenView() {
+		new CommonFunctions().elementView(btnBuyToken, "Buy Token");
+	}
+
+	public void clickAddPayment() {
+		click(btnAddPayment, "Add payment method");
+	}
+
+	public void clickAddAddress() {
+		click(btnAddAddress, "Add Address");
+	}
+
+	public void clickBuyToken() {
+		click(btnBuyToken, "Buy Token");
+	}
+
 	public int verifyProfile() throws InterruptedException {
 		Thread.sleep(2000);
-		int a=getElementList(btnProfile, "Profile").size();
+		int a = getElementList(btnProfile, "Profile").size();
 		return a;
 	}
 
-	
 	public TokenHomePopUp tokenHomePopUp() {
 		return new TokenHomePopUp();
 	}
@@ -193,9 +221,17 @@ public class TokenAccountPage extends MobileFunctions {
 	public WithdrawMenuComponent withdrawMenuComponent() {
 		return new WithdrawMenuComponent();
 	}
-	
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-	
+    public SuccessFailureComponent successFailureComponent() {
+    	return new SuccessFailureComponent();
+    }
+    public PaymentMethodsPage paymentMethodsPage() {
+    	return new PaymentMethodsPage();
+    }
+    public MailingAddressComponent mailingAddressComponent() {
+    	return new MailingAddressComponent();
+    }
 }
