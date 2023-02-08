@@ -201,7 +201,5 @@ public class SignUpPage extends MobileFunctions {
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
 	}
-   public PaymentMethodsPage paymentMethodsPage() {
-	return new PaymentMethodsPage();
-}
+
 }

@@ -6,36 +6,32 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
-public class AccountCreatedPage extends MobileFunctions {
-	private By heading = MobileBy.xpath("//*[@text='Account Created!']"); /// 2.3 ///
-	private By btnGetStarted = MobileBy.xpath("//*[contains(@text,'Get Started')]");
-	// 2.3//
-	private By btnAddCreditOrDebit = MobileBy.xpath("//*[contains(@resource-id,'tvAddCard')]");
-	private By btnSkip = MobileBy.xpath("//*[contains(@resource-id,'tvSkip')]|(//*[@text='Skip'])[1]");
-
+public class AccountCreatedPage extends MobileFunctions{
+	private By heading = MobileBy.xpath("//*[@text='Your Account Has Been Created']");
+	private By btnSkip =MobileBy.xpath("(//*[@text='Skip'])[1]");
+	private By btnGetStarted = MobileBy
+			.xpath("//*[contains(@text,'Get Started')]");
+	
+	
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
 	}
-
 	public void clickSkip() {
 		click(btnSkip, "Skip");
 	}
-
-	public void clickAddCreditOrDebit() {
-		click(btnAddCreditOrDebit, "Credit or Debit");
-	}
-
+	
 	public void clickGetStarted() {
 		new CommonFunctions().elementView(btnGetStarted, "Get started ");
 		click(btnGetStarted, "Get Started");
 	}
 
-	public TokenAccountPage tokenAccountPage() {
-		return new TokenAccountPage();
-	}
-
-	public IdentityVerificationPage identityVerificationPage() {
-		return new IdentityVerificationPage();
-	}
+	
+	public  TokenAccountPage tokenAccountPage() {
+		   return new TokenAccountPage();
+	  }
+	
+	public  IdentityVerificationPage identityVerificationPage() {
+		   return new IdentityVerificationPage();
+	  }
 
 }

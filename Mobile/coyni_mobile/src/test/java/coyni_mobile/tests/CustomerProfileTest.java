@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.pages.CustomerProfilePage;
-import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.pages.TokenAccountPage;
 import coyni_mobile.pages.UserDetailsPage;
 import coyni_mobile.utilities.CommonFunctions;
@@ -45,39 +44,6 @@ public class CustomerProfileTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testProfileView failed due to exception " + e);
-		}
-	}
-          ////////// 2.3 ////////////
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddAddressFromDashboard(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-					.mailingAddressComponent().tokenAccountPage().clickAddAddress();
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.addCardPage().mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillAddressLine2(data.get("addreddLine2"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillCity(data.get("city"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.selectState(data.get("state"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillZipCode(data.get("zipCode"));
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyCountryName(data.get("countryName"));			
-			// add address button
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickAddAddress();
-			// verify address
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().verifyAddressAdded(data.get("addressAddedPage"));
-			//click done button
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().clickDone();
-			customerProfilePage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyBuyTokenView();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAddAddress failed due to exception " + e);
 		}
 	}
 
@@ -496,18 +462,6 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddPaymentMethodTwoDotThree(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// customerProfilePage.tokenAccountPage()
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Verify DashBoard Failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testDashboardTabBarMenu(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -693,7 +647,7 @@ public class CustomerProfileTest {
 			}
 			int numOfBankAccs = customerProfilePage.paymentMethodsPage().verifyNumOfBanks();
 			for (int i = 1; i <= numOfBankAccs; i++) {
-				customerProfilePage.paymentMethodsPage().verifyPaymentHeading(data.get("paymentHeading"));
+				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 				customerProfilePage.paymentMethodsPage().selectBank();
 				customerProfilePage.paymentMethodsPage().removingPopup().verifyHeading();
 				customerProfilePage.paymentMethodsPage().removingPopup().clickYes();
@@ -998,7 +952,7 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteDebitCard(String strParams) {
@@ -1011,7 +965,7 @@ public class CustomerProfileTest {
 			Thread.sleep(1000);
 			int numOfDebitcards = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCards();
 			for (int i = 1; i <= numOfDebitcards; i++) {
-				customerProfilePage.paymentMethodsPage().verifyPaymentHeading(data.get("paymentHeading"));
+				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 				customerProfilePage.paymentMethodsPage().clickDebitCard();
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().clickRemove();
@@ -1039,7 +993,7 @@ public class CustomerProfileTest {
 			Thread.sleep(2000);
 			int numOfCreditCards = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCards();
 			for (int i = 1; i <= numOfCreditCards; i++) {
-				customerProfilePage.paymentMethodsPage().verifyPaymentHeading(data.get("paymentHeading"));
+				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 				customerProfilePage.paymentMethodsPage().clickCreditCard();
 				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().clickRemove();
@@ -1214,11 +1168,11 @@ public class CustomerProfileTest {
 			customerProfilePage.changePasswordPage().enterYourPINComponent().verifyEnterYourPinView();
 			customerProfilePage.changePasswordPage().enterYourPINComponent().navigationComponent().clickClose();
 			customerProfilePage.clickLogOut();
-
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
 	}
-
+	
 }

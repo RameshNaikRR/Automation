@@ -10,11 +10,11 @@ public class PreAuthorizationPage extends MobileFunctions {
 
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By btnVerify = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
+	
 
 	public void fillAmount(String amount) throws InterruptedException {
-//		enterText(txtAmount, amount, "amount");
 		new EnterYourPINComponent().fillPin(amount);
-
+		
 	}
 
 	public void clickVerify() {
@@ -24,7 +24,6 @@ public class PreAuthorizationPage extends MobileFunctions {
 	public AllDonePage allDonePage() {
 		return new AllDonePage();
 	}
-
 	public PreAuthorizationFailedPage preAuthorizationFailedPage() {
 		return new PreAuthorizationFailedPage();
 	}
