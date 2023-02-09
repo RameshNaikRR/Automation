@@ -356,5 +356,9 @@ public class SideBarComponent extends BrowserFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
+	
+	public AddMerchantComponent addMerchantComponent() {
+		return new AddMerchantComponent();
+	}
 
 }

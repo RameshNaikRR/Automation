@@ -3,6 +3,7 @@ package coyni.admin.tests;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.pages.HomePage;
 import coyni.customer.tests.TokenAccountTest;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -781,4 +783,162 @@ public class ProfilesTest {
 		}
 	}
 
+	// 2.3 Merchant
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddMerchantUser(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().clickAddMerchant();
+			homePage.sideBarComponent().addMerchantComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
+			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
+			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
+			homePage.sideBarComponent().addMerchantComponent().fillEmail();
+			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
+			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
+			homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
+			Thread.sleep(3000);
+			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
+					data.get("message"));
+			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditMerchantInvitation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.ClickMerchantUserBasedOnMerchantName();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().clickEditInvite();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().verifyContent(data.get("headingContact"));
+
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().addMerchantComponent().fillEditEmail();
+
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().navigationComponent().clickBack();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().clickEditInvite();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.merchantEditInviteComponent().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Resend invitation  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantResendInvitation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.ClickMerchantUserBasedOnMerchantName();
+			
+			String verifyName = homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.getName();
+
+			if ((data.get("firstName") + " " + data.get("lastName")).contains(verifyName)) {
+				ExtentTestManager.setInfoMessageInReport(verifyName + "Name Is Same");
+				homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+						.clickResendInvite();
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Resend invitation  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantCancelInvitation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.ClickMerchantUserBasedOnMerchantName();
+			String verifyName = homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+					.getName();
+			if ((data.get("firstName") + " " + data.get("lastName")).contains(verifyName)) {
+				ExtentTestManager.setInfoMessageInReport(verifyName + "Name Is Same");
+				homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+						.clickCancelInvite();
+				homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+						.VerifyCancelHeading(data.get("heading"));
+				homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent()
+						.clickCancelInvite();
+				Thread.sleep(3000);
+				homePage.sideBarComponent().addMerchantComponent().merchantResendAndCancelComponent().toastComponent()
+						.verifyToast(data.get("title"), data.get("message"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Resend invitation  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddMerchantWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().clickAddMerchant();
+			homePage.sideBarComponent().addMerchantComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
+			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
+			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
+			homePage.sideBarComponent().addMerchantComponent().fillEmail();
+			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
+			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
+			homePage.sideBarComponent().addMerchantComponent().clickOutside();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+			// homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddMerchantWithFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().addMerchantComponent().clickAddMerchant();
+			homePage.sideBarComponent().addMerchantComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
+			homePage.sideBarComponent().addMerchantComponent().validateFirstNameField(data.get("firstName"));
+			homePage.sideBarComponent().addMerchantComponent().validateLastNameField(data.get("lastName"));
+			homePage.sideBarComponent().addMerchantComponent().fillEmail();
+			homePage.sideBarComponent().addMerchantComponent().validatePartnerNameField(data.get("partnerName"));
+			homePage.sideBarComponent().addMerchantComponent().validateCompantNameField(data.get("companyName"));
+			homePage.sideBarComponent().addMerchantComponent().clickOutside();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
+		}
+	}
 }
