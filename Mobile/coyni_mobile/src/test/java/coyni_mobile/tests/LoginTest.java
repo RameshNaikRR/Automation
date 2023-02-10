@@ -88,7 +88,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -103,7 +103,9 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.VerifyLoginPageView();
 			loginPage.navigationComponent().verifyCloseView();
+			// Thread.sleep(2000);
 			loginPage.navigationComponent().clickClose();
+			// Thread.sleep(2000);
 			landingPage.verifyLandingPage();
 			// navigation LoginPage - Enter Your PIN Component
 			landingPage.clickLogin();
@@ -117,7 +119,7 @@ public class LoginTest {
 			loginPage.VerifyLoginPageView();
 			loginPage.fillPassword(loginData.get("password"));
 			DriverFactory.getDriver().hideKeyboard();
-			// navigation LoginPage - Forgot Your PIN Component
+//			// navigation LoginPage - Forgot Your PIN Component
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
@@ -194,38 +196,37 @@ public class LoginTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testForgotPin(String strParams) {
-//		try {
-//			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-//			Thread.sleep(1000);
-//			landingPage.clickLogin();
-//			Thread.sleep(3000);
-//			loginPage.VerifyLoginPageView();
-//			loginPage.fillEmail(loginData.get("email"));
-//			loginPage.fillPassword(loginData.get("password"));
-//			loginPage.clickLogin();
-//			loginPage.enterYourPINComponent().verifyEnterYourPinView();
-//			loginPage.enterYourPINComponent().clickForgotPin();
-////			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
-////			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
-////			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-////			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-////					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-//					.verifyResendlbl(loginData.get("resendMsgOld"));
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-//					.verifyNewResendlbl(loginData.get("resendMsgNew"));
-//			Thread.sleep(2000);
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
-//					.verifyNewResendlbl(loginData.get("resendMsgOld"));
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPin(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			landingPage.clickLogin();
+			Thread.sleep(3000);
+			loginPage.VerifyLoginPageView();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.enterYourPINComponent().fillPin(loginData.get("wrongPin"));
+			loginPage.enterYourPINComponent().clickForgotPin();
+//			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotYourPinView();
+//			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmail(loginData.get("email"));
+//			loginPage.enterYourPINComponent().forgotPinComponent().clickNext();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
+//			//loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+//					.fillInputBoxes(loginData.get("pin"));// enter wrong pin
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+					.verifyResendlbl(loginData.get("resendMsgOld"));
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().clickResend();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent()
+					.verifyNewResendlbl(loginData.get("resendMsgNew"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -268,16 +269,15 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.forgotPasswordPage().clickNext();
-//			Thread.sleep(2000);
-//			if (!loginData.get("errMessage").isEmpty()) {
-//				if (new CommonFunctions().isPlatformiOS()) {
-//					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-//							loginData.get("elementName"));
-//				} else {
-//					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-//							loginData.get("elementName"));
-//				}
-//			}
+			if (!loginData.get("errMessage").isEmpty()) {
+				if (new CommonFunctions().isPlatformiOS()) {
+					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				} else {
+					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+							loginData.get("elementName"));
+				}
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -339,34 +339,35 @@ public class LoginTest {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
-			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-			// loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
 			loginPage.clickForgotPassword();
-			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
+			Thread.sleep(2000);
 			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			// loginPage.forgotPasswordPage().verifyEmailComponent()
-			// .verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
+			loginPage.forgotPasswordPage().verifyEmailComponent()
+					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
 			// loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-
-//			loginPage.forgotPasswordPage().clickNext();
 //			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-//			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
-//			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
-//			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
-			// loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
-			// loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
-			// loginPage.forgotPasswordPage().createPasswordPage().clickSave();
-//			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
-//			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
+			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(loginData.get("createHeading"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
+			//loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
+			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
+			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+					.setFailMessageInReport("Forgot Password With Navigation Option due to exception " + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -601,8 +602,9 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyHeading(data.get("expEnterYourPinHeading"));
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
+					.enterYourPINComponent().fillPin(data.get("wrongPin"));
 			loginPage.enterYourPINComponent().clickForgotPin();
-
 //			loginPage.enterYourPINComponent().forgotPinComponent().headingForgotPin(data.get("expForgotPinHeading"));
 //			loginPage.enterYourPINComponent().forgotPinComponent().forgotPinDescription(data.get("expForgotPinDescrp"));
 //			loginPage.enterYourPINComponent().forgotPinComponent().emailFieldTiltle();
@@ -631,7 +633,7 @@ public class LoginTest {
 					.fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().choosePinComponent()
 					.verifyPinMatching(data.get("pinMatchingText"));
-			
+
 			// enterYourPINComponent.forgotPinComponent().crossIconView();
 			// enterYourPINComponent.forgotPinComponent().crossIconView();
 			// enterYourPINComponent.forgotPinComponent().verifyHeadingClickOnCrossIcon();
@@ -730,7 +732,7 @@ public class LoginTest {
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAllLinksOfCustomer(String strParams) {
@@ -752,7 +754,8 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().verifyEmailHeadingview();
-			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().navigationComponent().clickBack();
+			loginPage.enterYourPINComponent().forgotPinComponent().verifyEmailComponent().navigationComponent()
+					.clickBack();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();

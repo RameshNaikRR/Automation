@@ -34,6 +34,8 @@ public class SignUpPage extends MobileFunctions {
 	private By iconBackArrow = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
 	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
+	private By lblPhoneErr = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 
 	public void clickDone() {
 		if (new CommonFunctions().isPlatformiOS()) {
@@ -99,6 +101,12 @@ public class SignUpPage extends MobileFunctions {
 			pressBack();
 		}
 		clickDone();
+	}
+	public void verifyPhoneError(String expText) {
+		new CommonFunctions().verifyLabelText(lblPhoneErr, "Error Message", expText);
+	}
+	public void clickOk() {
+		click(btnOk, "Ok");
 	}
 
 	public void clickNext() {

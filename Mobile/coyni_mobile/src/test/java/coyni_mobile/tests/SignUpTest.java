@@ -227,6 +227,10 @@ public class SignUpTest {
 			}
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
+			if(data.get("validateExistingPhoneError").equalsIgnoreCase("Yes")) {
+			signUpPage.verifyPhoneError(data.get("phoneError"));
+			signUpPage.clickOk();
+			}
 			if (!data.get("errMessage").isEmpty()) {
 				if (new CommonFunctions().isPlatformiOS()) {
 					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
