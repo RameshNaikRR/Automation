@@ -53,7 +53,7 @@ public class ReserveHistoryIDPage extends BrowserFunctions {
 	}
 
 	public void getReserveRule() {
-		ExtentTestManager.setInfoMessageInReport("PayOut Date: " + getText(lblReserveRule, "Reserve Rule"));
+		ExtentTestManager.setInfoMessageInReport("Reserve Rule: " + getText(lblReserveRule, "Reserve Rule"));
 	}
 
 	public void verifyReleaseHistory(String expHeading) {

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -20,7 +16,6 @@ import coyni.merchant.pages.ProcessingFeesPage;
 import coyni.merchant.pages.RegistrationBeneficialOwnersPage;
 import coyni.merchant.pages.RegistrationStartPage;
 import coyni.uitilities.CommonFunctions;
-import ilabs.WebFramework.DriverFactory;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -160,11 +155,6 @@ public class MerchantApplicationTest {
 			sideMenuBarComponent.registrationBeneficialOwnersPage().clickNext();
 
 			Thread.sleep(10000);
-			sideMenuBarComponent.bankAccountPage().fillRoutingNumber(data.get("routingNumber"));
-			sideMenuBarComponent.bankAccountPage().fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
-			sideMenuBarComponent.bankAccountPage().fillAccountNumber(data.get("accountNumber"));
-			sideMenuBarComponent.bankAccountPage().fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideMenuBarComponent.bankAccountPage().clickEnter();
 
 			registrationStartPage.merchantAgreementsPage().clickView();
 			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));

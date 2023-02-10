@@ -877,7 +877,7 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
-
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenAddBank(String strParams) {
@@ -886,25 +886,42 @@ public class TokenAccountTest {
 			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
 			sideMenuBarComponent.clickTokenAccount();
 			tokenAccountPage.clickBuyTokens();
-//			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
-					.fillRoutingNumber(data.get("routingNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
-					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
-					.fillAccountNumber(data.get("accountNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
-					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup().clickAdd();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
-					.bankAccountAddedPopup().clickBuyCoyni();
+			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+			merchantSettingsTest.testAddExternalBankAccount(strParams);
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBuyTokenAddBank(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
+//			sideMenuBarComponent.clickTokenAccount();
+//			tokenAccountPage.clickBuyTokens();
+////			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
+//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickBankAccount();
+////			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
+////					.fillRoutingNumber(data.get("routingNumber"));
+////			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
+////					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+////			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
+////					.fillAccountNumber(data.get("accountNumber"));
+////			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
+////					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+////			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup().clickAdd();
+//			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addBankAccountPopup()
+//					.bankAccountAddedPopup().clickBuyCoyni();
+//			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().navigationComponent().clickClose();
+//			Thread.sleep(2000);
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })

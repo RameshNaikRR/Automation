@@ -52,16 +52,16 @@ public class AgreementsPage extends BrowserFunctions {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
-	public void verifyMerchantAgreementsTab() {
-		cf.elementView(getAgreements("1"), "Merchant Agreements tab ");
-	}
+//	public void verifyMerchantAgreementsTab() {
+//		cf.elementView(getAgreements("1"), "Merchant Agreements tab ");
+//	}
 
 	public void verifyPrivacyPolicyTab() {
 		cf.elementView(getAgreements("2"), "Privacy Policy tab ");
 	}
 
 	public void verifyTermsOfServicesTab() {
-		cf.elementView(getAgreements("3"), "Terms Of Services tab ");
+		cf.elementView(getAgreements("1"), "Terms Of Services tab ");
 	}
 
 	public void verifyMerchantAgreementsLbl() {

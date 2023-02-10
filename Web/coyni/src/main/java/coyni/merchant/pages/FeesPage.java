@@ -11,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class FeesPage extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
-	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='Fees']");
+	private By lblHeading = By.xpath("(//div[contains(@class,'BusinessSettings_page')]//span[.='Fees'])[2]");
 
 	private By getFeesChargesLbl = By.xpath("//div[contains(@class,'MerchantFees_fees_container')]/span");
 	private By getLables = By.xpath("//div[contains(@class,'MerchantFees_head')]/span");
