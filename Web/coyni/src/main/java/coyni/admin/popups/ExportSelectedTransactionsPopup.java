@@ -131,5 +131,10 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, expHeading, "Export Selected Transactions ");
 	}
+	
+	public void verifyProfileMerchantExportHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, expHeading, "Export Selected Merchant");
+	}
+
 
 }

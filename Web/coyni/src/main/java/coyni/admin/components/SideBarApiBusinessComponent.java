@@ -213,7 +213,7 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 //APi Keys
 
 	private By lblPublicKey = By
-			.xpath("//p[contains(@class,'text-sm text-cgy8 font-semibold mt-px APIKeys_secret_key__US28X')]");
+			.xpath("//p[contains(@class,'text-sm text-cgy8 font-semibold APIKeys_secret_key__539ou')]");
 	private By lblSecretKey = By
 			.xpath("//p[contains(@class,'text-sm text-cgy8 font-semibold APIKeys_secret_key__US28X')]");
 
@@ -245,7 +245,7 @@ public class SideBarApiBusinessComponent extends BrowserFunctions {
 //Agreements
 
 	private By lblAgreement = By.xpath("//span[text()='Terms of Service']");
-	private By lblDownload = By.xpath("//button[text()='Download PDF']");
+	private By lblDownload = By.xpath("//span[text()='Download PDF']");
 
 	public void clickTermOfService() {
 		click(lblAgreement, "Terms of Service");

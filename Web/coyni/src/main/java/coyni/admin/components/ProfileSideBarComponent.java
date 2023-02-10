@@ -89,6 +89,12 @@ public class ProfileSideBarComponent extends BrowserFunctions {
 		click(getMenuItems("Token Account"), "Token Account");
 	}
 
+	private By lblNoFilterRecord = By.xpath("//span[text()='No Records Found']");
+
+	public int getNoFilterRecSize() {
+		return getElementsList(lblNoFilterRecord, "No Record Found").size();
+	}
+
 	public void clickPreferencesControl() {
 		click(getMenuItems("Preferences / Controls"), "Preferences / Controls");
 	}

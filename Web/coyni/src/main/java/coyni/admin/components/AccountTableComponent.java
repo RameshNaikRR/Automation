@@ -68,6 +68,13 @@ public class AccountTableComponent extends BrowserFunctions {
 	public int getNoRecSize() {
 		return getElementsList(lblNoRecord, "").size();
 	}
+	
+	
+	private By lblNoFilterRecord = By.xpath("//span[text()='No Records Found']");
+
+	public int getNoFilterRecSize() {
+		return getElementsList(lblNoFilterRecord, "No Record Found").size();
+	}
 
 	public void verifyLabelHeading(String labelHeading) {
 		new CommonFunctions().verifyLabelText(lblBatchDetails, "label heading", labelHeading);

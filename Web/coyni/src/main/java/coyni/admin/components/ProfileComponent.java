@@ -36,6 +36,12 @@ public class ProfileComponent extends BrowserFunctions {
 		enterText(txtSearch, text, "Search");
         click(btnSearch,"Serach");
 	}
+	private By txtSearchMerchant = By.xpath("//input[contains(@class,' BusinessProfiles_search_bar_gbox__fDkrE')]");
+	public void fillSearchForMerchantDetails(String text) {
+		enterText(txtSearchMerchant, text, "Search");
+        click(btnSearch,"Serach");
+	}
+	
 
 	public void clickFilter() {
 		click(btnFilter, "Filter");

@@ -437,4 +437,36 @@ public class FilterComponent extends BrowserFunctions {
 		containsInList(txtStatusCaseID, data);
 	}
 
+	
+	
+	//2.3 Profile merchant filters
+	
+	public void clickchkbxActive() {
+		click(getCheckBox("Active"), "Active");
+	}
+
+	public void clickchkbxUnderReview() {
+		click(getCheckBox("Under Review"), "Under Review");
+	}
+
+	public void clickchkbxTerminated() {
+		click(getCheckBox("Terminated"), "Terminated");
+	}
+
+	public void clickchkbxDeclined() {
+		click(getCheckBox("Declined"), "Declined");
+	}
+
+	public void clickchkbxCancelled() {
+		click(getCheckBox("Cancelled"), "Cancelled");
+	}
+
+	public void clickchkbxApplication() {
+		click(getCheckBox("Application"), "Application");
+	}
+	
+	
+	
+	
+	
 }
