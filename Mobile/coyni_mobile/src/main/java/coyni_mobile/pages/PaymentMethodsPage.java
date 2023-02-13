@@ -35,7 +35,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
 	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
 	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Visa Credit')])[1]");
-	private By btnDebitCards = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
+	private By btnDebitCards = MobileBy.xpath("//*[contains(@text,'Debit Card')]");
 	private By btncreditCards = MobileBy.xpath("//*[contains(@text,'Credit')]");
 	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
 	private By numberOfBankAccounts = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankHead')]");
