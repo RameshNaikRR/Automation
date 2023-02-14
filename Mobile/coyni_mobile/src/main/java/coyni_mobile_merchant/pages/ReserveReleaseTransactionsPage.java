@@ -70,7 +70,7 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 	}
 	
 	public int verifyTransactionsCount() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(1500);
 		 return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 

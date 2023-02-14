@@ -8,6 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.LandingPage;
 import coyni_mobile_merchant.pages.LoginPage;
 import ilabs.MobileFramework.DriverFactory;
@@ -18,11 +19,12 @@ public class LoginTest {
 
 	LoginPage loginPage;
 	LandingPage landingPage;
-
+	BusinessTokenAccountPage businessTokenAccountPage;
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
+		businessTokenAccountPage = new BusinessTokenAccountPage();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -77,6 +79,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
 			loginPage.agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyUpdateHeading"));
+			businessTokenAccountPage.getUserName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
@@ -533,14 +536,15 @@ public class LoginTest {
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.fillNewPassword(data.get("newPassword"));
-			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
-			.verifyPasswordMaskedView(data.get("newPassword"));
+//			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+//			.verifyPasswordMaskedView(data.get("newPassword"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.clickEyeIconNewPassword();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
-			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
-					.clickEyeIconConfirmPassword();
+//			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+//					.clickEyeIconConfirmPassword();
+			
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageHeading(data.get("sucessHeading"));

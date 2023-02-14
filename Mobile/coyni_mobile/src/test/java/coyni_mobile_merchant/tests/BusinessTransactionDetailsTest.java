@@ -76,7 +76,6 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
-				Thread.sleep(1000);
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 						.verifyTransactionsCount() == 0) {
 					businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
@@ -131,7 +130,7 @@ public class BusinessTransactionDetailsTest {
 					}
 
 				} else {
-					ExtentTestManager.setWarningMessageInReport("You Have No More Transactions");
+					ExtentTestManager.setWarningMessageInReport("You have no transactions");
 				}
 			} else {
 				ExtentTestManager.setFailMessageInReport("You Have No More Transactions to Apply Filters");

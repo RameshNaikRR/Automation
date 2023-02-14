@@ -9,6 +9,7 @@ import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
@@ -72,9 +73,19 @@ public class PayoutTransactionsPage extends MobileFunctions {
 		new CommonFunctions().elementView(btnPayoutTransaction, "Pay Out Transactions");
 		new CommonFunctions().elementView(filtersIcon, "Filters Icon");
 	}
+	
+	public int verifyTransactionsCount() throws InterruptedException {
+		Thread.sleep(3000);
+		 return DriverFactory.getDriver().findElements(lblNoTransactions).size();
+	}
 
-	public void clickPayoutTransaction() {
-		click(btnPayoutTransaction, "Payout Transaction");
+	public int clickPayoutTransaction() {
+		if(DriverFactory.getDriver().findElements(lblNoTransactions).size()==0) {
+			ExtentTestManager.setWarningMessageInReport("You have no transactions");
+		}else {
+			click(btnPayoutTransaction, "Payout Transaction");	
+		}
+		return 0;
 	}
 
 	public void verifyScroll(String expText) {

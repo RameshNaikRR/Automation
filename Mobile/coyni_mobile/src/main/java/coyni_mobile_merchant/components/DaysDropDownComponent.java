@@ -10,7 +10,7 @@ public class DaysDropDownComponent extends MobileFunctions {
 
 	private By drpdwn = By.xpath("//*[contains(@resource-id,'tv_processing_volume')]");
 
-	private By btnToday = By.xpath("//*[contains(@resource-id,'tv_today')]");
+	private By btnToday = By.xpath("//*[contains(@text,'Today')]|//*[contains(@resource-id,'tv_today')]");
 
 	private By btnYesterday = By.xpath("//*[contains(@resource-id,'tv_yesterday')]");
 
@@ -21,6 +21,7 @@ public class DaysDropDownComponent extends MobileFunctions {
 	private By btnCustomDateRange = By.xpath("//*[contains(@resource-id,'tv_custom_date')]");
 
 	public void clickOnToday() {
+		click(drpdwn, "Drop Down");
 		click(btnToday, "Click Today");
 	}
 

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.TransactionSucessFailurePendingComponent;
+import coyni_mobile_merchant.components.UploadDocumentComponent;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.MerchantProfilePage;
 import ilabs.MobileFramework.DriverFactory;
@@ -22,6 +23,7 @@ public class MerchantMenuIconTest {
 	TransactionSucessFailurePendingComponent transactionSucessFailurePendingComponent;
 	MerchantProfileTest merchantProfileTest;
 	BusinessTransactionDetailsTest businessTransactionDetailsTest;
+	UploadDocumentComponent uploadDocumentComponent;
 
 	@BeforeTest
 	public void init() {
@@ -30,6 +32,7 @@ public class MerchantMenuIconTest {
 		merchantProfileTest = new MerchantProfileTest();
 		transactionSucessFailurePendingComponent = new TransactionSucessFailurePendingComponent();
 		businessTransactionDetailsTest = new BusinessTransactionDetailsTest();
+		uploadDocumentComponent= new UploadDocumentComponent();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -87,6 +90,10 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickOk();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getRequestedAmount();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSaveAlbum();
+			if(uploadDocumentComponent.verifyUsingApp()==1 ) {	
+				uploadDocumentComponent.clickUsingApp();
+				uploadDocumentComponent.clickAllow();
+				}
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickAllow();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent().verifyToastMsg(data.get("saveAlbumToast"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyQrCode();

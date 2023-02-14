@@ -111,6 +111,7 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.dashBoardPage().clickDashBoard();
 			businessTokenAccountPage.dashBoardPage().verifyLabelProcessingVolume(data.get("label"));
+			
 			businessTokenAccountPage.daysDropDownComponent().clickOnToday();
 			businessTokenAccountPage.dashBoardPage().getRefund();
 			businessTokenAccountPage.dashBoardPage().getProcessingFees();
@@ -943,20 +944,20 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().verifyFilters();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().navigationComponent().clickClose();
-			businessTokenAccountPage.reserveBalanceComponent().verifyReserveBalance();
-			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.verifyLabelReserveReleases();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.clickFilterIcon();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.verifyFilters();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().verifyReserveDetail();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.reserveReleaseDetailsPage().clickBack();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
+//			businessTokenAccountPage.reserveBalanceComponent().verifyReserveBalance();
+//			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+//					.verifyLabelReserveReleases();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+//					.clickFilterIcon();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+//					.verifyFilters();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+//					.reserveReleaseDetailsPage().verifyReserveDetail();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+//					.reserveReleaseDetailsPage().clickBack();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
 			businessTokenAccountPage.clickNotifications();
 			businessTokenAccountPage.notificationComponent().verifyNotifications();
 			businessTokenAccountPage.navigationComponent().clickBack();

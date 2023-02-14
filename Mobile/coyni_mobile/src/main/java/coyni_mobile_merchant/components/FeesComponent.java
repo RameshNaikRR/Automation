@@ -10,8 +10,10 @@ public class FeesComponent extends MobileFunctions {
 
 	private By headingFees = MobileBy.xpath("//*[contains(@text,'Fees')]");
 	private By headingTransactions = MobileBy.xpath("//*[@text='Transactions']");
-	private By lblSaleOrderDollr = MobileBy.xpath("//*[contains(@text,'Sale Order: Token')]/following-sibling::*[1]");
-	private By lblSaleOrder = MobileBy.xpath("//*[contains(@text,'Sale Order: Token')]/following-sibling::*[2]");
+	private By lblSaleOrder_ecommersDollr = MobileBy.xpath("//*[contains(@text,'Sale Order: eCommerce')]/following-sibling::*[1]|//*[contains(@text,'Sale Order: Token')]/following-sibling::*[1]");
+	private By lblSaleOrder_ecommerse = MobileBy.xpath("//*[contains(@text,'Sale Order: eCommerce')]/following-sibling::*[2]|//*[contains(@text,'Sale Order: Token')]/following-sibling::*[2]");
+	private By lblSaleOrder_RetailDollr = MobileBy.xpath("//*[contains(@text,'Sale Order: Retail/Mobile')]/following-sibling::*[1]|//*[contains(@text,'Sale Order: Token')]/following-sibling::*[1]");
+	private By lblSaleOrder_Retail = MobileBy.xpath("//*[contains(@text,'Sale Order: Retail/Mobile')]/following-sibling::*[2]|//*[contains(@text,'Sale Order: Token')]/following-sibling::*[2]");
 	private By lblRefundDollr = MobileBy.xpath("//*[contains(@text,'Refund')]/following-sibling::*[1]");
 	private By lblRefund = MobileBy.xpath("//*[contains(@text,'Refund')]/following-sibling::*[2]");
 	private By headingTokenAccount = MobileBy.xpath("//*[@text='Token Account']");
@@ -40,8 +42,8 @@ public class FeesComponent extends MobileFunctions {
 	}
 
 	public void getSaleOrder() {
-		String saleOrderPer = getText(lblSaleOrder);
-		String saleOrderDoll = getText(lblSaleOrderDollr);
+		String saleOrderPer = getText(lblSaleOrder_ecommerse);
+		String saleOrderDoll = getText(lblSaleOrder_ecommersDollr);
 		ExtentTestManager.setInfoMessageInReport("Sale Order Percentage : " + saleOrderDoll + "   " + saleOrderPer);
 	}
 

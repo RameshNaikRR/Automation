@@ -22,7 +22,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
 	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By emailHeading = MobileBy.xpath("//*[contains(@text,'Verify Email')]|//*[contains(@text,'Please Verify your Email')]");
+	private By emailHeading = MobileBy.xpath("//*[@text='Please Verify your Current Email']|//*[contains(@text,'Verify Email')]|//*[contains(@text,'Please Verify your Email')]");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
 	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");

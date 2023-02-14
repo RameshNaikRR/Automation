@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.ErrorMessagePopupComponent;
 import coyni_mobile_merchant.components.ToastComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -43,7 +44,7 @@ public class ReceivePaymentPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblHeading, "Receive Payment Page Heading");
 		new CommonFunctions().elementView(lblUserName, "User Name");
 	}
-	
+
 	public void verifyPageDescription(String expDescription) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Receive Payment Page Description", expDescription);
 	}
@@ -55,10 +56,12 @@ public class ReceivePaymentPage extends MobileFunctions {
 	public void verifySharePageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblShareHeading, "Share Page Heading", expHeading);
 	}
+
 	public void verifyQrCode() {
 		new CommonFunctions().elementView(lblQr, "OR code");
 		ExtentTestManager.setInfoMessageInReport("QR code:" + getText(lblQr));
 	}
+
 	public void getUserLogoText() {
 		ExtentTestManager.setInfoMessageInReport("User Logo Text is :" + getText(lblUserLogo));
 	}
@@ -128,14 +131,15 @@ public class ReceivePaymentPage extends MobileFunctions {
 		click(btnClose, "Close");
 	}
 
-	public void clickAllow() {
-		new CommonFunctions().elementView(btnAllow, "Allow");
-		click(btnAllow, "Allow");
+	public int clickAllow() throws InterruptedException {
+		Thread.sleep(1000);
+		return DriverFactory.getDriver().findElements(btnAllow).size();
 	}
-	
+
 	public ErrorMessagePopupComponent errorMessagePopupComponent() {
 		return new ErrorMessagePopupComponent();
 	}
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}

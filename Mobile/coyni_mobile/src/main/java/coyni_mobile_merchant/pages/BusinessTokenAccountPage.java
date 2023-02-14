@@ -125,7 +125,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 
 	public void getUserName() {
 		new CommonFunctions().elementView(lblUserName, "User Name");
-		ExtentTestManager.setInfoMessageInReport("User Name is : " + getText(lblUserName));
+		ExtentTestManager.setPassMessageInReport("User Name is : " + getText(lblUserName));
 	}
 
 	public void clickClose() {
