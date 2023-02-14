@@ -208,6 +208,7 @@ public class MerchantActivityTest {
 			if (merchantTransactionsPage.filterComponent().verifyTransactions()) {
 				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
+				merchantTransactionsPage.filterComponent().verifyMouseAction();
 				merchantTransactionsPage.filterComponent().clickFilters();
 //			tokenAccountPage.filterComponent().clickStartDate();
 //			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
@@ -310,27 +311,27 @@ public class MerchantActivityTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testDashBoardFullReserveHistory(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
-//			merchantActivityComponent.dashBoardPage().getReserveBalance();
-//			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
-//			merchantActivityComponent.dashBoardPage().getNextRelease();
-//			merchantActivityComponent.dashBoardPage().getLastRelease();
-//			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
-//			merchantActivityComponent.reserveHistoryPage().clickOnHold();
-//			merchantActivityComponent.reserveHistoryPage().clickOpen();
-//			merchantActivityComponent.reserveHistoryPage().clickReleased();
-//			merchantActivityComponent.reserveHistoryPage().clickManual();
-//			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testDashBoardFullReserveHistory failed due to exception " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardFullReserveHistory(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
+			merchantActivityComponent.dashBoardPage().getReserveBalance();
+			merchantActivityComponent.dashBoardPage().getReserveBalanceDescription();
+			merchantActivityComponent.dashBoardPage().getNextRelease();
+			merchantActivityComponent.dashBoardPage().getLastRelease();
+			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
+			merchantActivityComponent.reserveHistoryPage().clickOnHold();
+			merchantActivityComponent.reserveHistoryPage().clickOpen();
+			merchantActivityComponent.reserveHistoryPage().clickReleased();
+			merchantActivityComponent.reserveHistoryPage().clickManual();
+			merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDashBoardFullReserveHistory failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })

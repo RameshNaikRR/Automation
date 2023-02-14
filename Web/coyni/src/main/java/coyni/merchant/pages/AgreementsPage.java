@@ -6,12 +6,41 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AgreementsPage extends BrowserFunctions {
+
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("(//span[.='Agreements'])[2]");
+	private By lblTextBorder = By.xpath("//span[contains(text(),'Terms of Service')]");
+	private By btnPrivacyPolicy = By.xpath("//span[text()='Privacy Policy']"); // Privacy Policy
+	private By btnTermsOfService = By.xpath("//span[text()='Terms of Service']");
+	private By txtDownload = By.xpath("(//div[contains(@class,'__react_component_tooltip')])[4]");
+	private By downloadIcon = By.xpath("(//div[contains(@class,'BusinessSettingsAgreements_downloadIcon')])[1]");
 
 	private By getAgreements(String Agreements) {
 		return By.xpath(
 				String.format("(//button[contains(@class,'BusinessSettingsAgreements_AgreeCard')])[%s]", Agreements));
+	}
+
+	public void verifyMouseHoverAction() {
+		cf.verifyCursorAction(btnPrivacyPolicy, "Agreements");
+	}
+
+	public void verifyDownloadIcon() throws InterruptedException {
+		moveToElement(downloadIcon, "Download Icon");
+		verifyElementDisplayed(txtDownload, "Download");
+	}
+
+	public void clickPrivacyPolicy() {
+		click(btnPrivacyPolicy, "Privacy Policy");
+
+	}
+
+	public void clickTermsOfService() {
+		click(btnTermsOfService, "Terms Of Service");
+
+	}
+
+	public void clickAgreements() {
+		click(lblHeading, "Clicked on Agreements");
 	}
 
 	private By getAgreementsLbl(String AgreementsLabels) {
@@ -44,8 +73,11 @@ public class AgreementsPage extends BrowserFunctions {
 	}
 
 	private By getAgreementsDownload(String download) {
-		return By.xpath(String.format("//span[text()='Merchant Agreement']/ancestor::div[2]/following-sibling::div[3]",
-				download));
+		return By.xpath(String.format("div[class*='BusinessSettingsAgreements_downloadIcon']", download));
+	}
+
+	public void verifyAgreementsBorderColor(String expColor, String colorName) {
+		new CommonFunctions().verifyBordercolor(expColor, lblTextBorder, colorName);
 	}
 
 	public void verifyHeading(String Heading) {

@@ -191,6 +191,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	}
 
+	public void verifyMouseAction() {
+		new CommonFunctions().verifyCursorAction(btnFilter, "Filter");
+	}
+
 	public boolean verifyTransactions() {
 		WebElement ele = getElement(lblNoTrasactons, "");
 		boolean displayed = ele.isDisplayed();

@@ -480,6 +480,7 @@ public class TokenAccountTest {
 				tokenAccountPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
 				Thread.sleep(2000);
+				tokenAccountPage.filterComponent().verifyMouseAction();
 				tokenAccountPage.filterComponent().clickFilters();
 //			    tokenAccountPage.filterComponent().clickStartDate();
 //			    tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
@@ -877,7 +878,7 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenAddBank(String strParams) {

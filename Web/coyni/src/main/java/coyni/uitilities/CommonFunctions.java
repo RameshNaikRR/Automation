@@ -96,6 +96,18 @@ public class CommonFunctions {
 		}
 	}
 
+	public void verifyBordercolor(String expcolour, By color, String colorName) {
+		objBrowserFunctions.moveToElement(color, "Moved to element");
+		String cssValue = objBrowserFunctions.getElement(color, "locatin").getCssValue("border-color");
+		ExtentTestManager.setInfoMessageInReport(cssValue);
+
+		if (cssValue.equalsIgnoreCase(expcolour)) {
+			ExtentTestManager.setPassMessageInReport("Text field border colour changed to " + colorName);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Text field border colour is not changed");
+		}
+	}
+
 	public void verifyTextBoxBorderColor(String expcolour) {
 		By txterror = By.cssSelector("div[class *= 'FormField_error']");
 		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
@@ -241,10 +253,11 @@ public class CommonFunctions {
 		System.out.println(initialValue + " : " + FinalValue);
 		if (FinalValue.equalsIgnoreCase(expValue)) {
 			ExtentTestManager.setPassMessageInReport(
-					String.format("%s element %s css property value changed to ",eleName, cssProp) + "" + expColor);
+					String.format("%s element %s css property value changed to ", eleName, cssProp) + "" + expColor);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
-					String.format("%s element %s css property value not changed to ",eleName, cssProp) + "" + expColor);
+					String.format("%s element %s css property value not changed to ", eleName, cssProp) + ""
+							+ expColor);
 		}
 
 	}
@@ -352,7 +365,8 @@ public class CommonFunctions {
 	public void switchtoUrl(String url) {
 		DriverFactory.getDriver().navigate().to(url);
 	}
-	public void verifyHeadings(List<WebElement> elementsList,String excelHeading,String eleName) {
+
+	public void verifyHeadings(List<WebElement> elementsList, String excelHeading, String eleName) {
 		for (WebElement webElement : elementsList) {
 			String text = webElement.getText();
 			String[] split = excelHeading.split("/");

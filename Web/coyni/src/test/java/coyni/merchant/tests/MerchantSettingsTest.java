@@ -524,28 +524,34 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAgreementsBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyHeading(data.get("agreementsHeading"));
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyMerchantAgreementsTab();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.verifyAgreementsBorderColor(data.get("expColor"), data.get("colorName"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyPrivacyPolicyTab();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyTermsOfServicesTab();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyMerchantAgreementsLbl();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyPrivacyPolicyLbl();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyMerchantAgreementsIpAddressLbl();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyPrivacyPolicyIpAddressLbl();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyTermsOfServiceIpAddressLbl();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
-//					.verifyMerchantAgreementsIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.verifyMouseHoverAction();
+
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.clickPrivacyPolicy();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.clickAgreements();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.verifyDownloadIcon();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.clickTermsOfService();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+					.clickAgreements();
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 //					.verifyPrivacyPolicyIpAddress();
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 //					.verifyTermsOfServiceIpAddress();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+//					.verifyPrivacyPolicyIpAddressLbl();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
+//					.verifyTermsOfServiceIpAddressLbl();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreements failed due to " + e);
 		}
@@ -726,9 +732,8 @@ public class MerchantSettingsTest {
 					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.successFailurePopupCardComponent().navigationComponent().clickClose();
-		
-	}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
 		}
 	}
