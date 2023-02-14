@@ -358,16 +358,14 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(loginData.get("newPassword"));
 			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(loginData.get("confirmPassword"));
 			loginPage.forgotPasswordPage().createPasswordPage().verifyPassword();
-			//loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
+			// loginPage.forgotPasswordPage().createPasswordPage().scrollDown();
 			loginPage.forgotPasswordPage().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().createPasswordPage().verifyMessage(loginData.get("message"));
 			loginPage.forgotPasswordPage().createPasswordPage().clickLogin();
 		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("Forgot Password With Navigation Option due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("Forgot Password With Navigation Option due to exception " + e);
 		}
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -742,6 +740,7 @@ public class LoginTest {
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();
+			Thread.sleep(1000);
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
 			loginPage.clickRetrieveEmail();
