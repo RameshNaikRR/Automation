@@ -542,8 +542,8 @@ public class LoginTest {
 					.clickEyeIconNewPassword();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
-//			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
-//					.clickEyeIconConfirmPassword();
+			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+					.clickEyeIconConfirmPassword();
 			
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()

@@ -211,10 +211,10 @@ public class BusinessTransactionDetailsTest {
 					}
 
 				} else {
-					ExtentTestManager.setWarningMessageInReport("You Have No More Transactions");
+					ExtentTestManager.setInfoMessageInReport("You have no transactions");
 				}
 			} else {
-				ExtentTestManager.setFailMessageInReport("You Have No More Transactions to Apply Filters");
+				ExtentTestManager.setWarningMessageInReport("You Have No More Transactions to Apply Filters");
 			}
 
 		} catch (Exception e) {

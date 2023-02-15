@@ -69,7 +69,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 
 	private By btnRefund = MobileBy.xpath("//*[contains(@resource-id,'RefundIV')]");
 
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'close')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Mpayoutll')]|//*[contains(@resource-id,'close')]");
 
 	public void clickBack() {
 		click(btnBack, "Back");

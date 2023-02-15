@@ -50,8 +50,9 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 	
 	public void fillConfirmPassword(String confirmPassword) {
-		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
 		click(txtConfirmPassword, " Confirm Password");
+		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+//		click(txtConfirmPassword, " Confirm Password");
 		DriverFactory.getDriver().hideKeyboard();
 
 	}
