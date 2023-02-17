@@ -31,6 +31,7 @@ public class PreferencesComponent extends MobileFunctions {
 		getElementList(MobileBy.xpath(String.format("//*[@text='%s']", timeZone)), "Time Zone");
 		new CommonFunctions().clickEnter();
 		click(btnDone, "Done");
+		
 //		 selectDropdownOption(drpDwnTimeZone, txtTimeZone, "click on Drop Down", timeZone);
 //		 click(btnDone, "Done");
 	}

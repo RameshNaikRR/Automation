@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.MailingAddressComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -70,5 +71,8 @@ public class AddCardPage extends MobileFunctions {
 	}
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
+	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

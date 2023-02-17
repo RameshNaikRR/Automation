@@ -91,6 +91,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 		enterText(txtLastName, lastName, "Last Name ");
 		new CommonFunctions().clickTab();
 		scrollDownToElement(btnNext, "Next");
+	
 	}
 
 	public void pasteOption(String code) {

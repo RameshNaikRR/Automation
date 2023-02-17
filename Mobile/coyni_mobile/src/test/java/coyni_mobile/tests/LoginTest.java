@@ -428,6 +428,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
+			DriverFactory.getDriver().hideKeyboard();
 			loginPage.retrieveEmailPage().clickNext();
 			if (!loginData.get("errMessage").isEmpty()) {
 				if (new CommonFunctions().isPlatformiOS()) {
@@ -456,11 +457,14 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
 			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
 			loginPage.retrieveEmailPage().clickNext();
-			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
-			loginPage.retrieveEmailPage().navigationComponent().clickBack();
-			DriverFactory.getDriver().hideKeyboard();
+			loginPage.retrieveEmailPage().verifyTryAgain(loginData.get("tryAgain"));
+			loginPage.retrieveEmailPage().clickTryAgain();
 			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-			loginPage.retrieveEmailPage().navigationComponent().clickClose();
+//			loginPage.retrieveEmailPage().verifyPhoneNumberHeading(loginData.get("phoneNumberHeading"));
+//			loginPage.retrieveEmailPage().navigationComponent().clickBack();
+//			DriverFactory.getDriver().hideKeyboard();
+//			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
+//			loginPage.retrieveEmailPage().navigationComponent().clickClose();
 			loginPage.VerifyLoginPageView();
 
 		} catch (Exception e) {
