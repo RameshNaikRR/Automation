@@ -1,12 +1,16 @@
 package coyni.customer.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import coyni.customer.components.TokenAccountActivityComponent;
+import coyni.customer.pages.CustomerProfilePage;
 import coyni.customer.pages.ExportfilesPage;
 import coyni.customer.pages.GetHelpPage;
 import coyni.customer.pages.LoginPage;
@@ -68,6 +72,25 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("testWithdrawToUSD is failed due to exception " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.verifyHeadingPopup().clickVerifyHeading();
+			tokenAccountPage.verifyHeadingPopup().verifyHeading();
+			tokenAccountPage.verifyHeadingPopup().fillAddress1(data.get("address1"));
+			tokenAccountPage.verifyHeadingPopup().fillAddress2(data.get("address2"));
+			tokenAccountPage.verifyHeadingPopup().fillCity(data.get("city"));
+			tokenAccountPage.verifyHeadingPopup().selectState(data.get("state"));
+			tokenAccountPage.verifyHeadingPopup().fillZipCode(data.get("zipcode"));
+			tokenAccountPage.verifyHeadingPopup().clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+		}
 	}
 
 	@Test
@@ -584,12 +607,13 @@ public class TokenAccountTest {
 			tokenAccountPage.verifyTableItemsCount(data.get("query"));
 			// tokenAccountPage.verifyPostedTransactions(data.get("count"));
 			// tokenAccountPage.verifyBracesCount(data.get("query"));
-		//	tokenAccountPage.verifyPageNumbersWithCount();
+			// tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
 			tokenAccountPage.clickDropDownEntriesPage();
-		//	tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"), data.get("expValue"),
-			//		data.get("expColor"));
+			// tokenAccountPage.verifyPageNumberHighlighted(data.get("cssProp"),
+			// data.get("expValue"),
+			// data.get("expColor"));
 			// tokenAccountPage.getEntryOptions();
 			tokenAccountPage.verifyEntriesMessage();
 			ExtentTestManager.setInfoMessageInReport("Entries is displayed as " + tokenAccountPage.getEntriesMessage());
@@ -1111,7 +1135,7 @@ public class TokenAccountTest {
 	public void testBuyTokenTransactionBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//tokenAccountPage.clickBuyTokens();
+			// tokenAccountPage.clickBuyTokens();
 			// tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().verifyBuyCoyniTokenHeading(data.get("expHeading"));
 			Thread.sleep(3000);
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
@@ -1420,9 +1444,10 @@ public class TokenAccountTest {
 //					+ tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPay().getDailyLimit());
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
 			Thread.sleep(3000);
-			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
 			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
-			
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().verifyLabelDebitCardView();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
 					.getPaymentItems(data.get("last4digits"));
@@ -1433,7 +1458,8 @@ public class TokenAccountTest {
 					.enterMessage(data.get("transactionalmessage"));
 
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickOnNext();
-			 tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().processingFeeComponent().verifyProcessingFee(data.get("amount"), processingFee, totalAmount);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().processingFeeComponent()
+					.verifyProcessingFee(data.get("amount"), processingFee, totalAmount);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
@@ -2161,6 +2187,60 @@ public class TokenAccountTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
+	}
+
+	// added method
+	public void testAddCard(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+
+			tokenAccountPage.getStartedPopup().verifyHeading();
+			tokenAccountPage.getStartedPopup().verifyTextHeading();
+			tokenAccountPage.getStartedPopup().clickCard();
+			if (card.equalsIgnoreCase("credit")) {
+				tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
+			} else {
+				tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			}
+			Thread.sleep(3000);
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillNameOnCard(data.get("nameOnCard"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardNumber(data.get("cardNumber"));
+			Thread.sleep(3000);
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.validateCardBrand(data.get("cardType"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCardExpiry(data.get("cardExpiry"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.fillCVVorCVC(data.get("cvvNumber"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress1(data.get("address1"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillAddress2(data.get("address2"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillCity(data.get("city"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().selectState(data.get("state"));
+			tokenAccountPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
+					.mailingAddressComponent().clickNext();
+			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
+			tokenAccountPage.paymentMethodsComponent().preAuthorizationPopup().fillAmount(data.get("amount"));
+			tokenAccountPage.paymentMethodsComponent().preAuthorizationPopup().clickOnVerify();
+			tokenAccountPage.paymentMethodsComponent().preAuthorizationPopup().successFailurePopupCardComponent()
+					.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCard(String strParams) {
+		testAddCard(strParams, "debit");
 	}
 
 }

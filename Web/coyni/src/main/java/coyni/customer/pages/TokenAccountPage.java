@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.customer.components.BankAccountsComponent;
 import coyni.customer.components.NavigationComponent;
+import coyni.customer.components.PaymentMethodsComponent;
 import coyni.customer.components.TokenAccountActivityComponent;
 import coyni.customer.components.TokenPaidOrdersDetailsComponent;
 import coyni.customer.components.TokensPurchasedDetailsComponent;
@@ -20,7 +21,9 @@ import coyni.customer.components.UserNameDropDownComponent;
 import coyni.customer.popups.BuyCoyniTokensNoPaymentPopup;
 import coyni.customer.popups.BuyCoyniTokensPaymentMethodPopup;
 import coyni.customer.popups.BuyCoyniTokensPopup;
+import coyni.customer.popups.GetStartedPopup;
 import coyni.customer.popups.PayAndRequestTokensPopup;
+import coyni.customer.popups.VerifyHeadingPopup;
 import coyni.customer.popups.WithdrawCoyniToUSDPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -38,7 +41,8 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By btnPay = By.xpath("//button[text()='Pay']");
-	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Transactions')]|//span[contains(text(),'Token Transactions')]");
+	private By lblYourTransactions = By
+			.xpath("//h2[contains(text(),'Your Transactions')]|//span[contains(text(),'Token Transactions')]");
 	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
 	private By lblType = By.xpath("//span[text()='Type']");
 	private By lblSubType = By.xpath("//span[text()='SUB TYPE']");
@@ -52,13 +56,12 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By rows = By.cssSelector(".custom-table-wrapper>tbody>tr");
 	private By transaction = By.xpath("//tr[@class='  hovered']");
 	private By lblBracesCount = By.cssSelector(".posted-txn .posted");
-	private By defaultEntries = By
-			.xpath("//span[@class='entries-message']");
+	private By defaultEntries = By.xpath("//span[@class='entries-message']");
 	private By lblEntriesMessage = By.xpath("//span[contains(@class,'entries-message')]");
 	private By pagination = By.xpath("//li[@class='paginator__pagination__item active']");
 	private By entriesPerPageDropDown = By.xpath("//*[name()='svg'][@class='css-8mmkcg']");
 	private By lblNoRecordsFound = By.xpath("//span[text()='No Records Found']");
-	
+
 	// private By dropDownUserName = By.cssSelector(".down-arrow");
 
 	public String getBracesCount() {
@@ -182,10 +185,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		int expCount = Integer.parseInt(getItemsPerPage().split(" ")[3]);
 		if (count == expCount) {
 			ExtentTestManager.setPassMessageInReport(
-					"Number of" + count+" transactions in table matches with number of entries selected i.e ");
+					"Number of" + count + " transactions in table matches with number of entries selected i.e ");
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
-					"Number of" + count+ " transactions in table doesnot match with numer of entries selected");
+					"Number of" + count + " transactions in table doesnot match with numer of entries selected");
 		}
 	}
 
@@ -250,19 +253,18 @@ public class TokenAccountPage extends BrowserFunctions {
 	public void verifyEntriesMessage() {
 		new CommonFunctions().elementView(lblEntriesMessage, "Entries Message");
 	}
+
 	public int noRecordsFound() {
 		return getElementsList(lblNoRecordsFound, "No Records Found").size();
 	}
-	
 
 	public void clickDropDownEntriesPage() {
-		if(getElementsList(entriesPerPageDropDown, "entriesPerPageDropDown").size()>0) {
-		click(entriesPerPageDropDown, "Entries Per Page");
-		}
-		else {
+		if (getElementsList(entriesPerPageDropDown, "entriesPerPageDropDown").size() > 0) {
+			click(entriesPerPageDropDown, "Entries Per Page");
+		} else {
 			ExtentTestManager.setPassMessageInReport("There is no dropdown for entries per page");
 		}
-			}
+	}
 
 	public String getDefaultEntriesPerPage() {
 		moveToElement(defaultEntries, "defaultEntries");
@@ -358,5 +360,17 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
+	}
+
+	public VerifyHeadingPopup verifyHeadingPopup() {
+		return new VerifyHeadingPopup();
+	}
+
+	public PaymentMethodsComponent paymentMethodsComponent() {
+		return new PaymentMethodsComponent();
+	}
+
+	public GetStartedPopup getStartedPopup() {
+		return new GetStartedPopup();
 	}
 }

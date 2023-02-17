@@ -1,8 +1,6 @@
 package coyni.customer.components;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
@@ -27,6 +25,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By zipCode = By.xpath("//input[@id='zip-code']/parent::div");
 	private By txtDateOfBirth = By.cssSelector("#date-of-birth");
 	private By txtSocialSecurity = By.cssSelector("#social-security-no");
+	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
 
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
@@ -44,17 +43,17 @@ public class MailingAddressComponent extends BrowserFunctions {
 		enterText(txtCity, city, "city");
 
 	}
-	
+
 	public void editSelectState(String state) {
 		click(drpDwnState, "State DropDown");
-		By stateName=By.xpath(String.format("(//*[text()='%s'])[2]", state));
-		click(stateName,state);
+		By stateName = By.xpath(String.format("(//*[text()='%s'])[2]", state));
+		click(stateName, state);
 	}
 
 	public void selectState(String state) {
 		click(drpDwnState, "State DropDown");
-		By stateName=By.xpath(String.format("(//*[text()='%s'])[1]", state));
-		click(stateName,state);
+		By stateName = By.xpath(String.format("(//*[text()='%s'])[1]", state));
+		click(stateName, state);
 	}
 
 	public void fillZipCode(String zipCode) {
@@ -72,6 +71,10 @@ public class MailingAddressComponent extends BrowserFunctions {
 
 	public void clickSave() {
 		click(btnSave, "click save");
+	}
+
+	public void clickNext() {
+		click(btnNext, "Next Button");
 	}
 
 	public void clickstate() {
