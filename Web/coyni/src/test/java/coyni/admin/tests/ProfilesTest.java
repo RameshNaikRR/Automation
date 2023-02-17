@@ -1105,6 +1105,7 @@ public class ProfilesTest {
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxActive();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
 			homePage.sideBarComponent().profileComponent().fillSearchForMerchantDetails(data.get("searchText"));
+			Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
 			if (Size == 0) {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();

@@ -51,6 +51,11 @@ public class GobalSearchComponent extends BrowserFunctions {
 		click(btnReferenceId, "ReferenceID");
 		enterText(btnGobalSearch, profileDetails, "ReferenceId");
 	}
+	
+	public void fillLastFourDigitsOfCreditAndDebitCard(String fourDigitsOfCreditAndDebitCard) {
+		click(btnlast4, "Last Four Digits of credit and Debit");
+		enterText(btnGobalSearch, fourDigitsOfCreditAndDebitCard, "Last Four Digits of credit and Debit");
+	}
 
 	public void fillLast4(String profileDetails) {
 		click(btnlast4, "last4");

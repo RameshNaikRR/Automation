@@ -30,9 +30,8 @@ public class HomeTest {
 		imgComponent = new UploadIMGComponent();
 		gobalSearchComponent = new GobalSearchComponent();
 	}
-	
-	
-	//sanity test cases
+
+	// sanity test cases
 
 	@Test // added
 	@Parameters({ "strParams" })
@@ -301,6 +300,72 @@ public class HomeTest {
 				} else {
 					ExtentTestManager.setFailMessageInReport("Gobal search is not working");
 				}
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithLastFourDigitsOfDebitCardAndCreditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillLast4(data.get("lastFourDigits"));
+			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given credit/debit card");
+			} else {
+
+				ExtentTestManager
+						.setPassMessageInReport("Last 4 digits transaction are getting");
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithFirstSixDigitsOfDebitCardAndCreditCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillFirst6(data.get("firstSixDigits"));
+			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given credit/debit card");
+			} else {
+
+				ExtentTestManager
+						.setPassMessageInReport("first 6  digits transaction are getting");
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchWithBankNumber(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillBankAccount(data.get("bankAccount"));
+			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given BankAccount");
+			} else {
+
+				ExtentTestManager
+						.setPassMessageInReport("Bank Account Transaction are getting");
+
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
