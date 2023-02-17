@@ -1094,4 +1094,36 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileMerchantPayoutHistory(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			homePage.sideBarComponent().profileComponent().fillSearchForMerchantDetails(data.get("searchText"));
+			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
+			if (Size == 0) {
+				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileComponent()
+						.clickViewPayoutHistory();
+				int size = homePage.sideBarComponent().profileComponent().accountTableComponent().profileComponent()
+						.getNoRecSize();
+				if(size==0) {
+					ExtentTestManager.setInfoMessageInReport("PayOut Transactions History is displayed");
+					
+				}
+				else {
+					System.out.println("No Record found in the system");
+				}
+			} else {
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testProfileMerchantPayoutHistory Failed due to Exception " + e);
+		}
+	}
 }

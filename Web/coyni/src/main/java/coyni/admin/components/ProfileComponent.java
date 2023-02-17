@@ -17,7 +17,13 @@ public class ProfileComponent extends BrowserFunctions {
 	private By lblSearchIcon = By.xpath("//button[@class='icon-search']");
 	private By btnSearch = By.xpath("//button[@class='icon-search']");
 	private By lblNoRecordFound = By.xpath("//span[contains(text(),'No Records Found')]");
-
+	private By lnkViewPayoutHistory=By.xpath("//button[text()='View Payout History']");
+	public void clickViewPayoutHistory() {
+		click(lnkViewPayoutHistory, "View Payout History");
+	}
+	public int getNoRecSize() {
+		return getElementsList(lblNoRecordFound, "No Record Found").size();
+	}
 	private By lblApiBusiness = By.xpath("//p[text()='API Business']");
 
 	public void clickApiBusiness() {
