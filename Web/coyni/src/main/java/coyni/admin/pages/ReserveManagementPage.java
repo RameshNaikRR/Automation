@@ -24,7 +24,7 @@ public class ReserveManagementPage extends BrowserFunctions {
 
 	private By btnInActive = By.xpath("(//div[contains(text(),'Inactive')])[1]");
 
-	private By record = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
+	private By record = By.cssSelector("tbody>tr:nth-of-type(6)>td:nth-of-type(1)");
 
 	public void verifyHeading(String expHeading) {
 

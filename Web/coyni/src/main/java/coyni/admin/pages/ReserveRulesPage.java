@@ -81,4 +81,8 @@ public class ReserveRulesPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Reserve Records " + getText(reserveRecords, "Reserve Records "));
 	}
 
+	public ReserveRulesHistoryPage reserveRulesHistoryPage() {
+		return new ReserveRulesHistoryPage();
+	}
+
 }

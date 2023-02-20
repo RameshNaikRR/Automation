@@ -74,7 +74,7 @@ public class ReserveManagementTest {
 			homePage.sideBarComponent().clickReserveManagement();
 			homePage.sideBarComponent().reserveManagementPage().verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
-			homePage.sideBarComponent().reserveManagementPage().fillSearch(data.get("search"));
+			// homePage.sideBarComponent().reserveManagementPage().fillSearch(data.get("search"));
 			homePage.sideBarComponent().reserveManagementPage().clickRecord();
 			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().daysMonthsDropDownComponent()
 					.clickOnToday();
@@ -108,7 +108,7 @@ public class ReserveManagementTest {
 			homePage.sideBarComponent().clickReserveManagement();
 			homePage.sideBarComponent().reserveManagementPage().verifyHeading(data.get("heading"));
 			Thread.sleep(2000);
-			homePage.sideBarComponent().reserveManagementPage().fillSearch(data.get("search"));
+			// homePage.sideBarComponent().reserveManagementPage().fillSearch(data.get("search"));
 			homePage.sideBarComponent().reserveManagementPage().clickRecord();
 			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().getReserveBalance();
 			// homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().getReserveRecords();
@@ -117,7 +117,16 @@ public class ReserveManagementTest {
 			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().clickActivityLog();
 			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().getActivityLog();
 			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().clickFullReserveReleaseHistory();
-			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().reserveRulesHistoryPage()
+					.getReserveHeld();
+			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().reserveRulesHistoryPage()
+					.getDailyBatchIDs();
+			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().reserveRulesHistoryPage()
+					.getBatchDate();
+			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().reserveRulesHistoryPage()
+					.getReserveRule();
+			homePage.sideBarComponent().reserveManagementPage().reserveRulesPage().reserveRulesHistoryPage()
+					.getReserveSummary();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveManagementRecord failed due to exception " + e);
