@@ -25,9 +25,10 @@ public class ReviewApplicationPage extends MobileFunctions {
 	private By btnBeneficialEdit = MobileBy.xpath("//*[contains(@resource-id,'edit3TV')]");
 	private By lnkBeneficial1DocView = MobileBy.xpath("(//*[contains(@resource-id,'llUploadDocument')])[1]");
 	private By lblBankAccountHeading = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
-	private By lblMerchantHeading = MobileBy.xpath("//*[contains(@text,'Merchant Agreements')]");
+	private By lblAgreementsHeading = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By chkBoxReviewAppli = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
-	private By btnSubmit = MobileBy.xpath("//*[contains(@text,'Submit')]");
+	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
+	
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -103,9 +104,10 @@ public class ReviewApplicationPage extends MobileFunctions {
 
 //Merchant Agreements Information
 
-	public void verifyAgreementsHeading(String expHeading) {
-		scrollDownToElement(lblMerchantHeading, "Agreements Heading");
-		new CommonFunctions().verifyLabelText(lblMerchantHeading, "Agreements Heading", expHeading);
+	public void verifyAgreementsHeading(String expHeading) throws InterruptedException {
+		Thread.sleep(2000);
+		scrollDownToElement(btnNext, "Next");
+		new CommonFunctions().verifyLabelText(lblAgreementsHeading, "Agreements Heading", expHeading);
 	}
 
 //	public void clickMerchantAgreement() {
@@ -128,39 +130,39 @@ public class ReviewApplicationPage extends MobileFunctions {
 		click(chkBoxReviewAppli, "chkBoxReviewAppli");
 	}
 
-	public void clickSubmit() {
-		scrollDownToElement(btnSubmit, "Submit");
-		click(btnSubmit, "Submit");
+	public void clickNext() {
+//		scrollDownToElement(btnNext, "Next");
+		click(btnNext, "Next");
 	}
 
 	public void verifyReviewApplication(String expReviewHeading, String expCompHeading, String expDBAHeading,
-			String expBeneficialHeading, String expBankHeading, String expAgrrementsHeading)
+			String expBeneficialHeading, String expAgrrementsHeading)
 			throws InterruptedException {
 		verifyReviewApplicationHeading(expReviewHeading);
 
 		verifyCompanyHeading(expCompHeading);
-//		clickCompanyDocView();
-//		clickDocumentClose();
+		clickCompanyDocView();
+		clickDocumentClose();
 		verifyDBAInfoHeading(expDBAHeading);
-//		clickDBADocView();
-//		clickDocumentClose();
+		clickDBADocView();
+		clickDocumentClose();
 		verifyBeneficialHeading(expBeneficialHeading);
-//		clickBeneficialDocView();
-//		clickDocumentClose();
-//		Thread.sleep(2000);
-		verifyBankHeading(expBankHeading);
+		clickBeneficialDocView();
+		clickDocumentClose();
 		verifyAgreementsHeading(expAgrrementsHeading);
-//		agreementComponent().verifyPrivacyPolicyView();
-//		agreementComponent().clickClose();
-//		Thread.sleep(2000);
-//		agreementComponent().verifyTermsOfServiceView();
-//		agreementComponent().clickClose();
+		agreementComponent().verifyPrivacyPolicyView();
+		agreementComponent().clickClose();
+		agreementComponent().verifyTermsOfServiceView();
+		agreementComponent().clickClose();
+		clickNext();
+		
+//		clickSubmit();
 //		Thread.sleep(2000);
 //		agreementComponent().verifyMerchantAgreementView();
 //		agreementComponent().clickClose();
 //		Thread.sleep(2000);
-		clickReviewApplicationCheckBox();
-		clickSubmit();
+//		clickReviewApplicationCheckBox();
+//		clickSubmit();
 //		if (verifyCompanyHeading() == 1) {
 //			verifyCompanyHeading(expCompHeading);
 ////		clickCompanyEdit();
@@ -191,7 +193,7 @@ public class ReviewApplicationPage extends MobileFunctions {
 //		agreementComponent().clickClose();
 //		Thread.sleep(2000);
 //		clickReviewApplicationCheckBox();
-//		clickSubmit();
+//		
 
 	}
 

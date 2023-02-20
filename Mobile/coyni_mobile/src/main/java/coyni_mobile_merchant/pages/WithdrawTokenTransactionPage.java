@@ -23,7 +23,7 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	private By lbldailyLimit = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvAvailableBal')]");
 	private By lblWithdrawTokenHeading = MobileBy.xpath("//*[@text='Withdraw Token']");
-	private By btnWithdraw = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
+	private By btnWithdraw = MobileBy.xpath("//*[contains(@resource-id,'keyActionLL')]");
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblInstantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
@@ -57,23 +57,10 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	}
 	
 	
-//	public void verifyAddInstantPayHeading(String expheading) {
-//		new CommonFunctions().verifyLabelText(lblInstantPayHeading, "Instant Pay Heading", expheading);
-//	}
-	
 	public String getAvailabeBalance() {
 		return getText(lblAvailableBalance);
 	}
 
-//	public void verifyVisaCards() {
-//		int size = getElementList(visaCard, "").size();
-//		ExtentTestManager.setInfoMessageInReport(size + " Visa Card is there.");
-//	}
-//
-//	public void verifyMasterCards() {
-//		int size = getElementList(masterCard, "").size();
-//		ExtentTestManager.setInfoMessageInReport(size + " Master card is there.");
-//	}
 
 	public void verifyCancelAndButton() {
 		new CommonFunctions().elementView(btnCancel, "Cancel");
@@ -93,7 +80,7 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	}
 
 	public void clickWithdraw() {
-		click(btnWithdraw, "Withdraw");
+		new CommonFunctions().clickEnabledElement(btnWithdraw, "Withdraw");
 	}
 
 	public String getDailyLimit() {

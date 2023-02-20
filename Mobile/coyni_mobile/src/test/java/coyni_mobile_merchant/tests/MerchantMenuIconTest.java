@@ -156,7 +156,6 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			Thread.sleep(2000);
 			merchantProfileTest.testAddBankAccount(strParams);
 			testBuyTokenBankAccount(strParams);
 			businessTransactionDetailsTest.testVerifyBuyTokenBankTransaction(strParams);
@@ -169,9 +168,6 @@ public class MerchantMenuIconTest {
 	public void testBuyTokenBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
-//					.verifyPageHeading(data.get("selectPaymentMethodHeading"));
-//			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.buyTokenWithBankAccount(data.get("buyTokenHeading"), data.get("buyTokenDescription"),
 							data.get("amount"));
@@ -179,7 +175,6 @@ public class MerchantMenuIconTest {
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
 
@@ -233,7 +228,6 @@ public class MerchantMenuIconTest {
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			Thread.sleep(2000);
 			if(data.get("validateGiftCard").equalsIgnoreCase("yes")) {
 				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();	
 			}else {
@@ -396,29 +390,10 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
-//			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyAddNewPaymentMethod() == 0) {
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			} else {
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.AddDebitCard(strParams);
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
 			testWithdrawTokenProcedure(strParams);
-			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithInstantPay failed due to exception " + e);
@@ -530,7 +505,6 @@ public class MerchantMenuIconTest {
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
-			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
 

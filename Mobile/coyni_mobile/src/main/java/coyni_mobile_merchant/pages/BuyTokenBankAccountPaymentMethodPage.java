@@ -18,7 +18,7 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	private By lblBankNumber = MobileBy.xpath("//*[contains(@resource-id,'tvBAccNumber')]");
 	private By btnConverter = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
-	private By btnBuyToken = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
+	private By btnBuyToken = MobileBy.xpath("//*[contains(@resource-id,'keyActionLL')]");
 	private By lblAmountDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblLimitDescription = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]");
@@ -72,7 +72,7 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	}
 
 	public void clickBuyToken() {
-		click(btnBuyToken, "Buy Token");
+		new CommonFunctions().clickEnabledElement(btnBuyToken, "Buy Token");
 	}
 
 	public void clickClose() {

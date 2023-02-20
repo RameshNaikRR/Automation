@@ -49,6 +49,36 @@ public class CommonFunctions {
 
 	}
 
+	public void clickEnabledElement(By ele, String eleName) {
+		try {
+			if (mobileFunctions.getElement(ele, eleName).isEnabled()) {
+				ExtentTestManager.setPassMessageInReport(eleName + " button is enabled");
+				mobileFunctions.click(ele, eleName);
+			}else {
+				ExtentTestManager.setFailMessageInReport(eleName + " button is not enabled");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("click Enabled Element  method is failed due to exception " + e);
+		}
+
+	}
+	
+	public void clickFocusableElement(By ele, String eleName) {
+		try {
+			String a=mobileFunctions.getAttribute(ele,"focusable");
+			ExtentTestManager.setPassMessageInReport(a);
+			if(mobileFunctions.getAttribute(ele,"focusable").equalsIgnoreCase("true")) {
+				ExtentTestManager.setPassMessageInReport(eleName + " is Focusable");
+				mobileFunctions.click(ele, eleName);
+			}else {
+				ExtentTestManager.setFailMessageInReport(eleName + " is not Focusable to Click");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("click Focusable Element  method is failed due to exception " + e);
+		}
+
+	}
+	
 	public void validateFormErrorMessageIOS(String expErrMsg, String elementName) {
 		try {
 			By errorMsgs = MobileBy.xpath(String.format("//*[contains(@label,'%s,')]", elementName));

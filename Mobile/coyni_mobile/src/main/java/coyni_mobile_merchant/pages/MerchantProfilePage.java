@@ -155,8 +155,9 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 	}
 
 	public void getAccountId() {
+		new CommonFunctions().elementView(lblAccId, "Merchant Account ID");
 		String str = getText(lblAccId);
-		ExtentTestManager.setInfoMessageInReport(" User ID is :" + str);
+		ExtentTestManager.setInfoMessageInReport("Merchant Account ID :" + str);
 	}
 
 	public void clickUserDetails() {

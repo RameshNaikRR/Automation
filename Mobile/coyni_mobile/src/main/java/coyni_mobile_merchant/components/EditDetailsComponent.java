@@ -24,6 +24,7 @@ public class EditDetailsComponent extends MobileFunctions {
 	private By lblSucessMsg = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
 
 	public void clickSave() {
+		
 		click(btnSave, "Save");
 	}
 

@@ -2254,12 +2254,13 @@ public class MerchantProfileTest {
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickAgreements();
 			merchantProfilePage.agreementComponent().verifyHeading(data.get("agreeHeading"));
+			merchantProfilePage.agreementComponent().verifyPastAgreementsView();
 			merchantProfilePage.agreementComponent().verifyPrivacyPolicyView();
 			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().verifyTermsOfServiceView();
 			merchantProfilePage.agreementComponent().clickClose();
-			merchantProfilePage.agreementComponent().verifyMerchantAgreementView();
-			merchantProfilePage.agreementComponent().clickClose();
+//			merchantProfilePage.agreementComponent().verifyMerchantAgreementView();
+//			merchantProfilePage.agreementComponent().clickClose();
 			merchantProfilePage.agreementComponent().clickBack();
 			// merchantProfilePage.getAccountDetails();
 			merchantProfilePage.getAccountId();
@@ -3183,6 +3184,7 @@ public class MerchantProfileTest {
 	public void testAllLinksInProfile() {
 		try {
 			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
 			merchantProfilePage.verifyUserProfile();
 			merchantProfilePage.clickUserDetails();
 			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();

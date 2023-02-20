@@ -27,7 +27,7 @@ public class LoginPage extends MobileFunctions {
 	private By chkBxRememberMe = MobileBy
 			.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
 	private By btnLogin = MobileBy
-			.xpath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
+			.xpath("//*[contains(@resource-id,'cvNext')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
 	private By lblerrMsg = MobileBy.xpath(
 			"(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
@@ -184,24 +184,14 @@ public class LoginPage extends MobileFunctions {
 //	}
 
 	public void clickLogin() {
-		if (getElement(btnLogin, "login").isEnabled()) {
-			ExtentTestManager.setPassMessageInReport("login button  is enabled");
-			click(btnLogin, "login button");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("login button  is disabled");
-		}
+		new CommonFunctions().clickEnabledElement(btnLogin, "Login");
 	}
-
+	
 	public void validateLogin() {
 		MobileElement element = (MobileElement) DriverFactory.getDriver().findElementByXPath(
 				"//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
 		boolean isEnabled = element.isEnabled();
 		ExtentTestManager.setPassMessageInReport("" + isEnabled);
-//		if (DriverFactory.getDriver().findElementByXPath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]").isEnabled()) {
-//			ExtentTestManager.setFailMessageInReport("login button  is enabled");
-//		} else {
-//			ExtentTestManager.setPassMessageInReport("login button  is disabled mode");
-//		}
 	}
 
 	public void ViewCoyni() {

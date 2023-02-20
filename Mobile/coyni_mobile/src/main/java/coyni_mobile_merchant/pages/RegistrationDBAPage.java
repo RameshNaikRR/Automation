@@ -31,8 +31,8 @@ public class RegistrationDBAPage extends MobileFunctions {
 	private By txtAvgHighTicket = MobileBy.xpath("//*[contains(@resource-id,'avgTicketOET')]//*[contains(@resource-id,'volET')]");
 	private By drpdwnTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
 	private By lnkSelectTimeZone = MobileBy.xpath("//*[contains(@text,'Eastern')]");
-	private By btnUpload = MobileBy.xpath("//*[contains(@text,'Upload DBA filling (Optional)')]");
-	//*[contains(@resource-id,'dbaFillinguploadTV')]
+	private By btnUploadDBA = MobileBy.xpath("//*[contains(@resource-id,'dbaFillinguploadTV')]|//*[contains(@text,'Upload DBA filling (Optional)')]");
+	private By lnkUploadBusiness = MobileBy.xpath("//*[contains(@resource-id,'licesnseUploadTV')]");
 	private By txtWebsite = MobileBy.xpath("//*[contains(@resource-id,'websiteET')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@text,'Done')]");
@@ -47,6 +47,9 @@ public class RegistrationDBAPage extends MobileFunctions {
 		click(btnDifferent, "Different");
 	}
 
+	public void clickUploadBusiness() {
+		click(lnkUploadBusiness, "Upload Business License");
+	}
 
 	public int verifyDifferent() {
 		return DriverFactory.getDriver().findElements(btnDifferent).size();
@@ -73,7 +76,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 
 	public void fillHighTicket(String expHighTicket) {
-		scrollDownToElement(btnUpload, "Upload DBA filling");
+		scrollDownToElement(txtHighTicket, "High Ticket");
 		enterText(txtHighTicket, expHighTicket, "High Ticket");
 	}
 
@@ -86,19 +89,20 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnNext));
 		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
 
 	public void clickUpload() throws InterruptedException {
 		scrollDownToElement(btnNext, "Next");
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.elementToBeClickable(btnUpload));
-		click(btnUpload, "Upload DBA filling");
+//		wait.until(ExpectedConditions.presenceOfElementLocated(btnUploadDBA));
+		wait.until(ExpectedConditions.elementToBeClickable(btnUploadDBA));
+		click(btnUploadDBA, "Upload DBA filling");
 	}
 
 	public void clickTimeZone() {
-		scrollDownToElement(btnUpload, "Upload DBA filling");
+		scrollDownToElement(drpdwnTimeZone, "Time Zone Dropdown");
 		click(drpdwnTimeZone, "Time Zone Dropdown");
 		click(lnkSelectTimeZone, "Eastern (EST)");
 	}
@@ -124,14 +128,13 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 	
 	public void fillAvgHighTicket(String expAvgHighTicket) {	
-		scrollDownToElement(btnUpload, "Upload DBA filling");
+		scrollDownToElement(txtAvgHighTicket, "Average Ticket");
 		enterText(txtAvgHighTicket, expAvgHighTicket, "Average Ticket");
 	}
 	
 	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,String expWebsite, String expVolume, String expHighTicket, String expAvgTicket,
 			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
 			throws InterruptedException {
-		Thread.sleep(2000);
 		if(verifyDifferent()==1) {
 		verifyHeading(expHeading);
 		verifyDBADescription();
@@ -158,10 +161,9 @@ public class RegistrationDBAPage extends MobileFunctions {
 		uploadDocumentComponent().clickUsingApp();
 		uploadDocumentComponent().clickAllow();
 		}
-		uploadDocumentComponent().clickTakePhoto();
-		uploadDocumentComponent().clickCapture();
-		uploadDocumentComponent().clickSave();
-		Thread.sleep(2000);
+		uploadDocumentComponent().uploadTakePhoto();
+		clickUploadBusiness();
+		uploadDocumentComponent().uploadTakePhoto();
 	    clickNext();
 		mailingAddressComponent().fillAddressLine1(expAddress1);
 		mailingAddressComponent().fillAddressLine2(expAddress2);

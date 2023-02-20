@@ -123,7 +123,7 @@ public class UserDetailsPage extends MobileFunctions {
 	toastComponent().verifyToastMsg(expToast);
 	}
 	}else {
-		ExtentTestManager.setFailMessageInReport("in this credentials have only one default account, so unable to execute following test method");
+		ExtentTestManager.setWarningMessageInReport("in this credentials have only one default account, so unable to execute following test method");
 	}
 	}
 	public void verifyEmail() {

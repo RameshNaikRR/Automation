@@ -31,12 +31,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
-		DriverFactory.getDriver().hideKeyboard();
-		if (getElement(btnNext, "Next").isEnabled()) {
-			click(btnNext, " Next ");
-		} else {
-			ExtentTestManager.setInfoMessageInReport(" Next Button is Disabled");
-		}
+		new CommonFunctions().clickFocusableElement(btnNext, " Next ");
 	}
 
 	public void verifyForgotPasswordPageView() {

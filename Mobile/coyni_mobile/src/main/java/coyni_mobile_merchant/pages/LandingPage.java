@@ -11,6 +11,8 @@ public class LandingPage extends MobileFunctions {
 	private By btnGetStarted = MobileBy
 			.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1] ");
 	private By btnLogin = MobileBy.xpath("//*[contains(@text,'Log in')]|//*[contains(@resource-id,'layoutLogin')]|(//*[@name='Log in'])[1]");
+	private By btnGetStartedLogin = MobileBy
+			.xpath("//*[contains(@resource-id,'layoutLogin')]");
 
 	public void clickGetStarted() {
 		new CommonFunctions().elementView(btnGetStarted, "Get started ");
@@ -22,6 +24,11 @@ public class LandingPage extends MobileFunctions {
 			click(btnLogin, "login");
 		}
 	}
+	
+	public void clickGetStartedLogin() {
+		click(btnGetStartedLogin, "Get Started Login button");
+	}
+	
     public void verifyLoginbtnView() {
     	new  CommonFunctions().elementView(btnLogin, "Login");
     	

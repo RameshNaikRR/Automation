@@ -62,7 +62,7 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			LandingPage landingPage = new LandingPage();
-			landingPage.clickLogin();
+			landingPage.clickGetStartedLogin();
 			LoginPage loginPage = new LoginPage();
 			loginPage.AppUpdate();
 			loginPage.VerifyLoginPageView();
@@ -317,7 +317,6 @@ public class LoginTest {
 					.verifyDescription(data.get("accountPageDescription"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().clickCoyniAccount();
 			loginPage.verifyEmail(data.get("email"));
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail due to this Exception " + e);
 		}
@@ -531,7 +530,6 @@ public class LoginTest {
 					.verifyEmailHeading(data.get("verifyEmailHeading"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().getEmailText();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(3000);
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
@@ -544,13 +542,11 @@ public class LoginTest {
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.clickEyeIconConfirmPassword();
-			
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageHeading(data.get("sucessHeading"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageDescription(data.get("sucessDescription"));
-//			Thread.sleep(3000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot password faield due to exception " + e);

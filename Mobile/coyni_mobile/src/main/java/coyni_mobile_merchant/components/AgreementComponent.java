@@ -15,9 +15,9 @@ public class AgreementComponent extends MobileFunctions {
 	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
 	private By privacyPolicy = MobileBy
-			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
+			.xpath("//*[contains(@text,'Privacy Policy')]");
 	private By termsOfService = MobileBy
-			.xpath("//*[contains(@resource-id,'terms_of_service')]|//*[contains(@text,'Terms of Service')]");
+			.xpath("//*[contains(@text,'Terms of Service')]");
 	private By lblMerchantAgreements = MobileBy
 			.xpath("//*[contains(@resource-id,'merchant_agreements')]|//*[contains(@text,'Merchant’s Agreement')]");
 	private By headingPastAgreements = MobileBy.xpath("");
@@ -27,8 +27,8 @@ public class AgreementComponent extends MobileFunctions {
 	// Updates of Agreements after login
 	private By privacyPolicyUpdate = MobileBy
 			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
-	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
-	private By privacyPolicyHeading = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
+	private By termsOfServiceUpdateHeading = MobileBy.xpath("(//*[contains(@text,'Terms of Service')])[1]");
+	private By privacyPolicyHeading = MobileBy.xpath("(//*[contains(@text,'Privacy Policy')])[1]|//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 
@@ -37,6 +37,10 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
 	}
+	
+//	public void verifyActiveAgreementsHeading(String expHeading) {
+//		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
+//	}
 
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
@@ -121,26 +125,18 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyPrivacyPolicyView() {
-		scrollDownToElement(privacyPolicy, "Privacy Policy");
 		new CommonFunctions().elementView(privacyPolicy, "Privacy Policy");
 		ExtentTestManager.setInfoMessageInReport("Privacy Policy : " + getText(privacyPolicy));
 		click(privacyPolicy, "Privacy Policy");
 	}
-//
-//	public void clickPrivacyPolicy() {
-//		click(privacyPolicy, "Privacy Policy");
-//	}
+
 
 	public void verifyTermsOfServiceView() {
-		scrollDownToElement(termsOfService, "Terms Of Service");
 		new CommonFunctions().elementView(termsOfService, "Terms of Service");
 		ExtentTestManager.setInfoMessageInReport("Terms of service : " + getText(termsOfService));
 		click(termsOfService, "Terms Of Service");
 	}
 
-//	public void clickTermsOfService() {
-//		click(termsOfService, "Terms of Service");
-//	}
 	public void clickBack() {
 		click(btnBack, "Back");
 	}

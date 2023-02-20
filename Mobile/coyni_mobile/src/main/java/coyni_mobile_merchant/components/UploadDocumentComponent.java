@@ -8,7 +8,7 @@ import io.appium.java_client.MobileBy;
 
 public class UploadDocumentComponent extends MobileFunctions{
 	
-	private By lnkTakePhoto = MobileBy.xpath("//*[contains(@resource-id,'takePhotoTV')]");
+	private By lnkTakePhoto = MobileBy.xpath("//*[contains(@resource-id,'tvTakePhoto')]|//*[contains(@resource-id,'takePhotoTV')]");
 	private By lnkBrowseFiles = MobileBy.xpath("//*[contains(@resource-id,'browseFileTV')]");
 	private By lnkLibrary = MobileBy.xpath("//*[contains(@resource-id,'libraryTV')]");
 	private By btnCapture = MobileBy.xpath("//*[contains(@resource-id,'capture_image_button')]");
@@ -39,6 +39,11 @@ public class UploadDocumentComponent extends MobileFunctions{
 		click(btnSelectFile, "Select File through browse files");
 	}
 	
+	public void uploadTakePhoto() {
+		clickTakePhoto();
+		clickCapture();
+		clickSave();
+	}
 	
 	public void clickSave() {
 		click(btnSave, "Save");

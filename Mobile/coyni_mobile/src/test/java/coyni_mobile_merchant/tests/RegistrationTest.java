@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile_merchant.components.AgreementComponent;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.DashBoardPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
@@ -17,12 +18,14 @@ public class RegistrationTest {
 	RegistrationProcessPage registrationProcessPage;
 	RegistrationDBAPage registrationDBAPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
+	AgreementComponent agreementComponent;
 
 	@BeforeMethod
 	public void init() {
 		registrationProcessPage = new RegistrationProcessPage();
 		registrationDBAPage = new RegistrationDBAPage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
+		agreementComponent = new AgreementComponent();
 	}
 
 	@Test
@@ -114,11 +117,16 @@ public class RegistrationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationProcessPage.clickMerchantAgreement();
-			registrationProcessPage.registrationMerchantAgreementsPage().AcceptMerchantAgreement();
+			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsTerms();
+			agreementComponent.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
+			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsPrivacyPolicy();
+			agreementComponent.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
+			registrationProcessPage.registrationMerchantAgreementsPage().clickAgreementsDone();
 			registrationProcessPage.clickReviewApplication();
 			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"),
 					data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"),
-					data.get("reviewBeneficialHeading"), data.get("reviewBankHeading"), data.get("reviewAgreeHeading"));
+					data.get("reviewBeneficialHeading"), data.get("reviewAgreeHeading"));
+			registrationProcessPage.registrationMerchantAgreementsPage().VerifyApplicationDisclosure();
 			businessTokenAccountPage.dashBoardPage().VerifyUser();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -166,7 +174,6 @@ public class RegistrationTest {
 		}
 	}
 
-	
 	@Test
 	public void testAddPersonalAccount() {
 		try {
@@ -179,5 +186,5 @@ public class RegistrationTest {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
 		}
 	}
-	
+
 }

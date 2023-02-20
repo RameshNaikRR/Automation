@@ -74,8 +74,7 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 
 	public void clickSave() {
-		new CommonFunctions().elementEnabled(btnSave, "Save");
-		click(btnSave, "Save");
+		new CommonFunctions().clickEnabledElement(btnSave, "Save");
 	}
 
 	public void validateSave() {

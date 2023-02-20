@@ -85,7 +85,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next");
+		new CommonFunctions().clickEnabledElement(btnNext, "Next");
 	}
 
 	public void clickCrossIcon() {
