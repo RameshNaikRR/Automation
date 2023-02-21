@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import coyni.api.business.popups.SaveChangePopUp;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentManager;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class WebhookComponent extends BrowserFunctions {
 	private By lblHeading = By.xpath("(//span[text()='Webhooks'])[2]");
@@ -14,8 +16,9 @@ public class WebhookComponent extends BrowserFunctions {
 	private By endpointDescription = By.xpath("//textarea[@name='description']");
 	private By lastupdated = By.xpath("//p[@class='Webhooks_time__8zGbT']");
 	private By editEndPoint = By.xpath("");
-	private By editIcon = By.xpath("");
+	private By editIcon = By.xpath("//div[@data-tip='Edit']");
 	private By btnSave = By.xpath("//button[text()='Save']");
+	private By NoEndPoint = By.xpath("//p[text()='No EndPoints Exist']");
 	private By btnCreate = By.xpath("");
 	private By createheading = By.xpath("");
 	private By txtEndPointURL = By.xpath("");
@@ -23,6 +26,13 @@ public class WebhookComponent extends BrowserFunctions {
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Webhooks", expHeading);
+	}
+
+	public int verifyEditButton() {
+		moveToElement(endPointURL, "moved to end point");
+		int i = getElementsList(editIcon, "Edit button").size();
+		
+		return i;
 	}
 
 	public void verifyCreateHeading(String expHeading) {
@@ -71,16 +81,22 @@ public class WebhookComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(editEndPoint, editEndPointWebhook, "Edit Webhook");
 	}
 
-		public void clickIcon() {
-			click(editIcon, "EditIcon");
-		}
+	public void clickEditIcon() {
+		click(editIcon, "EditIcon");
+	}
 
 	public void clickSave() {
 		click(btnSave, "Save");
 	}
 
 	public void clickCreate() {
-		click(btnCreate, "Create");
+		int i = getElementsList(NoEndPoint, "No EndPoint").size();
+		if (i == 1) {
+			click(btnCreate, "Create");
+		} else {
+			ExtentTestManager.setPassMessageInReport("No EndPoint Exist");
+		}
+
 	}
 
 	public SaveChangePopUp saveChangePopUp() {

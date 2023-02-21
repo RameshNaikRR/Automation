@@ -9,12 +9,16 @@ public class TopBarComponent extends BrowserFunctions {
 	private By lblTitle = By.cssSelector(".welcome-text");
 	private By drpdwnUserName = By.cssSelector(".internal-header__right-container>span>div");
 	private By iconNotification = By.cssSelector(".internal-header__right-container>span>div");
+	private By welcome = By.xpath("//span[@class='welcome-text']");
 
 //	private By getDropDownItems(String itemsNum) {
 //		return By.cssSelector(String.format(".dropdown-container>div:nth-of-type('%s')", itemsNum));
 //	}
 	private By getDropDownItems(String itemsNum) {
 		return By.xpath(String.format("//div[@class='dropdown-container']//span[text()='%s']", itemsNum));
+	}
+	public void verifyWelcomeView(String expHeading) {
+		new CommonFunctions().verifyLabelText(welcome,"welcome to coyni",expHeading);
 	}
 
 	public void VerifyTitle(String expHeading) {

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.apibusiness.components.SideBarMenuComponent;
+import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.pages.BankAccountPage;
 import coyni.apibusiness.pages.ProcessingFeesPage;
 import coyni.apibusiness.pages.RegistrationAgreementsPage;
@@ -26,6 +27,7 @@ public class BusinessApplicationTest {
 	RegistrationStartPage registrationStartPage;
 	ProcessingFeesPage processingFeesPage;
 	RegistrationAgreementsPage registrationAgreementsPage;
+	TopBarComponent topBarComponent;
 
 	@BeforeTest
 	public void init() {
@@ -35,6 +37,7 @@ public class BusinessApplicationTest {
 		registrationStartPage = new RegistrationStartPage();
 		processingFeesPage = new ProcessingFeesPage();
 		registrationAgreementsPage = new RegistrationAgreementsPage();
+		topBarComponent = new TopBarComponent();
 	}
 
 //	@Test
@@ -102,6 +105,41 @@ public class BusinessApplicationTest {
 //		}
 //
 //	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessApplicationSideBarMenu(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.verifyWelcomeView(data.get("heading"));
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.clickEcosystemActivity();
+			sideBarMenuComponent.clickExportFiles();
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.clickGetHelp();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Side bar menu  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessApplicationTopBarMenu(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.verifyWelcomeView(data.get("heading"));
+			topBarComponent.clickUserName();
+			topBarComponent.clickUserDetails();
+			topBarComponent.clickPaymentMethods();
+			topBarComponent.clickPreferences();
+			topBarComponent.clickAgreements();
+			topBarComponent.clickChangePassword();
+			topBarComponent.clickTwoStepAuthentication();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Top Menu bar  failed due to Exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBeneficialsOwners(String strParams) {
@@ -791,7 +829,7 @@ public class BusinessApplicationTest {
 			registrationAgreementsPage.clickSave();
 			registrationAgreementsPage.clickPrivacyPolicy();
 //			Thread.sleep(4000);
-			
+
 //			registrationAgreementsPage.clickCheckBox();
 //			registrationAgreementsPage.clickAgree();
 //			registrationAgreementsPage.clickTermsOfServices();

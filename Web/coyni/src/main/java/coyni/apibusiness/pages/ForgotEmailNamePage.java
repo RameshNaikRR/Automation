@@ -11,8 +11,8 @@ public class ForgotEmailNamePage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//span[text()='Forgot Email?']");
 	private By lblDescription = By.cssSelector(".forgot-email__sub-title");
-	private By txtFirstName = By.id("First-Name");
-	private By txtLastName = By.id("Last-Name");
+	private By txtFirstName = By.name("first_name");
+	private By txtLastName = By.name("last_name");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By lnkBackToLogin = By.xpath("//button[text()='Back to Login']");
 

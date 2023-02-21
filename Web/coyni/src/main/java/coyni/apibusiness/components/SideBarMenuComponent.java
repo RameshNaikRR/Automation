@@ -13,7 +13,6 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarMenuComponent extends BrowserFunctions {
-	
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(
@@ -29,6 +28,7 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		// click(getDashBoardItems("Business Settings"), "Business Settings");
 	}
 
+	private By welcome = By.xpath("//span[@class='welcome-text']");
 	private By BusinessApplicationArrow = By.xpath("//div[@class='items-center text-xs -ml-2 4xl:mr-2']");
 	private By BusinessApplicationTracker = By.xpath("//div[@class='flex mt-3 h-2.5 justify-around']");
 	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
@@ -39,6 +39,10 @@ public class SideBarMenuComponent extends BrowserFunctions {
 
 	public void verifyTokenWalletView() {
 		new CommonFunctions().elementView(getDashBoardItems("Token Wallets"), "Token Wallets");
+	}
+
+	public void verifyWelcomeView(String expHeading) {
+		new CommonFunctions().verifyLabelText(welcome,"welcome to coyni",expHeading);
 	}
 
 	public void verifyHandCursorAction() {
@@ -63,7 +67,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public void clickBusinessApplicationArrow() {
 		click(BusinessApplicationArrow, "Business Application Arrow");
 	}
-		public void clickContinueApplication() {
+
+	public void clickContinueApplication() {
 		click(btnContinueApplication, "Continue Application");
 	}
 
@@ -140,4 +145,4 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public PaymentMethodComponent paymentMethodComponent() {
 		return new PaymentMethodComponent();
 	}
-	}
+}

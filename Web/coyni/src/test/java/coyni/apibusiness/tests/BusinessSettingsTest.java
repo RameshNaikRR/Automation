@@ -9,13 +9,14 @@ import org.testng.annotations.Test;
 import coyni.api.business.popups.AddIPAddressPopups;
 import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
+import coyni.apibusiness.components.WebhookComponent;
 import coyni.apibusiness.pages.BusinessProfilePage;
 import coyni.apibusiness.pages.HomePage;
 import coyni.customer.pages.NavigationMenuPage;
 import coyni.uitilities.CommonFunctions;
+import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
-import ilabs.api.utilities.DBConnection;
 
 public class BusinessSettingsTest {
 	SideBarMenuComponent sideBarMenuComponent;
@@ -24,6 +25,7 @@ public class BusinessSettingsTest {
 	BusinessProfilePage businessProfilePage;
 	NavigationMenuPage navigationMenuPage;
 	HomePage homePage;
+	WebhookComponent webComponent;
 
 	@BeforeTest
 	public void init() {
@@ -38,7 +40,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsSideBarView(String strParams) throws InterruptedException  {
+	public void testBusinessSettingsSideBarView(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		sideBarMenuComponent.clickBusinessSettings();
 		sideBarMenuComponent.businessSettingsSideBarMenuComponent().verifyHeading(data.get("heading"));
@@ -186,6 +188,7 @@ public class BusinessSettingsTest {
 		}
 	}
 
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsWebhookView(String strParams) {
@@ -207,23 +210,44 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsEditWebhook(String strParams) {
+	public void testBusinessSettingsWebhook(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickWebhooks();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
 					.verifyHeading(data.get("heading"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickEndPointURL();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
-					.enterEndPointURL(data.get("endpointURL"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickEndPointDescription();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
-					.enterEndpointDesc(data.get("endpointDesc"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickSave();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().saveChangePopUp().clickYes();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().toastComponent()
-					.verifyToast(data.get("title"), data.get("message"));
+			
+			if (sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().verifyEditButton()==1) {
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickEditIcon();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.enterEndPointURL(data.get("endpointURL"));
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.clickEndPointDescription();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.enterEndpointDesc(data.get("endpointDesc"));
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickSave();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().saveChangePopUp()
+						.clickYes();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().toastComponent()
+						.verifyToast(data.get("title"), data.get("message"));	
+			} else {
+			
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickCreate();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.enterEndPointURL(data.get("endpointURL"));
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.clickEndPointDescription();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent()
+						.enterEndpointDesc(data.get("endpointDesc"));
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().clickSave();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().saveChangePopUp()
+						.clickYes();
+				sideBarMenuComponent.businessSettingsSideBarMenuComponent().webhookComponent().toastComponent()
+						.verifyToast(data.get("title"), data.get("message"));
+
+			}
+			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
@@ -513,7 +537,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsNoTeamMember(String strParams) throws InterruptedException  {
+	public void testBusinessSettingsNoTeamMember(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarMenuComponent().clickBusinessSettings();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
@@ -562,7 +586,7 @@ public class BusinessSettingsTest {
 //					.addCustomRolePopup().navigationComponent().clickClose();
 			Thread.sleep(2000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-			.clickAdminRole();
+					.clickAdminRole();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent().clickEdit();
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 //					.verifyTokenWalletAccess();
@@ -582,7 +606,7 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
 					.clickSendInvitation();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.toastComponent().verifyToast(data.get("title"), data.get("message"));
+					.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -653,7 +677,7 @@ public class BusinessSettingsTest {
 					.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 		} catch (Exception e) {
 			ExtentTestManager
-					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+					.setFailMessageInReport("test Business Settings Remove Team Member  failed due to Exception " + e);
 		}
 	}
 

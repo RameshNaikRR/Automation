@@ -223,7 +223,7 @@ public class BusinessProfileTest {
 					.newEmailAddressPopup().verifyNewEmailAddressHeading(data.get("newEmailPopUp"));
 			tokenWalletPage.userDetailsComponent().editEmailAddressPopup().currentEmailAddressPopup()
 					.newEmailAddressPopup().authyComponent().fillInput(data.get("code"));
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 			tokenWalletPage.userDetailsComponent().editEmailAddressPopup().currentEmailAddressPopup()
 					.newEmailAddressPopup().navigationComponent().clickClose();
 			tokenWalletPage.userDetailsComponent().verifyUserDetailsView();
@@ -950,7 +950,7 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsDeleteSignet(String strParams) {
+	public void testBusinessSettingsDeleteCogent(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
