@@ -14,10 +14,8 @@ public class AgreementComponent extends MobileFunctions {
 
 	private By headingAgreements = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By headingActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
-	private By privacyPolicy = MobileBy
-			.xpath("//*[contains(@text,'Privacy Policy')]");
-	private By termsOfService = MobileBy
-			.xpath("//*[contains(@text,'Terms of Service')]");
+	private By privacyPolicy = MobileBy.xpath("//*[contains(@text,'Privacy Policy')]");
+	private By termsOfService = MobileBy.xpath("//*[contains(@text,'Terms of Service')]");
 	private By lblMerchantAgreements = MobileBy
 			.xpath("//*[contains(@resource-id,'merchant_agreements')]|//*[contains(@text,'Merchant’s Agreement')]");
 	private By headingPastAgreements = MobileBy.xpath("");
@@ -28,7 +26,8 @@ public class AgreementComponent extends MobileFunctions {
 	private By privacyPolicyUpdate = MobileBy
 			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
 	private By termsOfServiceUpdateHeading = MobileBy.xpath("(//*[contains(@text,'Terms of Service')])[1]");
-	private By privacyPolicyHeading = MobileBy.xpath("(//*[contains(@text,'Privacy Policy')])[1]|//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
+	private By privacyPolicyHeading = MobileBy.xpath(
+			"(//*[contains(@text,'Privacy Policy')])[1]|//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 
@@ -37,10 +36,6 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
 	}
-	
-//	public void verifyActiveAgreementsHeading(String expHeading) {
-//		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
-//	}
 
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
@@ -64,25 +59,25 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
-			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
-					expHeading);
-			Thread.sleep(2000);
-			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
-			clickAgreeCheckBox();
-			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
+		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+				expHeading);
+		Thread.sleep(2000);
+		scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+		clickAgreeCheckBox();
+		click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
 	}
 
 	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
-			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
-			Thread.sleep(2000);
-			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
-			clickAgreeCheckBox();
-			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
-		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
+		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+		Thread.sleep(2000);
+		scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
+		clickAgreeCheckBox();
+		click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+
 	}
-	
+
 	public void scrollTermsOfService() {
 
 //		while (getElementList(termsOfServiceUpdateOk, "Next").size() == 0) {
@@ -113,10 +108,6 @@ public class AgreementComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(headingPastAgreements, "Past Agreements ", expPastHeading);
 	}
 
-//	public void verifyMerchantAgreementsLabel(String expHeading) {
-//		new CommonFunctions().verifyLabelText(lblMerchantAgreements, "Label", expHeading);
-//	}
-
 	public void verifyMerchantAgreementView() {
 		scrollDownToElement(lblMerchantAgreements, "Merchant Agreements");
 		new CommonFunctions().elementView(lblMerchantAgreements, "Merchant Agreements");
@@ -129,7 +120,6 @@ public class AgreementComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Privacy Policy : " + getText(privacyPolicy));
 		click(privacyPolicy, "Privacy Policy");
 	}
-
 
 	public void verifyTermsOfServiceView() {
 		new CommonFunctions().elementView(termsOfService, "Terms of Service");
@@ -144,6 +134,7 @@ public class AgreementComponent extends MobileFunctions {
 	public void verifyHeading() {
 		new CommonFunctions().elementView(headingAgreements, "Page Heading");
 	}
+
 	public void clickClose() {
 		click(btnClose, "Close");
 	}

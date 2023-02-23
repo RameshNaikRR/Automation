@@ -52,7 +52,7 @@ public class RegistrationTest {
 	public void testRegistrationDBAInformation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 			registrationProcessPage.clickDBAInfo();
 			registrationProcessPage.registrationDBAPage().AddDBAInfo(data.get("dbaHeading"), data.get("dbaName"),
 					data.get("dbaEmail"), data.get("dbaPhNum"), data.get("dbaBusinessType"), data.get("dbaWebsite"),

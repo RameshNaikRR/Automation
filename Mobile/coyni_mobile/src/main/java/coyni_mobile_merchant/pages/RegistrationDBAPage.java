@@ -26,19 +26,24 @@ public class RegistrationDBAPage extends MobileFunctions {
 	private By txtBusinessType = MobileBy.xpath("//*[contains(@resource-id,'searchET')]");
 	private By btneCommerce = MobileBy.xpath("//*[contains(@resource-id,'eCommerceIV')]");
 	private By btnRetailLocation = MobileBy.xpath("//*[contains(@resource-id,'retailIV')]");
-	private By txtProcessingVolume = MobileBy.xpath("//*[contains(@resource-id,'mpvOET')]//*[contains(@resource-id,'volET')]");
-	private By txtHighTicket = MobileBy.xpath("//*[contains(@resource-id,'highTicketOET')]//*[contains(@resource-id,'volET')]");
-	private By txtAvgHighTicket = MobileBy.xpath("//*[contains(@resource-id,'avgTicketOET')]//*[contains(@resource-id,'volET')]");
+	private By txtProcessingVolume = MobileBy
+			.xpath("//*[contains(@resource-id,'mpvOET')]//*[contains(@resource-id,'volET')]");
+	private By txtHighTicket = MobileBy
+			.xpath("//*[contains(@resource-id,'highTicketOET')]//*[contains(@resource-id,'volET')]");
+	private By txtAvgHighTicket = MobileBy
+			.xpath("//*[contains(@resource-id,'avgTicketOET')]//*[contains(@resource-id,'volET')]");
 	private By drpdwnTimeZone = MobileBy.xpath("//*[contains(@resource-id,'timeZoneET')]");
 	private By lnkSelectTimeZone = MobileBy.xpath("//*[contains(@text,'Eastern')]");
-	private By btnUploadDBA = MobileBy.xpath("//*[contains(@resource-id,'dbaFillinguploadTV')]|//*[contains(@text,'Upload DBA filling (Optional)')]");
+	private By btnUploadDBA = MobileBy.xpath(
+			"//*[contains(@resource-id,'dbaFillinguploadTV')]|//*[contains(@text,'Upload DBA filling (Optional)')]");
 	private By lnkUploadBusiness = MobileBy.xpath("//*[contains(@resource-id,'licesnseUploadTV')]");
 	private By txtWebsite = MobileBy.xpath("//*[contains(@resource-id,'websiteET')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@text,'Done')]");
 	private By lblDBADescription = MobileBy.xpath("//*[contains(@text,' the same as your co')]");
-	
-	WebDriverWait wait= new WebDriverWait(DriverFactory.getDriver(), 20);
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblDBAHeading, "DBA  Info Heading", expHeading);
 	}
@@ -54,7 +59,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	public int verifyDifferent() {
 		return DriverFactory.getDriver().findElements(btnDifferent).size();
 	}
-	
+
 	public void clickSame() {
 		click(btnSame, "Same");
 	}
@@ -80,8 +85,8 @@ public class RegistrationDBAPage extends MobileFunctions {
 		enterText(txtHighTicket, expHighTicket, "High Ticket");
 	}
 
-	public void verifyDBADescription() {	
-		ExtentTestManager.setInfoMessageInReport("DBA Description is : "+getText(lblDBADescription));
+	public void verifyDBADescription() {
+		ExtentTestManager.setInfoMessageInReport("DBA Description is : " + getText(lblDBADescription));
 	}
 
 	public void fillWebsite(String expWebsite) {
@@ -90,7 +95,6 @@ public class RegistrationDBAPage extends MobileFunctions {
 
 	public void clickNext() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnNext));
-		scrollDownToElement(btnNext, "Next");
 		click(btnNext, "Next");
 	}
 
@@ -118,27 +122,27 @@ public class RegistrationDBAPage extends MobileFunctions {
 	public void clickRetailLocation() {
 		click(btnRetailLocation, "Retail Location");
 	}
-	
+
 	public void clickeCommerce() {
 		click(btneCommerce, "eCommerce");
 	}
-	
+
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
-	
-	public void fillAvgHighTicket(String expAvgHighTicket) {	
+
+	public void fillAvgHighTicket(String expAvgHighTicket) {
 		scrollDownToElement(txtAvgHighTicket, "Average Ticket");
 		enterText(txtAvgHighTicket, expAvgHighTicket, "Average Ticket");
 	}
-	
-	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,String expWebsite, String expVolume, String expHighTicket, String expAvgTicket,
-			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
-			throws InterruptedException {
-		if(verifyDifferent()==1) {
-		verifyHeading(expHeading);
-		verifyDBADescription();
-		clickDifferent();
+
+	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,
+			String expWebsite, String expVolume, String expHighTicket, String expAvgTicket, String expAddress1,
+			String expAddress2, String expCity, String expState, String expZipcode) throws InterruptedException {
+		if (verifyDifferent() == 1) {
+			verifyHeading(expHeading);
+			verifyDBADescription();
+			clickDifferent();
 		}
 		verifyHeading(expHeading);
 		fillDBAName(expName);
@@ -157,74 +161,26 @@ public class RegistrationDBAPage extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 		clickTimeZone();
 		clickUpload();
-		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
-		uploadDocumentComponent().clickUsingApp();
-		uploadDocumentComponent().clickAllow();
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
+			uploadDocumentComponent().clickUsingApp();
+			uploadDocumentComponent().clickAllow();
 		}
 		uploadDocumentComponent().uploadTakePhoto();
 		clickUploadBusiness();
 		uploadDocumentComponent().uploadTakePhoto();
-	    clickNext();
+		clickNext();
 		mailingAddressComponent().fillAddressLine1(expAddress1);
 		mailingAddressComponent().fillAddressLine2(expAddress2);
 		mailingAddressComponent().fillCity(expCity);
 		mailingAddressComponent().selectState(expState);
 		mailingAddressComponent().fillZipCode(expZipcode);
-        clickDone();
+		clickDone();
 	}
 
-//	public void AddDBAInfo(String expHeading, String expName, String expEmail, String expNum, String expBusinessType,String expWebsite, String expVolume, String expHighTicket, String expAvgTicket,
-//			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
-//			throws InterruptedException {
-//		
-//		verifyHeading(expHeading);
-//		verifyDBADescription();
-//		clickDifferent();
-//		verifyHeading(expHeading);
-//		fillDBAName(expName);
-//		fillEmail(expEmail);
-//		DriverFactory.getDriver().hideKeyboard();
-//		fillNum(expNum);
-//		DriverFactory.getDriver().hideKeyboard();
-//		selectBusinessType(expBusinessType);
-//		clickRetailLocation();
-//		fillWebsite(expWebsite);
-//		DriverFactory.getDriver().hideKeyboard();
-//		fillProcessingVolume(expVolume);
-//		DriverFactory.getDriver().hideKeyboard();
-//		fillHighTicket(expHighTicket);
-//		DriverFactory.getDriver().hideKeyboard();
-//		fillAvgHighTicket(expAvgTicket);
-//		DriverFactory.getDriver().hideKeyboard();
-//		clickTimeZone();
-//		Thread.sleep(2000);
-//		clickUpload();
-//		if(uploadDocumentComponent().verifyUsingApp()==1 ) {	
-//		uploadDocumentComponent().clickUsingApp();
-//		uploadDocumentComponent().clickAllow();
-//		}
-////		uploadDocumentComponent().clickBrowseFiles();
-////		DriverFactory.getDriver().context("NATIVE_APP");
-////		Thread.sleep(2000);
-////		uploadDocumentComponent().clickFile();
-////		DriverFactory.getDriver().context("coyni");
-//		uploadDocumentComponent().clickTakePhoto();
-//		uploadDocumentComponent().clickCapture();
-//		uploadDocumentComponent().clickSave();
-//		Thread.sleep(2000);
-//	    clickNext();
-//		mailingAddressComponent().fillAddressLine1(expAddress1);
-//		mailingAddressComponent().fillAddressLine2(expAddress2);
-//		mailingAddressComponent().fillCity(expCity);
-//		mailingAddressComponent().selectState(expState);
-//		mailingAddressComponent().fillZipCode(expZipcode);
-//        clickDone();
-//	}
-	
-	
 	public UploadDocumentComponent uploadDocumentComponent() {
 		return new UploadDocumentComponent();
 	}
+
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
