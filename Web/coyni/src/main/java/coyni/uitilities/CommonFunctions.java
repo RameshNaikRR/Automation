@@ -362,8 +362,13 @@ public class CommonFunctions {
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
-	public void switchtoUrl(String url) {
+
+
+	public void switchtoUrl(String url) throws InterruptedException {
+		
 		DriverFactory.getDriver().navigate().to(url);
+		Thread.sleep(4000);
+
 	}
 
 	public void verifyHeadings(List<WebElement> elementsList, String excelHeading, String eleName) {
@@ -388,4 +393,23 @@ public class CommonFunctions {
 		}
 
 	}
+
+	public void verifyNewWindow(String url) {
+		String parentWindowHandle = DriverFactory.getDriver().getWindowHandle();
+
+		Set<String> allWindowHandles = DriverFactory.getDriver().getWindowHandles();
+		Actions action = new Actions(DriverFactory.getDriver());
+
+		// Iterate through each handle
+		for (String handle : allWindowHandles) {
+			// Switch to the new window
+			if (!handle.equals(parentWindowHandle)) {
+				DriverFactory.getDriver().switchTo().window(handle);
+				action.keyDown(Keys.CONTROL).sendKeys(url).keyUp(Keys.CONTROL).build().perform();
+				break;
+			}
+		}
+
+	}
+
 }

@@ -72,6 +72,24 @@ public class DatePickerComponent extends BrowserFunctions {
 		LocalDateTime now = LocalDateTime.now();
 		return dtf.format(now);
 	}
+	public void clickCustomDate(String customDate) throws InterruptedException {
+		
+		String date1 = customDate.replace("/", " ");
+		System.out.println(date1);
+		long diff = this.getDateDifferenceInMonths(date1);
+		int day = this.getDay(date1);
+		WebElement arrow = (diff >= 0 ? next : prev);
+		diff = Math.abs(diff);
+
+		// click the arrows
+		LongStream.range(0, diff).forEach(i -> arrow.click());
+
+		// select the date
+		Thread.sleep(2000);
+		dates.stream().filter(ele -> !ele.getText().equals("")).filter(ele -> Integer.parseInt(ele.getText()) == day)
+				.findFirst().ifPresent(WebElement::click);
+		System.out.println(customDate + " selected from Calendar");
+	}
 	
 
 	public void generateDate() throws InterruptedException {

@@ -17,22 +17,24 @@ public class ChargebackComponent extends BrowserFunctions {
 	private By txtStartDate = By.xpath("(//span[text()='Select Date'])[1]");// span[text()='Select
 																			// Date']/following-sibling::span
 	private By txtEndDate = By.xpath(" (//span[text()='Select Date'])[2]/following-sibling::span");// span[text()='End
-																			// Date']/following-sibling::span
+	// Date']/following-sibling::span
 
-	
-	private By btnChargeBackLink = By.xpath("//p[contains(@class,'hover:underline text-cm3 cursor-pointer TransactionDetailBuyToken_caseNav__rSPGv')]");
-	
+	private By btnChargeBackLink = By.xpath(
+			"//p[contains(@class,'hover:underline text-cm3 cursor-pointer break-words TransactionDetailBuyToken_caseNav__QIoMp')]");
+
 	public int getChargeBackSize() {
 		return getElementsList(btnChargeBackLink, "").size();
-		
+
 	}
+
 	public void chargeBackLink() {
 		click(btnChargeBackLink, "btnChargeBackLink");
-		
+
 	}
-	
+
 	public void clickStartDate() {
 		click(txtStartDate, "Start Date");
+		// enterText(txtStartDate, startDate, "Received Date");
 	}
 
 	public void clickEndDate() {
@@ -44,17 +46,17 @@ public class ChargebackComponent extends BrowserFunctions {
 	}
 
 	public void clickChargeBack() {
-		if (getElement(btnChargeBack, "chargeback").isEnabled()) {
+		if (getElement(btnChargeBack, "chargeback").isDisplayed()) {
 			click(btnChargeBack, "Charge Back");
 		} else {
-			ExtentTestManager.setInfoMessageInReport("ChargeBack is disable");
+			ExtentTestManager.setFailMessageInReport("Given Transaction id don't hava a chargeback case");
 
 		}
 	}
-	
+
 	public int verifyElementChargeBackButton() {
 		return getElementsList(btnChargeBack, "Button").size();
-		
+
 	}
 
 	public void fillCaseNumber(String caseNumber) {
@@ -84,6 +86,7 @@ public class ChargebackComponent extends BrowserFunctions {
 	public CalenderComponent calenderComponent() {
 		return new CalenderComponent();
 	}
+
 	public DisputesDetailsComponent disputesDetailsComponent() {
 		return new DisputesDetailsComponent();
 	}

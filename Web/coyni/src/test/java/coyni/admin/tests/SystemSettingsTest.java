@@ -91,6 +91,8 @@ public class SystemSettingsTest {
 		}
 	}
 
+	
+	//We can use Edit Fee structure Also but we are not including 
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditPersonalFeeStructure(String strParams) {

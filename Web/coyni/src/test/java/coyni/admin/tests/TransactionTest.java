@@ -584,7 +584,7 @@ public class TransactionTest {
 						.clickStartDate();
 				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
-						.datePickerComponent().generateDate();
+						.datePickerComponent().clickCustomDate(data.get("startDate"));
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickReason();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()

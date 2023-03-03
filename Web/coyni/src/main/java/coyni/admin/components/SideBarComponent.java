@@ -92,6 +92,18 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(4000);
 	}
 
+	private By btnTemp = By.xpath("//span[text()='Templates']");
+
+	public void clickemp() {
+		click(btnTemp, "");
+	}
+
+	public void navigateToYopmail(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
+		Thread.sleep(5000);
+		clickemp();
+	}
+
 	public void clickGatewaySettings() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSideBarItems("Gateway Settings"), "Gateway Settings");
 		click(getSideBarItems("Gateway Settings"), "Gateway Settings");
@@ -103,8 +115,7 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSideBarItems("Exported Files"), "Exported Files");
 		Thread.sleep(4000);
 	}
-	
-	
+
 	private By lblExportFile = By.xpath("//span[text()='Exported Files']");
 
 	public void verifyExportFiles(String exp) {
@@ -165,7 +176,8 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickAPIBusinessess() throws InterruptedException {
-		//commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API Users");
+		// commonfunctions.verifyCursorAction(getSubMenuItems("API Users"), "API
+		// Users");
 		click(getSubMenuItems("API Business"), "API Businesses");
 		Thread.sleep(5000);
 	}
@@ -267,15 +279,16 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickMerchant() throws InterruptedException {
-	//	commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
+		// commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
 		click(getSubMenuItems("Merchants"), "Merchant");
 		Thread.sleep(5000);
 	}
+
 	public void clickuderMerchant() throws InterruptedException {
-		//	commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
-			click(getSubMenuItems("Merchant"), "Merchant");
-			Thread.sleep(5000);
-		}
+		// commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
+		click(getSubMenuItems("Merchant"), "Merchant");
+		Thread.sleep(5000);
+	}
 
 	public void verifyTotalDepositsView() throws InterruptedException {
 		new CommonFunctions().elementView(getSubMenuItems("Total Deposits"), "TotalDeposits");
@@ -356,7 +369,7 @@ public class SideBarComponent extends BrowserFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
-	
+
 	public AddMerchantComponent addMerchantComponent() {
 		return new AddMerchantComponent();
 	}

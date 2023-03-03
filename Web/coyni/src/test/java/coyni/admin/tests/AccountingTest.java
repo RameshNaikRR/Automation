@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import coyni.admin.components.AccountTableComponent;
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.HomePage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -24,9 +25,9 @@ public class AccountingTest {
 		accountTableComponent = new AccountTableComponent();
 		coyniPortalTest = new CoyniPortalTest();
 	}
-	
+
 //sanity test
-	
+
 	@Test
 	@Parameters("strParams")
 	public void testAccounting(String strParams) {
@@ -41,51 +42,45 @@ public class AccountingTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-	
-	
-	
-	
-	
 
 	public void totalWithdraw(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		Thread.sleep(2000);
-		
 
 		homePage.sideBarComponent().accountTableComponent().verifyColumnView();
 		int notransactionFound = homePage.sideBarComponent().accountTableComponent().notransactionFound();
-		if(notransactionFound>0) {
+		if (notransactionFound > 0) {
 			ExtentTestManager.setPassMessageInReport("No Transaction Found in the System");
-		}else {
-		homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
-		homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
-		// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
-		homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
-		// homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
-//		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
-		homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
-		// Thread.sleep(2000);
-		homePage.sideBarComponent().accountTableComponent().clickSearch();
-		Thread.sleep(5000);
-		int size = homePage.sideBarComponent().accountTableComponent().getSize();
-		if (size > 0) {
-			ExtentTestManager.setPassMessageInReport("Transaction Details are not found");
 		} else {
-			Thread.sleep(4000);
-			homePage.sideBarComponent().accountTableComponent().clickDetails();
+			homePage.sideBarComponent().accountTableComponent().clickdrpdwmBatchIdImg();
+			homePage.sideBarComponent().accountTableComponent().verifydrpdwnBatchIdView();
+			// homePage.sideBarComponent().accountTableComponent().verifydrpdwnDepositIdView();
+			homePage.sideBarComponent().accountTableComponent().verifydrpdwnReferenceIdView();
+			// homePage.sideBarComponent().accountTableComponent().verifyEnter8charIdView();
+//		homePage.sideBarComponent().accountTableComponent().verifyBankAccountView();
+			homePage.sideBarComponent().accountTableComponent().fillBatchId(data.get("batchId"));
+			// Thread.sleep(2000);
+			homePage.sideBarComponent().accountTableComponent().clickSearch();
+			Thread.sleep(5000);
+			int size = homePage.sideBarComponent().accountTableComponent().getSize();
+			if (size > 0) {
+				ExtentTestManager.setPassMessageInReport("Transaction Details are not found");
+			} else {
+				Thread.sleep(4000);
+				homePage.sideBarComponent().accountTableComponent().clickDetails();
 
-			Thread.sleep(6000);
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getFailedCount();
-			// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
-			homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
-			Thread.sleep(2000);
+				Thread.sleep(6000);
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalBatchAmount();
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().getInProgressCount();
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPaidCount();
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().getFailedCount();
+				// homePage.sideBarComponent().accountTableComponent().batchIDComponent().getPendingCount();
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().getTotalAccount();
+				homePage.sideBarComponent().accountTableComponent().batchIDComponent().verifyBatchId(data.get("bID"));
+				Thread.sleep(2000);
 //		homePage.sideBarComponent().accountTableComponent().batchIDComponent().paginationAndEntriesComponent()
 //		.verifyPageNumbersWithCount();
-		}
+			}
 		}
 	}
 
@@ -244,7 +239,7 @@ public class AccountingTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testTotalDepositSignetAccount(String strParams) {
+	public void testTotalDepositCogenttAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickAccounting();
@@ -470,6 +465,20 @@ public class AccountingTest {
 			homePage.sideBarComponent().batchIDComponent().getPaidCount();
 			homePage.sideBarComponent().batchIDComponent().getFailedCount();
 
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Total deposits detailed view is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "String strParams" })
+	public void testSwitchToWindow(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickAccounting();
+			homePage.sideBarComponent().navigateToYopmail("https://greenboxdev.atlassian.net/wiki/home");
+			System.out.println("ok");
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("test Total deposits detailed view is failed due to Exception " + e);

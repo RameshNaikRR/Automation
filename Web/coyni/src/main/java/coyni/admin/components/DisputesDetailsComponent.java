@@ -15,7 +15,7 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 
 	private By btnLost = By.xpath("//button[text()='Mark As Lost']");
 
-	private By lblAmount = By.xpath("(//p[@class='text-base'])[5]");//(//div[@class='card  shadow-lg']//div[@class='flex flex-col items-end']//p)[1]
+	private By lblAmount = By.xpath("(//p[contains(@class,'text-base')])[6]");//(//div[@class='card  shadow-lg']//div[@class='flex flex-col items-end']//p)[1]
 	
 	private By lblCaseID = By.xpath("//p[contains(@class,'Case_CaseTitle')]");
 
@@ -83,7 +83,7 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 	}
 
 	public void clickPending() {
-		click(statusPending, "Status");
+		click(statusPending, "Clicked on Pending");
 	}
 
 	public void verifyTableData(String data) {
