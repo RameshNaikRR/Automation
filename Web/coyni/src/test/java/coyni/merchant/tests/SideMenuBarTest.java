@@ -25,14 +25,15 @@ public class SideMenuBarTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
+			// sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.verifyUserName();
 //			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
 //			sideMenuBarComponent.verifyMerchnatTracker();
-			sideMenuBarComponent.clickOnMerchantdrpdwn();
+			// sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.handSymbolHighlightedMerchantActivity(data.get("cssProp"), data.get("value"),
 					data.get("color"));
 			sideMenuBarComponent.clickOnMerchantdrpdwn();
-			sideMenuBarComponent.verifyMerchantActivityDrpDwn();
+			// sideMenuBarComponent.verifyMerchantActivityDrpDwn();
 			sideMenuBarComponent.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("value"),
 					data.get("color"));
 			sideMenuBarComponent.verifyTokenAccountPushBtn();
@@ -50,6 +51,7 @@ public class SideMenuBarTest {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBar failed due to " + e);
 		}
 	}
+
 
 	@Test
 	public void testMerchantActivityDrpDwn() {

@@ -37,7 +37,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By sharedDropDown = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
 	private By sharedDropsDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
 	private By merchantDropDown = By.xpath("//span[@class='UserNameDropDown_title__RKKVD']");
-	private By btnMerchantDropDown = By.xpath("(//span[@class='icon-arrow-down'])[1]");
+	private By btnMerchantDropDown = By.xpath("(//div[contains(@class,'icon-small-arrow')])[2]");
 	private By btnsharedAccount = By.xpath("//div[contains(@class,'UserNameDropDown_arrowDown__1VWOu')]");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");

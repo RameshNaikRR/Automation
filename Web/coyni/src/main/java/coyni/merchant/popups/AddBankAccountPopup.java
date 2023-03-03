@@ -39,10 +39,20 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnBack = By.xpath("//button[contains(text(),'Back')]");
 	private By chckbox = By.xpath("//div[contains(@class,'custom-checkbox')]");
 	private By btnAdd = By.xpath("//button[contains(text(),'Add')]");
+	private By btnCheckBoxforMXBank = By.xpath("//input[@type='checkbox']");
+	private By btnStart = By.xpath("//button[contains(text(),'Start')]");
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "");
 		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void clickOnMXBankCheckBox() {
+		click(btnCheckBoxforMXBank, "Clicked on Check Box");
+	}
+
+	public void clickStart() {
+		click(btnStart, "start");
 	}
 
 	public void clickAdd() {

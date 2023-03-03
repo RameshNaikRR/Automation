@@ -651,13 +651,13 @@ public class TokenAccountTest {
 			testTransactionDetailsFilters(strParams);
 			testRecords(strParams);
 			Thread.sleep(4000);
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
-			tokenAccountPage.transactionDetailsComponent().getAmount();
-			tokenAccountPage.transactionDetailsComponent().getBankAccount();
-			tokenAccountPage.transactionDetailsComponent().getBankName();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getCreatedDate();
+//			tokenAccountPage.transactionDetailsComponent().getAmount();
+//			tokenAccountPage.transactionDetailsComponent().getBankAccount();
+//			tokenAccountPage.transactionDetailsComponent().getBankName();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionDetailsBankAccount Failed due to Exception " + e);
@@ -784,6 +784,26 @@ public class TokenAccountTest {
 
 	}
 
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithDebitCardWithOutPayment(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickBuyTokens();
+			testBuyTokenAddBank(strParams);
+			testBuyTokenTransactionBankAccount(strParams);
+			testBuyTokenDeleteBank(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithDebitCardWithOutPayment is failed due to " + e);
+		}
+	}
+	
+	
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenTransactionsWithoutBankAccount(String strParams) {

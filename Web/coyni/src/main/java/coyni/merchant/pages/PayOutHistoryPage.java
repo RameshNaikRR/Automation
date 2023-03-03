@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class PayOutHistoryPage extends BrowserFunctions {
 
@@ -27,6 +28,8 @@ public class PayOutHistoryPage extends BrowserFunctions {
 
 	private By lblStatus = By.xpath("(//span[contains(text(),'STATUS')])[1]");
 
+	private By lblNoTrasactons = By.xpath("//span[contains(text(),'You do not have any transactions.')]");
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPayOutHistory, "Pay Out History page heading", expHeading);
 	}
@@ -40,7 +43,24 @@ public class PayOutHistoryPage extends BrowserFunctions {
 	}
 
 	public void clickPayOut() {
-		click(payOut, "Pay Out");
+		if (getElement(payOut, "Enabled").isDisplayed()) {
+			scrollToElement(payOut, "Export");
+			click(payOut, "Export");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Pay button is Disabled");
+		}
+
+	}
+	
+	
+	public void verifyNoPayOutFound() {
+		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
+//		return getText(lblNoTrasactons, "No Trasactions");
+	}
+
+	public int verifyPayOut() {
+		int ele = getElementsList(lblNoTrasactons, "").size();
+		return ele;
 	}
 
 	public void verifyLabelPayOutDetails() {

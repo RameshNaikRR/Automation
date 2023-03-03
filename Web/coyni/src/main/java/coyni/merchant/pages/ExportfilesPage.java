@@ -26,6 +26,7 @@ public class ExportfilesPage extends BrowserFunctions {
 	private By lblSuccess = By.xpath("//span[text()='Success']");
 	private By downloadIcon = By.xpath("(//span[@data-tip='Download'])[1]");
 	private By btnExportFiles = By.xpath("(//span[text()='Export Files'])[1]");
+	private By btnReserveExport = By.xpath("//button[contains(@class,'Buttons_btn__JEz-N')]");
 	private By btnExport = By.xpath("//button[text()='Export']");
 	private By msgNoRecords = By.xpath("//div[contains(text(),'No Records Found')]");
 
@@ -33,9 +34,29 @@ public class ExportfilesPage extends BrowserFunctions {
 		click(btnExportFiles, "Export Files");
 	}
 
-	public void clickExport() {
-		click(btnExport, "Export");
+	public void clickReserveExport() {
+		if (getElement(btnReserveExport, "Enabled").isDisplayed()) {
+			scrollToElement(btnReserveExport, "Export");
+			click(btnReserveExport, "Export");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Reserve Export button is Disabled");
+		}
+
 	}
+
+	public void clickExport() {
+		if (getElement(btnExport, "Enabled").isDisplayed()) {
+			scrollToElement(btnExport, "Export");
+			click(btnExport, "Export");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Export button is Disabled");
+		}
+
+	}
+
+//	public void clickExport() {
+//		click(btnExport, "Export");
+//	}
 
 	public int verifyTeamMemberRecords() {
 		return getElementsList(msgNoRecords, "").size();

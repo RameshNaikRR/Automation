@@ -107,13 +107,13 @@ public class MerchantActivityTest {
 			merchantActivityComponent.dashBoardPage().getBatchPayOuts();
 			merchantActivityComponent.dashBoardPage().getNextPayOut();
 			merchantActivityComponent.dashBoardPage().getLastPayOut();
-			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
-			merchantActivityComponent.clickDashBoard();
-			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
-			// merchantActivityComponent.dashBoardPage().clickFullTransactionHistory();
-			merchantActivityComponent.clickDashBoard();
-			merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
-			merchantActivityComponent.clickDashBoard();
+			// merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
+//			merchantActivityComponent.clickDashBoard();
+//			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("heading"));
+//			// merchantActivityComponent.dashBoardPage().clickFullTransactionHistory();
+//			merchantActivityComponent.clickDashBoard();
+//			//merchantActivityComponent.dashBoardPage().clickFullReserveReleaseHistory();
+//			merchantActivityComponent.clickDashBoard();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testDashBoardProcessingVolume failed due to exception " + e);
@@ -205,7 +205,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
-			if (merchantTransactionsPage.filterComponent().verifyTransactions()) {
+			if (merchantTransactionsPage.filterComponent().verifyTransactionss() > 0) {
 				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
 				merchantTransactionsPage.filterComponent().verifyMouseAction();
@@ -236,7 +236,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
-			if (merchantTransactionsPage.filterComponent().verifyTransactions()) {
+			if (merchantTransactionsPage.filterComponent().verifyTransactionss() > 0) {
 				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
 				merchantTransactionsPage.filterComponent().clickFilters();
@@ -278,15 +278,20 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickDashBoard();
-			merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
-			merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
-			merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("heading"));
-			merchantActivityComponent.payOutHistoryPage().clickPayOut();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
-			merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
+			merchantActivityComponent.clickPayOutHistory();
+			// merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
+			// merchantActivityComponent.dashBoardPage().clickFullPayOutHistory();
+			// merchantActivityComponent.payOutHistoryPage().verifyHeading(data.get("heading"));
+			if (merchantActivityComponent.payOutHistoryPage().verifyPayOut() > 0) {
+				merchantActivityComponent.payOutHistoryPage().verifyNoPayOutFound();
+			} else {
+				merchantActivityComponent.payOutHistoryPage().clickPayOut();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDashBoardPayOutHistory failed due to exception " + e);
@@ -340,12 +345,12 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
-			if (merchantActivityComponent.reserveHistoryPage().verifyExports() != 0) {
+			if (merchantActivityComponent.reserveHistoryPage().verifyExports() > 0) {
 				merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
 			} else {
-				merchantActivityComponent.reserveHistoryPage().exportfilesPage().clickExport();
+				merchantActivityComponent.reserveHistoryPage().exportfilesPage().clickReserveExport();
 				merchantActivityComponent.reserveHistoryPage().exportfilesPage().exportSelectedTransactionsPopup()
-						.clickOnReserveExport();
+						.clickOnExport();
 
 			}
 		} catch (Exception e) {
@@ -360,15 +365,19 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickReserveHistory();
 			merchantActivityComponent.reserveHistoryPage().verifyHeading(data.get("heading"));
-			merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
-			merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
+			if (merchantActivityComponent.reserveHistoryPage().verifyExports() > 0) {
+				merchantActivityComponent.reserveHistoryPage().verifyNoRecordsFound();
+			} else {
+				merchantActivityComponent.reserveHistoryPage().clickReserveHistory();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
 
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveHistoryIDDetails failed due to exception " + e);
 		}

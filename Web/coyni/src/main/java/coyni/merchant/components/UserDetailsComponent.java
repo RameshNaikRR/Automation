@@ -21,7 +21,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By btnRemove = By.cssSelector("");
 	private By btnUploadNewImage = By.cssSelector("//button[contains(text(),'Upload New Image')]");
 	private By btnSave = By.cssSelector("");
-	private By lblUserName = By.xpath("//span[contains(class,'font-bold text-cgy8 UserDetails_largerName__NY3VX')]");
+	private By lblUserName = By.xpath("//span[contains(@class,'UserDetails_largerName__NY3VX')]");
 	private By lblAccountStatus = By.xpath("//div[@class='flex flex-wrap gap-1 ml-2 ']");
 	private By lblEmail = By.xpath("//h3[contains(@class,'UserDetails_email_address')]");
 	private By lblAddress = By.cssSelector("");

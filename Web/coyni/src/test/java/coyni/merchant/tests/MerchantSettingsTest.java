@@ -366,6 +366,7 @@ public class MerchantSettingsTest {
 	public void testDBAInfoInavlidPhoneNumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
@@ -612,6 +613,7 @@ public class MerchantSettingsTest {
 					.clickGenerateNewSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ClickGenerate();
+			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickRevealSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -708,6 +710,8 @@ public class MerchantSettingsTest {
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
 //					.clickDone();
 
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 					.switchToWindow();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()

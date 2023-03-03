@@ -55,18 +55,19 @@ public class LoginTest {
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			// loginPage.clickeyeIcon();
 //			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
 			} else {
+				Thread.sleep(5000);
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}

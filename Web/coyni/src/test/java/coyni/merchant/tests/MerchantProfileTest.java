@@ -564,9 +564,8 @@ public class MerchantProfileTest {
 	public void testNotifications() {
 		try {
 			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
-			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
 
 		} catch (Exception e) {
@@ -577,6 +576,7 @@ public class MerchantProfileTest {
 	@Test
 	public void testNotificationsDelete() {
 		try {
+			Thread.sleep(4000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			// merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
