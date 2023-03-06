@@ -2,11 +2,14 @@ package coyni.admin.tests;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.HomePage;
@@ -47,6 +50,36 @@ public class SystemSettingsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSystemSettings Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testTermOfServiceAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyTermsOfServiceLastUpdateDate();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetails();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterSummery();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().uploadDocument(data.get("folderName"),
+					data.get("fileName"));
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyTosAgreement(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickNonMeterial();
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDate();
+			homePage.sideBarComponent().agreementsComponent().clickStartDate();
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreements Failed due to Exception  " + e);
 		}
 	}
 

@@ -374,4 +374,8 @@ public class SideBarComponent extends BrowserFunctions {
 		return new AddMerchantComponent();
 	}
 
+	public AgreementsComponent agreementsComponent() {
+		return new AgreementsComponent();
+	}
+
 }
