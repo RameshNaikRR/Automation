@@ -82,7 +82,63 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreements Failed due to Exception  " + e);
 		}
 	}
+	
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testPrivacyPolicyAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyPrivacyPolicyLastUpdateDate();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForPrivacyPolicy();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterSummery();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().uploadDocument(data.get("folderName"),
+					data.get("fileName"));
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyPrivacyPolicy(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickNonMeterial();
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDate();
+			homePage.sideBarComponent().agreementsComponent().clickStartDate();
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationAcknowledgementAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyApplicationAcknowledgement();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForverifyApplicationAcknowledgement();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterApplicationAcknowledgementSummery();
+			
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyApplicationAcknowledgement(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDateForApplicationSummery();
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testFeeStructure(String strParams) {
