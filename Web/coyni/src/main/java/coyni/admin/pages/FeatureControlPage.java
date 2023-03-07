@@ -2,6 +2,7 @@ package coyni.admin.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.ToastComponent;
 import coyni.admin.popups.SaveChangePopUp;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -126,4 +127,72 @@ public class FeatureControlPage extends BrowserFunctions {
 	public SaveChangePopUp saveChangePopUp() {
 		return new SaveChangePopUp();
 	}
+	
+	private By getEnabledTransactionControls(String Control) {
+		return By.xpath(String.format("(//div[contains(@class,'react-toggle-track-x')])[%s]", Control));
+	}
+	public void verifyPayEnable() {
+		//new CommonFunctions().elementView(getEnabledTransactionControls("2"), "Pay");
+		click(getEnabledTransactionControls("2"), "Pay");
+	}
+
+	public void verifyRequestEnable() {
+		//new CommonFunctions().elementView(getEnabledTransactionControls("3"), "Request");
+		click(getEnabledTransactionControls("3"), "Request");
+	}
+
+	public void verifyExternalBankAccountEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("4"), "ExternalBankAccount");
+		click(getEnabledTransactionControls("4"), "ExternalBankAccount");
+	}
+
+	public void verifyInstantPayEnable() {
+		//new CommonFunctions().elementView(getEnabledTransactionControls("5"), "InstantPay");
+		click(getEnabledTransactionControls("5"), "InstantPay");
+	}
+
+	public void verifyGiftCardEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("6"), "GiftCard");
+		click(getEnabledTransactionControls("6"), "GiftCard");
+	}
+
+	public void verifySignetAccountEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("7"), "SignetAccount");
+		click(getEnabledTransactionControls("7"), "SignetAccount");
+	}
+
+	public void verifyCreditCardEnable() {
+		// new CommonFunctions().elementView(getTransactionControls("8"), "CreditCard");
+		click(getEnabledTransactionControls("8"), "CreditCard");
+	}
+
+	public void verifyDebitCardEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("9"), "DebitCard");
+		click(getEnabledTransactionControls("9"), "DebitCard");
+	}
+
+	public void verifyBuyTokensExternalBankAccountEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("10"), "BuyTokensExternalBankAccount");
+		click(getEnabledTransactionControls("10"), "BuyTokensExternalBankAccount");
+	}
+
+	public void verifyPaymentMethodsCreditCardEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("11"), "PaymentMethod CreditCard");
+		click(getEnabledTransactionControls("11"), "PaymentMethod CreditCard");
+	}
+
+	public void verifyPaymentMethodsDebitCardEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("12"), "PaymentMethod DebitCard");
+		click(getEnabledTransactionControls("12"), "PaymentMethod DebitCard");
+	}
+
+	public void verifyPaymentMethodsExternalBankAccountEnable() {
+	//	new CommonFunctions().elementView(getEnabledTransactionControls("13"), "PaymentMethodsExternalBankAccount");
+		click(getEnabledTransactionControls("13"), "PaymentMethodsExternalBankAccount");
+	}
+	
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+
 }

@@ -290,6 +290,7 @@ public class SystemSettingsTest {
 			Thread.sleep(2000);
 			// homePage.sideBarComponent().featureControlPage().verifyAllTransactionsControls();
 			// homePage.sideBarComponent().featureControlPage().verifyCreditCard();
+			
 			homePage.sideBarComponent().featureControlPage().verifyPay();
 			homePage.sideBarComponent().featureControlPage().verifyPayRequest();
 			homePage.sideBarComponent().featureControlPage().verifyBuyTokensExternalBankAccount();
@@ -313,6 +314,55 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().featureControlPage().saveChangePopUp()
 					.verifyDescription(data.get("expDescription"));
 			homePage.sideBarComponent().featureControlPage().saveChangePopUp().clickYes();
+			homePage.sideBarComponent().featureControlPage().toastComponent().verifyToast(data.get("success"),
+					data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFeatureControl Failed due to Exception " + e);
+		}
+
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testFeatureControlEnable(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickFeatureControls();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().featureControlPage().verifyActivityHeading(data.get("expActivityHeading"));
+			// homePage.sideBarComponent().featureControlPage().verifyActivityDescription();
+			Thread.sleep(2000);
+			// homePage.sideBarComponent().featureControlPage().verifyAllTransactionsControls();
+			// homePage.sideBarComponent().featureControlPage().verifyCreditCard();
+			
+			homePage.sideBarComponent().featureControlPage().verifyPayEnable();
+			homePage.sideBarComponent().featureControlPage().verifyPayRequest();
+			homePage.sideBarComponent().featureControlPage().verifyBuyTokensExternalBankAccountEnable();
+			homePage.sideBarComponent().featureControlPage().verifyInstantPayEnable();
+			homePage.sideBarComponent().featureControlPage().verifyGiftCardEnable();
+			homePage.sideBarComponent().featureControlPage().verifySignetAccountEnable();
+
+			homePage.sideBarComponent().featureControlPage().verifyDebitCardEnable();
+			homePage.sideBarComponent().featureControlPage().verifyPaymentMethodsExternalBankAccountEnable();
+			homePage.sideBarComponent().featureControlPage().verifyPayRequest();
+			homePage.sideBarComponent().featureControlPage().verifyWithdrawals();
+			homePage.sideBarComponent().featureControlPage().verifyBuyTokens();
+			homePage.sideBarComponent().featureControlPage().verifyPaymentMethods();
+
+			homePage.sideBarComponent().featureControlPage().verifyPaymentMethodsCreditCardEnable();
+			homePage.sideBarComponent().featureControlPage().verifyPaymentMethodsDebitCardEnable();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().featureControlPage().clickSave();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().featureControlPage().saveChangePopUp().verifyHeading(data.get("expHeading"));
+			homePage.sideBarComponent().featureControlPage().saveChangePopUp()
+					.verifyDescription(data.get("expDescription"));
+			homePage.sideBarComponent().featureControlPage().saveChangePopUp().clickYes();
+			homePage.sideBarComponent().featureControlPage().toastComponent().verifyToast(data.get("success"),
+					data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testFeatureControl Failed due to Exception " + e);
