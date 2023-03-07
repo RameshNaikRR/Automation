@@ -25,6 +25,12 @@ public class FeeStructurePage extends BrowserFunctions {
 	private By lblActive = By.xpath("//div[text()='Active'])[1]");
 	private By lblCancelled = By.xpath("//div[text()='Cancelled'])[1]");
 	private By lblScheduled = By.xpath("//div[text()='Scheduled'])[1]");
+	private By lblHeadingList =By.xpath("//th[contains(@class,'col-')]");
+	
+	public void VerifyHeadingList(String data) {
+		containsInList(lblHeadingList, data);
+	}
+	
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
@@ -138,5 +144,26 @@ public class FeeStructurePage extends BrowserFunctions {
 
 	public List<WebElement> getStartDate() throws InterruptedException {
 		return getElementsList(txtDate, "txtDate");
+	}
+	public void containsInList(By listXpath, String data) {
+		List<WebElement> elementsList = getElementsList(listXpath, "Fee Structure Heading");
+		for (WebElement webElement : elementsList) {
+			String text = webElement.getText();
+			String[] split = data.split(",");
+			int count = 0;
+			for (int i = 0; i < split.length; i++) {
+				if (text.equalsIgnoreCase(split[i])) {
+					ExtentTestManager.setPassMessageInReport(text + " Agreement Haedings match");
+					break;
+				}
+
+				else {
+					count++;
+					if (count == split.length) {
+						ExtentTestManager.setWarningMessageInReport(text + " Agreement Haedings Not Found");
+					}
+				}
+			}
+		}
 	}
 }

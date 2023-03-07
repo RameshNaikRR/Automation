@@ -147,7 +147,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
 			homePage.sideBarComponent().feeStructurePage().verifyHeading(data.get("expHeading"));
-			// homePage.sideBarComponent().feeStructurePage().clickPersonal();
+			
 			Thread.sleep(3000);
 			homePage.sideBarComponent().feeStructurePage().accountTableComponent()
 					.verifyTableLabels(data.get("labelColumn"));
@@ -181,7 +181,7 @@ public class SystemSettingsTest {
 	}
 
 	
-	//We can use Edit Fee structure Also but we are not including 
+	//----------------------------------------Fee Structure ---------------------------------
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditPersonalFeeStructure(String strParams) {
@@ -189,6 +189,7 @@ public class SystemSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
+			homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
 			sideBarComponent.feeStructurePage().clickEdit();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.verifyHeading(data.get("expEditHeading"));
@@ -197,13 +198,20 @@ public class SystemSettingsTest {
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyBuyToken();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyDispute();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
-			// sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editCreditCardAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editDebitCardPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editExternalBankAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editInstantPayPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyScheduleFeeStructure(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditPersonalFeeStructure Failed due to Exception " + e);
 		}
 	}
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditMerchantFeeStructure(String strParams) {
@@ -211,24 +219,34 @@ public class SystemSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
-			Thread.sleep(4000);
-			// homePage.sideBarComponent().feeStructurePage().verifyHeading(data.get("expHeading"));
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
-			Thread.sleep(4000);
+			homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
 			sideBarComponent.feeStructurePage().clickEdit();
-			sideBarComponent.feeStructurePage().viewMerchantfeeStructurePage()
-					.verifyHeading(data.get("expEditHeading"));
-			sideBarComponent.feeStructurePage().editMerchantFeeStructurePage().getFirstRowHeading();
-			sideBarComponent.feeStructurePage().editMerchantFeeStructurePage().verifyTranscation();
-			sideBarComponent.feeStructurePage().editMerchantFeeStructurePage().verifyTokenAccount();
-			sideBarComponent.feeStructurePage().editMerchantFeeStructurePage().verifyOtherfees();
-			// sideBarComponent.feeStructurePage().editMerchantFeeStructurePage().clickEdit();
-			// sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyMerchantHeading(data.get("expEditHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().getFirstRowHeading();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyWithdrawals();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyBuyToken();
+		//	sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyDispute();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickTransactionEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editSaleOrderEcommereAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editSaleOrderPercent(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickTokenAccountEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editExternalBankAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editInstantPayPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editEBAAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyScheduleFeeStructure(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditMerchantFeeStructure Failed due to Exception " + e);
 		}
 	}
+
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -327,17 +345,68 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickAccountLimits();
 			Thread.sleep(2000);
-			homePage.sideBarComponent().accountLimitsComponent().clickView();
+			  homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
 			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
 			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
-			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyDispute();
+	//		homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyDispute();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editWSAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editAccountLimitExternalBanAmount(data.get("percentage"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editExternalBankAmount(data.get("amount"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editInstantPayPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickWeeklyLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyScheduleAccountLimits(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimitSchedule();
+			   homePage.sideBarComponent().accountLimitsComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testViewPersonalFeeStructure Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testViewMerchantAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAccountLimits();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().feeStructurePage().clickMerchant();
+			  homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+//			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
+//			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
+//			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
+	//		homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyDispute();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editAccountLimitExternalBanAmount(data.get("amount"));
+			//sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editAccountLimitExternalBanAmount(data.get("percentage"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editExternalBankAmount(data.get("amount"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editInstantPayPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickWeeklyLimits();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyScheduleAccountLimits(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimitSchedule();
+			   homePage.sideBarComponent().accountLimitsComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
+		}
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionSearch(String strParams) {
