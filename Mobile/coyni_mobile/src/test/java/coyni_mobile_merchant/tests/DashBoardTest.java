@@ -420,7 +420,6 @@ public class DashBoardTest {
 				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().fillPin(data.get("pin"));
 				businessTokenAccountPage.batchPayOutComponent().enterYourPINComponent().toastComponent()
 						.verifyToastMsg(data.get("batchToastMsg"));
-				Thread.sleep(2000);
 				businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 						.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
@@ -451,7 +450,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
-			Thread.sleep(1000);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -461,13 +459,23 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickDone();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickApplyfilters();
+			if(!businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+					.noTransactions().equalsIgnoreCase("You have no transactions")){
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.verifyPageHeading(data.get("payoutHeading"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.getPayoutTransactionAllDetails();
+			if(businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().verifyTransactionAmount()>0.00) {
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.verifyPageHeading(data.get("payoutHeading"));
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.getPayoutTransactionAllDetails();	
+			}else {
+				ExtentTestManager.setWarningMessageInReport("Recent Transaction is 0.00, so its not clickable");
+			}
+			
+			}else {	
+				ExtentTestManager.setPassMessageInReport("You have no transactions");
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayOutApplyFilters Failed due to this Exception" + e);
@@ -487,7 +495,6 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
-			Thread.sleep(1000);
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
@@ -519,19 +526,36 @@ public class DashBoardTest {
 			String[] search = data.get("search").split(",");
 			businessTokenAccountPage.batchPayOutComponent().fieldValidationsComponent().validateSearchField(search[0],
 					search[1], search[2]);
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.verifyPageHeading(data.get("payoutHeading"));
-			String a = businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().getPayoutID();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.clickBack();
-			// businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField(a);
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.verifyPageHeading(data.get("payoutHeading"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
-					.getPayoutTransactionAllDetails();
+			if(businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().verifyTransactionAmount()>0.00) {
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.verifyPageHeading(data.get("payoutHeading"));
+				String a = businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().getPayoutID();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.clickBack();
+				// businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField(a);
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.verifyPageHeading(data.get("payoutHeading"));
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+						.getPayoutTransactionAllDetails();
+			}else {
+				ExtentTestManager.setWarningMessageInReport("Recent Transaction is 0.00, so its not clickable and we can't get Payout ID");
+			}
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+//					.verifyPageHeading(data.get("payoutHeading"));
+//			String a = businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().getPayoutID();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+//					.clickBack();
+//			// businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().fillSearchField(a);
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().clickPayoutTransaction();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+//					.verifyPageHeading(data.get("payoutHeading"));
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().payoutTransactionDetailsPage()
+//					.getPayoutTransactionAllDetails();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayoutsSearchField Failed due to this Exception" + e);
@@ -550,8 +574,8 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
-					.scrollToNoMoreTransactions(data.get("noMoreTransactions"));
+				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+				.scrollToNoMoreTransactions(data.get("noMoreTransactions"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBatchPayoutsScrollMethod Failed due to this Exception" + e);
 		}

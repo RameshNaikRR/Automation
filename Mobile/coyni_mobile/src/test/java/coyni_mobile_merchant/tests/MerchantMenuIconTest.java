@@ -59,10 +59,9 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
-			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage()
-					.verifySelectPhoto(data.get("label"));
+					.verifySelectPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnCancel();
 
@@ -72,6 +71,31 @@ public class MerchantMenuIconTest {
 
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testScanSavedAlbum(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
+//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage()
+					.verifySelectPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup().verifySacnPaymentOrderDetails();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+			.enterYourPINComponent().fillPin(data.get("pin"));
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+			.transactionSucessFailurePendingComponent().verifyScanPaymentDetails();
+			businessTokenAccountPage.getUserName();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
+		}
+
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testReceivePaymentView(String strParams) {

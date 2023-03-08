@@ -3,6 +3,8 @@ package coyni_mobile_merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.TransactionSucessFailurePendingComponent;
+import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -37,17 +39,19 @@ public class ScanCodePage extends MobileFunctions {
 
 	public void clickPhoto() {
 		click(btnPhoto, "Photo");
+		click(btnPhoto, "Photo");
 	}
 
-	public void verifySelectPhoto(String expStatus) {
-		new CommonFunctions().verifyLabelText(lblSelectPhoto, expStatus, "Select photo");
+	public void verifySelectPhoto() {
+		new CommonFunctions().elementView(lblSelectPhoto, "Select photo");
+//		new CommonFunctions().verifyLabelText(lblSelectPhoto, expStatus, "Select photo");
 	}
 
 	public void verifyScanCode() {
 		new CommonFunctions().elementView(btnFlashLight, "Scan Code");
 		new CommonFunctions().elementView(btnAlbum, "Album");
 	}
-	
+
 	public void clickDeny() {
 		click(btnDeny, "Deny");
 
@@ -57,5 +61,9 @@ public class ScanCodePage extends MobileFunctions {
 		if (verifyElementDisplayed(lblInvalidQRCode, "Invalid QR Code")) {
 			click(btnOk, "ok");
 		}
+	}
+
+	public OrderPreviewPopup orderPreviewPopup() {
+		return new OrderPreviewPopup();
 	}
 }

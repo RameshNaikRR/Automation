@@ -1,13 +1,6 @@
 package coyni_mobile_merchant.popups;
 
-import java.sql.Driver;
-
-import javax.lang.model.element.Element;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.graphbuilder.curve.Point;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
@@ -15,11 +8,9 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import coyni_mobile_merchant.components.EnterYourPINComponent;
 import coyni_mobile_merchant.components.TransactionSucessFailurePendingComponent;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class OrderPreviewPopup extends MobileFunctions {
 
@@ -39,8 +30,29 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");
 	private By lblOrderOverview = MobileBy.xpath("//*[contains(@text,'Order Overview')]");
-	private By lblReceiptentAddress = MobileBy.xpath("//*[contains(@resource-id,'recipAddre')]");
+	private By lblReceiptentAddress = MobileBy.xpath("//*[contains(@resource-id,'recipAddre')]|//*[contains(@resource-id,'recipientAddTV')]");
 	private By lblReasonForRefund = MobileBy.xpath("//*[contains(@resource-id,'messageNoteTV')]");
+	
+//	Scan Order preview details
+	private By lblPayingMethod = MobileBy.xpath("//*[contains(@resource-id,'accountType')]");
+	private By lblPayingTo = MobileBy.xpath("//*[contains(@resource-id,'userNameTV')]");
+	private By lblTokenAccountBalance = MobileBy.xpath("//*[contains(@resource-id,'availBalTV')]");
+	
+	
+	public void verifyPayingMethod() {
+		new CommonFunctions().elementView(lblPayingMethod, "Paying Method");
+		ExtentTestManager.setInfoMessageInReport("Paying Method : " + getText(lblAmount));
+	}
+
+	public void verifyTokenBalance() {
+		new CommonFunctions().elementView(lblTokenAccountBalance, "Token Account Balance");
+		ExtentTestManager.setInfoMessageInReport("Token Account Balance is : " + getText(lblTokenAccountBalance));
+	}
+	
+	public void verifyPayingTo() {
+		new CommonFunctions().elementView(lblPayingTo, "Paying To");
+		ExtentTestManager.setInfoMessageInReport("Paying To : " + getText(lblPayingTo));
+	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblOrderOverview, "Popup Heading", expHeading);
@@ -103,6 +115,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 	}
 
 	public void getReceiptentAddress() {
+		new CommonFunctions().elementView(lblReceiptentAddress, "Receiptent Address");
 		ExtentTestManager.setInfoMessageInReport("Receiptent Address : " + getText(lblReceiptentAddress));
 	}
 
@@ -181,6 +194,15 @@ public class OrderPreviewPopup extends MobileFunctions {
 		swipeSlideToConfirm();
 	}
 
+	public void verifySacnPaymentOrderDetails() {
+		verifyPayingTo();
+		getAmount();
+		getReceiptentAddress();
+		verifyPayingMethod();
+		verifyTokenBalance();
+		swipeSlideToConfirm();
+	}
+	
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}

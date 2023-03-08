@@ -8,17 +8,18 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class TransactionSucessFailurePendingComponent extends MobileFunctions {
-	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
+	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]|//*[contains(@text,'Successful')]");
 	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]|//*[contains(@text,'A new refund')]");
 	private By lblRefundDescription = MobileBy.xpath("//*[contains(@text,'A new refund')]");
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'Amount')]");
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'lyAmount')]|//*[contains(@resource-id,'Amount')]");
 	private By lblCurrency = MobileBy.xpath("//*[contains(@text,'CYN')]");
-	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'ReferenceID')]");
+	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'ReferenceID')]|//*[contains(@resource-id,'refIDTV')]");
 	private By lblTransactionTimeDescription = MobileBy.xpath("//*[contains(@resource-id,'Description')]");
 //	private By lnkLearnMore = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]");
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'Done')]");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'Done')]|//*[contains(@text,'Done')]");
 
 	public void getPageHeading() {
+		new CommonFunctions().elementView(lblPageHeading, "Page Heading");
 		ExtentTestManager.setInfoMessageInReport("Transaction Status : " + getText(lblPageHeading));
 	}
 
@@ -31,6 +32,7 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	}
 	
 	public void getAmount() {
+		new CommonFunctions().elementView(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount)+ "CYN");
 	}
 
@@ -39,6 +41,7 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	}
 
 	public void getReferenceID() {
+		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID : " + getText(lblReferenceID));
 	}
 
@@ -61,6 +64,13 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 		getAmount();
 		getReferenceID();
 		getRefundDescription();
+		clickDone();
+	}
+	
+	public void verifyScanPaymentDetails() {
+		getPageHeading();
+		getAmount();
+		getReferenceID();
 		clickDone();
 	}
 	

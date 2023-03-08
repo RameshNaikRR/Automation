@@ -62,7 +62,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			LandingPage landingPage = new LandingPage();
-			landingPage.clickGetStartedLogin();
+//			landingPage.clickGetStartedLogin();
+			landingPage.clickLogin();
 			LoginPage loginPage = new LoginPage();
 			loginPage.AppUpdate();
 			loginPage.VerifyLoginPageView();

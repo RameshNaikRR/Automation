@@ -46,7 +46,7 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
 	
 	
-WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
+WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
