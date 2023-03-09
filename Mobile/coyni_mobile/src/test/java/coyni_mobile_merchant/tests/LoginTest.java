@@ -135,7 +135,6 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
-
 	public void testLoginWithInvalidCredentials(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -576,6 +575,7 @@ public class LoginTest {
 						.fillNewPassword(data.get("newPassword"));
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 						.fillConfirmPassword(data.get("confirmPassword"));
+				
 				if (data.get("confirmPassword").equalsIgnoreCase("")) {
 					loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 							.clickNewPassword();
@@ -693,8 +693,10 @@ public class LoginTest {
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			String[] newPassword = data.get("newPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateNewPasswordField(newPassword[0],
-					newPassword[1], newPassword[2]);
-			String[] confirmPassword = data.get("newPassword").split(",");
+					newPassword[1], newPassword[2],newPassword[3],newPassword[4],
+					newPassword[5], newPassword[6],newPassword[7],newPassword[8],
+					newPassword[9], newPassword[10],newPassword[11]);
+			String[] confirmPassword = data.get("confirmPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
 					confirmPassword[1], confirmPassword[2]);
 

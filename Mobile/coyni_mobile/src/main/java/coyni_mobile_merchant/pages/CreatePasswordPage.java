@@ -78,13 +78,13 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 
 	public void validateSave() {
-		if (getElementList(btnSave, "Save").size() > 0) {
+//		if (getElementList(btnSave, "Save").size() > 0) {
 			if (getElement(btnSave, "Save").isEnabled()) {
 				ExtentTestManager.setFailMessageInReport("Save button  is enabled");
 			} else {
 				ExtentTestManager.setPassMessageInReport("Save button  is disabled");
 			}
-		}
+//		}
 	}
 
 	

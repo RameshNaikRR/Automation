@@ -68,14 +68,34 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	}
 
-	public void validateNewPasswordField(String singleChar, String maxChar, String moreThanMax) {
+	public void validateNewPasswordField(String invalid1,String invalid2,String invalid3,String invalid4,String invalid5,String invalid6,String invalid7,String invalid8,String invalid9,String minChar,String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtNewPassword, "New Password", singleChar);
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid1);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid2);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid3);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid4);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid5);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid6);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid7);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid8);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid9);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+//		for(int i=0;i<=2;i++) {
+		new CommonFunctions().validateField(txtNewPassword, "New Password", minChar);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateField(txtNewPassword, "New Password", maxChar);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateFieldMaxichar(txtNewPassword, "New Password", moreThanMax);
-		new CommonFunctions().clearText(txtNewPassword, "New Password");
+//		new CommonFunctions().clearText(txtNewPassword, "New Password");
+//		}
 	}
 
 	public void validateConfirmPasswordField(String singleChar, String maxChar, String moreThanMax) {
@@ -88,15 +108,15 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
 	}
 
-	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax, String maxCharr) {
+	public void validatePasswordField(String minChar, String maxChar, String moreThanMax, String currentPassword) {
 		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtPassword, "password", singleChar);
+		new CommonFunctions().validateField(txtPassword, "password", minChar);
 		new CommonFunctions().clearText(txtPassword, "password");
 		new CommonFunctions().validateField(txtPassword, "password", maxChar);
 		new CommonFunctions().clearText(txtPassword, "password");
 		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
 		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateField(txtPassword, "password", maxCharr);
+		new CommonFunctions().validateField(txtPassword, "password", currentPassword);
 	}
 
 	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax) {

@@ -775,7 +775,10 @@ public class MerchantProfileTest {
 					.verifyPageDescription(data.get("changePwdDescription"));
 			String[] newPassword = data.get("newPassword").split(",");
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
-					.validateNewPasswordField(newPassword[0], newPassword[1], newPassword[2]);
+					.validateNewPasswordField(newPassword[0],
+							newPassword[1], newPassword[2],newPassword[3],newPassword[4],
+							newPassword[5], newPassword[6],newPassword[7],newPassword[8],
+							newPassword[9], newPassword[10],newPassword[11]);
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
 					.validateConfirmPasswordField(confirmPassword[0], confirmPassword[1], confirmPassword[2]);

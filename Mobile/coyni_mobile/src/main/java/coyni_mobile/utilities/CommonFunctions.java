@@ -135,8 +135,8 @@ public class CommonFunctions {
 			// clickEnter();
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
-			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]");
-			if (enterText.equalsIgnoreCase(actualtext)) {
+			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'tvPasswordInfo')]");
+			if (enterText.equalsIgnoreCase(actualtext)&& DriverFactory.getDriver().findElements(errorMsgs).size()==0) {
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {
@@ -152,6 +152,30 @@ public class CommonFunctions {
 
 	}
 
+	public void validateFieldWithErrorMsg(By ele, String eleName, String enterText) {
+		try {
+			ExtentTestManager
+					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
+			mobileFunctions.enterText(ele, enterText, eleName);
+			// clickEnter();
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
+			System.out.println("length " + actualtext.length());
+			By errorMsgs = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]");
+			if (enterText.equalsIgnoreCase(actualtext) && mobileFunctions.getElement(errorMsgs, "Error Msg").isDisplayed()) {
+				ExtentTestManager
+						.setPassMessageInReport(eleName + " it is showing error Message " + mobileFunctions.getText(errorMsgs));
+			} else {
+				ExtentTestManager
+						.setFailMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("validate field is failed due to exception " + e);
+
+		}
+		// && mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0
+
+	}
+	
 	public void validateFieldMaxichar(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager
@@ -160,13 +184,12 @@ public class CommonFunctions {
 			// clickEnter();
 			String actualtext = mobileFunctions.getText(ele);
 			if (!enterText.equalsIgnoreCase(actualtext)) {
-
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
 			} else {
 
 				ExtentTestManager
-						.setInfoMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
+						.setFailMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validateFieldMaxichar is failed due to exception " + e);
