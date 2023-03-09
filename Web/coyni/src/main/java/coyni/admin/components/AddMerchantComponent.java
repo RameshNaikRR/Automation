@@ -87,7 +87,7 @@ public class AddMerchantComponent extends BrowserFunctions {
 		boolean useLetters = true;
 		boolean useNumbers = false;
 		String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-		return generatedString + "@gmail.com";
+		return generatedString + "@yopmail.com";
 	}
 
 	/**
