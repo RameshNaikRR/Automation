@@ -735,55 +735,6 @@ public class ProfilesTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testActionsOnCoyniEmployee(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniEmployees();
-			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
-			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
-			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup()
-					.verifyHeading(data.get("popupHeading"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
-			if (!data.get("toastMessage").isEmpty()) {
-				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"),
-						data.get("toastMessage"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testCoyniEmployeeSearch(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniEmployees();
-			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
-
-			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
-			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup()
-					.verifyHeading(data.get("popupHeading"));
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
-			if (!data.get("toastMessage").isEmpty()) {
-				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"),
-						data.get("toastMessage"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
-		}
-	}
-
 	// 2.3 Merchant
 	@Test
 	@Parameters({ "strParams" })
@@ -1075,18 +1026,20 @@ public class ProfilesTest {
 			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
 			if (Size == 0) {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.clickTokenAccount();
-			int size = homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.getNoFilterRecSize();
-			if (size == 0) {
-				testFilters(strParams);
-				testExportSelectedTransactions(strParams);
-				
-			}else {
-				ExtentTestManager.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
-			}}else {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+						.clickTokenAccount();
+				int size = homePage.sideBarComponent().profileComponent().accountTableComponent()
+						.profileSideBarComponent().getNoFilterRecSize();
+				if (size == 0) {
+					testFilters(strParams);
+					testExportSelectedTransactions(strParams);
+
+				} else {
+					ExtentTestManager
+							.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
+				}
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Their is No Active Records");
 			}
 
@@ -1094,6 +1047,7 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testProfileMerchantPayoutHistory(String strParams) {
@@ -1113,11 +1067,10 @@ public class ProfilesTest {
 						.clickViewPayoutHistory();
 				int size = homePage.sideBarComponent().profileComponent().accountTableComponent().profileComponent()
 						.getNoRecSize();
-				if(size==0) {
+				if (size == 0) {
 					ExtentTestManager.setInfoMessageInReport("PayOut Transactions History is displayed");
-					
-				}
-				else {
+
+				} else {
 					System.out.println("No Record found in the system");
 				}
 			} else {
@@ -1125,6 +1078,70 @@ public class ProfilesTest {
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testProfileMerchantPayoutHistory Failed due to Exception " + e);
+		}
+	}
+
+//Coyni Employee
+	@Test
+	@Parameters({ "strParams" })
+	public void testActionsOnCoyniEmployee(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup()
+					.verifyHeading(data.get("popupHeading"));
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
+			if (!data.get("toastMessage").isEmpty()) {
+				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"),
+						data.get("toastMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCoyniEmployeeSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+
+			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
+			Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().profileComponent().accountTableComponent().clickAction();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup()
+					.verifyHeading(data.get("popupHeading"));
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().verifyPopDes();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().actionsPopup().clickYes();
+			if (!data.get("toastMessage").isEmpty()) {
+				homePage.sideBarComponent().profileComponent().toastComponent().verifyToast(data.get("toastTitle"),
+						data.get("toastMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCreateCoyniEmployee(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().verifyPersonalHeading(data.get("profileHeading"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}
 	}
 }
