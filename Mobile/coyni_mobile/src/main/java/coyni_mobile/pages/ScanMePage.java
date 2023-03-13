@@ -6,6 +6,7 @@ import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.SetAmountComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ScanMePage extends MobileFunctions {
@@ -65,9 +66,13 @@ public class ScanMePage extends MobileFunctions {
 	public SetAmountComponent setAmountComponent() {
 		return new SetAmountComponent();
 	}
-
+    
 	public void clickAllow() {
+		if(getElement(btnAllow,"Allow").isEnabled()) {
 		click(btnAllow, "Allow");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Allow button is disabled");
+		}
 	}
 	
 	public NavigationComponent navigationComponent() {

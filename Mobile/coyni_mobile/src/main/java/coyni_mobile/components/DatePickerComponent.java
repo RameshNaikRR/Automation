@@ -6,7 +6,7 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class DatePickerComponent extends MobileFunctions {
-	private By btnDone = By.xpath("//*[@name='Choose range']/following-sibling::XCUIElementTypeButton[@name='Done']");
+	private By btnDone = By.xpath("//*[contains(@resource-id,'doneTV')]");
 	private By btnClose = By.xpath("//*[@name='Choose range']/preceding-sibling::XCUIElementTypeButton[@name='close']");
 	private By iconClear = By.xpath("//*[@name='icon clear']");
 	private By lblDateRange = By.xpath("//*[@name='icon clear']/preceding-sibling::*[1]");

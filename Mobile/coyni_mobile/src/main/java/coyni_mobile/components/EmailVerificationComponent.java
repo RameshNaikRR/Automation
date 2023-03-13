@@ -49,7 +49,7 @@ public class EmailVerificationComponent extends MobileFunctions {
 	}
 
 	public void verifyEmailOtpHeading(String expVerifyEmailDecrp) {
-		new CommonFunctions().verifyLabelText(lblverifyEmailDescrp, "Forgot Password ", expVerifyEmailDecrp);
+		new CommonFunctions().verifyLabelText(lblverifyEmailDescrp, "Email Description ", expVerifyEmailDecrp);
 	}
 
 	// public void verifyEmailOtpHeading(String expHeading) {

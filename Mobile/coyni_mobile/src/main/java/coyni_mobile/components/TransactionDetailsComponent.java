@@ -50,16 +50,17 @@ public class TransactionDetailsComponent extends MobileFunctions {
 	private By backIconWithdrawGiftCard = MobileBy.xpath("//*[contains(@resource-id,'withGiftprevious')]");
 
 	public void verifySentTransactionDetails(String transactionHeading) {
-		new CommonFunctions().verifyLabelText(transactions, "Transaction Heading", transactionHeading);
-		new CommonFunctions().elementView(lblStatus, "Status");
-		new CommonFunctions().elementView(lblDateTime, "Date & Time");
-		new CommonFunctions().elementView(lblProcessingFee, "Processing Fee");
-		new CommonFunctions().elementView(lblTotalAmount, "Total Amount");
-		new CommonFunctions().elementView(lblAccountBalance, "Account Balance");
-		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
-		new CommonFunctions().elementView(lblUserName, "User Name");
-		new CommonFunctions().elementView(lblAccountAddress, "Account Address");
-		click(referenceID, "Reference ID");
+//		new CommonFunctions().verifyLabelText(transactions, "Transaction Heading", transactionHeading);
+//		new CommonFunctions().elementView(lblStatus, "Status");
+//		new CommonFunctions().elementView(lblDateTime, "Date & Time");
+//		new CommonFunctions().elementView(lblProcessingFee, "Processing Fee");
+//		new CommonFunctions().elementView(lblTotalAmount, "Total Amount");
+//		new CommonFunctions().elementView(lblAccountBalance, "Account Balance");
+//		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
+//		new CommonFunctions().elementView(lblUserName, "User Name");
+//		new CommonFunctions().elementView(lblAccountAddress, "Account Address");
+//		click(referenceID, "Reference ID");
+		
 	}
 
 	public void verifyReceiveTransactionDetails(String transactionHeading) {

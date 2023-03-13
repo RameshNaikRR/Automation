@@ -16,7 +16,7 @@ public class SignUpPage extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
 	private By lnkPersonalAccount = MobileBy
 			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
-	private By lnKBusinessAccount = MobileBy.xpath("");
+	private By lnKBusinessAccount = MobileBy.xpath("//*[contains(@resource-id,'businessAccontLL')]");
 	private By lblCreateAccount = MobileBy.xpath("//*[@text='Create Account']|//*[@name='Create Account']");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]|(//*[@name='First Name'])[1]");
 	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'lastNameET')]|(//*[@name='Last Name'])[1]");
@@ -54,11 +54,17 @@ public class SignUpPage extends MobileFunctions {
 	public void clickPersonalAccount() {
 		click(lnkPersonalAccount, "Personal Account");
 	}
+	public void verifyPersonalAccount() {
+		new CommonFunctions().elementView(lnkPersonalAccount, "Personal Account");
+	}
 
 	public void clickBusinessAccount() {
 		click(lnKBusinessAccount, "Business Account");
 	}
-
+    public void verifyBusinessAccount() {
+    	new CommonFunctions().elementView(lnKBusinessAccount, "Business Account");
+    }
+	
 	public void verifyCreateAccount(String createAccount) {
 		new CommonFunctions().verifyLabelText(lblCreateAccount, createAccount, "Create Account");
 	}

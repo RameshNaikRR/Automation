@@ -54,5 +54,7 @@ public class TokenHomePopUp extends MobileFunctions {
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
 	}
-
+	public TransactionDetailsComponent2 transactionDetailsComponent2() {
+    	return new TransactionDetailsComponent2();
+    }
 }

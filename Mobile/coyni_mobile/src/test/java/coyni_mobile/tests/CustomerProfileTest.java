@@ -85,7 +85,25 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("testAddAddress failed due to exception " + e);
 		}
 	}
-
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickProfile();
+			customerProfilePage.verifyUserDetailsView();
+			customerProfilePage.clickUserDetails();
+			customerProfilePage.userDetailsPage().verifyUserName(data.get("userNameText"));
+			customerProfilePage.userDetailsPage().verifyExistingEmail(data.get("existingEmail"));
+			customerProfilePage.userDetailsPage().verifyExistingPhoneNumber(data.get("existingPhone"));
+			customerProfilePage.userDetailsPage().verifyAddress(data.get("existingAddress"));
+			customerProfilePage.userDetailsPage().navigationComponent().clickClose();
+			customerProfilePage.clickLogOut();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Test user details failed due to exception " + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testUserDetailsView(String strParams) {
@@ -1063,133 +1081,133 @@ public class CustomerProfileTest {
 
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testAddCardWithInvalidData(String strParams, String card) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickProfile();
-//			customerProfilePage.clickPaymentMethods();
-//			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-//			if (card.equalsIgnoreCase("credit")) {
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
-//			} else {
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
-//			}
-//			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillNameOnCard(data.get("nameOnCard"));
-//			DriverFactory.getDriver().hideKeyboard();
-//			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillCardNumber(data.get("cardNumber"));
-//			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillCardExp(data.get("cardExp"));
-//			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillCVVorCVC(data.get("cvvOrCVC"));
-//			if (data.get("validateAddress").equalsIgnoreCase("yes")) {
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().fillAddressLine2(data.get("addreddLine2"));
-//				DriverFactory.getDriver().hideKeyboard();
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().fillCity(data.get("city"));
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().selectState(data.get("state"));
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-//			}
-//			if (data.get("validatePreAuthy").equalsIgnoreCase("yes")) {
-//
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().clickAddCard();
-//
-//				String[] msg = data.get("errMsg").split(",");
-//				for (int i = 0; i < 2; i++) {
-//					System.out.println(msg[i]);
-//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//							.mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
-//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//							.mailingAddressComponent().preAuthorizationPage().clickVerify();
-//					new CommonFunctions().validateFormErrorMessage(msg[i], "pre-Authorization");
-//				}
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().preAuthorizationPage().clickVerify();
-//
-//				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//						.mailingAddressComponent().preAuthorizationPage().preAuthorizationFailedPage()
-//						.verifyHeading(data.get("statusHeading"));
-//			}
-//			if (!data.get("errMsg").isEmpty()) {
-//				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
-//			}
-//		} catch (Exception e) {
-//
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//		}
-//	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddCardWithInvalidData(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			String[] details = data.get("details").split("-");
-			for (int i = 0; i < details.length; i++) {
-				String[] individualDetails = details[i].split(",");
-				//tokenAccountPage.clickProfile();
-			//	customerProfilePage.clickPaymentMethods();
-			//	customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-				if (card.equalsIgnoreCase("credit")) {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
-				} else {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			tokenAccountPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
+			} else {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			}
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			DriverFactory.getDriver().hideKeyboard();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCVVorCVC(data.get("cvvOrCVC"));
+			if (data.get("validateAddress").equalsIgnoreCase("yes")) {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillAddressLine2(data.get("addreddLine2"));
+				DriverFactory.getDriver().hideKeyboard();
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillCity(data.get("city"));
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().selectState(data.get("state"));
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			}
+			if (data.get("validatePreAuthy").equalsIgnoreCase("yes")) {
+
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickAddCard();
+
+				String[] msg = data.get("errMsg").split(",");
+				for (int i = 0; i < 2; i++) {
+					System.out.println(msg[i]);
+					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
+					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().preAuthorizationPage().clickVerify();
+					new CommonFunctions().validateFormErrorMessage(msg[i], "pre-Authorization");
 				}
-				if (individualDetails[0].equalsIgnoreCase("Yes")) {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillNameOnCard(individualDetails[1]);
-					DriverFactory.getDriver().hideKeyboard();
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCardNumber(individualDetails[2]);
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCardExp(individualDetails[3]);
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCVVorCVC(individualDetails[4]);
-				}
-				if (individualDetails[5].equalsIgnoreCase("yes")) {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.mailingAddressComponent().fillAddressLine1(individualDetails[6]);
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.mailingAddressComponent().fillAddressLine2(individualDetails[7]);
-					DriverFactory.getDriver().hideKeyboard();
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.mailingAddressComponent().fillCity(individualDetails[8]);
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.mailingAddressComponent().selectState(individualDetails[9]);
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.mailingAddressComponent().fillZipCode(individualDetails[10]);
-				}
-				if (!individualDetails[11].isEmpty()) {
-					new CommonFunctions().validateFormErrorMessage(individualDetails[11], individualDetails[12]);
-				}
-				if(individualDetails[13].equalsIgnoreCase("Yes")) {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().navigationComponent()
-							.clickBack();
-					}
-				if (individualDetails[14].equalsIgnoreCase("Yes")) {
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.navigationComponent().clickClose();
-					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.navigationComponent().clickBack();
-				}
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().preAuthorizationPage().fillAmount(data.get("amount"));
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().preAuthorizationPage().clickVerify();
+
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().preAuthorizationPage().preAuthorizationFailedPage()
+						.verifyHeading(data.get("statusHeading"));
+			}
+			if (!data.get("errMsg").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
 			}
 		} catch (Exception e) {
 
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddCardWithInvalidData(String strParams, String card) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			String[] details = data.get("details").split("-");
+//			for (int i = 0; i < details.length; i++) {
+//				String[] individualDetails = details[i].split(",");
+//				//tokenAccountPage.clickProfile();
+//			//	customerProfilePage.clickPaymentMethods();
+//			//	customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+//				if (card.equalsIgnoreCase("credit")) {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCreditCard();
+//				} else {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+//				}
+//				if (individualDetails[0].equalsIgnoreCase("Yes")) {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.fillNameOnCard(individualDetails[1]);
+//					DriverFactory.getDriver().hideKeyboard();
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.fillCardNumber(individualDetails[2]);
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.fillCardExp(individualDetails[3]);
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.fillCVVorCVC(individualDetails[4]);
+//				}
+//				if (individualDetails[5].equalsIgnoreCase("yes")) {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.mailingAddressComponent().fillAddressLine1(individualDetails[6]);
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.mailingAddressComponent().fillAddressLine2(individualDetails[7]);
+//					DriverFactory.getDriver().hideKeyboard();
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.mailingAddressComponent().fillCity(individualDetails[8]);
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.mailingAddressComponent().selectState(individualDetails[9]);
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.mailingAddressComponent().fillZipCode(individualDetails[10]);
+//				}
+//				if (!individualDetails[11].isEmpty()) {
+//					new CommonFunctions().validateFormErrorMessage(individualDetails[11], individualDetails[12]);
+//				}
+//				if(individualDetails[13].equalsIgnoreCase("Yes")) {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().navigationComponent()
+//							.clickBack();
+//					}
+//				if (individualDetails[14].equalsIgnoreCase("Yes")) {
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.navigationComponent().clickClose();
+//					customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+//							.navigationComponent().clickBack();
+//				}
+//			}
+//		} catch (Exception e) {
+//
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1237,9 +1255,9 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testGetHelp(String strPrams) {
+	public void testGetHelp(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.clickGetHelp();
 			customerProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
@@ -1251,10 +1269,10 @@ public class CustomerProfileTest {
 	}
 
 	@Test
-//	@Parameters({ "strParams" })
-	public void testAllLinksInProfile() {
+	@Parameters({ "strParams" })
+	public void testAllLinksInProfile(String strParams) {
 		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickProfile();
 			customerProfilePage.verifyUserProfile();
 			customerProfilePage.clickUserDetails();
@@ -1264,6 +1282,7 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
 			customerProfilePage.clickPreferences();
 			customerProfilePage.preferencesComponent().verifyPreferencesHeading();
+			customerProfilePage.preferencesComponent().selectTimeZone(data.get("timeZone1"));
 			customerProfilePage.preferencesComponent().clickBackArrow();
 			customerProfilePage.clickAccountLimits();
 			customerProfilePage.accountLimitsComponent().verifyHeading();

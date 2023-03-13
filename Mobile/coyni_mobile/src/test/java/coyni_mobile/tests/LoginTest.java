@@ -744,7 +744,6 @@ public class LoginTest {
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
 			loginPage.verifyRememberMeView();
-			Thread.sleep(1000);
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().navigationComponent().clickClose();
 			loginPage.clickRetrieveEmail();

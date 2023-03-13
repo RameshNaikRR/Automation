@@ -9,14 +9,14 @@ import io.appium.java_client.MobileBy;
 public class FiltersComponent extends MobileFunctions {
 
 	private By lblFilter = MobileBy.xpath("");
-	private By btnFilters = MobileBy.xpath("");
+	private By btnFilters = MobileBy.xpath("//*[contains(@resource-id,'filterIconIV')]");
 	private By lblTransactionType = MobileBy.xpath("");
 	private By lblTransactionSubType = MobileBy.xpath("");
 	private By lblTransactionStatus = MobileBy.xpath("");
 	private By lblTransactionAmount = MobileBy.xpath("");
-	private By lblDate = MobileBy.xpath("");
+	private By lblDate = MobileBy.xpath("//*[contains(@resource-id,'datePickET')]");
 
-	private By btnPayRequest = MobileBy.xpath(" ");
+	private By btnPayRequest = MobileBy.xpath("//*[contains(@resource-id,'transTypePR')]");
 	private By btnBuyToken = MobileBy.xpath(" ");
 	private By btnSalesOrder = MobileBy.xpath(" ");
 	private By btnWithdrawn = MobileBy.xpath(" ");
@@ -24,7 +24,7 @@ public class FiltersComponent extends MobileFunctions {
 	private By btnAccountTransfer = MobileBy.xpath(" ");
 	private By btnPaidInvoice = MobileBy.xpath(" ");
 
-	private By btnSent = MobileBy.xpath(" ");
+	private By btnSent = MobileBy.xpath("//*[contains(@resource-id,'transSubTypeSent')]");
 	private By btnReceived = MobileBy.xpath(" ");
 	private By btnBankAccount = MobileBy.xpath(" ");
 	private By btnCreditCard = MobileBy.xpath(" ");
@@ -42,11 +42,11 @@ public class FiltersComponent extends MobileFunctions {
 	private By btnInProgress = MobileBy.xpath(" ");
 	private By btnFailed = MobileBy.xpath(" ");
 
-	private By txtTransactionAmountFrom = MobileBy.xpath(" ");
-	private By txtTransactionAmountTo = MobileBy.xpath(" ");
+	private By txtTransactionAmountFrom = MobileBy.xpath("//*[contains(@resource-id,'transAmountStartET')]");
+	private By txtTransactionAmountTo = MobileBy.xpath("//*[contains(@resource-id,'transAmountEndET')]");
 
 	private By btnResetAllFilters = MobileBy.xpath("");
-	private By applyFilter = MobileBy.xpath("");
+	private By applyFilter = MobileBy.xpath("//*[contains(@resource-id,'applyFilterBtnCV')]");
 
 	public void clickPayRequest() {
 		click(btnPayRequest, "Click Pay Request");
@@ -141,12 +141,13 @@ public class FiltersComponent extends MobileFunctions {
 		click(btnFailed, "Failed");
 	}
 
-	public void fillTransactionAmountFrom(String FromAmount) {
-		enterText(txtTransactionAmountFrom, FromAmount, "From Amount");
+	public void fillTransactionAmountFrom(String fromAmount) {
+		scrollDownToElement(txtTransactionAmountFrom, fromAmount);
+		enterText(txtTransactionAmountFrom, fromAmount, "From Amount");
 	}
 
-	public void fillTransactionAmountTo(String ToAmount) {
-		enterText(txtTransactionAmountTo, ToAmount, "To Amount");
+	public void fillTransactionAmountTo(String toAmount) {
+		enterText(txtTransactionAmountTo, toAmount, "To Amount");
 	}
 
 	public void clickFiltersIcon() {
@@ -205,6 +206,9 @@ public class FiltersComponent extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+	public DatePickerComponent datePickerComponent() {
+		return new DatePickerComponent();
 	}
 
 }

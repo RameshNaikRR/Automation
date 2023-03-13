@@ -19,6 +19,7 @@ public class SignUpTest {
 	SignUpPage signUpPage;
 	LandingPage landingPage;
 	UploadDocumentComponent uploadDocumentComponent;
+	CustomerProfileTest customerProfileTest;
 
 	@BeforeMethod
 	public void init() {
@@ -92,6 +93,8 @@ public class SignUpTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
+			signUpPage.verifyPersonalAccount();
+			signUpPage.verifyBusinessAccount();
 			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			signUpPage.fillFirstName(data.get("firstName"));

@@ -11,6 +11,10 @@ public class ScanPage extends MobileFunctions {
 
 	private By btnScanCode = MobileBy.xpath("//*[contains(@resource-id,'scanCodeTV')]");
 	private By btnScanMe = MobileBy.xpath("//*[contains(@resource-id,'scanMeTV')]");
+	private By btnAlbum = MobileBy.xpath("//*[contains(@resource-id,'albumIV')]");
+	private By btnPictures = MobileBy.xpath("//*[contains(@class,'RelativeLayout')][1]");
+	private By imgScanQR1 = MobileBy.xpath("//*[contains(@content-desc,'Photo taken')][2]");
+	private By imgScanQR2 = MobileBy.xpath("//*[contains(@content-desc,'Photo taken')][1]");
 	private By btnWhileUsingApp = MobileBy
 			.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
 
@@ -26,6 +30,18 @@ public class ScanPage extends MobileFunctions {
 		if(getElementList(btnWhileUsingApp, "While Using App").size()>0) {
 		click(btnWhileUsingApp, "While Using App");
 		}
+	}
+	public void clickPictures() {
+		click(btnPictures, "Pictures");
+	}
+	public void clickAlbum() {
+		click(btnAlbum, "Album");
+	}
+	public void clickQRCode() {
+		click(imgScanQR1, "Code");
+	}
+	public void clickQRWithAmount() {
+		click(imgScanQR2, "With Amount");
 	}
 
 	public void verifyScanMe() {

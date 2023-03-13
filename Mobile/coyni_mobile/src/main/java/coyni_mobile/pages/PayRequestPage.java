@@ -12,14 +12,24 @@ public class PayRequestPage extends MobileFunctions {
 	private By allow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
 	private By firstAndLastLetterName = MobileBy.xpath("//*[contains(@resource-id,'tvNameHead')]");
 	private By txtSearchBx = MobileBy.xpath("//*[contains(@resource-id,'etSearch')]");// *[@name='search'])[2]/following-sibling::*[1]|
-	private By lblUser = MobileBy.xpath("(//*[contains(@resource-id,'tvUserName')])[1]");// *[@name='Recent
-																							// Contacts'])[1]/following-sibling::*[1]|
+	private By lblUser = MobileBy.xpath("(//*[contains(@resource-id,'tvUserName')])[1]");// *[@name='Recent// Contacts'])[1]/following-sibling::*[1]|
+	private By lblRecentContacts = MobileBy.xpath("//*[@text='Recent Contacts']");
+	private By lblContactList = MobileBy.xpath("//*[@text='Contact List']");
 //	public void clickSearch() {
 //	click(iconSearch, "Search");
 //}
 
 	public void fillSearchBx(String userName) {
 		enterText(txtSearchBx, userName, "userName");
+	}
+	public void verifySearchBx() {
+		new CommonFunctions().elementView(txtSearchBx, "Search");
+	}
+	public void verifyRecentContacts() {
+		new CommonFunctions().elementView(lblRecentContacts, "Recent Contacts");
+	}
+	public void verifyContactList() {
+		new CommonFunctions().elementView(lblContactList, "Contact List");
 	}
 
 	public void verifyFirstAndLastLetter(String expHeading) {

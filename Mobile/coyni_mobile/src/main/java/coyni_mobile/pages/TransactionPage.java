@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.FiltersComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.TransactionDetailsComponent;
+import coyni_mobile.components.TransactionDetailsComponent2;
 import coyni_mobile.popups.FilterPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -178,5 +179,7 @@ public class TransactionPage extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
+public TransactionDetailsComponent2 transactionDetailsComponent2() {
+	return new TransactionDetailsComponent2();
+}
 }

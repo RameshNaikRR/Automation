@@ -14,6 +14,7 @@ import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.components.TokenHomePopUp;
+import coyni_mobile.components.TransactionDetailsComponent2;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
@@ -27,6 +28,7 @@ import io.appium.java_client.touch.offset.PointOption;
 public class TokenAccountPage extends MobileFunctions {
 
 	private By transactionsHeading = MobileBy.xpath("//*[@text='Recent Transactions']");
+	private By lblLatestTransaction = MobileBy.xpath("(//*[contains(@resource-id,'latestmessageTV')])[1]");
 	private By lblUserName = MobileBy.xpath(
 			"//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
@@ -178,6 +180,9 @@ public class TokenAccountPage extends MobileFunctions {
 	public void clickBuyToken() {
 		click(btnBuyToken, "Buy Token");
 	}
+	public void clickLatestTransaction() {
+		click(lblLatestTransaction, "Latest Transaction");
+	}
 
 	public int verifyProfile() throws InterruptedException {
 		Thread.sleep(2000);
@@ -234,4 +239,5 @@ public class TokenAccountPage extends MobileFunctions {
     public MailingAddressComponent mailingAddressComponent() {
     	return new MailingAddressComponent();
     }
+    
 }

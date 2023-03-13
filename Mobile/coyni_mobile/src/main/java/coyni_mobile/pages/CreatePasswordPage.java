@@ -49,7 +49,7 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 
 	public void verifyMessage(String msg) {
-		new CommonFunctions().verifyLabelText(lblSuccessMsg, "Your password has been successfully updated.", msg);
+		new CommonFunctions().verifyLabelText(lblSuccessMsg, "Message", msg);
 	}
 
 	public void clickLogin() {

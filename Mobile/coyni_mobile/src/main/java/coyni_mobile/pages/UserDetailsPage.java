@@ -15,6 +15,7 @@ public class UserDetailsPage extends MobileFunctions {
 	private By heading = MobileBy.xpath("//*[@text='User Details']");
 	private By btnEditUserImage = MobileBy.xpath("//*[contains(@resource-id,'editProfile')]");
 	private By lblEmailTitle = MobileBy.xpath("//*[@text='Email']");
+	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'/userNameTV')]");
 	private By lblExistingEmail = MobileBy.xpath("//*[contains(@resource-id,'/userEmailIdTV')]");
 	private By lnkEditEmail = MobileBy.xpath("//*[contains(@resource-id,'/userEmailIdTV')]/../following-sibling::*[1]");
 	private By lblPhoneNumberTitle = MobileBy.xpath("//*[@text='Phone Number']");
@@ -38,7 +39,9 @@ public class UserDetailsPage extends MobileFunctions {
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
-
+    public void verifyUserName(String userName) {
+    	new CommonFunctions().verifyLabelText(lblUserName, "User Name", userName);
+    }
 	public void verifyCurrentPhoneNumHeading(String PhoneHeading) {
 		new CommonFunctions().verifyLabelText(lblCurrentPhoneNumHeading, "PhoneHeading", PhoneHeading);
 	}
@@ -66,7 +69,9 @@ public class UserDetailsPage extends MobileFunctions {
 	public void verifyExistingPhoneNumberView() {
 		new CommonFunctions().elementView(lblExistingPhonenumber, "Existing PhoneNumber");
 	}
-
+    public void verifyExistingPhoneNumber(String phoneNumber) {
+    	new CommonFunctions().verifyLabelText(lblExistingPhonenumber, "Phone Number", phoneNumber);
+    }
 	public void verifyEditPhoneNumberArrowView() {
 		new CommonFunctions().elementView(lnkEditPhoneNumber, "Edit PhoneNumber Arrow");
 	}
@@ -77,6 +82,9 @@ public class UserDetailsPage extends MobileFunctions {
 
 	public void verifyExistingEmailView() {
 		new CommonFunctions().elementView(lblExistingEmail, "Existing Email");
+	}
+	public void verifyExistingEmail(String email) {
+		new CommonFunctions().verifyLabelText(lblExistingEmail, "Email", email);
 	}
 
 	public void verifyEditEmailArrowView() {
