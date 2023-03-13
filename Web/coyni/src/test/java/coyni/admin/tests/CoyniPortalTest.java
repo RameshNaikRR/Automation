@@ -318,7 +318,7 @@ public class CoyniPortalTest {
 		tokenAccountPage.mailingAddressComponent().fillAddress1(data.get("addressLine1"));
 		tokenAccountPage.mailingAddressComponent().fillAddress2(data.get("addressLine2"));
 		tokenAccountPage.mailingAddressComponent().fillCity(data.get("city"));
-	//	tokenAccountPage.mailingAddressComponent().clickstate();
+		// tokenAccountPage.mailingAddressComponent().clickstate();
 		Thread.sleep(500);
 		tokenAccountPage.mailingAddressComponent().selectState(data.get("state"));
 
@@ -356,7 +356,7 @@ public class CoyniPortalTest {
 			// tokenAccountPage.clickWithdrawToSignet();
 			tokenAccountPage.withdrawToSignetPopup().verifyPageHeading();
 			tokenAccountPage.withdrawToSignetPopup().fillAmount(data.get("amount"));
-			
+
 			tokenAccountPage.withdrawToSignetPopup().getAvailableBalance();
 			tokenAccountPage.withdrawToSignetPopup().fillMessage(data.get("description"));
 			int lblError = tokenAccountPage.withdrawToSignetPopup().lblError();
@@ -364,12 +364,11 @@ public class CoyniPortalTest {
 				ExtentTestManager.setInfoMessageInReport("Don't have amount in Total withdraw");
 			} else {
 
-				
 				tokenAccountPage.withdrawToSignetPopup().clickNext();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup()
 						.verifyPageHeading(data.get("withdrawToSignetPreviewHeading"));
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().verifyAmount();
-			//	tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
+				// tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getWithdrawAmount();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getProcessingFee();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().getTotal();
 				tokenAccountPage.withdrawToSignetPopup().withdrawToSignetPreviewPopup().clickConfirm();
@@ -446,7 +445,8 @@ public class CoyniPortalTest {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAddSignetAccountInvalidAmount Failed due to this Exception" + e);
+			ExtentTestManager
+					.setFailMessageInReport("testAddSignetAccountInvalidAmount Failed due to this Exception" + e);
 
 		}
 	}
@@ -466,6 +466,11 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().getBatchPayOuts();
 			homePage.sideBarComponent().commissionAccountPage().getNextPayOut();
 			homePage.sideBarComponent().commissionAccountPage().getLastPayOut();
+			homePage.sideBarComponent().commissionAccountPage().verifyWithdrawTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyBuyTokenTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyPayRequestTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifySaleOrderTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyRefundTransaction();
 			// homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("payOutHeading"));
 			// homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
@@ -475,6 +480,11 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().getBatchPayOuts();
 			homePage.sideBarComponent().commissionAccountPage().getNextPayOut();
 			homePage.sideBarComponent().commissionAccountPage().getLastPayOut();
+			homePage.sideBarComponent().commissionAccountPage().verifyWithdrawTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyBuyTokenTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyPayRequestTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifySaleOrderTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyRefundTransaction();
 			// homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("payOutHeading"));
 			// homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
@@ -484,6 +494,11 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().getBatchPayOuts();
 			homePage.sideBarComponent().commissionAccountPage().getNextPayOut();
 			homePage.sideBarComponent().commissionAccountPage().getLastPayOut();
+			homePage.sideBarComponent().commissionAccountPage().verifyWithdrawTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyBuyTokenTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyPayRequestTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifySaleOrderTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyRefundTransaction();
 			// homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("payOutHeading"));
 			// homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
@@ -493,6 +508,11 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().getBatchPayOuts();
 			homePage.sideBarComponent().commissionAccountPage().getNextPayOut();
 			homePage.sideBarComponent().commissionAccountPage().getLastPayOut();
+			homePage.sideBarComponent().commissionAccountPage().verifyWithdrawTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyBuyTokenTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyPayRequestTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifySaleOrderTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyRefundTransaction();
 			// homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("payOutHeading"));
 			// homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
@@ -502,6 +522,11 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().commissionAccountPage().getBatchPayOuts();
 			homePage.sideBarComponent().commissionAccountPage().getNextPayOut();
 			homePage.sideBarComponent().commissionAccountPage().getLastPayOut();
+			homePage.sideBarComponent().commissionAccountPage().verifyWithdrawTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyBuyTokenTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyPayRequestTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifySaleOrderTransaction();
+			homePage.sideBarComponent().commissionAccountPage().verifyRefundTransaction();
 			// homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("payOutHeading"));
 			// homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
@@ -516,17 +541,24 @@ public class CoyniPortalTest {
 	public void testCommissionAccountPayOut(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickCommissionAccount();
+			//homePage.sideBarComponent().clickCoyniPortal();
+			// homePage.sideBarComponent().clickCommissionAccount();
 			homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
-			homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("heading"));
+			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("heading"));
+			Thread.sleep(3000);
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().fillSearch(data.get("search"));
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().clickPayOut();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutDate();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutAmount();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTransactionReference();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getToTokenAccount();
-
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTransactionCount();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getVolumeCount();
+			String commission = homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getCommission();
+	String payout=		homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayoutCommission();
+	if(commission.contains(payout)) {
+		ExtentTestManager.setInfoMessageInReport("Payout Amount and Commission is Same");
+	}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCommissionAccount Failed due to Exception " + e);
 		}

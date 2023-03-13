@@ -13,7 +13,7 @@ public class PayOutsPage extends BrowserFunctions {
 
 	private By lblPayOutHistory = By.xpath("//span[contains(text(),'Payout History')]");
 
-	private By txtSearch = By.xpath("//input[@class='form-input  payOut_search_bar_gbox__zmdaq mb-2']");
+	private By txtSearch = By.xpath("//input[@class='form-input  payOut_search_bar_gbox__E8xRn mb-2']");
 
 	private By payOut = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(1)");
 
