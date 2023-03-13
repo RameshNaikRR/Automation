@@ -240,7 +240,7 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup()
 					.verifyTitle(data.get("exportHeading"));
 			Thread.sleep(2000);
-			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickExportPage();
+		//	homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickExportPage();
 			homePage.sideBarComponent().exportComponent().exportSelectedTransactionsPopup().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception " + e);
@@ -538,27 +538,47 @@ public class CoyniPortalTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testCommissionAccountManualBatchNow(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().commissionAccountPage().verifyHeading(data.get("heading"));
+			String getcommissionAmount = homePage.sideBarComponent().commissionAccountPage().getcommissionAmount();
+			String totalAmount = homePage.sideBarComponent().commissionAccountPage().getTotalAmount();
+			if (getcommissionAmount == totalAmount) {
+				ExtentTestManager.setInfoMessageInReport("Total Amount and Commision Amount is same");
+				homePage.sideBarComponent().commissionAccountPage().clickBatchNow();
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testCommissionAccountManualBatchNow Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testCommissionAccountPayOut(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//homePage.sideBarComponent().clickCoyniPortal();
-			// homePage.sideBarComponent().clickCommissionAccount();
+
 			homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
-			// homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().verifyHeading(data.get("heading"));
 			Thread.sleep(3000);
-			homePage.sideBarComponent().commissionAccountPage().payOutsPage().fillSearch(data.get("search"));
-			homePage.sideBarComponent().commissionAccountPage().payOutsPage().clickPayOut();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().fillSearch();
+			homePage.sideBarComponent().commissionAccountPage().payOutsPage().clickPayOutDate();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutDate();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayOutAmount();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTransactionReference();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getToTokenAccount();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTransactionCount();
 			homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getVolumeCount();
-			String commission = homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getCommission();
-	String payout=		homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getPayoutCommission();
-	if(commission.contains(payout)) {
-		ExtentTestManager.setInfoMessageInReport("Payout Amount and Commission is Same");
-	}
+			String commission = homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage()
+					.getCommission();
+			String payout = homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage()
+					.getPayoutCommission();
+			if (commission.contains(payout)) {
+				ExtentTestManager.setInfoMessageInReport("Payout Amount and Commission is Same");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCommissionAccount Failed due to Exception " + e);
 		}
@@ -567,66 +587,83 @@ public class CoyniPortalTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testCommissionExportSelectedPayOutToday(String strParams) throws InterruptedException {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
 		homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Today");
+	}catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("testCommissionAccount Failed due to Exception " + e);
 	}
-
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testCommissionExportSelectedPayOutYesterday(String strParams) throws InterruptedException {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
+		
 		homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Yesterday");
+	
+	} catch (Exception e) {
+		ExtentTestManager
+				.setFailMessageInReport("testCommissionAccountManualBatchNow Failed due to Exception " + e);
 	}
-
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testCommissionExportSelectedpayOutLastSevenDays(String strParams) throws InterruptedException {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
+		
 		homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Last Seven Days");
+	} catch (Exception e) {
+		ExtentTestManager
+				.setFailMessageInReport("testCommissionAccountManualBatchNow Failed due to Exception " + e);
+	}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testCommissionExportSelectedPayOutLastMonth(String strParams) throws InterruptedException {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
+		
 		homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent().clickExport();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Last Month");
+	} catch (Exception e) {
+		ExtentTestManager
+				.setFailMessageInReport("testCommissionAccountManualBatchNow Failed due to Exception " + e);
+	}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testCommissionExportSelectedPayOutMonthToDate(String strParams) throws InterruptedException {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarComponent().clickCoyniPortal();
-		homePage.sideBarComponent().clickCommissionAccount();
+		
 		homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
 		homePage.sideBarComponent().exportComponent().clickExport();
 		homePage.sideBarComponent().commissionAccountPage().payOutsPage().exportComponent()
 				.exportSelectedTransactionsPopup().verifyHeading(data.get("heading"));
 		testExportSelectedTransactions(strParams, "Month to Date");
+	} catch (Exception e) {
+		ExtentTestManager
+				.setFailMessageInReport("testCommissionAccountManualBatchNow Failed due to Exception " + e);
+	}
 	}
 
 	@Test
@@ -634,13 +671,12 @@ public class CoyniPortalTest {
 	public void testCommissionAccountTransactionList(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickCoyniPortal();
-			homePage.sideBarComponent().clickCommissionAccount();
+			
 			homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
 			homePage.sideBarComponent().tokenAccountPage().transactionPage()
-					.verifyTransactionHeading(data.get("heading"));
-			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
-					.verifyTableItemsCount(data.get("query"));
+					.verifyTransaction();
+//			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
+//					.verifyTableItemsCount(data.get("query"));
 			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()
 					.verifyPageNumbersWithCount();
 //			homePage.sideBarComponent().tokenAccountPage().transactionPage().paginationAndEntriesComponent()

@@ -20,7 +20,7 @@ public class PayOutIDPage extends BrowserFunctions {
 	private By lblvolume = By.xpath("//span[contains(@class,'text-lg font-bold text-right w-52 text-cgy4')]");
 	private By lblTransactionReference = By
 			.xpath("//span[contains(text(),'Transaction Reference ID:')]/following-sibling::*[1]");
-	private By lblPayoutCommission = By.xpath("//span[contains(@class,'text-xl font-bold text-cgy4')])[2]");
+	private By lblPayoutCommission = By.xpath("(//span[contains(@class,'text-xl font-bold text-cgy4')])[2]");
 	private By lblTransactionCount = By.xpath("//span[contains(@class,'text-lg font-bold text-right w-52 text-cgy4')]");
 
 	private By lblToTokenAccount = By.xpath("//span[contains(text(),'To Token Account:')]/following-sibling::*[1]");

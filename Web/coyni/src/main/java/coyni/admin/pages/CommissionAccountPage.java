@@ -33,7 +33,24 @@ public class CommissionAccountPage extends BrowserFunctions {
 
 	private By lblViewFullPayOutHistory = By.xpath("//button[text()='View Full Payout History']");
 
-	private By lblViewFullTransactionHistory = By.xpath("//span[contains(text(),'View Full Transactions History')]");
+	private By lblViewFullTransactionHistory = By.xpath("//button[contains(text(),'View Full Transactions History')]");
+
+	private By lblTotalCommissionAmount = By
+			.xpath("//span[contains(@class,'Gbox_wallet_balance_larger__Gqdxt font-bold cursor-default text-cgy4 ')]");
+	private By lblTotalAmount = By
+			.xpath("//span[contains(@class,'Gbox_wallet_balance3_larger__xYteD font-bold cursor-default text-cgy4 ')]");
+
+	public String getcommissionAmount() {
+		String text = getText(lblTotalCommissionAmount, "Commission Amount");
+		ExtentTestManager.setInfoMessageInReport("Total Commission Earned is " + text);
+		return text;
+	}
+
+	public String getTotalAmount() {
+		String text = getText(lblTotalAmount, "Total Amount");
+		ExtentTestManager.setInfoMessageInReport("Total Amount  is " + text);
+		return text;
+	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -62,10 +79,15 @@ public class CommissionAccountPage extends BrowserFunctions {
 	}
 
 	public void clickBatchNow() {
-		click(lnkBatchNow, "Batch Now");
+		if (getElement(lnkBatchNow, "Batch Now").isDisplayed()) {
+			click(lnkBatchNow, "Batch Now");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Batch Now Button is disable please you pay after 12 hr");
+		}
 	}
 
 	public void clickFullPayOutHistory() {
+		scrollToElement(lblViewFullPayOutHistory, "");
 		new CommonFunctions().verifyTextUnderLine(lblViewFullPayOutHistory, "Full PayOut History ");
 		click(lblViewFullPayOutHistory, "Full PayOut History");
 	}

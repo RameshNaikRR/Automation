@@ -12,6 +12,8 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TransactionPage extends BrowserFunctions {
 
 	private By headingTransactionList = By.xpath("//span[text()='Merchant Transactions']");
+	
+	private By lblHeading = By.xpath("Transactions");
 
 	private By lblToken = By.xpath("//div[text()='Token']");
 
@@ -40,6 +42,9 @@ public class TransactionPage extends BrowserFunctions {
 
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", expHeading);
+	}
+	public void verifyTransaction() {
+		new CommonFunctions().verifyLabelText(lblHeading, "Transactions", "Transactions");
 	}
 
 	public void verifyEntriesMessage() {
