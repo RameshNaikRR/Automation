@@ -19,8 +19,11 @@ import io.appium.java_client.MobileBy;
 public class PaymentMethodsPage extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
-	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment')]|//*[contains(@resource-id,'cvAddPayment')]");
+	private By lblDescription = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnAddNewPaymentMethod = MobileBy
+			.xpath("//*[contains(@text,'Add New Payment')]|//*[contains(@resource-id,'cvAddPayment')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
+	private By lblBankDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankMsg')]");
 	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
@@ -28,7 +31,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
-	private By selectBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]|(//*[contains(@resource-id,'tvBankName')])[1]");
+	private By selectBank = MobileBy
+			.xpath("(//*[contains(@text,'Bank Account')])[1]|(//*[contains(@resource-id,'tvBankName')])[1]");
 	private By HeadingBankName = MobileBy.xpath("//*[contains(@resource-id,'selectedBankName')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
@@ -41,42 +45,63 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By numberOfBankAccounts = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankHead')]");
 	private By numberOfDebitCards = MobileBy.xpath("//*[contains(@resource-id,'tvDCardHead')]");
 	private By numberOfCreditCards = MobileBy.xpath("//*[contains(@resource-id,'tvCCardHead')]");
-	
+	private By lblPaymentHeading = MobileBy.xpath("//*[@text='Payment Methods']");
+	private By lblBankAccount = MobileBy.xpath("(//*[contains(@resource-id,'tvBankName')])[1]");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+
 	public void verifyBankAccounts() {
-		ExtentTestManager.setPassMessageInReport("Deleted the All Bank Accounts and Present Bank Account Number is : "+getText(numberOfBankAccounts));	
+		ExtentTestManager.setPassMessageInReport(
+				"Deleted the All Bank Accounts and Present Bank Account Number is : " + getText(numberOfBankAccounts));
 	}
-	
+
 	public void verifyDebitCards() {
-		ExtentTestManager.setPassMessageInReport("Deleted the All Debit Cards and Debit Card Number is : "+getText(numberOfDebitCards));	
+		ExtentTestManager.setPassMessageInReport(
+				"Deleted the All Debit Cards and Debit Card Number is : " + getText(numberOfDebitCards));
 	}
-	
+
 	public void verifyCreditCards() {
-		ExtentTestManager.setPassMessageInReport("Deleted the All Credit Cards and Credit Card Number is : "+getText(numberOfCreditCards));	
+		ExtentTestManager.setPassMessageInReport(
+				"Deleted the All Credit Cards and Credit Card Number is : " + getText(numberOfCreditCards));
 	}
-	
+
 	public int verifyNumOfDebitCards() {
 		return getElementList(btnDebitCards, "Debit Card").size();
 	}
-	
+
 	public int verifyNumOfCreditCards() {
 		return getElementList(btncreditCards, "Credit Cards").size();
 	}
-	
+
 	public int verifyNumOfBanks() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnBank));
 		return getElementList(btnBank, "Bank Account").size();
 	}
-	
+
 	public void verifyPaymentHeading(String expHeading) {
 		if (getElementList(lblHeading, "heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 		}
 	}
 
+	public void verifyDescription(String description) {
+		new CommonFunctions().verifyLabelText(lblDescription, "Description", description);
+	}
+
 	public void clickExternalBankAccount() {
 		click(bankAccountBtn, "Click External Bank Account");
+	}
+
+	public void verifyBankDescription(String bankDescription) {
+		new CommonFunctions().verifyLabelText(lblBankDescription, "Bank description", bankDescription);
+	}
+
+	public void verifyPayment(String paymentMethod) {
+		new CommonFunctions().verifyLabelText(lblPaymentHeading, "Heading", paymentMethod);
+	}
+
+	public void verifyBankAccount(String account) {
+		new CommonFunctions().verifyLabelText(lblBankAccount, "Bank Account", account);
 	}
 
 	public void clickNext() {
@@ -121,7 +146,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickCreditCard() {
-		click(btncreditCard,"Credit Card");
+		click(btncreditCard, "Credit Card");
 	}
 
 	public void clickDebitCard() {
@@ -135,7 +160,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public void clickBankAccount() {
 		click(selectBank, "Bank");
 	}
-	
+
 	public BuyTokenComponent buyTokenComponent() {
 		return new BuyTokenComponent();
 	}

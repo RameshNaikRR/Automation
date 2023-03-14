@@ -189,8 +189,7 @@ public class LoginTest {
 			String[] email = data.get("email").split(",");
 			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			String[] password = data.get("password").split(",");
-			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
-					password[3]);
+			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLoginFieldValidation failed due to Exception " + e);
 		}

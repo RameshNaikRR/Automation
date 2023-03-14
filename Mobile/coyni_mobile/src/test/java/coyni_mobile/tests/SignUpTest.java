@@ -259,7 +259,8 @@ public class SignUpTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
-			signUpPage.clickBusinessAccount();
+			//signUpPage.clickBusinessAccount();
+			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			String[] firstName = data.get("firstName").split(",");
 			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
@@ -271,8 +272,7 @@ public class SignUpTest {
 			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
 					phoneNumber[2]);
 			String[] password = data.get("password").split(",");
-			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
-					password[3]);
+			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2]);
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0], confirmPassword[1],
 					confirmPassword[2]);

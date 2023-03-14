@@ -11,80 +11,93 @@ import io.appium.java_client.MobileBy;
 
 public class AddExternalBankAccountComponent extends MobileFunctions {
 
-	private By heading = MobileBy.xpath("//*[@text='Add Bank Account']");
-	private By txtRoutingNumber = MobileBy.xpath("//*[contains(@resource-id,'routingNumberET')]");
-	private By txtConfirmRouting = MobileBy.xpath("//*[contains(@resource-id,'confirmRoutingNumberET')]");
-	private By txtAccNumber = MobileBy.xpath("//*[contains(@resource-id,'checkAccNumberET')]");
-	private By txtConfirmAccNumber = MobileBy.xpath("//*[contains(@resource-id,'confirmAccNumberET')]");
-	private By btnAdd = MobileBy.xpath("//*[contains(@resource-id,'addCV')]");
-	private By txtNameOnBank = MobileBy.xpath("//*[contains(@resource-id,'nameOnBankET')]");
-	private By lblFindAccHeading = MobileBy.xpath("//*[contains(@resource-id,'head')]");
-	private By lblFindAccDes = MobileBy.xpath("//*[contains(@resource-id,'descriptionTV')]");
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'addCV')]");
+	private By heading = MobileBy.xpath("//*[@text='Add Bank Checking Account']");
+	private By lblAccountDescription = MobileBy.xpath("//*[contains(@text,'coyni uses')]");
+	private By checkBox = MobileBy.xpath("//*[contains(@resource-id,'checkbox')]");
+	private By checkBoxDescription = MobileBy.xpath("//*[contains(@text,'I understand that')]");
+	private By btnStart = MobileBy.xpath("//*[contains(@resource-id,'cvStart')]");
+	private By lblSelectInstitution = MobileBy.xpath("//*[@text='Select your institution']");
+	// private By btnMXOauth = MobileBy.xpath("//*[@text='MX Bank (Oauth)www.mx.com']");
+	private By LnkSearchInstitutions = MobileBy.xpath("//*[@text='Search more institutions']|//*[@text='Search for your institution']");
+	private By lblSearch = MobileBy.xpath("//*[contains(@resource-id,'mx-connect-search')]");
+	private By btnTryAgain = MobileBy.xpath("//*[@text='Try Again']");
+	private By lblMxOauth = MobileBy.xpath("//*[@text='Add account with MX Bank (Oauth)']|//*[@text='MX Bank (Oauth)']|//*[@text='MX Bank (Oauth) www.mx.com']");
+	private By lblVeifyIdentity = MobileBy.xpath("//*[@text='Verify identity']");
+	private By btnContinueTesting = MobileBy.xpath("//*[@text='Continue']");
+	private By btnMxSavings = MobileBy.xpath("(//*[@text='MX Bank Savings'])[2]");
+	private By btnMxChecking = MobileBy.xpath("(//*[@text='MX Bank Checking'])[2]");
+	private By btnContinue = MobileBy.xpath("//*[@text='Continue']");
+	private By lblAccountAdded = MobileBy.xpath("//*[@text='Bank Account(s) Added']");
+	private By lblAccountAddedDescription = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'tvButton')]");
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "Bank Heading", expHeading);
+	public void verifyHeading(String bankHeading) {
+		new CommonFunctions().verifyLabelText(heading, "Bank Heading", bankHeading);
 	}
 
-	public void fillNameOnBankAcc(String expBankName) {
-		enterText(txtNameOnBank, expBankName, "Name On Bank Account");
+	public void verifyAccountDescription(String accountDescription) {
+		new CommonFunctions().verifyLabelText(lblAccountDescription, "Bank Account Description", accountDescription);
 	}
 
-	public void fillRoutingNum(String expRoutingNumber) {
-		enterText(txtRoutingNumber, expRoutingNumber, "Routing Number");
+	public void clickCheckBx() {
+		click(checkBox, "CheckBox");
+	}
+    public void fillBankName(String bankName) {
+    	enterText(lblSearch, bankName,"Bank Name");
+    }
+	public void verifyCheckBoxDescription(String checkBxDescription) {
+		new CommonFunctions().verifyLabelText(checkBoxDescription, "Checkbox Description", checkBxDescription);
 	}
 
-	public void fillConfirmRoutingNum(String expConfirmRouting) {
-		DriverFactory.getDriver().hideKeyboard();
-		enterText(txtConfirmRouting, expConfirmRouting, "Confirm Routing Number");
+	public void clickStart() {
+		click(btnStart, "Start");
 	}
 
-	public void fillAccNum(String expAccNumber) {
-		DriverFactory.getDriver().hideKeyboard();
-		enterText(txtAccNumber, expAccNumber, "AccNumber");
+	public void verifySelectInstitution(String selectInstitution) {
+		new CommonFunctions().verifyLabelText(lblSelectInstitution, "Select Institution", selectInstitution);
 	}
 
-	public void fillConfirmAccNum(String expConfirmAccNum) {
-		DriverFactory.getDriver().hideKeyboard();
-		enterText(txtConfirmAccNumber, expConfirmAccNum, "Confirm Account Number");
+	public void clickMxOauth() {
+		click(lblMxOauth, "Mx Oauth");
 	}
 
-	public void clickAdd() {
-		DriverFactory.getDriver().hideKeyboard();
-		//scrollDownToElement(btnAdd, "Add");
-		click(btnAdd, "Add");
+	public void clickSearchInstitution() {
+		click(LnkSearchInstitutions, "Search Institution");
 	}
-
-	public void addBank(String expHeading, String expNameOnBank, String expRouting, String expConRouting,
-			String expAccNum, String expConfirmAcc) {
-		verifyHeading(expHeading);
-		fillNameOnBankAcc(expNameOnBank);
-		fillRoutingNum(expRouting);
-		fillConfirmRoutingNum(expConRouting);
-		fillAccNum(expAccNum);
-		fillConfirmAccNum(expConfirmAcc);
-		clickAdd();
+	public void verifyMxOauth(String mxOauth) {
+		new CommonFunctions().verifyLabelText(lblMxOauth, "Select Institution", mxOauth);
 	}
-
+	public void clickContinueTesting() {
+		click(btnContinueTesting, "Continue");
+	}
+	public void verifyIdentity(String identity) {
+		new CommonFunctions().verifyLabelText(lblVeifyIdentity, "identity", identity);
+	}
+	public void clickMxChecking() {
+		click(btnMxChecking, "checking");
+	}
+	public void clickMxSavings() {
+		click(btnMxSavings, "Savings");
+	}
+	public void clickContinue() {
+		click(btnContinue, "Continue");
+	}
+	public void verifyAccountAdded(String successHeading) {
+		new CommonFunctions().verifyLabelText(lblAccountAdded, "Account Added", successHeading);
+	}
+	public void verifyAccountAddedDes(String successDescription) {
+		new CommonFunctions().verifyLabelText(lblAccountAddedDescription, "Account Added Description", successDescription);
+	}
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
 	public BankAccountAddedPage bankAccountAddedPage() {
 		return new BankAccountAddedPage();
 	}
 
-//	private By lblHeading = MobileBy.xpath("//*[@name='Add External Bank Account']");
-//	private By lnkLearnMore = MobileBy.xpath("//*[@name='Learn more']");
-//private By btnNext = MobileBy.xpath("//*[@text='Next']");
-//
-//	public void verifyHeading(String expHeading) {
-//		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
-//	}
-
-//	public void clickLearnMore() {
-//		click(lnkLearnMore, "Learn More");
-//	}
-
-//	public void clickNext() {
-//		click(btnNext, "Next");
-//	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 
 	public AddAccountsComponent addAccountsComponent() {
 		return new AddAccountsComponent();

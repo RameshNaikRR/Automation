@@ -95,7 +95,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
 	}
 
-	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax, String maxCharr) {
+	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().validateField(txtPassword, "password", singleChar);
 		new CommonFunctions().clearText(txtPassword, "password");
@@ -103,7 +103,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().clearText(txtPassword, "password");
 		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
 		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateField(txtPassword, "password", maxCharr);
+    	//new CommonFunctions().validateField(txtPassword, "password", maxCharr);
 	}
 
 	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax) {

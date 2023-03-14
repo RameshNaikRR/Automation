@@ -660,32 +660,44 @@ public class CustomerProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
-			Thread.sleep(2000);
-			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			//if(data.get("validateAddbank").equalsIgnoreCase("Yes")) {
+			customerProfilePage.paymentMethodsPage().verifyPaymentHeading(data.get("paymentHeading"));
+			customerProfilePage.paymentMethodsPage().verifyDescription(data.get("description"));
+			customerProfilePage.paymentMethodsPage().verifyBankDescription(data.get("bankDescription"));
+			//verify 0/4 before adding bank account
 			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().clickExternalBankAcount();
-//			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-//					.verifyHeading("addBankHeading");
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().addBank(
-					data.get("addExternalBankHeading"), data.get("nameOnBank"), data.get("routingNum"),
-					data.get("confirmRoutingNum"), data.get("accountNum"), data.get("confirmAccNum"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.bankAccountAddedPage().verifyHeading(data.get("bankAddedHeading"));
-			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-					.bankAccountAddedPage().verifyStatus(data.get("bankStatus"));
-			String nameOnBank = customerProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addExternalBankAccountComponent().bankAccountAddedPage().getNameOnAccount();
-			String routingNum = customerProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addExternalBankAccountComponent().bankAccountAddedPage().getRoutingNum();
-			String accNum = customerProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addExternalBankAccountComponent().bankAccountAddedPage().getAccNum();
-			if (data.get("nameOnBank").equalsIgnoreCase(nameOnBank)
-					&& data.get("routingNum").equalsIgnoreCase(routingNum) && data.get("accountNum").contains(accNum)) {
-				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent()
-						.bankAccountAddedPage().getBankDetails();
-			} else {
-				ExtentTestManager.setFailMessageInReport("Bank Account Details are not updated");
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyHeading(data.get("bankHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyAccountDescription(data.get("accountDescription"));	
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyCheckBoxDescription(data.get("checkBoxDescription"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickCheckBx();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickStart();
+			//customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickSearchInstitution();
+			//customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().fillBankName(data.get("bankName"));
+			Thread.sleep(2000);
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickMxOauth();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyMxOauth(data.get("mxOauth"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickContinueTesting();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyIdentity(data.get("identity"));
+			if(data.get("mxChecking").equalsIgnoreCase("Yes")) {
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickMxChecking();
 			}
-//			
+			if(data.get("mxSavings").equalsIgnoreCase("Yes")) {
+				customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickMxSavings();
+			}
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickContinue();
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyAccountAdded(data.get("successHeading"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().verifyAccountAddedDes(data.get("successDescription"));
+			customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().clickDone();
+			customerProfilePage.paymentMethodsPage().verifyPayment(data.get("paymentMethod"));
+			customerProfilePage.paymentMethodsPage().verifyBankAccount(data.get("account"));
+			
+			
+			
+			//customerProfilePage.paymentMethodsPage().addNewPaymentComponent().addExternalBankAccountComponent().
+			
+			
+			
+			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddExternalBankAccount  failed due to exception " + e);
