@@ -28,6 +28,7 @@ public class LoginPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
 	WebDriverWait wait = new WebDriverWait(driver, 120);
 
+	private By logoCoyni = By.xpath("//img[@alt='coyni_Logo']");
 	private By txtEmail = By.xpath("//input[@id='Email']");
 	private By txtPassword = By.xpath("//input[@id='Password']");
 	private By lnkForgotEmail = By.xpath("//button[text()='Forgot Email?']");
@@ -61,6 +62,12 @@ public class LoginPage extends BrowserFunctions {
 
 	public void clickRefresh() {
 		navigate(Navigation.REFRESH);
+	}
+
+	public void getLogo() {
+		String text = getText(logoCoyni, "Logo Coyni");
+		ExtentTestManager.setInfoMessageInReport("No Logo displayed " + text);
+
 	}
 
 	public void getEmail() {

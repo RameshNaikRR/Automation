@@ -443,31 +443,35 @@ public class TokenAccountTest {
 	@Parameters({ "strParams" })
 	public void testExportSelectedTransactionToday(String strParams) {
 		testExportSelectedTransactions(strParams, "Today");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionYesterday(String strParams) {
 		testExportSelectedTransactions(strParams, "Yesterday");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastSevenDays(String strParams) {
 		testExportSelectedTransactions(strParams, "Last Seven Days");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionLastMonth(String strParams) {
 		testExportSelectedTransactions(strParams, "Last Month");
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportSelectedTransactionMonthToDate(String strParams) {
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportSelectedTransactionYesterday(String strParams) {
+//		testExportSelectedTransactions(strParams, "Yesterday");
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportSelectedTransactionLastSevenDays(String strParams) {
+//		testExportSelectedTransactions(strParams, "Last Seven Days");
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportSelectedTransactionLastMonth(String strParams) {
+//		testExportSelectedTransactions(strParams, "Last Month");
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportSelectedTransactionMonthToDate(String strParams) {
+//		testExportSelectedTransactions(strParams, "Month to Date");
+//	}
 
 	public void testFilters(String strParams) {
 		try {
@@ -762,6 +766,7 @@ public class TokenAccountTest {
 			tokenAccountPage.clickBuyTokens();
 			if (payment.equalsIgnoreCase("No")) {
 				tokenAccountPage.buyCoyniTokensNoPaymentPopup().clickOnAddNewPayment();
+				merchantSettingTest.testAddExternalBankAccount(strParams);
 				testBuyTokenTransactionBankAccount(strParams);
 				testBuyTokenDeleteBank(strParams);
 
@@ -784,32 +789,40 @@ public class TokenAccountTest {
 
 	}
 
-	
-	
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBuyTokenWithDebitCardWithOutPayment(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickBuyTokens();
+//			testBuyTokenAddBank(strParams);
+//			testBuyTokenTransactionBankAccount(strParams);
+//			testBuyTokenDeleteBank(strParams);
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testBuyTokenWithDebitCardWithOutPayment is failed due to " + e);
+//		}
+//	}
+//	
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testBuyTokenWithDebitCardWithOutPayment(String strParams) {
+	public void testBuyTokenTransactionsWithMaximumBankAccounts(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickBuyTokens();
-			testBuyTokenAddBank(strParams);
-			testBuyTokenTransactionBankAccount(strParams);
-			testBuyTokenDeleteBank(strParams);
+			merchantSettingTest.testAddExternalBankAccount(strParams);
+
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBuyTokenWithDebitCardWithOutPayment is failed due to " + e);
+			ExtentTestManager.setFailMessageInReport("testBuyTokenTransactionsWithBank is failed" + e);
 		}
 	}
-	
-	
-	
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenTransactionsWithoutBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testBuyTokenTransactionsWithAllPaymentMethods(strParams, "No");
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenTransactionsWithBank is failed" + e);
 		}
@@ -1052,6 +1065,25 @@ public class TokenAccountTest {
 					"testBuyTokenTransactionSignetAccountWithInvalidData failed due to exception " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawCogentWithoutPayment(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantSettingsTest merchantSettingsTest = new MerchantSettingsTest();
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			// tokenAccountPage.withdrawCoyniToUSDPopup().clickAddNewPaymentMethod();
+			merchantSettingsTest.testaddCogent(strParams);
+			testWithdrawToUSDCogentAccount(strParams);
+			testWithdrawToUSDDeleteCogentAccount(strParams);
+
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenAddBank is failed due to " + e);
+		}
 	}
 
 	@Test

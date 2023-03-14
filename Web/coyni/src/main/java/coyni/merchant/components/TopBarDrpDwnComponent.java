@@ -15,6 +15,52 @@ public class TopBarDrpDwnComponent extends BrowserFunctions {
 
 	CommonFunctions Cf = new CommonFunctions();
 
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+	
+	public void handSymbolHighlightedUserDetails(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("User Details"), "User Details");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedMerchantAccounts(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Merchant Accounts"), "Merchant Accounts");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedPreferences(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Preferences"), "Preferences");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedAgreements(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Agreements"), "Agreements");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedChangePassword(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Change Password"), "Change Password");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedTwoStepAuthentication(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("2-step Authentication"), "2-step Authentication");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+	
+	public void handSymbolHighlightedLogOut(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Sign Out"), "Sign Out");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "TopBarItems", cssProp, expValue,
+				expColor);
+	}
+
 	private By getDropDownItems(String itemsNum) {
 		return By.xpath(String.format("//div[@class='dropdown-container']//span[text()='%s']", itemsNum));
 	}

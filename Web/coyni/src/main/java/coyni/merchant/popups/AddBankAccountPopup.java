@@ -1,23 +1,16 @@
 package coyni.merchant.popups;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni.merchant.components.NavigationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AddBankAccountPopup extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1[.='Add Bank Account']");
+	private By lblHeading = By.xpath("//h1[.='Add Bank Checking Account']");
 	private By btnIamReady = By.xpath("//button[contains(text(),'Ready')]");
 	private By lblDoNotNavigate = By.xpath("//h2[contains(.,'Do Not')]");
 	private By lblDescription = By.xpath("//p[contains(.,'coyni uses')]");
@@ -30,17 +23,34 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By txtConfirmRoutingNumber = By.xpath("//input[contains(@name,'confirmRouting')]");
 	private By txtCheckingAccountNumber = By.xpath("//input[contains(@name,'accountNumber')]");
 	private By txtConfirmAccountNumber = By.xpath("//input[contains(@name,'confirmAccountNumber')]");
-	private By txtBankName = By.xpath("//input[@id='searchbar']");
+	private By txtBankName = By.xpath("//input[@id='mx-connect-search']");
 	private By headingNewPage = By.xpath("//h1[contains(text(),'Add Accounts')]");
 	private By lnkBankName = By.xpath("(//div[@class='autoResultBankName'])[1]");
-	private By txtUserName = By.xpath("//label[.='UserName']/following-sibling::input[1]");
-	private By txtPassword = By.xpath("//input[@type='password']");
-	private By btnNext = By.xpath("(//span[text()='Next'])[1]");
+	private By txtUserName = By.xpath("//input[@id='LOGIN']");
+	private By txtPassword = By.xpath("//input[@id='PASSWORD']");
+	private By btnContinue = By.xpath("//button[text()='Continue']");
 	private By btnBack = By.xpath("//button[contains(text(),'Back')]");
 	private By chckbox = By.xpath("//div[contains(@class,'custom-checkbox')]");
 	private By btnAdd = By.xpath("//button[contains(text(),'Add')]");
 	private By btnCheckBoxforMXBank = By.xpath("//input[@type='checkbox']");
 	private By btnStart = By.xpath("//button[contains(text(),'Start')]");
+	private By btnSearchInstitutions = By.xpath("//button[contains(text(),'Search more institutions')]");
+	private By btnMXBank = By.xpath("//div[contains(@class,'kyper-utilityrow-base-left')]");
+	private By btnChecking = By.xpath("//span[contains(text(),'Checking')]");
+
+	public void clickMXBank() {
+		click(btnMXBank, "Mx Bank");
+	}
+
+	public void clickSearchInstitutions() {
+		click(btnSearchInstitutions, "Search Institutions");
+	}
+
+	public void clickOnChecking() {
+		click(btnChecking, "Checked");
+
+	}
+
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "");
@@ -146,34 +156,34 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void clickNext() {
-		click(btnNext, "Click Next");
+		click(btnContinue, "Click On Continue");
 	}
 
-	public void unSelectBank() {
-		WebDriver driver = DriverFactory.getDriver();
-		WebDriverWait wait = new WebDriverWait(driver, 120);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.loader")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.loader")));
-		List<WebElement> List = getElementsList(chckbox, "");
-		int size = List.size();
-		if (size == 1) {
-			ExtentTestManager.setInfoMessageInReport("We have only one bank");
-			Object[] windowHandles = driver.getWindowHandles().toArray();
-			driver.close();
-			driver.switchTo().window(windowHandles[0].toString());
-		} else {
-			List.get(0).click();
-			ExtentTestManager.setInfoMessageInReport("Unselected the extra bank");
-			click(btnNext, "Click Next");
-			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-			Object[] windowHandles = driver.getWindowHandles().toArray();
-			driver.switchTo().window(windowHandles[0].toString());
-		}
-	}
-
-	public void clickUncheckBank() {
-		click(btnNext, "Click Next");
-	}
+//	public void unSelectBank() {
+//		WebDriver driver = DriverFactory.getDriver();
+//		WebDriverWait wait = new WebDriverWait(driver, 120);
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.loader")));
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.loader")));
+//		List<WebElement> List = getElementsList(chckbox, "");
+//		int size = List.size();
+//		if (size == 1) {
+//			ExtentTestManager.setInfoMessageInReport("We have only one bank");
+//			Object[] windowHandles = driver.getWindowHandles().toArray();
+//			driver.close();
+//			driver.switchTo().window(windowHandles[0].toString());
+//		} else {
+//			List.get(0).click();
+//			ExtentTestManager.setInfoMessageInReport("Unselected the extra bank");
+//			click(btnNext, "Click Next");
+//			wait.until(ExpectedConditions.numberOfWindowsToBe(1));
+//			Object[] windowHandles = driver.getWindowHandles().toArray();
+//			driver.switchTo().window(windowHandles[0].toString());
+//		}
+//	}
+//
+//	public void clickUncheckBank() {
+//		click(btnNext, "Click Next");
+//	}
 
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 		return new SuccessFailurePopupCardComponent();

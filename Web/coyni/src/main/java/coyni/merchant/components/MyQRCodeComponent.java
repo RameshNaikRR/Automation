@@ -66,6 +66,17 @@ public class MyQRCodeComponent extends BrowserFunctions {
 		}
 	}
 
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+
+	}
+
+	public void verifyhandSymbolHighlightedQRCode(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("QR Code"), "QR Code");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Team(Shared)", cssProp, expValue,
+				expColor);
+	}
+
 	public void clickGeneratePrintableQRCode() {
 		click(btnGeneratePrintableQRCode, "Generate Printable QR Code");
 	}

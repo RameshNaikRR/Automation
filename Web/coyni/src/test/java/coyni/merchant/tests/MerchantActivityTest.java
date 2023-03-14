@@ -15,6 +15,7 @@ import coyni.merchant.pages.LoginPage;
 import coyni.merchant.pages.MerchantSettingsPage;
 import coyni.merchant.pages.MerchantTransactionsPage;
 import coyni.merchant.pages.TokenAccountPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -201,6 +202,31 @@ public class MerchantActivityTest {
 		testExportSelectedTransactions(strParams, "Month to Date");
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testFilter(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickTransactions();
+			if (merchantTransactionsPage.filterComponent().verifyTransactionss() > 0) {
+				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
+			} else {
+				merchantTransactionsPage.filterComponent().verifyMouseAction();
+				merchantTransactionsPage.filterComponent().clickFilters();
+				// merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+				// merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
+				if (!data.get("errMessage").isEmpty()) {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				}
+
+				merchantTransactionsPage.filterComponent().clickApplyFilters();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
+		}
+	}
+
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -210,10 +236,13 @@ public class MerchantActivityTest {
 			} else {
 				merchantTransactionsPage.filterComponent().verifyMouseAction();
 				merchantTransactionsPage.filterComponent().clickFilters();
-//			tokenAccountPage.filterComponent().clickStartDate();
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
+				if (!data.get("errMessage").isEmpty()) {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				}
 				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));

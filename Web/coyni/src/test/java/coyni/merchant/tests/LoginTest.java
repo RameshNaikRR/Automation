@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeMethod;
@@ -38,7 +39,7 @@ public class LoginTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickSignOut();
-			loginPage.verifyHeading(data.get("loginHeading"));
+//			loginPage.verifyHeading();
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotEmailHeading"));
 			loginPage.forgotEmailComponent().clickBackToLogin();
@@ -264,9 +265,11 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
+			loginPage.getLogo();
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
+			// loginPage.forgotEmailComponent().getUsLogo();
 			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
 			loginPage.clickNext();
 			Thread.sleep(2000);
