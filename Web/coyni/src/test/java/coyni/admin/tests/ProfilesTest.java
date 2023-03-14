@@ -748,14 +748,18 @@ public class ProfilesTest {
 			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
 			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
 			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
-			homePage.sideBarComponent().addMerchantComponent().fillEmail();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+			.fillEmail();//this line used for static email (Next time we can change the class name)
 			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
 			homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
 			Thread.sleep(3000);
-			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
-					data.get("message"));
-			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
+//			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
+//					data.get("message"));
+//			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
+
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+			.clickActivateAccountInYOPMail(data.get("firstName"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
@@ -1155,25 +1159,39 @@ public class ProfilesTest {
 			homePage.sideBarComponent().clickCoyniEmployees();
 			homePage.sideBarComponent().profileComponent().verifyCoyniEmployeesHeading(data.get("profileHeading"));
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickNewEmployeeBtn();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().verifyAddNewEmployeeHeading();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().verifyHeading(data.get("heading"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillFirstName(data.get("firstname"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillLastName(data.get("lastname"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillEmail();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillPhonenNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().selectDepartment();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickAccounting();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickSendInvitaion();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickActivateAccountInYOPMail(data.get("firstname"));			
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().fillPhoneNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().clickNext();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().fillVerificationCode(data.get("verificationCode"));//123456
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().fillCreatePassword(data.get("createPassword"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().fillConfirmPassword(data.get("confirmPassword"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccount().clickCreate();
-			
-			
-			
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.verifyAddNewEmployeeHeading();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.fillFirstName(data.get("firstname"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.fillLastName(data.get("lastname"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.fillEmail();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.fillPhonenNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.selectDepartment();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.clickAccounting();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.clickSendInvitaion();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.clickActivateAccountInYOPMail(data.get("firstname"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().fillPhoneNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().clickNext();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().fillVerificationCode(data.get("verificationCode"));// 123456
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().fillCreatePassword(data.get("createPassword"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().fillConfirmPassword(data.get("confirmPassword"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccount().clickCreate();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}

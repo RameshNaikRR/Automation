@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
+import coyni.uitilities.YOPMail;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -128,5 +129,9 @@ public class AddMerchantComponent extends BrowserFunctions {
 
 	public MerchantResendAndCancelComponent merchantResendAndCancelComponent() {
 		return new MerchantResendAndCancelComponent();
+	}
+	
+	public YOPMail yopMail() {
+		return new YOPMail();
 	}
 }

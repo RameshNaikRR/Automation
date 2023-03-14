@@ -79,6 +79,13 @@ public class AddNewEmployeeComponent extends BrowserFunctions {
 		mail.clickActivateAccount(YopMail, firstname);
 		
 	}
+	public void clickCoyniGetStartInYOPMail(String firstname) throws InterruptedException, AWTException {
+		YOPMail mail=new YOPMail();
+		mail.openYopMail();
+		mail.switchToYopmailWindow();
+		mail.clickActivateAccount(YopMail, firstname);
+		
+	}
 	
 	public ActivateAccountComponent activateAccount() {
 		return new ActivateAccountComponent();

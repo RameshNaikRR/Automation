@@ -27,8 +27,8 @@ public class YOPMail extends BrowserFunctions {
 	private By btnResetPswd = By.xpath("//span[text()='Reset Password']");
 	private By ckboxLicense = By.xpath("//span[text()='I accept the End User License Agreement ']");
 	private By btnAccept = By.xpath("//span[text()='Accept']");
-	private By lblfirstname = By.xpath("//font[contains(text(),'Dear')]");
-	private By clkActivateAcc = By.xpath("//u[text()=' Activate Account ']");
+	private By lblfirstname = By.xpath("//font[contains(text(),'Dear')] | //font[contains(text(),'Congratulations ')]");
+	private By clkActivateAcc = By.xpath("//u[text()=' Activate Account '] |  //u[text()=' coyni get started page ']");
 
 	public void openYopMail() {
 		WebDriver driver = DriverFactory.getDriver();
