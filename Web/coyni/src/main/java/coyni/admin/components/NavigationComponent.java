@@ -7,9 +7,13 @@ import ilabs.WebFramework.BrowserFunctions;
 public class NavigationComponent extends BrowserFunctions {
 	private By btnBack = By.cssSelector(".self-start");
 	private By btnClose = By.cssSelector(".self-end");
+	private By btnGoBack=By.xpath("//button[text()='Go Back']");
 
 	public void clickBack() {
 		click(btnBack, "Back");
+	}
+	public void clickGoBack() {
+		click(btnGoBack, "Back");
 	}
 
 	public void clickClose() {

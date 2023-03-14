@@ -19,7 +19,7 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lblHeading = By.cssSelector(".verify-identity__title");
 	private By lblDescription = By.cssSelector(".verify-identity__sub-title");
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
-	private By lnkSmsCode = By.xpath("//span[contains(.,'Having')]");
+	private By lnkSmsCode = By.xpath("//button[contains(.,'Having')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
 
@@ -38,6 +38,10 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
+	}
+	public void verifyAutoFocus() {
+		new CommonFunctions().verifyAutoFocus(txtInput, "Authy Input Box");
+
 	}
 
 	public void fillAuthyInput(String securityKey) {
@@ -122,6 +126,11 @@ public class AuthyComponent extends BrowserFunctions {
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
+
+	public PhoneEmailVerificationComponent phoneEmailVerificationComponent() {
+		return new PhoneEmailVerificationComponent();
+	}
+
 	
 
 }

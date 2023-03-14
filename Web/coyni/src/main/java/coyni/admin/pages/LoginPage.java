@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.admin.components.NavigationComponent;
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
@@ -138,6 +139,10 @@ public class LoginPage extends BrowserFunctions {
 	public ForgotEmailPage forgotEmailPage() {
 		return new ForgotEmailPage();
 
+	}
+	
+	public void refreshPage() {
+		new CommonFunctions().Refresh();
 	}
 
 	public void clickSignUp() {
@@ -326,4 +331,8 @@ public class LoginPage extends BrowserFunctions {
 	public AdminUserDetailsPage adminUserDetailsPage() {
 		return new AdminUserDetailsPage();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 }

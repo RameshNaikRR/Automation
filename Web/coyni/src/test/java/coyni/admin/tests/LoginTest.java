@@ -45,8 +45,35 @@ public class LoginTest {
 			} else {
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			}
-			Thread.sleep(4000);
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminLoginWithSmsOtpAndNavigation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageDescription(data.get("loginDescription"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.navigationComponent().clickGoBack();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.refreshPage();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyAutoFocus();
+			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
+			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
+			loginPage.authyComponent().clickSmsCode();
+			loginPage.authyComponent().phoneEmailVerificationComponent().verifyPhoneHeading(data.get("heading"));
+			loginPage.authyComponent().phoneEmailVerificationComponent().fillpin(data.get("securityKey"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
