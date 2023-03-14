@@ -1,7 +1,6 @@
 package coyni_mobile.pages;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -14,7 +13,6 @@ import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.NotificationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.components.TokenHomePopUp;
-import coyni_mobile.components.TransactionDetailsComponent2;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
