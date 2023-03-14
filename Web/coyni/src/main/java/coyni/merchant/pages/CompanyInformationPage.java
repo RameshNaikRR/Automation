@@ -35,6 +35,16 @@ public class CompanyInformationPage extends BrowserFunctions {
 		click(iconEdit, "Edit icon");
 	}
 
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedCompanyinformation(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Company information"), "Company information");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Company information", cssProp, expValue,
+				expColor);
+	}
+
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}

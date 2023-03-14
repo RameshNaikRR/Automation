@@ -31,6 +31,16 @@ public class AccountLimitsPage extends BrowserFunctions {
 		}
 	}
 
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedAccountLimits(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Account Limits"), "Account Limits");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Account Limits", cssProp, expValue,
+				expColor);
+	}
+
 	public void verifyAccountLimits() {
 		List<WebElement> lists = getElementsList(getDailyLimitLbl, "");
 		for (WebElement list : lists) {

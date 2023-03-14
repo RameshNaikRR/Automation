@@ -159,4 +159,13 @@ public class TeamComponent extends BrowserFunctions {
 	public FiltersPage filtersPage() {
 		return new FiltersPage();
 	}
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedTeamShared(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Team(Shared)"), "Team(Shared)");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Team(Shared)", cssProp, expValue,
+				expColor);
+	}
 }

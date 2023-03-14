@@ -13,18 +13,34 @@ public class FeesPage extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("(//div[contains(@class,'BusinessSettings_page')]//span[.='Fees'])[2]");
 
-	private By getFeesChargesLbl = By.xpath("//div[contains(@class,'MerchantFees_fees_container')]/span");
+	private By getFeesChargesLbl = By.xpath("//div[contains(@class,'AccountFees_fees_container__szs-L')]/span");
 	private By getLables = By.xpath("//div[contains(@class,'MerchantFees_head')]/span");
 
 	public void verifyHeading(String Heading) {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
+	
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedFees(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Fees"), "Fees");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Fees", cssProp, expValue,
+				expColor);
+	}
+	
+	
+
+	
 	public void verifyFeesChargesLbl() {
 		List<WebElement> rows = getElementsList(getFeesChargesLbl, "percentage");
 		for (WebElement row : rows) {
 			String ChargesLbl = row.getText();
 			ExtentTestManager.setInfoMessageInReport(ChargesLbl + "   Label is Displayed");
+//			String text = getText(getFeesChargesLbl, "Fees Details");
+//			ExtentTestManager.setInfoMessageInReport(text);
 		}
 	}
 

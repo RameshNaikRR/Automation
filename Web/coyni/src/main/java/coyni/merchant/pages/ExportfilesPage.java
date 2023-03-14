@@ -43,6 +43,18 @@ public class ExportfilesPage extends BrowserFunctions {
 		}
 
 	}
+	
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+	
+	
+	
+	public void handSymbolHighlightedExportFiles(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Export Files"), "Export Files");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,
+				expColor);
+	}
 
 	public void clickExport() {
 		if (getElement(btnExport, "Enabled").isDisplayed()) {

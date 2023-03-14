@@ -27,6 +27,7 @@ public class ExportFilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			exportFilesPage.clickExportFiles();
+			exportFilesPage.handSymbolHighlightedExportFiles(data.get("cssProp"),data.get("value"), data.get("color"));
 			exportFilesPage.verifyHeading(data.get("heading"));
 			Thread.sleep(1000);
 			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();

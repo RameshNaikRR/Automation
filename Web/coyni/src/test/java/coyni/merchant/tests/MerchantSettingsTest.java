@@ -122,6 +122,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyHeading(data.get("companyInformationHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage().verifyhandSymbolHighlightedCompanyinformation(data.get("cssProp"),data.get("value"),data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyCompanyInformationLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
@@ -283,12 +284,14 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage().verifyhandSymbolHighlightedDbaInformation(data.get("cssProp"),data.get("value"),data.get("color"));
+			
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyHeading(data.get("dbaInformationHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyDBAnameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
-					.verifyWebsiteLbl();
+					.getwebsite();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyBusinessTypeLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
@@ -453,6 +456,9 @@ public class MerchantSettingsTest {
 					.clickBeneficiaryOwnerBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyHeading(data.get("beneficiaryOwnersHeading"));
+			
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage().verifyhandSymbolHighlightedBeneficialOwners(data.get("cssProp"),data.get("value"),data.get("color"));
+			
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
@@ -525,6 +531,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAgreementsBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyHeading(data.get("agreementsHeading"));
+		//	sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage().verifyhandSymbolHighlightedAgreements(data.get("cssProp"),data.get("value"),data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
 					.verifyAgreementsBorderColor(data.get("expColor"), data.get("colorName"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().agreementsPage()
@@ -567,6 +574,9 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+			.verifyhandSymbolHighlightedFees(data.get("cssProp"),data.get("value"),data.get("color"));
+			
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
 					.verifyHeading(data.get("feesHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
 					.verifyLabelHeadings();
@@ -585,6 +595,9 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAccountLimitsBtn();
+			
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage().verifyhandSymbolHighlightedAccountLimits(data.get("cssProp"),data.get("value"),data.get("color"));
+			
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
 					.verifyHeading(data.get("accountLimitsHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
@@ -606,6 +619,10 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
+			
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+			.verifyhandSymbolHighlightedApiKeys(data.get("cssProp"),data.get("value"),data.get("color"));
+		
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
 			Thread.sleep(2000);
@@ -1219,6 +1236,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantSettingsSideBarMenuComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().teamComponent().verifyhandSymbolHighlightedTeamShared(data.get("cssProp"),data.get("value"),data.get("color"));
 			merchantSettingsSideBarMenuComponent.clickTeamSharedBtn();
 			Thread.sleep(2000);
 			int verifyTeamMemberRecords = merchantSettingsSideBarMenuComponent.teamComponent()

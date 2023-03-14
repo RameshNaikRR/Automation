@@ -32,6 +32,15 @@ public class ApiKeysPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedApiKeys(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Api Keys"), "Api Keys");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Api Keys", cssProp, expValue, expColor);
+	}
+
 	public void getPublicKey() {
 		new CommonFunctions().elementView(lblPublicKey, "Public Key");
 		String text = getText(lblPublicKey, "Description");

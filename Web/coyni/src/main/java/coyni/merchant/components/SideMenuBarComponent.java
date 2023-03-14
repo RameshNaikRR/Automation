@@ -325,6 +325,10 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		return new CompleteVerificationPopup();
 	}
 
+	public TeamComponent component() {
+		return new TeamComponent();
+	}
+
 	public AddDBABusinessPopup addDBABusinessPopup() {
 		return new AddDBABusinessPopup();
 	}

@@ -13,6 +13,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class DBAInformationPage extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
 	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='DBA Information']");
+	private By labelwebsite=By.xpath("//p[contains(@class,'break-words')]");
 
 	private By getLables(String Lables) {
 		return By.xpath(String.format("//p[.='%s']", Lables));
@@ -36,11 +37,28 @@ public class DBAInformationPage extends BrowserFunctions {
 	public void clickSave() {
 		click(btnSave, "Save");
 	}
+	
+	
+	public void getwebsite() {
+		new CommonFunctions().elementView(labelwebsite, "website");
+	}
+	
+	
+	
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedDbaInformation(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Dba information"), "Dba information");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Dba information", cssProp, expValue,
+				expColor);
+	}
 
 	public void clickNoImage() {
 		click(lblNoImage, "No Image");
 	}
-
+    
 	public void getCompanyAndDBAname() {
 		String companyName = getText(lblCompanyName, "Company Name");
 		String DBAname = getText(lblDBAname, "DBA Name");
@@ -54,6 +72,9 @@ public class DBAInformationPage extends BrowserFunctions {
 
 	}
 
+	
+	
+	
 	public void clickImage() {
 		// moveToElement(lblImage, "Image");
 		if (verifyElementDisplayed(lblImage, "Image")) {

@@ -3,6 +3,7 @@ package coyni.merchant.pages;
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.MerchantSettingsSideBarMenuComponent;
+import coyni.merchant.components.TeamComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -16,5 +17,9 @@ public class MerchantSettingsPage extends BrowserFunctions {
 	public MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent() {
 		return new MerchantSettingsSideBarMenuComponent();
 	}
-	
+
+	public TeamComponent teamComponent() {
+		return new TeamComponent();
+	}
+
 }

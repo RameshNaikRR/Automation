@@ -19,6 +19,22 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 		return By.xpath(String.format(
 				"//div[contains(@class,'BenificialOwnerAccordion_benificialContainer')]//span[.='%s']", Lables));
 	}
+	
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedBeneficialOwners(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("BeneficalOwners"), "BeneficalOwners");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Beneficial Owners", cssProp, expValue,
+				expColor);
+	}
+	
+	
+	
+	
+	
+	
 
 	private By getBeneficialOwnerDetails(String details) {
 		return By.xpath(String.format(
