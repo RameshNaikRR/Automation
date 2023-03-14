@@ -146,13 +146,9 @@ public class LoginTest {
 				loginPage.clickEmail();
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-				} else {
 					DriverFactory.getDriver().hideKeyboard();
 //					loginPage.validateLogin();
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-				}
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));		
 			}
 			if (!data.get("popUpMsg").isEmpty()) {
 				loginPage.clickLogin();

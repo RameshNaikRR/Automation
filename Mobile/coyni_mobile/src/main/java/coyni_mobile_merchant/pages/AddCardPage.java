@@ -19,6 +19,7 @@ public class AddCardPage extends MobileFunctions {
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 	
 	public void fillNameOnCard(String nameOnCard) {
+		new CommonFunctions().verifyAutoFocusElement(txtNameOnCard, "NameOnCard");
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
 		DriverFactory.getDriver().hideKeyboard();

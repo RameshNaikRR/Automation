@@ -28,6 +28,7 @@ public class ChangePasswordPage extends MobileFunctions {
 	}
 
 	public void fillNewPassword(String newPassword) {
+		new CommonFunctions().verifyAutoFocusElement(txtNewPassword, "Confirm Password");
 		click(txtNewPassword, "Confirm Password");
 		enterText(txtNewPassword, newPassword, "Confirm Password");
 		DriverFactory.getDriver().hideKeyboard();

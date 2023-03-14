@@ -149,6 +149,7 @@ here explicitly wait is not working. so, to get accurate results we are using st
 
 // Enter your Credentials screen
 	public void fillUserName(String username) {
+		new CommonFunctions().verifyAutoFocusElement(txtUsername, "User Name");
 		click(txtUsername, "User Name");
 		enterText(txtUsername, username, "User Name");
 	}

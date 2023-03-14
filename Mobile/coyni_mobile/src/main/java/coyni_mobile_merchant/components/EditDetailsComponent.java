@@ -56,11 +56,13 @@ public class EditDetailsComponent extends MobileFunctions {
 	}
 
 	public void fillEmail(String email) {
+		new CommonFunctions().verifyAutoFocusElement(txtComponent, email);
 		click(txtComponent, email);
 		enterText(txtComponent, email, "Email");
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
+		new CommonFunctions().verifyAutoFocusElement(txtComponent,"Phone Number");
 		enterText(txtComponent, phoneNumber, "Phone Number");
 	}
 

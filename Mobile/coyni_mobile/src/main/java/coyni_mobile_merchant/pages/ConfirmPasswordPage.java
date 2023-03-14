@@ -26,6 +26,7 @@ public class ConfirmPasswordPage extends MobileFunctions {
 	}
 
 	public void fillCurrentPassword(String currentPassword) {
+		new CommonFunctions().verifyAutoFocusElement(txtCurrentPassword, "Current Password");
 		click(txtCurrentPassword, "Current Password");
 		enterText(txtCurrentPassword, currentPassword, "Current Password");
 	}

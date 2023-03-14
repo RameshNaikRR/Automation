@@ -79,36 +79,16 @@ public class CommonFunctions {
 	public void clickFocusableElement(By ele, String eleName) {
 		try {
 			String a=mobileFunctions.getAttribute(ele,"focusable");
-			ExtentTestManager.setPassMessageInReport(a);
 			if(mobileFunctions.getAttribute(ele,"focusable").equalsIgnoreCase("true")) {
-				ExtentTestManager.setPassMessageInReport(eleName + " is Focusable");
+				ExtentTestManager.setPassMessageInReport(eleName + " is enabled");
 				mobileFunctions.click(ele, eleName);
 			}else {
-				ExtentTestManager.setFailMessageInReport(eleName + " is not Focusable to Click");
+				ExtentTestManager.setFailMessageInReport(eleName + " is not enabled");
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("click Focusable Element  method is failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("clickFocusableElement method is failed due to exception " + e);
 		}
 
-	}
-	
-	public void validateFormErrorMessageIOS(String expErrMsg, String elementName) {
-		try {
-			By errorMsgs = MobileBy.xpath(String.format("//*[contains(@label,'%s,')]", elementName));
-			String msg = mobileFunctions.getText(errorMsgs).split(",")[1];
-			String actualMsg = msg.trim();
-			System.out.println(actualMsg);
-			mobileFunctions.waitForVisibility(errorMsgs);
-			if (actualMsg.equals(expErrMsg)) {
-				ExtentTestManager
-						.setPassMessageInReport("Error message '" + expErrMsg + "' displayed for " + elementName);
-			} else {
-				ExtentTestManager
-						.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
-		}
 	}
 
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
@@ -209,111 +189,8 @@ public class CommonFunctions {
 		}
 	}
 
-	public void validateFieldWithalphabet(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter alphabets in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting alphabets");
-			} else {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is accepting alphabets");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
-		}
-	}
-
-	public void validateFieldWithNotAcceptAlphabet(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter alphabets in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting alphabets");
-			} else {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is accepting alphabets");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithalphabet is failed due to exception " + e);
-		}
-	}
-
-	public void validateFieldWithNumber(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting Numbers");
-			} else {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is accepting Numbers");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
-		}
-	}
-
-	public void validateFieldWithNotAcceptNumber(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Numbers in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
-			} else {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithNumber is failed due to exception " + e);
-		}
-	}
-
-	public void validateFieldWithSpecialchar(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is not accepting Special characters");
-			} else {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is accepting Special characters");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
-		}
-	}
-
-	public void validateFieldWithNotAcceptSpecialchar(By ele, String eleName, String enterText) {
-		try {
-			ExtentTestManager.setInfoMessageInReport("trying to enter Special characters in " + eleName);
-			mobileFunctions.enterText(ele, enterText, eleName);
-			String actualtext = mobileFunctions.getText(ele);
-			if (actualtext.length() == 0) {
-
-				ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special characters");
-			} else {
-
-				ExtentTestManager.setFailMessageInReport(eleName + " is accepting Special characters");
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("validateFieldWithSpecialchar is failed due to exception " + e);
-		}
-	}
-
 	public boolean isPlatformiOS() {
 		return FileReaderManager.getInstance().getConfigReader().get("platform").equalsIgnoreCase("ios");
-
 	}
 
 	public void checkPassword(By ele, By ele1) {

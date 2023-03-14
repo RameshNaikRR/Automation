@@ -47,6 +47,7 @@ public class AddNewTeamMemberPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String expFirstName) {
+		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "First Name");
 		click(txtFirstName, "First Name");
 		enterText(txtFirstName, expFirstName, "First Name");
 		DriverFactory.getDriver().hideKeyboard();

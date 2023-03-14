@@ -35,7 +35,8 @@ public class EditTeamMemberPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String expFirstName) {
-		click(txtFirstName, "City");
+		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "First Name");
+		click(txtFirstName, "First Name");
 		enterText(txtFirstName, expFirstName, "First Name");
 		DriverFactory.getDriver().hideKeyboard();
 	}

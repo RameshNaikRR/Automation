@@ -25,6 +25,7 @@ public class EditAddressPage extends MobileFunctions {
 	}
 
 	public void fillAddress(String expAddress) {
+		new CommonFunctions().verifyAutoFocusElement(txtAddress, "Address");
 		click(txtAddress, "Address");
 		enterText(txtAddress, expAddress, "Address");
 		DriverFactory.getDriver().hideKeyboard();

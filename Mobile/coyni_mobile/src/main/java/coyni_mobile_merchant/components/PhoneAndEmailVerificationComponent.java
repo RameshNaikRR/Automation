@@ -128,6 +128,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 //	}
 
 	public void fillOtp(String pin) {
+		new CommonFunctions().verifyAutoFocusElement(txtCode, "pin");
 		enterText(txtCode, pin, "pin");
 	}
 

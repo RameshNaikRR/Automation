@@ -98,11 +98,7 @@ public class SignUpTest {
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.scrollUpToFirstName();
 			if (!data.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-				} else {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-				}
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
 
 		} catch (Exception e) {

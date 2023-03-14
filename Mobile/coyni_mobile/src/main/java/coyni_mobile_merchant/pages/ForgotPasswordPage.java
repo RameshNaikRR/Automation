@@ -26,6 +26,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 	}
 //forgot password
 	public void fillEmail(String email) {
+		new CommonFunctions().verifyAutoFocusElement(txtEmail, "Email");
 		enterText(txtEmail, email, "Email");
 		DriverFactory.getDriver().hideKeyboard();
 	}
