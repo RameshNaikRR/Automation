@@ -20,7 +20,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
-	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
+	private By lnkBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
 	private By btnCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 //	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 //	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
@@ -38,10 +38,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By deleteCogent = MobileBy.xpath("(//*[contains(@text,'Cogent Account')])[1]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
-//	private By numOfDebitCards = MobileBy.xpath("//*[contains(@resource-id,'layoutBack')]");
-
-	
-//	private By  = MobileBy.xpath("//*[contains(@resource-id,'AddPayment')]");
+//Verify Added Bank details
+	private By lblBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
+	private By lblBankType = MobileBy.xpath("(//*[contains(@resource-id,'tvBankName')])[1]");
 
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
@@ -61,6 +60,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public int verifyAddNewPaymentMethod() throws InterruptedException {
 		Thread.sleep(2000);
 		return DriverFactory.getDriver().findElements(btnAddNewPaymentMethod).size();
+//		return getElement(btnAddNewPaymentMethod, "").getSize()
 	}
 
 	public void clickExternalBankAccount() {
@@ -78,15 +78,15 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public int verifyNumOfCard() {
 		return getElementList(btnDebitCard, "Debit Card").size();
 	}
-	
+
 	public int verifyNumOfBanks() {
-		return getElementList(btnBank, "Bank Account").size();
+		return getElementList(lnkBank, "Bank Account").size();
 	}
-	
+
 	public int verifyNumOfCogentAccounts() {
 		return getElementList(btnCogentAcc, "Cogent Account").size();
 	}
-	
+
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
@@ -218,6 +218,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public void clickBankAccount() {
 		click(deleteBank, "Delete Bank");
+	}
+
+//	Verify Added Bank
+	public void verifyAddedMXBank(String heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "heading", heading);
+		new CommonFunctions().elementView(lblBank, "Bank Account");
+		new CommonFunctions().elementView(lblBankType, "MX Bank");
+
 	}
 
 }

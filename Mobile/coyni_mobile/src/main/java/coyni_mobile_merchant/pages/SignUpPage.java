@@ -74,19 +74,9 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String firstName) {
+		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "firstName");
 		click(txtFirstName, "firstName");
 		enterText(txtFirstName, firstName, "FirstName");
-		
-		
-//		Dimension  a =DriverFactory.getDriver().findElement(txtFirstName).getSize();	
-//		ExtentTestManager.setInfoMessageInReport(""+a);
-//		
-		Dimension size = DriverFactory.getDriver().manage().window().getSize();
-		int x = size.getWidth();
-		int y = size.getHeight();
-		ExtentTestManager.setInfoMessageInReport(x+ " "+ y);
-
-	
 	}
 
 	public void fillLastName(String lastName) {

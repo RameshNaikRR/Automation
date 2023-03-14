@@ -63,6 +63,19 @@ public class CommonFunctions {
 
 	}
 	
+	public void verifyAutoFocusElement(By ele, String eleName) {
+		try {
+			if (mobileFunctions.getAttribute(ele, "focused").equalsIgnoreCase("true")) {
+				ExtentTestManager.setPassMessageInReport(eleName + " is auto focused");
+			}else {
+				ExtentTestManager.setFailMessageInReport(eleName + " is not auto focused");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("verifyAutoFocusElement method is failed due to exception " + e);
+		}
+
+	}
+	
 	public void clickFocusableElement(By ele, String eleName) {
 		try {
 			String a=mobileFunctions.getAttribute(ele,"focusable");
