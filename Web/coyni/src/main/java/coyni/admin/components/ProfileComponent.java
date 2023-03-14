@@ -8,6 +8,7 @@ import ilabs.WebFramework.BrowserFunctions;
 public class ProfileComponent extends BrowserFunctions {
 
 	private By lblPersonalHeading = By.xpath("//span[contains(text(),'Personal')]");
+	private By lblCoyniEmployeesHeading = By.xpath("//span[contains(text(),'coyni Employees')]");
 	private By txtSearch = By.xpath("//input[contains(@class,'search-bar')]");
 	private By btnFilter = By.cssSelector("//div[@class='flex flex-row mr-5']");
 	private By btnExport = By.cssSelector("");
@@ -36,6 +37,10 @@ public class ProfileComponent extends BrowserFunctions {
 	
 	public void verifyPersonalHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPersonalHeading, "Page Heading ", expHeading);
+	}
+	
+	public void verifyCoyniEmployeesHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblCoyniEmployeesHeading, "Page Heading ", expHeading);
 	}
 
 	public void fillSearch(String text) {
@@ -84,6 +89,10 @@ public class ProfileComponent extends BrowserFunctions {
 
 	public SideBarApiBusinessComponent sideBarApiBusinessComponent() {
 		return new SideBarApiBusinessComponent();
+	}
+	
+	public CoyniEmployeeComponent coyniEmployeeComponent () {
+		return new CoyniEmployeeComponent();
 	}
 
 	private By lblApiBusinessDetails = By.xpath("(//tr[contains(@class,'  businessRow mb-0')])[1]");

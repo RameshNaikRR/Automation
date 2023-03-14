@@ -310,7 +310,10 @@ public class SideBarComponent extends BrowserFunctions {
 	public ProfileComponent profileComponent() {
 		return new ProfileComponent();
 	}
-
+	public CoyniEmployeeComponent coyniEmployeeComponent () {
+		return new CoyniEmployeeComponent();
+	}
+	
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
