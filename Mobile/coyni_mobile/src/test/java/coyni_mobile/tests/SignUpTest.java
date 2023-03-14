@@ -232,22 +232,13 @@ public class SignUpTest {
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickConfirmEye();
 			signUpPage.clickNext();
-			if(data.get("validateExistingPhoneError").equalsIgnoreCase("Yes")) {
-			signUpPage.verifyPhoneError(data.get("phoneError"));
-			signUpPage.clickOk();
+			if (data.get("validateExistingPhoneError").equalsIgnoreCase("Yes")) {
+				signUpPage.verifyPhoneError(data.get("phoneError"));
+				signUpPage.clickOk();
 			}
 			if (!data.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-				} else {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-				}
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
-//			if (!data.get("errorMessage").isEmpty()) {
-//				// Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.SECONDS);
-//				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("elementName"));
-//
-//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
@@ -261,7 +252,7 @@ public class SignUpTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickGetStarted();
-			//signUpPage.clickBusinessAccount();
+			// signUpPage.clickBusinessAccount();
 			signUpPage.clickPersonalAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			String[] firstName = data.get("firstName").split(",");

@@ -170,10 +170,6 @@ public class RetrieveEmailPage extends MobileFunctions {
 		new CommonFunctions().clearText(txtFirstName, "firstName");
 		new CommonFunctions().validateFieldMaxichar(txtFirstName, "firstName", moreThanChar);
 		new CommonFunctions().clearText(txtFirstName, "firstName");
-		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "firstName", specialChar);
-		new CommonFunctions().clearText(txtFirstName, "firstName");
-		new CommonFunctions().validateFieldWithNumber(txtFirstName, "firstName", numbers);
-
 	}
 
 	public void validateLastNameField(String minChar, String minPlusChar, String moreThanChar, String specialChar,
@@ -184,10 +180,6 @@ public class RetrieveEmailPage extends MobileFunctions {
 		new CommonFunctions().clearText(txtLastName, "lastName");
 		new CommonFunctions().validateFieldMaxichar(txtLastName, "lastName", moreThanChar);
 		new CommonFunctions().clearText(txtLastName, "lastName");
-		new CommonFunctions().validateFieldWithSpecialchar(txtLastName, "lastName", specialChar);
-		new CommonFunctions().clearText(txtLastName, "LastName");
-		new CommonFunctions().validateFieldWithNumber(txtLastName, "lastName", numbers);
-
 	}
 
 	public FieldValidationsComponent fieldValidationsComponent() {

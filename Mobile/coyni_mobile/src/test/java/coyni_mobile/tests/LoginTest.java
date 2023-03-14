@@ -155,13 +155,8 @@ public class LoginTest {
 			}
 			loginPage.clickLogin();
 			if (!loginData.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-							loginData.get("elementName"));
-				} else {
-					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-							loginData.get("elementName"));
-				}
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+						loginData.get("elementName"));
 			}
 			if (!loginData.get("popUpMsg").isEmpty()) {
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
@@ -269,13 +264,8 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.forgotPasswordPage().clickNext();
 			if (!loginData.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-							loginData.get("elementName"));
-				} else {
-					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-							loginData.get("elementName"));
-				}
+				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
+						loginData.get("elementName"));
 			}
 
 		} catch (Exception e) {
@@ -430,13 +420,8 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.retrieveEmailPage().clickNext();
 			if (!loginData.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-							loginData.get("elementName"));
-				} else {
 					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
 							loginData.get("elementName"));
-				}
 			}
 		} catch (Exception e) {
 			ExtentTestManager
