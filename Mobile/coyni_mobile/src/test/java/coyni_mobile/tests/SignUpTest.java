@@ -223,12 +223,14 @@ public class SignUpTest {
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
 			signUpPage.fillPassword(data.get("password"));
+			signUpPage.clickPasswordEye();
 			if (signUpPage.fieldBarCount() == 3) {
 				ExtentTestManager.setPassMessageInReport("Password is valid");
 			} else {
 				ExtentTestManager.setPassMessageInReport("password is invalid");
 			}
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
+			signUpPage.clickConfirmEye();
 			signUpPage.clickNext();
 			if(data.get("validateExistingPhoneError").equalsIgnoreCase("Yes")) {
 			signUpPage.verifyPhoneError(data.get("phoneError"));

@@ -24,6 +24,8 @@ public class SignUpPage extends MobileFunctions {
 	private By txtPhoneNumber = MobileBy
 			.xpath("//*[contains(@resource-id,'pnET')]|(//*[@name='usa'])/preceding-sibling::*[1]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'passwordET')]|(//*[@name='Password'])[1]");
+	private By btnEyeIconPassword = MobileBy.xpath("(//*[contains(@resource-id,'text_input_end_icon')])[1]");
+	private By btnEyeIconConfirm = MobileBy.xpath("(//*[contains(@resource-id,'text_input_end_icon')])[2]");
 	private By txtConfirmPassword = MobileBy
 			.xpath("//*[contains(@resource-id,'confirmPasswordET')]|(//*[@name='Confirm Password'])[1]");
 	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'nextCV')]|(//*[@name='Next'])[1]");
@@ -70,6 +72,7 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String firstName) {
+		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "firstName");
 		click(txtFirstName, "firstName");
 		enterText(txtFirstName, firstName, "FirstName");
 	}
@@ -96,6 +99,12 @@ public class SignUpPage extends MobileFunctions {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
 		clickDone();
+	}
+	public void clickPasswordEye() {
+		click(btnEyeIconPassword, "Password");
+	}
+	public void clickConfirmEye() {
+		click(btnEyeIconConfirm, "Confirm Password");
 	}
 
 	public void fillConfirmPassword(String confirmPassword) {
