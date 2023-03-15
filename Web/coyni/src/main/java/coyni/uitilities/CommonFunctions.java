@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -410,6 +412,27 @@ public class CommonFunctions {
 			}
 		}
 
+	}
+
+	public void swtichToNewtabUrl(String Url) {
+		WebDriver driver = DriverFactory.getDriver();
+		try {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.open(Url)");
+		ExtentTestManager.setPassMessageInReport(Url + "Url Launched");} 
+		catch (Throwable e) {
+		ExtentTestManager.setFailMessageInReport(e + "launching yopmail site is failed");}
+	}
+	
+	public void scrollToHorizontal() {
+		try {
+		JavascriptExecutor jse = (JavascriptExecutor) DriverFactory.getDriver();
+		jse.executeScript("window.scrollBy(250,0)", "Scrolled Horizontally");
+		ExtentTestManager.setPassMessageInReport("Scrolled Horizontally");
+		}
+		catch(Exception e) {
+			ExtentTestManager.setFailMessageInReport("Not Scrolled Horizontally");
+		}
 	}
 
 }

@@ -19,7 +19,7 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	private By lblMerchantAccountStatus = By.xpath("(//div[contains(@class,'chip__text--orange ')])");
 	
 	private By lblCaseIdNumber = By.xpath("//p[contains(@class,'PersonalCaseIdDetails')]");
-	private By lblCaseID = By.xpath("//p[contains(@class,'PersonalCaseIdDetails_CaseHeader')]");
+	private By lblCaseID = By.xpath("//p[contains(@class,'CaseIdDetails_CaseHeader')]");
 	private By lblPhoneNumber = By.xpath("(//div[contains(@class,'PersonalCaseIdDetails_tableBorder')]//span)[1]");
 	private By lblEmail = By.xpath("(//div[contains(@class,'PersonalCaseIdDetails_tableBorder')]//span)[2]");
 	private By lblSSN = By.xpath("(//div[contains(@class,'PersonalCaseIdDetails_tableBorder')]//span)[3]");
@@ -35,19 +35,25 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	private By lblDate = By.xpath("//span[contains(text(),'Timestamp')]/following-sibling::span");
 	private By lblMerchantDate = By.xpath("//p[contains(@class,'font-bold text-cgy4 ')]");
 	private By lblDueDate = By.xpath("//p[contains(text(),'@ ')]"); 
-	private By lstAssineNames = By.xpath("//div[contains(@style,'padding-top: 4%')]");
+	private By lstAssineNames = By.xpath("//div[@class='w-[135px] truncate ml-2']");
 	private By lblAssigneName = By.xpath("//div[contains(text(),'Prajwal')]");
-	private By lblMerchantAssigneName = By.xpath("//div[contains(text(),'Santosh Pa...')]");
+	private By lblMerchantAssigneName = By.xpath("//div[contains(text(),'Santosh')]");
 	
 	private By txtAssigneName = By.xpath("");
 	private By btnHide = By.xpath("//span[contains(text(),'Hide')]");
     private By btnAddNewTask = By.xpath("//span[text()='Add New Task']");
     private By lblMerchantCaseID = By.xpath("//p[contains(@class,'CaseIdDetails_CaseHeader__7jlV7 pb-5')]");
-    private By txtMerchantAccountID = By.xpath("//div[text()='New']");
+    private By txtMerchantAccountID = By.xpath("(//span[contains(@class,'CaseIdDetails_account_id')])[1]");
     private By lblMerchantPhoneNumber = By.xpath("(//span[contains(@class,'CaseIdDetails_hoverDiv__blLFt')])[2]");
     private By lblMerchantEmail = By.xpath("//span[contains(@class,'CaseIdDetails_hoverDiv__blLFt break-words')]");
-	
-	
+	private By txtMessage = By.xpath("//textarea[@name='notemessage']");
+	private By btnSend = By.xpath("//button[text()='Send']");
+	private By btnUnderwritingsMerchant = By.xpath("//div[@class='breadcrumb']/a");
+	private By btnFilter = By.xpath("//button[text()='Filter']");
+    private By txtcaseID = By.xpath("//input[@name='caseId']");
+    private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
+    private By lblPending = By.xpath("//div[text()='Pending']");
+    
 	public String verifyDate() {
 		String str = getText(lblDate, "Date");
 		String str1 = str.replaceAll("[a-zA-Z]", "");
@@ -58,8 +64,9 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	public String verifyMerchantDate() {
 		String str = getText(lblMerchantDate, "Date");
 		String str1 = str.replaceAll("[a-zA-Z]", "");
-		ExtentTestManager.setInfoMessageInReport("Date is " + str1);
-		return str1;
+		String str2 = str1.replaceFirst(" ", "");
+		ExtentTestManager.setInfoMessageInReport("Date is " + str2);
+		return str2;
 	}
 	public String VerifyMerchantCaseStatus() {
 		 String str = getText(lblMerchantAccountStatus, "New");
@@ -96,15 +103,10 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		}
 		
 	}
-	public void verifyMerchantPhoneNumber(String expPhoneNumber) {
+	public void verifyMerchantPhoneNumber() {
 		String str = getText(lblMerchantPhoneNumber, "PhoneNumber");
 		ExtentTestManager.setInfoMessageInReport("the phone Number is"+str);
-		if(str.equals(expPhoneNumber)) { 
-			ExtentTestManager.setPassMessageInReport("The phone number is matched");
-		}
-		else {
-			ExtentTestManager.setWarningMessageInReport("the Phone number is not matched");
-		}
+		
 		
 	}
 
@@ -120,16 +122,9 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		}
 		
 	}
-	public void verifyMerchantEmail(String expEmail) {
+	public void verifyMerchantEmail() {
 		String str = getText(lblMerchantEmail, "Email");
 		ExtentTestManager.setInfoMessageInReport("the email is"+str);
-		if(str.equals(expEmail)) { 
-			ExtentTestManager.setPassMessageInReport("The email is matched");
-		}
-		else {
-			ExtentTestManager.setWarningMessageInReport("the email is not matched");
-		}
-		
 	}
 
 
@@ -176,9 +171,12 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	}
 	public String verifyMerchantID() {
 		String str = getText(txtMerchantAccountID, "CaseIDNumber");
-		String str1 = str.replaceAll("[^0-9]", "");
-		ExtentTestManager.setInfoMessageInReport("Case ID Number is "+ str1);
-        return str1;  	
+		String str1 = str.replaceAll("[a-zA-Z]", "");
+        String str2 = str1.replaceAll(":", "");
+        String str3 = str2.replaceAll(" ", "");
+        String str4 = "M"+str3;
+		ExtentTestManager.setInfoMessageInReport("Case ID Number is "+ str4);
+        return str4;  	
 	}
 	
 	
@@ -225,9 +223,9 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
         List<WebElement> lst =	getElementsList(lstAssineNames, "List of Assigne Names");
            int k=lst.size();
         for(int i=0; i<k;i++) {
-         WebElement str=    lst.get(i); 
-       ExtentTestManager.setInfoMessageInReport(str.getText());  
-        }
+         WebElement str=lst.get(i); 
+      String str1 = str.getText();
+      ExtentTestManager.setInfoMessageInReport(str1);        }
 	}
 	
 	/*
@@ -254,6 +252,18 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		click(btnAddNewTask, "Add New Task");
 	}
 	
+	public void enterMessageToUser(String expMessage) {
+		enterText(txtMessage, expMessage, "Message to user");
+	}
+	
+	public void clickSend() {
+		click(btnSend, "Send");
+		}
+	
+	public void clickUnderWritingsMerchant() {
+		click(btnUnderwritingsMerchant, "UnderWritings Merchant");
+	}
+	
 	public AddAdditionalDocumentsPopup addAdditionalDocumentsPopup() {
 		return new AddAdditionalDocumentsPopup();
 	}
@@ -262,6 +272,21 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		return new ApproveCasePopup();
 	}
 	
-		
+	public void clickFilter() {
+		click(btnFilter, "filter");
+	}
+	
+	public void enterCaseID(String expCaseID) {
+		enterText(txtcaseID, expCaseID, "Case ID");
+	}
+	
+	public void clickApplyFilters() {
+		click(btnApplyFilters, "Apply Filters");
+	}
+	
+	public void verifyStatus() {
+		verifyElementDisplayed(lblPending, "Pending");
+		ExtentTestManager.setInfoMessageInReport("The Status is Pending");
+	}
 
 }

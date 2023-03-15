@@ -32,15 +32,15 @@ public class UnderWritingTest {
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
-		loginPage =new LoginPage();
-		merchantregistrationpage = new MerchantRegistrationPage();	
+		loginPage = new LoginPage();
+		merchantregistrationpage = new MerchantRegistrationPage();
 		underwritingpersonalcomponent = new UnderWritingPersonalComponent();
 		registrationStartPage = new RegistrationStartPage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 
 	}
-	
-	//sanity test
+
+	// sanity test
 	@Test
 	@Parameters({ "strParams" })
 	public void testUnderWritingTestWithLinks(String strParams) {
@@ -57,8 +57,6 @@ public class UnderWritingTest {
 			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
 		}
 	}
-	
-	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -70,101 +68,104 @@ public class UnderWritingTest {
 			homePage.sideBarComponent().clickPersonal();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickNew();
-			String caseID=homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseID();
-			String date=homePage.sideBarComponent().underWritingPersonalComponent().verifyDate();
-			String customerId=homePage.sideBarComponent().underWritingPersonalComponent().verifyCustomerID();
-			String caseStatus=homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseStatus();
-			String dueDate=homePage.sideBarComponent().underWritingPersonalComponent().verifyDueDate();
+			String caseID = homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseID();
+			String date = homePage.sideBarComponent().underWritingPersonalComponent().verifyDate();
+			String customerId = homePage.sideBarComponent().underWritingPersonalComponent().verifyCustomerID();
+			String caseStatus = homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseStatus();
+			String dueDate = homePage.sideBarComponent().underWritingPersonalComponent().verifyDueDate();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
 			Thread.sleep(2000);
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyHeading();
-			String caseDetailsCaseID= homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseId();
-			String caseDetailscaseStatus=homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
-			String caseDetailsCaseDate = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDate();
-			
-			String caseDetailsCustomerID =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCustomerID();
-			String caseDetailsDueDate =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDueDate();
-			
-			if(caseID.equals(caseDetailsCaseID)) {
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyHeading();
+			String caseDetailsCaseID = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyCaseId();
+			String caseDetailscaseStatus = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyCaseStatus();
+			String caseDetailsCaseDate = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyDate();
+
+			String caseDetailsCustomerID = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyCustomerID();
+			String caseDetailsDueDate = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyDueDate();
+
+			if (caseID.equals(caseDetailsCaseID)) {
 				ExtentTestManager.setPassMessageInReport("Case ID is Matched");
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Case Id is not Matched");
 			}
-			
-			if(date.equals(caseDetailsCaseDate)) {
+
+			if (date.equals(caseDetailsCaseDate)) {
 				ExtentTestManager.setPassMessageInReport("Date is Matched");
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Date is not Matched");
 			}
-			
-			if(customerId.equals(caseDetailsCustomerID)) {
+
+			if (customerId.equals(caseDetailsCustomerID)) {
 				ExtentTestManager.setPassMessageInReport("Customer Id is Matched");
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Customer Id is not Matched");
 			}
-			
-			if(caseStatus.equals(caseDetailscaseStatus)) {
+
+			if (caseStatus.equals(caseDetailscaseStatus)) {
 				ExtentTestManager.setPassMessageInReport("Case status is Matched");
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Case status is not Matched");
 			}
-			
-			if(dueDate.equals(caseDetailsDueDate)) {
+
+			if (dueDate.equals(caseDetailsDueDate)) {
 				ExtentTestManager.setPassMessageInReport("Due Date is Matched");
-			}
-			else {
+			} else {
 				ExtentTestManager.setInfoMessageInReport("Due Date is not Matched");
 			}
-			
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDateOfBirth(data.get("dateOfBirth"));
+
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyDateOfBirth(data.get("dateOfBirth"));
 //			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifySSNNumber(data.get("SSNNumber"));
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyPhoneNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyEmail(data.get("emailCustm"));;
-		//	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDownloadDriversLicense();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyPhoneNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyEmail(data.get("emailCustm"));
+			;
+			// homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDownloadDriversLicense();
 			Thread.sleep(2000);
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAssignee();
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyListofAssignes();
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().selectAssigneName();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.clickAssignee();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyListofAssignes();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.selectAssigneName();
 			homePage.clickUserName();
 			homePage.clickSignOut();
-			
-			
-			
-			
-
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAssigneLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		//	new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			// new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
 			loginPage.verifyPageHeading(data.get("loginHeading"));
-			//loginPage.verifyPageDescription(data.get("loginDescription"));
+			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("assigneEmail"));
 			loginPage.fillPassword(data.get("assingepassword"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
-			//loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
+			// loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			loginPage.authyComponent().fillInput(data.get("code"));
-			//loginPage.authyComponent().verifyMessage(data.get("message"));
+			// loginPage.authyComponent().verifyMessage(data.get("message"));
 			Thread.sleep(2000);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddRequiredDocuments(String strParams) {
@@ -173,15 +174,20 @@ public class UnderWritingTest {
 			homePage.sideBarComponent().clickUnderWriting();
 			homePage.sideBarComponent().clickPersonal();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickHide();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAddNewTask();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().clickCheckBox();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().clickAdd();
-		    if (!data.get("toastMessage").isEmpty()) {
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickHide();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.clickAddNewTask();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().clickCheckBox();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().clickAdd();
+			if (!data.get("toastMessage").isEmpty()) {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
 			Thread.sleep(2000);
@@ -190,59 +196,62 @@ public class UnderWritingTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAssigneDirectApprove(String strParams) {
 		try {
-		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickUnderWriting();
 			homePage.sideBarComponent().clickPersonal();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
-			
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
-		    String str = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseIDNumber(); 
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApprove();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().verifyDescription();
-		    String str1 = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().verifyCaseNumber();
-		    if(str.equals(str1)) {
-		    	ExtentTestManager.setPassMessageInReport("Case ID is matched");
-		    }
-		    else {
-		    	ExtentTestManager.setWarningMessageInReport("Case ID is not matched");
-		    }
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().clickYes();
-		    Thread.sleep(5000);
-		    homePage.clickUserName();
-		    Thread.sleep(5000);
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().toastComponet().navigationComponent().clickClose();
-		    homePage.clickSignOut();
-		    
+
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			String str = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyCaseIDNumber();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.clickApprove();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.approveCasePopup().verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.approveCasePopup().verifyDescription();
+			String str1 = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.approveCasePopup().verifyCaseNumber();
+			if (str.equals(str1)) {
+				ExtentTestManager.setPassMessageInReport("Case ID is matched");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("Case ID is not matched");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.approveCasePopup().clickYes();
+			Thread.sleep(5000);
+			homePage.clickUserName();
+			Thread.sleep(5000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.approveCasePopup().toastComponet().navigationComponent().clickClose();
+			homePage.clickSignOut();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testIdentifivericationSuccesfull(String strParams) {
 		try {
-		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.verifyIdetification();
 			ExtentTestManager.setPassMessageInReport("Idetification Sucessfull");
-		
-		    
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testcreateMerchantAccount(String strParams) {
@@ -251,7 +260,7 @@ public class UnderWritingTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			underwritingpersonalcomponent.openMerchantPortal();
 			underwritingpersonalcomponent.switchToYopmailWindow();
-			
+
 			loginPage.clickSignUp();
 			merchantregistrationpage.clickMerchantAccount();
 			merchantregistrationpage.fillFirstName(data.get("firstName1"));
@@ -267,7 +276,8 @@ public class UnderWritingTest {
 			merchantregistrationpage.phoneVerificationComponent().fillpin(data.get("code1"));
 			merchantregistrationpage.phoneVerificationComponent().emailVerificationComponent()
 					.verifyEmailHeading(data.get("emailHeading1"));
-			merchantregistrationpage.phoneVerificationComponent().emailVerificationComponent().fillpin(data.get("code1"));
+			merchantregistrationpage.phoneVerificationComponent().emailVerificationComponent()
+					.fillpin(data.get("code1"));
 
 //			merchantregistrationpage.scrollDownTermsOfService();
 //			merchantregistrationpage.clickOnCheckBox();
@@ -281,8 +291,7 @@ public class UnderWritingTest {
 //					.verifyAccountCreated(data.get("createdAccountHeading1"));
 
 			Thread.sleep(60000);
-			
-			
+
 //			registrationStartPage.verifyHeading(data.get("startPageHeading"));
 //			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 //			registrationStartPage.verifyMerchantApplicationView();
@@ -463,6 +472,79 @@ public class UnderWritingTest {
 			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
 		}
 	}
+	
+	public void testMerchantUnderWritingUserDetailsVerification(String strParams) {
+		try {
+		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			String caseID = homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseID();
+			String date = homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantDate();
+			String merchantId = homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantID();
+			String caseStatus = homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseStatus();
+			String dueDate = homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantDueDate();
+			Thread.sleep(5000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyHeading();
+			String caseDetailsCaseID = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyMerchantCaseId();
+			String caseDetailscaseStatus = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().VerifyMerchantCaseStatus();
+			String caseDetailsCaseDate = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyMerchantDate();
+
+			String caseDetailsMerchantID = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().verifyMerchantID();
+			// String caseDetailsDueDate
+			// =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDueDate();
+
+			if (caseID.equals(caseDetailsCaseID)) {
+				ExtentTestManager.setPassMessageInReport(caseID + "Case ID is Matched with " + caseDetailsCaseID);
+			} else {
+				ExtentTestManager.setInfoMessageInReport(caseID + "Case Id is not Matched with " + caseDetailsCaseID);
+			}
+
+			if (date.equals(caseDetailsCaseDate)) {
+				ExtentTestManager.setPassMessageInReport(date + " Date is Matched with " + caseDetailsCaseDate);
+			} else {
+				ExtentTestManager.setInfoMessageInReport(date + " Date is not Matched " + caseDetailsCaseDate);
+			}
+
+			if (merchantId.equals(caseDetailsMerchantID)) {
+				ExtentTestManager
+						.setPassMessageInReport(merchantId + " Merchant Id is Matched with " + caseDetailsMerchantID);
+			} else {
+				ExtentTestManager.setInfoMessageInReport(
+						merchantId + " Merchant Id is not Matched with " + caseDetailsMerchantID);
+			}
+
+			if (caseStatus.equals(caseDetailscaseStatus)) {
+				ExtentTestManager
+						.setPassMessageInReport(caseStatus + " Case status is Matched with " + caseDetailscaseStatus);
+			} else {
+				ExtentTestManager
+						.setInfoMessageInReport(caseStatus + " Case status is not Matched " + caseDetailscaseStatus);
+			}
+//			if(dueDate.equals(caseDetailsDueDate)) {
+//			ExtentTestManager.setPassMessageInReport("Due Date is Matched");
+//		}
+//		else {
+//			ExtentTestManager.setInfoMessageInReport("Due Date is not Matched");
+//		}
+
+		// homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDateOfBirth(data.get("dateOfBirth"));
+//		homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifySSNNumber(data.get("SSNNumber"));
+	
+		// homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDownloadDriversLicense();
+
+
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantPhoneNumber();
+	        homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantEmail();
+		}
+		catch (Exception e) {
+			
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantUnderWriting(String strParams) {
@@ -470,77 +552,18 @@ public class UnderWritingTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
 			homePage.sideBarComponent().clickUnderWriting();
-			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().clickuderMerchant();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyUnderwritingMerchantHeading();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickNew();
-			Thread.sleep(3000);
-			String caseID=homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseID();
-			String date=homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantDate();
-			String customerId=homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantID();
-			String caseStatus=homePage.sideBarComponent().underWritingPersonalComponent().verifyCaseStatus();
-			String dueDate=homePage.sideBarComponent().underWritingPersonalComponent().verifyMerchantDueDate();
-			Thread.sleep(5000);
-			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
-			Thread.sleep(2000);
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyHeading();
-			String caseDetailsCaseID= homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantCaseId();
-			String caseDetailscaseStatus=homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().VerifyMerchantCaseStatus();
-			String caseDetailsCaseDate = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantDate();
-			
-			String caseDetailsCustomerID =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantID();
-			//String caseDetailsDueDate =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDueDate();
-			
-			if(caseID.equals(caseDetailsCaseID)) {
-				ExtentTestManager.setPassMessageInReport("Case ID is Matched");
-			}
-			else {
-				ExtentTestManager.setInfoMessageInReport("Case Id is not Matched");
-			}
-			
-			if(date.equals(caseDetailsCaseDate)) {
-				ExtentTestManager.setPassMessageInReport("Date is Matched");
-			}
-			else {
-				ExtentTestManager.setInfoMessageInReport("Date is not Matched");
-			}
-			
-			if(customerId.equals(caseDetailsCustomerID)) {
-				ExtentTestManager.setPassMessageInReport("Merchant Id is Matched");
-			}
-			else {
-				ExtentTestManager.setInfoMessageInReport("Merchant Id is not Matched");
-			}
-			
-			if(caseStatus.equals(caseDetailscaseStatus)) {
-				ExtentTestManager.setPassMessageInReport("Case status is Matched");
-			}
-			else {
-				ExtentTestManager.setInfoMessageInReport("Case status is not Matched");
-			}
-			
-//			if(dueDate.equals(caseDetailsDueDate)) {
-//				ExtentTestManager.setPassMessageInReport("Due Date is Matched");
-//			}
-//			else {
-//				ExtentTestManager.setInfoMessageInReport("Due Date is not Matched");
-//			}
-			
-			//homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDateOfBirth(data.get("dateOfBirth"));
-//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifySSNNumber(data.get("SSNNumber"));
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantPhoneNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantEmail(data.get("emailCustm"));;
-		//	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyDownloadDriversLicense();
+			testMerchantUnderWritingUserDetailsVerification(strParams);
 			Thread.sleep(2000);
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAssignee();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyListofAssignes();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().selectMerchantAssigneName();
-			homePage.clickUserName();
+			homePage.clickUserName(); 
 			homePage.clickSignOut();
-			
-			
-			
-			
-
+			  
+			 
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
@@ -553,24 +576,55 @@ public class UnderWritingTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickUnderWriting();
-			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().clickuderMerchant();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyUnderwritingMerchantHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
-		    homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickHide();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAddNewTask();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().verifyHeading();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().clickCheckBox();
-		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().addAdditionalDocumentsPopup().clickAdd();
-		    if (!data.get("toastMessage").isEmpty()) {
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickHide();
+			String expCaseId = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseId();
+			String expMerchID =homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantID();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.clickAddNewTask();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().clickCheckBox();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.addAdditionalDocumentsPopup().clickAdd();
+			if (!data.get("toastMessage").isEmpty()) {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
-			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().enterMessageToUser(data.get("message"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickSend();
+			if (!data.get("toastMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage1"));
+			}
+			
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickUnderWritingsMerchant();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickPending();
+			
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickFilter();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().enterCaseID(expCaseId);
+		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApplyFilters();
+		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyStatus();
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().profileComponent().clickSearchIcon();
+			homePage.sideBarComponent().profileComponent().fillSearch(expMerchID);
+			new CommonFunctions().scrollToHorizontal();
+			homePage.sideBarComponent().profileComponent().verifyMerchantStatus();
+		    new CommonFunctions().swtichToNewtabUrl(data.get("url"));
+		    
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+    
+	
+ 	
+	
 
 }

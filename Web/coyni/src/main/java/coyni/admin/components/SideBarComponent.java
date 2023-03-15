@@ -281,7 +281,7 @@ public class SideBarComponent extends BrowserFunctions {
 	public void clickMerchant() throws InterruptedException {
 		// commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
 		click(getSubMenuItems("Merchants"), "Merchant");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 	}
 
 	public void clickuderMerchant() throws InterruptedException {

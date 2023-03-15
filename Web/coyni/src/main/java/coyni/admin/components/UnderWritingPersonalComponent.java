@@ -19,14 +19,15 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	private By lblDate = By.xpath("//tr//td[contains(@class,'updatedDate')]");
 	private By lblMerchantDate = By.xpath("//div[contains(@class,'font-s')]");
 	private By lblCustomerId = By.xpath("//tr//td[contains(@class,'customerId')]");
-	private By lblMerchantId = By.xpath("//span[text()='MERCHANT ID']");
+	private By lblMerchantId = By.xpath("(//tr[@class='  businessRow mb-0']//td)[3]");
 	private By lblCustomerName = By.xpath("//tr//td[contains(@class,'customerFullName')]");
 	private By lblDueDate = By.xpath("//div[contains(@class,'PersonalUsers_dueFont')]");
     private By lblHeading = By.xpath("//span[text()='Underwriting - Personal']");
     private By btnInReview = By.xpath("//button//div[contains(text(),'In Review')]");
     private By lblUnderwritingMerchnat = By.xpath("//span[text()='Underwriting - Merchant']");
-	private By lblCaseStatus = By.xpath(" //span[contains(text(), 'case Status')]");
+	private By lblCaseStatus = By.xpath("(//tr[@class='  businessRow mb-0']//td)[5]");
 	private By lblMerchantDueDate = By.xpath("//div[contains(@class,'font-semibold BusinessUsers_dueFont__j4wD5')]");
+	private By btnPending = By.xpath("//button//div[contains(text(),'Pending')]");
 	
 	public void verifyHeading() {
 		new CommonFunctions().elementView(lblHeading, "Heading");
@@ -67,9 +68,9 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	}
 	public String verifyMerchantID() {
 		String str = getText(lblMerchantId, "MerchantId");
-		String str1 = str.replaceAll("[^0-9]", "");
-		ExtentTestManager.setInfoMessageInReport("Merchant id is " + str1);
-		return str1;
+		//String str1 = str.replaceAll("[^0-9]", "");
+		ExtentTestManager.setInfoMessageInReport("Merchant id is " + str);
+		return str;
 	}
 	
 	public String verifyCustomerName() {
@@ -101,6 +102,10 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	
 	public void clickInReview() {
 		click(btnInReview, "In Review");
+	}
+	
+	public void clickPending() {
+		click(btnPending, "Pending");
 	}
 	public void openMerchantPortal() {
     	WebDriver driver =  DriverFactory.getDriver();

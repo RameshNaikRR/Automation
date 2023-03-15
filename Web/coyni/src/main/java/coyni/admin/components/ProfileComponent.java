@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ProfileComponent extends BrowserFunctions {
 
@@ -19,6 +20,8 @@ public class ProfileComponent extends BrowserFunctions {
 	private By btnSearch = By.xpath("//button[@class='icon-search']");
 	private By lblNoRecordFound = By.xpath("//span[contains(text(),'No Records Found')]");
 	private By lnkViewPayoutHistory=By.xpath("//button[text()='View Payout History']");
+	private By lblStatus = By.xpath("//div[contains(@class,'BusinessProfiles_button')]");
+	
 	public void clickViewPayoutHistory() {
 		click(lnkViewPayoutHistory, "View Payout History");
 	}
@@ -77,6 +80,10 @@ public class ProfileComponent extends BrowserFunctions {
 	public void verifySearchLables() {
 		new CommonFunctions().elementView(lblSearchBar, "Search Bar lable");
 		new CommonFunctions().elementView(lblSearchIcon, "Search Icon");
+	}
+	public void verifyMerchantStatus() {
+		String str = getText(lblStatus, "Status");
+		ExtentTestManager.setInfoMessageInReport("The status is" + str);
 	}
 
 	public ToastComponent toastComponent() {
