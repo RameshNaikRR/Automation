@@ -157,14 +157,13 @@ public class MerchantApplicationTest {
 			Thread.sleep(10000);
 
 			registrationStartPage.merchantAgreementsPage().clickView();
-			registrationStartPage.merchantAgreementsPage().verifyESignature(data.get("signature"));
-			registrationStartPage.merchantAgreementsPage().clickSave();
-
+			registrationStartPage.merchantAgreementsPage().scrollDownTermsOfService();
+			registrationStartPage.merchantAgreementsPage().clickAgree();
+			registrationStartPage.merchantAgreementsPage().scrollDownPrivacyPolicy();
+			registrationStartPage.merchantAgreementsPage().clickAgree();
 			registrationStartPage.merchantAgreementsPage().clickNext();
 
 			Thread.sleep(7000);
-
-			registrationStartPage.registrationCompanyInfoPage().verifyMerchantAgreements();
 
 			registrationStartPage.applicationSummaryPage().verifyCompanyInformation();
 			registrationStartPage.applicationSummaryPage().getCompanyInformation();
@@ -202,6 +201,9 @@ public class MerchantApplicationTest {
 				}
 
 			}
+
+			registrationStartPage.applicationSummaryPage().clickCheckBox();
+			registrationStartPage.applicationSummaryPage().verifyESignature(data.get("signature"));
 			registrationStartPage.applicationSummaryPage().clickDone();
 
 //			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));

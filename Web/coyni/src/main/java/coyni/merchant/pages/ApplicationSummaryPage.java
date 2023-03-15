@@ -17,6 +17,7 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
 	WebDriverWait wait = new WebDriverWait(driver, 120);
 
+	private By btnCheckBox = By.xpath("//input[@type='checkbox']");
 	private By lblHeading = By.xpath("//h4[text()='Merchant Application Summary']");
 	private By lblCompanyInformation = By
 			.xpath("(//p[contains(text(),'Company Information')])[2]/following-sibling::*");
@@ -57,6 +58,8 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	private By btnView = By.xpath("//button[text()='View']");
 	private By btnDone = By.xpath("//button[text()='Done']");
+	private By lblESignature = By.className("ApplicationSummary_fontStyle__oM7ra");
+	private By btnESignature = By.className("ApplicationSummary_fontStyle__oM7ra");
 	private By lblMerchantAgreements = By.xpath("//span[contains(text(),'Merchant Agreement')]");
 	private By done = By.xpath("(//button[contains(text(),'Done')])[2]");
 	private By popupPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
@@ -71,6 +74,16 @@ public class ApplicationSummaryPage extends BrowserFunctions {
 
 	public void clickDone() {
 		click(btnDone, "Done");
+	}
+
+	public void clickCheckBox() {
+		click(btnCheckBox, "Check Box");
+	}
+
+	public void verifyESignature(String signature) {
+		scrollToElement(lblESignature, "ESignature");
+		click(btnESignature, "Signature");
+		enterText(btnESignature, signature, "Signature");
 	}
 
 	public void clickMerchantAgreementsDone() {
