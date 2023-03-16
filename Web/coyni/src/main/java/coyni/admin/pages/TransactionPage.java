@@ -43,6 +43,8 @@ public class TransactionPage extends BrowserFunctions {
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", expHeading);
 	}
+	
+	
 	public void verifyTransaction() {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transactions", "Transactions");
 	}

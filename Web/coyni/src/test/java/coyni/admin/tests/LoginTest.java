@@ -65,6 +65,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.refreshPage();
+			ExtentTestManager.setInfoMessageInReport("No data found in the Email and Password field");
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();

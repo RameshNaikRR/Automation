@@ -39,20 +39,26 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By btnExport = By.xpath("//button[text()='Export']");
 
 	private By lblTransactions = By.xpath("//h2[text()='Transactions']");
-	
+
 	private By lblTokenAccount = By.xpath("//p[text()='Token Account']");
 	private By lblTokenAccountHeadings = By.xpath("//th[contains(@class,' col')]");
-	
+
 	CommonFunctions commonfunctions = new CommonFunctions();
-	
+
 	public void clickTokenAccount() {
 		click(lblTokenAccount, "Token Account");
 	}
+
 	public void verifyTokenAccountHeadings(String headings) {
 		List<WebElement> elementsList = getElementsList(lblTokenAccountHeadings, "Token Account Headings");
 		commonfunctions.verifyHeadings(elementsList, headings, "Token Account Headings");
 	}
-	
+
+	private By lblTransactionHeading = By.xpath("//h2[text()='Transactions']");
+
+	public void verifyTransactionHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblTransactionHeading, "Transaction Heading", expHeading);
+	}
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelTextContains(lblHeading, "Heading", expHeading);

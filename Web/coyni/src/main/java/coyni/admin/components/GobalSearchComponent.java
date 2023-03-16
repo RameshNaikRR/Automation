@@ -17,6 +17,8 @@ public class GobalSearchComponent extends BrowserFunctions {
 	private By btnUnderWritingCaseID = By.xpath("//label[text()='Underwriting Case ID:']");
 	private By lblId = By.cssSelector(".cell-col-0");
 	private By lblNoTransaction = By.xpath("//div[text()='No Search Results Found']");
+	
+	private By lblSeaech=By.xpath("//input[contains(@class,'Input_form_input__yl3pD italic Header_uwidth__Ih1LJ false ')]");
 
 	public int getTransaction() {
 		return getElementsList(lblNoTransaction, "").size();
@@ -74,7 +76,7 @@ public class GobalSearchComponent extends BrowserFunctions {
 
 	public void fillUnderWritingCaseID(String profileDetails) {
 		click(btnUnderWritingCaseID, "UnderWritingCaseID");
-		enterText(btnGobalSearch, profileDetails, "UnderWritingCaseID");
+		enterText(lblSeaech, profileDetails, "UnderWritingCaseID");
 	}
 
 	private By lblIndividuals = By.xpath("//label[text()='Individuals']");

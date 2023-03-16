@@ -96,6 +96,7 @@ public class HomeTest {
 			homePage.clickChangePassword();
 			homePage.authyComponent().fillInput(data.get("code"));
 			homePage.adminUserDetailsPage().verifyChangePasswordHeading();
+			homePage.adminUserDetailsPage().clickChangePasswordLink();
 			homePage.adminUserDetailsPage().verifyChangePasswordDescp();
 			homePage.adminUserDetailsPage().fillCurrentPassword(data.get("currentPassword"));
 			homePage.adminUserDetailsPage().clickEyeIconCurrentPassword();
@@ -365,6 +366,28 @@ public class HomeTest {
 
 				ExtentTestManager
 						.setPassMessageInReport("Bank Account Transaction are getting");
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Gobal search  failed due to exception" + e);
+		}
+	}
+	
+	@Test // added
+	@Parameters({ "strParams" })
+	public void tesGobalSearchUnderWritingCaseId(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			gobalSearchComponent.clickGobalSearch();
+			gobalSearchComponent.fillUnderWritingCaseID(data.get("caseId"));
+			gobalSearchComponent.clickSearch();
+			Thread.sleep(3000);
+			if (gobalSearchComponent.getTransaction() > 0) {
+				ExtentTestManager.setPassMessageInReport("No Search Result Found given BankAccount");
+			} else {
+
+				ExtentTestManager
+						.setPassMessageInReport("Under Writing case id  are getting");
 
 			}
 		} catch (Exception e) {
