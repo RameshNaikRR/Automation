@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AuthyComponent extends BrowserFunctions {
@@ -22,6 +23,8 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lnkSmsCode = By.xpath("//button[contains(.,'Having')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
+	private By btnActivateTwostepVerify=By.xpath("//button[text()='Activate Two-Step Authentication']");
+	private By btnDone=By.xpath("//button[@type='button'][text()='Done']");
 
 	private static Map<String, String> prevCode = new HashMap<>();
 
@@ -131,6 +134,26 @@ public class AuthyComponent extends BrowserFunctions {
 		return new PhoneEmailVerificationComponent();
 	}
 
+	/**
+	 * this method will click on Button `Activate Two step Authentication`. 
+	 * this button is visible after creating coyni employee in admin
+	 */
+	public void clickActivateTwoStepAuthyLink() {
+		click(btnActivateTwostepVerify, "Activate Two Step Authentication Link");
+	}
+	/**
+	 * using the existing method for entering authy verification code
+	 * @param authyCode
+	 */
+	public void enterVerficationCode(String authyCode) {
+		fillInput(authyCode);
+	}
+	public void clickDoneBtn() throws InterruptedException {
+		Thread.sleep(2000);
+		click(btnDone, "Done Button");
+		DriverFactory.getDriver().navigate().refresh();
+		Thread.sleep(3000);
+	}
 	
 
 }

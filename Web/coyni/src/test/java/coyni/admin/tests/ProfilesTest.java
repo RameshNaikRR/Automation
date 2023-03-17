@@ -1159,41 +1159,41 @@ public class ProfilesTest {
 			homePage.sideBarComponent().clickCoyniEmployees();
 			homePage.sideBarComponent().profileComponent().verifyCoyniEmployeesHeading(data.get("profileHeading"));
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickNewEmployeeBtn();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.verifyAddNewEmployeeHeading();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.verifyHeading(data.get("heading"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.fillFirstName(data.get("firstname"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.fillLastName(data.get("lastname"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.fillEmail();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.fillPhonenNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.selectDepartment();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.clickAccounting();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.clickSendInvitaion();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.clickActivateAccountInYOPMail(data.get("firstname"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().fillPhoneNumber(data.get("phoneNumber"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().clickNext();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().fillVerificationCode(data.get("verificationCode"));// 123456
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().fillCreatePassword(data.get("createPassword"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().fillConfirmPassword(data.get("confirmPassword"));
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.activateAccount().clickCreate();
-
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().verifyAddNewEmployeeHeading();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillFirstName(data.get("firstname"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillLastName(data.get("lastname"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillEmail();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().fillPhonenNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().selectDepartment(data.get("Department"));/////
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickOnPermissionRole(data.get("permissionRole"));///
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickSendInvitaion();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().clickActivateAccountInYOPMail(data.get("firstname"));			
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().fillPhoneNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().clickNext();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().fillVerificationCode(data.get("verificationCode"));//123456
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().fillCreatePassword(data.get("createPassword"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().fillConfirmPassword(data.get("confirmPassword"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().clickCreate();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().clickActivateTwoStepAuthyLink();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().enterVerficationCode(data.get("verificationCode"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().clickDoneBtn();
+			homePage.sideBarComponent().doLogin(data.get("createPassword"), data.get("verificationCode"));
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickOnFiltersBtn();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().selectFilter(data.get("filter1"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().selectFilter(data.get("filter2"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().fillSearch();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickEmployeeDetails();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().verifyPhoneNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().verifyEmail();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().verifyAccStatus();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickCancelOrRemoveUser();			
+			
+			
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testCreateCoyniEmployee Failed due to Exception " + e);
 		}
 	}
 

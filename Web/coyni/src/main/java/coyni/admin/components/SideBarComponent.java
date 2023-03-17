@@ -12,6 +12,7 @@ import coyni.admin.pages.CommissionAccountPage;
 import coyni.admin.pages.FeatureControlPage;
 import coyni.admin.pages.FeeStructurePage;
 import coyni.admin.pages.HomePage;
+import coyni.admin.pages.LoginPage;
 import coyni.admin.pages.ReserveManagementPage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
@@ -379,6 +380,17 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public AgreementsComponent agreementsComponent() {
 		return new AgreementsComponent();
+	}
+	public void doLogin(String password, String securityKey) throws InterruptedException {
+		new LoginPage().fillEmail(new AddNewEmployeeComponent().getYOPMail());
+		new LoginPage().fillPassword(password);
+		new LoginPage().clickNext();
+		if (securityKey.equalsIgnoreCase("123456")) {
+			new LoginPage().authyComponent().fillInput(securityKey);
+		} else {
+			new LoginPage().authyComponent().fillAuthyInput(securityKey);
+		}
+		Thread.sleep(5000);
 	}
 
 }
