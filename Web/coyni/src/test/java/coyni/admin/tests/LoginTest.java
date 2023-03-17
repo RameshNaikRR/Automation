@@ -152,13 +152,13 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
-			if (!data.get("code").isEmpty()) {
-				loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
 			}
-			if (!data.get("message").isEmpty()) {
-				loginPage.authyComponent().verifyMessage(data.get("message"));
-			}
-			Thread.sleep(2000);
+           Thread.sleep(2000);
 			loginPage.authyComponent().verifyLoginWithInvalidPin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Authy failed due to this exception " + e);
@@ -342,6 +342,41 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot email with invalid phone number test failed due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotEmailWithInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.clickForgotEmail();
+			loginPage.forgotEmailPage().verifyPageHeading(data.get("forgotEmailHeading"));
+			loginPage.forgotEmailPage().verifyPageDescription(data.get("forgotEmailDescription"));
+			loginPage.forgotEmailPage().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.forgotEmailPage().clickNext();
+			loginPage.forgotEmailPage().forgotEmailNamePage().verifyPageHeading(data.get("forgotEmailNameHeading"));
+			Thread.sleep(2000);
+			loginPage.forgotEmailPage().forgotEmailNamePage()
+					.verifyPageDescription(data.get("forgotEmailNameDescription"));
+			loginPage.forgotEmailPage().forgotEmailNamePage().fillFirstName(data.get("firstName"));
+			loginPage.forgotEmailPage().forgotEmailNamePage().fillLastName(data.get("lastName"));
+			loginPage.forgotEmailPage().forgotEmailNamePage().clickNext();
+			Thread.sleep(2000);
+			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("phoneEmailVerificationHeading"));
+			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
+					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
+	        loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
+			}
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -431,6 +466,32 @@ public class LoginTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithInvalidAuthy(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
+			loginPage.forgotPasswordPage().clickOutSide();
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().verifyPageHeading(data.get("emailHeading"));
+	        loginPage.forgotPasswordPage().phoneEmailVerificationComponent().getEmailDescription();
+	        loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
+			}
+			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
+		}
+	}
+	
 
 	@Test
 	@Parameters({ "strParams" })

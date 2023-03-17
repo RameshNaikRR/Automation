@@ -111,7 +111,7 @@ public class CommonFunctions {
 	}
 
 	public void verifyTextBoxBorderColor(String expcolour) {
-		By txterror = By.cssSelector("div[class *= 'FormField_error']");
+		By txterror = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");
 		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
 		ExtentTestManager.setInfoMessageInReport(value);
@@ -120,6 +120,19 @@ public class CommonFunctions {
 			ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Text field border not changed to red colour");
+		}
+	}
+	
+	public void verifyOTPBorderColor(String expcolour,String eleName) {	
+		By txterror = By.cssSelector("input[class *='verification-input error ']");
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
+		ExtentTestManager.setInfoMessageInReport(value);
+
+		if (value.equalsIgnoreCase(expcolour)) {
+			ExtentTestManager.setPassMessageInReport(eleName +" changed to red colour");
+		} else {
+			ExtentTestManager.setFailMessageInReport(" not changed to red colour");
 		}
 	}
 
