@@ -13,7 +13,6 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SideBarMenuComponent extends BrowserFunctions {
-	
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(
@@ -63,7 +62,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public void clickBusinessApplicationArrow() {
 		click(BusinessApplicationArrow, "Business Application Arrow");
 	}
-		public void clickContinueApplication() {
+
+	public void clickContinueApplication() {
 		click(btnContinueApplication, "Continue Application");
 	}
 
@@ -140,4 +140,8 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	public PaymentMethodComponent paymentMethodComponent() {
 		return new PaymentMethodComponent();
 	}
+
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent();
 	}
+}

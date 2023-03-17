@@ -37,7 +37,7 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By lblWallets = By
 			.xpath("//div[@class='text-sm TokenAccountWallets_Wallet_Id_Cyn__7pYfp text-cgy4 font-semibold']");
 	private By lblNoData = By.xpath("//span[text()='No Filter Data Found']");
-	
+	private By walletsData = By.xpath("//span[@class='grid 1xl:grid-cols-2 lg:grid-cols-1']");
 
 	private By getWallet(String walletNum) {
 		return By.xpath(String.format(
@@ -60,6 +60,7 @@ public class TokenWalletPage extends BrowserFunctions {
 				"div[class*='TokenAccountWallets_Wallets_Table']>div:nth-of-type(%s)>div:nth-of-type(1)>div:nth-of-type(4)>div",
 				WalletElements));
 	}
+
 	public void getIndividualWalletsName(String rowNum) {
 		ExtentTestManager
 				.setInfoMessageInReport(rowNum + " WalletName: " + getText(getWalletListElements("2", rowNum), ""));
@@ -124,6 +125,7 @@ public class TokenWalletPage extends BrowserFunctions {
 		click(btnTokenWallet, "Token Wallet");
 		Thread.sleep(3000);
 	}
+
 	public void clickCopyAddress() {
 		new CommonFunctions().elementView(copyAddress, "Copied to clipBoard");
 		click(copyAddress, "Copy Address");
@@ -177,11 +179,17 @@ public class TokenWalletPage extends BrowserFunctions {
 			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
 		}
 	}
+
+	public void viewWalletsData() {
+		String str = getText(walletsData, "Different Wallets Data");
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
 	public int getTransactionsSize() {
 		return getElementsList(lblNoData, "No Data").size();
-		
+
 	}
-	
+
 	public TopBarComponent topBarComponent() {
 		return new TopBarComponent();
 	}

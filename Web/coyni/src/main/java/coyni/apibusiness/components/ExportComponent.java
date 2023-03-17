@@ -30,6 +30,7 @@ public class ExportComponent extends BrowserFunctions {
 	private By lnkExportPage = By.xpath("//strong[text()='Export page.']");
 	private By btnClose = By.xpath("//button[text()='Close']");
 	private By popuphdngDesc = By.xpath("//span[@class='text-sm text-cgy3']");
+	private By lblDefault8 = By.xpath("//div[text()='Default (8)']");
 
 	public void verifyPopupHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblpopuphdng, "heading", "heading");
@@ -106,6 +107,10 @@ public class ExportComponent extends BrowserFunctions {
 
 	public void verifyDefault10View() {
 		new CommonFunctions().elementView(lblDefault10, "Default10");
+	}
+
+	public void verifyDefault8View() {
+		new CommonFunctions().elementView(lblDefault8, "Default(8)");
 	}
 
 	public void clickDateandTimeChkbx() {
@@ -293,6 +298,13 @@ public class ExportComponent extends BrowserFunctions {
 
 	public void verifyDefault10Desc(String description) {
 		new CommonFunctions().verifyLabelText(txtdefault10Desc, "description", "description");
+	}
+
+	public void verifyDefault8Desc() {
+		String str = getText(txtdefault10Desc, "Default 8");
+		ExtentTestManager.setInfoMessageInReport(str);
+		new CommonFunctions().elementView(txtdefault10Desc, "description");
+		click(lblDefault8, "Default(8)");
 	}
 
 	public DatePickerComponent datePickerComponent() {

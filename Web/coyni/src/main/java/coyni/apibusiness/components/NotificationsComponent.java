@@ -1,7 +1,10 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+
 import org.apache.poi.ss.formula.functions.Count;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.customer.popups.PayingAccountHolderNamePopup;
 import coyni.uitilities.CommonFunctions;
@@ -11,15 +14,11 @@ import ilabs.api.reporting.ExtentTestManager;
 public class NotificationsComponent extends BrowserFunctions {
 
 	// added
-	private By notificationsIcon = By.xpath("//button[@class='icon-notification-bold img-notifications']");
-	private By notificationCount = By.cssSelector(".notification-count");
-	private By btnNotifications = By.xpath("//button[contains(text(),'Notifications')]");
-	private By btnRequests = By.xpath("//button[contains(text(),'Pay/Req')]");
-	private By btnPay = By.xpath("(//button[text()='Pay'])[1]");
-	private By btnDeny = By.xpath("(//div[text()='Deny'])[2]");
+	private By notificationsBellIcon = By.xpath("//button[@class='icon-notification-bold img-notifications']");
+	private By notificationCount = By.xpath("//span[@class='text']");
+	private By btnNotifications = By.xpath("//button[@class='w-full h-full rounded-full']");
 	private By btnReminder = By.xpath("(//button[text()='Reminder'])[1]");
 	private By btnCancel = By.xpath("(//div[text()='Cancel'])[2]");
-	private By lblPayMessage = By.xpath("");
 	private By lblReminderMessage = By.xpath("//div[text()='You sent a reminder to ']");
 	private By btnclearAll = By.xpath("//span[text()='Clear All']");
 	private By initialMsg = By.xpath("(//div[contains(@class,'ReceivedNotificationCard')]/div)[1]/../.");
@@ -28,20 +27,60 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By recievedMsg = By.xpath(
 			"//body//div[@id='root']//div[contains(@class,'notification-container')]//div//div//div[1]//div[2]//div[2]//div[1]//span[1]");
 	private By ReminderfirstMsg = By.xpath("(//div[contains(@class,'ReceivedNotificationCard')]/div)[1]/../.");
+	private By today = By.xpath("//span[text()='Today']");
+	private By todayNotifications = By.xpath("//div[@class='notifications-wrap'][1]");
+	private By yesterday = By.xpath("//span[text()='Yesterday']");
+	private By yesterdayNotifications = By.xpath("//div[@class='notifications-wrap'][2]");
+	private By older = By.xpath("//span[text()='Older']");
+	private By olderNotifications = By.xpath("//div[@class='notifications-wrap'][3]");
 	private By ReminderLastMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By CancelMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
-	private By count = By.xpath("");
 	private By btnCross = By.xpath("//span[@class='cross-icon']//img ");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
-	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
-	private By closeIcon = By.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
+	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])");
+	private By closeIcon = By
+			.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
 	// private By notificationCOunt = By.xpath("//span[@class='text']");
 	// private By todayNotifications =
 	// By.xpath("//span/parent::div[@class=\"parent\"]");
 
 	// added
 	public void clickNotificationsIcon() {
-		click(notificationsIcon, "NotificationIcon");
+		click(notificationsBellIcon, "Notification Bell Icon");
+
+	}
+
+	public int viewTodayNotifications() {
+		new CommonFunctions().elementView(today, "Today");
+		moveToElement(today, "moved to Today");
+		int i = getElementsList(today, "Today").size();
+		return i;
+//		List<WebElement> rows = getElementsList(todayNotifications, "Today Notifications");
+//		for (WebElement row : rows) {
+//			String replace = row.getText().replace("\n", "");
+//			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+
+//	}
+
+	}
+
+	public void viewYesterdayNotifications() {
+		new CommonFunctions().elementView(yesterday, "Yesterday");
+//		List<WebElement> rows = getElementsList(yesterdayNotifications, "Today Notifications");
+//		for (WebElement row : rows) {
+//			String replace = row.getText().replace("\n", "");
+		ExtentTestManager.setInfoMessageInReport(yesterday + "Notifications are Displayed");
+//		}
+
+	}
+
+	public void viewOlderNotifications() {
+		new CommonFunctions().elementView(older, "older");
+//		List<WebElement> rows = getElementsList(olderNotifications, "Today Notifications");
+//		for (WebElement row : rows) {
+//			String replace = row.getText().replace("\n", "");
+		ExtentTestManager.setInfoMessageInReport(older + " is Displayed");
+//		}
 
 	}
 
@@ -49,24 +88,28 @@ public class NotificationsComponent extends BrowserFunctions {
 		click(closeIcon, "Close Icon");
 	}
 
-	public String getUiCount() {
-		return getText(notificationCount, "NotificationsCount");
-	}
-
-	// added
-	public void verifyCursorNotification() {
-		new CommonFunctions().verifyCursorAction(notificationsIcon, "Notification ");
-	}
+//	public String getUiCount() {
+//		return getText(notificationCount, "NotificationsCount");
+//	}
 
 	// added
 	public void verifyNotificationsCount() {
-		int lst = getElementsList(elementList, "Notification List").size();
-		ExtentTestManager.setPassMessageInReport("Displayed " + lst);
+		new CommonFunctions().verifyCursorAction(notificationCount, "Notification Count ");
+		String str = getElement(notificationCount, "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
+		String notifyCount = getText(notificationCount, "Notifications Count");
+		ExtentTestManager.setInfoMessageInReport(notifyCount + " Notifications are displayed");
 	}
 
 	// added
 	public void verifyDateFormatInNotifications() {
+
 		new CommonFunctions().elementView(dateFormat, "date format notifications");
+		List<WebElement> rows = getElementsList(dateFormat, "Date Format");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
+		}
 	}
 
 	// added
@@ -82,18 +125,13 @@ public class NotificationsComponent extends BrowserFunctions {
 
 	public void verifyMoveToCrossbtn() {
 		moveToElement(btnCross, "Cross");
+		click(btnCross, "Cross");
 	}
 
-	public void VerifyMousehoverNotificationscolor(String expCssProp, String expValue, String expColor) {
-		new CommonFunctions().verifyChangedColor(btnNotifications, "Notifications", expCssProp, expValue, expColor);
-	}
-
-	public void MousehoverNotificationscolor(String expCssProp, String expValue, String expColor) {
-		new CommonFunctions().verifyChangedColor(btnNotifications, "notifications", expCssProp, expValue, expColor);
-	}
-
-	public void verifyDenyBordercolor(String expCssProp, String expValue, String expColor) {
-		new CommonFunctions().verifyChangedColor(btnDeny, "Deny", expCssProp, expValue, expColor);
+	public void verifyNotificationsTextColor() {
+		new CommonFunctions().verifyCursorAction(btnNotifications, "Notification Count ");
+		String str = getElement(btnNotifications, "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyCancelBorderColor(String expCssProp, String expValue, String expColor) {
@@ -118,19 +156,7 @@ public class NotificationsComponent extends BrowserFunctions {
 //	}
 
 	public void clickNotifications() {
-		click(notificationsIcon, "Notifications ");
-	}
-
-	public void clickRequests() {
-		click(btnRequests, "Requests ");
-	}
-
-	public void clickPay() {
-		click(btnPay, "Pay ");
-	}
-
-	public void clickDeny() {
-		click(btnDeny, "Deny ");
+		click(notificationsBellIcon, "Notifications ");
 	}
 
 	public void clickReminder() {
@@ -145,36 +171,13 @@ public class NotificationsComponent extends BrowserFunctions {
 		click(btnclearAll, "Clear All");
 	}
 
-	public void verifyLabelPayMessage() {
-		new CommonFunctions().elementView(lblPayMessage, "Pay Message");
-	}
-
-	// added
-	public void verifyPay() {
-		new CommonFunctions().elementView(btnPay, "Pay is viewed");
-	}
-
-	// added
-	public void verifyDeny() {
-		new CommonFunctions().elementView(btnDeny, "Deny is viewed");
-	}
-
 	// added
 	public CommonFunctions commonFunctions() {
 		return new CommonFunctions();
 	}
 
-	public void verifyBellIconMouseHoverAction(String background, String border) {
-		new CommonFunctions().verifyCursorAction(notificationsIcon, "Notification Icon");
-		new CommonFunctions().verifyMouseHoverAction(notificationsIcon, "Notification Icon", background, border);
-	}
-
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
-	}
-
-	public void verifyRequestbtnView() {
-		new CommonFunctions().elementView(btnRequests, "Requests");
 	}
 
 	public void verifyInitialMsg(String expInitialmesssage) {
@@ -189,8 +192,8 @@ public class NotificationsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lastMsg, "Last Msg", expLastMsg);
 	}
 
-	public void verifyNotificationsIconView() {
-		new CommonFunctions().elementView(notificationsIcon, "notifications");
+	public void verifyNotificationsBellIconView() {
+		new CommonFunctions().elementView(notificationsBellIcon, "Notifications Bell icon");
 	}
 
 	public void verifyNotificationsbtnView() {
@@ -199,14 +202,6 @@ public class NotificationsComponent extends BrowserFunctions {
 
 	public void verifyRecievedMsg(String exprecievedMsg) {
 		new CommonFunctions().verifyLabelText(recievedMsg, "recieved message", exprecievedMsg);
-	}
-
-	public void verifyPaybtnView() {
-		new CommonFunctions().elementView(btnPay, "Pay button");
-	}
-
-	public void verifyDenybtnView() {
-		new CommonFunctions().elementView(btnDeny, "Deny button");
 	}
 
 	public void verifyClearallBtnView() {

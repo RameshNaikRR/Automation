@@ -84,7 +84,6 @@ public class LoginTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginInvalidCredentials(String strParams) {

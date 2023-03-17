@@ -32,6 +32,7 @@ public class GetHelpTest {
 			getHelpPage.verifyHeading(data.get("heading"));
 			getHelpPage.verifyCaption(data.get("caption"));
 			getHelpPage.verifyDescription();
+			getHelpPage.verifySupportHyperLink();
 			getHelpPage.verifyHelpElements();
 			getHelpPage.verifyGetHelpElements();
 		} catch (InterruptedException e) {

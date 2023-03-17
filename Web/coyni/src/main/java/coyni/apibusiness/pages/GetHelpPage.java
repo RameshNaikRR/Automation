@@ -16,18 +16,28 @@ public class GetHelpPage extends BrowserFunctions {
 			.xpath("//p[@class='text-[14px] leading-[20px] tracking-[0.22px] font-normal text-cbc9 w-[430px]']");
 	private By lblElements = By.xpath("//h1[@class='text-cbc9 font-semibold text-[13px] mb-[8px]']");
 	private By helpElements = By.xpath("//h1[@class='text-cbc9 font-semibold text-[13px]']");
+	private By supportHyperlink = By.xpath("//a[@href='mailto:support@coyni.com?subject']");
 
 	public void verifyHeading(String heading) {
-		new CommonFunctions().verifyLabelText(lblheading,"Heading", heading);
+		new CommonFunctions().verifyLabelText(lblheading, "Heading", heading);
 	}
 
 	public void verifyCaption(String caption) {
-		new CommonFunctions().verifyLabelText(lblcaption, "caption",caption);
+		new CommonFunctions().verifyLabelText(lblcaption, "caption", caption);
 	}
 
 	public void verifyDescription() {
 		String description = getText(lblDescription, " ");
 		ExtentTestManager.setInfoMessageInReport(description + "is displayed");
+	}
+
+	public void verifySupportHyperLink() {
+		new CommonFunctions().verifyCursorAction(supportHyperlink, "click Action on Hyper link");
+		moveToElement(supportHyperlink, "support@coyni.com");
+		new CommonFunctions().verifyTextUnderLine(supportHyperlink, "support@coyni.com");
+		String str = getElement(supportHyperlink, "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
+		click(supportHyperlink, "hyperlink");
 	}
 
 	public void verifyHelpElements() {

@@ -40,52 +40,56 @@ public class ExportFilesTest {
 			exportFilesPage.statusView();
 			exportFilesPage.clickIconDownload();
 			exportFilesPage.successView();
+			exportFilesPage.clickCheckBox();
+			exportFilesPage.clickBulkActionDropDown();
+			Thread.sleep(2000);
+			exportFilesPage.clickDownload();
+			Thread.sleep(2000);
+			exportFilesPage.clickApply();
+			exportFilesPage.toastComponent().verifyToast(data.get("title"), data.get("toastMessage"));
+			exportFilesPage.clickCheckBox();
+			exportFilesPage.clickBulkActionDropDown();
+			Thread.sleep(2000);
+			exportFilesPage.clickTrash();
+			Thread.sleep(2000);
+			exportFilesPage.clickApply();
+			exportFilesPage.toastComponent().verifyToast(data.get("title"), data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkDownload(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickExportFiles();
-			exportFilesPage.verifyHeading(data.get("heading"));
-			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			Thread.sleep(4000);
-			exportFilesPage.clickDownload();
-			Thread.sleep(4000);
-			exportFilesPage.clickApply();
-//			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
-//					data.get("expColour"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testExportFilesBulkDownload failed due to exception ");
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testExportFilesBulkTrash(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickExportFiles();
-			exportFilesPage.verifyHeading(data.get("heading"));
-			Thread.sleep(2000);
-			exportFilesPage.clickCheckBox();
-			exportFilesPage.clickBulkActionDropDown();
-			Thread.sleep(3000);
-			exportFilesPage.clickTrash();
-			Thread.sleep(3000);
-			exportFilesPage.clickApply();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testExportFilesBulkTrash failed due to exception ");
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportFilesBulkDownload(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickExportFiles();
+//			exportFilesPage.verifyHeading(data.get("heading"));
+//			Thread.sleep(2000);
+//			
+////			exportFilesPage.verifyPageNumberHighlighted(data.get("cssCrop"), data.get("expValue"),
+////					data.get("expColour"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testExportFilesBulkDownload failed due to exception ");
+//		}
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testExportFilesBulkTrash(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickExportFiles();
+//			exportFilesPage.verifyHeading(data.get("heading"));
+//			Thread.sleep(2000);
+//			
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testExportFilesBulkTrash failed due to exception ");
+//		}
+//	}
 
 //
 	public void testExportSelectedTransactions(String strParams, String strParams1) {

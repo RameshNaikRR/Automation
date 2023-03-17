@@ -2,6 +2,7 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.ToastComponent;
 import coyni.api.business.popups.ExportSelectedTransactionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -107,5 +108,9 @@ public class ExportFilesPage extends BrowserFunctions {
 
 	public ExportSelectedTransactionsPopup exportSelectedTransactionsPopup() {
 		return new ExportSelectedTransactionsPopup();
+	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 }
