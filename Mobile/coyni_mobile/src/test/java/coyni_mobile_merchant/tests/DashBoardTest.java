@@ -179,7 +179,7 @@ public class DashBoardTest {
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
 					.clickBack();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().fillSearch();
-			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickSearchTransaction();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
 					.getMerchantPayoutDetails();
 //			
@@ -739,12 +739,15 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickTransaction();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
-			String a = businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.getReserveID();
+//			String a = businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+//					.getReserveID();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+			.reserveReleaseDetailsPage().clickReserveID();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.reserveReleaseDetailsPage().clickBack();
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().fillSearchOption(a);
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().fillSearchWithCopiedData();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickTransaction();
+//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 					.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()

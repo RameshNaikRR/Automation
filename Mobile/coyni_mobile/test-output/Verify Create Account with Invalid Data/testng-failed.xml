@@ -4,7 +4,7 @@
   <listeners>
     <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
   </listeners>
-  <test thread-count="5" name="coyni_mobile.tests.SignUpTest.testCreateAccountInvalidData(failed)">
+  <test thread-count="5" name="coyni_mobile_merchant.tests.SignUpTest.testCreateAccountInvalidData(failed)">
     <parameter name="strParams" value="-pcreateAccount,
 -pfirstName,
 -plastName,
@@ -12,15 +12,15 @@
 -pphoneNumber,
 -ppassword,
 -pconfirmPassword,
--perrorMessage,
+-perrMessage,
 -pelementName"/>
     <classes>
-      <class name="coyni_mobile.tests.SignUpTest">
+      <class name="coyni_mobile_merchant.tests.SignUpTest">
         <methods>
-          <include name="testCreateAccountInvalidData" invocation-numbers="0"/>
           <include name="init"/>
+          <include name="testCreateAccountInvalidData" invocation-numbers="0"/>
         </methods>
-      </class> <!-- coyni_mobile.tests.SignUpTest -->
+      </class> <!-- coyni_mobile_merchant.tests.SignUpTest -->
     </classes>
-  </test> <!-- coyni_mobile.tests.SignUpTest.testCreateAccountInvalidData(failed) -->
+  </test> <!-- coyni_mobile_merchant.tests.SignUpTest.testCreateAccountInvalidData(failed) -->
 </suite> <!-- Failed suite [Verify Create Account with Invalid Data] -->

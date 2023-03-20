@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Verify Add Credit Card With Invalid Data]">
+<suite name="Failed suite [Team Field Validations]">
   <listeners>
     <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
   </listeners>
-  <test thread-count="5" name="coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData(failed)">
-    <parameter name="strParams" value="-pnameOnCard,
--pcardNumber,
--pcardExp,
--pcvvOrCVC,
--paddressLine1,
--paddreddLine2,
--pcity,
--pstate,
--pzipCode,
--perrMsg,
--pelementName"/>
+  <test thread-count="5" name="coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations(failed)">
+    <parameter name="strParams" value="-psearch,
+-pteamPageHeading,
+-pteamPageDescription,
+-pnewTeamMemberHeading,
+-pnewTeamMemberDescription,
+-pfirstName,
+-plastName,
+-pteamEmail,
+-pphoneNumber,
+-pkeyBoardType
+
+"/>
     <classes>
-      <class name="coyni_mobile.tests.CustomerProfileTest">
+      <class name="coyni_mobile_merchant.tests.MerchantProfileTest">
         <methods>
-          <include name="testAddDebitCardWithInvalidData" invocation-numbers="0"/>
           <include name="init"/>
+          <include name="hideKeyBoard"/>
+          <include name="testTeamMemberFieldValidations" invocation-numbers="0"/>
         </methods>
-      </class> <!-- coyni_mobile.tests.CustomerProfileTest -->
+      </class> <!-- coyni_mobile_merchant.tests.MerchantProfileTest -->
     </classes>
-  </test> <!-- coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData(failed) -->
-</suite> <!-- Failed suite [Verify Add Credit Card With Invalid Data] -->
+  </test> <!-- coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations(failed) -->
+</suite> <!-- Failed suite [Team Field Validations] -->

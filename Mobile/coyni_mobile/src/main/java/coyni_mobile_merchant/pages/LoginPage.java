@@ -1,7 +1,16 @@
 package coyni_mobile_merchant.pages;
 
-import org.openqa.selenium.By;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.AgreementComponent;
@@ -18,6 +27,7 @@ import io.appium.java_client.MobileElement;
 public class LoginPage extends MobileFunctions {
 
 	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
+//	private By txtEmail = MobileBy.cssSelector("#com.coyni.mapp:id/etEmail");
 	private By txtPassword = MobileBy
 			.xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
 	private By lnkRetrieveEmail = MobileBy
@@ -198,6 +208,40 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblCoyni, "Coyni");
 	}
 
+	public void verifyColour() throws IOException {
+		MobileElement element = (MobileElement) DriverFactory.getDriver().findElement(btnLogin);
+        byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+        BufferedImage image = ImageIO.read(new ByteArrayInputStream(screenshot));
+
+        // Get the element's location and size
+        Point elementLocation = element.getLocation();
+        Dimension elementSize = element.getSize();
+
+        // Crop the screenshot image to the size of the element
+        BufferedImage elementImage = image.getSubimage(
+                elementLocation.getX(),
+                elementLocation.getY(),
+                elementSize.getWidth(),
+                elementSize.getHeight()
+        );
+
+        // Get the pixel color of the center of the element image
+//        int pixelColor = elementImage.getRGB(elementSize.getWidth() / 2, elementSize.getHeight() / 2);
+        int pixelColor = elementImage.getRGB(elementSize.getWidth() / 2, elementSize.getHeight() / 2);     
+        ExtentTestManager.setPassMessageInReport(""+pixelColor);
+        // Verify if the pixel color matches the expected color
+        String expectedColor = "-16734558"; // Red color in ARGB format
+//        String quantityText = getText(expectedColor);
+		int value = Integer.parseInt(expectedColor);
+//		return value;
+        if (pixelColor == value) {
+            ExtentTestManager.setPassMessageInReport("Element color is primary green.");
+        } else {
+        	 ExtentTestManager.setFailMessageInReport("Element color is not primary green.");
+        }
+    }
+	
+	
 //	public FaceIDDisabledComponent faceIDDisabledComponent() {
 //		return new FaceIDDisabledComponent();
 //	}

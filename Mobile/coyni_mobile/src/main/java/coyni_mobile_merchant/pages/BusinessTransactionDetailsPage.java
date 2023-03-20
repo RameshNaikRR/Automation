@@ -16,7 +16,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 			"//*[contains(@resource-id,'merchantamount')]| //*[contains(@resource-id,'bankamount')]|//*[contains(@resource-id,'BankAmount')]|(//*[contains(@resource-id,'amount')])[1]");
 	private By lblStatus = MobileBy.xpath("//*[contains(@resource-id,'status')]|//*[contains(@resource-id,'Status')]");
 	private By lblDate = MobileBy.xpath(
-			"//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]|//*[contains(@resource-id,'dateTime')]");
+			"//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]|//*[contains(@resource-id,'dateTime')]|//*[contains(@resource-id,'released_on')]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
 	private By lblReferenceID = MobileBy.xpath(
 			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'mreferenceIdTV')]|//*[contains(@resource-id,'withdrawGiftrefidTV')]|//*[contains(@resource-id,'withinrefid')]");
@@ -63,14 +63,13 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By btnInstantPayBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
 	private By btnWithBankSignetBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
 	private By btnBuyBankBack = MobileBy.xpath("//*[contains(@resource-id,'btbankprevious')]");
-	private By btnBuyBankReferenceCopy = MobileBy.xpath("//*[contains(@resource-id,'btbankrefIV')]|//*[contains(@resource-id,'referenceCopyIV')]");
+	private By btnBuyBankReferenceCopy = MobileBy
+			.xpath("//*[contains(@resource-id,'btbankrefIV')]|//*[contains(@resource-id,'referenceCopyIV')]");
 	private By btnWithBankReferenceCopy = MobileBy.xpath("//*[contains(@resource-id,'withBankReferenceIDIV')]");
 //	private By btnWithBankBack = MobileBy.xpath("//*[contains(@resource-id,'withbankCloseLL')]");
 	private By btnWithInstaReference = MobileBy.xpath("//*[contains(@resource-id,'withinrefIDIV')]");
 //	private By btnWithInstaBack = MobileBy.xpath("//*[contains(@resource-id,'withInstantprevious')]");
-	
-	
-	
+
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transaction Details Heading ", expHeading);
 	}
@@ -83,10 +82,10 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type ", expType);
 	}
 
-	public void getAmount() {
+	public String getAmount() {
 //		scrollDownToElement(lblTotalAmount, "Total Availble Funds : ");
 		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount));
-
+		return getText(lblAmount);
 	}
 
 	public void getStatus() {
@@ -108,7 +107,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		click(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID" + getText(lblReferenceID));
 	}
-	
+
 	public void getPageDescription() {
 		ExtentTestManager.setInfoMessageInReport("Page Description is : " + getText(lblDescription));
 	}
@@ -130,19 +129,31 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void clickBuyBankReferenceID() {
-		click(btnBuyBankReferenceCopy,"Buy Bank Reference Id Copy");
+		click(btnBuyBankReferenceCopy, "Buy Bank Reference Id Copy");
 	}
-	
+
 	public void clickInstantPayReferenceID() {
-		click(btnWithInstaReference," Instant Pay Reference Id Copy");
+		click(btnWithInstaReference, " Instant Pay Reference Id Copy");
 	}
-	
+
 	public void clickWithBankReferenceID() {
-		click(btnWithBankReferenceCopy,"Withdraw Bank Reference Id Copy");
+		click(btnWithBankReferenceCopy, "Withdraw Bank Reference Id Copy");
 	}
-	
+
 	public void getMerchantPayoutTransactionDetails() {
 		getAmount();
+		getDate();
+		getPayoutID();
+		getReferenceID();
+		getPageDescription();
+		getPayoutDate();
+		getTotalAmout();
+		getTotalTransactions();
+		getDepositTo();
+	}
+
+	public void verifySearchTransactionDetails() {
+		getAmount().equalsIgnoreCase(getAmount());
 		getDate();
 		getPayoutID();
 		getReferenceID();
@@ -290,20 +301,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		click(btnCancel, "Cancel");
 	}
 
-	
 	public void clickInstantPayBack() {
 		click(btnInstantPayBack, "Back");
 	}
-	
+
 	public void clickWithBankSignetBack() {
 		click(btnWithBankSignetBack, "Back");
 	}
 
-	
 	public void clickbtnBuyBankBack() {
 		click(btnBuyBankBack, "Back");
 	}
-	
+
 	public void verifyCancelTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblCancelTranHeading, "Cancel Transaction Heading ", expHeading);
 	}

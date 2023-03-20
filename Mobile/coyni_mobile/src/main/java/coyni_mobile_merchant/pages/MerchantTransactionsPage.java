@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -8,6 +10,11 @@ import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class MerchantTransactionsPage extends MobileFunctions {
 
@@ -33,9 +40,17 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	}
 
 	public void fillSearch() {
-		enterText(searchOption, getCopiedData(), "Search");
+		
+		new CommonFunctions().VerifySearchWithPasteOption(searchOption);
+//		TouchAction action = new TouchAction(DriverFactory.getDriver());
+//		MobileElement search = (MobileElement) DriverFactory.getDriver().findElement(searchOption);
+//		Duration duration = Duration.ofMillis(1000);
+//		action.longPress(
+//				LongPressOptions.longPressOptions().withElement(ElementOption.element(search)).withDuration(duration))
+//				.release().perform();
+//		action.tap(PointOption.point(120, 350)).perform();
 	}
-	
+
 	public int verifyTransactionsCount() throws InterruptedException {
 		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
@@ -47,9 +62,9 @@ public class MerchantTransactionsPage extends MobileFunctions {
 	}
 
 	public void verifyMerchanTransactions() {
-		new CommonFunctions().elementView(lblMerchantTansactions,"Merchant Transactions");
+		new CommonFunctions().elementView(lblMerchantTansactions, "Merchant Transactions");
 	}
-	
+
 	public void clickMerchantTransctions() {
 		click(btnTransaction, "Transaction");
 	}

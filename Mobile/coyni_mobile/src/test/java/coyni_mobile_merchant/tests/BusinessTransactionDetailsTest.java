@@ -16,7 +16,6 @@ import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
 public class BusinessTransactionDetailsTest {
-
 	BusinessRecentTokenTransactionsPage businessRecentTokenTransactionsPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
 	MerchantProfilePage merchantProfilePage;
@@ -495,7 +494,7 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 						.clickBack();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickSearchTransaction();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 						.getMerchantPayoutTransactionDetails();
 

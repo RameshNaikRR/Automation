@@ -16,12 +16,12 @@ import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
 public class LoginTest {
-
 	LoginPage loginPage;
 	LandingPage landingPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
 	@BeforeTest
 	public void init() {
+		DriverFactory.getDriver().resetApp();
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
@@ -73,6 +73,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 //			loginPage.verifyPasswordMaskedView(data.get("password"));
+//			loginPage.verifyColour();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
@@ -412,9 +413,9 @@ public class LoginTest {
 			String[] phoneNumber = data.get("phoneNumber").split(",");
 			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
 			String[] firstName = data.get("firstName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],firstName[3], data.get("validateDataType"));
 			String[] lastName = data.get("lastName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2]);
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],data.get("validateDataType"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveWithFieldValidations failed due to exception " + e);
 		}
@@ -608,7 +609,6 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
-			Thread.sleep(3000);
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().verifyEmailVerificationPage();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("verifyEmailHeading"));

@@ -8,40 +8,49 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="8">Verify Add Credit Card With Invalid Data</th></tr>
-<tr><td><a href="#t0">coyni_mobile.tests.LoginTest.testLogin</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">20,882</td><td></td><td></td></tr>
-<tr class="stripe"><td><a href="#t1">coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">64,691</td><td></td><td></td></tr>
-<tr><th>Total</th><th class="num">1</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">85,573</th><th colspan="2"></th></tr>
+<tr><th colspan="8">Team Field Validations</th></tr>
+<tr><td><a href="#t0">coyni_mobile_merchant.tests.LoginTest.testLogin</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">23,333</td><td></td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">93,562</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">1</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">116,895</th><th colspan="2"></th></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Verify Add Credit Card With Invalid Data</th></tr></tbody><tbody id="t0"><tr><th colspan="4">coyni_mobile.tests.LoginTest.testLogin &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">coyni_mobile.tests.LoginTest</td><td><a href="#m0">testLogin</a></td><td rowspan="1">1643055659161</td><td rowspan="1">20533</td></tr></tbody>
-<tbody id="t1"><tr><th colspan="4">coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">coyni_mobile.tests.CustomerProfileTest</td><td><a href="#m1">testAddDebitCardWithInvalidData</a></td><td rowspan="1">1643055679800</td><td rowspan="1">64406</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Team Field Validations</th></tr></tbody><tbody id="t0"><tr><th colspan="4">coyni_mobile_merchant.tests.LoginTest.testLogin &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">coyni_mobile_merchant.tests.LoginTest</td><td><a href="#m0">testLogin</a></td><td rowspan="1">1679059275531</td><td rowspan="1">21533</td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4">coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">coyni_mobile_merchant.tests.MerchantProfileTest</td><td><a href="#m1">testTeamMemberFieldValidations</a></td><td rowspan="1">1679059297265</td><td rowspan="1">93158</td></tr><tr><th colspan="4">coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations &#8212; skipped (configuration methods)</th></tr><tr class="skippedeven"><td rowspan="1">coyni_mobile_merchant.tests.MerchantProfileTest</td><td><a href="#m2">hideKeyBoard</a></td><td rowspan="1">1679059390741</td><td rowspan="1">1</td></tr></tbody>
 </table>
-<h2>coyni_mobile.tests.LoginTest.testLogin</h2><h3 id="m0">coyni_mobile.tests.LoginTest#testLogin</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pemail,
+<h2>coyni_mobile_merchant.tests.LoginTest.testLogin</h2><h3 id="m0">coyni_mobile_merchant.tests.LoginTest#testLogin</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pemail,
 -ppassword,
--ppin,
--puserName</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData</h2><h3 id="m1">coyni_mobile.tests.CustomerProfileTest#testAddDebitCardWithInvalidData</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-pnameOnCard,
--pcardNumber,
--pcardExp,
--pcvvOrCVC,
--paddressLine1,
--paddreddLine2,
--pcity,
--pstate,
--pzipCode,
--perrMsg,
--pelementName</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: null
+-ppin</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations</h2><h3 id="m1">coyni_mobile_merchant.tests.MerchantProfileTest#testTeamMemberFieldValidations</h3><table class="result"><tr class="param"><th>Parameter #1</th></tr><tr class="param stripe"><td>-psearch,
+-pteamPageHeading,
+-pteamPageDescription,
+-pnewTeamMemberHeading,
+-pnewTeamMemberDescription,
+-pfirstName,
+-plastName,
+-pteamEmail,
+-pphoneNumber,
+-pkeyBoardType
+
+</td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: null
 	at ilabs.mobile.reporting.ExtentTestManager.setFailMessageInReport(ExtentTestManager.java:76)
-	at ilabs.MobileFramework.MobileFunctions.getElement(MobileFunctions.java:99)
-	at ilabs.MobileFramework.MobileFunctions.click(MobileFunctions.java:120)
-	at coyni_mobile.components.AddNewPaymentComponent.clickDebitCard(AddNewPaymentComponent.java:24)
-	at coyni_mobile.tests.CustomerProfileTest.testAddCardWithInvalidData(CustomerProfileTest.java:918)
-	at coyni_mobile.tests.CustomerProfileTest.testAddDebitCardWithInvalidData(CustomerProfileTest.java:948)
+	at ilabs.MobileFramework.MobileFunctions.getElement(MobileFunctions.java:98)
+	at ilabs.MobileFramework.MobileFunctions.getText(MobileFunctions.java:288)
+	at coyni_mobile.utilities.CommonFunctions.enterSpecialKey(CommonFunctions.java:238)
+	at coyni_mobile_merchant.components.FieldValidationsComponent.validateEmailField(FieldValidationsComponent.java:51)
+	at coyni_mobile_merchant.tests.MerchantProfileTest.testTeamMemberFieldValidations(MerchantProfileTest.java:1753)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at ilabs.MobileFramework.TestReader.run(TestReader.java:53)
 	at ilabs.MobileFramework.Runner.runOneIteration(Runner.java:149)
-	at ilabs.MobileFramework.Runner.run(Runner.java:61)
-	at coyni_mobile.runner.TestRunner.main(TestRunner.java:9)
+	at ilabs.MobileFramework.Runner.runRangeOfIterations(Runner.java:113)
+	at ilabs.MobileFramework.Runner.run(Runner.java:64)
+	at coyni_mobile.runner.TestRunner.main(TestRunner.java:12)
 ... Removed 26 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">coyni_mobile_merchant.tests.MerchantProfileTest#hideKeyBoard</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.testng.SkipException: Skipping this test
+	at ilabs.mobile.reporting.TestStatusListener.beforeInvocation(TestStatusListener.java:84)
+	at ilabs.MobileFramework.TestReader.run(TestReader.java:53)
+	at ilabs.MobileFramework.Runner.runOneIteration(Runner.java:149)
+	at ilabs.MobileFramework.Runner.runRangeOfIterations(Runner.java:113)
+	at ilabs.MobileFramework.Runner.run(Runner.java:64)
+	at coyni_mobile.runner.TestRunner.main(TestRunner.java:12)
+... Removed 17 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

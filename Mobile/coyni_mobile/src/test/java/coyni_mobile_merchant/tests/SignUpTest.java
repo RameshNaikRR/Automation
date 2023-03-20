@@ -11,6 +11,7 @@ import coyni_mobile_merchant.pages.LandingPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import coyni_mobile_merchant.pages.SignUpPage;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -23,6 +24,7 @@ public class SignUpTest {
 
 	@BeforeMethod
 	public void init() {
+		DriverFactory.getDriver().resetApp();
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
 		registrationProcessPage = new RegistrationProcessPage();
@@ -117,17 +119,19 @@ public class SignUpTest {
 			signUpPage.clickBusinessAccount();
 			signUpPage.verifyCreateAccount(data.get("createAccount"));
 			String[] firstName = data.get("firstName").split(",");
-			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
+			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],firstName[3], data.get("keyBoardType"));
 			String[] lastName = data.get("lastName").split(",");
-			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2]);
+			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],data.get("keyBoardType"));
 			String[] email = data.get("email").split(",");
 			signUpPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			String[] phoneNumber = data.get("phoneNumber").split(",");
 			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
 					phoneNumber[2]);
-			String[] password = data.get("password").split(",");
-			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
-					password[3]);
+			String[] newPassword = data.get("password").split(",");
+			signUpPage.fieldValidationsComponent().validateNewPasswordField(newPassword[0],
+					newPassword[1], newPassword[2],newPassword[3],newPassword[4],
+					newPassword[5], newPassword[6],newPassword[7],newPassword[8],
+					newPassword[9], newPassword[10],newPassword[11]);
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0], confirmPassword[1],
 					confirmPassword[2]);
@@ -137,4 +141,21 @@ public class SignUpTest {
 
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testHomePage(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			landingPage.verifyTimeLineOfIntroSlides();
+			landingPage.verifyFirstSlide();
+			landingPage.verifySecondSlide(data.get("introSecondSlideHeading"));
+			landingPage.verifyThirdSlide(data.get("introThirdSlideHeading"));
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpFieldValidations Failed due to this Exception" + e);
+		}
+
+	}
+	
 }

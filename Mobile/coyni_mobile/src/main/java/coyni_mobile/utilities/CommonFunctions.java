@@ -11,11 +11,14 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 public class CommonFunctions {
@@ -39,9 +42,11 @@ public class CommonFunctions {
 	public void elementView(By ele, String eleName) {
 		try {
 			if (mobileFunctions.getElement(ele, eleName).isDisplayed()) {
-				ExtentTestManager.setPassMessageInReport(eleName + " is displayed ");
+				ExtentTestManager
+						.setPassMessageInReport(eleName + " " + mobileFunctions.getText(ele) + " is displayed ");
 			} else {
-				ExtentTestManager.setFailMessageInReport(eleName + " is not displayed ");
+				ExtentTestManager
+						.setFailMessageInReport(eleName + " " + mobileFunctions.getText(ele) + " is not displayed ");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" element View failed due to exception " + e);
@@ -54,7 +59,7 @@ public class CommonFunctions {
 			if (mobileFunctions.getElement(ele, eleName).isEnabled()) {
 				ExtentTestManager.setPassMessageInReport(eleName + " button is enabled");
 				mobileFunctions.click(ele, eleName);
-			}else {
+			} else {
 				ExtentTestManager.setFailMessageInReport(eleName + " button is not enabled");
 			}
 		} catch (Exception e) {
@@ -62,12 +67,12 @@ public class CommonFunctions {
 		}
 
 	}
-	
+
 	public void verifyAutoFocusElement(By ele, String eleName) {
 		try {
 			if (mobileFunctions.getAttribute(ele, "focused").equalsIgnoreCase("true")) {
 				ExtentTestManager.setPassMessageInReport(eleName + " is auto focused");
-			}else {
+			} else {
 				ExtentTestManager.setFailMessageInReport(eleName + " is not auto focused");
 			}
 		} catch (Exception e) {
@@ -75,14 +80,14 @@ public class CommonFunctions {
 		}
 
 	}
-	
+
 	public void clickFocusableElement(By ele, String eleName) {
 		try {
-			String a=mobileFunctions.getAttribute(ele,"focusable");
-			if(mobileFunctions.getAttribute(ele,"focusable").equalsIgnoreCase("true")) {
+			String a = mobileFunctions.getAttribute(ele, "focusable");
+			if (mobileFunctions.getAttribute(ele, "focusable").equalsIgnoreCase("true")) {
 				ExtentTestManager.setPassMessageInReport(eleName + " is enabled");
 				mobileFunctions.click(ele, eleName);
-			}else {
+			} else {
 				ExtentTestManager.setFailMessageInReport(eleName + " is not enabled");
 			}
 		} catch (Exception e) {
@@ -114,9 +119,13 @@ public class CommonFunctions {
 	public void clearText(By ele, String eleName) {
 		try {
 			mobileFunctions.getElement(ele, eleName).clear();
-			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is cleared");
+//			if(mobileFunctions.getText(ele).length()==0||mobileFunctions.getText(ele).equalsIgnoreCase("Name")) {
+//				ExtentTestManager.setPassMessageInReport("Search option is clearing the text");
+//			}else {
+//				ExtentTestManager.setFailMessageInReport("Search option is not clearing the text");	
+//			}
 		} catch (Exception e) {
-			ExtentTestManager.setPassMessageInReport("Text field " + eleName + " is not cleared");
+			ExtentTestManager.setPassMessageInReport("clearText is failed due to exception " + e);
 		}
 	}
 
@@ -126,10 +135,13 @@ public class CommonFunctions {
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
 			// clickEnter();
-			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
+					.replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
-			By errorMsgs = MobileBy.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'tvPasswordInfo')]");
-			if (enterText.equalsIgnoreCase(actualtext)&& DriverFactory.getDriver().findElements(errorMsgs).size()==0) {
+			By errorMsgs = MobileBy
+					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'tvPasswordInfo')]");
+			if (enterText.equalsIgnoreCase(actualtext)
+					&& DriverFactory.getDriver().findElements(errorMsgs).size() == 0) {
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {
@@ -151,12 +163,14 @@ public class CommonFunctions {
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
 			// clickEnter();
-			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "").replace(")", "").replace("-", "");
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
+					.replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
 			By errorMsgs = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]");
-			if (enterText.equalsIgnoreCase(actualtext) && mobileFunctions.getElement(errorMsgs, "Error Msg").isDisplayed()) {
-				ExtentTestManager
-						.setPassMessageInReport(eleName + " it is showing error Message " + mobileFunctions.getText(errorMsgs));
+			if (enterText.equalsIgnoreCase(actualtext)
+					&& mobileFunctions.getElement(errorMsgs, "Error Msg").isDisplayed()) {
+				ExtentTestManager.setPassMessageInReport(
+						eleName + " it is showing error Message " + mobileFunctions.getText(errorMsgs));
 			} else {
 				ExtentTestManager
 						.setFailMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
@@ -168,7 +182,7 @@ public class CommonFunctions {
 		// && mobileFunctions.getElementList(errorMsgs, "errorMsg").size() == 0
 
 	}
-	
+
 	public void validateFieldMaxichar(By ele, String eleName, String enterText) {
 		try {
 			ExtentTestManager
@@ -213,21 +227,34 @@ public class CommonFunctions {
 		System.out.println("clicked on tab");
 	}
 
-	public void enterSpecialKey(String specialKey) {
-		// AT: @, LEFT_BRACKET : ( and so on
-		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(specialKey)));
+	public void enterSpecialKey(By ele,By inputPlace,String eleName) {
+		mobileFunctions.click(ele, "Field");
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.AT));
+		ExtentTestManager.setPassMessageInReport("@,(-+ text entered in element "+eleName);
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.COMMA));
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.LEFT_BRACKET));
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.MINUS));
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.PLUS));
+		String actualtext = mobileFunctions.getText(ele);// BUTTON_
+		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
+		if (actualtext.length() == 0) {
+			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special Charcters");
+		} else {
+			ExtentTestManager.setFailMessageInReport(eleName + " is accepting Special Charcters");
+		}
+//		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.SPACE));
 	}
 
-	public void enterKeys(By ele,By inputPlace, String data, String type,String eleName) throws InterruptedException {
+	public void enterKeys(By ele, By inputPlace, String data, String type, String eleName) throws InterruptedException {
 		mobileFunctions.click(ele, "Field");
 		String[] keys = data.split("");
 		if (type.equalsIgnoreCase("alphanumeric")) {
 			// takes numbers from alpha numeric keyboard
 			for (String key : keys) {
 				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + key)));
-				String actualtext = mobileFunctions.getText(inputPlace);//BUTTON_
-				//Thread.sleep(2000);
-				ExtentTestManager.setPassMessageInReport(actualtext);
+				ExtentTestManager.setPassMessageInReport(key+" text entered in element "+eleName);
+				String actualtext = mobileFunctions.getText(inputPlace);// BUTTON_
+				// Thread.sleep(2000);
 				if (actualtext.length() == 0) {
 					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
 				} else {
@@ -352,6 +379,16 @@ public class CommonFunctions {
 		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
 		new CommonFunctions().clickEnter();
 		mobileFunctions.click(btnConfirmState, "Done");
+	}
+
+	public void VerifySearchWithPasteOption(By ele) {
+		TouchAction action = new TouchAction(DriverFactory.getDriver());
+		MobileElement search = (MobileElement) DriverFactory.getDriver().findElement(ele);
+		Duration duration = Duration.ofMillis(1000);
+		action.longPress(
+				LongPressOptions.longPressOptions().withElement(ElementOption.element(search)).withDuration(duration))
+				.release().perform();
+		action.tap(PointOption.point(120, 350)).perform();
 	}
 
 	public String getTextBoxValue(By ele) {

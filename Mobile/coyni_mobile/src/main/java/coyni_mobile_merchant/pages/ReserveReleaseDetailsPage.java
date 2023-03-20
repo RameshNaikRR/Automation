@@ -13,11 +13,13 @@ import io.appium.java_client.MobileBy;
 
 public class ReserveReleaseDetailsPage extends MobileFunctions {
 
-	private By lblReserveDetail = MobileBy.xpath("//*[@text='Transaction Details']");
+	private By lblReserveDetail = MobileBy.xpath("//*[@text='Transaction Details']|//*[@text='Reserve Detail']");
 
-	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'tvamount')]|//*[contains(@resource-id,'reserve_amount')]");
+	private By txtAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'tvamount')]|//*[contains(@resource-id,'reserve_amount')]");
 
-	private By txtReserveID = MobileBy.xpath("//*[contains(@resource-id,'tvReserveID')]|//*[contains(@resource-id,'reserveIDLL')]");
+	private By txtReserveID = MobileBy
+			.xpath("//*[contains(@resource-id,'tvReserveID')]|//*[contains(@resource-id,'reserveIDLL')]");
 
 	private By lblStatus = MobileBy.xpath("//*[contains(@text,'Status')]/following-sibling::*[1]");
 
@@ -32,7 +34,8 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 
 	private By txtAmountReleased = MobileBy.xpath("//*[contains(@resource-id,'releasedAMT')]");
 
-	private By lblReleaseOn = MobileBy.xpath("//*[contains(@resource-id,'ReleasedDate')]|//*[contains(@resource-id,'released')]");
+	private By lblReleaseOn = MobileBy
+			.xpath("//*[contains(@resource-id,'ReleasedDate')]|//*[contains(@resource-id,'released')]");
 
 	private By lblReleaseTransactionID = MobileBy.xpath("//*[contains(@resource-id,'trans')]");
 
@@ -49,13 +52,14 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	private By lblRecentTransaction = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]");
 
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@resource-id,'MoreTransactions')]");
-	
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Mpayoutll')]|//*[contains(@resource-id,'btbankprevious')]|//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]|//*[contains(@resource-id,'revious')]");
+
+	private By btnBack = MobileBy.xpath(
+			"//*[contains(@resource-id,'Mpayoutll')]|//*[contains(@resource-id,'btbankprevious')]|//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'close')]|//*[contains(@resource-id,'revious')]");
 
 	public void clickBack() {
 		click(btnBack, "Back");
 	}
-	
+
 	public void verifyReserveDetail(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReserveDetail, "Reserve Detail", expHeading);
 	}
@@ -64,12 +68,12 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblReserveDetail, "Transaction Details");
 //		new CommonFunctions().elementView(txtAmount, "Amount");
 	}
-	
+
 	public void verifyReserveDetail() {
 		new CommonFunctions().elementView(lblReleaseOn, "Reserve Detail");
 		new CommonFunctions().elementView(txtReserveID, "Reserve ID");
 	}
-	
+
 	public void getRecentTransactionsList() {
 		List<WebElement> elementList = getElementList(lblRecentTransactionsList, " ");
 		ExtentTestManager.setInfoMessageInReport("Recent Transactions List: " + elementList);
@@ -91,6 +95,10 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	public void getDailyBatchIDs() {
 		String text = getText(lblDailyBatchIDs);
 		ExtentTestManager.setInfoMessageInReport("Daily Batch ID is " + text);
+	}
+
+	public void clickReserveID() {
+		click(lblDailyBatchIDs, "Reserve ID");
 	}
 
 	public void getBatchDate() {
@@ -123,6 +131,7 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 		getToTokenAccount();
 		clickBack();
 	}
+
 	public void getReserveOnHoldDetails() {
 		getTransactionType();
 		getReserveID();
@@ -150,11 +159,9 @@ public class ReserveReleaseDetailsPage extends MobileFunctions {
 	}
 
 	public void verifyRecentTransaction() {
-			new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
+		new CommonFunctions().elementView(lblRecentTransaction, "Recent Transaction");
 	}
 
-	
-	
 	public void getTransactionType() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Type : " + getText(lblTransactionType));
 	}

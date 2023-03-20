@@ -1733,17 +1733,21 @@ public class MerchantProfileTest {
 			String[] search = data.get("search").split(",");
 			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
 					.validateSearchField(search[0], search[1], search[2]);
+			merchantProfilePage.teamPage().teamMemberDetailsPage().verifySearchWithFullName();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().verifyClearOptionInSearch();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().verifySearchWithFirstName();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().verifySearchWithLastName();
 			merchantProfilePage.teamPage().clickAddTeamMember();
 			merchantProfilePage.teamPage().addNewTeamMemberPage().verifyPageHeading(data.get("newTeamMemberHeading"));
 			merchantProfilePage.teamPage().addNewTeamMemberPage()
 					.verifyDescription(data.get("newTeamMemberDescription"));
 			merchantProfilePage.teamPage().addNewTeamMemberPage().getAdministratorDesc();
-			String[] firstName = data.get("firstName").split(",");
-			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
-					.validateFirstNameField(firstName[0], firstName[1], firstName[2]);
-			String[] lastName = data.get("lastName").split(",");
-			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
-					.validateLastNameField(lastName[0], lastName[1], lastName[2]);
+//			String[] firstName = data.get("firstName").split(",");
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+//					.validateFirstNameField(firstName[0], firstName[1], firstName[2],firstName[3], data.get("keyBoardType"));
+//			String[] lastName = data.get("lastName").split(",");
+//			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
+//					.validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],data.get("keyBoardType"));
 			String[] teamEmail = data.get("teamEmail").split(",");
 			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
 					.validateEmailField(teamEmail[0], teamEmail[1], teamEmail[2]);

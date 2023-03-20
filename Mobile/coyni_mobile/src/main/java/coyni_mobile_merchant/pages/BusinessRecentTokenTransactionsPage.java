@@ -1,8 +1,11 @@
 package coyni_mobile_merchant.pages;
 
+import java.awt.AWTException;
+import java.awt.Point;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.FieldValidationsComponent;
@@ -12,8 +15,14 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+//import io.appium.java_client.touch.LongPressOptions;
+//import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
@@ -121,7 +130,6 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public int verifyViewMore() throws InterruptedException {
-		Thread.sleep(3000);
 		return DriverFactory.getDriver().findElements(btnViewMore).size();
 	}
 
@@ -136,7 +144,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public void ScrollToViewMore() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(1500);
 		while (getElementList(btnViewMore, "View More").size() == 0) {
 			TouchAction touch = new TouchAction(DriverFactory.getDriver());
 			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
@@ -144,8 +152,46 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		}
 	}
 
-	public void fillSearch() {
-		enterText(txtSearch, getCopiedData(), "Search");
+	public void fillSearch() throws AWTException, InterruptedException {
+		new CommonFunctions().VerifySearchWithPasteOption(txtSearch);
+//		TouchAction action = new TouchAction(DriverFactory.getDriver());
+//		WebElement element = DriverFactory.getDriver().findElement(txtSearch);
+//		TouchAction touchAction = new TouchAction(DriverFactory.getDriver());
+//		MobileElement search = (MobileElement) DriverFactory.getDriver().findElement(txtSearch);
+//		Duration duration = Duration.ofSeconds(2);
+//		touchAction.longPress(LongPressOptions.longPressOptions()
+//		    .withElement(ElementOption.element(search))
+//		    .withDuration(duration))
+//		    .release()
+//		    .perform();
+//		touchAction.tap(PointOption.point(140,330)).perform();
+//		touchAction.tap(TapOptions.tapOptions()).perform();
+		
+//		touchAction.tap(TapOptions.tapOptions(txtSearch));
+		
+//		touchAction.tap(
+//		touchAction.press(PointOption.point(140,340));
+//		MobileElement lement = (MobileElement) DriverFactory.getDriver().findElement(txtSearch);
+//
+//		// get the location of the element
+//
+//		org.openqa.selenium.Point location = lement.getLocation();
+//		int x = location.getX();
+//		int y = location.getY();
+//		System.out.println("Element location: " + x + ", " + y);
+//		DriverFactory.getDriver().
+	
+	
+//		Thread.sleep(2000);
+//		DriverFactory.getDriver().
+//		action.longPress((LongPressOptions) element).release().perform();
+//		click(txtSearch,"Search");
+//		Robot robot = new Robot();
+//		robot.keyPress(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_CONTROL);
+//		enterText(txtSearch, getCopiedData(), "Search");
 	}
 
 	public void clickFilterIcon() {
