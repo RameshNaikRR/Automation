@@ -18,11 +18,16 @@ public class PayOutsPage extends BrowserFunctions {
 
 	private By payOut = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(1)");
 
-	private By lblPayoutId = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(2)");
+	private static By lblPayoutId = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(2)");
 	private By lblDate = By.xpath("//td[contains(@class,'cell-col-1 batchId')]");
 	private By btnSearch = By.xpath("//button[@type='submit']");
-
-	public String getPayoutId() {
+	
+	
+	//public final  String grpID=getPayoutId();
+	
+	
+	
+	public  String getPayoutId() {
 		String text = getText(lblPayoutId, "PayOut Id");
 		ExtentTestManager.setInfoMessageInReport(text);
 		return text;

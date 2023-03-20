@@ -577,6 +577,8 @@ public class CoyniPortalTest {
 					.getPayoutCommission();
 			if (commission.contains(payout)) {
 				ExtentTestManager.setInfoMessageInReport("Payout Amount and Commission is Same");
+				homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTotalTransactionCount();
+				homePage.sideBarComponent().commissionAccountPage().payOutsPage().payOutIDPage().getTotalAmount();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testCommissionAccount Failed due to Exception " + e);
