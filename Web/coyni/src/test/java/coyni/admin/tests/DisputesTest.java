@@ -94,5 +94,22 @@ public class DisputesTest {
 			ExtentTestManager.setFailMessageInReport("verifyDisputesExportsStatusCaseID Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void verifyDisputesTransactionsCountWithDB(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickDisputes();
+			homePage.sideBarComponent().disputesDetailsComponent().clickPendingStatus();
+			homePage.sideBarComponent().disputesDetailsComponent().getTotalPendingTransaction();
+			homePage.sideBarComponent().disputesDetailsComponent().getTotalItemsCount(data.get("query"));
+			homePage.sideBarComponent().disputesDetailsComponent().clickWons();
+			homePage.sideBarComponent().disputesDetailsComponent().getTotalWonItemsCount(data.get("query2"));
+			homePage.sideBarComponent().disputesDetailsComponent().clickLosts();
+			homePage.sideBarComponent().disputesDetailsComponent().getTotalLostItemsCount(data.get("query3"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("verifyDisputesPendingTransactionsCount Failed due to Exception " + e);
+		}
+	}
 
 }
