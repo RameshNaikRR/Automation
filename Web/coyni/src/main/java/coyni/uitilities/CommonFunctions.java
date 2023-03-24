@@ -73,7 +73,7 @@ public class CommonFunctions {
 	}
 
 	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
-		By errorMsgs = By.cssSelector("span.text-crd5");
+		By errorMsgs = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");//By.cssSelector("span.text-crd5 | span.text-crd2");
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
@@ -184,7 +184,7 @@ public class CommonFunctions {
 	}
 
 	public void validateFormErrorMessage(String expErrMsg) {
-		By errorMsgs = By.cssSelector(".text-crd5");
+		By errorMsgs = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");	;
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
