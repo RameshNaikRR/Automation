@@ -49,7 +49,7 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	}
 	public String getTeamMemberName() {
 		String str = getText(lblTeamMemberName);
-		ExtentTestManager.setInfoMessageInReport("Team Member Name is : " + str);
+		ExtentTestManager.setInfoMessageInReport("Team Member Full Name is : " + str);
 		return str;
 	}
 
@@ -114,12 +114,13 @@ public class TeamMemberDetailsPage extends MobileFunctions {
 	public void verifySearchWithLastName() {
 		
 		String lastName = fullName.split(" ")[1];
-		enterText(txtSearch, lastName, "Verify search with only First Name");
+		enterText(txtSearch, lastName, "Verify search with only Last Name");
 		if(lastName.equalsIgnoreCase(getTeamMemberLastName())) {
 			ExtentTestManager.setPassMessageInReport("Search option is display the results, when we enter Last Name in Search field");
 		}else {
 			ExtentTestManager.setFailMessageInReport("Search option is not display the results, when we enter Last Name in Search field");
 		}
+		new CommonFunctions().clearText(txtSearch, "Search");
 	}
 	
 	public String getPhoneNumber() {

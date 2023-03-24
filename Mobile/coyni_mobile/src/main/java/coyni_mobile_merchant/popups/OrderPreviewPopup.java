@@ -30,15 +30,15 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");
 	private By btnSideView = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");
 	private By lblOrderOverview = MobileBy.xpath("//*[contains(@text,'Order Overview')]");
-	private By lblReceiptentAddress = MobileBy.xpath("//*[contains(@resource-id,'recipAddre')]|//*[contains(@resource-id,'recipientAddTV')]");
+	private By lblReceiptentAddress = MobileBy
+			.xpath("//*[contains(@resource-id,'recipAddre')]|//*[contains(@resource-id,'recipientAddTV')]");
 	private By lblReasonForRefund = MobileBy.xpath("//*[contains(@resource-id,'messageNoteTV')]");
-	
+
 //	Scan Order preview details
 	private By lblPayingMethod = MobileBy.xpath("//*[contains(@resource-id,'accountType')]");
 	private By lblPayingTo = MobileBy.xpath("//*[contains(@resource-id,'userNameTV')]");
 	private By lblTokenAccountBalance = MobileBy.xpath("//*[contains(@resource-id,'availBalTV')]");
-	
-	
+
 	public void verifyPayingMethod() {
 		new CommonFunctions().elementView(lblPayingMethod, "Paying Method");
 		ExtentTestManager.setInfoMessageInReport("Paying Method : " + getText(lblAmount));
@@ -48,7 +48,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		new CommonFunctions().elementView(lblTokenAccountBalance, "Token Account Balance");
 		ExtentTestManager.setInfoMessageInReport("Token Account Balance is : " + getText(lblTokenAccountBalance));
 	}
-	
+
 	public void verifyPayingTo() {
 		new CommonFunctions().elementView(lblPayingTo, "Paying To");
 		ExtentTestManager.setInfoMessageInReport("Paying To : " + getText(lblPayingTo));
@@ -146,6 +146,13 @@ public class OrderPreviewPopup extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Number is : " + getText(lblPaymentMethodNumber));
 	}
 
+	public String verifyPaymentMethod() {
+	String payMethod=getText(lblPaymentMethod);
+	String cardNumber=payMethod.replace("••••", "");
+	ExtentTestManager.setInfoMessageInReport(cardNumber);
+	return 	cardNumber;
+	}
+	
 	public void getPurchaseAmount() {
 		new CommonFunctions().elementView(lblPurchaseAmount, "Purchase Amount");
 		ExtentTestManager.setInfoMessageInReport("Purchase Amount  : " + getText(lblPurchaseAmount));
@@ -156,16 +163,25 @@ public class OrderPreviewPopup extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Processing Fee : " + getText(lblProcessingFee));
 	}
 
-	public void getTotal() {
+	public String getTotal() {
 		new CommonFunctions().elementView(lblTotal, "Total");
 		ExtentTestManager.setInfoMessageInReport("Total  : " + getText(lblTotal));
+		return getText(lblTotal);
+	}
+
+	public String verifyTotal() {
+		String a = getTotal();
+		String[] b=a.split(" ");
+		ExtentTestManager.setInfoMessageInReport(b[0]);
+		return b[0];
+		
 	}
 
 	public void swipeSlideToConfirm() {
 		new CommonFunctions().swipeElement(btnSlideToConfirm, Direction.RIGHT);
 //		click(btnSlideToConfirm, "Slide To Confirm");
 	}
-	
+
 //	public PointOption swipeSlideToConfirmLocation() {
 //		WebElement element = DriverFactory.getDriver().findElement(By.xpath("//*[contains(@resource-id,'slideToConfirm')]"));
 //		location = eleme
@@ -179,9 +195,11 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getPurchaseAmount();
 		getProcessingFee();
 		getTotal();
+		verifyTotal();
+		verifyPaymentMethod();
 //		swipeSlideToConfirmLocation();
 		swipeSlideToConfirm();
-		
+
 	}
 
 	public void refundPreviewDetails(String expHeading) {
@@ -202,7 +220,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		verifyTokenBalance();
 		swipeSlideToConfirm();
 	}
-	
+
 	public EnterYourPINComponent enterYourPINComponent() {
 		return new EnterYourPINComponent();
 	}

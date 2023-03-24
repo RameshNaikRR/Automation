@@ -25,7 +25,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By emailHeading = MobileBy.xpath("//*[@text='Please Verify New Email']|//*[@text='Please Verify your Current Email']|//*[contains(@text,'Verify Email')]|//*[contains(@text,'Please Verify your Email')]");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
-	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");
+	private By lblNewCode = MobileBy.xpath("//*[@text='A new code has sent']");
 	private By lblPopupHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lblPopupMsg = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
@@ -105,11 +105,16 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	}
 
 	public void clickResend() {
+		new CommonFunctions().elementView(lblDidntGetCode, "Didn't get the code");
 		click(lnkResend, "Resend");
 	}
 
-	public void verifyNewCodeMsg(String expMessage) {
-		new CommonFunctions().verifyLabelText(lblNewCode, "Message", expMessage);
+	public void verifyNewCodeMsg() throws InterruptedException {
+		new CommonFunctions().elementView(lblNewCode, "Message");
+		Thread.sleep(5000);
+		new CommonFunctions().elementView(lblDidntGetCode, "Didn't get the code");
+		click(lnkResend, "Resend");
+		new CommonFunctions().elementView(lblNewCode, "Message");
 	}
 
 //	public void verifyRemove(String invalidPin, By ele) {

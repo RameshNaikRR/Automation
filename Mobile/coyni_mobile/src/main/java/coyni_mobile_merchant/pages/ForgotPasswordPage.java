@@ -7,7 +7,6 @@ import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ForgotPasswordPage extends MobileFunctions {
@@ -25,12 +24,18 @@ public class ForgotPasswordPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblDescription, "Forgot Password Description ", expDescription);
 	}
 //forgot password
-	public void fillEmail(String email) {
+	public void fillEmail(String email) throws InterruptedException {
 		new CommonFunctions().verifyAutoFocusElement(txtEmail, "Email");
 		enterText(txtEmail, email, "Email");
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
+	public void verifyKeBaordTypeOfEmail(String email,String keyBoardType) throws InterruptedException {
+		click(txtEmail, "Email");
+		new CommonFunctions().verifyKeyBoardType(txtEmail, email, keyBoardType, "Email");
+		DriverFactory.getDriver().hideKeyboard();
+	}
+	
 	public void clickNext() {
 		new CommonFunctions().clickFocusableElement(btnNext, " Next ");
 	}

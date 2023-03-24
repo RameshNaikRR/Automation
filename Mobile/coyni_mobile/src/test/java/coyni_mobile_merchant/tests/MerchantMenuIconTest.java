@@ -27,12 +27,12 @@ public class MerchantMenuIconTest {
 
 	@BeforeTest
 	public void init() {
-		merchantProfilePage=new MerchantProfilePage();
+		merchantProfilePage = new MerchantProfilePage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
 		merchantProfileTest = new MerchantProfileTest();
 		transactionSucessFailurePendingComponent = new TransactionSucessFailurePendingComponent();
 		businessTransactionDetailsTest = new BusinessTransactionDetailsTest();
-		uploadDocumentComponent= new UploadDocumentComponent();
+		uploadDocumentComponent = new UploadDocumentComponent();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -60,8 +60,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage()
-					.verifySelectPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnCancel();
 
@@ -81,21 +80,21 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
 //			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage()
-					.verifySelectPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup().verifySacnPaymentOrderDetails();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
-			.enterYourPINComponent().fillPin(data.get("pin"));
+					.verifySacnPaymentOrderDetails();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
-			.transactionSucessFailurePendingComponent().verifyScanPaymentDetails();
+					.enterYourPINComponent().fillPin(data.get("pin"));
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+					.transactionSucessFailurePendingComponent().verifyScanPaymentDetails();
 			businessTokenAccountPage.getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testReceivePaymentView(String strParams) {
@@ -114,17 +113,19 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickOk();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getRequestedAmount();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSaveAlbum();
-			if(uploadDocumentComponent.verifyUsingApp()==1 ) {	
+			if (uploadDocumentComponent.verifyUsingApp() == 1) {
 				uploadDocumentComponent.clickUsingApp();
 				uploadDocumentComponent.clickAllow();
-				}
+			}
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent().verifyToastMsg(data.get("saveAlbumToast"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent()
+					.verifyToastMsg(data.get("saveAlbumToast"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyQrCode();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClearAmount();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getReceiptentAddress();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickCopy();
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent().verifyToastMsg(data.get("copyToastMsg"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent()
+					.verifyToastMsg(data.get("copyToastMsg"));
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickShare();
 			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
 					.verifySharePageHeading(data.get("sharePageHeading"));
@@ -245,19 +246,19 @@ public class MerchantMenuIconTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickGiftCard();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyGiftCardHeading(data.get("cardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyBrandHeading(data.get("poplurHeading"));
-			if(data.get("validateGiftCard").equalsIgnoreCase("yes")) {
-				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();	
-			}else {
+			if (data.get("validateGiftCard").equalsIgnoreCase("yes")) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			} else {
 				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickVisa();
 			}
-			
+
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -281,16 +282,16 @@ public class MerchantMenuIconTest {
 					.getTotal();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.slideToConfirm();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().successFailureComponent().getTransactionDetails();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawGiftCardTransaction(strParams);
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
@@ -351,7 +352,7 @@ public class MerchantMenuIconTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().navigationComponent().clickClose();
 			businessTokenAccountPage.clickMenuIcon();
@@ -360,7 +361,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().navigationComponent().clickClose();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickGiftCard();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillAmount(data.get("amount"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -391,7 +392,7 @@ public class MerchantMenuIconTest {
 //			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 //					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.testAddBankAccount(strParams);
 //			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
@@ -399,7 +400,7 @@ public class MerchantMenuIconTest {
 //					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
 //			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
 			testWithdrawTokenProcedure(strParams);
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawBankTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
@@ -418,9 +419,24 @@ public class MerchantMenuIconTest {
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
 			merchantProfileTest.AddDebitCard(strParams);
 			testWithdrawTokenProcedure(strParams);
-			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
+//			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithInstantPay failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+			merchantProfileTest.testDeleteDebitCards(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
 	}
@@ -525,13 +541,44 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
+			String totalAmount=businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().verifyTotal();
+			String paymentMethod=businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().verifyPaymentMethod();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
-
+			businessTokenAccountPage.clickAccount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageHeading(data.get("businessTokenHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyTotalAvailableFunds(data.get("fundsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage()
+					.verifyPageDescription(data.get("businessTokenDescription"));
+////			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
+////			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
+			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyLatestTransactionType()
+					.equalsIgnoreCase("5563")
+					&& businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
+							.equalsIgnoreCase(totalAmount)) {
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyPageHeading(data.get("transactionDetailsHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyTransactionType(data.get("transactionType"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.getWithdrawTokenInstantPayTransactionDetails();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.clickInstantPayBack();
+			} else {
+				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
 		}

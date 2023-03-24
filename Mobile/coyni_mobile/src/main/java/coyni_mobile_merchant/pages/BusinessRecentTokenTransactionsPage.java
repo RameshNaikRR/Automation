@@ -37,7 +37,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'net_amount')]");
 
 	private By lblRecentTransactionType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessage')])[1]");
-
+	private By lblLatestTransactionType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessagTV')])[1]");
+	
 	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
 
 	private By lblTokensHeading = MobileBy.xpath("//*[contains(@text,'Transaction')]");
@@ -108,16 +109,25 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public void getTransactionStatus() {
 		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Status is " + getText(lblTransactionStatus));
+		
 	}
-
-	public void getAmount() {
+	public String verifyTransactionAmount() {
+		String amount=getRecentTransAmount();
+		String latestTranAmount=amount.replace("-", "");
+		ExtentTestManager.setInfoMessageInReport(latestTranAmount);
+		return latestTranAmount;
+	}
+	
+	public String getAmount() {
 //		scrollDownToElement(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Amount is " + getText(lblAmount));
+		return getText(lblAmount);
 	}
 
-	public void getRecentTransAmount() {
+	public String getRecentTransAmount() {
 //		scrollDownToElement(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Amount is " + getText(recentTransAmount));
+		return getText(recentTransAmount);
 	}
 
 	public void clickTransaction() {
@@ -228,6 +238,14 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Type is " + getText(lblRecentTransactionType));
 	}
 
+	public String verifyLatestTransactionType() {
+		String payMethod=getText(lblLatestTransactionType);
+		String latestPaymentMethod[]=payMethod.split(" ");
+		ExtentTestManager.setInfoMessageInReport(latestPaymentMethod[1]);
+		return latestPaymentMethod[1];
+
+	}
+	
 	public void getRecentTransBalance() {
 //		scrollDownToElement(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Balance is " + getText(recentTransBalance));

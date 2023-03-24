@@ -11,6 +11,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.BusinessRecentTokenTransactionsPage;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.MerchantProfilePage;
+import coyni_mobile_merchant.popups.OrderPreviewPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -19,13 +20,14 @@ public class BusinessTransactionDetailsTest {
 	BusinessRecentTokenTransactionsPage businessRecentTokenTransactionsPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
 	MerchantProfilePage merchantProfilePage;
-	
+	OrderPreviewPopup orderPreviewPopup;
+
 	@BeforeTest
 	public void init() {
-		merchantProfilePage=new MerchantProfilePage();
+		merchantProfilePage = new MerchantProfilePage();
 		businessRecentTokenTransactionsPage = new BusinessRecentTokenTransactionsPage();
 		businessTokenAccountPage = new BusinessTokenAccountPage();
-
+		orderPreviewPopup = new OrderPreviewPopup();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
 		}
@@ -363,16 +365,23 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageDescription(data.get("businessTokenDescription"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyPageHeading(data.get("transactionDetailsHeading"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyTransactionType(data.get("transactionType"));
-
+//			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyLatestTransactionType()
+//					.equalsIgnoreCase(paymentMethod)
+//					&& businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
+//							.equalsIgnoreCase(businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//									.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal())) {
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyPageHeading(data.get("transactionDetailsHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyTransactionType(data.get("transactionType"));
+//			} else {
+//				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
+//			}
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);
@@ -388,7 +397,6 @@ public class BusinessTransactionDetailsTest {
 					.getWithdrawTokenInstantPayTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickInstantPayBack();
-
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);

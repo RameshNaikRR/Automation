@@ -32,6 +32,15 @@ public class DBAInformationPage extends MobileFunctions {
 	private By lblToastMsg = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancel_button')]");
 	private By btnRetake = MobileBy.xpath("//*[contains(@resource-id,'retake_button')]");
+	private By btnPhotoBack = MobileBy.xpath("//*[@content-desc='Navigate up']");
+	//Choose from library
+	private By btnCancelInSelectPhoto = MobileBy.xpath("//*[@text='CANCEL']");
+	private By btnSelectPicture = MobileBy.xpath("//*[contains(@resource-id,'gl_root_view')]");
+	private By btnPhotoHome = MobileBy.id("android:id/home");
+	private By lblSelectPhotoHeading = MobileBy.xpath("//*[@text='Select photo']");
+//	private By btnSelectPicture = MobileBy.xpath("//*[contains(@resource-id,'gl_root_view')]");
+	
+	
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "DBA Infromation Heading", expHeading);
@@ -122,7 +131,15 @@ public class DBAInformationPage extends MobileFunctions {
 		click(btnCrop, "Crop");
 	}
 
-	public void uploadDBAProfile(String expText,String expTex) throws InterruptedException {
+	public void clickCameraBack() {
+		click(btnPhotoBack, "Back");
+	}
+	
+	public void verifySelectPhotoHeading() {
+		new CommonFunctions().elementView(lblSelectPhotoHeading, "Select Photo");
+	}
+	
+	public void uploadDBAProfileWithTakePhoto(String expText,String expTex) throws InterruptedException {	
 		clickEditProfile();
 		if (uploadDocumentComponent().verifyUsingApp() == 1) {
 			uploadDocumentComponent().clickUsingApp();
@@ -142,10 +159,60 @@ public class DBAInformationPage extends MobileFunctions {
 		clickRetake();
 		clickCamera();
 		clickImgDone();
+		clickCameraBack();
+		verifyPageHeading(expTex);
+		clickEditProfile();
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
+			uploadDocumentComponent().clickUsingApp();
+			uploadDocumentComponent().clickAllow();
+		}
+		clickTakeAPhoto();
+		clickCamera();
+		clickImgDone();
 		clickCrop();
 		verifyProfileToastMsg(expText);
 	}
 
+	public void uploadDBAProfileWithChooseFromLibrary(String expText,String expTex) throws InterruptedException {	
+		clickEditProfile();
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
+			uploadDocumentComponent().clickUsingApp();
+			uploadDocumentComponent().clickAllow();
+		}
+		clickChoosefromLibrary();
+		verifySelectPhotoHeading();
+		click(btnCancelInSelectPhoto, "Cancel");
+		verifyPageHeading(expTex);
+		clickEditProfile();
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
+			uploadDocumentComponent().clickUsingApp();
+			uploadDocumentComponent().clickAllow();
+		}
+		clickChoosefromLibrary();
+		verifySelectPhotoHeading();
+		click(btnSelectPicture, "Select Pictures");
+		click(btnPhotoHome, "Photos Home");
+		verifySelectPhotoHeading();
+		click(btnSelectPicture, "Select Pictures");
+		click(btnCancelInSelectPhoto, "Cancel");
+		verifySelectPhotoHeading();
+		click(btnSelectPicture, "Select Pictures");
+		click(btnSelectPicture, "Select Picture");
+		clickCameraBack();
+		verifyPageHeading(expTex);
+		clickEditProfile();
+		if (uploadDocumentComponent().verifyUsingApp() == 1) {
+			uploadDocumentComponent().clickUsingApp();
+			uploadDocumentComponent().clickAllow();
+		}
+		clickChoosefromLibrary();
+		verifySelectPhotoHeading();
+		click(btnSelectPicture, "Select Pictures");
+		click(btnSelectPicture, "Select Picture");
+		clickCrop();
+		verifyProfileToastMsg(expText);
+	}
+	
 	public UploadDocumentComponent uploadDocumentComponent() {
 		return new UploadDocumentComponent();
 	}

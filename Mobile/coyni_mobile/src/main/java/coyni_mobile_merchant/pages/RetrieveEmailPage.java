@@ -49,7 +49,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 	}
 
 	public void verifyNextButtonDisabled() {
-		new CommonFunctions().elementEnabled(btnNext, "Next Button");
+		new CommonFunctions().verifyDisabledElement(btnNext, "Next Button");	
 	}
 
 	public void verifyCrossIconView() {

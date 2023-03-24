@@ -35,12 +35,16 @@ public class EditTeamMemberPage extends MobileFunctions {
 	}
 
 	public void fillFirstName(String expFirstName) {
-		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "First Name");
+//		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "First Name");
 		click(txtFirstName, "First Name");
 		enterText(txtFirstName, expFirstName, "First Name");
 		DriverFactory.getDriver().hideKeyboard();
 	}
 
+	public void VerifyFirstNameAutoFocus() {
+		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "First Name");
+	}
+	
 	public void fillLastName(String expLastName) {
 		click(txtLastName, "Last Name");
 		enterText(txtLastName, expLastName, "Last Name");

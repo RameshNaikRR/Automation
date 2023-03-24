@@ -34,6 +34,7 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 
 	public void fillNewPassword(String newPassword) {
+		new CommonFunctions().verifyDisabledElement(btnSave, "Save");
 		new CommonFunctions().verifyAutoFocusElement(txtNewPassword,"New Password");
 		enterText(txtNewPassword, newPassword, "New Password");
 		DriverFactory.getDriver().hideKeyboard();
@@ -51,6 +52,7 @@ public class CreatePasswordPage extends MobileFunctions {
 	}
 	
 	public void fillConfirmPassword(String confirmPassword) {
+		new CommonFunctions().verifyDisabledElement(btnSave, "Save");
 		click(txtConfirmPassword, " Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
 //		click(txtConfirmPassword, " Confirm Password");

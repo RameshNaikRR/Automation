@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.FieldValidationsComponent;
+import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.PhoneAndEmailVerificationComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -42,6 +43,14 @@ public class SignUpPage extends MobileFunctions {
 	private By btnDone = MobileBy.xpath("//*[@name='Done']");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	
+//	navigations
+	private By btnCreateAccClose = MobileBy.id("com.coyni.mapp:id/createAccountCloseIV");
+	private By btnAgreementsClose = MobileBy.id("com.coyni.mapp:id/closeIV");
+//	private By btnPrivacyClose = MobileBy.id("com.coyni.mapp:id/closeIV");
+//	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
+//	private By btnDone = MobileBy.xpath("//*[@name='Done']");
+//	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
+	
 	//sign up page
 	public void clickDone() {
 		if (new CommonFunctions().isPlatformiOS()) {
@@ -69,6 +78,14 @@ public class SignUpPage extends MobileFunctions {
 		click(lnKBusinessAccount, "Business Account");
 	}
 
+	public void clickCreateAccScreenCloseBtn() {
+		click(btnCreateAccClose, "Create Account Close button");
+	}
+	
+	public void clickAgreementsCloseBtn() {
+		click(btnAgreementsClose, "Agreements Close button");
+	}
+	
 	public void verifyCreateAccount(String createAccount) {
 		new CommonFunctions().verifyLabelText(lblCreateAccount, createAccount, "Create Account");
 	}
@@ -214,4 +231,8 @@ public class SignUpPage extends MobileFunctions {
 		return new FieldValidationsComponent();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	
 }

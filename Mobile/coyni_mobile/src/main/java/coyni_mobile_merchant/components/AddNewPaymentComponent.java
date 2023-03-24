@@ -107,10 +107,10 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickDebitCard() throws InterruptedException {
-		Thread.sleep(2000);
-		if (getElementList(btnDebitCard, "Debit Card").size() > 0) {
+//		Thread.sleep(2000);
+//		if (getElementList(btnDebitCard, "Debit Card").size() > 0) {
 			click(btnDebitCard, "Debit Card");
-		}
+//		}
 	}
 
 //	public void clickCreditCard() {

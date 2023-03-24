@@ -11,6 +11,7 @@ import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.DaysDropDownComponent;
 import coyni_mobile_merchant.components.NotificationComponent;
 import coyni_mobile_merchant.components.ReserveBalanceComponent;
+import coyni_mobile_merchant.popups.SwitchAccountPopup;
 import coyni_mobile_merchant.popups.TokenMenuIconPopUp;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -31,7 +32,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By lblUserName = MobileBy
 			.xpath(" //*[contains(@resource-id,'userNameTV')]|//*[contains(@resource-id,'tv_user_name')]");
 	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
-	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon')]");
+	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon_CV')]");
 	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
 	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
 	private By lnKBusinessAccount = MobileBy
@@ -46,6 +47,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
 	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[+ i +]");
+	private By btn = MobileBy.id("com.coyni.mapp:id/title");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
@@ -78,7 +80,13 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickAddDBA() {
-		click(btnAddDBA, "Add DBA");
+//	new CommonFunctions().clickEnabledElement(btnAddDBA, "Add DBA");
+		if (getElement(btnAddDBA, "Add DBA").isEnabled()) {
+			click(btnAddDBA, "Add DBA");
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"Add DBA is Disabled mode, because of another application is InProgress or UnderReview");
+		}
 	}
 
 	public void clickBusinessAccount() {
@@ -264,4 +272,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		return new NavigationComponent();
 	}
 
+	public SwitchAccountPopup switchAccountPopup() {
+		return new SwitchAccountPopup();
+	}
 }

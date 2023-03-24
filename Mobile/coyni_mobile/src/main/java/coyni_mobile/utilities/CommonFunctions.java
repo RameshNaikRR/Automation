@@ -227,16 +227,16 @@ public class CommonFunctions {
 		System.out.println("clicked on tab");
 	}
 
-	public void enterSpecialKey(By ele,By inputPlace,String eleName) {
+	public void enterSpecialKey(By ele, By inputPlace, String eleName) {
 		mobileFunctions.click(ele, "Field");
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.AT));
-		ExtentTestManager.setPassMessageInReport("@,(-+ text entered in element "+eleName);
+		ExtentTestManager.setPassMessageInReport("@,(-+ text entered in element " + eleName);
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.COMMA));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.LEFT_BRACKET));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.MINUS));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.PLUS));
 		String actualtext = mobileFunctions.getText(ele);// BUTTON_
-		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
+//		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
 		if (actualtext.length() == 0) {
 			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special Charcters");
 		} else {
@@ -252,7 +252,7 @@ public class CommonFunctions {
 			// takes numbers from alpha numeric keyboard
 			for (String key : keys) {
 				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + key)));
-				ExtentTestManager.setPassMessageInReport(key+" text entered in element "+eleName);
+				ExtentTestManager.setPassMessageInReport(key + " text entered in element " + eleName);
 				String actualtext = mobileFunctions.getText(inputPlace);// BUTTON_
 				// Thread.sleep(2000);
 				if (actualtext.length() == 0) {
@@ -361,7 +361,74 @@ public class CommonFunctions {
 		if (mobileFunctions.getElement(ele, eleName).isEnabled()) {
 			ExtentTestManager.setPassMessageInReport(eleName + " is enabled");
 		} else {
-			ExtentTestManager.setInfoMessageInReport(eleName + " is not enabled");
+			ExtentTestManager.setFailMessageInReport(eleName + " is not enabled");
+		}
+	}
+
+	public void verifyDisabledElement(By ele, String eleName) {
+		if (!mobileFunctions.getElement(ele, eleName).isEnabled()) {
+			ExtentTestManager.setPassMessageInReport(eleName + " is disabled");
+		} else {
+			ExtentTestManager.setFailMessageInReport(eleName + " is not disabled");
+		}
+	}
+
+	public void verifyNonFocusableElement(By ele, String eleName) {
+		String a = mobileFunctions.getAttribute(ele, "focusable");
+		ExtentTestManager.setPassMessageInReport(a);
+		if (!mobileFunctions.getAttribute(ele, "focusable").equalsIgnoreCase("true")) {
+			ExtentTestManager.setPassMessageInReport(eleName + " is disabled");
+		} else {
+			ExtentTestManager.setFailMessageInReport(eleName + " is not disabled");
+		}
+	}
+
+	public void verifyKeyBoardType(By ele, String data, String type, String eleName) throws InterruptedException {
+		mobileFunctions.click(ele, "Field");
+		String[] keys = data.split("");
+		if (type.equalsIgnoreCase("alphanumeric")) {
+			// takes numbers from alpha numeric keyboard
+			for (String key : keys) {
+				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("DIGIT_" + key)));
+				ExtentTestManager.setPassMessageInReport(key + " text entered in element " + eleName);
+				String actualtext = mobileFunctions.getText(ele);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport("Aplha Numeric Key Board is opened for " + eleName);
+				} else {
+					ExtentTestManager.setFailMessageInReport("Aplha Numeric Key Board is not opened for " + eleName);
+				}
+			}
+		} else if (type.equalsIgnoreCase("numeric")) {
+			// takes numbers from numeric keyboard
+			for (String key : keys) {
+				((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf("NUMPAD_" + key)));
+				String actualtext = mobileFunctions.getText(ele);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport("Numeric Key Board is opened for " + eleName);
+				} else {
+					ExtentTestManager.setFailMessageInReport("Numeric Key Board is not opened for " + eleName);
+				}
+			}
+		} else if (type.equalsIgnoreCase("alpha")) {
+			// takes alphabets from alpha numeric keyboard
+			for (String key : keys) {
+				if (key.matches("/[A-Z]+/")) {
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.SHIFT_LEFT));
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(key)));
+				} else {
+					((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.valueOf(key)));
+				}
+				String actualtext = mobileFunctions.getText(ele);
+				if (actualtext.length() == 0) {
+					ExtentTestManager.setPassMessageInReport("Aplhabetical Key Board is opened for " + eleName);
+				} else {
+					ExtentTestManager.setFailMessageInReport("Aplhabetical Key Board is not opened for " + eleName);
+				}
+
+			}
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"type argument value should be either 'alphanumeric' or 'numeric' or 'alpha'");
 		}
 	}
 

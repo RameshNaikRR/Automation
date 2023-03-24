@@ -264,6 +264,10 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyResendView();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
+			.clickResend();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
+			.verifyNewCodeMsg();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.choosePinComponent().verifyChoosePinHeading(data.get("choosePinHeading"));
@@ -342,6 +346,8 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyGetCodeView();
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyResendView();
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().navigationComponent().verifyBackView();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().clickResend();
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillOtp(data.get("phoneOTP"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
 					.verifyHeading(data.get("accountPageHeading"));
@@ -445,8 +451,7 @@ public class LoginTest {
 					.verifyHeading(data.get("accountPageHeading"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
 					.clickClose();
-			Thread.sleep(1000);
-			landingPage.clickLogin();
+			loginPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
@@ -559,13 +564,16 @@ public class LoginTest {
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordPage().verifyPageHeading(data.get("forgotHeading"));
+//			loginPage.forgotPasswordPage().verifyKeBaordTypeOfEmail(strParams, strParams);
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickNext();
 			if (data.get("validatePassword").equalsIgnoreCase("yes")) {
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent()
 						.verifyEmailHeading(data.get("verifyEmailHeading"));
+				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().clickResend();
+				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-				Thread.sleep(3000);
+//				Thread.sleep(3000);
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 						.verifyPageHeading(data.get("createPasswordHeading"));
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
@@ -588,7 +596,7 @@ public class LoginTest {
 			}
 
 			if (!data.get("errMessage").isEmpty()) {
-				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().validateSave();
+//				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().validateSave();
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 
 			}
@@ -642,7 +650,7 @@ public class LoginTest {
 			if (data.get("validatePopUpMsg").contains("yes")) {
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent()
 						.verifyEmailHeading(data.get("verifyEmailHeading"));
-				Thread.sleep(2000);
+//				Thread.sleep(2000);
 				for (int i = 0; i <= 4; i++) {
 					Thread.sleep(5000);
 					loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().clickResend();

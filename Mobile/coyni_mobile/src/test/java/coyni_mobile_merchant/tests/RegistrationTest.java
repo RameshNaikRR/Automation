@@ -34,7 +34,7 @@ public class RegistrationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationProcessPage.clickGetStarted();
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 			registrationProcessPage.clickCompanyInfo();
 			registrationProcessPage.registrationCompanyInfoPage().AddCompanyInfo(data.get("companyInfoHeading"),
 					data.get("compName"), data.get("compEmail"), data.get("compPhNum"), data.get("compSSN"),
@@ -123,9 +123,15 @@ public class RegistrationTest {
 			agreementComponent.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			registrationProcessPage.registrationMerchantAgreementsPage().clickAgreementsDone();
 			registrationProcessPage.clickReviewApplication();
-			registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"),
-					data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"),
-					data.get("reviewBeneficialHeading"), data.get("reviewAgreeHeading"));
+			if (data.get("verifyAddDBAApplication").equalsIgnoreCase("")) {
+				registrationProcessPage.reviewApplicationPage().verifyReviewApplication(data.get("reviewHeading"),
+						data.get("reviewCompanyInfoHeading"), data.get("reviewDBAHeading"),
+						data.get("reviewBeneficialHeading"), data.get("reviewAgreeHeading"));
+			} else {
+				registrationProcessPage.reviewApplicationPage().verifyAddDBAReviewApplication(data.get("reviewHeading"),
+						data.get("reviewDBAHeading"), data.get("reviewBeneficialHeading"),
+						data.get("reviewAgreeHeading"));
+			}
 			registrationProcessPage.registrationMerchantAgreementsPage().VerifyApplicationDisclosure();
 			businessTokenAccountPage.dashBoardPage().VerifyUser();
 		} catch (Exception e) {
@@ -134,11 +140,18 @@ public class RegistrationTest {
 	}
 
 	@Test
-	public void testAddDBA() {
+	@Parameters({ "strParams" })
+	public void testAddDBA(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickChooseUser();
 			businessTokenAccountPage.clickSelectAccount();
 			businessTokenAccountPage.clickAddDBA();
+//			registrationProcessPage.clickGetStarted();
+			businessTokenAccountPage.switchAccountPopup().verifyDescription(data.get("addDBADescription"));
+			businessTokenAccountPage.switchAccountPopup().verifyCompanyName();
+			businessTokenAccountPage.switchAccountPopup().verifyTotalDBAs();
+			businessTokenAccountPage.switchAccountPopup().clickAddDBA();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
 		}

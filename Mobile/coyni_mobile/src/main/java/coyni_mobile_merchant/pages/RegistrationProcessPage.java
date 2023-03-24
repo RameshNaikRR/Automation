@@ -26,9 +26,14 @@ public class RegistrationProcessPage extends MobileFunctions {
 	private By btnReviewApplication = MobileBy.xpath("//*[contains(@resource-id,'reviewCv')]");
 
 	public void clickGetStarted() throws InterruptedException {
-		Thread.sleep(2000);
-		if (DriverFactory.getDriver().findElements(btnGetStarted).size() == 1) {
+//		Thread.sleep(2000);
+//		if (DriverFactory.getDriver().findElements(btnGetStarted).size() == 1) {
+
+		if (getElement(btnGetStarted, "Get Started").isEnabled()) {
 			click(btnGetStarted, "Get Started");
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"Add DBA is Disabled mode, because of another application is InProgress or UnderReview");
 		}
 	}
 

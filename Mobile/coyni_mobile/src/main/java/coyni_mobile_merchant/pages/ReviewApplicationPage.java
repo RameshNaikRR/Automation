@@ -155,48 +155,26 @@ public class ReviewApplicationPage extends MobileFunctions {
 		agreementComponent().verifyTermsOfServiceView();
 		agreementComponent().clickClose();
 		clickNext();
-		
-//		clickSubmit();
-//		Thread.sleep(2000);
-//		agreementComponent().verifyMerchantAgreementView();
-//		agreementComponent().clickClose();
-//		Thread.sleep(2000);
-//		clickReviewApplicationCheckBox();
-//		clickSubmit();
-//		if (verifyCompanyHeading() == 1) {
-//			verifyCompanyHeading(expCompHeading);
-////		clickCompanyEdit();
-////		registrationCompanyInfoPage().AddCompanyInfo(expCompHeading, expAgrrementsHeading, expAgrrementsHeading, expAgrrementsHeading, expAgrrementsHeading, expReviewHeading, expCompHeading, expDBAHeading, expBeneficialHeading, expAgrrementsHeading);
-//			clickCompanyDocView();
-//			clickDocumentClose();
-//		}
-//		verifyDBAInfoHeading(expDBAHeading);
-//		Thread.sleep(2000);
-//		if (verifyDBADocView() == 1) {
-//			clickDBADocView();
-//			clickDocumentClose();
-//		}
-//		Thread.sleep(2000);
-//		verifyBeneficialHeading(expBeneficialHeading);
-//		clickBeneficialDocView();
-//		clickDocumentClose();
-//		Thread.sleep(2000);
-//		verifyBankHeading(expBankHeading);
-//		verifyAgreementsHeading(expAgrrementsHeading);
-//		agreementComponent().verifyPrivacyPolicyView();
-//		agreementComponent().clickClose();
-//		Thread.sleep(2000);
-//		agreementComponent().verifyTermsOfServiceView();
-//		agreementComponent().clickClose();
-//		Thread.sleep(2000);
-//		agreementComponent().verifyMerchantAgreementView();
-//		agreementComponent().clickClose();
-//		Thread.sleep(2000);
-//		clickReviewApplicationCheckBox();
-//		
-
 	}
 
+	public void verifyAddDBAReviewApplication(String expReviewHeading, String expDBAHeading,
+			String expBeneficialHeading, String expAgrrementsHeading)
+			throws InterruptedException {
+		verifyReviewApplicationHeading(expReviewHeading);
+		verifyDBAInfoHeading(expDBAHeading);
+		clickDBADocView();
+		clickDocumentClose();
+		verifyBeneficialHeading(expBeneficialHeading);
+		clickBeneficialDocView();
+		clickDocumentClose();
+		verifyAgreementsHeading(expAgrrementsHeading);
+		agreementComponent().verifyPrivacyPolicyView();
+		agreementComponent().clickClose();
+		agreementComponent().verifyTermsOfServiceView();
+		agreementComponent().clickClose();
+		clickNext();
+	}
+	
 	public AgreementComponent agreementComponent() {
 		return new AgreementComponent();
 	}

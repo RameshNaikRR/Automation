@@ -48,7 +48,6 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().enterSpecialKey(txtEmail, txtFirstNameInput, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
 		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
@@ -121,8 +120,10 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtPassword, "password", currentPassword);
 	}
 
-	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax) {
+	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax) throws InterruptedException {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().enterSpecialKey(txtPhoneNumber, txtPhoneNumber, "Phone Number");
+//		new CommonFunctions().enterKeys(txtPhoneNumber, txtPhoneNumber, alphabets, type, "Phone Number");
 		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", singleDigit);
 		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
 		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", maxDigit);
@@ -135,7 +136,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 			throws InterruptedException {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().enterKeys(txtFirstName, txtFirstNameInput, numbers, keyBoardType, "First Name");
-		new CommonFunctions().enterSpecialKey(txtFirstName,txtFirstNameInput,"First Name");
+//		new CommonFunctions().enterSpecialKey(txtFirstName,txtFirstNameInput,"First Name");
 		new CommonFunctions().validateField(txtFirstName, "First Name", singleDigit);
 		new CommonFunctions().clearText(txtFirstName, "First Name");
 		new CommonFunctions().validateField(txtFirstName, "First Name", maxDigit);
@@ -150,7 +151,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	public void validateLastNameField(String singleDigit, String maxDigit, String moreThanMax,String numbers,String keyBoardType) throws InterruptedException {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().enterKeys(txtLastName, txtFirstNameInput, numbers, keyBoardType, "Last Name");
-		new CommonFunctions().enterSpecialKey(txtLastName,txtFirstNameInput,"Last Name");
+//		new CommonFunctions().enterSpecialKey(txtLastName,txtFirstNameInput,"Last Name");
 		new CommonFunctions().validateField(txtLastName, "Last Name", singleDigit);
 		new CommonFunctions().clearText(txtLastName, "Last Name");
 		new CommonFunctions().validateField(txtLastName, "Last Name", maxDigit);
