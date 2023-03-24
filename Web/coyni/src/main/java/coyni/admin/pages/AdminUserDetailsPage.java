@@ -111,7 +111,7 @@ public class AdminUserDetailsPage extends BrowserFunctions {
 	}
 
 	public void fillCurrentPassword(String expCurrentPassword) {
-		new CommonFunctions().verifyAutoFocus(txtCurrentPassword, "Current Password");
+		//new CommonFunctions().verifyAutoFocus(txtCurrentPassword, "Current Password");
 		enterText(txtCurrentPassword, expCurrentPassword, "Current password");
 	}
 

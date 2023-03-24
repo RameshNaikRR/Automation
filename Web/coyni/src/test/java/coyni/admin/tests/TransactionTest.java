@@ -577,6 +577,7 @@ public class TransactionTest {
 						.fillCaseNumber(data.get("caseNumber"));
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickEndDate();
+				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.datePickerComponent().generateDate();
 				Thread.sleep(2000);
@@ -584,7 +585,7 @@ public class TransactionTest {
 						.clickStartDate();
 				Thread.sleep(2000);
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
-						.datePickerComponent().clickCustomDate(data.get("startDate"));
+						.datePickerComponent().clickCustomDate();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()
 						.clickReason();
 				sideBarComponent.transactionPage().filterComponent().transactionDetailsComponent().chargebackComponent()

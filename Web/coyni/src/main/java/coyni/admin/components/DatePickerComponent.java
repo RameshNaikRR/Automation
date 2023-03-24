@@ -72,9 +72,14 @@ public class DatePickerComponent extends BrowserFunctions {
 		LocalDateTime now = LocalDateTime.now();
 		return dtf.format(now);
 	}
-	public void clickCustomDate(String customDate) throws InterruptedException {
+	public String previousDay() {
+		LocalDate dt = LocalDate.now().minusDays(1);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
+		return formatter.format(dt);
+	}
+	public void clickCustomDate() throws InterruptedException {
 		
-		String date1 = customDate.replace("/", " ");
+		String date1 = previousDay();
 		System.out.println(date1);
 		long diff = this.getDateDifferenceInMonths(date1);
 		int day = this.getDay(date1);
@@ -88,7 +93,7 @@ public class DatePickerComponent extends BrowserFunctions {
 		Thread.sleep(2000);
 		dates.stream().filter(ele -> !ele.getText().equals("")).filter(ele -> Integer.parseInt(ele.getText()) == day)
 				.findFirst().ifPresent(WebElement::click);
-		System.out.println(customDate + " selected from Calendar");
+		System.out.println(previousDay() + " selected from Calendar");
 	}
 	
 
