@@ -24,15 +24,12 @@ public class EditandDeleteComponent extends BrowserFunctions {
 	}
 
 	public void clickEdit(String number) {
-		moveToElement(lblDebitCard, "Debit Card");
-		// moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)),
-		// "card");
-		click(btnEdit, "Edit");
-		// click(By.xpath(String
-		// .format("//p[contains(text(),'%s')]/following-sibling::button[contains(@class,
-		// 'icon-edit')]", number)),
-		// number);
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)), "card");
+		click(By.xpath(String
+				.format("//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-edit')]", number)),
+				number);
 		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
+
 	}
 
 	public void clickDelete(String number) {

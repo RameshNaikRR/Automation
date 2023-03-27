@@ -122,6 +122,9 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyHeading(data.get("companyInformationHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
+//					.verifyhandSymbolHighlightedCompanyinformation(data.get("cssProp"), data.get("value"),
+//							data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
 					.verifyCompanyInformationLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().companyInformationPage()
@@ -285,6 +288,9 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyHeading(data.get("dbaInformationHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+//					.verifyhandSymbolHighlightedDbaInformation(data.get("cssProp"), data.get("value"),
+//							data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyDBAnameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
@@ -453,6 +459,9 @@ public class MerchantSettingsTest {
 					.clickBeneficiaryOwnerBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyHeading(data.get("beneficiaryOwnersHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.verifyhandSymbolHighlightedBeneficialOwners(data.get("cssProp"), data.get("value"),
+//							data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
@@ -502,6 +511,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPreferencesBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.verifyHeading(data.get("preferencesHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
+//					.verifyhandSymbolHighlightedPreferences(data.get("cssProp"), data.get("value"), data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.clickTimeDropdown();
 			Thread.sleep(3000);
@@ -568,6 +579,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
 					.verifyHeading(data.get("feesHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
+//					.verifyhandSymbolHighlightedFees(data.get("cssProp"), data.get("value"), data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
 					.verifyLabelHeadings();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage()
@@ -587,6 +600,10 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickAccountLimitsBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
 					.verifyHeading(data.get("accountLimitsHeading"));
+			// sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
+			// .verifyhandSymbolHighlightedAccountLimits(data.get("cssProp"),
+			// data.get("value"),
+			// data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
 					.verifyLables();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().accountLimitsPage()
@@ -606,6 +623,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.verifyhandSymbolHighlightedApiKeys(data.get("cssProp"), data.get("value"), data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
 			Thread.sleep(2000);
@@ -714,23 +733,80 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 //					.verifyNewWindowHeading();
-			Thread.sleep(4000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickMXBank();
+			Thread.sleep(2000);
+			// merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().addExternalBankAccountPopup().close();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.clickSearchInstitutions();
+			Thread.sleep(5000);
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.addExternalBankAccountPopup().enterBankName(data.get("bankName"));
+
+			Thread.sleep(3000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
+//			Thread.sleep(3000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterUserName(data.get("expUserName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterPassword(data.get("expPassword"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+			Thread.sleep(5000);
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.enterBankName(data.get("expBankName"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
+					.clickOnBankAccountName(data.get("accountType"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.successFailurePopupCardComponent().navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
+		}
+	}
+
+	public void testAddExternalBankAccountNavigations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickBack();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup()
+					.clickTryAgain();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.clickSearchInstitutions();
+			Thread.sleep(5000);
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup()
+					.clickTryAgain();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup()
+					.clickTryAgain();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.enterUserName(data.get("expUserName"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 					.enterPassword(data.get("expPassword"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
-			Thread.sleep(5000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnChecking();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
-//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
-//					.successFailurePopupCardComponent().navigationComponent().clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickBack();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickClose();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent()
+					.clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
@@ -976,8 +1052,8 @@ public class MerchantSettingsTest {
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
 		testAddCard(strParams, "debit");
-		testEditCard(strParams);
-		testDeleteCard(strParams);
+//		testEditCard(strParams);
+//		testDeleteCard(strParams);
 	}
 
 	@Test

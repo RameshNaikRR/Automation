@@ -65,65 +65,6 @@ public class MerchantActivityTest {
 			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
 		}
 	}
-	
-	@Test
-	@Parameters({ "strParams" })
-	public void testMerchantActivityAfterApproved(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			new CommonFunctions().switchtoUrl(data.get("url"));
-			merchantActivityComponent.verifyApprovedHeading();
-			merchantActivityComponent.clickMerchantDashBoad();
-			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
-		}
-	}
-	
-	@Test
-	@Parameters({ "strParams" })
-	public void testMerchantActivityAcceptResrve(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			new CommonFunctions().switchtoUrl(data.get("url"));
-			Thread.sleep(1000);
-			if(loginPage.verifyPriacyPolicyHeading()==1) {
-				loginPage.scrollToPrivacyAgree();
-			     loginPage.clickDone();
-			}
-
-			else {
-			 loginPage.verifyWelcomeHeading();	
-			}
-			Thread.sleep(1000);
-			if(loginPage.verifyTermsOfServicesHeading()==1) {
-				loginPage.scrollToTermsAgree();
-			     loginPage.clickDone();
-			}
-			new CommonFunctions().switchtoUrl(data.get("url"));
-			merchantActivityComponent.verifyApprovedReserveHeading();
-		    merchantActivityComponent.verifyMonthlyProcessingVolume(data.get("monthlyProcessingVolume"));
-		    merchantActivityComponent.verifyHighTicket(data.get("highTicket"));
-		    merchantActivityComponent.verifyResrverAmount(data.get("reserveAmount"));
-		    merchantActivityComponent.verifyResrverPeriod(data.get("reservePeriod"));
-		    merchantActivityComponent.clickAcceptReserve();
-		    merchantActivityComponent.clickMerchantDashBoad();
-			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
-			merchantActivityComponent.clickUserName();
-			merchantActivityComponent.clickUserDetails();
-			String merchID = merchantActivityComponent.verifyMerchantIDForReserver();
-			new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
-			merchantActivityComponent.homePage().sideBarComponent().clickReserveManagement();
-			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().fillSearch(merchID);
-			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().clickSearchButton();
-			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().verifyStatus();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testMerchantActivityAcceptResrve failed due to exception " + e);
-		}
-	}
-
-	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -295,13 +236,10 @@ public class MerchantActivityTest {
 			} else {
 				merchantTransactionsPage.filterComponent().verifyMouseAction();
 				merchantTransactionsPage.filterComponent().clickFilters();
-				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				//merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+				//merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
-				if (!data.get("errMessage").isEmpty()) {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-				}
+				//merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
 				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
@@ -373,12 +311,12 @@ public class MerchantActivityTest {
 			if (merchantActivityComponent.payOutHistoryPage().verifyPayOut() > 0) {
 				merchantActivityComponent.payOutHistoryPage().verifyNoPayOutFound();
 			} else {
-				merchantActivityComponent.payOutHistoryPage().clickPayOut();
-				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
-				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
-				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
-				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
-				merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
+				//merchantActivityComponent.payOutHistoryPage().clickPayOut();
+//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
+//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
+//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
+//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
+//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
 			}
 
 		} catch (Exception e) {

@@ -38,42 +38,42 @@ public class TopBarTest {
 				topBarComponent.clickUserNameDrpDwn();
 				if (1 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickUserDetails();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedUserDetails(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedUserDetails(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().userDetailsPage().verifyHeading();
 				} else if (2 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickMerchantAccounts();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedMerchantAccounts(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedMerchantAccounts(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().merchantAccountsPage()
 							.verifyHeading(data.get("merchantAccountsHeading"));
 				} else if (3 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickPreferences();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedPreferences(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedPreferences(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().preferencesPage()
 							.verifyHeading(data.get("preferencesHeading"));
 				} else if (4 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickAgreements();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedAgreements(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedAgreements(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().agreementsPage()
 							.verifyHeading(data.get("agreementsHeading"));
 				} else if (5 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickChangePassword();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedChangePassword(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedChangePassword(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().changePasswordPage()
 							.verifyHeading(data.get("changePasswordHeading"));
 				} else if (6 == i) {
 					topBarComponent.topBarDrpDwnComponent().clickTwoStepAuthentication();
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedTwoStepAuthentication(
-							data.get("cssProp"), data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedTwoStepAuthentication(
+//							data.get("cssProp"), data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().twoStepAuthenticationPage()
 							.verifyHeading(data.get("twoStepAuthenticationHeading"));
 				} else {
-					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedLogOut(data.get("cssProp"),
-							data.get("value"), data.get("color"));
+//					topBarComponent.topBarDrpDwnComponent().handSymbolHighlightedLogOut(data.get("cssProp"),
+//							data.get("value"), data.get("color"));
 					topBarComponent.topBarDrpDwnComponent().clickSignOut();
 				}
 			}

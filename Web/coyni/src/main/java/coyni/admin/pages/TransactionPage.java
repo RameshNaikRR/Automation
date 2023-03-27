@@ -12,7 +12,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TransactionPage extends BrowserFunctions {
 
 	private By headingTransactionList = By.xpath("//span[text()='Transaction List ']");
-	
+
 	private By lblHeading = By.xpath("(//span[text()='Transactions'])[2]");
 
 	private By lblToken = By.xpath("//div[text()='Token']");
@@ -43,8 +43,7 @@ public class TransactionPage extends BrowserFunctions {
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingTransactionList, "Transaction Heading", expHeading);
 	}
-	
-	
+
 	public void verifyTransaction() {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transactions", "Transactions");
 	}
@@ -105,6 +104,7 @@ public class TransactionPage extends BrowserFunctions {
 	public PaginationAndEntriesComponent paginationAndEntriesComponent() {
 		return new PaginationAndEntriesComponent();
 	}
+
 	public TransactionDetailsComponent transactionDetailsComponent() {
 		return new TransactionDetailsComponent();
 	}
@@ -112,14 +112,22 @@ public class TransactionPage extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
-	private By txtSearch=By.cssSelector(".form-input");
-	private By btnSearch=By.xpath("//button[@class='icon-search']");
+
+	private By txtSearch = By.cssSelector(".form-input");
+	private By btnSearch = By.xpath("//button[@class='icon-search']");
+
 	public void clickSearch() {
 		click(btnSearch, "");
 	}
-	
+
+	public String copyDataToClipBoard() {
+		String str = getCopiedData();
+		return str;
+
+	}
+
 	public void fillSearch(String text) {
-		click(txtSearch,"");
-		enterText(txtSearch, text,"Search Data");
+		click(txtSearch, "");
+		enterText(txtSearch, text, "Search Data");
 	}
 }

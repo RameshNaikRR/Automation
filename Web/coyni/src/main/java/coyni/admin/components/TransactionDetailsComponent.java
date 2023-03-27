@@ -10,11 +10,17 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By lblHeadingTransactionDetails = By.cssSelector(".text");
 
+	private By record = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
+
 	private By lblLedgerInformation = By.xpath("//span[text()='Ledger Information']");
 
 	private By lblSenderInformation = By.xpath("//span[text()='Sender Information']");
 
 	private By lblMessageFromSender = By.xpath("");
+
+	private By lblNoTransaction = By.xpath("//span[text()='No Transactions Found']");
+
+	private By lblTrabsactionDetails = By.className("cell-col-0");
 
 	private By headingRecipientInformation = By.xpath("//span[text()='Recipient Information']");
 
@@ -23,6 +29,11 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By headingBankAccountInformation = By.xpath("//span[text()='Bank Account Information']");// Card Information
 
 	private By headingCardInformation = By.xpath("//span[text()='Card Information']");
+
+	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__SXaMW')]");
+	private By giftCardAmount = By
+			.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__LER5V')])[3]");
+	private By lblNoDataFound = By.xpath("//span[text()='No Filter Data Found']");
 
 	private By lblCompleted = By.xpath("(//div[text()='Completed'])[1]");
 	private By lblAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value')]");
@@ -37,23 +48,23 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By getBuyTokenData(String index) {
 		return By.xpath(String.format("(//tr[@class=' ']//td)[%s]", index));
 	}
-	private By TDetailsAmount = By.xpath("//p[contains(@class,' TransactionDetailBuyToken_value_blue__SXaMW')]");
-	private By giftCardAmount = By.xpath("(//p[contains(@class,'TransactionDetailInstantPay_value_blue_clr__LER5V')])[3]");
-	private By lblNoDataFound = By.xpath("//span[text()='No Filter Data Found']");
-	
-	
+
+	public void clickOnRecord() {
+		click(record, "Record");
+	}
+
 	public String amount() {
 		String text = getText(TDetailsAmount, "");
-	return	text.replaceAll("[A-Z ]", "");
+		return text.replaceAll("[A-Z ]", "");
 	}
 
 	public String verifyBuyTokenType() {
 		return getText(getBuyTokenData("3"), "");
 	}
+
 	public int noDataFound() {
 		return getElementsList(lblNoDataFound, "No Data Found").size();
 	}
-
 
 	public String verifyBuyTokenDescription() {
 		return getText(getBuyTokenData("5"), "");
@@ -62,31 +73,32 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public String verifyBuyTokenAmount() {
 		return getText(getBuyTokenData("6"), "");
 	}
-	
+
 	public String verifyWithDrawSubType() {
 		return getText(getBuyTokenData("4"), "");
 	}
+
 	public String verifyWithdrawDescription() {
 		return getText(getBuyTokenData("5"), "");
 	}
+
 	public String verifyWithdrawAmount() {
 		return getText(getBuyTokenData("6"), "");
 	}
+
 	public String giftCardAmount() {
 		String text = getText(giftCardAmount, "");
-	return	text.replaceAll("[A-Z ]", "");
+		return text.replaceAll("[A-Z ]", "");
 	}
-	
 
 	public void clickCompleted() {
-		if(getElementsList(lblCompleted,"lblCompleted").size()>0) {
-		click(lblCompleted, "Completed");
-		}
-		else {
+		if (getElementsList(lblCompleted, "lblCompleted").size() > 0) {
+			click(lblCompleted, "Completed");
+		} else {
 			ExtentTestManager.setPassMessageInReport("No Filter Data Found");
 		}
 	}
-	
+
 	public By getLabelItem(String Type) {
 		return By.xpath(String.format(
 				"//p[text()='%s']/following-sibling::div[1]/p  | //p[text()='%s']//following-sibling::span | //p[text()='%s']//following-sibling::p",
@@ -97,7 +109,6 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(headingCardInformation, "card Information", expHeading);
 	}
 
-	
 	public void verifyRecipientInformation(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingRecipientInformation, "Recipient Information", expHeading);
 	}
@@ -276,13 +287,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	public ChargebackComponent chargebackComponent() {
 		return new ChargebackComponent();
 	}
-	private By lblNoTransaction = By.xpath("//span[text()='No Transactions Found']");
 
 	public int getSize() {
 		return getElementsList(lblNoTransaction, "").size();
 	}
-
-	private By lblTrabsactionDetails = By.className("cell-col-0");
 
 	public void clickDetails() {
 		click(lblTrabsactionDetails, "Transaction Details");

@@ -16,7 +16,7 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 	CommonFunctions cf = new CommonFunctions();
 	private By giftCardHeading = By.xpath("//h1[text()='Gift Card Purchase']");
 	private By lblDescription = By.xpath("//span[.='Select Your Gift Card:']");
-	private By txtSearch = By.xpath("//input[@placeholder='Search By Keyword']");
+	private By txtSearch = By.className("Input_form_input__yl3pD");
 	private By GiftCards = By.xpath("//div[@class='gift-card-list-item__wrapper']");
 	private By lblEntries = By.xpath("(//span[contains(@class,'entries-message')])[2]");
 	private By lblPagenator = By.xpath("(//ul[@class='paginator__pagination'])[2]");
@@ -42,6 +42,10 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 
 	public void clickDone() {
 		click(btnDone, "Done");
+	}
+
+	public void switchToAdmin(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
 	}
 
 	public void enterSearckey(String searchKey) throws InterruptedException {

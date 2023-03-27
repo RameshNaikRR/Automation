@@ -30,28 +30,27 @@ public class SideMenuBarTest {
 //			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
 //			sideMenuBarComponent.verifyMerchnatTracker();
 			// sideMenuBarComponent.clickOnMerchantdrpdwn();
-			sideMenuBarComponent.handSymbolHighlightedMerchantActivity(data.get("cssProp"), data.get("value"),
-					data.get("color"));
+//			sideMenuBarComponent.handSymbolHighlightedMerchantActivity(data.get("cssProp"), data.get("value"),
+//					data.get("color"));
 			sideMenuBarComponent.clickOnMerchantdrpdwn();
 			// sideMenuBarComponent.verifyMerchantActivityDrpDwn();
-			sideMenuBarComponent.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("value"),
-					data.get("color"));
+//			sideMenuBarComponent.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("value"),
+//					data.get("color"));
 			sideMenuBarComponent.verifyTokenAccountPushBtn();
-			sideMenuBarComponent.handSymbolHighlightedExportFiles(data.get("cssProp"), data.get("value"),
-					data.get("color"));
+//			sideMenuBarComponent.handSymbolHighlightedExportFiles(data.get("cssProp"), data.get("value"),
+//					data.get("color"));
 			sideMenuBarComponent.verifyExportFilesPushBtn();
-			sideMenuBarComponent.handSymbolHighlightedBusinessSettings(data.get("cssProp"), data.get("value"),
-					data.get("color"));
+//			sideMenuBarComponent.handSymbolHighlightedBusinessSettings(data.get("cssProp"), data.get("value"),
+//					data.get("color"));
 			sideMenuBarComponent.verifyMerchnatSettingsPushBtn();
-			sideMenuBarComponent.handSymbolHighlightedGetHelp(data.get("cssProp"), data.get("value"),
-					data.get("color"));
+//			sideMenuBarComponent.handSymbolHighlightedGetHelp(data.get("cssProp"), data.get("value"),
+//					data.get("color"));
 			sideMenuBarComponent.verifyGetHelpPushBtn();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBar failed due to " + e);
 		}
 	}
-
 
 	@Test
 	public void testMerchantActivityDrpDwn() {

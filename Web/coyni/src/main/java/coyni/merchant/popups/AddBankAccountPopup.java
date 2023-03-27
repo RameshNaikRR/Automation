@@ -36,7 +36,11 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnStart = By.xpath("//button[contains(text(),'Start')]");
 	private By btnSearchInstitutions = By.xpath("//button[contains(text(),'Search more institutions')]");
 	private By btnMXBank = By.xpath("//div[contains(@class,'kyper-utilityrow-base-left')]");
-	private By btnChecking = By.xpath("//span[contains(text(),'Checking')]");
+	private By btnChecking = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[1]");
+	private By btnSaving = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[2]");
+	private By btnClose = By.xpath("//button[@class='self-end']");
+	private By iframe = By.cssSelector("#iframe");
+	private By btnMxBankk = By.xpath("(//span[contains(text(),'MX Bank')])[1]");
 
 	public void clickMXBank() {
 		click(btnMXBank, "Mx Bank");
@@ -51,6 +55,22 @@ public class AddBankAccountPopup extends BrowserFunctions {
 
 	}
 
+	public void clickOnMxBank() {
+		switchToFrame(iframe, "iframe");
+		click(btnMxBankk, "Mx Bank");
+		switchToParentFrame();
+	}
+
+	public void clickOnBankAccountName(String AccountType) {
+		switchToFrame(iframe, "frame");
+		if (AccountType.equalsIgnoreCase("Checking")) {
+			click(btnChecking, "Checking");
+		}
+
+		else if (AccountType.equalsIgnoreCase("Savings")) {
+			click(btnSaving, "Savings");
+		}
+	}
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "");
@@ -143,6 +163,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void clickOnBankName() {
+		switchToFrame(iframe, "frame");
 		click(lnkBankName, "Bank Name");
 	}
 
@@ -191,6 +212,10 @@ public class AddBankAccountPopup extends BrowserFunctions {
 
 	public BankAccountAddedPopup bankAccountAddedPopup() {
 		return new BankAccountAddedPopup();
+	}
+
+	public SessionCancelledPopup sessionCancelledPopup() {
+		return new SessionCancelledPopup();
 	}
 
 	public NavigationComponent navigationComponent() {

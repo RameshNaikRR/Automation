@@ -32,13 +32,13 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By btnDBA = By.xpath("//p[contains(text(),'New Merchant / DBA')]");
 	private By personalAccount = By.xpath("//div[@class='UserNameDropDown_userName__oCwHu']");
 	private By btnPersonalAccount = By.xpath("//p[text()='Add Personal Account']");
-	private By btnMerchantAccount = By.xpath("(//div[@class='UserNameDropDown_image__jUgDC bg-cm3'])[2]");
+	private By btnMerchantAccount = By.xpath("//button[contains(@class,'UserNameDropDown_dba__WtKbr')]");
 	private By btnPersonalDropDown = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__YA3Vr')]");
 	private By sharedDropDown = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
 	private By sharedDropsDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
-	private By merchantDropDown = By.xpath("//span[@class='UserNameDropDown_title__RKKVD']");
+	private By merchantDropDown = By.xpath("//button[contains(@class,'UserNameDropDown_header__y-U81')]");
 	private By btnMerchantDropDown = By.xpath("(//div[contains(@class,'icon-small-arrow')])[2]");
-	private By btnsharedAccount = By.xpath("//div[contains(@class,'UserNameDropDown_arrowDown__1VWOu')]");
+	private By btnsharedAccount = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");

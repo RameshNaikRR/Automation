@@ -51,7 +51,31 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminLoginTransactions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyPageHeading(data.get("loginHeading1"));
+			loginPage.verifyPageDescription(data.get("loginDescription1"));
+			loginPage.fillEmail(data.get("email2"));
+			loginPage.fillPassword(data.get("password1"));
+			loginPage.clickNext();
+			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading1"));
+			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription1"));
+			if (data.get("securityKey1").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey1"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey1"));
+			}
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantTOAdminLogin(String strParams) {
@@ -75,7 +99,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminLoginWithSmsOtpAndNavigation(String strParams) {
@@ -177,22 +201,22 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
-			loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			;
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
 			}
-           Thread.sleep(2000);
+			Thread.sleep(2000);
 			loginPage.authyComponent().verifyLoginWithInvalidPin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Authy failed due to this exception " + e);
 		}
 	}
 
-	
-	//sanity test cases
-	
+	// sanity test cases
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginWithForgotEmailAndForgotPassword(String strParams) {
@@ -367,7 +391,7 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot email with invalid phone number test failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotEmailWithInvalidAuthy(String strParams) {
@@ -390,13 +414,13 @@ public class LoginTest {
 					.verifyPhoneHeading(data.get("phoneEmailVerificationHeading"));
 			loginPage.forgotEmailPage().forgotEmailNamePage().phoneEmailVerificationComponent()
 					.verifyPageDescription(data.get("phoneEmailVerificationDescription"));
-	        loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			;
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
 			}
-			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
@@ -491,6 +515,7 @@ public class LoginTest {
 		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testForgotPasswordWithInvalidAuthy(String strParams) {
@@ -502,21 +527,21 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
 			loginPage.forgotPasswordPage().clickOutSide();
 			loginPage.forgotPasswordPage().clickNext();
-			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().verifyPageHeading(data.get("emailHeading"));
-	        loginPage.forgotPasswordPage().phoneEmailVerificationComponent().getEmailDescription();
-	        loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"),data.get("char"));;
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent()
+					.verifyPageHeading(data.get("emailHeading"));
+			loginPage.forgotPasswordPage().phoneEmailVerificationComponent().getEmailDescription();
+			loginPage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+			;
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
 				new CommonFunctions().verifyOTPBorderColor(data.get("otpColor"), "Otp Border colour");
 			}
-			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Forgot Email test failed due to exception " + e);
 		}
 	}
-	
 
 	@Test
 	@Parameters({ "strParams" })

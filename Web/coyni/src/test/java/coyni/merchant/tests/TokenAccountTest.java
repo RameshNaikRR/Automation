@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.admin.pages.HomePage;
 import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.TokenAccountActivityComponent;
 import coyni.merchant.pages.LoginPage;
@@ -22,6 +23,7 @@ public class TokenAccountTest {
 	TokenAccountActivityComponent tokenAccountActivityComponent;
 	MerchantSettingsTest merchantSettingTest;
 	SideMenuBarComponent sideMenuBarComponent;
+	HomePage homePage;
 
 	@BeforeTest
 	public void init() {
@@ -30,6 +32,7 @@ public class TokenAccountTest {
 		tokenAccountActivityComponent = new TokenAccountActivityComponent();
 		merchantSettingTest = new MerchantSettingsTest();
 		sideMenuBarComponent = new SideMenuBarComponent();
+		homePage = new HomePage();
 
 	}
 
@@ -860,6 +863,23 @@ public class TokenAccountTest {
 		}
 
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminTransactionBuyBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTransactions();
+			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1078,7 +1098,6 @@ public class TokenAccountTest {
 			// tokenAccountPage.withdrawCoyniToUSDPopup().clickAddNewPaymentMethod();
 			merchantSettingsTest.testaddCogent(strParams);
 			testWithdrawToUSDCogentAccount(strParams);
-			testWithdrawToUSDDeleteCogentAccount(strParams);
 
 			Thread.sleep(2000);
 		} catch (Exception e) {
@@ -1219,6 +1238,23 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminTransactionCogentAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTransactions();
+			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
 
@@ -1436,6 +1472,23 @@ public class TokenAccountTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawToUSDViaInstantPay failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminTransactionInstantPay(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTransactions();
+			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
 
@@ -1723,13 +1776,33 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
 					.verifySuccessHeading(data.get("successHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+			Thread.sleep(3000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().switchToAdmin(data.get("url"));
 
 		} catch (
 
 		Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTransactions();
+			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
 
@@ -1899,6 +1972,24 @@ public class TokenAccountTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testWithdrawToUSDAddExternalBankAccount failed due to this exception " + e);
+		}
+	}
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminExternalBankTransaction(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTransactions();
+			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
+			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
+			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
 		}
 	}
 

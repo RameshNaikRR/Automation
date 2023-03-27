@@ -15,7 +15,7 @@ public class ReserveHistoryPage extends BrowserFunctions {
 
 	private By btnAllStatuses = By.xpath("//p[text()='All Statuses']");
 
-	private By reserveHistory = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(2)");
+	private By reserveHistory = By.cssSelector("tbody>tr:nth-of-type(7)>td:nth-of-type(2)");
 
 	private By btnOpen = By.xpath("//p[text()='Open']");
 

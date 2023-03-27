@@ -1,6 +1,9 @@
 package coyni.merchant.components;
 
 import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 
 import coyni.merchant.pages.LoginPage;
@@ -87,7 +90,25 @@ public class ForgotEmailComponent extends BrowserFunctions {
 		}
 	}
 
-	public void fillFirstName(String firstName){
+	public void firstName(String firstName) throws Exception {
+		enterText(txtFirstName, firstName, "firstName");
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_SPACE);
+		robot.keyRelease(KeyEvent.VK_SPACE);
+		clickTab();
+
+	}
+	
+	public void lastName(String lastName) throws Exception {
+		enterText(txtLastName, lastName, "lastName");
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_SPACE);
+		robot.keyRelease(KeyEvent.VK_SPACE);
+		clickTab();
+
+	}
+
+	public void fillFirstName(String firstName) {
 		enterText(txtFirstName, firstName, "firstName");
 		click(txtLastName, "Last Name");
 	}
