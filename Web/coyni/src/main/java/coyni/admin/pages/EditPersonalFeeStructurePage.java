@@ -148,7 +148,6 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 
 	public void editSaleOrderEcommereAmount(String data) throws InterruptedException {
 		click(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
-
 		clearText(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
 		enterText(editSaleOrderEcommereAmount, data, "SaleOrderEcommereAmount");
 	}

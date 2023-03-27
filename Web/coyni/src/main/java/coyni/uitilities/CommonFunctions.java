@@ -73,7 +73,10 @@ public class CommonFunctions {
 	}
 
 	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
-		By errorMsgs = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");//By.cssSelector("span.text-crd5 | span.text-crd2");
+		By errorMsgs = By
+				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
+		// |
+		// span.text-crd2");
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
@@ -122,15 +125,15 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("Text field border not changed to red colour");
 		}
 	}
-	
-	public void verifyOTPBorderColor(String expcolour,String eleName) {	
+
+	public void verifyOTPBorderColor(String expcolour, String eleName) {
 		By txterror = By.cssSelector("input[class *='verification-input error ']");
 		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
 		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
 		ExtentTestManager.setInfoMessageInReport(value);
 
 		if (value.equalsIgnoreCase(expcolour)) {
-			ExtentTestManager.setPassMessageInReport(eleName +" changed to red colour");
+			ExtentTestManager.setPassMessageInReport(eleName + " changed to red colour");
 		} else {
 			ExtentTestManager.setFailMessageInReport(" not changed to red colour");
 		}
@@ -184,7 +187,9 @@ public class CommonFunctions {
 	}
 
 	public void validateFormErrorMessage(String expErrMsg) {
-		By errorMsgs = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");	;
+		By errorMsgs = By
+				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");
+		;
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
 		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
 				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
@@ -377,10 +382,8 @@ public class CommonFunctions {
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
-
-
 	public void switchtoUrl(String url) throws InterruptedException {
-		
+
 		DriverFactory.getDriver().navigate().to(url);
 		Thread.sleep(4000);
 
@@ -430,20 +433,20 @@ public class CommonFunctions {
 	public void swtichToNewtabUrl(String Url) {
 		WebDriver driver = DriverFactory.getDriver();
 		try {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.open(Url)");
-		ExtentTestManager.setPassMessageInReport(Url + "Url Launched");} 
-		catch (Throwable e) {
-		ExtentTestManager.setFailMessageInReport(e + "launching yopmail site is failed");}
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.open(Url)");
+			ExtentTestManager.setPassMessageInReport(Url + "Url Launched");
+		} catch (Throwable e) {
+			ExtentTestManager.setFailMessageInReport(e + "launching yopmail site is failed");
+		}
 	}
-	
+
 	public void scrollToHorizontal() {
 		try {
-		JavascriptExecutor jse = (JavascriptExecutor) DriverFactory.getDriver();
-		jse.executeScript("window.scrollBy(250,0)", "Scrolled Horizontally");
-		ExtentTestManager.setPassMessageInReport("Scrolled Horizontally");
-		}
-		catch(Exception e) {
+			JavascriptExecutor jse = (JavascriptExecutor) DriverFactory.getDriver();
+			jse.executeScript("window.scrollBy(250,0)", "Scrolled Horizontally");
+			ExtentTestManager.setPassMessageInReport("Scrolled Horizontally");
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Not Scrolled Horizontally");
 		}
 	}

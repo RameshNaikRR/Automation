@@ -124,7 +124,7 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickBalanceReports() throws InterruptedException {
-		commonfunctions.verifyCursorAction(getSideBarItems("Balance Reports"), "Balance Reports");
+		//commonfunctions.verifyCursorAction(getSideBarItems("Balance Reports"), "Balance Reports");
 		click(getSideBarItems("Balance Reports"), "Balance Reports");
 		Thread.sleep(4000);
 	}

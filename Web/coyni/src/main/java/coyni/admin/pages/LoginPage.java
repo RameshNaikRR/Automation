@@ -24,7 +24,7 @@ public class LoginPage extends BrowserFunctions {
 	private By lnkForgotEmail = By.xpath("//button[.='Forgot Email?']");
 	private By lnkForgotPassword = By.xpath("//button[.='Forgot Password?']");
 	private By lnkSignUp = By.xpath("//button[text()='Sign Up']");
-	private By btnSms = By.xpath("//button[contains(@class,'text-x')]");
+	private By btnSms = By.xpath("//div[contains(@class,'text-x')]");
 	private By btnResendVerification = By.xpath("//button[contains(@class,'text-cm3 hover:underline mt')]");
 	private By btnNewVerification = By.xpath("//div[contains(@class,'text-cgn')]");
 
