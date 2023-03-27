@@ -28,6 +28,27 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	private By lblCaseStatus = By.xpath("(//tr[@class='  businessRow mb-0']//td)[5]");
 	private By lblMerchantDueDate = By.xpath("//div[contains(@class,'font-semibold BusinessUsers_dueFont__j4wD5')]");
 	private By btnPending = By.xpath("//button//div[contains(text(),'Pending')]");
+	private By btnFilter = By.xpath("//button[text()='Filter']");
+	private By txtMerchantName = By.xpath("//input[@name='businessName']");
+	private By btnDecline = By.xpath("//div[contains(text(),'Declined')]");
+	private By txtMerchantId = By.xpath("//input[@name='businessId']");
+	
+	
+	public void clickFilter() {
+		click(btnFilter, "Filter");
+	}
+	
+	public void fillMerchantName(String merchantName) {
+		enterText(txtMerchantName, merchantName, "Merchant Name");
+	}
+	
+	public void fillMerchantId(String merchanID) {
+		enterText(txtMerchantId, merchanID, "Merchant ID");
+	}
+	
+	public void clickDecline() {
+		click(btnDecline, "Decline");
+	}
 	
 	public void verifyHeading() {
 		new CommonFunctions().elementView(lblHeading, "Heading");

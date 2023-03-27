@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.admin.popups.AddAdditionalDocumentsPopup;
 import coyni.admin.popups.ApproveCasePopup;
+import coyni.admin.popups.DeclineCasePopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -29,9 +30,9 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	private By headingDriversLicence = By.xpath("//span[contains(text(),'DRIVERS_LICENSE')]");
 	private By btnDownloadPDF = By.xpath("//button[contains(text(),'Download PDF')]");
 	private By btnClose = By.xpath("//div[contains(@class,'icon-close')]");
-	private By lblStatus = By.xpath("//div[contains(@class,'PersonalCaseIdDetails_chipStyle')]//div");
+	private By lblStatus = By.xpath("//div[contains(@class,'CaseIdDetails_chipStyle')]//div");
 	private By btnAssignePlus = By.xpath("//div[contains(@class,'MultiSelectAsignee_plus')]");
-	private By btnAprrove = By.xpath("//span[text()='Approve']");
+	private By btnAprrove = By.xpath("//button[text()='Approve']");
 	private By lblDate = By.xpath("//span[contains(text(),'Timestamp')]/following-sibling::span");
 	private By lblMerchantDate = By.xpath("//p[contains(@class,'font-bold text-cgy4 ')]");
 	private By lblDueDate = By.xpath("//p[contains(text(),'@ ')]"); 
@@ -53,6 +54,20 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
     private By txtcaseID = By.xpath("//input[@name='caseId']");
     private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
     private By lblPending = By.xpath("//div[text()='Pending']");
+    private By lblCheckListStatus = By.xpath("//p[text()='Updated']");
+    private By btnDownloadChcklst = By.xpath("//div[@data-tip='Download']");
+    private By btnAccept = By.xpath("(//div[contains(@class,' CaseIdDetails_acceptIcon')]//img)[1]");
+    private By lblFinalStatus = By.xpath("//p[text()='Closed']");
+    private By btnDecline = By.xpath("//button[text()='Decline']");
+    private By drpdwnChooseReason = By.xpath("//div[contains(@class,'FormField_selected_option')]");
+    
+    public void clickDropDown() {
+    	click(drpdwnChooseReason, "Choose a reason");
+    }
+    
+    public void clickDecline() {
+    	click(btnDecline, "Declline");
+    }
     
 	public String verifyDate() {
 		String str = getText(lblDate, "Date");
@@ -179,6 +194,16 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
         return str4;  	
 	}
 	
+	public String verifyMerchantIDForReserve() {
+		String str = getText(txtMerchantAccountID, "CaseIDNumber");
+		String str1 = str.replaceAll("[a-zA-Z]", "");
+        String str2 = str1.replaceAll(":", "");
+        String str3 = str2.replaceAll(" ", "");
+        String str4 = str3.replaceAll("-", "");
+		ExtentTestManager.setInfoMessageInReport("Case ID Number is "+ str4);
+        return str4;  	
+	}
+	
 	
 	public void verifyDownloadDriversLicense() throws InterruptedException {
 		click(btnDriversLicense, "DriversLicence");
@@ -195,6 +220,11 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	 String str = getText(lblStatus, "Status");
 	 ExtentTestManager.setInfoMessageInReport("the status is "+ str);
       return str;      
+	}
+	
+	public void verifyFinalStatus() {
+		String str = getText(lblFinalStatus, "Status");
+		ExtentTestManager.setInfoMessageInReport("The final case status is " + str);
 	}
 	
 	public void clickAssignee() {
@@ -260,6 +290,15 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		click(btnSend, "Send");
 		}
 	
+	public void verifyCheckListStatus() {
+		String str = getText(lblCheckListStatus, "");
+		ExtentTestManager.setInfoMessageInReport("The Required Chcek List Status is" + str);
+	}
+	
+	public void clickDownloadCheckList() {
+		click(btnDownloadChcklst, "Download");
+	}
+	
 	public void clickUnderWritingsMerchant() {
 		click(btnUnderwritingsMerchant, "UnderWritings Merchant");
 	}
@@ -288,5 +327,14 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 		verifyElementDisplayed(lblPending, "Pending");
 		ExtentTestManager.setInfoMessageInReport("The Status is Pending");
 	}
+	
+	public void clickAccept() {
+		click(btnAccept, "Green Accept Tick");
+	}
+	
+	public DeclineCasePopup declineCasePopup() {
+		return new DeclineCasePopup();
+	}
+	
 
 }

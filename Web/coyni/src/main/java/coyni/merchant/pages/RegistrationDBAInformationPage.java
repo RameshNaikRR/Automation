@@ -25,7 +25,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By drpdwnBusinessType = By.xpath("//div[text()='Business Type']/following-sibling::div");
 	private By radBtnRetailLocation = By.xpath("//span[text()='Retail Location']/..");
 	private By radBtneCommerce = By.xpath("//span[text()='eCommerce']/..");
-	private By txtCompanyEmail = By.cssSelector("#email");
+	private By txtCompanyEmail = By.xpath("(//input[@name='email'])[2]");
 	private By txtphoneNumber = By.cssSelector("#phone-number");
 	private By txtWebsite = By.cssSelector("#website");
 	private By txtMonthlyProcessingVolume = By.cssSelector("#monthly-processing-volume");
@@ -42,7 +42,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	}
 
 	public void fillCompanyEmail(String companyName) throws InterruptedException {
-		clearText(txtCompanyEmail, "Company Email");
+		//clearText(txtCompanyEmail, "Company Email");
 		enterText(txtCompanyEmail, companyName, "Company Name");
 	}
 

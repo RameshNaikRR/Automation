@@ -51,6 +51,31 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantTOAdminLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			/*
+			 * loginPage.verifyPageHeading(data.get("loginHeading")); //
+			 * loginPage.verifyPageDescription(data.get("loginDescription"));
+			 * loginPage.fillEmail(data.get("email"));
+			 * loginPage.fillPassword(data.get("password")); loginPage.clickNext();
+			 * loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
+			 * loginPage.authyComponent().verifyPageDescription(data.get("authyDescription")
+			 * ); if (data.get("securityKey").equalsIgnoreCase("123456")) {
+			 * loginPage.authyComponent().fillInput(data.get("securityKey")); } else {
+			 * loginPage.authyComponent().fillAuthyInput(data.get("securityKey")); }
+			 * Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			 */
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminLoginWithSmsOtpAndNavigation(String strParams) {

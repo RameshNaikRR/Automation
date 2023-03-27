@@ -429,6 +429,12 @@ public class CommonFunctions {
 		}
 
 	}
+	
+	
+	public void switchToAdmin() {
+		objBrowserFunctions.switchToMainPage();
+	}
+	
 
 	public void swtichToNewtabUrl(String Url) {
 		WebDriver driver = DriverFactory.getDriver();
@@ -450,5 +456,11 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("Not Scrolled Horizontally");
 		}
 	}
+	
+	public void closeCurrentWindow() {
+		DriverFactory.getDriver().close();
+		ExtentTestManager.setInfoMessageInReport("The Current Window is closed");
+	}
+	
 
 }

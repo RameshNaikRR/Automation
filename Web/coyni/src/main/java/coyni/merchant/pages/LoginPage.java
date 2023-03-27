@@ -49,13 +49,22 @@ public class LoginPage extends BrowserFunctions {
 	private By PDFtermsOfServices = By.xpath("(//span[.='Agreement'])[1]");
 	private By PDFprivacyPolicy = By.xpath("((//span[.='']))[1]");
 	private By privacyPolicyUpdate = By.xpath("//span[contains(text(),'Privacy Policy')]");
+	private By termsOFServicesUpdate = By.xpath("//span[contains(text(),'Terms of Service')]");
 	private By merchantAgreementUpdate = By.xpath("//span[contains(text(),'Merchant Agreement')]");
 	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
 	private By btnAgree = By.xpath("//button[contains(text(),'Agree')]");
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By termsOfServicePDF = By.xpath("//div[contains(@class,'AgreementModal_pdfSize__yrzAs')]");
 	private By termsOfmerchantPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
-
+	private By lblPrivacyPolicy = By.xpath("//div[contains(text(),'Privacy Policy')]");
+    private By pdfPrivacyUpdate = By.xpath("//div[contains(@class,'AgreementModal_apiData')]");
+	private By lblAdditionalDocument = By.xpath("//h1[contains(text(),'Merchant Application Additional Documentation')]");
+	private By lblWelcome = By.xpath("//span[contains(text(),'Welcome to ')]");
+	
+	public void clickCheckBox() {
+		click(checkbox, "Check Box");
+	}
+    
 	public void fillEmail(String userName) {
 		enterText(txtEmail, userName, "Email");
 	}
@@ -241,7 +250,82 @@ public class LoginPage extends BrowserFunctions {
 		clickAgree();
 		clickDone();
 	}
-
+	
+	public int verifyPriacyPolicyHeading() {
+		int z = getElementsList(privacyPolicyUpdate, "").size();
+		return z;
+	}
+	
+	public int verifyTermsOfServicesHeading() {
+		int z = getElementsList(termsOFServicesUpdate, "").size();
+		return z;
+	}
+	
+	public void verifyAdditionsalDocumentHeading(String additionalHeading) {
+		new CommonFunctions().verifyLabelText(lblAdditionalDocument, "Additonal Document Heading", additionalHeading);
+	}
+	
+	public void scrollPrivacyPolicyPdf() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblPrivacyPolicy));
+		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+	    int noOFPages = list.size();
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    WebElement element = getElement(checkbox, "");
+	    while(!element.isEnabled()) {
+	    	js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+	    	height += temp;
+	    	Thread.sleep(200);
+	    }
+	    clickAgree();
+	    clickDone();
+	
+	}
+	
+	public void scrollToPrivacyAgree() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblPrivacyPolicy));
+		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+	    int noOFPages = list.size();
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    WebElement element = getElement(checkbox, "");
+	    while(!element.isEnabled()) {
+	    	js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+	    	height += temp;
+	    	Thread.sleep(200);
+	    }
+	    clickCheckBox();
+	    clickAgree();
+	    
+	}
+	
+	public void scrollToTermsAgree() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfmerchantPDF));
+		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+	    int noOFPages = list.size();
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    WebElement element = getElement(checkbox, "");
+	    while(!element.isEnabled()) {
+	    	js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+	    	height += temp;
+	    	Thread.sleep(200);
+	    }
+	    clickCheckBox();
+	    clickAgree();
+	    
+	}
+	public void verifyWelcomeHeading() {
+		String str = getText(lblWelcome, "");
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+	
 	public void clickTab() throws AWTException {
 		new CommonFunctions().clickOutSideElement();
 	}

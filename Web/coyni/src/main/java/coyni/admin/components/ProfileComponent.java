@@ -10,10 +10,10 @@ public class ProfileComponent extends BrowserFunctions {
 
 	private By lblPersonalHeading = By.xpath("//span[contains(text(),'Personal')]");
 	private By lblCoyniEmployeesHeading = By.xpath("//span[contains(text(),'coyni Employees')]");
-	private By txtSearch = By.xpath("//input[contains(@class,'search-bar')]");
+	private By txtSearch = By.xpath("//input[contains(@class,'search_bar')]");
 	private By btnFilter = By.cssSelector("//div[@class='flex flex-row mr-5']");
 	private By btnExport = By.cssSelector("");
-	private By btnSearchIcon = By.cssSelector(".icon-search");
+	private By btnSearchIcon = By.xpath("//button[@class='icon-search']");
 	private By btnNewEmployee = By.xpath("//button[.='New Employee']");
 	private By lblSearchBar = By.xpath("//input[@placeholder='Search by Name, Email, or Phone']");
 	private By lblSearchIcon = By.xpath("//button[@class='icon-search']");

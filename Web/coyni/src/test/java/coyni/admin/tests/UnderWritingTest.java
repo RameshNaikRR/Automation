@@ -147,6 +147,8 @@ public class UnderWritingTest {
 	@Parameters({ "strParams" })
 	public void testAssigneLogin(String strParams) {
 		try {
+			
+			Thread.sleep(2000);
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			// new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
 			loginPage.verifyPageHeading(data.get("loginHeading"));
@@ -196,43 +198,243 @@ public class UnderWritingTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-
+	
 	@Test
 	@Parameters({ "strParams" })
-	public void testAssigneDirectApprove(String strParams) {
+	public void testAssigneApproveAfterVerifyCheckList(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickUnderWriting();
-			homePage.sideBarComponent().clickPersonal();
-			homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
+			homePage.sideBarComponent().clickuderMerchant();
+			//homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
 
 			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
-			String str = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.verifyCaseIDNumber();
+			/*
+			 * String str = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyCaseIDNumber();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .clickApprove();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyDescription();
+			 * String str1 = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyCaseNumber(); if
+			 * (str.equals(str1)) {
+			 * ExtentTestManager.setPassMessageInReport("Case ID is matched"); } else {
+			 * ExtentTestManager.setWarningMessageInReport("Case ID is not matched"); }
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCheckListStatus();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickDownloadCheckList();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAccept();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApprove();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.verifyHeading();
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.clickApprove();
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.approveCasePopup().verifyHeading();
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.approveCasePopup().verifyDescription();
-			String str1 = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.approveCasePopup().verifyCaseNumber();
-			if (str.equals(str1)) {
-				ExtentTestManager.setPassMessageInReport("Case ID is matched");
-			} else {
-				ExtentTestManager.setWarningMessageInReport("Case ID is not matched");
+					.approveCasePopup().clickConfirm();
+			if (!data.get("toastApproveMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastApproveMessage"));
 			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyFinalStatus();
+			/*
+			 * Thread.sleep(5000); homePage.clickUserName(); Thread.sleep(5000);
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent()
+			 * .approveCasePopup().toastComponet().navigationComponent().clickClose();
+			 * homePage.clickSignOut();
+			 */
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAssigneApproveAfterVerifyCheckListWithResrve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickuderMerchant();
+			//homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
+
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			/*
+			 * String str = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyCaseIDNumber();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .clickApprove();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyDescription();
+			 * String str1 = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyCaseNumber(); if
+			 * (str.equals(str1)) {
+			 * ExtentTestManager.setPassMessageInReport("Case ID is matched"); } else {
+			 * ExtentTestManager.setWarningMessageInReport("Case ID is not matched"); }
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCheckListStatus();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickDownloadCheckList();
+			String merchId = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantIDForReserve();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAccept();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApprove();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().clickApproveConditions();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReserveAmount(data.get("reserveAmount"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReservePeriod(data.get("reservePeriod"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReason(data.get("reason"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().clickConfirm();
+			if (!data.get("toastApproveMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastApproveMessage"));
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+		//	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyFinalStatus();
+			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().fillSearch(merchId);
+			homePage.sideBarComponent().reserveManagementPage().clickSearchButton();
+			homePage.sideBarComponent().reserveManagementPage().verifyStatus();
+		    
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAssigneDirectApproveWithOutReserve(String strParams) {
+		try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickuderMerchant();
+		//	homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
+
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			/*
+			 * String str = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyCaseIDNumber();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .clickApprove();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyDescription();
+			 * String str1 = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyCaseNumber(); if
+			 * (str.equals(str1)) {
+			 * ExtentTestManager.setPassMessageInReport("Case ID is matched"); } else {
+			 * ExtentTestManager.setWarningMessageInReport("Case ID is not matched"); }
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApprove();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.approveCasePopup().clickYes();
-			Thread.sleep(5000);
-			homePage.clickUserName();
-			Thread.sleep(5000);
-			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-					.approveCasePopup().toastComponet().navigationComponent().clickClose();
-			homePage.clickSignOut();
+			.approveCasePopup().clickConfirm();
+	       if (!data.get("toastApproveMessage").isEmpty()) {
+		loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastApproveMessage"));
+	}
+	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyFinalStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAssigneDirectApprove Failed due to this " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAssigneDirectApproveWithReserve(String strParams) {
+		try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickuderMerchant();
+		//	homePage.sideBarComponent().underWritingPersonalComponent().verifyHeading();
+
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			/*
+			 * String str = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyCaseIDNumber();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .clickApprove();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyHeading();
+			 * homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyDescription();
+			 * String str1 = homePage.sideBarComponent().underWritingPersonalComponent().
+			 * underWritingCaseDetailsComponent() .approveCasePopup().verifyCaseNumber(); if
+			 * (str.equals(str1)) {
+			 * ExtentTestManager.setPassMessageInReport("Case ID is matched"); } else {
+			 * ExtentTestManager.setWarningMessageInReport("Case ID is not matched"); }
+			 */
+			String merchId = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantIDForReserve();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApprove();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().clickApproveConditions();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReserveAmount(data.get("reserveAmount"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReservePeriod(data.get("reservePeriod"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().enterReason(data.get("reason"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().approveCasePopup().clickConfirm();
+			if (!data.get("toastApproveMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastApproveMessage"));
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+		//	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyFinalStatus();
+			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().fillSearch(merchId);
+			homePage.sideBarComponent().reserveManagementPage().clickSearchButton();
+			homePage.sideBarComponent().reserveManagementPage().verifyStatus();
+		    		}
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAssigneDirectApprove Failed due to this " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantUnderwritingsDecline(String strParams) {
+		try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickuderMerchant();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReview();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickFilter();
+			homePage.sideBarComponent().underWritingPersonalComponent().fillMerchantName(data.get("companyName"));
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickDownloadCheckList();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAccept();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickDecline();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().declineCasePopup().verifyHeading();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().declineCasePopup().clickDropDown();
+		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().declineCasePopup().selectReasaon();
+		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().declineCasePopup().clickYes();
+		    if (!data.get("toastDeclineMessage").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastDeclineMessage"));
+			}
+		    Thread.sleep(2000);
+		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyFinalStatus();
+			String merchId = homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyMerchantIDForReserve();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickUnderWritingsMerchant();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickDecline();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickFilter();
+			homePage.sideBarComponent().underWritingPersonalComponent().fillMerchantId(merchId);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApplyFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCustomer();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyCaseStatus();
+			
+
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
@@ -555,7 +757,7 @@ public class UnderWritingTest {
 			homePage.sideBarComponent().clickuderMerchant();
 			homePage.sideBarComponent().underWritingPersonalComponent().verifyUnderwritingMerchantHeading();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickNew();
-			testMerchantUnderWritingUserDetailsVerification(strParams);
+		//	testMerchantUnderWritingUserDetailsVerification(strParams);
 			Thread.sleep(2000);
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickAssignee();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyListofAssignes();
@@ -597,25 +799,27 @@ public class UnderWritingTest {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().enterMessageToUser(data.get("message"));
+			Thread.sleep(4000);
+			new CommonFunctions().clickTab();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickSend();
-			if (!data.get("toastMessage").isEmpty()) {
+			if (!data.get("toastMessage1").isEmpty()) {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage1"));
 			}
 			
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickUnderWritingsMerchant();
 			homePage.sideBarComponent().underWritingPersonalComponent().clickPending();
-			
+			Thread.sleep(2000);
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickFilter();
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().enterCaseID(expCaseId);
 		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().clickApplyFilters();
 		    homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().verifyStatus();
 			homePage.sideBarComponent().clickProfiles();
 			homePage.sideBarComponent().clickMerchant();
-			homePage.sideBarComponent().profileComponent().clickSearchIcon();
+			//homePage.sideBarComponent().profileComponent().clickSearchIcon();
 			homePage.sideBarComponent().profileComponent().fillSearch(expMerchID);
 			new CommonFunctions().scrollToHorizontal();
 			homePage.sideBarComponent().profileComponent().verifyMerchantStatus();
-		    new CommonFunctions().swtichToNewtabUrl(data.get("url"));
+		    new CommonFunctions().switchtoUrl(data.get("urlMerch"));
 		    
 
 		} catch (Exception e) {

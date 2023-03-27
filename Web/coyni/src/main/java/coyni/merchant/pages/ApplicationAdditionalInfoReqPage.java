@@ -22,6 +22,10 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 	private By lblBeneficialOwners = By.xpath("(//button[text()='Approve'])[2]");
 
 	private By lnkUploadImg = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]/input");
+	
+	private By btnSubmit = By.xpath("//button[text()='Submit']");
+	
+	private By lblAppicationStatus = By.xpath("//p[text()='Status:']//strong");
 
 	public void verifyAdditionalInfoRequiredDescription() {
 		String text = getText(lblAdditionalReqDescription, "Description");
@@ -33,11 +37,20 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Status " + text);
 
 	}
+	
+	public void verifyApllicationStatus() {
+		String str = getText(lblAppicationStatus, "Appication Status");
+		ExtentTestManager.setInfoMessageInReport("The Application Status is " + str);
+	}
 
 	public void clickDBA() {
 		click(lblDBAWebsite, "DBA Website Approved");
 	}
 
+	public void clickSubmit() {
+		click(btnSubmit, "Submit");
+	}
+	
 	public void clickBeneficialOwners() {
 		click(lblBeneficialOwners, "Beneficial Owenrs Approved");
 	}

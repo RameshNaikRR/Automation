@@ -1,5 +1,6 @@
 package coyni.merchant.components;
 
+import java.awt.AWTException;
 import java.util.List;
 
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,7 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	private By txtFirstName = By.name("firstName");
 	private By txtLastName = By.name("lastName");
 	private By txtCity = By.name("city");
-	private By drpDwnState = By.xpath("//div[text()='State']/parent::div");
+	private By drpDwnState = By.xpath("(//div[contains(@class,'FormField_selected_option')])[1]");
 	private By txtZipCode = By.name("zipCode");
 	private By txtCountry = By.xpath("//div[text()='Country']/following-sibling::*[1]");
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
@@ -27,7 +28,7 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	private By txtDateOfBirth = By.name("dateOfBirth");
 	private By txtSocialSecurity = By.name("ssn");
 	private By txtOwnership = By.name("ownership");
-	private By txtAddress1 = By.name("addressLine1");
+	private By txtAddress1 = By.xpath("//input[@name='addressLine1']");
 	private By txtAddress2 = By.name("addressLine2");
 
 //	public void getTextField(By ele, String text, String eleName, int i) {
@@ -37,45 +38,42 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 //		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
 //	}
 
-	public void fillFirstName(String firstName) throws InterruptedException {
-		// clearText(txtFirstName, "First Name");
-		enterText(txtFirstName, firstName, "First Name");
-		// getTextField(txtFirstName, firstName, "firstName", i);
-	}
-
-	public void fillLastName(String lastName) throws InterruptedException {
-		// clearText(txtLastName, "Last Name");
-		enterText(txtLastName, lastName, "Last Name");
-		// getTextField(txtLastName, lastName, "lastName", i);
-	}
-
-	public void fillAddress1(String address1) throws InterruptedException {
-		// clearText(txtAddress1, "address line 1");
-		enterText(txtAddress1, address1, "address line 1");
-		// getTextField(txtAddress1, address1, "address line 1", i);
-	}
-
-	public void fillAddress2(String address2) throws InterruptedException {
-		// clearText(txtAddress2, "address line 2");
-		enterText(txtAddress2, address2, "address line 2");
-		// getTextField(txtAddress2, address2, "address line 2", i);
-	}
-
-	public void fillCity(String city) throws InterruptedException {
-		// clearText(txtCity, "city");
-		enterText(txtCity, city, "city");
-		// getTextField(txtCity, city, "city", i);
-	}
-
-	public void selectState(String state) {
-		click(drpDwnState, "State DropDown");
-		click(getElement(state), state);
-	}
-
+	
 	public By getElement(String state) {
 		return By.xpath(String.format("//div[text()='%s']", state));
 	}
+	
+	public void fillFirstName(String firstNameRegisration) {
+		enterText(txtFirstName, firstNameRegisration, "First Name");
+	}
+	
+	public void fillLastName(String lastNameRegisration) {
+		enterText(txtLastName, lastNameRegisration, "Last Name");
+	}
 
+	public void fillAddress1(String addressline1) throws InterruptedException, AWTException {
+		Thread.sleep(2000);
+		enterText(txtAddress1, addressline1, "Address LIne1");
+		new CommonFunctions().clickTab();
+	}
+	
+	public void fillAddress2(String addressline2) {
+		enterText(txtAddress2, addressline2,"Adress Line2");
+	}
+	
+	public void fillCity(String city) {
+		enterText(txtCity, city, "City");
+	}
+	
+
+	public void selectState(String state) throws InterruptedException {
+	click(drpDwnState, "State DropDown");
+	Thread.sleep(2000);
+	click(getElement(state), state);
+ }
+
+
+	
 	public void selectState(String state, int i) {
 		List<WebElement> eleList = DriverFactory.getDriver().findElements(drpDwnState);
 		eleList.get(i).click();
@@ -84,9 +82,10 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		click(getElement(state), state);
 	}
 
-	public void fillZipCode(String zipCode) throws InterruptedException {
+	public void fillZipCode(String zipCode) throws AWTException {
 		// clearText(txtZipCode, "ZipCode");
 		// enterText(txtZipCode, zipCode, "Zipcode");
+		new CommonFunctions().clickTab();
 		enterText(txtZipCode, zipCode, "ZipCode");
 		// getTextField(txtZipCode, zipCode, "ZipCode", i);
 	}

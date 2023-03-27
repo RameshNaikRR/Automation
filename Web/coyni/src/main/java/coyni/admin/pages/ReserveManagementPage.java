@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni.admin.components.ExportComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ReserveManagementPage extends BrowserFunctions {
 
@@ -12,8 +13,10 @@ public class ReserveManagementPage extends BrowserFunctions {
 
 	private By btnReserveManagement = By.xpath("//span[contains(text(),'Reserve Mgmt.')]");
 
-	private By txtSearch = By.xpath("//input[@placeholder='Search By Merchant Name or Merchant ID']");
-
+	private By txtSearch = By.xpath("//input[contains(@class,'ReserveManagementList')]");
+	
+	private By lblStatus = By.xpath("//div[contains(@class,'chip__text')]");
+	
 	private By btnExport = By.xpath("//button[contains(text(),'Export')]");
 
 	private By btnAllStatuses = By.xpath("//div[text()='All Statuses']");
@@ -25,6 +28,8 @@ public class ReserveManagementPage extends BrowserFunctions {
 	private By btnInActive = By.xpath("(//div[contains(text(),'Inactive')])[1]");
 
 	private By record = By.cssSelector("tbody>tr:nth-of-type(6)>td:nth-of-type(1)");
+	
+	private By btnSearch = By.xpath("//button[@class='icon-search']");
 
 	public void verifyHeading(String expHeading) {
 
@@ -66,6 +71,16 @@ public class ReserveManagementPage extends BrowserFunctions {
 	public ExportComponent exportComponent() {
 		return new ExportComponent();
 	}
+	
+	public void verifyStatus() {
+		String str = getText(lblStatus, "");
+		ExtentTestManager.setInfoMessageInReport("The Status is "+ str);
+	}
+	
+	public void clickSearchButton() {
+		click(btnSearch, "Search");
+	}
+	
 
 	public ReserveRulesPage reserveRulesPage() {
 		return new ReserveRulesPage();

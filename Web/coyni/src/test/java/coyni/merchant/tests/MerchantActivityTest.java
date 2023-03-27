@@ -65,6 +65,65 @@ public class MerchantActivityTest {
 			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantActivityAfterApproved(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("url"));
+			merchantActivityComponent.verifyApprovedHeading();
+			merchantActivityComponent.clickMerchantDashBoad();
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantActivityAcceptResrve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("url"));
+			Thread.sleep(1000);
+			if(loginPage.verifyPriacyPolicyHeading()==1) {
+				loginPage.scrollToPrivacyAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			Thread.sleep(1000);
+			if(loginPage.verifyTermsOfServicesHeading()==1) {
+				loginPage.scrollToTermsAgree();
+			     loginPage.clickDone();
+			}
+			new CommonFunctions().switchtoUrl(data.get("url"));
+			merchantActivityComponent.verifyApprovedReserveHeading();
+		    merchantActivityComponent.verifyMonthlyProcessingVolume(data.get("monthlyProcessingVolume"));
+		    merchantActivityComponent.verifyHighTicket(data.get("highTicket"));
+		    merchantActivityComponent.verifyResrverAmount(data.get("reserveAmount"));
+		    merchantActivityComponent.verifyResrverPeriod(data.get("reservePeriod"));
+		    merchantActivityComponent.clickAcceptReserve();
+		    merchantActivityComponent.clickMerchantDashBoad();
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
+			merchantActivityComponent.clickUserName();
+			merchantActivityComponent.clickUserDetails();
+			String merchID = merchantActivityComponent.verifyMerchantIDForReserver();
+			new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			merchantActivityComponent.homePage().sideBarComponent().clickReserveManagement();
+			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().fillSearch(merchID);
+			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().clickSearchButton();
+			merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage().verifyStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testMerchantActivityAcceptResrve failed due to exception " + e);
+		}
+	}
+
+	
 
 	@Test
 	@Parameters({ "strParams" })

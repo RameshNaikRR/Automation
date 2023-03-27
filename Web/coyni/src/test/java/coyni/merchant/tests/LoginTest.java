@@ -9,6 +9,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+
+import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.TopBarComponent;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
@@ -72,6 +74,53 @@ public class LoginTest {
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
+			
+					
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginAfterSignUp(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(4000);
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			// loginPage.clickeyeIcon();
+//			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickNext();
+			Thread.sleep(5000);
+		//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				Thread.sleep(5000);
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				ExtentTestManager.setInfoMessageInReport("ok ");
+			}
+			Thread.sleep(2000);
+			if(loginPage.verifyPriacyPolicyHeading()==1) {
+				loginPage.scrollToPrivacyAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			Thread.sleep(2000);
+			if(loginPage.verifyTermsOfServicesHeading()==1) {
+				loginPage.scrollToTermsAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}
