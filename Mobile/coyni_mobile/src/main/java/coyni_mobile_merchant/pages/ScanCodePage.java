@@ -33,7 +33,9 @@ public class ScanCodePage extends MobileFunctions {
 	}
 
 	public void clickAllow() {
-		click(btnAllow, "Allow");
+		if (getElementList(btnAllow, "Allow").size() > 0) {
+			click(btnAllow, "Allow");
+		}
 
 	}
 

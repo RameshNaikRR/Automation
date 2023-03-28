@@ -52,8 +52,10 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			Thread.sleep(5000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
+			Thread.sleep(5000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()

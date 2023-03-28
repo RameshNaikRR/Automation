@@ -26,13 +26,13 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	private By lblPayOutTransactions = MobileBy.xpath("//*[@text='Payout Transactions']");
 	private By btnPayoutTransaction = MobileBy.xpath("(//*[contains(@resource-id,'payoutSent')])[1]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
-	private By lblAmount = MobileBy.xpath("(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[1]");
+	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')]");
 	private By lblNoTransactions = MobileBy
 			.xpath("//*[@text='You have no transactions']|//*[@text='You have no more transactions']");
 	private By lblNoMoreTransactions = MobileBy.xpath("//*[@text='You have no more transactions']");
 	private By size = MobileBy.xpath(
 			"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]");
-
+	private By lblPayoutDetailsHeading = MobileBy.xpath("//*[contains(@text,'Payout Details')]");
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
 
 	public String getPayoutID() {
@@ -49,6 +49,61 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	public String noTransactions() {
 		String a = getText(lblNoTransactions);
 		return a;
+
+	}
+
+	public void clickValidTransaction() throws InterruptedException {
+		int noOfTransactionsInPage = getElementList(lblAmount, "No of Transactions").size();
+		for (int i = 1; noOfTransactionsInPage - 1 >= i; i++) {
+			Thread.sleep(1000);
+			if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
+				break;
+			}
+			By moreThanZero = MobileBy
+					.xpath("(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + i + "]");
+			String TransactionAmount = getText(moreThanZero);
+			double amount = Double.parseDouble(TransactionAmount);
+			if (amount > 0.00) {
+				click(moreThanZero, "Greater Than 0.00 Transaction");
+			} else if (noOfTransactionsInPage - 1 == i) {
+				Thread.sleep(1000);
+				for (int t = 1; t <= 6; t++) {
+
+					if (getElementList(lblNoTransactions, "Transactions").size() <= 1) {
+						for (int c = 1; c <= 1; c++) {
+							Thread.sleep(1000);
+							if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
+								break;
+							}
+							TouchAction touch = new TouchAction(DriverFactory.getDriver());
+							touch.press(PointOption.point(540, 1395))
+									.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+									.moveTo(PointOption.point(540, (int) (260))).release().perform();
+						}
+						int noOfTransactionsIn = getElementList(lblAmount, "No of Transactions").size();
+						for (int j = 1; noOfTransactionsIn >= j; j++) {
+							By moreThanZeroTrans = MobileBy.xpath(
+									"(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + j + "]");
+							String TransAmount = getText(moreThanZeroTrans);
+							double transAmount = Double.parseDouble(TransAmount);
+							if (transAmount > 0.00) {
+								click(moreThanZeroTrans, "Greater Than 0.00 Transaction");
+								break;
+							} else {
+								int k = j + i;
+								ExtentTestManager.setWarningMessageInReport(
+										"Transaction " + k + " has not been greater than 0.00");
+							}
+						}
+					}
+					ExtentTestManager
+							.setFailMessageInReport("We have no transactions is greater than 0.00, to verify details");
+				}
+
+			} else {
+				ExtentTestManager.setWarningMessageInReport("Transaction " + i + " has not been greater than 0.00");
+			}
+		}
 
 	}
 
@@ -72,10 +127,10 @@ public class PayoutTransactionsPage extends MobileFunctions {
 		return value;
 //		Integer qty = Integer.valueOf(quantityText);
 	}
-	
+
 	public void clickPayoutTransaction() {
 //		if(verifyTransactionAmount()>0.00) {
-			click(btnPayoutTransaction, "Payout Transaction");
+		click(btnPayoutTransaction, "Payout Transaction");
 //		}else {
 //			ExtentTestManager.setInfoMessageInReport(getPayoutID());
 //		}

@@ -45,9 +45,10 @@ public class EnterYourPINComponent extends MobileFunctions {
 		new CommonFunctions().elementView(lnkForgotPin, "Forgot Pin");
 	}
 
-	public void verifyEnterYourPinView() {
+	public void verifyEnterYourPinView(String pinHeading) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(heading));
-		new CommonFunctions().elementView(heading, "Enter Your PIN");
+		new CommonFunctions().verifyLabelText(heading, "Enter Your PIN",pinHeading);
+//		new CommonFunctions().elementView(heading, "Enter Your PIN");
 	}
 
 	public void verifyHeading(String expHeading) {

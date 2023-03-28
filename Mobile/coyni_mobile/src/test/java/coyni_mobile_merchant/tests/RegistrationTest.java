@@ -117,8 +117,10 @@ public class RegistrationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationProcessPage.clickMerchantAgreement();
+			Thread.sleep(4000);//Agreements buffer symbol is loading two times
 			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsTerms();
 			agreementComponent.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
+			Thread.sleep(4000);//Agreements buffer symbol is loading two times
 			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsPrivacyPolicy();
 			agreementComponent.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			registrationProcessPage.registrationMerchantAgreementsPage().clickAgreementsDone();
@@ -146,7 +148,6 @@ public class RegistrationTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickChooseUser();
 			businessTokenAccountPage.clickSelectAccount();
-			businessTokenAccountPage.clickAddDBA();
 //			registrationProcessPage.clickGetStarted();
 			businessTokenAccountPage.switchAccountPopup().verifyDescription(data.get("addDBADescription"));
 			businessTokenAccountPage.switchAccountPopup().verifyCompanyName();
@@ -158,29 +159,27 @@ public class RegistrationTest {
 	}
 
 	@Test
-	public void testAddNewCompanyInBusinessAccount() {
+	public void testAddNewCompany() {
 		try {
 			businessTokenAccountPage.clickChooseUser();
-			Thread.sleep(3000);
-			businessTokenAccountPage.clickOpenNewAccount();
+			businessTokenAccountPage.clickAddNewAccount();
 			businessTokenAccountPage.clickBusinessAccount();
 			businessTokenAccountPage.clickNewCompany();
-//			businessTokenAccountPage.clickEnabledAccount();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
 		}
 	}
 
 	@Test
-	public void testOpenNewAccountWithNewDBA() {
+	public void testAddDBAThroughAddNewAccount() {
 		try {
 			businessTokenAccountPage.clickChooseUser();
-			Thread.sleep(3000);
-			businessTokenAccountPage.clickOpenNewAccount();
+			businessTokenAccountPage.clickAddNewAccount();
 			businessTokenAccountPage.clickBusinessAccount();
 			businessTokenAccountPage.clickNewDBA();
-			businessTokenAccountPage.clickEnabledAccount();
+			businessTokenAccountPage.switchAccountPopup().selectCompany();
+			businessTokenAccountPage.switchAccountPopup().clickAddDBAUnderCompany();
+//			businessTokenAccountPage.clickEnabledAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddDBA Failed due to this Exception" + e);
@@ -191,8 +190,7 @@ public class RegistrationTest {
 	public void testAddPersonalAccount() {
 		try {
 			businessTokenAccountPage.clickChooseUser();
-			Thread.sleep(3000);
-			businessTokenAccountPage.clickOpenNewAccount();
+			businessTokenAccountPage.clickAddNewAccount();
 			businessTokenAccountPage.clickPersonalAccount();
 
 		} catch (Exception e) {

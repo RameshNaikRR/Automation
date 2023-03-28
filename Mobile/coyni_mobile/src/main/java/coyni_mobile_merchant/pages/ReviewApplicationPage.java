@@ -56,8 +56,8 @@ public class ReviewApplicationPage extends MobileFunctions {
 //DBA information
 
 	public void verifyDBAInfoHeading(String expHeading) {
-		scrollDownToElement(lblDBAInfo, "DBA Info Heading");
 		new CommonFunctions().verifyLabelText(lblDBAInfo, "DBA Info Heading", expHeading);
+		scrollDownToElement(lblDBAInfo, "DBA Info Heading");
 	}
 
 	public void clickDBAEdit() {
@@ -139,7 +139,6 @@ public class ReviewApplicationPage extends MobileFunctions {
 			String expBeneficialHeading, String expAgrrementsHeading)
 			throws InterruptedException {
 		verifyReviewApplicationHeading(expReviewHeading);
-
 		verifyCompanyHeading(expCompHeading);
 		clickCompanyDocView();
 		clickDocumentClose();

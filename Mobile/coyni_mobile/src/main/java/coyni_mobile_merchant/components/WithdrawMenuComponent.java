@@ -22,7 +22,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	private By btnCogentAccount = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 	private By lblWithdrawHeading = MobileBy.xpath("//*[contains(@text,'Withdraw')]");
 	private By btnChooseInstantPay = MobileBy.xpath("//*[contains(@resource-id,'CardName')]");
-	private By btnWithdrawBankMethod = MobileBy.xpath("//*[contains(@resource-id,'Account')]");
+	private By btnWithdrawBankMethod = MobileBy.xpath("(//*[contains(@resource-id,'Account')])[1]");
 	private By btnChooseSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'Account')]");
 	private By lblWithdrawMethod = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By lblAddPaymentHeading = MobileBy.xpath("//*[contains(@resource-id,'PayHead')]");
@@ -84,7 +84,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	}
 
 	public void clickChooseInstantPay() {
-		ExtentTestManager.setInfoMessageInReport(getText(btnChooseInstantPay));
+//		ExtentTestManager.setInfoMessageInReport(getText(btnChooseInstantPay));
 		click(btnChooseInstantPay, "Choosen Instant Pay");
 	}
 
@@ -93,7 +93,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 		click(btnWithdrawBankMethod, getText(btnWithdrawBankMethod));
 	}
 
-	public void clickChooseSignetAccount() {
+	public void clickChooseCogentAccount() {
 		ExtentTestManager.setInfoMessageInReport(getText(btnChooseSignetAccount));
 		click(btnChooseSignetAccount, "Choosen Signet Account");
 	}

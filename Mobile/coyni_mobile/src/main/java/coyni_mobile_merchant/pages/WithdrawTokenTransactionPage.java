@@ -27,7 +27,7 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblInstantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
-	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
+	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'PayMethod')]|//*[contains(@resource-id,'tvBankName')]");
 	private By btnClose=MobileBy.xpath("//*[contains(@resource-id,'Close')]");
 
 	public void fillAmount(String Amount) {

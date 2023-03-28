@@ -166,7 +166,7 @@ public class CommonFunctions {
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
 					.replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
-			By errorMsgs = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]");
+			By errorMsgs = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]");
 			if (enterText.equalsIgnoreCase(actualtext)
 					&& mobileFunctions.getElement(errorMsgs, "Error Msg").isDisplayed()) {
 				ExtentTestManager.setPassMessageInReport(

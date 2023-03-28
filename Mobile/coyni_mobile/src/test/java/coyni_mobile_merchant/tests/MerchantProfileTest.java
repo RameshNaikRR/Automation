@@ -235,9 +235,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().clickResend();
+					.phoneAndEmailVerificationComponent().clickResend();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
+					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
@@ -246,9 +246,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getEmailText();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().clickResend();
+					.phoneAndEmailVerificationComponent().clickResend();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
+					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().clickCloseIcon();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
@@ -463,9 +463,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().clickResend();
+					.phoneAndEmailVerificationComponent().clickResend();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
+					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
@@ -475,9 +475,9 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().getPhoneDescription();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().clickResend();
+					.phoneAndEmailVerificationComponent().clickResend();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
-			.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
+					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().navigationComponent().clickBack();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
@@ -790,10 +790,9 @@ public class MerchantProfileTest {
 					.verifyPageDescription(data.get("changePwdDescription"));
 			String[] newPassword = data.get("newPassword").split(",");
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
-					.validateNewPasswordField(newPassword[0],
-							newPassword[1], newPassword[2],newPassword[3],newPassword[4],
-							newPassword[5], newPassword[6],newPassword[7],newPassword[8],
-							newPassword[9], newPassword[10],newPassword[11]);
+					.validateNewPasswordField(newPassword[0], newPassword[1], newPassword[2], newPassword[3],
+							newPassword[4], newPassword[5], newPassword[6], newPassword[7], newPassword[8],
+							newPassword[9], newPassword[10], newPassword[11]);
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			merchantProfilePage.confirmPasswordPage().changePasswordPage().fieldValidationsComponent()
 					.validateConfirmPasswordField(confirmPassword[0], confirmPassword[1], confirmPassword[2]);
@@ -994,10 +993,12 @@ public class MerchantProfileTest {
 			merchantProfilePage.dbaInformationPage().verifyPageHeading(data.get("dbaPageHeading"));
 			merchantProfilePage.dbaInformationPage().getCompanyName();
 			merchantProfilePage.dbaInformationPage().getDescription();
-			if(data.get("takeAPhoto").equalsIgnoreCase("Yes")) {
-			merchantProfilePage.dbaInformationPage().uploadDBAProfileWithTakePhoto(data.get("profileToastMsg"), data.get("dbaPageHeading"));
-			}else {
-				merchantProfilePage.dbaInformationPage().uploadDBAProfileWithChooseFromLibrary(data.get("profileToastMsg"), data.get("dbaPageHeading"));
+			if (data.get("takeAPhoto").equalsIgnoreCase("Yes")) {
+				merchantProfilePage.dbaInformationPage().uploadDBAProfileWithTakePhoto(data.get("profileToastMsg"),
+						data.get("dbaPageHeading"));
+			} else {
+				merchantProfilePage.dbaInformationPage()
+						.uploadDBAProfileWithChooseFromLibrary(data.get("profileToastMsg"), data.get("dbaPageHeading"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAInformationView failed due to Exception " + e);
@@ -1761,11 +1762,11 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().addNewTeamMemberPage().getAdministratorDesc();
 			merchantProfilePage.teamPage().addNewTeamMemberPage().VerifyFirstNameAutoFocus();
 			String[] firstName = data.get("firstName").split(",");
-			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
-					.validateFirstNameField(firstName[0], firstName[1], firstName[2],firstName[3], data.get("keyBoardType"));
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent().validateFirstNameField(
+					firstName[0], firstName[1], firstName[2], firstName[3], data.get("keyBoardType"));
 			String[] lastName = data.get("lastName").split(",");
-			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
-					.validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],data.get("keyBoardType"));
+			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent().validateLastNameField(
+					lastName[0], lastName[1], lastName[2], lastName[3], data.get("keyBoardType"));
 			String[] teamEmail = data.get("teamEmail").split(",");
 			merchantProfilePage.teamPage().addNewTeamMemberPage().fieldValidationsComponent()
 					.validateEmailField(teamEmail[0], teamEmail[1], teamEmail[2]);
@@ -1882,7 +1883,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().clickPendingStatusTeamMember();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
@@ -1895,8 +1896,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.verifyDescription(data.get("editTeamMemberDescription"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getAdministratorDesc();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-			.VerifyFirstNameAutoFocus();
+			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().VerifyFirstNameAutoFocus();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.fillFirstName(data.get("firstName"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
@@ -2373,52 +2373,6 @@ public class MerchantProfileTest {
 		}
 	}
 
-//	public void AddDebitCard(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-//			if (merchantProfilePage.paymentMethodsPage().verifyPaymentMethodHeading() == 1) {
-//				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
-//				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-//			}
-//			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
-//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-//						.verifyHeading(data.get("addPaymentHeading"));
-//				Thread.sleep(1000);
-//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
-//			}
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillNameOnCard(data.get("nameOnCard"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillCardNumber(data.get("cardNumber"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-//					.fillCardExp(data.get("cardExp"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-//			Thread.sleep(2000);
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.fillAddressLine1(data.get("addressLine1"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.fillAddressLine2(data.get("addressLine2"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.fillCity(data.get("city"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.selectState(data.get("state"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.fillZipCode(data.get("zipCode"));
-//			Thread.sleep(5000);
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.clickAddCard();
-//			Thread.sleep(8000);
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.allDonePage().verifyAllDone(data.get("doneHeading"));
-//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//					.allDonePage().clickDone();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//		}
-//	}
-
 	public void AddDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -2455,7 +2409,6 @@ public class MerchantProfileTest {
 				}
 			}
 			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyErrorMessageDebitCard() == 0) {
-//				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillNameOnCard(data.get("nameOnCard"));
@@ -2617,11 +2570,13 @@ public class MerchantProfileTest {
 	public void testEditDebitCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			if (businessTokenAccountPage.verifyProfile() == 1) {
-				businessTokenAccountPage.clickProfile();
-				merchantProfilePage.clickPaymentMethods();
-			}
-			Thread.sleep(2000);
+//			if (businessTokenAccountPage.verifyProfile() == 1) {
+//				businessTokenAccountPage.clickProfile();
+//				merchantProfilePage.clickPaymentMethods();
+//			}
+			merchantProfilePage.paymentMethodsPage().clickDebitCard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
 			merchantProfilePage.paymentMethodsPage().clickDebitCard();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillCardExp(data.get("cardExp"));
@@ -2646,31 +2601,50 @@ public class MerchantProfileTest {
 	}
 
 	@Test
-	@Parameters("strParams")
-	public void testVerifyAllStates(String strParams) {
+	@Parameters({ "strParams" })
+	public void testVerifyDeleteDebitCards(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-					.fillNameOnCard(data.get("nameOnCard"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-					.fillCardNumber(data.get("cardNumber"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-					.fillCardExp(data.get("cardExp"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillAddressLine1(data.get("addressLine1"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillAddressLine2(data.get("addressLine2"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillCity(data.get("city"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.validateAllStates();
 
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			int presentCard = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getPresentDebitCards();
+			int maxLimit = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getMaxDebitCardsLimit();
+			if (presentCard == maxLimit) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyDebitCards(data.get("presentDebitCardNumber"));
+			} else {
+				ExtentTestManager.setFailMessageInReport("Maximium Debit Cards are not added");
+			}
+			merchantProfilePage.paymentMethodsPage().clickClose();
+			int numOfCards = merchantProfilePage.paymentMethodsPage().verifyNumOfCard();
+			for (int i = 1; i <= numOfCards; i++) {
+				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+				merchantProfilePage.paymentMethodsPage().clickDebitCard();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickRemove();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickYes();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("debitDeleteToastMsg"));
+				if (!(numOfCards == i)) {
+					merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+				}
+				int presentCards = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getPresentDebitCards();
+				int maxLimitCards = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getMaxDebitCardsLimit();
+				if (maxLimitCards - i == presentCards) {
+					ExtentTestManager.setPassMessageInReport("Cogent Accounts are deleting in this order : "
+							+ merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getDebitCards());
+				} else {
+					ExtentTestManager.setFailMessageInReport("In Cogent Accounts, Deleting numbers are not updating");
+				}
+				merchantProfilePage.paymentMethodsPage().clickClose();
+			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
 	}
 
@@ -2686,7 +2660,6 @@ public class MerchantProfileTest {
 
 	}
 
-	
 	public void testDeleteDebitCards(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -2706,7 +2679,7 @@ public class MerchantProfileTest {
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDebitCardWithInvalidData(String strParams) {
@@ -2752,6 +2725,56 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testVerifyPaymentMethodsNavigationsView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
+			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyHeading(data.get("addPaymentHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.verifyDebitCard(data.get("addDebitHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.verifyDebitCard(data.get("addDebitHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyHeading(data.get("addPaymentHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.addCardPage().verifyCogentAccount(data.get("addCogentHeading"));
+			merchantProfilePage.paymentMethodsPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.verifyHeading(data.get("mxAddBankHeading"));
+			merchantProfilePage.paymentMethodsPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyHeading(data.get("addPaymentHeading"));
+			merchantProfilePage.paymentMethodsPage().clickClose();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
+			merchantProfilePage.paymentMethodsPage().clickBack();
+			merchantProfilePage.getAccountId();
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testAddCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -2785,7 +2808,7 @@ public class MerchantProfileTest {
 						.getMaxCogentAccounts();
 				if (presentCogentAccount <= maxCogentAccount) {
 					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-							.verifyCogentAccounts(data.get("presentSignetAccountNumber"));
+							.verifyCogentAccounts(data.get("presentCogentAccountNumber"));
 				}
 
 			}
@@ -2794,6 +2817,7 @@ public class MerchantProfileTest {
 					.verifyErrorMessageSignetAccount() == 0) {
 				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+				
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillNameOnCard(data.get("nameOnCard"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -2867,18 +2891,36 @@ public class MerchantProfileTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
-			if (businessTokenAccountPage.verifyProfile() == 1) {
-				businessTokenAccountPage.clickProfile();
-				merchantProfilePage.clickPaymentMethods();
-				Thread.sleep(1000);
+			testDeleteCogentAccounts(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteMaxCogentAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			int presentCogentAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.getPresentCogentAccounts();
+			int maxCogentAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.getMaxCogentAccounts();
+			if (presentCogentAccount == maxCogentAccount) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyCogentAccounts(data.get("presentCogentAccountNumber"));
+			} else {
+				ExtentTestManager.setFailMessageInReport("Maximium Cogent Accounts are not added");
 			}
+			merchantProfilePage.paymentMethodsPage().clickClose();
 			int numOfCogentAccounts = merchantProfilePage.paymentMethodsPage().verifyNumOfCogentAccounts();
 			for (int i = 1; i <= numOfCogentAccounts; i++) {
 				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
@@ -2886,7 +2928,40 @@ public class MerchantProfileTest {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.mailingAddressComponent().clickYes();
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("signetDeleteToastMsg"));
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("cogentDeleteToastMsg"));
+				if (!(numOfCogentAccounts == i)) {
+					merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+				}
+				int presentCogentAccoun = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getPresentCogentAccounts();
+				int maxCogentAccoun = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getMaxCogentAccounts();
+				if (maxCogentAccoun - i == presentCogentAccoun) {
+					ExtentTestManager.setPassMessageInReport("Cogent Accounts are deleting in this order : "
+							+ merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getCogentAccounts());
+				} else {
+					ExtentTestManager.setFailMessageInReport("In Cogent Accounts Deleting number are not updating");
+				}
+				merchantProfilePage.paymentMethodsPage().clickClose();
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+
+	public void testDeleteCogentAccounts(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+			int numOfCogentAccounts = merchantProfilePage.paymentMethodsPage().verifyNumOfCogentAccounts();
+			for (int i = 1; i <= numOfCogentAccounts; i++) {
+				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+				merchantProfilePage.paymentMethodsPage().clickDeleteCogentAccount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickYes();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("cogentDeleteToastMsg"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
@@ -2953,6 +3028,7 @@ public class MerchantProfileTest {
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
 			testAddBankAccount(strParams);
+			merchantProfilePage.paymentMethodsPage().verifyAddedMXBank(data.get("heading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
@@ -2962,7 +3038,6 @@ public class MerchantProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
 			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-//			Thread.sleep(2000);
 			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
 				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			}
@@ -2974,32 +3049,44 @@ public class MerchantProfileTest {
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifywithdrawAddBankHeading(data.get("withdrawAddBank"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(data.get("mxAddBankHeading"), data.get("mxAddBankDescription"), data.get("mxAddBankChkBxDescription"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().verifySelectYourInstitution(data.get("institutionHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().addBank(
+					data.get("mxAddBankHeading"), data.get("mxAddBankDescription"),
+					data.get("mxAddBankChkBxDescription"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.verifySelectYourInstitution(data.get("institutionHeading"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().selectMXBank();
-			if(merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().MXConfirmationScreen(data.get("mxConfirmationHeading"))==1) {
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().verifyMXConfirmationScreen(data.get("mxConfirmationHeading"), data.get("mxConfirmationDescription"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().clickMXContinue();
+			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.MXConfirmationScreen(data.get("mxConfirmationHeading")) == 1) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.verifyMXConfirmationScreen(data.get("mxConfirmationHeading"),
+								data.get("mxConfirmationDescription"));
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.clickMXContinue();
 			}
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().verifyCredentialsHeading(data.get("credentialsHeading"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().fillUserName(data.get("mxUsername"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().fillPassword(data.get("mxPassword"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.verifyCredentialsHeading(data.get("credentialsHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fillUserName(data.get("mxUsername"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.fillPassword(data.get("mxPassword"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().clickContinue();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().VerifyIdentityHeading(data.get("identityHeading"));
-			if(data.get("accountType").equalsIgnoreCase("checking")) {
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().clickChecking();
-			}else {
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().clickSavings();	
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.VerifyIdentityHeading(data.get("identityHeading"));
+			if (data.get("accountType").equalsIgnoreCase("checking")) {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.clickChecking();
+			} else {
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+						.clickSavings();
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent().clickContinue();
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-						.bankAccountAddedPage().verifySucessHeading(data.get("bankAddedHeading"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-				.bankAccountAddedPage().verifyAddedBankDescription(data.get("bankAddedDescription"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-				.bankAccountAddedPage().clickDone();
-				merchantProfilePage.paymentMethodsPage().verifyAddedMXBank(data.get("heading"));
-				
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().verifySucessHeading(data.get("bankAddedHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().verifyAddedBankDescription(data.get("bankAddedDescription"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+					.bankAccountAddedPage().clickDone();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
 		}
@@ -3075,44 +3162,90 @@ public class MerchantProfileTest {
 //		}
 //	}
 
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBankAccountFieldValidations(String strPrams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+//			businessTokenAccountPage.clickProfile();
+//			merchantProfilePage.clickPaymentMethods();
+//			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
+//			Thread.sleep(2000);
+//
+//			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+//				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+//			}
+//			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+//						.verifyHeading(data.get("addPaymentHeading"));
+//			}
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
+//			String[] nameOnBank = data.get("nameOnBank").split(",");
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+//					.fieldValidationsComponent().validateNameOnBankField(nameOnBank[0], nameOnBank[1], nameOnBank[2]);
+//			String[] routingNum = data.get("routingNum").split(",");
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+//					.fieldValidationsComponent().validateRoutingNumField(routingNum[0], routingNum[1], routingNum[2]);
+//			String[] confirmRoutingNum = data.get("confirmRoutingNum").split(",");
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+//					.fieldValidationsComponent()
+//					.validateConfirmRoutingField(confirmRoutingNum[0], confirmRoutingNum[1], confirmRoutingNum[2]);
+//			String[] accountNum = data.get("accountNum").split(",");
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+//					.fieldValidationsComponent()
+//					.validateConfirmAccountNumField(accountNum[0], accountNum[1], accountNum[2]);
+//			String[] confirmAccNum = data.get("confirmAccNum").split(",");
+//			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
+//					.fieldValidationsComponent()
+//					.validateConfirmAccountNumField(confirmAccNum[0], confirmAccNum[1], confirmAccNum[2]);
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
+//		}
+//	}
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testBankAccountFieldValidations(String strPrams) {
+	public void testVerifyDeleteBanks(String strPrams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
-			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
-			Thread.sleep(2000);
-
-			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
-				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
-			}
-			if (merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().verifyAddNewPaymentHeading() == 1) {
+			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			int presentBankAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.getPresentBankAccounts();
+			int maxBankAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getMaxBankAccounts();
+			if (presentBankAccount == maxBankAccount) {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-						.verifyHeading(data.get("addPaymentHeading"));
+						.verifyBankAccounts(data.get("presentBankAccountNumber"));
+			} else {
+				ExtentTestManager.setFailMessageInReport("Maximium Bank Accounts are not added");
 			}
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
-			String[] nameOnBank = data.get("nameOnBank").split(",");
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.fieldValidationsComponent().validateNameOnBankField(nameOnBank[0], nameOnBank[1], nameOnBank[2]);
-			String[] routingNum = data.get("routingNum").split(",");
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.fieldValidationsComponent().validateRoutingNumField(routingNum[0], routingNum[1], routingNum[2]);
-			String[] confirmRoutingNum = data.get("confirmRoutingNum").split(",");
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.fieldValidationsComponent()
-					.validateConfirmRoutingField(confirmRoutingNum[0], confirmRoutingNum[1], confirmRoutingNum[2]);
-			String[] accountNum = data.get("accountNum").split(",");
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.fieldValidationsComponent()
-					.validateConfirmAccountNumField(accountNum[0], accountNum[1], accountNum[2]);
-			String[] confirmAccNum = data.get("confirmAccNum").split(",");
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
-					.fieldValidationsComponent()
-					.validateConfirmAccountNumField(confirmAccNum[0], confirmAccNum[1], confirmAccNum[2]);
+			merchantProfilePage.paymentMethodsPage().clickClose();
+			int numOfBankAccs = merchantProfilePage.paymentMethodsPage().verifyNumOfBanks();
+			for (int i = 1; i <= numOfBankAccs; i++) {
+				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
+				merchantProfilePage.paymentMethodsPage().clickBankAccount();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().clickYes();
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.mailingAddressComponent().toastComponent().verifyToastMsg(data.get("bankDeleteToastMsg"));
+				if (!(numOfBankAccs == i)) {
+					merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+				}
+				int presentBankAccounts = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getPresentBankAccounts();
+				int maxBankAccounts = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.getMaxBankAccounts();
+				if (maxBankAccounts - i == presentBankAccounts) {
+					ExtentTestManager.setPassMessageInReport("Cogent Accounts are deleting in this order : "
+							+ merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getBanks());
+				} else {
+					ExtentTestManager.setFailMessageInReport("In Cogent Accounts, Deleting numbers are not updating");
+				}
+				merchantProfilePage.paymentMethodsPage().clickClose();
+			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" testAddBankAccount failed due to this Exception" + e);
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
 	}
 
@@ -3121,11 +3254,16 @@ public class MerchantProfileTest {
 	public void testDeleteBank(String strPrams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
-			Thread.sleep(2000);
-			if (businessTokenAccountPage.verifyProfile() == 1) {
-				businessTokenAccountPage.clickProfile();
-				merchantProfilePage.clickPaymentMethods();
-			}
+			testDeleteBanks(strPrams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
+	}
+
+	public void testDeleteBanks(String strPrams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strPrams);
+			MerchantProfilePage merchantProfilePage = new MerchantProfilePage();
 			int numOfBankAccs = merchantProfilePage.paymentMethodsPage().verifyNumOfBanks();
 			for (int i = 1; i <= numOfBankAccs; i++) {
 				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
@@ -3157,56 +3295,85 @@ public class MerchantProfileTest {
 	}
 
 	@Test
-	public void testAllLinksInProfile() {
+	@Parameters("strParams")
+	public void testVerifyAllStates(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
-			merchantProfilePage.getAccountId();
-			merchantProfilePage.verifyUserProfile();
-			merchantProfilePage.clickUserDetails();
-			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();
-			merchantProfilePage.userDetailsPage().clickBack();
-			merchantProfilePage.clickCompanyInformation();
-			merchantProfilePage.companyInformationPage().verifyPageHeading();
-			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.clickDBAInformation();
-			merchantProfilePage.dbaInformationPage().verifyPageHeading();
-			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.clickBeneficialOwners();
-			merchantProfilePage.benificialOwnersPage().verifyPageHeading();
-			merchantProfilePage.navigationComponent().clickBack();
-			merchantProfilePage.clickTeam();
-			merchantProfilePage.teamPage().verifyPageHeading();
-			merchantProfilePage.teamPage().clickBack();
 			merchantProfilePage.clickPaymentMethods();
-			merchantProfilePage.paymentMethodsPage().navigationComponent().clickClose();
-			merchantProfilePage.clickPreferences();
-			merchantProfilePage.preferencesComponent().verifyPreferencesHeading();
-			merchantProfilePage.preferencesComponent().clickBack();
-			merchantProfilePage.clickAccountLimits();
-			merchantProfilePage.accountLimitsComponent().verifyHeading();
-			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
-			merchantProfilePage.clickAgreements();
-			merchantProfilePage.agreementComponent().verifyHeading();
-			merchantProfilePage.agreementComponent().clickBack();
-			merchantProfilePage.clickGetHelp();
-			merchantProfilePage.getHelpPage().verifyGetHelp();
-			merchantProfilePage.getHelpPage().clickBack();
-			merchantProfilePage.clickResetPinCode();
-			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView();
-			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-			merchantProfilePage.clickTogggle();
-			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
-			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
-			Thread.sleep(2000);
-			merchantProfilePage.clickChangePassword();
-			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView();
-			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-			merchantProfilePage.clickLogOut();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillNameOnCard(data.get("nameOnCard"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardNumber(data.get("cardNumber"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.fillCardExp(data.get("cardExp"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine1(data.get("addressLine1"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillAddressLine2(data.get("addressLine2"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.validateAllStates();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
-
 	}
+
+//	@Test
+//	public void testAllLinksInProfile() {
+//		try {
+//			businessTokenAccountPage.clickProfile();
+//			merchantProfilePage.getAccountId();
+//			merchantProfilePage.verifyUserProfile();
+//			merchantProfilePage.clickUserDetails();
+//			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();
+//			merchantProfilePage.userDetailsPage().clickBack();
+//			merchantProfilePage.clickCompanyInformation();
+//			merchantProfilePage.companyInformationPage().verifyPageHeading();
+//			merchantProfilePage.navigationComponent().clickBack();
+//			merchantProfilePage.clickDBAInformation();
+//			merchantProfilePage.dbaInformationPage().verifyPageHeading();
+//			merchantProfilePage.navigationComponent().clickBack();
+//			merchantProfilePage.clickBeneficialOwners();
+//			merchantProfilePage.benificialOwnersPage().verifyPageHeading();
+//			merchantProfilePage.navigationComponent().clickBack();
+//			merchantProfilePage.clickTeam();
+//			merchantProfilePage.teamPage().verifyPageHeading();
+//			merchantProfilePage.teamPage().clickBack();
+//			merchantProfilePage.clickPaymentMethods();
+//			merchantProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+//			merchantProfilePage.clickPreferences();
+//			merchantProfilePage.preferencesComponent().verifyPreferencesHeading();
+//			merchantProfilePage.preferencesComponent().clickBack();
+//			merchantProfilePage.clickAccountLimits();
+//			merchantProfilePage.accountLimitsComponent().verifyHeading();
+//			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
+//			merchantProfilePage.clickAgreements();
+//			merchantProfilePage.agreementComponent().verifyHeading();
+//			merchantProfilePage.agreementComponent().clickBack();
+//			merchantProfilePage.clickGetHelp();
+//			merchantProfilePage.getHelpPage().verifyGetHelp();
+//			merchantProfilePage.getHelpPage().clickBack();
+//			merchantProfilePage.clickResetPinCode();
+//			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+//			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+//			merchantProfilePage.clickTogggle();
+//			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
+//			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
+//			Thread.sleep(2000);
+//			merchantProfilePage.clickChangePassword();
+//			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+//			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+//			merchantProfilePage.clickLogOut();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//
+//	}
 
 }

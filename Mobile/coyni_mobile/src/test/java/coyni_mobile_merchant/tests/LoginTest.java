@@ -75,7 +75,7 @@ public class LoginTest {
 //			loginPage.verifyPasswordMaskedView(data.get("password"));
 //			loginPage.verifyColour();
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
@@ -103,7 +103,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("newEmail"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			Thread.sleep(2000);
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
@@ -174,7 +174,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("emailVerificationHeading"));
@@ -211,7 +211,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
 			if (data.get("validatePopUpMsg").contains("yes")) {
 				loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
@@ -233,7 +233,7 @@ public class LoginTest {
 				loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 						.errorMessagePopupComponent().verifyPopUpMsg(data.get("errPopUpMsg"));
 				loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().clickOk();
-				loginPage.enterYourPINComponent().verifyEnterYourPinView();
+				loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotPinResendOTP Failed due to Exception " + e);
@@ -252,7 +252,7 @@ public class LoginTest {
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("emailVerificationHeading"));
@@ -279,12 +279,12 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.choosePinComponent().verifyChoosePinHeading(data.get("choosePinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickBack();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyEmailHeading(data.get("emailVerificationHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickBack();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickBack();
 			loginPage.VerifyLoginPageView();
 
@@ -451,7 +451,7 @@ public class LoginTest {
 					.verifyHeading(data.get("accountPageHeading"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
 					.clickClose();
-			loginPage.clickLogin();
+			loginPage.verifyLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
 			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
@@ -728,7 +728,7 @@ public class LoginTest {
 			DriverFactory.getDriver().hideKeyboard();
 			loginPage.clickRememberMe();
 			loginPage.clickLogin();
-			loginPage.enterYourPINComponent().verifyEnterYourPinView();
+			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyEmailHeadingview();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().navigationComponent().clickBack();

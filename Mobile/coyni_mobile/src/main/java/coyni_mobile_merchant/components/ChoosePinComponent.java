@@ -22,8 +22,6 @@ public class ChoosePinComponent extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-	
-	
 	public void verifyChoosePinHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading1, "heading", expHeading);
 	}

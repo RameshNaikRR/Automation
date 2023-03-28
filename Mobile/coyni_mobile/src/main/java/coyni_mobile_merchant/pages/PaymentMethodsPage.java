@@ -1,6 +1,8 @@
 package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.popups.CvvPopup;
@@ -18,14 +20,14 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
-	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
+//	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvCardNumber')]");
 	private By lnkBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
 	private By btnCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 //	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 //	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
-	private By headingAddExternalBankAccount = MobileBy.xpath("//*[contains(@text,'Add External Bank Account')]");
+	private By headingMXBankAccount = MobileBy.xpath("\"//*[@text='Add Bank Account']|//*[@text='Add Bank Checking Account']\"");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
@@ -37,18 +39,24 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By deleteBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
 	private By deleteCogent = MobileBy.xpath("(//*[contains(@text,'Cogent Account')])[1]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'PayClose')]");
-	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'ExternalClose')]");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'layoutClose')]|//*[contains(@resource-id,'ivBack')]|//*[contains(@resource-id,'PayBack')]");
 //Verify Added Bank details
 	private By lblBank = MobileBy.xpath("(//*[contains(@text,'Bank Account')])[1]");
 	private By lblBankType = MobileBy.xpath("(//*[contains(@resource-id,'tvBankName')])[1]");
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
+
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
-
 		}
 	}
 
+	public void verifyPageHeading(String expHeading) {
+			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	}
+
+	
 	public int verifyPaymentMethodHeading() {
 		return DriverFactory.getDriver().findElements(lblHeading).size();
 	}
@@ -64,26 +72,30 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickExternalBankAccount() {
-		click(btnExternalBankAccount, "External Bank Account");
+		click(btnExternalBankAccount, "Bank Account");
 	}
 
-	public void clickSignetAccount() {
-		click(btnSignetAccount, "Signet Account");
+	public void clickCogentAccount() {
+		click(btnCogentAcc, "Cogent Account");
 	}
 
 	public void clickDebitCard() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnDebitCard));
 		click(btnDebitCard, "Debit Card");
 	}
 
-	public int verifyNumOfCard() {
+	public int verifyNumOfCard() throws InterruptedException {
+		Thread.sleep(2000);
 		return getElementList(btnDebitCard, "Debit Card").size();
 	}
 
-	public int verifyNumOfBanks() {
+	public int verifyNumOfBanks() throws InterruptedException {
+		Thread.sleep(2000);
 		return getElementList(lnkBank, "Bank Account").size();
 	}
 
-	public int verifyNumOfCogentAccounts() {
+	public int verifyNumOfCogentAccounts() throws InterruptedException {
+		Thread.sleep(2000);
 		return getElementList(btnCogentAcc, "Cogent Account").size();
 	}
 
@@ -124,7 +136,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void verifyAddExternalBankAccountHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingAddExternalBankAccount, "Add External Bank Account Heading is",
+		new CommonFunctions().verifyLabelText(headingMXBankAccount, "Add MX Bank Account Heading is",
 				expHeading);
 	}
 
@@ -221,11 +233,11 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 //	Verify Added Bank
-	public void verifyAddedMXBank(String heading) {
+	public void verifyAddedMXBank(String heading) throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblHeading));
 		new CommonFunctions().verifyLabelText(lblHeading, "heading", heading);
 		new CommonFunctions().elementView(lblBank, "Bank Account");
 		new CommonFunctions().elementView(lblBankType, "MX Bank");
-
 	}
 
 }

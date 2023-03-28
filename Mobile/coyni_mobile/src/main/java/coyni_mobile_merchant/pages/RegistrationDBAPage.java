@@ -53,6 +53,7 @@ public class RegistrationDBAPage extends MobileFunctions {
 	}
 
 	public void clickUploadBusiness() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lnkUploadBusiness));
 		click(lnkUploadBusiness, "Upload Business License");
 	}
 

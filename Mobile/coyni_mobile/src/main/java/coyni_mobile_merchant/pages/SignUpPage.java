@@ -52,11 +52,6 @@ public class SignUpPage extends MobileFunctions {
 //	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	
 	//sign up page
-	public void clickDone() {
-		if (new CommonFunctions().isPlatformiOS()) {
-			click(btnDone, "Done");
-		}
-	}
 
 	public void clickGetStarted() {
 		click(btnGetStarted, "Get Started");
@@ -109,16 +104,22 @@ public class SignUpPage extends MobileFunctions {
 	public void fillPhoneNumber(String phoneNumber) {
 		scrollDownToElement(txtPassword, "Password");
 		click(txtPhoneNumber, "Phone Number");
-		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-		clickDone();
+		enterText(txtPhoneNumber,phoneNumber, "Phone Number");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		clickDone();
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
+	public void validatePasswordField(String invalid1,String invalid2,String invalid3,String invalid4,String invalid5,String invalid6,String invalid7,String invalid8,String invalid9,String minChar,String maxChar, String moreThanMax) {
+		click(txtPassword, "Password");
+		scrollDownToElement(btnNext, "Next");
+		fieldValidationsComponent().validateNewPasswordField(invalid1,invalid2,invalid3,invalid4,invalid5,invalid6,invalid7,invalid8,invalid9,minChar,maxChar, moreThanMax);
+	}
+	
 	public void fillConfirmPassword(String confirmPassword) {
 		scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
@@ -126,7 +127,7 @@ public class SignUpPage extends MobileFunctions {
 		if (!new CommonFunctions().isPlatformiOS()) {
 			pressBack();
 		}
-		clickDone();
+		DriverFactory.getDriver().hideKeyboard();
 //		scrollUpToElement(txtFirstName, "firstName");
 	}
 	

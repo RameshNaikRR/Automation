@@ -1,8 +1,11 @@
 package coyni_mobile_merchant.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -13,7 +16,10 @@ public class BankAccountAddedPage extends MobileFunctions {
 //	private By lblDescription = MobileBy.xpath("//*[@text='Your bank account(s) has been successfully authorized and added to your payment methods.']");
 	private By btnDone = MobileBy.xpath("//*[@text='Done']");
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 80);
+
 	public void verifySucessHeading(String expHeading) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(heading));
 		new CommonFunctions().verifyLabelText(heading, "Bank Heading", expHeading);
 	}
 

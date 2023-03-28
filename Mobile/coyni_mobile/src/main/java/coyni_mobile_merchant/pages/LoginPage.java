@@ -36,8 +36,7 @@ public class LoginPage extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
 	private By chkBxRememberMe = MobileBy
 			.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy
-			.xpath("//*[contains(@resource-id,'cvNext')]");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'cvNext')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
 	private By lblerrMsg = MobileBy.xpath(
 			"(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
@@ -196,7 +195,11 @@ public class LoginPage extends MobileFunctions {
 	public void clickLogin() {
 		new CommonFunctions().clickEnabledElement(btnLogin, "Login");
 	}
-	
+
+	public void verifyLogin() {
+		new CommonFunctions().elementView(btnLogin, "Login");
+	}
+
 	public void validateLogin() {
 		MobileElement element = (MobileElement) DriverFactory.getDriver().findElementByXPath(
 				"//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
@@ -210,38 +213,33 @@ public class LoginPage extends MobileFunctions {
 
 	public void verifyColour() throws IOException {
 		MobileElement element = (MobileElement) DriverFactory.getDriver().findElement(btnLogin);
-        byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-        BufferedImage image = ImageIO.read(new ByteArrayInputStream(screenshot));
+		byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
+		BufferedImage image = ImageIO.read(new ByteArrayInputStream(screenshot));
 
-        // Get the element's location and size
-        Point elementLocation = element.getLocation();
-        Dimension elementSize = element.getSize();
+		// Get the element's location and size
+		Point elementLocation = element.getLocation();
+		Dimension elementSize = element.getSize();
 
-        // Crop the screenshot image to the size of the element
-        BufferedImage elementImage = image.getSubimage(
-                elementLocation.getX(),
-                elementLocation.getY(),
-                elementSize.getWidth(),
-                elementSize.getHeight()
-        );
+		// Crop the screenshot image to the size of the element
+		BufferedImage elementImage = image.getSubimage(elementLocation.getX(), elementLocation.getY(),
+				elementSize.getWidth(), elementSize.getHeight());
 
-        // Get the pixel color of the center of the element image
+		// Get the pixel color of the center of the element image
 //        int pixelColor = elementImage.getRGB(elementSize.getWidth() / 2, elementSize.getHeight() / 2);
-        int pixelColor = elementImage.getRGB(elementSize.getWidth() / 2, elementSize.getHeight() / 2);     
-        ExtentTestManager.setPassMessageInReport(""+pixelColor);
-        // Verify if the pixel color matches the expected color
-        String expectedColor = "-16734558"; // Red color in ARGB format
+		int pixelColor = elementImage.getRGB(elementSize.getWidth() / 2, elementSize.getHeight() / 2);
+		ExtentTestManager.setPassMessageInReport("" + pixelColor);
+		// Verify if the pixel color matches the expected color
+		String expectedColor = "-16734558"; // Red color in ARGB format
 //        String quantityText = getText(expectedColor);
 		int value = Integer.parseInt(expectedColor);
 //		return value;
-        if (pixelColor == value) {
-            ExtentTestManager.setPassMessageInReport("Element color is primary green.");
-        } else {
-        	 ExtentTestManager.setFailMessageInReport("Element color is not primary green.");
-        }
-    }
-	
-	
+		if (pixelColor == value) {
+			ExtentTestManager.setPassMessageInReport("Element color is primary green.");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Element color is not primary green.");
+		}
+	}
+
 //	public FaceIDDisabledComponent faceIDDisabledComponent() {
 //		return new FaceIDDisabledComponent();
 //	}

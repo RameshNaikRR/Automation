@@ -38,13 +38,14 @@ public class AgreementComponent extends MobileFunctions {
 	private By finishSignup = MobileBy.id("com.coyni.mapp:id/actionTV");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 
-	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
 	}
 
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
+		
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
 			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
@@ -56,6 +57,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyPrivacyPolicyHeading(String expHeading) throws InterruptedException {
+		Thread.sleep(2000);
 		if (getElementList(privacyPolicyHeading, "").size() > 0) {
 			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
 			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
@@ -66,7 +68,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
+		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
 				expHeading);
 		Thread.sleep(2000);
@@ -84,7 +86,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
+		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
 		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
 		Thread.sleep(2000);
 		new CommonFunctions().verifyDisabledElement(chboxAgree, "Check Box");

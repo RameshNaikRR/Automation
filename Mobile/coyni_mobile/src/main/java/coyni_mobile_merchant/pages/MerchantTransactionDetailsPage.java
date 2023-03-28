@@ -24,7 +24,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'mPayoutIdTV')]");
 
 	private By lblReferenceID = MobileBy
-			.xpath("//*[contains(@resource-id,'mreferenceIdTV')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
+			.xpath("//*[contains(@resource-id,'MSfreferenceIdTV')]|//*[contains(@resource-id,'mreferenceIdTV')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
 
 	private By lblPayoutInformation = MobileBy.xpath("//*[contains(@text,'Payout Information')]");
 
@@ -232,6 +232,13 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 		getMerchantBalance();
 	}
 
+	public void verifyRetailMobileTransactions() {
+		getStatus();
+		getDateTime();
+		getReferenceID();
+		getMerchantBalance();
+	}
+	
 	public void getSaleOrderTokenAmount() {
 		ExtentTestManager.setInfoMessageInReport("Sale Order Token Amount : " + getText(lblSaleTranAmount));
 	}

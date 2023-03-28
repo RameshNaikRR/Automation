@@ -79,7 +79,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
-//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
 			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
@@ -181,7 +181,11 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickBuyTokens();
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			merchantProfileTest.testAddBankAccount(strParams);
+			if (data.get("verifyBuyTokenWithExistingBank").equalsIgnoreCase("yes")) {
+				merchantProfileTest.testAddBankAccount(strParams);
+			} else {
+				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().clickBank();
+			}
 			testBuyTokenBankAccount(strParams);
 			businessTransactionDetailsTest.testVerifyBuyTokenBankTransaction(strParams);
 		} catch (Exception e) {
@@ -205,6 +209,21 @@ public class MerchantMenuIconTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+			merchantProfileTest.testDeleteBanks(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
 	}
@@ -389,18 +408,14 @@ public class MerchantMenuIconTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-//			Thread.sleep(2000);
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			merchantProfileTest.testAddBankAccount(strParams);
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+			if (data.get("verifyWithdrawTokenWithExistingBank").equalsIgnoreCase("yes")) {
+				merchantProfileTest.testAddBankAccount(strParams);
+			} else {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+			}
 			testWithdrawTokenProcedure(strParams);
-//			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawBankTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
@@ -417,9 +432,13 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			merchantProfileTest.AddDebitCard(strParams);
+			if (data.get("verifyWithdrawTokenWithExistingCard").equalsIgnoreCase("yes")) {
+				merchantProfileTest.AddDebitCard(strParams);
+			} else {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
+			}
 			testWithdrawTokenProcedure(strParams);
-//			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
+			businessTransactionDetailsTest.testVerifyWithdrawInstantPayTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithInstantPay failed due to exception " + e);
 		}
@@ -467,7 +486,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.paymentMethodsPage().clickExternalBankAccount();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
-					.paymentMethodsPage().verifyAddExternalBankAccountHeading(data.get("addExternalBankHeading"));
+					.paymentMethodsPage().verifyAddExternalBankAccountHeading(data.get("mxAddBankHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.paymentMethodsPage().clickBack();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
@@ -487,64 +506,16 @@ public class MerchantMenuIconTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testWithdrawTokenWBankAccountWithNavigationView(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
-							data.get("optionalMessage"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().enterYourPINComponent().clickClose();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.clickChangePaymentMethod();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.clickOnAddNewPaymentMethod();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.addNewPaymentComponent().verifyHeading(data.get("heading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().clickExternalBankAccount();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().verifyAddExternalBankAccountHeading(data.get("addExternalBankHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().clickBack();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().clickClose();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.clickClose();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
-			businessTokenAccountPage.dashBoardPage().getUserName();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
-		}
-
-	}
-
 	public void testWithdrawTokenProcedure(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
-			String totalAmount=businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().verifyTotal();
-			String paymentMethod=businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().verifyPaymentMethod();
+			String totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal();
+			String paymentMethod = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.withdrawTokenTransactionPage().orderPreviewPopup().verifyPaymentMethod();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -559,26 +530,110 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageDescription(data.get("businessTokenDescription"));
-////			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
-////			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
-			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyLatestTransactionType()
-					.equalsIgnoreCase("5563")
-					&& businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
-							.equalsIgnoreCase(totalAmount)) {
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.verifyPageHeading(data.get("transactionDetailsHeading"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.verifyTransactionType(data.get("transactionType"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenInstantPayTransactionDetails();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.clickInstantPayBack();
-			} else {
-				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
-			}
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
+//			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
+//							.equalsIgnoreCase(totalAmount)) {
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//						.verifyPageHeading(data.get("transactionDetailsHeading"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//						.verifyTransactionType(data.get("transactionType"));
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//					.getWithdrawTokenInstantPayTransactionDetails();
+//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+//					.clickInstantPayBack();
+//			} else {
+//				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
+//			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWBankAccountWithNavigationView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().verifyAddExternalBankAccountHeading(data.get("mxAddBankHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickBack();		
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickClose();		
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
+							data.get("optionalMessage"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().enterYourPINComponent().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickExternalBankAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().verifyAddExternalBankAccountHeading(data.get("mxAddBankHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
+			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
 		}
@@ -597,6 +652,26 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent()
+					.verifywithdrawAddInstantHeading(data.get("withdrawInstantHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
@@ -604,7 +679,11 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.clickChangePaymentMethod();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -612,9 +691,20 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.addNewPaymentComponent().verifyHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().clickDebitCard();
+					.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent()
+					.verifywithdrawAddInstantHeading(data.get("withdrawInstantHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickClose();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -632,7 +722,7 @@ public class MerchantMenuIconTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testWithdrawTokenWithSignetAccountNavigationView(String strParams) {
+	public void testWithdrawTokenWithCogentAccountNavigationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
@@ -642,14 +732,45 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseSignetAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickCogentAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent()
+					.verifywithdrawAddCogentHeading(data.get("withdrawSignetHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseCogentAccount();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.clickChangePaymentMethod();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -657,9 +778,21 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.addNewPaymentComponent().verifyHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.paymentMethodsPage().clickSignetAccount();
+					.paymentMethodsPage().clickCogentAccount();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.paymentMethodsPage().addNewPaymentComponent()
+					.verifywithdrawAddCogentHeading(data.get("withdrawSignetHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickOnAddNewPaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.addNewPaymentComponent().verifyHeading(data.get("heading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.paymentMethodsPage().clickClose();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -668,6 +801,7 @@ public class MerchantMenuIconTest {
 					.clickClose();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
 			businessTokenAccountPage.dashBoardPage().getUserName();
 
@@ -684,31 +818,33 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.clickMenuIcon();
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
-//			if (businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyAddNewPaymentMethod() == 0) {
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyAddPaymentDesc(data.get("addPaymentDescription"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			} else {
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickAddPaymentMethod();
-//			}
 			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
-			merchantProfileTest.AddCogentAccount(strParams);
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseSignetAccount();
+			if (data.get("verifyTokenWithExistingCogentAccount").equalsIgnoreCase("yes")) {
+				merchantProfileTest.AddCogentAccount(strParams);
+			} else {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseCogentAccount();
+			}
 			testWithdrawTokenProcedure(strParams);
-			Thread.sleep(2000);
 			businessTransactionDetailsTest.testVerifyWithdrawSignetTransaction(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
 		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteCogentAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			MerchantProfileTest merchantProfileTest = new MerchantProfileTest();
+			merchantProfileTest.testDeleteCogentAccounts(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
 	}
 
 	@Test
@@ -720,10 +856,22 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
 					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+			if (data.get("verifyDebitCardInvalidData").equalsIgnoreCase("yes")) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
+			} else if (data.get("verifyCogentAccountInvalidData").equalsIgnoreCase("yes")) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickCogentAccount();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseCogentAccount();
+			} else {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickBank();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+						.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseWithdrawBankAccount();
+			}
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()

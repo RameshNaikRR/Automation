@@ -6,7 +6,6 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.AddCardPage;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
@@ -76,7 +75,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifyErrorMessageOfSignetAccount(String expHeading) {
-		new CommonFunctions().verifyLabelText(errMsgMaxSignet, "error message of maximum Signet Accounts", expHeading);
+		new CommonFunctions().verifyLabelText(errMsgMaxSignet, "error message of maximum Cogent Accounts", expHeading);
 	}
 
 	public int verifyErrorMessageSignetAccount() {
@@ -109,7 +108,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public void clickDebitCard() throws InterruptedException {
 //		Thread.sleep(2000);
 //		if (getElementList(btnDebitCard, "Debit Card").size() > 0) {
-			click(btnDebitCard, "Debit Card");
+		click(btnDebitCard, "Debit Card");
 //		}
 	}
 
@@ -118,7 +117,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 //	}
 
 	public void clickCogentAccount() {
-		click(btnCogentAccount, "Signet Account");
+		click(btnCogentAccount, "Cogent Account");
 	}
 
 	public String getBankAccounts() {
@@ -139,16 +138,33 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	public void verifyCogentAccounts(String expCogentAccount) {
 		if (getElementList(numberOfCogentAccounts, "Present Cogent Accounts number").size() > 0) {
-			new CommonFunctions().verifyLabelText(numberOfCogentAccounts, "Present Cogent Accounts",
-					expCogentAccount);
+			new CommonFunctions().verifyLabelText(numberOfCogentAccounts, "Present Cogent Accounts", expCogentAccount);
 		}
+	}
+
+	public String getCogentAccounts() {
+		String a = getText(numberOfCogentAccounts);
+		return a;
+
+	}
+
+	public String getDebitCards() {
+		String a = getText(numberOfBankAccounts);
+		return a;
+
+	}
+
+	public String getBanks() {
+		String a = getText(numberOfBankAccounts);
+		return a;
+
 	}
 
 	public void verifyBankAccounts(String expBank) {
 		if (getElementList(numberOfBankAccounts, "Present Bank Account number").size() > 0) {
 			new CommonFunctions().verifyLabelText(numberOfBankAccounts, "Present Bank Account number", expBank);
 		}
-		
+
 	}
 
 	public Integer getPresentDebitCards() {

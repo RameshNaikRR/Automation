@@ -1,8 +1,11 @@
 package coyni_mobile_merchant.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -18,7 +21,9 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 //	private By lnkLearnMore = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'Done')]|//*[contains(@text,'Done')]");
 
+	WebDriverWait wait =new WebDriverWait(DriverFactory.getDriver(), 20);
 	public void getPageHeading() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblPageHeading));
 		new CommonFunctions().elementView(lblPageHeading, "Page Heading");
 		ExtentTestManager.setInfoMessageInReport("Transaction Status : " + getText(lblPageHeading));
 	}

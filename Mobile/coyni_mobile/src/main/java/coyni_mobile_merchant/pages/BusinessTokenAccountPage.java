@@ -34,7 +34,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
 	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon_CV')]");
 	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
-	private By btnOpenNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
+	private By btnAddNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
 	private By lnKBusinessAccount = MobileBy
 			.xpath("//*[contains(@resource-id,'id/businessAccontLL')]|//*[contains(@text,'Merchant')]");
 	private By lnKPersonalAccount = MobileBy.xpath("//*[@text='Personal']");
@@ -43,7 +43,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By lnkSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'title')]");
 	private By btnAddNewDBA = MobileBy.xpath("//*[contains(@text,'Add DBA')]");
 	private By btnViewMerchantTransactions = MobileBy.xpath("//*[contains(@resource-id,'tv_merchant_transactions')]");
-	private By btnSelectAccount = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[1]");
+	private By btnSelectAccount = MobileBy.xpath("//*[contains(@resource-id,'arrow')]");
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
 	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[+ i +]");
@@ -80,12 +80,12 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	}
 
 	public void clickAddDBA() {
-//	new CommonFunctions().clickEnabledElement(btnAddDBA, "Add DBA");
+//		click(btn, "Add DBA");
 		if (getElement(btnAddDBA, "Add DBA").isEnabled()) {
 			click(btnAddDBA, "Add DBA");
 		} else {
 			ExtentTestManager.setFailMessageInReport(
-					"Add DBA is Disabled mode, because of another application is InProgress or UnderReview");
+					"Add DBA is Disabled mode, because of another DBA application is InProgress or UnderReview");
 		}
 	}
 
@@ -97,18 +97,34 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 		click(lnKPersonalAccount, "Personal Account");
 	}
 
-	public void clickOpenNewAccount() throws InterruptedException {
-		Thread.sleep(1500);
-		while (getElementList(btnOpenNewAccount, "Open New Account").size() == 0) {
-			TouchAction touch = new TouchAction(DriverFactory.getDriver());
-			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-					.moveTo(PointOption.point(540, (int) (300))).release().perform();
-		}
-		click(btnOpenNewAccount, "Open New Account");
+	public void clickAddNewAccount() throws InterruptedException {
+		scrollDownToElement(btnAddNewAccount, "add New Account");
+//		Thread.sleep(1500);
+//		while (getElementList(btnOpenNewAccount, "Open New Account").size() == 0) {
+//			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+//					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+//		}
+		click(btnAddNewAccount, "add New Account");
 	}
 
-	public void clickSelectAccount() {
-		click(btnSelectAccount, "Select Account");
+	public void clickSelectAccount() throws InterruptedException {
+//		click(btnSelectAccount, "Select Account");	
+		Thread.sleep(1500);
+		int noOfCompanies = getElementList(btnSelectAccount, "Company").size();
+		for (int i = 1; noOfCompanies >= i; i++) {
+			By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[" + i + "]");
+			click(btnEnabledAcc, "Company "+i+"");
+			if (getElement(btnAddDBA, "Add DBA").isEnabled()) {
+				scrollDownToElement(btnAddDBA, "Add DBA");
+				click(btnAddDBA, "Add DBA");
+			}else if(noOfCompanies == i) {
+					ExtentTestManager.setFailMessageInReport("No company has been possibility to add DBA, because of DBA applications is In Progress or UnderReview");
+			}else {
+				ExtentTestManager.setWarningMessageInReport("Company " + i
+						+ " has no possibility to add DBA, because of DBA applications is In Progress or UnderReview");
+			}
+		}
 	}
 
 	public void clickChildAccount1() {

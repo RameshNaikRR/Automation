@@ -71,6 +71,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	public void validateNewPasswordField(String invalid1,String invalid2,String invalid3,String invalid4,String invalid5,String invalid6,String invalid7,String invalid8,String invalid9,String minChar,String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
 		click(txtNewPassword, "New Password");
+		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid1);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid2);

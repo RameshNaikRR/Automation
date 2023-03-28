@@ -111,7 +111,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	public void verifyNewCodeMsg() throws InterruptedException {
 		new CommonFunctions().elementView(lblNewCode, "Message");
-		Thread.sleep(5000);
+		Thread.sleep(5000);//resend button is visible after 5 seconds
 		new CommonFunctions().elementView(lblDidntGetCode, "Didn't get the code");
 		click(lnkResend, "Resend");
 		new CommonFunctions().elementView(lblNewCode, "Message");
@@ -133,8 +133,10 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 //	}
 
 	public void fillOtp(String pin) {
+		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().verifyAutoFocusElement(txtCode, "pin");
 		enterText(txtCode, pin, "pin");
+//		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void verifyPhoneVerificationPage() {
