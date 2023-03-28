@@ -47,6 +47,10 @@ public class CommonFunctions {
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
 	}
+	public void doubleClick(By ele,String name) {
+		Actions actions = new Actions(DriverFactory.getDriver());
+		actions.doubleClick(objBrowserFunctions.getElement(ele, name)).build().perform();
+	}
 
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
