@@ -15,7 +15,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[.='Transfer Token']");
 	private By lblDescription = By.xpath("//span[contains(.,'Transfer coyni token')]");
-	private By txtAmount = By.cssSelector("#amount");
+	private By txtAmount = By.xpath("//input[@id='amount']");
 	private By lblAvailableBalance = By.xpath("//span[text()='Available Balance:']/following-sibling::span");
 	private By lblErrorMessage = By.xpath("//span[.='Amount is required.']");
 	private By drpdwnTransferTo = By.cssSelector("div[class*='FormField_selected_option_wallet']");
@@ -28,10 +28,17 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 //			.xpath("//div[contains(@class,'FormField_form_select_container')]//*[text()='Info']");
 	private By btnTransferWallet = By
 			.xpath("//div[contains(@class,'FormField_form_select_container')]/div[1]/div[4]/div[%s]");
+	private By insufficientFunds = By
+			.xpath("//span[@class='absolute -bottom-1 left-0 right-0 text-xs text-center text-crd5']");
 
 	private By getWallets(String WalletNumber) {
-		return By.xpath(String.format(" //div[contains(@class,'FormField_options_wrap_wallet__xaQiZ undefined')]/div[%s]",
-				WalletNumber));
+		return By.xpath(String.format(
+				" //div[contains(@class,'FormField_options_wrap_wallet__xaQiZ undefined')]/div[%s]", WalletNumber));
+	}
+
+	public void insufficientFunds() {
+		String str = getText(insufficientFunds, "Error Message");
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void selectTransferWallet() {
@@ -83,7 +90,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Amount is not verified");
 		}
 	}
-	
+
 	public void clickTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);

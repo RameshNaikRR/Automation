@@ -11,6 +11,7 @@ import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
 import coyni.apibusiness.pages.TokenWalletPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class SideBarMenuComponent extends BrowserFunctions {
 
@@ -23,6 +24,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	private By lblBusinessSetting = By.xpath("//span[text()='Business Settings']");
 
 	public void clickBusinessSettings() throws InterruptedException {
+		new CommonFunctions().verifyCursorAction(getDashBoardItems("Business Settings"), "Business Settings");
+		String str = getElement(getDashBoardItems("Business Settings"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(lblBusinessSetting, "Business Settings");
 		Thread.sleep(3000);
 		// click(getDashBoardItems("Business Settings"), "Business Settings");
@@ -31,8 +35,12 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	private By BusinessApplicationArrow = By.xpath("//div[@class='items-center text-xs -ml-2 4xl:mr-2']");
 	private By BusinessApplicationTracker = By.xpath("//div[@class='flex mt-3 h-2.5 justify-around']");
 	private By btnContinueApplication = By.xpath("//button[contains(@class,'w-60')]");
+	private By dbaName = By.xpath("");
 
 	public void clickTokenwallet() {
+		new CommonFunctions().verifyCursorAction(getDashBoardItems("Token Wallets"), "Token Wallet");
+		String str = getElement(getDashBoardItems("Token Wallets"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getDashBoardItems("Token Wallets"), "Token Wallet");
 	}
 
@@ -50,11 +58,17 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void clickEcosystemActivity() throws InterruptedException {
+		new CommonFunctions().verifyCursorAction(getDashBoardItems("Ecosystem Activity"), "Ecosystem Activity");
+		String str = getElement(getDashBoardItems("Ecosystem Activity"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getDashBoardItems("Ecosystem Activity"), "Ecosystem Activity");
 		Thread.sleep(3000);
 	}
 
 	public void clickExportFiles() throws InterruptedException {
+		new CommonFunctions().verifyCursorAction(getDashBoardItems("Export Files"), "Export Files");
+		String str = getElement(getDashBoardItems("Export Files"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getDashBoardItems("Export Files"), "Export Files");
 		Thread.sleep(3000);
 	}
@@ -68,6 +82,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void clickGetHelp() throws InterruptedException {
+		new CommonFunctions().verifyCursorAction(getDashBoardItems("Get Help"), "Get Help");
+		String str = getElement(getDashBoardItems("Get Help"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getDashBoardItems("Get Help"), "Get Help");
 		Thread.sleep(3000);
 	}
@@ -81,6 +98,9 @@ public class SideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void verifyBusinessApplicationTrackerView() {
+		new CommonFunctions().verifyCursorAction(BusinessApplicationTracker, "Business Application Tracker");
+		String str = getElement(BusinessApplicationTracker, "").getCssValue("color");
+		ExtentTestManager.setPassMessageInReport(str);
 		new CommonFunctions().elementView(BusinessApplicationTracker, "Business Application Tracker");
 	}
 

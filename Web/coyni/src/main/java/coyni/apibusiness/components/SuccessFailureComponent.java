@@ -24,7 +24,7 @@ public class SuccessFailureComponent extends BrowserFunctions {
 		click(referenceIdCopied, "Copied to ClipBoard");
 	}
 
-	public void verifyBankAddSuccesfulHeaading() {
+	public void verifyBankAddSuccesfulHeading() {
 		new CommonFunctions().elementView(lblBankAddedSuccesful, "Bank Added Succesful");
 	}
 

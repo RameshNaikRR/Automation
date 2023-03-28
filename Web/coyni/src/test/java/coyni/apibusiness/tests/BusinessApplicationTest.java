@@ -10,7 +10,9 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.apibusiness.components.SideBarMenuComponent;
+import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.pages.BankAccountPage;
+import coyni.apibusiness.pages.HomePage;
 import coyni.apibusiness.pages.ProcessingFeesPage;
 import coyni.apibusiness.pages.RegistrationAgreementsPage;
 import coyni.apibusiness.pages.RegistrationBeneficialOwnersPage;
@@ -26,6 +28,8 @@ public class BusinessApplicationTest {
 	RegistrationStartPage registrationStartPage;
 	ProcessingFeesPage processingFeesPage;
 	RegistrationAgreementsPage registrationAgreementsPage;
+	HomePage homePage;
+	TopBarComponent topBarComponent;
 
 	@BeforeTest
 	public void init() {
@@ -35,73 +39,201 @@ public class BusinessApplicationTest {
 		registrationStartPage = new RegistrationStartPage();
 		processingFeesPage = new ProcessingFeesPage();
 		registrationAgreementsPage = new RegistrationAgreementsPage();
+		homePage = new HomePage();
+		topBarComponent = new TopBarComponent();
+
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testBeneficialsOwners(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideBarMenuComponent.clickBusinessApplicationArrow();
-//			sideBarMenuComponent.clickContinueApplication();
-//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessApplicationSideBarMenu(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickTokenwallet();
+			sideBarMenuComponent.clickEcosystemActivity();
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.clickExportFiles();
+			sideBarMenuComponent.clickGetHelp();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Business Application side bar menu failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessApplicationTopBarMenu(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.VerifyTitle();
+			topBarComponent.clickUserName();
+			topBarComponent.clickIconNotification();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Business Application Top bar menu failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testRegistrationTracker(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickStartApplication();
+			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
+			registrationStartPage.registrationCompanyInfoPage()
+					.verifyPageDescription(data.get("companyInfoDescription"));
+			Thread.sleep(2000);
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyName(data.get("companyName"));
+			registrationStartPage.registrationCompanyInfoPage().clickBusinessEntityDropdown();
+			Thread.sleep(500);
+			registrationStartPage.registrationCompanyInfoPage().selectBusinessEntity(data.get("businessEntity"));
+			Thread.sleep(500);
+			registrationStartPage.registrationCompanyInfoPage().fillSSN_EIN_TIN(data.get("ssn_ein_tin"));
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyEmail(data.get("companyEmail"));
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyPhoneNumber(data.get("companyPhoneNumber"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillAddress1(data.get("addressline1"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillAddress2(data.get("addressline2"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent().fillCity(data.get("city"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.verifyCountry(data.get("country"));
+			registrationStartPage.registrationCompanyInfoPage().uploadDocument(data.get("folderName"),
+					data.get("fileName"), data.get("businessEntity"));
+
+			registrationStartPage.registrationCompanyInfoPage().clickNext();
+
+			Thread.sleep(2000);
+
+			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
+			registrationStartPage.registrationDBAInformationPage().clickNo();
+			Thread.sleep(3000);
+			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
+			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
+//			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+			registrationStartPage.registrationDBAInformationPage().fillCompanyEmail(data.get("companyEmail"));
+			registrationStartPage.registrationDBAInformationPage().fillPhoneNumber(data.get("companyPhoneNumber"));
+			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.fillAddress1(data.get("addressline1"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.fillAddress2(data.get("addressline2"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent().fillCity(data.get("city"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
+			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+//			
+//			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
 //			Thread.sleep(5000);
-//			sideBarMenuComponent.registrationSideBarMenuComponent().registrationBeneficialOwnersPage()
-//					.clickBeneficialOwners();
-//			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
-////			sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnersDesc(data.get("description"));
-//			Thread.sleep(7000);
-//			String[] id = data.get("id").split(",");
-//			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
-//			String[] ownerName = data.get("ownerName").split(",");
-//			String[] ownerShipValue = data.get("ownerShipValue").split(",");
-//			String[] firstName = data.get("firstName").split(",");
-//			String[] lastName = data.get("lastName").split(",");
-//			String[] ownerShip = data.get("ownerShip").split(",");
-//			for (int i = 0; i < 1; i++) {
-//				String num = Integer.toString(i + 1);
-//				int num1 = i;
-//				// sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBenificialOwner1(data.get("owner1"));
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillFirstName(firstName[i], num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillLastName(lastName[i], num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillDateOfBirth(data.get("dateOfBirth"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillSocialSecurityNum(data.get("ssn_ein_tin"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillOwnerShip(ownerShip[i], num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillAddress1(data.get("addressline1"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillAddress2(data.get("addressline2"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillCity(data.get("city"), num1);
-//				// sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent().clickstate();
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.selectState(data.get("state"), num1);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-//						.fillZipCode(data.get("zipCode"), num1);
-////				sideBarMenuComponent.registrationBeneficialOwnersPage().mailingAddressComponent()
-////						.verifyCountry(data.get("country"));
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
-//				Thread.sleep(10000);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
-//						data.get("fileName"));
-//				Thread.sleep(10000);
-//				sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave();
-//				Thread.sleep(10000);
-////				sideBarMenuComponent.registrationBeneficialOwnersPage().verifyBeneficialOwnerDetails(num,
-////						expOwnerlabel[i], ownerName[i], data.get("ownerShipLabel"), ownerShipValue[i]);
-//			}
-//			sideBarMenuComponent.registrationBeneficialOwnersPage().clickNext();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Beneficial Owners flow failed due to Exception " + e);
-//		}
-//
-//	}
+//			registrationStartPage.registrationDBAInformationPage().clickPacificTime();
+			Thread.sleep(3000);
+			registrationStartPage.registrationDBAInformationPage().uploadFile(data.get("folderName"),
+					data.get("fileName"));
+			System.out.println("Upload File Successfully");
+			Thread.sleep(5000);
+			registrationStartPage.registrationDBAInformationPage().clickNext();
+
+			Thread.sleep(2000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
+			Thread.sleep(7000);
+			String[] id = data.get("id").split(",");
+			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
+			String[] ownerName = data.get("ownerName").split(",");
+			String[] ownerShipValue = data.get("ownerShip").split(",");
+			String[] firstName = data.get("firstName").split(",");
+			String[] lastName = data.get("lastName").split(",");
+			String[] ownerShip = data.get("ownerShip").split(",");
+			int i = 0;
+			String num = Integer.toString(i + 1);
+			int num1 = i;
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillFirstName(data.get("firstName"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillLastName(data.get("lastName"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillDateOfBirth(data.get("dateOfBirth"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillSocialSecurityNum(data.get("ssn_ein_tin"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillOwnerShip(data.get("ownerShip"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillAddress1(data.get("addressline1"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillAddress2(data.get("addressline2"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillCity(data.get("city"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.selectState(data.get("state"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillZipCode(data.get("zipCode"));
+			Thread.sleep(6000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
+					data.get("fileName"));
+			Thread.sleep(20000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave();
+			Thread.sleep(5000);
+			Thread.sleep(5000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().clickNext();
+			Thread.sleep(2000);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickContinueApplication();
+			processingFeesPage.verifyHeading(data.get("heading"));
+			processingFeesPage.verifysubHeading();
+			processingFeesPage.verifyYourFeesCharges();
+			processingFeesPage.clickCheckBox();
+			processingFeesPage.clickNext();
+
+			Thread.sleep(3000);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickContinueApplication();
+			registrationAgreementsPage.verifyHeading(data.get("heading"));
+			registrationAgreementsPage.verifyAgreementsDescription(data.get("description"));
+			registrationAgreementsPage.clickTermsOfServices();
+			registrationAgreementsPage.scrollDownTermsOfService();
+			registrationAgreementsPage.clickPrivacyPolicy();
+			registrationAgreementsPage.scrollDownPrivacyPolicy();
+			registrationAgreementsPage.clickExit();
+			sideBarMenuComponent.clickContinueApplication();
+			registrationAgreementsPage.clickNext();
+
+			Thread.sleep(3000);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickContinueApplication();
+			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
+//			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
+			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();
+			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
+			registrationStartPage.applicationSubmissionPage().clickCheckBox();
+			registrationStartPage.applicationSubmissionPage().SignOnSubmission(data.get("signature"));
+			Thread.sleep(3000);
+			registrationStartPage.applicationSubmissionPage().clickSubmit();
+			registrationStartPage.applicationSummaryPage().verifyHeading(data.get("sumHeading"));
+//			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));
+			registrationStartPage.applicationSummaryPage().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("registration tracker  failed due to Exception " + e);
+		}
+
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBeneficialsOwners(String strParams) {
@@ -142,7 +274,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"), 0);
+					.fillZipCode(data.get("zipCode"));
 			Thread.sleep(6000);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
@@ -194,7 +326,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"), 0);
+					.fillZipCode(data.get("zipCode"));
 			// Thread.sleep(1000);
 			// sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent().clickCountry();
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
@@ -218,46 +350,46 @@ public class BusinessApplicationTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testBankAccountFlow(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
-			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
-			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-			// sideBarMenuComponent.bankAccountPage().VerifyAddBankAccountDesc(data.get("bankAccountDesc"));
-//			sideBarMenuComponent.bankAccountPage().clickLearnMore();
-//			sideBarMenuComponent.bankAccountPage().verifyFiesrvHeading(data.get("fiesrvhdg"));
-//			sideBarMenuComponent.bankAccountPage().clickBack();
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testBankAccountFlow(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+//			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+//			// sideBarMenuComponent.bankAccountPage().VerifyAddBankAccountDesc(data.get("bankAccountDesc"));
+////			sideBarMenuComponent.bankAccountPage().clickLearnMore();
+////			sideBarMenuComponent.bankAccountPage().verifyFiesrvHeading(data.get("fiesrvhdg"));
+////			sideBarMenuComponent.bankAccountPage().clickBack();
+////			Thread.sleep(5000);
+//			sideBarMenuComponent.bankAccountPage().clickImReady();
+//			sideBarMenuComponent.bankAccountPage().verifyAddBankAccountView();
+//			sideBarMenuComponent.bankAccountPage().verifyDoNotNavigateView();
+//			Thread.sleep(15000);
+//			sideBarMenuComponent.bankAccountPage().switchTab();
+//			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
+//			Thread.sleep(1000);
+////			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterUserName(data.get("userName"));
+//			Thread.sleep(2000);
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterPassword(data.get("password1"));
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickBankNext();
 //			Thread.sleep(5000);
-			sideBarMenuComponent.bankAccountPage().clickImReady();
-			sideBarMenuComponent.bankAccountPage().verifyAddBankAccountView();
-			sideBarMenuComponent.bankAccountPage().verifyDoNotNavigateView();
-			Thread.sleep(15000);
-			sideBarMenuComponent.bankAccountPage().switchTab();
-			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
-			Thread.sleep(1000);
-//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickOnBankName();
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterUserName(data.get("userName"));
-			Thread.sleep(2000);
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().enterPassword(data.get("password1"));
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickBankNext();
-			Thread.sleep(5000);
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
-			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
-			Thread.sleep(3000);
-//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
-		}
-
-	}
-
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().unSelectBank();
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickUncheckBank();
+//			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().switchToWindow();
+//			Thread.sleep(3000);
+////			sideBarMenuComponent.bankAccountPage().addBankAccountPopup().clickNext();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Bank Account Flow is failed due to Exception " + e);
+//		}
+//
+//	}
+//
 	@Test
 	@Parameters({ "strParams" })
 	public void testBeneficialOwnersFieldValidationsFlow(String strParams) {
@@ -293,7 +425,7 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"), 0);
+					.fillZipCode(data.get("zipCode"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.verifyCountry(data.get("country"));
 
@@ -476,6 +608,9 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -499,6 +634,9 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -509,19 +647,22 @@ public class BusinessApplicationTest {
 			registrationStartPage.registrationDBAInformationPage().verifyDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
 //			registrationStartPage.registrationDBAInformationPage().clickeCommerce();
+			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
 			registrationStartPage.registrationDBAInformationPage().verifyCompanyEmail(data.get("companyEmail"));
 			registrationStartPage.registrationDBAInformationPage().verifyPhoneNumber(data.get("companyPhoneNumber"));
-			registrationStartPage.registrationDBAInformationPage().fillWebsite(data.get("website"));
+
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.verifyAddline1(data.get("addressline1"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.verifyAddline2(data.get("addressline2"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.verifyCity(data.get("city"));
-			// registrationStartPage.registrationDBAInformationPage().mailingAddressComponent().verifyState(data.get("state"));
+			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
+					.verifyState(data.get("state"));
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.verifyZipCode(data.get("zipCode"));
-//			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
+			registrationStartPage.registrationDBAInformationPage().selectTimeZonee(data.get("option"),
+					data.get("timezone"));
 			registrationStartPage.registrationDBAInformationPage().clickBack();
 
 		} catch (Exception e) {
@@ -535,6 +676,9 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -604,6 +748,9 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(10000);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -644,12 +791,15 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(3000);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
 			registrationStartPage.clickContinueApplication();
 			registrationStartPage.registrationDBAInformationPage().verifyHeading(data.get("dbaHeading"));
-//			registrationStartPage.registrationDBAInformationPage().clickNo();
+			registrationStartPage.registrationDBAInformationPage().clickNo();
 			Thread.sleep(3000);
 			registrationStartPage.registrationDBAInformationPage().fillDBAName(data.get("dbaName"));
 			registrationStartPage.registrationDBAInformationPage().selectBusinessType(data.get("businessType"));
@@ -667,8 +817,8 @@ public class BusinessApplicationTest {
 
 			registrationStartPage.registrationDBAInformationPage().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
-			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("option"),
-					data.get("timezone"));
+			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
+			registrationStartPage.registrationDBAInformationPage().selectTimeZone(data.get("timezone"));
 //			
 //			registrationStartPage.registrationDBAInformationPage().clickTimeZone();
 //			Thread.sleep(5000);
@@ -686,80 +836,83 @@ public class BusinessApplicationTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddBankAccount(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
-			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
-			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
-			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
-			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
-			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
-			sideBarMenuComponent.bankAccountPage().clickExit();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddBankAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+//			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+////			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+//			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
+//			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+//			sideBarMenuComponent.bankAccountPage().clickExit();
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
+//		}
+//	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddBankAccountInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
-			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
-			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
-			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
-			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
-			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
-			if (!data.get("errMsg").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"));
-			}
-			sideBarMenuComponent.bankAccountPage().clickExit();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddBankAccountInvalidData(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+//			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+////			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+//			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
+//			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+//			if (!data.get("errMsg").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"));
+//			}
+//			sideBarMenuComponent.bankAccountPage().clickExit();
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
+//		}
+//	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testAddBankAccountValidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessApplicationArrow();
-			sideBarMenuComponent.clickContinueApplication();
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
-			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
-			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
-//			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
-			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
-			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
-			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
-			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
-			sideBarMenuComponent.bankAccountPage().clickNext();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddBankAccountValidData(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+//			sideBarMenuComponent.bankAccountPage().verifyHeadingView();
+//			sideBarMenuComponent.bankAccountPage().verifyLabelHeading(data.get("heading"));
+////			sideBarMenuComponent.bankAccountPage().VerifyFindAccountDesc(data.get("description"));
+//			sideBarMenuComponent.bankAccountPage().enterAccName(data.get("accName"));
+//			sideBarMenuComponent.bankAccountPage().enterRoutingNum(data.get("routingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmRouteNum(data.get("cnfrmRoutingNum"));
+//			sideBarMenuComponent.bankAccountPage().enterAccountNum(data.get("accNum"));
+//			sideBarMenuComponent.bankAccountPage().enterConfrmAccNum(data.get("cnfrmAccNum"));
+//			sideBarMenuComponent.bankAccountPage().clickNext();
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAddBankAccount failed due to Exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testProcessingFeeView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -777,7 +930,7 @@ public class BusinessApplicationTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAgreementsSignatureView(String strParams) {
+	public void testAgreementsView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationStartPage.verifyHeading();
@@ -786,19 +939,14 @@ public class BusinessApplicationTest {
 			registrationStartPage.clickContinueApplication();
 			registrationAgreementsPage.verifyHeading(data.get("heading"));
 			registrationAgreementsPage.verifyAgreementsDescription(data.get("description"));
-			registrationAgreementsPage.clickBusinessAgreement();
-			registrationAgreementsPage.AgreementSign(data.get("sign"));
-			registrationAgreementsPage.clickSave();
+			registrationAgreementsPage.clickTermsOfServices();
+			registrationAgreementsPage.scrollDownTermsOfService();
+			registrationAgreementsPage.clickCheckBox();
+			registrationAgreementsPage.clickAgree();
 			registrationAgreementsPage.clickPrivacyPolicy();
-//			Thread.sleep(4000);
-			
-//			registrationAgreementsPage.clickCheckBox();
-//			registrationAgreementsPage.clickAgree();
-//			registrationAgreementsPage.clickTermsOfServices();
-//			registrationAgreementsPage.clickCheckBox();
-//			registrationAgreementsPage.clickAgree();
-			registrationAgreementsPage.clickExit();
-			sideBarMenuComponent.clickContinueApplication();
+			registrationAgreementsPage.scrollDownPrivacyPolicy();
+			registrationAgreementsPage.clickCheckBox();
+			registrationAgreementsPage.clickAgree();
 			registrationAgreementsPage.clickNext();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAgreementsFlow failed due to Exception " + e);
@@ -810,6 +958,9 @@ public class BusinessApplicationTest {
 	public void testApplicationSubmissionView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessApplicationArrow();
+//			sideBarMenuComponent.clickContinueApplication();
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
@@ -818,6 +969,9 @@ public class BusinessApplicationTest {
 //			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
 			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();
 			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
+			registrationStartPage.applicationSubmissionPage().clickCheckBox();
+			registrationStartPage.applicationSubmissionPage().SignOnSubmission(data.get("signature"));
+			Thread.sleep(3000);
 			registrationStartPage.applicationSubmissionPage().clickSubmit();
 			registrationStartPage.applicationSummaryPage().verifyHeading(data.get("sumHeading"));
 //			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));

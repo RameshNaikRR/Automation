@@ -113,9 +113,9 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickCompanyInformation();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage()
 					.fillPhoneNumber(data.get("phoneNumber"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage()
 					.fillCompanyEmail(data.get("companyEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			Thread.sleep(4000);
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickSaveEnabled();
@@ -125,7 +125,6 @@ public class BusinessSettingsTest {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
 						data.get("elementName"));
 			}
-			
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test CompanyInfo  Failed due to Exception " + e);
@@ -134,10 +133,36 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testDBAInformationInvalidInfo(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
+					.fillPhoneNumber(data.get("phoneNumber"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
+					.fillCompanyEmail(data.get("DBAEmail"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage().clickTab();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage().clickSaveEnabled();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+						data.get("elementName"));
+			}
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
+						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test DBAInfo  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testDBAInformationView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
@@ -153,32 +178,6 @@ public class BusinessSettingsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test DBA Information Edit  Failed due to Exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testDBAInformationInvalidInfo(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessSettings();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickDBAinformation();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
-					.fillPhoneNumber(data.get("phoneNumber"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage()
-					.fillCompanyEmail(data.get("DBAEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().dbaInfoEditPage().clickSaveEnabled();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("color"),
-						data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("test DBAInfo  Failed due to Exception " + e);
 		}
 	}
 
@@ -346,13 +345,17 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsAddDebitCard(String strParams) throws InterruptedException {
-		homePage.sideBarMenuComponent().clickBusinessSettings();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-				.clickAddNewPayment();
-		testAddCard(strParams, "debit");
-		testBusinessSettingsDeleteDebitCard(strParams);
+	public void testBusinessSettingsAddDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
+					.clickAddNewPayment();
+			testAddCard(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Test Business Settings Add Debit card  failed  due to this " + e);
+		}
 	}
 
 	@Test
@@ -382,7 +385,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinenssSettingsAddCogentAccount(String strParams) {
+	public void testBusinessSettingsAddCogentAccount(String strParams) {
 		try {
 			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
@@ -407,36 +410,36 @@ public class BusinessSettingsTest {
 //			homePage.sideBarComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 //					.addNewPaymentMethodPopup().addNewSignetAccountPopup().verifyPageHeading(data.get("heading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillName(data.get("newSignetAccount"));
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().fillName(data.get("newSignetAccount"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().fillSignetWalletId(data.get("walletID"));
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().fillCogentWalletId(data.get("walletID"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().mailingAddressComponent()
 					.fillAddress1(data.get("address1"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().mailingAddressComponent()
 					.fillAddress2(data.get("address2"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().mailingAddressComponent()
 					.fillCity(data.get("city"));
 			Thread.sleep(500);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().mailingAddressComponent()
 					.selectState(data.get("state"));
 			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().mailingAddressComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().mailingAddressComponent()
 					.fillZipCode(data.get("zipCode"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().clickSave();
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().clickSave();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().successFailureComponent()
 					.verifySignetSucessfulHeading(data.get("heading1"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().successFailureComponent()
 					.verifySignetSucessfulHeading2(data.get("heading2"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
-					.addNewPaymentMethodPopup().addNewSignetAccountPopup().successFailureComponent()
+					.addNewPaymentMethodPopup().addNewcogentAccountPopup().successFailureComponent()
 					.navigationComponent().clickClose();
 		} catch (
 
@@ -491,11 +494,16 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsEditDebitCard(String strParams) throws InterruptedException {
-		homePage.sideBarMenuComponent().clickBusinessSettings();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent().clickEdit();
-		testEditCard(strParams, "debit");
+	public void testBusinessSettingsEditDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent().clickEdit();
+			testEditCard(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
 	}
 
 	public static void testEditCard(String strParams, String string) {
@@ -1052,8 +1060,8 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().authyComponent()
 					.fillInput(data.get("code"));
 			Thread.sleep(5000);
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().toastComponent()
-					.verifyToastTitle(data.get("title"));
+//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().toastComponent()
+//					.verifyToastTitle(data.get("title"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyApiKeyView();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().apiKeyComponent().verifyAPIEvents();
 

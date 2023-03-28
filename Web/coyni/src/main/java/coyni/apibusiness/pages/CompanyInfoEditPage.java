@@ -26,6 +26,11 @@ public class CompanyInfoEditPage extends BrowserFunctions {
 
 	public void fillCompanyEmail(String companyEmail) {
 		enterText(txtCompanyEmail, companyEmail, "Company Email");
+		try {
+			new CommonFunctions().clickTab();
+		} catch (AWTException e) {
+
+		}
 	}
 
 	public void viewPhoneNumber() {

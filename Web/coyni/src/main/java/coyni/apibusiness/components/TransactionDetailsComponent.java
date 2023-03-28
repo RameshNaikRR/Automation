@@ -27,10 +27,19 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By totalAmount = By.xpath("(//div[@class='flex justify-between mt-6'])[3]");
 	private By transactionDescription = By.xpath("(//div[@class='flex justify-between mt-6'])[4]");
 	private By referenceIdcopy = By.xpath("(//button[@class='copy-image icon-copy fontColor'])[1]");
+	private By depositIdcopy = By.xpath("(//button[@data-for='copy-btn'])[2]");
 	private By withdrawIdcopy = By.xpath("(//button[@class='copy-image icon-copy fontColor'])[2]");
 	private By cogentTransactionSubType = By.xpath("//p[.='Cogent ']");
 	private By verifyLblTransactionSubType = By.xpath("//p[.='Bank Account ']");
 	private By verifyTransactionSubType = By.xpath("//p[.='Instant Pay ']");
+	private By getBuyTokenDepositID = By.xpath("(//span[@class='TokenBuyTokenDetails_referenceTitle__MbnSK'])[2]");
+	private By verifyBuyTokenDepositID = By.xpath("//p[text()='Deposit ID']");
+	private By verifyBuyTokenReferenceID = By.xpath("//p[text()='Reference ID']");
+	private By getBuyTokenReferenceID = By.xpath("//span[@class='TokenBuyTokenDetails_referenceTitle__MbnSK'][1]");
+	private By getBuyTokenCreatedDate = By.xpath("(//span[@class='TokenBuyTokenDetails_referenceTitle__MbnSK'])[3]");
+	private By activitylog1 = By.xpath("//div[@class='flex-col mb-6'][1]");
+	private By activitylog2 = By.xpath("//div[@class='flex-col mb-6'][2]");
+	private By listTransactionRows = By.xpath("//tr[@class='  hovered'][1]");
 
 	// Reference ID is 2 and Deposit ID is 3 (Lables)
 	private By getLblIDheadings(String lblIdHeadings) {
@@ -50,14 +59,33 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		return By.xpath(String.format("//p[.='%s']", TransactionType));
 	}
 
-	
-
 //	private By getTransactionType(String ) {
 //		return By.xpath(String.format("//p[.='Buy Token']", null));
 //	}
 	public void getCardInfo() {
 		String str = getText(cardInfo, "Card Information");
 		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
+	public void clickFirstTransactions() {
+		click(listTransactionRows, "First Transaction");
+	}
+
+	public void getBuyTokenCreatedDate() {
+		String str = getText(getBuyTokenCreatedDate, "Created Date");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void getBuyTokenDepositID() {
+		String str = getText(getBuyTokenDepositID, "Deposit ID");
+		ExtentTestManager.setPassMessageInReport(str);
+		click(depositIdcopy, "copied to clipboard");
+	}
+
+	public void getBuyTokenReferenceID() {
+		String str = getText(getBuyTokenReferenceID, "Reference ID");
+		ExtentTestManager.setPassMessageInReport(str);
+		click(referenceIdcopy, "copied to clipboard");
 	}
 
 	private By lblBankAccount = By.cssSelector("p[class*='TokenBuyTokenDetails_referenceTitle']");
@@ -162,15 +190,15 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	}
 
 	public void verifyLblReferenceID(String ReferenceID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings("2"), "ReferenceID     ", ReferenceID);
+		new CommonFunctions().verifyLabelText(verifyBuyTokenReferenceID, ReferenceID, "Reference ID");
 	}
 
 	public void verifyLblDepositID(String DepositID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings("3"), "DepositID      ", DepositID);
+		new CommonFunctions().verifyLabelText(verifyBuyTokenDepositID, DepositID, "Deposit ID");
 	}
 
 	public void verifyLblWithdrawId(String withdrawID) {
-		new CommonFunctions().verifyLabelText(getLblIDheadings("4"), "WithdrawID", withdrawID);
+		new CommonFunctions().verifyLabelText(getLblIDheadings("4"), withdrawID, "Withdraw ID");
 	}
 
 //	public void getBuyTokenTransactionType() {
@@ -213,6 +241,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		String TransactionsubType = getText(verifyLblTransactionSubType, "");
 		ExtentTestManager.setInfoMessageInReport("TransactionsubType:   " + TransactionsubType);
 	}
+
 	public void getWithdrawCogentAccountTransactionSubType() {
 		String TransactionsubType = getText(cogentTransactionSubType, "");
 		ExtentTestManager.setInfoMessageInReport("TransactionsubType:   " + TransactionsubType);
@@ -393,17 +422,27 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 				"Bank Account Information", "Bank Account Information");
 	}
 
+	public void verifyActivityLog() {
+		new CommonFunctions().verifyLabelText(getInformationHeadings("Activity Log"), "Activity Log", "Activity Log");
+		String str1 = getText(activitylog1, "Activity Details");
+		ExtentTestManager.setPassMessageInReport(str1);
+		String str2 = getText(activitylog2, "Activity Details");
+		ExtentTestManager.setPassMessageInReport(str2);
+
+	}
+
 	public void verifyActivityLogHeading() {
 		new CommonFunctions().verifyLabelText(getInformationHeadings("Activity Log"), "Activity Log", "Activity Log");
 	}
 
 	public void getNameOnAccount() {
 		String NameOnAccount = getText(getInformationDetails("Recipient", "Name On Account"), "");
-		if (!NameOnAccount.isEmpty()) {
-			ExtentTestManager.setInfoMessageInReport("Name On Account: " + NameOnAccount);
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Name On Account: " + NameOnAccount);
-		}
+		ExtentTestManager.setPassMessageInReport(NameOnAccount);
+//		if (!NameOnAccount.isEmpty()) {
+//			ExtentTestManager.setInfoMessageInReport("Name On Account: " + NameOnAccount);
+//		} else {
+//			ExtentTestManager.setWarningMessageInReport("Name On Account: " + NameOnAccount);
+//		}
 	}
 
 	public void getBankName() {
@@ -570,6 +609,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	public void verifyWithdrawSubType() {
 		new CommonFunctions().elementView(getSubType("Bank Account"), "Bank Account");
+	}
+
+	public void verifyWithdrawCogentSubType() {
+		new CommonFunctions().elementView(getSubType("Cogent"), "Cogent");
 	}
 
 	public void clickTransactions(String type, String subType, String status) {

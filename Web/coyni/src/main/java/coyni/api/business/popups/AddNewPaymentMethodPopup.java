@@ -36,8 +36,8 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		return new AddCardComponent();
 	}
 
-	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
-		return new AddNewSignetAccountPopup();
+	public AddNewCogentAccountPopup addNewcogentAccountPopup() {
+		return new AddNewCogentAccountPopup();
 	}
 	public void verifyHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblAddNewPaymentMethodhdg, "add New Payment Method", heading);

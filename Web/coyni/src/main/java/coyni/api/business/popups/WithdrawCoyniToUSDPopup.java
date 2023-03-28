@@ -7,30 +7,31 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 
-	public By lblHeading = By.xpath("//h1[text()='Buy coyni Tokens']");
+	public By lblHeading = By.xpath("//h1[text()='Withdraw coyni to USD']");
 	public By btnBankAccount = By.xpath("//span[text()='Bank Account']");
 	public By btnInstantPay = By.xpath("//span[text()='Instant Pay']");
-	public By btnSignetAccount = By.xpath("//span[text()=' Signet Account']");
+	public By btnCogentAccount = By.xpath("//span[text()='Cogent Account']");
 	private By withdrawToUSDColor = By.xpath("//span[contains(text(),'Withdraw to')]/preceding-sibling::div");
-	private By SignetAccountDesc = By.xpath("//p[contains(text(),'Signet')]");
-	public By txtWithdrawSignetAccount = By.xpath("//h1[text()='Withdraw to Signet Account']");
+	private By cogentAccountDesc = By.xpath("//p[contains(text(),'Cogent')]");
+	public By txtWithdrawCogentAccount = By.xpath("//h1[text()='Withdraw to Cogent Account']");
 	public By btnChange = By.xpath("//span[text()='Change']");
 	private By btnBuyCoyni = By.xpath("//button[text()='Buy coyni']");
-	public By lblWithdrawCoyni = By.xpath("//h1[text()='Withdraw coyni to USD");
-	
+	public By lblWithdrawCoyni = By.xpath("//h1[text()='Withdraw coyni to USD']");
 
-	
 	public void verifylblHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
+
 	public void verifylblHeadingWithdraw(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWithdrawCoyni, "Heading", expHeading);
 	}
+
 	public void clickBuyCoyni() {
 		click(btnBuyCoyni, "Buy Coyni");
 	}
+
 	public void verifylblDesc(String expDesc) {
-		new CommonFunctions().verifyLabelText(SignetAccountDesc, "Signet Account Description", expDesc);
+		new CommonFunctions().verifyLabelText(cogentAccountDesc, "Signet Account Description", expDesc);
 	}
 
 	public void clickOnExternalBankAccount() {
@@ -45,15 +46,17 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		click(btnInstantPay, "Click InstantPay");
 	}
 
-	public void clickOnSignetAccount() {
-		click(btnSignetAccount, "Click Signet Account");
+	public void clickOnCogentAccount() {
+		new CommonFunctions().verifyCursorAction(btnCogentAccount, "Cogent Account");
+		click(btnCogentAccount, "Click Cogent Account");
 	}
+
 	public void clickOnChange() {
 		click(btnChange, "Change");
 	}
 
-	public void verifySignetHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(btnSignetAccount, "Signet Account", expHeading);
+	public void verifyCogentHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(btnCogentAccount, "Cogent Account", expHeading);
 	}
 
 	public void verifyBankAccountHeading(String expHeading) {
@@ -64,14 +67,14 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(btnInstantPay, "Instant Pay Heading", InstantPayHeading);
 	}
 
-	public void verifySignetAccountHeading(String SignetAccountHeading) {
-		new CommonFunctions().verifyLabelText(btnSignetAccount, "Signet Account Heading", SignetAccountHeading);
+	public void verifyCogentAccountHeading(String SignetAccountHeading) {
+		new CommonFunctions().verifyLabelText(btnCogentAccount, "Cogent Account Heading", SignetAccountHeading);
 	}
 
 	public void verifyWithdrawToUSD() {
 		new CommonFunctions().elementView(btnBankAccount, "External Bank Account");
 		new CommonFunctions().elementView(btnInstantPay, "Instant Pay");
-		new CommonFunctions().elementView(btnSignetAccount, "Signet Account");
+		new CommonFunctions().elementView(btnCogentAccount, "Cogent Account");
 	}
 
 	public WithdrawviaInstantPayPopup withdrawviaInstantPayPopup() {

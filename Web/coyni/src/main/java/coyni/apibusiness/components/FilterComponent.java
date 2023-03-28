@@ -52,8 +52,8 @@ public class FilterComponent extends BrowserFunctions {
 		click(transactionSubTypeCheckbox("5"), "Instant Pay");
 	}
 
-	public void clickSignetChkbx() {
-		click(transactionSubTypeCheckbox("6"), "Signet");
+	public void clickCogentChkbx() {
+		click(transactionSubTypeCheckbox("6"), "Cogent");
 	}
 
 	public void verifyStartDate(String expectedDate) {

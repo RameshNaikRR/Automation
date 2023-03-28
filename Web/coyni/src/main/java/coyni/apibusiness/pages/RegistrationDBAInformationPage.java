@@ -28,12 +28,12 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By lblBusinessType = By.xpath("//p[text()='Business Type']");
 	private By lblAddress = By.xpath("//p[text()='Address']");
 	private By lblCustomerService = By.xpath("//p[text()='Customer Service']");
-	private By txtDBAName = By.cssSelector("#dba-name");
+	private By txtDBAName = By.xpath("//input[@id='dba-name']");
 	private By drpdwnBusinessType = By.xpath("//div[text()='Business Type']/following-sibling::div");
 	private By radBtnRetailLocation = By.xpath("//span[text()='Retail Location']/..");
 	private By radBtneCommerce = By.xpath("//span[text()='eCommerce']/..");
-	private By txtCompanyEmail = By.cssSelector("#email");
-	private By txtphoneNumber = By.cssSelector("#phone-number");
+	private By txtCompanyEmail = By.xpath("//input[@id='email id']");
+	private By txtphoneNumber = By.xpath("//input[@id='phone-number']");
 	private By txtWebsite = By.cssSelector("#website");
 	private By drpdwnTimeZone = By.xpath("//div[text()='Select Time Zone']");
 	private By btnNext = By.xpath("//button[text()='Next']");
@@ -42,7 +42,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnEdit = By.xpath("");
 	private By dropdwnTimeZone = By.xpath("//div[text()='Pacific (PST)'");
 	private By drpdwnPacificTimeZone = By.xpath("//span[text()='Central (CST)']");
-	
+	private By drpDwnTime = By.xpath("//div[text()='Select Time Zone']/parent::div");
 
 	private By dropdwnTimeZone(String timezone) {
 		return By.xpath(String.format("//div[@class='FormField_options_wrap__wE188']", timezone));
@@ -113,44 +113,51 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		return By.xpath(String.format("//div[text()='%s']", timeZone));
 	}
 
-	public void selectTimeZone(String option, String timeZone) throws InterruptedException {
+	public void selectTimeZonee(String option, String timeZone) throws InterruptedException {
 		BrowserFunctions objBrowserFunctions = new BrowserFunctions();
 		click(drpdwnTimeZone, "TimeZone Drop down");
 		try {
 			By options = By.xpath("//div[contains(@class,'flex items-center justify-between p')]");
-			//boolean status = false;
+			// boolean status = false;
 			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
 			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
 			for (WebElement optionEle : optionsEles) {
 				if (optionEle.getText().equalsIgnoreCase(option)) {
 					optionEle.click();
-					//status = true;
+					// status = true;
 					break;
 				}
 			}
 //			if (status) {
-				ExtentTestManager.setInfoMessageInReport("pacific selected from " + timeZone + " drop down");
+			ExtentTestManager.setInfoMessageInReport("pacific selected from " + timeZone + " drop down");
 //			} else {
 //				ExtentTestManager.setFailMessageInReport(option + " not available in " + timeZone + " dropdown");
 //			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
 		}
-		
+
 //		click(getElement1(timeZone), timeZone);
 		Thread.sleep(2000);
 	}
+	public void selectTimeZone(String timeZone) {
+		new CommonFunctions().verifyCursorAction(drpdwnPacificTimeZone, "Pacific (PST)");
+		String str = getElement(drpdwnPacificTimeZone, "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
+		click(drpdwnPacificTimeZone, "PST");
+		// click(getElement(timeZone), timeZone);
+	}
 
 	public void clickTimeZone() {
-		click(drpdwnTimeZone, "TimeZone Drop down");
-		click(dropdwnTimeZone, "TimeZone Drop down");
+		click(drpDwnTime, "TimeZone Drop down");
+//		click(drpDwnTime, "TimeZone Drop down");
 //		click(getElement(timeZone), timeZone);
 //		Thread.sleep(2000);
 	}
+
 	public void clickPacificTime() {
 		click(drpdwnPacificTimeZone, "Pacific");
 	}
-
 
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
@@ -237,12 +244,16 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 
 	public void verifyCompanyEmail(String companyEmail) {
 		verifyElementDisable(txtCompanyEmail, "Company Service Email");
+//		String str = getText(txtCompanyEmail, "CompanyEmail");
+//		ExtentTestManager.setPassMessageInReport(str);
 		verifyTextBoxValue(txtCompanyEmail, "Company Email", companyEmail);
 
 	}
 
 	public void verifyPhoneNumber(String phoneNumber) {
 		verifyElementDisable(txtphoneNumber, "phone Number");
+//		String str = getText(txtphoneNumber, "phone Number");
+//		ExtentTestManager.setPassMessageInReport(str);
 		verifyTextBoxValue(txtphoneNumber, "Phone Number", phoneNumber);
 
 	}

@@ -215,9 +215,9 @@ public class MailingAddressComponent extends BrowserFunctions {
 	public void verifyState(String state) {
 		new RegistrationDBAInformationPage().verifyElementDisable(lblgetState, "state");
 		if (getText(lblgetState, "").equals(state)) {
-			ExtentTestManager.setPassMessageInReport(state + "is displayed");
+			ExtentTestManager.setPassMessageInReport(state + " is displayed");
 		} else {
-			ExtentTestManager.setFailMessageInReport(state + "is not displayed");
+			ExtentTestManager.setFailMessageInReport(state + " is not displayed");
 		}
 	}
 

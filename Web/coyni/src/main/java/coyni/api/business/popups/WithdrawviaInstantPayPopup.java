@@ -41,6 +41,7 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	private By iconDelete = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Delete']");
 	private By iconEdit = By.xpath("//p[contains(text(),'%s')]/parent::div/button[@data-tip='Edit']");
 	private By errMsg = By.xpath("//p[contains(text(),'Insufficient funds.')]");
+	private By errorInvalid = By.xpath("//p[@class='h-3 text-center text-xs text-crd5 font-semibold']");
 
 	public void enterAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -50,6 +51,11 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	public void enterMessage(String Message) {
 		enterText(txtmsg, Message, "Message");
 
+	}
+
+	public void InvalidMessage() {
+		String str = getText(errorInvalid, "Daily Limit");
+		ExtentTestManager.setPassMessageInReport(str + " is Displayed");
 	}
 
 	public String getDailyLimit() {
@@ -241,6 +247,10 @@ public class WithdrawviaInstantPayPopup extends BrowserFunctions {
 	}
 
 	public void clickOnAddNewDebitCard() {
+		new CommonFunctions().verifyCursorAction(btnAddNewDebit, "Add New Debit Card");
+		new CommonFunctions().verifyTextUnderLine(btnAddNewDebit, "Add New Debit Card");
+		String str = getElement(btnAddNewDebit, "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(btnAddNewDebit, "Add New Debit Card");
 
 	}

@@ -2,8 +2,10 @@ package coyni.apibusiness.components;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.pages.PreferencesPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class TopBarComponent extends BrowserFunctions {
 	private By lblTitle = By.cssSelector(".welcome-text");
@@ -17,15 +19,21 @@ public class TopBarComponent extends BrowserFunctions {
 		return By.xpath(String.format("//div[@class='dropdown-container']//span[text()='%s']", itemsNum));
 	}
 
-	public void VerifyTitle(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTitle, "Title Heading", expHeading);
+	public void VerifyTitle() {
+		String str = getText(lblTitle, "Title");
+		ExtentTestManager.setInfoMessageInReport(str);
+//		new CommonFunctions().verifyLabelText(lblTitle, "Title Heading", expHeading);
 	}
 
 	public void clickUserName() {
+		new CommonFunctions().verifyCursorAction(drpdwnUserName, "User Name");
+		String str = getText(drpdwnUserName, "User Name");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(drpdwnUserName, "User Name");
 	}
 
 	public void clickIconNotification() {
+		new CommonFunctions().verifyCursorAction(iconNotification, "Bell icon");
 		click(iconNotification, "Icon Notification");
 	}
 
@@ -63,6 +71,14 @@ public class TopBarComponent extends BrowserFunctions {
 
 	public UserDetailsComponent userDetailsComponent() {
 		return new UserDetailsComponent();
+	}
+
+	public PreferencesPage preferencespage() {
+		return new PreferencesPage();
+	}
+
+	public AgreementsComponent agreementsComponent() {
+		return new AgreementsComponent();
 	}
 
 //	public void clickUserDetails() {

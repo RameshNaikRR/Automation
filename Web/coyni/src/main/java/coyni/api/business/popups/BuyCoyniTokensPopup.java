@@ -47,8 +47,8 @@ public class BuyCoyniTokensPopup extends BrowserFunctions {
 		return new AddNewPaymentMethodPopup();
 	}
 
-	public AddNewSignetAccountPopup addNewSignetAccountPopup() {
-		return new AddNewSignetAccountPopup();
+	public AddNewCogentAccountPopup addNewCogentAccountPopup() {
+		return new AddNewCogentAccountPopup();
 	}
 
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {

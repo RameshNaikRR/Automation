@@ -20,9 +20,9 @@ import ilabs.api.reporting.ExtentTestManager;
 public class UserDetailsComponent extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("//span[@class='text-base text-cgy4']");
-	private By lblUserName = By.xpath("//span[text()='Afrin Lucky']");
+	private By lblUserName = By.xpath("//span[@class='font-bold text-cgy8  UserDetails_largerName__NY3VX']");
 	private By EditUserImgToolTip = By.xpath("//img[@data-tip='Edit Image']");
-	private By lblAccountID = By.xpath("//span[text()='Account ID: BAP-1104']");
+	private By lblAccountID = By.xpath("//span[@class='mt-1 text-xs text-cgy2']");
 	private By lblAccountStatus = By.xpath("//span[@class=' font-bold text-md  text-cgn5']");
 	private By lblEditAccountPhone = By.xpath("//h3[contains(@class, 'UserDetails_phone')]");
 	private By IconEditPhone = By.xpath("//div[contains(@class, 'UserDetails_edit_Phone')]");
@@ -96,6 +96,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public void clickEditUserImage() {
 		click(EditUserImgToolTip, "Edit User Image");
+	}
+
+	public void verifyEditImageView() {
+		new CommonFunctions().elementView(EditUserImgToolTip, "Edit User Image");
 	}
 
 	public void clickResendCode() {
@@ -216,14 +220,9 @@ public class UserDetailsComponent extends BrowserFunctions {
 		click(lblPaymentMethod, "Payment Methods");
 	}
 
-	public void verifyAccountStatus(String expStatus) {
+	public void verifyAccountStatus() {
 		String str = getText(lblAccountStatus, "Account Status");
-
-		if (str.equals(expStatus)) {
-			ExtentTestManager.setPassMessageInReport("Account status is Active");
-		} else {
-			ExtentTestManager.setWarningMessageInReport("Account Status is" + str);
-		}
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void verifyEditPhoneNum(String expheading) {

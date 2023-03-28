@@ -29,6 +29,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By txtConfirmRoutingNumber = By.xpath("//input[contains(@name,'confirmRouting')]");
 	private By txtCheckingAccountNumber = By.xpath("//input[contains(@name,'accountNumber')]");
 	private By txtConfirmAccountNumber = By.xpath("//input[contains(@name,'confirmAccountNumber')]");
+	private By btnMXBank = By.xpath("//div[contains(@class,'kyper-utilityrow-base-left')]");
 
 	private By status = By.xpath("//span[contains(text(),'Status')]/following-sibling::*");
 
@@ -46,10 +47,29 @@ public class AddBankAccountPopup extends BrowserFunctions {
 
 	private By btnWithdraw = By.xpath("//button[contains(text(),'Withdraw')]");
 	private By clickAdd = By.xpath("//button[text()='Add']");
+	private By btnCheckBoxforMXBank = By.xpath("//input[@type='checkbox']");
+	private By btnChecking = By.xpath("//span[contains(text(),'Checking')]");
+	private By btnStart = By.xpath("//button[contains(text(),'Start')]");
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "Heading");
 		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void clickMXBank() {
+		click(btnMXBank, "Mx Bank");
+	}
+
+	public void clickStart() {
+		click(btnStart, "start");
+	}
+
+	public void clickOnMXBankCheckBox() {
+		click(btnCheckBoxforMXBank, "Clicked on Check Box");
+	}
+
+	public void clickOnChecking() {
+		click(btnChecking, "Checked");
 	}
 
 	public void verifyStatus() {

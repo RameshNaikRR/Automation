@@ -31,6 +31,8 @@ public class ExportComponent extends BrowserFunctions {
 	private By btnClose = By.xpath("//button[text()='Close']");
 	private By popuphdngDesc = By.xpath("//span[@class='text-sm text-cgy3']");
 	private By lblDefault8 = By.xpath("//div[text()='Default (8)']");
+	private By lblexportbeingPrepared = By.xpath("//h2[text()='Your Export is Being Prepared']");
+	private By description = By.xpath("//span[@class='text-sm text-cgy3']");
 
 	public void verifyPopupHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblpopuphdng, "heading", "heading");
@@ -45,7 +47,20 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickClose() {
+		new CommonFunctions().verifyCursorAction(btnClose, "Close");
+		String str = getElement(btnClose, "").getCssValue("color");
+		ExtentTestManager.setPassMessageInReport(str);
 		click(btnClose, "close");
+	}
+
+	public void exportBeingPrepared() {
+		String str = getText(lblexportbeingPrepared, "Export Being Prepared");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void exportBeingPrepareddescription() {
+		String str = getText(description, "Export Being Prepared Description");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void verifyStartDate(String expectedDate) {
@@ -106,7 +121,11 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void verifyDefault10View() {
-		new CommonFunctions().elementView(lblDefault10, "Default10");
+		String str = getText(lblDefault10, "Default 10");
+		ExtentTestManager.setInfoMessageInReport(str);
+		new CommonFunctions().verifyCursorAction(lblDefault10, "Default 10");
+		new CommonFunctions().elementView(txtdefault10Desc, "description");
+		click(lblDefault10, "Default(10)");
 	}
 
 	public void verifyDefault8View() {
@@ -226,6 +245,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickToday() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Today"), "Today");
+		String str = getElement(getToggleInputs("Today"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Today"), "Today");
 	}
 
@@ -234,6 +256,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickYesterday() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Yesterday"), "Yesterday");
+		String str = getElement(getToggleInputs("Yesterday"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Yesterday"), "Yesterday");
 	}
 
@@ -242,6 +267,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickLast7Days() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Last 7 Days"), "Last 7 Days");
+		String str = getElement(getToggleInputs("Last 7 Days"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Last 7 Days"), "Last 7 Days");
 	}
 
@@ -250,6 +278,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickMonthtoDate() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Month to Date"), "Month to Date");
+		String str = getElement(getToggleInputs("Month to Date"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Month to Date"), "Month to Date");
 	}
 
@@ -258,6 +289,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickLastMonth() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Last Month"), "Last Month");
+		String str = getElement(getToggleInputs("Last Month"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Last Month"), "Last Month");
 	}
 
@@ -266,6 +300,9 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickCustomDateRange() {
+		new CommonFunctions().verifyCursorAction(getToggleInputs("Custom Date Range"), "Custom Date Range");
+		String str = getElement(getToggleInputs("Custom Date Range"), "").getCssValue("color");
+		ExtentTestManager.setInfoMessageInReport(str);
 		click(getToggleInputs("Custom Date Range"), "Custom Date Range");
 	}
 
@@ -274,6 +311,7 @@ public class ExportComponent extends BrowserFunctions {
 	}
 
 	public void clickStartDate() {
+		new CommonFunctions().verifyCursorAction(txtStartDate, "startDate");
 		click(txtStartDate, "startDate");
 	}
 
@@ -285,6 +323,7 @@ public class ExportComponent extends BrowserFunctions {
 		// new CommonFunctions().verifyMouseHoverAction(lnkCustom, "Custom",
 		// getPageTitle(), getCopiedData());
 		moveToElement(lnkCustom, "Moved to custom");
+		new CommonFunctions().verifyCursorAction(lnkCustom, "Custom");
 		click(lnkCustom, "Custom");
 	}
 

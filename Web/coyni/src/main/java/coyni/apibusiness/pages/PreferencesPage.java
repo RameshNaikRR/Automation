@@ -13,6 +13,7 @@ public class PreferencesPage extends BrowserFunctions {
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");
 	private By btnMountain = By.xpath("//span[text()='Mountain (MST)']");
 	private By dropDownIcon = By.xpath("//img[@src='/static/media/arrow-right.3014e1fb88e2fed86fbb76e783121d86.svg']");
+	private By defaultAccount = By.xpath("//div[@class='FormField_selected_option__7Rw29 text-[10px]  undefined']");
 
 	public By getElement(String timeZone) {
 		return By.xpath(String.format("//div[text()='%s']", timeZone));
@@ -37,6 +38,11 @@ public class PreferencesPage extends BrowserFunctions {
 
 	public void clickTimeDropdown() {
 		click(drpDwnTime, "Time Zone");
+	}
+
+	public void defaultAccount() {
+		new CommonFunctions().verifyCursorAction(defaultAccount, "Default Account");
+		click(defaultAccount, "Default Account");
 	}
 
 	public void clickSave() {

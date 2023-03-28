@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import coyni.admin.components.TransactionDetailsComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.ExportFilesPage;
 import coyni.apibusiness.pages.HomePage;
@@ -230,7 +229,7 @@ public class EcoSystemActivityTest {
 			sideBarMenuComponent.filterComponent().clickTransactionTypeClearAll();
 			sideBarMenuComponent.filterComponent().clickBankAccountChkbx();
 			sideBarMenuComponent.filterComponent().clickInstantPayChkbx();
-			sideBarMenuComponent.filterComponent().clickSignetChkbx();
+			sideBarMenuComponent.filterComponent().clickCogentChkbx();
 			sideBarMenuComponent.filterComponent().clickTrasactionSubtypeClearAll();
 			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
@@ -266,7 +265,7 @@ public class EcoSystemActivityTest {
 			sideBarMenuComponent.filterComponent().clickWithdrawChkbx();
 			sideBarMenuComponent.filterComponent().clickBankAccountChkbx();
 			sideBarMenuComponent.filterComponent().clickInstantPayChkbx();
-			sideBarMenuComponent.filterComponent().clickSignetChkbx();
+			sideBarMenuComponent.filterComponent().clickCogentChkbx();
 			sideBarMenuComponent.filterComponent().fillToCYN(data.get("toCYN"));
 			sideBarMenuComponent.filterComponent().fillFromCYN(data.get("fromCYN"));
 			sideBarMenuComponent.filterComponent().fill15CharReferenceId(data.get("referenceId"));

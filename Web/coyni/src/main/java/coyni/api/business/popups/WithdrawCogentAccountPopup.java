@@ -10,11 +10,10 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
-public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
+public class WithdrawCogentAccountPopup extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1[text()='Withdraw to Signet Account']");
-
-	private By lnkAddNewSignetAccount = By.xpath("//span[text()='Add New Signet Account']");
+	private By lblHeading = By.xpath("//h1[text()='Withdraw to Cogent Account']");
+	private By lnkAddNewCogentAccount = By.xpath("//span[text()='Add New Cogent Account']");
 	private By rdbtnBankAccount = By.xpath("(//input[@name='buy-token-radio'])[1]");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By txtAmount = By.xpath("//input[@name='amount']");
@@ -28,8 +27,8 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	private By btnCross = By.xpath("//button[@class='self-end']");
 	private By txtInsufficientfunds = By.xpath("//p[text()='Insufficient funds. ']");
 	private By txtMaxWithdrawAmount = By.xpath("//span[text()='Max Withdraw Amount']");
-	private By verifyWithdrawSignet = By.xpath("//h1[text()='Withdraw to Signet Account']");
-	
+	private By verifyWithdrawCogent = By.xpath("//h1[text()='Withdraw to Cogent Account']");
+	private By errorInvalid = By.xpath("//p[@class='h-3 text-center text-xs text-crd5 font-semibold']");
 
 	private By lblNote = By.xpath("//textarea[@name='message']");
 	private By BankAccounts = By.xpath("//div[@class='flex flex-col items-center justify-center mt-9']//p");
@@ -37,14 +36,17 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	public void clickDelete() {
 		click(iconDelete, "delete");
 	}
-
+	public void InvalidMessage() {
+		String str = getText(errorInvalid, "Daily Limit");
+		ExtentTestManager.setPassMessageInReport(str + " is Displayed");
+	}
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
-	public void verifyWithdrawHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(verifyWithdrawSignet, "WithdrawHeading", expHeading);
-	}
 
+	public void verifyWithdrawHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(verifyWithdrawCogent, "WithdrawHeading", expHeading);
+	}
 
 	public void verifyOrderPreviewForWithdraw() {
 		List<WebElement> rows = getElementsList(wtdSignetAmount, "Order Preview");
@@ -88,8 +90,9 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 		click(rdbtnBankAccount, "BankAccount");
 	}
 
-	public void clickAddNewSignetAccount() {
-		click(lnkAddNewSignetAccount, "AddNewSignetAccoungt");
+	public void clickAddNewCogentAccount() {
+		new CommonFunctions().verifyCursorAction(lnkAddNewCogentAccount, "Add new Cogent Account");
+		click(lnkAddNewCogentAccount, "AddNewSignetAccoungt");
 	}
 
 	public void clickNext() {
@@ -123,7 +126,8 @@ public class WithdrawtoSignetAccountPopup extends BrowserFunctions {
 	public void clickOutside() {
 		new CommonFunctions().clickOutSideElement();
 	}
-	public void verifyInsufficientfunds(String Insufficientfunds,String MaxWithdrawAmount) {
+
+	public void verifyInsufficientfunds(String Insufficientfunds, String MaxWithdrawAmount) {
 		getElement(txtInsufficientfunds, "Insufficientfunds").getText().equals(Insufficientfunds);
 		getElement(txtMaxWithdrawAmount, "MaxWithdrawAmount").getText().equals(MaxWithdrawAmount);
 	}

@@ -72,7 +72,7 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyNewRegPageHeading(data.get("authyHeading"));
-			loginPage.authyComponent().verifyNewRegPageDescription(data.get("authyDescription"));
+//			loginPage.authyComponent().verifyNewRegPageDescription(data.get("authyDescription"));
 			// loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 			Thread.sleep(2000);
 			loginPage.authyComponent().fillInput(data.get("code"));

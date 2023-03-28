@@ -7,7 +7,7 @@ import coyni.apibusiness.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
-public class AddNewSignetAccountPopup extends BrowserFunctions {
+public class AddNewCogentAccountPopup extends BrowserFunctions {
 	public By lblHeading = By.xpath("//h1[text()='Add New Signet Account']");
 	public By txtName = By.xpath("//input[@name='name']");
 	public By lnkPaste = By.xpath("//span[text()='Withdraw Amount']");
@@ -22,7 +22,7 @@ public class AddNewSignetAccountPopup extends BrowserFunctions {
 		enterText(txtName, message, "Name");
 	}
 
-	public void fillSignetWalletId(String walletID) {
+	public void fillCogentWalletId(String walletID) {
 		enterText(txtSignetWalletID, walletID, "walletID");
 	}
 

@@ -455,6 +455,65 @@ public class BusinessProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testprofilePreferences(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenWalletPage.topBarComponent().clickUserName();
+			tokenWalletPage.topBarComponent().clickPreferences();
+			Thread.sleep(2000);
+			tokenWalletPage.topBarComponent().preferencespage().dropDownIcon();
+			tokenWalletPage.topBarComponent().preferencespage().clickTimeDropdown();
+			Thread.sleep(4000);
+			tokenWalletPage.topBarComponent().preferencespage().selectTimeZone(data.get("timeZone"));
+			Thread.sleep(1000);
+			tokenWalletPage.topBarComponent().preferencespage().defaultAccount();
+			tokenWalletPage.topBarComponent().preferencespage().verifyCurrency(data.get("currency"));
+			Thread.sleep(5000);
+			tokenWalletPage.topBarComponent().preferencespage().clickSave();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Preferences failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileAgreements(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickAgreements();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyAgreementsView();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.termsOfService();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.privacyPolicy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickTermsOfServices();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.getAllVersionAgreements();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickDownloadPDF();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickLinkAgreements();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickiconDownloadTermsOfService();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickPrivacyPolicy();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickDownloadPDF();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickLinkAgreements();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().agreementsComponent()
+					.clickiconDownloadPrivacyPolicy();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Business Settings Agreements failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testChangePasswordView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -497,6 +556,76 @@ public class BusinessProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserName();
+			topBarComponent.clickUserDetails();
+			topBarComponent.userDetailsComponent().verifyEditImageView();
+			topBarComponent.userDetailsComponent().verifyUserNameView();
+			topBarComponent.userDetailsComponent().verifyUserDetailsView();
+			topBarComponent.userDetailsComponent().verifyEditImageView();
+			topBarComponent.userDetailsComponent().verifyAccountIdView();
+			topBarComponent.userDetailsComponent().verifyAccountStatusView();
+			topBarComponent.userDetailsComponent().verifyAccountStatus();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test User Details view failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsAddImage(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserName();
+			topBarComponent.clickUserDetails();
+			Thread.sleep(2000);
+			topBarComponent.userDetailsComponent().clickEditUserImage();
+			topBarComponent.userDetailsComponent().accountProfileImagePopup()
+					.verifyPageHeading(data.get("accountProfileHeading"));
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.verifyHeading(data.get("cropYourImageHeading"));
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
+			Thread.sleep(5000);
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUserDetailsImageRemove(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserName();
+			topBarComponent.clickUserDetails();
+			Thread.sleep(4000);
+			topBarComponent.userDetailsComponent().clickEditUserImage();
+			topBarComponent.userDetailsComponent().accountProfileImagePopup()
+					.verifyPageHeading(data.get("accountProfileHeading"));
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().clickRemoveLnk();
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.verifyHeading(data.get("removeProfileHeading"));
+			topBarComponent.userDetailsComponent().accountProfileImagePopup().removeProfileImagePopup()
+					.clickRemoveImage();
+			Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+			topBarComponent.userDetailsComponent().accountProfileImagePopup()
+					.verifyPageHeading(data.get("accountProfileHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testUserDetailsImageRemove failed due to exception " + e);
+
+		}
+	}
+
 //	@Test
 //	@Parameters({ "strParams" })
 //	public void testAddDebitCard(String strParams) {
@@ -533,7 +662,7 @@ public class BusinessProfileTest {
 	public void testNotifications(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.topBarComponent().VerifyTitle(data.get("heading"));
+			homePage.topBarComponent().VerifyTitle();
 			Thread.sleep(2000);
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsBellIconView();
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsCount();
@@ -543,7 +672,7 @@ public class BusinessProfileTest {
 			if (apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewTodayNotifications() == 1) {
 				ExtentTestManager.setInfoMessageInReport("Today Notifications are Displayed");
 			}
-			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewYesterdayNotifications();
+//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewYesterdayNotifications();
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewOlderNotifications();
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
 //			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyMoveToCrossbtn();

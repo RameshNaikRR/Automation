@@ -19,7 +19,7 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 	private By txtLastName = By.name("lastName");
 	private By txtCity = By.name("city");
 	private By drpDwnState = By.xpath("//div[text()='State']/parent::div");
-	private By txtZipCode = By.name("zipCode");
+	private By txtZipCode = By.xpath("//input[@id='zip-code-0']");
 	private By txtCountry = By.xpath("//div[text()='Country']/following-sibling::*[1]");
 	private By btnSave = By.xpath("//button[@type=\"submit\"]");
 	private By lblState = By.xpath("//div[text()='State']/parent::div");
@@ -35,17 +35,17 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
 	}
 
-	public void fillFirstName(String firstName,int i) {
+	public void fillFirstName(String firstName, int i) {
 
-		getTextField(txtFirstName, firstName, "firstName",i);
+		getTextField(txtFirstName, firstName, "firstName", i);
 	}
 
-	public void fillLastName(String lastName,int i) {
-		getTextField(txtLastName, lastName, "lastName",i);
+	public void fillLastName(String lastName, int i) {
+		getTextField(txtLastName, lastName, "lastName", i);
 	}
 
-	public void fillAddress1(String address1,int i) {
-		getTextField(txtAddress1, address1, "address line 1",i);
+	public void fillAddress1(String address1, int i) {
+		getTextField(txtAddress1, address1, "address line 1", i);
 	}
 
 	public void fillAddress2(String address2, int i) {
@@ -64,8 +64,8 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		click(getElement(state), state);
 	}
 
-	public void fillZipCode(String zipCode, int i) {
-		getTextField(txtZipCode, zipCode, "ZipCode", i);
+	public void fillZipCode(String zipCode) {
+		enterText(txtZipCode, zipCode, "ZipCode");
 	}
 
 	public void verifyCountry(String country) {

@@ -16,6 +16,8 @@ public class BuyCoyniTokensNoPaymentPopup extends BrowserFunctions {
 	private By BankAccounts = By.xpath("//div[@class='BuyTokenModal_paymentMethods__p2987']//p");
 
 	public void clickOnAddNewPayment() {
+		new CommonFunctions().verifyTextUnderLine(lnkAddNewPayment, "Add New Bank Account");
+		new CommonFunctions().verifyCursorAction(lnkAddNewPayment, "Add New Bank Account");
 		click(lnkAddNewPayment, "click Add New Payment");
 	}
 

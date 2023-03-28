@@ -45,8 +45,14 @@ public class TokenWalletPage extends BrowserFunctions {
 				walletNum));
 	}
 
+	private By clickTransaction = By.xpath("//tr[@class='  hovered'][1]");
+
 	public void clickWallet(String walletNum) {
 		click(getWallet("1"), "Wallet Number " + walletNum);
+	}
+
+	public void clickSecondWallet(String walletNum) {
+		click(getWallet("2"), "Wallet Number " + walletNum);
 	}
 
 	private By getWalletListElements(String walletElements, String rowNum) {
@@ -93,6 +99,10 @@ public class TokenWalletPage extends BrowserFunctions {
 
 		}
 
+	}
+
+	public void clickFirstTransaction() {
+		click(clickTransaction, "Transaction");
 	}
 
 	private By getlnk(String walletNum, String type) {
