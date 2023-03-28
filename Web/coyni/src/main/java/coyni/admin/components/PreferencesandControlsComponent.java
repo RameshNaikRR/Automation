@@ -8,7 +8,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class PreferencesandControlsComponent extends BrowserFunctions {
 	
-	private By heading = By.xpath("//div[contains(@class,'w-screen')]//span[contains(text(),'Preferences')]") ;
+	private By heading = By.xpath("(//span[contains(text(),'Preferences')])[2]") ;
 	private By lblTimeZone = By.xpath("(//div[contains(@class,'PortalSettings_time_type')]//div)");
 	private By lblLocalCurrency = By.xpath("(//div[contains(@class,'PortalSettings_time_type')]//div)[2]");
 	private By btnEnable = By.xpath("//button[contains(text(),'Enable')]");

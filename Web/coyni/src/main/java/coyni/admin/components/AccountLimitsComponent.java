@@ -12,7 +12,7 @@ import ilabs.web.actions.WaitForElement;
 
 public class AccountLimitsComponent extends BrowserFunctions {
 
-	private By heading = By.xpath("(//p[text()='Account Limits'])[2]");
+	private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
 	
 	private By lblBuyTokenBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span)[1]");
 	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span");

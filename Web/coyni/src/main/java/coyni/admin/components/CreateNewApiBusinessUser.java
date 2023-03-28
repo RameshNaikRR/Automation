@@ -86,7 +86,7 @@ public class CreateNewApiBusinessUser extends BrowserFunctions {
 	}
 
 	public void fillExternalAmountforBusinessFees(String amount) throws InterruptedException, AWTException {
-		enterText(getElementDoller("External Bank Account"), amount, "External Bank Amount is");
+	enterText(getElementDoller("External Bank Account"), amount, "External Bank Amount is");
 		new CommonFunctions().clickTab();
 	}
 	
