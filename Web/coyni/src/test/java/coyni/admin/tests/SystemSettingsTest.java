@@ -13,8 +13,10 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.HomePage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
+
 
 public class SystemSettingsTest {
 
@@ -82,7 +84,61 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreements Failed due to Exception  " + e);
 		}
 	}
-
+	@Test
+	@Parameters({"strParams"})
+	public void testTermOfServiceAgreementsEmptyVersion(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetails();
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			Thread.sleep(3000);
+			homePage.sideBarComponent().agreementsComponent().clearVersion();
+				new CommonFunctions().clickOutSideElement();
+						if (!data.get("errMessage").isEmpty()) {
+				 Thread.sleep(2000);
+				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
+				 //data.get("elementName"));				 
+			}
+		}
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreementsEmptyVersion Failed due to Exception  " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testTermOfServiceAgreementsReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyTermsOfServiceLastUpdateDate();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetails();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterSummery();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().uploadDocument(data.get("folderName"),
+					data.get("fileName"));
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyTosAgreement(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickNonMeterial();
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDate();
+			homePage.sideBarComponent().agreementsComponent().clickStartDate();
+//			Thread.sleep(3000);
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
+			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+					data.get("Message"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
+		}
+	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testPrivacyPolicyAgreements(String strParams) {
@@ -112,6 +168,64 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
 		}
 	}
+	@Test
+	@Parameters({"strParams"})
+	public void testPrivacyPolicyAgreementsEmptyVersion(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForPrivacyPolicy();
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			Thread.sleep(3000);
+			homePage.sideBarComponent().agreementsComponent().clearVersion();
+				new CommonFunctions().clickOutSideElement();
+			
+//			homePage.sideBarComponent().agreementsComponent().verifyVersionError(data.get("versionError"));
+			if (!data.get("errMessage").isEmpty()) {
+				 Thread.sleep(2000);
+				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
+				 //data.get("elementName"));
+				 
+			}
+		}
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreementsEmptyVersion Failed due to Exception  " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testPrivacyPolicyAgreementsReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyPrivacyPolicyLastUpdateDate();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForPrivacyPolicy();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterSummery();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().uploadDocument(data.get("folderName"),
+					data.get("fileName"));
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyPrivacyPolicy(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickNonMeterial();
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDate();
+			homePage.sideBarComponent().agreementsComponent().clickStartDate();
+//			Thread.sleep(3000);
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
+			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+					data.get("Message"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -136,6 +250,60 @@ public class SystemSettingsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({"strParams"})
+	public void testApplicationAcknowledgementAgreementsEmptyVersion(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForverifyApplicationAcknowledgement();
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			Thread.sleep(3000);
+			homePage.sideBarComponent().agreementsComponent().clearVersion();
+				new CommonFunctions().clickOutSideElement();
+			
+//			homePage.sideBarComponent().agreementsComponent().verifyVersionError(data.get("versionError"));
+			if (!data.get("errMessage").isEmpty()) {
+				 Thread.sleep(2000);
+				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
+				 //data.get("elementName"));
+				 
+			}
+		}
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationAcknowledgementAgreementsEmptyVersion Failed due to Exception  " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationAcknowledgementAgreementsReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAgreements();
+			homePage.sideBarComponent().agreementsComponent().verifyHeading();
+			homePage.sideBarComponent().agreementsComponent().verifyApplicationAcknowledgement();
+			homePage.sideBarComponent().agreementsComponent().clickTosViewDetailsForverifyApplicationAcknowledgement();
+			homePage.sideBarComponent().agreementsComponent().verifyTableHeading(data.get("AgreementList"));
+			homePage.sideBarComponent().agreementsComponent().clickEdit();
+			homePage.sideBarComponent().agreementsComponent().enterVersion();
+			homePage.sideBarComponent().agreementsComponent().enterApplicationAcknowledgementSummery();
+
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+			homePage.sideBarComponent().agreementsComponent().clickSave();
+			homePage.sideBarComponent().agreementsComponent().verifyApplicationAcknowledgement(data.get("tosHeading"));
+			homePage.sideBarComponent().agreementsComponent().clickEfftiveDateForApplicationSummery();
+			homePage.sideBarComponent().agreementsComponent().clickSchedule();
+			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+					data.get("Message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationAcknowledgementAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
 		}
 	}
 
@@ -172,6 +340,43 @@ public class SystemSettingsTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditPersonalFeeStructure Failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditPersonalFeeStructureReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickFeeStructure();
+			homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
+			sideBarComponent.feeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyHeading(data.get("expEditHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().getFirstRowHeading();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyWithdrawals();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyBuyToken();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyDispute();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
+			Thread.sleep(2000);
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editCreditCardAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editDebitCardPercentage(data.get("percentage"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+//					.editExternalBankAmount(data.get("amount"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+//		    	.editInstantPayPercentage(data.get("percentage"));
+			
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyScheduleFeeStructure(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
+			Thread.sleep(2000);
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().VerifyScheduleError();			
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testEditPersonalFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
 		}
 	}
 
@@ -212,6 +417,44 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testEditMerchantFeeStructure Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditMerchantFeeStructureReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickFeeStructure();
+			homePage.sideBarComponent().feeStructurePage().clickMerchant();
+			homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
+			sideBarComponent.feeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyMerchantHeading(data.get("expEditHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().getFirstRowHeading();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyWithdrawals();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyBuyToken();
+			// sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().verifyDispute();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickTransactionEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editSaleOrderEcommereAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editSaleOrderPercent(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickTokenAccountEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editExternalBankAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editInstantPayPercentage(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editEBAAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyScheduleFeeStructure(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().VerifyScheduleError();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testEditMerchantFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
+		}
+	} 
 	
 	//Account limits
 
@@ -245,6 +488,36 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testViewPersonalAccountLimitsReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAccountLimits();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
+			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
+			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editWSAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editAccountLimitExternalBanAmount(data.get("percentage"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickWeeklyLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyScheduleAccountLimits(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimitSchedule();
+			sideBarComponent.feeStructurePage().VerifyScheduleError();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
+		}
+	}
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -273,8 +546,33 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
 		}
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testViewMerchantAccountLimitsReschedulingwithSameDate(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickAccountLimits();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().feeStructurePage().clickMerchant();
+			homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
+			homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEdit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.editAccountLimitExternalBanAmount(data.get("amount"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickWeeklyLimits();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
+					.verifyScheduleAccountLimits(data.get("tosHeading"));
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimit();
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickAccountLimitSchedule();
+			sideBarComponent.feeStructurePage().VerifyScheduleError();
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testViewMerchantAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
+		}
 
+	}
 
 	@Test
 	@Parameters({ "strParams" })

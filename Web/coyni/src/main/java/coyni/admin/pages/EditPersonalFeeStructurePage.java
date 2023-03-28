@@ -8,16 +8,25 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
+
 public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//span[text()='Edit Personal Fee Structure']");
 	private By lblMerchantHeading = By.xpath("//span[text()='Edit Merchant Fee Structure']");
+	
 	private By lblFirstRowHeading = By
 			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-4 bg-cm1 rounded-xl')]");
-	private By lnkEdit = By.xpath("//button[text()='Edit All']");
+	private By lnkEdit = By.xpath("//a[text()='Edit All']");
 
 	private By getSideHeading(String HeadingNum) {
-		return By.xpath(String.format("(//span[contains(@class,'font-bold text-cgy8')])[%s]", HeadingNum));
+		return By.xpath(String.format("(//span[contains(@class,'font-bold text-cgy8')])[%s]", HeadingNum));	
 	}
+	private By editExternalBanAmount = By.xpath("//input[@name='WEBAAmount']");
+
+	private By editInstantPayPercentage = By.xpath("//input[@name='InstantPercent']");
+
+	private By editCreditAmount = By.xpath("//input[@name='CreditCardAmount']");
+	private By editDebitCardPercentage = By.xpath("//input[@name='DebitCardPercent']");
+
 
 	public void verifyWithdrawals() {
 		new CommonFunctions().elementView(getSideHeading("1"), "Withdrawals");
@@ -32,7 +41,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	}
 
 	public void clickEdit() {
-		new CommonFunctions().elementView(lnkEdit, "edit");
+		new CommonFunctions().elementView(lnkEdit, "Edit All");
 		click(lnkEdit, "edit");
 	}
 
@@ -50,13 +59,6 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 
 	}
 
-	private By editExternalBanAmount = By.xpath("//input[@name='WEBAAmount']");
-
-	private By editInstantPayPercentage = By.xpath("//input[@name='InstantPercent']");
-
-	private By editCreditAmount = By.xpath("//input[@name='CreditCardAmount']");
-	private By editDebitCardPercentage = By.xpath("//input[@name='DebitCardPercent']");
-
 	public void editExternalBankAmount(String data) throws InterruptedException {
 		clearText(editExternalBanAmount, "ExternalBanAmount");
 		enterText(editExternalBanAmount, data, "ExternalBanAmount");
@@ -73,8 +75,13 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	}
 
 	public void editDebitCardPercentage(String data) throws InterruptedException {
-		clearText(editDebitCardPercentage, "DebitCard Percentage");
-		enterText(editDebitCardPercentage, data, "DebitCard Percentage");
+		click(editDebitCardPercentage, "DebitCardPercentage");
+		//	Thread.sleep(2000);
+		//	clearText(editDebitCardPercentage, "DebitCard Percentage");
+			 DriverFactory.getDriver().findElement(editDebitCardPercentage).clear();
+			Thread.sleep(1000);
+			enterText(editDebitCardPercentage, data, "DebitCard Percentage");
+		
 	}
 
 	private By btnschedule = By.xpath("//button[text()='Schedule']");
@@ -188,6 +195,14 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	public void clickWeeklyLimits() {
 		click(btnLabellDaily, "Daily Limit");
 		click(btnLabelWeekly, "Weekly Limit");
+		new CommonFunctions().switchToAdmin();
+	}
+	private By ScheduleError = By.xpath("//p[contains(text(),'Please select another date')]");
+	public void VerifyScheduleError() {
+		boolean String;
+		if (String  = getText(ScheduleError, "ScheduleError") != null){
+			ExtentTestManager.setInfoMessageInReport(String + "Error is displayed ");
+		};
 	}
 	
 	private By lblAccountLimit = By.xpath("//h1[text()='Schedule Your Account Limits']");

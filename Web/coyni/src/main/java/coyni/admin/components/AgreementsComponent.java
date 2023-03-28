@@ -11,6 +11,7 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.FileHelper;
 
+
 public class AgreementsComponent extends BrowserFunctions {
 
 	private By heading = By.xpath("//span[contains(text(),'Agreements')]");
@@ -27,9 +28,10 @@ public class AgreementsComponent extends BrowserFunctions {
 			.xpath("(//span[contains(@class,'agreement-type-list__body__date')])[2]");
 	private By lblLastUpdateOfApplicationAcknowledgement = By
 			.xpath("(//span[contains(@class,'agreement-type-list__body__date')])[3]");
-	private By txtVersion = By.xpath("(//input[contains(@class,'Input_form_input__yl3pD ')])[2]");
-	private By txtChangeSummery = By
-			.xpath("//div[contains(@class,'public-DraftStyleDefault-block public-DraftStyleDefault-ltr')]");
+	private By txtVersion = By.xpath("//input[@name='version']");
+	private By txtVersionError = By.xpath("//span[text()='Version is Required']");
+	private By txtReSchedulingTostmsg = By.xpath("");
+	private By txtChangeSummery = By.xpath("//div[contains(@class,'public-DraftStyleDefault-block public-DraftStyleDefault-ltr')]");
 	private By txtverifyApplicationAcknowledgementSummery = By.xpath("//div[@contenteditable='true']");
 		//	.xpath("(//div[contains(@class,'public-DraftStyleDefault-block public-DraftStyleDefault-ltr')])[3]"); // public-DraftStyleDefault-ltr')])[1]
 	private By uploadDocument = By.xpath("//input[contains(@class,'absolute w-60 h-60 opacity-0 cursor-pointer')]");
@@ -101,6 +103,19 @@ public class AgreementsComponent extends BrowserFunctions {
 		enterText(txtVersion, GenerateRandomVersion(), "Version Number");
 	}
 
+	public void clearVersion() throws Exception {
+		Thread.sleep(2000);
+		clearText(txtVersion, "Clear Version");
+
+	}
+
+	public void verifyVersionError(String expError) {
+		//String error = getText(txtVersionError, "VersionError");
+		
+		new CommonFunctions().verifyLabelText(txtVersionError, "expError", expError);
+
+	}
+
 	public void uploadDocument(String folderName, String fileName) {
 		click(btnCancelIcon, "Cancel Icon");
 		getElement(uploadDocument, "select Document").sendKeys(FileHelper.getFilePath(folderName, fileName));
@@ -156,8 +171,12 @@ public class AgreementsComponent extends BrowserFunctions {
 	public void verifyPrivacyPolicy(String heading) {
 		new CommonFunctions().verifyLabelText(lblPrivacyPolicyAgreement, "Save Privacy Policy agreement", heading);
 	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 	
 	public void verifyApplicationAcknowledgement(String heading) {
+		
 		new CommonFunctions().verifyLabelText(lblApplicationAcknowledgementAgreement, "Save Application Acknowledgment", heading);
 	}
 

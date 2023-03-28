@@ -15,22 +15,21 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.WaitForElement;
 
 public class FeeStructurePage extends BrowserFunctions {
-	//private By lblHeading = By.xpath("//span[text()='Fee Structure']");
+	// private By lblHeading = By.xpath("//span[text()='Fee Structure']");
 	private By lnkPersonal = By.xpath("//div[text()='Personal']");
 	private By lnkMerchant = By.xpath("//button[contains(text(),'Merchant')]/..");
 	private By btnView = By.xpath("//button[contains(@data-tip,'View')]");
 	private By btnEdit = By.xpath("//button[contains(@class,'icon-edit')]");
-	 private By lblHeading = By.xpath("//span[text()='Fee Structure ']");
+	private By lblHeading = By.xpath("//span[text()='Fee Structure ']");
 	private By lblInactive = By.xpath("(//div[text()='Inactive'])[1]");
 	private By lblActive = By.xpath("//div[text()='Active'])[1]");
 	private By lblCancelled = By.xpath("//div[text()='Cancelled'])[1]");
 	private By lblScheduled = By.xpath("//div[text()='Scheduled'])[1]");
-	private By lblHeadingList =By.xpath("//th[contains(@class,'col-')]");
-	
+	private By lblHeadingList = By.xpath("//th[contains(@class,'col-')]");
+
 	public void VerifyHeadingList(String data) {
 		containsInList(lblHeadingList, data);
 	}
-	
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "expHeading", expHeading);
@@ -133,6 +132,16 @@ public class FeeStructurePage extends BrowserFunctions {
 
 	}
 
+	private By ScheduleError = By.xpath("//p[contains(text(),'Please select another date')]");
+
+	public void VerifyScheduleError() {
+		boolean String;
+		if (String = getText(ScheduleError, "ScheduleError") != null) {
+			ExtentTestManager.setInfoMessageInReport(String + "Error is displayed ");
+		}
+		;
+	}
+
 	private By txtCreditedBy = By.xpath("(//h1[@class='text-sm font-semibold text-cgy4'])[3]");
 
 	public String getCreditedByname() {
@@ -145,6 +154,7 @@ public class FeeStructurePage extends BrowserFunctions {
 	public List<WebElement> getStartDate() throws InterruptedException {
 		return getElementsList(txtDate, "txtDate");
 	}
+
 	public void containsInList(By listXpath, String data) {
 		List<WebElement> elementsList = getElementsList(listXpath, "Fee Structure Heading");
 		for (WebElement webElement : elementsList) {

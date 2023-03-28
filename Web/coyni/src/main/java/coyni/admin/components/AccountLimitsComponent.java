@@ -12,7 +12,7 @@ import ilabs.web.actions.WaitForElement;
 
 public class AccountLimitsComponent extends BrowserFunctions {
 
-	private By heading = By.xpath("(//span[text()='Account Limits'])[2]");
+	private By heading = By.xpath("(//p[text()='Account Limits'])[2]");
 	
 	private By lblBuyTokenBankAccountDailyLimit = By.xpath("(//div[text()='Bank Account']/..//span)[1]");
 	private By lblBuyTokenDebitCardDailyLimit = By.xpath("//div[text()='Debit Card']/..//span");
@@ -33,7 +33,6 @@ public class AccountLimitsComponent extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(heading, "expHeading", expHeading);
 
 	}
-
 	public AccountTableComponent accountTableComponent() {
 		return new AccountTableComponent();
 	}
@@ -94,11 +93,14 @@ public class AccountLimitsComponent extends BrowserFunctions {
 	public void enterTextDebit(String debitAmnt) throws InterruptedException {
 		Thread.sleep(2000);
 		click(btnEditDebit, "btnEditDebit");
-//		WebElement ele = getElement(btnEditDebit, "btnEditDebit");
-//		Actions a = new Actions(DriverFactory.getDriver());
-//		a.doubleClick(ele).sendKeys(debitAmnt).perform();
-//		ExtentTestManager.setInfoMessageInReport("Clicked on element debit");
-//		ExtentTestManager.setInfoMessageInReport("Entered text in element Debit");
+		WebElement ele = getElement(btnEditDebit, "btnEditDebit");
+		Actions a = new Actions(DriverFactory.getDriver());
+		WebElement ele1 = (WebElement) a.click(ele);
+		Thread.sleep(2000);
+		ele1.sendKeys(debitAmnt);
+		ExtentTestManager.setInfoMessageInReport("Clicked on element debit");
+		ExtentTestManager.setInfoMessageInReport("Entered text in element Debit");
+	
 	}
 
 	private By btnShedule = By.xpath("//button[text()='Schedule']");
