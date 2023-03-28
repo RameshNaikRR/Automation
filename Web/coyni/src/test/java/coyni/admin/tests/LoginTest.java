@@ -671,7 +671,7 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.clickSms();
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 1; i <= 6; i++) {
 				loginPage.clickResendVerification();
 				loginPage.verifyNewVerification();
 			}
