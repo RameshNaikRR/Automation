@@ -149,4 +149,5 @@ public class TokenAccountPage extends BrowserFunctions {
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
+	
 }

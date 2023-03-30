@@ -56,6 +56,16 @@ public class FilterComponent extends BrowserFunctions {
 	private By lblInProgress = By
 			.xpath("//span[text()='In Progress']/ancestor::div[@class='flex items-center mr-3 selectOption']");
 	private By lblFiltersList = By.xpath("//button[.='Clear All']/../following-sibling::div[1]/div");
+	private By txtReferencrID = By.xpath("//label[text()='Reference ID']");
+	private By lblShowingItems = By.xpath("//span[@class='entries-message']");
+	private By lblNoFilterData = By.xpath("//span[text()='No Filter Data Found']");
+	
+
+	
+	public int noFilterData() {
+		int size = getElementsList(lblNoFilterData, "").size();
+		return size;
+	}
 
 	public void fillWithdrawID(String id) {
 		enterText(getTextFieldElements("Withdraw ID"), id, "Withdraw ID");
@@ -464,8 +474,42 @@ public class FilterComponent extends BrowserFunctions {
 	public void clickchkbxApplication() {
 		click(getCheckBox("Application"), "Application");
 	}
-	
-	
+	/*
+	 * New Code for CheckBox
+	 */
+
+	public void clickCheckBox(String checkBox) {
+		By checkCheckBoxes = By.xpath(String
+				.format("//input[@type='checkbox']/following::span[text()='%s']/preceding-sibling::input", checkBox));
+		click(checkCheckBoxes, checkBox + "Check Boxs");
+	}
+
+	public String getTotalPendingTransaction() {
+		String text = getText(lblShowingItems, "Toatl Pending Transction");
+		String[] split = text.split(" ");
+		String string = split[3];
+		return string;
+	}
+
+	public void getTotalCustomerCount(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getTotalPendingTransaction());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Number of users  matches with number of entries in DB ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Number of users not matches with number of entries in DB ");
+		}
+	}
+	public void scroolDownToElement() {
+		scrollToElement(txtReferencrID, "Reference ID");
+	}
+	public FilterCalenderComponent filterCalenderComponent() {
+		return new FilterCalenderComponent();
+	}
+	public CalenderComponent calenderComponent() {
+		return new CalenderComponent();
+	}
 	
 	
 	
