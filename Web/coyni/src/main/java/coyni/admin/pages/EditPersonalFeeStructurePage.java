@@ -65,11 +65,13 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	}
 
 	public void editExternalBankAmount(String data) throws InterruptedException {
+		new CommonFunctions().doubleClick(editExternalBanAmount, "ExternalBanAmount");
 		clearText(editExternalBanAmount, "ExternalBanAmount");
 		enterText(editExternalBanAmount, data, "ExternalBanAmount");
 	}
 
 	public void editInstantPayPercentage(String data) throws InterruptedException {
+		new CommonFunctions().doubleClick(editInstantPayPercentage, "InstantPayPercentage");
 		clearText(editInstantPayPercentage, "InstantPayPercentage");
 		enterText(editInstantPayPercentage, data, "InstantPayPercentage");
 	}
@@ -81,10 +83,10 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 
 	public void editDebitCardPercentage(String data) throws InterruptedException {
 		click(editDebitCardPercentage, "DebitCardPercentage");
-		// Thread.sleep(2000);
-		// clearText(editDebitCardPercentage, "DebitCard Percentage");
-		DriverFactory.getDriver().findElement(editDebitCardPercentage).clear();
-		Thread.sleep(1000);
+		
+		new CommonFunctions().doubleClick(editDebitCardPercentage, "Debit Card Percentage");
+		clearText(editDebitCardPercentage, "Debit Card Percentage");
+		
 		enterText(editDebitCardPercentage, data, "DebitCard Percentage");
 
 	}

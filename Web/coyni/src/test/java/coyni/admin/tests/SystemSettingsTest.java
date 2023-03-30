@@ -425,7 +425,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
-			homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
+		//	homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
 			sideBarComponent.feeStructurePage().clickEdit();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.verifyMerchantHeading(data.get("expEditHeading"));

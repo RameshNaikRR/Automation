@@ -125,7 +125,11 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public String getItemsPerPage() {
-		return getText(lblItemsPerPage, "entries per page");
+		if (getElement(lblItemsPerPage, "").isEnabled()) {
+			return getText(lblItemsPerPage, "entries per page");
+		} else {
+			return "No Transaction";
+		}
 	}
 
 	public void verifyPostedTransactions(String expCount) {

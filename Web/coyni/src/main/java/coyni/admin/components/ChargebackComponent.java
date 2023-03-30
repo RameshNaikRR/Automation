@@ -8,7 +8,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class ChargebackComponent extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[text()='Open New Chargeback']");
-	private By btnChargeBack = By.cssSelector(".icon-refund-icon");
+	private By btnChargeBack = By.xpath("//button[text()='Chargeback']");
 	private By txtCaseNumber = By.xpath("//input[@name='caseNumber']");
 	private By btnReason = By.xpath("//div[text()='Select A Reason']/following-sibling::div");
 	private By btnReasonTxt = By.xpath("//span[text()='10.1']");

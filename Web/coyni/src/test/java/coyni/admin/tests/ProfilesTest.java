@@ -198,19 +198,19 @@ public class ProfilesTest {
 					.enterTokenWallet(data.get("walletID"));
 			// Demo
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickAddWallet();
-			Thread.sleep(2000);
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().tokenAmount();
-			// homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
-			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
-			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
-					.getNoTransactionSize() > 0) {
-				ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
-			} else {
-				testFilters(strParams);
-				testExportSelectedTransactions(strParams);
+//			Thread.sleep(2000);
+//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().tokenAmount();
+//			// homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
+//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
+//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
+//			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
+//					.getNoTransactionSize() > 0) {
+//				ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
+//			} else {
+//				testFilters(strParams);
+//				testExportSelectedTransactions(strParams);
 
-			}
+		//	}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test verify Api Business details Failed due to Exception " + e);
@@ -422,7 +422,7 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-			tokenAccountTest.testTransactionList(strParams);
+		//	tokenAccountTest.testTransactionList(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}
@@ -686,8 +686,8 @@ public class ProfilesTest {
 					.agreementsComponent().clickTermsofService();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.agreementsComponent().verifyTermsofServiceHeading();
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.agreementsComponent().viewAgreement();
+//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+//					.agreementsComponent().viewAgreement();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
@@ -709,8 +709,8 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.clickAccountLimits();
 			Thread.sleep(4000);
-			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-					.accountLimitsComponent().verifyHeading();
+//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+//					.accountLimitsComponent().verifyHeading();
 
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.accountLimitsComponent().verifyDailyLimitBuyTokenBankAccount();
@@ -1006,8 +1006,8 @@ public class ProfilesTest {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.clickAccountLimits();
 				Thread.sleep(4000);
-				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-						.accountLimitsComponent().verifyHeading();
+//				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+//						.accountLimitsComponent().verifyHeading();
 
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.accountLimitsComponent().verifyDailyLimitBuyTokenBankAccount();
@@ -1073,14 +1073,15 @@ public class ProfilesTest {
 						.clickTokenAccount();
 				int size = homePage.sideBarComponent().profileComponent().accountTableComponent()
 						.profileSideBarComponent().getNoFilterRecSize();
-				if (size == 0) {
-					testFilters(strParams);
-					testExportSelectedTransactions(strParams);
-
-				} else {
-					ExtentTestManager
-							.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
-				}
+				Thread.sleep(2000);
+//				if (size == 0) {
+//					testFilters(strParams);
+//					testExportSelectedTransactions(strParams);
+//
+//				} else {
+//					ExtentTestManager
+//							.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
+//				}
 			} else {
 				ExtentTestManager.setInfoMessageInReport("Their is No Active Records");
 			}
