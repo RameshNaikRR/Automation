@@ -112,17 +112,21 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 //		click(btnSelectAccount, "Select Account");	
 		Thread.sleep(1500);
 		int noOfCompanies = getElementList(btnSelectAccount, "Company").size();
+		ExtentTestManager.setWarningMessageInReport("list " + noOfCompanies);
 		for (int i = 1; noOfCompanies >= i; i++) {
 			By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[" + i + "]");
-			click(btnEnabledAcc, "Company "+i+"");
+			click(btnEnabledAcc, "Company " + i + "");
+			scrollDownToElement(btnAddDBA, "Add DBA");
 			if (getElement(btnAddDBA, "Add DBA").isEnabled()) {
-				scrollDownToElement(btnAddDBA, "Add DBA");
 				click(btnAddDBA, "Add DBA");
-			}else if(noOfCompanies == i) {
-					ExtentTestManager.setFailMessageInReport("No company has been possibility to add DBA, because of DBA applications is In Progress or UnderReview");
-			}else {
+			} else if (noOfCompanies == i+1) {
+				ExtentTestManager.setFailMessageInReport(
+						"No company has been possibility to add DBA, because of DBA applications is In Progress or UnderReview");
+
+			} else {
 				ExtentTestManager.setWarningMessageInReport("Company " + i
 						+ " has no possibility to add DBA, because of DBA applications is In Progress or UnderReview");
+				click(btnEnabledAcc, "Arrow");
 			}
 		}
 	}

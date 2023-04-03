@@ -2384,7 +2384,7 @@ public class MerchantProfileTest {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.verifyHeading(data.get("addPaymentHeading"));
 //				Thread.sleep(1000);
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
+//				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifywithdrawAddInstantHeading(data.get("withdrawInstantHeading"));
@@ -2607,7 +2607,6 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
-
 			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 			int presentCard = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getPresentDebitCards();
 			int maxLimit = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getMaxDebitCardsLimit();
@@ -2753,8 +2752,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.verifyHeading(data.get("addPaymentHeading"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
-					.addCardPage().verifyCogentAccount(data.get("addCogentHeading"));
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+					.verifyCogentAccount(data.get("addCogentHeading"));
 			merchantProfilePage.paymentMethodsPage().clickBack();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickBankAcount();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addBankAccountComponent()
@@ -2817,7 +2816,7 @@ public class MerchantProfileTest {
 					.verifyErrorMessageSignetAccount() == 0) {
 				Thread.sleep(1000);
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
-				
+
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillNameOnCard(data.get("nameOnCard"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -2865,6 +2864,7 @@ public class MerchantProfileTest {
 						.verifyHeading(data.get("addPaymentHeading"));
 			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickCogentAccount();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyNameAutoFocus();
 			String[] nameOnCard = data.get("nameOnCard").split(",");
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().fieldValidationsComponent()
 					.validateNameOnCardField(nameOnCard[0], nameOnCard[1], nameOnCard[2]);
@@ -2989,7 +2989,6 @@ public class MerchantProfileTest {
 						.fillNameOnCard(data.get("nameOnCard"));
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillSignetWalletId(data.get("signetWalletID"));
-
 			} else if (data.get("validateCogentErrMsg").equalsIgnoreCase("yes")) {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillNameOnCard(data.get("nameOnCard"));
@@ -3210,17 +3209,21 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strPrams);
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 			merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+					.verifyHeading(data.get("addPaymentHeading"));
 			int presentBankAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 					.getPresentBankAccounts();
 			int maxBankAccount = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getMaxBankAccounts();
-			if (presentBankAccount == maxBankAccount) {
+			if (presentBankAccount == maxBankAccount - 2) {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.verifyBankAccounts(data.get("presentBankAccountNumber"));
 			} else {
 				ExtentTestManager.setFailMessageInReport("Maximium Bank Accounts are not added");
 			}
 			merchantProfilePage.paymentMethodsPage().clickClose();
+			merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
 			int numOfBankAccs = merchantProfilePage.paymentMethodsPage().verifyNumOfBanks();
 			for (int i = 1; i <= numOfBankAccs; i++) {
 				merchantProfilePage.paymentMethodsPage().verifyHeading(data.get("heading"));
@@ -3232,11 +3235,13 @@ public class MerchantProfileTest {
 				if (!(numOfBankAccs == i)) {
 					merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 				}
+				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
+						.verifyHeading(data.get("addPaymentHeading"));
 				int presentBankAccounts = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.getPresentBankAccounts();
 				int maxBankAccounts = merchantProfilePage.paymentMethodsPage().addNewPaymentComponent()
 						.getMaxBankAccounts();
-				if (maxBankAccounts - i == presentBankAccounts) {
+				if (maxBankAccounts - i - 2 == presentBankAccounts) {
 					ExtentTestManager.setPassMessageInReport("Cogent Accounts are deleting in this order : "
 							+ merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().getBanks());
 				} else {

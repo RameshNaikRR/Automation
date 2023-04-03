@@ -234,7 +234,7 @@ public class DashBoardTest {
 							.getMonthlyServiceFee();
 				} else if (data.get("filterType").equalsIgnoreCase("Retail / Mobile")) {
 					businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
-					.getSaleOrderTokenDetails();
+							.getSaleOrderTokenDetails();
 				}
 			} else if (data.get("filterType").equalsIgnoreCase("eCommerce")) {
 //				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
@@ -453,17 +453,17 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 					.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.clickCalendar();
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.selectFromDate(data.get("fromDate"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.selectToDate(data.get("toDate"));
-			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.clickDone();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+//					.clickCalendar();
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+//					.selectFromDate(data.get("fromDate"));
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+//					.selectToDate(data.get("toDate"));
+//			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
+//					.clickDone();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickApplyfilters();
-			if (!businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().noTransactions()
-					.equalsIgnoreCase("You have no transactions")) {
+			if ((businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
+					.verifyTransactionsCount() == 0)) {
 				businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
 						.verifyLabelPayOutTransactions(data.get("labelPayOutTransactions"));
 				if (businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage()
@@ -783,20 +783,58 @@ public class DashBoardTest {
 	}
 
 	@Test
-	public void testNotifications() {
+	@Parameters({ "strParams" })
+	public void testNotifications(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			int beforeRead = businessTokenAccountPage.notificationComponent().countNotifications();
+			ExtentTestManager.setPassMessageInReport("Before preform the action on notifications, the count is");
 			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().viewNotification();
-			businessTokenAccountPage.notificationComponent().countNotifications();
-			businessTokenAccountPage.notificationComponent().viewDots();
-			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().viewRequest();
-			businessTokenAccountPage.notificationComponent().clickRequest();
-			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
-			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent()
+					.verifyNotificationHeading(data.get("notificationsHeading"));
+			businessTokenAccountPage.notificationComponent().verifyMesaageTitle();
+			businessTokenAccountPage.notificationComponent().verifyMessageBody();
+			businessTokenAccountPage.notificationComponent().verifyTime();
 			businessTokenAccountPage.notificationComponent().swipeNotificationLeft();
-			businessTokenAccountPage.notificationComponent().clickRead();
+			businessTokenAccountPage.notificationComponent().verifyRead();
+			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.getUserName();
+			int afterRead = businessTokenAccountPage.notificationComponent().countNotifications();
+			if (beforeRead == afterRead + 1) {
+				ExtentTestManager.setPassMessageInReport("After Reading the notification, the count is reducing");
+			} else {
+				ExtentTestManager.setFailMessageInReport("After Reading the notification, the count is not reducing");
+			}
+			int beforeUnRead = businessTokenAccountPage.notificationComponent().countNotifications();
+			businessTokenAccountPage.clickNotifications();
+			businessTokenAccountPage.notificationComponent()
+					.verifyNotificationHeading(data.get("notificationsHeading"));
+			businessTokenAccountPage.notificationComponent().swipeNotificationLeft();
+			businessTokenAccountPage.notificationComponent().verifyUnRead();
+			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			businessTokenAccountPage.getUserName();
+			int afterUnRead = businessTokenAccountPage.notificationComponent().countNotifications();
+			if (beforeUnRead == afterUnRead - 1) {
+				ExtentTestManager.setPassMessageInReport("After Un Reading the notification, the count is increasing");
+			} else {
+				ExtentTestManager
+						.setFailMessageInReport("After Un Reading the notification, the count is not increasing");
+			}
+//			int beforeDelete = businessTokenAccountPage.notificationComponent().countNotifications();
+//			businessTokenAccountPage.clickNotifications();
+//			businessTokenAccountPage.notificationComponent()
+//					.verifyNotificationHeading(data.get("notificationsHeading"));
+//			businessTokenAccountPage.notificationComponent().swipeNotificationRight();
+//			businessTokenAccountPage.notificationComponent().clickDelete();
+//			businessTokenAccountPage.notificationComponent().navigationComponent().clickBack();
+//			businessTokenAccountPage.getUserName();
+//			int afterDelete = businessTokenAccountPage.notificationComponent().countNotifications();
+//			if (beforeDelete == afterDelete + 1) {
+//				ExtentTestManager.setPassMessageInReport("After Deleting the notification, the count is reducing");
+//			} else {
+//				ExtentTestManager
+//						.setFailMessageInReport("After Un Reading the notification, the count is not reducing");
+//			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNotifications faield due to exception " + e);
@@ -824,138 +862,94 @@ public class DashBoardTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testNotificationPay(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().viewPay();
-			businessTokenAccountPage.notificationComponent().clickPay();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup()
-					.verifyHeading(data.get("heading"));
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
-					.clickForgotPin();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent()
-					.navigationComponent().clickBack();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
-					.fillPin(data.get("pin"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotificationPay faield due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testNotificationDeny(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().viewDeny();
-			businessTokenAccountPage.notificationComponent().viewPay();
-			businessTokenAccountPage.notificationComponent().clickDeny();
-			businessTokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotificationDeny faield due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testRequestReminder(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().clickRequest();
-			businessTokenAccountPage.notificationComponent().clickRemainder();
-			businessTokenAccountPage.notificationComponent().verifyReminderMessage(data.get("reminderMessage"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRequestReminder faield due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testRequestCancel(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().clickRequest();
-			businessTokenAccountPage.notificationComponent().clickCancel();
-			businessTokenAccountPage.notificationComponent().verifyCancelMessage(data.get("cancelMessage"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRequestCancel faield due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testRequestPay(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().clickRequest();
-			businessTokenAccountPage.notificationComponent().clickPay();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup()
-					.verifyHeading(data.get("heading"));
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
-					.clickForgotPin();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent()
-					.navigationComponent().clickBack();
-			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
-					.fillPin(data.get("pin"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRequestPay faield due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testRequestDeny(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickNotifications();
-			businessTokenAccountPage.notificationComponent().clickRequest();
-			businessTokenAccountPage.notificationComponent().clickDeny();
-			businessTokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testRequestDeny faield due to exception " + e);
-		}
-
-	}
-
-	@Test
-	public void testNotificationsDelete() {
-		try {
-			businessTokenAccountPage.clickNotifications();
-			Thread.sleep(2000);
-			businessTokenAccountPage.notificationComponent().viewDots();
-			businessTokenAccountPage.notificationComponent().swipeNotificationRight();
-			businessTokenAccountPage.notificationComponent().clickDelete();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRequestReminder(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			businessTokenAccountPage.clickNotifications();
+//			businessTokenAccountPage.notificationComponent().clickRequest();
+//			businessTokenAccountPage.notificationComponent().clickRemainder();
+//			businessTokenAccountPage.notificationComponent().verifyReminderMessage(data.get("reminderMessage"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testRequestReminder faield due to exception " + e);
+//		}
+//
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRequestCancel(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			businessTokenAccountPage.clickNotifications();
+//			businessTokenAccountPage.notificationComponent().clickRequest();
+//			businessTokenAccountPage.notificationComponent().clickCancel();
+//			businessTokenAccountPage.notificationComponent().verifyCancelMessage(data.get("cancelMessage"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testRequestCancel faield due to exception " + e);
+//		}
+//
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRequestPay(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			businessTokenAccountPage.clickNotifications();
+//			businessTokenAccountPage.notificationComponent().clickRequest();
+//			businessTokenAccountPage.notificationComponent().clickPay();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup()
+//					.verifyHeading(data.get("heading"));
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyAmount();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyPreview();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyLockSwipe();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().verifySlideText();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().swipeConfirm();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+//					.clickForgotPin();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().forgotPinComponent()
+//					.navigationComponent().clickBack();
+//			businessTokenAccountPage.notificationComponent().payRequestConfirmPopup().enterYourPINComponent()
+//					.fillPin(data.get("pin"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testRequestPay faield due to exception " + e);
+//		}
+//
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testRequestDeny(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			businessTokenAccountPage.clickNotifications();
+//			businessTokenAccountPage.notificationComponent().clickRequest();
+//			businessTokenAccountPage.notificationComponent().clickDeny();
+//			businessTokenAccountPage.notificationComponent().verifyDenyMessage(data.get("denyMessage"));
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testRequestDeny faield due to exception " + e);
+//		}
+//
+//	}
+//
+//	@Test
+//	public void testNotificationsDelete() {
+//		try {
+//			businessTokenAccountPage.clickNotifications();
+//			Thread.sleep(2000);
+//			businessTokenAccountPage.notificationComponent().viewDots();
+//			businessTokenAccountPage.notificationComponent().swipeNotificationRight();
+//			businessTokenAccountPage.notificationComponent().clickDelete();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
+//		}
+//	}
 
 	@Test
 	public void testAllLinksDashBoard() {

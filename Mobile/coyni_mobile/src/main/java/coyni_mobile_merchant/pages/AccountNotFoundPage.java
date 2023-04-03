@@ -21,4 +21,5 @@ public class AccountNotFoundPage extends MobileFunctions {
 	public void verifyTryAgainView() {
 		new CommonFunctions().elementView(btnTryAgain, "Try Again");
 	}
+	
 }

@@ -53,23 +53,21 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	}
 
 	public void clickValidTransaction() throws InterruptedException {
+//		Thread.sleep(1000);
 		int noOfTransactionsInPage = getElementList(lblAmount, "No of Transactions").size();
 		for (int i = 1; noOfTransactionsInPage - 1 >= i; i++) {
 			Thread.sleep(1000);
-			if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
-				break;
-			}
 			By moreThanZero = MobileBy
 					.xpath("(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + i + "]");
 			String TransactionAmount = getText(moreThanZero);
-			double amount = Double.parseDouble(TransactionAmount);
+			String Amount = TransactionAmount.replace("-", "");
+			double amount = Double.parseDouble(Amount);
 			if (amount > 0.00) {
 				click(moreThanZero, "Greater Than 0.00 Transaction");
 			} else if (noOfTransactionsInPage - 1 == i) {
 				Thread.sleep(1000);
 				for (int t = 1; t <= 6; t++) {
-
-					if (getElementList(lblNoTransactions, "Transactions").size() <= 1) {
+					if (getElementList(lblNoTransactions, "Transactions").size() >= 1) {
 						for (int c = 1; c <= 1; c++) {
 							Thread.sleep(1000);
 							if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
@@ -85,7 +83,8 @@ public class PayoutTransactionsPage extends MobileFunctions {
 							By moreThanZeroTrans = MobileBy.xpath(
 									"(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + j + "]");
 							String TransAmount = getText(moreThanZeroTrans);
-							double transAmount = Double.parseDouble(TransAmount);
+							String mount = TransactionAmount.replace("-", "");
+							double transAmount = Double.parseDouble(mount);
 							if (transAmount > 0.00) {
 								click(moreThanZeroTrans, "Greater Than 0.00 Transaction");
 								break;
@@ -103,6 +102,9 @@ public class PayoutTransactionsPage extends MobileFunctions {
 			} else {
 				ExtentTestManager.setWarningMessageInReport("Transaction " + i + " has not been greater than 0.00");
 			}
+			if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
+				break;
+			}
 		}
 
 	}
@@ -117,13 +119,14 @@ public class PayoutTransactionsPage extends MobileFunctions {
 	}
 
 	public int verifyTransactionsCount() throws InterruptedException {
-		wait.until(ExpectedConditions.presenceOfElementLocated(lblNoTransactions));
+		Thread.sleep(1500);
 		return DriverFactory.getDriver().findElements(lblNoTransactions).size();
 	}
 
 	public double verifyTransactionAmount() {
-		String quantityText = getText(lblAmount);
-		double value = Double.parseDouble(quantityText);
+		String amount = getText(lblAmount);
+		String amountText = amount.replace("-", "");
+		double value = Double.parseDouble(amountText);
 		return value;
 //		Integer qty = Integer.valueOf(quantityText);
 	}

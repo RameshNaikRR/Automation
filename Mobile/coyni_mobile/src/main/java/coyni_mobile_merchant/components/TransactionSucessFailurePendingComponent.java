@@ -11,7 +11,7 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class TransactionSucessFailurePendingComponent extends MobileFunctions {
-	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]|//*[contains(@text,'Successful')]");
+	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHeading')]|//*[contains(@text,'Successful')]");
 	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]|//*[contains(@text,'A new refund')]");
 	private By lblRefundDescription = MobileBy.xpath("//*[contains(@text,'A new refund')]");
 	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'lyAmount')]|//*[contains(@resource-id,'Amount')]");
@@ -25,7 +25,7 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	public void getPageHeading() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(lblPageHeading));
 		new CommonFunctions().elementView(lblPageHeading, "Page Heading");
-		ExtentTestManager.setInfoMessageInReport("Transaction Status : " + getText(lblPageHeading));
+		ExtentTestManager.setPassMessageInReport("Transaction Status : " + getText(lblPageHeading));
 	}
 
 	public void getPageDescription() {

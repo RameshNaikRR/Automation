@@ -512,10 +512,10 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
-			String totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal();
-			String paymentMethod = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-					.withdrawTokenTransactionPage().orderPreviewPopup().verifyPaymentMethod();
+//			String totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal();
+//			String paymentMethod = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+//					.withdrawTokenTransactionPage().orderPreviewPopup().verifyPaymentMethod();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()

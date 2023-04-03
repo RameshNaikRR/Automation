@@ -15,57 +15,98 @@ import io.appium.java_client.MobileBy;
 public class NotificationComponent extends MobileFunctions {
 
 	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
-	private By btnRequest = MobileBy.xpath("//*[contains(@resource-id,'requestsTV')]");
-	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelLL')]");
-	private By btnReminder = MobileBy.xpath("//*[contains(@resource-id,'remindLL')]");
-	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'denyLL')]");
-	private By btnPay = MobileBy.xpath("//*[@text='Pay']");
-	private By countNotification = MobileBy.xpath("//*[contains(@resource-id,'cvNotification')]");
-	private By viewDot = MobileBy.xpath("//*[contains(@resource-id,'readStatusCV')]");
-	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'notificationItemLL')]");
+	private By lblHeading = MobileBy.id("com.coyni.mapp:id/headerTV");
+	private By lblTime = MobileBy.xpath("(//*[contains(@resource-id,'timeTV')])[1]");
+	private By lblBody = MobileBy.xpath("(//*[contains(@resource-id,'messageTV')])[1]");
+	private By lblTitle = MobileBy.xpath("(//*[contains(@resource-id,'subject')])[1]");
+//	private By btnPay = MobileBy.xpath("//*[@text='Pay']");
+	private By countNotification = MobileBy.id("com.coyni.mapp:id/countTV");
+	private By viewDot = MobileBy
+			.xpath("(//*[contains(@resource-id,'notificationsRV')]//*[contains(@resource-id,'readStatusCV')])[1]");
+	private By notificationSwipe = MobileBy.xpath("(//*[contains(@resource-id,'subject')])[1]");
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
-	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
-	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
-	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
-	private By lblRead = MobileBy.xpath("//*[contains(@resource-id,'readStatusTV')]");
-	private By lblNotifications = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
-	
+//	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+//	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+//	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
+	private By lblRead = MobileBy.xpath("//*[contains(@text,'READ')]");
+	private By lblUnRead = MobileBy.xpath("//*[contains(@text,'UNREAD')]");
+//	private By lblNotifications = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]");
+
 	public void clickNotifications() {
 		click(btnNotifications, "Notification");
 	}
 
+	public void verifyNotificationHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Notifications", heading);
+	}
+
 	public void verifyNotifications() {
-		new CommonFunctions().elementView(lblNotifications, "Notification");
-	}
-	
-	public void clickRequest() {
-		click(btnRequest, "Request");
+		new CommonFunctions().elementView(lblHeading, "Notification");
 	}
 
-	public void clickRead() {
-		click(lblRead, "Read");
+	public void verifyUnRead() throws InterruptedException {
+		new CommonFunctions().elementView(lblUnRead, "UNREAD");
+		click(lblUnRead, "UNREAD");
+		Thread.sleep(1500);
+//		if (getElementList(viewDot, "Dot").size() == 1) {
+//			ExtentTestManager.setPassMessageInReport("After clickin on READ, the dot is visible");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("After clickin on READ, the dot is not visible");
+//		}
 	}
 
-	public void verifyRead() {
-		new CommonFunctions().elementView(lblRead, "Read ");
+	public void verifyMessageBody() {
+		new CommonFunctions().elementView(lblBody, "Body");
 	}
 
-	public void countNotifications() {
-		List<WebElement> elementList = getElementList(countNotification, "Count Elements");
-		ExtentTestManager.setInfoMessageInReport("Element List : " + elementList.size());
+	public void verifyTime() {
+		new CommonFunctions().elementView(lblTime, "Time");
 	}
 
-	public void viewNotification() {
-		new CommonFunctions().elementView(btnNotifications, "View Notification");
+	public void verifyMesaageTitle() {
+		new CommonFunctions().elementView(lblTitle, "Title");
+
 	}
 
-	public void viewRequest() {
-		new CommonFunctions().elementView(btnRequest, "View Request");
+	public void verifyRead() throws InterruptedException {
+		new CommonFunctions().elementView(lblRead, "READ");
+		click(lblRead, "READ");
+		Thread.sleep(1500);
+//		if (getElementList(viewDot, "Dot").size() == 0) {
+//			ExtentTestManager.setPassMessageInReport("After clickin on READ, the dot is not visible");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("After clickin on READ, the dot is visible");
+//		}
+	}
+//	public void clickRead() {
+//		click(lblRead, "Read");
+//	}
+
+//	public void verifyRead() {
+//		new CommonFunctions().elementView(lblRead, "Read ");
+//	}
+
+	public int countNotifications() throws InterruptedException {
+//		Thread.sleep();
+		String elementList = getText(countNotification);
+		ExtentTestManager.setPassMessageInReport("Notification count is " + elementList);
+//		int count=Integer.parseInt(elementList);
+		int cunt = Integer.parseInt(elementList);
+		ExtentTestManager.setPassMessageInReport("Notification count is " + cunt);
+		return cunt;
 	}
 
-	public void viewPay() {
-		new CommonFunctions().elementView(btnPay, "View Pay");
-	}
+//	public void viewNotification() {
+//		new CommonFunctions().elementView(btnNotifications, "View Notification");
+//	}
+//
+//	public void viewRequest() {
+//		new CommonFunctions().elementView(btnRequest, "View Request");
+//	}
+//
+//	public void viewPay() {
+//		new CommonFunctions().elementView(btnPay, "View Pay");
+//	}
 
 	public void viewDots() {
 		scrollDownToElement(viewDot, "view Dot");
@@ -77,9 +118,9 @@ public class NotificationComponent extends MobileFunctions {
 		click(btnDelete, "Delete Notification");
 	}
 
-	public void viewDeny() {
-		new CommonFunctions().elementView(btnDeny, "Deny");
-	}
+//	public void viewDeny() {
+//		new CommonFunctions().elementView(btnDeny, "Deny");
+//	}
 
 	public void readDot() {
 		if (getElementList(viewDot, "read Message").size() > 0) {
@@ -89,58 +130,20 @@ public class NotificationComponent extends MobileFunctions {
 		}
 	}
 
-	public void verifyDenyMessage(String heading) {
-		new CommonFunctions().verifyLabelText(denyMessage, "Deny Message", heading);
-	}
-
-	public void verifyReminderMessage(String heading) {
-		new CommonFunctions().verifyLabelText(reminderMessage, "Reminder Message", heading);
-	}
-
-	public void verifyCancelMessage(String heading) {
-		new CommonFunctions().verifyLabelText(cancelMessage, "Cancel Message", heading);
-	}
-
 	public void swipeNotificationRight() {
-		if (verifyElementDisplayed(viewDot, "Dot")) {
-			swipeOnElement(notificationSwipe, "Swiped Deleted Notification", SwipeDirection.LEFT);
-		}
+//		if (verifyElementDisplayed(viewDot, "Dot")) {
+		swipeOnElement(notificationSwipe, "Swiped Deleted Notification", SwipeDirection.LEFT);
+//		}
 	}
 
 	public void swipeNotificationLeft() {
-		if (verifyElementDisplayed(viewDot, "Dot")) {
-			swipeOnElement(notificationSwipe, "Swiped Read Notification", SwipeDirection.RIGHT);
-		}
+//		if (verifyElementDisplayed(viewDot, "Dot")) {
+		swipeOnElement(notificationSwipe, "Swiped Read Notification", SwipeDirection.RIGHT);
+//		}
 	}
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
-	}
-
-	// Added
-	public void clickPay() {
-		if (getElement(btnPay, "Click Pay").isDisplayed()) {
-			click(btnPay, "Pay");
-			// String senderName
-			// (By.xpath(String.format("btnPay", senderName)), "Pay button");
-		} else {
-			System.out.println("Pay button is in disable mode");
-		}
-	}
-
-	public void clickDeny() {
-		click(btnDeny, "Deny");
-
-	}
-
-	public void clickRemainder() {
-		click(btnReminder, "Reminder");
-
-	}
-
-	public void clickCancel() {
-		click(btnCancel, "Cancel");
-
 	}
 
 	public PayRequestConfirmPopup payRequestConfirmPopup() {

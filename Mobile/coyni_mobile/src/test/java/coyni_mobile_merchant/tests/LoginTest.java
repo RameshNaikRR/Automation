@@ -19,6 +19,7 @@ public class LoginTest {
 	LoginPage loginPage;
 	LandingPage landingPage;
 	BusinessTokenAccountPage businessTokenAccountPage;
+
 	@BeforeTest
 	public void init() {
 		DriverFactory.getDriver().resetApp();
@@ -81,6 +82,7 @@ public class LoginTest {
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
 			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
 			loginPage.agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyUpdateHeading"));
+			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
 			businessTokenAccountPage.getUserName();
 
 		} catch (Exception e) {
@@ -124,11 +126,12 @@ public class LoginTest {
 			loginPage.VerifyLoginPageView();
 			loginPage.verifyEmailview();
 			loginPage.verifyPasswordview();
-			loginPage.verifyRememberMeView();	
+			loginPage.verifyRememberMeView();
 			String[] email = data.get("email").split(",");
 			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			String[] password = data.get("password").split(",");
-			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2], password[3]);
+			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2],
+					password[3]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLoginFieldValidation failed due to Exception " + e);
 		}
@@ -147,9 +150,9 @@ public class LoginTest {
 				loginPage.clickEmail();
 			}
 			if (!data.get("errMessage").isEmpty()) {
-					DriverFactory.getDriver().hideKeyboard();
+				DriverFactory.getDriver().hideKeyboard();
 //					loginPage.validateLogin();
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));		
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
 			if (!data.get("popUpMsg").isEmpty()) {
 				loginPage.clickLogin();
@@ -263,10 +266,9 @@ public class LoginTest {
 					.verifyGetCodeView();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.verifyResendView();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().clickResend();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
-			.clickResend();
-			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
-			.verifyNewCodeMsg();
+					.verifyNewCodeMsg();
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
@@ -379,7 +381,8 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().clickNext();
 			loginPage.retrieveEmailPage().accountNotFoundPage().verifyHeading(data.get("cantFindHeading"));
 			loginPage.retrieveEmailPage().accountNotFoundPage().verifyTryAgainView();
-
+			loginPage.retrieveEmailPage().accountNotFoundPage().clickTryAgain();
+			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials failed due to exception " + e);
@@ -412,21 +415,24 @@ public class LoginTest {
 	public void testRetrieveWithFieldValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			//Retreive email
+			// Retreive email
 			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
 			String[] phoneNumber = data.get("phoneNumber").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1], phoneNumber[2]);
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0],
+					phoneNumber[1], phoneNumber[2]);
 			String[] firstName = data.get("firstName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],firstName[3], data.get("validateDataType"));
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1],
+					firstName[2], firstName[3], data.get("validateDataType"));
 			String[] lastName = data.get("lastName").split(",");
-			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2], lastName[3],data.get("validateDataType"));
+			loginPage.retrieveEmailPage().fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1],
+					lastName[2], lastName[3], data.get("validateDataType"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveWithFieldValidations failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithNavigationView(String strParams) {
@@ -541,9 +547,13 @@ public class LoginTest {
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.clickEyeIconNewPassword();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+			.clickEyeIconNewPassword();
+			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.fillConfirmPassword(data.get("confirmPassword"));
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.clickEyeIconConfirmPassword();
+			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
+			.clickEyeIconConfirmPassword();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage().clickSave();
 			loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 					.successFailureComponent().verifyPageHeading(data.get("sucessHeading"));
@@ -580,7 +590,7 @@ public class LoginTest {
 						.fillNewPassword(data.get("newPassword"));
 				loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 						.fillConfirmPassword(data.get("confirmPassword"));
-				
+
 				if (data.get("confirmPassword").equalsIgnoreCase("")) {
 					loginPage.forgotPasswordPage().phoneAndEmailVerificationComponent().createPasswordPage()
 							.clickNewPassword();
@@ -697,9 +707,8 @@ public class LoginTest {
 					.verifyPageHeading(data.get("createPasswordHeading"));
 			String[] newPassword = data.get("newPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateNewPasswordField(newPassword[0],
-					newPassword[1], newPassword[2],newPassword[3],newPassword[4],
-					newPassword[5], newPassword[6],newPassword[7],newPassword[8],
-					newPassword[9], newPassword[10],newPassword[11]);
+					newPassword[1], newPassword[2], newPassword[3], newPassword[4], newPassword[5], newPassword[6],
+					newPassword[7], newPassword[8], newPassword[9], newPassword[10], newPassword[11]);
 			String[] confirmPassword = data.get("confirmPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
 					confirmPassword[1], confirmPassword[2]);
@@ -709,7 +718,7 @@ public class LoginTest {
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAllLinksOfLogin(String strParams) {
@@ -730,8 +739,10 @@ public class LoginTest {
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().clickForgotPin();
-			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().verifyEmailHeadingview();
-			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent().navigationComponent().clickBack();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailHeadingview();
+			loginPage.enterYourPINComponent().forgotPinComponent().phoneAndEmailVerificationComponent()
+					.navigationComponent().clickBack();
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();

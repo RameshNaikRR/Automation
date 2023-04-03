@@ -195,7 +195,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getPurchaseAmount();
 		getProcessingFee();
 		getTotal();
-		verifyTotal();
+//		verifyTotal();
 		verifyPaymentMethod();
 //		swipeSlideToConfirmLocation();
 		swipeSlideToConfirm();

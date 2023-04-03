@@ -265,7 +265,7 @@ public class LoginPage extends MobileFunctions {
 	public void verifyEmail(String email) {
 		String actualEmail = new CommonFunctions().getTextBoxValue(txtEmail);
 		if (email.equals(actualEmail)) {
-			ExtentTestManager.setPassMessageInReport("Email is verified");
+			ExtentTestManager.setPassMessageInReport("Email is verified : " + getText(txtEmail));
 		} else {
 			ExtentTestManager.setFailMessageInReport("Email is not verified");
 		}

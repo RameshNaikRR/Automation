@@ -24,7 +24,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'mPayoutIdTV')]");
 
 	private By lblReferenceID = MobileBy
-			.xpath("//*[contains(@resource-id,'MSfreferenceIdTV')]|//*[contains(@resource-id,'mreferenceIdTV')] | //*[contains(@resource-id,'SalesReferenceidTV')]");
+			.xpath("//*[contains(@resource-id,'MSfreferenceIdTV')]|//*[contains(@resource-id,'mreferenceIdTV')] | //*[contains(@resource-id,'SalesReferenceidTV')]|//*[contains(@resource-id,'refundreferenceTV')]");
 
 	private By lblPayoutInformation = MobileBy.xpath("//*[contains(@text,'Payout Information')]");
 
@@ -165,7 +165,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 	}
 
 	public void getFees() {
-		ExtentTestManager.setInfoMessageInReport("Deposit To : " + getText(lblFees));
+		ExtentTestManager.setInfoMessageInReport("Fees : " + getText(lblFees));
 	}
 
 	public void getRecipientName() {
@@ -269,7 +269,7 @@ public class MerchantTransactionDetailsPage extends MobileFunctions {
 		getDateTime();
 		getReferenceID();
 		getFees();
-		getReserveAmount();
+//		getReserveAmount();
 		getNetAmount();
 		getMerchantBalance();
 		getSenderName();

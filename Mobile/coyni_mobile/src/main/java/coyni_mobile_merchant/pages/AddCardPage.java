@@ -22,10 +22,13 @@ public class AddCardPage extends MobileFunctions {
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeIV')]");
 
 	public void fillNameOnCard(String nameOnCard) {
-		new CommonFunctions().verifyAutoFocusElement(txtNameOnCard, "NameOnCard");
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
 		DriverFactory.getDriver().hideKeyboard();
+	}
+
+	public void verifyNameAutoFocus() {
+		new CommonFunctions().verifyAutoFocusElement(txtNameOnCard, "NameOnCard");
 	}
 
 	public void scrollUpToNameOnCard() {
