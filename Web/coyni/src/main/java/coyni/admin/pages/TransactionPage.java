@@ -1,16 +1,19 @@
 package coyni.admin.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 
 import coyni.admin.components.FilterComponent;
 import coyni.admin.components.PaginationAndEntriesComponent;
 import coyni.admin.components.TransactionDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class TransactionPage extends BrowserFunctions {
-
+	WebDriver driver = DriverFactory.getDriver();
 	private By headingTransactionList = By.xpath("//span[text()='Transaction List ']");
 
 	private By lblHeading = By.xpath("(//span[text()='Transactions'])[2]");
@@ -129,5 +132,10 @@ public class TransactionPage extends BrowserFunctions {
 	public void fillSearch(String text) {
 		click(txtSearch, "");
 		enterText(txtSearch, text, "Search Data");
+	}
+
+	public void fillTransactionSearch() {
+		click(txtSearch, "");
+		DriverFactory.getDriver().findElement(txtSearch).sendKeys(Keys.CONTROL + "v");
 	}
 }

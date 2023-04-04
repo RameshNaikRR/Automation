@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni.apibusiness.components.EcoSystemActivityComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.pages.ExportFilesPage;
 import coyni.apibusiness.pages.HomePage;
@@ -17,10 +18,11 @@ public class EcoSystemActivityTest {
 	SideBarMenuComponent sideBarMenuComponent;
 	HomePage homePage;
 	ExportFilesPage exportfilesPage;
+	EcoSystemActivityComponent ecoSystemActivityComponent;
 
 	@BeforeMethod
 	public void init() {
-
+		ecoSystemActivityComponent = new EcoSystemActivityComponent();
 		sideBarMenuComponent = new SideBarMenuComponent();
 		homePage = new HomePage();
 		exportfilesPage = new ExportFilesPage();
@@ -107,24 +109,28 @@ public class EcoSystemActivityTest {
 			sideBarMenuComponent.filterComponent().scrollDownFilter();
 			sideBarMenuComponent.filterComponent().clickApplyFilter();
 			Thread.sleep(3000);
-			sideBarMenuComponent.ecoSystemActivityComponent().clickTransactionRow();
-			sideBarMenuComponent.transactionDetailsComponent().verifyLblTransactionDetailsHeading();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawTransactionType();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawBankAccountTransactionSubType();
-			sideBarMenuComponent.transactionDetailsComponent().getReferenceId();
-			sideBarMenuComponent.transactionDetailsComponent().getReferenceIdCopy();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawId();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawIdCopy();
-			sideBarMenuComponent.transactionDetailsComponent().getCreatedDate();
-			sideBarMenuComponent.transactionDetailsComponent().getAmountReceived();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawAmount();
-			sideBarMenuComponent.transactionDetailsComponent().getProcessingFee();
-			sideBarMenuComponent.transactionDetailsComponent().getTotalAmount();
-			sideBarMenuComponent.transactionDetailsComponent().getTransactionDescription();
-			sideBarMenuComponent.transactionDetailsComponent().getWithdrawAccountBalance();
-			sideBarMenuComponent.transactionDetailsComponent().getNameOnAccount();
-			sideBarMenuComponent.transactionDetailsComponent().getBankAccountNumber();
-			sideBarMenuComponent.transactionDetailsComponent().getBankName();
+			if (ecoSystemActivityComponent.getTransactionsSize() == 0) {
+				sideBarMenuComponent.ecoSystemActivityComponent().clickTransactionRow();
+				sideBarMenuComponent.transactionDetailsComponent().verifyLblTransactionDetailsHeading();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawTransactionType();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawBankAccountTransactionSubType();
+				sideBarMenuComponent.transactionDetailsComponent().getReferenceId();
+				sideBarMenuComponent.transactionDetailsComponent().getReferenceIdCopy();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawId();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawIdCopy();
+				sideBarMenuComponent.transactionDetailsComponent().getCreatedDate();
+				sideBarMenuComponent.transactionDetailsComponent().getAmountReceived();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawAmount();
+				sideBarMenuComponent.transactionDetailsComponent().getProcessingFee();
+				sideBarMenuComponent.transactionDetailsComponent().getTotalAmount();
+				sideBarMenuComponent.transactionDetailsComponent().getTransactionDescription();
+				sideBarMenuComponent.transactionDetailsComponent().getWithdrawAccountBalance();
+				sideBarMenuComponent.transactionDetailsComponent().getNameOnAccount();
+				sideBarMenuComponent.transactionDetailsComponent().getBankAccountNumber();
+				sideBarMenuComponent.transactionDetailsComponent().getBankName();
+			} else {
+				ExtentTestManager.setPassMessageInReport("No Transactions Found");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testTransactionList failed due to exception " + e);
 		}

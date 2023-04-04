@@ -14,7 +14,7 @@ public class DBAInfoEditPage extends BrowserFunctions {
 	private By editIcon = By.xpath("//input[@id='Edit Phone Number']");
 	private By editEmailIcon = By.xpath("//input[@id='Edit Email Address']");
 	private By btnSave = By.xpath("//button[@type='submit']");
-	private By lblDBAInformation = By.xpath("(//span[text()='DBA Information'])[2]");
+	private By lblDBAInformation = By.xpath("//span[@class='text-base text-cgy4']");
 	private By website = By.xpath("//div[@class='flex flex-row DbaInformation_sidecontainer__hoW+o'][1]");
 	private By businessType = By.xpath("//div[@class='flex flex-row DbaInformation_sidecontainer__hoW+o'][2]");
 	private By address = By.xpath("//div[@class='flex flex-row DbaInformation_sidecontainer__hoW+o'][3]");

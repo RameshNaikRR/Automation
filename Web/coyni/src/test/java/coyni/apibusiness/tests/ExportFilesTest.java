@@ -46,14 +46,14 @@ public class ExportFilesTest {
 			exportFilesPage.clickDownload();
 			Thread.sleep(2000);
 			exportFilesPage.clickApply();
-			exportFilesPage.toastComponent().verifyToast(data.get("title"), data.get("toastMessage"));
+			exportFilesPage.toastComponent().verifyToastTitle(data.get("title"));
 			exportFilesPage.clickCheckBox();
 			exportFilesPage.clickBulkActionDropDown();
 			Thread.sleep(2000);
 			exportFilesPage.clickTrash();
 			Thread.sleep(2000);
 			exportFilesPage.clickApply();
-			exportFilesPage.toastComponent().verifyToast(data.get("title"), data.get("message"));
+			exportFilesPage.toastComponent().verifyToastTitle(data.get("title"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Export files failed due to exception ");

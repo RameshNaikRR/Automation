@@ -49,6 +49,8 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 	private By purchasedDetails = By.xpath("//span[text()='Tokens Purchased']/parent::div/following-sibling::button");
 	private By withdrawnDetails = By.xpath("//span[text()='Tokens Withdrawn ']/parent::div/following-sibling::button");
 	private By export = By.xpath("//button[text()='Export']");
+	private By activitydetails = By.xpath("//div[@class='flex flex-row gap-20']");
+	private By drpDownAction = By.xpath("//div[contains(@class,'icon-small-arrow text-xs mt-0.5')]");
 
 //	private By lblTokenTransferred = By.xpath("//span[.='Tokens Transferred']");
 	private By getTokens(String Tokens) {
@@ -84,9 +86,18 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 
 	public void clickExport() {
 		new CommonFunctions().verifyCursorAction(export, "Export");
-		String str=getElement(export, "").getCssValue("color");
+		String str = getElement(export, "").getCssValue("color");
 		ExtentTestManager.setPassMessageInReport(str);
 		click(export, "Export");
+	}
+
+	public void clickDropDown() {
+		click(drpDownAction, "Drop Down");
+	}
+
+	public void getTransferredActivityDetails() {
+		String str = getText(activitydetails, "Transferred Details");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void verifyTokenWalletsLnk() {
@@ -183,7 +194,7 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 
 	public void clickToday() {
 		new CommonFunctions().verifyCursorAction(today, "Today");
-		String str = getElement(today,"").getCssValue("color");
+		String str = getElement(today, "").getCssValue("color");
 		ExtentTestManager.setInfoMessageInReport(str);
 		click(today, "Today");
 	}

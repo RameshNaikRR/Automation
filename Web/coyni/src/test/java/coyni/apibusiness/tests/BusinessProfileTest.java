@@ -588,12 +588,14 @@ public class BusinessProfileTest {
 			topBarComponent.userDetailsComponent().accountProfileImagePopup()
 					.verifyPageHeading(data.get("accountProfileHeading"));
 			topBarComponent.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+//			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+//					.verifyHeading(data.get("cropYourImageHeading"));
 			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
-					.verifyHeading(data.get("cropYourImageHeading"));
+					.verifySelectImageView();
 			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			topBarComponent.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 
 		} catch (Exception e) {
 
@@ -669,22 +671,9 @@ public class BusinessProfileTest {
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyNotificationsTextColor();
 			Thread.sleep(2000);
-			if (apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewTodayNotifications() == 1) {
-				ExtentTestManager.setInfoMessageInReport("Today Notifications are Displayed");
-			}
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewYesterdayNotifications();
+			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewTodayNotifications();
+			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewYesterdayNotifications();
 			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().viewOlderNotifications();
-			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyMoveToCrossbtn();
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent()
-//					.verifyReminderfirstMsg(data.get("initialMsg"));
-//			Thread.sleep(1000);
-//			 apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyCancelBorderColor(data.get("CssProp"),
-//			 data.get("CssValue"), data.get("Color"));
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().clickCancel();
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent()
-//					.verifyCancelMsg(data.get("finalMsg"));
-//			apiBusinessProfilePage.userDetailsComponent().notificationsComponent().verifyAllNotifications();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}

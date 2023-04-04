@@ -39,6 +39,7 @@ public class TokenWalletPage extends BrowserFunctions {
 	private By lblNoData = By.xpath("//span[text()='No Filter Data Found']");
 	private By walletsData = By.xpath("//span[@class='grid 1xl:grid-cols-2 lg:grid-cols-1']");
 
+
 	private By getWallet(String walletNum) {
 		return By.xpath(String.format(
 				"(//div[contains(@class,'TokenAccountWallets_Wallets_Table')]//div[contains(@class,'Wallet_walletName')])[%s]",

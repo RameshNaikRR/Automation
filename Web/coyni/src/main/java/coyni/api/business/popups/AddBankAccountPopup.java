@@ -2,6 +2,7 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.apibusiness.components.NavigationComponent;
 import coyni.apibusiness.components.SuccessFailureComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -10,7 +11,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AddBankAccountPopup extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1[.='Add Bank Account']");
+	private By lblHeading = By.xpath("//h1[text()='Add Bank Checking Account']");
 	private By btnIamReady = By.cssSelector(".w-60");
 	private By headingNewWindow = By.xpath("//h1[text()='Add Accounts']");
 	private By txtBankName = By.xpath("//input[@id='searchbar']");
@@ -50,14 +51,32 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnCheckBoxforMXBank = By.xpath("//input[@type='checkbox']");
 	private By btnChecking = By.xpath("//span[contains(text(),'Checking')]");
 	private By btnStart = By.xpath("//button[contains(text(),'Start')]");
+	private By btnSearchInstitutions = By.xpath("//button[contains(text(),'Search more institutions')]");
+	private By iframe = By.cssSelector("#iframe");
+	private By btnMxBankk = By.xpath("(//span[contains(text(),'MX Bank')])[1]");
+	private By btnBack = By.xpath("//button[contains(text(),'Back')]");
 
 	public void verifyHeading() {
 		String text = getText(lblHeading, "Heading");
 		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
+	public void clickSearchInstitutions() {
+		click(btnSearchInstitutions, "Search Institutions");
+	}
+
+	public void clickOnMxBank() {
+		switchToFrame(iframe, "iframe");
+		click(btnMxBankk, "Mx Bank");
+		switchToParentFrame();
+	}
+
 	public void clickMXBank() {
 		click(btnMXBank, "Mx Bank");
+	}
+
+	public void clickBack() {
+		click(btnBack, " Back ");
 	}
 
 	public void clickStart() {
@@ -192,4 +211,11 @@ public class AddBankAccountPopup extends BrowserFunctions {
 		return new SuccessFailureComponent();
 	}
 
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+
+	public SessionCancelledPopup sessionCancelledPopup() {
+		return new SessionCancelledPopup();
+	}
 }

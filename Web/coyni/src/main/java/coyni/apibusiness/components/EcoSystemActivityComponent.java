@@ -60,6 +60,7 @@ public class EcoSystemActivityComponent extends BrowserFunctions {
 	private By paginationPrevious = By.xpath("//span[text()='Previous']");
 	private By filters = By.xpath("//span[@class='icon-filter btn__custom_button__icon relative right-2']");
 	private By listTransactionRows = By.xpath("//tr[@class='  hovered'][1]");
+	private By lblNoData = By.xpath("//span[text()='No Filter Data Found']");
 
 	private By activityDashboardRows(String dashboard) {
 		return By
@@ -140,6 +141,11 @@ public class EcoSystemActivityComponent extends BrowserFunctions {
 
 	public void clickGoToPreviousPage() {
 		click(prevPage, "previous page '❮'");
+	}
+
+	public int getTransactionsSize() {
+		return getElementsList(lblNoData, "No Data").size();
+
 	}
 
 	public void clickGoToNextPage() {

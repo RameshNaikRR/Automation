@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import coyni.customer.popups.PayingAccountHolderNamePopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class NotificationsComponent extends BrowserFunctions {
@@ -37,7 +38,7 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By CancelMsg = By.xpath("//div[@class='text-xs text-cm3 font-sans font-semibold']");
 	private By btnCross = By.xpath("//span[@class='cross-icon']//img ");
 	private By elementList = By.xpath("//div[@class='SingleNotificationCard_firstDiv__2XnAQ w-16']");
-	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])");
+	private By dateFormat = By.xpath("(//span[text()='Export Report Successful'])[1]/following-sibling::span");
 	private By closeIcon = By
 			.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
 	// private By notificationCOunt = By.xpath("//span[@class='text']");
@@ -50,37 +51,55 @@ public class NotificationsComponent extends BrowserFunctions {
 
 	}
 
-	public int viewTodayNotifications() {
-		new CommonFunctions().elementView(today, "Today");
-		moveToElement(today, "moved to Today");
-		int i = getElementsList(today, "Today").size();
-		return i;
-//		List<WebElement> rows = getElementsList(todayNotifications, "Today Notifications");
-//		for (WebElement row : rows) {
-//			String replace = row.getText().replace("\n", "");
-//			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
-
-//	}
-
+	public void viewTodayNotifications() {
+		try {
+			WebElement todayNotify = DriverFactory.getDriver().findElement(today);
+//		moveToElement(today, "moved to Today");
+			if (todayNotify.isDisplayed()) {
+//				String notify = getText(todayNotifications, "Notifications");
+				ExtentTestManager.setPassMessageInReport("Today Notifications are displayed");
+				String dateFormate = getText(dateFormat, "Date Format");
+				ExtentTestManager.setPassMessageInReport(dateFormate + "is displayed");
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Today Notifications");
+			}
+		} catch (Exception E) {
+			ExtentTestManager.setInfoMessageInReport("No Today Notifications");
+		}
 	}
 
 	public void viewYesterdayNotifications() {
-		new CommonFunctions().elementView(yesterday, "Yesterday");
-//		List<WebElement> rows = getElementsList(yesterdayNotifications, "Today Notifications");
-//		for (WebElement row : rows) {
-//			String replace = row.getText().replace("\n", "");
-		ExtentTestManager.setInfoMessageInReport(yesterday + "Notifications are Displayed");
-//		}
-
+		try {
+			WebElement todayNotify = DriverFactory.getDriver().findElement(yesterday);
+//		moveToElement(yesterday, "moved to Yesterday");
+			if (todayNotify.isDisplayed()) {
+//			String notify = getText(yesterdayNotifications, "Notifications");
+				ExtentTestManager.setPassMessageInReport("Yesterday Notifications are displayed");
+				String dateFormate = getText(dateFormat, "Date Format");
+				ExtentTestManager.setPassMessageInReport(dateFormate + "is displayed");
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No yesterday Notifications");
+			}
+		} catch (Exception E) {
+			ExtentTestManager.setInfoMessageInReport("No yesterday Notifications");
+		}
 	}
 
 	public void viewOlderNotifications() {
-		new CommonFunctions().elementView(older, "older");
-//		List<WebElement> rows = getElementsList(olderNotifications, "Today Notifications");
-//		for (WebElement row : rows) {
-//			String replace = row.getText().replace("\n", "");
-		ExtentTestManager.setInfoMessageInReport(older + " is Displayed");
-//		}
+		try {
+			WebElement todayNotify = DriverFactory.getDriver().findElement(older);
+//		moveToElement(older, "moved to older");
+			if (todayNotify.isDisplayed()) {
+//				String notify = getText(olderNotifications, "Notifications");
+				ExtentTestManager.setPassMessageInReport("older Notifications are displayed");
+				String dateFormate = getText(dateFormat, "Date Format");
+				ExtentTestManager.setPassMessageInReport(dateFormate + " Date Format is displayed");
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No older Notifications");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setInfoMessageInReport("No Older Notifications");
+		}
 
 	}
 

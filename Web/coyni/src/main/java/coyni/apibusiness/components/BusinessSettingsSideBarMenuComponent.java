@@ -110,6 +110,7 @@ public class BusinessSettingsSideBarMenuComponent extends BrowserFunctions {
 	}
 
 	public void clickTeam() {
+		new CommonFunctions().verifyCursorAction(getSideMenuBarItems("9"), "Team");
 		click(getSideMenuBarItems("9"), "Team");
 	}
 

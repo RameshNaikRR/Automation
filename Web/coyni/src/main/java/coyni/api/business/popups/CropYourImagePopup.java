@@ -9,8 +9,8 @@ import ilabs.api.utilities.FileHelper;
 
 public class CropYourImagePopup extends BrowserFunctions {
 	private By heading = By.cssSelector(".UserDetails_container__50Pke>h1");
-	private By btnSelectImage = By.cssSelector(".mb-20");
 	private By btnSave = By.cssSelector(".UserDetails_container__50Pke>div>button");
+	private By btnSelectImage = By.xpath("//p[@class='font-bold text-cwhite']");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);

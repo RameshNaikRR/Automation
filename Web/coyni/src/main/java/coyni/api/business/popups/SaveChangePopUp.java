@@ -2,12 +2,13 @@ package coyni.api.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class SaveChangePopUp extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[text()='Save Permission Role']");
-	private By lblEndPointHeading=By.xpath("");
+	private By lblEndPointHeading = By.xpath("");
 	private By lnkBack = By.xpath("//span[text()='No, go back']");
 	private By btnYes = By.xpath("//button[text()='Yes']");
 	private By btnCross = By.cssSelector(".self-end");
@@ -15,6 +16,7 @@ public class SaveChangePopUp extends BrowserFunctions {
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, expHeading, expHeading);
 	}
+
 	public void verifyEndPointHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEndPointHeading, expHeading, expHeading);
 	}
@@ -31,4 +33,7 @@ public class SaveChangePopUp extends BrowserFunctions {
 		click(btnCross, "Cross");
 	}
 
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
 }

@@ -71,6 +71,7 @@ public class BusinessApplicationTest {
 			ExtentTestManager.setFailMessageInReport("Business Application Top bar menu failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRegistrationTracker(String strParams) {
@@ -256,6 +257,8 @@ public class BusinessApplicationTest {
 			String num = Integer.toString(i + 1);
 			int num1 = i;
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillAddress1(data.get("addressline1"), 0);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillFirstName(data.get("firstName"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillLastName(data.get("lastName"), 0);
@@ -266,23 +269,21 @@ public class BusinessApplicationTest {
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillOwnerShip(data.get("ownerShip"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillAddress1(data.get("addressline1"), 0);
-			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.fillAddress2(data.get("addressline2"), 0);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillCity(data.get("city"), 0);
-			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
 					.selectState(data.get("state"), 0);
-			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
-					.fillZipCode(data.get("zipCode"));
 			Thread.sleep(6000);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().selectID(id[i], num1);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().uploadSelectImage(data.get("folderName"),
 					data.get("fileName"));
 			Thread.sleep(20000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillCity(data.get("city"), 0);
+			Thread.sleep(5000);
+			sideBarMenuComponent.registrationBeneficialOwnersPage().addBeneficialOwnersComponent()
+					.fillZipCode(data.get("zipCode"));
 			sideBarMenuComponent.registrationBeneficialOwnersPage().clickSave();
-			Thread.sleep(10000);
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 			sideBarMenuComponent.registrationBeneficialOwnersPage().clickNext();
 
 		} catch (Exception e) {

@@ -11,13 +11,14 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.api.business.popups.AddIPAddressPopups;
 import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
+import coyni.apibusiness.components.NavigationComponent;
 import coyni.apibusiness.components.SideBarMenuComponent;
+import coyni.apibusiness.components.TeamComponent;
 import coyni.apibusiness.components.WebhookComponent;
 import coyni.apibusiness.pages.BusinessProfilePage;
 import coyni.apibusiness.pages.DBAInfoEditPage;
 import coyni.apibusiness.pages.HomePage;
 import coyni.apibusiness.pages.TokenWalletPage;
-import coyni.customer.pages.NavigationMenuPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
@@ -28,10 +29,11 @@ public class BusinessSettingsTest {
 	BusinessProfilePage apiBusinessProfilePage;
 	BusinessSettingsSideBarMenuComponent businessSettingsSideBarMenuComponent;
 	AddIPAddressPopups addIpAddressPopups;
-	NavigationMenuPage navigationMenuPage;
+	NavigationComponent navigationComponent;
 	HomePage homePage;
 	DBAInfoEditPage dbaInfoEditPage;
 	WebhookComponent webComponent;
+	TeamComponent teamComponent;
 
 	@BeforeTest
 	public void init() {
@@ -40,9 +42,10 @@ public class BusinessSettingsTest {
 		addIpAddressPopups = new AddIPAddressPopups();
 		tokenWalletPage = new TokenWalletPage();
 		apiBusinessProfilePage = new BusinessProfilePage();
-		navigationMenuPage = new NavigationMenuPage();
+		navigationComponent = new NavigationComponent();
 		homePage = new HomePage();
 		dbaInfoEditPage = new DBAInfoEditPage();
+		teamComponent = new TeamComponent();
 
 	}
 
@@ -234,41 +237,64 @@ public class BusinessSettingsTest {
 
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testAddBankAccountWithOutPaymentMethod(String strParams) {
-//		tokenWalletPage.topBarComponent().clickUserName();
-//		tokenWalletPage.topBarComponent().userDetailsComponent().clickPaymentMethods();
-//		apiBusinessProfilePage.paymentMethodComponent().clickAddNewPayment();
-//		testAddExternalBankAccount(strParams);
-//	}
-
-	public void testAddExternalBankAccount(String strParams) {
+	public void testAddExternalBankAccountNavigations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			SideBarMenuComponent sideBarMenuComponent = new SideBarMenuComponent();
 			sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
-//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-//					.fillNameOnBankAccount(data.get("bankAccountName"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.fillRoutingNumber(data.get("routingNumber"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.fillAccountNumber(data.get("accountNumber"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
-//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyNameOnAccount();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyInstitution();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyRoutingNumber();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyAccount();
-//			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickDone();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickBack();
+			sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickClose();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup().clickTryAgain();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickSearchInstitutions();
+			Thread.sleep(5000);
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickClose();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup().clickTryAgain();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickClose();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().sessionCancelledPopup().clickTryAgain();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterUserName(data.get("expUserName"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterPassword(data.get("expPassword"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickBack();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickClose();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().navigationComponent().clickClose();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(" test Bank Account Method failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+            sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickMXBank();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterBankName(data.get("expBankName"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterUserName(data.get("expUserName"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterPassword(data.get("expPassword"));
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+			Thread.sleep(5000);
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnChecking();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
+					.verifyBankAddSuccesfulHeading();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Bank Account failed due to exception " + e);
 		}
 	}
 
@@ -279,7 +305,7 @@ public class BusinessSettingsTest {
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 				.clickAddNewPayment();
-		testAddExternalBankAccount(strParams);
+		testAddBankAccount(strParams);
 	}
 
 	@Test
@@ -777,21 +803,6 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testBusinessSettingsNoTeamMember(String strParams) throws InterruptedException {
-		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		homePage.sideBarMenuComponent().clickBusinessSettings();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
-				.verifyTeamHeading(data.get("heading"));
-//			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifySearch(data.get("search"));
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconSearch();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickFilter();
-		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyRecords();
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void addCustomRole(String strParams) throws InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -809,7 +820,8 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
-			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickAddTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifyNoFoundRecords();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyHeading(data.get("addTeamHeading"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -820,6 +832,15 @@ public class BusinessSettingsTest {
 					.verifyEmail(data.get("emaildet"));
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.verifyPhone(data.get("phone"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.clickAddRole();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().verifyHeading(data.get("customHeading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().verifyRoleName(data.get("roleNewName"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.addCustomRolePopup().clickGoBack();
+//			ExtentTestManager.setPassMessageInReport("You have successfully added Role Name role!");
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
 					.getUserPermission(data.get("option"), data.get("eleName"));
 //			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
@@ -846,7 +867,7 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
 					.clickSendInvitation();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
-					.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+					.toastComponent().verifyToast(data.get("toastTitle"), data.get("message"));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -889,6 +910,33 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testTeamFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarMenuComponent().clickBusinessSettings();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifyTeamHeading(data.get("heading"));
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.teamComponent().clickFilter();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyActive();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyPending();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyExpired();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.filtersPage().verifyApplyFilters();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().addTeamMemberComponent()
+					.teamComponent().verifyRecords();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("test Business Settings Team Search  failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBusinessSettingsTeamSearch(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -912,7 +960,13 @@ public class BusinessSettingsTest {
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().iconDelete();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifyRemoveHeading1();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent()
+					.verifyRemoveHeading2();
+			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyDescription();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().clickRemove();
+			Thread.sleep(1000);
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().toastComponent()
 					.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 		} catch (Exception e) {
@@ -1008,14 +1062,11 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testDeleteAddIpAddress(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().clickIpAddresses();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickDelete();
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
-					.verifyRemoveHeading(data.get("removeHeading"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
-					.verifydesc(data.get("ipDescription"));
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().verifyRemoveHeading();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().verifydesc();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickYes();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Remove ip address  Failed due to Exception " + e);

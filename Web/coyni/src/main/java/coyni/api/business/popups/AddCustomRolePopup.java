@@ -27,6 +27,7 @@ public class AddCustomRolePopup extends BrowserFunctions {
 	}
 
 	public void clickGoBack() {
+		new CommonFunctions().verifyCursorAction(lnkGoBack, "No,Go Back");
 		click(lnkGoBack, "Go Back");
 	}
 
