@@ -448,7 +448,9 @@ public class SystemSettingsTest {
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.verifyScheduleFeeStructure(data.get("tosHeading"));
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
+			Thread.sleep(1000);
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
+			Thread.sleep(1000);
 			sideBarComponent.feeStructurePage().VerifyScheduleError();
 
 		} catch (Exception e) {

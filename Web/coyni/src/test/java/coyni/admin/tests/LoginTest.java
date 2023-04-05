@@ -37,6 +37,7 @@ public class LoginTest {
 			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
+			Thread.sleep(1000);
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
 			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));

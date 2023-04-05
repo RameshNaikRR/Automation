@@ -14,7 +14,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 
 	private By lblFirstRowHeading = By
 			.xpath("//div[contains(@class,'grid w-full h-10 grid-cols-4 bg-cm1 rounded-xl')]");
-	private By lnkEdit = By.xpath("//a[text()='Edit All']");
+	private By lnkEdit = By.xpath("//button[text()='Edit All']");
 	private By lnkEditAccontLimit = By.xpath("//button[text()='Edit All']");
 
 	private By getSideHeading(String HeadingNum) {

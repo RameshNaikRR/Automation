@@ -135,11 +135,15 @@ public class FeeStructurePage extends BrowserFunctions {
 	private By ScheduleError = By.xpath("//p[contains(text(),'Please select another date')]");
 
 	public void VerifyScheduleError() {
-		boolean String;
-		if (String = getText(ScheduleError, "ScheduleError") != null) {
-			ExtentTestManager.setInfoMessageInReport(String + "Error is displayed ");
+		WebElement e =DriverFactory.getDriver().findElement(ScheduleError);
+		if (e.isDisplayed()) {
+			String	error = e.getText();
+			ExtentTestManager.setInfoMessageInReport(error + "Error is displayed ");
 		}
-		;
+		else {
+			ExtentTestManager.setFailMessageInReport("Error Not Displayed"); 
+		}
+		
 	}
 
 	private By txtCreditedBy = By.xpath("(//h1[@class='text-sm font-semibold text-cgy4'])[3]");
