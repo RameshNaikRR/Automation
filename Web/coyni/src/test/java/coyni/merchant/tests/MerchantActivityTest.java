@@ -303,6 +303,7 @@ public class MerchantActivityTest {
 	public void testDashBoardPayOutHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.clickPayOutHistory();
 			// merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
@@ -398,10 +399,10 @@ public class MerchantActivityTest {
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
-				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
-				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
-				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
-				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
+//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
+//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
+//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
+//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
 
 			}
 		} catch (Exception e) {

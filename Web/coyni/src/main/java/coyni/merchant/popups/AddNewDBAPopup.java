@@ -28,4 +28,8 @@ public class AddNewDBAPopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
+	public AddDBAUnderNewCompanyPopup addDBAUnderNewCompanyPopup() {
+		return new AddDBAUnderNewCompanyPopup();
+	}
 }

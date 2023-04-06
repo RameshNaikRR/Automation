@@ -178,6 +178,35 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testUserDetailsAddImageMore(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			Thread.sleep(2000);
+			merchantProfilePage.userDetailsComponent().clickEditUserImage();
+			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
+					.verifyHeading(data.get("accountProfileHeading"));
+			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
+			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.verifyHeading(data.get("cropYourImageHeading"));
+			
+			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
+					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			
+			
+			if (!data.get("toastMessage").isEmpty()) {
+				merchantProfilePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+
+		} catch (Exception e) {
+
+			ExtentTestManager.setFailMessageInReport("testUserDetailsAddImage failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testUserDetailsImageRemove(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -613,6 +642,8 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();
+			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickMerchantAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantAccounts is failed due to Exception " + e);

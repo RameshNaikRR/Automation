@@ -250,6 +250,7 @@ public class LoginTest {
 			loginPage.clickNext();
 //			for (int i = 0; i <= 4; i++) {
 //				Thread.sleep(2000);
+			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().clickResend();
 			// }
 		} catch (Exception e) {

@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import coyni.merchant.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
@@ -95,10 +96,10 @@ public class ForgotEmailComponent extends BrowserFunctions {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_SPACE);
 		robot.keyRelease(KeyEvent.VK_SPACE);
-		clickTab();
+		// clickTab();
 
 	}
-	
+
 	public void lastName(String lastName) throws Exception {
 		enterText(txtLastName, lastName, "lastName");
 		Robot robot = new Robot();
