@@ -1,6 +1,11 @@
 package coyni_mobile.pages;
 
+import java.sql.Driver;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.components.EnterYourPINComponent;
@@ -15,6 +20,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
+import ilabs.mobile.actions.WaitForElement;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
@@ -29,16 +35,18 @@ public class LoginPage extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
 	private By chkBxRememberMe = MobileBy
 			.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]");
+	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'nextBtn')]/parent::*|//*[contains(@resource-id,'cvNext')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
 	private By lblerrMsg = MobileBy
-			.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]");
+			.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
 	private By popUperror = MobileBy
 			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'cvAction')]");
+	private By btnEyeIconPassword = MobileBy.xpath("//*[contains(@resource-id,'endIconIV')]");
 	private By btnCross = MobileBy.xpath("");
 	private By iconFace = MobileBy.xpath("");
 
+	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 	public void clickOk() {
 		click(btnOk, "ok");
 	}
@@ -82,6 +90,7 @@ public class LoginPage extends MobileFunctions {
 
 	public void verifyPopupMsg(String expText) {
 		new CommonFunctions().verifyLabelText(lblerrMsg, "PopupMessage", expText);
+		
 	}
 
 	private void minimizePopup() {
@@ -105,14 +114,18 @@ public class LoginPage extends MobileFunctions {
 	public void fillPassword(String password) {
 		click(txtPassword, "password");
 		enterText(txtPassword, password, "password ");
+		click(btnEyeIconPassword, "Password Eye Icon");
 	}
-
+//	public void clickPasswordEye() {
+//		
+//	}
 	public void clickEmail() {
 		click(txtEmail, "email");
 	}
 
 	public void clickPassword() {
 		click(txtPassword, "password");
+		
 	}
 
 	public void clickRetrieveEmail() {
@@ -138,13 +151,12 @@ public class LoginPage extends MobileFunctions {
 //		
 //	}
 
-	public void clickLogin() {
-//		if (getElement(btnLogin, "login").isEnabled()) {
-//			click(btnLogin, "login button");
-//		} else {
-//			ExtentTestManager.setInfoMessageInReport("login button  is disabled");
-//		}
-		click(btnLogin, "login button");
+	public void clickLogin() throws InterruptedException {
+		click(btnLogin, "Login button");
+		Thread.sleep(1500);
+		if(getElementList(btnLogin, "login").size() > 0) {
+			click(btnLogin, "Login button");
+		}
 	}
 
 	public void ViewCoyni() {

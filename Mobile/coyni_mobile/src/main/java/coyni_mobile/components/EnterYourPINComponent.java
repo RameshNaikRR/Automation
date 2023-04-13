@@ -15,6 +15,7 @@ public class EnterYourPINComponent extends MobileFunctions {
 	private By pinCircles = MobileBy.xpath("//*[contains(@resource-id,'pinLL')]");
 	private By lnkForgotPin = MobileBy.xpath("//*[contains(@resource-id,'tvForgot')]");
 	
+	
 
 	private By getOneNumberOfPin(char num) {
 		return MobileBy.xpath(
@@ -22,13 +23,11 @@ public class EnterYourPINComponent extends MobileFunctions {
 	}
 
 	public void fillPin(String pin) throws InterruptedException {
-	    Thread.sleep(2000);
-		System.out.println(pin.length());
 		for (int i = 0; i < pin.length(); i++) {
 			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
 		}
 	}
-
+	
 	public void clickForgotPin() {
 		click(lnkForgotPin, "click Forgot Pin");
 	}

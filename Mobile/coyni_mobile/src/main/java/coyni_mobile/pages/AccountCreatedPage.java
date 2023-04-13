@@ -12,9 +12,11 @@ public class AccountCreatedPage extends MobileFunctions {
 	// 2.3//
 	private By btnAddCreditOrDebit = MobileBy.xpath("//*[contains(@resource-id,'tvAddCard')]");
 	private By btnSkip = MobileBy.xpath("//*[contains(@resource-id,'tvSkip')]|(//*[@text='Skip'])[1]");
+	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Your coyni account')]");
 
-	public void verifyHeading(String expHeading) {
+	public void verifyHeading(String expHeading, String accountDescription) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblDescription, "Description", accountDescription);
 	}
 
 	public void clickSkip() {

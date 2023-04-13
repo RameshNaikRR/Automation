@@ -22,12 +22,12 @@ public class NotificationComponent extends MobileFunctions {
 	private By btnPay = MobileBy.xpath("//*[@text='Pay']");
 	private By countNotification = MobileBy.xpath("//*[contains(@resource-id,'cvNotification')]");
 	private By viewDot = MobileBy.xpath("//*[contains(@resource-id,'readStatusCV')]");
-	private By notificationSwipe = MobileBy.xpath("//*[contains(@resource-id,'notificationItemLL')]");
+	private By notificationSwipe = MobileBy.xpath("(//*[contains(@resource-id,'subject')])[1]");
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
 	private By reminderMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By denyMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By cancelMessage = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
-	private By lblRead = MobileBy.xpath("//*[contains(@resource-id,'readStatusTV')]");
+	private By lblReadUnRead = MobileBy.xpath("//*[@text='READ']|//*[contains(@resource-id,'readStatusTV')]|//*[@text='UNREAD']");
 	private By lblNotifDate = MobileBy.xpath("//*[contains(@text,'Today')]");
 	
 
@@ -45,12 +45,15 @@ public class NotificationComponent extends MobileFunctions {
 //		new CommonFunctions().elementView(lblNotifDate, "Today");
 	}
 	
-	public void clickRead() {
-		click(lblRead, "Read");
+	public void clickReadUnRead() {
+		click(lblReadUnRead, "Read");
+	}
+	public void verifyReadUnRead(String expText) {
+	new CommonFunctions().verifyLabelText(lblReadUnRead, "Text", expText);
 	}
 
 	public void verifyRead() {
-		new CommonFunctions().elementView(lblRead, "Read ");
+		new CommonFunctions().elementView(lblReadUnRead, "Read ");
 	}
 
 	public void countNotifications() {
@@ -87,8 +90,22 @@ public class NotificationComponent extends MobileFunctions {
 	public void readDot() {
 		if (getElementList(viewDot, "read Message").size() > 0) {
 			ExtentTestManager.setInfoMessageInReport("Dot is present");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("No Dot present in the Notification");
+		    swipeOnElement(notificationSwipe, "Read", SwipeDirection.RIGHT);
+		    clickReadUnRead();
+		    swipeOnElement(notificationSwipe, "UnRead", SwipeDirection.RIGHT);
+		    clickReadUnRead();
+		    swipeOnElement(notificationSwipe, "Delete", SwipeDirection.LEFT);
+		    clickDelete();
+			ExtentTestManager.setInfoMessageInReport(" Dot present in the Notification");
+		}
+		else {
+			   swipeOnElement(notificationSwipe, "Read", SwipeDirection.RIGHT);
+			   clickReadUnRead();
+			    swipeOnElement(notificationSwipe, "UnRead", SwipeDirection.RIGHT);
+			    clickReadUnRead();
+			    swipeOnElement(notificationSwipe, "Delete", SwipeDirection.LEFT);
+			    clickDelete();
+				ExtentTestManager.setInfoMessageInReport("No Dot present in the Notification");
 		}
 	}
 

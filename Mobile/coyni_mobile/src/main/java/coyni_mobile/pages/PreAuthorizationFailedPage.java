@@ -7,12 +7,16 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class PreAuthorizationFailedPage extends MobileFunctions {
-	private By lblHeading = MobileBy.xpath("//*[@text='Pre-Authorization Failed']");
-	private By lblDescription = MobileBy.xpath("//*[contains(@text,'The amount')]");
+	private By lblHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Your account')]");
 	private By btnAddBankAccount = MobileBy.xpath("//*[@text='Add Bank Account']");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvOK')]");
 
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
+	}
+	public void clickOk() {
+		click(btnOk, "Ok");
 	}
 
 	public void verifyDescription(String Description) {
@@ -22,4 +26,8 @@ public class PreAuthorizationFailedPage extends MobileFunctions {
 	public void clickAddBankAccount() {
 		click(btnAddBankAccount, "Add Bank Account");
 	}
+	public void verifyPreAuthDescription(String expContent) {
+		new CommonFunctions().verifyLabelText(lblDescription, "Content", expContent);
+	}
+	
 }

@@ -11,6 +11,7 @@ public class AllDonePage extends MobileFunctions {
 
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'cvDone')]");
 	private By txtAllDone = MobileBy.xpath("//*[@text='All Done']");
+	private By lblAllDoneDescription = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 
 	public void clickDone() {
 		click(btnDone, "Done");
@@ -26,8 +27,9 @@ public class AllDonePage extends MobileFunctions {
 
 	}
 	
-	public void verifyAllDoneHeading(String expHeading) {
+	public void verifyAllDoneHeading(String expHeading, String expDoneDescription) {
 		new CommonFunctions().verifyLabelText(txtAllDone, "All Done",expHeading );
+		new CommonFunctions().verifyLabelText(lblAllDoneDescription, "All Done Description", expDoneDescription);
 	}
 
 }

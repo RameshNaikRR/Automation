@@ -10,7 +10,8 @@ import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
 public class FieldValidationsComponent extends MobileFunctions {
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')]|//*[contains(@resource-id,'emailET')]|//*[contains(@resource-id,'emailIdET')]");
+	private By txtEmail = MobileBy.xpath(
+			"//*[contains(@resource-id,'newEmailET')]|//*[contains(@resource-id,'etEmail')]|//*[contains(@resource-id,'emailET')]|//*[contains(@resource-id,'emailIdET')]");
 	private By txtNewEmail = MobileBy.xpath("//*[contains(@resource-id,'b_newEmailET')]");
 	private By txtNewPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
 	private By txtConfirmPassword = MobileBy
@@ -18,8 +19,8 @@ public class FieldValidationsComponent extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath(
 			"//*[contains(@resource-id,'etPassword')] |//*[contains(@resource-id,'passwordET')]|//*[contains(@resource-id,'currentPassET')]");
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
-	private By txtFirstName = MobileBy
-			.xpath("//*[contains(@resource-id,'FirstNameET')]|//*[contains(@resource-id,'firstNameET')]|//*[contains(@resource-id,'editFNameET')]");
+	private By txtFirstName = MobileBy.xpath(
+			"//*[contains(@resource-id,'FirstNameET')]|//*[contains(@resource-id,'firstNameET')]|//*[contains(@resource-id,'editFNameET')]");
 	private By txtFirstNameInput = MobileBy.xpath("//*[contains(@resource-id,'textinput_placeholder')]");
 
 	private By txtLastName = MobileBy.xpath(
@@ -43,15 +44,16 @@ public class FieldValidationsComponent extends MobileFunctions {
 			"//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]|//*[contains(@resource-id,'companyaddress2ET')]");
 	private By txtCity = MobileBy.xpath(
 			"//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]|//*[contains(@resource-id,'cityET')]");
-	private By txtSearch = MobileBy.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'payoutSearchET')]");
+	private By txtSearch = MobileBy
+			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'payoutSearchET')]");
 	private By txtZipCode = MobileBy.xpath(
 			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
-	
+
 	// validate email
-	public void validateEmailField(String singleChar , String maxChar, String moreThanMax) {
+	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
 		wait.until(ExpectedConditions.elementToBeClickable(txtEmail));
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
@@ -75,19 +77,39 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	}
 
-	public void validateNewPasswordField(String singleChar, String maxChar, String moreThanMax) {
+	public void validateNewPasswordField(String invalid1,String invalid2,String invalid3,String invalid4,String invalid5,String invalid6,String invalid7,String invalid8,String invalid9,String minChar,String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtNewPassword, "New Password", singleChar);
+		click(txtNewPassword, "New Password");
+		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid1);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid2);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid3);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid4);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid5);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid6);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid7);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid8);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateFieldWithErrorMsg(txtNewPassword, "New Password", invalid9);
+		new CommonFunctions().clearText(txtNewPassword, "New Password");
+		new CommonFunctions().validateField(txtNewPassword, "New Password", minChar);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateField(txtNewPassword, "New Password", maxChar);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateFieldMaxichar(txtNewPassword, "New Password", moreThanMax);
-		new CommonFunctions().clearText(txtNewPassword, "New Password");
-	}
+}
 
 	public void validateConfirmPasswordField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", singleChar);
+		//new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", minChar);
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
 		new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", maxChar);
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
@@ -103,7 +125,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().clearText(txtPassword, "password");
 		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
 		new CommonFunctions().clearText(txtPassword, "password");
-    	//new CommonFunctions().validateField(txtPassword, "password", maxCharr);
+		// new CommonFunctions().validateField(txtPassword, "password", maxCharr);
 	}
 
 	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax) {
@@ -227,6 +249,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	public void validateAddressLine1Field(String singleDigit, String maxDigit, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtAddressLine1, "Address Line 1");
 		new CommonFunctions().validateField(txtAddressLine1, "Address Line 1", singleDigit);
 		new CommonFunctions().clearText(txtAddressLine1, "Address Line 1");
 		new CommonFunctions().validateField(txtAddressLine1, "Address Line 1", maxDigit);
@@ -237,6 +260,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	public void validateAddressLine2Field(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtAddressLine2, "Address Line 2");
 		new CommonFunctions().validateField(txtAddressLine2, "Address Line 2", singleChar);
 		new CommonFunctions().clearText(txtAddressLine2, "Address Line 2");
 		new CommonFunctions().validateField(txtAddressLine2, "Address Line 2", maxChar);
@@ -248,6 +272,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	public void validateCityField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtCity, "City");
 		new CommonFunctions().validateField(txtCity, "City", singleChar);
 		new CommonFunctions().clearText(txtCity, "City");
 		new CommonFunctions().validateField(txtCity, "City", maxChar);

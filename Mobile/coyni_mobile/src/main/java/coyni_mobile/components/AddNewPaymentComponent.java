@@ -48,5 +48,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public AddCardPage addCardPage() {
 		return new AddCardPage();
 	}
+	public WithdrawMenuComponent withdrawMenuComponent() {
+		return new WithdrawMenuComponent();
+	}
 
 }

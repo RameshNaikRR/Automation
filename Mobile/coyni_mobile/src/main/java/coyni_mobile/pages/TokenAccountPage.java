@@ -36,7 +36,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By btnDashBoard = MobileBy.xpath("//*[@text='Dashboard']");
 	private By btnCrypto = MobileBy.xpath(" ");
 	private By btnProfile = MobileBy.xpath("//*[@text='Profile']");
-	private By btnHome = MobileBy.xpath("//*[@name='qucik_bottommenu']|//*[contains(@resource-id,'layoutMainMenu')]");
+	private By btnHome = MobileBy.xpath("//*[contains(@resource-id,'layoutMainMenu')]");
 	private By btnIssueCard = MobileBy.xpath(" ");
 	private By btnViewMore = MobileBy.xpath("//*[contains(@resource-id,'viewMoreLL')]");
 	private By btnImgProfile = MobileBy.xpath("//*[contains(@resource-id, 'tvUserInfo')]|//*[contains(@resource-id, 'imgProfile')]");
@@ -179,7 +179,11 @@ public class TokenAccountPage extends MobileFunctions {
 		click(btnBuyToken, "Buy Token");
 	}
 	public void clickLatestTransaction() {
-		click(lblLatestTransaction, "Latest Transaction");
+		click(lblLatestTransaction, "Recent Transaction");
+	}
+	
+	public void verifyDashBoard() {
+		ExtentTestManager.setInfoMessageInReport("Dashboard :  " + getText(lblLatestTransaction));
 	}
 
 	public int verifyProfile() throws InterruptedException {
@@ -236,6 +240,9 @@ public class TokenAccountPage extends MobileFunctions {
     }
     public MailingAddressComponent mailingAddressComponent() {
     	return new MailingAddressComponent();
+    }
+    public CustomerProfilePage customerProfilePage() {
+    	return new CustomerProfilePage();
     }
     
 }

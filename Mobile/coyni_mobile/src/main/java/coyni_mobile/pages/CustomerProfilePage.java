@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.AccountLimitsComponent;
 import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EnterYourPINComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.components.PreferencesComponent;
@@ -396,5 +397,8 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

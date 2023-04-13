@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -93,6 +94,9 @@ public class ForgotPasswordPage extends MobileFunctions {
 	
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
+	}
+	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
 	}
 	
 }

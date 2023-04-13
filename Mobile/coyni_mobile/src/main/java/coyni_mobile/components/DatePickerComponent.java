@@ -22,7 +22,7 @@ public class DatePickerComponent extends MobileFunctions {
 		// 1-January 2022
 		String day = fromDate.split("-")[0];
 		String monthAndYear = fromDate.split("-")[1];
-		//scrollUpToElement(getDate(monthAndYear, day), fromDate);
+		scrollUpToElement(getDate(monthAndYear, day), fromDate);
 		System.out.println(day);
 		System.out.println(monthAndYear);
 		click(getDate(monthAndYear, day), fromDate);
@@ -34,7 +34,7 @@ public class DatePickerComponent extends MobileFunctions {
 		String monthAndYear = toDate.split("-")[1];
 		System.out.println(day);
 		System.out.println(monthAndYear);
-		//scrollDownToElement(getDate(monthAndYear, day), toDate);
+		scrollDownToElement(getDate(monthAndYear, day), toDate);
 		click(getDate(monthAndYear, day), toDate);
 	}
 

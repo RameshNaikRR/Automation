@@ -15,17 +15,24 @@ public class AgreementComponent extends MobileFunctions {
 	private By privacyPolicy = MobileBy.xpath("(//*[contains(@resource-id,'listagreementsTV')])[1]");
 	private By termsOfService = MobileBy.xpath("(//*[contains(@resource-id,'listagreementsTV')])[2]");
 	private By backIconAgreement = MobileBy.xpath("//*[contains(@resource-id,'backAgreeIV')]");
-	private By lblActiveAgreements = MobileBy.xpath(" ");
-	private By lblPastAgreements = MobileBy.xpath(" ");
+	private By lblActiveAgreements = MobileBy.xpath("//*[contains(@resource-id,'activeTV')]");
+	private By lblPastAgreements = MobileBy.xpath("//*[contains(@resource-id,'pastTV')]");
 	// Updates of Agreements after login
 	private By privacyPolicyUpdate = MobileBy
 			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
 	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
+	private By allow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
 	
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
+	public void clickAllow() {
+		if (getElementList(allow, "Allow").size() > 0) {
+			click(allow, "Allow");	
+		}
+	}
+	
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {

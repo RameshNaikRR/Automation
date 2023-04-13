@@ -25,6 +25,10 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By lblBankDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankMsg')]");
 	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
+	private By lblBankCount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBankHead')]");
+	private By lblDebitCardCount = MobileBy.xpath("//*[contains(@resource-id,'tvDCardHead')]");
+	private By lblCreditCardCount = MobileBy.xpath("//*[contains(@resource-id,'tvCCardHead')]");
+	private By lblLimitError = MobileBy.xpath("//*[contains(@resource-id,'tvDCardError')]|//*[contains(@resource-id,'tvCCardError')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
 	private By headingAddExternalBankAccount = MobileBy.xpath("//*[contains(@text,'Add External Bank Account')]");
@@ -37,8 +41,8 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
-	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
-	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Visa Credit')])[1]");
+	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]|//*[contains(@resource-id,'tvPayMethod')]");
+	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]");
 	private By btnDebitCards = MobileBy.xpath("//*[contains(@text,'Debit Card')]");
 	private By btncreditCards = MobileBy.xpath("//*[contains(@text,'Credit')]");
 	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
@@ -47,6 +51,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By numberOfCreditCards = MobileBy.xpath("//*[contains(@resource-id,'tvCCardHead')]");
 	private By lblPaymentHeading = MobileBy.xpath("//*[@text='Payment Methods']");
 	private By lblBankAccount = MobileBy.xpath("(//*[contains(@resource-id,'tvBankName')])[1]");
+	// expired cards//
+	private By lblExpiredCreditCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[1]/following-sibling::*[1]");
+	private By lblExpiredDebitCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[2]/following-sibling::*[1]");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -64,9 +71,23 @@ public class PaymentMethodsPage extends MobileFunctions {
 		ExtentTestManager.setPassMessageInReport(
 				"Deleted the All Credit Cards and Credit Card Number is : " + getText(numberOfCreditCards));
 	}
-
+	public void verifyExpiredCredit() {
+		new CommonFunctions().elementView(lblExpiredCreditCard, "Credit Card Expired");
+	}
+	public void verifyExpiredDebit() {
+		new CommonFunctions().elementView(lblExpiredDebitCard, "Debit Card Expired");
+	}
 	public int verifyNumOfDebitCards() {
 		return getElementList(btnDebitCards, "Debit Card").size();
+	}
+	public void verifyDebitCount(String expCount) {
+		new CommonFunctions().verifyLabelText(lblDebitCardCount, "Debit Count", expCount);
+	}
+	public void verifyCreditCount(String expCount) {
+		new CommonFunctions().verifyLabelText(lblCreditCardCount, "Credit Count", expCount);
+	}
+	public void verifyBankCount(String expCount) {
+		new CommonFunctions().verifyLabelText(lblBankCount, "Bank Count", expCount);
 	}
 
 	public int verifyNumOfCreditCards() {
@@ -87,7 +108,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public void verifyDescription(String description) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Description", description);
 	}
-
+    public void verifyLimitError(String expMessage) {
+    	new CommonFunctions().verifyLabelText(lblLimitError, "Message", expMessage);
+    }
 	public void clickExternalBankAccount() {
 		click(bankAccountBtn, "Click External Bank Account");
 	}
@@ -209,6 +232,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public CustomerProfilePage customerProfilePage() {
 		return new CustomerProfilePage();
+	}
+	public AddCardPage addCardPage() {
+		return new AddCardPage();
 	}
 
 	public void AddBankFromBuyToken() throws InterruptedException {

@@ -25,7 +25,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By lblCountry = MobileBy
 			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
 	private By btnAddCard = MobileBy
-			.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
+			.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]|//*[contains(@resource-id,'addCardTV')]");
 	private By txtState = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
@@ -33,12 +33,19 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
-    ////////////////////////2.3 //////////////////////////////
+	//////////////////////// 2.3 //////////////////////////////
 	private By chkAddress = MobileBy.xpath("//*[contains(@resource-id,'saveAddressCB')]");
 	private By btnAddAddress = MobileBy.xpath("//*[contains(@resource-id,'editAddressSaveCV')]");
 	private By lblAddressAdded = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'cvDone')]");
 	private By lblAddressHeading = MobileBy.xpath("//*[@text='Add Address']");
+	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvCardHead')]");
+	private By lblCardDescription = MobileBy.xpath("//*[contains(@resource-id,'tvAddMsg')]");
+
+	public void verifyHeading(String expheading) {
+		new CommonFunctions().verifyLabelText(heading, "Add card Heading", expheading);
+		new CommonFunctions().elementView(lblCardDescription, "Card Description");
+	}
 
 	private By txtCurrentState(String currentState) {
 		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
@@ -47,9 +54,11 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void clickCurrentState() {
 		click(txtCurrentState("California"), "California");
 	}
-    public void verifyAddress(String expHeading) {
-    	new CommonFunctions().verifyLabelText(lblAddressHeading, "Heading", expHeading);
-    }
+
+	public void verifyAddress(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblAddressHeading, "Heading", expHeading);
+	}
+
 	public void fillAddressLine1(String addressLine1) {
 		click(txtAddressLine1, "Address Line1");
 		enterText(txtAddressLine1, addressLine1, "Address Line1");
@@ -122,19 +131,24 @@ public class MailingAddressComponent extends MobileFunctions {
 		scrollDownToElement(btnSave, "Save");
 		new CommonFunctions().verifyLabelText(lblCountry, "Country", expCountry);
 	}
+
 	public void clickChkAddress() {
 		click(chkAddress, "Save Address");
 	}
+
 	public void clickAddAddress() {
 		click(btnAddAddress, "Add Address");
 	}
+
 	public void clickAddCard() {
 		scrollDownToElement(btnAddCard, "Add Card");
 		click(btnAddCard, "Add Card");
 	}
-    public void clickDone() {
-    	click(btnDone, "Done");
-    }
+
+	public void clickDone() {
+		click(btnDone, "Done");
+	}
+
 	public void clickSave() {
 		scrollDownToElement(btnSave, "Save");
 		click(btnSave, "Save");
@@ -152,9 +166,11 @@ public class MailingAddressComponent extends MobileFunctions {
 	public void clickYes() {
 		click(btnYes, "Yes");
 	}
-    public void verifyAddressAdded(String expText) {
-    	new CommonFunctions().verifyLabelText(lblAddressAdded, "Address Added", expText);
-    }
+
+	public void verifyAddressAdded(String expText) {
+		new CommonFunctions().verifyLabelText(lblAddressAdded, "Address Added", expText);
+	}
+
 	public void verifyAddressLine1View() {
 		new CommonFunctions().elementView(txtAddressLine1, "Address line1 text field");
 	}
@@ -182,8 +198,15 @@ public class MailingAddressComponent extends MobileFunctions {
 	public AllDonePage allDonePage() {
 		return new AllDonePage();
 	}
+
 	public TokenAccountPage tokenAccountPage() {
 		return new TokenAccountPage();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 }

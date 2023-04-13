@@ -19,6 +19,7 @@ public class RetrieveEmailPage extends MobileFunctions {
 
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]");
 	private By retrieveheading = MobileBy.xpath("//*[@text='Retrieve Email']|//*[@name='Retrieve Email']");
+	private By retrieveContent = MobileBy.xpath("//*[contains(@text,'To help you retrieve')]");
 	// private By lblPhoneNumber =
 	// MobileBy.xpath("//*[contains(@resource-id,'hintTV')]");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'reFirstNameET')]|//*[@name='First Name']");
@@ -38,10 +39,11 @@ public class RetrieveEmailPage extends MobileFunctions {
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]|//*[@name='OK']");
 	private By otpMsg = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By errMessage = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	
 
-	public void verifyHeading(String expHeading) {
+	public void verifyHeading(String expHeading, String expContent) {
 		new CommonFunctions().verifyLabelText(retrieveheading, "Retrieve Email Heading ", expHeading);
-
+		new CommonFunctions().verifyLabelText(retrieveContent, "Retrieve Content", expContent);
 	}
 
 	public void verifyErrorMessage() {

@@ -11,6 +11,8 @@ import io.appium.java_client.MobileBy;
 
 public class AddCardPage extends MobileFunctions {
 	
+	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvCardHead')]");
+	private By lblCardDescription = MobileBy.xpath("//*[contains(@resource-id,'tvCardMsg')]");
 	private By txtNameOnCard = MobileBy.xpath("//*[contains(@resource-id,'etName')]");
 	private By txtCardNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtCardExp = MobileBy.xpath("//*[contains(@resource-id,'etExpiry')]");
@@ -20,7 +22,20 @@ public class AddCardPage extends MobileFunctions {
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 	private By lblCountryName= MobileBy.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
 	private By btnAddCard = MobileBy.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]");
+	private By lblErrHead = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By lblErrContent = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	
+	
+	public void verifyCardError(String expHeading, String expErrContent) {
+		new CommonFunctions().verifyLabelText(lblErrHead, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblErrContent, "Message", expErrContent);
+		click(btnOk, "Ok");
+	}
+	public void verifyHeading(String expheading) {
+		new CommonFunctions().verifyLabelText(heading, "Add card Heading", expheading);
+		new CommonFunctions().elementView(lblCardDescription, "Card Description");
+	}
 	public void fillNameOnCard(String nameOnCard) {
 		click(txtNameOnCard, "NameOnCard");
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
@@ -74,5 +89,8 @@ public class AddCardPage extends MobileFunctions {
 	}
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+	public PaymentMethodsPage paymentMethodsPage() {
+		return new PaymentMethodsPage();
 	}
 }

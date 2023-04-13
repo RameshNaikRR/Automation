@@ -17,23 +17,22 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblProcessingFee = MobileBy.xpath("//*[@text='Processing Fee']/following-sibling::*");
 	private By lblTotalAmount = MobileBy.xpath("//*[@text='Total Amount']/../following-sibling::*");
 	private By lblAccountBalance = MobileBy.xpath("//*[@text='Account Balance']/following-sibling::*");
-	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*");
+	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*[1]/android.widget.TextView");
 	private By lblUserName = MobileBy.xpath("//*[@text='User Name']/following-sibling::*");
 	private By lblAccountAddress = MobileBy.xpath("//*[@text='Account Address']/following-sibling::*");
 	private By lblGiftCardName = MobileBy.xpath("//*[@text='Gift Card Name']/following-sibling::*");
 	private By lblGrandTotal = MobileBy.xpath("//*[@text='Grand Total']/following-sibling::*[1]");
 	private By lblSubTotal = MobileBy.xpath("//*[@text='Sub Total']/following-sibling::*[1]");
 	private By lblWithdrawGiftProcessingFee = MobileBy.xpath("//*[@text='Processing Fee']/following-sibling::*[1]");
-	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*");
+	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*/android.widget.TextView");
 	private By lblRecipentName = MobileBy.xpath("//*[@text='Recipient Name']/following-sibling::*");
 	private By lblRecipentEmail = MobileBy.xpath("//*[@text='Recipient Email']/following-sibling::*");
 	private By lblInstantPayAmount = MobileBy.xpath("//*[contains(@resource-id,'withinamount')]");
 	private By lblWithdrawInstantPayAmount = MobileBy.xpath("//*[@text='Withdraw Amount']/following-sibling::*");
 	private By lblCardHolderName = MobileBy.xpath("//*[@text='Card Holder Name']/following-sibling::*");
 	private By lblCardNumber = MobileBy.xpath("//*[@text='Card Number']/following-sibling::*[2]");
-	// private By lblBuyTokensCardPurchaseAmount = MobileBy.xpath(""); unable to
-	// locate
-	private By lblBuyTokenCardDepositID = MobileBy.xpath("//*[@text='Deposit ID']/following-sibling::*");
+	// private By lblBuyTokensCardPurchaseAmount = MobileBy.xpath(""); unable to locate
+	private By lblBuyTokenCardDepositID = MobileBy.xpath("//*[@text='Deposit ID']/following-sibling::*[1]/android.widget.TextView");
 	private By lblBuyTokenCardDescriptorName = MobileBy.xpath("//*[@text='Descriptor Name']/following-sibling::*");
 	private By lblExpirationDate = MobileBy.xpath("//*[@text='Expiration Date']/following-sibling::*");
 
@@ -71,6 +70,11 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 
 	public void getReferenceID() {
 		ExtentTestManager.setInfoMessageInReport("Reference ID: " + getText(lblReferenceID));
+		click(lblReferenceID, "Copied Reference ID");
+	}
+	public String verifyTransactionReferenceID() {
+		String str = getText(lblReferenceID);
+		return str;
 	}
 
 	public void getUserName() {
@@ -152,6 +156,10 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getUserName();
 		getAccountAddress();
 	}
+	public String verifyPayTotalAmount() {
+		String amount = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		return amount;
+	}
 //withdrawgiftcard
 	public void getWithdrawGiftcardTransactionDetails() {
 		getTransactionHeading();
@@ -184,9 +192,13 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getCardHolderName();
 		getCardNumber();
 	}
+	public String verifyWithdrawTotalAmount() {
+		String amount = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		return amount;
+	}
 //buytokenscard
 ////buytokenscard	
-	public void getBuyTokenDebitCardDetails() {
+	public void getBuyTokenDebitCardDetails() throws InterruptedException {
 		getTransactionHeading();
 		getTransactions();
 		getTransactionAmount();
@@ -197,10 +209,14 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getTotalAmount();
 		getAccountBalance();
 		getBuyTokenCardDepositID();
+		Thread.sleep(1000);
 		getReferenceID();
+		Thread.sleep(1000);
 		getBuyTokenCardDescriptorName();
 		getCardHolderName();
 		getCardNumber();
+		Thread.sleep(2000);
+		scrollDownToElement(lblExpirationDate, "Expiration date");
 		getExpirationDate();
 	}
 //buytokencredit
@@ -233,10 +249,11 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getUserName();
 		getAccountAddress();
 	}
-	public void qe() {
-	}
+//	public void getWithdrawTransactiondetails() {
+//		
+//	}
 	
-	public void getTransactionDetails() {
+	public void getTransactionDetails() throws InterruptedException {
 	if(getText(lblTransactions).contains("Sent")) {
 		    getSentTransactionDetails();
 	}else if(getText(lblTransactions).contains("Received")){

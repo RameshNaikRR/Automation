@@ -2,6 +2,7 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.MobileFunctions;
@@ -18,8 +19,9 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	private By lblAvailabelBalance = MobileBy.xpath("//*[contains(@resource-id, 'balanceTV')]");
 	private By senderName = MobileBy.xpath("//*[contains(@resource-id, 'myUserIDTV')]");
 	private By message = MobileBy.xpath("//*[contains(@resource-id, 'messageTV')]");
-	private By btnConfirm = MobileBy.xpath("//*[contains(@resource-id, 'slideToConfirm')]");// *[@name='Slide to
-																							// confirm']/../..
+	private By btnConfirm = MobileBy.xpath("//*[contains(@resource-id, 'slideToConfirm')]|//*[contains(@resource-id,'im_lock')]");// *[@name='Slide to
+																							// confirm']/../..  , 
+	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'refIDTV')]");
 	private By lock = MobileBy.xpath("//*[contains(@resource-id, 'im_lock')]");
 	// private By lblAvailableBalance = MobileBy.xpath(" ");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id, 'doneCV')]");
@@ -29,14 +31,17 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	}
 
 	public void verifyHeading() {
-		new CommonFunctions().elementView(heading, "Tarnsaction sucessful heading");	
+		new CommonFunctions().elementView(heading, "Transaction successfull heading");	
 		new CommonFunctions().elementView(amount, "Amount");	
 		}
 	
 	public void verifyLockSwipe() {
 		new CommonFunctions().elementView(lock, "Lock ");
 	}
-
+	public String getCopiedReference() {
+		String str = getCopiedData();
+		return str;
+	}
 	public void clickCopy() {
 		click(lnkCopy, "Copy");
 	}
@@ -60,7 +65,8 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 
 	public void swipeConfirm() {
 
-		new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+		//new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+		swipeOnElement(btnConfirm, "Swipe Right", SwipeDirection.RIGHT);
 	}
 
 	public void getAvailableBalance() {
@@ -81,5 +87,11 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 
 	public SecurePayPopup securePayPopup() {
 		return new SecurePayPopup();
+	}
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
+	public TransactionDetailsComponent2 transactionDetailsComponent2() {
+		return new TransactionDetailsComponent2();
 	}
 }

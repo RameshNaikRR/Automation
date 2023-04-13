@@ -12,7 +12,7 @@ public class TokenHomePopUp extends MobileFunctions {
 
 	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'scanLL')]");
 	private By btnPayRequest = MobileBy.xpath("//*[contains(@resource-id,'payRequestLL')]");// (*[@name='Pay/Request'])[3]|
-	private By btnBuyTokens = MobileBy.xpath("(//*[@name='Buy Tokens'])[1]|//*[contains(@resource-id,'buyTokenLL')]");
+	private By btnBuyTokens = MobileBy.xpath("//*[contains(@resource-id,'buyTokenLL')]");
 	private By btnWithdrawToUSD = MobileBy.xpath("//*[@text='Withdraw to USD']");
 
 	public void clickScan() {

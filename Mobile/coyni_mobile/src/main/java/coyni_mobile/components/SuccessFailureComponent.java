@@ -21,6 +21,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lnkReferenceID = MobileBy.xpath("//*[contains(@resource-id,'tvReferenceID')]/following-sibling::*[1]");
 	private By lblTrasactionStatus = MobileBy.xpath("//*[contains(@text,'Trasactions')]");
 	private By lblEmailSucessFul = MobileBy.xpath("//*[contains(@text,'Change Email Successful')]");
+	private By lblEmailSuccessContent = MobileBy.xpath("//*[contains(@text,'For security purposes')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]|//*[contains(@resource-id,'imgBack')]");
 
 	public void getStatus() {
@@ -46,8 +47,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 
 	}
 
-	public void viewEmailSuccessHeading() {
+	public void verifyEmailSuccessHeading(String emailContent) {
 		new CommonFunctions().elementView(lblEmailSucessFul, "Email Successful");
+	//	new CommonFunctions().verifyLabelText(lblEmailSucessFul, "Email Successful" ,emailSuccess);
+		new CommonFunctions().verifyLabelText(lblEmailSuccessContent, "Email Content" ,emailContent);
 	}
 
 	public void clickDone() {
@@ -74,7 +77,15 @@ public class SuccessFailureComponent extends MobileFunctions {
 
 	public void getReferenceID() {
 		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
-		ExtentTestManager.setPassMessageInReport("Reference ID : " + getText(lblReferenceID));
+		click(lblReferenceID, "Copied Reference ID");
+	//	getReferenceID();
+		//ExtentTestManager.setInfoMessageInReport("Reference ID : " + getText(lblReferenceID));
+		
+	}
+	
+	public String getCopiedReference() {
+		String str = getText(lblReferenceID);
+		return str;
 	}
 
 	public void clickLogOut() {
@@ -85,7 +96,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 		verifySuccessFailureHeading();
 		getAmount();
 		getReferenceID();
-		clickDone();
+	//	clickDone();
 	}
 	
 	public void getGiftCardTransactionDetails() {

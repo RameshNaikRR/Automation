@@ -13,23 +13,38 @@ import io.appium.java_client.MobileBy;
 public class SecureAccountPage extends MobileFunctions {
 
 	private By heading = MobileBy.xpath("//*[@text='Secure your account']");
+	private By lblSecureDescription = MobileBy.xpath("//*[contains(@text,'One way we')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By btnFinishSignup = MobileBy.xpath("//*[contains(@text,'Finish Signup')]");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	private By privacyPolicyUpdate = MobileBy
 			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@text,'Privacy Policy')]");
 	private By termsOfServiceUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'agreNameTV')]");
-	private By privacyPolicyHeading = MobileBy.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
+	private By privacyPolicyHeading = MobileBy
+			.xpath("//*[contains(@resource-id,'privacy_policy')]|//*[contains(@resource-id,'agreNameTV')]");
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
+	private By btnThreeDots = MobileBy.xpath("//*[contains(@resource-id,'optionsIV')]");
+	private By btnDownload = MobileBy.xpath("//*[contains(@resource-id,'downloadLL')]");
+	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelTV')]");
+	private By lblSucessMsg = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
+
 //	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 
-	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 40);
+	public void verifyToastMsg(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblSucessMsg, "Toast Message", expHeading);
+	}
+//	public void verifySecureDescription(String expHeading) {
+//		new CommonFunctions().verifyLabelText(lblSecureDescription, "Secure Account Description", expHeading);
+//	}
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 40);
+
 	public void clickAgreeCheckBox() {
 		click(chboxAgree, "Terms of service and Privacy");
 	}
 
-	public void verifyHeading(String expHeading) {
+	public void verifyHeading(String expHeading, String expDescription) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblSecureDescription, "Secure Account Description", expDescription);
 	}
 
 	public void clickNext() {
@@ -53,26 +68,37 @@ public class SecureAccountPage extends MobileFunctions {
 //		}
 	}
 
-	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {
+	public void verifyTermsOfServiceUpdateForSignUp(String expHeading, String toastMessage) throws InterruptedException {
 //		wait.until(ExpectedConditions.titleIs(expHeading));
 //		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
 		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
 				expHeading);
+		//click(btnThreeDots, "3 Dots");
+		//click(btnDownload, "Download");
+		//new CommonFunctions().verifyLabelText(lblSucessMsg, "Toast Message", toastMessage);
+        //click(btnThreeDots, "3 Dots");
+		//click(btnCancel, "Cancel");
 		scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
 		clickAgreeCheckBox();
 		click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
-}
+	}
 
-public void verifyPrivacyPolicyHeadingForSignUp(String expHeading) throws InterruptedException {
+	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading, String toastMessage) throws InterruptedException {
 //		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
-	wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
 		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+		//click(btnThreeDots, "3 Dots");
+		//click(btnDownload, "Download");
+		//new CommonFunctions().verifyLabelText(lblSucessMsg, "Toast Message", toastMessage);
+        //click(btnThreeDots, "3 Dots");
+		//click(btnCancel, "Cancel");
 		scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
 		clickAgreeCheckBox();
 		click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
-	
-}
+
+	}
 
 	public void clickFinishSignup() {
 		click(btnFinishSignup, "Finish Signup");
