@@ -30,6 +30,7 @@ public class BusinessTransactionDetailsTest {
 		orderPreviewPopup = new OrderPreviewPopup();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
+			DriverFactory.getDriver().hideKeyboard();
 		}
 //		merchantProfilePage.verifyAcccountStatus();
 	}
