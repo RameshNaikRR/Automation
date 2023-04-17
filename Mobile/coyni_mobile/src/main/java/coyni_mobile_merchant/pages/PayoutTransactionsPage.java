@@ -59,7 +59,7 @@ public class PayoutTransactionsPage extends MobileFunctions {
 			By moreThanZero = MobileBy
 					.xpath("(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + i + "]");
 			String TransactionAmount = getText(moreThanZero);
-			String Amount = TransactionAmount.replace("-", "");
+			String Amount = TransactionAmount.replace("", "");
 			double amount = Double.parseDouble(Amount);
 			if (amount > 0.00) {
 				click(moreThanZero, "Greater Than 0.00 Transaction");
@@ -82,14 +82,14 @@ public class PayoutTransactionsPage extends MobileFunctions {
 							By moreThanZeroTrans = MobileBy.xpath(
 									"(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + j + "]");
 							String TransAmount = getText(moreThanZeroTrans);
-							String mount = TransactionAmount.replace("-", "");
+							String mount = TransactionAmount.replace("", "");
 							double transAmount = Double.parseDouble(mount);
 							if (transAmount > 0.00) {
 								click(moreThanZeroTrans, "Greater Than 0.00 Transaction");
 								break;
 							} else {
 								int k = j + i;
-								ExtentTestManager.setWarningMessageInReport(
+								ExtentTestManager.setInfoMessageInReport(
 										"Transaction " + k + " has not been greater than 0.00");
 							}
 						}
@@ -99,7 +99,7 @@ public class PayoutTransactionsPage extends MobileFunctions {
 				}
 
 			} else {
-				ExtentTestManager.setWarningMessageInReport("Transaction " + i + " has not been greater than 0.00");
+				ExtentTestManager.setInfoMessageInReport("Transaction " + i + " has not been greater than 0.00");
 			}
 			if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
 				break;

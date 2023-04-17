@@ -43,7 +43,8 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 			"//*[contains(@resource-id,'withBankWithdrawidTV')]|//*[contains(@resource-id,'withgiftid')]|//*[contains(@resource-id,'withinwithdrawidTV')]");
 	private By lblAccountBalance = MobileBy.xpath("//*[contains(@resource-id,'AccBalance')]");
 
-	private By lblCardHolderName = MobileBy.xpath("//*[contains(@resource-id,'holdername')]|//*[contains(@resource-id,'withBankNameOnAccountTV')]");
+	private By lblCardHolderName = MobileBy
+			.xpath("//*[contains(@resource-id,'holdername')]|//*[contains(@resource-id,'withBankNameOnAccountTV')]");
 	private By lblCardNumber = MobileBy.xpath("//*[contains(@resource-id,'cardnum')]");
 	private By lblExpirationDate = MobileBy.xpath("//*[contains(@resource-id,'expdate')]");
 
@@ -299,6 +300,11 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 
 	public void clickCancelTransaction() {
 		click(btnCancel, "Cancel");
+	}
+
+	public int verifyCancelTransaction() throws InterruptedException {
+		Thread.sleep(1500);
+		return getElementList(btnCancel, "Cancel").size();
 	}
 
 	public void clickInstantPayBack() {

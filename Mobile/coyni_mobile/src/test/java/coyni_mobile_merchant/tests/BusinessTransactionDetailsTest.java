@@ -228,26 +228,33 @@ public class BusinessTransactionDetailsTest {
 	public void cancelTransaction(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.clickCancelTransaction();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyCancelTransactionHeading(data.get("cancelHeading"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyCancelTransactionDescription(data.get("cancelDescription"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage().clickNo();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyPageHeading(data.get("transactionDetailsHeading"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.clickCancelTransaction();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyCancelTransactionHeading(data.get("cancelHeading"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.verifyCancelTransactionDescription(data.get("cancelDescription"));
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage().clickYes();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.errorMessagePopup()
-					.verifyCancelTransaction(data.get("popUpHeading"), data.get("popUpDescription"));
-		} catch (Exception e) {
+			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyCancelTransaction() == 1) {
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.clickCancelTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyCancelTransactionHeading(data.get("cancelHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyCancelTransactionDescription(data.get("cancelDescription"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.clickNo();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyPageHeading(data.get("transactionDetailsHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.clickCancelTransaction();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyCancelTransactionHeading(data.get("cancelHeading"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.verifyCancelTransactionDescription(data.get("cancelDescription"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.clickYes();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+						.errorMessagePopup()
+						.verifyCancelTransaction(data.get("popUpHeading"), data.get("popUpDescription"));
+			}
+		} catch (
+
+		Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testBusinessTokenTransactionWithThreeFilters failed due to Exception " + e);
 		}

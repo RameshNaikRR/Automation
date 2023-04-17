@@ -62,14 +62,14 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By lblNoMoreTransactions = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]");
 
-	private By lnkSearchTransaction = MobileBy.xpath("(//*[contains(@text,'Merchant Payout')])[1]");
+	private By lnkSearchTransaction = MobileBy.id("com.coyni.mapp:id/layoutTopRadiusRL");
 
 	private By btnClose = MobileBy.id("com.coyni.mapp:id/closeBtnIV");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void clickSearchTransaction() {
-		scrollDownToElement(lnkSearchTransaction, "Transaction");
+//		scrollDownToElement(lnkSearchTransaction, "Transaction");
 		click(lnkSearchTransaction, "Transaction");
 	}
 

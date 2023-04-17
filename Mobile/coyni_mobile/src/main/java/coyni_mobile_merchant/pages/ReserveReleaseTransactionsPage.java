@@ -29,7 +29,7 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By btnReserve = MobileBy.xpath("(//*[@text='Released'])[1]");
 
-//	private By btnReserve = MobileBy.xpath("(//*[@text='Released'])[1]|(//*[contains(@resource-id,'rl_base')])[1]");
+	private By btnOnHold = MobileBy.xpath("(//*[@text='On Hold'])[1]");
 
 	private By lblReleaseType = MobileBy.xpath(" //*[contains(@resource-id,'ChangeName')]");
 
@@ -56,6 +56,10 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 		click(btnReserve, "Reserve");
 	}
 
+	public void clickOnHold() {
+		click(btnOnHold, "On Hold");
+	}
+	
 	public void clickTransaction() {
 		scrollDownToElement(lnkTrans, "Transaction");
 		click(lnkTrans, "Transaction");

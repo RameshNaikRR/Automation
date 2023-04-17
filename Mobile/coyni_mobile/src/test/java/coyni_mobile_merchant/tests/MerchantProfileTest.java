@@ -111,8 +111,6 @@ public class MerchantProfileTest {
 					.successFailureComponent().landingPage().verifyLandingPage();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.successFailureComponent().landingPage().verifyLoginbtnView();
-			LoginTest loginTest = new LoginTest();
-			loginTest.testLogin(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeEmailWithValidDetails failed due to Exception " + e);
 		}
@@ -123,7 +121,6 @@ public class MerchantProfileTest {
 	public void testChangeEmailFieldValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.getAccountId();
 			merchantProfilePage.clickUserDetails();

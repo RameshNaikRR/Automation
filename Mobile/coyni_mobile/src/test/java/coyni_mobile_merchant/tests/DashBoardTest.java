@@ -672,7 +672,7 @@ public class DashBoardTest {
 							.reserveReleaseDetailsPage().getReserveReleasedDetails();
 
 				} else if (data.get("filterType").equalsIgnoreCase("On Hold")) {
-					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickOnHold();
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 							.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
