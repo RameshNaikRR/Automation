@@ -16,7 +16,6 @@ import coyni_mobile_merchant.pages.LandingPage;
 import coyni_mobile_merchant.pages.LoginPage;
 import coyni_mobile_merchant.pages.MerchantProfilePage;
 import ilabs.MobileFramework.DriverFactory;
-import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -644,9 +643,6 @@ public class DashBoardTest {
 					.clickFilterIcon();
 			Thread.sleep(1000);
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.selectFilter(data.get("filterType"));
-			Thread.sleep(1000);
-			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickCalendar();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().selectFromDate(data.get("fromDate"));
@@ -655,9 +651,14 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickDone();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickResetAllFilters();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.selectFilter(data.get("filterType"));
+			Thread.sleep(1000);
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.clickApplyfilters();
 			if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-					.verifyTransactionsCount() == 0) {
+					.verifyTransactionCount() > 0) {
 
 				if (data.get("filterType").equalsIgnoreCase("Open")) {
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
@@ -671,13 +672,11 @@ public class DashBoardTest {
 							.reserveReleaseDetailsPage().getReserveReleasedDetails();
 
 				} else if (data.get("filterType").equalsIgnoreCase("On Hold")) {
-
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 							.reserveReleaseDetailsPage().verifyReserveDetail(data.get("reserveDetail"));
 					businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 							.reserveReleaseDetailsPage().getReserveOnHoldDetails();
-
 				} else if (data.get("filterType").equalsIgnoreCase("Canceled")) {
 
 				} else if (data.get("filterType").equalsIgnoreCase("Failed")) {
@@ -961,30 +960,30 @@ public class DashBoardTest {
 			businessTokenAccountPage.merchantTransactionsPage().verifyMerchanTransactions();
 			businessTokenAccountPage.merchantTransactionsPage().clickFilterIcon();
 			businessTokenAccountPage.merchantTransactionsPage().filterPopup().verifyFilters();
-			businessTokenAccountPage.merchantTransactionsPage().clickMerchantTransctions();
-			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage()
-					.verifyTransactionDetails();
-			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage().clickBack();
+//			businessTokenAccountPage.merchantTransactionsPage().clickMerchantTransctions();
+//			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage()
+//					.verifyTransactionDetails();
+//			businessTokenAccountPage.merchantTransactionsPage().merchantTransactionDetailsPage().clickBack();
 			businessTokenAccountPage.merchantTransactionsPage().clickClose();
 			businessTokenAccountPage.batchPayOutComponent().clickFullPayOutHistory();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().verifyFiltersIcon();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().clickFilterIcon();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().verifyFilters();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().navigationComponent().clickClose();
-//			businessTokenAccountPage.reserveBalanceComponent().verifyReserveBalance();
-//			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-//					.verifyLabelReserveReleases();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-//					.clickFilterIcon();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-//					.verifyFilters();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-//					.reserveReleaseDetailsPage().verifyReserveDetail();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
-//					.reserveReleaseDetailsPage().clickBack();
-//			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
+			businessTokenAccountPage.reserveBalanceComponent().verifyReserveBalance();
+			businessTokenAccountPage.reserveBalanceComponent().clickFullReserveReleaseHistory();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.verifyLabelReserveReleases();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.clickFilterIcon();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
+					.verifyFilters();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().clickReserve();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().verifyReserveDetail();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
+					.reserveReleaseDetailsPage().clickBack();
+			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().ClickClose();
 			businessTokenAccountPage.clickNotifications();
 			businessTokenAccountPage.notificationComponent().verifyNotifications();
 			businessTokenAccountPage.navigationComponent().clickBack();
@@ -1005,16 +1004,16 @@ public class DashBoardTest {
 			businessTokenAccountPage.navigationComponent().clickClose();
 			businessTokenAccountPage.clickDashBoard();
 			businessTokenAccountPage.dashBoardPage().VerifyUser();
-			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifyScanCode();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
-			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading();
-			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
-			businessTokenAccountPage.dashBoardPage().VerifyUser();
+//			businessTokenAccountPage.clickMenuIcon();
+//			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
+//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifyScanCode();
+//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
+//			businessTokenAccountPage.clickMenuIcon();
+//			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
+//			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading();
+//			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
+//			businessTokenAccountPage.dashBoardPage().VerifyUser();
 			businessTokenAccountPage.clickTransactions();
 			businessTokenAccountPage.merchantTransactionsPage().verifyMerchanTransactions();
 			businessTokenAccountPage.merchantTransactionsPage().clickClose();

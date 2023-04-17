@@ -7,7 +7,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.pages.LandingPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
@@ -52,10 +51,10 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()

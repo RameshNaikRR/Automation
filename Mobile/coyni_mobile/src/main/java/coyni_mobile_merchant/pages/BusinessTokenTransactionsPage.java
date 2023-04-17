@@ -1,3 +1,4 @@
+package coyni_mobile_merchant.pages;
 //package coyni_mobile_merchant.pages;
 //
 //import org.openqa.selenium.By;

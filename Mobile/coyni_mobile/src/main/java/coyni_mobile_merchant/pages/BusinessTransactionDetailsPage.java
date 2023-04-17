@@ -104,7 +104,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getReferenceID() {
-		click(lblReferenceID, "Reference ID");
+//		click(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID" + getText(lblReferenceID));
 	}
 

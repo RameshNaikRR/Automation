@@ -20,7 +20,8 @@ import io.appium.java_client.MobileBy;
 public class MerchantProfilePage extends MobileFunctions {
 	private By lblUserName = MobileBy.xpath("//*[contains(@resource-id,'b_nameTV')]");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@resource-id,'b_accountIDTV')]");
-	private By lblAccountStatus = MobileBy.xpath("//*[contains(@text,'Under Review')]|//*[contains(@resource-id,'AccountStatusTV')]");
+	private By lblAccountStatus = MobileBy
+			.xpath("//*[contains(@text,'Under Review')]|//*[contains(@resource-id,'AccountStatusTV')]");
 	private By imgQRCode = MobileBy.xpath("//*[contains(@resource-id,'imgQRCode')]");
 	private By imgUser = MobileBy.xpath("");
 	private By lblSettings = MobileBy.xpath("//*[contains(@resource-id,'userSettingsTV')]");
@@ -44,9 +45,9 @@ public class MerchantProfilePage extends MobileFunctions {
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'back')]");
 	private By btnInformation = MobileBy.xpath("//*[contains(@text,'Information')]");
 	private By btnGetHelp = MobileBy.xpath("//*[contains(@text,'Get Help')]");
-	
-	
-WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("//*[contains(@resource-id,'profileSV')]//*[contains(@text,'%s')]", eleName));
 	}
@@ -66,7 +67,7 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 		new CommonFunctions().elementView(lblAccountID, "Account ID");
 		new CommonFunctions().elementView(lblAccountStatus, "Account Status");
 	}
-	
+
 	public void clickImg() {
 		click(imgUser, "Click Image");
 	}
@@ -104,10 +105,11 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 		if (getText(lblAccountStatus).equalsIgnoreCase("Active")) {
 			ExtentTestManager.setPassMessageInReport(getText(lblAccountStatus));
 		} else {
-			ExtentTestManager.setFailMessageInReport(" Account is in Under Review or Not Active Status. So we can't perform Token actions");
+			ExtentTestManager.setFailMessageInReport(
+					" Account is in Under Review or Not Active Status. So we can't perform Token actions");
 		}
 	}
-	
+
 	public void clickFaceIDSetting() {
 		click(btnFaceIDSetting, "FaceID Setting");
 	}
@@ -228,7 +230,8 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 
 	public void clickChangePassword() {
 		scrollDownToElement(btnLogOut, "Log Out");
-//		wait.until(ExpectedConditions.invisibilityOfElementLocated(btnChangePassword));
+		new CommonFunctions().elementView(btnChangePassword, "Change Password");
+		wait.until(ExpectedConditions.elementToBeClickable(btnChangePassword));
 		click(btnChangePassword, "Change Password");
 	}
 
@@ -236,7 +239,7 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 		scrollDownToElement(btnGetHelp, "Get Help");
 		click(btnGetHelp, "Get Help");
 	}
-	
+
 	public void clickLogOut() {
 		scrollDownToElement(btnLogOut, "Log Out");
 		click(btnLogOut, "Log Out");
@@ -305,7 +308,7 @@ WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 10);
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}
-	
+
 	public GetHelpPage getHelpPage() {
 		return new GetHelpPage();
 	}

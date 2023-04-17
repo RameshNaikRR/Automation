@@ -1,9 +1,6 @@
 package coyni_mobile_merchant.components;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.popups.PayRequestConfirmPopup;

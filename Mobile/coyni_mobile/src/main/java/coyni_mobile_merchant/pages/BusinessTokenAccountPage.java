@@ -1,14 +1,11 @@
 package coyni_mobile_merchant.pages;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 
-import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.BatchPayOutComponent;
 import coyni_mobile_merchant.components.DaysDropDownComponent;
+import coyni_mobile_merchant.components.NavigationComponent;
 import coyni_mobile_merchant.components.NotificationComponent;
 import coyni_mobile_merchant.components.ReserveBalanceComponent;
 import coyni_mobile_merchant.popups.SwitchAccountPopup;
@@ -17,9 +14,6 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class BusinessTokenAccountPage extends MobileFunctions {
 

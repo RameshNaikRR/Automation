@@ -11,17 +11,22 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class TransactionSucessFailurePendingComponent extends MobileFunctions {
-	private By lblPageHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHeading')]|//*[contains(@text,'Successful')]");
-	private By lblPageDescription = MobileBy.xpath("//*[contains(@resource-id,'Message')]|//*[contains(@text,'A new refund')]");
+	private By lblPageHeading = MobileBy
+			.xpath("//*[contains(@resource-id,'tvBHeading')]|//*[contains(@resource-id,'tvHeading')]|//*[contains(@text,'Successful')]");
+	private By lblPageDescription = MobileBy
+			.xpath("//*[contains(@resource-id,'Message')]|//*[contains(@text,'A new refund')]");
 	private By lblRefundDescription = MobileBy.xpath("//*[contains(@text,'A new refund')]");
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'lyAmount')]|//*[contains(@resource-id,'Amount')]");
+	private By lblAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'lyAmount')]|//*[contains(@resource-id,'Amount')]");
 	private By lblCurrency = MobileBy.xpath("//*[contains(@text,'CYN')]");
-	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'ReferenceID')]|//*[contains(@resource-id,'refIDTV')]");
+	private By lblReferenceID = MobileBy
+			.xpath("//*[contains(@resource-id,'ReferenceID')]|//*[contains(@resource-id,'refIDTV')]");
 	private By lblTransactionTimeDescription = MobileBy.xpath("//*[contains(@resource-id,'Description')]");
 //	private By lnkLearnMore = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'Done')]|//*[contains(@text,'Done')]");
 
-	WebDriverWait wait =new WebDriverWait(DriverFactory.getDriver(), 20);
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
+
 	public void getPageHeading() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(lblPageHeading));
 		new CommonFunctions().elementView(lblPageHeading, "Page Heading");
@@ -35,10 +40,10 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 	public void getRefundDescription() {
 		ExtentTestManager.setInfoMessageInReport("Refund Description : " + getText(lblRefundDescription));
 	}
-	
+
 	public void getAmount() {
 		new CommonFunctions().elementView(lblAmount, "Amount");
-		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount)+ "CYN");
+		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount) + "CYN");
 	}
 
 	public void getCurrency() {
@@ -47,6 +52,7 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 
 	public void getReferenceID() {
 		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
+		click(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID : " + getText(lblReferenceID));
 	}
 
@@ -63,7 +69,7 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 		getReferenceID();
 		clickDone();
 	}
-	
+
 	public void getRefundTokenTransactionStatusDetails() {
 		getPageHeading();
 		getAmount();
@@ -71,14 +77,14 @@ public class TransactionSucessFailurePendingComponent extends MobileFunctions {
 		getRefundDescription();
 		clickDone();
 	}
-	
+
 	public void verifyScanPaymentDetails() {
 		getPageHeading();
 		getAmount();
 		getReferenceID();
 		clickDone();
 	}
-	
+
 //	public void viewLearnMore() {
 //		new CommonFunctions().elementView(lnkLearnMore, "Learn More ");
 ////		click(lnkLearnMore, "Link More");

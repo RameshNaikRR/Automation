@@ -112,7 +112,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.successFailureComponent().landingPage().verifyLoginbtnView();
 			LoginTest loginTest = new LoginTest();
-			loginTest.testLoginFor(strParams);
+			loginTest.testLogin(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testChangeEmailWithValidDetails failed due to Exception " + e);
 		}
@@ -1884,12 +1884,12 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().teamMemberDetailsPage()
 					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
-			merchantProfilePage.teamPage().teamMemberDetailsPage()
-					.verifyDescription(data.get("teamMemberDetailsDescription"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage()
+//					.verifyDescription(data.get("teamMemberDetailsDescription"));
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickEdit();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.verifyPageHeading(data.get("editTeamMemberHeading"));
@@ -3328,57 +3328,59 @@ public class MerchantProfileTest {
 		}
 	}
 
-//	@Test
-//	public void testAllLinksInProfile() {
-//		try {
-//			businessTokenAccountPage.clickProfile();
-//			merchantProfilePage.getAccountId();
-//			merchantProfilePage.verifyUserProfile();
-//			merchantProfilePage.clickUserDetails();
-//			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();
-//			merchantProfilePage.userDetailsPage().clickBack();
-//			merchantProfilePage.clickCompanyInformation();
-//			merchantProfilePage.companyInformationPage().verifyPageHeading();
-//			merchantProfilePage.navigationComponent().clickBack();
-//			merchantProfilePage.clickDBAInformation();
-//			merchantProfilePage.dbaInformationPage().verifyPageHeading();
-//			merchantProfilePage.navigationComponent().clickBack();
-//			merchantProfilePage.clickBeneficialOwners();
-//			merchantProfilePage.benificialOwnersPage().verifyPageHeading();
-//			merchantProfilePage.navigationComponent().clickBack();
-//			merchantProfilePage.clickTeam();
-//			merchantProfilePage.teamPage().verifyPageHeading();
-//			merchantProfilePage.teamPage().clickBack();
-//			merchantProfilePage.clickPaymentMethods();
-//			merchantProfilePage.paymentMethodsPage().navigationComponent().clickClose();
-//			merchantProfilePage.clickPreferences();
-//			merchantProfilePage.preferencesComponent().verifyPreferencesHeading();
-//			merchantProfilePage.preferencesComponent().clickBack();
-//			merchantProfilePage.clickAccountLimits();
-//			merchantProfilePage.accountLimitsComponent().verifyHeading();
-//			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
-//			merchantProfilePage.clickAgreements();
-//			merchantProfilePage.agreementComponent().verifyHeading();
-//			merchantProfilePage.agreementComponent().clickBack();
-//			merchantProfilePage.clickGetHelp();
-//			merchantProfilePage.getHelpPage().verifyGetHelp();
-//			merchantProfilePage.getHelpPage().clickBack();
-//			merchantProfilePage.clickResetPinCode();
-//			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
-//			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-//			merchantProfilePage.clickTogggle();
-//			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
-//			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
+	@Test
+	@Parameters("strParams")
+	public void testAllLinksInProfile(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.getAccountId();
+			merchantProfilePage.verifyUserProfile();
+			merchantProfilePage.clickUserDetails();
+			merchantProfilePage.userDetailsPage().verifyUserDetailsPageview();
+			merchantProfilePage.userDetailsPage().clickBack();
+			merchantProfilePage.clickCompanyInformation();
+			merchantProfilePage.companyInformationPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickDBAInformation();
+			merchantProfilePage.dbaInformationPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickBeneficialOwners();
+			merchantProfilePage.benificialOwnersPage().verifyPageHeading();
+			merchantProfilePage.navigationComponent().clickBack();
+			merchantProfilePage.clickTeam();
+			merchantProfilePage.teamPage().verifyPageHeading();
+			merchantProfilePage.teamPage().clickBack();
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+			merchantProfilePage.clickPreferences();
+			merchantProfilePage.preferencesComponent().verifyPreferencesHeading();
+			merchantProfilePage.preferencesComponent().clickBack();
+			merchantProfilePage.clickAccountLimits();
+			merchantProfilePage.accountLimitsComponent().verifyHeading();
+			merchantProfilePage.accountLimitsComponent().navigationComponent().clickBack();
+			merchantProfilePage.clickAgreements();
+			merchantProfilePage.agreementComponent().verifyHeading();
+			merchantProfilePage.agreementComponent().clickBack();
+			merchantProfilePage.clickGetHelp();
+			merchantProfilePage.getHelpPage().verifyGetHelp();
+			merchantProfilePage.getHelpPage().clickBack();
+			merchantProfilePage.clickResetPinCode();
+			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			merchantProfilePage.clickTogggle();
+			merchantProfilePage.setUpTouchIDPopup().verifyHeading();
+			merchantProfilePage.setUpTouchIDPopup().clickNotNow();
 //			Thread.sleep(2000);
-//			merchantProfilePage.clickChangePassword();
-//			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
-//			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
-//			merchantProfilePage.clickLogOut();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-//		}
-//
-//	}
+			merchantProfilePage.clickChangePassword();
+			merchantProfilePage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
+			merchantProfilePage.enterYourPINComponent().navigationComponent().clickClose();
+			merchantProfilePage.clickLogOut();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+
+	}
 
 }

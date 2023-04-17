@@ -1,15 +1,11 @@
 package coyni_mobile_merchant.components;
 
-import java.sql.Driver;
-
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import coyni_mobile_merchant.pages.PayoutTransactionsPage;
 import coyni_mobile_merchant.popups.FilterPopup;
-import coyni_mobile_merchant.popups.OrderPreviewPopup;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;

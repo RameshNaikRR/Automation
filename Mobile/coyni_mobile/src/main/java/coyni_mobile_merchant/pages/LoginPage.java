@@ -11,6 +11,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.interactions.Keyboard;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.AgreementComponent;
@@ -70,6 +71,10 @@ public class LoginPage extends MobileFunctions {
 	public void fillEmail(String email) {
 		click(txtEmail, "email");
 		enterText(txtEmail, email, "Email ");
+		ExtentTestManager.setPassMessageInReport("Password is Masked by the : " + DriverFactory.getDriver().getKeyboard()); 
+//		keyboard_layout = DriverFactory.getDriver('mobile: getKeyboardLayout')
+//
+//				print("Keyboard Layout:", keyboard_layout)
 	}
 
 	public void clickCross() {

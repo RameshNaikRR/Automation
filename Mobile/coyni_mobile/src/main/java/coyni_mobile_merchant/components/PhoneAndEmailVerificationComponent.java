@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import coyni_mobile_merchant.pages.*;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.pages.CreatePasswordPage;
 import coyni_mobile_merchant.pages.FoundAccountPage;
-import coyni_mobile_merchant.popups.ErrorMessagePopup;
+import coyni_mobile_merchant.pages.SecureAccountPage;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;

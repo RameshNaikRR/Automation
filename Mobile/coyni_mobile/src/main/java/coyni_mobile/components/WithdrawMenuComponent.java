@@ -7,7 +7,6 @@ import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.popups.WithdrawToUSDBankAccountPopup;
 import coyni_mobile.popups.WithdrawToUSDInstantPayPopup;
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile_merchant.pages.DashBoardPage;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -23,6 +22,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	public void clickInstantPay() {
 		click(btnInstantPay, "Instant Pay");
 	}
+
 	public void clickExistingCard() {
 		click(btnExistingCard, "Card");
 	}
@@ -42,6 +42,7 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	public WithdrawToUSDInstantPayPopup withdrawToUSDInstantPayPopup() {
 		return new WithdrawToUSDInstantPayPopup();
 	}
+
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
 	}
@@ -53,11 +54,13 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	public GiftCardPage giftCardPage() {
 		return new GiftCardPage();
 	}
+
 	public WithdrawToUSDBankAccountPopup withdrawToUSDBankAccountPopup() {
 		return new WithdrawToUSDBankAccountPopup();
 	}
+
 	public TransactionDetailsComponent2 transactionDetailsComponent2() {
 		return new TransactionDetailsComponent2();
 	}
-	
+
 }

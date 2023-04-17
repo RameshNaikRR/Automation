@@ -70,14 +70,15 @@ public class LandingPage extends MobileFunctions {
 		Thread.sleep(2500);
 		new CommonFunctions().elementView(btnGetStarted, "Get started ");
 	}
-	
+
 	public void verifyLoginbtnView() {
 		new CommonFunctions().elementView(btnLogin, "Login");
 
 	}
 
 	public void verifyLandingPage() {
-		new CommonFunctions().elementView(btnGetStarted, "Landing Page ");
+		new CommonFunctions().elementView(btnGetStarted, "Get Started in Landing Page");
+		new CommonFunctions().elementView(btnLogin, "Login in Landing Page");
 	}
 
 }

@@ -1,11 +1,11 @@
 package coyni_mobile_merchant.pages;
 
 import java.awt.AWTException;
-import java.awt.Point;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.FieldValidationsComponent;
@@ -15,14 +15,10 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.TapOptions;
 //import io.appium.java_client.touch.LongPressOptions;
 //import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
@@ -38,7 +34,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By lblRecentTransactionType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessage')])[1]");
 	private By lblLatestTransactionType = MobileBy.xpath("(//*[contains(@resource-id,'latestmessagTV')])[1]");
-	
+
 	private By btnViewMore = MobileBy.xpath("//*[contains(@text,'View More')]");
 
 	private By lblTokensHeading = MobileBy.xpath("//*[contains(@text,'Transaction')]");
@@ -55,7 +51,8 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	private By txtToAmount = MobileBy.xpath("//*[contains(@resource-id,'AmountEnd')]");
 
-	private By recentTransType = MobileBy.xpath("(//*[contains(@resource-id,'message')])[1]|(//*[contains(@resource-id,'latestmessage')])[1]");
+	private By recentTransType = MobileBy
+			.xpath("(//*[contains(@resource-id,'message')])[1]|(//*[contains(@resource-id,'latestmessage')])[1]");
 
 	private By recentTranStatus = MobileBy.xpath("(//*[contains(@resource-id,'statusTV')])[1]");
 
@@ -66,6 +63,10 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	private By lblNoMoreTransactions = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]");
 
 	private By lnkSearchTransaction = MobileBy.xpath("(//*[contains(@text,'Merchant Payout')])[1]");
+
+	private By btnClose = MobileBy.id("com.coyni.mapp:id/closeBtnIV");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void clickSearchTransaction() {
 		scrollDownToElement(lnkSearchTransaction, "Transaction");
@@ -79,12 +80,12 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public void verifyPageHeading() {
 		new CommonFunctions().elementView(lblTransHeading, "Business Recent Token Transactions Heading");
 	}
-	
-	public void verifyTokenAccount(){
+
+	public void verifyTokenAccount() {
 		new CommonFunctions().elementView(lblHeading, "Business Recent Token Transactions Heading");
 //		new CommonFunctions().elementView(lblTotalFunds, "Total Availble Funds");
 	}
-	
+
 	public void verifyTokenPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTokensHeading, "Token Transactions Heading", expHeading);
 
@@ -109,15 +110,16 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public void getTransactionStatus() {
 		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Status is " + getText(lblTransactionStatus));
-		
+
 	}
+
 	public String verifyTransactionAmount() {
-		String amount=getRecentTransAmount();
-		String latestTranAmount=amount.replace("-", "");
+		String amount = getRecentTransAmount();
+		String latestTranAmount = amount.replace("-", "");
 		ExtentTestManager.setInfoMessageInReport(latestTranAmount);
 		return latestTranAmount;
 	}
-	
+
 	public String getAmount() {
 //		scrollDownToElement(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Amount is " + getText(lblAmount));
@@ -132,6 +134,14 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 
 	public void clickTransaction() {
 		click(lnkTransaction, "Transaction");
+	}
+
+	public void clickClose() {
+		click(btnClose, "Close");
+	}
+
+	public int verifyNumberOfTransactionCount() {
+		return getElementList(recentTransType, "recentTransType").size();
 	}
 
 	public void clickViewMore() {
@@ -163,6 +173,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public void fillSearch() throws AWTException, InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(txtSearch));
 		new CommonFunctions().VerifySearchWithPasteOption(txtSearch);
 //		TouchAction action = new TouchAction(DriverFactory.getDriver());
 //		WebElement element = DriverFactory.getDriver().findElement(txtSearch);
@@ -176,9 +187,9 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 //		    .perform();
 //		touchAction.tap(PointOption.point(140,330)).perform();
 //		touchAction.tap(TapOptions.tapOptions()).perform();
-		
+
 //		touchAction.tap(TapOptions.tapOptions(txtSearch));
-		
+
 //		touchAction.tap(
 //		touchAction.press(PointOption.point(140,340));
 //		MobileElement lement = (MobileElement) DriverFactory.getDriver().findElement(txtSearch);
@@ -190,8 +201,7 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 //		int y = location.getY();
 //		System.out.println("Element location: " + x + ", " + y);
 //		DriverFactory.getDriver().
-	
-	
+
 //		Thread.sleep(2000);
 //		DriverFactory.getDriver().
 //		action.longPress((LongPressOptions) element).release().perform();
@@ -239,13 +249,13 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public String verifyLatestTransactionType() {
-		String payMethod=getText(lblLatestTransactionType);
-		String latestPaymentMethod[]=payMethod.split(" ");
+		String payMethod = getText(lblLatestTransactionType);
+		String latestPaymentMethod[] = payMethod.split(" ");
 		ExtentTestManager.setInfoMessageInReport(latestPaymentMethod[1]);
 		return latestPaymentMethod[1];
 
 	}
-	
+
 	public void getRecentTransBalance() {
 //		scrollDownToElement(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Recent Transaction Balance is " + getText(recentTransBalance));
@@ -298,5 +308,5 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
 	}
-	
+
 }

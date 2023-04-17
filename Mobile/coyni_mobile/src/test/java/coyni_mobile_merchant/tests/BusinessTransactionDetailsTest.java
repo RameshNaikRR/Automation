@@ -30,7 +30,6 @@ public class BusinessTransactionDetailsTest {
 		orderPreviewPopup = new OrderPreviewPopup();
 		if (!new CommonFunctions().isPlatformiOS()) {
 			DriverFactory.getDriver().hideKeyboard();
-			DriverFactory.getDriver().hideKeyboard();
 		}
 //		merchantProfilePage.verifyAcccountStatus();
 	}
@@ -62,21 +61,22 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickFilterIcon();
 				Thread.sleep(1000);
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.clickCalendar();
+//				Thread.sleep(1000);
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectFromDate(data.get("fromDate"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectToDate(data.get("toDate"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.clickDone();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
 						.selectFilter(data.get("filterType"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
 						.selectFilter(data.get("filterType1"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillFromAmount(data.get("fromAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.clickCalendar();
-				Thread.sleep(1000);
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectFromDate(data.get("fromDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectToDate(data.get("toDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
 						.verifyTransactionsCount() == 0) {
@@ -169,15 +169,15 @@ public class BusinessTransactionDetailsTest {
 						.selectFilter(data.get("filterType2"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillFromAmount(data.get("fromAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.clickCalendar();
-				Thread.sleep(1000);
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectFromDate(data.get("fromDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectToDate(data.get("toDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.clickDone();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.clickCalendar();
+//				Thread.sleep(1000);
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectFromDate(data.get("fromDate"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectToDate(data.get("toDate"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
 				Thread.sleep(1000);
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
@@ -349,6 +349,7 @@ public class BusinessTransactionDetailsTest {
 					.getWithdrawTokenBankTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickWithBankSignetBack();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testVerifyWithdrawBankTransaction failed due to Exception " + e);
 		}
@@ -366,23 +367,20 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageDescription(data.get("businessTokenDescription"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
-//			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyLatestTransactionType()
-//					.equalsIgnoreCase(paymentMethod)
-//					&& businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
-//							.equalsIgnoreCase(businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//									.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal())) {
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
+			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNumberOfTransactionCount() == 1) {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.verifyPageHeading(data.get("transactionDetailsHeading"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.verifyTransactionType(data.get("transactionType"));
-//			} else {
-//				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
-//			}
+			} else {
+				ExtentTestManager.setFailMessageInReport("Its not showing latest transaction");
+			}
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyPageHeading(data.get("transactionDetailsHeading"));
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
+					.verifyTransactionType(data.get("transactionType"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);
@@ -398,6 +396,7 @@ public class BusinessTransactionDetailsTest {
 					.getWithdrawTokenInstantPayTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickInstantPayBack();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawInstantPayTransaction failed due to Exception " + e);
@@ -413,6 +412,7 @@ public class BusinessTransactionDetailsTest {
 					.getWithdrawTokenCogentTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickWithBankSignetBack();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawSignetTransaction failed due to Exception " + e);
@@ -441,6 +441,7 @@ public class BusinessTransactionDetailsTest {
 					.getBuyTokenBankTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickbtnBuyBankBack();
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testVerifyBuyTokenBankTransaction failed due to Exception " + e);
 		}

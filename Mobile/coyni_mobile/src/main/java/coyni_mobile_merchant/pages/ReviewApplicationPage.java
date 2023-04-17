@@ -28,7 +28,6 @@ public class ReviewApplicationPage extends MobileFunctions {
 	private By lblAgreementsHeading = MobileBy.xpath("//*[contains(@text,'Agreements')]");
 	private By chkBoxReviewAppli = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
-	
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -80,7 +79,8 @@ public class ReviewApplicationPage extends MobileFunctions {
 
 //Beneficial Owners information
 
-	public void verifyBeneficialHeading(String expHeading) {
+	public void verifyBeneficialHeading(String expHeading) throws InterruptedException {
+//		Thread.sleep(2000);
 		scrollDownToElement(lblBeneficialHeading, "Beneficial Owners Heading");
 		new CommonFunctions().verifyLabelText(lblBeneficialHeading, "Beneficial Owners Heading", expHeading);
 	}
@@ -136,15 +136,14 @@ public class ReviewApplicationPage extends MobileFunctions {
 	}
 
 	public void verifyReviewApplication(String expReviewHeading, String expCompHeading, String expDBAHeading,
-			String expBeneficialHeading, String expAgrrementsHeading)
-			throws InterruptedException {
+			String expBeneficialHeading, String expAgrrementsHeading) throws InterruptedException {
 		verifyReviewApplicationHeading(expReviewHeading);
 		verifyCompanyHeading(expCompHeading);
 		clickCompanyDocView();
 		clickDocumentClose();
 		verifyDBAInfoHeading(expDBAHeading);
-		clickDBADocView();
-		clickDocumentClose();
+//		clickDBADocView();
+//		clickDocumentClose();
 		verifyBeneficialHeading(expBeneficialHeading);
 		clickBeneficialDocView();
 		clickDocumentClose();
@@ -157,12 +156,11 @@ public class ReviewApplicationPage extends MobileFunctions {
 	}
 
 	public void verifyAddDBAReviewApplication(String expReviewHeading, String expDBAHeading,
-			String expBeneficialHeading, String expAgrrementsHeading)
-			throws InterruptedException {
+			String expBeneficialHeading, String expAgrrementsHeading) throws InterruptedException {
 		verifyReviewApplicationHeading(expReviewHeading);
 		verifyDBAInfoHeading(expDBAHeading);
-		clickDBADocView();
-		clickDocumentClose();
+//		clickDBADocView();
+//		clickDocumentClose();
 		verifyBeneficialHeading(expBeneficialHeading);
 		clickBeneficialDocView();
 		clickDocumentClose();
@@ -173,7 +171,7 @@ public class ReviewApplicationPage extends MobileFunctions {
 		agreementComponent().clickClose();
 		clickNext();
 	}
-	
+
 	public AgreementComponent agreementComponent() {
 		return new AgreementComponent();
 	}

@@ -1,7 +1,5 @@
 package coyni_mobile_merchant.pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -10,11 +8,6 @@ import coyni_mobile_merchant.popups.FilterPopup;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.offset.ElementOption;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class MerchantTransactionsPage extends MobileFunctions {
 

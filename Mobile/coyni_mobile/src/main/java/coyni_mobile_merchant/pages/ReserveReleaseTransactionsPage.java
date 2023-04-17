@@ -1,10 +1,6 @@
 package coyni_mobile_merchant.pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -14,11 +10,6 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.offset.ElementOption;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
@@ -36,7 +27,9 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By btnManual = MobileBy.xpath("//*[contains(@resource-id,'manualTV')]");
 
-	private By btnReserve = MobileBy.xpath("(//*[contains(@resource-id,'rl_base')])[3]");
+	private By btnReserve = MobileBy.xpath("(//*[@text='Released'])[1]");
+
+//	private By btnReserve = MobileBy.xpath("(//*[@text='Released'])[1]|(//*[contains(@resource-id,'rl_base')])[1]");
 
 	private By lblReleaseType = MobileBy.xpath(" //*[contains(@resource-id,'ChangeName')]");
 
@@ -50,13 +43,15 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	private By lblNoTransactions = MobileBy.xpath("//*[contains(@text,'You have no')]");
 
+	private By lblNumTransactions = MobileBy.id("com.coyni.mapp:id/rl_base");
+
 	private By lnkTrans = MobileBy.xpath("(//*[contains(@text,'On Hold')])[1]|(//*[contains(@text,'Released')])[1]");
 
 	private By txtReserveID = MobileBy
 			.xpath("//*[contains(@resource-id,'tvReserveID')]|//*[contains(@resource-id,'reserveIDLL')]");
 
-	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 5);
-	
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
+
 	public void clickReserve() {
 		click(btnReserve, "Reserve");
 	}
@@ -68,22 +63,15 @@ public class ReserveReleaseTransactionsPage extends MobileFunctions {
 
 	public void fillSearchWithCopiedData() {
 		new CommonFunctions().VerifySearchWithPasteOption(searchOption);
-//		TouchAction touch = new TouchAction(DriverFactory.getDriver());
-//		wait.until(ExpectedConditions.presenceOfElementLocated(searchOption));
-//		MobileElement search = (MobileElement) DriverFactory.getDriver().findElement(searchOption);
-//		Duration dutarion = Duration.ofMillis(1500);
-//		touch.longPress(
-//				LongPressOptions.longPressOptions().withElement(ElementOption.element(search)).withDuration(dutarion))
-//				.release().perform();
-//		touch.tap(PointOption.point(120, 350)).perform();
-//		enterText(searchOption, expValue,"Search Option");
-//		String a=getReserveID();
-//		new CommonFunctions().elementView(searchOption, "Search Option");
-//		DriverFactory.getDriver().findElement(searchOption).sendKeys(a);	
 	}
 
 	public void verifyReleaseType(String expReleaseType) {
 		new CommonFunctions().verifyLabelText(lblReleaseType, "Reserve Release Type", expReleaseType);
+	}
+
+	public int verifyTransactionCount() throws InterruptedException {
+		Thread.sleep(1500);
+		return DriverFactory.getDriver().findElements(lblNumTransactions).size();
 	}
 
 	public int verifyTransactionsCount() throws InterruptedException {

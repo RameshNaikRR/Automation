@@ -23,7 +23,7 @@ public class RegistrationMerchantAgreementsPage extends MobileFunctions {
 	private By btnSignatureDone = MobileBy.xpath("//*[contains(@resource-id,'tv_signature_done')]");
 	private By btnAgreementsDone = MobileBy
 			.xpath("//*[contains(@text,'Done')]|//*[contains(@resource-id,'AgreeDoneCv')]");
-	private By lblApplicationDisclosureHea = MobileBy.xpath("//*[@text='Application Disclosure']");
+	private By lblApplicationDisclosureHea = MobileBy.id("com.coyni.mapp:id/agreNameTV");
 	private By drawSignature = MobileBy.xpath("//*[contains(@resource-id,'csv_signature_view')]");
 	private By btnClear = MobileBy.xpath("//*[@text='Clear']");
 	private By btnMerchantAgreement = MobileBy.xpath("//*[contains(@resource-id,'aggrementsIncompleteLL')]");

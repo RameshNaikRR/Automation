@@ -48,6 +48,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
+		Thread.sleep(1000);
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
 			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
@@ -59,7 +60,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 
 	public void verifyPrivacyPolicyHeading(String expHeading) throws InterruptedException {
-//		Thread.sleep(2000);
+		Thread.sleep(1000);
 		if (getElementList(privacyPolicyHeading, "").size() > 0) {
 			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
 			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);

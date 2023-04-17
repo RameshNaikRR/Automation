@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import coyni_mobile_merchant.components.AgreementComponent;
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
-import coyni_mobile_merchant.pages.DashBoardPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import ilabs.MobileFramework.Runner;
@@ -117,10 +116,10 @@ public class RegistrationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationProcessPage.clickMerchantAgreement();
-			Thread.sleep(4000);//Agreements buffer symbol is loading two times
+			Thread.sleep(4000);// Agreements buffer symbol is loading two times
 			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsTerms();
 			agreementComponent.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
-			Thread.sleep(4000);//Agreements buffer symbol is loading two times
+			Thread.sleep(4000);// Agreements buffer symbol is loading two times
 			registrationProcessPage.registrationMerchantAgreementsPage().VerifyAgreementsPrivacyPolicy();
 			agreementComponent.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			registrationProcessPage.registrationMerchantAgreementsPage().clickAgreementsDone();

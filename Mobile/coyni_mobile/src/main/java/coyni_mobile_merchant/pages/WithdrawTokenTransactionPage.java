@@ -27,8 +27,9 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblInstantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'Head')]");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
-	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'PayMethod')]|//*[contains(@resource-id,'tvBankName')]");
-	private By btnClose=MobileBy.xpath("//*[contains(@resource-id,'Close')]");
+	private By btnChangePaymentMethod = MobileBy
+			.xpath("//*[contains(@resource-id,'PayMethod')]|//*[contains(@resource-id,'tvBankName')]");
+	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]");
 
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
@@ -51,16 +52,14 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	public void clickChangePaymentMethod() {
 		click(btnChangePaymentMethod, "Change Payment Method");
 	}
-	
+
 	public void clickClose() {
 		click(btnClose, "Close");
 	}
-	
-	
+
 	public String getAvailabeBalance() {
 		return getText(lblAvailableBalance);
 	}
-
 
 	public void verifyCancelAndButton() {
 		new CommonFunctions().elementView(btnCancel, "Cancel");
@@ -128,8 +127,8 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 		clickOnConvertLink();
 		getAmount();
 		getAvailabeBalance();
-		enterMessage(Message);
-		clickCancel();
+//		enterMessage(Message);
+//		clickCancel();
 		enterMessage(Message);
 		clickDone();
 		clickWithdraw();
@@ -143,13 +142,13 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
 	}
-	
+
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
 	}
-	
+
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}
-	
+
 }

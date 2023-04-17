@@ -2,18 +2,14 @@ package CommonEmail;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.LandingPage;
 import coyni_mobile_merchant.pages.LoginPage;
-import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.android.AndroidDriver;
 
