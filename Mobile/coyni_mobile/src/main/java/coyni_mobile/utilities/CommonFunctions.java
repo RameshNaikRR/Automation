@@ -39,6 +39,18 @@ public class CommonFunctions {
 		}
 	}
 
+	public void verifyLabelTextforEmailDescription(By label, String labelName, String expText1, String expText2) {
+		String[] actText = mobileFunctions.getText(label).split(":");
+		String actText1=actText[0];
+		String actText2=actText[1].replace(" ", "");
+		if (expText1.equalsIgnoreCase(actText1) && expText2.equalsIgnoreCase(actText2)) {
+			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
+		} else {
+			ExtentTestManager.setWarningMessageInReport(
+					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText1, actText));
+		}
+	}
+	
 	public void elementView(By ele, String eleName) {
 		try {
 			if (mobileFunctions.getElement(ele, eleName).isDisplayed()) {

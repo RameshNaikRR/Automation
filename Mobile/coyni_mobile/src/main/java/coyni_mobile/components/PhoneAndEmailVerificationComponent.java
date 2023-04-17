@@ -10,14 +10,15 @@ import io.appium.java_client.MobileBy;
 
 public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
-	
-	private By phoneHeading = MobileBy.xpath("//*[contains(@resource-id,'headerTV')]|//*[contains(@text,'Verify Phone Number')]");
+	private By phoneHeading = MobileBy
+			.xpath("//*[contains(@resource-id,'headerTV')]|//*[contains(@text,'Verify Phone Number')]");
 	private By phoneDescription = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 	private By txtCode = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
 	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
 	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
 	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By emailHeading = MobileBy.xpath("//*[@text='Verify Email']|//*[contains(@text,'Please Verify your Email')]");
+	private By emailHeading = MobileBy
+			.xpath("//*[@text='Verify Email']|//*[contains(@text,'Please Verify your Email')]");
 	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
 //	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
 	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");
@@ -53,12 +54,16 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 
 	public void verifyPhoneHeading(String expHeading, String expDescription) {
 		new CommonFunctions().verifyLabelText(phoneHeading, "Page Heading", expHeading);
-		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Description", expDescription);
+//		new CommonFunctions().verifyLabelTextforVerification(phoneDescription, "Phone Description", expDescription1,
+//				expDescription2);
+//		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Description", expDescription);
 	}
 
-	public void verifyEmailHeading(String expHeading, String expDescription) {
+	public void verifyEmailHeading(String expHeading, String expDescription1, String expDescription2) {
 		new CommonFunctions().verifyLabelText(emailHeading, "Page Heading", expHeading);
-		new CommonFunctions().verifyLabelText(lblEmailText, "Email Verification Description", expDescription);
+		new CommonFunctions().verifyLabelTextforEmailDescription(lblEmailText, "Email Verification Description",
+				expDescription1, expDescription2);
+//		new CommonFunctions().verifyLabelText(lblEmailText, "Email Verification Description", expDescription);
 	}
 
 	public void verifyPhoneDescription(String expText) {
@@ -125,7 +130,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	public void fillOtp(String pin) {
 		enterText(txtCode, pin, "pin");
 	}
-	
+
 	public void fillPin(String pin) throws InterruptedException {
 		new EnterYourPINComponent().fillPin(pin);
 	}

@@ -11,6 +11,7 @@ import coyni_mobile.components.UploadDocumentComponent;
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -23,6 +24,7 @@ public class SignUpTest {
 
 	@BeforeMethod
 	public void init() {
+		DriverFactory.getDriver().resetApp();
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
 	}
@@ -49,9 +51,9 @@ public class SignUpTest {
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
-			//signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
+			// signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			//signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
+			// signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"), data.get("toastMessage"));
@@ -73,7 +75,8 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.clickNotNow();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"),data.get("accountDescription"));
+					.accountCreatedPage()
+					.verifyHeading(data.get("createAccountHeading"), data.get("accountDescription"));
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 //					.accountCreatedPage().clickSkip();
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
@@ -104,18 +107,20 @@ public class SignUpTest {
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
-			signUpPage.phoneAndEmailVerificationComponent()
-					.verifyPhoneHeading(data.get("phoneVerificationPageHeading"), data.get("phoneDescription"));
+			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationPageHeading"),
+					data.get("phoneDescription"));
+//			signUpPage.phoneAndEmailVerificationComponent()
+//			.verifyPhoneHeading(data.get("phoneVerificationPageHeading"), data.get("phoneDescription"),data.get("phoneNumber"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent()
-					.verifyEmailHeading(data.get("emailVerificationPageHeading"),data.get("emailDescription"));
+			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationPageHeading"),
+					data.get("emailDescription"), data.get("email"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(5000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServicePageHeading"), data.get("toastMessage"));
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyTermsOfServiceUpdateForSignUp(
+					data.get("termsOfServicePageHeading"), data.get("toastMessage"));
 			Thread.sleep(5000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyPageHeading"), data.get("toastMessage"));
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyPrivacyPolicyHeadingForSignUp(
+					data.get("privacyPolicyPageHeading"), data.get("toastMessage"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountPageHeading"), data.get("secureAccountDescription"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
@@ -132,11 +137,13 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.clickNotNow();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().verifyHeading(data.get("createAccountPageHeading"),data.get("accountDescription"));
+					.accountCreatedPage()
+					.verifyHeading(data.get("createAccountPageHeading"), data.get("accountDescription"));
 			if (data.get("validateAddCreditOrDebit").equalsIgnoreCase("Yes")) {
 				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 						.enableFaceIDpage().accountCreatedPage().clickAddCreditOrDebit();
-				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyHeading(data.get("cardDetailsHeading"));
+				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+						.verifyHeading(data.get("cardDetailsHeading"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillNameOnCard(data.get("nameOnCard"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -145,7 +152,8 @@ public class SignUpTest {
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 						.fillCVVorCVC(data.get("cvvOrCVC"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent().verifyHeading(data.get("addAddressHeading"));
+				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+						.verifyHeading(data.get("addAddressHeading"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 						.fillAddressLine1(data.get("addressLine1"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
@@ -170,7 +178,8 @@ public class SignUpTest {
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 						.preAuthorizationPage().clickVerify();
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-						.preAuthorizationPage().allDonePage().verifyAllDoneHeading(data.get("successHeading"), data.get("successDescription"));
+						.preAuthorizationPage().allDonePage()
+						.verifyAllDoneHeading(data.get("successHeading"), data.get("successDescription"));
 				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
 						.preAuthorizationPage().allDonePage().clickDone();
 				if (data.get("viewAddAddress").equalsIgnoreCase("Yes")) {
@@ -319,13 +328,11 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().clickResend();
 			signUpPage.phoneAndEmailVerificationComponent().verifyNewCodeMsg(data.get("expMessage"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
 	}
-	
-	
 
 }
