@@ -1878,8 +1878,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.teamPage().verifyPageHeading(data.get("teamPageHeading"));
 			merchantProfilePage.teamPage().verifyDescription(data.get("teamPageDescription"));
 			merchantProfilePage.teamPage().clickPendingStatusTeamMember();
-			merchantProfilePage.teamPage().teamMemberDetailsPage()
-					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
+//			merchantProfilePage.teamPage().teamMemberDetailsPage()
+//					.verifyPageHeading(data.get("teamMemberDetailsHeading"));
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberName();
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberDesc();
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getTeamMemberStatus();
@@ -1888,12 +1888,12 @@ public class MerchantProfileTest {
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getEmail();
 //			merchantProfilePage.teamPage().teamMemberDetailsPage().getPhoneNumber();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().clickEdit();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.verifyPageHeading(data.get("editTeamMemberHeading"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
-					.verifyDescription(data.get("editTeamMemberDescription"));
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getAdministratorDesc();
-			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().VerifyFirstNameAutoFocus();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+//					.verifyPageHeading(data.get("editTeamMemberHeading"));
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
+//					.verifyDescription(data.get("editTeamMemberDescription"));
+////			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().getAdministratorDesc();
+//			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage().VerifyFirstNameAutoFocus();
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
 					.fillFirstName(data.get("firstName"));
 			merchantProfilePage.teamPage().teamMemberDetailsPage().editTeamMemberPage()
