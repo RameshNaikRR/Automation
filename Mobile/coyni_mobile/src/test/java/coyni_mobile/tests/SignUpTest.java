@@ -103,7 +103,7 @@ public class SignUpTest {
 			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
@@ -202,7 +202,7 @@ public class SignUpTest {
 						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyAddAddressView();
 				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().clickAddPayment();
-				Thread.sleep(2000);
+//				Thread.sleep(2000);
 				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().paymentMethodsPage()
 						.verifyPaymentHeading(data.get("addPaymentPageHeading"));

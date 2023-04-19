@@ -179,6 +179,7 @@ public class TokenAccountPage extends MobileFunctions {
 		click(btnBuyToken, "Buy Token");
 	}
 	public void clickLatestTransaction() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblLatestTransaction));
 		click(lblLatestTransaction, "Recent Transaction");
 	}
 	

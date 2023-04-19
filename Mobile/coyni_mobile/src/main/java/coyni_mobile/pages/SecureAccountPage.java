@@ -73,7 +73,7 @@ public class SecureAccountPage extends MobileFunctions {
 //		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
-		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+		new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Heading",
 				expHeading);
 		//click(btnThreeDots, "3 Dots");
 		//click(btnDownload, "Download");
@@ -82,21 +82,21 @@ public class SecureAccountPage extends MobileFunctions {
 		//click(btnCancel, "Cancel");
 		scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
 		clickAgreeCheckBox();
-		click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+		click(termsOfServiceUpdateOk, "Terms Of Service Ok");
 	}
 
 	public void verifyPrivacyPolicyHeadingForSignUp(String expHeading, String toastMessage) throws InterruptedException {
 //		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyHeading));
-		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Heading", expHeading);
 		//click(btnThreeDots, "3 Dots");
 		//click(btnDownload, "Download");
 		//new CommonFunctions().verifyLabelText(lblSucessMsg, "Toast Message", toastMessage);
         //click(btnThreeDots, "3 Dots");
 		//click(btnCancel, "Cancel");
-		scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
+		scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy button");
 		clickAgreeCheckBox();
-		click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+		click(termsOfServiceUpdateOk, "Privacy Policy Ok");
 
 	}
 

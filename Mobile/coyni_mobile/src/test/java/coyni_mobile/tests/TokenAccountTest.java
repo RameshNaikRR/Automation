@@ -463,33 +463,36 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
 					.payRequestOptionalPopup().clickDone();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().clickPay();
-			String amt1=tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup().verifyTransactionTotalAmount();
+			String amt1 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.orderPreviewPopup().verifyTransactionTotalAmount();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.verifyHeading();
-			String ref=tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().successFailureComponent().getCopiedReference();
+			String ref = tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.payRequestConfirmPopup().successFailureComponent().getCopiedReference();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
 					.clickDone();
 			tokenAccountPage.verifyDashBoard();
 			tokenAccountPage.clickLatestTransaction();
-			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup().transactionDetailsComponent2().getSentTransactionDetails();
-			String amt2	=	tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
-					.transactionDetailsComponent2().verifyPayTotalAmount();
-					if(amt1.equals(amt2)) {
-						ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
-					}else {
-						ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
-					}
-					String ref1= tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-							.transactionDetailsComponent2().verifyTransactionReferenceID();
-							if(ref.equals(ref1)) {
-								ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
-							}else {
-								ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
-							}	
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().payRequestConfirmPopup()
+					.transactionDetailsComponent2().getSentTransactionDetails();
+			String amt2 = tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.payRequestConfirmPopup().transactionDetailsComponent2().verifyPayTotalAmount();
+			if (amt1.equals(amt2)) {
+				ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+			}
+			String ref1 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().verifyTransactionReferenceID();
+			if (ref.equals(ref1)) {
+				ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPay  failed due to exception " + e);
 		}
@@ -555,9 +558,7 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickPayRequest();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
-			Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
 			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
 			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().verifyName();
@@ -686,6 +687,7 @@ public class TokenAccountTest {
 		}
 
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokensWithExistingDebitCard(String strParams) {
@@ -698,37 +700,42 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().cvvPopup().clickOk();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
-			String dailyLimitFee=tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getDailyLimitFeeLabel();
+			String dailyLimitFee = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.orderPreviewPopup().getDailyLimitFeeLabel();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().verifyTotalAmount(dailyLimitFee);
-			String total= tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().verifyTransactionTotalAmount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.verifyTotalAmount(dailyLimitFee);
+			String total = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.orderPreviewPopup().verifyTransactionTotalAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
 					.getTokenTransactionStatusDetails();
-			String ref=tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().getCopiedReference();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent().clickDone();
+			String ref = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.successFailureComponent().getCopiedReference();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
+					.clickDone();
 			Thread.sleep(2000);
 			tokenAccountPage.clickLatestTransaction();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.transactionDetailsComponent2().getBuyTokenDebitCardDetails();
 			String amt2 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-			.transactionDetailsComponent2().verifyWithdrawTotalAmount();
-			if(total.equals(amt2)) {
+					.transactionDetailsComponent2().verifyWithdrawTotalAmount();
+			if (total.equals(amt2)) {
 				ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
-			}else {
+			} else {
 				ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
 			}
-			String ref1= tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+			String ref1 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.transactionDetailsComponent2().verifyTransactionReferenceID();
-					if(ref.equals(ref1)) {
-						ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
-					}else {
-						ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
-					}	
+			if (ref.equals(ref1)) {
+				ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenDebit  failed due to exception " + e);
 		}
@@ -949,7 +956,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup().getTotal();
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.slideToConfirm();
-			//Thread.sleep(2000);
+			// Thread.sleep(2000);
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
 					.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
@@ -1098,9 +1105,9 @@ public class TokenAccountTest {
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
-			Thread.sleep(1000);
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickExistingCard();
-			String dailyLimitFee=tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup().getDailyLimitFeeLabel();
+			String dailyLimitFee = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.orderPreviewPopup().getDailyLimitFeeLabel();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
@@ -1112,10 +1119,12 @@ public class TokenAccountTest {
 			DriverFactory.getDriver().hideKeyboard();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().clickWithdraw();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().verifyTotalAmount(dailyLimitFee);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
+					.verifyTotalAmount(dailyLimitFee);
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.getAmount();
-			String amt1=tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup().verifyTransactionTotalAmount();
+			String amt1 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.orderPreviewPopup().verifyTransactionTotalAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.verifySlideText();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
@@ -1124,29 +1133,29 @@ public class TokenAccountTest {
 					.enterYourPINComponent().fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
 					.successFailureComponent().getTokenTransactionStatusDetails();
-			String str = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-					.successFailureComponent().getCopiedReference();
+			String str = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.orderPreviewPopup().successFailureComponent().getCopiedReference();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().orderPreviewPopup()
-			.successFailureComponent().clickDone();
-			Thread.sleep(1000);
+					.successFailureComponent().clickDone();
+//			Thread.sleep(1000);
 			tokenAccountPage.verifyDashBoard();
-		//	tokenAccountPage.clickViewMore();
-			Thread.sleep(2000);
+			// tokenAccountPage.clickViewMore();
+//			Thread.sleep(2000);
 			tokenAccountPage.clickLatestTransaction();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.transactionDetailsComponent2().getWithdrawInstantPayDetails();
-	        String amt2	=	tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-			.transactionDetailsComponent2().verifyWithdrawTotalAmount();
-	        if(amt1.equals(amt2)) {
-	        	ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
-	        }else {
-	        	ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
-	        }
-			String str2= tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-			.transactionDetailsComponent2().verifyTransactionReferenceID();
-			if(str.equals(str2)) {
+			String amt2 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().verifyWithdrawTotalAmount();
+			if (amt1.equals(amt2)) {
+				ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+			}
+			String str2 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().verifyTransactionReferenceID();
+			if (str.equals(str2)) {
 				ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
-			}else {
+			} else {
 				ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
 			}
 

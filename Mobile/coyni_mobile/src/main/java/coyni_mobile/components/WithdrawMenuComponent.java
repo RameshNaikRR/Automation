@@ -1,12 +1,16 @@
 package coyni_mobile.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.pages.GiftCardPage;
 import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.popups.WithdrawToUSDBankAccountPopup;
 import coyni_mobile.popups.WithdrawToUSDInstantPayPopup;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.pages.DashBoardPage;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -19,11 +23,16 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	private By withdrawHeading = MobileBy.xpath("//*[@text='Select Withdraw Method']");
 	private By btnExistingCard = MobileBy.xpath("//*[contains(@resource-id,'mainRL')]|//*[contains(@text,'8780')]");
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+
 	public void clickInstantPay() {
-		click(btnInstantPay, "Instant Pay");
+		if (getElement(btnInstantPay, "Instant Pay").isDisplayed()) {
+			click(btnInstantPay, "Instant Pay");
+		}
 	}
 
 	public void clickExistingCard() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnExistingCard));
 		click(btnExistingCard, "Card");
 	}
 

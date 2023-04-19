@@ -44,7 +44,7 @@ public class CommonFunctions {
 		String actText1=actText[0];
 		String actText2=actText[1].replace(" ", "");
 		if (expText1.equalsIgnoreCase(actText1) && expText2.equalsIgnoreCase(actText2)) {
-			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
+			ExtentTestManager.setPassMessageInReport(actText1+" "+actText2);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText1, actText));
@@ -55,10 +55,10 @@ public class CommonFunctions {
 		try {
 			if (mobileFunctions.getElement(ele, eleName).isDisplayed()) {
 				ExtentTestManager
-						.setPassMessageInReport(eleName + " " + mobileFunctions.getText(ele) + " is displayed ");
+						.setPassMessageInReport(eleName + " is displayed ");
 			} else {
 				ExtentTestManager
-						.setFailMessageInReport(eleName + " " + mobileFunctions.getText(ele) + " is not displayed ");
+						.setFailMessageInReport(eleName + " is not displayed ");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" element View failed due to exception " + e);
