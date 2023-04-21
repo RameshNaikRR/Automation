@@ -18,8 +18,9 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	private By lblDate = MobileBy.xpath(
 			"//*[contains(@resource-id,'merchantdate')]|//*[contains(@resource-id,'bankDatetime')]|//*[contains(@resource-id,'dateTime')]|//*[contains(@resource-id,'released_on')]");
 	private By lblPayoutID = MobileBy.xpath("//*[contains(@resource-id,'PayoutId')]");
-	private By lblReferenceID = MobileBy.xpath(
-			"//*[contains(@resource-id,'RefidTV')]|//*[contains(@resource-id,'withBankReferenceIDTV')]|//*[contains(@resource-id,'mreferenceIdTV')]|//*[contains(@resource-id,'withdrawGiftrefidTV')]|//*[contains(@resource-id,'withinrefid')]");
+	private By lblReferenceID = MobileBy
+			.xpath("//*[contains(@resource-id,'RefundcopyIV')]|//*[@text='Reference ID']/following-sibling::*");
+
 	private By lblPayoutDate = MobileBy.xpath("//*[contains(@resource-id,'merchantPIdate')]");
 	private By lblTotalAmount = MobileBy
 			.xpath("//*[contains(@resource-id,'totalamount')]|//*[contains(@resource-id,'Total')]");
@@ -84,13 +85,11 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public String getAmount() {
-//		scrollDownToElement(lblTotalAmount, "Total Availble Funds : ");
 		ExtentTestManager.setInfoMessageInReport("Amount : " + getText(lblAmount));
 		return getText(lblAmount);
 	}
 
 	public void getStatus() {
-//		scrollDownToElement(lblTotalAmount, "Total Availble Funds : ");
 		ExtentTestManager.setInfoMessageInReport("Status : " + getText(lblStatus));
 
 	}
@@ -100,13 +99,15 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 	}
 
 	public void getPayoutID() {
-		// scrollDownToElement(lblSaleOrderDetails, "Sale Order");
 		ExtentTestManager.setInfoMessageInReport("Payout ID : " + getText(lblPayoutID));
 	}
 
-	public void getReferenceID() {
-//		click(lblReferenceID, "Reference ID");
+	public String getReferenceID() {
+		click(lblReferenceID, "Reference ID");
 		ExtentTestManager.setInfoMessageInReport("Reference ID" + getText(lblReferenceID));
+		String beforeTranRefernceId = getCopiedData();
+		ExtentTestManager.setPassMessageInReport(beforeTranRefernceId);
+		return getText(lblReferenceID);
 	}
 
 	public void getPageDescription() {
@@ -153,16 +154,19 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getDepositTo();
 	}
 
-	public void verifySearchTransactionDetails() {
-		getAmount().equalsIgnoreCase(getAmount());
-		getDate();
-		getPayoutID();
+	public void verifySearchTransactionDetails() throws InterruptedException {
+		String beforeTranRefernceId = getCopiedData();
 		getReferenceID();
-		getPageDescription();
-		getPayoutDate();
-		getTotalAmout();
-		getTotalTransactions();
-		getDepositTo();
+		String AfterTranefernceId = getCopiedData();
+		if (beforeTranRefernceId.equals(AfterTranefernceId)) {
+			ExtentTestManager.setPassMessageInReport("Search is validated it is giving accurate results");
+			getAmount();
+			getDate();
+			getReferenceID();
+			getTotalAmout();
+		} else {
+			ExtentTestManager.setFailMessageInReport("Search filed is not showing copied transaction");
+		}
 	}
 
 	public void getNameonAccount() {
@@ -195,9 +199,8 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		ExtentTestManager.setInfoMessageInReport("Descriptor Name is : " + getText(lblDescriptorName));
 	}
 
-	public void getBuyTokenBankTransactionDetails() {
+	public void verifyBuyTokenBankTransactionDetails() {
 		getAmount();
-//		getStatus();
 		getDate();
 		getPurchaseAmount();
 		getProcessingFee();
@@ -208,6 +211,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getNameonAccount();
 		getBankName();
 		getBankAccount();
+	}
+
+	public void VerifyLatestBuyTokenBankTransactionDetails() {
+		String transReferId = getCopiedData();
+		click(lblReferenceID, "Reference ID");
+		String latestTranreferId = getCopiedData();
+		if (transReferId.equals(latestTranreferId)) {
+			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The latest transaction is not updated");
+		}
+		this.verifyBuyTokenBankTransactionDetails();
 	}
 
 	public void getWithdrawAmount() {
@@ -222,9 +237,20 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		ExtentTestManager.setInfoMessageInReport("Account Balance is : " + getText(lblAccountBalance));
 	}
 
-	public void getWithdrawTokenBankTransactionDetails() {
+	public void VerifyLatestWithdrawTokenBankTransactionDetails() {
+		String transReferId = getCopiedData();
+		click(lblReferenceID, "Reference ID");
+		String latestTranreferId = getCopiedData();
+		if (transReferId.equals(latestTranreferId)) {
+			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The latest transaction is not updated");
+		}
+		this.verifyWithdrawTokenBankTransactionDetails();
+	}
+
+	public void verifyWithdrawTokenBankTransactionDetails() {
 		getAmount();
-//		getStatus();
 		getDate();
 		getWithdrawAmount();
 		getProcessingFee();
@@ -249,8 +275,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		ExtentTestManager.setInfoMessageInReport("Expiration Date is : " + getText(lblExpirationDate));
 	}
 
-	public void getWithdrawTokenInstantPayTransactionDetails() {
-//		getTransactionType();
+	public void verifyWithdrawTokenInstantPayTransactionDetails() {
 		getAmount();
 //		getStatus();
 		getDate();
@@ -262,6 +287,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getCardHolderName();
 		getCardNumber();
 		getExpirationDate();
+	}
+
+	public void verifyLatestWithdrawTokenInstantPayTransactionDetails() {
+		String transReferId = getCopiedData();
+		click(lblReferenceID, "Reference ID");
+		String latestTranreferId = getCopiedData();
+		if (transReferId.equals(latestTranreferId)) {
+			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The latest transaction is not updated");
+		}
+		this.verifyWithdrawTokenInstantPayTransactionDetails();
 	}
 
 	public void getGiftCardName() {
@@ -280,8 +317,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		ExtentTestManager.setInfoMessageInReport("Recipient Email is : " + getText(lblRecipientEmail));
 	}
 
-	public void getWithdrawTokenGiftCardTransactionDetails() {
-//		getTransactionType();
+	public void verifyWithdrawTokenGiftCardTransactionDetails() {
 		getAmount();
 		getStatus();
 		getDate();
@@ -292,6 +328,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getReferenceID();
 		getRecipientName();
 		getRecipientEmail();
+	}
+
+	public void verifyLatestWithdrawTokenGiftCardTransactionDetails() {
+		String transReferId = getCopiedData();
+		click(lblReferenceID, "Reference ID");
+		String latestTranreferId = getCopiedData();
+		if (transReferId.equals(latestTranreferId)) {
+			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The latest transaction is not updated");
+		}
+		this.verifyWithdrawTokenGiftCardTransactionDetails();
 	}
 
 	public void getReserveReleaseTransactionDetails() {
@@ -378,8 +426,7 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 
 	}
 
-	public void getWithdrawTokenCogentTransactionDetails() {
-//		getTransactionType();
+	public void verifyWithdrawTokenCogentTransactionDetails() {
 		getAmount();
 		getStatus();
 		getDate();
@@ -391,6 +438,18 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 		getReferenceID();
 		getNameonAccount();
 		getBankName();
+	}
+
+	public void verifyLatestWithdrawTokenCogentTransactionDetails() {
+		String transReferId = getCopiedData();
+		click(lblReferenceID, "Reference ID");
+		String latestTranreferId = getCopiedData();
+		if (transReferId.equals(latestTranreferId)) {
+			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The latest transaction is not updated");
+		}
+		this.verifyWithdrawTokenCogentTransactionDetails();
 	}
 
 	public ErrorMessagePopup errorMessagePopup() {

@@ -136,8 +136,11 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		click(lnkTransaction, "Transaction");
 	}
 
-	public void clickClose() {
+	public void clickClose() throws InterruptedException {
+		Thread.sleep(500);
+		if(getElementList(btnClose, "Close").size()==1){
 		click(btnClose, "Close");
+		}
 	}
 
 	public int verifyNumberOfTransactionCount() {
@@ -154,9 +157,11 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	}
 
 	public void scrollToNoMoreTransactions() {
-		scrollDownToElement(lblNoMoreTransactions, "No More Transactions");
-//		ExtentTestManager.setInfoMessageInReport("Transaction list scrolled down to no more transactions");
-//		return DriverFactory.getDriver().findElements(lblNoMoreTransactions).size();
+		while (getElementList(lblNoMoreTransactions, "No More Transactions").size() == 0) {
+			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(540, (int) (300))).release().perform();
+		}
 	}
 
 	public void verifyNoMoreTransactions(String expHeading) {
@@ -175,43 +180,6 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 	public void fillSearch() throws AWTException, InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(txtSearch));
 		new CommonFunctions().VerifySearchWithPasteOption(txtSearch);
-//		TouchAction action = new TouchAction(DriverFactory.getDriver());
-//		WebElement element = DriverFactory.getDriver().findElement(txtSearch);
-//		TouchAction touchAction = new TouchAction(DriverFactory.getDriver());
-//		MobileElement search = (MobileElement) DriverFactory.getDriver().findElement(txtSearch);
-//		Duration duration = Duration.ofSeconds(2);
-//		touchAction.longPress(LongPressOptions.longPressOptions()
-//		    .withElement(ElementOption.element(search))
-//		    .withDuration(duration))
-//		    .release()
-//		    .perform();
-//		touchAction.tap(PointOption.point(140,330)).perform();
-//		touchAction.tap(TapOptions.tapOptions()).perform();
-
-//		touchAction.tap(TapOptions.tapOptions(txtSearch));
-
-//		touchAction.tap(
-//		touchAction.press(PointOption.point(140,340));
-//		MobileElement lement = (MobileElement) DriverFactory.getDriver().findElement(txtSearch);
-//
-//		// get the location of the element
-//
-//		org.openqa.selenium.Point location = lement.getLocation();
-//		int x = location.getX();
-//		int y = location.getY();
-//		System.out.println("Element location: " + x + ", " + y);
-//		DriverFactory.getDriver().
-
-//		Thread.sleep(2000);
-//		DriverFactory.getDriver().
-//		action.longPress((LongPressOptions) element).release().perform();
-//		click(txtSearch,"Search");
-//		Robot robot = new Robot();
-//		robot.keyPress(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		enterText(txtSearch, getCopiedData(), "Search");
 	}
 
 	public void clickFilterIcon() {
@@ -265,6 +233,13 @@ public class BusinessRecentTokenTransactionsPage extends MobileFunctions {
 		click(recentTransType, "Transaction");
 	}
 
+
+//	public void verifyLatestTransaction() {
+//		String referId = getCopiedData();
+////		return referId;
+//	}
+
+	
 //	public void getNetAmount() {
 //		scrollDownToElement(lblNetAmount, "Net Amount");
 //		ExtentTestManager.setInfoMessageInReport("Net Amount " + getText(lblNetAmount));

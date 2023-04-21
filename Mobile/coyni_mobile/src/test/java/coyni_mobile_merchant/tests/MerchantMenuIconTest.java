@@ -354,7 +354,6 @@ public class MerchantMenuIconTest {
 				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 						.fillAmount(data.get("amount"));
 			}
-
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
@@ -370,7 +369,6 @@ public class MerchantMenuIconTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
-//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().navigationComponent().clickClose();
 			businessTokenAccountPage.clickMenuIcon();
@@ -379,7 +377,6 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().navigationComponent().clickClose();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickGiftCard();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
-//			Thread.sleep(2000);
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillAmount(data.get("amount"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -521,32 +518,6 @@ public class MerchantMenuIconTest {
 					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
-//			businessTokenAccountPage.clickAccount();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyPageHeading(data.get("businessTokenHeading"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyTotalAvailableFunds(data.get("fundsHeading"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage()
-//					.verifyPageDescription(data.get("businessTokenDescription"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransactionType();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTranStatus();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
-////			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyTransactionAmount()
-//							.equalsIgnoreCase(totalAmount)) {
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//						.verifyPageHeading(data.get("transactionDetailsHeading"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//						.verifyTransactionType(data.get("transactionType"));
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//					.getWithdrawTokenInstantPayTransactionDetails();
-//			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-//					.clickInstantPayBack();
-//			} else {
-//				ExtentTestManager.setFailMessageInReport("Transaction is not updated");
-//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
 		}
@@ -824,7 +795,7 @@ public class MerchantMenuIconTest {
 				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseCogentAccount();
 			}
 			testWithdrawTokenProcedure(strParams);
-			businessTransactionDetailsTest.testVerifyWithdrawSignetTransaction(strParams);
+			businessTransactionDetailsTest.testVerifyWithdrawCogentTransaction(strParams);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);

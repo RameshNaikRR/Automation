@@ -51,10 +51,10 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"));
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
@@ -160,14 +160,14 @@ public class SignUpTest {
 					.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-			.verifyChoosePinHeading(data.get("choosePinHeading"));
+					.verifyChoosePinHeading(data.get("choosePinHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 					.fillPin(data.get("pin"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
 			signUpPage.navigationComponent().clickBack();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-			.verifyChoosePinHeading(data.get("choosePinHeading"));
+					.verifyChoosePinHeading(data.get("choosePinHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 					.fillPin(data.get("pin"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()

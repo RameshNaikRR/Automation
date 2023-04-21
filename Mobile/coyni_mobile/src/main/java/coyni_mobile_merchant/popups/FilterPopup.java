@@ -3,8 +3,8 @@ package coyni_mobile_merchant.popups;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.components.CalendarComponent;
 import coyni_mobile_merchant.components.DatePickerComponent;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -108,5 +108,9 @@ public class FilterPopup extends MobileFunctions {
 	
 	public DatePickerComponent  datePickerComponent() {
 		return new DatePickerComponent();
+	}
+	
+	public CalendarComponent  calendarComponent() {
+		return new CalendarComponent();
 	}
 }

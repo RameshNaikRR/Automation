@@ -61,16 +61,16 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickFilterIcon();
 				Thread.sleep(1000);
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.clickCalendar();
-//				Thread.sleep(1000);
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectFromDate(data.get("fromDate"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectToDate(data.get("toDate"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.clickDone();
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.clickCalendar();
+				Thread.sleep(1000);
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectFromDate(data.get("fromDate"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectToDate(data.get("toDate"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.clickDone();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
 						.selectFilter(data.get("filterType"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
@@ -87,7 +87,6 @@ public class BusinessTransactionDetailsTest {
 							.verifyTransactionType(data.get("transactionType"));
 					businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 							.getStatus();
-
 					if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
@@ -97,7 +96,7 @@ public class BusinessTransactionDetailsTest {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getBuyTokenBankTransactionDetails();
+								.verifyBuyTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Cogent")) {
 
@@ -110,7 +109,7 @@ public class BusinessTransactionDetailsTest {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenBankTransactionDetails();
+								.verifyWithdrawTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Instant Pay")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
@@ -120,15 +119,15 @@ public class BusinessTransactionDetailsTest {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().clickTransaction();
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenInstantPayTransactionDetails();
+								.verifyWithdrawTokenInstantPayTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Cogent")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenCogentTransactionDetails();
+								.verifyWithdrawTokenCogentTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Gift Card")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenGiftCardTransactionDetails();
+								.verifyWithdrawTokenGiftCardTransactionDetails();
 					}
 
 				} else {
@@ -197,18 +196,18 @@ public class BusinessTransactionDetailsTest {
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")
 							&& data.get("filterType2").equalsIgnoreCase("Canceled")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenBankTransactionDetails();
+								.verifyWithdrawTokenBankTransactionDetails();
 					} else if (data.get("filterType").equalsIgnoreCase("Withdrawn")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")
 							&& data.get("filterType2").equalsIgnoreCase("In progress")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getWithdrawTokenBankTransactionDetails();
+								.verifyWithdrawTokenBankTransactionDetails();
 						cancelTransaction(strParams);
 					} else if (data.get("filterType").equalsIgnoreCase("Buy Token")
 							&& data.get("filterType1").equalsIgnoreCase("Bank Account")
 							&& data.get("filterType2").equalsIgnoreCase("In progress")) {
 						businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-								.getBuyTokenBankTransactionDetails();
+								.verifyBuyTokenBankTransactionDetails();
 						cancelTransaction(strParams);
 					}
 
@@ -285,13 +284,17 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickCalendar();
-				Thread.sleep(1000);
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectFromDate(data.get("fromDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectToDate(data.get("toDate"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.clickDone();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectFromDate(data.get("fromDate"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.selectToDate(data.get("toDate"));
+//				Thread.sleep(5000);
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().calendarComponent()
+//						.clickPreviousTenDays();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().calendarComponent()
+//						.clickCurrentDay();
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+//						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
 				Thread.sleep(1000);
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
@@ -353,7 +356,7 @@ public class BusinessTransactionDetailsTest {
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenBankTransactionDetails();
+					.VerifyLatestWithdrawTokenBankTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickWithBankSignetBack();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
@@ -366,7 +369,7 @@ public class BusinessTransactionDetailsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
-			businessTokenAccountPage.clickAccount();
+//			businessTokenAccountPage.clickAccount();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
 					.verifyPageHeading(data.get("businessTokenHeading"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage()
@@ -376,14 +379,7 @@ public class BusinessTransactionDetailsTest {
 					.verifyPageDescription(data.get("businessTokenDescription"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransAmount();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getRecentTransBalance();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
-			businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
-			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyNumberOfTransactionCount() == 1) {
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
-			} else {
-				ExtentTestManager.setFailMessageInReport("Its not showing latest transaction");
-			}
+			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickRecentTransaction();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.verifyPageHeading(data.get("transactionDetailsHeading"));
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
@@ -400,7 +396,7 @@ public class BusinessTransactionDetailsTest {
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenInstantPayTransactionDetails();
+					.verifyLatestWithdrawTokenInstantPayTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickInstantPayBack();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
@@ -410,13 +406,13 @@ public class BusinessTransactionDetailsTest {
 		}
 	}
 
-	public void testVerifyWithdrawSignetTransaction(String strParams) {
+	public void testVerifyWithdrawCogentTransaction(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenCogentTransactionDetails();
+					.verifyLatestWithdrawTokenCogentTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickWithBankSignetBack();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
@@ -432,7 +428,7 @@ public class BusinessTransactionDetailsTest {
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getWithdrawTokenGiftCardTransactionDetails();
+					.verifyLatestWithdrawTokenGiftCardTransactionDetails();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testVerifyWithdrawGiftCardTransaction failed due to Exception " + e);
@@ -445,7 +441,7 @@ public class BusinessTransactionDetailsTest {
 			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
 			testVerifyTransaction(strParams);
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-					.getBuyTokenBankTransactionDetails();
+					.VerifyLatestBuyTokenBankTransactionDetails();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
 					.clickbtnBuyBankBack();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().clickClose();
@@ -513,14 +509,15 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillSearch();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickSearchTransaction();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().businessTransactionDetailsPage()
-						.getMerchantPayoutTransactionDetails();
+						.verifySearchTransactionDetails();
 
 			} else {
-				ExtentTestManager.setInfoMessageInReport("You Have No More Transactions to Apply Filters");
+				ExtentTestManager.setWarningMessageInReport("You Have No More Transactions to validate Search field");
 			}
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBusinessTokenTransactionList failed due to Exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("testBusinessTokenTransactionValidateSearch failed due to Exception " + e);
 		}
 	}
 }
