@@ -1,5 +1,6 @@
 package coyni.merchant.pages;
 
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,7 +18,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By lnkBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]");
@@ -71,7 +72,31 @@ public class SignupPage extends BrowserFunctions {
 	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
 	private By btnAgree = By.xpath("//button[contains(text(),'Agree')]");
 	private By txtPassword = By.xpath("//input[@id='Password']");
+	private By lblTwoStepAuthy = By.xpath("//span[contains(text(),'Two-Step Authentication')]");
+	private By btnTwoStepAuthy = By.xpath("//span[contains(text(),'Two-Step Authentication')]//button");
+	private By headingTwoStepAuthy = By.xpath("//h1[contains(text(),'Two-Step Authentication')]");
+	private By headingTwoStepAuthySucess = By.xpath("//h1[contains(text(),'Two-Step Authentication Success')]");
+	
 
+	public void verifyTwoStepDescription() {
+		String str = getText(lblTwoStepAuthy, "Two step authy");
+		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Description is " + str);
+	}
+	
+	public void verifyTwoStepHeading() {
+		String str = getText(headingTwoStepAuthy, "Two step Authy");
+		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Heading is " + str);
+	}
+	
+	public void clickTwostepAuthy() {
+		click(btnTwoStepAuthy, "Two Step Authy");
+	}
+	
+	public void verifyTwoStepSucess() {
+		String str = getText(headingTwoStepAuthySucess, "two Step Authy Sucess");
+		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Success Heading is " + str);
+	}
+	
 	public void clickCheckBox() {
 		click(chkBox, "CheckBox");
 	}

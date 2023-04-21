@@ -38,15 +38,14 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 //		ExtentTestManager.setInfoMessageInReport(text + "Text entered in the Text Field" + eleName);
 //	}
 
-	
 	public By getElement(String state) {
 		return By.xpath(String.format("//div[text()='%s']", state));
 	}
-	
+
 	public void fillFirstName(String firstNameRegisration) {
 		enterText(txtFirstName, firstNameRegisration, "First Name");
 	}
-	
+
 	public void fillLastName(String lastNameRegisration) {
 		enterText(txtLastName, lastNameRegisration, "Last Name");
 	}
@@ -56,24 +55,21 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 		enterText(txtAddress1, addressline1, "Address LIne1");
 		new CommonFunctions().clickTab();
 	}
-	
+
 	public void fillAddress2(String addressline2) {
-		enterText(txtAddress2, addressline2,"Adress Line2");
+		enterText(txtAddress2, addressline2, "Adress Line2");
 	}
-	
+
 	public void fillCity(String city) {
 		enterText(txtCity, city, "City");
 	}
-	
 
 	public void selectState(String state) throws InterruptedException {
-	click(drpDwnState, "State DropDown");
-	Thread.sleep(2000);
-	click(getElement(state), state);
- }
+		click(drpDwnState, "State DropDown");
+		Thread.sleep(2000);
+		click(getElement(state), state);
+	}
 
-
-	
 	public void selectState(String state, int i) {
 		List<WebElement> eleList = DriverFactory.getDriver().findElements(drpDwnState);
 		eleList.get(i).click();
@@ -175,5 +171,9 @@ public class AddBeneficialOwnersComponent extends BrowserFunctions {
 			new CommonFunctions().validateTextFeild(ele, eleName, field[i]);
 		}
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
+	}
+
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
 	}
 }

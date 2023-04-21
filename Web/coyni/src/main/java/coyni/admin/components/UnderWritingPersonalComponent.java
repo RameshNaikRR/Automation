@@ -32,7 +32,7 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
 	private By txtMerchantName = By.xpath("//input[@name='businessName']");
 	private By btnDecline = By.xpath("//div[contains(text(),'Declined')]");
 	private By txtMerchantId = By.xpath("//input[@name='businessId']");
-	
+	private By btnCancelled = By.xpath("(//div[contains(text(),'Cancelled')])[1]");
 	
 	public void clickFilter() {
 		click(btnFilter, "Filter");
@@ -172,7 +172,10 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
         
 		
     }
-
+    
+    public void clickCancelled() {
+    	click(btnCancelled, "Cancelled");
+    }
 	
 	
 	

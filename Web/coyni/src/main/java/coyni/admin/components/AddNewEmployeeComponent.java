@@ -9,6 +9,7 @@ import coyni.uitilities.CommonFunctions;
 import coyni.uitilities.YOPMail;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.MailHelper;
 
 public class AddNewEmployeeComponent extends BrowserFunctions {
 	private By lblAddNewEmployee = By.xpath("//span[text()='Add New Employee']");
@@ -45,8 +46,22 @@ public class AddNewEmployeeComponent extends BrowserFunctions {
 		enterText(txtLastName, txt, "Last Name");
 	}
 
-	public void fillEmail() {
-		enterText(txtEmail, YopMail, "Email");
+	public String getUrl() {
+		String str=MailHelper.getURLFromMail();
+		return str;
+	}
+	
+	public void navigateUrl(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
+	}
+	
+	public String getEmail() {
+		String str=MailHelper.getRandomMailID();
+		return str;
+	}
+
+	public void fillEmail(String mail) {
+		enterText(txtEmail, mail, "Email");
 	}
 	public String getYOPMail() {
 		return YopMail;

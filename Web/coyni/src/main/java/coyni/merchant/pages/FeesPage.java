@@ -15,6 +15,7 @@ public class FeesPage extends BrowserFunctions {
 
 	private By getFeesChargesLbl = By.xpath("//div[contains(@class,'AccountFees_fees_container__szs-L')]/span");
 	private By getLables = By.xpath("//div[contains(@class,'MerchantFees_head')]/span");
+	private By lbleCommereceAmount = By.xpath("//span[contains(text(),'Sale Order: eCommerce')]/following-sibling::*//span[contains(@class,'AccountFees_amount')]");
 
 	public void verifyHeading(String Heading) {
 		cf.verifyLabelText(lblHeading, "Heading", Heading);
@@ -31,6 +32,11 @@ public class FeesPage extends BrowserFunctions {
 				expColor);
 	}
 	
+	public String geteCommerceProcessing() {
+		String str = getText(lbleCommereceAmount, "eCommerce processing Amount");
+		String str1 = str.replaceAll("[$]", "");
+		return str1;
+	}
 	
 
 	

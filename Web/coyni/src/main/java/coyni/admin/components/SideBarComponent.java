@@ -44,7 +44,7 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public By getSideBarItems(String elementName) {
 		return By.xpath(String.format(
-				"(//span[(contains(@class,'menu' ) or contains(@class,'label') or contains(@class,'Label'))and text()='%s'])[1]",
+				"(//span[(contains(@class,'menu' ) or contains(@class,'text') or contains(@class,'label') or contains(@class,'Label'))and text()='%s'])[1]",
 				elementName));
 	}
 

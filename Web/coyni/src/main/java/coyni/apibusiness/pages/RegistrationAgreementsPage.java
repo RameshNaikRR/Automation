@@ -1,5 +1,6 @@
 package coyni.apibusiness.pages;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,7 +17,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RegistrationAgreementsPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 	private By lblHeading = By.xpath("//h4[text()='Agreements']");
 	private By lblDesc = By.xpath("//p[contains(text(),'before you submit your')]");
 	private By agreementSign = By.xpath("//div[@contenteditable='true']");

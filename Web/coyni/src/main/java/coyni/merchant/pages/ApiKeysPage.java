@@ -15,6 +15,12 @@ public class ApiKeysPage extends BrowserFunctions {
 	private By lblHeading = By.xpath("//div[contains(@class,'BusinessSettings_page')]//span[.='API Keys']");
 
 	private By lblPublicKey = By.xpath("//span[contains(text(),'Public Key:')]/following-sibling::*");
+	
+	private By btnCopyPublicKey = By.xpath("//button[contains(@class,'copy-image')]");
+	
+	private By btnCopyReavelSecretKey = By.xpath("(//button[contains(@class,'copy-image')])[2]");
+	
+	private By btnReavelSecretKey = By.xpath("//button[text()='Reveal Secret Key']");
 
 	private By btnGenerateNewSecretKey = By.xpath("//button[text()='Generate New Secret Key']");
 
@@ -27,7 +33,13 @@ public class ApiKeysPage extends BrowserFunctions {
 	private By lblAPIKeyLogs = By.xpath("//span[text()='API Key Log']/following-sibling::*");
 
 	private By lblInActiveAPIKeys = By.cssSelector(".chip__text--orange");
+	
+	private By btneCommerceApiKeys = By.xpath("(//button[text()='API Keys'])[1]");
 
+	public void clickApiKeys() {
+		click(btneCommerceApiKeys, "ApiKeys");
+	}
+	
 	public void verifyHeading(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
@@ -41,21 +53,35 @@ public class ApiKeysPage extends BrowserFunctions {
 		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Api Keys", cssProp, expValue, expColor);
 	}
 
-	public void getPublicKey() {
-		new CommonFunctions().elementView(lblPublicKey, "Public Key");
-		String text = getText(lblPublicKey, "Description");
-		ExtentTestManager.setInfoMessageInReport("Description " + text);
+	public void clickPublicKeyCopy() {
+		click(btnCopyPublicKey, "Public Key Copy");
+	}
+	
+	public void clickSecretKeyCopy() {
+		click(btnCopyReavelSecretKey, "Reavel Secret Key");
+	}
 
+	public void clickReavelSecretKey() {
+		click(btnReavelSecretKey, "Reavel SecretKey");
+	}
+	
+	public int verifyButtonReavelSecretKey(){
+         int i = getElementsList(btnReavelSecretKey, "Reavel SecretKey").size();
+         return i;
+	}
+	
+	public String getPublicKey() {
+		String str = getCopiedData();
+        return str;    
 	}
 
 	public String getInActiveAPIKeys() {
 		return getText(lblInActiveAPIKeys, "API Keys InActive");
 	}
 
-	public void getSecretKey() {
-		new CommonFunctions().elementView(lblSecretKey, "Secret Key");
-		String text = getText(lblSecretKey, "Description");
-		ExtentTestManager.setInfoMessageInReport("Description " + text);
+	public String getSecretKey() {
+		String str = getCopiedData();
+        return str;   
 
 	}
 
@@ -85,9 +111,6 @@ public class ApiKeysPage extends BrowserFunctions {
 		click(btnGenerate, "Generate");
 	}
 
-	public void clickRevealSecretKey() {
-		click(btnRevealSecretKey, "Secret Key");
-	}
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();

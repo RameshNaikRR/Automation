@@ -873,7 +873,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1250,7 +1250,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1484,7 +1484,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1798,7 +1798,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+		//	homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1985,7 +1985,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+		//	homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {

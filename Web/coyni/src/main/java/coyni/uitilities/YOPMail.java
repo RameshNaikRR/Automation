@@ -18,6 +18,7 @@ public class YOPMail extends BrowserFunctions {
 	private By txtLogin = By.id("login");
 	private By txtTempPswd = By.xpath("(//p[@style='line-height: 1.6em; padding: 0 3em'])[2]");
 	private By iframe = By.xpath("//iframe[@name='ifmail']");
+	private By iframereCaptcha = By.xpath("//iframe[@title ='reCAPTCHA']");
 	private By btnLogout = By.xpath("//span[text()='power_settings_new']");
 	private By txtEmail = By.id("email");
 	private By btnContinue = By.xpath("//button[@id='tn-submit-button']/span");
@@ -29,6 +30,7 @@ public class YOPMail extends BrowserFunctions {
 	private By btnAccept = By.xpath("//span[text()='Accept']");
 	private By lblfirstname = By.xpath("//font[contains(text(),'Dear')] | //font[contains(text(),'Congratulations ')]");
 	private By clkActivateAcc = By.xpath("//u[text()=' Activate Account '] |  //u[text()=' coyni get started page ']");
+	private By chckBox = By.xpath("//div[@class='recaptcha-checkbox-border']");
 
 	public void openYopMail() {
 		WebDriver driver = DriverFactory.getDriver();
@@ -42,6 +44,20 @@ public class YOPMail extends BrowserFunctions {
 			System.out.println(e);
 			ExtentTestManager.setFailMessageInReport(e + "launching yopmail site is failed");
 		}
+	}
+	
+	public int verifyreCaptchSize() {
+		int i =getElementsList(iframereCaptcha, "").size();
+		return i;
+	}
+	
+	public int verifyNotRobotSize() {
+		int i = getElementsList(chckBox, "").size();
+		return i;
+	}
+	
+	public void clickCheckBox() {
+		click(chckBox,"Check Box");
 	}
 
 	public void switchToYopmailWindow() {
@@ -62,25 +78,50 @@ public class YOPMail extends BrowserFunctions {
 	public void clickActivateAccount(String yopmail, String firstname)
 			throws InterruptedException, AWTException {
 		waitForElement(txtLogin, waittime, WaitForElement.presence);
+		
 		click(txtLogin, "Login");
 		enterText(txtLogin, yopmail, "Login");
 		Thread.sleep(2000);
 		Actions action = new Actions(DriverFactory.getDriver());
 		action.sendKeys(Keys.ENTER).build().perform();
 		Thread.sleep(3000);
+		if(verifyreCaptchSize()==1) {
+			switchToFrame(iframereCaptcha, "iframe");
+			clickCheckBox();
+			switchToFrame(iframe, "iframe");
+			String fname = getText(lblfirstname, "first name");
+			System.out.println(fname);
+			String infomsg = fname.contains(firstname) ? "Opened Invitation mail" : "Invitation mail not displayed";
+			ExtentTestManager.setInfoMessageInReport(infomsg);
+			
+			click(clkActivateAcc, "Acivate Account");
+			Thread.sleep(3000);
+			
+			String yopMailTab = DriverFactory.getDriver().getWindowHandle();
+			Set<String> windowHandles = DriverFactory.getDriver().getWindowHandles();
+			for (String string : windowHandles) {
+				if (!string.equals(yopMailTab)) {
+					DriverFactory.getDriver().close();
+					ExtentTestManager.setInfoMessageInReport("Closed the current wondow Tab");
+					DriverFactory.getDriver().switchTo().window(string);
+					ExtentTestManager.setPassMessageInReport("Switched to Coyni Activate Account Tab");
+					break;
+		
+		}
+		else {
 		switchToFrame(iframe, "iframe");
-		String fname = getText(lblfirstname, "first name");
+		 fname = getText(lblfirstname, "first name");
 		System.out.println(fname);
-		String infomsg = fname.contains(firstname) ? "Opened Invitation mail" : "Invitation mail not displayed";
+		 infomsg = fname.contains(firstname) ? "Opened Invitation mail" : "Invitation mail not displayed";
 		ExtentTestManager.setInfoMessageInReport(infomsg);
 		
 		click(clkActivateAcc, "Acivate Account");
 		Thread.sleep(3000);
 		
-		String yopMailTab = DriverFactory.getDriver().getWindowHandle();
-		Set<String> windowHandles = DriverFactory.getDriver().getWindowHandles();
-		for (String string : windowHandles) {
-			if (!string.equals(yopMailTab)) {
+		 yopMailTab = DriverFactory.getDriver().getWindowHandle();
+		 windowHandles = DriverFactory.getDriver().getWindowHandles();
+		for (String string1 : windowHandles) {
+			if (!string1.equals(yopMailTab)) {
 				DriverFactory.getDriver().close();
 				ExtentTestManager.setInfoMessageInReport("Closed the current wondow Tab");
 				DriverFactory.getDriver().switchTo().window(string);
@@ -89,4 +130,11 @@ public class YOPMail extends BrowserFunctions {
 			}
 		}
 	}
+	
+			
+			}
+
+	}
+	}
 }
+

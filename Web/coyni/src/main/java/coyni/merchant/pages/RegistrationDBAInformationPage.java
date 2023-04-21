@@ -24,7 +24,6 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By txtDBAName = By.cssSelector("#dba-name");
 	private By drpdwnBusinessType = By.xpath("//div[text()='Business Type']/following-sibling::div");
 	private By radBtnRetailLocation = By.xpath("//span[text()='Retail Location']/..");
-	private By radBtneCommerce = By.xpath("//span[text()='eCommerce']/..");
 	private By txtCompanyEmail = By.xpath("(//input[@name='email'])[2]");
 	private By txtphoneNumber = By.cssSelector("#phone-number");
 	private By txtWebsite = By.cssSelector("#website");
@@ -35,7 +34,20 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By btnUploadFile = By.cssSelector("//span[.='DBA Filing']");
 	private By btnRemoveFile = By.cssSelector("span[class*='FormFile_file_cross']");
+	private By btneCommerce = By.xpath("//input[@id='eCommerce']");
+	private By txtDBAFilling = By.xpath("(//input[@type='file'])[1]");
 
+	public void clickeCommerece() {
+		click(btneCommerce, "eCommerece");
+	}
+	
+	private By getUploadDocumentElement = By
+			.xpath(String.format("(//input[@type='file'])[1]"));
+
+	public void uploadSelectImage(String folderName, String fileName) {
+		getElement(getUploadDocumentElement, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
+	}
+	
 	public void fillDBAName(String dbaName) throws InterruptedException {
 		clearText(txtDBAName, "DBA Name");
 		enterText(txtDBAName, dbaName, "DBA Name");
@@ -100,9 +112,7 @@ public class RegistrationDBAInformationPage extends BrowserFunctions {
 		click(radBtnRetailLocation, "Retail Location");
 	}
 
-	public void clickeCommerce() {
-		click(radBtneCommerce, "eCommerce");
-	}
+	
 
 	public void clickTimeZoneDropdown() {
 		click(drpdwnTimeZone, "TimeZone Drop down");

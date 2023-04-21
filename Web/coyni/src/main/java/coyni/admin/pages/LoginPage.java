@@ -321,6 +321,12 @@ public class LoginPage extends BrowserFunctions {
 				expValue, expColor);
 	}
 
+	public void switchtoLoginPage(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
+		ExtentTestManager.setInfoMessageInReport("Admin Logged In");
+	}
+
+	
 	public void handSymbolHighlightedMerchant(String cssProp, String expValue, String expColor) {
 		commonfunctions.verifyChangedColor(getSubMenuItems("Merchants"), "Merchants", cssProp, expValue, expColor);
 	}

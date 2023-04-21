@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.pages.HomePage;
+import coyni.admin.pages.LoginPage;
 import coyni.customer.tests.TokenAccountTest;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -19,11 +20,12 @@ import ilabs.api.reporting.ExtentTestManager;
 public class ProfilesTest {
 
 	HomePage homePage;
+	LoginPage loginPage;
 
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
-
+        loginPage = new LoginPage();
 	}
 
 	@Test
@@ -72,59 +74,61 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
 					.verifyBusinessHeading(data.get("business"));
-		//	homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforBusinessFees("1");//data.get("amount")
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforBusinessFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforBusinessFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforBusinessFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountAmountforBusinessFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountPercentageforBusinessFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardforBusinessFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforBusinessFees(data.get("amount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforBusinessFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillMonthlyFeeforBusinessFees("1");
-		homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyEcoSystemHeading(data.get("ecoSystem"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforEcoSystemFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforEcoSystemFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforEcoSystemFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforEcoSystemFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardAmountforEcoSystemFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardPercentageforEcoSystemFees(data.get("percentage"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
-//			//homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforEcoSystemFees("1");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountAmountforBusinessFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
+		//	homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillMonthlyFeeforBusinessFees(data.get("amount"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitforBusinessFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforBusinessFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforBusinessFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentLimitforBusinessFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforBusinessFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforEcoSystemFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforEcoSystemFees("limitAmount");
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillDebitAndCreditCardLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyEcoSystemHeading(data.get("ecoSystem"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforEcoSystemFees(data.get("percentage"));
+					homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardPercentageforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforEcoSystemFees(data.get("percentage"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().verifyHeading(data.get("invitationHeading"));
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().clickDone();
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforEcoSystemFees("limitAmount");
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillDebitAndCreditCardLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().verifyHeading(data.get("invitationHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().clickDone();
+		
+			
+			
 //			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalDoller(data.get("doller"));
 //			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillBuySignetPercentage(data.get("percentage"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickSend();//Axdded
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
-//					.verifyBusinessAccount(data.get("businessLimit"));
-			//homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-//			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
-//					.verifyEcosystemLimit(data.get("ecoSystemLimit"));
-			//homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickSend();
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyBusinessAccount(data.get("businessLimit"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyEcosystemLimit(data.get("ecoSystemLimit"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickSend();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test verify Api Business details Failed due to Exception" + e);
 		}
@@ -198,19 +202,19 @@ public class ProfilesTest {
 					.enterTokenWallet(data.get("walletID"));
 			// Demo
 			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickAddWallet();
-//			Thread.sleep(2000);
-//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().tokenAmount();
-//			// homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
-//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
-//			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
-//			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
-//					.getNoTransactionSize() > 0) {
-//				ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
-//			} else {
-//				testFilters(strParams);
-//				testExportSelectedTransactions(strParams);
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().tokenAmount();
+			// homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().viewWalletIdAndBalance();
+			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().clickViewMore();
+			homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent().getAvaliableBalance();
+			if (homePage.sideBarComponent().profileComponent().sideBarApiBusinessComponent()
+					.getNoTransactionSize() > 0) {
+				ExtentTestManager.setInfoMessageInReport("Export button is disable because no transactions");
+			} else {
+				testFilters(strParams);
+				testExportSelectedTransactions(strParams);
 
-		//	}
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test verify Api Business details Failed due to Exception " + e);
@@ -422,7 +426,7 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().fillSearch(data.get("searchText"));
 
 			homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-		//	tokenAccountTest.testTransactionList(strParams);
+			tokenAccountTest.testTransactionList(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}
@@ -657,8 +661,8 @@ public class ProfilesTest {
 					.agreementsComponent().clickPrivacyPolicy();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.agreementsComponent().verifyPrivacyPolicyHeading();
-//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-//					.agreementsComponent().viewAgreement();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+					.agreementsComponent().viewAgreement();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
@@ -686,8 +690,8 @@ public class ProfilesTest {
 					.agreementsComponent().clickTermsofService();
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.agreementsComponent().verifyTermsofServiceHeading();
-//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-//					.agreementsComponent().viewAgreement();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+					.agreementsComponent().viewAgreement();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
@@ -709,8 +713,8 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.clickAccountLimits();
 			Thread.sleep(4000);
-//			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-//					.accountLimitsComponent().verifyHeading();
+			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+					.accountLimitsComponent().verifyHeading();
 
 			homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 					.accountLimitsComponent().verifyDailyLimitBuyTokenBankAccount();
@@ -773,6 +777,10 @@ public class ProfilesTest {
 	}
 
 	// 2.3 Merchant
+	
+	static String mail;
+	static String url;
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddMerchantUser(String strParams) {
@@ -785,18 +793,21 @@ public class ProfilesTest {
 			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
 			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
 			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
+			mail = homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().getEmail();
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-			.fillEmail();//this line used for static email (Next time we can change the class name)
+			.fillEmail(mail);//this line used for static email (Next time we can change the class name)
 			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
 			homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
-			Thread.sleep(3000);
+			if (!data.get("toastMerchantInvitation").isEmpty()) {
+				loginPage.toastComponent().verifyToast(data.get("toastTitle1"), data.get("toastMerchantInvitation"));
+			}
+				Thread.sleep(3000);
 //			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
 //					data.get("message"));
 //			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
-
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-			.clickActivateAccountInYOPMail(data.get("firstName"));
+            url=homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().getUrl();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().navigateUrl(url);			
 		//	new CommonFunctions().swtichToNewtabUrl(data.get("merchUrl"));
 
 		} catch (Exception e) {
@@ -1006,8 +1017,8 @@ public class ProfilesTest {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.clickAccountLimits();
 				Thread.sleep(4000);
-//				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
-//						.accountLimitsComponent().verifyHeading();
+				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
+						.accountLimitsComponent().verifyHeading();
 
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.accountLimitsComponent().verifyDailyLimitBuyTokenBankAccount();
@@ -1073,15 +1084,14 @@ public class ProfilesTest {
 						.clickTokenAccount();
 				int size = homePage.sideBarComponent().profileComponent().accountTableComponent()
 						.profileSideBarComponent().getNoFilterRecSize();
-				Thread.sleep(2000);
-//				if (size == 0) {
-//					testFilters(strParams);
-//					testExportSelectedTransactions(strParams);
-//
-//				} else {
-//					ExtentTestManager
-//							.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
-//				}
+				if (size == 0) {
+					testFilters(strParams);
+					testExportSelectedTransactions(strParams);
+
+				} else {
+					ExtentTestManager
+							.setInfoMessageInReport("Their is no transaction & Filters and Export are Disabled");
+				}
 			} else {
 				ExtentTestManager.setInfoMessageInReport("Their is No Active Records");
 			}
@@ -1207,7 +1217,7 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
 					.fillLastName(data.get("lastname"));
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-					.fillEmail();
+					.fillEmail(mail);
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
 					.fillPhonenNumber(data.get("phoneNumber"));
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()

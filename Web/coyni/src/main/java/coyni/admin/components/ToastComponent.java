@@ -34,8 +34,8 @@ public class ToastComponent extends BrowserFunctions {
 	}
 
 	public void verifyToastMessage(String expMessage) {
-		String actMessage = getText(message, "toast message").toLowerCase();
-		if (actMessage.contains(expMessage.toLowerCase())) {
+		String actMessage = getText(message, "toast message");
+		if (actMessage.contains(expMessage)) {
 			ExtentTestManager.setPassMessageInReport("Toast message is: " + actMessage);
 		} else {
 			ExtentTestManager.setFailMessageInReport(actMessage + " does not contains exp message: " + expMessage);

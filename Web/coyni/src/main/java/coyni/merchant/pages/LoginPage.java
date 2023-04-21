@@ -1,6 +1,7 @@
 package coyni.merchant.pages;
 
 import java.awt.AWTException;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -26,7 +27,7 @@ import ilabs.web.actions.Navigation;
 
 public class LoginPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 	private By logoCoyni = By.xpath("//img[@alt='coyni_Logo']");
 	private By txtEmail = By.xpath("//input[@id='Email']");
@@ -53,16 +54,22 @@ public class LoginPage extends BrowserFunctions {
 	private By merchantAgreementUpdate = By.xpath("//span[contains(text(),'Merchant Agreement')]");
 	private By btnDone = By.xpath("//button[contains(text(),'Done')]");
 	private By btnAgree = By.xpath("//button[contains(text(),'Agree')]");
-	private By checkbox = By.xpath("//input[@type='checkbox']");
+	private By checkbox = By.xpath("(//input[@type='checkbox'])[3]");
 	private By termsOfServicePDF = By.xpath("//div[contains(@class,'AgreementModal_pdfSize__yrzAs')]");
 	private By termsOfmerchantPDF = By.xpath("//div[contains(@class,'AgreementModal_apiData__xVMmx')]");
 	private By lblPrivacyPolicy = By.xpath("//div[contains(text(),'Privacy Policy')]");
     private By pdfPrivacyUpdate = By.xpath("//div[contains(@class,'AgreementModal_apiData')]");
 	private By lblAdditionalDocument = By.xpath("//h1[contains(text(),'Merchant Application Additional Documentation')]");
 	private By lblWelcome = By.xpath("//span[contains(text(),'Welcome to ')]");
+	private By btnClose = By.xpath("//button[@classs='self-end']");
 	
 	public void clickCheckBox() {
 		click(checkbox, "Check Box");
+	}
+	
+	public int verifyNonMaterialAgrrement() {
+		int i = getElementsList(btnClose, "Material Aggrement").size();
+		return i;
 	}
     
 	public void fillEmail(String userName) {
@@ -226,7 +233,12 @@ public class LoginPage extends BrowserFunctions {
 	}
 
 	public void clickDone() {
-		click(btnDone, "Done");
+      click(btnDone,"Done");
+	}
+	
+	public int verifyDoneButtonSize() {
+		int i = getElementsList(btnDone, "Done").size();
+		return i;
 	}
 
 	public void clickAgree() {
@@ -284,9 +296,28 @@ public class LoginPage extends BrowserFunctions {
 	
 	}
 	
+	public void scrollToPrivacyAgreeNonMaterial() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblPrivacyPolicy));
+		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		Thread.sleep(2000);
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+	    int noOFPages = list.size();
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    WebElement element = getElement(btnDone, "");
+	    while(element.getAttribute("class").contains("pointer")) {
+	    	js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+	    	height += temp;
+	    	Thread.sleep(200);
+	    }
+	    clickDone();
+	}
+	
 	public void scrollToPrivacyAgree() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(lblPrivacyPolicy));
 		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		Thread.sleep(2000);
 		int height = ele.getSize().getHeight();
 		int temp = height;
 		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
@@ -301,6 +332,24 @@ public class LoginPage extends BrowserFunctions {
 	    clickCheckBox();
 	    clickAgree();
 	    
+	}
+	
+	public void scrollToTermsAgreeNonMateria() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfmerchantPDF));
+		WebElement ele = getElement(pdfPrivacyUpdate,"");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(termsOfMerchantPDFPages, "");
+	    int noOFPages = list.size();
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    WebElement element = getElement(btnDone, "");
+	    while(element.getAttribute("class").contains("pointer")) {
+	    	js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+	    	height += temp;
+	    	Thread.sleep(200);
+	    }
+	    System.out.println("sucess");
+    clickDone();
 	}
 	
 	public void scrollToTermsAgree() throws InterruptedException {

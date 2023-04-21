@@ -1,14 +1,19 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+
+import coyni.admin.components.SideBarComponent;
 import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.TopBarComponent;
+import coyni.merchant.components.TransactionDetailsComponent;
 import coyni.merchant.pages.ExportfilesPage;
 import coyni.merchant.pages.GetHelpPage;
 import coyni.merchant.pages.LoginPage;
@@ -29,7 +34,8 @@ public class MerchantActivityTest {
 	ExportfilesPage exportfilesPage;
 	MerchantSettingsPage merchantSettingsPage;
 	GetHelpPage getHelpPage;
-
+    SideBarComponent adminSideBarComponent; 
+	
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
@@ -43,6 +49,8 @@ public class MerchantActivityTest {
 		getHelpPage = new GetHelpPage();
 		merchantActivityComponent = new MerchantActivityComponent();
 		sideMenuBarComponent = new SideMenuBarComponent();
+		adminSideBarComponent = new SideBarComponent();
+		
 
 	}
 
@@ -63,6 +71,82 @@ public class MerchantActivityTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantActivityAfterApproved(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("url"));
+			merchantActivityComponent.verifyApprovedHeading();
+			merchantActivityComponent.clickMerchantDashBoad();
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testMerchantActivityLinks failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantActivityAcceptResrve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			if (loginPage.verifyPriacyPolicyHeading() == 1) {
+				loginPage.scrollToPrivacyAgree();
+				loginPage.clickDone();
+			}
+
+			else {
+				loginPage.verifyWelcomeHeading();
+			}
+			Thread.sleep(1000);
+			if (loginPage.verifyTermsOfServicesHeading() == 1) {
+				loginPage.scrollToTermsAgree();
+				loginPage.clickDone();
+			}
+			merchantActivityComponent.verifyApprovedReserveHeading();
+			merchantActivityComponent.verifyMonthlyProcessingVolume(data.get("monthlyProcessingVolume"));
+			merchantActivityComponent.verifyHighTicket(data.get("highTicket"));
+			merchantActivityComponent.verifyResrverAmount(data.get("reserveAmount"));
+			merchantActivityComponent.verifyResrverPeriod(data.get("reservePeriod"));
+			merchantActivityComponent.clickAcceptReserve();
+			merchantActivityComponent.clickMerchantDashBoad();
+			merchantActivityComponent.dashBoardPage().verifyHeading(data.get("merchantDashBoardheading"));
+
+			merchantActivityComponent.clickUserName();
+			merchantActivityComponent.clickUserDetails();
+			merchantActivityComponent.verifyStatus();
+
+			/*
+			 * String merchID =merchantActivityComponent.verifyMerchantIDForReserver();
+			 * 
+			 * new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			 * //merchantActivityComponent.homePage().sideBarComponent().
+			 * clickReserveManagement();
+			 * //merchantActivityComponent.homePage().sideBarComponent().
+			 * reserveManagementPage().clickActive(); Thread.sleep(2000);
+			 * 
+			 * 
+			 * merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage
+			 * ().fillSearch(merchID);
+			 * merchantActivityComponent.homePage().sideBarComponent().reserveManagementPage
+			 * ().clickSearchButton();
+			 * 
+			 * //merchantActivityComponent.homePage().sideBarComponent().
+			 * reserveManagementPage().verifyStatus();
+			 * merchantActivityComponent.homePage().sideBarComponent().clickProfiles();
+			 * merchantActivityComponent.homePage().sideBarComponent().clickMerchant();
+			 * merchantActivityComponent.homePage().sideBarComponent().profileComponent().
+			 * fillSearch(merchID);
+			 * 
+			 * merchantActivityComponent.homePage().sideBarComponent().profileComponent().
+			 * verifyMerchantStatus();
+			 */
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" testMerchantActivityAcceptResrve failed due to exception " + e);
 		}
 	}
 
@@ -236,10 +320,13 @@ public class MerchantActivityTest {
 			} else {
 				merchantTransactionsPage.filterComponent().verifyMouseAction();
 				merchantTransactionsPage.filterComponent().clickFilters();
-				//merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-				//merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-				//merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
+				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
+				if (!data.get("errMessage").isEmpty()) {
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				}
 				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));
@@ -303,7 +390,6 @@ public class MerchantActivityTest {
 	public void testDashBoardPayOutHistory(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			merchantActivityComponent.clickDashBoard();
 			merchantActivityComponent.clickPayOutHistory();
 			// merchantActivityComponent.dashBoardPage().getPayOutHistoryRecentTransactions();
@@ -312,12 +398,12 @@ public class MerchantActivityTest {
 			if (merchantActivityComponent.payOutHistoryPage().verifyPayOut() > 0) {
 				merchantActivityComponent.payOutHistoryPage().verifyNoPayOutFound();
 			} else {
-				//merchantActivityComponent.payOutHistoryPage().clickPayOut();
-//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
-//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
-//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
-//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
-//				merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
+				merchantActivityComponent.payOutHistoryPage().clickPayOut();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutDate();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getPayOutAmount();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getToTokenAccount();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().getTransactionReference();
+				merchantActivityComponent.payOutHistoryPage().payOutIDPage().verifyDownloadPDF();
 			}
 
 		} catch (Exception e) {
@@ -399,10 +485,10 @@ public class MerchantActivityTest {
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getDailyBatchIds();
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getBatchDate();
 				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReserveRule();
-//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
-//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
-//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
-//				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedOn();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getReleasedTransactionID();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().getToTokenAccount();
+				merchantActivityComponent.reserveHistoryPage().reserveHistoryIDPage().verifyDownloadPDF();
 
 			}
 		} catch (Exception e) {
@@ -410,6 +496,176 @@ public class MerchantActivityTest {
 		}
 	}
 
+	static String referenceID;
+	static String processFee;
+	static String netAmount;
+	static String PercentageAmountOfResrve;
+	static String grossAmount;
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantReserveandProcessAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+		//	sideMenuBarComponent.clickMerchantActivityDrpDwn();
+		//	Thread.sleep(2000);
+			merchantActivityComponent.clickTransactions();
+			merchantActivityComponent.clickFilter();
+			merchantActivityComponent.clickeCommerceChcekBox();
+			merchantActivityComponent.clickApplyFliters();
+			merchantActivityComponent.transactionDetailsComponent().clickRecord();
+			Thread.sleep(2000);
+			grossAmount = merchantActivityComponent.transactionDetailsComponent().getGrossAmount();
+			 processFee = merchantActivityComponent.transactionDetailsComponent().getProcessingFee();
+			
+				String expPercentageAmountOfReserve=merchantActivityComponent.transactionDetailsComponent().reservePercentage(data.get("reserveAmount"));
+				PercentageAmountOfResrve=merchantActivityComponent.transactionDetailsComponent().getPercatageAmount();
+				if(expPercentageAmountOfReserve.equals(PercentageAmountOfResrve)) {
+					ExtentTestManager.setPassMessageInReport("The Reserved Percentage Calculation amount of the total cart amount is "+ expPercentageAmountOfReserve +"Matched with" + " The Reserved Percentage calaulation amount in the Merchant Transaction details  " + PercentageAmountOfResrve);
+				}
+				else {
+					ExtentTestManager.setInfoMessageInReport("The Reserved Percentage Calculation amount of the total cart amount is "+ expPercentageAmountOfReserve +" not Matched with" + " The Reserved Percentage calaulation amount in the Merchant Transaction details  " + PercentageAmountOfResrve);
+				}	
+			netAmount = merchantActivityComponent.transactionDetailsComponent().getNetAmount();
+			
+			
+			merchantActivityComponent.transactionDetailsComponent().clickCopyReferenceID();
+			Thread.sleep(2000);
+			referenceID = merchantActivityComponent.transactionDetailsComponent().getCopyReferenceID();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
+			 String eCommereceProcess=sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage().geteCommerceProcessing();
+				if(processFee.equals(eCommereceProcess)) {
+					ExtentTestManager.setPassMessageInReport("The Processing amount of the total cart amount is "+ processFee +"Matched with" + " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
+				}
+				else {
+					ExtentTestManager.setInfoMessageInReport("The Processing amount of the total cart amount is "+ processFee +"not Matched with" + " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
+				}
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionDetailsFilters Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminReserveAndCommisionAmountLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("urlAdmin"));
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickNext();
+			Thread.sleep(1500);
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			}
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminReserveAndCommisionAmount(String strParams) {
+		try {
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			adminSideBarComponent.clickTransactions();
+			adminSideBarComponent.transactionPage().clickBusiness();
+			
+			adminSideBarComponent.transactionPage().fillSearch(referenceID);
+			adminSideBarComponent.transactionPage().clickSearch();
+			Thread.sleep(2000);
+			adminSideBarComponent.transactionPage().transactionDetailsComponent().clickDetails();
+			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getGrossAmount();
+			if(grossAmount.equals(actGrossAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is reflecelted and Matched with the Gross amount in the Admin Transaction Page  " + actGrossAmount);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is not reflecelted and not Matched with the Gross amount in the Admin Transaction Page  " + actGrossAmount);
+			}
+			String actProcessingFee=adminSideBarComponent.transactionPage().transactionDetailsComponent().getProcessingFee();
+			if(processFee.equals(actProcessingFee)) {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is reflecelted and Matched with the Processing amount in the Admin Transaction Page  " + actProcessingFee);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is not reflecelted and not Matched with the Processing amount in the Admin Transaction Page  " + actProcessingFee);
+			}
+			String actResrve=adminSideBarComponent.transactionPage().transactionDetailsComponent().getPercatageAmount();
+			if(PercentageAmountOfResrve.equals(actResrve)) {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is reflecelted and Matched with the Reserve Percentage amount in the Admin Transaction Page  " + actResrve);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Transaction Page  " + actResrve);
+			}
+			String actnetAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getNetAmount();
+			if(netAmount.equals(actnetAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is reflecelted and Matched with the Net amount in the Admin Transaction Page  " + actnetAmount);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is not reflecelted and not Matched with the Net amount in the Admin Transaction Page  " + actnetAmount);
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdminReserveandProcessFeeCommisionAmount(String strParams) {
+		try {
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			adminSideBarComponent.clickCoyniPortal();
+			adminSideBarComponent.clickCommissionAccount();
+			adminSideBarComponent.commissionAccountPage().clickFullTransactionHistory();
+			Thread.sleep(2000);
+			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().clickFilters();
+			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().fillReferenceID(referenceID);
+			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().clickApplyFilters();
+			
+			
+			Thread.sleep(2000);
+			adminSideBarComponent.transactionPage().transactionDetailsComponent().clickDetails();
+			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getGrossAmount();
+			if(grossAmount.equals(actGrossAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is reflecelted and Matched with the Gross amount in the Admin Commisssion Page  " + actGrossAmount);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is not reflecelted and not Matched with the Gross amount in the Admin Commisssion Page  " + actGrossAmount);
+			}
+			String actProcessingFee=adminSideBarComponent.transactionPage().transactionDetailsComponent().getProcessingFee();
+			if(processFee.equals(actProcessingFee)) {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is reflecelted and Matched with the Processing amount in the Admin Commisssion Page  " + actProcessingFee);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is not reflecelted and not Matched with the Processing amount in the Admin Commisssion Page  " + actProcessingFee);
+			}
+			String actResrve=adminSideBarComponent.transactionPage().transactionDetailsComponent().getPercatageAmount();
+			if(PercentageAmountOfResrve.equals(actResrve)) {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is reflecelted and Matched with the Reserve Percentage amount in the Admin Commisssion Page  " + actResrve);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Commisssion Page  " + actResrve);
+			}
+			String actnetAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getNetAmount();
+			if(netAmount.equals(actnetAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is reflecelted and Matched with the Net amount in the Admin Commisssion Page  " + actnetAmount);
+			}
+			else {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is not reflecelted and not Matched with the Net amount in the Admin Commisssion Page  " + actnetAmount);
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+		}
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailsFilters(String strParams) {

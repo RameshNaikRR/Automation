@@ -1,5 +1,6 @@
 package coyni.checkout.tests;
 
+import java.awt.AWTException;
 import java.util.Map;
 
 import org.testng.annotations.BeforeTest;
@@ -7,17 +8,24 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.checkout.CheckOutPage;
+import coyni.merchant.components.SideMenuBarComponent;
+import coyni.merchant.pages.LoginPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class CheckOutTest {
 
 	CheckOutPage checkOutPage;
+	LoginPage loginPage;
+	SideMenuBarComponent sideMenuBarComponent;
 
 	@BeforeTest
 	public void init() {
 
 		checkOutPage = new CheckOutPage();
+		loginPage = new LoginPage();
+		sideMenuBarComponent = new SideMenuBarComponent();
 	}
 
 	@Test
@@ -26,10 +34,11 @@ public class CheckOutTest {
 	public void tesCheckOutTransaction(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get(""));
 			checkOutPage.enterDomain(data.get("domain"));
 			checkOutPage.enterOrderId();
-			checkOutPage.enterPublicKey(data.get("publicKey"));
-			checkOutPage.enterSecretKey(data.get("secretKey"));
+			checkOutPage.enterPublicKey(str);
+			checkOutPage.enterSecretKey(str1);
 			checkOutPage.clickSaveDetails();
 			checkOutPage.clickCardOne();
 			int totalFirstCardAmount = checkOutPage.getTotalFirstCardAmount();
@@ -42,7 +51,7 @@ public class CheckOutTest {
 				Thread.sleep(2000);
 				checkOutPage.clickCheckOut();
 				Thread.sleep(3000);
-				checkOutPage.switchToWindoe();
+				checkOutPage.switchToWindow();
 				Thread.sleep(2000);
 				checkOutPage.scanQRCodePayMerchantPage().clickContinueWithBrowser();
 
@@ -181,6 +190,219 @@ public class CheckOutTest {
 				.buyCoyniTokensPaymentsPage().buyCoyniTokensOrderPreviewPage().identityVerificationPage()
 				.successFailurePopupCardComponent().clickDone();
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantLoginForCheckOut(String strParams) throws InterruptedException, AWTException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		try {
+        Thread.sleep(1000);
+	//	loginPage.verifyHeading(data.get("loginHeading"));
+		loginPage.fillEmail(data.get("merchEmail"));
+		loginPage.fillPassword(data.get("merchPassword"));
+		// loginPage.clickeyeIcon();
+//		loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+		loginPage.clickNext();
+		Thread.sleep(1000);
+		loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+		if (data.get("securityKey").equalsIgnoreCase("123456")) {
+			loginPage.authyComponent().fillInput(data.get("securityKey"));
+		} else {
+			Thread.sleep(1000);
+			loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+			ExtentTestManager.setInfoMessageInReport("ok ");
+		}
+		
+		Thread.sleep(2000);
+		if(loginPage.verifyNonMaterialAgrrement()==0) {
+			if(loginPage.verifyTermsOfServicesHeading()==1) {
+				loginPage.scrollToTermsAgree();
+			     loginPage.clickDone();
+			}
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			Thread.sleep(3000);
+			if(loginPage.verifyPriacyPolicyHeading()==1) {
+				loginPage.scrollToPrivacyAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+
+		}
+		}	
+			else {
+				Thread.sleep(3000);
+		if(loginPage.verifyPriacyPolicyHeading()==1) {
+			loginPage.scrollToPrivacyAgree();
+		     loginPage.clickDone();
+		}
+
+		else {
+		 loginPage.verifyWelcomeHeading();	
+		}
+		Thread.sleep(2000);
+		if(loginPage.verifyTermsOfServicesHeading()==1) {
+			loginPage.scrollToTermsAgree();
+		     loginPage.clickDone();
+		}
+
+		else {
+		 loginPage.verifyWelcomeHeading();	
+		}
+}
+	} catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+	}
+	}	
+
+	
+	String str;
+	String str1;
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantApiKeys(String strParams) throws InterruptedException, AWTException {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		try {
+			Thread.sleep(2000);
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickApiKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickPublicKeyCopy();
+			str=sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getPublicKey();
+			Thread.sleep(2000);
+			int i =sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().verifyButtonReavelSecretKey();
+			if(i==1) {
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickReavelSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().authyComponent().fillInput(data.get("code"));
+			Thread.sleep(2000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickSecretKeyCopy();
+			str1 = sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getSecretKey();
+			}
+			else {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickGenerateNewSecretKey();
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().ClickGenerate();
+				Thread.sleep(2000);
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickReavelSecretKey();
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().authyComponent().fillInput(data.get("code"));
+				Thread.sleep(2000);
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage().clickSecretKeyCopy();
+				str1 = sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+						.getSecretKey();
+			
+			}
+			Thread.sleep(3000);
+			new CommonFunctions().switchtoUrl(data.get("checkOutUrl"));
+			checkOutPage.enterDomain(data.get("url"));
+			checkOutPage.enterOrderId();
+			
+			//checkOutPage.fillOrderId(data.get("orderID"));
+			checkOutPage.enterPublicKey(str);
+			checkOutPage.enterSecretKey(str1);
+			checkOutPage.clickSaveDetails();
+			
+			int totalFirstCardAmount = checkOutPage.getTotalFirstCardAmount();
+			int totalSecondCardAmount = checkOutPage.getTotalSecondCardAmount();
+			checkOutPage.clickCardOne();
+			checkOutPage.clickCardTwo();
+			
+			int count = totalFirstCardAmount + totalSecondCardAmount;
+			int sumOfAmount = checkOutPage.sumOfAmount();
+			if (count == sumOfAmount) {
+				ExtentTestManager.setInfoMessageInReport("Total Amount is : " + sumOfAmount);
+				Thread.sleep(2000);
+			
+				checkOutPage.clickCheckOut();
+				Thread.sleep(3000);
+				checkOutPage.switchToWindow();
+				Thread.sleep(2000);
+				checkOutPage.scanQRCodePayMerchantPage().clickContinueWithBrowser();
+
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().fillEmail(data.get("custEmail"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().fillPassword(data.get("custPassword"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().clickNext();
+
+		        checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().clickRadioBtnPhone();
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().clickNext();
+//				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().phoneVerificationPage()
+//						.verifyPhoneVerificationHeading();
+
+				Thread.sleep(3000);
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().phoneVerificationPage()
+						.fillpin(data.get("code"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage()
+				.phoneVerificationPage().page().clickPaynow();
+		        checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage()
+				.phoneVerificationPage().page().verifyContent(data.get("successContent"));
+		       
+			}
+		
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}	
+		
+	}
+	
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+
+	public void tesCheckOutTransactionForReserve(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			new CommonFunctions().switchtoUrl(data.get("checkOutUrl"));
+			checkOutPage.enterDomain(data.get("url"));
+			checkOutPage.enterOrderId();
+			checkOutPage.enterPublicKey(str);
+			checkOutPage.enterSecretKey(str1);
+			checkOutPage.clickSaveDetails();
+			checkOutPage.clickCardOne();
+			int totalFirstCardAmount = checkOutPage.getTotalFirstCardAmount();
+			checkOutPage.clickCardTwo();
+			int totalSecondCardAmount = checkOutPage.getTotalSecondCardAmount();
+			int count = totalFirstCardAmount + totalSecondCardAmount;
+			int sumOfAmount = checkOutPage.sumOfAmount();
+			if (count == sumOfAmount) {
+				ExtentTestManager.setInfoMessageInReport("Total Amount is : " + sumOfAmount);
+				Thread.sleep(2000);
+				checkOutPage.clickCheckOut();
+				Thread.sleep(3000);
+				checkOutPage.switchToWindow();
+				Thread.sleep(2000);
+				checkOutPage.scanQRCodePayMerchantPage().clickContinueWithBrowser();
+
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().fillEmail(data.get("email"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().fillPassword(data.get("password"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().clickNext();
+
+		        checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().clickRadioBtnPhone();
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().clickNext();
+//				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().phoneVerificationPage()
+//						.verifyPhoneVerificationHeading();
+
+				Thread.sleep(3000);
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage().phoneVerificationPage()
+						.fillpin(data.get("code"));
+				checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage()
+				.phoneVerificationPage().page().clickPaynow();
+		        checkOutPage.scanQRCodePayMerchantPage().loginPage().identityVerificationPage()
+				.phoneVerificationPage().page().verifyContent(data.get("successContent"));
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}	
+		
+	}
+		
 
 	@Test
 	@Parameters({ "strParams" })
@@ -256,7 +478,7 @@ public class CheckOutTest {
 				Thread.sleep(2000);
 				checkOutPage.clickCheckOut();
 				Thread.sleep(3000);
-				checkOutPage.switchToWindoe();
+				checkOutPage.switchToWindow();
 				checkOutPage.scanQRCodePayMerchantPage().clickContinueWithBrowser();
 
 				checkOutPage.scanQRCodePayMerchantPage().loginPage().fillEmail(data.get("email"));

@@ -13,7 +13,7 @@ public class ReserveManagementPage extends BrowserFunctions {
 
 	private By btnReserveManagement = By.xpath("//span[contains(text(),'Reserve Mgmt.')]");
 
-	private By txtSearch = By.xpath("//input[contains(@class,'ReserveManagementList')]");
+	private By txtSearch = By.xpath("//input[contains(@placeholder,'Search By Merchant')]");
 	
 	private By lblStatus = By.xpath("//div[contains(@class,'chip__text')]");
 	
@@ -45,9 +45,12 @@ public class ReserveManagementPage extends BrowserFunctions {
 	}
 
 	public void fillSearch(String search) {
+         click(txtSearch, "Search");	
 		enterText(txtSearch, search, "Search");
 	}
 
+	
+	
 	public void clickExport() {
 		click(btnExport, "Export");
 	}

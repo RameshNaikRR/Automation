@@ -43,6 +43,43 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 			.xpath("(//p[contains(@class,'TransactionDetailBuyToken_row_title_ledger__MoUSE')])[1]");
 	private By lblTransactionSubType = By
 			.xpath("(//p[contains(@class,'TransactionDetailBuyToken_row_titles__PhBDm')])[2]");
+	private By lblFees = By.xpath("//p[text()='Fees']/following-sibling::p");
+	private By lblNetAmount = By.xpath("//p[text()='Net Amount']/following-sibling::p");
+	private By lblGrossAmount = By.xpath("//p[text()='Gross Amount']/following-sibling::p");
+	private By lblPercentageAmountOfReserve = By.xpath("//p[text()='Reserve']/following-sibling::p");
+	
+	public String getProcessingFee() {
+		String str = getText(lblFees, "Processing Fee");
+		String str1 = str.replaceAll("[A-Za-z]", "");
+		String str2 = str1.replaceAll(" ", "");
+		ExtentTestManager.setInfoMessageInReport("The Processing Fee is " + str2);
+		return str2;
+	}
+	
+	public String getNetAmount () {
+		String str = getText(lblNetAmount, "Net Amount");
+		String str1 = str.replaceAll("[A-Za-z]", "");
+		String str2 = str1.replaceAll(" ", "");
+		ExtentTestManager.setInfoMessageInReport("The Net Amount is " + str2);
+		return  str2;
+	}
+
+	public String getGrossAmount() {
+		String str = getText(lblGrossAmount, "Gross Amount");
+		String str1 = str.replaceAll("[A-Za-z]", "");
+		String str2 = str1.replaceAll(" ", "");
+	//	String str3 = str2.replaceAll(".00", "");
+		ExtentTestManager.setInfoMessageInReport("The Gross Amount is " + str2);
+		return str2;
+	}
+	
+	public String getPercatageAmount() {
+		String str = getText(lblPercentageAmountOfReserve, "Percentage amount of Resrve");
+		String str1= str.replaceAll("[A-Za-z]", "");
+		String str2 = str1.replaceAll(" ", "");
+		return str2;
+	}
+
 
 	// ---------------------------------------------
 	private By getBuyTokenData(String index) {

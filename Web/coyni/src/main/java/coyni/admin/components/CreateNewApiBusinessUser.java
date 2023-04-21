@@ -4,11 +4,14 @@ import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import coyni.admin.popups.InvitationPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class CreateNewApiBusinessUser extends BrowserFunctions {
@@ -20,6 +23,8 @@ public class CreateNewApiBusinessUser extends BrowserFunctions {
 	private By txtLastName = By.id("last_Name");
 	private By txtEmail = By.id("Email");
 	private By txtPhoneNumber = By.id("Phone_Number");
+	private By txtBankAmount = By.xpath("//input[@name='WEBDollar']");
+	private By txtBankPercentage = By.xpath("//input[@name='WEBPercent']");
 	private By btnNext = By.xpath("//button[text()='Next']");
 	private By btnCancel = By.xpath("//button[text()='Cancel']");
 	private By lblBusinessHeading = By.xpath("//h1[text()='Business Fees']");
@@ -86,146 +91,152 @@ public class CreateNewApiBusinessUser extends BrowserFunctions {
 	}
 
 	public void fillExternalAmountforBusinessFees(String amount) throws InterruptedException, AWTException {
-	enterText(getElementDoller("External Bank Account"), amount, "External Bank Amount is");
-		new CommonFunctions().clickTab();
+		WebElement ele = getElement(txtBankAmount, "Amount");
+		//Actions action = new Actions(DriverFactory.getDriver());
+		ele.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+		Thread.sleep(3000);
+	//	action.doubleClick(ele);
+		enterText(getElementDoller("External Bank Account"), amount, "External Bank Amount is");
 	}
 	
-	public void fillExternalBanckAccountPercentageforBusinessFees(String percentage) throws AWTException {
+	public void fillExternalBanckAccountPercentageforBusinessFees(String percentage) throws AWTException, InterruptedException {
+		WebElement ele = getElement(txtBankPercentage, "Percentage");
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.doubleClick(ele);
 		enterText(getElementPercentage("External Bank Account"), percentage, "External Banck Percentage");
-		new CommonFunctions().clickTab(); 
 	}
 	
-	public void fillInstantPayAmountforBusinessFees(String amount) throws AWTException {
+	public void fillInstantPayAmountforBusinessFees(String amount) throws AWTException, InterruptedException {
+//		new CommonFunctions().doubleClick();
+//		ele.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		enterText(getElementDoller("Instant Pay"), amount, "Instant Pay Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillInstantPayPercentageforBusinessFees(String percentage) throws AWTException {
+	public void fillInstantPayPercentageforBusinessFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Instant Pay"), percentage, "Instant Pay Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCogentAccountAmountforBusinessFees(String amount) throws AWTException {
+	public void fillCogentAccountAmountforBusinessFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Cogent Account"), amount, "Cogent Account is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCogentAccountPercentageforBusinessFees(String percentage) throws AWTException {
+	public void fillCogentAccountPercentageforBusinessFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Cogent Account"), percentage, "Cogent Account Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillGiftCardforBusinessFees(String amount) throws AWTException {
+	public void fillGiftCardforBusinessFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Gift Card"), amount, "Gift Card Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillFailedBankWithdrawAmountforBusinessFees(String amount) throws AWTException {
+	public void fillFailedBankWithdrawAmountforBusinessFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Failed Bank Withdraw"), amount, "Failed Bank Withdraw amount is");
-		new CommonFunctions().clickTab();
 	}
 	
 	
-	public void fillFailedBankWithdrawPercentageforBusinessFees(String percentage) throws AWTException {
+	public void fillFailedBankWithdrawPercentageforBusinessFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Failed Bank Withdraw"), percentage, "Failed Bank Withdraw Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillExternalAmountBuyTokenforBusinessFees(String amount) throws AWTException {
+	public void fillExternalAmountBuyTokenforBusinessFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDollerForBuyToken("External Bank Account"), amount, "External Bank Amount for BuyTokens is");
-		new CommonFunctions().clickTab();
 	}
 
-	public void fillExternalPercentageBuyTokenforBusinessFees(String percentage) throws AWTException {
+	public void fillExternalPercentageBuyTokenforBusinessFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentageForBuyToken("External Bank Account"), percentage, "External Bank Percentage for BuyTokens is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillMonthlyFeeforBusinessFees(String amount) throws AWTException {
+	public void fillMonthlyFeeforBusinessFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Monthly Fee"), amount, "Monthly Fee is");
-		new CommonFunctions().clickTab();
 		
 	}
 	
-	public void fillExternalAmountforEcoSystemFees(String amount) throws AWTException {
+	public void fillExternalAmountforEcoSystemFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Bank Account"), amount, "External Bank Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillExternalBanckAccountPercentageforEcoSystemFees(String percentage) throws AWTException {
+	public void fillExternalBanckAccountPercentageforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Bank Account"), percentage, "External Banck Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillInstantPayAmountforEcoSystemFees(String amount) throws AWTException {
+	public void fillInstantPayAmountforEcoSystemFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Instant Pay"), amount, "Instant Pay Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillInstantPayPercentageforEcoSystemFees(String percentage) throws AWTException {
+	public void fillInstantPayPercentageforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Instant Pay"), percentage, "Instant Pay Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCogentAccountAmountforEcoSystemFees(String amount) throws AWTException {
+	public void fillCogentAccountAmountforEcoSystemFees(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Cogent Account"), amount, "Cogent Account is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCogentAccountPercentageforEcoSystemFees(String percentage) throws AWTException {
+	public void fillCogentAccountPercentageforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Cogent Account"), percentage, "Cogent Account Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillGiftCardAmountforEcoSystemFees(String amount) throws AWTException {
+	public void fillGiftCardAmountforEcoSystemFees(String amount) throws AWTException,InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Gift Card"), amount, "Gift Card Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillGiftCardPercentageforEcoSystemFees(String percentage) throws AWTException {
+	public void fillGiftCardPercentageforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Gift Card"), percentage, "Gift Card percentage is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillFailedBankWithdrawAmountforEcoSystemFees(String amount) throws AWTException {
+	public void fillFailedBankWithdrawAmountforEcoSystemFees(String amount) throws AWTException, InterruptedException {
 		enterText(getElementPercentage("Failed Bank Withdraw"), amount, "Failed Bank Withdraw amount is");
-		new CommonFunctions().clickTab();
 	}
 	
 	
-	public void fillFailedBankWithdrawPercentageforEcoSystemFees(String percentage) throws AWTException {
+	public void fillFailedBankWithdrawPercentageforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Failed Bank Withdraw"), percentage, "Failed Bank Withdraw Percentage");
-		new CommonFunctions().clickTab();
 	}
 
-	public void fillExternalAmountBuyTokenforEcoSystemFees(String amount) throws AWTException {
+	public void fillExternalAmountBuyTokenforEcoSystemFees(String amount) throws AWTException, InterruptedException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDollerForBuyToken("Bank Account"), amount, "External Bank Amount for BuyTokens is");
-		new CommonFunctions().clickTab();
 	}
 
-	public void fillExternalPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException {
+	public void fillExternalPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentageForBuyToken("Bank Account"), percentage, "External Bank Percentage for BuyTokens is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillDebitCardAmountBuyTokenforEcoSystemFeess(String amount) throws AWTException {
+	public void fillDebitCardAmountBuyTokenforEcoSystemFeess(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Debit Card"), amount, "Debit Card Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillDebitCardAmountPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException {
+	public void fillDebitCardAmountPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Debit Card"), percentage, "Debit Card Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCreditCardAmountBuyTokenforEcoSystemFeess(String amount) throws AWTException {
+	public void fillCreditCardAmountBuyTokenforEcoSystemFeess(String amount) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementDoller("Credit Card"), amount, "Debit Card Amount is");
-		new CommonFunctions().clickTab();
 	}
 	
-	public void fillCreditCardAmountPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException {
+	public void fillCreditCardAmountPercentageBuyTokenforEcoSystemFees(String percentage) throws AWTException, InterruptedException {
+		new CommonFunctions().doubleClick();
 		enterText(getElementPercentage("Credit Card"), percentage, "Debit Card Percentage");
-		new CommonFunctions().clickTab();
 	}
 	
 	public void fillExternalBankLimitforBusinessFees(String limitAmount) throws AWTException {

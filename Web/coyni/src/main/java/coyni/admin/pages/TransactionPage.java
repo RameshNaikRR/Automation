@@ -20,7 +20,7 @@ public class TransactionPage extends BrowserFunctions {
 
 	private By lblToken = By.xpath("//div[text()='Token']");
 
-	private By lblBusiness = By.xpath("//div[text()='Business']");
+	private By lblBusiness = By.xpath("//button[text()='Business']");
 
 	private By lblDateTime = By.xpath("//span[text()='Date & Time']");
 

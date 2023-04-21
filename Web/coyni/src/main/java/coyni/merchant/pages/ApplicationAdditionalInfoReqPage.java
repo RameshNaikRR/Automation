@@ -22,6 +22,12 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 	private By lblBeneficialOwners = By.xpath("(//button[text()='Approve'])[2]");
 
 	private By lnkUploadImg = By.xpath("//button[contains(@class,'FormFile_form_file__-SKGD')]/input");
+	private By lnkUploadImg1 = By.xpath("(//button[contains(@class,'FormFile_form_file__-SKGD')]/input)[2]");
+	private By chckBox1 = By.xpath("(//input[@type='checkbox'])[1]");
+	private By chckbox2 = By.xpath("(//input[@type='checkbox'])[2]");
+	private By btnApprove = By.xpath("(//button[text()='Approve'])[1]");
+	private By btnApprove1 = By.xpath("(//button[@type='button'])[9]");
+
 	
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	
@@ -32,6 +38,15 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Description " + text);
 	}
 
+	public void clickApporve() {
+		click(btnApprove, "Approve Company Name");
+	}
+	
+	public void clickApprove1() {
+		scrollToElement(btnApprove1, "Approve New Website");
+		click(btnApprove1, "Approve New Website");
+	}
+	
 	public void verifyStatus() {
 		String text = getText(lblStatus, "Status");
 		ExtentTestManager.setInfoMessageInReport("Status " + text);
@@ -62,6 +77,14 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}
+	
+	public void clickCheckBox() {
+		click(chckBox1, "CheckBox Website Content Revision");
+	}
+	
+	public void clickCheckBox1() {
+	click(chckbox2, "CheckBox Website Content Revision1");	
+	}
 
 	// added
 	public void getMerchantTrackerApplication() {
@@ -75,6 +98,10 @@ public class ApplicationAdditionalInfoReqPage extends BrowserFunctions {
 
 	public void clickUploadImage(String folderName, String fileName) {
 		getElement(lnkUploadImg, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
+	}
+	
+	public void clickUploadImage1(String folderName, String fileName) {
+		getElement(lnkUploadImg1, "select Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
 
 }

@@ -9,10 +9,11 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+
+import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.TopBarComponent;
 import coyni.merchant.pages.HomePage;
 import coyni.merchant.pages.LoginPage;
-import coyni.merchant.pages.SignupPage;
 import coyni.merchant.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
@@ -23,7 +24,6 @@ public class LoginTest {
 	HomePage homePage;
 	TokenAccountPage tokenAccountPage;
 	TopBarComponent topBarComponent;
-	SignupPage signUpPage;
 
 	@BeforeMethod
 	public void init() {
@@ -31,7 +31,6 @@ public class LoginTest {
 		homePage = new HomePage();
 		tokenAccountPage = new TokenAccountPage();
 		topBarComponent = new TopBarComponent();
-		signUpPage = new SignupPage();
 
 	}
 
@@ -59,44 +58,139 @@ public class LoginTest {
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(4000);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			// loginPage.clickeyeIcon();
 //			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
 			} else {
-				Thread.sleep(5000);
 				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
-//			
-//			new CommonFunctions().switchtoUrl(data.get("url"));
-//			Thread.sleep(1000);
-//			 if(loginPage.verifyPriacyPolicyHeading()==1) {
-//		  loginPage.scrollToPrivacyAgree();
-//			 loginPage.clickDone();
-//			}
-//
-//			 else {
-//			 loginPage.verifyWelcomeHeading();    
-//			            }
-//			            Thread.sleep(1000);
-//			 if(loginPage.verifyTermsOfServicesHeading()==1) {
-//			 loginPage.scrollToTermsAgree();
-//			 loginPage.clickDone();
-//			 }
+			Thread.sleep(2000);
+			if(loginPage.verifyNonMaterialAgrrement()==0) {
+				if(loginPage.verifyTermsOfServicesHeading()==1) {
+					loginPage.scrollToTermsAgree();
+				     loginPage.clickDone();
+				}
+				else {
+				 loginPage.verifyWelcomeHeading();	
+				}
+				Thread.sleep(3000);
+				if(loginPage.verifyPriacyPolicyHeading()==1) {
+					loginPage.scrollToPrivacyAgree();
+				     loginPage.clickDone();
+				}
 
+				else {
+				 loginPage.verifyWelcomeHeading();	
+
+			}
+			}	
+				else {
+					Thread.sleep(3000);
+			if(loginPage.verifyPriacyPolicyHeading()==1) {
+				loginPage.scrollToPrivacyAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			Thread.sleep(2000);
+			if(loginPage.verifyTermsOfServicesHeading()==1) {
+				loginPage.scrollToTermsAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+	}
+					
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginAfterSignUp(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(1000);
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
+			// loginPage.clickeyeIcon();
+//			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickNext();
+			Thread.sleep(1000);
+		//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				Thread.sleep(1000);
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				ExtentTestManager.setInfoMessageInReport("ok ");
+			}
+			Thread.sleep(2000);
+			if(loginPage.verifyDoneButtonSize()==1) {
+				loginPage.scrollToPrivacyAgreeNonMaterial();
+				Thread.sleep(1000);
+				loginPage.scrollToTermsAgreeNonMateria();
+			}
+			else {
+			Thread.sleep(2000);
+			if(loginPage.verifyNonMaterialAgrrement()==0) {
+				if(loginPage.verifyTermsOfServicesHeading()==1) {
+					loginPage.scrollToTermsAgree();
+				     loginPage.clickDone();
+				}
+				else {
+				 loginPage.verifyWelcomeHeading();	
+				}
+				Thread.sleep(3000);
+				if(loginPage.verifyPriacyPolicyHeading()==1) {
+					loginPage.scrollToPrivacyAgree();
+				     loginPage.clickDone();
+				}
 
+				else {
+				 loginPage.verifyWelcomeHeading();	
+
+			}
+			}	
+				else {
+					Thread.sleep(3000);
+			if(loginPage.verifyPriacyPolicyHeading()==1) {
+				loginPage.scrollToPrivacyAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+			Thread.sleep(2000);
+			if(loginPage.verifyTermsOfServicesHeading()==1) {
+				loginPage.scrollToTermsAgree();
+			     loginPage.clickDone();
+			}
+
+			else {
+			 loginPage.verifyWelcomeHeading();	
+			}
+	}
+}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
+		}
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
@@ -250,7 +344,6 @@ public class LoginTest {
 			loginPage.clickNext();
 //			for (int i = 0; i <= 4; i++) {
 //				Thread.sleep(2000);
-			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().clickResend();
 			// }
 		} catch (Exception e) {
@@ -365,33 +458,6 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillFirstName(data.get("firstName"));
 			Thread.sleep(2000);
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
-			loginPage.clickNext();
-			if (!data.get("errMessage").isEmpty()) {
-				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testForgotEmailWithInvalidFirstAndLastName failed due to exception " + e);
-		}
-	}
-	
-	
-	@Test
-	@Parameters({ "strParams" })
-	public void testForgotEmailWithInvalidFirstAndLastNameDetails(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.clickForgotEmail();
-			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
-			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
-			loginPage.clickNext();
-			loginPage.forgotEmailComponent().firstName(data.get("firstName"));
-			Thread.sleep(2000);
-			loginPage.forgotEmailComponent().lastName(data.get("lastName"));
 			loginPage.clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);

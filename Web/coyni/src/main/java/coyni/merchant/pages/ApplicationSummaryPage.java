@@ -1,5 +1,7 @@
 package coyni.merchant.pages;
  
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,7 @@ import ilabs.api.reporting.ExtentTestManager;
  
 public class ApplicationSummaryPage extends BrowserFunctions {
     WebDriver driver = DriverFactory.getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 120);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
  
     private By btnCheckBox = By.xpath("//input[@type='checkbox']");
     private By lblHeading = By.xpath("//h4[text()='Merchant Application Summary']");

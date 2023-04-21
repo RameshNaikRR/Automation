@@ -65,13 +65,13 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	}
 
 	public void editExternalBankAmount(String data) throws InterruptedException {
-		new CommonFunctions().doubleClick(editExternalBanAmount, "ExternalBanAmount");
+	//	new CommonFunctions().doubleClick(editExternalBanAmount, "ExternalBanAmount");
 		clearText(editExternalBanAmount, "ExternalBanAmount");
 		enterText(editExternalBanAmount, data, "ExternalBanAmount");
 	}
 
 	public void editInstantPayPercentage(String data) throws InterruptedException {
-		new CommonFunctions().doubleClick(editInstantPayPercentage, "InstantPayPercentage");
+	//	new CommonFunctions().doubleClick(editInstantPayPercentage, "InstantPayPercentage");
 		clearText(editInstantPayPercentage, "InstantPayPercentage");
 		enterText(editInstantPayPercentage, data, "InstantPayPercentage");
 	}
@@ -84,7 +84,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	public void editDebitCardPercentage(String data) throws InterruptedException {
 		click(editDebitCardPercentage, "DebitCardPercentage");
 		
-		new CommonFunctions().doubleClick(editDebitCardPercentage, "Debit Card Percentage");
+	//	new CommonFunctions().doubleClick(editDebitCardPercentage, "Debit Card Percentage");
 		clearText(editDebitCardPercentage, "Debit Card Percentage");
 		
 		enterText(editDebitCardPercentage, data, "DebitCard Percentage");
@@ -152,7 +152,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 
 	public void editSaleOrderEcommereAmount(String data) throws InterruptedException {
 		// click(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
-		new CommonFunctions().doubleClick(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
+	//	new CommonFunctions().doubleClick(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
 		clearText(editSaleOrderEcommereAmount, "SaleOrderEcommereAmount");
 		enterText(editSaleOrderEcommereAmount, data, "SaleOrderEcommereAmount");
 	}
@@ -181,7 +181,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	private By editWSAmount = By.xpath("//input[@name='WSAmount']");
 
 	public void editWSAmount(String data) throws InterruptedException {
-		new CommonFunctions().doubleClick(editWSAmount, "WSAmount");
+	//	new CommonFunctions().doubleClick(editWSAmount, "WSAmount");
 		clearText(editWSAmount, "WSAmount");
 		enterText(editWSAmount, data, "WSAmount");
 	}
@@ -189,7 +189,7 @@ public class EditPersonalFeeStructurePage extends BrowserFunctions {
 	private By editAccountLimitExternalBanAmount = By.xpath("//input[@name='WEBAmount']");
 
 	public void editAccountLimitExternalBanAmount(String data) throws InterruptedException {
-		new CommonFunctions().doubleClick(editAccountLimitExternalBanAmount, "ExternalBanAmount");
+	//	new CommonFunctions().doubleClick(editAccountLimitExternalBanAmount, "ExternalBanAmount");
 		clearText(editAccountLimitExternalBanAmount, "ExternalBanAmount");
 		enterText(editAccountLimitExternalBanAmount, data, "ExternalBanAmount");
 	}

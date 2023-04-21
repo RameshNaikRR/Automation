@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import coyni.admin.components.DaysMonthsDropDownComponent;
+import coyni.admin.components.TransactionDetailsComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -166,7 +167,15 @@ public class CommissionAccountPage extends BrowserFunctions {
 				"(//div[contains(@class,'flex flex-row-reverse justify-center -ml-16 text-sm font-semibold text-cgy4')])[%s]",
 				Type));
 	}
-
+     
+	public TransactionDetailsComponent transactionDetailsComponent() {
+		return new TransactionDetailsComponent(); 
+	}
+	
+	public TransactionPage transactionPage() {
+		return new TransactionPage();
+	}
+	
 	public By getValumeAndCommissionAmountCount(String Type) {
 		return By.xpath(String.format(
 				"(//div[contains(@class,'flex flex-row-reverse text-sm font-semibold mr-9 text-cgy4')])[%s]", Type));

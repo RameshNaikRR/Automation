@@ -1,5 +1,6 @@
 package coyni.admin.pages;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,7 +19,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class MerchantRegistrationPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By lnkBusinessAccount = By.xpath("//div[contains(text(),'Merchant Account')]");

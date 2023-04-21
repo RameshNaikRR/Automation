@@ -26,7 +26,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By txtFromAmount = By.xpath("//span[text()='From (CYN)']/preceding-sibling::input");
 	private By txtToAmount = By.xpath("//span[text()='To (CYN)']/preceding-sibling::input");
 	private By lblReferenceId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Reference ID']");
-	private By txtReferenceId = By.xpath("//input[@id='Reference ID']");
+	private By txtReferenceId = By.xpath("//input[@name='gbxTransactionId']");
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	// private By lnkClaerAll = By.xpath("");
 	private By lblEmployeeName = By.xpath("//label[contains(text(),'Withdraw ID')]/following-sibling::*//input "); // label[text()='Employee

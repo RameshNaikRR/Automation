@@ -1,5 +1,6 @@
 package coyni.merchant.pages;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,7 +17,7 @@ import ilabs.WebFramework.DriverFactory;
 
 public class MerchantAgreementsPage extends BrowserFunctions {
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 	private By popupPDF = By.xpath("//div[contains(@class,'Agreements_apiData')]");
 	private By checkbox = By.xpath("//input[@type='checkbox']");

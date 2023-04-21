@@ -1,6 +1,7 @@
 package coyni.uitilities;
 
 import java.awt.AWTException;
+import java.awt.Desktop.Action;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -46,10 +47,6 @@ public class CommonFunctions {
 			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText, actText));
 		}
-	}
-	public void doubleClick(By ele,String name) {
-		Actions actions = new Actions(DriverFactory.getDriver());
-		actions.doubleClick(objBrowserFunctions.getElement(ele, name)).build().perform();
 	}
 
 	public void selectCustomDropDown(String option, String eleName) {
@@ -349,7 +346,6 @@ public class CommonFunctions {
 				break;
 			}
 		}
-
 	}
 
 	public String convertRgbaToHex(String a) {
@@ -387,9 +383,8 @@ public class CommonFunctions {
 	}
 
 	public void switchtoUrl(String url) throws InterruptedException {
-
 		DriverFactory.getDriver().navigate().to(url);
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 
 	}
 
@@ -434,10 +429,19 @@ public class CommonFunctions {
 
 	}
 	
+	public void doubleClick() throws InterruptedException {
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.doubleClick(null);
+		ExtentTestManager.setInfoMessageInReport("The double clicked");
+	
+		Thread.sleep(2000);
+	}
+	
 	
 	public void switchToAdmin() {
 		objBrowserFunctions.switchToMainPage();
 	}
+	
 	
 
 	public void swtichToNewtabUrl(String Url) {

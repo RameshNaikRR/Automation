@@ -6,6 +6,7 @@ import coyni.admin.pages.HomePage;
 import coyni.admin.pages.LoginPage;
 import coyni.admin.pages.TokenAccountPage;
 import coyni.admin.pages.TransactionPage;
+import coyni.checkout.CheckOutPage;
 import coyni.merchant.pages.DashBoardPage;
 import coyni.merchant.pages.ExportfilesPage;
 import coyni.merchant.pages.MerchantTransactionsPage;
@@ -28,6 +29,10 @@ public class MerchantActivityComponent extends BrowserFunctions {
 	private By btnUserName = By.xpath("//img[contains(@class,'down-arrow')]/..");
 	private By lblUserDetails = By.xpath("//span[text()='User Details']");
 	private By txtMerchantAccountID = By.xpath("//div[contains(text(),'Account ID: ')]");
+	private By lblStatus = By.xpath("//div[contains(text(),'Account Status:')]//div");
+	private By btnFilter = By.xpath("//button[text()='Filter']");
+	private By chckBoxeCommerece = By.xpath("//span[text()='Sale Order: eCommerce']/preceding-sibling::input");
+	private By btnApplyFilters = By.xpath("//button[text()='Apply Filters']");
 			
 	
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {
@@ -37,6 +42,23 @@ public class MerchantActivityComponent extends BrowserFunctions {
 	
 	public void clickAcceptReserve() {
 		click(btnAcceptReserve, "Accept Reserve");
+	}
+	
+	public void clickFilter() {
+		click(btnFilter, "Filter");
+	}
+	
+	public void clickApplyFliters() {
+		click(btnApplyFilters, "Apply Filters");
+	}
+	
+	public void clickeCommerceChcekBox() {
+		click(chckBoxeCommerece, "Check Box Sale Order: eCommerce");
+	}
+	
+	public void verifyStatus() {
+		String str = getText(lblStatus, "Status");
+	ExtentTestManager.setInfoMessageInReport("The status is " + str);;
 	}
 	
 	public void verifyApprovedHeading() {
@@ -198,4 +220,7 @@ public class MerchantActivityComponent extends BrowserFunctions {
 		return new HomePage();
 	}
 	
+	public CheckOutPage checkOutPage() {
+		return new CheckOutPage();
+	}
 }
