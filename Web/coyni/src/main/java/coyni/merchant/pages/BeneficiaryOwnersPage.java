@@ -14,12 +14,13 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 	private By lblOwnerName = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[1]/div/p");
 	private By lblOwnerShipPercent = By.xpath("//summary[contains(@class,'BenificialOwnerAccordion')]/div/div[2]/p[2]");
 	private By drpdwnBeneficiaryOwner = By.xpath("//button[contains(@class,'BenificialOwnerAccordion')]");
+	private By lblStarMark = By.xpath("//img[contains(@class,'BenificialOwnerAccordion_star_icon__VCND6 ml-1.5')]");
 
 	private By getSideLables(String Lables) {
 		return By.xpath(String.format(
 				"//div[contains(@class,'BenificialOwnerAccordion_benificialContainer')]//span[.='%s']", Lables));
 	}
-	
+
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}
@@ -29,12 +30,12 @@ public class BeneficiaryOwnersPage extends BrowserFunctions {
 		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Beneficial Owners", cssProp, expValue,
 				expColor);
 	}
-	
-	
-	
-	
-	
-	
+
+	public void verifyStarMark() {
+		String mark = getText(lblStarMark, "Star Mark");
+		ExtentTestManager.setInfoMessageInReport(mark + "  is displayed");
+
+	}
 
 	private By getBeneficialOwnerDetails(String details) {
 		return By.xpath(String.format(

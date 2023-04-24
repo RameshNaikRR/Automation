@@ -30,7 +30,6 @@ public class ExportFilesTest {
 			// exportFilesPage.handSymbolHighlightedExportFiles(data.get("cssProp"),data.get("value"),
 			// data.get("color"));
 			exportFilesPage.verifyHeading(data.get("heading"));
-			Thread.sleep(1000);
 			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
 			if (verifyTeamMemberRecords > 0) {
 				exportFilesPage.verifyNoRecordsFound();
@@ -57,7 +56,6 @@ public class ExportFilesTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			exportFilesPage.clickExportFiles();
 			exportFilesPage.verifyHeading(data.get("heading"));
-			Thread.sleep(2000);
 			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
 			if (verifyTeamMemberRecords > 0) {
 				exportFilesPage.verifyNoRecordsFound();
@@ -80,7 +78,6 @@ public class ExportFilesTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			exportFilesPage.clickExportFiles();
 			exportFilesPage.verifyHeading(data.get("heading"));
-			Thread.sleep(2000);
 			int verifyTeamMemberRecords = exportFilesPage.verifyTeamMemberRecords();
 			if (verifyTeamMemberRecords > 0) {
 				exportFilesPage.verifyNoRecordsFound();
@@ -99,7 +96,6 @@ public class ExportFilesTest {
 	public void testExportSelectedTransactions(String strParams, String strParams1) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			exportFilesPage.clickExportFiles();
 			if (strParams1.equalsIgnoreCase("Today")) {
 				exportFilesPage.exportSelectedTransactionsPopup().clickOnToday();
@@ -113,10 +109,9 @@ public class ExportFilesTest {
 			} else {
 				exportFilesPage.exportSelectedTransactionsPopup().clickMonthTODate();
 			}
-			Thread.sleep(2000);
+			
 			exportFilesPage.exportSelectedTransactionsPopup().clickOnExport();
 			exportFilesPage.exportSelectedTransactionsPopup().verifyTitle(data.get("heading"));
-			Thread.sleep(2000);
 			exportFilesPage.exportSelectedTransactionsPopup().clickExportPage();
 			exportFilesPage.exportSelectedTransactionsPopup().clickClose();
 		} catch (Exception e) {

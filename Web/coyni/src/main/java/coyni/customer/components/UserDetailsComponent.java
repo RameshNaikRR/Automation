@@ -4,6 +4,8 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import coyni.customer.popups.AccountProfileImagePopup;
 import coyni.customer.popups.EditEmailAddressPopup;
 import coyni.customer.popups.EditPhoneNumberPopup;
@@ -21,8 +23,9 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By btnRemove = By.cssSelector("");
 	private By btnUploadNewImage = By.cssSelector("");
 	private By btnSave = By.cssSelector("");
+	private By lblAccountID = By.xpath("//span[contains(@class,'mt-1 text-xs text-cgy2')]");
 	private By lblUserName = By.xpath("//span[@class='text-2xl font-bold text-cgy8']");
-	private By lblAccountStatus = By.xpath("//div[@class='flex flex-row text-md text-cgy4']");
+	private By lblAccountStatus = By.xpath("//div[contains(@class,'bgCard mt-12 xl:mt-5')]");
 	private By lblEmail = By.xpath("//h3[contains(@class,'UserDetails_email_address')]");
 	private By lblAddress = By.cssSelector("");
 	private By lnkEditAccountEmail = By.xpath("//div[text()='Edit Account Email']");
@@ -33,10 +36,11 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By iconEditAddress = By.xpath("//div[@id='t14bec415-7d33-4847-85c6-9e08e7b12434']");
 	private By userImg = By.xpath("//div[contains(@class,'flex flex-row')]//div[contains(@class,'bg-cm3')] \" ");
 	private By imgPhone = By.xpath("//h3[contains(@class,'UserDetails_phoneNumber')]");
-	private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
+	// private By accountId = By.xpath("//span[@class='mt-1 text-xs text-cgy2'] ");
 	private By lblEmailAuth = By.xpath("//div[@class='mt-4']");
 	private By lblEmailAddress = By.xpath("//h1[text()='Edit Email Address']");
-	private By lblAccountAddress = By.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
+	private By lblAccountAddress = By
+			.xpath("//div[contains(@class,'UserDetails_address__2XyBR UserDetails_city_field__2olcd')] ");
 	private By txtCode = By.cssSelector("input[class *= 'verification-input']");
 	private By txtNewPhoneNumber = By.xpath("//input[text()='New Phone Number']");
 	private By btnCross = By.cssSelector("button[class='self-end']");
@@ -72,22 +76,42 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblUserName, "UserName");
 	}
 
-	public void verifyAccountIdView() {
-		new CommonFunctions().elementView(accountId, "accountId");
-	}
+//	public void verifyAccountIdView() {
+//		new CommonFunctions().elementView(accountId, "accountId");
+//	}
 
-	public void verifyAccountStatusView() {
-		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
-	}
+//	public void verifyAccountStatusView() {
+//		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
+//	}
 
 	public void verifyEmailAddressView() {
 		new CommonFunctions().elementView(lblEmailAddress, "EmailAddress");
 	}
 
+	public void verifyAccountIdView() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblAccountID, "Account ID"));
+		// return getText(lblAccountID, "Account ID");
+	}
+
+//	public WebElement verifyAccountIdView() {
+//		WebElement text = getElement(lblAccountID, "Account ID");
+//		return text;
+//	}
+
+	public void verifyAccountStatusView() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblAccountStatus, "Account Status"));
+		// return getText(lblAccountStatus, "Account status");
+	}
+
+//	public WebElement verifyAccountStatusView() {
+//		WebElement text = getElement(lblAccountStatus, "Account Status");
+//		return text;
+//	}
+
 	public void verifyAccountAddressView() {
 		new CommonFunctions().elementView(lblAccountAddress, "AccountAddress");
 	}
-	
+
 	public VerifyCurrentPhoneNumberPopup verifyCurrentPhoneNumberPopup() {
 		return new VerifyCurrentPhoneNumberPopup();
 	}
@@ -177,7 +201,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	public AccountProfileImagePopup accountProfileImagePopup() {
 		return new AccountProfileImagePopup();
 	}
-	
+
 	public EditPhoneNumberPopup editPhoneNumberPopup() {
 		return new EditPhoneNumberPopup();
 	}
@@ -199,32 +223,31 @@ public class UserDetailsComponent extends BrowserFunctions {
 		click(iconEditPhNum, "Clciked Edit Phone Number Icon");
 	}
 
-
 	public void verifyVerificationTextCodeBoxBorderColorAndDescription(String expColor, String expVerificationmsg) {
 
 		new CommonFunctions().verifyTextBoxBorderColor(expColor);
 		new CommonFunctions().verifyLabelText(lblVerificationSuccesful, "Verificational Succesful", expVerificationmsg);
 	}
-	
+
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
 		new CommonFunctions().validateTextFeild(txtNewPhoneNumber, expNewPhoneNumber, "New Phone Number");
 	}
-	
+
 	public void enterCode(String expCode) {
 		enterText(txtCode, expCode, "Verification Code");
 	}
-	
+
 	public void verifyNewPhoneNumberHeading(String expNewPhoneNumberHeading) {
 		new CommonFunctions().verifyLabelText(lblNewPhoneNumberHeading, "New Phone Number Verification",
 				expNewPhoneNumberHeading);
 	}
-
 
 	public void verifyEditPhoneNumberScreen(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingEditPhoneNumber, "Edit Phone Number", expHeading);
 
 	}
 
+	
 	public void verifyNewPhoneNumberTextWithPreviousData() {
 		String str = getText(txtNewPhoneNumber, "New Phone Number");
 		if (!str.isEmpty()) {

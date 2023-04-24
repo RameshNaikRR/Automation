@@ -14,7 +14,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	private By lblHeading = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>h1");
 	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container__UXCpJ]>div>p");
-	private By lblMerchantApplication = By.xpath("//p[text()='Merchant']");
+	private By lblMerchantApplication = By.xpath("//p[text()='Merchant']/following-sibling::*");
 	private By btnStartApplication = By.xpath("//button[text()='Start Application']");
 	private By btnContinueApplication = By.xpath("//button[text()='Continue Application']");
 	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
@@ -43,6 +43,11 @@ public class RegistrationStartPage extends BrowserFunctions {
 		return st;
 
 	}
+
+//	public void verifyMerchantApplicationVieww() {
+//		ExtentTestManager.setInfoMessageInReport(getText(lblMerchantApplication, "Merchant Applciation"));
+//
+//	}
 
 	public void verifyColor() {
 		String str = getElement(lblChangeColor, "Color").getCssValue("background-color");

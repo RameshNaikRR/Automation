@@ -3,6 +3,7 @@ package coyni.merchant.popups;
 import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -13,6 +14,15 @@ public class WithdrawToCogentPreviewPopup extends BrowserFunctions {
 	public By lblAmount = By.cssSelector(".WithdrawToSignet_amount__3EkcQ ");
 	public By btnConfirm = By.xpath("//button[text()='Confirm']");
 	public By btnDelete = By.xpath("//img[@class='cursor-pointer']");
+	private By lnkCopy = By.cssSelector(".icon-copy");
+
+	public void clickCopy() {
+		click(lnkCopy, "Copy");
+	}
+
+	public void switchToAdmin(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
+	}
 
 	public By getLabelItem(String Type) {
 		return By.xpath(String.format("//span[text()='%s']//following-sibling::span", Type));
@@ -48,5 +58,9 @@ public class WithdrawToCogentPreviewPopup extends BrowserFunctions {
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 }

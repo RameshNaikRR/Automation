@@ -31,6 +31,10 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
 	}
 
+	public void switchToAdmin(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
+	}
+
 	public void clickLearnMoreLnk() {
 		click(lnkLearnMore, "Click LearnMore");
 	}
@@ -64,11 +68,11 @@ public class TransactionInProgessPopup extends BrowserFunctions {
 		click(lnkReferenceID, "ReferenceID Link");
 		ExtentTestManager.setInfoMessageInReport("Reference ID is :" + getCopiedData());
 	}
-	
+
 	/**
 	 * this is used to perform click action
 	 */
-	
+
 	public void clickDone() {
 		click(btnDone, "Click Done");
 	}

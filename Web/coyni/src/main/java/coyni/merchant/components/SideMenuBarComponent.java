@@ -30,15 +30,17 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By userNameDrpDwn = By.xpath("//div[contains(@class,'DashboardMenu_username')]");
 	private By btnAddDBA = By.xpath("//button[text()='Add New DBA']");
 	private By btnDBA = By.xpath("//p[contains(text(),'New Merchant / DBA')]");
+	private By btnDBARecord = By.xpath("(//p[contains(text(),'New DBA')])[1]");
 	private By personalAccount = By.xpath("//div[@class='UserNameDropDown_userName__oCwHu']");
 	private By btnPersonalAccount = By.xpath("//p[text()='Add Personal Account']");
-	private By btnMerchantAccount = By.xpath("//button[contains(@class,'UserNameDropDown_dba__WtKbr')]");
+	private By btnMerchantAccount = By.xpath("(//p[contains(@class,'m-1 text-xs font-semibold text-cgy8')])[1]");
 	private By btnPersonalDropDown = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__YA3Vr')]");
-	private By sharedDropDown = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
+	private By sharedDropDown = By.xpath("(//span[contains(@class,'UserNameDropDown_title__RKKVD')])[1]");
 	private By sharedDropsDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
-	private By merchantDropDown = By.xpath("//button[contains(@class,'UserNameDropDown_header__y-U81')]");
-	private By btnMerchantDropDown = By.xpath("(//div[contains(@class,'icon-small-arrow')])[2]");
-	private By btnsharedAccount = By.xpath("//div[contains(@class,'UserNameDropDown_userName__oCwHu')]");
+	private By merchantDropDown = By.xpath("//button[contains(@class,'DashboardMenu_mainDiv__kfX1C')]");
+	private By btnMerchantDropDown = By.xpath("(//button[contains(@class,'UserNameDropDown_header__y-U81')])[5]");
+	private By btnsharedAccount = By.xpath("(//span[contains(@class,'UserNameDropDown_title__RKKVD')])[2]");
+	private By btnNewDBADropDown = By.xpath("//button[contains(@class,'DashboardMenu_mainDiv__kfX1C')]");
 	private By btnMerchnatApplicationTracker = By
 			.xpath("(//span[contains(.,'Merchant')][contains(., 'Application')])[1]");
 	private By merchnatApplicationTracker = By.xpath("(//div[@class='flex mt-3 h-2.5 justify-around'])[1]");
@@ -69,6 +71,15 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		}
 		return st;
 
+	}
+
+	public void clickOnDBARecord() {
+		click(btnDBARecord, "DBA");
+
+	}
+	
+	public void clickOnNewDBAAccount() {
+		click(btnNewDBADropDown, "DBA Account");
 	}
 
 	public void clickContinueApplication() {

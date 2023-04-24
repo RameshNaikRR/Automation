@@ -12,6 +12,8 @@ public class AddNewDBAPopup extends BrowserFunctions {
 
 	private By drpDownSelectCompany = By.xpath("//div[text()='Select Company']/parent::div");
 
+	private By btnAddDBA = By.xpath("//button[contains(text(),'Add DBA')]");
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Add DBA Business", expHeading);
 	}
@@ -25,11 +27,11 @@ public class AddNewDBAPopup extends BrowserFunctions {
 		click(getElement(state), state);
 	}
 
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
+	public void clickDBA() {
+		click(btnAddDBA, "DBA");
 	}
 
-	public AddDBAUnderNewCompanyPopup addDBAUnderNewCompanyPopup() {
-		return new AddDBAUnderNewCompanyPopup();
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 }

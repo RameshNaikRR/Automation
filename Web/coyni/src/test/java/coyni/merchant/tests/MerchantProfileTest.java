@@ -90,11 +90,12 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
+			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().verifyUserNameView();
 			merchantProfilePage.userDetailsComponent().verifyUserDetailsView();
 			merchantProfilePage.userDetailsComponent().verifyEditImageView();
 			merchantProfilePage.userDetailsComponent().verifyAccountIdView();
-			merchantProfilePage.userDetailsComponent().verifyAccountStatusView();
+			merchantProfilePage.userDetailsComponent().verifyAccountStatus();
 			merchantProfilePage.userDetailsComponent().verifyAccountStatus(data.get("status"));
 
 		} catch (Exception e) {
@@ -158,7 +159,6 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
@@ -168,7 +168,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup().clickSave();
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 
 		} catch (Exception e) {
 
@@ -183,18 +183,15 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().clickUploadNewImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.verifyHeading(data.get("cropYourImageHeading"));
-			
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup().cropYourImagePopup()
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
-			
-			
+
 			if (!data.get("toastMessage").isEmpty()) {
 				merchantProfilePage.toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
@@ -212,7 +209,6 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			Thread.sleep(4000);
 			merchantProfilePage.userDetailsComponent().clickEditUserImage();
 			merchantProfilePage.userDetailsComponent().accountProfileImagePopup()
 					.verifyHeading(data.get("accountProfileHeading"));
@@ -254,7 +250,45 @@ public class MerchantProfileTest {
 					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
-			Thread.sleep(3000);
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.verifyNewPhoneNumberPopup().authyComponent().successFailurePopupCardComponent()
+					.navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testEditPhoneNumberWithValidData is failed due to Exception " + e);
+		}
+	}
+
+	@Test // added
+	@Parameters({ "strParams" })
+
+	public void testEditPhoneNumberWithValidDataWithSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().clickSms();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().phoneVerificationComponent()
+					.fillpin(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.authyComponent().clickSms();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.phoneVerificationComponent().fillpin(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.verifyNewPhoneNumberPopup().verifyNewPhoneNumberScreen(data.get("headingNewPhoneNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyNewPhoneNumberPopup().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
@@ -280,7 +314,6 @@ public class MerchantProfileTest {
 				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
 			if (!data.get("errorMessage").isEmpty()) {
-				Thread.sleep(4000);
 				merchantProfilePage.authyComponent().verifyMessage(data.get("errorMessage"));
 			}
 
@@ -300,7 +333,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
@@ -466,7 +498,6 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
@@ -499,6 +530,47 @@ public class MerchantProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testEditEmailSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
+			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
+			merchantProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
+			merchantProfilePage.userDetailsComponent().authyComponent().clickSms();
+			merchantProfilePage.userDetailsComponent().phoneVerificationComponent().fillpin(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.verifyEditEmailAddress(data.get("heading"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
+					.fillNewEmailAddress(data.get("newEmailAddress"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyCurrentEmail(data.get("currentEmail"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.authyComponent().clickSms();
+			// merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().phoneVerificationComponent().
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.phoneVerificationComponent().fillpin(data.get("fillPinEmail"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().verifyNewEmailAddress(data.get("newEmailHeading"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().verifyNewEmail(data.get("newEmail"));
+			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+					.verifyNewEmailAddressPopUp().authyComponent().fillInput(data.get("fillPinNewEmail"));
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.verifyNewEmailAddressPopUp().authyComponent().verifyMessage(data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testEditEmailWithResendVerificationCode(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -509,7 +581,6 @@ public class MerchantProfileTest {
 					.verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSMSCode();
 			for (int i = 0; i <= 4; i++) {
-				Thread.sleep(3000);
 				merchantProfilePage.userDetailsComponent().editEmailAddressPopup().phoneVerificationComponent()
 						.clickOnResendCode();
 			}
@@ -533,7 +604,6 @@ public class MerchantProfileTest {
 					.verifyEditEmailAddress(data.get("heading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.fillNewEmailAddress(data.get("newEmailAddress"));
-			Thread.sleep(2000);
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickTab();
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().clickSendCode();
 
@@ -544,7 +614,6 @@ public class MerchantProfileTest {
 			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
 					data.get("elementName"));
 
-			Thread.sleep(5000);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
@@ -557,17 +626,14 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
-			Thread.sleep(5000);
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			if (!data.get("code").isEmpty()) {
 				merchantProfilePage.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
 			}
 			if (!data.get("errorMessage").isEmpty()) {
-				Thread.sleep(4000);
 				merchantProfilePage.authyComponent().verifyMessage(data.get("errorMessage"));
 			}
-			Thread.sleep(2000);
 			merchantProfilePage.authyComponent().verifyLoginWithInvalidPin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -589,13 +655,19 @@ public class MerchantProfileTest {
 	}
 
 	@Test
-	// @Parameters({ "strParams" })
-	public void testNotifications() {
+	@Parameters({ "strParams" })
+	public void testNotifications(String strParams) {
 		try {
-			// Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(5000);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
+			merchantProfilePage.userDetailsComponent().notificationsComponent().getTotalCount(data.get("query"));
+			merchantProfilePage.userDetailsComponent().notificationsComponent()
+					.getTotalTodayCount(data.get("todayquery"));
+			merchantProfilePage.userDetailsComponent().notificationsComponent()
+					.getTotalYesterdayCount(data.get("yesterdayquery"));
+			merchantProfilePage.userDetailsComponent().notificationsComponent()
+					.getTotalOlderCount(data.get("olderquery"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
@@ -605,9 +677,8 @@ public class MerchantProfileTest {
 	@Test
 	public void testNotificationsDelete() {
 		try {
-			Thread.sleep(4000);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotificationsIcon();
-			// merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
+			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyCursorNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickDelete();
 
 		} catch (Exception e) {
@@ -642,8 +713,10 @@ public class MerchantProfileTest {
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
 			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();
-			sideMenuBarComponent.clickMerchantdrpdwn();
-			sideMenuBarComponent.clickMerchantAccount();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickMerchantAccounts();
+			merchantProfilePage.merchantAccountsPage().clickGoToMerchant();
+//			sideMenuBarComponent.clickMerchantAccount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantAccounts is failed due to Exception " + e);
@@ -699,8 +772,6 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
-			Thread.sleep(3000);
-//			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);
@@ -710,10 +781,8 @@ public class MerchantProfileTest {
 	@Test // added
 	@Parameters({ "strParams" })
 	public void testPreferencesDisplayed(String strParams) {
-
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
 			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
@@ -724,7 +793,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount1"));
 			sideMenuBarComponent.clickMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantAccount();
-			Thread.sleep(3000);
 			signupPage.tokenAccountPage().clickTokenAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 
@@ -739,18 +807,33 @@ public class MerchantProfileTest {
 	public void testChangePassword(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2000);
 			topBarComponent.clickUserNameDrpDwn();
-			Thread.sleep(2000);
 			topBarComponent.userNameDropDownComponent().clickChangePassword();
-			Thread.sleep(2000);
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
 			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
 			merchantProfilePage.changePasswordPage().clickIcon();
 			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
 			merchantProfilePage.changePasswordPage().clickSave();
-			Thread.sleep(3000);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickChangePassword();
+			merchantProfilePage.changePasswordPage().authyComponent().clickSms();
+			merchantProfilePage.changePasswordPage().phoneVerificationComponent().fillpin(data.get("code"));
+			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
+			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
+			merchantProfilePage.changePasswordPage().clickIcon();
+			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
+			merchantProfilePage.changePasswordPage().clickSave();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test change password failed due to exception " + e);
 		}
@@ -763,9 +846,7 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantMenuComponent.clickUserName();
 			merchantMenuComponent.clickUserDetails();
-			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
-			Thread.sleep(1000);
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
 			merchantProfilePage.changePasswordPage().authyComponent().fillInput(data.get("code"));
 			merchantProfilePage.changePasswordPage().fillCurrentPassword(data.get("currentPassword"));
@@ -774,7 +855,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.changePasswordPage().fillNewPassword(data.get("newPassword"));
 			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
 			merchantProfilePage.changePasswordPage().clickTab();
-			Thread.sleep(3000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
 			}
@@ -808,9 +888,7 @@ public class MerchantProfileTest {
 		try {
 
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
 			merchantMenuComponent.clickUserName();
-			Thread.sleep(1000);
 			merchantMenuComponent.clickChangePassword();
 			merchantProfilePage.changePasswordPage().verifyAuthyHeading(data.get("heading"));
 
@@ -829,7 +907,6 @@ public class MerchantProfileTest {
 	public void testTwoStepAuthentication(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(4000);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickTwoStepAuthentication();
 			merchantProfilePage.twoStepAuthenticationPage().clickReconfigure();

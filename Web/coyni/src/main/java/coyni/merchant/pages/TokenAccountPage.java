@@ -3,10 +3,12 @@ package coyni.merchant.pages;
 import java.sql.SQLException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.BankAccountsComponent;
 import coyni.merchant.components.FilterComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.NotificationsComponent;
 import coyni.merchant.components.TokenAccountActivityComponent;
 import coyni.merchant.components.TokensPurchasedDetailsComponent;
 import coyni.merchant.components.TokensWithdrawnDetailsComponent;
@@ -30,7 +32,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By lblYourTokenAccount = By.xpath("//h1[text()='Merchant Token Account']");
 	private By lblTotalFunds = By.xpath("//span[contains(text(),'Total Available Funds')]");
 	private By lblHeading = By.xpath("(//span[text()='Token Account'])[1]");
-	private By amount = By.xpath("//span[contains(@class,'wallet_balance')]");
+	private By amount = By.xpath("//div[contains(@class,'MerchantWalletDashboard_wallet_ballance_wrap__nNo5D')]");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Business Transactions')]");
@@ -127,8 +129,11 @@ public class TokenAccountPage extends BrowserFunctions {
 
 	}
 
-	public void verifyAmount() {
-		new CommonFunctions().elementView(amount, "Amount");
+	public WebElement verifyAmount() {
+		// new CommonFunctions().elementView(amount, "Amount");
+		WebElement txt = getElement(amount, " Amount ");
+		return txt;
+
 	}
 
 	public void verifyTransactionList() {
@@ -227,7 +232,7 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public void verifyHeading(String Heading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Token account page heading ", Heading);
+		new CommonFunctions().verifyLabelText(lblHeading, "heading ", Heading);
 	}
 
 //	public List<String> getEntryOptions() {
@@ -351,8 +356,13 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new WithdrawToSignetAccountPopup();
 	}
 
+	
 	public UserNameDropDownComponent userNameDropDownComponent() {
 		return new UserNameDropDownComponent();
+	}
+
+	public NotificationsComponent notificationsComponent() {
+		return new NotificationsComponent();
 	}
 
 	public TransactionDetailsComponent transactionDetailsComponent() {

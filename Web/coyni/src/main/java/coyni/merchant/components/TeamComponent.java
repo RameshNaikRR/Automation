@@ -58,16 +58,31 @@ public class TeamComponent extends BrowserFunctions {
 	}
 
 	public void clickFilter() {
-		click(lnkFilter, "Filter");
+		if (verifyElementDisplayed(lnkFilter, "Filter")) {
+			click(lnkFilter, "Filter");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Filter is in disabled mode");
+		}
 	}
 
-	public int verifyTeamMemberRecords() {
-		return getElementsList(msgNoRecords, "").size();
+	public int verifyFilter() {
+		int size = getElementsList(msgNoRecords, "Records").size();
+		return size;
+
 	}
 
-	public String verifyNoRecordsFound() {
+	public void verifyFilterDisabled() {
 		new CommonFunctions().elementView(msgNoRecords, "No Records");
-		return getText(msgNoRecords, "No Records");
+	}
+
+	
+	public int verifyTeamMemberRecords() {
+		int size = getElementsList(msgNoRecords, "Records").size();
+		return size;
+	}
+
+	public void verifyNoRecordsFound() {
+		new CommonFunctions().elementView(msgNoRecords, "No Records");
 	}
 
 	public void clickActions() {
@@ -133,7 +148,23 @@ public class TeamComponent extends BrowserFunctions {
 	}
 
 	public void clickCheckBox() {
-		click(btnCheckBox, "CheckBox");
+		if (verifyElementDisplayed(btnCheckBox, "Check Box")) {
+			click(btnCheckBox, "CheckBox");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("check box is in disabled mode");
+		}
+
+	}
+
+	public int clickOnCheckBox() {
+		int size = getElementsList(msgNoRecords, "").size();
+		return size;
+
+	}
+
+	public void verifyCheckBoxDisabled() {
+		new CommonFunctions().elementView(msgNoRecords, "Check Box is in disabled");
+
 	}
 
 	public AddTeamMemberComponent addTeamMemberComponent() {
@@ -159,6 +190,7 @@ public class TeamComponent extends BrowserFunctions {
 	public FiltersPage filtersPage() {
 		return new FiltersPage();
 	}
+
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}

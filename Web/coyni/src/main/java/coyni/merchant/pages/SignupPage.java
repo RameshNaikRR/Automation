@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni.merchant.components.PhoneVerificationComponent;
+import coyni.merchant.components.SideMenuBarComponent;
 import coyni.merchant.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -76,27 +77,26 @@ public class SignupPage extends BrowserFunctions {
 	private By btnTwoStepAuthy = By.xpath("//span[contains(text(),'Two-Step Authentication')]//button");
 	private By headingTwoStepAuthy = By.xpath("//h1[contains(text(),'Two-Step Authentication')]");
 	private By headingTwoStepAuthySucess = By.xpath("//h1[contains(text(),'Two-Step Authentication Success')]");
-	
 
 	public void verifyTwoStepDescription() {
 		String str = getText(lblTwoStepAuthy, "Two step authy");
 		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Description is " + str);
 	}
-	
+
 	public void verifyTwoStepHeading() {
 		String str = getText(headingTwoStepAuthy, "Two step Authy");
 		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Heading is " + str);
 	}
-	
+
 	public void clickTwostepAuthy() {
 		click(btnTwoStepAuthy, "Two Step Authy");
 	}
-	
+
 	public void verifyTwoStepSucess() {
 		String str = getText(headingTwoStepAuthySucess, "two Step Authy Sucess");
 		ExtentTestManager.setInfoMessageInReport("The Two Step Authy Success Heading is " + str);
 	}
-	
+
 	public void clickCheckBox() {
 		click(chkBox, "CheckBox");
 	}
@@ -497,7 +497,14 @@ public class SignupPage extends BrowserFunctions {
 		click(btnAgree, "Agree");
 	}
 
-	
+	public RegistrationStartPage registrationStartPage() {
+		return new RegistrationStartPage();
+	}
+
+	public SideMenuBarComponent sideMenuBarComponent() {
+		return new SideMenuBarComponent();
+	}
+
 	public void scrollDownMerchantAgreementUpdate() throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(PDFmerchantAgreementsUpdate));
 		WebElement ele = getElement(termsOfmerchantPDF, "");

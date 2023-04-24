@@ -3,7 +3,9 @@ package coyni.merchant.components;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
+
 import coyni.merchant.popups.AccountProfileImagePopup;
 import coyni.merchant.popups.EditEmailAddressPopup;
 import coyni.merchant.popups.EditPhoneNumberPopup;
@@ -72,13 +74,24 @@ public class UserDetailsComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblUserName, "UserName");
 	}
 
-	public void verifyAccountIdView() {
-		new CommonFunctions().elementView(accountId, "accountId");
+	public By getLabelItem(String Type) {
+		return By.xpath(String.format(
+				"//p[text()='%s']/following-sibling::div[1]/p  | //p[text()='%s']//following-sibling::span | //p[text()='%s']//following-sibling::p",
+				Type, Type, Type));// | //p[text()='%s']//following-sibling::span
 	}
 
-	public void verifyAccountStatusView() {
-		new CommonFunctions().elementView(lblAccountStatus, "accountStatus");
+	public void verifyAccountIdView() {
+		ExtentTestManager.setInfoMessageInReport(getText(accountId, "Account ID"));
 	}
+
+	public void verifyAccountStatus() {
+		ExtentTestManager.setInfoMessageInReport(getText(lblAccountStatus, "Account status"));
+	}
+
+//	public WebElement verifyAccountStatus() {
+//		WebElement text = getElement(lblAccountStatus, "Account Status");
+//		return text;
+//	}
 
 	public void verifyEmailAddressView() {
 		new CommonFunctions().elementView(lblEmailAddress, "EmailAddress");
@@ -203,6 +216,10 @@ public class UserDetailsComponent extends BrowserFunctions {
 
 	public void verifyNewPhoneField(String expNewPhoneNumber) {
 		new CommonFunctions().validateTextFeild(txtNewPhoneNumber, expNewPhoneNumber, "New Phone Number");
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 	public void enterCode(String expCode) {

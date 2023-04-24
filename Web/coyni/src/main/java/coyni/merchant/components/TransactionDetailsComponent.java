@@ -69,19 +69,19 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 	private By lblDepositTo = By.xpath("//span[text()='Deposit To']/following-sibling::*");
 
 	private By txtReasonForRefund = By.cssSelector("#message");
-	
+
 	private By lblProcessFee = By.xpath("//p[text()='Processing Fee']/following-sibling::p");
-	
+
 	private By lblGrossAmount = By.xpath("//p[text()='Gross Amount']/following-sibling::p");
-	
+
 	private By lblPercentageAmountOfReserve = By.xpath("//p[text()='Reserve']/following-sibling::p");
 
 	private By lblNetAmount = By.xpath("//p[text()='Net Amount']/following-sibling::p");
-	
+
 	private By btnNext = By.xpath("//button[text()='Next']");
 
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
-	
+
 	private By btnCopy = By.xpath("(//button[contains(@class,'icon-copy')])[2]");
 
 	public void fillReason(String refund) {
@@ -209,7 +209,7 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		String text = getText(lblCreatedDate, "Created Date");
 		ExtentTestManager.setInfoMessageInReport("Created Date " + text);
 	}
-	
+
 	public String getProcessingFee() {
 		String str = getText(lblProcessFee, "Process Fee");
 		String str1 = str.replaceAll("[A-Za-z]", "");
@@ -217,53 +217,52 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("The Processing Fee is " + str2);
 		return str2;
 	}
-	
+
 	public String getPercatageAmount() {
 		String str = getText(lblPercentageAmountOfReserve, "Percentage amount of Resrve");
-		String str1= str.replaceAll("[A-Za-z]", "");
+		String str1 = str.replaceAll("[A-Za-z]", "");
 		String str2 = str1.replaceAll(" ", "");
 		return str2;
 	}
-	
-	public String getNetAmount () {
+
+	public String getNetAmount() {
 		String str = getText(lblNetAmount, "Net Amount");
 		String str1 = str.replaceAll("[A-Za-z]", "");
 		String str2 = str1.replaceAll(" ", "");
 		ExtentTestManager.setInfoMessageInReport("The Net Amount is " + str2);
-		return  str2;
+		return str2;
 	}
 
 	public String getGrossAmount() {
 		String str = getText(lblGrossAmount, "Gross Amount");
 		String str1 = str.replaceAll("[A-Za-z]", "");
 		String str2 = str1.replaceAll(" ", "");
-	//	String str3 = str2.replaceAll(".00", "");
+		// String str3 = str2.replaceAll(".00", "");
 		ExtentTestManager.setInfoMessageInReport("The Gross Amount is " + str2);
 		return str2;
 	}
-	
+
 	public String reservePercentage(String reserveAmount) {
 		double j = Integer.parseInt(reserveAmount);
 		String str = getText(lblGrossAmount, "Gross Amount");
 		String str1 = str.replaceAll("[A-Za-z]", "");
 		String str2 = str1.replaceAll(" ", "");
 		double k = Double.parseDouble(str2);
-		double percentage = k/100;
-		double percentage1 = percentage*j;
+		double percentage = k / 100;
+		double percentage1 = percentage * j;
 		String str3 = String.valueOf(percentage1);
 		return str3;
 	}
-	
+
 	public void clickCopyReferenceID() {
 		click(btnCopy, "Copy Reference ID");
 	}
-	
+
 	public String getCopyReferenceID() {
 		String str = getCopiedData();
 		return str;
 	}
-	
-	
+
 	public void getAmount() {
 		String text = getText(lblAmount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Amount " + text);

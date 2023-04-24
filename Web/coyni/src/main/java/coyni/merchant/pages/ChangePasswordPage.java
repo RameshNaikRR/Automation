@@ -3,6 +3,7 @@ package coyni.merchant.pages;
 import java.awt.AWTException;
 import org.openqa.selenium.By;
 import coyni.merchant.components.AuthyComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -109,6 +110,10 @@ public class ChangePasswordPage extends BrowserFunctions {
 	public void verifyUpdatePassword(String text) {
 		new CommonFunctions().verifyLabelText(labelPasswordSuccess, text, "password success message");
 
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 	public AuthyComponent authyComponent() {

@@ -40,7 +40,6 @@ public class TokenAccountTest {
 	public void testAvailableBalance() throws InterruptedException {
 		try {
 			tokenAccountPage.clickTokenAccount();
-			Thread.sleep(2000);
 			tokenAccountPage.verifyLabelYourTokenAccount();
 			tokenAccountPage.verifyAmount();
 			ExtentTestManager.setInfoMessageInReport(
@@ -75,8 +74,7 @@ public class TokenAccountTest {
 	public void testTodayTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
-			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
 			} else {
@@ -90,8 +88,7 @@ public class TokenAccountTest {
 	public void testYesterDayTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
-			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
 			} else {
@@ -105,8 +102,7 @@ public class TokenAccountTest {
 	public void testLast7DaysTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
-			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
 			} else {
@@ -120,8 +116,7 @@ public class TokenAccountTest {
 	public void testMonthToDateTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
-			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
 			} else {
@@ -135,12 +130,26 @@ public class TokenAccountTest {
 	public void testLastMonthTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(1000);
-			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
 			} else {
 				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryLastMonth"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
+		}
+	}
+
+	public void testCustomDateRangeTrasactions(String strParams, String today) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
+				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
+			} else {
+				tokenAccountPage.tokenAccountActivityComponent()
+						.verifyTableItemsCount(data.get("queryCustomDateRange"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test failed due to" + e);
@@ -161,30 +170,47 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalTodayCount(data.get("query"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayPayOutsReceived();
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalYesterdayCount(data.get("query1"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysPayOutsReceived();
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalLast7DaysCount(data.get("query2"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDatePayOutsReceived();
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testMonthToDateTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalMonthToDateCount(data.get("query3"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthPayOutsReceived();
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalLastMonthCount(data.get("query4"));
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.daysMonthsDropDownComponent().clickCustomDateRangePayOutsReceived();
+			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+					.verifyLabelTransactionDetails(data.get("expHeading"));
+			testCustomDateRangeTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalCustomDateRangeCount(data.get("query5"));
 			exports(strParams);
 
 		} catch (Exception e) {
@@ -228,32 +254,48 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
+//					.getTotalTodayCount(data.get("query"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+//					.getTotalYesterdayCount(data.get("query1"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+//					.getTotalLast7DaysCount(data.get("query2"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-
 			testMonthToDateTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+//					.getTotalMonthToDateCount(data.get("query3"));
 			exports(strParams);
-
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+//					.getTotalLastMonthCount(data.get("query4"));
+			exports(strParams);
+			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+					.daysMonthsDropDownComponent().clickCustomDateRangeTokensPurchased();
+			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
+			testCustomDateRangeTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
+//					.getTotalCustomDateRangeCount(data.get("query5"));
 			exports(strParams);
 
 		} catch (Exception e) {
@@ -297,30 +339,48 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalTodayCount(data.get("query"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickYesterdayTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testYesterDayTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalYesterdayCount(data.get("query1"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLast7DaysTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLast7DaysTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalLast7DaysCount(data.get("query2"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickMonthToDateTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testMonthToDateTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalMonthToDateCount(data.get("query3"));
 			exports(strParams);
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalLastMonthCount(data.get("query4"));
+			exports(strParams);
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
+			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
+			testCustomDateRangeTrasactions(strParams, "date");
+//			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
+//					.getTotalCustomDateRangeCount(data.get("query4"));
 			exports(strParams);
 
 		} catch (Exception e) {
@@ -350,8 +410,10 @@ public class TokenAccountTest {
 	}
 
 	@Test
-	public void testTokenAccountActivityDetails() throws InterruptedException {
+	@Parameters({ "strParams" })
+	public void testTokenAccountActivityDetails(String strParams) throws InterruptedException {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.tokenAccountActivityComponent().tokenAccountActivityDetails();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnToday();
@@ -374,6 +436,16 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnCustomDateRange();
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().filterCalenderComponent()
+					.clickSelectDate(data.get("startDate"));
+			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().filterCalenderComponent()
+					.clickSelectDate(data.get("endDate"));
+			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
+			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
+//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().filterCalenderComponent()
+//					.clickPreviousTenDays();
 
 		} catch (InterruptedException e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountActivityDetails is failed due to exception " + e);
@@ -422,18 +494,24 @@ public class TokenAccountTest {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOn7Days();
 				} else if (strParams1.equalsIgnoreCase("Last Month")) {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnLastMonth();
-				} else {
+				} else if (strParams1.equalsIgnoreCase("Month to Date")) {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
+				} else {
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickCustomDateRange();
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
+							.clickSelectDate(data.get("startDate"));
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
+							.clickSelectDate(data.get("endDate"));
+					;
+
 				}
-				Thread.sleep(2000);
 
 			}
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnExport();
-			Thread.sleep(2000);
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().navigationComponent().clickClose();
-//				tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
-//				tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
-//						.verifyNotificationText(data.get("notificationText"));
+			tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
+			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+					.verifyNotificationText(data.get("notificationText"));
 		} catch (
 
 		Exception e) {
@@ -450,6 +528,7 @@ public class TokenAccountTest {
 		testExportSelectedTransactions(strParams, "Last Seven Days");
 		testExportSelectedTransactions(strParams, "Last Month");
 		testExportSelectedTransactions(strParams, "Month to Date");
+		testExportSelectedTransactions(strParams, "Custom Date Range");
 	}
 
 //	@Test
@@ -479,19 +558,15 @@ public class TokenAccountTest {
 	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			Thread.sleep(10000);
 			tokenAccountPage.clickTokenAccount();
-//			Thread.sleep(2000);
 			if (tokenAccountPage.filterComponent().verifyTransactionss() > 0) {
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				tokenAccountPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
-				Thread.sleep(2000);
 				tokenAccountPage.filterComponent().verifyMouseAction();
 				tokenAccountPage.filterComponent().clickFilters();
-//			    tokenAccountPage.filterComponent().clickStartDate();
-//			    tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-//			   tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				tokenAccountPage.filterComponent().filterCalenderComponent().verifyStartDate(data.get("startDate"));
+				tokenAccountPage.filterComponent().filterCalenderComponent().verifyEndDate(data.get("endDate"));
 				tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
 				tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
 				tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -508,7 +583,819 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionListFilters(String strParams) {
-		testFilters(strParams);
+		// testFilters(strParams);
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().scroolDownToElement();
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getTotalTransctions();
+//			tokenAccountPage.transactionDetailsComponent().getPayOutDate();
+//			tokenAccountPage.transactionDetailsComponent().getPayOutID();
+//			tokenAccountPage.transactionDetailsComponent().getDepositTo();
+//			int filterData = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData1 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData1 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData2 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData2 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData3 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData3 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData4 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData4 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData5 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData5 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData6 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData6 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData7 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData7 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData8 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData8 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData9 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData9 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData10 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData10 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData11 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData11 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData12 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData12 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData13 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData13 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData14 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData14 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData15 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData15 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData16 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData16 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+//			int filterData17 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData17 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData18 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData18 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData19 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData19 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData20 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData20 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData21 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData21 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData22 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData22 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData23 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData22 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData24 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData24 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData25 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData25 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData26 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData26 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData27 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData27 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData28 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData28 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData29 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData29 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData30 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData30 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData31 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData31 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData32 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData32 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData33 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData33 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData34 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData34 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData35 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData35 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData36 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData36 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData37 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData37 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData38 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData38 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData39 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData39 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData40 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData40 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData41 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData41 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData42 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData42 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData43 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData43 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData44 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData44 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData45 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData45 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData46 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData46 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData47 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData47 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData48 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData48 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+			// int filterData49 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData49 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
+		}
 
 	}
 
@@ -541,8 +1428,817 @@ public class TokenAccountTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionListResetFilters(String strParams) {
-		testResetFilters(strParams);
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().scroolDownToElement();
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
+//			tokenAccountPage.transactionDetailsComponent().getTotalTransctions();
+//			tokenAccountPage.transactionDetailsComponent().getPayOutDate();
+//			tokenAccountPage.transactionDetailsComponent().getPayOutID();
+//			tokenAccountPage.transactionDetailsComponent().getDepositTo();
+//			int filterData = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
 
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData1 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData1 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData2 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData2 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData3 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData3 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData4 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData4 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData5 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData5 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData6 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData6 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData7 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData7 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData8 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData8 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData9 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData9 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData10 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData10 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData11 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData11 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData12 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData12 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData13 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData13 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData14 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData14 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData15 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData15 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData16 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData16 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+//			int filterData17 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData17 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData18 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData18 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData19 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData19 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData20 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData20 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData21 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData21 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData22 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData22 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData23 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData22 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData24 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData24 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData25 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData25 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData26 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData26 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData27 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData27 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData28 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData28 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData29 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData29 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData30 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData30 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData31 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData31 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData32 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData32 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData33 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData33 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData34 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData34 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData35 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData35 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData36 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData36 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData37 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData37 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData38 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData38 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData39 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData39 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData40 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData40 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData41 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData41 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData42 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData42 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData43 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData43 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData44 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData44 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData45 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData45 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData46 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData46 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData47 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData47 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData48 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData48 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			// tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			// int filterData49 = tokenAccountPage.filterComponent().noFilterData();
+//			if (filterData49 == 0) {
+//				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
+		}
 	}
 
 	@Test
@@ -842,9 +2538,9 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank(data.get("number"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
-//			String processingFee = tokenAccountPage.buyCoyniTokensPaymentMethodPopup().processingFeeComponent()
-//					.getTotalProcessingFee(data.get("amount"));
-//			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			String processingFee = tokenAccountPage.buyCoyniTokensPaymentMethodPopup().processingFeeComponent()
+					.getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
@@ -856,6 +2552,16 @@ public class TokenAccountTest {
 					.authyComponent().fillInput(data.get("code"));
 			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
 					.transactionInProgessPopup().clickDone();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.transactionInProgessPopup().switchToAdmin(data.get("url"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -863,7 +2569,52 @@ public class TokenAccountTest {
 		}
 
 	}
-	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenTransactionBankAccountWithSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickBuyTokens();
+			Thread.sleep(3000);
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickBank(data.get("number"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().fillAmount(data.get("amount"));
+			String processingFee = tokenAccountPage.buyCoyniTokensPaymentMethodPopup().processingFeeComponent()
+					.getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickConvert();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickOutSIde();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().clickNext();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.verifyOrderViewHeading();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.clickConfirm();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.authyComponent().clickSms();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.phoneVerificationComponent().fillpin(data.get("code"));
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.transactionInProgessPopup().clickDone();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.buyCoyniTokensPaymentMethodPopup().buyCoyniTokensPopup().orderPreviewPopup()
+					.transactionInProgessPopup().switchToAdmin(data.get("url"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
+		}
+
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminTransactionBuyBankAccount(String strParams) {
@@ -873,7 +2624,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1233,14 +2984,79 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().fillInput(data.get("code1"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().successFailureComponent();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.switchToAdmin(data.get("url"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
 		}
 	}
-	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDCogentAccountWithSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnCogentAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.clickCogent(data.get("cogentNumber"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().enterAmount(data.get("amount"));
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getWithdrawAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getProcessingFee();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.getTotal();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.authyComponent().clickSmsCode();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.phoneVerificationComponent().fillpin(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.authyComponent().successFailureComponent();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
+					.switchToAdmin(data.get("url"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminTransactionCogentAccount(String strParams) {
@@ -1250,7 +3066,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1453,28 +3269,91 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickDebitCard(data.get("number"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
-//			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
-//					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
-//			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
 			Thread.sleep(3000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			Thread.sleep(3000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyOrderPreviewForWithdraw();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.verifyHeading(data.get("authyVerificationHeading"));
-			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().authyComponent()
 					.fillInput(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickCopy();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.successFailurePopupCardComponent().clickDone();
-
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
+			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+					.verifyNotificationText(data.get("notificationText"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.switchToAdmin(data.get("url"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawToUSDViaInstantPay failed due to exception " + e);
 		}
 	}
-	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup()
+					.verifyLabelWithdrawToUSDHeading(data.get("withdrawToUSDHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnInstantPay();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickDebitCard(data.get("number"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().enterAmount(data.get("amount"));
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			Thread.sleep(3000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickTab();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().clickNext();
+			Thread.sleep(3000);
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.verifyOrderPreviewForWithdraw();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().authyComponent()
+					.clickSms();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+//					.verifyHeading(data.get("authyVerificationHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().phoneVerificationComponent()
+					.fillpin(data.get("code1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.successFailurePopupCardComponent().clickDone();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
+			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+					.verifyNotificationText(data.get("notificationText"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
+					.switchToAdmin(data.get("url"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawToUSDViaInstantPay failed due to exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminTransactionInstantPay(String strParams) {
@@ -1484,7 +3363,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1760,25 +3639,77 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
-			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			Thread.sleep(2000);
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
 					.verifyHeading1(data.get("authyHeading1"));
-			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
 					.fillInput(data.get("code"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
 					.verifySuccessHeading(data.get("successHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
-
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
-			Thread.sleep(3000);
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().switchToAdmin(data.get("url"));
+
+		} catch (
+
+		Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn gift card Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDGiftCardWithAmazonSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnGiftCard();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().verifyHeading(data.get("giftHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().enterSearckey(data.get("searchKey"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
+			Thread.sleep(2000);
+			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.processingFeeComponent().getTotalProcessingFee(data.get("amount"));
+			String totalAmount = new ProcessingFeeComponent().getTotalAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
+//			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent()
+//					.verifyHeading1(data.get("authyHeading1"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().authyComponent().clickSms();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().phoneVerificationComponent()
+					.fillpin(data.get("code"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
+					.verifySuccessHeading(data.get("successHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().switchToAdmin(data.get("url"));
 
 		} catch (
@@ -1798,7 +3729,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-		//	homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -1974,8 +3905,7 @@ public class TokenAccountTest {
 					"testWithdrawToUSDAddExternalBankAccount failed due to this exception " + e);
 		}
 	}
-	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminExternalBankTransaction(String strParams) {
@@ -1985,7 +3915,7 @@ public class TokenAccountTest {
 			String copiedData = homePage.sideBarComponent().transactionPage().copyDataToClipBoard();
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
-		//	homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
+			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
@@ -2077,6 +4007,63 @@ public class TokenAccountTest {
 					.verifyYourIdentityPopup().authyComponent().fillInput(data.get("code"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
 					.verifyYourIdentityPopup().transactionInProgessPopup().clickDone();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.verifyYourIdentityPopup().transactionInProgessPopup().switchToAdmin(data.get("url"));
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDExternalBankAccountSMS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			tokenAccountPage.withdrawCoyniToUSDPopup().verifyLabelWithdrawToUSDHeading(data.get("heading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().clickOnExternalBankAccount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyHeading(data.get("externalBankHeading"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup()
+					.verifyDescription(data.get("externalBankDescription"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickBank2RadioBtn();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().clickNextBtn();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickAmount(data.get("amount"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickTxtMsgField(data.get("message"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickNext();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.getAmount();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.clickConfirm();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.verifyYourIdentityPopup().authyComponent().clickSmsCode();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.verifyYourIdentityPopup().phoneVerificationComponent().fillpin(data.get("code"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.verifyYourIdentityPopup().transactionInProgessPopup().clickDone();
+			this.testAvailableBalance();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+			tokenAccountPage.filterComponent().clickOnRecord();
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+			tokenAccountPage.withdrawCoyniToUSDPopup().chooseYourBankAccountPopup().withdrawToBankAccountPopUp()
+					.verifyYourIdentityPopup().transactionInProgessPopup().switchToAdmin(data.get("url"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport(" test withdrawn External Bank Transaction  failed due to exception " + e);

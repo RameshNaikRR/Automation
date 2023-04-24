@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -15,9 +16,9 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class MyQRCodeComponent extends BrowserFunctions {
 
-	private By imgActualQRCode = By.cssSelector("");
+	private By imgActualQRCode = By.xpath("//div[contains(@class,'p-3.5 ShareQrCodeModal_corners__31Ytu')]");
 
-	private By lblWalletAddress = By.cssSelector("");
+	private By lblWalletAddress = By.xpath("//span[contains(@class,'text-sm font-semibold text-center text-cgy4')]");
 
 	private By btnCopy = By.cssSelector(".copy-image");
 
@@ -47,12 +48,20 @@ public class MyQRCodeComponent extends BrowserFunctions {
 
 	private By btnPasteEmail = By.xpath("(//button[text()='Paste'])[2]");
 
+	private By walletAddress = By.xpath("//span[contains(@class,'text-sm font-semibold text-center text-cgy4')]");
+
 	public void verifytxtCopyToClipBoard(String data) {
 		new CommonFunctions().verifyLabelText(txtCopyToClipBoard, "Copied to clipboard", data);
 	}
 
 	public void verifyQRCodeDisplayed() {
-		verifyElementDisplayed(imgActualQRCode, "QR Code Image");
+		if (verifyElementDisplayed(imgActualQRCode, "QR Code Image")) {
+			ExtentTestManager.setInfoMessageInReport(" QR code is displayed");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(" QR code is not displayed");
+
+		}
+
 	}
 
 	public void fillPhoneNumber(String phoneNumber) {
@@ -63,8 +72,9 @@ public class MyQRCodeComponent extends BrowserFunctions {
 		}
 	}
 
-	public String getWalletAddress() {
-		return getText(lblWalletAddress, "wallet address");
+	public WebElement getWalletAddress() {
+		WebElement text = getElement(lblWalletAddress, "wallet address");
+		return text;
 	}
 
 	// DOUBT
@@ -81,6 +91,10 @@ public class MyQRCodeComponent extends BrowserFunctions {
 //		moveToElement(btnCopy, "Copy");
 //		new CommonFunctions().verifyLabelText(copyMsg, "Copy", expMsg);
 		click(btnCopy, "Copy");
+	}
+
+	public void getWalletID() {
+
 	}
 
 	public void clickShareButton() {

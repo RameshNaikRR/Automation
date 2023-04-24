@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.MerchantSettingsSideBarMenuComponent;
 import coyni.merchant.components.SideMenuBarComponent;
 import coyni.uitilities.CommonFunctions;
@@ -18,11 +19,13 @@ import ilabs.api.reporting.ExtentTestManager;
 public class MerchantSettingsTest {
 	SideMenuBarComponent sideMenuBarComponent;
 	MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent;
+	MerchantActivityComponent merchantActivityComponent;
 
 	@BeforeTest
 	public void init() {
 		sideMenuBarComponent = new SideMenuBarComponent();
 		merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+		merchantActivityComponent = new MerchantActivityComponent();
 
 	}
 
@@ -329,13 +332,19 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickDBAinformationBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.verifyHeading(data.get("dbaInformationHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.clickEditImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.accountProfileImagePopup().clickUploadNewImage();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.accountProfileImagePopup().cropYourImagePopup()
+					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
 			String[] numbers = data.get("dbaInfoPhoneNumber").split(",");
 			for (String number : numbers) {
 				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 						.clickPhoneNumber(number);
 				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 						.verifySaveBtn();
-				Thread.sleep(2000);
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditPhoneNumberDBAInfo failed due to " + e);
@@ -502,14 +511,18 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickPreferencesBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.verifyHeading(data.get("preferencesHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
+//					.verifyhandSymbolHighlightedPreferences(data.get("cssProp"), data.get("value"), data.get("color"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
-					.clickTimeDropdown();
-			Thread.sleep(3000);
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
-					.clickEastern();
-			Thread.sleep(3000);
+					.selectDefaultTimeZone(data.get("defaultTimeZone"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().preferencesPage()
 					.clickSave();
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickDashboard();
+			merchantActivityComponent.dashBoardPage().getAccountBalance();
+			merchantActivityComponent.dashBoardPage().getBatchPayOuts();
+			merchantActivityComponent.dashBoardPage().getNextPayOut();
+			merchantActivityComponent.dashBoardPage().getLastPayOut();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPreferences failed due to " + e);
 		}
@@ -629,17 +642,202 @@ public class MerchantSettingsTest {
 
 	}
 
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAPIKeysRevealSecretInvalidAuthy(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideMenuBarComponent.clickMerchantSettings();
+//			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.getPublicKey();
+//			Thread.sleep(2000);
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.clickGenerateNewSecretKey();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ClickGenerate();
+////			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+////					.clickRevealSecretKey();
+//			if (!data.get("code").isEmpty()) {
+//				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//						.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
+//			}
+//			if (!data.get("errMessage").isEmpty()) {
+//				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//						.authyComponent().verifyMessage(data.get("errMessage"));
+//			}
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+//		}
+//
+//	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAPIKeysInactiveRecords(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideMenuBarComponent.clickMerchantSettings();
+//			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.verifyHeading(data.get("apiKeysHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.verifyTableItemsCount(data.get("query"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+//		}
+//
+//	}
+//	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAPIKeysEcommerce(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickApiKeys();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.clickActiveKeys();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.clickGenerateNewSecretKey();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.generateNewSecretKeyPopup().clickGenerate();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getPublicKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickReavelSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.authyComponent().fillInput(data.get("code"));
+			Thread.sleep(2000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnAPIKeyss();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getListOfAPIKeyLogs();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAPIKeysEcommerceInActiveAndExpiredKeysData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickApiKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickInActiveKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getListOfInActiveAPIKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickExpiredKeys();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAPIKeysPOS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickApiKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnPOSIntegrationAPIKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnConfigure();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnViewAPIKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().clickRevealSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().authyComponent().fillInput(data.get("code1"));
+			Thread.sleep(2000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().getSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().clickGenerateNewSecretKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().ClickGenerate();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAPIKeysInactiveAndExpiredKeysPOS(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickApiKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnPOSIntegrationAPIKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnConfigure();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnViewAPIKey();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().clickInActiveKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.apiKeysPopup().clickExpiredKeys();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
+		}
+
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAPIKeysRevealSecretInvalidAuthy(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.verifyHeading(data.get("apiKeysHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickApiKeys();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
-			Thread.sleep(2000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickGenerateNewSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -666,6 +864,7 @@ public class MerchantSettingsTest {
 	public void testAPIKeysInactiveRecords(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
@@ -678,6 +877,207 @@ public class MerchantSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddIpAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().verifyNoIp(data.get("noIPExist"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickIpAddress();
+			// sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+			// .ipAddressPage().addIPAddressPopup().verifyAccountName();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickSubmit();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().addIPAddressPopup().verifySuccessHeading(data.get("successHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAdditionalIpAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnIpAddress();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().verifyNoIp(data.get("noIPExist"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickAddNewIpAddress();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().addIPAddressPopup().verifyAccountName();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickOnAdditionalIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAdditionalIpAddress  Failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddIpAddressInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnIpAddress();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().verifyNoIp(data.get("noIPExist"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().clickIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickAddNewIpAddress();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().addIPAddressPopup().verifyAccountName();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickOutSide();
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddIpAddressInvalidData  Failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteIpAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickDelete();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().verifyRemoveHeading(data.get("removeHeading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().verifydesc(data.get("ipDescription"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickYes();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDeleteIpAddress  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWebhookView(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnWebHooks();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyEndPointURL();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyEndPointDescription();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyEndPointStatus();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyLastUpdated();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test webhook  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditWebhook(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnWebHooks();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().clickOnEndPointURL();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().enterEndPointURL(data.get("endpointURL"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().clickEndPointDescription();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().enterEndpointDesc(data.get("endpointDesc"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().clickSave();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().saveChangePopUp().clickYes();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().toastComponent().verifyToast(data.get("title"), data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testEditWebhook  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testCreateWebhook(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnWebHooks();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().clickOnEndPointURL();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().enterEndPointURL(data.get("endpointURL"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().enterEndpointDesc(data.get("description"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.webhookComponent().clickCreate();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testCreateWebhook  Failed due to Exception " + e);
+		}
 	}
 
 	public void testAddExternalBankAccount(String strParams) {
@@ -714,21 +1114,25 @@ public class MerchantSettingsTest {
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 //					.verifyNewWindowHeading();
-			Thread.sleep(4000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickMXBank();
+			// merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().addExternalBankAccountPopup().close();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.clickSearchInstitutions();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.addExternalBankAccountPopup().enterBankName(data.get("bankName"));
+
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
+//			Thread.sleep(3000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterUserName(data.get("expUserName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterPassword(data.get("expPassword"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.enterBankName(data.get("expBankName"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.enterUserName(data.get("expUserName"));
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.enterPassword(data.get("expPassword"));
+					.clickOnBankAccountName(data.get("accountType"));
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
-			Thread.sleep(5000);
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnChecking();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
-			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
-					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
 //					.successFailurePopupCardComponent().navigationComponent().clickClose();
 

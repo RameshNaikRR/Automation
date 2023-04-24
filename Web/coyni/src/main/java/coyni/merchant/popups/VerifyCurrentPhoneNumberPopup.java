@@ -3,6 +3,7 @@ package coyni.merchant.popups;
 import org.openqa.selenium.By;
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -44,6 +45,10 @@ public class VerifyCurrentPhoneNumberPopup extends BrowserFunctions {
 		for (int i = 0; i <= 5; i++) {
 			clickResend();
 		}
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 	public void ResendErrorMessage(String expResendErrorMsg) {

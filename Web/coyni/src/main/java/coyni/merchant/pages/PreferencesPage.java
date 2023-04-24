@@ -6,16 +6,28 @@ import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class PreferencesPage extends BrowserFunctions {
-	private By lblHeading = By.xpath("(//span[.='Preferences'])[2]");
+	private By lblHeading = By.xpath("//span[.='Preferences']");
 	private By drpDwnTime = By.xpath("//div[text()='Time Zone']/parent::div");
 	private By btnSave = By.xpath("//button[text()='Save']");
 	private By localCurrency = By.xpath("//div[text()='Local Currency']/following-sibling::*[1]");
 	private By lblDescription = By.xpath("//span[contains(.,'Your merchant batch')]");
 	private By drpDwnDefaultAccount = By
 			.xpath("//div[text()='Default Account']/../div[contains(@class,'FormField_selected_option')]");
+	private By drpDwnTimeZones = By
+			.xpath("//div[text()='Time Zone']/../div[contains(@class,'FormField_selected_option')]");
 
 	private By getTimeZones(String timeZone) {
 		return By.xpath(String.format("//span[normalize-space()='%s']", timeZone));
+	}
+
+	private By getDashBoardItems(String eleName) {
+		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
+	}
+
+	public void verifyhandSymbolHighlightedPreferences(String cssProp, String expValue, String expColor) {
+		click(getDashBoardItems("Preferences"), "Preferences");
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Dba information", cssProp, expValue,
+				expColor);
 	}
 
 	public void clickEastern() {
@@ -25,6 +37,11 @@ public class PreferencesPage extends BrowserFunctions {
 	public void selectDefaultAccount(String defaultAccount) {
 		click(drpDwnDefaultAccount, "Default Account DropDown");
 		new CommonFunctions().selectCustomDropDown(defaultAccount, "Default Account");
+	}
+
+	public void selectDefaultTimeZone(String defaultTimeZone) {
+		click(drpDwnTimeZones, "Default TimeZone DropDown");
+		new CommonFunctions().selectCustomDropDown(defaultTimeZone, "Default TimeZone");
 	}
 
 	public void clickPacific() {

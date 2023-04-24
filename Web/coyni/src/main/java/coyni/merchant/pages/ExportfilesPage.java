@@ -43,13 +43,21 @@ public class ExportfilesPage extends BrowserFunctions {
 		}
 
 	}
-	
+
+//	public void getTotalExportsCount(String query) throws SQLException {
+//		int count = DBConnection.getDbCon().getCount(query);
+//		int expCount = Integer.parseInt(getUiCount());
+//		if (count == expCount) {
+//			ExtentTestManager.setPassMessageInReport(count + " matches with number of entries in DB " + expCount);
+//		} else {
+//			ExtentTestManager.setFailMessageInReport(count + " not matches with number of entries in DB ");
+//		}
+//	}
+
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}
-	
-	
-	
+
 	public void handSymbolHighlightedExportFiles(String cssProp, String expValue, String expColor) {
 		click(getDashBoardItems("Export Files"), "Export Files");
 		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "SideBarItems", cssProp, expValue,

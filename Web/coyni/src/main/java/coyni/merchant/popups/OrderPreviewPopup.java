@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -25,9 +26,18 @@ public class OrderPreviewPopup extends BrowserFunctions {
 	private By lblBankName = By.xpath("//span[contains(text(),'Bank')]");
 	private By btnBack = By.xpath("//button[@class='self-start']");
 	private By btnClose = By.xpath("//button[@class='self-end']");
+	private By lnkCopy = By.cssSelector(".icon-copy");
 
 	public void clickConfirm() {
 		click(btnConfirm, "Click Confirm");
+	}
+
+	public void clickCopy() {
+		click(lnkCopy, "Copy");
+	}
+
+	public void switchToAdmin(String url) throws InterruptedException {
+		new CommonFunctions().switchtoUrl(url);
 	}
 
 	public void verifyHeading(String expHeading) {
@@ -59,6 +69,7 @@ public class OrderPreviewPopup extends BrowserFunctions {
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 		return new SuccessFailurePopupCardComponent();
 	}
+
 	public void orderPreviewBuyTokenWithBankView() {
 		new CommonFunctions().elementView(lblEnteredMoney, "User Enter Amount");
 		new CommonFunctions().elementView(lblPurchaseAmount, "Purchase Amount");
@@ -67,8 +78,13 @@ public class OrderPreviewPopup extends BrowserFunctions {
 		new CommonFunctions().elementView(lblBankName, "Bank Name");
 		new CommonFunctions().elementView(btnBack, "Back ");
 		new CommonFunctions().elementView(btnClose, "Close");
-		
+
 	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
+	}
+
 	public void verifyOrderViewHeading() {
 		new CommonFunctions().elementView(lblOrderPreviewHeading, "Order Preview");
 	}

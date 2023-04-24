@@ -2,9 +2,9 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
-
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -25,12 +25,19 @@ public class VerifyCurrentEmailAddressPopup extends BrowserFunctions {
 	public void verifyCurrentEmail(String exestingEmail) {
 		new CommonFunctions().verifyLabelText(lblCurrentEmail, "Current Email", exestingEmail);
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
+	}
+
 	public VerifyNewEmailAddressPopUp verifyNewEmailAddressPopUp() {
 		return new VerifyNewEmailAddressPopUp();
 	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}

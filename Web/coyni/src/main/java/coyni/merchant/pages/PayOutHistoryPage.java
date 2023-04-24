@@ -1,6 +1,9 @@
 package coyni.merchant.pages;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -12,7 +15,7 @@ public class PayOutHistoryPage extends BrowserFunctions {
 
 	private By txtSearch = By.xpath("//input[@placeholder='Search By Payout Date or Payout ID']");
 
-	private By payOut = By.cssSelector("tbody>tr:nth-of-type(3)>td:nth-of-type(1)");
+	private By payOut = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(1)");
 
 	private By lblRecord = By.xpath("//div[text()='Business Token Account']");
 
@@ -34,8 +37,13 @@ public class PayOutHistoryPage extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblPayOutHistory, "Pay Out History page heading", expHeading);
 	}
 
-	public void fillSearch(String search) {
-		enterText(txtSearch, search, "Search");
+	public void fillSearch(String search) throws Exception {
+		enterText(txtSearch, search + Keys.ENTER, "Search");
+
+	}
+
+	public void clickTab() throws AWTException {
+		new CommonFunctions().clickOutSideElement();
 	}
 
 	public void clickRecord() {
@@ -43,16 +51,15 @@ public class PayOutHistoryPage extends BrowserFunctions {
 	}
 
 	public void clickPayOut() {
-		if (getElement(payOut, "Enabled").isDisplayed()) {
-			scrollToElement(payOut, "Export");
-			click(payOut, "Export");
+		if (getElement(payOut, "payout").isEnabled()) {
+			// scrollToElement(payOut, "Payout");
+			click(payOut, "PayOut");
 		} else {
 			ExtentTestManager.setPassMessageInReport("Pay button is Disabled");
 		}
 
 	}
-	
-	
+
 	public void verifyNoPayOutFound() {
 		new CommonFunctions().elementView(lblNoTrasactons, "No Trasactions");
 //		return getText(lblNoTrasactons, "No Trasactions");

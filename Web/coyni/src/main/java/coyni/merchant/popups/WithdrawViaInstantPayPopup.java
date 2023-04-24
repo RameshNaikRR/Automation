@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.AuthyComponent;
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -212,6 +213,10 @@ public class WithdrawViaInstantPayPopup extends BrowserFunctions {
 	public void clickDebitCard(String number) {
 		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
 		ExtentTestManager.setInfoMessageInReport("button clicked for card " + (number));
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 	public OrderPreviewPopup orderPreviewPopup() {

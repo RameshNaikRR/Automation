@@ -10,11 +10,15 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
+import coyni.customer.pages.CustomerProfilePage;
 import coyni.merchant.components.MerchantActivityComponent;
 import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.SideMenuBarComponent;
+import coyni.merchant.components.TopBarComponent;
 import coyni.merchant.pages.LoginPage;
+import coyni.merchant.pages.MerchantProfilePage;
 import coyni.merchant.pages.SignupPage;
+import coyni.merchant.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.WebFramework.Runner;
@@ -26,6 +30,10 @@ public class SignupTest {
 	SideMenuBarComponent sideMenuBarComponent;
 	PhoneVerificationComponent phoneVerificationComponent;
 	MerchantActivityComponent merchantActivityComponent;
+	TokenAccountPage tokenAccountPage;
+	TopBarComponent topBarComponent;
+	CustomerProfilePage customerProfilePage;
+	MerchantProfilePage merchantProfilePage;
 
 	@BeforeMethod
 	public void init() {
@@ -33,6 +41,10 @@ public class SignupTest {
 		signupPage = new SignupPage();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		phoneVerificationComponent = new PhoneVerificationComponent();
+		tokenAccountPage = new TokenAccountPage();
+		customerProfilePage = new CustomerProfilePage();
+		topBarComponent = new TopBarComponent();
+		merchantProfilePage = new MerchantProfilePage();
 		merchantActivityComponent = new MerchantActivityComponent();
 	}
 
@@ -42,8 +54,8 @@ public class SignupTest {
 		try {
 			WebDriver driver = DriverFactory.getDriver();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		//	loginPage.clickSignUp();
-		//	signupPage.clickMerchantAccount();
+			// loginPage.clickSignUp();
+			// signupPage.clickMerchantAccount();
 			signupPage.fillFirstName(data.get("firstName"));
 			signupPage.fillLastName(data.get("lastName"));
 			signupPage.fillPhoneNumber(data.get("phoneNumber"));
@@ -77,9 +89,9 @@ public class SignupTest {
 		try {
 			WebDriver driver = DriverFactory.getDriver();
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		//	loginPage.clickSignUp();
-		//	signupPage.clickMerchantAccount();
-		//	new CommonFunctions().switchTodWindow();
+			// loginPage.clickSignUp();
+			// signupPage.clickMerchantAccount();
+			// new CommonFunctions().switchTodWindow();
 			signupPage.fillFirstName(data.get("firstName"));
 			signupPage.fillLastName(data.get("lastName"));
 			signupPage.fillPhoneNumber(data.get("phoneNumber"));
@@ -108,13 +120,12 @@ public class SignupTest {
 			signupPage.phoneVerificationComponent().fillpin(data.get("code"));
 			signupPage.verifyTwoStepSucess();
 			signupPage.clickDone();
-			//new CommonFunctions().closeCurrentWindow();
+			// new CommonFunctions().closeCurrentWindow();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testcreateAccount Failed due to Exception " + e);
 		}
 	}
 
-	
 	@Test
 	@Parameters({ "strParams" })
 	public void testcreateAccountWithNavigationOptions(String strParams) {
@@ -399,7 +410,6 @@ public class SignupTest {
 			sideMenuBarComponent.clickPersonalAccount();
 			signupPage.createPersonalAccountPage().verifyHeading(data.get("heading"));
 			signupPage.createPersonalAccountPage().clickCreatePersonalAccount();
-			Thread.sleep(5000);
 
 		}
 
@@ -415,13 +425,48 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickOnPersonalAccount();
-			sideMenuBarComponent.verifyColor();
+			// sideMenuBarComponent.verifyColor();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
+			tokenAccountPage.userNameDropDownComponent().clickDropDown();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyAccountIdView();
+			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
+			Thread.sleep(1000);
 			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantAccount();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			signupPage.tokenAccountPage().clickTokenAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.userDetailsComponent().verifyAccountIdView();
+			topBarComponent.userDetailsComponent().verifyAccountStatus();
+
+		}
+
+		catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUpIndividualViaBusiness Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testSignUpBusinessViaCustomer(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnPersonalAccount();
+			sideMenuBarComponent.clickOnPersonalAccountDropDown();
+			// topBarComponent.clickUserNameDrpDwn();
+			tokenAccountPage.userNameDropDownComponent().clickDropDown();
+			tokenAccountPage.userNameDropDownComponent().clickUserDetails();
+			customerProfilePage.userDetailsComponent().verifyAccountIdView();
+			customerProfilePage.userDetailsComponent().verifyAccountStatusView();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
+			signupPage.sideMenuBarComponent().clickQRCode();
+			// signupPage.sideMenuBarComponent().myQRCodeComponent().verifyQRCodeDisplayed();
+			signupPage.sideMenuBarComponent().myQRCodeComponent().getWalletAddress();
 
 		}
 
@@ -437,8 +482,11 @@ public class SignupTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickSharedDropDown();
+			sideMenuBarComponent.clickOnDBARecord();
+			signupPage.registrationStartPage().verifyMerchantApplicationView();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
-			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			signupPage.tokenAccountPage().verifyAmount();
 
 		}
 
@@ -456,8 +504,11 @@ public class SignupTest {
 			sideMenuBarComponent.clickOnPersonalAccount();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
 			sideMenuBarComponent.clickSharedAccount();
+			sideMenuBarComponent.clickOnDBARecord();
+			signupPage.registrationStartPage().verifyMerchantApplicationView();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
-			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			signupPage.tokenAccountPage().verifyAmount();
 
 		}
 
@@ -472,15 +523,32 @@ public class SignupTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickSharedAccount();
+			sideMenuBarComponent.clickOnDBARecord();
+			signupPage.registrationStartPage().verifyMerchantApplicationView();
+			sideMenuBarComponent.clickOnNewDBAAccount();
 			sideMenuBarComponent.clickOnPersonalAccount();
 			sideMenuBarComponent.clickOnPersonalAccountDropDown();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			customerProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount"));
+			customerProfilePage.preferencesComponent().clickSave();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			topBarComponent.userDetailsComponent().verifyAccountIdView();
+			topBarComponent.userDetailsComponent().verifyAccountStatus();
+			// tokenAccountPage.verifyAmount();
 			sideMenuBarComponent.clickMerchantdrpdwn();
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
 			sideMenuBarComponent.clickMerchantAccount();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			signupPage.tokenAccountPage().clickTokenAccount();
-			sideMenuBarComponent.clickUserdrpdwn();
-			sideMenuBarComponent.clickSharedDropDown();
-			sideMenuBarComponent.clickSharedAccount();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount1"));
+//			sideMenuBarComponent.clickUserdrpdwn();
+//			sideMenuBarComponent.clickSharedDropDown();
+//			sideMenuBarComponent.clickSharedAccount();
 			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 
 		}
@@ -499,11 +567,11 @@ public class SignupTest {
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickAddDBA();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
-			sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickBack();
-			sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
+			// sideMenuBarComponent.addDBABusinessPopup().navigationComponent().clickBack();
+			// sideMenuBarComponent.addDBABusinessPopup().clickNewCompany();
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addDBAUnderNewCompanyPopup().clickAddDBA();
-			Thread.sleep(4000);
+			signupPage.registrationStartPage().getStatus();
 		}
 
 		catch (Exception e) {
@@ -520,16 +588,15 @@ public class SignupTest {
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickAddDBA();
 			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
-			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().navigationComponent().clickBack();
-			sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
-			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().verifyHeading(data.get("heading"));
+			// sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().navigationComponent().clickBack();
+			// sideMenuBarComponent.addDBABusinessPopup().clickNewMerchantDBA();
+			// sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().selectCompany(data.get("dba"));
-			Thread.sleep(4000);
+			sideMenuBarComponent.addDBABusinessPopup().addNewDBAPopup().clickDBA();
 		}
 
 		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
-
 }

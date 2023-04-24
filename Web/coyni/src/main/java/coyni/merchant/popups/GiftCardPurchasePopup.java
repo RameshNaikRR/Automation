@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import coyni.merchant.components.AuthyComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.merchant.components.SuccessFailurePopupCardComponent;
+import coyni.reusable.components.ProcessingFeeComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -40,12 +42,12 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 		click(lnkCopy, "Copy");
 	}
 
-	public void clickDone() {
-		click(btnDone, "Done");
-	}
-
 	public void switchToAdmin(String url) throws InterruptedException {
 		new CommonFunctions().switchtoUrl(url);
+	}
+
+	public void clickDone() {
+		click(btnDone, "Done");
 	}
 
 	public void enterSearckey(String searchKey) throws InterruptedException {
@@ -158,8 +160,16 @@ public class GiftCardPurchasePopup extends BrowserFunctions {
 		return new AuthyComponent();
 	}
 
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
+	}
+
 	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
 		return new SuccessFailurePopupCardComponent();
+	}
+
+	public ProcessingFeeComponent processingFeeComponent() {
+		return new ProcessingFeeComponent();
 	}
 
 }

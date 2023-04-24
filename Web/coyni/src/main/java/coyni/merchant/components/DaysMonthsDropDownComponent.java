@@ -172,4 +172,8 @@ public class DaysMonthsDropDownComponent extends BrowserFunctions {
 		click(btnCustomDateRange, "Click Custom Date Range");
 		new CommonFunctions().elementView(lblWithdraw, "Tokens Withdraw");
 	}
+
+	public FilterCalenderComponent filterCalenderComponent() {
+		return new FilterCalenderComponent();
+	}
 }

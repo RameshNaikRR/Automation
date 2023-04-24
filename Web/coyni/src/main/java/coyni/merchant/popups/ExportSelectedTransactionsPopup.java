@@ -2,6 +2,7 @@ package coyni.merchant.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.FilterCalenderComponent;
 import coyni.merchant.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -13,7 +14,8 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	private By radBtnYesterday = By.xpath("//span[text()='Yesterday']");
 	private By radBtn7Days = By.xpath("//span[text()='Last 7 Days']");
 	private By radBtnMonthToDate = By.xpath("//span[contains(text(),'Month to Date')]");
-	private By radBtnLastMonth = By.xpath("//span[text()='Yesterday']");
+	private By radBtnLastMonth = By.xpath("//span[text()='Last Month']");
+	private By radBtnCustomDateRange = By.xpath("//span[text()='Custom Date Range']");
 	private By btnExport = By.xpath("(//button[text()='Export'])[2]");
 	private By btnReserveExport = By.xpath("(//button[text()='Export'])[2]");
 	private By drpdwnDefault = By.xpath("(//div[text()='Default (8)'])[1]");
@@ -74,6 +76,10 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 
 	public void clickOnLastMonth() {
 		click(radBtnLastMonth, "Click LastMonth");
+	}
+
+	public void clickCustomDateRange() {
+		click(radBtnCustomDateRange, "Click CustomDateRange");
 	}
 
 	public void clickOnExport() {
@@ -151,6 +157,10 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+	public FilterCalenderComponent filterCalenderComponent() {
+		return new FilterCalenderComponent();
 	}
 
 }

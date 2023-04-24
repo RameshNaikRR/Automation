@@ -73,8 +73,7 @@ public class MyQRCodeComponent extends BrowserFunctions {
 
 	public void verifyhandSymbolHighlightedQRCode(String cssProp, String expValue, String expColor) {
 		click(getDashBoardItems("QR Code"), "QR Code");
-		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Team(Shared)", cssProp, expValue,
-				expColor);
+		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "QR Code", cssProp, expValue, expColor);
 	}
 
 	public void clickGeneratePrintableQRCode() {
@@ -144,9 +143,19 @@ public class MyQRCodeComponent extends BrowserFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 	}
 
+	public void clickOnPaste() {
+		if (getElement(btnPaste, "Paste").isEnabled()) {
+			click(btnPaste, "Paste");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Share Via Email is in disabled Mode");
+
+		}
+	}
+
 	public void pasteOption(String phoneNumber) throws InterruptedException {
 		copyDataToClipboard(phoneNumber);
-		click(btnPaste, "Paste");
+		clickOnPaste();
+		// click(btnPaste, "Paste");
 		clearText(btnPaste, "Phone Number");
 		Uninterruptibles.sleepUninterruptibly(10000, TimeUnit.MILLISECONDS);
 	}

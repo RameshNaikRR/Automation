@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.apibusiness.components.AuthyComponent;
 import coyni.apibusiness.components.NavigationComponent;
+import coyni.merchant.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -25,7 +26,7 @@ public class VerifyYourIdentityPopup extends BrowserFunctions {
 
 	public void verifyMsg() {
 		String msg = getText(lblMsg, "");
-		ExtentTestManager.setInfoMessageInReport(msg+ " is displayed");
+		ExtentTestManager.setInfoMessageInReport(msg + " is displayed");
 	}
 
 	public void verifyLink() {
@@ -43,8 +44,12 @@ public class VerifyYourIdentityPopup extends BrowserFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-	
+
 	public TransactionInProgessPopup transactionInProgessPopup() {
 		return new TransactionInProgessPopup();
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 }
