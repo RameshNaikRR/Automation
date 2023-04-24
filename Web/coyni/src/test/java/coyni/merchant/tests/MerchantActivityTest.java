@@ -341,7 +341,325 @@ public class MerchantActivityTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionListFilters(String strParams) {
-		testFilters(strParams);
+		// testFilters(strParams);
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickTransactions();
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+			// int filterData1 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData1 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData2 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData2 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData3 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData3 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData4 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData4 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+			// int filterData5 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData5 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData6 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData6 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData7 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData7 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData8 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData8 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData9 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData9 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData10 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData10 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData11 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData11 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData12 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData12 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData13 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData13 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+//			int filterData14 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData14 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickApplyFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
+		}
 
 	}
 
@@ -353,9 +671,9 @@ public class MerchantActivityTest {
 				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
 				merchantTransactionsPage.filterComponent().clickFilters();
-//			tokenAccountPage.filterComponent().clickStartDate();
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-//			tokenAccountPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+//			merchantTransactionsPage.filterComponent().clickStartDate();
+//			merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+//			merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
 				merchantTransactionsPage.filterComponent().clickClearAllTransactionType();
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
@@ -381,9 +699,328 @@ public class MerchantActivityTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionListResetFilters(String strParams) {
-		testResetFilters(strParams);
+		// testResetFilters(strParams);
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantActivityComponent.clickTransactions();
+			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+//			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+			// int filterData1 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData1 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+	//		merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData2 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData2 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+//			merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData3 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData3 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData4 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData4 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+			// int filterData5 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData5 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query2"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData6 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData6 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData7 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData7 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData8 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData8 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query3"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData9 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData9 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData10 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData10 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+			//merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData11 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData11 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query4"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData12 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData12 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData13 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData13 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			int filterData14 = merchantTransactionsPage.filterComponent().noFilterData();
+//			if (filterData14 == 0) {
+//				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query5"));
+//
+//			} else {
+//				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+//			}
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+		//	merchantTransactionsPage.filterComponent().clickFilters();
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
+		}
 
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })
