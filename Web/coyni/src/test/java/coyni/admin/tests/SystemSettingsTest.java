@@ -844,5 +844,29 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewMerchantfeeStructurePage Failed due to Exception " + e);
 		}
 	}
+	
+	
+	//Vendor
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddVendor(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickVendor();
+			homePage.sideBarComponent().addVendorComponent().clickAddVendor();
+			homePage.sideBarComponent().addVendorComponent().verifyHeading(data.get("heading"));
+			homePage.sideBarComponent().addVendorComponent().fillVendorName(data.get("vendorName"));
+			homePage.sideBarComponent().addVendorComponent().fillPrimaryEmail(data.get("primaryEmail"));
+			homePage.sideBarComponent().addVendorComponent().fillprimaryPhoneNumber(data.get("primaryPhone"));
+			homePage.sideBarComponent().addVendorComponent().fillTechnicalEmail(data.get("TechnicalEmail"));
+			homePage.sideBarComponent().addVendorComponent().fillTechnicalPhoneNumber(data.get("TechnicalPhone"));
+			homePage.sideBarComponent().addVendorComponent().clickAddVendor();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddVendor Failed due to Exception " + e);
+		}
+	}
+	
+	
 
 }

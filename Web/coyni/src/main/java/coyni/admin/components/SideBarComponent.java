@@ -25,13 +25,11 @@ import ilabs.WebFramework.BrowserFunctions;
 public class SideBarComponent extends BrowserFunctions {
 
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
-	
-	
+
 	// (//label[contains(@class,'text-sm')])
 	// (//span[contains(@class,'text-sm')])
 
 	CommonFunctions commonfunctions = new CommonFunctions();
-
 
 	public void verifyCursorAction() {
 		new CommonFunctions().verifyCursorAction(handMark, "Coyni  Portal");
@@ -252,6 +250,12 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 	}
 
+	public void clickVendor() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Vendors"), "Vendors");
+		click(getSubMenuItems("Vendors"), "Vendors");
+		Thread.sleep(5000);
+	}
+
 	public void clickAccountLimits() throws InterruptedException {
 		commonfunctions.verifyCursorAction(getSubMenuItems("Account Limits"), "Account Limits");
 		click(getSubMenuItems("Account Limits"), "Account Limits");
@@ -314,10 +318,11 @@ public class SideBarComponent extends BrowserFunctions {
 	public ProfileComponent profileComponent() {
 		return new ProfileComponent();
 	}
-	public CoyniEmployeeComponent coyniEmployeeComponent () {
+
+	public CoyniEmployeeComponent coyniEmployeeComponent() {
 		return new CoyniEmployeeComponent();
 	}
-	
+
 	public FilterComponent filterComponent() {
 		return new FilterComponent();
 	}
@@ -376,7 +381,7 @@ public class SideBarComponent extends BrowserFunctions {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
-	
+
 	public void switchtoAdminPage() {
 		switchToMainPage();
 	}
@@ -388,11 +393,15 @@ public class SideBarComponent extends BrowserFunctions {
 	public AgreementsComponent agreementsComponent() {
 		return new AgreementsComponent();
 	}
-	
+
 	public DisputesDetailsComponent disputesDetailsComponent() {
 		return new DisputesDetailsComponent();
 	}
-	
+
+	public AddVendorComponent addVendorComponent() {
+		return new AddVendorComponent();
+	}
+
 	public void doLogin(String password, String securityKey) throws InterruptedException {
 
 		new LoginPage().fillEmail(new AddNewEmployeeComponent().getYOPMail());
@@ -403,16 +412,16 @@ public class SideBarComponent extends BrowserFunctions {
 
 		if (securityKey.equalsIgnoreCase("123456")) {
 
-		new LoginPage().authyComponent().fillInput(securityKey);
+			new LoginPage().authyComponent().fillInput(securityKey);
 
 		} else {
 
-		new LoginPage().authyComponent().fillAuthyInput(securityKey);
+			new LoginPage().authyComponent().fillAuthyInput(securityKey);
 
 		}
 
 		Thread.sleep(5000);
 
-		}
+	}
 
 }
