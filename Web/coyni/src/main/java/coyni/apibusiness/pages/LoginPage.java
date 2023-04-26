@@ -1,5 +1,6 @@
 package coyni.apibusiness.pages;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,7 +21,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class LoginPage extends BrowserFunctions {
 	
 	WebDriver driver = DriverFactory.getDriver();
-	WebDriverWait wait = new WebDriverWait(driver, 120);
+	WebDriverWait wait =new WebDriverWait(driver, Duration.ofSeconds(120));
 	
 	private By lblApplicationHeading = By.cssSelector(".title");
 	private By lblApplicationDescription = By.cssSelector(".disclaimer");
