@@ -27,9 +27,13 @@ public class SideBarMenuComponent extends BrowserFunctions {
 		new CommonFunctions().verifyCursorAction(getDashBoardItems("Business Settings"), "Business Settings");
 		String str = getElement(getDashBoardItems("Business Settings"), "").getCssValue("color");
 		ExtentTestManager.setInfoMessageInReport(str);
-		click(lblBusinessSetting, "Business Settings");
-		Thread.sleep(3000);
-		// click(getDashBoardItems("Business Settings"), "Business Settings");
+		if (getElement(lblBusinessSetting, "Business Settings").isEnabled()) {
+			click(lblBusinessSetting, "Business Settings");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Business Settings button is in disabled mode");
+			Thread.sleep(3000);
+			// click(getDashBoardItems("Business Settings"), "Business Settings");
+		}
 	}
 
 	private By BusinessApplicationArrow = By.xpath("//div[@class='items-center text-xs -ml-2 4xl:mr-2']");

@@ -48,7 +48,7 @@ public class BusinessApplicationTest {
 	@Parameters({ "strParams" })
 	public void testBusinessApplicationSideBarMenu(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			sideBarMenuComponent.clickTokenwallet();
 			sideBarMenuComponent.clickEcosystemActivity();
 			sideBarMenuComponent.clickBusinessSettings();
@@ -489,6 +489,10 @@ public class BusinessApplicationTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
 			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.clickTwoStep();
+			registrationStartPage.authyComponent().fillInput(data.get("code"));
+			registrationStartPage.authyComponent().clickDoneBtn();
+			Thread.sleep(4000);
 			registrationStartPage.getStatus();
 			registrationStartPage.clickStartApplication();
 			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
@@ -979,6 +983,53 @@ public class BusinessApplicationTest {
 			registrationStartPage.applicationSummaryPage().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testStatusApproved(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			{
+
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Application Submission  Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationAdditionalInfo(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.actionRequired().verifyHeading();
+			registrationStartPage.actionRequired().verifyDescription();
+			registrationStartPage.actionRequired().verifyMessageHeading();
+			registrationStartPage.actionRequired().verifyMessage();
+			registrationStartPage.actionRequired().uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			ExtentTestManager.setPassMessageInReport("Uploaded File");
+			Thread.sleep(4000);
+			registrationStartPage.actionRequired().clickSubmit();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationAdditionalInfo failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testApplicationCancelled(String strParams) {
+		try {
+			registrationStartPage.applicationDecline().verifyHeading();
+			registrationStartPage.applicationDecline().verifyDescription();
+			registrationStartPage.applicationDecline().verifyMessageHeading();
+			registrationStartPage.applicationDecline().verifyMessage();
+			registrationStartPage.applicationDecline().verifyDeclineMessage();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testApplicationAdditionalInfo failed due to Exception " + e);
 		}
 	}
 

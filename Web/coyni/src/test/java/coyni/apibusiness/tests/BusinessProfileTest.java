@@ -12,6 +12,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.apibusiness.components.BusinessSettingsSideBarMenuComponent;
 import coyni.apibusiness.components.PhoneEmailVerificationComponent;
+import coyni.apibusiness.components.SideBarMenuComponent;
 import coyni.apibusiness.components.TopBarComponent;
 import coyni.apibusiness.components.TransactionListComponent;
 import coyni.apibusiness.components.UserDetailsComponent;
@@ -25,6 +26,7 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class BusinessProfileTest {
 	PhoneEmailVerificationComponent phoneEmailVerificationComponent;
+	SideBarMenuComponent sideBarMenuComponent;
 	TokenWalletPage tokenWalletPage;
 	TopBarComponent topBarComponent;
 	TransactionListComponent transactionListComponent;
@@ -45,6 +47,7 @@ public class BusinessProfileTest {
 		apiBusinessProfilePage = new BusinessProfilePage();
 		homePage = new HomePage();
 		businessSettingsMenuComponent = new BusinessSettingsSideBarMenuComponent();
+		sideBarMenuComponent = new SideBarMenuComponent();
 	}
 
 	@Test

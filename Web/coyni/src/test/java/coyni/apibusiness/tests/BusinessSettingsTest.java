@@ -119,7 +119,7 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage()
 					.fillCompanyEmail(data.get("companyEmail"));
-			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickTab();
+			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickOutsideElement();
 			Thread.sleep(4000);
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().companyInfoEditPage().clickSaveEnabled();
 			Thread.sleep(4000);
@@ -163,7 +163,7 @@ public class BusinessSettingsTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testDBAInformationView(String strParams) {
+	public void testDBAInformation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
@@ -205,7 +205,6 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsPaymentsList(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
@@ -278,7 +277,7 @@ public class BusinessSettingsTest {
 	public void testAddBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-            sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			sideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
@@ -373,7 +372,6 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsAddDebitCard(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
@@ -522,7 +520,6 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsEditDebitCard(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickPaymentMethods();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent().clickEdit();
@@ -701,7 +698,6 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsAgreements(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickAgreements();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().verifyAgreementsView();
@@ -979,7 +975,6 @@ public class BusinessSettingsTest {
 	@Parameters({ "strParams" })
 	public void testBusinessSettingsTeamEdit(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickBusinessSettings();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().clickTeam();
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().teamComponent().verifyEditIcon();
@@ -1000,7 +995,6 @@ public class BusinessSettingsTest {
 //			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent()
 //					.verifyNoIp(data.get("noIPExist"));
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().clickIpAddress();
-
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()
 					.verifyAccountId();
 			sideBarMenuComponent.businessSettingsSideBarMenuComponent().ipAddressComponent().addIPAddressPopups()

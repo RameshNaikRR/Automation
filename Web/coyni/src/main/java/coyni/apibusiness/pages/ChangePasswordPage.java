@@ -12,7 +12,7 @@ public class ChangePasswordPage extends BrowserFunctions {
 	private By txtCurrentPassword = By.xpath("//input[@name='oldPassword']");
 	private By txtNewPassword = By.xpath("//input[@name='newPassword']");
 	private By txtConfirmNewPassword = By.xpath("//input[@id='ConfirmNewPassword']");
-	private By eyeIconCurrent = By.xpath("(//button[@data-tip='View'])[1]");
+	private By eyeIconCurrent = By.xpath("(//button[@data-for='button'])[1] ");
 	private By eyeIconNew = By.xpath("(//button[@data-for='button'])[2]");
 	private By eyeIconConfirm = By.xpath("(//button[@data-for='button'])[3]");
 	private By greendot = By.xpath("//span[@class='green-dot']/parent::span");
@@ -118,9 +118,10 @@ public class ChangePasswordPage extends BrowserFunctions {
 	public void clickSave() {
 		click(btnSave, "Save");
 	}
+
 	public void clickOutSide() {
 		new CommonFunctions().clickOutSideElement();
-		
+
 	}
 
 }

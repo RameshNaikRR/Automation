@@ -2,6 +2,9 @@ package coyni.apibusiness.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.components.AuthyComponent;
+import coyni.api.business.popups.ActionRequired;
+import coyni.api.business.popups.ApplicationDecline;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -14,6 +17,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 	private By btnStartApplication = By.xpath("//button[text()='Start Application']");
 	private By btnContinueApplication = By.xpath("//Button[text()='Continue Application']");
 	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
+	private By twostep = By.xpath("//strong[text()='Activate Two-Step Authentication']");
 
 	public void verifyHeading() {
 		String heading = getText(lblHeading, "Heading");
@@ -22,6 +26,10 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	public void verifyPageDescription(String expDesc) {
 		new CommonFunctions().verifyLabelText(lblDescription, "Page Description", expDesc);
+	}
+
+	public void clickTwoStep() {
+		click(twostep, "Activate Two-Step Authentication");
 	}
 
 	public void clickStartApplication() {
@@ -55,5 +63,17 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	public ApplicationSubmissionPage applicationSubmissionPage() {
 		return new ApplicationSubmissionPage();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
+
+	public ActionRequired actionRequired() {
+		return new ActionRequired();
+	}
+
+	public ApplicationDecline applicationDecline() {
+		return new ApplicationDecline();
 	}
 }

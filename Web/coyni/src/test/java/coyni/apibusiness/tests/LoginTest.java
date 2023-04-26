@@ -55,9 +55,40 @@ public class LoginTest {
 			loginPage.authyComponent().fillInput(data.get("code"));
 			Thread.sleep(3000);
 //			loginPage.authyComponent().verifyMessage(data.get("message"));
+			if (loginPage.verifyNonMaterialAgrrement() == 0) {
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
+					loginPage.scrollToTermsAgree();
+					loginPage.clickDone();
+				} else {
+					loginPage.verifyWelcomeHeading();
+				}
+				Thread.sleep(2000);
+				if (loginPage.verifyPrivacyPolicyHeading() == 1) {
+					loginPage.scrollToPrivacyAgree();
+					loginPage.clickDone();
+				} else {
+					loginPage.verifyWelcomeHeading();
+				}
+			} else {
+				Thread.sleep(2000);
+				if (loginPage.verifyPrivacyPolicyHeading() == 1) {
+					loginPage.scrollToPrivacyAgree();
+					loginPage.clickDone();
+				} else {
+					loginPage.verifyWelcomeHeading();
+				}
+				Thread.sleep(2000);
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
+					loginPage.scrollToTermsAgree();
+					loginPage.clickDone();
+				}
 
+				else {
+					loginPage.verifyWelcomeHeading();
+				}
+			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}
 	}
 

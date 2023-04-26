@@ -73,4 +73,8 @@ public class CompanyInfoEditPage extends BrowserFunctions {
 		new CommonFunctions().clickTab();
 	}
 
+	public void clickOutsideElement() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 }

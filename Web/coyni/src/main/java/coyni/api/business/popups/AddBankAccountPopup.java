@@ -15,8 +15,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnIamReady = By.cssSelector(".w-60");
 	private By headingNewWindow = By.xpath("//h1[text()='Add Accounts']");
 	private By txtBankName = By.xpath("//input[@id='searchbar']");
-	private By lnkBankName = By
-			.xpath("//div[@class='autoResultBankName']/p[text()='CashEdge Test Bank (Agg) - Retail Non 2FA']");
+	private By lnkBankName = By.xpath("//span[text()='https://www.mx.com']");
 	private By txtUserName = By.xpath("//input[@id='acctForm:j_idt145:0:login_']");
 	private By txtPassword = By.xpath("//input[@id='acctForm:j_idt149:0:password_']");
 	private By btnBankNext = By.xpath("(//span[text()='Next'])[1]");
@@ -31,6 +30,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By txtCheckingAccountNumber = By.xpath("//input[contains(@name,'accountNumber')]");
 	private By txtConfirmAccountNumber = By.xpath("//input[contains(@name,'confirmAccountNumber')]");
 	private By btnMXBank = By.xpath("//div[contains(@class,'kyper-utilityrow-base-left')]");
+	private By clickContinue = By.xpath("//button[text()='Continue']");
 
 	private By status = By.xpath("//span[contains(text(),'Status')]/following-sibling::*");
 
@@ -128,6 +128,10 @@ public class AddBankAccountPopup extends BrowserFunctions {
 
 	}
 
+	public void clickContinue() {
+		click(clickContinue, "Continue");
+	}
+
 	public void fillNameOnBankAccount(String bankName) {
 		enterText(txtnameOnBankAccount, bankName, "bankName");
 	}
@@ -200,6 +204,7 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void clickOnBankName() {
+		moveToElement(lnkBankName, "Click Bank Name");
 		click(lnkBankName, "Click Bank Name");
 	}
 

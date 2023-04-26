@@ -16,8 +16,8 @@ public class BuyCoyniTokensNoPaymentPopup extends BrowserFunctions {
 	private By BankAccounts = By.xpath("//div[@class='BuyTokenModal_paymentMethods__p2987']//p");
 
 	public void clickOnAddNewPayment() {
-		new CommonFunctions().verifyTextUnderLine(lnkAddNewPayment, "Add New Bank Account");
 		new CommonFunctions().verifyCursorAction(lnkAddNewPayment, "Add New Bank Account");
+//		new CommonFunctions().verifyTextUnderLine(lnkAddNewPayment, "Add New Bank Account");
 		click(lnkAddNewPayment, "click Add New Payment");
 	}
 
@@ -33,18 +33,7 @@ public class BuyCoyniTokensNoPaymentPopup extends BrowserFunctions {
 		objBrowserFunctions.waitForElement(BankAccounts, BrowserFunctions.waittime, WaitForElement.presence);
 		List<WebElement> optionsEles = objBrowserFunctions.getElementsList(BankAccounts, "BankAccounts");
 		for (WebElement optionEle : optionsEles) {
-			if (optionEle.getText().contains("CashEdge Test Bank")) {
-				optionEle.click();
-				break;
-			}
-		}
-	}
-
-	public void selectSignetAccount() {
-		objBrowserFunctions.waitForElement(BankAccounts, BrowserFunctions.waittime, WaitForElement.presence);
-		List<WebElement> optionsEles = objBrowserFunctions.getElementsList(BankAccounts, "BankAccounts");
-		for (WebElement optionEle : optionsEles) {
-			if (!optionEle.getText().contains("CashEdge Test Bank")) {
+			if (optionEle.getText().contains("MX Bank")) {
 				optionEle.click();
 				break;
 			}

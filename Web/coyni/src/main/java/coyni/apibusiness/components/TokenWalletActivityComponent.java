@@ -1,6 +1,9 @@
 package coyni.apibusiness.components;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.api.business.popups.AddNewCogentAccountPopup;
 import coyni.api.business.popups.BuyCoyniTokensNoPaymentPopup;
@@ -17,7 +20,9 @@ import coyni.api.business.popups.WithdrawCoyniToUSDPopup;
 import coyni.api.business.popups.WithdrawToBankAccountPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.WaitForElement;
 
 public class TokenWalletActivityComponent extends BrowserFunctions {
 	private By lnkTokenWallets = By.xpath("//a[contains(@class,'breadcrumb')]");
@@ -73,7 +78,7 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 		return By.xpath(String.format("table[class*='custom-table-wrapper'] th:nth-of-type(1)", tabNumbers));
 	}
 
-	private By lblNoTransactions = By.xpath("//span[.='You do not have any transactions.']");
+	private By noTransactions = By.xpath("//span[text()='You do not have any transactions.']");
 
 	public void clickWithdrawToUSD() {
 		new CommonFunctions().verifyCursorAction(lnkWithdrawToUSD, "Withdraw to USD");
@@ -93,6 +98,59 @@ public class TokenWalletActivityComponent extends BrowserFunctions {
 
 	public void clickDropDown() {
 		click(drpDownAction, "Drop Down");
+	}
+
+	public void selectCustomDropDown() {
+		try {
+			By options = By.xpath("//ul[@class='grid cursor-pointer gap-y-2']");
+			BrowserFunctions objBrowserFunctions = new BrowserFunctions();
+			boolean status = false;
+			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
+			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+			for (WebElement optionEle : optionsEles) {
+				optionEle.click();
+				WebElement element = DriverFactory.getDriver().findElement(noTransactions);
+				if (!element.isDisplayed()) {
+					String str = getText(noTransactions, "Transaction");
+					ExtentTestManager.setPassMessageInReport(str);
+				} else {
+					clickExport();
+				}
+				break;
+			}
+			if (status) {
+				// ExtentTestManager.setInfoMessageInReport(option + " selected from " + eleName
+				// + " drop down");
+			} else {
+				// ExtentTestManager.setFailMessageInReport(option + " not available in " +
+				// eleName + " dropdown");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
+		}
+	}
+
+	public void findTransaction() {
+		WebElement element = DriverFactory.getDriver().findElement(noTransactions);
+		if (element.isDisplayed()) {
+			String str = getText(noTransactions, "Transaction");
+			ExtentTestManager.setPassMessageInReport(str);
+		}
+	}
+
+	public void getTransaction() {
+		By options = By.xpath("//ul[@class='grid cursor-pointer gap-y-2']");
+		BrowserFunctions objBrowserFunctions = new BrowserFunctions();
+		List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+		for (WebElement optionEle : optionsEles) {
+			optionEle.click();
+			WebElement element = DriverFactory.getDriver().findElement(export);
+			if (element.isEnabled()) {
+				clickExport();
+			}
+
+			break;
+		}
 	}
 
 	public void getTransferredActivityDetails() {

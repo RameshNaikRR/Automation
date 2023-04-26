@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.apibusiness.tests.LoginTest;
 import coyni.api.business.popups.BuyCoyniTokensNoPaymentPopup;
 import coyni.api.business.popups.BuyTokensPaymentPopup;
 import coyni.apibusiness.components.FilterComponent;
@@ -167,6 +166,7 @@ public class TokenWalletTest {
 			tokenWalletPage.transactionDetailsComponent().verifyWalletType();
 			tokenWalletPage.transactionDetailsComponent().verifyWalletTransferSubType();
 			tokenWalletPage.transactionDetailsComponent().clickTransactions("Wallet", "Transfer");
+			Thread.sleep(3000);
 			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionDetailsHeading();
 			tokenWalletPage.transactionDetailsComponent().verifyLblTransactionType(data.get("lblTransactionType"));
 			tokenWalletPage.transactionDetailsComponent()
@@ -246,7 +246,7 @@ public class TokenWalletTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddBankAccount(String strParams) {
+	public void testBuyTokensAddBankAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarMenuComponent().clickTokenwallet();
@@ -257,15 +257,12 @@ public class TokenWalletTest {
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickMXBank();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterBankName(data.get("expBankName"));
+			Thread.sleep(6000);
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterUserName(data.get("expUserName"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().enterPassword(data.get("expPassword"));
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
 			Thread.sleep(5000);
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnChecking();
-			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickContinue();
+			Thread.sleep(6000);
 			sideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().successFailureComponent()
 					.verifyBankAddSuccesfulHeading();
 		} catch (Exception e) {
@@ -774,36 +771,6 @@ public class TokenWalletTest {
 		}
 	}
 
-//	public void addBankAccount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup()
-//					.VerifyHeading(data.get("heading"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().clickAddnewpaymentmethod();
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
-//					.verifyHeading(data.get("addNewPaymenthdg"));
-//			sideBarMenuComponent.tokenWalletActivityComponent().buyCoyniTokensPopup().addNewPaymentMethodPopup()
-//					.clickBankAccount();
-//			sideBarMenuComponent.bankAccountPage().clickImReady();
-//			sideBarMenuComponent.bankAccountPage().verifyAddBankAccountView();
-//			sideBarMenuComponent.bankAccountPage().verifyDoNotNavigateView();
-//			Thread.sleep(15000);
-//			sideBarMenuComponent.bankAccountPage().switchTab();
-//			sideBarMenuComponent.bankAccountPage().fillBankName(data.get("bankName"));
-//			Thread.sleep(1000);
-//			sideBarMenuComponent.bankAccountPage().fillUserName(data.get("userName"));
-//			sideBarMenuComponent.bankAccountPage().fillPassword(data.get("password1"));
-//			Thread.sleep(5000);
-//			sideBarMenuComponent.bankAccountPage().clickEnter();
-//			Thread.sleep(10000);
-//			// sideBarMenuComponent.bankAccountPage().clickBankNext();
-//			sideBarMenuComponent.bankAccountPage().clickChkbxBank();
-//			sideBarMenuComponent.bankAccountPage().clickEnter();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Token Wallet Buy Tokens is failed due to Exception" + e);
-//		}
-//
-//	}
 	@Test
 	@Parameters({ "strParams" })
 	public void testTokenWalletWithdrawBankAccount(String strParams) {
@@ -1230,7 +1197,7 @@ public class TokenWalletTest {
 			tokenWalletPage.filterComponent().clickFailedChkbx();
 			tokenWalletPage.filterComponent().clickApplyFilter();
 			Thread.sleep(3000);
-			if (tokenWalletPage.getTransactionsSize()==0) {
+			if (tokenWalletPage.getTransactionsSize() == 0) {
 				tokenWalletPage.transactionDetailsComponent().verifyWithdrawType();
 				tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
 				Thread.sleep(2000);
@@ -1278,7 +1245,7 @@ public class TokenWalletTest {
 			tokenWalletPage.filterComponent().clickBankAccountChkbx();
 			tokenWalletPage.filterComponent().clickCancelledChkbx();
 			tokenWalletPage.filterComponent().clickApplyFilter();
-			if (tokenWalletPage.getTransactionsSize()!=0) {
+			if (tokenWalletPage.getTransactionsSize() != 0) {
 				tokenWalletPage.transactionDetailsComponent().verifyWithdrawType();
 				tokenWalletPage.transactionDetailsComponent().verifyWithdrawSubType();
 				Thread.sleep(2000);
@@ -1390,7 +1357,6 @@ public class TokenWalletTest {
 	}
 
 	public static void testDeleteCardForInstantPay(String strParams) {
-
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			HomePage homePage = new HomePage();
@@ -1573,10 +1539,12 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().clickTokenwallet();
 			homePage.sideBarMenuComponent().tokenWalletPage().clickIndividualWalletsName();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().verifyWithdrawtoUsdCursorAction();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickdrpdwnTokenWalletActivity();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickMonthToDate();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickdrpdwnTokenWalletActivity();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickMonthToDate();
 			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickWithdrawnDetails();
-			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickExport();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickDropDown();
+			homePage.sideBarMenuComponent().tokenWalletActivityComponent().getTransaction();
+//			homePage.sideBarMenuComponent().tokenWalletActivityComponent().clickExport();
 			sideBarMenuComponent.exportComponent().verifyExportsSelectedOptionsView();
 			sideBarMenuComponent.exportComponent().verifyDateRangeView();
 			sideBarMenuComponent.exportComponent().verifyTodayView();
