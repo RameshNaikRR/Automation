@@ -80,7 +80,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void getReferenceID() {
 		new CommonFunctions().elementView(lblReferenceID, "Reference ID");
 		click(lblReferenceID, "Reference ID");
-		ExtentTestManager.setInfoMessageInReport("Reference ID : " + "lblReferenceID");
+		ExtentTestManager.setInfoMessageInReport("Reference ID : " +getText(lblReferenceID));
 	}
 
 	public void getTransactionDetails() {

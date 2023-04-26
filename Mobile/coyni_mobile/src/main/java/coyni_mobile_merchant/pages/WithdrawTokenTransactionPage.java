@@ -131,7 +131,7 @@ public class WithdrawTokenTransactionPage extends MobileFunctions {
 //		clickCancel();
 		enterMessage(Message);
 		clickDone();
-		clickWithdraw();
+//		clickWithdraw();
 
 	}
 

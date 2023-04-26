@@ -200,14 +200,35 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
 					.buyTokenWithBankAccount(data.get("buyTokenHeading"), data.get("buyTokenDescription"),
 							data.get("amount"));
+			Double processingfee = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().validateProcessingFees();
+			Double totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().validateTotal();
 			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
-					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
-					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
-			businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod().buyTokenBankAccountPaymentMethodPage()
-					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
-
+					.clickBuyToken();
+			Double processingFee = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateProcessingFee();
+			Double total = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateTotal();
+			Double totalOrderPreview = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateTotalInOrderPreview();
+			if (processingfee.equals(processingFee) && totalAmount.equals(total) && total.equals(totalOrderPreview)) {
+				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
+						.orderPreviewDetails(data.get("orderHeading"));
+				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().swipeSlideToConfirm();
+				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().enterYourPINComponent()
+						.fillPin(data.get("pin"));
+				businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+						.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup()
+						.transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
+			} else {
+				ExtentTestManager.setFailMessageInReport("The fees calculation is not valid");
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
 
@@ -277,11 +298,14 @@ public class MerchantMenuIconTest {
 			} else {
 				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickVisa();
 			}
-
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillAmount(data.get("amount"));
+			Double processingfeeGiftScreen = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.giftCardPage().validateProcessingFees();
+			Double totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
+					.validateTotal();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillFirstName(data.get("firstName"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
@@ -289,27 +313,36 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage()
 					.fillEmail(data.get("email1"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().clickPurchase();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.verifyHeading(data.get("orderOverview"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.verifyGiftCardHeading(data.get("amazonGift"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.verifyRecipentEmail(data.get("recipentEmail"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.getProcessingFee();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.getTotal();
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.slideToConfirm();
-//			Thread.sleep(2000);
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().fillPin(data.get("pin"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
-					.enterYourPINComponent().successFailureComponent().getTransactionDetails();
-//			Thread.sleep(2000);
-			businessTransactionDetailsTest.testVerifyWithdrawGiftCardTransaction(strParams);
+			Double processingFeeOrderScreen = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateProcessingFee();
+			Double total = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateTotal();
+			Double totalOrderPreview = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().orderPreviewPopup().validateTotalInOrderPreview();
+			if (processingfeeGiftScreen.equals(processingFeeOrderScreen) && totalAmount.equals(total)
+					&& total.equals(totalOrderPreview)) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.verifyHeading(data.get("orderOverview"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.verifyGiftCardHeading(data.get("amazonGift"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.verifyRecipentEmail(data.get("recipentEmail"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.getProcessingFee();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.getTotal();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.slideToConfirm();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.enterYourPINComponent().verifyHeading(data.get("pinHeading"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.enterYourPINComponent().fillPin(data.get("pin"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().giftCardPage().orderPreviewPopup()
+						.enterYourPINComponent().successFailureComponent().getTransactionDetails();
+				businessTransactionDetailsTest.testVerifyWithdrawGiftCardTransaction(strParams);
+			} else {
+				ExtentTestManager.setFailMessageInReport("The fees calculation is not valid");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
 		}
@@ -508,16 +541,31 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
-//			String totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.withdrawTokenTransactionPage().orderPreviewPopup().verifyTotal();
-//			String paymentMethod = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
-//					.withdrawTokenTransactionPage().orderPreviewPopup().verifyPaymentMethod();
+			Double processingfee = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().validateProcessingFees();
+			Double totalAmount = businessTokenAccountPage.tokenMenuIconPopUp().selectPaymentmethod()
+					.buyTokenBankAccountPaymentMethodPage().validateTotal();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
-			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-					.orderPreviewPopup().transactionSucessFailurePendingComponent().getTokenTransactionStatusDetails();
+					.clickWithdraw();
+			Double processingFee = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.withdrawTokenTransactionPage().orderPreviewPopup().validateProcessingFee();
+			Double total = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.withdrawTokenTransactionPage().orderPreviewPopup().validateTotal();
+			Double totalOrderPreview = businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.withdrawTokenTransactionPage().orderPreviewPopup().validateTotalInOrderPreview();
+			if (processingfee.equals(processingFee) && totalAmount.equals(total) && total.equals(totalOrderPreview)) {
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+						.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+						.orderPreviewPopup().swipeSlideToConfirm();
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+						.orderPreviewPopup().enterYourPINComponent().fillPin(data.get("pin"));
+				businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+						.orderPreviewPopup().transactionSucessFailurePendingComponent()
+						.getTokenTransactionStatusDetails();
+			} else {
+				ExtentTestManager.setFailMessageInReport("The fees calculation is not valid");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithBankAccount failed due to exception " + e);
 		}

@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.popups;
 
+import java.text.DecimalFormat;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
@@ -21,10 +23,15 @@ public class OrderPreviewPopup extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'PayMethod')]");
 	private By lblPaymentMethodNumber = MobileBy
 			.xpath("//*[contains(@resource-id,'tvAccount')]|//*[contains(@resource-id,'PayMethod')]");
-	private By lblPurchaseAmount = MobileBy.xpath("//*[contains(@resource-id,'tvPurchaseAmt')]");
+	private By lblPurchaseAmount = MobileBy.cssSelector(
+			"[resource-id='com.coyni.mapp:id/subTotalTV'],[resource-id='com.coyni.mapp:id/tvPurchaseAmt']");
+//	private By lblProcessingFee = MobileBy.cssSelector("#com.coyni.mapp:id/feeTV, #com.coyni.mapp:id/tvProcessingFee");
 	private By lblProcessingFee = MobileBy
-			.xpath("//*[contains(@resource-id,'tvProcessingFee')]|//*[contains(@resource-id,'feeTV')]");
-	private By lblTotal = MobileBy.xpath("//*[contains(@resource-id,'tvTotal')]|//*[contains(@resource-id,'totalTV')]");
+			.cssSelector("[resource-id='com.coyni.mapp:id/feeTV'], [resource-id='com.coyni.mapp:id/tvProcessingFee']");
+	private By lblTotal = MobileBy
+			.cssSelector("[resource-id='com.coyni.mapp:id/totalTV'],[resource-id='com.coyni.mapp:id/tvTotal']");
+
+//	private By lblTotal = MobileBy.cssSelector("#com.coyni.mapp:id/totalTV,#com.coyni.mapp:id/tvTotal");
 	private By btnSlideToConfirm = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");
 	private By lblAmazon = MobileBy.xpath("//*[contains(@resource-id,'giftCardTypeTV')]");
 	private By lblReceipentEmail = MobileBy.xpath("//*[contains(@resource-id,'recipientMailTV')]");
@@ -147,12 +154,12 @@ public class OrderPreviewPopup extends MobileFunctions {
 	}
 
 	public String verifyPaymentMethod() {
-	String payMethod=getText(lblPaymentMethod);
-	String cardNumber=payMethod.replace("••••", "");
-	ExtentTestManager.setInfoMessageInReport(cardNumber);
-	return 	cardNumber;
+		String payMethod = getText(lblPaymentMethod);
+		String cardNumber = payMethod.replace("••••", "");
+		ExtentTestManager.setInfoMessageInReport(cardNumber);
+		return cardNumber;
 	}
-	
+
 	public void getPurchaseAmount() {
 		new CommonFunctions().elementView(lblPurchaseAmount, "Purchase Amount");
 		ExtentTestManager.setInfoMessageInReport("Purchase Amount  : " + getText(lblPurchaseAmount));
@@ -163,18 +170,38 @@ public class OrderPreviewPopup extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Processing Fee : " + getText(lblProcessingFee));
 	}
 
+	public Double validateProcessingFee() {
+		String[] processFee = getText(lblProcessingFee).split(" ");
+		Double processingFee = Double.parseDouble(processFee[0]);
+		DecimalFormat df = new DecimalFormat("#.##");
+		double fee = Double.parseDouble(df.format(processingFee));
+		System.out.println(fee);
+		return fee;
+	}
+
 	public String getTotal() {
 		new CommonFunctions().elementView(lblTotal, "Total");
 		ExtentTestManager.setInfoMessageInReport("Total  : " + getText(lblTotal));
 		return getText(lblTotal);
 	}
 
-	public String verifyTotal() {
-		String a = getTotal();
-		String[] b=a.split(" ");
-		ExtentTestManager.setInfoMessageInReport(b[0]);
-		return b[0];
-		
+	public Double validateTotal() {
+		String[] totall = getText(lblTotal).split(" ");
+		Double Total = Double.parseDouble(totall[0]);
+		DecimalFormat df = new DecimalFormat("#.##");
+		double total = Double.parseDouble(df.format(Total));
+		System.out.println(total);
+		return total;
+	}
+
+	public Double validateTotalInOrderPreview() {
+		String[] transAmount = getText(lblPurchaseAmount).split(" ");
+		String[] ProcessingFee = getText(lblProcessingFee).split(" ");
+		Double total = Double.parseDouble(transAmount[0]) + Double.parseDouble(ProcessingFee[0]);
+		DecimalFormat df = new DecimalFormat("#.##");
+		double feees = Double.parseDouble(df.format(total));
+		System.out.println(feees);
+		return feees;
 	}
 
 	public void swipeSlideToConfirm() {
@@ -195,11 +222,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 		getPurchaseAmount();
 		getProcessingFee();
 		getTotal();
-//		verifyTotal();
 		verifyPaymentMethod();
-//		swipeSlideToConfirmLocation();
-		swipeSlideToConfirm();
-
 	}
 
 	public void refundPreviewDetails(String expHeading) {

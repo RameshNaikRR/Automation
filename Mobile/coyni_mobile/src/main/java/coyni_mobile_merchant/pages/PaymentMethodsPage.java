@@ -90,7 +90,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public int verifyNumOfBanks() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(2500);
 		return getElementList(lnkBank, "Bank Account").size();
 	}
 

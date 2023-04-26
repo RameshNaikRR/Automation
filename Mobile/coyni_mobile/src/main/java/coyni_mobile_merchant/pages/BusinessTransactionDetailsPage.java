@@ -332,8 +332,10 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 
 	public void verifyLatestWithdrawTokenGiftCardTransactionDetails() {
 		String transReferId = getCopiedData();
+		System.out.println(transReferId);
 		click(lblReferenceID, "Reference ID");
 		String latestTranreferId = getCopiedData();
+		System.out.println(latestTranreferId);
 		if (transReferId.equals(latestTranreferId)) {
 			ExtentTestManager.setPassMessageInReport("The latest transaction is updated");
 		} else {

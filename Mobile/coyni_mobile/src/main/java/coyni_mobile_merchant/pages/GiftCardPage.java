@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.pages;
 
+import java.text.DecimalFormat;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -25,7 +27,7 @@ public class GiftCardPage extends MobileFunctions {
 	private By imgAmazon = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[2]");
 	private By imgVisa = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[1]");
 
-	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'amountET')]");
+	private By txtAmount = MobileBy.id("com.coyni.mapp:id/amountET");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]");
 	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'lastNameET')]");
 
@@ -43,6 +45,7 @@ public class GiftCardPage extends MobileFunctions {
 	private By lblDescription = MobileBy.xpath("//*[contains(@resource-id,'giftCardDescTV')]");
 
 	private By btnDone = MobileBy.xpath("//*[@text='Done']");
+	private By lblFees = MobileBy.id("com.coyni.mapp:id/tvFeePer");
 
 	public void clickDone() {
 		click(btnDone, "Done");
@@ -93,8 +96,7 @@ public class GiftCardPage extends MobileFunctions {
 		DriverFactory.getDriver().hideKeyboard();
 		click(txtFirstName, "First Name");
 		enterText(txtFirstName, firstName, "First Name");
-		
-		
+
 	}
 
 	public void fillLastName(String lastName) {
@@ -107,7 +109,7 @@ public class GiftCardPage extends MobileFunctions {
 	public void fillEmail(String email) {
 		DriverFactory.getDriver().hideKeyboard();
 		scrollDownToElement(txtEmail, "Email");
-		click(txtEmail, "Email");	
+		click(txtEmail, "Email");
 		enterText(txtEmail, email, "Email");
 //		new CommonFunctions().clickTab();
 //		DriverFactory.getDriver().hideKeyboard();
@@ -143,6 +145,25 @@ public class GiftCardPage extends MobileFunctions {
 
 	public void clickCross() {
 		click(iconCross, "Cross");
+	}
+
+	public Double validateProcessingFees() {
+		String[] fee1 = getText(lblFees).replace(" ", "").split(":");
+		String feeDollars = fee1[1].replace("$", "");
+		Double feeDollar = Double.parseDouble(feeDollars);
+		DecimalFormat df = new DecimalFormat("#.##");
+		double fee = Double.parseDouble(df.format(feeDollar));
+		System.out.println(fee);
+		return fee;
+	}
+
+	public Double validateTotal() {
+		Double purchaseAmount = Double.parseDouble(getText(txtAmount));
+		Double amount = validateProcessingFees() + purchaseAmount;
+		DecimalFormat df = new DecimalFormat("#.##");
+		double totalAmount = Double.parseDouble(df.format(amount));
+		System.out.println(totalAmount);
+		return totalAmount;
 	}
 
 	public EnterYourPINComponent enterYourPINComponent() {

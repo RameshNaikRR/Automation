@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.pages;
 
+import java.text.DecimalFormat;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -17,13 +19,13 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
 	private By lblBankNumber = MobileBy.xpath("//*[contains(@resource-id,'tvBAccNumber')]");
 	private By btnConverter = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
-	private By lblAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
+	private By lblAmount = MobileBy.id("com.coyni.mapp:id/amountET");
 	private By btnBuyToken = MobileBy.xpath("//*[contains(@resource-id,'keyActionLL')]");
 	private By lblAmountDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblLimitDescription = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'Close')]");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
-	
+	private By lblFees = MobileBy.id("com.coyni.mapp:id/tvFeePer");
 
 	public void verifyPageHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblBuyTokenBankAccHeading, "Page Heading", expHeading);
@@ -53,14 +55,16 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	public void clickAddNewPaymentMethod() {
 		click(btnAddNewPaymentMethod, "Add New Payment Method");
 	}
-	
+
 	public void getPaymentMethodDetails() {
 		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Name is : " + getText(btnChangePaymentMethod));
 		ExtentTestManager.setInfoMessageInReport("Payment Method Bank Number is : " + getText(lblBankNumber));
 	}
 
-	public void getAmount() {
+	public Double getAmount() {
 		ExtentTestManager.setInfoMessageInReport("after click on convertor Amount is : " + getText(lblAmount));
+		Double amount = Double.parseDouble(getText(lblAmount));
+		return amount;
 	}
 
 	public void fillAmount(String amount) {
@@ -79,7 +83,38 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 		click(btnClose, "Close");
 	}
 
-	public void buyTokenWithBankAccount(String expHeading,String expDescription,String amount) {
+	public Double validateProcessingFees() { 
+		String[] fees = getText(lblFees).split("\\+");
+		String[] fee1 = fees[0].replace(" ", "").split(":");
+		String feeDollars = fee1[1].replace("$", "");
+		Double feeDollar = Double.parseDouble(feeDollars) + validateFeesPercentage();
+		DecimalFormat df=new DecimalFormat("#.##");
+		double fee=Double.parseDouble(df.format(feeDollar));
+		System.out.println(fee);
+		return fee;
+	}
+
+	public Double validateTotal() {
+		Double amount = validateProcessingFees() + getAmount();
+		DecimalFormat df = new DecimalFormat("#.##");
+		double totalAmount = Double.parseDouble(df.format(amount));
+		System.out.println(totalAmount);
+		return totalAmount;
+	}
+
+	public Double validateFeesPercentage() {
+		String[] fees = getText(lblFees).split("\\+");
+		String fee2 = fees[1].replace(" ", "").replace("%", "");
+		Double feePercentage = Double.parseDouble(fee2);
+		Double fee = feePercentage / 100 * getAmount();
+		DecimalFormat df = new DecimalFormat("#.##");
+		double feees = Double.parseDouble(df.format(fee));
+		System.out.println(feees);
+		return feees;
+
+	}
+
+	public void buyTokenWithBankAccount(String expHeading, String expDescription, String amount) {
 		verifyPageHeading(expHeading);
 		verifyPageDescription(expDescription);
 		getPaymentMethodDetails();
@@ -90,7 +125,7 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 		clickConvertor();
 		getAmount();
 		getExchangeRate();
-		clickBuyToken();
+//		clickBuyToken();
 	}
 
 	public OrderPreviewPopup orderPreviewPopup() {
@@ -100,7 +135,7 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
 	}
-	
+
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
 	}
