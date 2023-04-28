@@ -9,7 +9,7 @@ public class DeacttivateVendor extends BrowserFunctions {
 
 	private By btnDeactivate = By.xpath("//button[text()='Deactivate Vendor'] | //button[text()='Deactivate']");
 	private By lblDeactivateHeading = By.xpath("//h1[text()='Deactivate Vendor?']");
-	private By btnCheckBox = By.xpath("input[type='checkbox']");
+	private By btnCheckBox = By.xpath("//input[@type='checkbox']");
 
 	// private By btnDeactivate=By.xpath("//button[text()='Deactivate']");
 
@@ -22,7 +22,11 @@ public class DeacttivateVendor extends BrowserFunctions {
 	}
 
 	public void clickCheckbox() {
+		moveToElement(btnCheckBox, "Check Box");
 		click(btnCheckBox, "CheckBox");
+	}
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }

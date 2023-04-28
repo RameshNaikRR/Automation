@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.bouncycastle.asn1.dvcs.Data;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -16,7 +17,6 @@ import coyni.admin.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
-
 
 public class SystemSettingsTest {
 
@@ -84,8 +84,9 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreements Failed due to Exception  " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testTermOfServiceAgreementsEmptyVersion(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -96,20 +97,20 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().clickEdit();
 			Thread.sleep(3000);
 			homePage.sideBarComponent().agreementsComponent().clearVersion();
-				new CommonFunctions().clickOutSideElement();
-						if (!data.get("errMessage").isEmpty()) {
-				 Thread.sleep(2000);
-				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
-				 //data.get("elementName"));				 
+			new CommonFunctions().clickOutSideElement();
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(2000);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));// data.get("color"),
+				// data.get("elementName"));
 			}
-		}
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreementsEmptyVersion Failed due to Exception  " + e);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testTermOfServiceAgreementsEmptyVersion Failed due to Exception  " + e);
 		}
 	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testTermOfServiceAgreementsReschedulingwithSameDate(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -136,9 +137,11 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
 					data.get("Message"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTermOfServiceAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testTermOfServiceAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testPrivacyPolicyAgreements(String strParams) {
@@ -168,8 +171,9 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
 		}
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testPrivacyPolicyAgreementsEmptyVersion(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -180,18 +184,18 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().clickEdit();
 			Thread.sleep(3000);
 			homePage.sideBarComponent().agreementsComponent().clearVersion();
-				new CommonFunctions().clickOutSideElement();
-			
+			new CommonFunctions().clickOutSideElement();
+
 //			homePage.sideBarComponent().agreementsComponent().verifyVersionError(data.get("versionError"));
 			if (!data.get("errMessage").isEmpty()) {
-				 Thread.sleep(2000);
-				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
-				 //data.get("elementName"));
-				 
+				Thread.sleep(2000);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));// data.get("color"),
+				// data.get("elementName"));
+
 			}
-		}
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreementsEmptyVersion Failed due to Exception  " + e);
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testPrivacyPolicyAgreementsEmptyVersion Failed due to Exception  " + e);
 		}
 	}
 
@@ -223,7 +227,8 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
 					data.get("Message"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testPrivacyPolicyAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
 		}
 	}
 
@@ -252,9 +257,9 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testPrivacyPolicyAgreements Failed due to Exception  " + e);
 		}
 	}
-	
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testApplicationAcknowledgementAgreementsEmptyVersion(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -265,20 +270,21 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().clickEdit();
 			Thread.sleep(3000);
 			homePage.sideBarComponent().agreementsComponent().clearVersion();
-				new CommonFunctions().clickOutSideElement();
-			
+			new CommonFunctions().clickOutSideElement();
+
 //			homePage.sideBarComponent().agreementsComponent().verifyVersionError(data.get("versionError"));
 			if (!data.get("errMessage").isEmpty()) {
-				 Thread.sleep(2000);
-				 new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));//data.get("color"),
-				 //data.get("elementName"));
-				 
+				Thread.sleep(2000);
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));// data.get("color"),
+				// data.get("elementName"));
+
 			}
-		}
-		catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testApplicationAcknowledgementAgreementsEmptyVersion Failed due to Exception  " + e);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testApplicationAcknowledgementAgreementsEmptyVersion Failed due to Exception  " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testApplicationAcknowledgementAgreementsReschedulingwithSameDate(String strParams) {
@@ -303,7 +309,8 @@ public class SystemSettingsTest {
 					data.get("Message"));
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testApplicationAcknowledgementAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testApplicationAcknowledgementAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
 		}
 	}
 
@@ -342,6 +349,7 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testEditPersonalFeeStructure Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditPersonalFeeStructureReschedulingwithSameDate(String strParams) {
@@ -366,17 +374,18 @@ public class SystemSettingsTest {
 //					.editExternalBankAmount(data.get("amount"));
 //			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 //		    	.editInstantPayPercentage(data.get("percentage"));
-			
+
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.verifyScheduleFeeStructure(data.get("tosHeading"));
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEfftiveDate();
 			Thread.sleep(2000);
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickSchedule();
-			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().VerifyScheduleError();			
+			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().VerifyScheduleError();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testEditPersonalFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testEditPersonalFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
 		}
 	}
 
@@ -417,6 +426,7 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testEditMerchantFeeStructure Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditMerchantFeeStructureReschedulingwithSameDate(String strParams) {
@@ -425,7 +435,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickSystemSettings();
 			homePage.sideBarComponent().clickFeeStructure();
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
-		//	homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
+			// homePage.sideBarComponent().feeStructurePage().VerifyHeadingList(data.get("AgreementList"));
 			sideBarComponent.feeStructurePage().clickEdit();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.verifyMerchantHeading(data.get("expEditHeading"));
@@ -454,11 +464,12 @@ public class SystemSettingsTest {
 			sideBarComponent.feeStructurePage().VerifyScheduleError();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testEditMerchantFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testEditMerchantFeeStructureReschedulingwithSameDate Failed due to Exception " + e);
 		}
-	} 
-	
-	//Account limits
+	}
+
+	// Account limits
 	@Test
 	@Parameters({ "strParams" })
 	public void testViewPersonalAccountLimits(String strParams) {
@@ -468,7 +479,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().clickAccountLimits();
 			Thread.sleep(2000);
 			homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
-	//		homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+			// homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
 			homePage.sideBarComponent().viewPersonalFeeStructurePage().getDefaultFirstRowHeading();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
@@ -489,6 +500,7 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testViewPersonalAccountLimitsReschedulingwithSameDate(String strParams) {
@@ -515,7 +527,8 @@ public class SystemSettingsTest {
 			sideBarComponent.feeStructurePage().VerifyScheduleError();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testViewPersonalAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
 		}
 	}
 
@@ -529,7 +542,7 @@ public class SystemSettingsTest {
 			Thread.sleep(2000);
 			homePage.sideBarComponent().feeStructurePage().clickMerchant();
 			homePage.sideBarComponent().feeStructurePage().clickActiveEdit();
-		//	homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
+			// homePage.sideBarComponent().accountLimitsComponent().verifyHeading(data.get("expViewHeading"));
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEditAccountLimit();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.editAccountLimitExternalBanAmount(data.get("amount"));
@@ -546,6 +559,7 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalAccountLimits Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testViewMerchantAccountLimitsReschedulingwithSameDate(String strParams) {
@@ -569,7 +583,8 @@ public class SystemSettingsTest {
 			sideBarComponent.feeStructurePage().VerifyScheduleError();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testViewMerchantAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testViewMerchantAccountLimitsReschedulingwithSameDate Failed due to Exception " + e);
 		}
 
 	}
@@ -588,7 +603,7 @@ public class SystemSettingsTest {
 			Thread.sleep(2000);
 			// homePage.sideBarComponent().featureControlPage().verifyAllTransactionsControls();
 			// homePage.sideBarComponent().featureControlPage().verifyCreditCard();
-			
+
 			homePage.sideBarComponent().featureControlPage().verifyPay();
 			homePage.sideBarComponent().featureControlPage().verifyPayRequest();
 			homePage.sideBarComponent().featureControlPage().verifyBuyTokensExternalBankAccount();
@@ -620,7 +635,7 @@ public class SystemSettingsTest {
 		}
 
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testFeatureControlEnable(String strParams) {
@@ -635,7 +650,7 @@ public class SystemSettingsTest {
 			Thread.sleep(2000);
 			// homePage.sideBarComponent().featureControlPage().verifyAllTransactionsControls();
 			// homePage.sideBarComponent().featureControlPage().verifyCreditCard();
-			
+
 			homePage.sideBarComponent().featureControlPage().verifyPayEnable();
 			homePage.sideBarComponent().featureControlPage().verifyPayRequest();
 			homePage.sideBarComponent().featureControlPage().verifyBuyTokensExternalBankAccountEnable();
@@ -669,7 +684,7 @@ public class SystemSettingsTest {
 	}
 
 //Extra lines of code	
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAccountLimts(String strParams) {
@@ -821,7 +836,7 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewPersonalFeeStructure Failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testViewMerchantfeeStructurePage(String strParams) {
@@ -844,9 +859,8 @@ public class SystemSettingsTest {
 			ExtentTestManager.setFailMessageInReport("testViewMerchantfeeStructurePage Failed due to Exception " + e);
 		}
 	}
-	
-	
-	//Vendor
+
+	// Vendor
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddVendor(String strParams) {
@@ -860,15 +874,92 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().addVendorComponent().fillPrimaryEmail();
 			homePage.sideBarComponent().addVendorComponent().fillprimaryPhoneNumber();
 			homePage.sideBarComponent().addVendorComponent().fillTechnicalEmail();
-			homePage.sideBarComponent().addVendorComponent().fillTechnicalPhoneNumber(data.get("TechnicalPhone"));
+			homePage.sideBarComponent().addVendorComponent().fillTechnicalPhoneNumber();
 			homePage.sideBarComponent().addVendorComponent().clickAddVendors();
-		//	homePage.sideBarComponent().addVendorComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));
-			
+			// homePage.sideBarComponent().addVendorComponent().toastComponent().verifyToast(data.get("success"),
+			// data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddVendor Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testVendorCreateApiKeysAndIpAddress(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickVendor();
+			homePage.sideBarComponent().vendorStatusComponent().clickAllVendorStatus();
+			homePage.sideBarComponent().vendorStatusComponent().clickActiveStatus();
+			homePage.sideBarComponent().vendorStatusComponent().clickOutSide();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().clickVendor();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().clickMerchant();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().getMerchantName();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().clickApiKey();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.clickGenerateApiKey();
+			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
+
+//			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+//					.toastComponent().verifyToast(data.get("success"), data.get("message"));
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().clickIpWhiteList();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().clickAddIpAddress();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().getVendorName();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().getVendorId();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().fillIpAddress(data.get("ipAddress"));
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().fillDescription();
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().clickIpAdd();
+		//	homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+			//		.ipWhiteListComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));
+			homePage.sideBarComponent().vendorStatusComponent().vendorListComponent().apiKeysComponent()
+					.ipWhiteListComponent().getActivityLog();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddVendor Failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditVendor(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickVendor();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().fillSearchBox();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().clickEditVendor();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().fillPrimaryEmail();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().fillTechnicalPhoneNumber();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().clickSave();
+			//homePage.sideBarComponent().vendorListComponent().editVendorComponent().toastComponent().verifyToast(data.get("success"), data.get("message"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddVendor Failed due to Exception " + e);
 		}
 	}
 	
-	
-
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeactivateVendor(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickSystemSettings();
+			homePage.sideBarComponent().clickVendor();
+			homePage.sideBarComponent().vendorListComponent().editVendorComponent().fillSearchBox();
+			homePage.sideBarComponent().vendorListComponent().deacttivateVendor().clickDeactivate();
+			homePage.sideBarComponent().vendorListComponent().deacttivateVendor().verifyDeactivateHeading(data.get("deactiveHeading"));
+			homePage.sideBarComponent().vendorListComponent().deacttivateVendor().clickCheckbox();
+			homePage.sideBarComponent().vendorListComponent().deacttivateVendor().clickDeactivate();
+			homePage.sideBarComponent().vendorListComponent().deacttivateVendor().toastComponent().verifyToast(data.get("success"), data.get("message"));
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddVendor Failed due to Exception " + e);
+		}
+	}
 }

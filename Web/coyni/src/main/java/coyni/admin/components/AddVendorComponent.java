@@ -58,7 +58,7 @@ public class AddVendorComponent extends BrowserFunctions {
 		enterText(txtTechnicalEmail, generateEmail(), "TechnicalEmail");
 	}
 
-	public void fillTechnicalPhoneNumber(String name) {
+	public void fillTechnicalPhoneNumber() {
 		click(txtTechnicalPhoneNumberdo, "TechnicalPhoneNumber");
 		enterText(txtTechnicalPhoneNumberdo, generateNumber(), "TechnicalPhoneNumber");
 	}

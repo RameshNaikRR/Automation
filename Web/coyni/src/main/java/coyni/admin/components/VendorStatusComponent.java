@@ -1,7 +1,10 @@
 package coyni.admin.components;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
 public class VendorStatusComponent extends BrowserFunctions {
@@ -20,5 +23,12 @@ public class VendorStatusComponent extends BrowserFunctions {
 
 	public void clickInActiveStatus() {
 		click(btnInactive, "btnInactive");
+	}
+	public void clickOutSide() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+	
+	public VendorListComponent vendorListComponent() {
+		return new VendorListComponent();
 	}
 }

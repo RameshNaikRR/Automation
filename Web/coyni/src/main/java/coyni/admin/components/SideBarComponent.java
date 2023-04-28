@@ -423,5 +423,11 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 
 	}
+	public VendorStatusComponent vendorStatusComponent() {
+		return new VendorStatusComponent();
+	}
+	public VendorListComponent vendorListComponent() {
+		return new VendorListComponent();
+	}
 
 }
