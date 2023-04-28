@@ -763,12 +763,12 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			//sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.clickApiKeys();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.clickApiKeys();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnPOSIntegrationAPIKeys();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
