@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.MailHelper;
 
 public class AddTeamMemberComponent extends BrowserFunctions {
 
@@ -26,12 +27,31 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 		new CommonFunctions().clickOutSideElement();
 	}
 
+	public void navigateToUrl(String url) throws Exception {
+		new CommonFunctions().switchtoUrl(url);
+	}
+
 	public void verifyLastName(String lastName) {
 		enterText(txtLastName, lastName, "LastName");
 	}
 
 	public void verifyEmail(String email) {
 		enterText(txtEmail, email, "Email");
+	}
+
+	public void verifyEmail1() {
+		getCopiedData();
+		// enterText(txtEmail, email, "Email");
+	}
+
+	public String getMail() {
+		String str = MailHelper.getRandomMailID();
+		return str;
+	}
+
+	public String getUrl() {
+		String str = MailHelper.getURLFromMail();
+		return str;
 	}
 
 	public void verifyPhone(String Phone) {

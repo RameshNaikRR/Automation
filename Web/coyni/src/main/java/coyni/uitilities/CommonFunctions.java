@@ -73,6 +73,18 @@ public class CommonFunctions {
 		}
 	}
 
+	public void validateFormErrorMessageForIPAddress(String expErrMsg) {
+		By errorMsgs = By.cssSelector(".IpAddresses_error__QnSzJ");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
 	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
 		By errorMsgs = By
 				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
@@ -428,21 +440,18 @@ public class CommonFunctions {
 		}
 
 	}
-	
+
 	public void doubleClick() throws InterruptedException {
 		Actions action = new Actions(DriverFactory.getDriver());
 		action.doubleClick(null);
 		ExtentTestManager.setInfoMessageInReport("The double clicked");
-	
+
 		Thread.sleep(2000);
 	}
-	
-	
+
 	public void switchToAdmin() {
 		objBrowserFunctions.switchToMainPage();
 	}
-	
-	
 
 	public void swtichToNewtabUrl(String Url) {
 		WebDriver driver = DriverFactory.getDriver();
@@ -464,11 +473,10 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("Not Scrolled Horizontally");
 		}
 	}
-	
+
 	public void closeCurrentWindow() {
 		DriverFactory.getDriver().close();
 		ExtentTestManager.setInfoMessageInReport("The Current Window is closed");
 	}
-	
 
 }

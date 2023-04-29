@@ -273,7 +273,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
 					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().clickSms();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent().clickOnSms();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().phoneVerificationComponent()
 					.fillpin(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
@@ -281,8 +281,8 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.verifyCurrentPhoneNumberHeading(data.get("headingCurrentPhoneNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
-					.authyComponent().clickSms();
+//			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
+//					.authyComponent().clickOnSms();
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
 					.phoneVerificationComponent().fillpin(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().verifyCurrentPhoneNumberPopup()
@@ -538,7 +538,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().verifyEmail(data.get("verifyEmail"));
 			merchantProfilePage.userDetailsComponent().clickIconEditEmail();
 			merchantProfilePage.userDetailsComponent().verifyEditEmailAddressAuthentication(data.get("authiHeading"));
-			merchantProfilePage.userDetailsComponent().authyComponent().clickSms();
+			merchantProfilePage.userDetailsComponent().authyComponent().clickOnSms();
 			merchantProfilePage.userDetailsComponent().phoneVerificationComponent().fillpin(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup()
 					.verifyEditEmailAddress(data.get("heading"));
@@ -550,8 +550,8 @@ public class MerchantProfileTest {
 					.verifyCurrentEmailAddressHeading(data.get("currentEmailHeading"));
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.verifyCurrentEmail(data.get("currentEmail"));
-			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
-					.authyComponent().clickSms();
+//			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
+//					.authyComponent().clickSms();
 			// merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup().phoneVerificationComponent().
 			merchantProfilePage.userDetailsComponent().editEmailAddressPopup().verifyCurrentEmailAddressPopup()
 					.phoneVerificationComponent().fillpin(data.get("fillPinEmail"));
@@ -568,6 +568,7 @@ public class MerchantProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
+
 
 	@Test
 	@Parameters({ "strParams" })

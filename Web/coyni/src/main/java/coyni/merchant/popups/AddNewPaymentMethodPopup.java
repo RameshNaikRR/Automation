@@ -16,6 +16,7 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	private By btnCreditCard = By.xpath("//span[text()='Credit Card']");
 	private By lblBankAccountCount = By.xpath("(//span[@class='count'])[1]");
 	private By lblDebitCardCount = By.xpath("(//span[@class='count'])[2]");
+	private By debitCardCount = By.xpath("(//span[contains(@class,'count')])[5]");
 
 	public void clickBankAccount() {
 		click(btnBankAccount, "Click Bank Account");
@@ -47,7 +48,7 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	}
 
 	public String getDebitCardCount() {
-		return getText(lblDebitCardCount, "Debit Card Count");
+		return getText(debitCardCount, "Debit Card Count");
 	}
 
 	public AddCardComponent addCardComponent() {
@@ -62,8 +63,10 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 		return new AddNewDebitCardPopup();
 	}
 
-	public void verifyAddNewPaymentMethodHeading() {
-		new CommonFunctions().elementView(headingAddNewPaymentMethod, "Add New Payment Method heading");
+	public void verifyAddNewPaymentMethodHeading(String heading) {
+		new CommonFunctions().verifyLabelText(headingAddNewPaymentMethod, heading, "Heading is Add New Payment Method");
+		// new CommonFunctions().elementView(headingAddNewPaymentMethod, "Add New
+		// Payment Method heading");
 	}
 
 	public NavigationComponent navigationComponent() {

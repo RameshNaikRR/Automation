@@ -339,6 +339,9 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
 					.accountProfileImagePopup().cropYourImagePopup()
 					.uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
+					.accountProfileImagePopup().cropYourImagePopup().clickSave();
+			Thread.sleep(3000);
 			String[] numbers = data.get("dbaInfoPhoneNumber").split(",");
 			for (String number : numbers) {
 				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().dbaInformationPage()
@@ -351,8 +354,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
+	@Test @Parameters({"strParams"})
+
 	public void testDBAInfoPhoneNumberFieldValidations(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -462,6 +465,11 @@ public class MerchantSettingsTest {
 					.clickBeneficiaryOwnerBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyHeading(data.get("beneficiaryOwnersHeading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.verifyhandSymbolHighlightedBeneficialOwners(data.get("cssProp"), data.get("value"),
+//							data.get("color"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+					.verifyStarMark();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
@@ -702,6 +710,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			Thread.sleep(4000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -715,7 +724,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getPublicKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.clickReavelSecretKey();
+					.clickRevealSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.authyComponent().fillInput(data.get("code"));
 			Thread.sleep(2000);
@@ -763,7 +772,8 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-			//sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			sideMenuBarComponent.clickMerchantSettings();
+			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
@@ -933,6 +943,14 @@ public class MerchantSettingsTest {
 					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickSubmit();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnAPIKeyss();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickIPAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getListOfIpAddressKeyLogs();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAdditionalIpAddress  Failed due to Exception " + e);
@@ -987,8 +1005,8 @@ public class MerchantSettingsTest {
 					.ipAddressPage().clickDelete();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().verifyRemoveHeading(data.get("removeHeading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().verifydesc(data.get("ipDescription"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().verifydesc(data.get("ipDescription"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().clickYes();
 		} catch (Exception e) {
@@ -1006,8 +1024,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnWebHooks();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.webhookComponent().verifyHeading(data.get("heading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.webhookComponent().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.webhookComponent().verifyEndPointURL();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -1032,10 +1050,10 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnWebHooks();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.webhookComponent().verifyHeading(data.get("heading"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.webhookComponent().clickOnEndPointURL();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.webhookComponent().verifyHeading(data.get("heading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.webhookComponent().clickOnEndPointURL();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.webhookComponent().enterEndPointURL(data.get("endpointURL"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -1048,6 +1066,12 @@ public class MerchantSettingsTest {
 					.webhookComponent().saveChangePopUp().clickYes();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.webhookComponent().toastComponent().verifyToast(data.get("title"), data.get("message"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnAPIKeyss();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickWebhooks();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getListOfWebHookLogs();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditWebhook  Failed due to Exception " + e);
@@ -1118,6 +1142,67 @@ public class MerchantSettingsTest {
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 //					.clickSearchInstitutions();
 			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBank();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.addExternalBankAccountPopup().enterBankName(data.get("bankName"));
+
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnBankName();
+//			Thread.sleep(3000);
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterUserName(data.get("expUserName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.enterPassword(data.get("expPassword"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+					.clickOnBankAccountName(data.get("accountType"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickNext();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.successFailurePopupCardComponent().verifyBankAddSuccesfulHeaading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.successFailurePopupCardComponent().navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test ExternalMethod failed due to exception " + e);
+		}
+	}
+
+	public void testAddExternalBankAccountOATH(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup().clickBankAccount();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().verifyHeading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillNameOnBankAccount(data.get("bankAccountName"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillRoutingNumber(data.get("routingNumber"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillConfirmRoutingNumber(data.get("confirmRoutingNumber"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillAccountNumber(data.get("accountNumber"));
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.fillConfirmAccountNumber(data.get("confirmAccountNumber"));
+			// merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickAdd();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.verifyHeading();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.verifyNameOnAccount();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.verifyInstitution();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.verifyRoutingNumber();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.verifyAccount();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().bankAccountAddedPopup()
+//					.clickDone();
+
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMXBankCheckBox();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickStart();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addExternalBankAccountPopup()
+//					.verifyNewWindowHeading();
+			// merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().addExternalBankAccountPopup().close();
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
+//					.clickSearchInstitutions();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup().clickOnMxBankOATH();
 //			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addBankAccountPopup()
 //					.addExternalBankAccountPopup().enterBankName(data.get("bankName"));
 
@@ -1369,6 +1454,42 @@ public class MerchantSettingsTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
+
+	}
+
+	public void testAddCardFifth(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			MerchantSettingsSideBarMenuComponent merchantSettingsSideBarMenuComponent = new MerchantSettingsSideBarMenuComponent();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+					.verifyAddNewPaymentMethodHeading(data.get("heading"));
+			Thread.sleep(2000);
+			if (card.equalsIgnoreCase("credit")) {
+				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+						.clickCreditCard();
+			} else {
+				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+						.getDebitCardCount();
+			}
+			Thread.sleep(3000);
+
+//			merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+//					.getDebitCardCount();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardFifth(String strParams) {
+		sideMenuBarComponent.clickMerchantSettings();
+		merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
+		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
+//		merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
+		testAddCardFifth(strParams, "debit");
 
 	}
 

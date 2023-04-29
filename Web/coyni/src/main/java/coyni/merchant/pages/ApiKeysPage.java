@@ -23,6 +23,16 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By btnCopyPublicKey = By.xpath("//button[contains(@class,'copy-image')]");
 
+	// private By btnWebhooks =
+	// By.xpath("(//button[contains(text(),'Webhooks')])[1]");
+
+	private By btnWebhookss = By.xpath("(//button[contains(text(),'Webhooks')])[2]");
+
+	// private By btnIPAddresses = By.xpath("(//button[contains(text(),'IP
+	// Addresses')])[1]");
+
+	private By btnIpAddresss = By.xpath("(//button[contains(text(),'IP Addresses')])[2]");
+
 	private By btnCopyReavelSecretKey = By.xpath("(//button[contains(@class,'copy-image')])[2]");
 
 	private By btnReavelSecretKey = By.xpath("//button[text()='Reveal Secret Key']");
@@ -45,7 +55,13 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By lblExpiredKeysData = By.xpath("//p[contains(text(),'You do not have any Expired keys.')]");
 
-	private By apikeyname = By.xpath("(//p[contains(@class,'font-bold capitalize break-all')])[1]//span");
+//	private By apikeyname = By.xpath("(//p[contains(@class,'font-bold capitalize break-all')])[1]//span");
+
+	private By apikeyname = By.xpath("(//span)[1]");
+
+//	private By apikeyDate = By.xpath("((//p[contains(@class,'font-bold capitalize break-all')])[1]//span)[2]");
+
+	private By apikeyDate = By.xpath("(//span)[2]");
 
 	private By btnWebhooks = By.xpath("(//button[contains(text(),'Webhooks')])[1]");
 
@@ -72,8 +88,75 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By btneCommerceApiKeys = By.xpath("(//button[text()='API Keys'])[1]");
 
+	private By revealSecretKey = By.xpath("//button[contains(text(),'Reveal Secret Key')]");
+
+	private By ipaddressName = By.xpath("(//span)[1]");
+
+//	private By apikeyDate = By.xpath("((//p[contains(@class,'font-bold capitalize break-all')])[1]//span)[2]");
+
+	private By ipAddressDate = By.xpath("(//span)[2]");
+
+	private By lblIpAddressLogs = By.xpath(
+			"(//div[contains(@class,'ActivityLog_logs_container')]/parent::div//div[contains(@class,'flex flex-col mb-6')])");
+
 	public void clickApiKeys() {
 		click(btneCommerceApiKeys, "ApiKeys");
+	}
+
+	public void clickWebhooks() {
+		click(btnWebhookss, "Webhooks");
+	}
+
+	public void getListOfWebHookLogs() throws InterruptedException {
+		Thread.sleep(5000);
+		List<WebElement> list = getElementsList(lblAPIKeyLogs, "API Key Logs");
+		int size = list.size();
+		System.out.println("size is " + size);
+		ExtentTestManager.setInfoMessageInReport("List size is " + size);
+		for (WebElement eles : list) {
+			try {
+				WebElement ele = eles.findElement(apikeyname);
+				String text = ele.getText();
+				WebElement ele2 = eles.findElement(apikeyDate);
+				String text2 = ele.getText();
+				String text1 = text + text2;
+				// System.out.println("Element is " + text);
+				ExtentTestManager.setInfoMessageInReport("API Keys " + text1);
+
+			} catch (Exception e) {
+				ExtentTestManager.setInfoMessageInReport("Information is " + e);
+			}
+
+		}
+
+	}
+
+	public void getListOfIpAddressKeyLogs() throws InterruptedException {
+		Thread.sleep(5000);
+		List<WebElement> list = getElementsList(lblIpAddressLogs, "Ip address logs");
+		int size = list.size();
+		System.out.println("size is " + size);
+		ExtentTestManager.setInfoMessageInReport("List size is " + size);
+		for (WebElement eles : list) {
+			try {
+				WebElement ele = eles.findElement(ipaddressName);
+				String text = ele.getText();
+				WebElement ele2 = eles.findElement(ipAddressDate);
+				String text2 = ele.getText();
+				String text1 = text + text2;
+				// System.out.println("Element is " + text);
+				ExtentTestManager.setInfoMessageInReport("API Keys " + text1);
+
+			} catch (Exception e) {
+				ExtentTestManager.setInfoMessageInReport("Information is " + e);
+			}
+
+		}
+
+	}
+
+	public void clickIPAddress() {
+		click(btnIpAddresss, "IP Address");
 	}
 
 	public void verifyHeading(String Heading) {
@@ -84,6 +167,30 @@ public class ApiKeysPage extends BrowserFunctions {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
 	}
 
+	public void getListOfAPIKeyLogs() throws InterruptedException {
+		Thread.sleep(5000);
+		List<WebElement> list = getElementsList(lblAPIKeyLogs, "API Key Logs");
+		int size = list.size();
+		System.out.println("size is " + size);
+		ExtentTestManager.setInfoMessageInReport("List size is " + size);
+		for (WebElement eles : list) {
+			try {
+				WebElement ele = eles.findElement(apikeyname);
+				String text = ele.getText();
+				WebElement ele2 = eles.findElement(apikeyDate);
+				String text2 = ele.getText();
+				String text1 = text + text2;
+				// System.out.println("Element is " + text);
+				ExtentTestManager.setInfoMessageInReport("API Keys " + text1);
+
+			} catch (Exception e) {
+				ExtentTestManager.setInfoMessageInReport("Information is " + e);
+			}
+
+		}
+
+	}
+
 	public void verifyhandSymbolHighlightedApiKeys(String cssProp, String expValue, String expColor) {
 		click(getDashBoardItems("Api Keys"), "Api Keys");
 		new CommonFunctions().verifyChangedColor(getDashBoardItems("Type"), "Api Keys", cssProp, expValue, expColor);
@@ -91,6 +198,10 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	public void clickPublicKeyCopy() {
 		click(btnCopyPublicKey, "Public Key Copy");
+	}
+
+	public void clickRevealSecretKey() {
+		click(revealSecretKey, "Reveal Secret Key");
 	}
 
 	public void clickSecretKeyCopy() {
@@ -149,27 +260,6 @@ public class ApiKeysPage extends BrowserFunctions {
 			}
 
 		}
-	}
-
-	public void getListOfAPIKeyLogs() throws InterruptedException {
-		Thread.sleep(5000);
-		List<WebElement> list = getElementsList(lblAPIKeyLogs, "API Key Logs");
-		int size = list.size();
-		System.out.println("size is " + size);
-		ExtentTestManager.setInfoMessageInReport("List size is " + size);
-		for (WebElement eles : list) {
-			try {
-				WebElement ele = eles.findElement(apikeyname);
-				String text = ele.getText();
-				// System.out.println("Element is " + text);
-				ExtentTestManager.setInfoMessageInReport("API Keys " + text);
-
-			} catch (Exception e) {
-				ExtentTestManager.setInfoMessageInReport("Information is " + e);
-			}
-
-		}
-
 	}
 
 	public void clickOnWebHooks() {

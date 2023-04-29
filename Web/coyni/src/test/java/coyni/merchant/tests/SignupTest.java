@@ -534,6 +534,9 @@ public class SignupTest {
 			customerProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount"));
 			customerProfilePage.preferencesComponent().clickSave();
 			topBarComponent.clickUserNameDrpDwn();
+//			topBarComponent.userNameDropDownComponent().clickPreferences();
+//			customerProfilePage.preferencesComponent().selectDefaultAccount(data.get("defaultAccount2"));
+//			customerProfilePage.preferencesComponent().clickSave();
 			topBarComponent.userNameDropDownComponent().clickUserDetails();
 			topBarComponent.userDetailsComponent().verifyAccountIdView();
 			topBarComponent.userDetailsComponent().verifyAccountStatus();
@@ -599,4 +602,5 @@ public class SignupTest {
 			ExtentTestManager.setFailMessageInReport("testDBAUnderBusinessAccount Failed due to Exception " + e);
 		}
 	}
+
 }

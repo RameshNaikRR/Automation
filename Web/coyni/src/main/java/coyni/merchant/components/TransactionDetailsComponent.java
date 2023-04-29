@@ -20,8 +20,8 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By lblNoRecords = By.xpath("//span[contains(text(),'No Filter Data Found')]");
 
-	private By lblTransactionType = By.xpath(
-			"//span[contains(text(),'Transaction Type')]/../..//p |//span[text()='Transaction Type']/../following-sibling::*[1] |//p[text()='Transaction Type']/following-sibling::*");
+	private By lblTransactionType = By
+			.xpath("(//span[contains(text(),'Transaction Type')]/.././following-sibling::*)[1]");
 
 	private By lblTransactionSubType = By
 			.xpath("//p[contains(text(),'Transaction Sub-type')]/following-sibling::*[1]/p");

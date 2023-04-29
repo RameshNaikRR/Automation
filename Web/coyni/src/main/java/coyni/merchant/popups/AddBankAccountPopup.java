@@ -41,9 +41,16 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnClose = By.xpath("//button[@class='self-end']");
 	private By iframe = By.cssSelector("#iframe");
 	private By btnMxBankk = By.xpath("(//span[contains(text(),'MX Bank')])[1]");
+	private By btnMXBankOATH = By.xpath("//span[contains(text(),'MX Bank (Oauth)')]");
 
 	public void clickMXBank() {
 		click(btnMXBank, "Mx Bank");
+	}
+
+	public void clickOnMxBankOATH() {
+		switchToFrame(iframe, "iframe");
+		click(btnMXBankOATH, "Mx Bank OATH");
+		switchToParentFrame();
 	}
 
 	public void clickSearchInstitutions() {

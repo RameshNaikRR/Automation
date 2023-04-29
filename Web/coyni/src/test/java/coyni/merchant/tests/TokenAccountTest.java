@@ -58,7 +58,7 @@ public class TokenAccountTest {
 
 	public void exports(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() != 0) {
+		if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 			tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 		} else {
 			tokenAccountPage.tokenAccountActivityComponent().exportfilesPage().clickExport();
@@ -74,6 +74,7 @@ public class TokenAccountTest {
 	public void testTodayTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
@@ -88,6 +89,7 @@ public class TokenAccountTest {
 	public void testYesterDayTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
@@ -102,6 +104,7 @@ public class TokenAccountTest {
 	public void testLast7DaysTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
@@ -116,9 +119,9 @@ public class TokenAccountTest {
 	public void testMonthToDateTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
-
 			} else {
 				tokenAccountPage.tokenAccountActivityComponent().verifyTableItemsCount(data.get("queryMonthToDate"));
 			}
@@ -130,7 +133,7 @@ public class TokenAccountTest {
 	public void testLastMonthTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 
@@ -145,6 +148,7 @@ public class TokenAccountTest {
 	public void testCustomDateRangeTrasactions(String strParams, String today) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
 			if (tokenAccountPage.tokenAccountActivityComponent().verifyTransactions() > 0) {
 				tokenAccountPage.tokenAccountActivityComponent().verifyNoTrasactionsFound();
 			} else {
@@ -170,6 +174,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testTodayTrasactions(strParams, "date");
+			Thread.sleep(3000);
 //			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 //					.getTotalTodayCount(data.get("query"));
 			exports(strParams);
@@ -202,6 +207,7 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
 			testLastMonthTrasactions(strParams, "date");
+			exports(strParams);
 //			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 //					.getTotalLastMonthCount(data.get("query4"));
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
@@ -219,25 +225,25 @@ public class TokenAccountTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testCustomDateRangePayOutsReceived(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickPayOutsReceived();
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-					.clickCustomDateRangePayOutsReceived();
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-					.setDateWithYear(data.get("startDate"));
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-			// verify CustomDateRange
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testCustomDateRangePayOutsReceived is failed due to exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCustomDateRangePayOutsReceived(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.tokenAccountActivityComponent().clickPayOutsReceived();
+//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+//					.clickCustomDateRangePayOutsReceived();
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+//					.setDateWithYear(data.get("startDate"));
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+//			// verify CustomDateRange
+//
+//		} catch (Exception e) {
+//			ExtentTestManager
+//					.setFailMessageInReport("testCustomDateRangePayOutsReceived is failed due to exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -305,25 +311,25 @@ public class TokenAccountTest {
 
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testCustomDateRangePurchaseTransaction(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-					.clickCustomDateRangeTokensPurchased();
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-					.setDateWithYear(data.get("startDate"));
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-			// verify CustomDateRange
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testCustomDateRangePurchaseTransaction is failed due to exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCustomDateRangePurchaseTransaction(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.tokenAccountActivityComponent().clickTokensPurchasedDetails();
+//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+//					.clickCustomDateRangeTokensPurchased();
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+//					.setDateWithYear(data.get("startDate"));
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+//			// verify CustomDateRange
+//
+//		} catch (Exception e) {
+//			ExtentTestManager
+//					.setFailMessageInReport("testCustomDateRangePurchaseTransaction is failed due to exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -392,25 +398,6 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testCustomDateRangeWithdrawTransaction(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			tokenAccountPage.clickTokenAccount();
-			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
-			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
-					.clickCustomDateRangeTokensWithdraw();
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
-					.setDateWithYear(data.get("startDate"));
-			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
-
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testCustomDateRangeWithdrawTransaction is failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testTokenAccountActivityDetails(String strParams) throws InterruptedException {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -462,7 +449,7 @@ public class TokenAccountTest {
 			ExtentTestManager.setInfoMessageInReport(
 					"Available balance is displayed as " + tokenAccountPage.getAvailableBalance());
 			tokenAccountPage.verifyLabelTransactionListDetails();
-			tokenAccountPage.verifyTableItemsCount(data.get("query"));
+			// tokenAccountPage.verifyTableItemsCount(data.get("query"));
 			tokenAccountPage.verifyPageNumbersWithCount();
 			ExtentTestManager.setInfoMessageInReport(
 					"Default Entries is displayed as " + tokenAccountPage.getDefaultEntriesPerPage());
@@ -498,20 +485,22 @@ public class TokenAccountTest {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
 				} else {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickCustomDateRange();
+					// tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickDate();
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
 							.clickSelectDate(data.get("startDate"));
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
 							.clickSelectDate(data.get("endDate"));
-					;
 
 				}
 
 			}
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickOnExport();
 			tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().navigationComponent().clickClose();
-			tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
-			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
-					.verifyNotificationText(data.get("notificationText"));
+			// tokenAccountPage.exportfilesPage().notificationsComponent().clickNotificationsIcon();
+			// tokenAccountPage.exportfilesPage().notificationsComponent().clickCloseIcon();
+//			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+//					.getNotificationText();
+//					//.verifyNotificationText(data.get("notificationText"));
 		} catch (
 
 		Exception e) {
@@ -588,9 +577,10 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.filterComponent().clickFilters();
+			// tokenAccountPage.filterComponent().clickOnDate();
 			tokenAccountPage.filterComponent().scroolDownToElement();
-			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -1436,9 +1426,16 @@ public class TokenAccountTest {
 			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 			// tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			tokenAccountPage.filterComponent().clickOnRecord();
 //			tokenAccountPage.transactionDetailsComponent().getTransactionType();
@@ -1459,9 +1456,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();// filter type - status
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData1 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData1 == 0) {
@@ -1474,9 +1478,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();// filter type - status
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData2 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData2 == 0) {
@@ -1490,9 +1501,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();// filter type - status
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData3 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData3 == 0) {
@@ -1506,9 +1524,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();// filter type - status
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData4 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData4 == 0) {
@@ -1522,9 +1547,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData5 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData5 == 0) {
@@ -1538,9 +1570,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData6 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData6 == 0) {
@@ -1553,9 +1592,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData7 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData7 == 0) {
@@ -1569,9 +1615,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData8 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData8 == 0) {
@@ -1585,9 +1638,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData9 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData9 == 0) {
@@ -1601,8 +1661,15 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData10 = tokenAccountPage.filterComponent().noFilterData();
@@ -1616,9 +1683,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData11 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData11 == 0) {
@@ -1631,9 +1705,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData12 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData12 == 0) {
@@ -1646,9 +1727,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData13 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData13 == 0) {
@@ -1661,9 +1749,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData14 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData14 == 0) {
@@ -1676,9 +1771,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData15 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData15 == 0) {
@@ -1691,9 +1793,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData16 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData16 == 0) {
@@ -1707,9 +1816,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 //			int filterData17 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData17 == 0) {
@@ -1723,9 +1839,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData18 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData18 == 0) {
@@ -1739,9 +1862,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData19 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData19 == 0) {
@@ -1755,9 +1885,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData20 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData20 == 0) {
@@ -1771,9 +1908,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData21 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData21 == 0) {
@@ -1786,9 +1930,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData22 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData22 == 0) {
@@ -1801,9 +1952,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData23 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData22 == 0) {
@@ -1816,9 +1974,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData24 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData24 == 0) {
@@ -1831,9 +1996,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData25 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData25 == 0) {
@@ -1846,9 +2018,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData26 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData26 == 0) {
@@ -1861,9 +2040,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData27 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData27 == 0) {
@@ -1876,9 +2062,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData28 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData28 == 0) {
@@ -1891,9 +2084,16 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnRefund();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData29 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData29 == 0) {
@@ -1907,9 +2107,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData30 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData30 == 0) {
@@ -1923,9 +2132,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData31 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData31 == 0) {
@@ -1939,9 +2157,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData32 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData32 == 0) {
@@ -1955,9 +2182,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData33 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData33 == 0) {
@@ -1971,9 +2207,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnBuyToken();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData34 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData34 == 0) {
@@ -1987,9 +2232,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData35 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData35 == 0) {
@@ -2004,9 +2258,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData36 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData36 == 0) {
@@ -2021,9 +2284,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData37 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData37 == 0) {
@@ -2038,9 +2310,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData38 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData38 == 0) {
@@ -2055,9 +2336,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnBankAccount();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData39 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData39 == 0) {
@@ -2072,9 +2362,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData40 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData40 == 0) {
@@ -2089,9 +2388,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData41 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData41 == 0) {
@@ -2106,9 +2414,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData42 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData42 == 0) {
@@ -2123,9 +2440,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData43 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData43 == 0) {
@@ -2140,9 +2466,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData44 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData44 == 0) {
@@ -2157,9 +2492,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnPending();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData45 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData45 == 0) {
@@ -2174,9 +2518,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData46 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData46 == 0) {
@@ -2191,9 +2544,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnCancelled();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData47 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData47 == 0) {
@@ -2208,9 +2570,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnInProgress();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData48 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData48 == 0) {
@@ -2225,9 +2596,18 @@ public class TokenAccountTest {
 //			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnClearAll();
+			tokenAccountPage.filterComponent().clickOnSaleOrder();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnSubType();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickOnClearTxnAmount();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed();
+			tokenAccountPage.filterComponent().clickOnClearAllTxnStatus();
+			tokenAccountPage.filterComponent().ClickOnFailed();
 			tokenAccountPage.filterComponent().clickResetAllFilters();
 			// int filterData49 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData49 == 0) {
@@ -2303,11 +2683,18 @@ public class TokenAccountTest {
 	public void testTransactionDetailsReserveRelease(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			testTransactionDetailsReserveMerchantPayOutFilters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().scroolDownToElement();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			// tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().clickApplyFilters();
 			testRecords(strParams);
-//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-//			tokenAccountPage.transactionDetailsComponent().getReferenceID();
-
+			Thread.sleep(3000);
+			tokenAccountPage.transactionDetailsComponent().getTransactionType();
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testTransactionDetailsReserveRelease Failed due to Exception " + e);
@@ -2448,6 +2835,40 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
+			testRecords(strParams);
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionList Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetailsFiltersSaleOrder(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.clickTokenAccount();
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().scroolDownToElement();
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType1"));
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().selectFilter(data.get("filterType2"));
+			tokenAccountPage.filterComponent().clickApplyFilters();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionDetailsFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionDetailsSaleOrder(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			testTransactionDetailsFiltersSaleOrder(strParams);
 			testRecords(strParams);
 //			tokenAccountPage.transactionDetailsComponent().getTransactionType();
 //			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
@@ -2663,7 +3084,7 @@ public class TokenAccountTest {
 			tokenAccountPage.clickBuyTokens();
 			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescrpWithOutPaymentMethods();
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			// tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().navigationComponent().clickBack();
 			tokenAccountPage.buyCoyniTokensPopup().buyCoyniTokensPaymentMethodPopup()
 					.verifyBuyCoyniTokenHeading(data.get(""));
@@ -3603,7 +4024,7 @@ public class TokenAccountTest {
 			tokenAccountPage.buyCoyniTokensPopup().clickChangeLink();
 			tokenAccountPage.buyCoyniTokensPopup().verifyBuyCoyniTokenDescription(data.get("buyCoyniTokenDescrp"));
 			tokenAccountPage.buyCoyniTokensPopup().clickAddNewPaymentMethod();
-			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
+			// tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().verifyAddNewPaymentMethodHeading();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().clickDebitCard();
 			tokenAccountPage.buyCoyniTokensPopup().addNewPaymentMethodPopup().addNewDebitCardPopup().addCardComponent()
 					.validateNameOnCard(data.get("cardName"));

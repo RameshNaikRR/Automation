@@ -30,7 +30,8 @@ public class NotificationsComponent extends BrowserFunctions {
 	private By dateFormat = By.xpath("(//span[@class='ml-1 font-sans font-semibold text-xs text-cgy2 pt-1'])[3]");
 	private By closeIcon = By
 			.xpath("//span[@class='float-right mt-6 mr-8 cursor-pointer icon-close text-cgy2 hover:text-cgy4']");
-	private By lblnotification = By.xpath("(//span[contains(@class,'text-base font-sans font-bold text-cgy4')]/../..)[1]");
+	private By lblnotification = By
+			.xpath("(//span[contains(@class,'text-base font-sans font-bold text-cgy4')]/../..)[1]");
 
 	public void clickNotificationsIcon() {
 		click(notificationsIcon, "NotificationIcon");
@@ -41,12 +42,44 @@ public class NotificationsComponent extends BrowserFunctions {
 		return getText(yesterdayNotifications, "NotificationsCount");
 	}
 
+	public boolean todayNotification() {
+		if (verifyElementDisplayed(todayNotifications, "Today Notifications")) {
+			click(todayNotifications, "Today");
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean yesterdayNotification() {
+		if (verifyElementDisplayed(yesterdayNotifications, "Yesterday Notifications")) {
+			click(yesterdayNotifications, "Yesterday");
+			return true;
+		}
+		return false;
+
+	}
+
+//	public boolean todayNotification() {
+//		if (verifyElementDisplayed(todayNotifications, "Today Notifications")) {
+//			click(todayNotifications, "Today");
+//			return true;
+//		}
+//		return false;
+//
+//	}
+
 	public String getOlderCount() {
 		return getText(olderNotifications, "NotificationsCount");
 	}
 
 	public String getTodayCount() {
 		return getText(olderNotifications, "NotificationsCount");
+	}
+	
+	public String getNotificationText() {
+		String text = getText(lblnotification, "Notification");
+		return text;
 	}
 
 	public void verifyNotificationText(String expText) {
@@ -79,18 +112,25 @@ public class NotificationsComponent extends BrowserFunctions {
 		}
 	}
 
+	public By getXpathLastNotification(String lastIndex) {
+		return By.xpath(
+				String.format("(//img[contains(@class,'SingleNotificationCard_dotIcon__XeCUH')])[%s]", lastIndex));
+	}
+
 	public void getTotalNotificationsCount() throws InterruptedException {
 		List<WebElement> list = getElementsList(lblNotificationss, "Notifications ");
 		int size = list.size();
-		System.out.println("size is " + size);
-		ExtentTestManager.setInfoMessageInReport("List size is " + size);
-		for (WebElement eles : list) {
-			try {
-				scrollToElement(lblNotificationss, "Scrolled");
+		String index = "" + size;
+		System.out.println("size is " + index);
+		ExtentTestManager.setInfoMessageInReport("List size is " + index);
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+//		for (WebElement eles : list) {
+		try {
+			scrollToElement(getXpathLastNotification(index), "Scrolled");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+//			}
 		}
 	}
 
@@ -132,6 +172,8 @@ public class NotificationsComponent extends BrowserFunctions {
 
 	public void verifyCursorNotifications() {
 		// click(notification, "Notification");
+		// new CommonFunctions().verifyMouseHoverAction(cursorDeleteNotification,
+		// getUiCount(), getTodayCount(), getOlderCount());
 		new CommonFunctions().verifyCursorAction(notification, "Notifications");
 	}
 

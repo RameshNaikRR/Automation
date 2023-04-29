@@ -33,9 +33,14 @@ public class ExportSelectedTransactionsPopup extends BrowserFunctions {
 	private By btnclose = By.xpath("//button[text()='Close']");
 	private By pagetitle = By.xpath("//h2[text()='Your Export is Being Prepared']");
 	private By lnkExportPage = By.xpath("//strong[@class='underline cursor-pointer text-cbl5']");
+	private By date = By.xpath("//div[contains(@class,'custom-date-picker-filter')][1]");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, expHeading, "Export Selected Transactions ");
+	}
+
+	public void clickDate() {
+		click(date, "Date");
 	}
 
 	public void verifyReserveExportHeading(String expHeading) {

@@ -37,7 +37,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	private By btnPersonalDropDown = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__YA3Vr')]");
 	private By sharedDropDown = By.xpath("(//span[contains(@class,'UserNameDropDown_title__RKKVD')])[1]");
 	private By sharedDropsDown = By.xpath("(//button[@class='UserNameDropDown_header__y-U81'])[6]");
-	private By merchantDropDown = By.xpath("//button[contains(@class,'DashboardMenu_mainDiv__kfX1C')]");
+	private By merchantDropDown = By.xpath("//div[contains(@class,'DashboardMenu_downArrow__YA3Vr')]");
 	private By btnMerchantDropDown = By.xpath("(//button[contains(@class,'UserNameDropDown_header__y-U81')])[5]");
 	private By btnsharedAccount = By.xpath("(//span[contains(@class,'UserNameDropDown_title__RKKVD')])[2]");
 	private By btnNewDBADropDown = By.xpath("//button[contains(@class,'DashboardMenu_mainDiv__kfX1C')]");

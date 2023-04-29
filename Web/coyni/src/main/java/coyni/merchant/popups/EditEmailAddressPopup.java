@@ -22,9 +22,9 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 		new CommonFunctions().elementView(txtOldEmailAddress, "Old Email Address");
 	}
 
-	public void fillNewEmailAddress(String newNumber) {
+	public void fillNewEmailAddress(String email) {
 		// waitForElement(txtNewEmailAddress, waittime, WaitForElement.visibility);
-		enterText(txtNewEmailAddress, newNumber, "NewNumber");
+		enterText(txtNewEmailAddress, email, "Email Address");
 	}
 
 	public void clickSMSCode() {

@@ -46,9 +46,25 @@ public class FilterComponent extends BrowserFunctions {
 	private By lnkClearTxnStatus = By.xpath("//span[text()='Transaction Status']//button[text()='Clear All']");
 	private By lnkClearSenderName = By.xpath("//span[text()='Sender Name']//button[text()='Clear']");
 	private By lnkClearReceiverName = By.xpath("//span[text()='Sender Name']//button[text()='Clear']");
+	private By btnClearAllTxnType = By.xpath("//span[contains(text(),'Transaction Type')]//button");
+	private By btnClearAllTxnSubType = By.xpath("//span[contains(text(),'Transaction Subtype')]//button");
+	private By btnClearDate = By.xpath("//label[contains(text(),'Date')]//button");
+	private By btnClearTxnAmount = By.xpath("//label[contains(text(),'Transaction Amount')]//button");
+	private By btnClearAllTxnStatus = By.xpath("//span[contains(text(),'Transaction Status')]//button");
+	private By btnClearSender = By.xpath("//label[contains(text(),'Sender Name')]//button");
+	private By btnClearReceiver = By.xpath("//label[contains(text(),'Receiver Name')]//button");
+
 
 	private By getCheckBoxes(String checkBox) {
 		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", checkBox));
+	}
+
+	public void clickOnClearSender() {
+		click(btnClearSender, "Sender Name");
+	}
+
+	public void clickOnClearReceiver() {
+		click(btnClearReceiver, "Receiver Name");
 	}
 
 	public void clickOnRecord() {
@@ -58,6 +74,26 @@ public class FilterComponent extends BrowserFunctions {
 	public int noFilterData() {
 		int size = getElementsList(lblNoFilterData, "").size();
 		return size;
+	}
+	
+	public void clickOnClearDate() {
+		click(btnClearDate, "Clear Date");
+	}
+
+	public void clickOnClearTxnAmount() {
+		click(btnClearTxnAmount, "Clear Txn Amount");
+	}
+
+	public void clickOnClearAllTxnStatus() {
+		click(btnClearAllTxnStatus, "ClearAll Txn Status");
+	}
+
+	public void clickOnClearAll() {
+		click(btnClearAllTxnType, "ClearAll");
+	}
+
+	public void clickOnClearAllTxnSubType() {
+		click(btnClearAllTxnSubType, "ClearAll");
 	}
 
 	public String getTotalPendingTransaction() {

@@ -18,6 +18,8 @@ public class AuthyComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
 
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
+	
+	private By editSms = By.xpath("//span[contains(@class,'font-semibold cursor-pointer hover:underline text-cgy4')]");
 
 	private By heading = By.xpath("//div[contains(text(),'Two-Step Authentication')]");
 
@@ -42,6 +44,10 @@ public class AuthyComponent extends BrowserFunctions {
 		}
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
+	}
+	
+	public void clickOnSms() {
+		click(editSms, "Edit SMS");
 	}
 
 	public void clickSms() {
