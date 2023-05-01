@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -92,5 +93,8 @@ public class AddCardPage extends MobileFunctions {
 	}
 	public PaymentMethodsPage paymentMethodsPage() {
 		return new PaymentMethodsPage();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

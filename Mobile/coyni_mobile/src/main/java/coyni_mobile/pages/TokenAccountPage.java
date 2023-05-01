@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
@@ -244,6 +245,9 @@ public class TokenAccountPage extends MobileFunctions {
     }
     public CustomerProfilePage customerProfilePage() {
     	return new CustomerProfilePage();
+    }
+    public AddNewPaymentComponent addNewPaymentComponent() {
+    	return new AddNewPaymentComponent();
     }
     
 }

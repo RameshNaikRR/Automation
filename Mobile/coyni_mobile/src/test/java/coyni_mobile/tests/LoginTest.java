@@ -88,9 +88,11 @@ public class LoginTest {
 			// loginPage.enterYourPINComponent().verifyEnterYourPinView();
 			loginPage.enterYourPINComponent().fillPin(loginData.get("pin"));
 			//loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
-			//loginPage.enterYourPINComponent().enableFaceIDpage().verifyHeading(loginData.get("enableTouchIdPageHeading"), loginData.get("idDescription"));
-			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-			
+			loginPage.enterYourPINComponent().enableFaceIDpage().verifyHeading(loginData.get("enableTouchIdPageHeading"), loginData.get("idDescription"));
+			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();	
+//			loginPage.agreementComponent().verifyTermsOfServiceUpdate(loginData.get("termsUpdateHeading"));
+//			loginPage.agreementComponent().verifyPrivacyPolicyHeading(loginData.get("privacyUpdateHeading"));
+//			loginPage.agreementComponent().verifyTermsOfServiceUpdate(loginData.get("termsUpdateHeading"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
 
 		} catch (Exception e) {
@@ -156,16 +158,16 @@ public class LoginTest {
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
 			DriverFactory.getDriver().hideKeyboard();
-			if (loginData.get("password").length() < 8) {
-				loginPage.clickEmail();
-			}
-			loginPage.clickLogin();
+//			if (loginData.get("password").length() < 8) {
+//				loginPage.clickEmail();
+//			}
+//			loginPage.clickLogin();
 			if (!loginData.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
 						loginData.get("elementName"));
 			}
 			if (!loginData.get("popUpMsg").isEmpty()) {
-				loginPage.ViewCoyni();
+				//loginPage.ViewCoyni();
 				loginPage.verifyPopupMsg(loginData.get("popUpMsg"));
 				Thread.sleep(1000);
 				loginPage.minimizePopupByClikingOK();

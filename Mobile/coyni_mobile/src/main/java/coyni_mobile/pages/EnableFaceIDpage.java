@@ -8,9 +8,10 @@ import io.appium.java_client.MobileBy;
 
 public class EnableFaceIDpage extends MobileFunctions {
 
-	private By btnNotNow = MobileBy.xpath("//*[contains(@resource-id, 'layoutNotnow')]|//*[@text='Not Now']");
-	private By lnkDontRemindMeAgain = MobileBy
-			.xpath("//*[contains(@resource-id, 'dontRemindTouchTV')]|(//*[@name='Don’t Remind Me Again'])[1]");
+	private By btnNotNow = MobileBy.//id("layoutNotnow");
+			xpath("//*[contains(@resource-id, 'layoutNotnow')]|//*[@text='Not Now']");
+	private By lnkDontRemindMeAgain = MobileBy.//id("dontRemindTouchTV");
+			xpath("//*[contains(@resource-id, 'dontRemindTouchTV')]|(//*[@name='Don’t Remind Me Again'])[1]");
 	private By btnEnableFaceId = MobileBy
 			.xpath("//*[contains(@resource-id, 'enableTouchCV')]|(//*[@name='Enable Face ID'])[2]|(//*[@text,'Enable Touch ID'])[10]");
 	private By lblEnableFaceId = MobileBy.xpath("(//*[@text='Enable Touch ID'])[1]|(//*[@name='Enable Face ID'])[1]");

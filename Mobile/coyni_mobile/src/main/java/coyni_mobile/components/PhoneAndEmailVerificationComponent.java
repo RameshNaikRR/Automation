@@ -56,7 +56,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(phoneHeading, "Page Heading", expHeading);
 //		new CommonFunctions().verifyLabelTextforVerification(phoneDescription, "Phone Description", expDescription1,
 //				expDescription2);
-//		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Description", expDescription);
+		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Description", expDescription);
 	}
 
 	public void verifyEmailHeading(String expHeading, String expDescription1, String expDescription2) {

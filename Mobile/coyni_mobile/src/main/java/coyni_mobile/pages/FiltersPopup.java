@@ -27,6 +27,7 @@ public class FiltersPopup extends MobileFunctions {
 	}
 
 	public void clickCalender() {
+		scrollDownToElement(btnCalender, "Calender");
 		click(btnCalender, "Calender");
 	}
 
@@ -52,9 +53,13 @@ public class FiltersPopup extends MobileFunctions {
 		return MobileBy.xpath(String.format("//*[contains(@resource-id,'%s')]", elementName));
 	}
 
-	public void selectFilter(String type) {
+	public void selectFilterType(String type) {
 		//scrollDownToElement(getElement(type), type);
 		click(getElement(type), type);
+	}
+	public void selectFilterSubType(String subType) {
+		scrollDownToElement(getElement(subType), subType);
+		click(getElement(subType), subType);
 	}
 
 	public DatePickerComponent datePickerComponent() {

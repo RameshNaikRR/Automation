@@ -8,6 +8,7 @@ import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.actions.SwipeDirection;
 import io.appium.java_client.MobileBy;
 
 public class PayRequestConfirmPopup extends MobileFunctions {
@@ -73,8 +74,9 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	}
 
 	public void swipeConfirm() {
-		wait.until(ExpectedConditions.presenceOfElementLocated(btnConfirm));
-		new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+
+		//new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+		swipeOnElement(btnConfirm, "Swipe Right", SwipeDirection.RIGHT);
 	}
 
 	public void getAvailableBalance() {

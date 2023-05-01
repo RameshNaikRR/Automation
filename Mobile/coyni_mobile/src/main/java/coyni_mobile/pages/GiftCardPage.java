@@ -22,8 +22,8 @@ public class GiftCardPage extends MobileFunctions {
 
 	private By lblWithdrawHeading = MobileBy.xpath("//*[@text='Withdraw Gift Card']");
 
-	private By imgAmazon = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[2]");
-	private By imgVisa = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[1]");
+	private By imgAmazon = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[2]|(//*[contains(@resource-id,'brandNameTV')])[2]");
+	private By imgVisa = MobileBy.xpath("(//*[contains(@resource-id,'imgBrand')])[1]|(//*[contains(@resource-id,'brandNameTV')])[1]");
 
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'amountET')]");
 	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]");

@@ -25,7 +25,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By lblCountry = MobileBy
 			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
 	private By btnAddCard = MobileBy
-			.xpath("//*[contains(@resource-id,'cvAddCard')] | //*[contains(@resource-id,'cvAdd')]|//*[contains(@resource-id,'addCardTV')]");
+			.xpath("//*[contains(@resource-id,'cvAddCard')]|//*[contains(@resource-id,'cvAdd')]|//*[contains(@resource-id,'addCardTV')]");
 	private By txtState = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
 	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");

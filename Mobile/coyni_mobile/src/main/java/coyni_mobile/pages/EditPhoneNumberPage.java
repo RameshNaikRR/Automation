@@ -29,6 +29,9 @@ public class EditPhoneNumberPage extends MobileFunctions {
 			ExtentTestManager.setFailMessageInReport("Current Phone Number is not " + expPhone);
 		}
 	}
+	  public void verifyEditPhonePageView() {
+	    	new CommonFunctions().elementView(heading, "Edit Phone Page");
+	    }
 
 	public void fillNewPhoneNumber(String newPhone) {
 		enterText(txtNewPhone, newPhone, "New Phone Number");

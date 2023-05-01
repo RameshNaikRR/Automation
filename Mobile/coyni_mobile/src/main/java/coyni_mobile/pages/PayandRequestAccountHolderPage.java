@@ -20,7 +20,7 @@ public class PayandRequestAccountHolderPage extends MobileFunctions {
 	// private By btnMessage =
 	// MobileBy.xpath("(//*[contains(@name,'Available')])[1]/following-sibling::*[2]");
 	private By lnkConverter = MobileBy.xpath(" ");
-	private By errorMessage = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By errorMessage = MobileBy.xpath("//*[contains(@resource-id,'tvError')]");
 
 	public void verifyName() {
 		ExtentTestManager.setInfoMessageInReport("User Name is : "+ getText(lblName));

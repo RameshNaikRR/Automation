@@ -15,7 +15,12 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'layoutDCard')]|//*[contains(@resource-id,'tvPayMethod')]");
 	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
-
+   //2.4//
+	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
+	private By lblErrorMsg = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnOk= MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
+	private By lblPaymentHeading= MobileBy.xpath("//*[@text='Add Payment Method']");
+	
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
@@ -37,10 +42,25 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		click(btnCreditCard, "Credit Card");
 	}
 
+	public void verifyErrHeading() {
+		new CommonFunctions().elementView(lblCoyni, "coyni is displayed");
+	}
+	public void verifyErrMsg() {
+		new CommonFunctions().elementView(lblErrorMsg,"Error is displayed");
+	}
+	public int verifyPaymentHeading() throws InterruptedException {
+		Thread.sleep(2000);
+		return getElementList(lblPaymentHeading, "Add Payment Heading").size();
+	}
+	public void verifyAddPaymentView() {
+		new CommonFunctions().elementView(lblPaymentHeading, "Add Payment Heading");
+	}
 	public void clickSignetAccount() {
 		click(btnSignetAccount, "Signet Account");
 	}
-
+	public void clickOk() {
+		click(btnOk, "Ok");
+	}
 	public AddExternalBankAccountComponent addExternalBankAccountComponent() {
 		return new AddExternalBankAccountComponent();
 	}

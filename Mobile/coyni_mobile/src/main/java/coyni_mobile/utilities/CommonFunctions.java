@@ -44,7 +44,7 @@ public class CommonFunctions {
 		String actText1=actText[0];
 		String actText2=actText[1].replace(" ", "");
 		if (expText1.equalsIgnoreCase(actText1) && expText2.equalsIgnoreCase(actText2)) {
-			ExtentTestManager.setPassMessageInReport(actText1+" "+actText2);
+			ExtentTestManager.setPassMessageInReport(actText1+": "+actText2);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText1, actText));

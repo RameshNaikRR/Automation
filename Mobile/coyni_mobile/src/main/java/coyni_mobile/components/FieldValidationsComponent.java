@@ -246,6 +246,14 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Exp", moreThanMax);
 		// new CommonFunctions().clearText(txtCardExp, "Card Exp");
 	}
+	public void validateCardCVVField(String singleDigit, String maxDigit, String moreThanMax) {
+		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().validateField(txtCVVorCVC, "Card Exp", singleDigit);
+		new CommonFunctions().clearText(txtCVVorCVC, "Card Exp");
+		new CommonFunctions().validateField(txtCVVorCVC, "Card Exp", maxDigit);
+		new CommonFunctions().clearText(txtCVVorCVC, "Card Exp");
+		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Exp", moreThanMax);
+	}
 
 	public void validateAddressLine1Field(String singleDigit, String maxDigit, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();

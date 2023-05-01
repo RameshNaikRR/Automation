@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import coyni_mobile.components.AgreementComponent;
 import coyni_mobile.components.EmailVerificationComponent;
 import coyni_mobile.components.EnterYourPINComponent;
 import coyni_mobile.components.FaceIDDisabledComponent;
@@ -26,23 +27,26 @@ import io.appium.java_client.MobileBy;
 
 public class LoginPage extends MobileFunctions {
 
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
-	private By txtPassword = MobileBy
-			.xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
-	private By lnkRetriveEmail = MobileBy
-			.xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
-	private By lnkForgotPassword = MobileBy
-			.xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
-	private By chkBxRememberMe = MobileBy
-			.xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy.xpath("//*[contains(@resource-id,'nextBtn')]/parent::*|//*[contains(@resource-id,'cvNext')]");
+	private By txtEmail = MobileBy.//id("etEmail");
+			xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
+	private By txtPassword = MobileBy.//id("etPassword");
+			xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
+	private By lnkRetriveEmail = MobileBy.//id("tvRetEmail");
+			xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
+	private By lnkForgotPassword = MobileBy.//id("forgotpwd");
+			xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
+	private By chkBxRememberMe = MobileBy.//id("chkRemember");
+			xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
+	private By btnLogin = MobileBy.//id("cvNext");
+			xpath("//*[contains(@resource-id,'nextBtn')]/parent::*|//*[contains(@resource-id,'cvNext')]");
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
 	private By lblerrMsg = MobileBy
-			.xpath("(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
+			.xpath("//*[contains(@resource-id,'tvEmailError')]|(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
 	private By popUperror = MobileBy
-			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
+			.xpath("//*[contains(@resource-id,'tvMessage')]|//*[contains(@text,'Either your email or password is incorrect.')]|//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'cvAction')]");
-	private By btnEyeIconPassword = MobileBy.xpath("//*[contains(@resource-id,'endIconIV')]");
+	private By btnEyeIconPassword = MobileBy.//id("endIconIV");
+			xpath("//*[contains(@resource-id,'endIconIV')]");
 	private By btnCross = MobileBy.xpath("");
 	private By iconFace = MobileBy.xpath("");
 
@@ -89,15 +93,15 @@ public class LoginPage extends MobileFunctions {
 	}
 
 	public void verifyPopupMsg(String expText) {
-		new CommonFunctions().verifyLabelText(lblerrMsg, "PopupMessage", expText);
+		new CommonFunctions().verifyLabelText(popUperror, "PopupMessage", expText);
 		
 	}
 
 	private void minimizePopup() {
 		if (DriverFactory.getDriver().findElement(btnLogin).isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
+			ExtentTestManager.setPassMessageInReport("Popup is closed");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
+			ExtentTestManager.setFailMessageInReport("Popup is not closed");
 		}
 	}
 
@@ -219,6 +223,9 @@ public class LoginPage extends MobileFunctions {
 	
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
+	}
+	public AgreementComponent agreementComponent() {
+		return new AgreementComponent();
 	}
 	
 }

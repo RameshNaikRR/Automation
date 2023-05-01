@@ -46,27 +46,66 @@ public class TokenAccountTest {
 //		tokenAccountPage.verifyAcccountStatus();
 	}
 
+//	@Test
+//	public void testNot() {
+//		try {
+//			tokenAccountPage.notificationComponent().countNotifications();
+//		}catch(Exception e) {
+//			
+//		}
+//	}
+
 	@Test
-	@Parameters({ "strParams" })
+	// @Parameters({ "strParams" })
 	public void testNotifications() {
 		try {
-			tokenAccountPage.clickNotificationsIcon();
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
+			int beforeRead = tokenAccountPage.notificationComponent().countNotifications();
+			// ExtentTestManager.setPassMessageInReport("Before Reading the notifications,
+			// the count is");
 			tokenAccountPage.notificationComponent().viewNotification();
-			tokenAccountPage.notificationComponent().countNotifications();
-			tokenAccountPage.notificationComponent().viewDots();
-			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().viewRequest();
-			tokenAccountPage.notificationComponent().clickRequest();
+			Thread.sleep(2000);
+			// tokenAccountPage.notificationComponent().countNotifications();
+			// tokenAccountPage.notificationComponent().viewDots();
+			tokenAccountPage.notificationComponent().swipeNotificationLeft();
+			tokenAccountPage.notificationComponent().clickReadUnRead();
 			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			Thread.sleep(3000);
+			int afterRead = tokenAccountPage.notificationComponent().countNotifications();
+			if (afterRead == beforeRead - 1) {
+				ExtentTestManager.setPassMessageInReport("After Reading the notification, the count is reducing");
+			} else {
+				ExtentTestManager.setFailMessageInReport("After Reading the notification, the count is not reducing");
+			}
+			int beforeUnRead = tokenAccountPage.notificationComponent().countNotifications();
 			tokenAccountPage.clickNotificationsIcon();
-			tokenAccountPage.notificationComponent().readDot();
-//			tokenAccountPage.notificationComponent().swipeNotificationLeft();
-//			tokenAccountPage.notificationComponent().clickReadUnRead();
-//			tokenAccountPage.notificationComponent().swipeNotificationLeft();
-//			tokenAccountPage.notificationComponent().clickReadUnRead();
-//			tokenAccountPage.notificationComponent().swipeNotificationRight();
-//			tokenAccountPage.notificationComponent().clickDelete();
+//			tokenAccountPage.notificationComponent().viewRequest();
+//			tokenAccountPage.notificationComponent().clickRequest();
+			tokenAccountPage.notificationComponent().swipeNotificationLeft();
+			tokenAccountPage.notificationComponent().clickReadUnRead();
+			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			Thread.sleep(3000);
+			int afterUnRead = tokenAccountPage.notificationComponent().countNotifications();
+			if (afterUnRead == beforeUnRead + 1) {
+				ExtentTestManager.setPassMessageInReport("After Un Reading the notification, the count is increasing");
+			} else {
+				ExtentTestManager
+						.setFailMessageInReport("After Un Reading the notification, the count is not increasing");
+			}
+			int beforeDelete = tokenAccountPage.notificationComponent().countNotifications();
+			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().swipeNotificationRight();
+			tokenAccountPage.notificationComponent().clickDelete();
+			tokenAccountPage.notificationComponent().navigationComponent().clickBack();
+			Thread.sleep(3000);
+			int afterDelete = tokenAccountPage.notificationComponent().countNotifications();
+			if (afterDelete == beforeDelete - 1) {
+				ExtentTestManager.setPassMessageInReport("After Deleting notification, the count is reduced");
+			} else {
+				ExtentTestManager.setFailMessageInReport("After Deleting notification, the count is not reduced");
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNotifications faield due to exception " + e);
@@ -101,6 +140,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().clickRequest();
 			tokenAccountPage.notificationComponent().viewPay();
 			tokenAccountPage.notificationComponent().clickPay();
 			tokenAccountPage.notificationComponent().payRequestConfirmPopup().verifyHeading(data.get("heading"));
@@ -126,6 +166,7 @@ public class TokenAccountTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickNotificationsIcon();
+			tokenAccountPage.notificationComponent().clickRequest();
 			tokenAccountPage.notificationComponent().viewDeny();
 			tokenAccountPage.notificationComponent().viewPay();
 			tokenAccountPage.notificationComponent().clickDeny();
@@ -429,12 +470,14 @@ public class TokenAccountTest {
 					.fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().setAmountComponent().clickOk();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSaveToAlbum();
+			Thread.sleep(1000);
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickClearAmount();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSaveToAlbum();
-			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().navigationComponent().clickClose();
-			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
+			// tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifyReceipientAddress();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickCopy();
+			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
@@ -679,6 +722,8 @@ public class TokenAccountTest {
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
 					.getTokenTransactionStatusDetails();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
+					.clickDone();
 			tokenAccountPage.clickLatestTransaction();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.transactionDetailsComponent2().getBuyTokenDebitCardDetails();
@@ -1491,14 +1536,36 @@ public class TokenAccountTest {
 			tokenAccountPage.clickViewMore();
 			tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
 			tokenAccountPage.transactionPage().clickfilter();
-			tokenAccountPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
+			tokenAccountPage.transactionPage().filtersPopup().selectFilterType(data.get("filterType"));
 			tokenAccountPage.transactionPage().filtersPopup().clickApplyfilters();
 //			tokenAccountPage.transactionPage().ScrollTransactions();
-//			Thread.sleep(2000);
+			Thread.sleep(2000);
 //          tokenAccountPage.transactionPage().getUITransactionCount();
 			tokenAccountPage.transactionPage().clickFirstTransaction();
+			// Thread.sleep(2000);
+			// tokenAccountPage.transactionPage().getUITransactionCount();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testfilterSubType(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Thread.sleep(2500);
+			tokenAccountPage.clickViewMore();
+			tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			tokenAccountPage.transactionPage().clickfilter();
+			tokenAccountPage.transactionPage().filtersPopup().selectFilterSubType(data.get("filterSubType"));
+			tokenAccountPage.transactionPage().filtersPopup().clickApplyfilters();
+//			tokenAccountPage.transactionPage().ScrollTransactions();
 			Thread.sleep(2000);
-			tokenAccountPage.transactionPage().getUITransactionCount();
+//          tokenAccountPage.transactionPage().getUITransactionCount();
+			tokenAccountPage.transactionPage().clickFirstTransaction();
+			// Thread.sleep(2000);
+			// tokenAccountPage.transactionPage().getUITransactionCount();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
 		}
@@ -1517,9 +1584,9 @@ public class TokenAccountTest {
 			tokenAccountPage.clickViewMore();
 			tokenAccountPage.transactionPage().verifyHeading(data.get("transactionHeading"));
 			tokenAccountPage.transactionPage().clickfilter();
-			tokenAccountPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
-			tokenAccountPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
-			tokenAccountPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
+			tokenAccountPage.transactionPage().filtersPopup().selectFilterType(data.get("filterType"));
+			tokenAccountPage.transactionPage().filtersPopup().selectFilterSubType(data.get("filterType1"));
+			tokenAccountPage.transactionPage().filtersPopup().selectFilterSubType(data.get("filterType2"));
 			tokenAccountPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
 			tokenAccountPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.transactionPage().filtersPopup().clickCalender();
@@ -1535,7 +1602,7 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().clickfilter();
 			tokenAccountPage.transactionPage().filtersPopup().clickResetAllFilters();
 			tokenAccountPage.transactionPage().filtersPopup().clickApplyfilters();
-			tokenAccountPage.transactionPage().filtersPopup().navigationComponent().clickClose();
+			// tokenAccountPage.transactionPage().filtersPopup().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfiltersWithCalender failed due to exception " + e);
 		}

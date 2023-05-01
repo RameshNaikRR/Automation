@@ -3,6 +3,7 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
@@ -227,4 +228,7 @@ public class SignUpPage extends MobileFunctions {
    public PaymentMethodsPage paymentMethodsPage() {
 	return new PaymentMethodsPage();
 }
+   public AddNewPaymentComponent addNewPaymentComponent() {
+	   return new AddNewPaymentComponent();
+   }
 }

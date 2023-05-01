@@ -17,10 +17,11 @@ public class ScanMePage extends MobileFunctions {
 	private By lnkSetAmount = MobileBy.xpath("//*[contains(@resource-id,'scanMesetAmountTV')]");
 	private By lnkClearAmount = MobileBy.xpath("//*[contains(@resource-id,'scanMesetAmountTV')]");
 	private By lnkSaveToAlbum = MobileBy.xpath("//*[contains(@resource-id,'saveToAlbumTV')]");
-	private By lnkCopy = MobileBy.xpath("//*[contains(@resource-id,'lyCopy')]");
+	private By lnkCopy = MobileBy.xpath("//*[contains(@resource-id,'lyCopy')]|//*[contains(@resource-id,'imgCopy')]");
 	private By lnkShare = MobileBy.xpath("//*[contains(@resource-id,'imgShare')]");
-	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']");
-	private By btnAllow = MobileBy.xpath("//*[contains(@text,'ALLOW')]");
+	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']/following-sibling::*[1]|//*[contains(@resource-id,'tvWalletAddress')]");
+	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
+	
 
 	public void verifylblUserName(String userName) {
 		new CommonFunctions().verifyLabelText(lblUserName, "userName", userName);
@@ -51,6 +52,7 @@ public class ScanMePage extends MobileFunctions {
 	}
 
 	public void clickCopy() {
+		scrollDownToElement(lnkCopy, "Copy");
 		click(lnkCopy, "Copy");
 	}
 

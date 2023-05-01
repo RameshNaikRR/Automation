@@ -46,7 +46,7 @@ public class TransactionPage extends MobileFunctions {
 	private By giftCardAmount = MobileBy.xpath("(//*[contains(@text,'-')])[1]");
 	private By amount = MobileBy.xpath("(//*[contains(@resource-id,'amountTV')])[3]");
 	private By lblNoRecent = MobileBy
-			.xpath("//*[@text='You have no more transactions']|//*[contains(@resource-id,'noTxnTV')]|//*[contains(@resource-id,'noTransactions')]");
+			.xpath("//*[@text='You have no more transactions']|//*[contains(@resource-id,'noTxnTV')]|//*[@text='You have no transactions']");
 	private By lblNoMore = MobileBy.xpath("//*[contains(@resource-id,'noMoreTransactions')]|//*[contains(@resource-id,'noTransactions')]");
 //	private By copyIcon = MobileBy.xpath("//*[contains(@resource-id,'refidTV')]|//*[contains(@resource-id,'withdrawRefID')]|//*[contains(@resource-id,'refIdIV')]|//*[contains(@resource-id,'ref')]|//*[contains(@resource-id,'refid')]|//*[contains(@resource-id,'referenceIDTV')|(//*[contains(@resource-id,'ref')])[2]]");
 	private By copyIcon = MobileBy.xpath("(//*[contains(@resource-id,'ref')])[1]");
@@ -62,7 +62,7 @@ public class TransactionPage extends MobileFunctions {
 	}
 
 	public void ScrollTransactions() {
-		if (getElementList(lblNoRecent, "").size() == 0) {
+		if (getElementList(lblNoMore, "").size() == 0) {
 			scrollDownToElement(lblNoMore, "You have no transactions");
 		} else {
 			ExtentTestManager.setInfoMessageInReport("You have no recent transactions");
@@ -91,6 +91,7 @@ public class TransactionPage extends MobileFunctions {
 //			click(searchOption, "Search");
 //			click(btnPaste, "Paste");
 		} else {
+			//ScrollTransactions();
 			ExtentTestManager.setPassMessageInReport("No Transactions found");
 		}
 	}

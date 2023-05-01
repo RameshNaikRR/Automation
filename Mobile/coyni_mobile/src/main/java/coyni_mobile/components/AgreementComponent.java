@@ -34,6 +34,7 @@ public class AgreementComponent extends MobileFunctions {
 	}
 	
 	public void verifyTermsOfServiceUpdate(String expHeading) throws InterruptedException {
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
 		if (getElementList(termsOfServiceUpdateHeading, "").size() > 0) {
 			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
@@ -43,6 +44,7 @@ public class AgreementComponent extends MobileFunctions {
 			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
 		}
 	}
+	
 
 	public void clickAgreeCheckBox() {
 		click(chboxAgree, "Terms of service and Privacy");

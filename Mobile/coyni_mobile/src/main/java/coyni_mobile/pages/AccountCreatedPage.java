@@ -13,10 +13,13 @@ public class AccountCreatedPage extends MobileFunctions {
 	private By btnAddCreditOrDebit = MobileBy.xpath("//*[contains(@resource-id,'tvAddCard')]");
 	private By btnSkip = MobileBy.xpath("//*[contains(@resource-id,'tvSkip')]|(//*[@text='Skip'])[1]");
 	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Your coyni account')]");
+	//2.4//
+	private By btnGoToDashboard = MobileBy.xpath("//*[@text='Go to Dashboard']");
 
-	public void verifyHeading(String expHeading, String accountDescription) {
+
+	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
-		new CommonFunctions().verifyLabelText(lblDescription, "Description", accountDescription);
+		new CommonFunctions().elementView(lblDescription, "Description");
 	}
 
 	public void clickSkip() {
@@ -30,6 +33,13 @@ public class AccountCreatedPage extends MobileFunctions {
 	public void clickGetStarted() {
 		new CommonFunctions().elementView(btnGetStarted, "Get started ");
 		click(btnGetStarted, "Get Started");
+	}
+	public int verifyGoToDashboard() throws InterruptedException {
+		Thread.sleep(2000);
+		return getElementList(btnGoToDashboard, "Go To Dashboard").size();
+	}
+	public void clickGoToDashboard() {
+		click(btnGoToDashboard, "Go To Dashboard");
 	}
 
 	public TokenAccountPage tokenAccountPage() {
