@@ -131,9 +131,8 @@ public class ReceivePaymentPage extends MobileFunctions {
 		click(btnClose, "Close");
 	}
 
-	public int clickAllow() throws InterruptedException {
-		Thread.sleep(1000);
-		return DriverFactory.getDriver().findElements(btnAllow).size();
+	public void clickAllow() throws InterruptedException {
+		click(btnAllow, "Allow");
 	}
 
 	public ErrorMessagePopupComponent errorMessagePopupComponent() {

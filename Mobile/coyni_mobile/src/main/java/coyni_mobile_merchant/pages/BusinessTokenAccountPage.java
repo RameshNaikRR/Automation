@@ -23,10 +23,11 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnAccount = MobileBy.xpath("//*[contains(@resource-id,'account_tab')]");
 	private By btnTransactions = MobileBy.xpath("//*[contains(@resource-id,'transactions_tab')]");
 	private By btnCloseIcon = MobileBy.xpath("//*[contains(@resource-id,'businessTrackerCloseIV')]");
-	private By lblUserName = MobileBy
-			.xpath(" //*[contains(@resource-id,'userNameTV')]|//*[contains(@resource-id,'tv_user_name')]");
+	private By lblUserName = MobileBy.xpath(
+			" //*[contains(@resource-id,'userNameTV')]|//*[contains(@resource-id,'tv_user_name')]|//*[contains(@resource-id,'tvUserName')]");
 	private By btnNotifications = MobileBy.xpath("//*[contains(@resource-id,'iv_notifications')]");
-	private By btnChooseUser = MobileBy.xpath("//*[contains(@resource-id,'iv_user_icon_CV')]");
+	private By btnChooseUser = MobileBy
+			.xpath("//*[contains(@resource-id,'iv_user_icon_CV')]|//*[contains(@resource-id,'tvUserInfo')]");
 	private By btnAddDBA = MobileBy.xpath("//*[contains(@resource-id,'addDbaText')]");
 	private By btnAddNewAccount = MobileBy.xpath("//*[@text='Add New Account']");
 	private By lnKBusinessAccount = MobileBy
@@ -41,11 +42,25 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 	private By btnSelectAccount2 = MobileBy.xpath("(//*[contains(@resource-id,'arrow')])[2]");
 	private By btnChildAccount1 = MobileBy.xpath("(//*[contains(@resource-id,'ll_child_view')])[1]");
 	private By btnEnabledAcc = MobileBy.xpath("(//*[contains(@resource-id,'title')])[+ i +]");
-	private By btn = MobileBy.id("com.coyni.mapp:id/title");
+	private By btnPersonal = MobileBy.xpath("//*[@text='Test Last']");
+	private By chooseMerchant = MobileBy.xpath("//*[@text='goura']");
+	private By chooseMerchantDBA = MobileBy.xpath("//*[@text='ssdfyjjjj']");
 
 	public void clickAccount() {
 		new CommonFunctions().elementView(btnAccount, "Account");
 		click(btnAccount, "Account");
+	}
+
+	public void choosePersonalAccount() {
+		scrollDownToElement(btnPersonal, "Personal Account");
+		click(btnPersonal, "Personal Account");
+	}
+
+	public void chooseMerchantAccount() {
+		scrollDownToElement(chooseMerchant, "Merchant Account");
+		click(chooseMerchant, "Merchant Account");
+		scrollDownToElement(chooseMerchantDBA, "Merchant Account DBA");
+		click(chooseMerchantDBA, "Merchant Account DBA");
 	}
 
 	public void clickNotifications() {
@@ -113,7 +128,7 @@ public class BusinessTokenAccountPage extends MobileFunctions {
 			scrollDownToElement(btnAddDBA, "Add DBA");
 			if (getElement(btnAddDBA, "Add DBA").isEnabled()) {
 				click(btnAddDBA, "Add DBA");
-			} else if (noOfCompanies == i+1) {
+			} else if (noOfCompanies == i + 1) {
 				ExtentTestManager.setFailMessageInReport(
 						"No company has been possibility to add DBA, because of DBA applications is In Progress or UnderReview");
 

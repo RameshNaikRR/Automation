@@ -1,5 +1,6 @@
 package coyni_mobile_merchant.tests;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import org.testng.annotations.AfterTest;
@@ -96,6 +97,59 @@ public class DashBoardTest {
 			businessTokenAccountPage.dashBoardPage().verifyLabelMerchantBalance(data.get("label"));
 			businessTokenAccountPage.dashBoardPage().getDashBoardDescription();
 			businessTokenAccountPage.dashBoardPage().getMerchantBalance();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantBalance Failed due to this Exception" + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testDashBoardFeeCalculation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickDashBoard();
+			businessTokenAccountPage.dashBoardPage().verifyLabelMerchantBalance(data.get("label"));
+			double beforeTransMerchBalance = businessTokenAccountPage.dashBoardPage().verifyMerchantBalance();
+			int beforeTransCount = businessTokenAccountPage.dashBoardPage().verifyTransacyions();
+			double beforeTransGroAmount = businessTokenAccountPage.dashBoardPage().verifyGrossAmount();
+			double beforeTransProcessFee = businessTokenAccountPage.dashBoardPage().verifyNetAmount();
+			double beforeTransNetAmount = businessTokenAccountPage.dashBoardPage().verifyProcessingFee();
+			double beforeTransBatchPay = businessTokenAccountPage.dashBoardPage().verifyBatchPayouts();
+			double beforeTransNextPayout = businessTokenAccountPage.dashBoardPage().verifyNextPayout();
+			double beforeTransReserve = businessTokenAccountPage.dashBoardPage().verifyReserveBalance();
+			MerchantMenuIconTest merchantMenuIconTest = new MerchantMenuIconTest();
+			merchantMenuIconTest.testReceivePayment(strParams);
+			businessTokenAccountPage.clickChooseUser();
+			businessTokenAccountPage.choosePersonalAccount();
+			MerchantMenuIconTest merchantMenuTest = new MerchantMenuIconTest();
+			merchantMenuTest.testScanSaveAlbum(strParams);
+			businessTokenAccountPage.clickChooseUser();
+			businessTokenAccountPage.chooseMerchantAccount();
+			int afterTransCount = businessTokenAccountPage.dashBoardPage().verifyTransacyions();
+			if (afterTransCount == beforeTransCount + 1) {
+				ExtentTestManager.setPassMessageInReport("Transactions count is updaing properly in processing volume");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Transactions count is not updaing in processing volume");
+			}
+			double afterTransMerchBalance = businessTokenAccountPage.dashBoardPage().verifyMerchantBalance();
+			double afterTransProcessFee = businessTokenAccountPage.dashBoardPage().verifyNetAmount();
+			double afterTransNetAmount = businessTokenAccountPage.dashBoardPage().verifyProcessingFee();
+			double afterTransGroAmount = businessTokenAccountPage.dashBoardPage().verifyGrossAmount();
+			double afterTransBatch = businessTokenAccountPage.dashBoardPage().validateBatchPayouts(beforeTransNextPayout,beforeTransReserve);
+			if (afterTransGroAmount == (afterTransProcessFee + afterTransNetAmount)) {
+				ExtentTestManager.setPassMessageInReport("Exact amount of transaction is reflected in Gross Amount");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Exact amount of transaction not reflected in Gross Amount");
+			}
+			double finalMerchBal=afterTransMerchBalance - beforeTransMerchBalance;
+			DecimalFormat df = new DecimalFormat("#.##");
+			Double fnlMerchBal = Double.parseDouble(df.format(finalMerchBal));
+			if (fnlMerchBal==afterTransBatch) {
+				ExtentTestManager.setPassMessageInReport("The Merchant Balance is updating based on transaction");
+			} else {
+				ExtentTestManager.setFailMessageInReport("The Merchant Balance is not updating based on transaction");
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testMerchantBalance Failed due to this Exception" + e);

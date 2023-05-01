@@ -3290,7 +3290,6 @@ public class MerchantProfileTest {
 			merchantProfilePage.clickGetHelp();
 			merchantProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
 			merchantProfilePage.getHelpPage().getHelpDetails();
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
 		}
@@ -3303,6 +3302,9 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickProfile();
 			merchantProfilePage.clickPaymentMethods();
+			if (merchantProfilePage.paymentMethodsPage().verifyAddNewPaymentMethod() == 1) {
+				merchantProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
+			}
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().clickDebitCard();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
 					.fillNameOnCard(data.get("nameOnCard"));
@@ -3312,14 +3314,7 @@ public class MerchantProfileTest {
 					.fillCardExp(data.get("cardExp"));
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
 			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillAddressLine1(data.get("addressLine1"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillAddressLine2(data.get("addressLine2"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.fillCity(data.get("city"));
-			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-					.validateAllStates();
-
+					.validateAllStates(data.get("states"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}

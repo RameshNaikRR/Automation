@@ -10,14 +10,16 @@ import io.appium.java_client.MobileBy;
 public class ScanCodePage extends MobileFunctions {
 
 	private By btnFlashLight = MobileBy.xpath("//*[contains(@resource-id,'toglebtn')]");
-	private By btnAlbum = MobileBy.xpath("//*[contains(@resource-id,'albumIV')]");
+	private By btnAlbum = MobileBy.id("com.coyni.mapp:id/albumIV");
 	private By btnAllow = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_button')]");
 	private By btnDeny = MobileBy.xpath("//*[contains(@resource-id,'permission_deny_button')]");
 	private By lblInvalidQRCode = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
-	private By lblSelectPhoto = MobileBy.xpath("//*[contains(@resource-id,'action_bar_title')]");
+	private By lblSelectPhoto = MobileBy.id("com.google.android.apps.photos:id/image");
 	private By btnPhoto = MobileBy.xpath("//*[contains(@resource-id,'gl_root_view')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'action_cancel')]");
+
+	private By chooseImage = MobileBy.xpath("//*[@text='Today']/../following-sibling::*[1]");
 
 	public void clickFlashLight() {
 		click(btnFlashLight, "FlashLight");
@@ -39,8 +41,8 @@ public class ScanCodePage extends MobileFunctions {
 	}
 
 	public void clickPhoto() {
-		click(btnPhoto, "Photo");
-		click(btnPhoto, "Photo");
+		click(chooseImage, "Photo");
+//		click(btnPhoto, "Photo");
 	}
 
 	public void verifySelectPhoto() {

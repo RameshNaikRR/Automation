@@ -24,7 +24,8 @@ public class ScanPage extends MobileFunctions {
 		click(btnScanMe, "ScanMe");
 	}
 
-	public void clickOnWhileUsingApp() {
+	public void clickOnWhileUsingApp() throws InterruptedException {
+		Thread.sleep(2000);
 		if(getElementList(btnWhileUsingApp, "While Using App").size()>0){
 		click(btnWhileUsingApp, "While Using App");
 		}

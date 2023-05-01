@@ -33,8 +33,6 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 	private By lnkBrowseFiles = MobileBy.xpath("//*[contains(@resource-id,'browseFileTV')]");
 	private By lnkLibrary = MobileBy.xpath("//*[contains(@resource-id,'libraryTV')]");
 
-
-
 	public void clickGetStarted() {
 		click(btnGetStarted, "Get Started");
 	}
@@ -124,7 +122,6 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 		click(lnkLibrary, "Choose From Library");
 	}
 
-
 	public void AddCompanyInfo(String expHeading, String expName, String expEmail, String expNum, String expSSN,
 			String expAddress1, String expAddress2, String expCity, String expState, String expZipcode)
 			throws InterruptedException {
@@ -156,7 +153,7 @@ public class RegistrationCompanyInfoPage extends MobileFunctions {
 		uploadDocumentComponent().clickCapture();
 		uploadDocumentComponent().clickSave();
 		clickDone();
-		
+
 	}
 
 	public UploadDocumentComponent uploadDocumentComponent() {

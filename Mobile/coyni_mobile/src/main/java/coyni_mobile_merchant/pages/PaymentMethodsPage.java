@@ -27,7 +27,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 //	private By btndebitCard = MobileBy.xpath("//*[contains(@resource-id,'tvDCHead')]");
 //	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
-	private By headingMXBankAccount = MobileBy.xpath("\"//*[@text='Add Bank Account']|//*[@text='Add Bank Checking Account']\"");
+	private By headingMXBankAccount = MobileBy.xpath("//*[@text='Add Bank Account']|//*[@text='Add Bank Checking Account']");
 	private By btnNext = MobileBy.xpath("//*[contains(@text,'Next')]");
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");

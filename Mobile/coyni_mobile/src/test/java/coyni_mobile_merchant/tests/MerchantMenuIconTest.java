@@ -95,6 +95,29 @@ public class MerchantMenuIconTest {
 
 	}
 
+	public void testScanSaveAlbum(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
+//			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+					.verifySacnPaymentOrderDetails();
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+					.enterYourPINComponent().fillPin(data.get("pin"));
+			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
+					.transactionSucessFailurePendingComponent().verifyScanPaymentDetails();
+			businessTokenAccountPage.getUserName();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
+		}
+
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testReceivePaymentView(String strParams) {
@@ -139,6 +162,31 @@ public class MerchantMenuIconTest {
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReceivePaymentView  failed due to exception " + e);
+		}
+
+	}
+
+	public void testReceivePayment(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			BusinessTokenAccountPage businessTokenAccountPage = new BusinessTokenAccountPage();
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickReceivePayment();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getUserNameText();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSetAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage()
+					.verifyAmountPageHeading(data.get("amountHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().fillAmount(data.get("amount"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickOk();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().getRequestedAmount();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickSaveAlbum();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickAllow();
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().toastComponent()
+					.verifyToastMsg(data.get("saveAlbumToast"));
+			businessTokenAccountPage.tokenMenuIconPopUp().receivePaymentPage().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testReceivePayment  failed due to exception " + e);
 		}
 
 	}

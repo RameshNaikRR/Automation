@@ -13,7 +13,7 @@ import io.appium.java_client.MobileBy;
 
 public class TokenMenuIconPopUp extends MobileFunctions {
 
-	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'llScan')]");
+	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'llScan')]|//*[contains(@resource-id,'scanQrLL')]");
 	private By btnReceivePayment = MobileBy.xpath("//*[contains(@resource-id,'receive_PaymentLL')]");
 	private By btnBuyTokens = MobileBy.xpath("//*[contains(@resource-id,'buy_TokenLL')]");
 	private By btnWithdrawTokens = MobileBy.xpath("//*[contains(@text,'Withdraw Tokens')]");

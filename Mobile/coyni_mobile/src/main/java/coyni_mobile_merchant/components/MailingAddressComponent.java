@@ -1,6 +1,5 @@
 package coyni_mobile_merchant.components;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -13,9 +12,6 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 
 public class MailingAddressComponent extends MobileFunctions {
 	private By txtAddressLine1 = MobileBy.xpath(
@@ -41,6 +37,8 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");
 	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
+	private By lblState = MobileBy.id("com.coyni.mapp:id/tvState");
+	private By lblStateValue = MobileBy.id("com.coyni.mapp:id/etState");
 
 	private By verifyAllStates(int Value) {
 		return By.xpath(String.format("(//*[contains(@resource-id,'tvState')])[%s]", Value));
@@ -137,28 +135,53 @@ public class MailingAddressComponent extends MobileFunctions {
 		click(btnYes, "Yes");
 	}
 
-	public void validateAllStates() throws InterruptedException {
-
-		click(drpDwnState, "State Drop down");	
-		for (int j = 1; j < 10; j++) {
-			for (int i = 1; i < 7; i++) {
-				// scrollDownToElement(txtCity, "City");
+//	public void validateAllStates() throws InterruptedException {
+//
+//		click(drpDwnState, "State Drop down");	
+//		for (int j = 1; j < 10; j++) {
+//			for (int i = 1; i < 7; i++) {
+//				// scrollDownToElement(txtCity, "City");
+////				click(drpDwnState, "State Drop down");
+////			enterText(txtState, state, "State");
+////			Thread.sleep(2000);
+////			new CommonFunctions().clickEnter();
+////			// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
+////			new CommonFunctions().clickEnter();
+//				scrollDownToElement(verifyAllStates(i), getText(verifyAllStates(i)));
+//				click(verifyAllStates(i), getText(verifyAllStates(i)));
+//				click(btnConfirmState, "Done");
+//				ExtentTestManager.setPassMessageInReport("Selected State is" + getText(drpDwnState));
 //				click(drpDwnState, "State Drop down");
-//			enterText(txtState, state, "State");
+//		}
 //			Thread.sleep(2000);
-//			new CommonFunctions().clickEnter();
-//			// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
-//			new CommonFunctions().clickEnter();
-				scrollDownToElement(verifyAllStates(i), getText(verifyAllStates(i)));
-				click(verifyAllStates(i), getText(verifyAllStates(i)));
+//			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+//			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+//					.moveTo(PointOption.point(540, (int) (440))).release().perform();
+//		}
+//	}
+
+	public void validateAllStates(String state) throws InterruptedException {
+		scrollDownToElement(drpDwnState, "State Drop down");
+		click(drpDwnState, "State Drop down");
+		for (int i = 1; i <= 51; i++) {
+			String[] State = state.split(",");
+			enterText(txtState, State[i], "State Search Field");
+			Thread.sleep(1000);
+			if (getElementList(lblState, "State").size() == 1) {
+				ExtentTestManager.setPassMessageInReport("The State search bar showing expected results");
+				click(lblState, "State");
 				click(btnConfirmState, "Done");
-				ExtentTestManager.setPassMessageInReport("Selected State is" + getText(drpDwnState));
+				System.out.println(getText(lblStateValue));
+				System.out.println(State[i]);
+				if (getText(lblStateValue).equals(State[i])) {
+					ExtentTestManager.setPassMessageInReport(getText(lblStateValue) + " state is selected");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Input state is not selected");
+				}
 				click(drpDwnState, "State Drop down");
-		}
-			Thread.sleep(2000);
-			TouchAction touch = new TouchAction(DriverFactory.getDriver());
-			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
-					.moveTo(PointOption.point(540, (int) (440))).release().perform();
+			} else {
+				ExtentTestManager.setFailMessageInReport("The State search bar not showing input related results");
+			}
 		}
 	}
 
