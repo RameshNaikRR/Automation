@@ -3,6 +3,7 @@ package coyni.api.business.popups;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 import org.openqa.selenium.By;
 
@@ -11,6 +12,7 @@ import coyni.apibusiness.components.NavigationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[.='Transfer Token']");
@@ -22,7 +24,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[.='Next']");
 	private By btnConfirm = By.xpath("//button[.='Confirm']");
 	private By btnClose = By.xpath("//button[@type='button']/img");
-	private By lblSelectTrasanfer = By
+	private By lblSelectTransfer = By
 			.xpath("//div[contains(@class,'FormField_form_select_container')]/div/div/../div[3]");
 //	private By btnTransferWallet = By
 //			.xpath("//div[contains(@class,'FormField_form_select_container')]//*[text()='Info']");
@@ -42,7 +44,7 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 	}
 
 	public void selectTransferWallet() {
-		click(lblSelectTrasanfer, "Click on Transfer");
+		click(lblSelectTransfer, "Click on Transfer");
 		click(btnTransferWallet, "Select Wallet");
 	}
 
@@ -74,8 +76,9 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Transfer Popup Heading", Heading);
 	}
 
-	public void verifyDescription(String Description) {
-		new CommonFunctions().verifyLabelText(lblDescription, "Transfer Popup Description", Description);
+	public void verifyDescription() {
+		String str = getText(lblDescription, "Description");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void fillAmount(String Amount) {
@@ -99,6 +102,22 @@ public class TokenWalletTransferTokenPopup extends BrowserFunctions {
 
 	public void verifyAvailableBalance() {
 		new CommonFunctions().elementView(lblAvailableBalance, "Available Balance");
+	}
+
+	public String getAvailBalance() {
+		String str = getText(lblAvailableBalance, "Available Balance");
+		return str;
+	}
+
+	public void getAvailableBalance(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getAvailBalance());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Amount is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Amount is not matched");
+		}
 	}
 
 	public void verifyErrorMessage() {

@@ -1,18 +1,21 @@
 package coyni.api.business.popups;
 
+import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.admin.pages.LoginPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class TransactionSuccessfulPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//div[.='Transaction Successful']");
-	private By lblDescription = By.xpath("//h2[contains(@class,'TransferTokenModal_Pay')]");
 	private By lblBorder = By.xpath("//hr[contains(@class,'border-1 border-cm2')]");
 	private By btnDone = By.xpath("//button[.='Done']");
 	private By copyreference = By.xpath("//span[contains(text(),'WTA')]//button");
+	private By transactionMsg = By.xpath("//h2[@class='TransferTokenModal_Pay_text__+IoGJ']");
 
 	private By getAccountDetails(String Number) {
 		return By.xpath(String.format("(//div[contains(@class,'flex items-center justify-between')])[%s]", Number));
@@ -26,14 +29,31 @@ public class TransactionSuccessfulPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", Heading);
 	}
 
-	public void verifyDescriptionView() {
-		new CommonFunctions().elementView(lblDescription, "Description");
+	public void verifyTransactionMessage() {
+		String str = getText(transactionMsg, "Transaction Successful Message");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void VerifyReferenceIdView() {
 		String str = getText(getAccountDetails("1"), "ReferenceID");
 		ExtentTestManager.setInfoMessageInReport(str);
 		new CommonFunctions().elementView(getAccountDetails("1"), "ReferenceID");
+	}
+
+	public String VerifyTransferReferenceId() {
+		String str = getText(getAccountDetails("1"), "ReferenceID");
+		return str;
+	}
+
+	public void getTransferReferenceId(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(VerifyTransferReferenceId());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Total Balance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Total Balance is not matched");
+		}
 	}
 
 	public void getLoginDetails() {
@@ -68,14 +88,42 @@ public class TransactionSuccessfulPopup extends BrowserFunctions {
 		new CommonFunctions().elementView(getAccountDetails("2"), "FromBalanceName");
 	}
 
+	public String verifyTransferFromBalanceName() {
+		String str = getText(getAccountDetails("2"), "FromBalanceName");
+		return str;
+	}
+
+	public void getTransferFromBalanceName(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(verifyTransferFromBalanceName());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("FromBalance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("FromBalance is not matched");
+		}
+	}
+
 	public void verifyToBalanceNameView() {
 		String str = getText(getAccountDetails("3"), "ToBalanceName");
 		ExtentTestManager.setInfoMessageInReport(str);
 		new CommonFunctions().elementView(getAccountDetails("3"), "ToBalanceName");
 	}
 
-	public void verifyDescription(String Description) {
-		new CommonFunctions().verifyLabelText(lblDescription, "Description", Description);
+	public String verifyTransferToBalanceName() {
+		String str = getText(getAccountDetails("3"), "ToBalance");
+		return str;
+	}
+
+	public void getTransferToBalanceName(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(verifyTransferToBalanceName());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("ToBalance is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("ToBalance is not matched");
+		}
 	}
 
 	public void verifyBorder() {

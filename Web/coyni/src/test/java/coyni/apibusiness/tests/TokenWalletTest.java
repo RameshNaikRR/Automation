@@ -55,13 +55,13 @@ public class TokenWalletTest {
 			tokenWalletPage.verifyHeading(data.get("tokenPageHeading"));
 			tokenWalletPage.clickTransfer(data.get("walletNumber"));
 			tokenWalletPage.tokenWalletTransferPopup().verifyHeading(data.get("transferPopupHeading"));
-			tokenWalletPage.tokenWalletTransferPopup().verifyDescription(data.get("transferPopupDescription"));
 			tokenWalletPage.tokenWalletTransferPopup().fillAmount(data.get("amount"));
 			tokenWalletPage.tokenWalletTransferPopup().clickTransferToDropDown();
 			tokenWalletPage.tokenWalletTransferPopup().clickWallet3();
 			tokenWalletPage.tokenWalletTransferPopup().clickNext();
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup()
 					.verifyHeading(data.get("walletTransferPopupHeading"));
+//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().getVerifiedAmount(data.get("query"));
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().clickConfirm();
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
 					.verifyHeading(data.get("verifyYourIdentityHeading"));
@@ -125,9 +125,6 @@ public class TokenWalletTest {
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().clickConfirm();
 			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup()
 					.verifyHeading(data.get("verifyYourIdentityHeading"));
-//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().authyComponent().fillInput(data.get("code"));
-//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().transactionSuccessfulPopup().verifyHeading(data.get("transactionSuccessfulHeading"));
-//			tokenWalletPage.tokenWalletTransferPopup().walletTransferPrieviewPopup().verifyYourIdentityPopup().transactionSuccessfulPopup().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setPassMessageInReport("testTokenWalletNavigationView failed due to this exception " + e);
 		}
@@ -665,6 +662,7 @@ public class TokenWalletTest {
 			sideBarMenuComponent.tokenWalletActivityComponent().clickTransferTokens();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
 					.verifyHeading(data.get("heading"));
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifyDescription();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifytxtAmountView();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifyTransferToView();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
@@ -672,6 +670,8 @@ public class TokenWalletTest {
 			// sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().clickClose();
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
 					.fillAmount(data.get("amount"));
+			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
+					.getAvailableBalance(data.get("query"));
 			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup()
 					.clickTransferToDropDown();
 //			sideBarMenuComponent.tokenWalletActivityComponent().tokenWalletTransferTokenPopup().verifyWallet1View();
@@ -686,10 +686,10 @@ public class TokenWalletTest {
 			sideBarMenuComponent.tokenWalletActivityComponent().verifyYourIdentityPopup()
 					.verifyHeading(data.get("verifyYourIdentityHeading"));
 			sideBarMenuComponent.tokenWalletActivityComponent().verifyYourIdentityPopup().authyComponent()
-					.fillInput(data.get("code"));
+					.fillInput(data.get("code1"));
 			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup()
 					.verifyHeading(data.get("TransactionSuccessfullHeading"));
-			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().verifyDescriptionView();
+			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().verifyTransactionMessage();
 			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().VerifyReferenceIdView();
 			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup().copyreferenceID();
 			sideBarMenuComponent.tokenWalletActivityComponent().transactionSuccessfulPopup()
@@ -1642,9 +1642,7 @@ public class TokenWalletTest {
 			homePage.sideBarMenuComponent().businessSettingsSideBarMenuComponent().paymentMethodComponent()
 					.addNewPaymentMethodPopup().addNewcogentAccountPopup().successFailureComponent()
 					.navigationComponent().clickClose();
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 
 		}

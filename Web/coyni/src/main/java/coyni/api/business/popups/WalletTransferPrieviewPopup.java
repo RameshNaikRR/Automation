@@ -1,10 +1,13 @@
 package coyni.api.business.popups;
 
+import java.sql.SQLException;
+
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.api.utilities.DBConnection;
 
 public class WalletTransferPrieviewPopup extends BrowserFunctions {
 	private By lblHeading = By.xpath("//h1[.='Wallet Transfer Preview']");
@@ -36,6 +39,22 @@ public class WalletTransferPrieviewPopup extends BrowserFunctions {
 		String str = getText(lblAmount, "Amount");
 		ExtentTestManager.setPassMessageInReport(str);
 		ExtentTestManager.setInfoMessageInReport("Amount is verified");
+	}
+
+	public String getAmount() {
+		String str = getText(lblAmount, "Amount");
+		return str;
+	}
+
+	public void getVerifiedAmount(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getAmount());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport("Amount is matched ");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Amount is not matched");
+		}
 	}
 
 	public void clickConfirm() {
