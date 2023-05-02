@@ -30,6 +30,9 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
 	private By errorPopuphdg = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By errorPopupDesc = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By lnkContactUS = MobileBy.id("com.coyni.mapp:id/contactUsTV");
+//	private By lnkContactUS = MobileBy.id("com.coyni.mapp:id/contactUsTV");
+	
 
 	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
 	public void verifyPopUpView() {
@@ -115,6 +118,11 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		click(lnkResend, "Resend");
 		new CommonFunctions().elementView(lblNewCode, "Message");
 	}
+	
+	public void clickContactUS() {
+		click(lnkContactUS, "Contact US");
+	}
+	
 
 //	public void verifyRemove(String invalidPin, By ele) {
 //		fillPin(invalidPin);

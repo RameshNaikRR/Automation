@@ -53,6 +53,7 @@ public class SwitchAccountPopup extends MobileFunctions {
 	public void clickAddDBAUnderCompany() throws InterruptedException {
 		Thread.sleep(1000);
 		if (getElementList(btnTickMark, "Tick Mark").size() == 1) {
+			scrollDownToElement(btnAddDBA, "Add DBA");
 			click(btnAddDBA, "Add DBA");
 		} else {
 			ExtentTestManager.setFailMessageInReport("No company has been selected");

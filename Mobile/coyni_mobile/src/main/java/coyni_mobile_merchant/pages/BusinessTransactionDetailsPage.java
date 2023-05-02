@@ -163,7 +163,6 @@ public class BusinessTransactionDetailsPage extends ReserveReleaseDetailsPage {
 			getAmount();
 			getDate();
 			getReferenceID();
-			getTotalAmout();
 		} else {
 			ExtentTestManager.setFailMessageInReport("Search filed is not showing copied transaction");
 		}

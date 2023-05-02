@@ -41,7 +41,7 @@ public class AgreementComponent extends MobileFunctions {
 	private By termsOfServiceUpdateOk = MobileBy.xpath("//*[contains(@resource-id,'actionCV')]");
 	private By finishSignup = MobileBy.id("com.coyni.mapp:id/actionTV");
 	private By chboxAgree = MobileBy.xpath("//*[contains(@resource-id,'agreeCB')]");
-	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(headingAgreements, "Page Heading", expHeading);
@@ -65,16 +65,29 @@ public class AgreementComponent extends MobileFunctions {
 			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
 			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
 			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
-//			Thread.sleep(1000);
+//			Thread.sleep(1500);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(chboxAgree));
 			if (getElementList(chboxAgree, "").size() > 0) {
 				clickAgreeCheckBox();
 				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+			} else if (getElementList(privacyPolicyHeading, "").size() > 0) {
+				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+			} else if (getTermsOfService() > 0) {
+				wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+				scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+				clickAgreeCheckBox();
+				click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
 			} else {
 				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
 				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
 			}
 
 		}
+	}
+
+	public int getTermsOfService() {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(termsOfServiceUpdateHeading));
+		return getElementList(termsOfServiceUpdateHeading, "").size();
 	}
 
 	public void verifyTermsOfServiceUpdateForSignUp(String expHeading) throws InterruptedException {

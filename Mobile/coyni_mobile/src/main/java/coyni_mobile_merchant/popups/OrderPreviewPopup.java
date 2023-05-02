@@ -23,13 +23,13 @@ public class OrderPreviewPopup extends MobileFunctions {
 			.xpath("//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'PayMethod')]");
 	private By lblPaymentMethodNumber = MobileBy
 			.xpath("//*[contains(@resource-id,'tvAccount')]|//*[contains(@resource-id,'PayMethod')]");
-	private By lblPurchaseAmount = MobileBy.cssSelector(
-			"[resource-id='com.coyni.mapp:id/subTotalTV'],[resource-id='com.coyni.mapp:id/tvPurchaseAmt']");
+	private By lblPurchaseAmount = MobileBy.xpath(
+			"//*[@resource-id='com.coyni.mapp:id/subTotalTV']|//*[@resource-id='com.coyni.mapp:id/tvPurchaseAmt']");
 //	private By lblProcessingFee = MobileBy.cssSelector("#com.coyni.mapp:id/feeTV, #com.coyni.mapp:id/tvProcessingFee");
 	private By lblProcessingFee = MobileBy
-			.cssSelector("[resource-id='com.coyni.mapp:id/feeTV'], [resource-id='com.coyni.mapp:id/tvProcessingFee']");
+			.xpath("//*[@resource-id='com.coyni.mapp:id/feeTV']|//*[@resource-id='com.coyni.mapp:id/tvProcessingFee']");
 	private By lblTotal = MobileBy
-			.cssSelector("[resource-id='com.coyni.mapp:id/totalTV'],[resource-id='com.coyni.mapp:id/tvTotal']");
+			.cssSelector("//*[@resource-id='com.coyni.mapp:id/totalTV']|//*[@resource-id='com.coyni.mapp:id/tvTotal']");
 
 //	private By lblTotal = MobileBy.cssSelector("#com.coyni.mapp:id/totalTV,#com.coyni.mapp:id/tvTotal");
 	private By btnSlideToConfirm = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");

@@ -60,6 +60,10 @@ public class BusinessTransactionDetailsTest {
 
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickFilterIcon();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
+						.selectFilter(data.get("filterType"));
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
+						.selectFilter(data.get("filterType1"));
 				Thread.sleep(1000);
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickCalendar();
@@ -70,11 +74,7 @@ public class BusinessTransactionDetailsTest {
 						.selectToDate(data.get("toDate"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickDone();
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
-						.selectFilter(data.get("filterType"));
-				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
-						.selectFilter(data.get("filterType1"));
+//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillFromAmount(data.get("fromAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
@@ -293,8 +293,8 @@ public class BusinessTransactionDetailsTest {
 //						.clickPreviousTenDays();
 //				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().calendarComponent()
 //						.clickCurrentDay();
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.clickDone();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
 				Thread.sleep(1000);
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()

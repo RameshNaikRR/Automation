@@ -236,6 +236,12 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.phoneAndEmailVerificationComponent().clickContactUS();
+			merchantProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
+			merchantProfilePage.getHelpPage().clickBack();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("verifyCurrentEmailHeading"));
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
@@ -463,6 +469,13 @@ public class MerchantProfileTest {
 					.phoneAndEmailVerificationComponent().clickResend();
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().verifyNewCodeMsg();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.phoneAndEmailVerificationComponent().clickContactUS();
+			merchantProfilePage.getHelpPage().verifyHeading(data.get("getHelpHeading"));
+			merchantProfilePage.getHelpPage().clickBack();
+			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
+					.phoneAndEmailVerificationComponent()
+					.verifyPhoneHeading(data.get("verifyCurrentPhoneNumberVerificationHeading"));
 			merchantProfilePage.userDetailsPage().currentDetailsComponent().editDetailsComponent()
 					.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			Thread.sleep(2000);
