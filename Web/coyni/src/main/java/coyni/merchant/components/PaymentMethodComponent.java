@@ -1,6 +1,8 @@
 package coyni.merchant.components;
 
 import org.openqa.selenium.By;
+
+import coyni.admin.pages.FeatureControlPage;
 import coyni.merchant.popups.AddBankAccountPopup;
 import coyni.merchant.popups.AddNewPaymentMethodPopup;
 import coyni.merchant.popups.PreAuthorizationPopup;
@@ -33,7 +35,7 @@ public class PaymentMethodComponent extends BrowserFunctions {
 		moveToElement(lblSignetAccount, "Signet Account");
 		click(btnDelete, "Delete");
 	}
-	
+
 	public void clickDeleteCogentAccount(String number) {
 		moveToElement(lblCogentAccount, "Cogent Account");
 		click(btnDelete, "Delete");
@@ -105,6 +107,11 @@ public class PaymentMethodComponent extends BrowserFunctions {
 
 	public EditCardComponent editCardComponent() {
 		return new EditCardComponent();
+	}
+
+	public FeatureControlPage featureControlPage() {
+		return new FeatureControlPage();
+
 	}
 
 	public AddCardComponent addCardComponent() {

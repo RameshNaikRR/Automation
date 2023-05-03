@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.admin.pages.FeatureControlPage;
 import coyni.merchant.components.BankAccountsComponent;
 import coyni.merchant.components.FilterComponent;
 import coyni.merchant.components.NavigationComponent;
@@ -348,6 +349,10 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new ExportfilesPage();
 	}
 
+	public FeatureControlPage featureControlPage() {
+		return new FeatureControlPage();
+	}
+
 	public BuyCoyniTokensNoPaymentPopup buyCoyniTokensNoPaymentPopup() {
 		return new BuyCoyniTokensNoPaymentPopup();
 	}
@@ -356,7 +361,6 @@ public class TokenAccountPage extends BrowserFunctions {
 		return new WithdrawToSignetAccountPopup();
 	}
 
-	
 	public UserNameDropDownComponent userNameDropDownComponent() {
 		return new UserNameDropDownComponent();
 	}

@@ -354,7 +354,8 @@ public class MerchantSettingsTest {
 		}
 	}
 
-	@Test @Parameters({"strParams"})
+	@Test
+	@Parameters({ "strParams" })
 
 	public void testDBAInfoPhoneNumberFieldValidations(String strParams) {
 		try {
@@ -1250,6 +1251,26 @@ public class MerchantSettingsTest {
 					.successFailurePopupCardComponent().verifyPaymnetRemovedSuccessfulHeading();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testPaymentMethodFeatureControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickMerchantSettings();
+			merchantSettingsSideBarMenuComponent.clickPaymentMethodsBtn();
+			Thread.sleep(3000);
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().featureControlPage()
+					.verifyHeading(data.get("FeatureControlheading"));
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().featureControlPage().getHeading();
+			merchantSettingsSideBarMenuComponent.paymentMethodComponent().featureControlPage().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
 		}
 
 	}

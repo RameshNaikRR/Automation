@@ -26,6 +26,12 @@ public class SideBarComponent extends BrowserFunctions {
 
 	private By handMark = By.cssSelector(".flex.flex-row.items-center.justify-between.gap-1.menu_item_small");
 
+	private By record = By.cssSelector("tbody>tr:nth-of-type(3)");
+
+	private By btnSearch = By.xpath("//button[@class='icon-search']");
+
+	private By search = By.xpath("//input[contains(@class,'BusinessProfiles_search_bar_gbox__fDkrE')]");
+
 	// (//label[contains(@class,'text-sm')])
 	// (//span[contains(@class,'text-sm')])
 
@@ -33,6 +39,16 @@ public class SideBarComponent extends BrowserFunctions {
 
 	public void verifyCursorAction() {
 		new CommonFunctions().verifyCursorAction(handMark, "Coyni  Portal");
+	}
+
+	public void clickRecord() {
+		click(record, "Record");
+	}
+
+	public void fillSearch(String searcch) {
+		enterText(search, searcch, "Search");
+		click(btnSearch, "Search");
+
 	}
 
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {
@@ -402,6 +418,14 @@ public class SideBarComponent extends BrowserFunctions {
 		return new AddVendorComponent();
 	}
 
+	public MerchantDetailsComponent merchantDetailsComponent() {
+		return new MerchantDetailsComponent();
+	}
+
+	public PreferencesandControlsComponent preferencesandControlsComponent() {
+		return new PreferencesandControlsComponent();
+	}
+
 	public void doLogin(String password, String securityKey) throws InterruptedException {
 
 		new LoginPage().fillEmail(new AddNewEmployeeComponent().getYOPMail());
@@ -423,9 +447,11 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 
 	}
+
 	public VendorStatusComponent vendorStatusComponent() {
 		return new VendorStatusComponent();
 	}
+
 	public VendorListComponent vendorListComponent() {
 		return new VendorListComponent();
 	}

@@ -19,15 +19,17 @@ public class ProfileComponent extends BrowserFunctions {
 	private By lblSearchIcon = By.xpath("//button[@class='icon-search']");
 	private By btnSearch = By.xpath("//button[@class='icon-search']");
 	private By lblNoRecordFound = By.xpath("//span[contains(text(),'No Records Found')]");
-	private By lnkViewPayoutHistory=By.xpath("//button[text()='View Payout History']");
+	private By lnkViewPayoutHistory = By.xpath("//button[text()='View Payout History']");
 	private By lblStatus = By.xpath("//div[contains(@class,'BusinessProfiles_button')]");
-	
+
 	public void clickViewPayoutHistory() {
 		click(lnkViewPayoutHistory, "View Payout History");
 	}
+
 	public int getNoRecSize() {
 		return getElementsList(lblNoRecordFound, "No Record Found").size();
 	}
+
 	private By lblApiBusiness = By.xpath("//p[text()='API Business']");
 
 	public void clickApiBusiness() {
@@ -37,25 +39,26 @@ public class ProfileComponent extends BrowserFunctions {
 	public void verifyNoRecords() {
 		new CommonFunctions().elementView(lblNoRecordFound, "No record found");
 	}
-	
+
 	public void verifyPersonalHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblPersonalHeading, "Page Heading ", expHeading);
 	}
-	
+
 	public void verifyCoyniEmployeesHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblCoyniEmployeesHeading, "Page Heading ", expHeading);
 	}
 
 	public void fillSearch(String text) {
 		enterText(txtSearch, text, "Search");
-        click(btnSearch,"Serach");
+		click(btnSearch, "Serach");
 	}
+
 	private By txtSearchMerchant = By.xpath("//input[contains(@class,' BusinessProfiles_search_bar_gbox__fDkrE')]");
+
 	public void fillSearchForMerchantDetails(String text) {
 		enterText(txtSearchMerchant, text, "Search");
-        click(btnSearch,"Serach");
+		click(btnSearch, "Serach");
 	}
-	
 
 	public void clickFilter() {
 		click(btnFilter, "Filter");
@@ -81,6 +84,7 @@ public class ProfileComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(lblSearchBar, "Search Bar lable");
 		new CommonFunctions().elementView(lblSearchIcon, "Search Icon");
 	}
+
 	public void verifyMerchantStatus() {
 		String str = getText(lblStatus, "Status");
 		ExtentTestManager.setInfoMessageInReport("The status is" + str);
@@ -97,8 +101,8 @@ public class ProfileComponent extends BrowserFunctions {
 	public SideBarApiBusinessComponent sideBarApiBusinessComponent() {
 		return new SideBarApiBusinessComponent();
 	}
-	
-	public CoyniEmployeeComponent coyniEmployeeComponent () {
+
+	public CoyniEmployeeComponent coyniEmployeeComponent() {
 		return new CoyniEmployeeComponent();
 	}
 

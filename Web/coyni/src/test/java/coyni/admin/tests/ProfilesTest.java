@@ -25,7 +25,7 @@ public class ProfilesTest {
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
-        loginPage = new LoginPage();
+		loginPage = new LoginPage();
 	}
 
 	@Test
@@ -74,52 +74,87 @@ public class ProfilesTest {
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
 					.verifyBusinessHeading(data.get("business"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforBusinessFees(data.get("doller"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforBusinessFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforBusinessFees(data.get("doller"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforBusinessFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountAmountforBusinessFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentAccountPercentageforBusinessFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardforBusinessFees(data.get("doller"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees(data.get("doller"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
-		//	homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforBusinessFees(data.get("doller"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforBusinessFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillMonthlyFeeforBusinessFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyTokenWalletHeading(data.get("tokenWalletHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBanckAccountPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillCogentAccountAmountforBusinessFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillCogentAccountPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillGiftCardforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillFailedBankWithdrawAmountforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
+			// homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalAmountBuyTokenforBusinessFees(data.get("doller"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalPercentageBuyTokenforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillMonthlyFeeforBusinessFees(data.get("amount"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyEcoSystemHeading(data.get("ecoSystem"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyTokenWalletHeading(data.get("tokenWalletHeading"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountforEcoSystemFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBanckAccountPercentageforEcoSystemFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayAmountforEcoSystemFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayPercentageforEcoSystemFees(data.get("percentage"));
-					homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardAmountforEcoSystemFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillGiftCardPercentageforEcoSystemFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawAmountforBusinessFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().verifyBuyTokenHeading(data.get("buyTokenHeading"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalAmountBuyTokenforEcoSystemFees(data.get("amount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalPercentageBuyTokenforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyEcoSystemHeading(data.get("ecoSystem"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyTokenWalletHeading(data.get("tokenWalletHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBanckAccountPercentageforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayPercentageforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillGiftCardAmountforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillGiftCardPercentageforEcoSystemFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillFailedBankWithdrawAmountforBusinessFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillFailedBankWithdrawPercentageforBusinessFees(data.get("percentage"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.verifyBuyTokenHeading(data.get("buyTokenHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalAmountBuyTokenforEcoSystemFees(data.get("amount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalPercentageBuyTokenforEcoSystemFees(data.get("percentage"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitforBusinessFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforBusinessFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforBusinessFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillCogentLimitforBusinessFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBankLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillgiftCardLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillCogentLimitforBusinessFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBankLimitBuyTokensforBusinessFees(data.get("limitAmount"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillInstantPayLimitforEcoSystemFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillgiftCardLimitforEcoSystemFees("limitAmount");
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillDebitAndCreditCardLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillInstantPayLimitforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillgiftCardLimitforEcoSystemFees("limitAmount");
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillExternalBankLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser()
+					.fillDebitAndCreditCardLimitBuyTokensforEcoSystemFees(data.get("limitAmount"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
-			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().verifyHeading(data.get("invitationHeading"));
+			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup()
+					.verifyHeading(data.get("invitationHeading"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().invitationPopup().clickDone();
-		
-			
-			
+
 //			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillExternalDoller(data.get("doller"));
 //			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().fillBuySignetPercentage(data.get("percentage"));
 			homePage.sideBarComponent().profileComponent().createNewApiBusinessUser().clickNext();
@@ -777,10 +812,10 @@ public class ProfilesTest {
 	}
 
 	// 2.3 Merchant
-	
+
 	static String mail;
 	static String url;
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddMerchantUser(String strParams) {
@@ -793,22 +828,25 @@ public class ProfilesTest {
 			homePage.sideBarComponent().addMerchantComponent().verifyContent(data.get("headingContact"));
 			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
 			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
-			mail = homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().getEmail();
+			mail = homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.getEmail();
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
-			.fillEmail(mail);//this line used for static email (Next time we can change the class name)
+					.fillEmail(mail);// this line used for static email (Next time we can change the class name)
 			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
 			homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
 			if (!data.get("toastMerchantInvitation").isEmpty()) {
 				loginPage.toastComponent().verifyToast(data.get("toastTitle1"), data.get("toastMerchantInvitation"));
 			}
-				Thread.sleep(3000);
+			Thread.sleep(3000);
 //			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
 //					data.get("message"));
 //			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
-            url=homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().getUrl();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().navigateUrl(url);			
-		//	new CommonFunctions().swtichToNewtabUrl(data.get("merchUrl"));
+			url = homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.getUrl();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.navigateUrl(url);
+			// new CommonFunctions().swtichToNewtabUrl(data.get("merchUrl"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
@@ -1161,6 +1199,26 @@ public class ProfilesTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testProfileMerchantPreferencesControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().fillSearch(data.get("search"));
+			homePage.sideBarComponent().clickRecord();
+			homePage.sideBarComponent().merchantDetailsComponent().clickPreferencesControl();
+			homePage.sideBarComponent().preferencesandControlsComponent().clickDisable();
+			homePage.sideBarComponent().preferencesandControlsComponent().clickSave();
+			homePage.sideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickYes();
+			new CommonFunctions().switchtoUrl(data.get("url"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testCoyniEmployeeSearch(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1240,11 +1298,14 @@ public class ProfilesTest {
 					.activateAccountComponent().fillConfirmPassword(data.get("confirmPassword"));
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
 					.activateAccountComponent().clickCreate();
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().clickActivateTwoStepAuthyLink();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccountComponent().authyComponent().clickActivateTwoStepAuthyLink();
 
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().enterVerficationCode(data.get("verificationCode"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccountComponent().authyComponent().enterVerficationCode(data.get("verificationCode"));
 
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent().activateAccountComponent().authyComponent().clickDoneBtn();
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().addNewEmployeeComponent()
+					.activateAccountComponent().authyComponent().clickDoneBtn();
 
 			homePage.sideBarComponent().doLogin(data.get("createPassword"), data.get("verificationCode"));
 
@@ -1262,7 +1323,8 @@ public class ProfilesTest {
 
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().clickEmployeeDetails();
 
-			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().verifyPhoneNumber(data.get("phoneNumber"));
+			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent()
+					.verifyPhoneNumber(data.get("phoneNumber"));
 
 			homePage.sideBarComponent().profileComponent().coyniEmployeeComponent().verifyEmail();
 

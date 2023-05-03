@@ -3279,6 +3279,46 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testBuyTokenTransactionFeatureControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickBuyTokens();
+			Thread.sleep(3000);
+			tokenAccountPage.featureControlPage().verifyHeading(data.get("FeatureControlheading"));
+			tokenAccountPage.featureControlPage().getHeading();
+			// tokenAccountPage.featureControlPage().verifyActivityDescription();
+			tokenAccountPage.featureControlPage().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTransactionFeatureControls(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideMenuBarComponent.clickTokenAccount();
+			tokenAccountPage.clickWithdrawToUSD();
+			Thread.sleep(3000);
+			tokenAccountPage.featureControlPage().verifyHeading(data.get("FeatureControlheading"));
+			tokenAccountPage.featureControlPage().getHeading();
+			// tokenAccountPage.featureControlPage().verifyActivityDescription();
+			tokenAccountPage.featureControlPage().clickDone();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Buy Token Transaction with bank account failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testWithdrawToUSDDeleteCogentAccount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);

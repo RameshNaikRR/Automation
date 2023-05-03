@@ -39,10 +39,7 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 		enterText(txtEmail, email, "Email");
 	}
 
-	public void verifyEmail1() {
-		getCopiedData();
-		// enterText(txtEmail, email, "Email");
-	}
+
 
 	public String getMail() {
 		String str = MailHelper.getRandomMailID();
@@ -50,8 +47,14 @@ public class AddTeamMemberComponent extends BrowserFunctions {
 	}
 
 	public String getUrl() {
+		// issue with getURL
 		String str = MailHelper.getURLFromMail();
+		System.out.println(str);
 		return str;
+	}
+	
+	public void fillEmail(String email) {
+		enterText(txtEmail, email, "Email");
 	}
 
 	public void verifyPhone(String Phone) {
