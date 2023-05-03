@@ -38,22 +38,19 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	private By btnMXBank = By.xpath("//div[contains(@class,'kyper-utilityrow-base-left')]");
 	private By btnChecking = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[1]");
 	private By btnSaving = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[2]");
+	private By btnMXOATHChecking = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[1]");
+	private By btnMXOATHSaving = By.xpath("(//label[contains(@class,'kyper-selectionbox')])[2]");
 	private By btnClose = By.xpath("//button[@class='self-end']");
 	private By iframe = By.cssSelector("#iframe");
-	private By btnMxBankk = By.xpath("(//span[contains(text(),'MX Bank')])[1]");
+	private By btnMxBankk = By.xpath("(//div[contains(text(),'MX Bank')])[1]");
 	private By btnMXBankOATH = By.xpath("//span[contains(text(),'MX Bank (Oauth)')]");
 
 	public void clickMXBank() {
 		click(btnMXBank, "Mx Bank");
 	}
 
-	public void clickOnMxBankOATH() {
-		switchToFrame(iframe, "iframe");
-		click(btnMXBankOATH, "Mx Bank OATH");
-		switchToParentFrame();
-	}
-
 	public void clickSearchInstitutions() {
+		switchToFrame(iframe, "iframe");
 		click(btnSearchInstitutions, "Search Institutions");
 	}
 
@@ -62,13 +59,41 @@ public class AddBankAccountPopup extends BrowserFunctions {
 
 	}
 
+	public void clickOnMxBankOATH() {
+		switchToFrame(iframe, "iframe");
+		click(btnMXBankOATH, "Mx Bank OATH");
+		switchToParentFrame();
+	}
+
 	public void clickOnMxBank() {
 		switchToFrame(iframe, "iframe");
 		click(btnMxBankk, "Mx Bank");
 		switchToParentFrame();
 	}
 
+	public void clickOnBankAccountNameOATH(String AccountType) {
+		switchToFrame(iframe, "frame");
+		if (AccountType.equalsIgnoreCase("Checking")) {
+			click(btnMXOATHChecking, "Checking");
+		}
+
+		else if (AccountType.equalsIgnoreCase("Savings")) {
+			click(btnMXOATHSaving, "Savings");
+		}
+	}
+
 	public void clickOnBankAccountName(String AccountType) {
+		// switchToFrame(iframe, "frame");
+		if (AccountType.equalsIgnoreCase("Checking")) {
+			click(btnChecking, "Checking");
+		}
+
+		else if (AccountType.equalsIgnoreCase("Savings")) {
+			click(btnSaving, "Savings");
+		}
+	}
+
+	public void clickOnBankAccountOATH(String AccountType) {
 		switchToFrame(iframe, "frame");
 		if (AccountType.equalsIgnoreCase("Checking")) {
 			click(btnChecking, "Checking");
@@ -175,12 +200,15 @@ public class AddBankAccountPopup extends BrowserFunctions {
 	}
 
 	public void enterUserName(String expUserName) {
+		switchToFrame(iframe, "frame");
 		enterText(txtUserName, expUserName, "User Name");
 //		click(txtPassword, "Password");
 	}
 
 	public void enterPassword(String expPassword) {
-		enterText(txtPassword, expPassword, " Password");
+		click(txtPassword, "Password");
+		// switchToFrame(iframe, "frame");
+		enterText(txtPassword, expPassword, "Password");
 	}
 
 	public void clickNext() {

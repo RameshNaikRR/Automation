@@ -29,6 +29,7 @@ public class ExportfilesPage extends BrowserFunctions {
 	private By btnReserveExport = By.xpath("//button[contains(@class,'Buttons_btn__JEz-N')]");
 	private By btnExport = By.xpath("//button[text()='Export']");
 	private By msgNoRecords = By.xpath("//div[contains(text(),'No Records Found')]");
+	private By exportFilesValue = By.xpath("(//label[contains(@class,'custom-checkbox undefined')])[2]");
 
 	public void clickExportFiles() {
 		click(btnExportFiles, "Export Files");
@@ -41,6 +42,14 @@ public class ExportfilesPage extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setPassMessageInReport("Reserve Export button is Disabled");
 		}
+
+	}
+
+	public int getValueExportFiles() {
+		String text = getText(exportFilesValue, "Export Files");
+		int value = Integer.parseInt(text) + 1;
+		ExtentTestManager.setInfoMessageInReport("Value is " + value);
+		return value;
 
 	}
 

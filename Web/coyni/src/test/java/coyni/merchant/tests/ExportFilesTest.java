@@ -34,6 +34,7 @@ public class ExportFilesTest {
 			if (verifyTeamMemberRecords > 0) {
 				exportFilesPage.verifyNoRecordsFound();
 			} else {
+				exportFilesPage.getValueExportFiles();
 				exportFilesPage.exportIdView();
 				exportFilesPage.exportDateView();
 				exportFilesPage.dateRangeView();
@@ -109,7 +110,7 @@ public class ExportFilesTest {
 			} else {
 				exportFilesPage.exportSelectedTransactionsPopup().clickMonthTODate();
 			}
-			
+
 			exportFilesPage.exportSelectedTransactionsPopup().clickOnExport();
 			exportFilesPage.exportSelectedTransactionsPopup().verifyTitle(data.get("heading"));
 			exportFilesPage.exportSelectedTransactionsPopup().clickExportPage();

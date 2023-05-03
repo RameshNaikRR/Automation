@@ -24,7 +24,7 @@ public class SideMenuBarTest {
 	public void testSideMenuBar(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// sideMenuBarComponent.clickOnMerchantdrpdwn();
+			sideMenuBarComponent.clickOnMerchantActivitydrpdwn();
 			Thread.sleep(2000);
 			sideMenuBarComponent.verifyUserName();
 //			sideMenuBarComponent.verifyLblMerchnatApplicationTracker();
@@ -51,7 +51,6 @@ public class SideMenuBarTest {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBar failed due to " + e);
 		}
 	}
-
 
 	@Test
 	public void testMerchantActivityDrpDwn() {

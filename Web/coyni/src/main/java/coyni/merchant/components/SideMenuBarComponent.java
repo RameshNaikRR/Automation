@@ -50,6 +50,9 @@ public class SideMenuBarComponent extends BrowserFunctions {
 			.xpath("(//button[@class='absolute bg-cwhite UserProfile_QR_main__7Go2P cursor-pointer false'])[1]");
 	private By lblColor = By.xpath("//div[contains(@class,'justify-center rounded-l-full')]");
 	private By lbllColor = By.xpath("//div[@data-tip='merchant-application']//button");
+	private By btnMerchantActivityDropDown = By
+			.xpath("(//div[contains(@class,'icon-small-arrow text-xs mr-3 font-semibold text-cm3 arrowUp ')])[1]");
+	private By btnMerchantAccountP = By.xpath("(//span[contains(@class,'UserNameDropDown_title__RKKVD')])[13]");
 
 	private By getDashBoardItems(String eleName) {
 		return By.xpath(String.format("(//span[.='%s'])[1]", eleName));
@@ -73,11 +76,15 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	}
 
+	public void clickOnMerchantActivitydrpdwn() {
+		click(btnMerchantActivityDropDown, "Merchant drop down");
+	}
+
 	public void clickOnDBARecord() {
 		click(btnDBARecord, "DBA");
 
 	}
-	
+
 	public void clickOnNewDBAAccount() {
 		click(btnNewDBADropDown, "DBA Account");
 	}
@@ -167,6 +174,11 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void clickOnMerchantdrpdwn() {
 		click(btnMerchantDropDown, "Merchant drop down");
+	}
+
+	public void clickOnMMerchantDropDOwn() {
+		scrollToElement(btnMerchantAccountP, "Merchant Account");
+		click(btnMerchantAccountP, "Merchant Account");
 	}
 
 	public void clickOnSharedDropDown() {

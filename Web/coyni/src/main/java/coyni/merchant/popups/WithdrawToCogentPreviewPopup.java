@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.admin.components.AuthyComponent;
 import coyni.merchant.components.PhoneVerificationComponent;
+import coyni.merchant.components.SuccessFailurePopupCardComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -58,6 +59,10 @@ public class WithdrawToCogentPreviewPopup extends BrowserFunctions {
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public SuccessFailurePopupCardComponent successFailurePopupCardComponent() {
+		return new SuccessFailurePopupCardComponent();
 	}
 
 	public PhoneVerificationComponent phoneVerificationComponent() {

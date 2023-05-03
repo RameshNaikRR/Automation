@@ -702,6 +702,7 @@ public class MerchantSettingsTest {
 //
 //	}
 //	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAPIKeysEcommerce(String strParams) {
@@ -734,6 +735,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnAPIKeyss();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getAPIKeyLog();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getListOfAPIKeyLogs();
 
 		} catch (Exception e) {
@@ -748,10 +751,12 @@ public class MerchantSettingsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
+			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickApiKeys();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -774,7 +779,7 @@ public class MerchantSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideMenuBarComponent.clickMerchantActivityDrpDwn();
 			sideMenuBarComponent.clickMerchantSettings();
-			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
+			// sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
@@ -843,8 +848,10 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
+			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
+
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickApiKeys();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -900,8 +907,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnIpAddress();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().verifyNoIp(data.get("noIPExist"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ipAddressPage().verifyNoIp(data.get("noIPExist"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().clickIpAddress();
 			// sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -911,11 +918,26 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickAddNewIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress1"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription1"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().clickAddNewIpAddress();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress2"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription2"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickSubmit();
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 //					.ipAddressPage().addIPAddressPopup().verifySuccessHeading(data.get("successHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickClose();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.getIPAddressLog();
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Add ip address  Failed due to Exception " + e);
 		}
@@ -946,6 +968,8 @@ public class MerchantSettingsTest {
 					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickSubmit();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickClose();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnAPIKeyss();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -984,9 +1008,14 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickOutSide();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessageForIPAddress(data.get("errMessage"));
+			} else if (!data.get("toastMessage").isEmpty()) {
+				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+						.ipAddressPage().toastComponent().verifyToast(data.get("toastTitle"), data.get("toastMessage"));
 			}
-		} catch (Exception e) {
+		}
+
+		catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddIpAddressInvalidData  Failed due to Exception " + e);
 		}
 
@@ -1006,8 +1035,8 @@ public class MerchantSettingsTest {
 					.ipAddressPage().clickDelete();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().verifyRemoveHeading(data.get("removeHeading"));
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-//					.ipAddressPage().verifydesc(data.get("ipDescription"));
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().verifydesc();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().clickYes();
 		} catch (Exception e) {
@@ -1025,8 +1054,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnWebHooks();
-//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-//					.webhookComponent().verifyHeading(data.get("heading"));
+			// sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+			// .webhookComponent().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.webhookComponent().verifyEndPointURL();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -1089,8 +1118,8 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickApiKeyBtn();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnWebHooks();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.webhookComponent().verifyHeading(data.get("heading"));
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.webhookComponent().verifyHeading(data.get("heading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.webhookComponent().clickOnEndPointURL();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()

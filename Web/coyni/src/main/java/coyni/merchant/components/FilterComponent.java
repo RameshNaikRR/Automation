@@ -20,6 +20,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By lnkClearAllTransactionType = By.xpath("//span[text()='Transaction Type']/button");
 //	private By lnkClearSenderName = By.xpath("//label[text()='Sender Name']/button");
 	private By lnkResetAllFilters = By.xpath("//button[text()='Reset all filters']");
+	private By btnDate = By.xpath("(//div[contains(@class,'custom-date-picker-filter')])[2]");
 	private By lnkClearAllTransactionSubtype = By.xpath("//span[text()='Transaction Subtype']/button");
 	private By txtFromAmount = By.cssSelector("div[class $='group__from']>input");
 	private By btnResetFilters = By.xpath("//button[text()='Reset all filters']");
@@ -53,7 +54,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By btnClearAllTxnStatus = By.xpath("//span[contains(text(),'Transaction Status')]//button");
 	private By btnClearSender = By.xpath("//label[contains(text(),'Sender Name')]//button");
 	private By btnClearReceiver = By.xpath("//label[contains(text(),'Receiver Name')]//button");
-
+	private By btnResetFiltersForTeamMembers = By.xpath("//button[text()='Reset filters']");
 
 	private By getCheckBoxes(String checkBox) {
 		return By.xpath(String.format("//span[text()='%s']/preceding-sibling::input", checkBox));
@@ -61,6 +62,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickOnClearSender() {
 		click(btnClearSender, "Sender Name");
+	}
+
+	public void clickOnTeamMembersResetFilters() {
+		click(btnResetFiltersForTeamMembers, "Team Members Reset Filters");
 	}
 
 	public void clickOnClearReceiver() {
@@ -75,7 +80,7 @@ public class FilterComponent extends BrowserFunctions {
 		int size = getElementsList(lblNoFilterData, "").size();
 		return size;
 	}
-	
+
 	public void clickOnClearDate() {
 		click(btnClearDate, "Clear Date");
 	}
@@ -398,6 +403,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickResetAllFilters() {
 		click(lnkResetAllFilters, "Reset All Filters");
+	}
+
+	public void clickOnDate() {
+		click(btnDate, "Date");
 	}
 
 	public void scroolDownToElement() {

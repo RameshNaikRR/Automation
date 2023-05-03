@@ -295,8 +295,19 @@ public class FilterCalenderComponent extends BrowserFunctions {
 				String.format("//div[contains(@class,\"react-datepicker__day react-datepicker__day--007\")]", date));
 	}
 
+	private By getDate1(String date) {
+		return By.xpath(String.format(
+				"//div[contains(@class,\"react-datepicker__day react-datepicker__day--001 react-datepicker__day--weekend\")]",
+				date));
+	}
+
 	public void clickSelectDate(String date) {
 		click(getDate(date), "date");
+
+	}
+
+	public void clickSelectDate1(String date) {
+		click(getDate1(date), "date");
 
 	}
 

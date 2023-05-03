@@ -95,9 +95,15 @@ public class ApiKeysPage extends BrowserFunctions {
 //	private By apikeyDate = By.xpath("((//p[contains(@class,'font-bold capitalize break-all')])[1]//span)[2]");
 
 	private By ipAddressDate = By.xpath("(//span)[2]");
-
+	
 	private By lblIpAddressLogs = By.xpath(
 			"(//div[contains(@class,'ActivityLog_logs_container')]/parent::div//div[contains(@class,'flex flex-col mb-6')])");
+
+	private By ipAddressLog = By.xpath("(//div[contains(@class,'flex flex-col mb-6')])[1]");
+
+	private By apiKeyLog = By.xpath("(//div[contains(@class,'flex flex-col mb-6')])[1]");
+
+	private By webhookLog = By.xpath("(//div[contains(@class,'flex flex-col mb-6')])[1]");
 
 	public void clickApiKeys() {
 		click(btneCommerceApiKeys, "ApiKeys");
@@ -324,6 +330,24 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	public void ClickGenerate() {
 		click(btnGenerate, "Generate");
+	}
+
+	public void getIPAddressLog() throws InterruptedException {
+		Thread.sleep(5000);
+		ExtentTestManager.setInfoMessageInReport("IP Address Log is " + getText(ipAddressLog, "IP Address"));
+
+	}
+
+	public void getWebHookLog() throws InterruptedException {
+		Thread.sleep(5000);
+		ExtentTestManager.setInfoMessageInReport("Webhook Log is " + getText(webhookLog, "WebHook Log"));
+
+	}
+
+	public void getAPIKeyLog() throws InterruptedException {
+		Thread.sleep(5000);
+		ExtentTestManager.setInfoMessageInReport("API Key Log is" + getText(apiKeyLog, "API key"));
+
 	}
 
 	public GenerateNewSecretKeyPopup generateNewSecretKeyPopup() {

@@ -34,6 +34,15 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		}
 	}
 
+	public void clickEdit(String number) {
+		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)), "card");
+		click(By.xpath(String
+				.format("//p[contains(text(),'%s')]/following-sibling::button[contains(@class, 'icon-edit')]", number)),
+				number);
+		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
+
+	}
+
 	public void clickDeleteDebitCard(String number) {
 		moveToElement(lblDebitCard, "Debit Card");
 		click(btnDelete, "Delete");
@@ -54,10 +63,10 @@ public class WithdrawCoyniToUSDPopup extends BrowserFunctions {
 		ExtentTestManager.setInfoMessageInReport("Delete button clicked for bank " + (number));
 	}
 
-	public void clickEdit(String number) {
-		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
-		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
-	}
+//	public void clickEdit(String number) {
+//		click(By.xpath(String.format("//p[contains(text(),'%s')]", number)), number);
+//		ExtentTestManager.setInfoMessageInReport("Edit button clicked for card " + (number));
+//	}
 
 	public void clickOnExternalBankAccount() {
 		click(getPaymentBnts("1"), "click ExternalBankAccount");

@@ -18,7 +18,7 @@ public class AuthyComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
 
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
-	
+
 	private By editSms = By.xpath("//span[contains(@class,'font-semibold cursor-pointer hover:underline text-cgy4')]");
 
 	private By heading = By.xpath("//div[contains(text(),'Two-Step Authentication')]");
@@ -28,7 +28,10 @@ public class AuthyComponent extends BrowserFunctions {
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 
 	private By lnkGoBack = By.xpath("//button[text()='Go Back']");
+
+	private By lnkSmsCode = By.xpath("//button[contains(text(),'SMS')]");
 	private By heading1 = By.xpath("//h1[text()='Verify Your Identity']");
+
 	private static Map<String, String> prevCode = new HashMap<>();
 
 	private String getTwoFactorCode(String securityKey) {
@@ -45,9 +48,13 @@ public class AuthyComponent extends BrowserFunctions {
 		prevCode.put(securityKey, twoFactorCode);
 		return twoFactorCode;
 	}
-	
+
 	public void clickOnSms() {
 		click(editSms, "Edit SMS");
+	}
+
+	public void clickSmsCode() {
+		click(lnkSmsCode, "SmsCode");
 	}
 
 	public void clickSms() {

@@ -2,6 +2,7 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.components.ToastComponent;
 import coyni.merchant.popups.AddIPAddressPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -49,6 +50,10 @@ public class IPAddressPage extends BrowserFunctions {
 //		} else {
 //			click(lblAddIp, "Add  Ip Address");
 //		}
+	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 	public AddIPAddressPopup addIPAddressPopup() {
