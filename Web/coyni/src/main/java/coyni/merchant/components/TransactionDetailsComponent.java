@@ -84,6 +84,10 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 
 	private By btnCopy = By.xpath("(//button[contains(@class,'icon-copy')])[2]");
 
+	private By lblCustomerName = By.xpath("//p[contains(text(),'Customer Name')]/following-sibling::*");
+
+	private By lblCustomerEmail = By.xpath("//p[contains(text(),'Customer Email')]/following-sibling::*");
+
 	public void fillReason(String refund) {
 		enterText(txtReasonForRefund, refund, "Reason For Refund");
 	}
@@ -116,6 +120,16 @@ public class TransactionDetailsComponent extends BrowserFunctions {
 			ExtentTestManager.setPassMessageInReport("record is not displayed");
 		}
 
+	}
+
+	public void getCustomerName() {
+		// String text = getText(lblTransactionType, "Transaction Type");
+		ExtentTestManager.setInfoMessageInReport("Transaction Type  " + getText(lblCustomerName, "Customer Name"));
+	}
+
+	public void getCustomerEmail() {
+		// String text = getText(lblTransactionType, "Transaction Type");
+		ExtentTestManager.setInfoMessageInReport("Transaction Type  " + getText(lblCustomerEmail, "Customer Email"));
 	}
 
 	public void clickFullAmount() {

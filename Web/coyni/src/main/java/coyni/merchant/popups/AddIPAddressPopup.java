@@ -15,7 +15,11 @@ public class AddIPAddressPopup extends BrowserFunctions {
 	private By lblAddNewIpAddress = By.xpath("//h3[text()='Add New IP Address']");
 	private By lblHeading = By.xpath("//h1[text()='New IP Address Request']");
 	private By txtIpAddress = By.xpath("//label[text()='IP Address']/following-sibling::input");
+	private By txtIpAddress1 = By.xpath("(//label[text()='IP Address']/following-sibling::input)[2]");
+	private By txtIpAddress2 = By.xpath("(//label[text()='IP Address']/following-sibling::input)[3]");
 	private By txtDescription = By.xpath("//label[text()='IP Address Description']/following-sibling::textarea");
+	private By txtDescription1 = By.xpath("(//label[text()='IP Address Description']/following-sibling::textarea)[2]");
+	private By txtDescription2 = By.xpath("(//label[text()='IP Address Description']/following-sibling::textarea)[3]");
 	private By btnSubmit = By.xpath("//button[text()='Submit']");
 	private By lblAddIp = By.xpath("//button[text()='Add IP Address']");
 	private By lblNoIPHeading = By.xpath("//p[text()='No IP Address Exists']");
@@ -83,8 +87,24 @@ public class AddIPAddressPopup extends BrowserFunctions {
 		enterText(txtIpAddress, data, "IP Address");
 	}
 
+	public void fillIpAddress1(String data) {
+		enterText(txtIpAddress1, data, "IP Address");
+	}
+
+	public void fillIpAddress2(String data) {
+		enterText(txtIpAddress2, data, "IP Address");
+	}
+
 	public void fillDescription(String data) {
 		enterText(txtDescription, data, "Description");
+	}
+
+	public void fillDescription1(String data) {
+		enterText(txtDescription1, data, "Description");
+	}
+
+	public void fillDescription2(String data) {
+		enterText(txtDescription2, data, "Description");
 	}
 
 	public void verifyAccountId() {

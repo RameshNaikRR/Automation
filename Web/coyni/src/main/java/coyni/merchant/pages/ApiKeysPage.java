@@ -47,6 +47,8 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By btnActivekeys = By.xpath("//button[contains(text(),'Active Keys')]");
 
+	private By ipAddressLogD = By.xpath("(//p[contains(@class,'ml-[18px] text-xs break-all text-cgy4')])[1]");
+
 	private By btnInActiveKeys = By.xpath("//button[contains(text(),'Inactive Keys')]");
 
 	private By btnExpiredKeys = By.xpath("//button[contains(text(),'Expired Keys')]");
@@ -90,12 +92,12 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By revealSecretKey = By.xpath("//button[contains(text(),'Reveal Secret Key')]");
 
-	private By ipaddressName = By.xpath("(//span)[1]");
+	private By ipaddressName = By.xpath("(//span)[85]");
 
 //	private By apikeyDate = By.xpath("((//p[contains(@class,'font-bold capitalize break-all')])[1]//span)[2]");
 
-	private By ipAddressDate = By.xpath("(//span)[2]");
-	
+	private By ipAddressDate = By.xpath("(//span)[86]");
+
 	private By lblIpAddressLogs = By.xpath(
 			"(//div[contains(@class,'ActivityLog_logs_container')]/parent::div//div[contains(@class,'flex flex-col mb-6')])");
 
@@ -105,8 +107,14 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	private By webhookLog = By.xpath("(//div[contains(@class,'flex flex-col mb-6')])[1]");
 
+	private By btnIPAddresssess = By.xpath("(//button[contains(text(),'IP Addresses')])[2]");
+
 	public void clickApiKeys() {
 		click(btneCommerceApiKeys, "ApiKeys");
+	}
+
+	public void clickOnIpAddressLog() {
+		click(btnIPAddresssess, "IP Address");
 	}
 
 	public void clickWebhooks() {
@@ -137,7 +145,7 @@ public class ApiKeysPage extends BrowserFunctions {
 
 	}
 
-	public void getListOfIpAddressKeyLogs() throws InterruptedException {
+	public void getListOfIpAddressLogs() throws InterruptedException {
 		Thread.sleep(5000);
 		List<WebElement> list = getElementsList(lblIpAddressLogs, "Ip address logs");
 		int size = list.size();
@@ -149,9 +157,11 @@ public class ApiKeysPage extends BrowserFunctions {
 				String text = ele.getText();
 				WebElement ele2 = eles.findElement(ipAddressDate);
 				String text2 = ele.getText();
-				String text1 = text + text2;
+				WebElement ele3 = eles.findElement(ipAddressLogD);
+				String text3 = ele.getText();
+				String text1 = text + text2 + text3;
 				// System.out.println("Element is " + text);
-				ExtentTestManager.setInfoMessageInReport("API Keys " + text1);
+				ExtentTestManager.setInfoMessageInReport("IP Addreess Logs " + text1);
 
 			} catch (Exception e) {
 				ExtentTestManager.setInfoMessageInReport("Information is " + e);

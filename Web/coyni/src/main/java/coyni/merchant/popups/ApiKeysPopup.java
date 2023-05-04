@@ -26,8 +26,14 @@ public class ApiKeysPopup extends BrowserFunctions {
 
 	private By btnExpiredKeys = By.xpath("//button[contains(text(),'Expired Keys')]");
 
+	private By btHideSecretKey = By.xpath("//button[contains(text(),'Hide Secret Key')]");
+
 	public void clickActiveKeys() {
 		click(btnActivekeys, "Active");
+	}
+
+	public void clickOnHideSecretKey() {
+		click(btHideSecretKey, "Hide Secret Key");
 	}
 
 	public void clickRevealSecretKey() {

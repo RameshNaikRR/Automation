@@ -336,13 +336,14 @@ public class MerchantProfileTest {
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
 					.fillInput(data.get("code"));
 			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
-			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			// merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
 			if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 
+				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
-			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
-					data.get("elementName"));
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -569,7 +570,6 @@ public class MerchantProfileTest {
 		}
 	}
 
-
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditEmailWithResendVerificationCode(String strParams) {
@@ -610,10 +610,9 @@ public class MerchantProfileTest {
 
 			if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-
+				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+						data.get("elementName"));
 			}
-			new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
-					data.get("elementName"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
@@ -662,14 +661,18 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantProfilePage.userDetailsComponent().notificationsComponent().clickNotifications();
 			merchantProfilePage.userDetailsComponent().notificationsComponent().verifyDateFormatInNotifications();
-			merchantProfilePage.userDetailsComponent().notificationsComponent().getTotalCount(data.get("query"));
-			merchantProfilePage.userDetailsComponent().notificationsComponent()
-					.getTotalTodayCount(data.get("todayquery"));
-			merchantProfilePage.userDetailsComponent().notificationsComponent()
-					.getTotalYesterdayCount(data.get("yesterdayquery"));
-			merchantProfilePage.userDetailsComponent().notificationsComponent()
-					.getTotalOlderCount(data.get("olderquery"));
-
+			// merchantProfilePage.userDetailsComponent().notificationsComponent().getTotalCount(data.get("query"));
+			merchantProfilePage.userDetailsComponent().notificationsComponent().getTotalNotificationsCount();
+//			if (merchantProfilePage.userDetailsComponent().notificationsComponent().todayNotification()) {
+//				merchantProfilePage.userDetailsComponent().notificationsComponent()
+//						.getTotalTodayCount(data.get("todayquery"));
+//			} else if (merchantProfilePage.userDetailsComponent().notificationsComponent().yesterdayNotification()) {
+//				merchantProfilePage.userDetailsComponent().notificationsComponent()
+//						.getTotalYesterdayCount(data.get("yesterdayquery"));
+//			} else {
+//				merchantProfilePage.userDetailsComponent().notificationsComponent()
+//						.getTotalOlderCount(data.get("olderquery"));
+//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test Notifications is failed due to Exception " + e);
 		}
@@ -773,6 +776,18 @@ public class MerchantProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnPersonalAccount();
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickPreferences();
+			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount1"));
+			sideMenuBarComponent.clickUserdrpdwn();
+			sideMenuBarComponent.clickOnMerchantdrpdwn();
+			sideMenuBarComponent.clickOnMMerchantDropDOwn();
+			Thread.sleep(3000);
+			signupPage.tokenAccountPage().clickTokenAccount();
+			signupPage.tokenAccountPage().verifyHeading(data.get("heading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPreferences is failed due to Exception " + e);

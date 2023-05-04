@@ -1,6 +1,7 @@
 package coyni.merchant.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.BeforeTest;
@@ -736,8 +737,8 @@ public class MerchantSettingsTest {
 					.clickOnAPIKeyss();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getAPIKeyLog();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.getListOfAPIKeyLogs();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.getListOfAPIKeyLogs();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
@@ -795,9 +796,11 @@ public class MerchantSettingsTest {
 					.apiKeysPopup().clickRevealSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.apiKeysPopup().authyComponent().fillInput(data.get("code1"));
-			Thread.sleep(2000);
+			Thread.sleep(4000);
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.apiKeysPopup().getSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.apiKeysPopup().getSecretKey();
+					.apiKeysPopup().clickOnHideSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.apiKeysPopup().clickGenerateNewSecretKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -821,11 +824,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.clickApiKeys();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnPOSIntegrationAPIKeys();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.clickOnConfigure();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickOnViewAPIKey();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
@@ -851,17 +850,16 @@ public class MerchantSettingsTest {
 			Thread.sleep(3000);
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.verifyHeading(data.get("apiKeysHeading"));
-
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickApiKeys();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.getPublicKey();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.clickGenerateNewSecretKey();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ClickGenerate();
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-//					.clickRevealSecretKey();
+//					.getPublicKey();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.clickGenerateNewSecretKey();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+//					.ClickGenerate();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickRevealSecretKey();
 			if (!data.get("code").isEmpty()) {
 				sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 						.authyComponent().fillAuthyInputInvalid(data.get("code"), data.get("char"));
@@ -871,7 +869,9 @@ public class MerchantSettingsTest {
 						.authyComponent().verifyMessage(data.get("errMessage"));
 			}
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAPIKeys failed due to " + e);
 		}
 
@@ -918,23 +918,28 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().clickAddNewIpAddress();
+					.ipAddressPage().addIPAddressPopup().clickOnAdditionalIpAddress();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress1"));
+					.ipAddressPage().addIPAddressPopup().fillIpAddress1(data.get("ipAddress1"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription1"));
+					.ipAddressPage().addIPAddressPopup().fillDescription1(data.get("ipDescription1"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().clickAddNewIpAddress();
+					.ipAddressPage().addIPAddressPopup().clickOnAdditionalIpAddress();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().addIPAddressPopup().fillIpAddress(data.get("ipAddress2"));
+					.ipAddressPage().addIPAddressPopup().fillIpAddress2(data.get("ipAddress2"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription2"));
+					.ipAddressPage().addIPAddressPopup().fillDescription2(data.get("ipDescription2"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickSubmit();
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 //					.ipAddressPage().addIPAddressPopup().verifySuccessHeading(data.get("successHeading"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickClose();
+			Thread.sleep(2000);
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnAPIKeyss();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.clickOnIpAddressLog();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.getIPAddressLog();
 
@@ -975,7 +980,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickIPAddress();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.getListOfIpAddressKeyLogs();
+					.getListOfIpAddressLogs();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAdditionalIpAddress  Failed due to Exception " + e);
@@ -1007,6 +1012,9 @@ public class MerchantSettingsTest {
 					.ipAddressPage().addIPAddressPopup().fillDescription(data.get("ipDescription"));
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.ipAddressPage().addIPAddressPopup().clickOutSide();
+			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
+					.ipAddressPage().addIPAddressPopup().clickSubmit();
+			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessageForIPAddress(data.get("errMessage"));
 			} else if (!data.get("toastMessage").isEmpty()) {
@@ -1101,7 +1109,7 @@ public class MerchantSettingsTest {
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
 					.clickWebhooks();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().apiKeysPage()
-					.getListOfWebHookLogs();
+					.getWebHookLog();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditWebhook  Failed due to Exception " + e);

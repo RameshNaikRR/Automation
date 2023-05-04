@@ -282,6 +282,10 @@ public class TokenAccountActivityComponent extends BrowserFunctions {
 		return new DatePickerComponent();
 	}
 
+	public FilterCalenderComponent filterCalenderComponent() {
+		return new FilterCalenderComponent();
+	}
+
 	public ExportfilesPage exportfilesPage() {
 		return new ExportfilesPage();
 	}

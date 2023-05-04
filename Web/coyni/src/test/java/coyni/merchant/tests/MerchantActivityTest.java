@@ -34,8 +34,8 @@ public class MerchantActivityTest {
 	ExportfilesPage exportfilesPage;
 	MerchantSettingsPage merchantSettingsPage;
 	GetHelpPage getHelpPage;
-    SideBarComponent adminSideBarComponent; 
-	
+	SideBarComponent adminSideBarComponent;
+
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
@@ -50,7 +50,6 @@ public class MerchantActivityTest {
 		merchantActivityComponent = new MerchantActivityComponent();
 		sideMenuBarComponent = new SideMenuBarComponent();
 		adminSideBarComponent = new SideBarComponent();
-		
 
 	}
 
@@ -707,9 +706,16 @@ public class MerchantActivityTest {
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
 			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
@@ -725,10 +731,19 @@ public class MerchantActivityTest {
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 			// int filterData1 = merchantTransactionsPage.filterComponent().noFilterData();
@@ -738,15 +753,24 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-	//		merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData2 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData2 == 0) {
@@ -759,12 +783,21 @@ public class MerchantActivityTest {
 //			merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData3 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData3 == 0) {
@@ -774,15 +807,24 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData4 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData4 == 0) {
@@ -792,15 +834,24 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 			// int filterData5 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData5 == 0) {
@@ -810,15 +861,24 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData6 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData6 == 0) {
@@ -827,15 +887,24 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData7 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData7 == 0) {
@@ -844,15 +913,24 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData8 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData8 == 0) {
@@ -862,15 +940,24 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData9 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData9 == 0) {
@@ -880,15 +967,24 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData10 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData10 == 0) {
@@ -897,15 +993,24 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-			//merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData11 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData11 == 0) {
@@ -914,15 +1019,29 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData12 = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData12 == 0) {
@@ -931,15 +1050,73 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickResetFilters();
+
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
 			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData13 = merchantTransactionsPage.filterComponent().noFilterData();
@@ -949,15 +1126,28 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
-			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 //			int filterData14 = merchantTransactionsPage.filterComponent().noFilterData();
@@ -967,60 +1157,72 @@ public class MerchantActivityTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
-			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
+			merchantTransactionsPage.filterComponent().clickOnClearAll();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().clickOnClearAllTxnSubType();
+			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+			merchantTransactionsPage.filterComponent().clickOnClearTxnAmount();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+			merchantTransactionsPage.filterComponent().clickOnClearSender();
+			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnClearReceiver();
+			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+			merchantTransactionsPage.filterComponent().clickOnClearAllTxnStatus();
 			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 
-		//	merchantTransactionsPage.filterComponent().clickFilters();
+			// merchantTransactionsPage.filterComponent().clickFilters();
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
 //			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
-			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
-			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().ClickOnCompleted();
-			merchantTransactionsPage.filterComponent().clickResetFilters();
-
-		//	merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
-			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
-			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnRefund();
-			merchantTransactionsPage.filterComponent().clickResetFilters();
-
-		//	merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
-			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
-			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
-			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
-			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
-			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
-			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
-			merchantTransactionsPage.filterComponent().clickResetFilters();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+//			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+//			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+//			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+//			merchantTransactionsPage.filterComponent().ClickOnCompleted();
+//			merchantTransactionsPage.filterComponent().clickResetFilters();
+//
+//			// merchantTransactionsPage.filterComponent().clickFilters();
+////			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+////			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+//			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+//			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+//			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+//			merchantTransactionsPage.filterComponent().clickOnRefund();
+//			merchantTransactionsPage.filterComponent().clickResetFilters();
+//
+//			// merchantTransactionsPage.filterComponent().clickFilters();
+////			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
+////			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
+//			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
+//			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
+//			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
+//			merchantTransactionsPage.filterComponent().fillSender(data.get("filterType1"));
+//			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
+//			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
+//			merchantTransactionsPage.filterComponent().clickResetFilters();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
 		}
 
 	}
-
 
 	@Test
 	@Parameters({ "strParams" })
@@ -1138,15 +1340,15 @@ public class MerchantActivityTest {
 	static String netAmount;
 	static String PercentageAmountOfResrve;
 	static String grossAmount;
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testMerchantReserveandProcessAmount(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
-		//	sideMenuBarComponent.clickMerchantActivityDrpDwn();
-		//	Thread.sleep(2000);
+			// sideMenuBarComponent.clickMerchantActivityDrpDwn();
+			// Thread.sleep(2000);
 			merchantActivityComponent.clickTransactions();
 			merchantActivityComponent.clickFilter();
 			merchantActivityComponent.clickeCommerceChcekBox();
@@ -1154,37 +1356,48 @@ public class MerchantActivityTest {
 			merchantActivityComponent.transactionDetailsComponent().clickRecord();
 			Thread.sleep(2000);
 			grossAmount = merchantActivityComponent.transactionDetailsComponent().getGrossAmount();
-			 processFee = merchantActivityComponent.transactionDetailsComponent().getProcessingFee();
-			
-				String expPercentageAmountOfReserve=merchantActivityComponent.transactionDetailsComponent().reservePercentage(data.get("reserveAmount"));
-				PercentageAmountOfResrve=merchantActivityComponent.transactionDetailsComponent().getPercatageAmount();
-				if(expPercentageAmountOfReserve.equals(PercentageAmountOfResrve)) {
-					ExtentTestManager.setPassMessageInReport("The Reserved Percentage Calculation amount of the total cart amount is "+ expPercentageAmountOfReserve +"Matched with" + " The Reserved Percentage calaulation amount in the Merchant Transaction details  " + PercentageAmountOfResrve);
-				}
-				else {
-					ExtentTestManager.setInfoMessageInReport("The Reserved Percentage Calculation amount of the total cart amount is "+ expPercentageAmountOfReserve +" not Matched with" + " The Reserved Percentage calaulation amount in the Merchant Transaction details  " + PercentageAmountOfResrve);
-				}	
+			processFee = merchantActivityComponent.transactionDetailsComponent().getProcessingFee();
+
+			String expPercentageAmountOfReserve = merchantActivityComponent.transactionDetailsComponent()
+					.reservePercentage(data.get("reserveAmount"));
+			PercentageAmountOfResrve = merchantActivityComponent.transactionDetailsComponent().getPercatageAmount();
+			if (expPercentageAmountOfReserve.equals(PercentageAmountOfResrve)) {
+				ExtentTestManager.setPassMessageInReport(
+						"The Reserved Percentage Calculation amount of the total cart amount is "
+								+ expPercentageAmountOfReserve + "Matched with"
+								+ " The Reserved Percentage calaulation amount in the Merchant Transaction details  "
+								+ PercentageAmountOfResrve);
+			} else {
+				ExtentTestManager.setInfoMessageInReport(
+						"The Reserved Percentage Calculation amount of the total cart amount is "
+								+ expPercentageAmountOfReserve + " not Matched with"
+								+ " The Reserved Percentage calaulation amount in the Merchant Transaction details  "
+								+ PercentageAmountOfResrve);
+			}
 			netAmount = merchantActivityComponent.transactionDetailsComponent().getNetAmount();
-			
-			
+
 			merchantActivityComponent.transactionDetailsComponent().clickCopyReferenceID();
 			Thread.sleep(2000);
 			referenceID = merchantActivityComponent.transactionDetailsComponent().getCopyReferenceID();
 			sideMenuBarComponent.clickMerchantSettings();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().clickFeesBtn();
-			 String eCommereceProcess=sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().feesPage().geteCommerceProcessing();
-				if(processFee.equals(eCommereceProcess)) {
-					ExtentTestManager.setPassMessageInReport("The Processing amount of the total cart amount is "+ processFee +"Matched with" + " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
-				}
-				else {
-					ExtentTestManager.setInfoMessageInReport("The Processing amount of the total cart amount is "+ processFee +"not Matched with" + " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
-				}
-			
+			String eCommereceProcess = sideMenuBarComponent.merchantSettingsPage()
+					.merchantSettingsSideBarMenuComponent().feesPage().geteCommerceProcessing();
+			if (processFee.equals(eCommereceProcess)) {
+				ExtentTestManager.setPassMessageInReport(
+						"The Processing amount of the total cart amount is " + processFee + "Matched with"
+								+ " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
+			} else {
+				ExtentTestManager.setInfoMessageInReport(
+						"The Processing amount of the total cart amount is " + processFee + "not Matched with"
+								+ " The Processing amount in the Merchant Settings Fees  " + eCommereceProcess);
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTransactionDetailsFilters Failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminReserveAndCommisionAmountLogin(String strParams) {
@@ -1206,103 +1419,137 @@ public class MerchantActivityTest {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminReserveAndCommisionAmount(String strParams) {
 		try {
-			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			adminSideBarComponent.clickTransactions();
 			adminSideBarComponent.transactionPage().clickBusiness();
-			
+
 			adminSideBarComponent.transactionPage().fillSearch(referenceID);
 			adminSideBarComponent.transactionPage().clickSearch();
 			Thread.sleep(2000);
 			adminSideBarComponent.transactionPage().transactionDetailsComponent().clickDetails();
-			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getGrossAmount();
-			if(grossAmount.equals(actGrossAmount)) {
-				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is reflecelted and Matched with the Gross amount in the Admin Transaction Page  " + actGrossAmount);
+			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getGrossAmount();
+			if (grossAmount.equals(actGrossAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal " + grossAmount
+						+ " is reflecelted and Matched with the Gross amount in the Admin Transaction Page  "
+						+ actGrossAmount);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal " + grossAmount
+						+ " is not reflecelted and not Matched with the Gross amount in the Admin Transaction Page  "
+						+ actGrossAmount);
 			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is not reflecelted and not Matched with the Gross amount in the Admin Transaction Page  " + actGrossAmount);
+			String actProcessingFee = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getProcessingFee();
+			if (processFee.equals(actProcessingFee)) {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal " + processFee
+						+ " is reflecelted and Matched with the Processing amount in the Admin Transaction Page  "
+						+ actProcessingFee);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal " + processFee
+						+ " is not reflecelted and not Matched with the Processing amount in the Admin Transaction Page  "
+						+ actProcessingFee);
 			}
-			String actProcessingFee=adminSideBarComponent.transactionPage().transactionDetailsComponent().getProcessingFee();
-			if(processFee.equals(actProcessingFee)) {
-				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is reflecelted and Matched with the Processing amount in the Admin Transaction Page  " + actProcessingFee);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is not reflecelted and not Matched with the Processing amount in the Admin Transaction Page  " + actProcessingFee);
-			}
-			String actResrve=adminSideBarComponent.transactionPage().transactionDetailsComponent().getPercatageAmount();
-			if(PercentageAmountOfResrve.equals(actResrve)) {
-				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is reflecelted and Matched with the Reserve Percentage amount in the Admin Transaction Page  " + actResrve);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Transaction Page  " + actResrve);
+			String actResrve = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getPercatageAmount();
+			if (PercentageAmountOfResrve.equals(actResrve)) {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "
+						+ PercentageAmountOfResrve
+						+ " is reflecelted and Matched with the Reserve Percentage amount in the Admin Transaction Page  "
+						+ actResrve);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "
+						+ PercentageAmountOfResrve
+						+ " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Transaction Page  "
+						+ actResrve);
 			}
 			String actnetAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getNetAmount();
-			if(netAmount.equals(actnetAmount)) {
-				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is reflecelted and Matched with the Net amount in the Admin Transaction Page  " + actnetAmount);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is not reflecelted and not Matched with the Net amount in the Admin Transaction Page  " + actnetAmount);
+			if (netAmount.equals(actnetAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal " + netAmount
+						+ " is reflecelted and Matched with the Net amount in the Admin Transaction Page  "
+						+ actnetAmount);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal " + netAmount
+						+ " is not reflecelted and not Matched with the Net amount in the Admin Transaction Page  "
+						+ actnetAmount);
 			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminReserveandProcessFeeCommisionAmount(String strParams) {
 		try {
-			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			adminSideBarComponent.clickCoyniPortal();
 			adminSideBarComponent.clickCommissionAccount();
 			adminSideBarComponent.commissionAccountPage().clickFullTransactionHistory();
 			Thread.sleep(2000);
 			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().clickFilters();
-			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().fillReferenceID(referenceID);
+			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent()
+					.fillReferenceID(referenceID);
 			adminSideBarComponent.commissionAccountPage().transactionPage().filterComponent().clickApplyFilters();
-			
-			
+
 			Thread.sleep(2000);
 			adminSideBarComponent.transactionPage().transactionDetailsComponent().clickDetails();
-			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getGrossAmount();
-			if(grossAmount.equals(actGrossAmount)) {
-				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is reflecelted and Matched with the Gross amount in the Admin Commisssion Page  " + actGrossAmount);
+			String actGrossAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getGrossAmount();
+			if (grossAmount.equals(actGrossAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal " + grossAmount
+						+ " is reflecelted and Matched with the Gross amount in the Admin Commisssion Page  "
+						+ actGrossAmount);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal " + grossAmount
+						+ " is not reflecelted and not Matched with the Gross amount in the Admin Commisssion Page  "
+						+ actGrossAmount);
 			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Gross Amount of the Merchant Portal "+ grossAmount + " is not reflecelted and not Matched with the Gross amount in the Admin Commisssion Page  " + actGrossAmount);
+			String actProcessingFee = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getProcessingFee();
+			if (processFee.equals(actProcessingFee)) {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal " + processFee
+						+ " is reflecelted and Matched with the Processing amount in the Admin Commisssion Page  "
+						+ actProcessingFee);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal " + processFee
+						+ " is not reflecelted and not Matched with the Processing amount in the Admin Commisssion Page  "
+						+ actProcessingFee);
 			}
-			String actProcessingFee=adminSideBarComponent.transactionPage().transactionDetailsComponent().getProcessingFee();
-			if(processFee.equals(actProcessingFee)) {
-				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is reflecelted and Matched with the Processing amount in the Admin Commisssion Page  " + actProcessingFee);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Processing Fees of the Merchant Portal "+ processFee + " is not reflecelted and not Matched with the Processing amount in the Admin Commisssion Page  " + actProcessingFee);
-			}
-			String actResrve=adminSideBarComponent.transactionPage().transactionDetailsComponent().getPercatageAmount();
-			if(PercentageAmountOfResrve.equals(actResrve)) {
-				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is reflecelted and Matched with the Reserve Percentage amount in the Admin Commisssion Page  " + actResrve);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "+ PercentageAmountOfResrve + " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Commisssion Page  " + actResrve);
+			String actResrve = adminSideBarComponent.transactionPage().transactionDetailsComponent()
+					.getPercatageAmount();
+			if (PercentageAmountOfResrve.equals(actResrve)) {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "
+						+ PercentageAmountOfResrve
+						+ " is reflecelted and Matched with the Reserve Percentage amount in the Admin Commisssion Page  "
+						+ actResrve);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Reserve Percentage Amount of the Merchant Portal "
+						+ PercentageAmountOfResrve
+						+ " is not reflecelted and not Matched with the Reserve Percentage amount in the Admin Commisssion Page  "
+						+ actResrve);
 			}
 			String actnetAmount = adminSideBarComponent.transactionPage().transactionDetailsComponent().getNetAmount();
-			if(netAmount.equals(actnetAmount)) {
-				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is reflecelted and Matched with the Net amount in the Admin Commisssion Page  " + actnetAmount);
-			}
-			else {
-				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal "+ netAmount + " is not reflecelted and not Matched with the Net amount in the Admin Commisssion Page  " + actnetAmount);
+			if (netAmount.equals(actnetAmount)) {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal " + netAmount
+						+ " is reflecelted and Matched with the Net amount in the Admin Commisssion Page  "
+						+ actnetAmount);
+			} else {
+				ExtentTestManager.setPassMessageInReport("The Net Amount of the Merchant Portal " + netAmount
+						+ " is not reflecelted and not Matched with the Net amount in the Admin Commisssion Page  "
+						+ actnetAmount);
 			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testTransactionDetailsFilters(String strParams) {
@@ -1339,10 +1586,9 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			// testRecords(strParams);
-			Thread.sleep(2000);
-//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-//			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
+			testRecords(strParams);
+			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 //			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
 //			merchantActivityComponent.transactionDetailsComponent().getAmount();
@@ -1362,9 +1608,9 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			// testRecords(strParams);
-//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
-//			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
+			testRecords(strParams);
+			merchantActivityComponent.transactionDetailsComponent().getCustomerName();
+			merchantActivityComponent.transactionDetailsComponent().getCustomerEmail();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 //			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
 //			merchantActivityComponent.transactionDetailsComponent().getAmount();
@@ -1383,7 +1629,7 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			// testRecords(strParams);
+//			 testRecords(strParams);
 //			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getPayOutID();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
@@ -1402,8 +1648,8 @@ public class MerchantActivityTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			testTransactionDetailsFilters(strParams);
-			// testRecords(strParams);
-//			merchantActivityComponent.transactionDetailsComponent().getTransactionType();
+			testRecords(strParams);
+			// merchantActivityComponent.transactionDetailsComponent().getTransactionType();
 //			merchantActivityComponent.transactionDetailsComponent().getReferenceID();
 //			merchantActivityComponent.transactionDetailsComponent().getCreatedDate();
 //			merchantActivityComponent.transactionDetailsComponent().getAmount();

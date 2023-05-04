@@ -73,51 +73,48 @@ public class LoginTest {
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
 			Thread.sleep(2000);
-			if(loginPage.verifyNonMaterialAgrrement()==0) {
-				if(loginPage.verifyTermsOfServicesHeading()==1) {
+			if (loginPage.verifyNonMaterialAgrrement() == 0) {
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
 					loginPage.scrollToTermsAgree();
-				     loginPage.clickDone();
-				}
-				else {
-				 loginPage.verifyWelcomeHeading();	
+					loginPage.clickDone();
+				} else {
+					loginPage.verifyWelcomeHeading();
 				}
 				Thread.sleep(3000);
-				if(loginPage.verifyPriacyPolicyHeading()==1) {
+				if (loginPage.verifyPriacyPolicyHeading() == 1) {
 					loginPage.scrollToPrivacyAgree();
-				     loginPage.clickDone();
+					loginPage.clickDone();
 				}
 
 				else {
-				 loginPage.verifyWelcomeHeading();	
+					loginPage.verifyWelcomeHeading();
+				}
+			} else {
+				Thread.sleep(3000);
+				if (loginPage.verifyPriacyPolicyHeading() == 1) {
+					loginPage.scrollToPrivacyAgree();
+					loginPage.clickDone();
+				}
 
-			}
-			}	
 				else {
-					Thread.sleep(3000);
-			if(loginPage.verifyPriacyPolicyHeading()==1) {
-				loginPage.scrollToPrivacyAgree();
-			     loginPage.clickDone();
+					loginPage.verifyWelcomeHeading();
+				}
+				Thread.sleep(2000);
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
+					loginPage.scrollToTermsAgree();
+					loginPage.clickDone();
+				}
+
+				else {
+					loginPage.verifyWelcomeHeading();
+				}
 			}
 
-			else {
-			 loginPage.verifyWelcomeHeading();	
-			}
-			Thread.sleep(2000);
-			if(loginPage.verifyTermsOfServicesHeading()==1) {
-				loginPage.scrollToTermsAgree();
-			     loginPage.clickDone();
-			}
-
-			else {
-			 loginPage.verifyWelcomeHeading();	
-			}
-	}
-					
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginAfterSignUp(String strParams) {
@@ -131,7 +128,7 @@ public class LoginTest {
 //			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			Thread.sleep(1000);
-		//	loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			// loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
 			} else {
@@ -140,57 +137,55 @@ public class LoginTest {
 				ExtentTestManager.setInfoMessageInReport("ok ");
 			}
 			Thread.sleep(2000);
-			if(loginPage.verifyDoneButtonSize()==1) {
+			if (loginPage.verifyDoneButtonSize() == 1) {
 				loginPage.scrollToPrivacyAgreeNonMaterial();
 				Thread.sleep(1000);
 				loginPage.scrollToTermsAgreeNonMateria();
-			}
-			else {
-			Thread.sleep(2000);
-			if(loginPage.verifyNonMaterialAgrrement()==0) {
-				if(loginPage.verifyTermsOfServicesHeading()==1) {
-					loginPage.scrollToTermsAgree();
-				     loginPage.clickDone();
-				}
-				else {
-				 loginPage.verifyWelcomeHeading();	
-				}
-				Thread.sleep(3000);
-				if(loginPage.verifyPriacyPolicyHeading()==1) {
-					loginPage.scrollToPrivacyAgree();
-				     loginPage.clickDone();
-				}
-
-				else {
-				 loginPage.verifyWelcomeHeading();	
-
-			}
-			}	
-				else {
+			} else {
+				Thread.sleep(2000);
+				if (loginPage.verifyNonMaterialAgrrement() == 0) {
+					if (loginPage.verifyTermsOfServicesHeading() == 1) {
+						loginPage.scrollToTermsAgree();
+						loginPage.clickDone();
+					} else {
+						loginPage.verifyWelcomeHeading();
+					}
 					Thread.sleep(3000);
-			if(loginPage.verifyPriacyPolicyHeading()==1) {
-				loginPage.scrollToPrivacyAgree();
-			     loginPage.clickDone();
-			}
+					if (loginPage.verifyPriacyPolicyHeading() == 1) {
+						loginPage.scrollToPrivacyAgree();
+						loginPage.clickDone();
+					}
 
-			else {
-			 loginPage.verifyWelcomeHeading();	
-			}
-			Thread.sleep(2000);
-			if(loginPage.verifyTermsOfServicesHeading()==1) {
-				loginPage.scrollToTermsAgree();
-			     loginPage.clickDone();
-			}
+					else {
+						loginPage.verifyWelcomeHeading();
 
-			else {
-			 loginPage.verifyWelcomeHeading();	
+					}
+				} else {
+					Thread.sleep(3000);
+					if (loginPage.verifyPriacyPolicyHeading() == 1) {
+						loginPage.scrollToPrivacyAgree();
+						loginPage.clickDone();
+					}
+
+					else {
+						loginPage.verifyWelcomeHeading();
+					}
+					Thread.sleep(2000);
+					if (loginPage.verifyTermsOfServicesHeading() == 1) {
+						loginPage.scrollToTermsAgree();
+						loginPage.clickDone();
+					}
+
+					else {
+						loginPage.verifyWelcomeHeading();
+					}
+				}
 			}
-	}
-}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
 		}
-		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testLoginView(String strParams) {
