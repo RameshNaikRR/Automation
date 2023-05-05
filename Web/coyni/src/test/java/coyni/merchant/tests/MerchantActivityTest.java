@@ -345,8 +345,9 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -354,6 +355,7 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().fillReceiver(data.get("filterType2"));
 			merchantTransactionsPage.filterComponent().ClickOnCompleted();
 			merchantTransactionsPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData = merchantTransactionsPage.filterComponent().noFilterData();
 //			if (filterData == 0) {
 //				merchantTransactionsPage.filterComponent().getTotalCount(data.get("query1"));
@@ -363,8 +365,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -380,8 +385,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -398,8 +406,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -416,8 +427,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -434,8 +448,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -452,8 +469,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -469,8 +489,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -486,8 +509,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -504,8 +530,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -522,8 +551,11 @@ public class MerchantActivityTest {
 //			}
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -539,8 +571,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -556,8 +591,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 			merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
@@ -573,8 +611,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -591,8 +632,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -609,8 +653,11 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderEmobile();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -621,8 +668,11 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickApplyFilters();
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -633,8 +683,11 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickApplyFilters();
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -645,8 +698,11 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickApplyFilters();
 
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().clickResetAllFilters();
+			merchantTransactionsPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrderECommerce();
 			merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -657,7 +713,7 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickApplyFilters();
 
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testResetFilters Failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("testFilters Failed due to Exception " + e);
 		}
 
 	}
@@ -670,9 +726,8 @@ public class MerchantActivityTest {
 				merchantTransactionsPage.filterComponent().verifyNoTrasactionsFound();
 			} else {
 				merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().clickStartDate();
-//			merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-//			merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				merchantTransactionsPage.filterComponent().filterCalenderComponent().clickPreviousTenDays();
+				merchantTransactionsPage.filterComponent().filterCalenderComponent().clickStartDate();
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
 				merchantTransactionsPage.filterComponent().clickClearAllTransactionType();
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
@@ -703,8 +758,8 @@ public class MerchantActivityTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			merchantActivityComponent.clickTransactions();
 			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -728,8 +783,8 @@ public class MerchantActivityTest {
 //			}
 
 //			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -754,8 +809,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -781,8 +836,8 @@ public class MerchantActivityTest {
 //			}
 
 //			merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
@@ -808,8 +863,8 @@ public class MerchantActivityTest {
 //			}
 
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
@@ -835,8 +890,8 @@ public class MerchantActivityTest {
 //			}
 
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnRefund();
@@ -862,8 +917,8 @@ public class MerchantActivityTest {
 //			}
 
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
@@ -888,8 +943,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
@@ -914,8 +969,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMerchantPayOut();
@@ -941,8 +996,8 @@ public class MerchantActivityTest {
 //			}
 
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
@@ -968,8 +1023,8 @@ public class MerchantActivityTest {
 //			}
 
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
@@ -994,8 +1049,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnMonthlyServiceFee();
@@ -1020,8 +1075,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -1051,9 +1106,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
-
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -1076,6 +1130,8 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickOnRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -1098,6 +1154,8 @@ public class MerchantActivityTest {
 			merchantTransactionsPage.filterComponent().clickOnPartialRefund();
 			merchantTransactionsPage.filterComponent().clickResetFilters();
 
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -1127,8 +1185,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
@@ -1158,8 +1216,8 @@ public class MerchantActivityTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// merchantTransactionsPage.filterComponent().clickFilters();
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-//			merchantTransactionsPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			merchantTransactionsPage.filterComponent().filterCalenderComponent().setDate();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();
 			merchantTransactionsPage.filterComponent().clickOnClearAll();
 			merchantTransactionsPage.filterComponent().clickOnSaleOrder();

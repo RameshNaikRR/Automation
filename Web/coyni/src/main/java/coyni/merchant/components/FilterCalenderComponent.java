@@ -71,8 +71,40 @@ public class FilterCalenderComponent extends BrowserFunctions {
 		PageFactory.initElements(DriverFactory.getDriver(), this);
 	}
 
-	public void setDate(String date) {
-		String temp = date;
+	public String currentDay1() {
+		LocalDate dt = LocalDate.now();
+		// .plusDays(1);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
+		return formatter.format(dt);
+	}
+
+	public String previous10Days() {
+		LocalDate dt = LocalDate.now().minusDays(2);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
+		return formatter.format(dt);
+	}
+
+	public void setPrevious10Date() {
+		String temp = previous10Days();
+		// date = date.replace("/", " ");
+		System.out.println(temp);
+		long diff = this.getDateDifferenceInMonths(temp);
+		int day = this.getDay(temp);
+		WebElement arrow = (diff >= 0 ? next : prev);
+		diff = Math.abs(diff);
+
+		// click the arrows
+		LongStream.range(0, diff).forEach(i -> arrow.click());
+
+		// select the date
+		dates.stream().filter(ele -> !ele.getText().equals("")).filter(ele -> Integer.parseInt(ele.getText()) == day)
+				.findFirst().ifPresent(WebElement::click);
+		System.out.println(temp + " selected from Calendar");
+	}
+	
+
+	public void setDate() {
+		String temp = currentDay1();
 		// date = date.replace("/", " ");
 		System.out.println(temp);
 		long diff = this.getDateDifferenceInMonths(temp);

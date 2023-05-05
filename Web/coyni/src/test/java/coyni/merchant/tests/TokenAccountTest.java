@@ -425,9 +425,9 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().clickOnCustomDateRange();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().filterCalenderComponent()
-					.clickSelectDate(data.get("startDate"));
+					.setDate();
 			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent().filterCalenderComponent()
-					.clickSelectDate(data.get("endDate"));
+					.setPrevious10Date();
 			tokenAccountPage.tokenAccountActivityComponent().getPayOutsReceivedList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionPurchasedDetailsList();
 			tokenAccountPage.tokenAccountActivityComponent().getTransactionWithdrawDetailsList();
@@ -577,15 +577,16 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.filterComponent().clickFilters();
-			// tokenAccountPage.filterComponent().clickOnDate();
+			tokenAccountPage.filterComponent().clickOnDate();
 			tokenAccountPage.filterComponent().scroolDownToElement();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			tokenAccountPage.filterComponent().clickOnRecord();
 //			tokenAccountPage.transactionDetailsComponent().getTransactionType();
 //			tokenAccountPage.transactionDetailsComponent().getReferenceID();
@@ -602,13 +603,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(3000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().ClickOnCompleted();
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData1 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData1 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
@@ -617,13 +622,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData2 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData2 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
@@ -633,13 +642,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
-			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData3 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData3 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
@@ -649,13 +662,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData4 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData4 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query1"));
@@ -665,13 +682,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData5 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData5 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
@@ -681,13 +702,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData6 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData6 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
@@ -696,13 +721,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData7 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData7 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
@@ -712,13 +741,18 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			Thread.sleep(3000);
 //			int filterData8 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData8 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
@@ -728,13 +762,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData9 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData9 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query2"));
@@ -744,13 +782,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData10 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData10 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
@@ -759,13 +801,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData11 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData11 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
@@ -774,13 +820,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData12 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData12 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
@@ -789,13 +839,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData13 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData13 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
@@ -804,13 +858,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData14 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData14 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query3"));
@@ -819,13 +877,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData15 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData15 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
@@ -834,13 +896,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData16 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData16 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
@@ -850,13 +916,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 //			int filterData17 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData17 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
@@ -866,13 +936,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData18 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData18 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
@@ -882,13 +956,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData19 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData19 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query4"));
@@ -896,15 +974,18 @@ public class TokenAccountTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData20 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData20 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
@@ -914,13 +995,17 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData21 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData21 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
@@ -929,13 +1014,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData22 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData22 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
@@ -944,13 +1033,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData23 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData22 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
@@ -959,13 +1052,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData24 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData24 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query5"));
@@ -974,13 +1071,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData25 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData25 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
@@ -989,13 +1090,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData26 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData26 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
@@ -1004,13 +1109,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData27 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData27 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
@@ -1019,13 +1128,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData28 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData28 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
@@ -1034,13 +1147,17 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData29 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData29 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query6"));
@@ -1049,14 +1166,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData30 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData30 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1065,14 +1186,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData31 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData31 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1081,14 +1206,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData32 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData32 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1097,14 +1226,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData33 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData33 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1113,14 +1246,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData34 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData34 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1129,14 +1266,18 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData35 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData35 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1144,16 +1285,19 @@ public class TokenAccountTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData36 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData36 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1163,14 +1307,18 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData37 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData37 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1180,14 +1328,18 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData38 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData38 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1197,14 +1349,18 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
 			tokenAccountPage.filterComponent().clickApplyFilters();
+			Thread.sleep(3000);
 			// int filterData39 = tokenAccountPage.filterComponent().noFilterData();
 //			if (filterData39 == 0) {
 //				tokenAccountPage.filterComponent().getTotalCount(data.get("query7"));
@@ -1214,8 +1370,206 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnInstantPay();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnInstantPay();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnInstantPay();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnInstantPay();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnInstantPay();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnCogent();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnCogent();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnCogent();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnCogent();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnCogent();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnGiftCard();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnPending(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnGiftCard();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCompleted(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnGiftCard();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnCancelled(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnGiftCard();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnInProgress(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.filterComponent().clickOnWithdraw();
+			tokenAccountPage.filterComponent().clickOnGiftCard();
+			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
+			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
+			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
+			tokenAccountPage.filterComponent().clickApplyFilters();
+
+			tokenAccountPage.filterComponent().clickFilters();
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1229,10 +1583,12 @@ public class TokenAccountTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1248,8 +1604,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1265,8 +1624,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1282,8 +1644,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1297,10 +1662,12 @@ public class TokenAccountTest {
 //			} else {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
-
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1316,8 +1683,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1333,8 +1703,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1350,8 +1723,11 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
@@ -1367,10 +1743,13 @@ public class TokenAccountTest {
 //			}
 
 			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickResetAllFilters();
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
-			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
+			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().fillFromAmount(data.get("amount"));
 			tokenAccountPage.filterComponent().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.filterComponent().ClickOnFailed(); // filter type - status
@@ -1423,8 +1802,10 @@ public class TokenAccountTest {
 			tokenAccountPage.clickTokenAccount();
 			tokenAccountPage.filterComponent().clickFilters();
 			tokenAccountPage.filterComponent().scroolDownToElement();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
@@ -1453,8 +1834,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
@@ -1475,8 +1858,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
@@ -1498,8 +1883,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
@@ -1521,8 +1908,10 @@ public class TokenAccountTest {
 //			}
 
 //			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnMerchantPayOut();
@@ -1544,8 +1933,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
@@ -1567,8 +1958,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
@@ -1589,8 +1982,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
@@ -1612,8 +2007,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
@@ -1635,8 +2032,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
@@ -1658,8 +2057,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
@@ -1680,8 +2081,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
@@ -1702,8 +2105,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
@@ -1724,8 +2129,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
@@ -1746,8 +2153,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("startDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate(data.get("endDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
@@ -1768,8 +2177,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
@@ -1790,8 +2201,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
@@ -1813,8 +2226,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
@@ -1836,8 +2251,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
@@ -1859,8 +2276,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnReserveRelease();
@@ -1882,8 +2301,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
@@ -1905,8 +2326,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
@@ -1927,8 +2350,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
@@ -1949,8 +2374,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
@@ -1971,8 +2398,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
@@ -1993,8 +2422,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnRefund();
@@ -2015,8 +2446,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnRefund();
@@ -2037,8 +2470,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnRefund();
@@ -2059,8 +2494,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnRefund();
@@ -2081,8 +2518,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnRefund();
 			tokenAccountPage.filterComponent().clickOnClearAll();
 			tokenAccountPage.filterComponent().clickOnRefund();
@@ -2103,8 +2542,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2128,8 +2569,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2153,8 +2596,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2178,8 +2623,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2203,8 +2650,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnBuyToken();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2228,8 +2677,10 @@ public class TokenAccountTest {
 //				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 //			}
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2254,8 +2705,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2280,8 +2733,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2306,8 +2761,10 @@ public class TokenAccountTest {
 //			}
 
 //			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2332,8 +2789,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnWithdraw();
 			tokenAccountPage.filterComponent().clickOnBankAccount();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2358,8 +2817,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2384,8 +2845,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2410,8 +2873,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2436,8 +2901,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2462,8 +2929,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2488,8 +2957,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2514,8 +2985,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2540,8 +3013,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2566,8 +3041,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderECommerce();
 			tokenAccountPage.filterComponent().clickOnClearAll();
@@ -2592,8 +3069,10 @@ public class TokenAccountTest {
 //			}
 
 			// tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("endDate"));
-			tokenAccountPage.filterComponent().filterCalenderComponent().clickSelectDate1(data.get("startDate"));
+			tokenAccountPage.filterComponent().clickOnDate();
+			Thread.sleep(2000);
+			tokenAccountPage.filterComponent().filterCalenderComponent().setPrevious10Date();
+			tokenAccountPage.filterComponent().filterCalenderComponent().setDate();
 			tokenAccountPage.filterComponent().clickOnSaleOrder();
 			tokenAccountPage.filterComponent().clickOnSaleOrderEmobile();
 			tokenAccountPage.filterComponent().clickOnClearAll();
