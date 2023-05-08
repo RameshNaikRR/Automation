@@ -51,6 +51,8 @@ public class LoginPage extends MobileFunctions {
 	private By btnAppUpdate = MobileBy.xpath("//*[@text='UPDATE']");
 	private By lblAppUpdateDescription = MobileBy.xpath("//*[contains(@resource-id,'message')]");
 	private By lblAppUpdateHeading = MobileBy.xpath("//*[contains(@resource-id,'alertTitle')]");
+	private By lblEmailErr = MobileBy.id("com.coyni.mapp:id/tvEmailError");
+	private By lblPasswErr = MobileBy.id("com.coyni.mapp:id/tvPwdError");
 
 	// Login Page
 	public void clickOk() {
@@ -65,16 +67,10 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().elementView(iconFace, "Face Icon");
 	}
 
-//    public FaceIDnotAvailableComponent faceIDnotAvailableComponent() {
-//    	return new FaceIDnotAvailableComponent();
-//    }
 	public void fillEmail(String email) {
+//		getElement(txtEmail, "email").clear();
 		click(txtEmail, "email");
 		enterText(txtEmail, email, "Email ");
-		ExtentTestManager.setPassMessageInReport("Password is Masked by the : " + DriverFactory.getDriver().getKeyboard()); 
-//		keyboard_layout = DriverFactory.getDriver('mobile: getKeyboardLayout')
-//
-//				print("Keyboard Layout:", keyboard_layout)
 	}
 
 	public void clickCross() {
@@ -88,7 +84,6 @@ public class LoginPage extends MobileFunctions {
 	public void verifyPasswordMaskedView(String password) {
 		click(eyeIcon, "eyeIcon");
 		click(eyeIcon, "eyeIcon");
-//		int a= getText(txtPassword).length();
 		if (password.length() == getText(txtPassword).length() && getText(txtPassword).contains("........")) {
 			ExtentTestManager.setPassMessageInReport("Password is Masked by the : " + getText(txtPassword));
 		} else {
@@ -205,6 +200,18 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().elementView(btnLogin, "Login");
 	}
 
+	public boolean verifyLoginEnable() {
+		return getElement(btnLogin, "Login").isEnabled();
+	}
+
+	public int verifyEmailErrMsg() {
+		return getElementList(lblEmailErr, "Email Error Msg").size();
+	}
+
+	public int verifyPwdErrMsg() {
+		return getElementList(lblPasswErr, "Password Error Msg").size();
+	}
+
 	public void validateLogin() {
 		MobileElement element = (MobileElement) DriverFactory.getDriver().findElementByXPath(
 				"//*[contains(@resource-id,'nextBtn')]|(//*[@name='Log in'])[1]|//*[contains(@text,'Log in')]");
@@ -270,13 +277,24 @@ public class LoginPage extends MobileFunctions {
 	public void verifyEmail(String email) {
 		String actualEmail = new CommonFunctions().getTextBoxValue(txtEmail);
 		if (email.equals(actualEmail)) {
-			ExtentTestManager.setPassMessageInReport("Email is verified : " + getText(txtEmail));
+			ExtentTestManager.setPassMessageInReport("Email is auto populated : " + getText(txtEmail));
 		} else {
-			ExtentTestManager.setFailMessageInReport("Email is not verified");
+			ExtentTestManager.setFailMessageInReport("Email is not auto populated");
 		}
 
 	}
 
+	public void verifyEmailWithClose() {
+		String actualEmail = new CommonFunctions().getTextBoxValue(txtEmail);
+		if ((actualEmail.equals("")) || (actualEmail.equals("Email"))) {
+			ExtentTestManager.setPassMessageInReport(
+					"Email is not auto populated after click on close button in retrieve email");
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Email is auto populated after click on close button in retrieve email");
+		}
+
+	}
 //	public void validateEmailField(String singleChar, String maxChar, String moreThanMax,String alphabet, String number, String specialChar) {
 //		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
 //		new CommonFunctions().clearText(txtEmail, "Email");

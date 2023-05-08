@@ -55,6 +55,7 @@ public class SecureAccountPage extends MobileFunctions{
 		
 	}
 	public void clickNext() {
+		DriverFactory.getDriver().hideKeyboard();
 		click(btnNext, "Next");
 	}
 	

@@ -122,6 +122,7 @@ public class DashBoardTest {
 			merchantMenuIconTest.testReceivePayment(strParams);
 			businessTokenAccountPage.clickChooseUser();
 			businessTokenAccountPage.choosePersonalAccount();
+			loginPage.agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyUpdateHeading"));
 			MerchantMenuIconTest merchantMenuTest = new MerchantMenuIconTest();
 			merchantMenuTest.testScanSaveAlbum(strParams);
 			businessTokenAccountPage.clickChooseUser();

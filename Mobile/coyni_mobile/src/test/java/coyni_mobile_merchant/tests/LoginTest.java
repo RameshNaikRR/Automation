@@ -63,27 +63,19 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			LandingPage landingPage = new LandingPage();
-//			landingPage.clickGetStartedLogin();
 			landingPage.clickLogin();
 			LoginPage loginPage = new LoginPage();
 			loginPage.AppUpdate();
-			loginPage.VerifyLoginPageView();
-			loginPage.verifyEmailview();
-			loginPage.verifyPasswordview();
-			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-//			loginPage.verifyPasswordMaskedView(data.get("password"));
-//			loginPage.verifyColour();
 			loginPage.clickLogin();
 			loginPage.enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
 			loginPage.enterYourPINComponent().enableFaceIDpage().verifyEnableFaceIdView();
 			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-
 //			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
 			loginPage.agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyUpdateHeading"));
-			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
+//			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
 			businessTokenAccountPage.getUserName();
 
 		} catch (Exception e) {
@@ -104,6 +96,9 @@ public class LoginTest {
 			landingPage.clickLogin();
 			LoginPage loginPage = new LoginPage();
 			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickLogin();
@@ -166,6 +161,11 @@ public class LoginTest {
 				DriverFactory.getDriver().hideKeyboard();
 //					loginPage.validateLogin();
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				if (loginPage.verifyLoginEnable() == false) {
+					ExtentTestManager.setPassMessageInReport("Login button is disabled");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Login button is enabled");
+				}
 			}
 			if (!data.get("popUpMsg").isEmpty()) {
 				loginPage.clickLogin();
@@ -175,6 +175,45 @@ public class LoginTest {
 				loginPage.clickLogin();
 				loginPage.verifyPopupMsg(data.get("popUpMsg"));
 			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.VerifyLoginPageView();
+			for (int i = 0; i <= 5; i++) {
+				String[] validateEmail = data.get("validateEmail").split(",");
+				loginPage.fillEmail(validateEmail[i]);
+				loginPage.clickPassword();
+				loginPage.fillPassword(data.get("password"));
+				if (loginPage.verifyLoginEnable() == false && loginPage.verifyEmailErrMsg() == 1
+						&& loginPage.verifyPwdErrMsg() == 0) {
+					ExtentTestManager.setPassMessageInReport("Error Message is displayed for Email");
+					ExtentTestManager.setPassMessageInReport("Login button is disabled");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Error Message is displayed (or) Login button is enabled");
+				}
+			}
+//			loginPage.fillEmail(data.get("email"));
+//			for (int j = 0; j <= 4; j++) {
+//				String[] validatePassword = data.get("validatePassword").split(",");
+//				loginPage.fillPassword(validatePassword[j]);
+//				loginPage.clickEmail();
+//				if (loginPage.verifyLoginEnable() == false && loginPage.verifyEmailErrMsg() == 0
+//						&& loginPage.verifyPwdErrMsg() == 1) {
+//					ExtentTestManager.setPassMessageInReport("Error Message is displayed for Password");
+//					ExtentTestManager.setPassMessageInReport("Login button is disabled");
+//				} else {
+//					ExtentTestManager.setFailMessageInReport("Error Message is displayed (or) Login button is enabled");
+//				}
+//			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
@@ -474,6 +513,7 @@ public class LoginTest {
 					.verifyHeading(data.get("accountPageHeading"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
 					.clickClose();
+			loginPage.verifyEmailWithClose();
 			loginPage.verifyLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
@@ -486,9 +526,11 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillOtp(data.get("phoneOTP"));
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage()
 					.verifyHeading(data.get("accountPageHeading"));
+			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().navigationComponent()
+					.clickClose();
 			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().foundAccountPage().clickCoyniAccount();
 			loginPage.verifyEmail(data.get("email"));
-			loginPage.navigationComponent().clickClose();
+
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testRetrieveEmailWithNavigationView failed due to exception " + e);

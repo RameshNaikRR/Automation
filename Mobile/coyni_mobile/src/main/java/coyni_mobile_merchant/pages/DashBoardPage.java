@@ -4,9 +4,12 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile_merchant.components.NavigationComponent;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -68,6 +71,8 @@ public class DashBoardPage extends MobileFunctions {
 	private By lblReserveRule = MobileBy.id("com.coyni.mapp:id/reserveRuleTV");
 
 	private By lblTransaction = MobileBy.id("com.coyni.mapp:id/transactions");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
 
 	public void clickDashBoard() {
 		click(btnDashBoard, "DashBoard");
@@ -239,9 +244,11 @@ public class DashBoardPage extends MobileFunctions {
 	}
 
 	public int verifyTransacyions() {
-		int netAmount = Integer.parseInt(getText(lblTransaction));
-		System.out.println(netAmount);
-		return netAmount;
+		wait.until(ExpectedConditions.elementSelectionStateToBe(lblTransaction, false));
+//		new CommonFunctions().elementView(lblTransaction, "Transactions");
+		int transactions = Integer.parseInt(getText(lblTransaction));
+		System.out.println(transactions);
+		return transactions;
 	}
 
 	public double verifyNextPayout() {

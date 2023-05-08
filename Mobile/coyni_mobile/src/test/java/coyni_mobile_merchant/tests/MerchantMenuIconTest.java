@@ -48,47 +48,11 @@ public class MerchantMenuIconTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testScanCode(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickFlashLight();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().navigationComponent().clickClose();
-			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnCancel();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
 	public void testScanSavedAlbum(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessTokenAccountPage.clickMenuIcon();
-			businessTokenAccountPage.tokenMenuIconPopUp().clickScan();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().clickOnWhileUsingApp();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickOnAlbum();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickAllow();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().verifySelectPhoto();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().clickPhoto();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
-					.verifySacnPaymentOrderDetails();
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
-					.enterYourPINComponent().fillPin(data.get("pin"));
-			businessTokenAccountPage.tokenMenuIconPopUp().scanPage().scanCodePage().orderPreviewPopup()
-					.transactionSucessFailurePendingComponent().verifyScanPaymentDetails();
-			businessTokenAccountPage.getUserName();
+			testScanSaveAlbum(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
 		}
@@ -663,7 +627,11 @@ public class MerchantMenuIconTest {
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickWithdraw();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().swipeSlideToConfirm();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -743,7 +711,11 @@ public class MerchantMenuIconTest {
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickWithdraw();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.orderPreviewPopup().swipeSlideToConfirm();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -782,7 +754,8 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
 			businessTokenAccountPage.dashBoardPage().getUserName();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testWithdrawTokenWithInstantPay failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawTokenWithInstantPayNavigationView failed due to exception " + e);
 		}
 	}
 
@@ -830,7 +803,11 @@ public class MerchantMenuIconTest {
 					.withdrawTokenTransaction(data.get("withdrawTokenHeading"), data.get("amount"),
 							data.get("optionalMessage"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickWithdraw();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+			.orderPreviewPopup().swipeSlideToConfirm();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()

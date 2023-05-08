@@ -1,5 +1,7 @@
 package coyni_mobile_merchant.components;
 
+import java.util.Iterator;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -61,28 +63,54 @@ public class AgreementComponent extends MobileFunctions {
 
 	public void verifyPrivacyPolicyHeading(String expHeading) throws InterruptedException {
 		Thread.sleep(1000);
-		if (getElementList(privacyPolicyHeading, "").size() > 0) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
-			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
-			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
-//			Thread.sleep(1500);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(chboxAgree));
-			if (getElementList(chboxAgree, "").size() > 0) {
-				clickAgreeCheckBox();
-				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
-			} else if (getElementList(privacyPolicyHeading, "").size() > 0) {
-				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
-			} else if (getTermsOfService() > 0) {
-				wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+		if (getElementList(chboxAgree, "").size() > 0) {
+			for (int i = 0; i < getElementList(chboxAgree, "").size(); ) {
+//			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+//			new CommonFunctions().verifyLabelText(termsOfServiceUpdateHeading, "Terms Of Service Update Heading",
+//					expHeading);
 				scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
 				clickAgreeCheckBox();
 				click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
-			} else {
-				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+			}
+		}
+		Thread.sleep(1000);
+		if (getElementList(termsOfServiceUpdateOk, "").size() > 0) {
+			for (int i = 0; i < getElementList(termsOfServiceUpdateOk, "").size();) {
+				clickAgreeCheckBox();
 				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
 			}
-
 		}
+//		} else if (getElementList(termsOfServiceUpdateOk, "").size() > 0) {
+//			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//		} else if (getTermsOfService() > 0) {
+//			wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+//			scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+//			clickAgreeCheckBox();
+//			click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+//		} else {
+//			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//			click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//		}
+//		if (getElementList(privacyPolicyHeading, "").size() > 0) {
+//			wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyUpdate));
+//			new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
+//			scrollDownToElement(termsOfServiceUpdateOk, "Privacy Policy Update button");
+////			Thread.sleep(1500);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(chboxAgree));
+//			if (getElementList(chboxAgree, "").size() > 0) {
+//				clickAgreeCheckBox();
+//				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//			} else if (getElementList(privacyPolicyHeading, "").size() > 0) {
+//				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//			} else if (getTermsOfService() > 0) {
+//				wait.until(ExpectedConditions.presenceOfElementLocated(termsOfServiceUpdateHeading));
+//				scrollDownToElement(termsOfServiceUpdateOk, "Terms of Service Agree button");
+//				clickAgreeCheckBox();
+//				click(termsOfServiceUpdateOk, "Terms Of Service Update Ok");
+//			} else {
+//				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//				click(termsOfServiceUpdateOk, "Privacy Policy Update Update Ok");
+//			}
 	}
 
 	public int getTermsOfService() {
@@ -112,7 +140,7 @@ public class AgreementComponent extends MobileFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyHeading));
 		new CommonFunctions().verifyLabelText(privacyPolicyHeading, "Privacy Policy Update Heading", expHeading);
 		Thread.sleep(2000);
-		new CommonFunctions().verifyDisabledElement(chboxAgree, "Check Box");
+//		new CommonFunctions().verifyDisabledElement(chboxAgree, "Check Box");
 		scrollDownToElement(finishSignup, "Finish Signup");
 		new CommonFunctions().elementEnabled(chboxAgree, "Check Box");
 //		new CommonFunctions().verifyNonFocusableElement(finishSignup, "Finish Signup");

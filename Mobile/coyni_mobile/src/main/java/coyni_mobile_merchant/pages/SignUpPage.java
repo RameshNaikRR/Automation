@@ -124,9 +124,9 @@ public class SignUpPage extends MobileFunctions {
 		scrollDownToElement(txtConfirmPassword, "Confirm Password");
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		if (!new CommonFunctions().isPlatformiOS()) {
-			pressBack();
-		}
+//		if (!new CommonFunctions().isPlatformiOS()) {
+//			pressBack();
+//		}
 		DriverFactory.getDriver().hideKeyboard();
 //		scrollUpToElement(txtFirstName, "firstName");
 	}

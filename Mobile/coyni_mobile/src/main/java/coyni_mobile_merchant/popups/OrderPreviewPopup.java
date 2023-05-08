@@ -29,8 +29,7 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblProcessingFee = MobileBy
 			.xpath("//*[@resource-id='com.coyni.mapp:id/feeTV']|//*[@resource-id='com.coyni.mapp:id/tvProcessingFee']");
 	private By lblTotal = MobileBy
-			.cssSelector("//*[@resource-id='com.coyni.mapp:id/totalTV']|//*[@resource-id='com.coyni.mapp:id/tvTotal']");
-
+			.xpath("//*[@resource-id='com.coyni.mapp:id/totalTV']|//*[@resource-id='com.coyni.mapp:id/tvTotal']");
 //	private By lblTotal = MobileBy.cssSelector("#com.coyni.mapp:id/totalTV,#com.coyni.mapp:id/tvTotal");
 	private By btnSlideToConfirm = MobileBy.xpath("//*[contains(@resource-id,'slideToConfirm')]");
 	private By lblAmazon = MobileBy.xpath("//*[contains(@resource-id,'giftCardTypeTV')]");

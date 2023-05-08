@@ -56,6 +56,9 @@ public class PayoutTransactionsPage extends MobileFunctions {
 		int noOfTransactionsInPage = getElementList(lblAmount, "No of Transactions").size();
 		for (int i = 1; noOfTransactionsInPage - 1 >= i; i++) {
 			Thread.sleep(1000);
+			if (getElementList(lblPayoutDetailsHeading, "Transactions Details Heading").size() == 1) {
+				break;
+			}
 			By moreThanZero = MobileBy
 					.xpath("(//*[contains(@resource-id,'com.coyni.mapp:id/payoutMoneyTV')])[" + i + "]");
 			String TransactionAmount = getText(moreThanZero);
@@ -89,8 +92,8 @@ public class PayoutTransactionsPage extends MobileFunctions {
 								break;
 							} else {
 								int k = j + i;
-								ExtentTestManager.setInfoMessageInReport(
-										"Transaction " + k + " has not been greater than 0.00");
+								ExtentTestManager
+										.setInfoMessageInReport("Transaction " + k + " has not been greater than 0.00");
 							}
 						}
 					}

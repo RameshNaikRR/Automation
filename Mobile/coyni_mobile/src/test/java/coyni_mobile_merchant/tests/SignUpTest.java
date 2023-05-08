@@ -7,7 +7,9 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile_merchant.pages.BusinessTokenAccountPage;
 import coyni_mobile_merchant.pages.LandingPage;
+import coyni_mobile_merchant.pages.LoginPage;
 import coyni_mobile_merchant.pages.RegistrationDBAPage;
 import coyni_mobile_merchant.pages.RegistrationProcessPage;
 import coyni_mobile_merchant.pages.SignUpPage;
@@ -21,6 +23,7 @@ public class SignUpTest {
 	LandingPage landingPage;
 	RegistrationProcessPage registrationProcessPage;
 	RegistrationDBAPage registrationDBAPage;
+	BusinessTokenAccountPage businessTokenAccountPage;
 
 	@BeforeMethod
 	public void init() {
@@ -29,6 +32,7 @@ public class SignUpTest {
 		landingPage = new LandingPage();
 		registrationProcessPage = new RegistrationProcessPage();
 		registrationDBAPage = new RegistrationDBAPage();
+		businessTokenAccountPage = new BusinessTokenAccountPage();
 	}
 
 	@Test
@@ -57,6 +61,54 @@ public class SignUpTest {
 			Thread.sleep(6000);
 			signUpPage.phoneAndEmailVerificationComponent().agreementComponent()
 					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"));
+			if (data.get("validateSignUpWithoutPin").equals("yes")) {
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
+						.verifyHeading(data.get("secureYourAccountHeading"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.verifyChoosePinHeading(data.get("choosePinHeading"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.fillPin(data.get("pin"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.verifyConfirmPinHeading(data.get("confirmPinHeading"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.fillPin(data.get("pin"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.enableFaceIDpage().verifyHeading(data.get("enableFaceIdHeading"));
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.enableFaceIDpage().clickNotNow();
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.enableFaceIDpage().accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
+			} else {
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
+						.verifyHeading(data.get("secureYourAccountHeading"));
+				DriverFactory.getDriver().resetApp();
+				ExtentTestManager.setPassMessageInReport("Sucessfulled killed the application");
+				testSignUpWithoutChoosePin(strParams);
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testSignUp Failed due to this Exception" + e);
+		}
+
+	}
+
+	public void testSignUpWithoutChoosePin(String strParams) {
+
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			LoginPage loginPage = new LoginPage();
+			loginPage.AppUpdate();
+			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmailview();
+			loginPage.verifyPasswordview();
+			loginPage.verifyRememberMeView();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickLogin();
+			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
@@ -72,8 +124,12 @@ public class SignUpTest {
 					.verifyHeading(data.get("enableFaceIdHeading"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.clickNotNow();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
+			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
+			loginPage.agreementComponent().verifyPrivacyPolicyHeading(data.get("privacyUpdateHeading"));
+			loginPage.agreementComponent().verifyTermsOfServiceUpdate(data.get("termsUpdateHeading"));
+			businessTokenAccountPage.getUserName();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSignUp Failed due to this Exception" + e);

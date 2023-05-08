@@ -81,7 +81,7 @@ public class FilterPopup extends MobileFunctions {
 	}
 
 	public void selectFilter(String type) {
-		scrollDownToElement(getElement(type), "");
+//		scrollDownToElement(getElement(type), "");
 		click(getElement(type), type);
 	}
 

@@ -19,7 +19,8 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 	private By btnChangePaymentMethod = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
 	private By lblBankNumber = MobileBy.xpath("//*[contains(@resource-id,'tvBAccNumber')]");
 	private By btnConverter = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
-	private By lblAmount = MobileBy.id("com.coyni.mapp:id/amountET");
+	private By lblAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'amountET')]|//*[contains(@resource-id,'etAmount')]");
 	private By btnBuyToken = MobileBy.xpath("//*[contains(@resource-id,'keyActionLL')]");
 	private By lblAmountDescription = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By lblLimitDescription = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
@@ -83,13 +84,13 @@ public class BuyTokenBankAccountPaymentMethodPage extends MobileFunctions {
 		click(btnClose, "Close");
 	}
 
-	public Double validateProcessingFees() { 
+	public Double validateProcessingFees() {
 		String[] fees = getText(lblFees).split("\\+");
 		String[] fee1 = fees[0].replace(" ", "").split(":");
 		String feeDollars = fee1[1].replace("$", "");
 		Double feeDollar = Double.parseDouble(feeDollars) + validateFeesPercentage();
-		DecimalFormat df=new DecimalFormat("#.##");
-		double fee=Double.parseDouble(df.format(feeDollar));
+		DecimalFormat df = new DecimalFormat("#.##");
+		double fee = Double.parseDouble(df.format(feeDollar));
 		System.out.println(fee);
 		return fee;
 	}

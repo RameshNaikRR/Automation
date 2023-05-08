@@ -161,6 +161,7 @@ public class MailingAddressComponent extends MobileFunctions {
 //	}
 
 	public void validateAllStates(String state) throws InterruptedException {
+		DriverFactory.getDriver().hideKeyboard();
 		scrollDownToElement(drpDwnState, "State Drop down");
 		click(drpDwnState, "State Drop down");
 		for (int i = 1; i <= 51; i++) {

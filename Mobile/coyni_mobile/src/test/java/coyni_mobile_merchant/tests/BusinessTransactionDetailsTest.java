@@ -55,9 +55,7 @@ public class BusinessTransactionDetailsTest {
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().getTotalAvailableFunds();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage();
 			businessTokenAccountPage.businessRecentTokenTransactionsPage().ScrollToViewMore();
-
 			if (businessTokenAccountPage.businessRecentTokenTransactionsPage().verifyViewMore() == 1) {
-
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickViewMore();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().clickFilterIcon();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup()
