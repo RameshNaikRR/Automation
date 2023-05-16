@@ -1,5 +1,8 @@
 package coyni_mobile_merchant.pages;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -30,6 +33,16 @@ public class LandingPage extends MobileFunctions {
 	public void clickLogin() {
 		new CommonFunctions().elementView(btnGetStarted, "Get started ");
 		click(btnLogin, "login");
+		LocalDate lodt = LocalDate.now();
+		System.out.println(lodt);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM yyyy");
+
+		// Format the local date
+		String formattedDate = lodt.format(formatter);
+		System.out.println(formattedDate);
+//		LocalDate previousDate = lodt.minusDays(17);
+		String previousformattedDate = lodt.minusDays(17).format(formatter);
+		System.out.println(previousformattedDate);
 	}
 
 	public void clickGetStartedLogin() {

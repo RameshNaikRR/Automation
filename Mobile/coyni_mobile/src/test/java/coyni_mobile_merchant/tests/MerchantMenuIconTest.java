@@ -807,7 +807,7 @@ public class MerchantMenuIconTest {
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().orderPreviewDetails(data.get("orderHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
-			.orderPreviewPopup().swipeSlideToConfirm();
+					.orderPreviewPopup().swipeSlideToConfirm();
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
 					.orderPreviewPopup().enterYourPINComponent().verifyEnterYourPinView(data.get("pinHeading"));
 			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
@@ -926,6 +926,77 @@ public class MerchantMenuIconTest {
 
 			}
 
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testWithdrawTokenWithBankAccountInvalidData failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithExpiredDebitCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			businessTokenAccountPage.clickMenuIcon();
+			businessTokenAccountPage.tokenMenuIconPopUp().clickWithdrawTokens();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickRemove();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickNo();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickEdit();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyEditCardHeading();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("selectWithdrawMethodHeading"));
+//			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickInstantPay();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent()
+					.verifyWithdraMethodHeading(data.get("withdrawMethod"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickChooseInstantPay();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickRemove();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickNo();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickChangePaymentMethod();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickEdit();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyEditCardHeading();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().withdrawTokenTransactionPage()
+					.clickClose();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickClose();
+			businessTokenAccountPage.clickProfile();
+			merchantProfilePage.clickPaymentMethods();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickRemove();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
+					.clickNo();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickExpiredCard();
+			businessTokenAccountPage.tokenMenuIconPopUp().withdrawMenuComponent().clickEdit();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyEditCardHeading();
+			merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickBack();
+			merchantProfilePage.paymentMethodsPage().verifyPageHeading(data.get("heading"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testWithdrawTokenWithBankAccountInvalidData failed due to exception " + e);

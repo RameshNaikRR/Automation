@@ -7,6 +7,7 @@ import coyni_mobile_merchant.components.FieldValidationsComponent;
 import coyni_mobile_merchant.components.MailingAddressComponent;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddCardPage extends MobileFunctions {
@@ -20,6 +21,10 @@ public class AddCardPage extends MobileFunctions {
 	private By iconCamera = MobileBy.xpath("//*[contains(@resource-id,'readCardIV')]");
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'Back')]|//*[contains(@resource-id,'closeIV')]");
+	private By lblEditDebit = MobileBy.id("com.coyni.mapp:id/tvCard");
+	private By btnOk = MobileBy.id("com.coyni.mapp:id/cvAction");
+	private By lblInvalidDes = MobileBy.xpath("//*[@text='Invalid request! Please check the card and try again.']");
+	private By lblInvalidCreditDes = MobileBy.xpath("//*[@text='Invalid request! Please add Debit Card only.']");
 
 	public void fillNameOnCard(String nameOnCard) {
 		click(txtNameOnCard, "NameOnCard");
@@ -29,6 +34,10 @@ public class AddCardPage extends MobileFunctions {
 
 	public void verifyNameAutoFocus() {
 		new CommonFunctions().verifyAutoFocusElement(txtNameOnCard, "NameOnCard");
+	}
+
+	public void verifyEditCardHeading() {
+		new CommonFunctions().elementView(lblEditDebit, "Edit Debit Card Heading");
 	}
 
 	public void scrollUpToNameOnCard() {
@@ -87,6 +96,35 @@ public class AddCardPage extends MobileFunctions {
 
 	public void clickCardExp() {
 		click(txtCardNumber, "Card Number");
+	}
+
+	public void clickOk() {
+		click(btnOk, "Ok");
+	}
+
+	public void verifyCardNumber() {
+		new CommonFunctions().verifyAutoFocusElement(txtCardNumber, "Card Number");
+		if (getText(txtCardNumber).equals("")) {
+			ExtentTestManager.setPassMessageInReport("The Card Number field is cleared");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Card Number field is not cleared");
+		}
+	}
+
+	public void verifyCardExp() {
+		if (getText(txtCardExp).equals("Card Exp") || getText(txtCardExp).equals("")) {
+			ExtentTestManager.setPassMessageInReport("The Card Expiry field is cleared");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Card Expiry field is not cleared");
+		}
+	}
+
+	public void verifyInvalidDesc() {
+		new CommonFunctions().elementView(lblInvalidDes, "Invalid request! Please check the card and try again.");
+	}
+
+	public void verfiyInvalidCreditDesc() {
+		new CommonFunctions().elementView(lblInvalidCreditDes, "Invalid request! Please add Debit Card only.");
 	}
 
 	public MailingAddressComponent mailingAddressComponent() {

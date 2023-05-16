@@ -2709,24 +2709,45 @@ public class MerchantProfileTest {
 					.fillCardExp(data.get("cardExp"));
 			if (data.get("validateAddress").equalsIgnoreCase("yes")) {
 				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().fillCity(data.get("city"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().selectState(data.get("state"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-				merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-						.mailingAddressComponent().clickAddCard();
+				System.out.println("executed");
+//				String[] cardNum = data.get("cardNum").split(",");
+				if (data.get("validatePopup").equalsIgnoreCase("yes")) {
+					System.out.println("executed1");
+//					for (int i = 0; i < 2; i++) {
+					if (data.get("cardNumber").equalsIgnoreCase("0000000000000000")) {
+						System.out.println("executed2");
+						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+								.verifyInvalidDesc();
+					} else {
+						merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+								.verfiyInvalidCreditDesc();
+					}
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickOk();
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyCardNumber();
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage().verifyCardExp();
+//					}
+				} else {
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().fillAddressLine1(data.get("addressLine1"));
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().fillAddressLine2(data.get("addressLine2"));
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().fillCity(data.get("city"));
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().selectState(data.get("state"));
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().fillZipCode(data.get("zipCode"));
+					merchantProfilePage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
+							.mailingAddressComponent().clickAddCard();
+				}
 			}
-
 			if (!data.get("errMsg").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
 			}
-		} catch (Exception e) {
+
+		} catch (
+
+		Exception e) {
 
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}

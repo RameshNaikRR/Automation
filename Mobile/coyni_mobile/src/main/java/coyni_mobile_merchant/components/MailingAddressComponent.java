@@ -39,6 +39,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
 	private By lblState = MobileBy.id("com.coyni.mapp:id/tvState");
 	private By lblStateValue = MobileBy.id("com.coyni.mapp:id/etState");
+	private By lblRemoving = MobileBy.xpath("//*[@text='Removing']");
 
 	private By verifyAllStates(int Value) {
 		return By.xpath(String.format("(//*[contains(@resource-id,'tvState')])[%s]", Value));
@@ -128,10 +129,12 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void clickNo() {
+		new CommonFunctions().elementView(lblRemoving, "Removing popup");
 		click(btnNo, "No");
 	}
 
 	public void clickYes() {
+		new CommonFunctions().elementView(lblRemoving, "Removing popup");
 		click(btnYes, "Yes");
 	}
 

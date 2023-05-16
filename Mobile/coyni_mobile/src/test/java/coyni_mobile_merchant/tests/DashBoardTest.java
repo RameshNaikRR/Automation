@@ -137,16 +137,17 @@ public class DashBoardTest {
 			double afterTransProcessFee = businessTokenAccountPage.dashBoardPage().verifyNetAmount();
 			double afterTransNetAmount = businessTokenAccountPage.dashBoardPage().verifyProcessingFee();
 			double afterTransGroAmount = businessTokenAccountPage.dashBoardPage().verifyGrossAmount();
-			double afterTransBatch = businessTokenAccountPage.dashBoardPage().validateBatchPayouts(beforeTransNextPayout,beforeTransReserve);
+			double afterTransBatch = businessTokenAccountPage.dashBoardPage()
+					.validateBatchPayouts(beforeTransNextPayout, beforeTransReserve);
 			if (afterTransGroAmount == (afterTransProcessFee + afterTransNetAmount)) {
 				ExtentTestManager.setPassMessageInReport("Exact amount of transaction is reflected in Gross Amount");
 			} else {
 				ExtentTestManager.setFailMessageInReport("Exact amount of transaction not reflected in Gross Amount");
 			}
-			double finalMerchBal=afterTransMerchBalance - beforeTransMerchBalance;
+			double finalMerchBal = afterTransMerchBalance - beforeTransMerchBalance;
 			DecimalFormat df = new DecimalFormat("#.##");
 			Double fnlMerchBal = Double.parseDouble(df.format(finalMerchBal));
-			if (fnlMerchBal==afterTransBatch) {
+			if (fnlMerchBal == afterTransBatch) {
 				ExtentTestManager.setPassMessageInReport("The Merchant Balance is updating based on transaction");
 			} else {
 				ExtentTestManager.setFailMessageInReport("The Merchant Balance is not updating based on transaction");
@@ -256,17 +257,16 @@ public class DashBoardTest {
 					.fillFromMerchantAmount(data.get("fromAmount"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToMerchantAmount(data.get("toAmount"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.clickCalendar();
-//			Thread.sleep(1000);
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.selectFromDate(data.get("fromDate"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.selectToDate(data.get("toDate"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.clickDone();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
-			Thread.sleep(2000);
+			Thread.sleep(1200);
 			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().merchantTransactionDetailsPage()
@@ -321,15 +321,15 @@ public class DashBoardTest {
 					.fillFromMerchantAmount(data.get("fromAmount"));
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup()
 					.fillToMerchantAmount(data.get("toAmount"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.clickCalendar();
-//			Thread.sleep(1000);
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.selectFromDate(data.get("fromDate"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.selectToDate(data.get("toDate"));
-//			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
-//					.clickDone();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickCalendar();
+			Thread.sleep(1000);
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectFromDate();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.selectToDate();
+			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().datePickerComponent()
+					.clickDone();
 			businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().filterPopup().clickApplyfilters();
 			if (businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().verifyTransactionsCount() == 0) {
 				businessTokenAccountPage.dashBoardPage().merchantTransactionsPage().clickMerchantTransctions();
@@ -556,9 +556,9 @@ public class DashBoardTest {
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickCalendar();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.selectFromDate(data.get("fromDate"));
+					.selectFromDate();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
-					.selectToDate(data.get("toDate"));
+					.selectToDate();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup().datePickerComponent()
 					.clickDone();
 			businessTokenAccountPage.batchPayOutComponent().payoutTransactionsPage().filterPopup()
@@ -700,9 +700,9 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickCalendar();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().selectFromDate(data.get("fromDate"));
+					.datePickerComponent().selectFromDate();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().selectToDate(data.get("toDate"));
+					.datePickerComponent().selectToDate();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickDone();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
@@ -769,9 +769,9 @@ public class DashBoardTest {
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickCalendar();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().selectFromDate(data.get("fromDate"));
+					.datePickerComponent().selectFromDate();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
-					.datePickerComponent().selectToDate(data.get("toDate"));
+					.datePickerComponent().selectToDate();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()
 					.datePickerComponent().clickDone();
 			businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage().filterPopup()

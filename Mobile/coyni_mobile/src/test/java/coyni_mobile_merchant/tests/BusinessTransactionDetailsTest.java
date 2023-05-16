@@ -67,9 +67,9 @@ public class BusinessTransactionDetailsTest {
 						.clickCalendar();
 				Thread.sleep(1000);
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectFromDate(data.get("fromDate"));
+						.selectFromDate();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-						.selectToDate(data.get("toDate"));
+						.selectToDate();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickDone();
 //				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickResetAllFilters();
@@ -166,15 +166,14 @@ public class BusinessTransactionDetailsTest {
 						.selectFilter(data.get("filterType2"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillFromAmount(data.get("fromAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.clickCalendar();
-//				Thread.sleep(1000);
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectFromDate(data.get("fromDate"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectToDate(data.get("toDate"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.clickDone();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.clickCalendar();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectFromDate();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectToDate();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
 				Thread.sleep(1000);
 				if (businessTokenAccountPage.reserveBalanceComponent().reserveReleaseTransactionsPage()
@@ -282,15 +281,10 @@ public class BusinessTransactionDetailsTest {
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().fillToAmount(data.get("toAmount"));
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickCalendar();
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectFromDate(data.get("fromDate"));
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
-//						.selectToDate(data.get("toDate"));
-//				Thread.sleep(5000);
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().calendarComponent()
-//						.clickPreviousTenDays();
-//				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().calendarComponent()
-//						.clickCurrentDay();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectFromDate();
+				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
+						.selectToDate();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().datePickerComponent()
 						.clickDone();
 				businessTokenAccountPage.businessRecentTokenTransactionsPage().filterPopup().clickApplyfilters();
