@@ -1,5 +1,8 @@
 package coyni_mobile.pages;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.EnterYourPINComponent;
@@ -114,6 +117,12 @@ public class GiftCardPage extends MobileFunctions {
 		enterText(txtAmount, amount, "Amount");
 		scrollDownToElement(txtLastName, "Last Name");
 		DriverFactory.getDriver().hideKeyboard();
+	//	new CommonFunctions().clearText(txtAmount, "amount");
+	}
+	public void fillAmt(String amount) {
+		click(txtAmount, "Amount");
+		enterText(txtAmount, amount, "Amount");
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	public void clickPurchase() {
@@ -124,6 +133,9 @@ public class GiftCardPage extends MobileFunctions {
 		}
 	}
 
+	public void clearText() {
+		new CommonFunctions().clearText(txtAmount, "Amount");
+	}
 	public void clickSearch() {
 		click(iconSearch, "Search");
 	}

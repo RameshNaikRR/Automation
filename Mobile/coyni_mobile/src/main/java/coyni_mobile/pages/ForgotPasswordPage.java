@@ -64,6 +64,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 			ExtentTestManager.setInfoMessageInReport("Next button is in Disabled mode");
 		}
 	}
+	
 
 	public EmailVerificationComponent verifyEmailComponent() {
 		return new EmailVerificationComponent();
@@ -72,7 +73,7 @@ public class ForgotPasswordPage extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
+   
 	public CreatePasswordPage createPasswordPage() {
 		return new CreatePasswordPage();
 	}

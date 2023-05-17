@@ -41,7 +41,11 @@ public class SecureAccountPage extends MobileFunctions {
 	public void clickAgreeCheckBox() {
 		click(chboxAgree, "Terms of service and Privacy");
 	}
-
+	public int verifySecureAccount() {
+		new CommonFunctions().elementView(heading, "Heading");
+		return 0;
+	}
+	
 	public void verifyHeading(String expHeading, String expDescription) {
 		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 		new CommonFunctions().verifyLabelText(lblSecureDescription, "Secure Account Description", expDescription);

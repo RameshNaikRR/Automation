@@ -17,7 +17,7 @@ public class CreatePasswordPage extends MobileFunctions {
 	private By lblSuccessMsg = MobileBy.xpath(
 			"//*[contains(@text,'Your password has been successfully updated.')]|//*[@name='Your password has been successfully updated.']");
 	private By btnLogin = MobileBy.xpath("//*[contains(@text,'Log in')]|(//*[@name='Log in'])[1]");
-
+	private By lblPasswordError = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]");
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "Create Password Heading", expHeading);
 	}
@@ -27,12 +27,16 @@ public class CreatePasswordPage extends MobileFunctions {
 		enterText(txtNewPassword, newPassword, "New Password");
 	}
 
+	public void clickNewPassword() {
+		click(txtNewPassword, "New Password");
+	}
+
 	public void fillConfirmPassword(String confirmPassword) {
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		if (!new CommonFunctions().isPlatformiOS()) {
-			pressBack();
-		}
+//		if (!new CommonFunctions().isPlatformiOS()) {
+//			pressBack();
+//		}
 	}
 
 	public void scrollDown() {
@@ -58,6 +62,9 @@ public class CreatePasswordPage extends MobileFunctions {
 
 	public void verifyPassword() {
 		new CommonFunctions().checkPassword(txtNewPassword, txtConfirmPassword);
+	}
+	public void validatePassword(String error) {
+		new CommonFunctions().verifyLabelText(lblPasswordError, "Message", error);
 	}
 
 //	public void checkPassword() {

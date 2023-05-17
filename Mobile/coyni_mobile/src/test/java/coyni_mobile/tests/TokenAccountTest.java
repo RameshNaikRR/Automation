@@ -474,9 +474,10 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickClearAmount();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickSaveToAlbum();
-			// tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickAllow();
+			Thread.sleep(1000);
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().verifyReceipientAddress();
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().clickCopy();
+			Thread.sleep(1000);
 			tokenAccountPage.tokenHomePopUp().scanPage().scanMePage().navigationComponent().clickClose();
 
 		} catch (Exception e) {
@@ -625,6 +626,28 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testPayRequestAmountFieldValidationAndMsg(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickPayRequest();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().clickAllow();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().fillSearchBx(data.get("user"));
+			tokenAccountPage.tokenHomePopUp().payRequestPage().selectUser();
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage().verifyName();
+			String[] amount = data.get("amount").split(",");
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.fieldValidationsComponent().validateAmount(amount[0], amount[1]);
+			tokenAccountPage.tokenHomePopUp().payRequestPage().payandRequestAccountHolderPage()
+					.payRequestOptionalPopup().enterMessage(data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testPayAmountValidation  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBuyTokenBankWithOutPayments(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -686,23 +709,80 @@ public class TokenAccountTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-
-			CustomerProfileTest customerProfileTest = new CustomerProfileTest();
-			customerProfileTest.testAddBankAccount(strParams);
-//			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clickBuyToken();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup().getAmount();
+			String total = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.orderPreviewPopup().verifyTransactionTotalAmount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.swipeConfirm();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().enterYourPINComponent()
 					.fillPin(data.get("pin"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().orderPreviewPopup()
 					.successFailureComponent().getTokenTransactionStatusDetails();
+			String ref = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.successFailureComponent().getCopiedReference();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().successFailureComponent()
+					.clickDone();
+			Thread.sleep(2000);
+			tokenAccountPage.clickLatestTransaction();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().getBuyTokenBankAccountDetails();
+			String amt2 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().verifyWithdrawTotalAmount();
+			if (total.equals(amt2)) {
+				ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+			}
+			String ref1 = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.transactionDetailsComponent2().verifyTransactionReferenceID();
+			if (ref.equals(ref1)) {
+				ExtentTestManager.setInfoMessageInReport("The Reference ID is Same.");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Reference ID is Different.");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			// min amount- 2 CYN
+			// exceeds daily limit
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBank  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenBankWithFieldValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
+					.verifyHeading(data.get("buyTokenHeading"));
+			String[] amount = data.get("amount").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fieldValidationsComponent()
+					.validateAmount(amount[0], amount[1]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenBankFieldValidation  failed due to exception " + e);
 		}
 
 	}
@@ -789,6 +869,23 @@ public class TokenAccountTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testBuyTokensWithExistingCardCvvValidation(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickExistingCard();
+			String[] cvv = data.get("cvv").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().fieldValidationsComponent()
+					.validateCardCVVField(cvv[0], cvv[1], cvv[2]);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenDebitCvvValidation  failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testBuyTokenCreditCard(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -846,20 +943,38 @@ public class TokenAccountTest {
 	public void testBuyTokenBankAccountWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			String errMessage[] = data.get("errMessage").split("-");
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().clickBankAccount();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent()
 					.verifyHeading(data.get("buyTokenHeading"));
+			// min amt//
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fillAmount(data.get("amount"));
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			new CommonFunctions().validateErrMsg(errMessage[0]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clearText();
+			// limit//
+			float limit = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getDailyOrWeeklyLimitAmount();
+			String dailyOrWeeklyLimitText = tokenAccountPage.tokenHomePopUp().paymentMethodsPage()
+					.withdrawMenuComponent().withdrawToUSDInstantPayPopup().getDailyOrWeeklyLimitText();
+			ExtentTestManager.setInfoMessageInReport(String.format("Same Limit", limit));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(Float.toString(limit + 1));
+
+			if ((dailyOrWeeklyLimitText).contains("daily")) {
+				new CommonFunctions().validateErrMsg(errMessage[1]);
+			} else if (dailyOrWeeklyLimitText.contains("weekly")) {
+				new CommonFunctions().validateErrMsg(errMessage[2]);
 			}
 
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clearText();
+			String[] amount1 = data.get("amount1").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fieldValidationsComponent()
+					.validateAmount(amount1[0], amount1[1]);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
-
 	}
 
 	@Test
@@ -895,9 +1010,13 @@ public class TokenAccountTest {
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
-
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clearText();
+			ExtentTestManager.setInfoMessageInReport("Test Field validation for Buy Token Debit Card");
+			String[] amount1 = data.get("amount1").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fieldValidationsComponent()
+					.validateAmount(amount1[0], amount1[1]);
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithDebitCardInvalidData  failed due to exception " + e);
 		}
 
 	}
@@ -957,6 +1076,11 @@ public class TokenAccountTest {
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().clearText();
+			ExtentTestManager.setInfoMessageInReport("Test Field validation for Buy Token Credit Card");
+			String[] amount1 = data.get("amount1").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().buyTokenComponent().fieldValidationsComponent()
+					.validateAmount(amount1[0], amount1[1]);
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
@@ -1042,6 +1166,48 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillEmail(data.get("email1"));
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" GiftCard  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawnToUSDGiftCardInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			String[]errMessage = data.get("errMessage").split("-");
+			float availableBal = tokenAccountPage.getAvailableBalance();
+			ExtentTestManager.setInfoMessageInReport(String.format("available balance: ", availableBal));
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().clickGiftCard();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyGiftCardHeading(data.get("cardHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyBrandHeading(data.get("poplurHeading"));
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clickAmazon();
+			tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+					.verifyWithdrawGiftCard(data.get("giftCardHeading"));
+			if (data.get("validateAvailableBalance").equalsIgnoreCase("Yes")) {
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+						.fillAmt(Float.toString(availableBal));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clearText();
+			}
+			if (data.get("validateMoreThanAvailable").equalsIgnoreCase("Yes")) {
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage()
+						.fillAmt(Float.toString(availableBal + 1));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clearText();
+			}
+			if (data.get("validateMinAmount").equalsIgnoreCase("Yes")) {
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().fillAmt(data.get("amount"));
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+				tokenAccountPage.tokenHomePopUp().withdrawMenuComponent().giftCardPage().clearText();
+
 			}
 
 		} catch (Exception e) {
@@ -1294,7 +1460,7 @@ public class TokenAccountTest {
 	@Parameters({ "strParams" })
 	public void testWithdrawToUSDInstantPayAddDebitCardWithCards(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
+		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
@@ -1316,6 +1482,106 @@ public class TokenAccountTest {
 	public void testWithdrawToUSDViaInstantPayWithInvalidDetails(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			String errMessage[] = data.get("errMessage").split("-");
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("withdrawMethodHeading"));
+			if (data.get("validateInstantPay").equalsIgnoreCase("Yes")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickOnDebitCard();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			}
+			if (data.get("validateBankAccount").equalsIgnoreCase("Yes")) {
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickBank();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().clickBankAccount();
+				tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+						.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			}
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
+			new CommonFunctions().validateErrMsg(errMessage[0]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clearText();
+
+			float availableBal = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getAvailableBalance();
+			ExtentTestManager.setInfoMessageInReport(String.format("More than Available Balance", availableBal));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(Float.toString(availableBal + 1));
+			new CommonFunctions().validateErrMsg(errMessage[1]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clearText();
+
+			ExtentTestManager.setInfoMessageInReport(String.format("Same as Available Balance", availableBal));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(Float.toString(availableBal));
+			new CommonFunctions().validateErrMsg(errMessage[2]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clearText();
+
+			float limit = tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().getDailyOrWeeklyLimitAmount();
+			String dailyOrWeeklyLimitText = tokenAccountPage.tokenHomePopUp().paymentMethodsPage()
+					.withdrawMenuComponent().withdrawToUSDInstantPayPopup().getDailyOrWeeklyLimitText();
+			ExtentTestManager.setInfoMessageInReport(String.format("Same Limit", limit));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(Float.toString(limit));
+
+			if (availableBal > limit) {
+				if ((dailyOrWeeklyLimitText).contains("daily")) {
+					new CommonFunctions().validateErrMsg(errMessage[3]);
+				} else if (dailyOrWeeklyLimitText.contains("weekly")) {
+					new CommonFunctions().validateErrMsg(errMessage[4]);
+				} else {
+					new CommonFunctions().validateErrMsg(errMessage[5]);
+				}
+			} else {
+				new CommonFunctions().validateErrMsg(errMessage[1]);
+			}
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clearText();
+
+			ExtentTestManager.setInfoMessageInReport(String.format("More than Limit", limit));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fillAmount(Float.toString(limit + 1));
+
+			if (availableBal > limit) {
+				if ((dailyOrWeeklyLimitText).contains("daily")) {
+					new CommonFunctions().validateErrMsg(errMessage[6]);
+				} else if (dailyOrWeeklyLimitText.contains("weekly")) {
+					new CommonFunctions().validateErrMsg(errMessage[7]);
+				} else {
+					new CommonFunctions().validateErrMsg(errMessage[8]);
+				}
+			} else {
+				new CommonFunctions().validateErrMsg(errMessage[1]);
+			}
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clearText();
+			ExtentTestManager.setInfoMessageInReport("Test Field validation for Withdraw");
+			String[] amount1 = data.get("amount1").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fieldValidationsComponent().validateAmount(amount1[0], amount1[1]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawToUSDViaInstantPayWithMinAmt(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(2000);
 			tokenAccountPage.btnHome();
 			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
@@ -1327,13 +1593,38 @@ public class TokenAccountTest {
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
 			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
-					.withdrawToUSDInstantPayPopup().getDailyLimit();
-			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
 					.withdrawToUSDInstantPayPopup().fillAmount(data.get("amount"));
-			Thread.sleep(2000);
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
 			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"testWithdrawToUSDViaInstantPayWithInvalidDetails failed due to exception " + e);
+
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawViaInstantPayAmtFieldValidationAndMsg(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			tokenAccountPage.btnHome();
+			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.verifyWithdrawHeading(data.get("withdrawMethodHeading"));
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent().clickInstantPay();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().clickDebitCard();
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().verifyWithdrawTokenHeading(data.get("withdrawTokenHeading"));
+			String[] amount = data.get("amount").split(",");
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().fieldValidationsComponent().validateAmount(amount[0], amount[1]);
+			tokenAccountPage.tokenHomePopUp().paymentMethodsPage().withdrawMenuComponent()
+					.withdrawToUSDInstantPayPopup().enterMessage(data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -1590,13 +1881,14 @@ public class TokenAccountTest {
 			tokenAccountPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
 			tokenAccountPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
 			tokenAccountPage.transactionPage().filtersPopup().clickCalender();
+			Thread.sleep(2000);
 			tokenAccountPage.transactionPage().filtersPopup().datePickerComponent()
 					.selectFromDate(data.get("fromDate"));
 			tokenAccountPage.transactionPage().filtersPopup().datePickerComponent().selectToDate(data.get("toDate"));
 			tokenAccountPage.transactionPage().filtersPopup().clickApplyfilters();
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
 			tokenAccountPage.transactionPage().ScrollTransactions();
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
 			tokenAccountPage.transactionPage().getUITransactionCount();
 			Thread.sleep(2000);
 			tokenAccountPage.transactionPage().clickfilter();

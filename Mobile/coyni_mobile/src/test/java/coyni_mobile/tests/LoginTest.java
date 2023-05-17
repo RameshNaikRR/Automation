@@ -385,10 +385,36 @@ public class LoginTest {
 					newPassword[1], newPassword[2],newPassword[3],newPassword[4],
 					newPassword[5], newPassword[6],newPassword[7],newPassword[8],
 					newPassword[9], newPassword[10],newPassword[11]);
-			String[] confirmPassword = data.get("newPassword").split(",");
+			String[] confirmPassword = data.get("confirmPassword").split(",");
 			loginPage.forgotPasswordPage().fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0],
 					confirmPassword[1], confirmPassword[2]);
-
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithInvalidPassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordPage().verifyHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordPage().fillEmail(data.get("email"));
+			loginPage.forgotPasswordPage().clickNext();
+			loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(data.get("code"));
+			loginPage.forgotPasswordPage().createPasswordPage().verifyHeading(data.get("createHeading"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillNewPassword(data.get("newPassword"));
+			loginPage.forgotPasswordPage().createPasswordPage().fillConfirmPassword(data.get("confirmPassword"));
+			if(data.get("validatePassword").equalsIgnoreCase("Yes")) {
+			loginPage.forgotPasswordPage().createPasswordPage().validatePassword(data.get("errMessage"));
+			}
+			if(data.get("validateFormErr").equalsIgnoreCase("Yes")) {
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
+			}
+			}
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
@@ -413,6 +439,7 @@ public class LoginTest {
 			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
 			loginPage.retrieveEmailPage().clickCoyniAccount();
 			loginPage.VerifyLoginPageView();
+			loginPage.verifyEmail(loginData.get("email"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
 		}
@@ -496,6 +523,7 @@ public class LoginTest {
 		}
 	}
 
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithInvalidOTPCredentials(String strParams) {

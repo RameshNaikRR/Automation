@@ -38,6 +38,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	private By txtCardNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtCardExp = MobileBy.xpath("//*[contains(@resource-id,'etExpiry')]");
 	private By txtCVVorCVC = MobileBy.xpath("//*[contains(@resource-id,'etCVV')]");
+	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]|//*[contains(@resource-id,'payrequestET')]");
 	private By txtAddressLine1 = MobileBy.xpath(
 			"//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]|//*[contains(@resource-id,'companyaddressET')]");
 	private By txtAddressLine2 = MobileBy.xpath(
@@ -77,7 +78,9 @@ public class FieldValidationsComponent extends MobileFunctions {
 
 	}
 
-	public void validateNewPasswordField(String invalid1,String invalid2,String invalid3,String invalid4,String invalid5,String invalid6,String invalid7,String invalid8,String invalid9,String minChar,String maxChar, String moreThanMax) {
+	public void validateNewPasswordField(String invalid1, String invalid2, String invalid3, String invalid4,
+			String invalid5, String invalid6, String invalid7, String invalid8, String invalid9, String minChar,
+			String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
 		click(txtNewPassword, "New Password");
 		DriverFactory.getDriver().hideKeyboard();
@@ -104,12 +107,13 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtNewPassword, "New Password", maxChar);
 		new CommonFunctions().clearText(txtNewPassword, "New Password");
 		new CommonFunctions().validateFieldMaxichar(txtNewPassword, "New Password", moreThanMax);
-}
+	}
 
 	public void validateConfirmPasswordField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
 		new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", singleChar);
-		//new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", minChar);
+		// new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password",
+		// minChar);
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
 		new CommonFunctions().validateField(txtConfirmPassword, "Confirm Password", maxChar);
 		new CommonFunctions().clearText(txtConfirmPassword, "Confirm Password");
@@ -246,13 +250,21 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Exp", moreThanMax);
 		// new CommonFunctions().clearText(txtCardExp, "Card Exp");
 	}
+
 	public void validateCardCVVField(String singleDigit, String maxDigit, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtCVVorCVC, "Card Exp", singleDigit);
-		new CommonFunctions().clearText(txtCVVorCVC, "Card Exp");
-		new CommonFunctions().validateField(txtCVVorCVC, "Card Exp", maxDigit);
-		new CommonFunctions().clearText(txtCVVorCVC, "Card Exp");
-		new CommonFunctions().validateFieldMaxichar(txtCardExp, "Card Exp", moreThanMax);
+		new CommonFunctions().validateField(txtCVVorCVC, "CVV", singleDigit);
+		new CommonFunctions().clearText(txtCVVorCVC, "CVV");
+		new CommonFunctions().validateField(txtCVVorCVC, "CVV", maxDigit);
+		new CommonFunctions().clearText(txtCVVorCVC, "CVV");
+		new CommonFunctions().validateFieldMaxichar(txtCVVorCVC, "CVV", moreThanMax);
+	}
+
+	public void validateAmount(String maxDigit, String moreThanMax) {
+		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().validateField(txtAmount, "Amount", maxDigit);
+		new CommonFunctions().clearText(txtAmount, "Amount");
+		new CommonFunctions().validateFieldMaxichar(txtAmount, "Amount", moreThanMax);
 	}
 
 	public void validateAddressLine1Field(String singleDigit, String maxDigit, String moreThanMax) {

@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PayRequestConfirmPopup;
 import coyni_mobile.components.PayRequestOptionalPopup;
@@ -57,6 +58,9 @@ public class PayandRequestAccountHolderPage extends MobileFunctions {
 
 	public PayRequestConfirmPopup payRequestConfirmPopup() {
 		return new PayRequestConfirmPopup();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 
 	public NavigationComponent navigationComponent() {

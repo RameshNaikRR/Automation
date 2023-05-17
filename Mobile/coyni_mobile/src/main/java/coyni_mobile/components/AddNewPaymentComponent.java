@@ -18,8 +18,10 @@ public class AddNewPaymentComponent extends MobileFunctions {
    //2.4//
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
 	private By lblErrorMsg = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
-	private By btnOk= MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
+	private By btnOk= MobileBy.xpath("//*[contains(@resource-id,'tvAction')]|//*[@text='OK']");
 	private By lblPaymentHeading= MobileBy.xpath("//*[@text='Add Payment Method']");
+	private By btnCloseCard = MobileBy.xpath("//*[contains(@resource-id,'closeIV')]");
+	private By lblCardHeader= MobileBy.xpath("//*[contains(@resource-id,'tvCardHead')]");
 	
 	public void verifyHeading(String expHeading) {
 		if (getElementList(lblHeading, "Heading").size() > 0) {
@@ -27,6 +29,9 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 		}
 
+	}
+	public void clickCloseCard() {
+		click(btnCloseCard, "Close");
 	}
 
 	public void clickExternalBankAcount() {
@@ -36,17 +41,19 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public void clickDebitCard() {
 		click(btnDebitCard, "Debit Card");
 	}
-
+    
 	public void clickCreditCard() {
 		scrollDownToElement(btnCreditCard, "Credit Card");
 		click(btnCreditCard, "Credit Card");
 	}
-
-	public void verifyErrHeading() {
-		new CommonFunctions().elementView(lblCoyni, "coyni is displayed");
+	public void VerifyCardHeader() {
+		new CommonFunctions().elementView(lblCardHeader, "Heading");
+	}
+	public int verifyErrHeading() {
+		return getElementList(lblCoyni, "coyni").size();
 	}
 	public void verifyErrMsg() {
-		new CommonFunctions().elementView(lblErrorMsg,"Error is displayed");
+		new CommonFunctions().elementView(lblErrorMsg, "Error");
 	}
 	public int verifyPaymentHeading() throws InterruptedException {
 		Thread.sleep(2000);
@@ -70,6 +77,9 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 	public WithdrawMenuComponent withdrawMenuComponent() {
 		return new WithdrawMenuComponent();
+	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 
 }

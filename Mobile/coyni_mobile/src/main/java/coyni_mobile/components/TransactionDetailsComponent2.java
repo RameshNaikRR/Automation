@@ -15,6 +15,8 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblStatus = MobileBy.xpath("//*[@text='Status']/following-sibling::*");
 	private By lblDateTime = MobileBy.xpath("//*[@text='Date & Time']/following-sibling::*");
 	private By lblProcessingFee = MobileBy.xpath("//*[@text='Processing Fee']/following-sibling::*");
+	private By lblPurchaseAmount = MobileBy.xpath("//*[@text='Purchase Amount']/following-sibling::*");
+	private By lblDepositID = MobileBy.xpath("//*[@text='Deposit ID']/following-sibling::*");
 	private By lblTotalAmount = MobileBy.xpath("//*[@text='Total Amount']/../following-sibling::*");
 	private By lblAccountBalance = MobileBy.xpath("//*[@text='Account Balance']/following-sibling::*");
 	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*[1]/android.widget.TextView");
@@ -35,7 +37,11 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblBuyTokenCardDepositID = MobileBy.xpath("//*[@text='Deposit ID']/following-sibling::*[1]/android.widget.TextView");
 	private By lblBuyTokenCardDescriptorName = MobileBy.xpath("//*[@text='Descriptor Name']/following-sibling::*");
 	private By lblExpirationDate = MobileBy.xpath("//*[@text='Expiration Date']/following-sibling::*");
-
+	private By lblNameOnAccount = MobileBy.xpath("//*[@text='Name on Account']/following-sibling::*");
+	private By lblBankName = MobileBy.xpath("//*[@text='Bank Name']/following-sibling::*");
+	private By lblBankAccount = MobileBy.xpath("//*[@text='Bank Account #']/following-sibling::*");
+	private By lblCancelTransaction = MobileBy.xpath("//*[@text='Cancel Transaction']");
+	
 	public void getTransactionHeading() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Heading: " + getText(lblTransactionsHeading));
 	}
@@ -59,7 +65,24 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	public void getProcessingFee() {
 		ExtentTestManager.setInfoMessageInReport("Processing Fee: " + getText(lblProcessingFee));
 	}
-
+	public void getPurchaseAmount() {
+		ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + getText(lblPurchaseAmount));
+	}
+	public void getDepositID() {
+		ExtentTestManager.setInfoMessageInReport("Deposit ID: " + getText(lblDepositID));
+	}
+	public void getNameOnBank() {
+		ExtentTestManager.setInfoMessageInReport("Name on Account: " + getText(lblNameOnAccount));
+	}
+	public void getBankName() {
+		ExtentTestManager.setInfoMessageInReport("Bank Name: " + getText(lblBankName));
+	}
+	public void getBankAccount() {
+		ExtentTestManager.setInfoMessageInReport("Bank Account: " + getText(lblBankAccount));
+	}
+	public void getCancelTransaction() {
+		ExtentTestManager.setInfoMessageInReport("Cancel Transaction: " + getText(lblCancelTransaction));
+	}
 	public void getTotalAmount() {
 		ExtentTestManager.setInfoMessageInReport("Total Amount: " + getText(lblTotalAmount));
 	}
@@ -226,7 +249,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getTransactionAmount();
 		getStatus();
 		getDateTime();
-		// Purchase Amount//
+		getPurchaseAmount();
 		getProcessingFee();
 		getTotalAmount();
 		getAccountBalance();
@@ -236,6 +259,25 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getCardHolderName();
 		getCardNumber();
 		getExpirationDate();
+	}
+	//Buy token bank account
+	public void getBuyTokenBankAccountDetails() throws InterruptedException {
+		getTransactionHeading();
+		getTransactions();
+		getTransactionAmount();
+		getStatus();
+		getDateTime();
+		getProcessingFee();
+		getPurchaseAmount();
+		getTotalAmount();
+		getDepositID();
+		getReferenceID();
+		getBuyTokenCardDescriptorName();
+		getNameOnBank();
+		getBankAccount();
+		getBankName();
+		scrollDownToElement(lblCancelTransaction, "Cancel Transaction");
+		getCancelTransaction();
 	}
 //received transaction
 	public void getReceivedTransactionDetails() {
@@ -249,6 +291,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getUserName();
 		getAccountAddress();
 	}
+	
 //	public void getWithdrawTransactiondetails() {
 //		
 //	}
@@ -269,6 +312,9 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	}
 	else if(getText(lblTransactions).contains("Withdraw")&& (getText(lblTransactions).contains("Gift Card"))){
 		getWithdrawGiftcardTransactionDetails();
+	}
+	else if(getText(lblTransactions).contains("Buy")&& (getText(lblTransactions).contains("Bank Account"))){
+		getBuyTokenBankAccountDetails();
 	}
 	}
 }

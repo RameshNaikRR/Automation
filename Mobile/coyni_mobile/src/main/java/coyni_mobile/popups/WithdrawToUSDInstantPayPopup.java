@@ -1,8 +1,12 @@
 package coyni_mobile.popups;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.EnterYourPINComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
@@ -13,21 +17,59 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	private By visaCard = MobileBy.xpath("//*[contains(@text,'Visa')]");
 	private By masterCard = MobileBy.xpath("//*[contains(@text,'Mastercard')]");
-	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]");
+	private By debitCard = MobileBy.xpath("//*[contains(@resource-id,'tvPayMethod')]|//*[contains(@resource-id,'tvCardName')]");
 	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By optionaltxt = MobileBy.xpath("//*[contains(@resource-id,'etRemarks')]");
 	private By txtmsg = MobileBy.xpath("//*[contains(@resource-id,'addNoteET')]");
 	private By btnCancel = MobileBy.xpath("//*[contains(@resource-id,'cancelBtn')]");
 	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneBtn')]");
 	private By lnkConvert = MobileBy.xpath("//*[contains(@resource-id,'imgConvert')]");
-	private By lbldailyLimit = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
+	private By lblDailyLimitOrWeeklyLimit = MobileBy.xpath("//*[contains(@resource-id,'tvLimit')]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id,'tvAvailableBal')]");
 	private By withdrawTokenHeading = MobileBy.xpath("//*[@text='Withdraw Token']");
 	private By withdraw = MobileBy.xpath("//*[contains(@resource-id,'keyActionTV')]");
 	private By exchangeRate = MobileBy.xpath("//*[contains(@resource-id,'tvExchange')]");
 	private By instantPayHeading = MobileBy.xpath("//*[contains(@resource-id,'tvPayHead')]");
 	private By addNewPaymentMethod = MobileBy.xpath("//*[@text='Add New Payment Method']");
+	private By btnBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]");
+	private By btnExternalBank = MobileBy.xpath("//*[contains(@resource-id,'lyExternal')]");
+	
 
+	private float getAmountFromtext(By ele) {
+		String text = getText(ele);
+		System.out.println(text);
+		String texts = text.replace(",", "");
+		System.out.println(texts);
+		Pattern pattern = Pattern.compile("\\d+.\\d+");
+		Matcher match = pattern.matcher(texts);
+		while (match.find()) {
+			float amount = Float.parseFloat(match.group());
+			return amount;
+		}
+		return 0.0f;
+	}
+
+	public float getAvailableBalance() {
+//    if(getElementList(lblAvailableBalance, "").size()> 0){
+		return this.getAmountFromtext(lblAvailableBalance);
+//    }
+		//     return 0;
+	}
+
+	public String getDailyOrWeeklyLimitText() {
+//    if(getElementList(lblAvailableBalance, "").size()> 0){
+		return getText(lblDailyLimitOrWeeklyLimit);
+		//     }
+//    return null;
+	}
+
+	public float getDailyOrWeeklyLimitAmount() {
+		//     if(getElementList(lblAvailableBalance, "").size()> 0){
+		return this.getAmountFromtext(lblDailyLimitOrWeeklyLimit);
+		//     }
+	}
+
+//	public void click
 	public void fillAmount(String Amount) {
 		enterText(txtAmount, Amount, "Amount");
 		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
@@ -36,7 +78,7 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	public void enterMessage(String Message) {
 		click(optionaltxt, "optional message");
-		enterText(txtmsg, Message, "message");
+		enterText(txtmsg, Message, " message ");
 
 	}
 
@@ -56,12 +98,17 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 		int size = getElementList(visaCard, "").size();
 		ExtentTestManager.setInfoMessageInReport(size + " Visa Card is there.");
 	}
-
+    
 	public void verifyMasterCards() {
 		int size = getElementList(masterCard, "").size();
 		ExtentTestManager.setInfoMessageInReport(size + " Master card is there.");
 	}
-
+	public void clickBank() {
+		click(btnExternalBank, "External Bank");
+	}
+	public void clickBankAccount() {
+		click(btnBankAccount, "Bank");
+	}
 	public void verifyCancelAndButton() {
 		new CommonFunctions().elementView(btnCancel, "Cancel");
 		new CommonFunctions().elementView(btnDone, "Done");
@@ -74,6 +121,9 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
+	public void clearText() {
+		new CommonFunctions().clearText(txtAmount, "Amount");
+	}
 
 	public void verifyExchangeRate() {
 		new CommonFunctions().elementView(exchangeRate, "Exchange Rate");
@@ -84,7 +134,7 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 	}
 
 	public void getDailyLimit() {
-		String dailyLimit = getText(lbldailyLimit);
+		String dailyLimit = getText(lblDailyLimitOrWeeklyLimit);
 		ExtentTestManager.setInfoMessageInReport(dailyLimit);
 
 	}
@@ -119,5 +169,8 @@ public class WithdrawToUSDInstantPayPopup extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

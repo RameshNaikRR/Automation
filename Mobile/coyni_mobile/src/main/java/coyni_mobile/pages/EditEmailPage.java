@@ -15,6 +15,9 @@ public class EditEmailPage extends MobileFunctions {
 	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@text,'access')]");
 	private By lnkContactUs = MobileBy.xpath("//*[@text='Contact Us']");
 	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'saveEmailCV')]");
+	private By popUperror = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'tvAction')]");
+	private By lblNeedHelpHeading = MobileBy.xpath("//*[@text='Need help with coyni?']");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
@@ -39,8 +42,9 @@ public class EditEmailPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblDontHaveAccess, "Dont Have Access");
 	}
 
-	public void clickContactUs() {
+	public void clickContactUs(String expHeading) {
 		click(lnkContactUs, "Click Contact us");
+		new CommonFunctions().verifyLabelText(lblNeedHelpHeading, "Contact us Heading",expHeading);
 	}
 
 	public void verifyContactUsView() {
@@ -50,7 +54,14 @@ public class EditEmailPage extends MobileFunctions {
 	public void clickSave() {
 		click(btnSave, "Save");
 	}
-
+	public void clickOk() {
+		//new CommonFunctions().verifyLabelText(lblErrMsg, "Error", expError);
+		click(btnOk, "Ok");
+	}
+	public void verifyPopupMsg(String expText) {
+		new CommonFunctions().verifyLabelText(popUperror, "PopupMessage", expText);
+		
+	}
 	public VerifyEmailPage verifyEmailPage() {
 		return new VerifyEmailPage();
 	}

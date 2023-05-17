@@ -21,6 +21,10 @@ public class AccountCreatedPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
 		new CommonFunctions().elementView(lblDescription, "Description");
 	}
+	public int verifyAccountCreated() {
+		return getElementList(heading, "Account Created").size();
+		
+	}
 
 	public void clickSkip() {
 		click(btnSkip, "Skip");

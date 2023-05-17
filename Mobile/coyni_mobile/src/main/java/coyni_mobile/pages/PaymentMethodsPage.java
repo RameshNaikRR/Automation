@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.WithdrawMenuComponent;
 import coyni_mobile.popups.CvvPopup;
@@ -13,6 +14,7 @@ import coyni_mobile.popups.RemovingPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
@@ -52,8 +54,22 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By lblPaymentHeading = MobileBy.xpath("//*[@text='Payment Methods']");
 	private By lblBankAccount = MobileBy.xpath("(//*[contains(@resource-id,'tvBankName')])[1]");
 	// expired cards//
-	private By lblExpiredCreditCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[1]/following-sibling::*[1]");
-	private By lblExpiredDebitCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[2]/following-sibling::*[1]");
+	private By lblExpiredCreditCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[1]/following-sibling::*[1]|(//*[contains(@resource-id,'tvError')])[1]");
+	private By lblExpiredDebitCard = MobileBy.xpath("(//*[contains(@resource-id,'tvBankHead')])[2]/following-sibling::*[1]|(//*[contains(@resource-id,'tvError')])[2]|//*[contains(@resource-id,'tvError')]");
+	private By btnExpiredCreditCard = MobileBy.xpath("(//*[contains(@resource-id,'mainRL')])[2]|(//*[contains(@resource-id,'tvError')])[1]");
+	private By btnExpiredDebitCard = MobileBy.xpath("(//*[contains(@resource-id,'mainRL')])[3]|(//*[contains(@resource-id,'tvError')])[2]");
+	private By btnEditExpiredCard = MobileBy.xpath("//*[contains(@resource-id,'editLL')]|//*[contains(@resource-id,'tvEdit')]");
+	private By btnDeleteExpiredCard = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
+	private By btnBackExpiredCard = MobileBy.xpath("//*[contains(@resource-id,'layoutBack')]");
+	private By lblRemoving = MobileBy.xpath("//*[@text='Removing']");
+	private By lblYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
+	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
+	private By lblOops= MobileBy.xpath("//*[@text='Oops']");
+	private By lblOopsmsg= MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
+	private By btnEditOops = MobileBy.xpath("//*[contains(@resource-id,'tvEdit')]");
+	private By lblRemove = MobileBy.xpath("//*[contains(@resource-id,'tvRemove')]");
+	private By btnClose= MobileBy.xpath("//*[contains(@resource-id,'lySelBack')]");
+	
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -67,15 +83,56 @@ public class PaymentMethodsPage extends MobileFunctions {
 				"Deleted the All Debit Cards and Debit Card Number is : " + getText(numberOfDebitCards));
 	}
 
+	public void clickCloseSelectPayments() {
+		click(btnClose, "Close");
+	}
 	public void verifyCreditCards() {
 		ExtentTestManager.setPassMessageInReport(
 				"Deleted the All Credit Cards and Credit Card Number is : " + getText(numberOfCreditCards));
 	}
-	public void verifyExpiredCredit() {
-		new CommonFunctions().elementView(lblExpiredCreditCard, "Credit Card Expired");
+	public void clickCreditEditAndDelete() {
+		swipeOnElement(btnExpiredCreditCard, "Credit Card", SwipeDirection.LEFT);
+		click(btnEditExpiredCard, "Edit");
+		click(btnBackExpiredCard, "Back");
+		swipeOnElement(btnExpiredCreditCard, "Credit Card", SwipeDirection.LEFT);
+		click(btnDeleteExpiredCard, "Delete");
+		new CommonFunctions().elementView(lblRemoving, "Removing");
+		new CommonFunctions().elementView(lblYes, "Yes");
+		click(btnNo, "No");	
 	}
+	public void clickDebitEditAndDelete() {
+		swipeOnElement(btnExpiredDebitCard, "Debit Card", SwipeDirection.LEFT);
+		click(btnEditExpiredCard, "Edit");
+		click(btnBackExpiredCard, "Back");
+		swipeOnElement(btnExpiredDebitCard, "Debit Card", SwipeDirection.LEFT);
+		click(btnDeleteExpiredCard, "Delete");
+		new CommonFunctions().elementView(lblRemoving, "Removing");
+		new CommonFunctions().elementView(lblYes, "Yes");
+		click(btnNo, "No");	
+	}
+	public void verifyCreditOopsCondition() throws InterruptedException {
+		click(lblExpiredCreditCard, "Credit");
+		new CommonFunctions().elementView(lblOops, "Oops");
+		ExtentTestManager.setInfoMessageInReport("Text is :" + getText(lblOopsmsg));
+		new CommonFunctions().elementView(lblRemove, "Remove");
+		click(btnEditOops, "Edit");
+		click(btnBackExpiredCard, "Back");
+	}
+	public void verifyDebitOopsCondition() throws InterruptedException {
+		click(lblExpiredDebitCard, "Debit");
+		new CommonFunctions().elementView(lblOops, "Oops");
+		ExtentTestManager.setInfoMessageInReport("Text is :" + getText(lblOopsmsg));
+		new CommonFunctions().elementView(lblRemove, "Remove");		
+		Thread.sleep(2000);
+		click(btnEditOops, "Edit");
+		click(btnBackExpiredCard, "Back");
+	}
+	
 	public void verifyExpiredDebit() {
 		new CommonFunctions().elementView(lblExpiredDebitCard, "Debit Card Expired");
+	}
+	public void verifyExpiredCredit() {
+		new CommonFunctions().elementView(lblExpiredCreditCard, "Credit Card Expired");
 	}
 	public int verifyNumOfDebitCards() {
 		return getElementList(btnDebitCards, "Debit Card").size();
@@ -236,6 +293,12 @@ public class PaymentMethodsPage extends MobileFunctions {
 	public AddCardPage addCardPage() {
 		return new AddCardPage();
 	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+				}
+//	public NavigationComponent navigationComponent() {
+//		return new NavigationComponent();
+//	}
 
 	public void AddBankFromBuyToken() throws InterruptedException {
 		customerProfilePage().paymentMethodsPage().verifyHeadingAddAccount();

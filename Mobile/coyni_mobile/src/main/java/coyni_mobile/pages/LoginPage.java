@@ -47,6 +47,8 @@ public class LoginPage extends MobileFunctions {
 	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'cvAction')]");
 	private By btnEyeIconPassword = MobileBy.//id("endIconIV");
 			xpath("//*[contains(@resource-id,'endIconIV')]");
+	private By fieldBar = MobileBy.xpath(
+			"//*[contains(@resource-id, 'layoutIndicator')]/*");
 	private By btnCross = MobileBy.xpath("");
 	private By iconFace = MobileBy.xpath("");
 
@@ -96,7 +98,10 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(popUperror, "PopupMessage", expText);
 		
 	}
+	public int fieldBarCount() {
+		return getElementList(fieldBar, "field bar").size();
 
+	}
 	private void minimizePopup() {
 		if (DriverFactory.getDriver().findElement(btnLogin).isDisplayed()) {
 			ExtentTestManager.setPassMessageInReport("Popup is closed");
@@ -149,7 +154,9 @@ public class LoginPage extends MobileFunctions {
 	public void VerifyLoginPageView() {
 		new CommonFunctions().elementView(chkBxRememberMe, "Login Page");
 	}
-
+    public void verifyEmail(String email) {
+    	new CommonFunctions().verifyLabelText(txtEmail, "Email", email);
+    }
 //	public void clickEnter() {
 //		((AndroidDriver)DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.TAB));
 //		

@@ -15,10 +15,11 @@ public class BuyTokenComponent extends MobileFunctions {
 	private By lblPaymentMethod = MobileBy
 			.xpath("//*[@text='Payment Method']|//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
 	private By lblDailylimits = MobileBy.xpath("//*[@name ='arrow-right']/following-sibling::*[1]");
-	private By btnChangePayment = MobileBy.xpath("//*[@name ='arrow-right']");
-	private By txtAmount = MobileBy.xpath("//*[@name ='currency toggle']/preceding-sibling::XCUIElementTypeTextField");
+	private By btnChangePayment = MobileBy.xpath("//*[contains(@resource-id,'imgArrow')]");
+	private By txtAmount = MobileBy.xpath("//*[contains(@resource-id,'etAmount')]");
 	private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]|//*[contains(@resource-id,'keyActionTV')]");
 	private By btnConvert = MobileBy.xpath("//*[@name ='currency toggle']");
+	
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblBuyToken, "heading", expHeading);
@@ -31,6 +32,9 @@ public class BuyTokenComponent extends MobileFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Payment method is not " + expPayment);
 		}
+	}
+	public void clearText() {
+		new CommonFunctions().clearText(txtAmount, "Amount");
 	}
 
 	public void getDailyLimits() {
@@ -68,5 +72,8 @@ public class BuyTokenComponent extends MobileFunctions {
 	
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
+	}
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

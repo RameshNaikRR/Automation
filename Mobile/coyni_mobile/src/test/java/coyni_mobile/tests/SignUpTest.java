@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.components.UploadDocumentComponent;
 import coyni_mobile.pages.LandingPage;
+import coyni_mobile.pages.LoginPage;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
@@ -22,15 +23,16 @@ public class SignUpTest {
 	LandingPage landingPage;
 	UploadDocumentComponent uploadDocumentComponent;
 	CustomerProfileTest customerProfileTest;
+	LoginPage loginPage;
 
-	//@BeforeTest
-	
-	
+	// @BeforeTest
+
 	@BeforeMethod
 	public void init() {
 		DriverFactory.getDriver().resetApp();
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
+		loginPage = new LoginPage();
 	}
 
 	@AfterMethod
@@ -79,8 +81,7 @@ public class SignUpTest {
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.clickNotNow();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage()
-					.verifyHeading(data.get("createAccountHeading"));
+					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 //					.accountCreatedPage().clickSkip();
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
@@ -107,7 +108,6 @@ public class SignUpTest {
 			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-//			Thread.sleep(2000);
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
 			signUpPage.clickNext();
@@ -127,6 +127,18 @@ public class SignUpTest {
 					data.get("privacyPolicyPageHeading"), data.get("toastMessage"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
 					.verifyHeading(data.get("secureYourAccountPageHeading"), data.get("secureAccountDescription"));
+			if (data.get("validateAppTerminate").equalsIgnoreCase("Yes")) {
+				DriverFactory.getDriver().closeApp();
+				DriverFactory.getDriver().launchApp();
+				landingPage.clickLogin();
+				loginPage.fillEmail(data.get("email"));
+				loginPage.fillPassword(data.get("password"));
+				loginPage.clickLogin();
+				signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			}
+			DriverFactory.getDriver().hideKeyboard();
+			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
+					.verifyHeading(data.get("secureYourAccountPageHeading"), data.get("secureAccountDescription"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 					.verifyChoosePinHeading(data.get("choosePinHeading"));
@@ -140,9 +152,13 @@ public class SignUpTest {
 					.verifyHeading(data.get("enableTouchIdPageHeading"), data.get("idDescription"));
 			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 					.clickNotNow();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage()
-					.verifyHeading(data.get("createAccountPageHeading"));
+			if (signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+					.enableFaceIDpage().accountCreatedPage().verifyAccountCreated() == 1) {
+				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+						.enableFaceIDpage().accountCreatedPage().verifyHeading(data.get("createAccountPageHeading"));
+			} else {
+				loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
+			}
 			if (data.get("validateAddCreditOrDebit").equalsIgnoreCase("Yes")) {
 				if (signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 						.enableFaceIDpage().accountCreatedPage().verifyGoToDashboard() == 1) {
@@ -151,10 +167,29 @@ public class SignUpTest {
 					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 							.enableFaceIDpage().accountCreatedPage().tokenAccountPage().clickAddPayment();
 					signUpPage.addNewPaymentComponent().clickDebitCard();
-					signUpPage.addNewPaymentComponent().verifyErrHeading();
-					signUpPage.addNewPaymentComponent().verifyErrMsg();
-					signUpPage.addNewPaymentComponent().clickOk();
-				}else {
+					if (signUpPage.addNewPaymentComponent().verifyErrHeading() >= 1) {
+						signUpPage.addNewPaymentComponent().verifyErrMsg();
+						signUpPage.addNewPaymentComponent().clickOk();
+						//Thread.sleep(2000);
+					} 
+					else {
+						signUpPage.addNewPaymentComponent().VerifyCardHeader();
+						signUpPage.addNewPaymentComponent().clickCloseCard();
+					}
+					signUpPage.addNewPaymentComponent().verifyAddPaymentView();
+					signUpPage.addNewPaymentComponent().clickCreditCard();
+					if (signUpPage.addNewPaymentComponent().verifyErrHeading() >= 1) {
+						signUpPage.addNewPaymentComponent().verifyErrMsg();
+						signUpPage.addNewPaymentComponent().clickOk();
+						Thread.sleep(2000);
+					} 
+//					else {
+//						signUpPage.addNewPaymentComponent().VerifyCardHeader();
+//						signUpPage.addNewPaymentComponent().clickCloseCard();
+//					}
+					signUpPage.addNewPaymentComponent().verifyAddPaymentView();
+
+				} else {
 					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 							.enableFaceIDpage().accountCreatedPage().clickAddCreditOrDebit();
 					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
@@ -202,6 +237,7 @@ public class SignUpTest {
 						signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 								.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyAddAddressView();
 					}
+					Thread.sleep(1000);
 					if (data.get("viewBuyToken").equalsIgnoreCase("Yes")) {
 						signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
 								.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyBuyTokenView();
@@ -235,12 +271,12 @@ public class SignUpTest {
 						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().successFailureComponent()
 						.clickClose();
 			}
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
-
 	}
+
+	
 
 	@Test
 	@Parameters({ "strParams" })

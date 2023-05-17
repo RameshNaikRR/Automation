@@ -21,8 +21,13 @@ public class WithdrawMenuComponent extends MobileFunctions {
 	private By btnGiftCard = MobileBy.xpath("//*[@text='Gift Card']");
 	private By btnBankAccountWithDraw = MobileBy.xpath("//*[@text='External Bank Account']");
 	private By withdrawHeading = MobileBy.xpath("//*[@text='Select Withdraw Method']");
-	private By btnExistingCard = MobileBy.xpath("//*[contains(@resource-id,'mainRL')]|//*[contains(@text,'8780')]");
-
+	private By btnExistingCard = MobileBy.xpath("//*[contains(@resource-id,'mainRL')]|//*[contains(@text,'8780')]|(//*[contains(@resource-id,'tvCardNumber')])[1]");
+    // Expired cards//
+	private By btnDebitCard = MobileBy.xpath("(//*[contains(@resource-id,'tvCardNumber')])[2]|//*[@text='Mastercard Debit']");
+	private By lblNoTokens = MobileBy.xpath("//*[@text='No Token Available']");
+	private By lblWithdrawHeading = MobileBy.xpath("//*[@text='Withdraw Token']");
+	private By btnChangePayment = MobileBy.xpath("//*[contains(@resource-id,'imgArrow')]");
+	
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
 	public void clickInstantPay() {
@@ -35,7 +40,16 @@ public class WithdrawMenuComponent extends MobileFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnExistingCard));
 		click(btnExistingCard, "Card");
 	}
-
+	public void clickExistingCardInNoTokens() {
+		new CommonFunctions().elementView(lblNoTokens, "No Tokens");
+		click(btnExistingCard, "Existing Card");
+	}
+	
+	public void clickWithdrawTokens() {
+		click(btnDebitCard, "Debit");
+		new CommonFunctions().elementView(lblWithdrawHeading, "Withdraw Tokens");
+		click(btnChangePayment, "Click Arrow");
+	}
 	public void clickGiftCard() {
 		click(btnGiftCard, "Gift Card");
 	}

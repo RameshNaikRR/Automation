@@ -1,6 +1,8 @@
 package coyni_mobile.pages;
 
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -31,6 +33,7 @@ public class TokenAccountPage extends MobileFunctions {
 	private By lblUserName = MobileBy.xpath(
 			"//*[contains(@resource-id, 'tvUserName')]|(//*[@name='notifications_nobadge'])/following-sibling::*[1]");
 	private By lblAvailableBalance = MobileBy.xpath("//*[contains(@resource-id, 'tvBalHead')]");
+	private By lblAvailableBal= MobileBy.xpath("//*[contains(@resource-id, 'tvBalance')]");
 	private By iconNotifications = MobileBy.xpath("//*[contains(@resource-id,'notificationsLL')]");// *[@name='notifications_nobadge']
 	private By btnPayRequest = MobileBy.xpath(" ");
 	private By btnScan = MobileBy.xpath("//*[contains(@resource-id,'scanQrLL')]");
@@ -51,6 +54,25 @@ public class TokenAccountPage extends MobileFunctions {
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
+	
+	private float getAmountFromtext(By ele) {
+		String text = getText(ele);
+		System.out.println(text);
+		String texts = text.replace(",", "");
+		System.out.println(texts);
+		Pattern pattern = Pattern.compile("\\d+.\\d+");
+		Matcher match = pattern.matcher(texts);
+		while (match.find()) {
+			float amount = Float.parseFloat(match.group());
+			return amount;
+		}
+		return 0.0f;
+	}
+
+	public float getAvailableBalance() {
+//    if(getElementList(lblAvailableBalance, "").size()> 0){
+		return this.getAmountFromtext(lblAvailableBal);
+	}
 	public void verifyTransactionHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(transactionsHeading, "Transaction heading", expHeading);
 	}
@@ -103,7 +125,7 @@ public class TokenAccountPage extends MobileFunctions {
 		}
 	}
 
-	public String getAvailableBalance() {
+	public String getAvailableBal() {
 		return getText(lblAvailableBalance);// doubt
 	}
 

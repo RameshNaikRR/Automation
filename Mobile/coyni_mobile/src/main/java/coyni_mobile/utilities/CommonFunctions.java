@@ -1,6 +1,7 @@
 package coyni_mobile.utilities;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Rectangle;
@@ -32,6 +33,8 @@ public class CommonFunctions {
 	public void verifyLabelText(By label, String labelName, String expText) {
 		String actText = mobileFunctions.getText(label).trim().replace("\n", "");
 		if (expText.equalsIgnoreCase(actText)) {
+//			System.out.println(actText);
+//			System.out.println(expText);
 			ExtentTestManager.setPassMessageInReport(String.format("%s is %s", labelName, actText));
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
@@ -41,24 +44,22 @@ public class CommonFunctions {
 
 	public void verifyLabelTextforEmailDescription(By label, String labelName, String expText1, String expText2) {
 		String[] actText = mobileFunctions.getText(label).split(":");
-		String actText1=actText[0];
-		String actText2=actText[1].replace(" ", "");
+		String actText1 = actText[0];
+		String actText2 = actText[1].replace(" ", "");
 		if (expText1.equalsIgnoreCase(actText1) && expText2.equalsIgnoreCase(actText2)) {
-			ExtentTestManager.setPassMessageInReport(actText1+": "+actText2);
+			ExtentTestManager.setPassMessageInReport(actText1 + ": " + actText2);
 		} else {
 			ExtentTestManager.setWarningMessageInReport(
 					String.format("%s ::<p>Expected =  %s</br>Actual = %s</p>", labelName, expText1, actText));
 		}
 	}
-	
+
 	public void elementView(By ele, String eleName) {
 		try {
 			if (mobileFunctions.getElement(ele, eleName).isDisplayed()) {
-				ExtentTestManager
-						.setPassMessageInReport(eleName + " is displayed ");
+				ExtentTestManager.setPassMessageInReport(eleName + " is displayed ");
 			} else {
-				ExtentTestManager
-						.setFailMessageInReport(eleName + " is not displayed ");
+				ExtentTestManager.setFailMessageInReport(eleName + " is not displayed ");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" element View failed due to exception " + e);
@@ -108,10 +109,11 @@ public class CommonFunctions {
 
 	}
 
+	// passwordInfoTV
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
 		try {
 			By errorMsgs = MobileBy.xpath(
-					"(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
+					"(//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]|//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			// mobileFunctions.
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
@@ -126,6 +128,23 @@ public class CommonFunctions {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("validate form error message failed due to exception " + e);
 		}
+	}
+
+	public void validateErrMsg(String errMesg) throws InterruptedException {
+
+		//     clearText(getElement(errMessage), errMessage);
+		List<WebElement> errorMsgEles = mobileFunctions.getElementList(getElement(errMesg), errMesg);
+		if (errorMsgEles.size() >= 1) {
+			Thread.sleep(2000);
+			ExtentTestManager.setPassMessageInReport("Error message " + errMesg);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message failed " + errMesg);
+		}
+	}
+
+	private By getElement(String errMesg) {
+		// TODO Auto-generated method stub
+		return MobileBy.xpath(String.format("//*[contains(@resource-id,'tvError')]", errMesg));
 	}
 
 	public void clearText(By ele, String eleName) {
@@ -178,7 +197,8 @@ public class CommonFunctions {
 			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
 					.replace(")", "").replace("-", "");
 			System.out.println("length " + actualtext.length());
-			By errorMsgs = MobileBy.xpath("//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]");
+			By errorMsgs = MobileBy
+					.xpath("//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]");
 			if (enterText.equalsIgnoreCase(actualtext)
 					&& mobileFunctions.getElement(errorMsgs, "Error Msg").isDisplayed()) {
 				ExtentTestManager.setPassMessageInReport(

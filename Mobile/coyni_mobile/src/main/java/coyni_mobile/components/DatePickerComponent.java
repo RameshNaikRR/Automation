@@ -23,6 +23,7 @@ public class DatePickerComponent extends MobileFunctions {
 		String day = fromDate.split("-")[0];
 		String monthAndYear = fromDate.split("-")[1];
 		scrollUpToElement(getDate(monthAndYear, day), fromDate);
+		//scrollDownToElement(getDate(monthAndYear, day), fromDate);
 		System.out.println(day);
 		System.out.println(monthAndYear);
 		click(getDate(monthAndYear, day), fromDate);
