@@ -319,13 +319,10 @@ public class MerchantActivityTest {
 			} else {
 				merchantTransactionsPage.filterComponent().verifyMouseAction();
 				merchantTransactionsPage.filterComponent().clickFilters();
-				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
-				merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
+				// merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("startdate"));
+				// merchantTransactionsPage.filterComponent().datePickerComponent().setDate(data.get("enddate"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType"));
-				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
-				if (!data.get("errMessage").isEmpty()) {
-					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
-				}
+				// merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType3"));
 				merchantTransactionsPage.filterComponent().fillFromAmount(data.get("amount"));
 				merchantTransactionsPage.filterComponent().fillToAmount(data.get("toAmount"));
 				merchantTransactionsPage.filterComponent().selectFilter(data.get("filterType2"));

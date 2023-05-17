@@ -214,7 +214,9 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickCustomDateRangePayOutsReceived();
 			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 					.verifyLabelTransactionDetails(data.get("expHeading"));
-			testCustomDateRangeTrasactions(strParams, "date");
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setPrevious10Date();
+//			testCustomDateRangeTrasactions(strParams, "date");
 //			tokenAccountPage.tokenAccountActivityComponent().payOutsReceivedDetailsComponent()
 //					.getTotalCustomDateRangeCount(data.get("query5"));
 			exports(strParams);
@@ -299,7 +301,10 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickCustomDateRangeTokensPurchased();
 			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 					.verifyLabelPurchasedTransactionDetails(data.get("expHeading"));
-			testCustomDateRangeTrasactions(strParams, "date");
+//			testCustomDateRangeTrasactions(strParams, "date");
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setPrevious10Date();
+//			
 //			tokenAccountPage.tokenAccountActivityComponent().tokensPurchasedDetailsComponent()
 //					.getTotalCustomDateRangeCount(data.get("query5"));
 			exports(strParams);
@@ -384,7 +389,10 @@ public class TokenAccountTest {
 					.daysMonthsDropDownComponent().clickLastMonthTokensWithdraw();
 			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 					.verifyLabelWithdrawTransactionDetails(data.get("expHeading"));
-			testCustomDateRangeTrasactions(strParams, "date");
+//			testCustomDateRangeTrasactions(strParams, "date");
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setDate();
+			tokenAccountPage.tokenAccountActivityComponent().filterCalenderComponent().setPrevious10Date();
+//			
 //			tokenAccountPage.tokenAccountActivityComponent().tokensWithdrawnDetailsComponent()
 //					.getTotalCustomDateRangeCount(data.get("query4"));
 			exports(strParams);
@@ -395,6 +403,25 @@ public class TokenAccountTest {
 		}
 
 	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCustomDateRangeWithdrawTransaction(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			tokenAccountPage.clickTokenAccount();
+//			tokenAccountPage.tokenAccountActivityComponent().clickTokensWithdrawnDetails();
+//			tokenAccountPage.tokenAccountActivityComponent().daysMonthsDropDownComponent()
+//					.clickCustomDateRangeTokensWithdraw();
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent()
+//					.setDateWithYear(data.get("startDate"));
+//			tokenAccountPage.tokenAccountActivityComponent().datePickerComponent().setDateWithYear(data.get("endDate"));
+//
+//		} catch (Exception e) {
+//			ExtentTestManager
+//					.setFailMessageInReport("testCustomDateRangeWithdrawTransaction is failed due to exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -485,11 +512,11 @@ public class TokenAccountTest {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickMonthTODate();
 				} else {
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickCustomDateRange();
-					// tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickDate();
+					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().clickDate();
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
-							.clickSelectDate(data.get("startDate"));
+							.setDate();
 					tokenAccountPage.exportfilesPage().exportSelectedTransactionsPopup().filterCalenderComponent()
-							.clickSelectDate(data.get("endDate"));
+							.setPrevious10Date();
 
 				}
 

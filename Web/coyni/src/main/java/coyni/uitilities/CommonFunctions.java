@@ -73,6 +73,21 @@ public class CommonFunctions {
 		}
 	}
 
+	public void validateFormErrorMessagesforSpaces(String expErrMsg, String expcolour, String elementName) {
+		By errorMsgs = By.xpath("//span[contains(@class,'FormField_errorGap__Dd3Uk')]");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager
+					.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
+		}
+		verifyTextBoxBorderColor(expcolour);
+	}
+
 	public void validateFormErrorMessageForIPAddress(String expErrMsg) {
 		By errorMsgs = By.cssSelector(".IpAddresses_error__QnSzJ");
 		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);

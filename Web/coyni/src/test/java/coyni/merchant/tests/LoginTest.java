@@ -468,6 +468,32 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testForgotEmailWithInvalidFirstAndLastNameDetails(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.clickForgotEmail();
+			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
+			loginPage.forgotEmailComponent().fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.clickNext();
+			loginPage.forgotEmailComponent().firstName(data.get("firstName"));
+			Thread.sleep(2000);
+			loginPage.forgotEmailComponent().lastName(data.get("lastName"));
+			loginPage.clickNext();
+			if (!data.get("errMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessagesforSpaces(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testForgotEmailWithInvalidFirstAndLastName failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testForgotEmailwithBackActions(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
