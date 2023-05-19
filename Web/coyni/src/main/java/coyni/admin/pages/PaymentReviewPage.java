@@ -3,10 +3,11 @@ package coyni.admin.pages;
 import org.openqa.selenium.By;
 
 import coyni.admin.components.EntriesAndPaginationsComponent;
+import coyni.admin.components.SideBarComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
-public class CompliancePage extends BrowserFunctions {
+public class PaymentReviewPage extends BrowserFunctions {
 
 	private By lblPaymentReview = By.xpath("");
 	private By tabACHs = By.xpath("");
@@ -42,6 +43,10 @@ public class CompliancePage extends BrowserFunctions {
 
 	public void clickClose() {
 		click(crossClose, "Close");
+	}
+
+	public SideBarComponent sideBarComponent() {
+		return new SideBarComponent();
 	}
 
 	public EntriesAndPaginationsComponent entriesAndPaginationsComponent() {

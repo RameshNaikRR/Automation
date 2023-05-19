@@ -13,6 +13,7 @@ public class ChangeAchAndWireBankPopup extends BrowserFunctions {
 	private By txtReason = By.xpath("");
 	private By crossMark = By.xpath("");
 	private By btnChangeBank = By.xpath("");
+	private By drpdwnSelectedBankName = By.xpath("");
 
 	public void verifyChangeBank(String changeBank) {
 		new CommonFunctions().verifyLabelText(lblChangeBank, "Heading is: ", changeBank);
@@ -38,6 +39,9 @@ public class ChangeAchAndWireBankPopup extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Change Bank Button is Disabled");
 		}
 
+	}
+	public void selectedBankName(String selectedBankName) {
+		selectDropdown(drpdwnSelectedBankName, selectedBankName, "Selected Bank Name");
 	}
 
 }
