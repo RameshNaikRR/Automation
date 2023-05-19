@@ -15,7 +15,7 @@ public class SetUpTouchIDPopup extends MobileFunctions {
 
 	private By heading = MobileBy.xpath("(//*[@text='Set Up Touch ID'])[1]");
 
-	private By backIcon = MobileBy.xpath("//android.widget.ImageButton[@content-desc='Navigate up']");
+	private By backIcon = MobileBy.xpath("//android.widget.ImageButton[@content-desc='Back']");
 
 	public void clickSetUpTouchID() {
 		click(setUpTouchID, "Set Up Touch ID");

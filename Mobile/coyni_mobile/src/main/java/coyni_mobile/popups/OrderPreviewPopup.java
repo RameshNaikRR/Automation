@@ -166,8 +166,8 @@ public class OrderPreviewPopup extends MobileFunctions {
 	}
 
 	public void slideToConfirm() {
-		// new CommonFunctions().swipeElement(btnSideView, Direction.RIGHT);
-		swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
+		 new CommonFunctions().swipeElement(btnSideView, Direction.RIGHT);
+		//swipeOnElement(btnSideView, "Purchased", SwipeDirection.RIGHT);
 	}
 
 	public EnterYourPINComponent enterYourPINComponent() {

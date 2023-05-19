@@ -13,7 +13,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
 	private By btnExternalBank = MobileBy.xpath("//*[contains(@text,'External Bank')]|//*[contains(@resource-id,'tvExtBankMsg')]");
 	private By btnDebitCard = MobileBy.xpath("//*[contains(@resource-id,'layoutDCard')]|//*[contains(@resource-id,'tvPayMethod')]");
-	private By btnCreditCard = MobileBy.xpath("//*[contains(@resource-id,'tvCCHead')]");
+	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]|//*[contains(@resource-id,'tvCCHead')]|//*[contains(@resource-id,'tvCCardMsg')]|//*[contains(@resource-id,'imgCCardArrowC')]");
 	private By btnSignetAccount = MobileBy.xpath("//*[contains(@resource-id,'tvSignetHead')]");
    //2.4//
 	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
@@ -42,7 +42,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		click(btnDebitCard, "Debit Card");
 	}
     
-	public void clickCreditCard() {
+	public void clickCreditCard() throws InterruptedException {
+		Thread.sleep(2000);
 		scrollDownToElement(btnCreditCard, "Credit Card");
 		click(btnCreditCard, "Credit Card");
 	}

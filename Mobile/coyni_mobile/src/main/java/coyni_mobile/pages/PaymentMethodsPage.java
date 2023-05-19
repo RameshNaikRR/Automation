@@ -44,7 +44,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
 	private By chkbxBank = MobileBy.xpath("(//*[contains(@resource-id,'accountCheckbox')])[1]");
 	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]|//*[contains(@resource-id,'tvPayMethod')]");
-	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]");
+	private By btncreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]|//*[contains(@resource-id,'tvCCHead')]|//*[contains(@resource-id,'tvCCardMsg')]|//*[contains(@resource-id,'imgCCardArrowC')]");
 	private By btnDebitCards = MobileBy.xpath("//*[contains(@text,'Debit Card')]");
 	private By btncreditCards = MobileBy.xpath("//*[contains(@text,'Credit')]");
 	private By btnBank = MobileBy.xpath("//*[contains(@text,'Bank Account')]");
@@ -141,6 +141,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblDebitCardCount, "Debit Count", expCount);
 	}
 	public void verifyCreditCount(String expCount) {
+		scrollDownToElement(btnCreditCard, "Credit");
 		new CommonFunctions().verifyLabelText(lblCreditCardCount, "Credit Count", expCount);
 	}
 	public void verifyBankCount(String expCount) {
@@ -226,7 +227,10 @@ public class PaymentMethodsPage extends MobileFunctions {
 	}
 
 	public void clickCreditCard() {
+		scrollDownToElement(btncreditCard, "Credit");
 		click(btncreditCard, "Credit Card");
+		
+		//scrollUpToElement(btncreditCard, "Credit");
 	}
 
 	public void clickDebitCard() {

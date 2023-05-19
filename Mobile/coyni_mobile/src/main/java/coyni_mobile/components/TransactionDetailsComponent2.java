@@ -9,9 +9,9 @@ import io.appium.java_client.MobileBy;
 public class TransactionDetailsComponent2 extends MobileFunctions {
 
 	private By lblTransactionsHeading = MobileBy.xpath("//*[contains(@text,'Transaction Details')]");
-	private By lblTransactions = MobileBy.xpath("//*[contains(@resource-id,'head')]");
+	private By lblTransactions = MobileBy.xpath("//*[contains(@resource-id,'head')]|//*[contains(@resource-id,'withBankHeaderTV')]");
 	private By lblTransactionAmount = MobileBy
-			.xpath("//*[contains(@resource-id,'amountTV')]|//*[contains(@resource-id,'tvAmount')]|//*[contains(@resource-id,'withdrawGiftamount')]");
+			.xpath("//*[contains(@resource-id,'amountTV')]|//*[contains(@resource-id,'tvAmount')]|//*[contains(@resource-id,'withdrawGiftamount')]|//*[contains(@resource-id,'withBankAmount')]");
 	private By lblStatus = MobileBy.xpath("//*[@text='Status']/following-sibling::*");
 	private By lblDateTime = MobileBy.xpath("//*[@text='Date & Time']/following-sibling::*");
 	private By lblProcessingFee = MobileBy.xpath("//*[@text='Processing Fee']/following-sibling::*");
@@ -26,7 +26,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblGrandTotal = MobileBy.xpath("//*[@text='Grand Total']/following-sibling::*[1]");
 	private By lblSubTotal = MobileBy.xpath("//*[@text='Sub Total']/following-sibling::*[1]");
 	private By lblWithdrawGiftProcessingFee = MobileBy.xpath("//*[@text='Processing Fee']/following-sibling::*[1]");
-	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*/android.widget.TextView");
+	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*|//*[@text='Withdraw ID']/following-sibling::*/android.widget.TextView");
 	private By lblRecipentName = MobileBy.xpath("//*[@text='Recipient Name']/following-sibling::*");
 	private By lblRecipentEmail = MobileBy.xpath("//*[@text='Recipient Email']/following-sibling::*");
 	private By lblInstantPayAmount = MobileBy.xpath("//*[contains(@resource-id,'withinamount')]");
@@ -41,7 +41,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblBankName = MobileBy.xpath("//*[@text='Bank Name']/following-sibling::*");
 	private By lblBankAccount = MobileBy.xpath("//*[@text='Bank Account #']/following-sibling::*");
 	private By lblCancelTransaction = MobileBy.xpath("//*[@text='Cancel Transaction']");
-	
+	private By lblWithdrawAmount = MobileBy.xpath("//*[@text='Withdraw Amount']/following-sibling::*[1]");
 	public void getTransactionHeading() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Heading: " + getText(lblTransactionsHeading));
 	}
@@ -86,7 +86,9 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	public void getTotalAmount() {
 		ExtentTestManager.setInfoMessageInReport("Total Amount: " + getText(lblTotalAmount));
 	}
-
+	public void getWithdrawAmount() {
+		ExtentTestManager.setInfoMessageInReport("Withdraw Amount: " + getText(lblWithdrawAmount));
+	}
 	public void getAccountBalance() {
 		ExtentTestManager.setInfoMessageInReport("Account Balance: " + getText(lblAccountBalance));
 	}
@@ -242,6 +244,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		scrollDownToElement(lblExpirationDate, "Expiration date");
 		getExpirationDate();
 	}
+	
 //buytokencredit
 	public void getBuyTokenCreditCardDetails() {
 		getTransactionHeading();
@@ -274,6 +277,31 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getReferenceID();
 		getBuyTokenCardDescriptorName();
 		getNameOnBank();
+		Thread.sleep(1000);
+		scrollDownToElement(lblBankAccount, "Bank Account");
+		getBankAccount();
+		getBankName();
+		scrollDownToElement(lblCancelTransaction, "Cancel Transaction");
+		getCancelTransaction();
+	}
+	//withdraw to bank
+	public void getWithdrawTokenBankAccountDetails() throws InterruptedException {
+		getTransactionHeading();
+		getTransactions();
+		getTransactionAmount();
+		getStatus();
+		getDateTime();
+		getWithdrawAmount();
+		getProcessingFee();
+		getAccountBalance();
+		getTotalAmount();
+		
+	//	getDepositID();
+		getReferenceID();
+	//	getBuyTokenCardDescriptorName();
+		getNameOnBank();
+		Thread.sleep(1000);
+		scrollDownToElement(lblBankAccount, "Bank Account");
 		getBankAccount();
 		getBankName();
 		scrollDownToElement(lblCancelTransaction, "Cancel Transaction");

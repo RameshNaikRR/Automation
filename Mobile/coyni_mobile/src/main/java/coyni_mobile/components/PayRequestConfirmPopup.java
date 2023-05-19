@@ -21,8 +21,8 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	private By lblPayingMehtod = MobileBy.xpath("//*[@text='Paying Method']");
 	private By lblRecipientAddress = MobileBy.xpath("//*[@text='Recipient’s Address']");
 	private By lblAvailabelBalance = MobileBy.xpath("//*[contains(@resource-id, 'balanceTV')]");
-	private By senderName = MobileBy.xpath("//*[contains(@resource-id, 'myUserIDTV')]");
-	private By message = MobileBy.xpath("//*[contains(@resource-id, 'messageTV')]");
+	private By senderName = MobileBy.xpath("//*[contains(@resource-id,'myUserIDTV')]");
+	private By message = MobileBy.xpath("//*[contains(@resource-id,'messageTV')]");
 	private By btnConfirm = MobileBy
 			.xpath("//*[contains(@resource-id, 'slideToConfirm')]|//*[contains(@resource-id,'im_lock')]");// *[@name='Slide
 																											// to
@@ -30,7 +30,7 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 	private By lblReferenceID = MobileBy.xpath("//*[contains(@resource-id,'refIDTV')]");
 	private By lock = MobileBy.xpath("//*[contains(@resource-id, 'im_lock')]");
 	// private By lblAvailableBalance = MobileBy.xpath(" ");
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id, 'doneCV')]");
+	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'doneCV')]|//*[@text='Done']");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -75,8 +75,8 @@ public class PayRequestConfirmPopup extends MobileFunctions {
 
 	public void swipeConfirm() {
 
-		//new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
-		swipeOnElement(btnConfirm, "Swipe Right", SwipeDirection.RIGHT);
+		new CommonFunctions().swipeElement(btnConfirm, Direction.RIGHT);
+	 // swipeOnElement(btnConfirm, "Swipe Right", SwipeDirection.RIGHT);
 	}
 
 	public void getAvailableBalance() {

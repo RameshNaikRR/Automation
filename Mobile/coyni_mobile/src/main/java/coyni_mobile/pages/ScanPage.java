@@ -16,8 +16,8 @@ public class ScanPage extends MobileFunctions {
 	private By imgScanQR1 = MobileBy.xpath("//*[contains(@content-desc,'Photo taken')][2]");
 	private By imgScanQR2 = MobileBy.xpath("//*[contains(@content-desc,'Photo taken')][1]");
 	private By btnWhileUsingApp = MobileBy
-			.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]");
-
+			.xpath("//*[contains(@resource-id,'permission_allow_foreground_only_button')]|//*[@text='While using the app']");
+	private By btnOnlyThisTime = MobileBy.xpath("//*[contains(@resource-id,'permission_allow_one_time_button']");
 	public void clickScanCode() {
 		click(btnScanCode, "ScanCode");
 	}
@@ -26,8 +26,9 @@ public class ScanPage extends MobileFunctions {
 		click(btnScanMe, "ScanMe");
 	}
 
-	public void clickOnWhileUsingApp() {
-		if(getElementList(btnWhileUsingApp, "While Using App").size()>0) {
+	public void clickOnWhileUsingApp() throws InterruptedException {
+		Thread.sleep(1200);
+		if(getElementList(btnWhileUsingApp, "While Using App").size()==1) {
 		click(btnWhileUsingApp, "While Using App");
 		}
 	}
