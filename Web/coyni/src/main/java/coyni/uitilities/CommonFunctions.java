@@ -1,11 +1,19 @@
 package coyni.uitilities;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
+import ilabs.web.actions.WaitForElement;
 
 public class CommonFunctions {
 
@@ -38,6 +46,37 @@ public class CommonFunctions {
 			ExtentTestManager.setPassMessageInReport(eleName + " is Auto Focused");
 		} else {
 			ExtentTestManager.setFailMessageInReport(eleName + " is not Auto Focused");
+		}
+	}
+
+	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
+		By errorMsgs = By
+				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
+		// |
+		// span.text-crd2");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager
+					.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
+		}
+		verifyTextBoxBorderColor(expcolour);
+	}
+
+	public void verifyTextBoxBorderColor(String expcolour) {
+		By txterror = By.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error']");
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		String value = objBrowserFunctions.getElement(txterror, "error textField").getCssValue("border-color");
+		ExtentTestManager.setInfoMessageInReport(value);
+
+		if (value.equalsIgnoreCase(expcolour)) {
+			ExtentTestManager.setPassMessageInReport("Text field border changed to red colour");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Text field border not changed to red colour");
 		}
 	}
 
@@ -78,6 +117,20 @@ public class CommonFunctions {
 				ExtentTestManager.setWarningMessageInReport(eleName + " is  accepting  Spaces");
 			}
 		}
+	}
+
+	public void elementView(By ele, String eleName) {
+		if (objBrowserFunctions.getElement(ele, eleName).isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(eleName + " is displayed ");
+		} else {
+			ExtentTestManager.setFailMessageInReport(eleName + " is not displayed ");
+		}
+	}
+
+	public void clickTab() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
 }

@@ -77,6 +77,14 @@ public class FilterComponent extends BrowserFunctions {
 		click(getCheckBox("Inactive"), "Inactive");
 	}
 
+	public void clickBusiness() {
+		click(getCheckBox("Business"), "Business");
+	}
+
+	public void clickCoyni() {
+		click(getCheckBox("coyni"), "coyni");
+	}
+
 	public void clickResetAllFilters() {
 		click(btnResetAllFilters, "Reset All Filters");
 	}

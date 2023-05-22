@@ -1,8 +1,11 @@
-package coyni.admin.pages;
+package coyni.business.pages;
+
+import java.awt.AWTException;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.components.AuthyComponent;
+import coyni.business.components.AuthyComponent;
+import coyni.business.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -83,7 +86,16 @@ public class LoginPage extends BrowserFunctions {
 		}
 	}
 
+	public void clickOutSide() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
 	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+
 }
