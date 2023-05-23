@@ -133,4 +133,24 @@ public class CommonFunctions {
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
+	public void verifyMouseHoverAction(By ele, String eleName, String backGround, String border) {
+		Uninterruptibles.sleepUninterruptibly(2000, TimeUnit.MILLISECONDS);
+		String initialBackGroundColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(backGround);
+		String initialBorderColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(border);
+		ExtentTestManager.setInfoMessageInReport(initialBackGroundColor);
+		ExtentTestManager.setInfoMessageInReport(initialBorderColor);
+		objBrowserFunctions.moveToElement(ele, eleName);
+		Uninterruptibles.sleepUninterruptibly(2000, TimeUnit.MILLISECONDS);
+		String finalBackGroundColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(backGround);
+		String finalBorderColor = objBrowserFunctions.getElement(ele, eleName).getCssValue(border);
+		ExtentTestManager.setInfoMessageInReport(finalBackGroundColor);
+		ExtentTestManager.setInfoMessageInReport(finalBorderColor);
+		if (!initialBackGroundColor.equalsIgnoreCase(finalBackGroundColor)
+				|| !initialBorderColor.equalsIgnoreCase(finalBorderColor)) {
+			ExtentTestManager.setPassMessageInReport("Border color and Background color is changed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
+		}
+	}
+
 }
