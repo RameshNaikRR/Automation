@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupPage extends BrowserFunctions {
@@ -235,6 +234,7 @@ public class SignupPage extends BrowserFunctions {
 	}
 
 	public void clickLogin() {
+		new CommonFunctions().verifyCursorAction(lnkLogIn, "Login");
 		click(lnkLogIn, "Login");
 	}
 }
