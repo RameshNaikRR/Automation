@@ -5,6 +5,7 @@ import java.awt.AWTException;
 import org.openqa.selenium.By;
 
 import coyni.business.components.AuthyComponent;
+import coyni.business.components.RetrieveEmailComponent;
 import coyni.business.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -96,6 +97,10 @@ public class LoginPage extends BrowserFunctions {
 
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
+	}
+
+	public RetrieveEmailComponent retrieveEmailComponent() {
+		return new RetrieveEmailComponent();
 	}
 
 }

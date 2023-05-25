@@ -1,19 +1,25 @@
 package coyni.business.pages;
 
-import org.openqa.selenium.By;
+import java.time.Duration;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import coyni.business.components.PhoneVerificationComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class SignupPage extends BrowserFunctions {
 
-	private By lblBusinessAccountHeading = By.xpath("");
-	private By btnCreateNewAccount = By.xpath("");
-	private By lblCreateNewAccountDes = By.xpath("");
-	private By lblOR = By.xpath("");
-	private By btnAddExistingAccount = By.xpath("");
-	private By lblAddToExistingDes = By.xpath("");
+	WebDriver driver = DriverFactory.getDriver();
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
 	private By lblHeading = By.xpath("");
 	private By lblDescription = By.xpath("");
@@ -34,6 +40,11 @@ public class SignupPage extends BrowserFunctions {
 	private By eyeIconConfirmPassword = By.xpath("");
 	private By eyeIconCreatePassword = By.xpath("");
 	private By lblLogin = By.xpath("");
+	private By popupPDF = By.xpath("");
+	private By PDFpages = By.cssSelector("");
+	private By checkbox = By.xpath("");
+	private By PDFprivacyPolicy = By.xpath("");
+	private By privacyPDF = By.xpath("");
 
 	private String FirstName;
 	private String LastName;
@@ -41,36 +52,6 @@ public class SignupPage extends BrowserFunctions {
 	private String Email;
 	private String CreatePassword;
 	private String ConfirmPassword;
-
-	public void verifyBusinessAccountHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblBusinessAccountHeading, "Heading is: ", expHeading);
-	}
-
-	public void clickCreateNewAccount(String backGround, String borderColor) {
-		new CommonFunctions().verifyCursorAction(btnCreateNewAccount, "Create New Account");
-		new CommonFunctions().verifyMouseHoverAction(btnCreateNewAccount, "Create New Account", backGround,
-				borderColor);
-		click(btnCreateNewAccount, "Create New Account");
-	}
-
-	public void verifyCreateAccountDescription(String expDes) {
-		new CommonFunctions().verifyLabelText(lblCreateNewAccountDes, "Create Account Description is: ", expDes);
-	}
-
-	public void verifyOR(String expDes) {
-		new CommonFunctions().verifyLabelText(lblOR, "OR Description is: ", expDes);
-	}
-
-	public void clickAddToExistingAccount(String backGround, String borderColor) {
-		new CommonFunctions().verifyCursorAction(btnAddExistingAccount, "Add to Existing Account");
-		new CommonFunctions().verifyMouseHoverAction(btnAddExistingAccount, "Add to Existing Account", backGround,
-				borderColor);
-		click(btnAddExistingAccount, "Add to Existing Account");
-	}
-
-	public void verifyExistingAccountDescription(String expDes) {
-		new CommonFunctions().verifyLabelText(lblAddToExistingDes, "EXisting Account Description is: ", expDes);
-	}
 
 	public void verifyHeading(String expHedaing) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHedaing);
@@ -236,5 +217,47 @@ public class SignupPage extends BrowserFunctions {
 	public void clickLogin() {
 		new CommonFunctions().verifyCursorAction(lnkLogIn, "Login");
 		click(lnkLogIn, "Login");
+	}
+
+	public void scrollDownTermsOfService() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(popupPDF));
+		WebElement ele = getElement(popupPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		List<WebElement> list = getElementsList(PDFpages, "");
+		int noOfPages = list.size();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+	}
+	public void scrollDownPrivacyPolicy() throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(PDFprivacyPolicy));
+		WebElement ele = getElement(privacyPDF, "");
+		int height = ele.getSize().getHeight();
+		int temp = height;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = getElement(checkbox, "");
+		while (!element.isEnabled()) {
+			js.executeScript("arguments[0].scrollTop = arguments[1]", ele, height);
+			height += temp;
+			Thread.sleep(200);
+		}
+		clickOnCheckBox();
+		clickNext();
+	}
+
+	public void clickOnCheckBox() {
+		click(checkbox, "Check Box");
+
+	}
+
+
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 }
