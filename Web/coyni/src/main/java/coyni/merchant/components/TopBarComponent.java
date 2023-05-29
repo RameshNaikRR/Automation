@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class TopBarComponent extends BrowserFunctions {
 	private By lblTitle = By.cssSelector(".welcome-text");
-	private By drpdwnUserName = By.xpath("//span[contains(@class,'cursor-pointer')]/..");
+	private By drpdwnUserName = By.xpath("//img[contains(@class,'cursor-pointer down-arrow')]");
 	private By iconNotification = By.xpath("//button[contains(@class,'icon-notification')]");
 
 	public void VerifyTitle() {

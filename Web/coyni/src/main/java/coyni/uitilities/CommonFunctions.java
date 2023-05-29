@@ -100,6 +100,97 @@ public class CommonFunctions {
 		}
 	}
 
+	public void validateFormErrorMessageForGiftCard(String expErrMsg) {
+		By errorMsgs = By.cssSelector(
+				"div[class *= 'FormField_error'],p[class ='h-3 text-center text-xs text-crd5 font-semibold']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForForgotPasswordInvalid(String expErrMsg) {
+		By errorMsgs = By.xpath("//span[contains(@class,'FormField_text_xxs__V1JkZ')]");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForForgotPasswordInvalidEmailExists(String expErrMsg) {
+		By errorMsgs = By.xpath("//div[@class='text-crd5 text-[11px] cursor-pointer leading-4 break-words ']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForForgotPasswordInvalidPhoneOTP(String expErrMsg) {
+		By errorMsgs = By.cssSelector("span[class *='VerificationInput_code__verification_error__Iocax']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForForgotPasswordChangePassword(String expErrMsg) {
+		By errorMsgs = By.cssSelector("span[class *='FormField_errorGap__Dd3Uk']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForForgotPassword(String expErrMsg) {
+		By errorMsgs = By.cssSelector("div[class *='text-crd5']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void validateFormErrorMessageForChangePassword(String expErrMsg, String expcolour, String elementName) {
+		By errorMsgs = By
+				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
+		// |
+		// span.text-crd2");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager
+					.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
+		}
+		verifyTextBoxBorderColor(expcolour);
+	}
+
 	public void validateFormErrorMessage(String expErrMsg, String expcolour, String elementName) {
 		By errorMsgs = By
 				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
@@ -226,6 +317,42 @@ public class CommonFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
 		}
+	}
+
+	public void validateFormErrorMessageForUserDetailsEditPhoneNumber(String expErrMsg, String expcolour,
+			String elementName) {
+		By errorMsgs = By.xpath("(//span[contains(@class,'FormField_errorGap__Dd3Uk')])[2]");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager
+					.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
+		}
+		verifyTextBoxBorderColor(expcolour);
+	}
+
+	public void validateFormErrorMessageForDebitCard(String expErrMsg, String expcolour, String elementName) {
+		By errorMsgs = By.cssSelector("span[class *='FormField_errorGap__Dd3Uk']");
+		// By errorMsgs = By
+		// .cssSelector("div[class *= 'FormField_error'],span[class
+		// *='verification_error'],span.text-crd5");// By.cssSelector("span.text-crd5
+		// |
+		// span.text-crd2");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager
+					.setPassMessageInReport("Error message '" + expErrMsg + "' displayed, for  " + elementName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
+		}
+		verifyTextBoxBorderColor(expcolour);
 	}
 
 	public void clearText(By ele, String eleName) {

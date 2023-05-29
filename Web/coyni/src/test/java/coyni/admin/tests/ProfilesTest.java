@@ -1199,7 +1199,7 @@ public class ProfilesTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testProfileMerchantPreferencesControls(String strParams) {
+	public void testProfileMerchantPreferencesControlsDisable(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickProfiles();
@@ -1208,6 +1208,26 @@ public class ProfilesTest {
 			homePage.sideBarComponent().clickRecord();
 			homePage.sideBarComponent().merchantDetailsComponent().clickPreferencesControl();
 			homePage.sideBarComponent().preferencesandControlsComponent().clickDisable();
+			homePage.sideBarComponent().preferencesandControlsComponent().clickSave();
+			homePage.sideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickYes();
+			new CommonFunctions().switchtoUrl(data.get("url"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileMerchantPreferencesControlsEnable(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().fillSearch(data.get("search"));
+			homePage.sideBarComponent().clickRecord();
+			homePage.sideBarComponent().merchantDetailsComponent().clickPreferencesControl();
+			homePage.sideBarComponent().preferencesandControlsComponent().clickEnable();
 			homePage.sideBarComponent().preferencesandControlsComponent().clickSave();
 			homePage.sideBarComponent().preferencesandControlsComponent().saveChangePopUp().clickYes();
 			new CommonFunctions().switchtoUrl(data.get("url"));

@@ -175,6 +175,7 @@ public class NotificationsComponent extends BrowserFunctions {
 		// new CommonFunctions().verifyMouseHoverAction(cursorDeleteNotification,
 		// getUiCount(), getTodayCount(), getOlderCount());
 		new CommonFunctions().verifyCursorAction(notification, "Notifications");
+		moveToElement(notification, "Notifications");
 	}
 
 	// added

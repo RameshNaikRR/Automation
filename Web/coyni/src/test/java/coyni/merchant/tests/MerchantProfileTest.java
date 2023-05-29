@@ -350,6 +350,33 @@ public class MerchantProfileTest {
 					.setFailMessageInReport("testEditPhoneNumberWithInvalidCode is failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testEditPhoneNumberWithInvalidDataForExistingNumbers(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickUserNameDrpDwn();
+			topBarComponent.userNameDropDownComponent().clickUserDetails();
+			merchantProfilePage.userDetailsComponent().verifyEditPhoneNumberIconView();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup()
+					.verifyAuthyEditPhoneHeading(data.get("authyEditPhoneHeading"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().authyComponent()
+					.fillInput(data.get("code"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().fillNewNumber(data.get("expNumber"));
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickTab();
+			merchantProfilePage.userDetailsComponent().editPhoneNumberPopup().clickSendCode();
+			if (!data.get("errorMessage").isEmpty()) {
+				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+				new CommonFunctions().validateFormErrorMessageForUserDetailsEditPhoneNumber(data.get("errorMessage"),
+						data.get("colour"), data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testEditPhoneNumberWithInvalidCode is failed due to Exception " + e);
+		}
+	}
 
 	@Test // added
 	@Parameters({ "strParams" })
@@ -610,7 +637,7 @@ public class MerchantProfileTest {
 
 			if (!data.get("errorMessage").isEmpty()) {
 				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), data.get("colour"),
+				new CommonFunctions().validateFormErrorMessageForUserDetailsEditPhoneNumber(data.get("errorMessage"), data.get("colour"),
 						data.get("elementName"));
 			}
 
@@ -779,6 +806,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount"));
 			sideMenuBarComponent.clickUserdrpdwn();
 			sideMenuBarComponent.clickOnPersonalAccount();
+			
 			topBarComponent.clickUserNameDrpDwn();
 			topBarComponent.userNameDropDownComponent().clickPreferences();
 			merchantProfilePage.preferencesPage().selectDefaultAccount(data.get("defaultAccount1"));
@@ -872,7 +900,7 @@ public class MerchantProfileTest {
 			merchantProfilePage.changePasswordPage().fillConfirmNewPassword(data.get("confirmPassword"));
 			merchantProfilePage.changePasswordPage().clickTab();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessageForForgotPasswordChangePassword(data.get("errMessage"));
 			}
 
 		} catch (Exception e) {

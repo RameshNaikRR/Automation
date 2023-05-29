@@ -1279,6 +1279,7 @@ public class MerchantActivityTest {
 
 	}
 
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testDashBoardPayOutHistory(String strParams) {

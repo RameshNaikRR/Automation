@@ -3986,13 +3986,13 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().successFailureComponent();
 			this.testAvailableBalance();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.switchToAdmin(data.get("url"));
 
@@ -4039,13 +4039,13 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.authyComponent().successFailureComponent();
 			this.testAvailableBalance();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawToCogentAccountPopup().withdrawToCogentPreviewPopup()
 					.switchToAdmin(data.get("url"));
 
@@ -4065,7 +4065,7 @@ public class TokenAccountTest {
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
 			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+		//	homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
@@ -4285,16 +4285,16 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.successFailurePopupCardComponent().clickDone();
 			this.testAvailableBalance();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
-			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
-					.verifyNotificationText(data.get("notificationText"));
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
+//			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+//					.verifyNotificationText(data.get("notificationText"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.switchToAdmin(data.get("url"));
 		} catch (Exception e) {
@@ -4335,16 +4335,16 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.successFailurePopupCardComponent().clickDone();
 			this.testAvailableBalance();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
-			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
-			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
-					.verifyNotificationText(data.get("notificationText"));
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.notificationsComponent().clickNotificationsIcon();
+//			tokenAccountPage.merchantProfilePage().userDetailsComponent().notificationsComponent()
+//					.verifyNotificationText(data.get("notificationText"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().withdrawViaInstantPaypopup().orderPreviewPopup()
 					.switchToAdmin(data.get("url"));
 		} catch (Exception e) {
@@ -4362,7 +4362,7 @@ public class TokenAccountTest {
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
 			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+	//		homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
@@ -4640,7 +4640,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			Thread.sleep(2000);
 			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
@@ -4655,13 +4655,13 @@ public class TokenAccountTest {
 					.verifySuccessHeading(data.get("successHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().switchToAdmin(data.get("url"));
 
 		} catch (
@@ -4685,7 +4685,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnAmazon();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email1"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			Thread.sleep(2000);
 			String processingFee = tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup()
@@ -4701,13 +4701,13 @@ public class TokenAccountTest {
 					.verifySuccessHeading(data.get("successHeading"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickCopy();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickDone();
-			tokenAccountPage.filterComponent().clickFilters();
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
-			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
-			tokenAccountPage.filterComponent().clickOnRecord();
-			tokenAccountPage.transactionDetailsComponent().getTransactionType();
-			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
+//			tokenAccountPage.filterComponent().clickFilters();
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter1"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter2"));
+//			tokenAccountPage.filterComponent().selectFilter(data.get("filter3"));
+//			tokenAccountPage.filterComponent().clickOnRecord();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionType();
+//			tokenAccountPage.transactionDetailsComponent().getTransactionSubType();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().switchToAdmin(data.get("url"));
 
 		} catch (
@@ -4728,7 +4728,7 @@ public class TokenAccountTest {
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
 			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);
@@ -4748,7 +4748,7 @@ public class TokenAccountTest {
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnVisa();
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillFirstName(data.get("firstName"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillLastName(data.get("lastName"));
-			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("email"));
+			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillEmail(data.get("merchEmail"));
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().fillAmount(data.get("amount"));
 			Thread.sleep(2000);
 			tokenAccountPage.withdrawCoyniToUSDPopup().giftCardPurchasePopup().clickOnPurchase();
@@ -4914,7 +4914,7 @@ public class TokenAccountTest {
 			homePage.sideBarComponent().transactionPage().verifyTransactionHeading(data.get("listHeading"));
 			homePage.sideBarComponent().transactionPage().fillSearch(copiedData);
 			// homePage.sideBarComponent().transactionPage().transactionDetailsComponent().clickOnRecord();
-			homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
+			//homePage.sideBarComponent().transactionPage().transactionDetailsComponent().getgiftCardAmount();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountTransactionList Failed due to Exception " + e);

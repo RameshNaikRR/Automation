@@ -198,14 +198,14 @@ public class LoginTest {
 			Thread.sleep(5000);
 			loginPage.viewForgotEmail();
 			loginPage.viewForgotPassword();
-			loginPage.fillEmail(data.get("email"));
+			loginPage.fillEmail(data.get("merchEmail"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickeyeIcon();
 			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			loginPage.authyComponent().clickGoBack();
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
+			loginPage.fillEmail(data.get("merchEmail"));
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
@@ -230,8 +230,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			if (!data.get("errMessage").isEmpty()) {
@@ -252,8 +252,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			if (!data.get("toastMessage").isEmpty()) {
@@ -270,8 +270,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			Uninterruptibles.sleepUninterruptibly(300, TimeUnit.MILLISECONDS);
 			if (!data.get("toastMessage").isEmpty()) {
@@ -288,8 +288,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
 			if (!data.get("code").isEmpty()) {
@@ -312,8 +312,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			// loginPage.authyComponent().clickSms();
 			// loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
@@ -334,13 +334,15 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
-//			for (int i = 0; i <= 4; i++) {
-//				Thread.sleep(2000);
-			loginPage.phoneVerificationComponent().clickResend();
-			// }
+			loginPage.authyComponent().clickGoBack();
+			for (int i = 0; i <= 4; i++) {
+				Thread.sleep(2000);
+				loginPage.phoneVerificationComponent().clickResend();
+				// }
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testLoginWithResendOTP failed due to exception " + e);
 		}
@@ -352,8 +354,8 @@ public class LoginTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			loginPage.verifyHeading(data.get("loginHeading"));
-			loginPage.fillEmail(data.get("email"));
-			loginPage.fillPassword(data.get("password"));
+			loginPage.fillEmail(data.get("merchEmail"));
+			loginPage.fillPassword(data.get("merchPassword"));
 			loginPage.clickNext();
 			loginPage.authyComponent().clickSms();
 			loginPage.phoneVerificationComponent().verifyHeading(data.get("phoneHeading"));
@@ -408,7 +410,7 @@ public class LoginTest {
 			loginPage.forgotEmailComponent().fillLastName(data.get("lastName"));
 			loginPage.clickNext();
 			for (int i = 0; i <= 2; i++) {
-				Thread.sleep(2000);
+				Thread.sleep(4000);
 				loginPage.phoneVerificationComponent().clickResendCode();
 			}
 
@@ -422,6 +424,7 @@ public class LoginTest {
 	public void testForgotEmailWithInvalidPhonenumber(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(3000);
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotEmail();
 			loginPage.forgotEmailComponent().verifyForgotHeading(data.get("forgotHeading"));
@@ -551,7 +554,7 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
 			loginPage.forgotPasswordComponent().clickNext();
 			loginPage.forgotPasswordComponent().verifyEmailVerificationHeading(data.get("verificationHeading"));
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
@@ -578,11 +581,32 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
 			loginPage.forgotPasswordComponent().clickNext();
 			if (!data.get("errMessage").isEmpty()) {
 				Thread.sleep(1000);
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessageForForgotPasswordInvalid(data.get("errMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testForgotPasswordWithInvalidEmail failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithInvalidEmailAlreadyExistsEmail(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.clickForgotPassword();
+			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
+			loginPage.forgotPasswordComponent().clickNext();
+			if (!data.get("errMessage").isEmpty()) {
+				Thread.sleep(1000);
+				new CommonFunctions()
+						.validateFormErrorMessageForForgotPasswordInvalidEmailExists(data.get("errMessage"));
 			}
 
 		} catch (Exception e) {
@@ -598,12 +622,12 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
 			loginPage.forgotPasswordComponent().clickNext();
 			loginPage.forgotPasswordComponent().verifyEmailVerificationHeading(data.get("verificationHeading"));
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessageForForgotPasswordInvalidPhoneOTP(data.get("errMessage"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager
@@ -619,11 +643,12 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
 			loginPage.forgotPasswordComponent().clickNext();
 			loginPage.forgotPasswordComponent().verifyEmailVerificationHeading(data.get("verificationHeading"));
 			loginPage.forgotPasswordComponent().verifyEmail(data.get("lblEmail") + ".");
 			loginPage.forgotPasswordComponent().fillpin(data.get("code"));
+			Thread.sleep(5000);
 			loginPage.forgotPasswordComponent().verifyCreatePasswordHeading(data.get("CreatePasswordHeading"));
 			loginPage.forgotPasswordComponent().fillPassword(data.get("enterPassword"));
 			loginPage.forgotPasswordComponent().verifyPasswordMaskedView(data.get("attribute"), "password");
@@ -633,7 +658,7 @@ public class LoginTest {
 			loginPage.forgotPasswordComponent().clickIcon();
 			loginPage.forgotPasswordComponent().clickSubmit();
 			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"));
+				new CommonFunctions().validateFormErrorMessageForForgotPasswordChangePassword(data.get("errMessage"));
 			}
 		} catch (Exception e) {
 			ExtentTestManager
@@ -649,7 +674,7 @@ public class LoginTest {
 			loginPage.verifyHeading(data.get("loginHeading"));
 			loginPage.clickForgotPassword();
 			loginPage.forgotPasswordComponent().verifyHeading(data.get("forgotHeading"));
-			loginPage.forgotPasswordComponent().fillEmail(data.get("email"));
+			loginPage.forgotPasswordComponent().fillEmail(data.get("merchEmail"));
 			loginPage.forgotPasswordComponent().clickNext();
 			for (int i = 0; i <= 4; i++) {
 				Thread.sleep(3000);

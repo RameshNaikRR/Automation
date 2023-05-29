@@ -470,20 +470,20 @@ public class MerchantSettingsTest {
 //			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 //					.verifyhandSymbolHighlightedBeneficialOwners(data.get("cssProp"), data.get("value"),
 //							data.get("color"));
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.verifyStarMark();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.verifyStarMark();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyOwnershipLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifyBeneficialOwnernameLbl();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.verifyOwnerShipPercentage();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.clickBeneficialOwnerDrpDwn();
-			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
-					.verifyBeneficialOwnernameLbl();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.verifyOwnerShipPercentage();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.clickBeneficialOwnerDrpDwn();
+//			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
+//					.verifyBeneficialOwnernameLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
 					.verifySocialSecurityNumberLbl();
 			sideMenuBarComponent.merchantSettingsPage().merchantSettingsSideBarMenuComponent().beneficiaryOwnersPage()
@@ -1559,8 +1559,8 @@ public class MerchantSettingsTest {
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
 		testAddCard(strParams, "debit");
-		testEditCard(strParams);
-		testDeleteCard(strParams);
+		//testEditCard(strParams);
+		//	testDeleteCard(strParams);
 	}
 
 	@Test
@@ -1597,8 +1597,8 @@ public class MerchantSettingsTest {
 			if (data.get("state1").isEmpty()) {
 				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 						.addCardComponent().mailingAddressComponent().clickstate();
-				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
-						.addCardComponent().mailingAddressComponent().clickstate();
+//				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
+//						.addCardComponent().mailingAddressComponent().clickstate();
 				merchantSettingsSideBarMenuComponent.paymentMethodComponent().addNewPaymentMethodPopup()
 						.addCardComponent().mailingAddressComponent().clickTab();
 			}

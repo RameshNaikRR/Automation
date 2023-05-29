@@ -33,7 +33,10 @@ public class TokenAccountPage extends BrowserFunctions {
 	private By lblYourTokenAccount = By.xpath("//h1[text()='Merchant Token Account']");
 	private By lblTotalFunds = By.xpath("//span[contains(text(),'Total Available Funds')]");
 	private By lblHeading = By.xpath("(//span[text()='Token Account'])[1]");
-	private By amount = By.xpath("//div[contains(@class,'MerchantWalletDashboard_wallet_ballance_wrap__nNo5D')]");
+	private By merchantamount = By
+			.xpath("//div[contains(@class,'MerchantWalletDashboard_wallet_ballance_wrap__nNo5D')]");
+	private By customerAmount = By
+			.xpath("//span[contains(@class,'CustomerWalletDashboard_wallet_balance_normal__XTB0Y')]");
 	private By btnBuyTokens = By.xpath("//span[text()='Buy Tokens']");
 	private By btnWithdrawToUSD = By.xpath("//span[text()='Withdraw to USD']");
 	private By lblYourTransactions = By.xpath("//h2[contains(text(),'Your Business Transactions')]");
@@ -126,13 +129,18 @@ public class TokenAccountPage extends BrowserFunctions {
 	}
 
 	public String getAvailableBalance() {
-		return getText(amount, "Available Balance");
+		return getText(merchantamount, "Available Balance");
+
+	}
+
+	public String getAvailableBalanceForCustomer() {
+		return getText(customerAmount, "Available Balance");
 
 	}
 
 	public WebElement verifyAmount() {
 		// new CommonFunctions().elementView(amount, "Amount");
-		WebElement txt = getElement(amount, " Amount ");
+		WebElement txt = getElement(merchantamount, " Amount ");
 		return txt;
 
 	}

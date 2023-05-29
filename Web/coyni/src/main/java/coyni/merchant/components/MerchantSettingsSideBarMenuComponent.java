@@ -18,6 +18,7 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	private By lblMerchantSettings = By.xpath("(//span[text()='Merchant Settings'])[1]");
 //	private By lblAccountStatus = By.xpath("//div[text()='Account Status:']");
+	private By btnBeneficialOwners = By.xpath("//span[text()='Beneficiary Owner(s)']");
 //	private By lblActive = By.xpath("//div[.='Active']");
 	private By lblUserName = By.xpath("//div[@class='px-3 lg:px-1']/div[1]/div[2]/div[1]");
 	private By lblAccountId = By.xpath("//div[@class='px-3 lg:px-1']/div[1]/div[2]/div[2]");
@@ -48,6 +49,11 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(getAccountStatus, "accountStatus");
 	}
 
+	public void clickBeneficiaryOwnerBtn() {
+		click(btnBeneficialOwners, "Beneficial Owners");
+		// click(getSideMenuBarItems("Beneficiary Owner(s)"), "Beneficiary Owner");
+	}
+
 	public void clickCompanyInformationBtn() {
 		click(getSideMenuBarItems("Company Information"), "Company Information");
 	}
@@ -62,10 +68,6 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public void verifyDBAInformationBtn() {
 		new CommonFunctions().elementView(getSideMenuBarItems("DBA Information"), "DBA Infromation");
-	}
-
-	public void clickBeneficiaryOwnerBtn() {
-		click(getSideMenuBarItems("Beneficiary Owner(s)"), "Beneficiary Owner");
 	}
 
 	public void verifyBeneficiaryOwnersBtn() {
