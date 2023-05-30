@@ -3,7 +3,6 @@ package coyni.business.components;
 import org.openqa.selenium.By;
 
 import coyni.business.pages.ProfilePage;
-import coyni.business.popups.EditPhoneNumberPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 

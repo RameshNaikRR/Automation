@@ -2,6 +2,7 @@ package coyni.business.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.business.components.MailingAddressComponent;
 import coyni.business.popups.EditEmailAddressPopup;
 import coyni.business.popups.EditPhoneNumberPopup;
 import coyni.uitilities.CommonFunctions;
@@ -65,6 +66,10 @@ public class ProfilePage extends BrowserFunctions {
 
 	public EditEmailAddressPopup editEmailAddressPopup() {
 		return new EditEmailAddressPopup();
+	}
+
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
 	}
 
 }

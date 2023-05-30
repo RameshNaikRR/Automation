@@ -1,8 +1,10 @@
 package coyni.uitilities;
 
 import java.awt.AWTException;
+
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -150,6 +152,34 @@ public class CommonFunctions {
 			ExtentTestManager.setPassMessageInReport("Border color and Background color is changed");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
+		}
+	}
+	
+	public void selectCustomDropDown(String option, String eleName) {
+		try {
+			By options = By.xpath(
+					"//div[contains(@class,'custom-country-select__menu-list')]/div | //div[contains(@class,'custom-select__menu-list')]/div");
+			boolean status = false;
+			objBrowserFunctions.waitForElement(options, BrowserFunctions.waittime, WaitForElement.presence);
+			List<WebElement> optionsEles = objBrowserFunctions.getElementsList(options, "options");
+			for (WebElement optionEle : optionsEles) {
+				System.out.println("for executed");
+				if (optionEle.getText().equalsIgnoreCase(option)) {
+					System.out.println("if executed");
+					optionEle.click();
+					status = true;
+					System.out.println(status);
+					break;
+				}
+			}
+			System.out.println(status = true);
+			if (status) {
+				ExtentTestManager.setInfoMessageInReport(option + " selected from " + eleName + " drop down");
+			} else {
+				ExtentTestManager.setFailMessageInReport(option + " not available in " + eleName + " dropdown");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("select custom drop down failed due to exception " + e);
 		}
 	}
 
