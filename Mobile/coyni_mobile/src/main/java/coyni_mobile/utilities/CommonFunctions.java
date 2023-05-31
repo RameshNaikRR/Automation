@@ -388,6 +388,13 @@ public class CommonFunctions {
 			// ignore
 		}
 	}
+//	public void elementClickable(By ele, String eleName) {
+//		if (mobileFunctions.getElement(ele, eleName).) {
+//			ExtentTestManager.setPassMessageInReport(eleName + " is enabled");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport(eleName + " is not enabled");
+//		}
+//	}
 
 	public void elementEnabled(By ele, String eleName) {
 		if (mobileFunctions.getElement(ele, eleName).isEnabled()) {

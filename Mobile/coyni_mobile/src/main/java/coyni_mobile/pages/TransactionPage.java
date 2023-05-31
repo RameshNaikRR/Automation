@@ -86,6 +86,7 @@ public class TransactionPage extends MobileFunctions {
 			click(copyIcon, "Copy");
 			Thread.sleep(1000);
 			click(btnBack, "back");
+			Thread.sleep(2000);
 			VerifySearchWithPasteOption(searchOption);
 //			click(searchOption, "Search");
 //			click(searchOption, "Search");

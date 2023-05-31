@@ -2,9 +2,11 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 public class TransactionDetailsComponent2 extends MobileFunctions {
 
@@ -40,7 +42,10 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	private By lblNameOnAccount = MobileBy.xpath("//*[@text='Name on Account']/following-sibling::*");
 	private By lblBankName = MobileBy.xpath("//*[@text='Bank Name']/following-sibling::*");
 	private By lblBankAccount = MobileBy.xpath("//*[@text='Bank Account #']/following-sibling::*");
-	private By lblCancelTransaction = MobileBy.xpath("//*[@text='Cancel Transaction']");
+	private By lblCancelTransaction = MobileBy.xpath("//*[contains(@resource-id,'cvCancelWB')]|//*[@text='Cancel Transaction']");
+	private By lblCancelHeading = MobileBy.xpath("//*[@text='Cancel Transaction?']");
+	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
+	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
 	private By lblWithdrawAmount = MobileBy.xpath("//*[@text='Withdraw Amount']/following-sibling::*[1]");
 	public void getTransactionHeading() {
 		ExtentTestManager.setInfoMessageInReport("Transaction Heading: " + getText(lblTransactionsHeading));
@@ -83,6 +88,25 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 	public void getCancelTransaction() {
 		ExtentTestManager.setInfoMessageInReport("Cancel Transaction: " + getText(lblCancelTransaction));
 	}
+	public int getNoSize() {
+		getElementList(btnNo, "No").size();
+		return 0;
+	}
+	public void clickCancelTransaction() {
+		//new CommonFunctions().elementEnabled(lblCancelTransaction, "Enabled");
+		//if(getElement(lblCancelTransaction, "Cancel").isEnabled()) {
+		click(lblCancelTransaction, "Cancel Transaction");
+//		ExtentTestManager.setInfoMessageInReport("Heading is: " + getText(lblCancelHeading));
+		if(getNoSize()==1) {
+		click(btnNo, "No");
+		click(lblCancelTransaction, "Cancel Transaction");
+		click(btnYes, "Yes");
+		scrollUpToElement(lblStatus, "Status");
+		getStatus();
+		}else {
+		ExtentTestManager.setInfoMessageInReport("Cancel Transaction button is Disabled");
+		}
+		}
 	public void getTotalAmount() {
 		ExtentTestManager.setInfoMessageInReport("Total Amount: " + getText(lblTotalAmount));
 	}
@@ -282,7 +306,9 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getBankAccount();
 		getBankName();
 		scrollDownToElement(lblCancelTransaction, "Cancel Transaction");
-		getCancelTransaction();
+		//getCancelTransaction();
+		clickCancelTransaction();
+		
 	}
 	//withdraw to bank
 	public void getWithdrawTokenBankAccountDetails() throws InterruptedException {
@@ -294,8 +320,7 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getWithdrawAmount();
 		getProcessingFee();
 		getAccountBalance();
-		getTotalAmount();
-		
+		getTotalAmount();	
 	//	getDepositID();
 		getReferenceID();
 	//	getBuyTokenCardDescriptorName();
@@ -305,7 +330,9 @@ public class TransactionDetailsComponent2 extends MobileFunctions {
 		getBankAccount();
 		getBankName();
 		scrollDownToElement(lblCancelTransaction, "Cancel Transaction");
-		getCancelTransaction();
+		//getCancelTransaction();
+		clickCancelTransaction();
+		
 	}
 //received transaction
 	public void getReceivedTransactionDetails() {

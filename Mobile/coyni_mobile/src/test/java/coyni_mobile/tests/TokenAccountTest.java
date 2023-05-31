@@ -1862,7 +1862,7 @@ public class TokenAccountTest {
 			Thread.sleep(2000);
 //          tokenAccountPage.transactionPage().getUITransactionCount();
 			tokenAccountPage.transactionPage().clickFirstTransaction();
-			// Thread.sleep(2000);
+			 Thread.sleep(3000);
 			// tokenAccountPage.transactionPage().getUITransactionCount();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
@@ -1884,7 +1884,7 @@ public class TokenAccountTest {
 			Thread.sleep(2000);
 //          tokenAccountPage.transactionPage().getUITransactionCount();
 			tokenAccountPage.transactionPage().clickFirstTransaction();
-			// Thread.sleep(2000);
+			Thread.sleep(3000);
 			// tokenAccountPage.transactionPage().getUITransactionCount();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);

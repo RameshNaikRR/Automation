@@ -1202,7 +1202,6 @@ public class CustomerProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
-
 			customerProfilePage.paymentMethodsPage().clickAddNewPaymentMethod();
 
 			if (card.equalsIgnoreCase("credit")) {
