@@ -172,11 +172,37 @@ public class UnderWritingPersonalComponent extends BrowserFunctions {
         
 		
     }
-    
-    public void clickCancelled() {
-    	click(btnCancelled, "Cancelled");
-    }
-	
+    /*
+	 * New code for filters
+	 */
+	private By getTabItemLoc(String elementName) {
+		return By.xpath(String.format("//div[contains(text(),'%s')]", elementName));
+	}
+
+	public void clickAllStatus() {
+		click(getTabItemLoc("All Status"),"All Status");
+	}
+	public void clickNewTab() {
+		click(getTabItemLoc("New"), "New");
+	}
+	public void clickPendingTab() {
+		click(getTabItemLoc("Pending"), "Pending");
+	}
+	public void clickInReviewTab() {
+		click(getTabItemLoc("In Review"), "In Review");
+	}
+	public void clickApproved() {
+		click(getTabItemLoc("Approved"), "Approved");
+	}
+	public void clickDeclined() {
+		click(getTabItemLoc("Declined"), "Declined");
+	}
+	public void clickCancelled() {
+		click(getTabItemLoc("Cancelled"), "Pending");
+	}
+	public void clickOverdue() {
+		click(getTabItemLoc("Overdue"), "Overdue");
+	}
 	
 	
 	

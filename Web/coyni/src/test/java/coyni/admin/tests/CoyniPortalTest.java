@@ -21,7 +21,7 @@ public class CoyniPortalTest {
 	TokenAccountPage tokenAccountPage;
 	HomePage homePage;
 	CommissionAccountPage commissionAccountPage;
-	BrowserFunctions objBrowserFunctions ;
+	BrowserFunctions objBrowserFunctions;
 
 	@BeforeTest
 	public void init() {
@@ -456,8 +456,6 @@ public class CoyniPortalTest {
 		}
 	}
 
-	
-
 	public void validateFormErrorMessage(String expErrMsg) {
 		By errorMsgs = By.cssSelector("p.text-crd5");
 		;
@@ -821,13 +819,14 @@ public class CoyniPortalTest {
 		homePage.sideBarComponent().commissionAccountPage().verifyTransactionList();
 
 	}
+
 	@Test
-	@Parameters({"strParams"})
+	@Parameters({ "strParams" })
 	public void testFiltersWithTokenAccount(String strParams) {
 		try {
-		    Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().clickTokenAccount();
-//			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
 //			homePage.sideBarComponent().tokenAccountPage().filterComponent().calenderComponent().clickStartDate();
 //			Thread.sleep(1000);
 //			homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
@@ -835,40 +834,76 @@ public class CoyniPortalTest {
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickCheckBox(data.get("transactionType"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("fromAmount"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
-     		homePage.sideBarComponent().tokenAccountPage().filterComponent().scroolDownToElement();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().scroolDownToElement();
 //	        homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceId(data.get("referenceId"));
-	        homePage.sideBarComponent().tokenAccountPage().filterComponent().clickCheckBox(data.get("checkBox"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickCheckBox(data.get("checkBox"));
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
 			Thread.sleep(2000);
-			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData(); 
-			if(noFilterData==0) {
-				 Thread.sleep(2000);
-				 homePage.sideBarComponent().tokenAccountPage().filterComponent().getTotalCustomerCount(data.get("query"));
-			}else {
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
 				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
 			}
-		
-		    } catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
-		}
-	}
-	@Test
-	@Parameters({"strParams"})
-	public void testTokenAccountFiltersWithReferenceIdInvalidData(String strParams) {
-		try {
-		    Map<String, String> data = Runner.getKeywordParameters(strParams);
-			homePage.sideBarComponent().clickTokenAccount();
-			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();			
-	        homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceId(data.get("referenceId"));	       
-	        if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
-           
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
 		}
 	}
-	
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTokenAccountFiltersWithReferenceIdInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillReferenceId(data.get("referenceId"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTokenAccountFilters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	public void testTokenAccountWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testPayoutHistoryPaginations() {
+		try {
+			homePage.sideBarComponent().clickCommissionAccount();
+			homePage.sideBarComponent().commissionAccountPage().clickFullPayOutHistory();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testTransactionHistoryPaginations() {
+		try {
+			homePage.sideBarComponent().clickCommissionAccount();
+			homePage.sideBarComponent().commissionAccountPage().clickFullTransactionHistory();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
 
 }

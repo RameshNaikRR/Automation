@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import coyni.admin.components.SideBarComponent;
 import coyni.admin.pages.HomePage;
 import coyni.admin.pages.TransactionPage;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -667,9 +668,276 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
 			sideBarComponent.transactionPage().filterComponent().verifyTableItemsCount(data.get("query"));
 
-	} catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test TransactionList Failed due to Exception " + e);
+		}
+	}
+
+	/*
+	 * New code for Filters
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionsFiltersWithBusiness(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().clickBusiness();
+			Thread.sleep(2000);
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+
+			/*
+			 * Business Completed
+			 */
+//		    sideBarComponent.transactionPage().filterComponent().calenderComponent().clickStartDate();
+//			Thread.sleep(1000);
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxBusiness();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkSaleOrder();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkMerchantPayout();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkRefund();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkMonthlyServiceFee();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCommissionPayout();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkeCommerce();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkRetailOrMobile();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("fromAmount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCompleted();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business Failed
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCompleted();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData1 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData1 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query1"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business In Progress
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData2 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData2 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query2"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business Pending
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkPending();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData3 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData3 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query3"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Filters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionsFiltersBusinessWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().clickBusiness();
+			Thread.sleep(2000);
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().fillSenderName(data.get("senderName"));
+			sideBarComponent.transactionPage().filterComponent().fillReceiverName(data.get("receiverName"));
+			if (!data.get("errMessage").isEmpty()) {
+				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
+						data.get("elementName"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Filters Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTrasactionsFiltersWithToken(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().clickToken();
+			Thread.sleep(2000);
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			/*
+			 * Business Completed
+			 */
+//		    sideBarComponent.transactionPage().filterComponent().calenderComponent().clickStartDate();
+//			Thread.sleep(1000);
+//		    homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxPersonal();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkPayAndRequest();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickBuyToken();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkSent();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkReceived();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickDebitCard();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickCreditCard();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickExternalBankAccount();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCogent();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkInstantPay();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickGiftCard();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkFailedBankWithdraw();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillFromAmount(data.get("fromAmount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().fillToAmount(data.get("toAmount"));
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCompleted();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business Failed
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCompleted();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData1 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData1 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query1"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business In Progress
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxFailed();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData2 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData2 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query2"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business Pending
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxInprogress();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkPending();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData3 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData3 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query3"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Business Cancelled
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkPending();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxCancelled();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData4 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData4 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query4"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * Coyni Admin
+			 */
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			/*
+			 * Business Completed
+			 */
+//		    sideBarComponent.transactionPage().filterComponent().calenderComponent().clickStartDate();
+//			Thread.sleep(1000);
+//		    homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxPersonal();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxCoyniAdmin();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCommissionPayout();
+//			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCogent();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbkCompleted();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxCancelled();
+			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData5 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData5 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query5"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Filters Failed due to Exception " + e);
+		}
+	}
+	
+	@Test
+	public void testTransactionPaginations() {
+		try {
+		    homePage.sideBarComponent().clickTransactions();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+		    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+		
 	}
 }
 
-}

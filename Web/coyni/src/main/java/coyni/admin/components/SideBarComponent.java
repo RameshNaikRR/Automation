@@ -200,6 +200,12 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 	}
 
+	public void clickApiBusiness() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("API Business"), "API Business");
+		click(getSubMenuItems("API Business"), "API Business");
+		Thread.sleep(2000);
+	}
+
 	private By lblApiBusinessHeading = By.xpath("//span[text()='Underwriting - API Business']");
 
 	public void verifyApiBusinessHeading(String exp) {
@@ -302,9 +308,15 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(5000);
 	}
 
+	public void clickMerchants() throws InterruptedException {
+		commonfunctions.verifyCursorAction(getSubMenuItems("Merchants"), "Merchants");
+		click(getSubMenuItems("Merchants"), "Merchants");
+		Thread.sleep(2000);
+	}
+
 	public void clickMerchant() throws InterruptedException {
-		// commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
-		click(getSubMenuItems("Merchants"), "Merchant");
+		commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
+		click(getSubMenuItems("Merchant"), "Merchant");
 		Thread.sleep(2000);
 	}
 

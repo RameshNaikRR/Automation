@@ -22,6 +22,7 @@ import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.web.actions.Navigation;
 import ilabs.web.actions.WaitForElement;
+import org.openqa.selenium.support.Color;
 
 public class CommonFunctions {
 
@@ -619,6 +620,37 @@ public class CommonFunctions {
 	public void closeCurrentWindow() {
 		DriverFactory.getDriver().close();
 		ExtentTestManager.setInfoMessageInReport("The Current Window is closed");
+	}
+
+	/*
+	 * New code
+	 */
+
+	public void moveToElementAndClick(WebElement ele, String elementName) {
+		Actions actions = new Actions(DriverFactory.getDriver());
+		actions.moveToElement(ele).pause(2000).click(ele).build().perform();
+		ExtentTestManager.setInfoMessageInReport("clicked on " + elementName);
+
+	}
+
+	public void waitUntilLoadingCompletes() {
+		objBrowserFunctions.waitForCondition(d -> d.findElements(By.cssSelector(".icon-loading")).size() == 0,
+				"Loading Completes");
+	}
+
+	public void verifyColor(By ele, String expColour, String eleName) {
+		Uninterruptibles.sleepUninterruptibly(500, TimeUnit.MILLISECONDS);
+		String value = objBrowserFunctions.getElement(ele, "border color").getCssValue("background-color");
+		ExtentTestManager.setInfoMessageInReport(value);
+		if (value.equalsIgnoreCase(expColour)) {
+			ExtentTestManager.setPassMessageInReport(eleName + " color is expcted");
+		} else {
+			ExtentTestManager.setFailMessageInReport(" color is not expcted");
+		}
+		String hexValue = Color.fromString(value).asHex();
+		System.out.println(hexValue);
+		// java.awt.Color c = stri(hexValue);
+
 	}
 
 }

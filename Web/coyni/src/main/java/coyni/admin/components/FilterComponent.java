@@ -1,5 +1,6 @@
 package coyni.admin.components;
 
+import java.awt.AWTException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class FilterComponent extends BrowserFunctions {
 	private By txtFromAmount = By.xpath("//span[text()='From (CYN)']/preceding-sibling::input");
 	private By txtToAmount = By.xpath("//span[text()='To (CYN)']/preceding-sibling::input");
 	private By lblReferenceId = By.xpath("//button[text()='Clear']/ancestor::label[text()='Reference ID']");
-	private By txtReferenceId = By.xpath("//input[@name='gbxTransactionId']");
+	private By txtReferenceId = By.xpath("//input[@id='Reference ID']");
 	private By lblTransactionStatus = By.xpath("//span[text()='Transaction Status']");
 	// private By lnkClaerAll = By.xpath("");
 	private By lblEmployeeName = By.xpath("//label[contains(text(),'Withdraw ID')]/following-sibling::*//input "); // label[text()='Employee
@@ -59,9 +60,21 @@ public class FilterComponent extends BrowserFunctions {
 	private By txtReferencrID = By.xpath("//label[text()='Reference ID']");
 	private By lblShowingItems = By.xpath("//span[@class='entries-message']");
 	private By lblNoFilterData = By.xpath("//span[text()='No Filter Data Found']");
-	
+	private By txtSenderName = By.xpath("//input[@name='senderName']");
+	private By txtReceiverName = By.xpath("//input[@name='receiverName']");
+	private By txtCaseId = By.xpath("//input[@name='caseId']");
+	private By txtCustomerId = By.xpath("//input[@name='customerId']");
+	private By txtEmployeeName = By.xpath("//input[@name='employeeName']");
+	private By txtCustomerName = By.xpath("//input[@name='employeeName' or @name='customerName']");
+	private By txtMerchantID = By.xpath("//input[@name='businessId']");
+	private By txtMerchantName = By.xpath("//input[@name='businessName']");
+	private By txtBusinessID = By.xpath("//input[@name='businessId']");
+	private By txtBusinessName = By.xpath("//input[@name='businessName']");
+	private By txtCaseumber = By.xpath("//input[@name='caseNumber']");
+	private By txtAccountId = By.xpath("//input[@name='accountId']");
+	private By txtCardFirstSix = By.xpath("//input[@name='cardFirstSix']");
+	private By txtCardLastFour = By.xpath("//input[@name='cardLastFour']");
 
-	
 	public int noFilterData() {
 		int size = getElementsList(lblNoFilterData, "").size();
 		return size;
@@ -86,7 +99,6 @@ public class FilterComponent extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setPassMessageInReport("Filters button is Disabled");
 		}
-
 
 	}
 
@@ -116,8 +128,9 @@ public class FilterComponent extends BrowserFunctions {
 		enterText(getTextFieldElements("Deposit ID"), DepositId, "Deposit Id");
 	}
 
-	public void fillReferenceId(String ReferenceId) {
+	public void fillReferenceId(String ReferenceId) throws AWTException {
 		enterText(getTextFieldElements("Reference ID"), ReferenceId, "Reference Id");
+		new CommonFunctions().clickTab();
 	}
 
 	public void fillUserId(String UserId) {
@@ -308,7 +321,7 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickchkbxCoyniAdmin() {
-		click(getCheckBox("Coyni Admin"), "Coyni Admin");
+		click(getCheckBox("coyni Admin"), "coyni Admin");
 	}
 
 	public void clickchkbxPaid() {
@@ -321,6 +334,170 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickchkbxInprogress() {
 		click(getCheckBox("In Progress"), "In Progress");
+	}
+
+	/*
+	 * New Code For Filters
+	 */
+	public void clickchkbkReserveRelease() {
+		click(getCheckBox("Reserve Release"), "Reserve Release");
+	}
+
+	public void clickchkbkSaleOrder() {
+		click(getCheckBox("Sale Order"), "Sale Order");
+	}
+
+	public void clickchkbkMerchantPayout() {
+		click(getCheckBox("Merchant Payout"), "Merchant Payout");
+	}
+
+	public void clickchkbkRetailOrMobile() {
+		click(getCheckBox("Retail / Mobile"), "Retail / Mobile");
+	}
+
+	public void clickchkbkeCommerce() {
+		click(getCheckBox("eCommerce"), "eCommerce");
+	}
+
+	public void clickchkbkPending() {
+		click(getCheckBox("Pending"), "Pending");
+	}
+
+	public void clickchkbkCompleted() {
+		click(getCheckBox("Completed"), "Completed");
+	}
+
+	public void clickchkbkCancelled() {
+		click(getCheckBox("Cancelled"), "Cancelled");
+	}
+
+	public void clickchkbkRefund() {
+		click(getCheckBox("Refund"), "Refund");
+	}
+
+	public void clickchkbkMonthlyServiceFee() {
+		click(getCheckBox("Monthly Service Fee"), "Monthly Service Fee");
+	}
+
+	public void clickchkbkCommissionPayout() {
+		click(getCheckBox("Commission Payout"), "Commission Payout");
+	}
+
+	public void clickchkbkPayAndRequest() {
+		click(getCheckBox("Pay/Request"), "Pay/Request");
+	}
+
+	public void clickchkbkSent() {
+		click(getCheckBox("Sent"), "Sent");
+	}
+
+	public void clickchkbkReceived() {
+		click(getCheckBox("Received"), "Received");
+	}
+
+	public void clickchkbkCogent() {
+		click(getCheckBox("Cogent"), "Cogent");
+	}
+
+	public void clickchkbkInstantPay() {
+		click(getCheckBox("Instant Pay"), "Instant Pay");
+	}
+
+	public void clickchkbkFailedBankWithdraw() {
+		click(getCheckBox("Failed Bank Withdraw"), "Failed Bank Withdraw");
+	}
+
+	public void clickchkbkAdministrator() {
+		click(getCheckBox("Administrator"), "Administrator");
+	}
+
+	public void clickchkbkUnderwriting() {
+		click(getCheckBox("Underwriting"), "Underwriting");
+	}
+
+	public void clickchkbkDevelopment() {
+		click(getCheckBox("Development"), "Development");
+	}
+
+	public void clickchkbkAccounting() {
+		click(getCheckBox("Accounting"), "Accounting");
+	}
+
+	public void clickchkbkSupport() {
+		click(getCheckBox("Support"), "Support");
+	}
+
+	public void clickchkbkCLevel() {
+		click(getCheckBox("C-Level"), "C-Level");
+	}
+
+	public void clickchkbkLegal() {
+		click(getCheckBox("Legal"), "Legal");
+	}
+
+	public void clickchkbkRiskManagement() {
+		click(getCheckBox("Risk Management"), "Risk Management");
+	}
+
+	public void clickchkbkExpired() {
+		click(getCheckBox("Expired"), "Expired");
+	}
+
+	public void fillCaseId(String caseId) {
+		enterText(txtCaseId, caseId, "Case ID");
+	}
+
+	public void fillCustomerId(String customerId) {
+		enterText(txtCustomerId, customerId, "Customer ID");
+	}
+
+	public void fillEmployeeName(String employeeName) {
+		enterText(txtEmployeeName, employeeName, "Employee Name");
+	}
+
+	public void fillCustomerName(String customerName) {
+		enterText(txtCustomerName, customerName, "Customer Name");
+	}
+
+	public void fillSenderName(String senderName) {
+		enterText(txtSenderName, senderName, "Sender Name");
+	}
+
+	public void fillReceiverName(String receiverName) throws AWTException {
+		enterText(txtReceiverName, receiverName, "Receiver Name");
+		new CommonFunctions().clickTab();
+	}
+
+	public void fillMerchantID(String merchantId) {
+		enterText(txtMerchantID, merchantId, "Merchant ID");
+	}
+
+	public void fillMerchantName(String merchantName) {
+		enterText(txtMerchantName, merchantName, "Merchant Name");
+	}
+
+	public void fillBusinessID(String businessId) {
+		enterText(txtBusinessID, businessId, "Business ID");
+	}
+
+	public void fillBusinessName(String businessName) {
+		enterText(txtBusinessName, businessName, "Business Name");
+	}
+
+	public void fillCaseNumber(String caseNumber) {
+		enterText(txtCaseumber, caseNumber, "Case Number");
+	}
+
+	public void fillAccountId(String accountId) {
+		enterText(txtAccountId, accountId, "Account ID");
+	}
+
+	public void fillCardFirstSix(String cardFirstSix) {
+		enterText(txtCardFirstSix, cardFirstSix, "Card First 6");
+	}
+
+	public void fillCardLastFour(String cardLastFour) {
+		enterText(txtCardLastFour, cardLastFour, "Card Last 4");
 	}
 
 	public void filtersComponent(String data) {
@@ -447,10 +624,8 @@ public class FilterComponent extends BrowserFunctions {
 		containsInList(txtStatusCaseID, data);
 	}
 
-	
-	
-	//2.3 Profile merchant filters
-	
+	// 2.3 Profile merchant filters
+
 	public void clickchkbxActive() {
 		click(getCheckBox("Active"), "Active");
 	}
@@ -465,6 +640,10 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickchkbxDeclined() {
 		click(getCheckBox("Declined"), "Declined");
+	}
+
+	public void clickchkbxDeactivated() {
+		click(getCheckBox("Deactivated"), "Deactivated");
 	}
 
 	public void clickchkbxCancelled() {
@@ -496,21 +675,27 @@ public class FilterComponent extends BrowserFunctions {
 		int count = DBConnection.getDbCon().getCount(query);
 		int expCount = Integer.parseInt(getTotalPendingTransaction());
 		if (count == expCount) {
-			ExtentTestManager.setPassMessageInReport("Number of users  matches with number of entries in DB ");
+			ExtentTestManager.setPassMessageInReport(
+					count + " Number of users  matches with number of entries in DB " + expCount);
 		} else {
 			ExtentTestManager.setFailMessageInReport("Number of users not matches with number of entries in DB ");
 		}
 	}
+
 	public void scroolDownToElement() {
 		scrollToElement(txtReferencrID, "Reference ID");
 	}
+
+	public void clickOutSide() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public FilterCalenderComponent filterCalenderComponent() {
 		return new FilterCalenderComponent();
 	}
+
 	public CalenderComponent calenderComponent() {
 		return new CalenderComponent();
 	}
-	
-	
-	
+
 }

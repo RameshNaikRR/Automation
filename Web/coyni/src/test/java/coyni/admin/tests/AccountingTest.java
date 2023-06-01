@@ -1,5 +1,7 @@
 package coyni.admin.tests;
 
+import java.awt.AWTException;
+import java.util.List;
 import java.util.Map;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -88,7 +90,7 @@ public class AccountingTest {
 
 	}
 
-	public void testFilters(String strParams) {
+	public void testFilters(String strParams) throws AWTException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		// if(
 		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters().)
@@ -484,5 +486,121 @@ public class AccountingTest {
 					.setFailMessageInReport("test Total deposits detailed view is failed due to Exception " + e);
 		}
 	}
+	  
+		/*
+		 * New code for filters
+		 */
+		@Test
+		@Parameters({ "strParams" })
+		public void testTotalWithdrawBankAccountsWithFilters(String strParams) {
+			try {
+				Map<String, String> data = Runner.getKeywordParameters(strParams);
+				homePage.sideBarComponent().clickAccounting();
+				homePage.sideBarComponent().clickTotalWithdraw();
+				homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+				homePage.sideBarComponent().accountTableComponent().entries().clickDropDownItemsPerPage();
+		    	List<String> entryOptions = homePage.sideBarComponent().accountTableComponent().entries().getEntryOptions();
+		    	for(String entryOption : entryOptions) {
+//		    		homePage.sideBarComponent().accountTableComponent().clickDropDownEntries();
+		    		Thread.sleep(3000);
+		    		homePage.sideBarComponent().accountTableComponent().entries().selectItemsPerPage(entryOption);
+//		    		homePage.sideBarComponent().accountTableComponent().verifyTableItemsCount();
+//		    		homePage.sideBarComponent().accountTableComponent().entries().clickDropDownItemsPerPage();
+		    	}
+				
+				
+	//---------------------------------------------------------------------------------------------------------		
+//				Thread.sleep(2000);
+//				homePage.sideBarComponent().accountTableComponent().entries().clickDropDownItemsPerPage();
+////				new CommonFunctions().selectCustomDropDownSize();
+//				String entryOption = data.get("entryOption");
+//			    Thread.sleep(2000);
+//			    new CommonFunctions().selectCustomDropDown(entryOption, "entryOption");
+////			    homePage.sideBarComponent().accountTableComponent().selectDropDownEntries(entryOption);
+//			    int expEntries = Integer.parseInt(entryOption.split(" ")[0]);
+//			    homePage.sideBarComponent().accountTableComponent().verifyTableItemsCount(expEntries);
+//			   
+//				ExtentTestManager.setPassMessageInReport("Entries Buttons are Working Successfully");
+////	    		homePage.sideBarComponent().accountTableComponent().clickOnAction("04/28/2023", "Pending");
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("test Entries count failed due to exception" + e);
+			}
+			
+		}
+		@Test
+		public void testTotalWithdrawBankAccountsWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalWithdraw();
+			    homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		@Test
+		public void testTotalWithdrawCogentAccountsWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalWithdraw();
+			    homePage.sideBarComponent().accountTableComponent().clickCogentAccount();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		
+		@Test
+		public void testTotalWithdrawInstantPayWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalWithdraw();
+			    homePage.sideBarComponent().accountTableComponent().clickInstantPay();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		
+		@Test
+		public void testTotalWithdrawGiftCardsWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalWithdraw();
+			    homePage.sideBarComponent().accountTableComponent().clickGiftCard();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		@Test
+		public void testTotalDepositsBankAccountWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalDeposits();
+			    homePage.sideBarComponent().accountTableComponent().clickBankAccount();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		@Test
+		public void testTotalDepositsCreditAndDebitCardWithPaginations() {
+			try {
+			    homePage.sideBarComponent().clickAccounting();
+			    homePage.sideBarComponent().clickTotalDeposits();
+			    homePage.sideBarComponent().accountTableComponent().clickCreditAndDebitCard();
+				homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+			} catch (Exception e) {
+			    ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+			}
+			
+		}
+		
 
 }

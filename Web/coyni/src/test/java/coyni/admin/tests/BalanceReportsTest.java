@@ -19,12 +19,9 @@ public class BalanceReportsTest {
 		homePage = new HomePage();
 
 	}
-	
-	
-	
-	
-	//sanity test
-	
+
+	// sanity test
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testVerifyBalanceReport(String strParams) {
@@ -33,11 +30,12 @@ public class BalanceReportsTest {
 			homePage.sideBarComponent().verifyCursorAction();
 			homePage.sideBarComponent().clickBalanceReports();
 			homePage.sideBarComponent().balanceReportsPage().verifyHeading(data.get("expHeading"));
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBalanceReportsTest Failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testVerifyCountAndBalanceReportsTest(String strParams) {
@@ -93,18 +91,28 @@ public class BalanceReportsTest {
 				homePage.sideBarComponent().exportSelectedTransactions().clickExport();
 			} else {
 				homePage.sideBarComponent().exportSelectedTransactions().clickDropDown(data.get("dropDown"));
-				//homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickDeselectAll();
+				// homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickDeselectAll();
 //				homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions()
 //						.clickCheckBox(data.get("checkBox"));
-				
-				
-		 homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickExport();
+
+				homePage.sideBarComponent().exportSelectedTransactions().columnsSelectedTransactions().clickExport();
 
 			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportSelectedTransactions Failed due to Exception " + e);
 		}
+	}
+
+	@Test
+	public void testBalanceReportWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickBalanceReports();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
 	}
 
 }

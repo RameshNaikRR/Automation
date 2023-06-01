@@ -112,4 +112,8 @@ public class ProfileComponent extends BrowserFunctions {
 		click(lblApiBusinessDetails, "User");
 	}
 
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
+	}
+
 }

@@ -7,6 +7,7 @@ import org.apache.poi.ss.formula.functions.Count;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.DBConnection;
@@ -14,8 +15,8 @@ import ilabs.api.utilities.DBConnection;
 public class DisputesDetailsComponent extends BrowserFunctions {
 
 	private By btnWon = By.xpath("//button[text()='Mark As Won']");
-	
-	private By lblWon=By.xpath("//div[text()='Won']");
+
+	private By lblWon = By.xpath("//div[text()='Won']");
 
 	private By btnLost = By.xpath("//button[text()='Mark As Lost']");
 	private By lblLost = By.xpath("//div[text()='Lost']");
@@ -37,16 +38,48 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 	public void clickLost() {
 		click(btnLost, "Lost");
 	}
+
 	public void clickLosts() {
 		click(lblLost, "Lost");
 	}
 
-
 	public void clickWon() {
 		click(btnWon, "Won");
 	}
+
 	public void clickWons() {
 		click(lblWon, "Won");
+	}
+
+	/*
+	 * New code for filters
+	 */
+	private By getTabItemLoc(String elementName) {
+		return By.xpath(String.format("//div[contains(text(),'%s')]", elementName));
+	}
+
+	private By verifyTabItemLoc(String elementName) {
+		return By.xpath(String.format("//div[text()='%s']/parent::*", elementName));
+	}
+
+	public void clickAllDisputes(String expColor, String colorName) {
+		click(getTabItemLoc("All Disputes"), "All Disputes");
+		new CommonFunctions().verifyColor(verifyTabItemLoc("All Disputes"), expColor, colorName);
+	}
+
+	public void clickPendingTab(String expColor, String colorName) {
+		click(getTabItemLoc("Pending"), "Pending");
+		new CommonFunctions().verifyColor(verifyTabItemLoc("Pending"), expColor, colorName);
+	}
+
+	public void clickWonTab(String expColor, String colorName) {
+		click(getTabItemLoc("Won"), "Won");
+		new CommonFunctions().verifyColor(verifyTabItemLoc("Won"), expColor, colorName);
+	}
+
+	public void clickLostTab(String expColor, String colorName) {
+		click(getTabItemLoc("Lost"), "Lost");
+		new CommonFunctions().verifyColor(verifyTabItemLoc("Lost"), expColor, colorName);
 	}
 
 	private By lblCaseId = By.xpath("//div[@class='flex flex-row justify-between ']/descendant::div[text()='Won']");
@@ -109,6 +142,7 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 	public void clickPending() {
 		click(statusPending, "Clicked on Pending");
 	}
+
 	public void clickPendingStatus() {
 		click(topstatusPending, "Clicked on Pending");
 	}
@@ -140,66 +174,93 @@ public class DisputesDetailsComponent extends BrowserFunctions {
 	public DisputesWonAndLostComponent disputesWonAndLostComponent() {
 		return new DisputesWonAndLostComponent();
 	}
-	
-	
-	//public void getTotalItemsCount(String query) throws SQLException {
 
-		
-	//}
+	// public void getTotalItemsCount(String query) throws SQLException {
+
+	// }
 
 	public void getTotalItemsCount(String query) {
 		;
 		try {
 			int count = DBConnection.getDbCon().getCount(query);
-			ExtentTestManager.setInfoMessageInReport(" Db pending Details is "+ count);
+			ExtentTestManager.setInfoMessageInReport(" Db pending Details is " + count);
 			int expCount = Integer.parseInt(getTotalPendingTransaction());
-			ExtentTestManager.setInfoMessageInReport(" Application pending Details is "+ expCount);
+			ExtentTestManager.setInfoMessageInReport(" Application pending Details is " + expCount);
 			if (count == expCount) {
-				ExtentTestManager.setPassMessageInReport("Number of Pending Details  matches with number of entries in DB ");
+				ExtentTestManager
+						.setPassMessageInReport("Number of Pending Details  matches with number of entries in DB ");
 			} else {
-				ExtentTestManager.setFailMessageInReport("Number of Pending Details not matches with number of entries in DB ");
+				ExtentTestManager
+						.setFailMessageInReport("Number of Pending Details not matches with number of entries in DB ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-		public void getTotalWonItemsCount(String query) {
-			try {
-				int count = DBConnection.getDbCon().getCount(query);
-				ExtentTestManager.setInfoMessageInReport(" Db Won Details is "+ count);
-				int expCount = Integer.parseInt(getTotalPendingTransaction());
-				ExtentTestManager.setInfoMessageInReport(" Application pending Details is "+ count);
-				if (count == expCount) {
-					ExtentTestManager.setPassMessageInReport("Number of Won Details  matches with number of entries in DB ");
-				} else {
-					ExtentTestManager.setFailMessageInReport("Number of Won Details not matches with number of entries in DB ");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+	public void getTotalWonItemsCount(String query) {
+		try {
+			int count = DBConnection.getDbCon().getCount(query);
+			ExtentTestManager.setInfoMessageInReport(" Db Won Details is " + count);
+			int expCount = Integer.parseInt(getTotalPendingTransaction());
+			ExtentTestManager.setInfoMessageInReport(" Application pending Details is " + count);
+			if (count == expCount) {
+				ExtentTestManager
+						.setPassMessageInReport("Number of Won Details  matches with number of entries in DB ");
+			} else {
+				ExtentTestManager
+						.setFailMessageInReport("Number of Won Details not matches with number of entries in DB ");
 			}
-		
-		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
-		public void getTotalLostItemsCount(String query) {
-			try {
-				int count = DBConnection.getDbCon().getCount(query);
-				ExtentTestManager.setInfoMessageInReport(" Db Lost Details is "+ count);
-				ExtentTestManager.setInfoMessageInReport(count+" Db Transaction");
-				ExtentTestManager.setInfoMessageInReport(" Application Lost Details is "+ count);
-				int expCount = Integer.parseInt(getTotalPendingTransaction());
-				if (count == expCount) {
-					ExtentTestManager.setPassMessageInReport("Number of Lost Details  matches with number of entries in DB ");
-				} else {
-					ExtentTestManager.setFailMessageInReport("Number of Lost Details not matches with number of entries in DB ");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+	public void getTotalLostItemsCount(String query) {
+		try {
+			int count = DBConnection.getDbCon().getCount(query);
+			ExtentTestManager.setInfoMessageInReport(" Db Lost Details is " + count);
+			ExtentTestManager.setInfoMessageInReport(count + " Db Transaction");
+			ExtentTestManager.setInfoMessageInReport(" Application Lost Details is " + count);
+			int expCount = Integer.parseInt(getTotalPendingTransaction());
+			if (count == expCount) {
+				ExtentTestManager
+						.setPassMessageInReport("Number of Lost Details  matches with number of entries in DB ");
+			} else {
+				ExtentTestManager
+						.setFailMessageInReport("Number of Lost Details not matches with number of entries in DB ");
 			}
-		
-		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void getTotalDisputesCount(String query) throws SQLException {
+
+		int count = DBConnection.getDbCon().getCount(query);
+		int expCount = Integer.parseInt(getTotalPendingTransaction());
+		if (count == expCount) {
+			ExtentTestManager.setPassMessageInReport(
+					count + " Number of users  matches with number of entries in DB " + expCount);
+		} else {
+			ExtentTestManager.setFailMessageInReport("Number of users not matches with number of entries in DB ");
+		}
+	}
+
+	private By getTableItems(String elementName) {
+		return By.xpath(String.format("//span[contains(text(),'No')]", elementName));
+	}
+
+	public int noDisputesData() {
+		int size = getElementsList(getTableItems("No Disputes Found"), "").size();
+		return size;
+	}
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
 	}
 
 }

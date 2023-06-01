@@ -1356,5 +1356,785 @@ public class ProfilesTest {
 			ExtentTestManager.setFailMessageInReport("testIndividualsActivityLogView Failed due to Exception " + e);
 		}
 	}
+	
+	/*
+	 * New code for profile filters
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfilePersonalWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxUnderReview();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData1 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData1 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query1"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxUnderReview();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeclined();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData2 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData2 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query2"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeclined();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeactivated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData3 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData3 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query3"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeactivated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxTerminated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData4 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData4 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query4"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Test filters with personal Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileMerchantWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchants();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query5"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxTerminated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData1 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData1 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query6"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxTerminated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeclined();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData2 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData2 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query7"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeclined();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxApplication();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData3 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData3 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query8"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxApplication();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxUnderReview();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData4 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData4 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query9"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxUnderReview();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxCancelled();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData5 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData5 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query10"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Test filters with merchants Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileCoyniEmployeesWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query11"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData1 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData1 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query12"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData2 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData2 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query13"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			int noFilterData3 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData3 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query14"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData4 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData4 == 0) {
+
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query15"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData5 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData5 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query16"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData6 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData6 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query17"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData7 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData7 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query18"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxActive();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeactivated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData8 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData8 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query19"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData9 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData9 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query20"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData10 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData10 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query21"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData11 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData11 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query22"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData12 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData12 == 0) {
+//				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query23"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData13 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData13 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query24"));
+			} else {
+//				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData14 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData14 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query25"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData15 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData15 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query26"));
+			} else {
+				// Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbxDeactivated();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkPending();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData16 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData16 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query27"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData17 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData17 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query28"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData18 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData18 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query29"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData19 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData19 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query30"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData20 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData20 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query31"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData21 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData21 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query32"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData22 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData22 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query33"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData23 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData23 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query34"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkPending();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkExpired();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData24 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData24 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query35"));
+			} else {
+				// Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData25 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData25 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query36"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData26 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData26 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query37"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData27 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData27 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query38"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData28 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData28 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query39"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData29 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData29 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query40"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData30 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData30 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query41"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData31 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData31 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query42"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			/*
+			 * New Code for Cancelled
+			 */
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkExpired();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCancelled();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData32 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData32 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query43"));
+			} else {
+				// Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAdministrator();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData33 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData33 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query44"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkUnderwriting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData34 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData34 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query45"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkDevelopment();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData35 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData35 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query46"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkCLevel();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData36 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData36 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query47"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkAccounting();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData37 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData37 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query48"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkSupport();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData38 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData38 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query49"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().profileComponent().filterComponent().clickFilters();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkLegal();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickchkbkRiskManagement();
+			homePage.sideBarComponent().profileComponent().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData39 = homePage.sideBarComponent().tokenAccountPage().filterComponent().noFilterData();
+			if (noFilterData39 == 0) {
+				Thread.sleep(2000);
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query50"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+		}
+	}
+
+	@Test
+	public void testProfilePersonalWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testProfileMerchantsWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickMerchants();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testProfileCoyniEmployeesWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickCoyniEmployees();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testProfileApiBusinessWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickApiBusiness();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
 
 }

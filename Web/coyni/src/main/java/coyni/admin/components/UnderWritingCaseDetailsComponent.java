@@ -87,6 +87,23 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 	private By eleWebsite = By.xpath("(//div[contains(@class,'CaseIdDetails_AdditionalRequiredDocs__Vz8ti')])[1]");
 	private By btnWebsiteDoc = By.xpath(
 			"(//div[contains(@class,'CaseIdDetails_acceptIcon__9EcTK')])[1]/descendant::img[contains(@src,'success-green-circle-icon')]");
+	
+	private By getTableItems(String elementName) {
+    	return By.xpath(String.format("//span[contains(text(),'No')]", elementName));
+    }
+    
+    public int noPersonalData() {
+		int size = getElementsList(getTableItems("No Personal Data Found"), "").size();
+		return size;
+	}
+    public int noMerchantData() {
+    	int size = getElementsList(getTableItems("No Merchant Data Found"), "").size();
+    	return size;
+    }
+    public int noApiBusinessData() {
+    	int size = getElementsList(getTableItems("No Api Business Data Found"), "").size();
+    	return size;
+    }
 
 	public void clickEditButton() {
 		moveToElement(btnEditWebsite, "WebSite");
@@ -432,6 +449,10 @@ public class UnderWritingCaseDetailsComponent extends BrowserFunctions {
 
 	public AddRevisionTaskPopup addRevisionTaskPopup() {
 		return new AddRevisionTaskPopup();
+	}
+	
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
 	}
 
 }

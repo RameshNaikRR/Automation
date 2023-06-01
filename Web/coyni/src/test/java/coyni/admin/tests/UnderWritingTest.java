@@ -288,12 +288,12 @@ public class UnderWritingTest {
 			 */
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
 					.verifyCheckListStatus();
-		//	homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
-		//			.clickDownloadCheckList();
+			// homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+			// .clickDownloadCheckList();
 			String merchId = homePage.sideBarComponent().underWritingPersonalComponent()
 					.underWritingCaseDetailsComponent().verifyMerchantIDForReserve();
 			Thread.sleep(3000);
-		homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
 					.clickAcceptAdditionalDoc();
 			Thread.sleep(4000);
 			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
@@ -956,7 +956,7 @@ public class UnderWritingTest {
 			homePage.sideBarComponent().profileComponent().fillSearch(expMerchID);
 			new CommonFunctions().scrollToHorizontal();
 			homePage.sideBarComponent().profileComponent().verifyMerchantStatus();
-			//new CommonFunctions().switchtoUrl(data.get("urlMerch"));
+			// new CommonFunctions().switchtoUrl(data.get("urlMerch"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Exception happend due to this " + e);
@@ -1046,6 +1046,870 @@ public class UnderWritingTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testUnderWritingTest Failed due to Exception " + e);
 		}
+	}
+
+	/*
+	 * New code for filters
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testUnderwritingPersonalWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickPersonal();
+			// Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickAllStatus();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+
+//    		 homePage.sideBarComponent().tokenAccountPage().filterComponent().calenderComponent().clickStartDate();
+//			 Thread.sleep(1000);
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillCaseId(data.get("caseID"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillCustomerId(data.get("customerId"));
+//    		 homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().filterComponent().fillEmployeeName(data.get("employeeName"));
+//    		 homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent().filterComponent().fillCustomerName(data.get("customerName"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickNewTab();
+			Thread.sleep(2000);
+			int noPersonalData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickResetAllFilters();
+				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			/*
+			 * New Code
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().clickPendingTab();
+			Thread.sleep(2000);
+			int noPersonalData2 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData2 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickResetAllFilters();
+				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReviewTab();
+			Thread.sleep(2000);
+			int noPersonalData3 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData3 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickResetAllFilters();
+				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().clickApproved();
+			Thread.sleep(2000);
+			int noPersonalData4 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData4 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+//				
+//				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickDeclined();
+			Thread.sleep(2000);
+			int noPersonalData5 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData5 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+//				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//						.filterComponent().clickFilters();
+//				Thread.sleep(2000);
+//				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//						.filterComponent().clickResetAllFilters();
+//				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query1"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+//	        Thread.sleep(5000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCancelled();
+			Thread.sleep(2000);
+			int noPersonalData6 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData6 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickResetAllFilters();
+				Thread.sleep(2000);
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickOverdue();
+			Thread.sleep(2000);
+			int noPersonalData7 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noPersonalData();
+			if (noPersonalData7 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCustomerId(data.get("customerId"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testUnderwritingMerchantWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickMerchant();
+			// Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickAllStatus();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+//    		 homePage.sideBarComponent().tokenAccountPage().filterComponent().calenderComponent().clickStartDate();
+//			 Thread.sleep(1000);
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillCaseId(data.get("caseID"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillMerchantID(data.get("merchantID"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickNewTab();
+			Thread.sleep(2000);
+			int noMerchantData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query1"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				Thread.sleep(2000);
+				ExtentTestManager.setInfoMessageInReport("No Merchant Data found in the system");
+			}
+//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//					.filterComponent().clickFilters();
+//			Thread.sleep(2000);
+//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			/*
+			 * New Code
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().clickPendingTab();
+			Thread.sleep(2000);
+			int noMerchantData2 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData2 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID2"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID2"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query2"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReviewTab();
+			Thread.sleep(2000);
+			int noMerchantData3 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData3 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID3"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID3"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query3"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickApproved();
+			Thread.sleep(2000);
+			int noMerchantData4 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData4 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID4"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID4"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query4"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickDeclined();
+			Thread.sleep(2000);
+			int noMerchantData5 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData5 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID5"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID5"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query5"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCancelled();
+			Thread.sleep(2000);
+			int noMerchantData6 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData6 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID6"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID6"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query6"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickOverdue();
+			Thread.sleep(2000);
+			int noMerchantData7 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noMerchantData();
+			if (noMerchantData7 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID7"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillMerchantID(data.get("merchantID7"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query7"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Personal Data found in the system");
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this " + e);
+		}
+	}
+
+	/*
+	 * New code for filters
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testUnderwritingApiBusinesstWithFilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			Thread.sleep(2000);
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickApiBusiness();
+			// Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickAllStatus();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+//    		 homePage.sideBarComponent().tokenAccountPage().filterComponent().calenderComponent().clickStartDate();
+//			 Thread.sleep(1000);
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickPreviousTenDays();
+// 			 homePage.sideBarComponent().tokenAccountPage().filterComponent().filterCalenderComponent().clickCurrentDay();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillCaseId(data.get("caseID"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().fillBusinessID(data.get("businessID"));
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			int noFilterData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+			if (noFilterData == 0) {
+				homePage.sideBarComponent().tokenAccountPage().filterComponent()
+						.getTotalCustomerCount(data.get("query"));
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickNewTab();
+			Thread.sleep(2000);
+			int noApiBusinessData = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID1"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query1"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+//			 homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//			.filterComponent().clickFilters();
+//	         Thread.sleep(2000);
+//	         homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//			.filterComponent().clickResetAllFilters();
+//	         Thread.sleep(2000);
+			/*
+			 * New Code
+			 */
+			homePage.sideBarComponent().underWritingPersonalComponent().clickPendingTab();
+			Thread.sleep(2000);
+			int noApiBusinessData2 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData2 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID2"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID2"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query2"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//					.filterComponent().clickFilters();
+//			Thread.sleep(2000);
+//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickInReviewTab();
+			Thread.sleep(2000);
+			int noApiBusinessData3 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData3 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID3"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID3"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query3"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+//			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//			.filterComponent().clickFilters();
+//	        Thread.sleep(2000);
+//	        homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+//			.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickApproved();
+			Thread.sleep(2000);
+			int noApiBusinessData4 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData4 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID4"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID4"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query4"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().clickDeclined();
+			Thread.sleep(2000);
+			int noApiBusinessData5 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData5 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID5"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID5"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query5"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickCancelled();
+			Thread.sleep(2000);
+			int noApiBusinessData6 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData6 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID6"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID6"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query6"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().clickOverdue();
+			Thread.sleep(2000);
+			int noApiBusinessData7 = homePage.sideBarComponent().underWritingPersonalComponent()
+					.underWritingCaseDetailsComponent().noApiBusinessData();
+			if (noApiBusinessData7 == 0) {
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickFilters();
+				Thread.sleep(2000);
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillCaseId(data.get("caseID7"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().fillBusinessID(data.get("businessID7"));
+				homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+						.filterComponent().clickApplyFilters();
+				Thread.sleep(2000);
+				int noFilterData1 = homePage.sideBarComponent().underWritingPersonalComponent()
+						.underWritingCaseDetailsComponent().filterComponent().noFilterData();
+				if (noFilterData1 == 0) {
+					homePage.sideBarComponent().tokenAccountPage().filterComponent()
+							.getTotalCustomerCount(data.get("query7"));
+				} else {
+					ExtentTestManager.setInfoMessageInReport("No Filter Data found in the system");
+				}
+			} else {
+				ExtentTestManager.setInfoMessageInReport("No Api Business Data found in the system");
+			}
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickResetAllFilters();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().underWritingPersonalComponent().underWritingCaseDetailsComponent()
+					.filterComponent().clickOutSide();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this " + e);
+		}
+	}
+
+	@Test
+	public void testUnderwritingPersonalWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testUnderwritingMerchantWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickMerchant();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testUnderwritingApiBusinessWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickUnderWriting();
+			homePage.sideBarComponent().clickApiBusiness();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
 	}
 
 }

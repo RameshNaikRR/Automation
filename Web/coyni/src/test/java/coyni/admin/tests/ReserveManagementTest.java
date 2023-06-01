@@ -45,7 +45,7 @@ public class ReserveManagementTest {
 			homePage.sideBarComponent().reserveManagementPage().clickAllStatuses();
 			homePage.sideBarComponent().reserveManagementPage().clickActive();
 			homePage.sideBarComponent().reserveManagementPage().clickStopped();
-			homePage.sideBarComponent().reserveManagementPage().clickInActive();
+			homePage.sideBarComponent().reserveManagementPage().clickInactive();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveManagement failed due to exception " + e);
@@ -132,6 +132,55 @@ public class ReserveManagementTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReserveManagementRecord failed due to exception " + e);
 		}
+	}
+	
+	@Test
+	public void testReserveManagementWithAllStatusesPaginations() {
+		try {
+			Thread.sleep(2000);
+			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().clickAllStatuses();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+	
+	@Test
+	public void testReserveManagementActiveWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickReserveManagement();
+//			homePage.sideBarComponent().reserveManagementPage().clickActive();
+//			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testReserveManagementWithStoppedPaginations() {
+		try {
+			homePage.sideBarComponent().clickReserveManagement();
+			homePage.sideBarComponent().reserveManagementPage().clickStopped();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
+
+	@Test
+	public void testReserveManagementWithInactivePaginations() {
+		try {
+			homePage.sideBarComponent().reserveManagementPage();
+			homePage.sideBarComponent().reserveManagementPage().clickInactive();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
 	}
 
 }

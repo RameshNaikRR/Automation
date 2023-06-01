@@ -19,7 +19,7 @@ public class ExportFilesTest {
 	@BeforeTest
 	public void init() {
 		homePage = new HomePage();
-		exportfilecomponent=new ExportFileComponent();
+		exportfilecomponent = new ExportFileComponent();
 	}
 
 	@Test
@@ -28,71 +28,76 @@ public class ExportFilesTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideBarComponent().verifyCursorAction();
-	//		homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp", "expValue", "expColor");
+			// homePage.sideBarComponent().verifyMouseHoverChangedColor("cssProp",
+			// "expValue", "expColor");
 			homePage.sideBarComponent().clickExportedFiles();
 			homePage.sideBarComponent().verifyExportFiles(data.get("exportHeading"));
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);
 		}
 	}
-	
-	
-	
+
 	@Test
-    @Parameters({ "strParams" })
-    public void testDownloadExportFile(String strParams) {
-        try {
-            //Map<String, String> data = Runner.getKeywordParameters(strParams);
-            
-            homePage.sideBarComponent().clickExportedFiles();
-            exportfilecomponent.clickDownload();
-            exportfilecomponent.verifySuccess();
-            //exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
+	@Parameters({ "strParams" })
+	public void testDownloadExportFile(String strParams) {
+		try {
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 
+			homePage.sideBarComponent().clickExportedFiles();
+			exportfilecomponent.clickDownload();
+			exportfilecomponent.verifySuccess();
+			// exportfilecomponent.toastComponent().verifyToast(data.get("title"),
+			// data.get("message"));
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDownloadExportFile Failed due to Exception " + e);
+		}
+	}
 
-       } catch (Exception e) {
-            ExtentTestManager.setFailMessageInReport("testDownloadExportFile Failed due to Exception " + e);
-        }
-    }
-    @Test
-    @Parameters({ "strParams" })
-    public void testDownloadMultipleExportFiles(String strParams) {
-        try {
-            Map<String, String> data = Runner.getKeywordParameters(strParams);
-            homePage.sideBarComponent().clickExportedFiles();
-            exportfilecomponent.clickchkboxBulkActions();
-            exportfilecomponent.clickBulkActions();
-            exportfilecomponent.clickBulkDownload();
-            exportfilecomponent.clickApply();
-            exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
-            
-        } catch (Exception e) {
-            ExtentTestManager.setFailMessageInReport("testDownloadMultipleExportFiles Failed due to Exception " + e);
-        }
-    }
-    @Test
-    @Parameters({ "strParams" })
-    public void testTrashExportFile(String strParams) {
-        try {
-            Map<String, String> data = Runner.getKeywordParameters(strParams);
-            homePage.sideBarComponent().clickExportedFiles();
-            exportfilecomponent.clickchkboxFirstExport();
-            exportfilecomponent.clickBulkAction();
-            exportfilecomponent.clickchkboxTrash();
-            exportfilecomponent.clickApply();
-            exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
-            
-        } catch (Exception e) {
-            ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);
-        }
-    }
-	
-	
-	
-	
-	
-	
+	@Test
+	@Parameters({ "strParams" })
+	public void testDownloadMultipleExportFiles(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickExportedFiles();
+			exportfilecomponent.clickchkboxBulkActions();
+			exportfilecomponent.clickBulkActions();
+			exportfilecomponent.clickBulkDownload();
+			exportfilecomponent.clickApply();
+			exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testDownloadMultipleExportFiles Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testTrashExportFile(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickExportedFiles();
+			exportfilecomponent.clickchkboxFirstExport();
+			exportfilecomponent.clickBulkAction();
+			exportfilecomponent.clickchkboxTrash();
+			exportfilecomponent.clickApply();
+			exportfilecomponent.toastComponent().verifyToast(data.get("title"), data.get("message"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	public void testExportedFilesWithPaginations() {
+		try {
+			homePage.sideBarComponent().clickExportedFiles();
+			homePage.sideBarComponent().accountTableComponent().verifyPaginations();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
+
+	}
 
 }
