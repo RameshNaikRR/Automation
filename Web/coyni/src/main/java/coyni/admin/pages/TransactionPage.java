@@ -18,7 +18,7 @@ public class TransactionPage extends BrowserFunctions {
 
 	private By lblHeading = By.xpath("(//span[text()='Transactions'])[2]");
 
-	private By lblToken = By.xpath("//div[text()='Token']");
+	private By lblToken = By.xpath("//button[text()='Token']");
 
 	private By lblBusiness = By.xpath("//button[text()='Business']");
 
