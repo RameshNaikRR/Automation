@@ -1,113 +1,226 @@
 package coyni_mobile.pages;
 
-import java.sql.Driver;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import coyni_mobile.components.AgreementComponent;
-import coyni_mobile.components.EmailVerificationComponent;
-import coyni_mobile.components.EnterYourPINComponent;
-import coyni_mobile.components.FaceIDDisabledComponent;
-import coyni_mobile.components.FaceIDnotAvailableComponent;
-import coyni_mobile.components.FieldValidationsComponent;
-import coyni_mobile.components.ForgotPinComponent;
+import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.popups.CoyniInavlidEmailPopup;
-import coyni_mobile.popups.EmailOrPasswordIsIncorrectPopup;
+import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
-import ilabs.mobile.actions.WaitForElement;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class LoginPage extends MobileFunctions {
+	private By imgCoyni = MobileBy.AccessibilityId("");
+	private By txtEmail = MobileBy.AccessibilityId("Email Text Field");
+	private By txtPassword = MobileBy.AccessibilityId("Password Text Field");
+	private By chkBxRememberMe = MobileBy.AccessibilityId("Remember Me");
+	private By lblRememberMe = MobileBy.AccessibilityId("");
+	private By lnkForgotPassword = MobileBy.AccessibilityId("");
+	private By lnkRetrieveEmail = MobileBy.AccessibilityId("");
+	private By btnLogin = MobileBy.AccessibilityId("");
+	private By lblForgotYourPassword = MobileBy.AccessibilityId("");
+	private By lblForgotPwdDesc = MobileBy.AccessibilityId("");
+	private By btnNext = MobileBy.AccessibilityId("");
+    private By lblRetrieveEmail = MobileBy.AccessibilityId("");
+    private By retrieveEmailDesc = MobileBy.AccessibilityId("");
+    private By imgFlag = MobileBy.AccessibilityId("");
+    private By txtPhoneNumber = MobileBy.AccessibilityId("");
+    private By txtFirstName = MobileBy.AccessibilityId("");
+    private By txtLastName = MobileBy.AccessibilityId("");
+    private By imgNoUserFound = MobileBy.AccessibilityId("");
+    private By lblNoUserFound = MobileBy.AccessibilityId("");
+    private By noUserDesc = MobileBy.AccessibilityId("");
+    private By btnTryAgain = MobileBy.AccessibilityId("");
+    private By btnCancel = MobileBy.AccessibilityId("");
+    private By lblWeFoundAccount = MobileBy.AccessibilityId("");
+    private By imgWeFoundAccounnt = MobileBy.AccessibilityId("");
+    private By lblUserName = MobileBy.AccessibilityId("");
+    private By btnRetrieveLogin = MobileBy.AccessibilityId("");
+    private By btnThisisNotMe = MobileBy.AccessibilityId("");
+    
+    
+	
+	
+	
+	
 
-	private By txtEmail = MobileBy.//id("etEmail");
-			xpath("//*[contains(@resource-id,'etEmail')] | (//*[contains(@name,'Email')])[1]");
-	private By txtPassword = MobileBy.//id("etPassword");
-			xpath("//*[contains(@resource-id,'etPassword')] | (//*[contains(@name,'Password')])[1]");
-	private By lnkRetriveEmail = MobileBy.//id("tvRetEmail");
-			xpath("//*[contains(@resource-id,'tvRetEmail')] | (//*[contains(@name,'Retrieve Email')])[1]");
-	private By lnkForgotPassword = MobileBy.//id("forgotpwd");
-			xpath("//*[contains(@resource-id,'forgotpwd')]|(//*[@name ='Forgot Password'])[1]");
-	private By chkBxRememberMe = MobileBy.//id("chkRemember");
-			xpath("//*[contains(@resource-id,'chkRemember')]| //*[@name='Remember Me']/preceding-sibling::*[1]");
-	private By btnLogin = MobileBy.//id("cvNext");
-			xpath("//*[contains(@resource-id,'nextBtn')]/parent::*|//*[contains(@resource-id,'cvNext')]");
-	private By lblCoyni = MobileBy.xpath("//*[contains(@resource-id,'loginBGIV')]|//*[@name='coyni-logo-full']");
-	private By lblerrMsg = MobileBy
-			.xpath("//*[contains(@resource-id,'tvEmailError')]|(//*[contains(@text,'is incorrect')])[1]|(//*[contains(@label,'is incorrect')])[1]|//*[contains(@resource-id,'tvMessage')]");
+	
+	
+	private By lblInvalidDesc = MobileBy.xpath(
+			"//*[contains(@name,'Either your email or password is incorrect.')] | //*[contains(@name,'User Data')]");
 	private By popUperror = MobileBy
-			.xpath("//*[contains(@resource-id,'tvMessage')]|//*[contains(@text,'Either your email or password is incorrect.')]|//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]|//*[contains(@resource-id,'cvAction')]");
-	private By btnEyeIconPassword = MobileBy.//id("endIconIV");
-			xpath("//*[contains(@resource-id,'endIconIV')]");
-	private By fieldBar = MobileBy.xpath(
-			"//*[contains(@resource-id, 'layoutIndicator')]/*");
-	private By btnCross = MobileBy.xpath("");
-	private By iconFace = MobileBy.xpath("");
+			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
+	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]");
 
-	WebDriverWait wait=new WebDriverWait(DriverFactory.getDriver(), 30);
-	public void clickOk() {
-		click(btnOk, "ok");
+	public void verifyImageCoyniView() {
+		new CommonFunctions().elementView(imgCoyni, "Coyni");
 	}
 
-	public void clickFace() {
-		click(iconFace, "Face Icon");
-	}
-
-	public void VerifyFaceView() {
-		new CommonFunctions().elementView(iconFace, "Face Icon");
-	}
-
-	public FaceIDnotAvailableComponent faceIDnotAvailableComponent() {
-		return new FaceIDnotAvailableComponent();
+	
+	public void clickEmail() {
+		click(txtEmail, "Email");
 	}
 
 	public void fillEmail(String email) {
-		click(txtEmail, "email");
-		enterText(txtEmail, email, "Email ");
+		enterText(txtEmail, email, "email");
 	}
 
-	public void clickCross() {
-		click(btnCross, "Cross");
+	public void clcikPassword() {
+		click(txtPassword, "password");
 	}
 
-	public void verifyEmailview() {
-		new CommonFunctions().elementView(txtEmail, "email");
+	public void fillPassword(String password) {
+		enterText(txtPassword, password, "password ");
 	}
 
-	public void verifyPasswordview() {
-		new CommonFunctions().elementView(txtPassword, "password");
+	public void clickRememberMe() {
+		click(chkBxRememberMe, "Remember");
 	}
 
 	public void verifyRememberMeView() {
-		new CommonFunctions().elementView(chkBxRememberMe, "Remember me");
+		new CommonFunctions().elementView(lblRememberMe, "Rememeber Me");
 	}
 
-	public void verifyRetrieveView() {
-		new CommonFunctions().elementView(lnkRetriveEmail, "Retrieve email");
+	public void clickForgotPassword() {
+		click(lnkForgotPassword, "Forgot Password ");
 	}
 
-	public void verifyPopupMsg(String expText) {
-		new CommonFunctions().verifyLabelText(popUperror, "PopupMessage", expText);
-		
+	public void clickRetrieveEmail() {
+		click(lnkRetrieveEmail, "Retrieve Email ");
 	}
-	public int fieldBarCount() {
-		return getElementList(fieldBar, "field bar").size();
 
+	public void verifyRetrieveEmailView() {
+		new CommonFunctions().elementView(lnkRetrieveEmail, "Retrieve Email");
 	}
+
+	public void verifyRetrievEmailhdgView(String desc) {
+		new CommonFunctions().elementView(lblRetrieveEmail, "RetrieveEmail");
+		new CommonFunctions().verifyLabelText(retrieveEmailDesc, "retrieve Email desc", desc);
+	}
+	public void fillPhoneNumber(String phoneNum) {
+		new CommonFunctions().elementView(imgFlag, "Flag");
+		enterText(txtPhoneNumber, phoneNum, "PhoneNumber");
+	}
+	public void fillFirstName(String firstName) {
+		enterText(txtFirstName, firstName, "firstName");
+	}
+	public void fillLastName(String lastName) {
+		enterText(txtLastName, lastName, "lastName");
+	}
+	
+	public void verifyForgotPasswordView() {
+		new CommonFunctions().elementView(lnkForgotPassword, "forgotPassword");
+	}
+
+	public void verifyNoUserFound(String desc) {
+		new CommonFunctions().elementView(imgNoUserFound, "No User found image");
+		new CommonFunctions().elementView(lblNoUserFound, "No user Found");
+		new CommonFunctions().verifyLabelText(noUserDesc, "No user found desc",desc);
+	}
+	
+	public void verifyWeFoundYourAccount() {
+		new CommonFunctions().elementView(imgWeFoundAccounnt, "image");
+		new CommonFunctions().elementView(lblWeFoundAccount, "We found your Account");
+		new CommonFunctions().elementView(lblUserName, "userName");
+	}
+	
+	public void clickRetyrieveLogin() {
+		if(getElement(btnRetrieveLogin, "Login").isEnabled()) {
+			click(btnRetrieveLogin, "Login");
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("Login button is disabled");
+		}
+	}
+	public void clickThisisNotMe() {
+		if(getElement(btnThisisNotMe, "This is Not Me").isEnabled()) {
+			click(btnThisisNotMe, "ThisisNotMe");
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("ThisisNotMe button is disabled");
+		}
+	}
+	
+	public void clickTryAgain() {
+		if(getElement(btnTryAgain, "Tryb Again").isEnabled()) {
+			click(btnTryAgain, "Try Again");
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("Try Again Button is disabled");
+		}
+	}
+	public void clickcancel() {
+		if(getElement(btnCancel, "Cancel").isEnabled()) {
+			click(btnCancel, "btnCancel");
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("Cancel Button is disabled");
+		}
+	}
+	
+	public void verifyForgotYourPasswordview(String desc) {
+		new CommonFunctions().elementView(lblForgotYourPassword, "Forgot Your Password");
+		new CommonFunctions().verifyLabelText(lblForgotPwdDesc, "Description", desc);
+	}
+	
+	public void clickNext() {
+		if(getElement(btnNext, "Next").isEnabled()) {
+			click(btnNext, "Next");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Next button is disabled");
+		}
+	}
+	
+	public void clickLogin() {
+		if (getElement(btnLogin, "login").isEnabled()) {
+			click(btnLogin, "login button");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("login button  is disabled");
+		}
+	}
+
+	public SignUpPage signUpPage() {
+		return new SignUpPage();
+	}
+
+	/**
+	 * Order - minChar, max, MaxiPlus
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void validateCreatePasswordfields(String password) {
+		String[] field = password.split(",");
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateTextFeild(txtPassword, "password", field[i]);
+//		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
+		}
+		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);
+	}
+
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
+	}
+
+	public void verifyPopupDescription(String expDescription) {
+		new CommonFunctions().verifyLabelText(lblInvalidDesc, "PopupMessage", expDescription);
+	}
+
 	private void minimizePopup() {
 		if (DriverFactory.getDriver().findElement(btnLogin).isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport("Popup is closed");
+			ExtentTestManager.setPassMessageInReport("Invalid credentials error popup closed");
 		} else {
-			ExtentTestManager.setFailMessageInReport("Popup is not closed");
+			ExtentTestManager.setFailMessageInReport("Invalid credentilas error popup not closed");
 		}
+	}
+
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
 	}
 
 	public void minimizePopupBySwipeDown() {
@@ -120,119 +233,4 @@ public class LoginPage extends MobileFunctions {
 		minimizePopup();
 	}
 
-	public void fillPassword(String password) {
-		click(txtPassword, "password");
-		enterText(txtPassword, password, "password ");
-		click(btnEyeIconPassword, "Password Eye Icon");
-	}
-//	public void clickPasswordEye() {
-//		
-//	}
-	public void clickEmail() {
-		click(txtEmail, "email");
-	}
-
-	public void clickPassword() {
-		click(txtPassword, "password");
-		
-	}
-
-	public void clickRetrieveEmail() {
-		click(lnkRetriveEmail, "Retrieve Email ");
-
-	}
-
-	public void clickForgotPassword() {
-		click(lnkForgotPassword, "Forgot Password ");
-
-	}
-
-	public void clickRememberMe() {
-		click(chkBxRememberMe, "Remember");
-	}
-
-	public void VerifyLoginPageView() {
-		new CommonFunctions().elementView(chkBxRememberMe, "Login Page");
-	}
-    public void verifyEmail(String email) {
-    	new CommonFunctions().verifyLabelText(txtEmail, "Email", email);
-    }
-//	public void clickEnter() {
-//		((AndroidDriver)DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.TAB));
-//		
-//	}
-
-	public void clickLogin() throws InterruptedException {
-		click(btnLogin, "Login button");
-		Thread.sleep(1500);
-		if(getElementList(btnLogin, "login").size() > 0) {
-			click(btnLogin, "Login button");
-		}
-	}
-
-	public void ViewCoyni() {
-		new CommonFunctions().elementView(lblCoyni, "Coyni");
-	}
-
-	public FaceIDDisabledComponent faceIDDisabledComponent() {
-		return new FaceIDDisabledComponent();
-	}
-
-	public ForgotPasswordPage forgotPasswordPage() {
-		return new ForgotPasswordPage();
-	}
-
-	public ForgotPinComponent forgotPinPage() {
-		return new ForgotPinComponent();
-	}
-
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
-
-	public RetrieveEmailPage retrieveEmailPage() {
-		return new RetrieveEmailPage();
-	}
-
-	public EnterYourPINComponent enterYourPINComponent() {
-		return new EnterYourPINComponent();
-	}
-
-	public EmailVerificationComponent verifyEmailComponent() {
-		return new EmailVerificationComponent();
-	}
-
-	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
-
-	}
-
-	public void validatePasswordField(String singleChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateField(txtPassword, "password", singleChar);
-		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateField(txtPassword, "password", maxChar);
-		new CommonFunctions().clearText(txtPassword, "password");
-		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", moreThanMax);
-
-	}
-
-	public CoyniInavlidEmailPopup coyniInavlidEmailPopup() {
-		return new CoyniInavlidEmailPopup();
-	}
-
-	public EmailOrPasswordIsIncorrectPopup emailOrPasswordIsIncorrectPopup() {
-		return new EmailOrPasswordIsIncorrectPopup();
-	}
-	
-	public FieldValidationsComponent fieldValidationsComponent() {
-		return new FieldValidationsComponent();
-	}
-	public AgreementComponent agreementComponent() {
-		return new AgreementComponent();
-	}
-	
 }

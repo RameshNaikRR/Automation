@@ -1,37 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [test gift card]">
+<suite name="Failed suite [Verify SignUp with valid credentials]">
   <listeners>
     <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
   </listeners>
-  <test thread-count="5" name="coyni_mobile_merchant.tests.MerchantMenuIconTest.testWithdrawnToUSDGiftCard(failed)">
-    <parameter name="strParams" value="-pcardHeading,
--ppoplurHeading,
--penterCard,
--pgiftCardHeading,
--pamount,
--pfirstName,
--plastName,
--pemail1,
--porderOverview,
--pamazonGift,
--pvalidateGiftCard,
--precipentEmail,
--ppinHeading,
--ppin,
--pbusinessTokenHeading,
--pfundsHeading,
--pbusinessTokenDescription,
--ptransactionDetailsHeading,
--ptransactionType"/>
+  <test thread-count="5" name="coyni_mobile.tests.SignUpTest.testSignUp(failed)">
+    <parameter name="strParams" value=""/>
     <classes>
-      <class name="coyni_mobile_merchant.tests.MerchantMenuIconTest">
+      <class name="coyni_mobile.tests.SignUpTest">
         <methods>
           <include name="init"/>
-          <include name="hideKeyBoard"/>
-          <include name="testWithdrawnToUSDGiftCard" invocation-numbers="0"/>
+          <include name="testSignUp"/>
         </methods>
-      </class> <!-- coyni_mobile_merchant.tests.MerchantMenuIconTest -->
+      </class> <!-- coyni_mobile.tests.SignUpTest -->
     </classes>
-  </test> <!-- coyni_mobile_merchant.tests.MerchantMenuIconTest.testWithdrawnToUSDGiftCard(failed) -->
-</suite> <!-- Failed suite [test gift card] -->
+  </test> <!-- coyni_mobile.tests.SignUpTest.testSignUp(failed) -->
+</suite> <!-- Failed suite [Verify SignUp with valid credentials] -->

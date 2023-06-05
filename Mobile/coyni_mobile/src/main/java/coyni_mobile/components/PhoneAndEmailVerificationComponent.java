@@ -1,142 +1,52 @@
 package coyni_mobile.components;
 
-import org.openqa.selenium.By;
-
-import coyni_mobile.pages.SecureAccountPage;
-import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
+import org.openqa.selenium.By;
+import coyni_mobile.pages.AgreementPage;
+import coyni_mobile.utilities.AndroidCommonFunctions;
 import io.appium.java_client.MobileBy;
 
-public class PhoneAndEmailVerificationComponent extends MobileFunctions {
+public class PhoneAndEmailVerificationComponent extends MobileFunctions{
 
-	private By phoneHeading = MobileBy
-			.xpath("//*[contains(@resource-id,'headerTV')]|//*[contains(@text,'Verify Phone Number')]");
-	private By phoneDescription = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
-	private By txtCode = MobileBy.xpath("//*[contains(@resource-id,'otpPV')]");
-	private By lblDidntGetCode = MobileBy.xpath("//*[@text=\"Didn't get the code?\"]");
-	private By lnkResend = MobileBy.xpath("//*[@text='Resend']");
-	private By btnBackspace = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By emailHeading = MobileBy
-			.xpath("//*[@text='Verify Email']|//*[contains(@text,'Please Verify your Email')]");
-	private By lblEmailText = MobileBy.xpath("//*[contains(@resource-id,'subHeaderTV')]");
-//	private By lblGetCode =MobileBy.xpath("//*[@text='Didn't get the code?']");
-	private By lblNewCode = MobileBy.xpath("//*[@text=' A new code has sent']");
-	private By lblPopupHeading = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By lblPopupMsg = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
-	private By errorPopuphdg = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By errorPopupDesc = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
-
-	public void verifyPopUpView() {
-		new CommonFunctions().elementView(lblPopupHeading, "Popup");
+	private By lblPhoneVerification = MobileBy.AccessibilityId("");
+	private By lblPhoneDesc = MobileBy.AccessibilityId("");
+	private By txtOtp = MobileBy.AccessibilityId("");
+	private By lnkResend = MobileBy.AccessibilityId("");
+	private By lblEmailVerification = MobileBy.AccessibilityId("");
+	private By lblEmailDesc = MobileBy.AccessibilityId("");
+	
+	
+	public void verifyPhoneVerificationView(String desc) {
+		new AndroidCommonFunctions().elementView(lblPhoneVerification, "Phone verification");
+		new AndroidCommonFunctions().verifyLabelText(lblPhoneDesc, "Description", desc);
 	}
-
-	public void verifyPopupHeading(String expPopupHeading) {
-		new CommonFunctions().verifyLabelText(lblPopupMsg, "Popup Heading", expPopupHeading);
+	public void verifyEmailVerificationView(String desc) {
+		new AndroidCommonFunctions().elementView(lblEmailVerification, "Phone verification");
+		new AndroidCommonFunctions().verifyLabelText(lblEmailDesc, "Description", desc);
 	}
-
-	public void verifyPopupMsg(String expPopupMsg) {
-		new CommonFunctions().verifyLabelText(lblPopupMsg, "Popup Message", expPopupMsg);
-	}
-
-	public void clickOk() {
-		click(btnOk, "Ok");
-	}
-
-	public void verifyErrorHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(errorPopuphdg, "Popup Heading", expHeading);
-	}
-
-	public void verifyErrorDesc(String expDesc) {
-		new CommonFunctions().verifyLabelText(errorPopupDesc, "Popup Desc ", expDesc);
-	}
-
-	public void verifyPhoneHeading(String expHeading, String expDescription) {
-		new CommonFunctions().verifyLabelText(phoneHeading, "Page Heading", expHeading);
-//		new CommonFunctions().verifyLabelTextforVerification(phoneDescription, "Phone Description", expDescription1,
-//				expDescription2);
-		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Description", expDescription);
-	}
-
-	public void verifyEmailHeading(String expHeading, String expDescription1, String expDescription2) {
-		new CommonFunctions().verifyLabelText(emailHeading, "Page Heading", expHeading);
-		new CommonFunctions().verifyLabelTextforEmailDescription(lblEmailText, "Email Verification Description",
-				expDescription1, expDescription2);
-//		new CommonFunctions().verifyLabelText(lblEmailText, "Email Verification Description", expDescription);
-	}
-
-	public void verifyPhoneDescription(String expText) {
-		new CommonFunctions().verifyLabelText(phoneDescription, "Phone Verification Description ", expText);
-	}
-
-	public void verifyEmailText(String expText) {
-		new CommonFunctions().verifyLabelText(lblEmailText, "Email Verification Description ", expText);
-	}
-
-	public void getEmailText() {
-		String str = getText(lblEmailText);
-		ExtentTestManager.setInfoMessageInReport(str);
-	}
-
-	public void getPhoneDescription() {
-		String str = getText(phoneDescription);
-		ExtentTestManager.setInfoMessageInReport(str);
-	}
-
-	public void verifyOtpTextFieldView() {
-		new CommonFunctions().elementView(txtCode, "OTP Text field");
-	}
-
-	public void verifyGetCodeView() {
-		new CommonFunctions().elementView(lblDidntGetCode, "Didn't get the code");
-	}
-
-	public void verifyResendView() {
-		new CommonFunctions().elementView(lnkResend, "Resend");
-	}
-
-	public void verifyBackButtonView() {
-		new CommonFunctions().elementView(btnBackspace, "Back Icon");
-	}
-
-	public void clickCloseIcon() {
-		click(btnBackspace, "Back Space");
-	}
-
 	public void clickResend() {
 		click(lnkResend, "Resend");
 	}
-
-	public void verifyNewCodeMsg(String expMessage) {
-		new CommonFunctions().verifyLabelText(lblNewCode, "Message", expMessage);
+	public void fillOtp(String otp) {
+		enterText(txtOtp, otp, "OTP");
 	}
-
-//	public void verifyRemove(String invalidPin, By ele) {
-//		fillPin(invalidPin);
-//		click(btnBackspace, "Backspace");
-//		String text = new CommonFunctions().getTextBoxValue(ele);
-//		if (text.equalsIgnoreCase(invalidPin)) {
-//			ExtentTestManager.setPassMessageInReport("Backspace is working");
-//		} else {
-//			ExtentTestManager.setFailMessageInReport("Backspace is not working");
-//		}
-//	}
-
-//	public void verifyRemoveCode(String invalidPin) {
-//		verifyRemove(invalidPin, txtCode);
-//	}
-
-	public void fillOtp(String pin) {
-		enterText(txtCode, pin, "pin");
+	public AgreementPage agreementPage() {
+		return new AgreementPage();
 	}
-
-	public void fillPin(String pin) throws InterruptedException {
-		new EnterYourPINComponent().fillPin(pin);
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
 	}
-
-	public SecureAccountPage secureAccountPage() {
-		return new SecureAccountPage();
+	
+	public CreatePasswordComponent createPasswordComponent() {
+		return new CreatePasswordComponent();
 	}
-
+	public void verifyResendView() {
+		new AndroidCommonFunctions().elementView(lnkResend, "Resend");
+	}
+	
+	
+	
+	
+	
+	
 }

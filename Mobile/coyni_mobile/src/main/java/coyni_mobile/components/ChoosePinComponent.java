@@ -2,62 +2,83 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.pages.EnableFaceIDpage;
-import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.pages.DashboardPage;
+import coyni_mobile.pages.EnableFaceOrTouchIDpage;
+import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ChoosePinComponent extends MobileFunctions {
+	private By lblEnterYourPin = MobileBy.AccessibilityId("");
+	private By btnLogout = MobileBy.AccessibilityId("");
+	private By btnForgotPin = MobileBy.AccessibilityId("");
+	private By lblChoosePinDes = MobileBy.AccessibilityId("");
+	private By lblChooseYourPin = MobileBy.AccessibilityId("");
+	private By txtPin = MobileBy.xpath("//*[contains(@name,'PIN')]/following-sibling::*[1]");
+	private By lblConfirmYourPin = MobileBy.AccessibilityId("");
+	private By lblPinErr = MobileBy.AccessibilityId("");
 
-	private By heading1 = MobileBy.xpath("//*[@text='Choose your PIN']");
+	private By getOneNumberOfPin(char num) {
 
-	private By heading2 = MobileBy.xpath("//*[@text='Confirm your PIN']");
+		return MobileBy.xpath(String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 
-	private By lblPinMatching = MobileBy.xpath("//*[contains(@resource-id,'toastTV')]");
-
-	public EnterYourPINComponent enterYourPINComponent() {
-		return new EnterYourPINComponent();
-	}
-
-	public NavigationComponent navigationComponent() {
-		return new NavigationComponent();
-	}
-
-	public void verifyChoosePinHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading1, "heading", expHeading);
 	}
 
 	public void verifyChooseYourPinView() {
-		new CommonFunctions().elementView(heading1, "Choose your Pin ");
+		new AndroidCommonFunctions().elementView(lblChooseYourPin, "Choose Your Pin");
+		ExtentTestManager.setInfoMessageInReport("The Text is :" + getText(lblChoosePinDes));
 	}
 
-	public void verifyConfirmPinHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading2, "heading", expHeading);
+	public void fillPin(String pin) {
+		enterText(txtPin, pin, "pin");
+	}
+
+	public void fillPins(String pin) {
+
+		System.out.println(pin.length());
+
+		for (int i = 0; i < pin.length(); i++) {
+
+			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
+
+		}
+
 	}
 
 	public void verifyConfirmYourPinView() {
-		new CommonFunctions().elementView(heading2, "Confirm your Pin");
+		new AndroidCommonFunctions().elementView(lblConfirmYourPin, "Confirm Your Pin");
 	}
 
-	public void fillPin(String pin) throws InterruptedException {
-		new EnterYourPINComponent().fillPin(pin);
+	public void verifyEnterYourPinView() {
+		new AndroidCommonFunctions().elementView(lblEnterYourPin, "Enter Pin");
 	}
 
-	public EnableFaceIDpage enableFaceIDpage() {
-		return new EnableFaceIDpage();
+	public void verifyLogoutView() {
+		new AndroidCommonFunctions().elementView(btnLogout, "Logout");
 	}
 
-	public void verifyPinMatching(String expPinMatchingText) {
-		new CommonFunctions().verifyLabelText(lblPinMatching, "Pin Matching Text", expPinMatchingText);
+	public void verifyForgotPinView() {
+		new AndroidCommonFunctions().elementView(btnForgotPin, "Forgot Pin");
 	}
 
-	public void verifyPinMissMatch() {
-		if (verifyElementDisplayed(heading2, "Confirm Your Pin")) {
-			ExtentTestManager.setPassMessageInReport("Pin is miss matched");
-		} else {
-			ExtentTestManager.setFailMessageInReport("pin is matched");
-		}
+	public void clickLogout() {
+		click(btnLogout, "Logout");
 	}
 
+	public void clickForgotPin() {
+		click(btnForgotPin, "forgot Pin");
+	}
+
+	public EnableFaceOrTouchIDpage enableFaceOrTouchIDpage() {
+		return new EnableFaceOrTouchIDpage();
+	}
+
+	public DashboardPage dashboardPage() {
+		return new DashboardPage();
+	}
+	
+	public PhoneAndEmailVerificationComponent  phoneAndEmailVerificationComponent() {
+		return new PhoneAndEmailVerificationComponent();
+	}
 }

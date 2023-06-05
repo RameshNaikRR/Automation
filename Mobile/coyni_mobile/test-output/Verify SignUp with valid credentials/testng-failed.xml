@@ -5,18 +5,12 @@
     <listener class-name="ilabs.mobile.reporting.TestStatusListener"/>
   </listeners>
   <test thread-count="5" name="coyni_mobile.tests.SignUpTest.testSignUp(failed)">
-    <parameter name="strParams" value="-pcreateAccount,
--pfirstName,
--plastName,
--pemail,
--pphoneNumber,
--ppassword,
--pconfirmPassword"/>
+    <parameter name="strParams" value=""/>
     <classes>
       <class name="coyni_mobile.tests.SignUpTest">
         <methods>
           <include name="init"/>
-          <include name="testSignUp" invocation-numbers="0"/>
+          <include name="testSignUp"/>
         </methods>
       </class> <!-- coyni_mobile.tests.SignUpTest -->
     </classes>

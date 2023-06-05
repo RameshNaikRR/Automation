@@ -1,79 +1,309 @@
 package coyni_mobile.pages;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import coyni_mobile.components.AddNewPaymentComponent;
-import coyni_mobile.components.FieldValidationsComponent;
+import com.google.common.util.concurrent.Uninterruptibles;
+
+import coyni_mobile.components.AddCardComponent;
+import coyni_mobile.components.MailingAddressComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class SignUpPage extends MobileFunctions {
+//
+//	private By btnGetStarted = MobileBy
+//			.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
+//
+////	private By lblCreateAccount = MobileBy.xpath("//*[@text='Create Account']|//*[@name='Create Account']");
+//	private By lblCreateAccount = MobileBy.AccessibilityId("Create Account");
+////private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]|(//*[@name='First Name'])[1]");
+////	private By txtFirstName = MobileBy.AccessibilityId("First Name");
+////	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'lastNameET')]|(//*[@name='Last Name'])[1]");
+////	private By txtLastName = MobileBy.AccessibilityId("Last Name");
+////	private By txtEmail = MobileBy.xpath("(//*[@name='Email'])[1] | (//*[contains(@name,'Email')])[1]");
+////	private By txtEmail = MobileBy.AccessibilityId("Email");
+//	private By txtEmailField = MobileBy.AccessibilityId("Email Text Field");
+////	private By txtPhoneNumber = MobileBy.xpath("//*[@name='Phone Number']");
+//	private By txtPhoneNumber = MobileBy.AccessibilityId("Phone Number");
+////	private By txtPassword = MobileBy.xpath("(//*[contains(@name,'Password')])[1]");
+////	private By txtPassword = MobileBy.AccessibilityId("Password");
+////	private By txtConfirmPassword = MobileBy
+////			.xpath("//*[contains(@resource-id,'confirmPasswordET')]|(//*[@name='Confirm Password'])[1]");
+//	private By txtConfirmPassword = MobileBy.AccessibilityId("Confirm Password");
+//	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'nextCV')]|(//*[@name='Next'])[1]");
+//	private By lblPasswordReq = MobileBy.xpath("//*[contains(@name,'Must')]");
+//	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
+//	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
+//	private By btnDone = MobileBy.xpath("//*[@name='Done']");
+//	private By chckbx = MobileBy.xpath("//*[@name='I agree to']/preceding-sibling::*[1]");
+//    private By lblPhnNumErrMsg = MobileBy.xpath("//*[contains(@name,'Entered phone number already')]");
+//    private By btnOk = MobileBy.xpath("//XCUIElementTypeButton[@name='OK']");
+//    
+//    private By lblPwdDoesnotErrMsg = MobileBy.AccessibilityId("Password doesn’t match");
+//    
+//    
+//    public void verifyPhnNumErrorMsg(String expHeading) {
+//    	new CommonFunctions().verifyLabelText(lblPhnNumErrMsg, "Error Msg", expHeading);
+//    }
+//    public void clickOk() {
+//    	click(btnOk, "Ok");
+//    }
+//    
+//	public void clickDone() {
+//	//	Uninterruptibles.sleepUninterruptibly(10, TimeUnit.SECONDS);
+//		if (getElementList(btnDone, "").size() > 0) {
+//			click(btnDone, "Done");
+////			DriverFactory.getDriver().findElement(btnDone).click();
+//		}
+//	//	click(btnDone, "Done");
+//	}
+//
+//	
+//	public void clickCheckBox() {
+//		click(chckbx, "Check box");
+//	}
+//
+//	public void verifyCreateAccount(String createAccount) {
+//		new CommonFunctions().verifyLabelText(lblCreateAccount, createAccount, "Create Account");
+//	}
+//    public void verifyPasswordREquirementError(String errMSg) {
+//    	if(getElementList(lblPasswordReq, "Password error").size()>0) {
+//    	new CommonFunctions().verifyLabelText(lblPasswordReq, "Password error",  errMSg);
+//    }
+//    }
+//	
+//    public void verifyPwdNotMatched(String expErr) {
+//    new CommonFunctions().verifyLabelText(lblPwdDoesnotErrMsg, "Confirm Password error message ", expErr);	
+//    }
+//    
+//	
+//
+//	public void fillEmail(String email) {
+//		click(txtEmail, "email");
+//		enterText(txtEmail, email, "Email");
+//	//	clickDone();
+//	}
+//
+//	public void fillPhoneNumber(String phoneNumber) {
+//		scrollDownToElement(txtPhoneNumber, "Password");
+//	//	click(txtPhoneNumber, "Phone Number");
+//		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
+//	//	clickDone();
+//	}
+//
+//	
+//	public void fillConfirmPassword(String confirmPassword) {
+//		scrollDownToElement(txtConfirmPassword, "Confirm Password");
+//		click(txtConfirmPassword, "Confirm Password");
+//		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
+//		if (!new CommonFunctions().isPlatformiOS()) {
+//			pressBack();
+//		}
+//		clickDone();
+//	}
+//
+//	public void clickNext() {
+//		scrollDownToElement(btnNext, "Next");
+//		click(btnNext, "Next");
+//	}
+//
+//	public void validateCreatePassword() {
+//		if (getElementList(lblPasswordReq, "Password Requirement").size() > 0) {
+//			ExtentTestManager.setInfoMessageInReport("Password is invalid");
+//		} else {
+//			ExtentTestManager.setInfoMessageInReport("password is valid");
+//		}
+//	}
+//
+//	public void validatePhoneErrorMsg(String errMessage, String elementName) {
+//		new CommonFunctions().validateFormErrMsg(errMessage, elementName);
+//	}
+//
+//	public void verifyPhoneHeading(String expHeading) {
+//		new CommonFunctions().verifyLabelText(headingPhoneNumber, "Phone Heading", expHeading);
+//	}
+//
+//	public void verifyPhoneNumberText(String phoneNumber) {
+//		new CommonFunctions().verifyLabelText(headingPhoneNumber, phoneNumber, phoneNumber);
+//	}
+//
+//	public void clickResend() {
+//		click(lnkResend, "Resend");
+//	}
+//
+//	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
+//		return new PhoneAndEmailVerificationComponent();
+//	}
+//
 
-	private By btnGetStarted = MobileBy
-			.xpath("//*[contains(@resource-id,'getStartedLL')]|(//*[@name='Get Started'])[1]");
-	private By lnkPersonalAccount = MobileBy
-			.xpath("//*[contains(@resource-id,'personalAccontLL')]|//*[@name='Personal']/preceding-sibling::*[2]");
-	private By lnKBusinessAccount = MobileBy.xpath("//*[contains(@resource-id,'businessAccontLL')]");
-	private By lblCreateAccount = MobileBy.xpath("//*[@text='Create Account']|//*[@name='Create Account']");
-	private By txtFirstName = MobileBy.xpath("//*[contains(@resource-id,'firstNameET')]|(//*[@name='First Name'])[1]");
-	private By txtLastName = MobileBy.xpath("//*[contains(@resource-id,'lastNameET')]|(//*[@name='Last Name'])[1]");
-	private By txtEmail = MobileBy.xpath("//*[contains(@resource-id,'emailET')]|(//*[@name='Email'])[1]");
-	private By txtPhoneNumber = MobileBy
-			.xpath("//*[contains(@resource-id,'pnET')]|(//*[@name='usa'])/preceding-sibling::*[1]");
-	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'passwordET')]|(//*[@name='Password'])[1]");
-	private By btnEyeIconPassword = MobileBy.xpath("(//*[contains(@resource-id,'text_input_end_icon')])[1]");
-	private By btnEyeIconConfirm = MobileBy.xpath("(//*[contains(@resource-id,'text_input_end_icon')])[2]");
-	private By txtConfirmPassword = MobileBy
-			.xpath("//*[contains(@resource-id,'confirmPasswordET')]|(//*[@name='Confirm Password'])[1]");
-	private By btnNext = MobileBy.xpath("//*[contains(@resource-id,'nextCV')]|(//*[@name='Next'])[1]");
-	private By fieldBar = MobileBy.xpath(
-			"//*[contains(@resource-id, 'stregnthViewLL')]/*|(//*[@name='Password'])[1]/following-sibling::*[1]/descendant::*");
-	private By headingPhoneNumber = MobileBy.xpath("//*[@text='Please Verify Your Phone Number']");
-	private By lnkResend = MobileBy.xpath("//*[contains(@resource-id,'resendTV')]");
-	private By iconBackArrow = MobileBy.xpath("//*[contains(@resource-id,'otpValidationCloseIV')]");
-	private By iconCrossMark = MobileBy.xpath("//*[contains(@resource-id,'imgClose')]");
-	private By btnDone = MobileBy.xpath("//*[@name='Done']");
-	private By lblPhoneErr = MobileBy.xpath("//*[contains(@resource-id,'tvMessage')]");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
+//	/**
+//	 * Order -minChar, maxChar,maxiPlus
+//	 */
+//	public void validateEmailFields(String email) {
+//		String[] field = email.split(",");
+//		for (int i = 0; i < 2; i++) {
+//			new CommonFunctions().validateField(txtEmailField, "Email", field[i]);
+//		}
+//		new CommonFunctions().validateFieldMaxichar(txtEmailField, "Email", field[2]);
+//	}
+//
+//	
+//	/**
+//	 * Order - minChar, max, MaxiPlus
+//	 * @throws InterruptedException 
+//	 */
+//	public void validateCreatePasswordfields(String password) {
+//		String[] field = password.split(",");
+//		for(int i=0;i<2;i++) {
+//		new CommonFunctions().validateTextFeild(txtPassword, "password", field[i]);
+////		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
+//		}
+//		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);	
+//	}
+//	
+//	/**
+//	 * Order - minChar, max, MaxiPlus
+//	 * @throws InterruptedException 
+//	 */
+//	public void CreatePasswordfields(String password) {
+//		String[] field = password.split(",");
+//	//	for(int i=0;i<2;i++) {
+//		new CommonFunctions().validateTextFeild(txtPassword, "password", field[0]);
+//		new CommonFunctions().validateTextFeild(txtPassword, "password", field[1]);
+////		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
+//	//	}
+//		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);	
+//	}
+//	
+//	
+//	
+//	public void validateConfirmPasswordfields(String password) throws InterruptedException {
+//		String[] field = password.split(",");
+//		for(int i=0;i<2;i++) {
+//		new CommonFunctions().validateTextFeild(txtConfirmPassword, "password", field[i]);
+//	//	Thread.sleep(1000);
+//	//	new CommonFunctions().validateField(txtPassword, "password", field[1]);
+//		}
+//		new CommonFunctions().validateFieldMaxichar(txtConfirmPassword, "password", field[2]);	
+//	}
+//	
+//
 
-	public void clickDone() {
-		if (new CommonFunctions().isPlatformiOS()) {
-			click(btnDone, "Done");
+//	
+//	public void validateAddressField(By ele, String eleName, String textField) {
+//		String[] field = textField.split(",");
+//		new CommonFunctions().validateField(ele, eleName, field[0]);
+//		new CommonFunctions().validateField(ele, eleName, field[1]);
+//		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[2]);
+//	}
+//	
+//	
+//	
+//
+//	public void validateFirstNameField(String firstName) {
+//		validateNameField(txtFirstName, "First Name", firstName);
+//	//	clickDone();
+//	}
+//
+//	public void validateLastNameField(String LastName) {
+//		validateNameField(txtLastName, "Last Name", LastName);
+//	//	clickDone();
+//	}
+//
+//	public NavigationComponent navigationComponent() {
+//		return new NavigationComponent();
+//	}
+//
+
+//
+//	public MailingAddressComponent mailingAddressComponent() {
+//		return new MailingAddressComponent();
+//	}
+//	
+
+//    
+
+//	public TokenAccountPage tokenAccountPage() {
+//		return new TokenAccountPage();
+//	}
+//	public void companyInfoComponent() {
+//		// TODO Auto-generated method stub
+//
+//	}
+
+	/**************
+	 * 
+	 */
+	private By lblPhoneNumber = MobileBy.AccessibilityId("");
+	private By txtPhoneNumbers = MobileBy.AccessibilityId("");
+	private By txtPhoneDesc = MobileBy.AccessibilityId("");
+	private By drpdwnPhNum = MobileBy.AccessibilityId("");
+	private By txtSearchField = MobileBy.AccessibilityId("");
+	private By btnSearchCross = MobileBy.AccessibilityId("");
+	private By btnContinue = MobileBy.AccessibilityId("");
+	private By lblEmail = MobileBy.AccessibilityId("");
+	private By lblEmailDesc = MobileBy.AccessibilityId("");
+	private By txtEmail = MobileBy.AccessibilityId("");
+	private By lblName = MobileBy.AccessibilityId("");
+	private By lblNameDesc = MobileBy.AccessibilityId("");
+	private By txtFirstName = MobileBy.AccessibilityId("");
+	private By txtLastName = MobileBy.AccessibilityId("");
+	private By lblPassword = MobileBy.AccessibilityId("");
+	private By lblPasswordDesc = MobileBy.AccessibilityId("");
+	private By txtPassword = MobileBy.AccessibilityId("");
+	private By btnEye = MobileBy.AccessibilityId("");
+	private By txtPwdErrMSg = MobileBy.AccessibilityId("");
+
+	public void VerifyPhoneNumberView(String phoneNumDesc) {
+		new CommonFunctions().elementView(lblPhoneNumber, "Phone Number Heading");
+		new CommonFunctions().verifyLabelText(txtPhoneDesc, "Phone Number Description is", phoneNumDesc);
+	}
+
+	public void fillPhoneNumbers(String PhoneNumber) {
+		enterText(txtPhoneNumbers, PhoneNumber, "PhoneNumber");
+	}
+
+	public void clickDopdown() {
+		click(drpdwnPhNum, "Dropdown");
+	}
+
+	public void fillSearch(String country) {
+		enterText(txtSearchField, country, "country");
+	}
+
+	public void clickSearchCross() {
+		click(btnSearchCross, "Cross");
+	}
+
+	public void clickContinue() {
+		if (getElement(btnContinue, "Continue").isEnabled()) {
+			click(btnContinue, "Contiue");
 		}
 	}
 
-	public void clickGetStarted() {
-		click(btnGetStarted, "Get Started");
+	public void verifyEmailView(String emailDesc) {
+		new CommonFunctions().elementView(lblEmail, "Email heading");
+		new CommonFunctions().verifyLabelText(lblEmailDesc, "Description", emailDesc);
+	}
+	public void fillEmail(String email) {
+		enterText(txtEmail, email, "Email");	
 	}
 
-	public void verifyGetStarted() {
-		new CommonFunctions().elementView(btnGetStarted, "Get Started");
-	}
-
-	public void clickPersonalAccount() {
-		click(lnkPersonalAccount, "Personal Account");
-	}
-	public void verifyPersonalAccount() {
-		new CommonFunctions().elementView(lnkPersonalAccount, "Personal Account");
-	}
-
-	public void clickBusinessAccount() {
-		click(lnKBusinessAccount, "Business Account");
-	}
-    public void verifyBusinessAccount() {
-    	new CommonFunctions().elementView(lnKBusinessAccount, "Business Account");
-    }
-	
-	public void verifyCreateAccount(String createAccount) {
-		new CommonFunctions().verifyLabelText(lblCreateAccount, createAccount, "Create Account");
+	public void verifyNameView(String nameDesc) {
+		new CommonFunctions().elementView(lblName, "Email");
+		new CommonFunctions().verifyLabelText(lblNameDesc, "Description", nameDesc);
 	}
 
 	public void fillFirstName(String firstName) {
-		new CommonFunctions().verifyAutoFocusElement(txtFirstName, "firstName");
 		click(txtFirstName, "firstName");
 		enterText(txtFirstName, firstName, "FirstName");
 	}
@@ -83,152 +313,104 @@ public class SignUpPage extends MobileFunctions {
 		enterText(txtLastName, lastName, "LastName");
 	}
 
-	public void fillEmail(String email) {
-		click(txtEmail, "email");
-		enterText(txtEmail, email, "Email");
-	}
-
-	public void fillPhoneNumber(String phoneNumber) {
-		click(txtPhoneNumber, "Phone Number");
-		enterText(txtPhoneNumber, phoneNumber, "PhoneNumber");
-		DriverFactory.getDriver().hideKeyboard();
-//		scrollDownToElement(txtPassword, "Password");
-		clickDone();
+	public void verifyPasswordView(String passwordDesc) {
+		new CommonFunctions().elementView(lblPassword, "Password");
+		new CommonFunctions().verifyLabelText(lblPasswordDesc, "Description", passwordDesc);
 	}
 
 	public void fillPassword(String password) {
 		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		clickDone();
-	}
-	public void clickPasswordEye() {
-		click(btnEyeIconPassword, "Password");
-	}
-	public void clickConfirmEye() {
-		click(btnEyeIconConfirm, "Confirm Password");
+		// clickDone();
 	}
 
-	public void fillConfirmPassword(String confirmPassword) {
-		scrollDownToElement(txtConfirmPassword, "Confirm Password");
-		click(txtConfirmPassword, "Confirm Password");
-		enterText(txtConfirmPassword, confirmPassword, "Confirm Password");
-		new CommonFunctions().clickTab();
-		if (!new CommonFunctions().isPlatformiOS()) {
-			pressBack();
-		}
-		clickDone();
-	}
-	public void verifyPhoneError(String expText) {
-		new CommonFunctions().verifyLabelText(lblPhoneErr, "Error Message", expText);
-	}
-	public void clickOk() {
-		click(btnOk, "Ok");
+	public void clickEye() {
+		click(btnEye, "Eye");
 	}
 
-	public void clickNext() {
-//		scrollDownToElement(btnNext, "Next");
-//		if (getElement(btnNext, "Next").isEnabled()) {
-//			click(btnNext, "Next");
-//			ExtentTestManager.setInfoMessageInReport("Next button is in enable mode");
-//		}else {
-//			ExtentTestManager.setInfoMessageInReport("Next buttton is in disabled mode");
-//		}
-		scrollDownToElement(btnNext, "Next");
-		click(btnNext, "Next");
-	}
-
-	public int fieldBarCount() {
-		return getElementList(fieldBar, "field bar").size();
-
-	}
-
-	public void verifyPhoneHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(headingPhoneNumber, "Phone Heading", expHeading);
-	}
-
-	public void verifyPhoneNumberText(String phoneNumber) {
-		new CommonFunctions().verifyLabelText(headingPhoneNumber, phoneNumber, phoneNumber);
-	}
-
-	public void clickResend() {
-		click(lnkResend, "Resend");
-	}
-
-	public void clickBackArrow() {
-		click(iconBackArrow, "Back Arrow");
-	}
-
-	public void clickCrossMark() {
-		click(iconCrossMark, "Cross Mark");
-	}
-
-	public void fieldValidations() {
-		WebElement numberField = DriverFactory.getDriver()
-				.findElement(By.xpath("//*[contains(@resource-id,'firstNameET')]"));
-		numberField.sendKeys("1234");
-		// Retrieve typed value
-		String typedValue1 = numberField.getAttribute("value");
-		// Get the length of typed value
-		int size1 = typedValue1.length();
-
-		if (size1 == 0) {
-			System.out.println("Special characters are not allowed");
-		} else {
-			System.out.println("Characters are allowed");
-		}
-
-	}
-
-	public void validateFirstName(String singleChar, String maxChar, String moreThanMax) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtFirstName, "First Name", specialChar);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-//		new CommonFunctions().validateFieldWithNumber(txtFirstName, "First Name", number);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
-		new CommonFunctions().validateFieldMaxichar(txtFirstName, "First Name", moreThanMax);
-		new CommonFunctions().clearText(txtFirstName, "First Name");
-		new CommonFunctions().validateField(txtFirstName, "First Name", singleChar);
-		new CommonFunctions().clearText(txtFirstName, "First Name");
-		new CommonFunctions().validateField(txtFirstName, "First Name", maxChar);
-	}
-
-	public void validateLastName(String singleChar, String maxChar, String moreThanMax) {
-//		new CommonFunctions().validateFieldWithSpecialchar(txtLastName, "Last Name", specialChar);
-//		new CommonFunctions().clearText(txtLastName, "Last Name");
-//		new CommonFunctions().validateFieldWithalphabet(txtLastName, "Last Name", number);
-//		new CommonFunctions().clearText(txtLastName, "Last Name");
-		new CommonFunctions().validateFieldMaxichar(txtLastName, "Last Name", moreThanMax);
-		new CommonFunctions().clearText(txtLastName, "Last Name");
-		new CommonFunctions().validateField(txtLastName, "Last Name", singleChar);
-		new CommonFunctions().clearText(txtLastName, "Last Name");
-		new CommonFunctions().validateField(txtLastName, "Last Name", maxChar);
-	}
-
-	public void validateEmailField(String minChar, String maxChar, String moreThanMax) {
-		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", moreThanMax);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", minChar);
-		new CommonFunctions().clearText(txtEmail, "Email");
-		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
-
-	}
-
-	public void validatePhoneNumber(String maxChar, String moreThanMax) {
-		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", moreThanMax);
-		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
-		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", maxChar);
+	public void verifyPasswordErrorMSg(String errMsg) {
+		new CommonFunctions().verifyLabelText(txtPwdErrMSg, "errMsg", errMsg);
 	}
 
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
 	}
 
-	public FieldValidationsComponent fieldValidationsComponent() {
-		return new FieldValidationsComponent();
+	/**
+	 * Order -minChar, MaxiPlus
+	 */
+	public void validatePhoneNumber(String phoneNumber) {
+		String[] field = phoneNumber.split(",");
+		for (int i = 0; i < 1; i++) {
+			new CommonFunctions().validateField(txtPhoneNumbers, "Phone Number", field[0]);
+		}
+		new CommonFunctions().validateFieldMaxichar(txtPhoneNumbers, "Phone Number", field[1]);
 	}
-   public PaymentMethodsPage paymentMethodsPage() {
-	return new PaymentMethodsPage();
-}
-   public AddNewPaymentComponent addNewPaymentComponent() {
-	   return new AddNewPaymentComponent();
-   }
+
+	/**
+	 * Order -minChar, maxChar,maxiPlus
+	 */
+	public void validateEmail(String email) {
+		String[] field = email.split(",");
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateField(txtEmail, "Email", field[i]);
+		}
+		new CommonFunctions().validateFieldMaxichar(txtEmail, "Email", field[2]);
+	}
+
+	/**
+	 * // Order -minChar, maxChar, specialChar, Number, maxiPlus
+	 */
+	public void validateNameField(By ele, String eleName, String textField) {
+		String[] field = textField.split(",");
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateField(ele, eleName, field[i]);
+		}
+		System.out.println(textField.length());
+		for (int j = 2; j < 4; j++) {
+			System.out.println(field[j]);
+			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
+		}
+		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
+	}
+
+	public void validateFirstNameField(String firstName) {
+		validateNameField(txtFirstName, "First Name", firstName);
+		// clickDone();
+	}
+
+	public void validateLastNameField(String LastName) {
+		validateNameField(txtLastName, "Last Name", LastName);
+		// clickDone();
+	}
+
+	/**
+	 * Order - minChar, max, MaxiPlus
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void CreatePasswordfields(String password) {
+		String[] field = password.split(",");
+		// for(int i=0;i<2;i++) {
+		new CommonFunctions().validateTextFeild(txtPassword, "password", field[0]);
+		new CommonFunctions().validateTextFeild(txtPassword, "password", field[1]);
+//		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
+		// }
+		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);
+	}
+
+	public DashboardPage dashboardPage() {
+		return new DashboardPage();
+	}
+
+	public CustomerProfilePage customerProfilePage() {
+		return new CustomerProfilePage();
+	}
+
+	public AddCardComponent addCardComponent() {
+		return new AddCardComponent();
+	}
+	public LoginPage loginPage() {
+		return new LoginPage();
+	}
 }

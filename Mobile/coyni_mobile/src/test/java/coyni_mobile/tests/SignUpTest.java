@@ -2,18 +2,12 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import coyni_mobile.components.UploadDocumentComponent;
 import coyni_mobile.pages.LandingPage;
-import coyni_mobile.pages.LoginPage;
 import coyni_mobile.pages.SignUpPage;
-import coyni_mobile.utilities.CommonFunctions;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
@@ -21,369 +15,327 @@ public class SignUpTest {
 
 	SignUpPage signUpPage;
 	LandingPage landingPage;
-	UploadDocumentComponent uploadDocumentComponent;
-	CustomerProfileTest customerProfileTest;
-	LoginPage loginPage;
-
-	// @BeforeTest
 
 	@BeforeMethod
 	public void init() {
-		DriverFactory.getDriver().resetApp();
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
-		loginPage = new LoginPage();
 	}
 
-	@AfterMethod
-	public void DenyPermission() throws InterruptedException {
-		uploadDocumentComponent.clickDeny();
-	}
 
-	// 2.0//
+//	/**
+//	 * testCreateAccountInvalidData script is to test By giving Invalid data in the
+//	 * text fields and validating Error messages.
+//	 * 
+//	 * @param strParams
+//	 */
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testCreateAccountInvalidData(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			landingPage.clickGetStarted();
+//			landingPage.chooseAccountPage().clickPersonalAccount();
+//			signUpPage.verifyCreateAccount(data.get("createAccount"));
+//			signUpPage.fillFirstName(data.get("firstName"));
+//			signUpPage.fillLastName(data.get("lastName"));
+//			signUpPage.fillEmail(data.get("email"));
+//			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
+//			signUpPage.fillPassword(data.get("password"));
+//			if (data.get("validatePassword").equalsIgnoreCase("Yes")) {
+//				signUpPage.verifyPasswordREquirementError(data.get("errMessage"));
+//			}
+//			Thread.sleep(1000);
+//			// signUpPage.validateCreatePassword();
+//			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
+//			if (data.get("validatePhoneNumber").equalsIgnoreCase("Yes")) {
+//				signUpPage.clickNext();
+//				signUpPage.verifyPhnNumErrorMsg(data.get("phNumErrorMsg"));
+//				signUpPage.clickOk();
+//			}
+//			if (data.get("validateConfirmPassword").equalsIgnoreCase("Yes")) {
+//				signUpPage.verifyPwdNotMatched(data.get("errMessage"));
+//			}
+//			if (data.get("validateErrorMessage").equalsIgnoreCase("Yes")) {
+//				Thread.sleep(1000);
+//				if (!data.get("errMessage").isEmpty() /* && !data.get("elementName").equals("Phone Number") */) {
+//
+//					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
+//				}
+//			}
+////			if (data.get("elementName").equals("Phone Number")) {
+////				signUpPage.validatePhoneErrorMsg(data.get("errMessage"), data.get("elementName"));
+////			}
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//
+//	}
+//
+//	/**
+//	 * testFieldValidationCreateAccount script is to test the field validations for
+//	 * create account text fields.
+//	 * 
+//	 * @param strParams
+//	 */
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testFieldValidationCreateAccount(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			landingPage.clickGetStarted();
+//			landingPage.chooseAccountPage().clickPersonalAccount();
+//			signUpPage.validateFirstNameField(data.get("firstName"));
+//			signUpPage.validateLastNameField(data.get("lastName"));
+////			signUpPage.validateEmail(data.get("email"));
+////			signUpPage.validatePhoneNumber(data.get("phoneNumber"));
+//			Thread.sleep(10000);
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//		}
+//
+//	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testSignUp(String strParams) {
-
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.clickPersonalAccount();
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("lastName"));
-			signUpPage.fillEmail(data.get("email"));
-			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			signUpPage.fillPassword(data.get("password"));
-			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickNext();
-			// signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			// signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyTermsOfServiceUpdateForSignUp(data.get("termsOfServiceHeading"), data.get("toastMessage"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyPrivacyPolicyHeadingForSignUp(data.get("privacyPolicyHeading"), data.get("toastMessage"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyHeading(data.get("secureYourAccountHeading"), data.get("secureAccountDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.verifyChoosePinHeading(data.get("choosePinHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.fillPin(data.get("pin"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.fillPin(data.get("pin"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.verifyHeading(data.get("enableFaceIdHeading"), data.get("idDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.clickNotNow();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().verifyHeading(data.get("createAccountHeading"));
+//			String[] phoneHeading = data.get("phoneVerificationHeading").split(",");
+//			if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
+			//if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
+			landingPage.verifyCoyniView();
+			landingPage.verifyCoyniDesc();
+			landingPage.clickSignUp();
+						
+
+//			landingPage.clickGetStarted();
+//			landingPage.chooseAccountPage().clickPersonalAccount();
+//		//	if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
+//			signUpPage.verifyCreateAccount(data.get("createAccount"));
+//			signUpPage.fillFirstName(data.get("firstName"));
+//			signUpPage.fillLastName(data.get("lastName"));
+//			signUpPage.fillEmail(data.get("email"));
+//			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
+//			signUpPage.fillPassword(data.get("password"));
+//			Thread.sleep(1000);
+//			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
+//			Thread.sleep(2000);
+//		//	signUpPage.clickCheckBox();
+//			signUpPage.clickNext();
+//		    String lblPhoneHeading = signUpPage.phoneAndEmailVerificationComponent().getPhoneHeading();
+//		    if(lblPhoneHeading.contains("Please Verify")) {
+//		     	signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(phoneHeading[0]);
+//		    }
+//		    	else{
+//		    		signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(phoneHeading[1]);
+//		    	}
+//	//		signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().fillOTP(data.get("code"));
+//			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().fillOTP(data.get("code"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().TermsOfservice();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickchkBx();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNextButton();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().scrollPrivacyPOlicy();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickchkBx();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickFinishSignUp();
+//			}
+//			if(data.get("validatePhoneOtp").equalsIgnoreCase("Yes")) {
+//				landingPage.clickLogin();
+//				signUpPage.loginPage().fillEmail(data.get("email"));
+//				signUpPage.loginPage().fillPassword(data.get("password"));
+//				signUpPage.loginPage().clickLogin();
+//				 String lblPhoneHeading = signUpPage.phoneAndEmailVerificationComponent().getPhoneHeading();
+//				    if(lblPhoneHeading.contains("Please Verify")) {
+//				     	signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(phoneHeading[0]);
+//				    }
+//				    	else{
+//				    		signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(phoneHeading[1]);
+//				    	}
+//				signUpPage.phoneAndEmailVerificationComponent().fillOTP(data.get("code"));
+//			}
+//			if(data.get("validatePin").equalsIgnoreCase("Yes")) {
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
+//					.verifyHeading(data.get("secureYourAccountHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+//					.verifyChoosePinHeading(data.get("choosePinHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+//					.fillPin(data.get("pin"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+//					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
+//					.fillPin(data.get("pin"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.verifyHeading(data.get("enableFaceIdHeading"));
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().verifyDontRemindButtonView();
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().verifyEnableFaceIDButtonView();
+//			Thread.sleep(3000);
+//			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.clickNotNow();
+////			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+////					.accountCreatedPage().verifyAccountCreatedHdg(data.get("createAccountHeading"));
+//			}
+//			if (data.get("validateAddDebitOrCreditCard").equalsIgnoreCase("Yes")) {
+//			  if(signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().VerifyGoToDashboard()==1) {
+//			    signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().clickGoToDashboard();
+//			    Thread.sleep(3000);
+//			    signUpPage.dashboardPage().clickPayment();
+//			 //   signUpPage.dashboardPage().addNewPaymentComponent().verifyAddNewPaymentHeading(data.get("addPaymentMethodHeading"));
+//			    Thread.sleep(1000);
+//			    signUpPage.dashboardPage().addNewPaymentComponent().clickDebitCard();
+//			    if(signUpPage.dashboardPage().addNewPaymentComponent().verifyCoyniView()==1) {
+//			//    signUpPage.dashboardPage().addNewPaymentComponent().verifyCoyniView();
+//			    signUpPage.dashboardPage().addNewPaymentComponent().verifyErrorTextView();
+//			    }else {
+//			    	signUpPage.addCardComponent().verifyHeadingView();
+//			    	signUpPage.addCardComponent().navigationComponent().clickBack();
+//			    }
+//			    Thread.sleep(1000);
+//			    signUpPage.dashboardPage().addNewPaymentComponent().clickCreditCard();
+//			    if(signUpPage.dashboardPage().addNewPaymentComponent().verifyCoyniView()==1) {
+//			    	signUpPage.dashboardPage().addNewPaymentComponent().verifyErrorTextView();
+//			    }else {
+//			    	signUpPage.addCardComponent().verifyHeadingView();
+//			    	signUpPage.addCardComponent().navigationComponent().clickBack();
+//			    }
+//			    
+//			  }else {
+//			    signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//					.accountCreatedPage().verifyAccountCreatedHdg(data.get("createAccountHeading"));
+//				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
+//				.accountCreatedPage().clickAddCreditOrDebit();
+//				Thread.sleep(2000);
+//				 signUpPage.dashboardPage().clickPayment();
+//				 Thread.sleep(1000);
+//				 signUpPage.dashboardPage().addNewPaymentComponent().clickDebitCard();
+//				signUpPage.addCardComponent().verifyPageHeading(data.get("expCardHeading"));
+//				signUpPage.addCardComponent().verifyHeadingView();
+//				signUpPage.addCardComponent().fillNameOnCard(data.get("NameOnCard"));
+//				signUpPage.addCardComponent().fillCardNumber(data.get("cardNumber"));
+//				Thread.sleep(2000);
+//				signUpPage.addCardComponent().fillCardExp(data.get("cardExp"));
+//				signUpPage.addCardComponent().fillCVVorCVC(data.get("cvvCVC"));
+//				signUpPage.addCardComponent().clickNext();
+//				signUpPage.addCardComponent().verifyPageHeading(data.get("expCardHeading"));
+//				signUpPage.addCardComponent().mailingAddressComponent().fillAddressLine1(data.get("addline1"));
+//				signUpPage.addCardComponent().mailingAddressComponent().fillAddressLine2(data.get("addline2"));
+//				signUpPage.addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
+//				signUpPage.addCardComponent().mailingAddressComponent().selectState(data.get("state"));
+//				signUpPage.addCardComponent().mailingAddressComponent().fillZipCode(data.get("zipcode"));
+//				signUpPage.addCardComponent().mailingAddressComponent().verifyCountry(data.get("expCountry"));
+//				if(data.get("validateSaveAddressCheckBox").equalsIgnoreCase("Yes")) {
+//				signUpPage.addCardComponent().mailingAddressComponent().clickSaveThisAddCheckBox();
+//				}
+//				Thread.sleep(4000);
+//				signUpPage.addCardComponent().mailingAddressComponent().clickAddCard();
+//				if (data.get("validateAuthorization").equalsIgnoreCase("Yes")) {
+//					signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent()
+//							.verifyHeading(data.get("preAuthHeading"));
+//					signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent()
+//							.fillAmount(data.get("amount"));
+//					Thread.sleep(1000);
+//					signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent().clickVerify();
+//					Thread.sleep(2000);
+//					signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent()
+//							.successFailureComponent().getStatus();
+//					signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent()
+//							.successFailureComponent().clickDone();
+//					Thread.sleep(1000);
+//				}
+//				if(data.get("validateBuyToken").equalsIgnoreCase("Yes")) {
+//					Thread.sleep(4000);
+//		       signUpPage.dashboardPage().verifyBuyTokenView();
+//				}
+//			  }
+//			}
+//			if(data.get("validateSkip").equalsIgnoreCase("Yes")) {
+//				  if(signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().VerifyGoToDashboard()==1) {
+//					    signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().clickGoToDashboard();
+//				  }else {
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 //					.accountCreatedPage().clickSkip();
+//				  }
+//			Thread.sleep(5000);
+//			signUpPage.dashboardPage().verifyAddPaymentView();
+//			signUpPage.dashboardPage().clickPayment();
+//			signUpPage.dashboardPage().addNewPaymentComponent().verifyAddNewPaymentHeading(data.get("addPaymentMethodHeading"));
+//			signUpPage.dashboardPage().addNewPaymentComponent().clickCross();
+//			Thread.sleep(5000);
+//			signUpPage.dashboardPage().verifyAddAddressView();
+//			signUpPage.dashboardPage().clickAddanAddresss();
+//			signUpPage.dashboardPage().verifyAddAddressHeading(data.get("addAddressHeading"));
+//			signUpPage.dashboardPage().addNewPaymentComponent().clickCross();
+//	        signUpPage.tokenAccountPage().clickProfile();
+//	     //   signUpPage.customerProfilePage().clickUserDetails();
+//	        signUpPage.customerProfilePage().userDetailsPage().clickEditAddress();
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().fillPin(data.get("pin"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent().fillAddLine1(data.get("addline1"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent().fillAddLine1(data.get("addline2"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent().fillCity(data.get("city"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent().selectState(data.get("state"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent().fillZipCode(data.get("zipcode"));
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().clickSave();
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().navigationComponent().clickBack();
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().navigationComponent().clickBack();
+//	        signUpPage.customerProfilePage().userDetailsPage().enterYourPINComponent().editAddressPage().navigationComponent().clickBack();
+
+//	        customerProfilePage.userDetailsPage().enterYourPINComponent().verifyEnterYourPinView();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyHeading(data.get("pinHeading"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyPinView();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().verifyForgotPinView();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().navigationComponent().clickClose();
+//			customerProfilePage.userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
+//			customerProfilePage.userDetailsPage().clickEditAddress();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().fillPin(data.get("pin"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage()
+//					.verifyHeading(data.get("editAddrHeading"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.verifyLine1View(data.get("addline1"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.verifyLine2View(data.get("addline2"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.verifyCityView(data.get("city"));
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.verifyStateView();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.verifyZipCodeView();
+//			customerProfilePage.userDetailsPage().enterYourPINComponent().editAddressPage().mailingAddressComponent()
+//					.validateZipCode(data.get("zipcode"));
+
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-//					.tokenAccountPage().verifyRegistration();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+//			.tokenAccountPage().verifyRegistration();
+    
+	//		}
+			} 
+			catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test SignUp Failed due to this Exception" + e);
 		}
-
-	}
-
-	// 2.3//
-	@Test
-	@Parameters({ "strParams" })
-	public void testSignUpTwoDotThree(String strParams) {
-
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.verifyPersonalAccount();
-			signUpPage.clickPersonalAccount();
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("lastName"));
-			signUpPage.fillEmail(data.get("email"));
-			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			signUpPage.fillPassword(data.get("password"));
-			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickNext();
-			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneHeading(data.get("phoneVerificationPageHeading"),
-					data.get("phoneDescription"));
-//			signUpPage.phoneAndEmailVerificationComponent()
-//			.verifyPhoneHeading(data.get("phoneVerificationPageHeading"), data.get("phoneDescription"),data.get("phoneNumber"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent().verifyEmailHeading(data.get("emailVerificationPageHeading"),
-					data.get("emailDescription"), data.get("email"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			Thread.sleep(5000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyTermsOfServiceUpdateForSignUp(
-					data.get("termsOfServicePageHeading"), data.get("toastMessage"));
-			Thread.sleep(5000);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().verifyPrivacyPolicyHeadingForSignUp(
-					data.get("privacyPolicyPageHeading"), data.get("toastMessage"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyHeading(data.get("secureYourAccountPageHeading"), data.get("secureAccountDescription"));
-			if (data.get("validateAppTerminate").equalsIgnoreCase("Yes")) {
-				DriverFactory.getDriver().closeApp();
-				DriverFactory.getDriver().launchApp();
-				landingPage.clickLogin();
-				loginPage.fillEmail(data.get("email"));
-				loginPage.fillPassword(data.get("password"));
-				loginPage.clickLogin();
-				signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			}
-			DriverFactory.getDriver().hideKeyboard();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage()
-					.verifyHeading(data.get("secureYourAccountPageHeading"), data.get("secureAccountDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().clickNext();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.verifyChoosePinHeading(data.get("choosePinHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.fillPin(data.get("pin"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.verifyConfirmPinHeading(data.get("confirmPinHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.fillPin(data.get("pin"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.verifyHeading(data.get("enableTouchIdPageHeading"), data.get("idDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.clickNotNow();
-			if (signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-					.enableFaceIDpage().accountCreatedPage().verifyAccountCreated() == 1) {
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().verifyHeading(data.get("createAccountPageHeading"));
-			} else {
-				loginPage.enterYourPINComponent().enableFaceIDpage().tokenAccountPage().verifyLogin();
-			}
-			if (data.get("validateAddCreditOrDebit").equalsIgnoreCase("Yes")) {
-				if (signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().verifyGoToDashboard() == 1) {
-					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-							.enableFaceIDpage().accountCreatedPage().clickGoToDashboard();
-					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-							.enableFaceIDpage().accountCreatedPage().tokenAccountPage().clickAddPayment();
-					signUpPage.addNewPaymentComponent().clickDebitCard();
-					if (signUpPage.addNewPaymentComponent().verifyErrHeading() >= 1) {
-						signUpPage.addNewPaymentComponent().verifyErrMsg();
-						signUpPage.addNewPaymentComponent().clickOk();
-						//Thread.sleep(2000);
-					} 
-					else {
-						signUpPage.addNewPaymentComponent().VerifyCardHeader();
-						signUpPage.addNewPaymentComponent().clickCloseCard();
-					}
-					signUpPage.addNewPaymentComponent().verifyAddPaymentView();
-					signUpPage.addNewPaymentComponent().clickCreditCard();
-					if (signUpPage.addNewPaymentComponent().verifyErrHeading() >= 1) {
-						signUpPage.addNewPaymentComponent().verifyErrMsg();
-						signUpPage.addNewPaymentComponent().clickOk();
-						Thread.sleep(2000);
-					} 
-//					else {
-//						signUpPage.addNewPaymentComponent().VerifyCardHeader();
-//						signUpPage.addNewPaymentComponent().clickCloseCard();
-//					}
-					signUpPage.addNewPaymentComponent().verifyAddPaymentView();
-
-				} else {
-					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-							.enableFaceIDpage().accountCreatedPage().clickAddCreditOrDebit();
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.verifyHeading(data.get("cardDetailsHeading"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillNameOnCard(data.get("nameOnCard"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCardNumber(data.get("cardNumber"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCardExp(data.get("cardExp"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.fillCVVorCVC(data.get("cvvOrCVC"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickNext();
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.verifyHeading(data.get("addAddressHeading"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.fillAddressLine1(data.get("addressLine1"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.fillAddressLine2(data.get("addreddLine2"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.fillCity(data.get("city"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.selectState(data.get("state"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.fillZipCode(data.get("zipCode"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage()
-							.verifyCountryName(data.get("countryName"));
-					if (data.get("validateSaveAddress").equalsIgnoreCase("Yes")) {
-						signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-								.clickChkAddress();
-					}
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().clickAddCardInAddress();
-//				signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-//				.preAuthorizationPage().verifyPreAuthHeading(data.get("preAuthHeading"), data.get("preAuthDescription"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.preAuthorizationPage().fillAmount(data.get("preAuthiAmount"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.preAuthorizationPage().clickVerify();
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.preAuthorizationPage().allDonePage()
-							.verifyAllDoneHeading(data.get("successHeading"), data.get("successDescription"));
-					signUpPage.paymentMethodsPage().addNewPaymentComponent().addCardPage().mailingAddressComponent()
-							.preAuthorizationPage().allDonePage().clickDone();
-					if (data.get("viewAddAddress").equalsIgnoreCase("Yes")) {
-						signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-								.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyAddAddressView();
-					}
-					Thread.sleep(1000);
-					if (data.get("viewBuyToken").equalsIgnoreCase("Yes")) {
-						signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-								.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyBuyTokenView();
-					}
-				}
-			}
-			if (data.get("validateSkip").equalsIgnoreCase("Yes")) {
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().clickSkip();
-				if (data.get("viewAddPayment").equalsIgnoreCase("Yes")) {
-					signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-							.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyAddPaymentView();
-				}
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().verifyAddAddressView();
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().clickAddPayment();
-//				Thread.sleep(2000);
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().paymentMethodsPage()
-						.verifyPaymentHeading(data.get("addPaymentPageHeading"));
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().successFailureComponent()
-						.clickClose();
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().clickAddAddress();
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().mailingAddressComponent()
-						.verifyAddress(data.get("addAddressPageHeading"));
-				signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent()
-						.enableFaceIDpage().accountCreatedPage().tokenAccountPage().successFailureComponent()
-						.clickClose();
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-	}
-
-	
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testCreateAccountInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.clickPersonalAccount();
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("lastName"));
-			signUpPage.fillEmail(data.get("email"));
-			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			signUpPage.fillPassword(data.get("password"));
-			signUpPage.clickPasswordEye();
-			if (signUpPage.fieldBarCount() == 3) {
-				ExtentTestManager.setPassMessageInReport("Password is valid");
-			} else {
-				ExtentTestManager.setPassMessageInReport("password is invalid");
-			}
-			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickConfirmEye();
-			signUpPage.clickNext();
-			if (data.get("validateExistingPhoneError").equalsIgnoreCase("Yes")) {
-				signUpPage.verifyPhoneError(data.get("phoneError"));
-				signUpPage.clickOk();
-			}
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("elementName"));
-			}
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testSignUpFieldValidations(String strParams) {
-
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			// signUpPage.clickBusinessAccount();
-			signUpPage.clickPersonalAccount();
-			signUpPage.verifyCreateAccount(data.get("createAccount"));
-			String[] firstName = data.get("firstName").split(",");
-			signUpPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2]);
-			String[] lastName = data.get("lastName").split(",");
-			signUpPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2]);
-			String[] email = data.get("email").split(",");
-			signUpPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
-			String[] phoneNumber = data.get("phoneNumber").split(",");
-			signUpPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
-					phoneNumber[2]);
-			String[] password = data.get("password").split(",");
-			signUpPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2]);
-			String[] confirmPassword = data.get("confirmPassword").split(",");
-			signUpPage.fieldValidationsComponent().validateConfirmPasswordField(confirmPassword[0], confirmPassword[1],
-					confirmPassword[2]);
+			landingPage.clickSignUp();
+			signUpPage.clickDopdown();
+			signUpPage.fillSearch(data.get("country"));
+			signUpPage.validatePhoneNumber(data.get("phoneNumber"));
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("Otp"));
+			signUpPage.validateEmail(data.get("email"));
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("Otp"));
+            signUpPage.validateFirstNameField(data.get("firstName"));
+			signUpPage.validateLastNameField(data.get("lastName"));
+			signUpPage.clickContinue();
+			signUpPage.CreatePasswordfields(data.get("password"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testSignUpFieldValidations Failed due to this Exception" + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testIdentityVerificationTest(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().clickGetStarted();
-			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
-					.accountCreatedPage().identityVerificationPage().verifyIdentity(data.get("verifyHeading"),
-							data.get("identityHeading"), data.get("SSN"), data.get("addressLine1"),
-							data.get("addressLine2"), data.get("city"), data.get("state"), data.get("zipCode"),
-							data.get("identitySuccess"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
-		}
-
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testResendPhoneAndEmailOTP(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickGetStarted();
-			signUpPage.clickPersonalAccount();
-			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("lastName"));
-			signUpPage.fillEmail(data.get("email"));
-			signUpPage.fillPhoneNumber(data.get("phoneNumber"));
-			signUpPage.fillPassword(data.get("password"));
-			signUpPage.fillConfirmPassword(data.get("confirmPassword"));
-			signUpPage.clickNext();
-			signUpPage.phoneAndEmailVerificationComponent().clickResend();
-			signUpPage.phoneAndEmailVerificationComponent().verifyNewCodeMsg(data.get("expMessage"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			signUpPage.phoneAndEmailVerificationComponent().clickResend();
-			signUpPage.phoneAndEmailVerificationComponent().verifyNewCodeMsg(data.get("expMessage"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
+			ExtentTestManager
+					.setFailMessageInReport("test SignUp field validations is Failed due to this Exception" + e);
 		}
 
 	}

@@ -1,212 +1,299 @@
 package coyni_mobile.components;
 
-import org.openqa.selenium.By;
+import java.util.List;
 
-import coyni_mobile.pages.AllDonePage;
-import coyni_mobile.pages.PreAuthorizationPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import coyni_mobile.pages.SignUpPage;
-import coyni_mobile.pages.TokenAccountPage;
-import coyni_mobile.utilities.CommonFunctions;
-import ilabs.MobileFramework.DriverFactory;
+import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class MailingAddressComponent extends MobileFunctions {
+public class MailingAddressComponent extends MobileFunctions{
+	
+//	private By lblHeading =MobileBy.xpath("//*[contains(@name,'confirm your')]");
+	private By lblHeading =MobileBy.AccessibilityId("Please confirm your billing address");
+//	private By txtAddressLine1 = MobileBy.xpath("(//*[contains(@name,'Address Line 1')])[1]");
+//	private By txtAddressLine2 = MobileBy.xpath("(//*[contains(@name,'Address Line 2')])[1]");
+//	private By txtCity = MobileBy.xpath("//*[@name='City']");
+	private By drpDwnState = MobileBy.xpath("//*[@name='State']/following-sibling::*[1] | //*[@name='State']");
+//	private By txtZipCode = MobileBy.xpath("//*[@name='Zip Code']");
+//	private By lblCountry = MobileBy.xpath("//*[@name='Country']");
+	
+	private By txtState = MobileBy.xpath("//*[@name='search']/following-sibling::*[1]");
+//	private By btnConfirmState = MobileBy.xpath("//*[@name='search']/../following-sibling::*[@name='Done']");
+	private By txtAddressLine1 = MobileBy.AccessibilityId("Billing Address Line 1");
 
-	private By txtAddressLine1 = MobileBy
-			.xpath("//*[contains(@resource-id,'etAddress1')]|//*[contains(@resource-id,'addressLineOneET')]");
-	private By txtAddressLine2 = MobileBy
-			.xpath("//*[contains(@resource-id,'etAddress2')]|//*[contains(@resource-id,'addressLineTwoET')]");
-	private By txtCity = MobileBy.xpath("//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]");
-	private By drpDwnState = MobileBy
-			.xpath("//*[contains(@resource-id,'etState')]|//*[contains(@resource-id,'stateET')]");
-	private By txtZipCode = MobileBy.xpath(
-			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
-	private By lblCountry = MobileBy
-			.xpath("//*[contains(@resource-id,'etCountry')]|//*[contains(@resource-id,'countryET')]");
-	private By btnAddCard = MobileBy
-			.xpath("//*[contains(@resource-id,'cvAddCard')]|//*[contains(@resource-id,'cvAdd')]|//*[contains(@resource-id,'addCardTV')]");
-	private By txtState = MobileBy
-			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'stateET')]");
-	private By btnConfirmState = MobileBy.xpath("//*[contains(@resource-id,'cvAction')]");
-	private By btnSave = MobileBy.xpath("//*[contains(@resource-id,'cvSave')]");
-	private By btnRemove = MobileBy.xpath("//*[contains(@resource-id,'cvRemove')]");
-	private By btnNo = MobileBy.xpath("//*[contains(@resource-id,'tvNo')]");
-	private By btnYes = MobileBy.xpath("//*[contains(@resource-id,'tvYes')]");
-	//////////////////////// 2.3 //////////////////////////////
-	private By chkAddress = MobileBy.xpath("//*[contains(@resource-id,'saveAddressCB')]");
-	private By btnAddAddress = MobileBy.xpath("//*[contains(@resource-id,'editAddressSaveCV')]");
-	private By lblAddressAdded = MobileBy.xpath("//*[contains(@resource-id,'tvHead')]");
-	private By btnDone = MobileBy.xpath("//*[contains(@resource-id,'cvDone')]");
-	private By lblAddressHeading = MobileBy.xpath("//*[@text='Add Address']");
-	private By heading = MobileBy.xpath("//*[contains(@resource-id,'tvCardHead')]");
-	private By lblCardDescription = MobileBy.xpath("//*[contains(@resource-id,'tvAddMsg')]");
-
-	public void verifyHeading(String expheading) {
-		new CommonFunctions().verifyLabelText(heading, "Add card Heading", expheading);
-		new CommonFunctions().elementView(lblCardDescription, "Card Description");
-	}
-
-	private By txtCurrentState(String currentState) {
-		return MobileBy.xpath(String.format("//*[contains(@text,'%s')]", currentState));
-	}
-
-	public void clickCurrentState() {
-		click(txtCurrentState("California"), "California");
-	}
-
-	public void verifyAddress(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblAddressHeading, "Heading", expHeading);
-	}
-
-	public void fillAddressLine1(String addressLine1) {
-		click(txtAddressLine1, "Address Line1");
-		enterText(txtAddressLine1, addressLine1, "Address Line1");
-		scrollUpToElement(txtAddressLine1, "Address Line1");
-	}
-
-	public void fillAddressLine2(String addressLine2) {
-		scrollDownToElement(txtAddressLine2, "Address Line2");
-		click(txtAddressLine2, "Address Line2");
-		enterText(txtAddressLine2, addressLine2, "Address Line2");
-	}
-
-	public void fillCity(String city) {
-		scrollDownToElement(txtAddressLine2, "Address Line2");
-		click(txtCity, "City");
-		enterText(txtCity, city, "City");
-		// new CommonFunctions().clickEnter();
-		DriverFactory.getDriver().hideKeyboard();
-	}
-
-	public void selectState(String state) throws InterruptedException {
-//		scrollDownToElement(txtCity, "City");
-//		click(drpDwnState, "State Drop down");
-////		click(txtState, "state");
-////		Thread.sleep(2000);
-//		enterText(txtState, state, "State");
-//		new CommonFunctions().clickEnter();
-//		Thread.sleep(2000);
-//		clickCurrentState();
-//		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
-////		new CommonFunctions().clickTab();
-//		click(btnConfirmState, "Done");
-
-		scrollDownToElement(txtCity, "City");
-		click(drpDwnState, "State Drop down");
-		enterText(txtState, state, "State");
-		Thread.sleep(2000);
-		new CommonFunctions().clickEnter();
-		// click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");
-		new CommonFunctions().clickEnter();
-		click(btnConfirmState, "Done");
-	}
-
-	public void fillZipCode(String zipCode) throws InterruptedException {
-		Thread.sleep(2000);
-		scrollDownToElement(txtZipCode, "zipCode");
-		click(txtZipCode, "zip Code");
-		enterText(txtZipCode, zipCode, "Zip Code");
-		new CommonFunctions().clickTab();
-		DriverFactory.getDriver().hideKeyboard();
-	}
-
-	public void scrollDownToAddress2() {
-		scrollDownToElement(txtAddressLine2, "Address2");
-	}
-
-	public void scrollDownToSave() {
-		scrollDownToElement(btnSave, "Save");
-	}
-
-//	public void fillZipCode(String zipCode) {
-//		click(txtZipCode, "zip Code");
-//		enterText(txtZipCode, zipCode, "Zip Code");
-//		new CommonFunctions().clickEnter();
-//		// DriverFactory.getDriver().hideKeyboard();
-//
-//	}
-
-	public void verifyCountry(String expCountry) {
-		scrollDownToElement(btnSave, "Save");
-		new CommonFunctions().verifyLabelText(lblCountry, "Country", expCountry);
-	}
-
-	public void clickChkAddress() {
-		click(chkAddress, "Save Address");
-	}
-
+	private By txtAddLine1 = MobileBy.AccessibilityId("Mailing Address Line 1");
+	private By txtAddressLine2 = MobileBy.AccessibilityId("Billing Address Line 2 (Optional)");
+	private By txtAddLine2 = MobileBy.AccessibilityId("Mailing Address Line 2(Optional)");
+	
+//	private By drpDwnState = MobileBy.AccessibilityId("arrow-down");
+	
+	private By lblCountry = MobileBy.AccessibilityId("Country");
+	private By btnConfirmState = MobileBy.xpath("//*[@name='search']/../following-sibling::*[@name='Done']");
+//	private By btnDone = MobileBy.xpath("//*[@name='Title']/preceding-sibling::*[1]");
+	private By btnDone = MobileBy.AccessibilityId("Done");
+	private By drpdwnStatelist = MobileBy.xpath("(//XCUIElementTypeTable)[3]/XCUIElementTypeCell");
+	
+	
+	
+	/////2.3//////
+//	private By lblAddressAdded = MobileBy.xpath("//XCUIElementTypeStaticText[@name ='Address Added']");
+	private By lblAddressAdded = MobileBy.AccessibilityId("Address Added");
+	private By btnAddAddress = MobileBy.xpath("//XCUIElementTypeButton[@name='Add Address']");
+	private By buttonDone = MobileBy.xpath("//XCUIElementTypeButton[@name='Done']");
+	private By btnClose = MobileBy.AccessibilityId("close");
+	
+	
 	public void clickAddAddress() {
 		click(btnAddAddress, "Add Address");
 	}
-
-	public void clickAddCard() {
-		scrollDownToElement(btnAddCard, "Add Card");
-		click(btnAddCard, "Add Card");
+	public void verifyAddressAdded() {
+		new AndroidCommonFunctions().elementView(lblAddressAdded, "Adress Added");
 	}
-
+	public void clickDoneButton() {
+		click(buttonDone, "Done");
+	}
+	
+	
+	/////////////////
+	public void verifyNostates(String noStates) {
+		
+		new AndroidCommonFunctions().verifyLabelText(lblNoStatesFound, "nostates", noStates);
+		click(btnClose, "Close");
+		
+	//	click(btnDone, "Done");
+	}
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
 
-	public void clickSave() {
-		scrollDownToElement(btnSave, "Save");
-		click(btnSave, "Save");
+	public void DropdownState() throws InterruptedException {
+		clickdropdown();
+		Thread.sleep(10000);
+		List<WebElement> elements = getElementList(drpdwnStatelist, "drpdwnstate");
+		System.out.println(elements);
+		int size = elements.size();
+		System.out.println("the size is : " + size);
+		for (int i = 0; i <size; i++) {
+		//	clickdropdown();
+			List<WebElement> element = getElementList(drpdwnStatelist, "drpdwnstate");
+			element.get(i).click();
+//			click(btnDone, "Done");
+//			click(btnConfirmState, "Done");
+//			ExtentTestManager.setInfoMessageInReport("selected state is: " + getAttribute(lblState, "value"));
+		//	System.out.println(i);
+		}
+
+	}
+	
+
+	public void clickdropdown() {
+		click(drpDwnState, "drop down");
 	}
 
-	public void clickRemove() {
-		scrollDownToElement(btnRemove, "Remove");
-		click(btnRemove, "Remove");
+	public void verifyHeading(String expHeading) {
+		new AndroidCommonFunctions().verifyLabelText(lblHeading, "heading", expHeading);
+	}
+	public void fillAddressLine1(String addressLine1) {
+		click(txtAddressLine1, "addressline1");
+		enterText(txtAddressLine1, addressLine1, "Address Line1");
+		click(btnDone, "Done");
+	}
+	
+	public void fillAddLine1(String addressLine1) {
+		//click(txtAddressLine1, "addressline1");
+		enterText(txtAddLine1, addressLine1, "Address Line1");
+		click(btnDone, "Done");
+	}
+	public void scrollToAddressLine1() {
+		scrollDownToElement(txtAddressLine1, "Address Line 1");
+	}
+	public void fillAddressLine2(String addressLine2) {
+		enterText(txtAddressLine2, addressLine2, "Address Line2");
+		click(btnDone, "Done");
+	}
+	public void fillAddLine2(String addressLine2) {
+		enterText(txtAddLine2, addressLine2, "Address Line2");
+		click(btnDone, "Done");
+	}
+	public void scrollToAddressLine2() {
+		scrollDownToElement(txtAddressLine2, "Address Line 2");
+	}
+	
+	public void scrollToCity() {
+		scrollDownToElement(txtCity, "City");
+	}
+	public void fillState(String state) {
+		click(drpDwnState, "state drop down");
+		enterText(txtState, state, "State");
 	}
 
-	public void clickNo() {
-		click(btnNo, "No");
+	
+	
+	
+	
+	public void scrollToState() {
+		scrollDownToElement(drpDwnState, "State");
 	}
-
-	public void clickYes() {
-		click(btnYes, "Yes");
+	
+	public void scrollToZipCode() {
+		scrollDownToElement(txtZipCode, "ZipCode");
 	}
-
-	public void verifyAddressAdded(String expText) {
-		new CommonFunctions().verifyLabelText(lblAddressAdded, "Address Added", expText);
+	public void verifyCountry(String expCountry) {
+		String actualText =getAttribute(lblCountry, "value").trim();
+		if(actualText.equalsIgnoreCase(expCountry)) {
+			ExtentTestManager.setPassMessageInReport("Country is "+expCountry);
+		}
+		else {
+			ExtentTestManager.setWarningMessageInReport("Country is not "+ expCountry);
+		}
 	}
-
-	public void verifyAddressLine1View() {
-		new CommonFunctions().elementView(txtAddressLine1, "Address line1 text field");
+	
+	
+//	
+//   public void verifyAddressLine1View(String addline1) {
+//	   new CommonFunctions().elementView(txtAddressLine1, "Address line1 text field");
+//	   new SignUpPage().validateAddressField(txtAddressLine1, "address line 1", addline1 );
+//   }
+//   
+//	
+//   public void verifyAddressLine2View(String addline2) {
+//	   new CommonFunctions().elementView(txtAddressLine2, "Address line2  text field");
+//	   new SignUpPage().validateAddressField(txtAddressLine2, "Address line2", addline2);
+//   }
+//   public void verifyLine2View(String addline2) {
+//	   new CommonFunctions().elementView(txtLine2, "Address line2  text field");
+//	   new SignUpPage().validateAddressField(txtLine2, "Address line2", addline2);
+//   }
+   
+   public void verifyCityView(String city) {
+	   new AndroidCommonFunctions().elementView(txtCity, "City text field");
+	   new SignUpPage().validateNameField(txtCity, "city", city);
+   }
+   public void verifyStateView() {
+	   new AndroidCommonFunctions().elementView(drpDwnState, "State dropdown");
+   }
+   public void verifyZipCodeView() {
+	   new AndroidCommonFunctions().elementView(txtZipCode, "ZipCode  text field");
+   }
+	public PreAuthorizationComponent preAuthorizationComponent() {
+		return new PreAuthorizationComponent();
 	}
-
-	public void verifyAddressLine2View() {
-		new CommonFunctions().elementView(txtAddressLine2, "Address line2  text field");
+	public void validateAddline1(String addressLine1) {
+		validateAdd(txtAddressLine1, "Billing Address Line 1", addressLine1);
 	}
-
-	public void verifyCityView() {
-		new CommonFunctions().elementView(txtCity, "City text field");
+	public void validateAddline2(String addressLine2) {
+		validateAdd(txtAddressLine2, "Billing Address Line 2", addressLine2);
 	}
-
-	public void verifyStateView() {
-		new CommonFunctions().elementView(drpDwnState, "State dropdown");
+	public void validateCity(String city) {
+		new SignUpPage().validateNameField(txtCity, "City", city);
 	}
-
-	public void verifyZipCodeView() {
-		new CommonFunctions().elementView(txtZipCode, "ZipCode  text field");
+	public void validateZipCode(String textField) {
+		String[] field = textField.split(",");
+		new AndroidCommonFunctions().validateField(txtZipCode, "Zip Code", field[0]);
+	//	click(btnDone, "Done");
+		new AndroidCommonFunctions().validateFieldMaxichar(txtZipCode, "Zip Code", field[1]);
+	//		click(btnDone, "Done");
 	}
-
-	public PreAuthorizationPage preAuthorizationPage() {
-		return new PreAuthorizationPage();
-	}
-
-	public AllDonePage allDonePage() {
-		return new AllDonePage();
-	}
-
-	public TokenAccountPage tokenAccountPage() {
-		return new TokenAccountPage();
+	public void validateAdd(By ele,String eleName,String textField) {
+		String[] field = textField.split(",");
+		new AndroidCommonFunctions().validateField(ele, eleName, field[0]);
+	//	click(btnDone, "Done");
+		new AndroidCommonFunctions().validateField(ele, eleName, field[1]);
+	//	click(btnDone, "Done");
+		new AndroidCommonFunctions().validateFieldMaxichar(ele, eleName, field[2]);
+	//	click(btnDone, "Done");
 	}
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-
-	public FieldValidationsComponent fieldValidationsComponent() {
-		return new FieldValidationsComponent();
+	public SignUpPage signUpPage() {
+		return new SignUpPage();
 	}
+	
+	/******
+	 * 
+	 */
+	
+	private By lblBillingAddress = MobileBy.AccessibilityId("");
+	private By lblBillDesc = MobileBy.AccessibilityId("");
+	private By drpDwnCountry = MobileBy.AccessibilityId("");
+	private By txtSearch = MobileBy.AccessibilityId("");
+	private By btnSearchCross = MobileBy.AccessibilityId("");
+	private By txtLine1 = MobileBy.AccessibilityId("Address Line 1");
+	private By txtLine2 = MobileBy.AccessibilityId("Address Line 2 (Optional)");
+	private By txtCity = MobileBy.AccessibilityId("City");
+	private By lblState = MobileBy.xpath("//*[@name='State']");
+	private By lblNoStatesFound = MobileBy.AccessibilityId("No states found");
+	private By txtZipCode = MobileBy.AccessibilityId("Zip Code");
+	private By chkbxSaveThisAddress = MobileBy.AccessibilityId("uncheck");
+	private By descChkbx = MobileBy.AccessibilityId("");
+	private By btnAddCard = MobileBy.AccessibilityId("");
+	
+	
+	
+	public void verifyBillingAddressView() {
+		new AndroidCommonFunctions().elementView(lblBillingAddress, "Billing Address");
+		ExtentTestManager.setInfoMessageInReport("The text is: " + getText(lblBillDesc));
+	}
+	public void clickCountryDropdown() {
+		click(drpDwnCountry, "Country Dropdown");
+	}
+	
+	public void selectCountry(String state) { 
+		enterText(txtSearch, state, "Search field");
+		click(MobileBy.xpath(String.format("//*[@name='%s']", state)), "state");
+	}
+	
+	public void clickSearchCross() {
+		click(btnSearchCross, "Cross");
+	}
+	
+//	public void verifyLine1View(String addline1) {
+//		   new CommonFunctions().elementView(txtLine1, "Address line1 text field");
+//		   new SignUpPage().validateAddressField(txtLine1, "address line 1", addline1 );
+//	   }
+	public void fillLine1(String addressLine1) {
+	//	click(txtLine1, "addressline1");
+		enterText(txtLine1, addressLine1, "Address Line1");
+	//	click(btnDone, "Done");
+	}
+	public void fillLine2(String addressLine1) {
+	//	click(txtLine2, "addressline1");
+		enterText(txtLine2, addressLine1, "Address Line1");
+	//	click(btnDone, "Done");
+	}
+	public void fillCity(String city) {
+		enterText(txtCity, city, "City");
+	//	click(btnDone, "Done");
+	}
+	
+	public void selectState(String state) { 
+		click(drpDwnState, "State Drop down");
+		enterText(txtState, state, "State");
+		click(MobileBy.xpath(String.format("//*[@name='%s']", state)), "state");
+		click(btnDone, "Done");
+		click(btnConfirmState, "Done");
+	}
+	
+	public void fillZipCode(String zipCode) {
+		enterText(txtZipCode, zipCode, "Zip Code");
+	//	click(btnDone, "Done");
+		}
+	public void clickAddCard() {
+		if(getElement(btnAddCard, "AddCard").isEnabled()) {
+		click(btnAddCard, "Add Card");
+		}
+	}
+	
+	public void clickSaveThisAddCheckBox() {
+	  new AndroidCommonFunctions().elementView(descChkbx, "Check box");
+		click(chkbxSaveThisAddress, "SaveThisAddress");
+	}
+	
+	
 }

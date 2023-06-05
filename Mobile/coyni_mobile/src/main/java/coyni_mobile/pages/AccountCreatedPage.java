@@ -2,56 +2,73 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class AccountCreatedPage extends MobileFunctions {
-	private By heading = MobileBy.xpath("//*[@text='Account Created!']"); /// 2.3 ///
-	private By btnGetStarted = MobileBy.xpath("//*[contains(@text,'Get Started')]");
-	// 2.3//
-	private By btnAddCreditOrDebit = MobileBy.xpath("//*[contains(@resource-id,'tvAddCard')]");
-	private By btnSkip = MobileBy.xpath("//*[contains(@resource-id,'tvSkip')]|(//*[@text='Skip'])[1]");
-	private By lblDescription = MobileBy.xpath("//*[contains(@text,'Your coyni account')]");
-	//2.4//
-	private By btnGoToDashboard = MobileBy.xpath("//*[@text='Go to Dashboard']");
-
-
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
-		new CommonFunctions().elementView(lblDescription, "Description");
+public class AccountCreatedPage extends MobileFunctions{
+//	private By heading = MobileBy.xpath("//*[@name='Your Account Has Been Created']");
+//	private By btnGetStarted =MobileBy.xpath("(//*[@name='Get Started'])[1]");
+//	
+////	private By btnSkip =MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`label == 'Skip'`]");
+//	
+//	//2.3
+////	private By lblAccountCreatedhdg = MobileBy.xpath("//*[@name= 'Account Created!']");
+//	
+//	private By btnGoToDashBoard = MobileBy.xpath("(//*[@name='Go to Dashboard'])[2]");
+//	
+//	
+//	
+//	//////////////
+//	public void verifyHeading(String expHeading) {
+//		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
+//	}
+//	
+//	public void clickGetStarted() {
+//		click(btnGetStarted, "Get Started");
+//	}
+//	public  TokenAccountPage tokenAccountPage() {
+//		   return new TokenAccountPage();
+//    }
+//
+//	public int VerifyGoToDashboard() {
+//    return getElementList(btnGoToDashBoard, "btnGoToDashBoard").size();
+//	}
+////	}
+//	public void clickGoToDashboard() {
+//		click(btnGoToDashBoard, "Go to dashboard");
+//	}
+//	
+	/****
+	 * 
+	 */
+	private By lblAccountCreatedhdg = MobileBy.AccessibilityId("Account Created!");
+	private By lblAccountCreatedImg = MobileBy.AccessibilityId("");
+	private By lblAccountCreatedDesc = MobileBy.AccessibilityId("");
+	private By btnAddCreditOrDebit = MobileBy.AccessibilityId("");
+	private By btnSkip =MobileBy.AccessibilityId("");
+	
+	public void verifyAccountCreatedHdgView() {
+		if(getElementList(lblAccountCreatedhdg, "lblAccountCreatedhdg").size()>0) {
+		new AndroidCommonFunctions().elementView(lblAccountCreatedhdg, "Account Created");
+		}
 	}
-	public int verifyAccountCreated() {
-		return getElementList(heading, "Account Created").size();
-		
+	public void verifyAccountCreatedImageView() {
+		new AndroidCommonFunctions().elementView(lblAccountCreatedImg, "Account Created Image");
+		ExtentTestManager.setInfoMessageInReport("the desc is:" + getText(lblAccountCreatedDesc));
 	}
-
-	public void clickSkip() {
-		click(btnSkip, "Skip");
-	}
-
+	
 	public void clickAddCreditOrDebit() {
-		click(btnAddCreditOrDebit, "Credit or Debit");
+		if(getElement(btnAddCreditOrDebit, "AddCreditOrDebit").isEnabled()) {
+		click(btnAddCreditOrDebit, "Add Debit or Credit");
+		
+		}
 	}
-
-	public void clickGetStarted() {
-		new CommonFunctions().elementView(btnGetStarted, "Get started ");
-		click(btnGetStarted, "Get Started");
+	public void clickSkip() {
+		if(getElement(btnSkip, "Skip").isEnabled()) {
+		click(btnSkip, "Skip");
+		}
 	}
-	public int verifyGoToDashboard() throws InterruptedException {
-		Thread.sleep(2000);
-		return getElementList(btnGoToDashboard, "Go To Dashboard").size();
-	}
-	public void clickGoToDashboard() {
-		click(btnGoToDashboard, "Go To Dashboard");
-	}
-
-	public TokenAccountPage tokenAccountPage() {
-		return new TokenAccountPage();
-	}
-
-	public IdentityVerificationPage identityVerificationPage() {
-		return new IdentityVerificationPage();
-	}
-
+	
 }
