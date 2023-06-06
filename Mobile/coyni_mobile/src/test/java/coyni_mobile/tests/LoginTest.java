@@ -54,18 +54,7 @@ public class LoginTest {
 		}
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testLoginFieldValidations(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-		    loginPage.signUpPage().validateEmail(loginData.get("email"));
-			loginPage.validateCreatePasswordfields(loginData.get("password"));
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Login field Validations failed due to Exception " + e);
-		}
-	}
+	
 
 	/**
 	 * testLoginNavigationView script is to test the Navigation flow of Login
@@ -84,7 +73,9 @@ public class LoginTest {
 			loginPage.verifyRememberMeView();
 			loginPage.verifyRetrieveEmailView();
 			loginPage.verifyForgotPasswordView();
+			loginPage.signUpPage().validateEmail(loginData.get("validateEmailField"));
 			loginPage.fillEmail(loginData.get("email"));
+			loginPage.validateCreatePasswordfields(loginData.get("validatePasswordField"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
 			loginPage.choosePinComponent().verifyEnterYourPinView();
@@ -314,7 +305,6 @@ public class LoginTest {
 	public void testRetrieveEmail(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
 			loginPage.verifyRetrievEmailhdgView(loginData.get("retrieveEmailDesc"));
 			loginPage.signUpPage().validatePhoneNumber(loginData.get("validatePhoneNumber"));
@@ -323,67 +313,64 @@ public class LoginTest {
 			loginPage.navigationComponent().clickClose();
 			loginPage.clickRetrieveEmail();
 			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillFirstName(loginData.get("firstName1"));
 			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
 			Thread.sleep(2000);
 			loginPage.verifyNoUserFound(loginData.get("noUserFoundDesc"));
 			loginPage.clickTryAgain();
 			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillFirstName(loginData.get("firstName1"));
 			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
 			loginPage.clickcancel();
 			loginPage.clickRetrieveEmail();
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber1"));
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.fillFirstName(loginData.get("firstName1"));
-			loginPage.fillLastName(loginData.get("lastName1"));
+			loginPage.fillLastName(loginData.get("lastName"));
+			loginPage.clickNext();
+			loginPage.navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
             loginPage.phoneAndEmailVerificationComponent().verifyPhoneVerificationView(loginData.get("PhoneNumberDesc"));
 			loginPage.phoneAndEmailVerificationComponent().verifyResendView();
 			loginPage.navigationComponent().clickClose();
 			loginPage.clickRetrieveEmail();
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber1"));
-			loginPage.fillFirstName(loginData.get("firstName1"));
-			loginPage.fillLastName(loginData.get("lastName1"));
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
 			loginPage.navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
+			loginPage.clickNext();
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.clickThisisNotMe();
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
+			loginPage.clickNext();
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.navigationComponent().clickClose();
+			loginPage.clickRetrieveEmail();
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
+			loginPage.clickNext();
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.clickRetrieveLogin();
+			loginPage.verifyLoginEmail(loginData.get("email"));
 			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
 		}
 	}
-//
-//	/**
-//	 * testRetrieveEmailWithInvalidData script is to test By giving invalid data in
-//	 * the text fields by validating Error messages for every text field in Retrieve
-//	 * Email feature.
-//	 * 
-//	 * @param strParams
-//	 */
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testRetrieveEmailWithInvalidData(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-//			loginPage.clickRetrieveEmail();
-//			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-//			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
-//			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
-//			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
-//			if (!data.get("errMessage").isEmpty() /* && !data.get("elementName").equals("Phone Number") */) {
-//
-//				new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-//			}
-////			if (data.get("elementName").equals("Phone Number")) {
-////				new SignUpPage().validatePhoneErrorMsg(data.get("errMessage"), data.get("elementName"));
-////			}
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testRetrieveEmailWithInvalidData Failed due to exception " + e);
-//		}
-//	}
+
 //
 //	/**
 //	 * testRetrieveEmailWithInvalidCredentials script is to test By giving invalid
@@ -412,72 +399,8 @@ public class LoginTest {
 //					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
 //		}
 //	}
-//
-//	/**
-//	 * testRetrieveEmailView script is to test the navigation flow for Retrieve
-//	 * Email feature.
-//	 * 
-//	 * @param strParams
-//	 */
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testRetrieveEmailView(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-//			loginPage.clickRetrieveEmail();
-//			loginPage.retrieveEmailPage().navigationComponent().clickClose();
-//			loginPage.clickRetrieveEmail();
-//			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-//			loginPage.retrieveEmailPage().fillPhoneNumber(data.get("phoneNumber"));
-//			loginPage.retrieveEmailPage().fillFirstName(data.get("firstName"));
-//			loginPage.retrieveEmailPage().fillLastName(data.get("lastName"));
-//			loginPage.retrieveEmailPage().clickNext();
-//			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent()
-//					.verifyPhoneHeading(data.get("phoneHeading"));
-//			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().navigationComponent().verifyBackView();
-//			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().navigationComponent().clickBack();
-//			loginPage.retrieveEmailPage().verifyRetriveEmailView();
-//			loginPage.retrieveEmailPage().clickNext();
-//			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().fillOTP(data.get("code"));
-//			loginPage.retrieveEmailPage().phoneAndEmailVerificationComponent().accountPage()
-//			.verifyHeading(data.get("accountHeading"));
-//		//	loginPage.retrieveEmailPage().navigationComponent().verifyCloseView();
-//			loginPage.retrieveEmailPage().clickClose();
-//			loginPage.VerifyLoginPageView();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testRetrieveEmailView Failed due to exception " + e);
-//		}
-//
-//	}
-//
-////
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testRetrieveEmailNavigationOptions(String strParams) {
-////		try {
-////			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-////			landingPage.clickLogin();
-////			loginPage.clickForgotEmail();
-////			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-////			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-////			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-////			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-////			loginPage.retrieveEmailPage().clickNext();
-////			loginPage.retrieveEmailPage().navigationComponent().clickBack();
-////			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-////
-////			loginPage.retrieveEmailPage().clickNext();
-////			loginPage.verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-////			loginPage.retrieveEmailPage().verifyLabelAccountHeading(loginData.get("expAccountHeading"));
-////			loginPage.retrieveEmailPage().navigationComponent().clickClose();
-////			landingPage.verifyLandingPage();
-////
-////		} catch (Exception e) {
-////			ExtentTestManager.setFailMessageInReport("testRetrieveEmailNavigationOptions Failed due to exception " + e);
-////		}
-////
-////	}
+
+
 ////
 ////	@Test
 ////	@Parameters({ "strParams" })
@@ -507,56 +430,7 @@ public class LoginTest {
 ////					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
 ////		}
 ////	}
-////
-//	/**
-//	 * testRetrieveEmailFieldValidations script is to test the field validations for
-//	 * text fields in REtrieve Email feature.
-//	 * 
-//	 * @param strParams
-//	 */
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testRetrieveEmailFieldValidations(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-//			loginPage.clickRetrieveEmail();
-//			loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-//			loginPage.retrieveEmailPage().SignUpPage().validatePhoneNumber(data.get("phoneNumber"));
-//			loginPage.retrieveEmailPage().SignUpPage().validateFirstNameField(data.get("firstName"));
-//			loginPage.retrieveEmailPage().SignUpPage().validateLastNameField(data.get("lastName"));
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testRetrieveEmailFieldValidations Failed due to exception " + e);
-//		}
-//	}
-//
-////	/**
-////	 * testLoginFieldValidation script is to test the field validations foe email
-////	 * and password text fields in login module.
-////	 * 
-////	 * @param strParams
-////	 */
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testLoginFieldValidation(String strParams) {
-////		try {
-////			Map<String, String> data = Runner.getKeywordParameters(strParams);
-////
-////			landingPage.clickLogin();
-////			loginPage.VerifyLoginPageView();
-////			loginPage.verifyEmailview();
-////			loginPage.verifyPasswordview();
-////			loginPage.verifyRememberMeView();
-////			String[] email = data.get("email").split(",");
-////			loginPage.validateEmailField(email[0], email[1], email[2]);
-////			String[] password = data.get("password").split(",");
-////			loginPage.validatePasswordField(password[0], password[1], password[2]);
-////
-////		} catch (Exception e) {
-////			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
-////		}
-////	}
+
 //
 //	@Test
 //	@Parameters({ "strParams" })

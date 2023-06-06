@@ -59,7 +59,9 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().elementView(imgCoyni, "Coyni");
 	}
 
-	
+	public void verifyLoginEmail(String email) {
+		new CommonFunctions().verifyLabelText(txtEmail, "email", email);
+	}
 	public void clickEmail() {
 		click(txtEmail, "Email");
 	}
@@ -127,7 +129,7 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblUserName, "userName");
 	}
 	
-	public void clickRetyrieveLogin() {
+	public void clickRetrieveLogin() {
 		if(getElement(btnRetrieveLogin, "Login").isEnabled()) {
 			click(btnRetrieveLogin, "Login");
 		}
