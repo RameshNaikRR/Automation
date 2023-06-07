@@ -30,7 +30,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 		enterText(txtZipCode, zipCode, "Zip Code");
 	}
 
-	public void selectState(String country) {
+	public void selectCountry(String country) {
 		click(drpdwnCountry, "Country");
 		By countryName = By.xpath(String.format("", country));
 		click(countryName, country);
