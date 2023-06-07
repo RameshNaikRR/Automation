@@ -88,4 +88,12 @@ public class CustomerProfilePage extends MobileFunctions {
     public ProfilePage profilePage() {
 		return new ProfilePage();
 	}
+    
+    public AccountLimitsPage accountLimitsPage() {
+		return new AccountLimitsPage();
+	}
+
+	public WalletFeesPage walletFeesPage() {
+		return new WalletFeesPage();
+	}
 }

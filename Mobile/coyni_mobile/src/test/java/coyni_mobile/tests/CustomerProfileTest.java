@@ -6,8 +6,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import coyni_mobile.pages.AgreementPage;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.DashboardPage;
+import coyni_mobile.pages.PreferencesPage;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -16,10 +18,14 @@ public class CustomerProfileTest  {
 	
 	CustomerProfilePage customerProfilePage;
 	DashboardPage dashboardPage;
+	AgreementPage agreementsPage;
+	PreferencesPage preferencesPage;
 	MobileFunctions mobileFunctions;
 	
 	@BeforeTest
 	public void init() {
+		preferencesPage = new PreferencesPage();
+		agreementsPage = new AgreementPage();
 		customerProfilePage = new CustomerProfilePage();
 		dashboardPage = new DashboardPage();
 		mobileFunctions = new MobileFunctions();	
@@ -304,7 +310,59 @@ public class CustomerProfileTest  {
 		}
 	}
 	
-	
+	@Test
+	@Parameters({ "strParams" })
+	public void VerifyPrefernces(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickProfile();
+		customerProfilePage.clickPreferences();
+		preferencesPage.verifyPreferencesHeading(data.get("preferencesHeading"));
+		String[] timeZone = data.get("timeZones").split(",");
+		for (int i = 0; i <= timeZone.length; i++) {
+			preferencesPage.selectTimeZone(timeZone[i]);
+			preferencesPage.toastComponent().verifyToastMsg(data.get("preferencesToastMsg"));
+			preferencesPage.verifyTimeZone(timeZone[i]);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void VerifyAgreements(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickProfile();
+		customerProfilePage.clickAgreements();
+		agreementsPage.clickPrivacyPolicy();
+		agreementsPage.clickPrivacyActiveAgreement();
+		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+		agreementsPage.navigationComponent().clickClose();
+		agreementsPage.clickPrivacyPastAgreement();
+		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+		agreementsPage.navigationComponent().clickClose();
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void VerifyAccountLimitsView(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickProfile();
+		customerProfilePage.clickAccountLimits();
+		customerProfilePage.accountLimitsPage().verifyAccLimitsHeading(data.get("AccLimitsHeader"));
+		customerProfilePage.accountLimitsPage().viewSendRequestLimit();
+		customerProfilePage.accountLimitsPage().viewBuyTokenLimit();
+		customerProfilePage.accountLimitsPage().viewWithdrawLimits();
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void VerifyWalletFeesView(String strParams) {
+		Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickProfile();
+		customerProfilePage.clickWalletFees();
+		customerProfilePage.walletFeesPage().verifyWalletFeesHeading(data.get("WalletFeesHeader"));
+		customerProfilePage.walletFeesPage().viewBuyTokenFees();
+		customerProfilePage.walletFeesPage().viewWithdrawFees();
+	}
 	
 	
 	
