@@ -9,30 +9,33 @@ import org.testng.annotations.Test;
 import coyni_mobile.pages.AgreementPage;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.DashboardPage;
+import coyni_mobile.pages.EnableFaceOrTouchIDpage;
 import coyni_mobile.pages.PreferencesPage;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
-public class CustomerProfileTest  {
-	
+public class CustomerProfileTest {
+
 	CustomerProfilePage customerProfilePage;
 	DashboardPage dashboardPage;
 	AgreementPage agreementsPage;
 	PreferencesPage preferencesPage;
 	MobileFunctions mobileFunctions;
-	
+	EnableFaceOrTouchIDpage enableFaceOrTouchIDpage;
+
 	@BeforeTest
 	public void init() {
 		preferencesPage = new PreferencesPage();
 		agreementsPage = new AgreementPage();
 		customerProfilePage = new CustomerProfilePage();
 		dashboardPage = new DashboardPage();
-		mobileFunctions = new MobileFunctions();	
+		mobileFunctions = new MobileFunctions();
+		enableFaceOrTouchIDpage = new EnableFaceOrTouchIDpage();
 	}
-	
+
 	/**
-	 * testProfileView Script is to test the Edit the profile photo 
+	 * testProfileView Script is to test the Edit the profile photo
 	 * 
 	 * @param strParams
 	 */
@@ -52,11 +55,9 @@ public class CustomerProfileTest  {
 			ExtentTestManager.setFailMessageInReport("Profile Edit Emage due to Exception " + e);
 		}
 	}
-	
-	
-	
+
 	/**
-	 * testProfileEditEmage Script is to test the Edit the profile photo 
+	 * testProfileEditEmage Script is to test the Edit the profile photo
 	 * 
 	 * @param strParams
 	 */
@@ -80,9 +81,9 @@ public class CustomerProfileTest  {
 			ExtentTestManager.setFailMessageInReport("Profile Edit Emage due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testEditEmail Script is to  Edit the Email
+	 * testEditEmail Script is to Edit the Email
 	 * 
 	 * @param strParams
 	 */
@@ -105,27 +106,37 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().verifycurrentEmail(data.get("existingEmail"));
 			customerProfilePage.profilePage().editProfilePage().fillNewEmail(data.get("newEmail"));
 			customerProfilePage.profilePage().editProfilePage().clickSave();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyCurrentEmailVerificationHeading(data.get("emailVerificationHeading"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyCurrentEmailVerificationText(data.get("verificationText"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyCurrentEmailVerificationHeading(data.get("emailVerificationHeading"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyCurrentEmailVerificationText(data.get("verificationText"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyResendView();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyDontHaveAccess();
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyDontHaveAccess();
 			customerProfilePage.profilePage().editProfilePage().verifyNeedHelpView();
-		    customerProfilePage.profilePage().navigationComponent().clickClose();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewEmailVerificationText(data.get("newVerificationText"));
+			customerProfilePage.profilePage().navigationComponent().clickClose();
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewEmailVerificationText(data.get("newVerificationText"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyResendView();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			customerProfilePage.profilePage().editProfilePage().successFailureComponent().verifyEmailSucess(data.get("sucessHeading"));
-			customerProfilePage.profilePage().editProfilePage().successFailureComponent().verifyChangeEmailDesc(data.get("changeEmaildesc"));
-			customerProfilePage.profilePage().editProfilePage().successFailureComponent().clickLogin();	
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().successFailureComponent()
+					.verifyEmailSucess(data.get("sucessHeading"));
+			customerProfilePage.profilePage().editProfilePage().successFailureComponent()
+					.verifyChangeEmailDesc(data.get("changeEmaildesc"));
+			customerProfilePage.profilePage().editProfilePage().successFailureComponent().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit  Email failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testEditEmailFieldValidations Script is to  Edit the Email navigations and text field validations
+	 * testEditEmailFieldValidations Script is to Edit the Email navigations and
+	 * text field validations
 	 * 
 	 * @param strParams
 	 */
@@ -150,19 +161,22 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().clickSave();
 			customerProfilePage.profilePage().editProfilePage().navigationComponent().clickBack();
 			customerProfilePage.profilePage().editProfilePage().clickSave();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().navigationComponent().clickBack();
 			customerProfilePage.profilePage().editProfilePage().clickSave();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-		    customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
-		
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit Email field validations Failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testEditPhoneNumber Script is to  Edit the Phone Number 
+	 * testEditPhoneNumber Script is to Edit the Phone Number
 	 * 
 	 * @param strParams
 	 */
@@ -186,22 +200,31 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().clickArrow(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyCurrentPhoneVerificationHeading(data.get("phoneVerificationHeading"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyCurrentPhoneVerificationText(data.get("verificationText"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyCurrentPhoneVerificationHeading(data.get("phoneVerificationHeading"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyCurrentPhoneVerificationText(data.get("verificationText"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyResendView();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyDontHaveAccess();
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyDontHaveAccess();
 			customerProfilePage.profilePage().editProfilePage().verifyNeedHelpView();
-		    customerProfilePage.profilePage().navigationComponent().clickClose();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewPhoneVerificationHdg(data.get("newPhoneVerificationHeading"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewPhoneVerificationText(data.get("newVerificationText"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			customerProfilePage.profilePage().navigationComponent().clickClose();
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewPhoneVerificationHdg(data.get("newPhoneVerificationHeading"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewPhoneVerificationText(data.get("newVerificationText"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit Phone Number failed due to Exception " + e);
 		}
 	}
+
 	/**
-	 * testEditEmailFieldValidations Script is to  Edit the Email navigations and text field validations
+	 * testEditEmailFieldValidations Script is to Edit the Email navigations and
+	 * text field validations
 	 * 
 	 * @param strParams
 	 */
@@ -236,16 +259,21 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().clickArrow(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().navigationComponent().clickBack();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-		    customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.fillOtp(data.get("code"));
+			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
+					.verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Edit Phone Number Field Validations failed due to Exception " + e);
+			ExtentTestManager
+					.setFailMessageInReport("Edit Phone Number Field Validations failed due to Exception " + e);
 		}
 	}
+
 	/**
-	 * testEditAddress Script is to  Edit the Phone Number 
+	 * testEditAddress Script is to Edit the Phone Number
 	 * 
 	 * @param strParams
 	 */
@@ -264,21 +292,25 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().clickChange();
 			customerProfilePage.profilePage().editProfilePage().verifyEditAddres(data.get("editAddressHeading"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().clickCountryDropdown();
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().selectCountry(data.get("country"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillAddLine1(data.get("addline1"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillAddLine2(data.get("addline2"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.selectCountry(data.get("country"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.fillAddLine1(data.get("addline1"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.fillAddLine2(data.get("addline2"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillCity(data.get("city"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillState(data.get("state"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillZipCode(data.get("zipcode"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.fillZipCode(data.get("zipcode"));
 			customerProfilePage.profilePage().editProfilePage().clickSave();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit Address failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testEditAddress Script is to  Edit the Phone Number 
+	 * testEditAddress Script is to Edit the Phone Number
 	 * 
 	 * @param strParams
 	 */
@@ -299,20 +331,25 @@ public class CustomerProfileTest  {
 			customerProfilePage.profilePage().editProfilePage().clickChange();
 			customerProfilePage.profilePage().editProfilePage().verifyEditAddres(data.get("editAddressHeading"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().clickCountryDropdown();
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().selectCountry(data.get("country"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().validateAddline1(data.get("addline1"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().validateAddline2(data.get("addline2"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().validateCity(data.get("city"));
-		//	customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillState(data.get("state"));
-			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().validateZipCode(data.get("zipCode"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.selectCountry(data.get("country"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.validateAddline1(data.get("addline1"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.validateAddline2(data.get("addline2"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.validateCity(data.get("city"));
+			// customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().fillState(data.get("state"));
+			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
+					.validateZipCode(data.get("zipCode"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit Address Fieldvalidations failed due to Exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
-	public void VerifyPrefernces(String strParams) {
+	public void verifyPrefernces(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickPreferences();
@@ -327,7 +364,7 @@ public class CustomerProfileTest  {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void VerifyAgreements(String strParams) {
+	public void verifyAgreements(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickAgreements();
@@ -343,29 +380,24 @@ public class CustomerProfileTest  {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void VerifyAccountLimitsView(String strParams) {
+	public void verifyEnableTouchOrFaceID(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
-		customerProfilePage.clickAccountLimits();
-		customerProfilePage.accountLimitsPage().verifyAccLimitsHeading(data.get("AccLimitsHeader"));
-		customerProfilePage.accountLimitsPage().viewSendRequestLimit();
-		customerProfilePage.accountLimitsPage().viewBuyTokenLimit();
-		customerProfilePage.accountLimitsPage().viewWithdrawLimits();
+		customerProfilePage.enableFaceOrTouchIDpage().clickEnable();
+		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
+		customerProfilePage.enableFaceOrTouchIDpage().clickEnable();
+		customerProfilePage.enableFaceOrTouchIDpage().clickNotNow();
+
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void VerifyWalletFeesView(String strParams) {
+	public void verifyGetHelp(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		dashboardPage.clickProfile();
-		customerProfilePage.clickWalletFees();
-		customerProfilePage.walletFeesPage().verifyWalletFeesHeading(data.get("WalletFeesHeader"));
-		customerProfilePage.walletFeesPage().viewBuyTokenFees();
-		customerProfilePage.walletFeesPage().viewWithdrawFees();
+		customerProfilePage.clickGetHelp();
+		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelp(data.get("getHelpHeading"));
+		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpDesc(data.get("getHelpDesc"));
+		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
+		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
 	}
-	
-	
-	
-	}
-
-
+}

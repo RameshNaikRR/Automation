@@ -155,7 +155,6 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("validate field is failed due to exception " + e);
 
 		}
-
 	}
 	
 	public void validatePasswordField(By ele, String eleName, String enterText) {
@@ -172,7 +171,6 @@ public class CommonFunctions {
 //			System.out.println("length " + actualtext.length());
 			if (enterText.equalsIgnoreCase(actualtext)
 					) {
-
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {

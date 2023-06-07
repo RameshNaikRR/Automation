@@ -26,9 +26,6 @@ public class LoginTest {
 		mobileFunctions = new MobileFunctions();
 //		DriverFactory.getDriver().removeApp("com.ideyalabstech.coyniqa");
 	}
-
-	
-
 	/**
 	 * testLogin Script is to test the Login to the application
 	 * 

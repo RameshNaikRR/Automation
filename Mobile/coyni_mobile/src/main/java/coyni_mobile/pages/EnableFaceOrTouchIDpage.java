@@ -2,7 +2,9 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -17,10 +19,16 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 	private By imgFaceID = MobileBy.AccessibilityId("");
 	private By btnNotNow = MobileBy.AccessibilityId("");
 	private By lnkDontRemindMeAgain = MobileBy.AccessibilityId("");
+	private By lblGetHelpHeading = MobileBy.AccessibilityId("");
+	private By lblGetHelpDesc = MobileBy.AccessibilityId("");
+	private By lblGetHelpName = MobileBy.AccessibilityId("");
+	private By lblLoginEmail = MobileBy.AccessibilityId("");
+	private By lblAccountID = MobileBy.AccessibilityId("");
+	private By lblDesc = MobileBy.AccessibilityId("");
 
 	public void verifyEnableFaceIdView() {
-		new AndroidCommonFunctions().elementView(imgFaceID, "Face Id image");
-		new AndroidCommonFunctions().elementView(lblEnableFaceId, "Enable Face Id");
+		new CommonFunctions().elementView(imgFaceID, "Face Id image");
+		new CommonFunctions().elementView(lblEnableFaceId, "Enable Face Id");
 		ExtentTestManager.setInfoMessageInReport("The text is :" + getText(lblEnableFaceIDText));
 	}
 
@@ -28,7 +36,7 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		click(btnEnable, "Enable");
 	}
 	public void verifyPermissionPopup() {
-		new AndroidCommonFunctions().elementView(lnkAllow, "Allow");
+		new CommonFunctions().elementView(lnkAllow, "Allow");
 		click(lnkDontAllow, "Dont Allow");
 	}
 	public void clickSkip() {
@@ -42,10 +50,27 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		}
 	}
 	public void verifyDontRemindButtonView() {
-		new AndroidCommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again");
+		new CommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again");
+	}
+	public void verifyGetHelp(String expHeading) {
+		new CommonFunctions().elementView(lblGetHelpHeading, "Heading");
+		new CommonFunctions().verifyLabelText(lblGetHelpHeading, "Heading", expHeading);
+	}
+	public void verifyGetHelpDesc(String expHeading) {
+		new CommonFunctions().elementView(lblGetHelpDesc, "Description");
+		new CommonFunctions().verifyLabelText(lblGetHelpDesc, "Description", expHeading);
+	}
+	public void verifyGetHelpview() {
+		new CommonFunctions().elementView(lblGetHelpName, "Name");
+		new CommonFunctions().elementView(lblLoginEmail, "Email");
+		new CommonFunctions().elementView(lblAccountID, "Account");
+		new CommonFunctions().elementView(lblDesc, "Description");
 	}
 	public AccountCreatedPage accountCreatedPage() {
 		return new AccountCreatedPage();
+	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
 	}
 	
 

@@ -79,6 +79,10 @@ public class CustomerProfilePage extends MobileFunctions {
 		scrollDownToElement(lnkChangePassword, "Change Password");
 		click(lnkChangePassword, "Change Password");
 	}
+    public void clickGetHelp() {
+    	scrollDownToElement(lnkGetHelp, "GetHelp");
+    	click(lnkGetHelp, "Get Help");
+    }
     public void clickLogout() {
     	click(btnLogOut, "Log out");
     }
@@ -95,5 +99,8 @@ public class CustomerProfilePage extends MobileFunctions {
 
 	public WalletFeesPage walletFeesPage() {
 		return new WalletFeesPage();
+	}
+	public EnableFaceOrTouchIDpage enableFaceOrTouchIDpage() {
+		return new EnableFaceOrTouchIDpage();
 	}
 }
