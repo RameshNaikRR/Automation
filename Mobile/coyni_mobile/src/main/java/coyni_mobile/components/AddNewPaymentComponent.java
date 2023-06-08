@@ -7,98 +7,86 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class AddNewPaymentComponent extends MobileFunctions{
-	private By lblHeading =MobileBy.AccessibilityId("Add Payment Method");
+public class AddNewPaymentComponent extends MobileFunctions {
+	private By lblHeading = MobileBy.AccessibilityId("Add Payment Method");
 	private By lblPaymentMethods = MobileBy.AccessibilityId("");
-	private By lblPageDes =MobileBy.AccessibilityId("");
-    private By btnExternalBank =MobileBy.AccessibilityId("");
-    private By btnDebitCard = MobileBy.AccessibilityId("");
-    private By btnCreditCard =MobileBy.AccessibilityId("");
-    private By lblBankCount =MobileBy.AccessibilityId("");
-    private By lblCreditCardCount =MobileBy.AccessibilityId("");
-    private By lblDebitCardCount = MobileBy.AccessibilityId("");
-    private By lblBankContent = MobileBy.AccessibilityId("");
-    private By lblCreditContent = MobileBy.AccessibilityId("Visa, Mastercard, Discover, and American Express credit cards");
-    private By lblDebitContent =MobileBy.AccessibilityId("Visa or Mastercard debit cards");
-    private By lblError = MobileBy.AccessibilityId("");
-    private By lblErrorMesg = MobileBy.AccessibilityId("");
-    private By btnOK = MobileBy.AccessibilityId("");
-    private By lblMaxLimit = MobileBy.AccessibilityId("This method has reached maximum 4 cards");
-    private By lblCoyni = MobileBy.AccessibilityId("coyni");
-    private By lblerrorText = MobileBy.AccessibilityId("");
-    private By lblAddNewPayment = MobileBy.AccessibilityId("Add Payment Method");
-    private By btnAddNewPayment = MobileBy.xpath("//*[@name='Add New Payment Method']");
+	private By lblPageDes = MobileBy.AccessibilityId("");
+	private By btnExternalBank = MobileBy.AccessibilityId("");
+	private By btnDebitCard = MobileBy.AccessibilityId("");
+	private By btnCreditCard = MobileBy.AccessibilityId("");
+	private By lblBankCount = MobileBy.AccessibilityId("");
+	private By lblCreditCardCount = MobileBy.AccessibilityId("");
+	private By lblDebitCardCount = MobileBy.AccessibilityId("");
+	private By lblBankContent = MobileBy.AccessibilityId("");
+	private By lblCreditContent = MobileBy
+			.AccessibilityId("Visa, Mastercard, Discover, and American Express credit cards");
+	private By lblDebitContent = MobileBy.AccessibilityId("Visa or Mastercard debit cards");
+	private By lblError = MobileBy.AccessibilityId("");
+	private By lblErrorMesg = MobileBy.AccessibilityId("");
+	private By btnOK = MobileBy.AccessibilityId("");
+	private By lblMaxLimit = MobileBy.AccessibilityId("This method has reached maximum 4 cards");
+	private By lblCoyni = MobileBy.AccessibilityId("coyni");
+	private By lblerrorText = MobileBy.AccessibilityId("");
+	private By lblAddNewPayment = MobileBy.AccessibilityId("Add Payment Method");
+	private By btnAddNewPayment = MobileBy.xpath("//*[@name='Add New Payment Method']");
 //	private By btnSignetWalletId = MobileBy.xpath("//*[contains(@name,'Signet')]//following-sibling::*[contains(@name,'••••%s')]");
-  
-    private By btnBank = MobileBy.xpath("//*[contains(@name,'BANK')]");
-    
-    private By btnBankOne = MobileBy.xpath("(//*[contains(@name,'BANK')])[1]");
-    private By btnCreditOne = MobileBy.xpath("(//*[contains(@name,'Credit Card')])[1]");
-    private By btnDebitOne = MobileBy.xpath("(//*[contains(@name,'Debit Card')])[1]");
-    
-    private By btnAccountOne = MobileBy.xpath("//*[@name='Add New Payment Method']/../following-sibling::*[1]");
-    private By listOfAccounts = MobileBy.xpath("//*[@name='Add New Payment Method']/../following-sibling:: XCUIElementTypeCell");
-    
-    private By lblCreditExpiry = MobileBy.xpath("//*[@name='Visa Credit Card']/following-sibling::*[2] |//*[contains(@name,'Visa Credit')]/../*[1]");
-    private By lblDEbitEXpiry = MobileBy.xpath("//*[@name='Visa Debit Card']/following-sibling::*[2]|//*[contains(@name,'Visa Debit')]/../*[1] |(//*[contains(@name,'Mastercard Debit')]/../*[1])[2]");
-    private By lblDebitExp = MobileBy.xpath("(//*[contains(@name,'Mastercard Debit')]/../*[1])[3]");
-    
-    private By imgEdit = MobileBy.AccessibilityId("edited Green");
-    private By imgDelete = MobileBy.AccessibilityId("Icon feather trash");
-    private By btnBack = MobileBy.AccessibilityId("back");
-    private By lblRemoving = MobileBy.AccessibilityId("Removing");
-    private By btnNo = MobileBy.xpath("(//*[contains(@name,'No')])[2]");
-    private By btnYes = MobileBy.xpath("(//*[contains(@name,'Yes')])[2]");
-    private By lblOOPS = MobileBy.AccessibilityId("Oops");
-    private By txtOops = MobileBy.AccessibilityId("Seems like you have an issue with your card");
-    private By btnRemove = MobileBy.xpath("(//*[@name='Remove'])[2]");
-    private By btnEdit = MobileBy.xpath("(//*[@name='Edit'])[2]");
-    private By btnClose = MobileBy.AccessibilityId("close");
-    
-    
-    private By lblNoToken = MobileBy.AccessibilityId("No Token Available");
-    
 
-    
+	private By btnBank = MobileBy.xpath("//*[contains(@name,'BANK')]");
 
-    
-    public int verifyCoyniView() {
-        return getElementList(lblCoyni, "Coyni").size();
+	private By btnBankOne = MobileBy.xpath("(//*[contains(@name,'BANK')])[1]");
+	private By btnCreditOne = MobileBy.xpath("(//*[contains(@name,'Credit Card')])[1]");
+	private By btnDebitOne = MobileBy.xpath("(//*[contains(@name,'Debit Card')])[1]");
 
-    }
-    public void verifyMaxlimit(String expTxt) {
+	private By btnAccountOne = MobileBy.xpath("//*[@name='Add New Payment Method']/../following-sibling::*[1]");
+	private By listOfAccounts = MobileBy
+			.xpath("//*[@name='Add New Payment Method']/../following-sibling:: XCUIElementTypeCell");
 
-        new CommonFunctions().verifyLabelText(lblMaxLimit, "Max limit", expTxt);
+	private By lblCreditExpiry = MobileBy
+			.xpath("//*[@name='Visa Credit Card']/following-sibling::*[2] |//*[contains(@name,'Visa Credit')]/../*[1]");
+	private By lblDEbitEXpiry = MobileBy.xpath(
+			"//*[@name='Visa Debit Card']/following-sibling::*[2]|//*[contains(@name,'Visa Debit')]/../*[1] |(//*[contains(@name,'Mastercard Debit')]/../*[1])[2]");
+	private By lblDebitExp = MobileBy.xpath("(//*[contains(@name,'Mastercard Debit')]/../*[1])[3]");
 
-    }
-    public void  verifyAddNewPaymentHeading(String expHeading) {
+	private By imgEdit = MobileBy.AccessibilityId("edited Green");
+	private By imgDelete = MobileBy.AccessibilityId("Icon feather trash");
+	private By btnBack = MobileBy.AccessibilityId("back");
+	private By lblRemoving = MobileBy.AccessibilityId("Removing");
+	private By btnNo = MobileBy.xpath("(//*[contains(@name,'No')])[2]");
+	private By btnYes = MobileBy.xpath("(//*[contains(@name,'Yes')])[2]");
+	private By lblOOPS = MobileBy.AccessibilityId("Oops");
+	private By txtOops = MobileBy.AccessibilityId("Seems like you have an issue with your card");
+	private By btnRemove = MobileBy.xpath("(//*[@name='Remove'])[2]");
+	private By btnEdit = MobileBy.xpath("(//*[@name='Edit'])[2]");
+	private By btnClose = MobileBy.AccessibilityId("close");
 
-        new CommonFunctions().verifyLabelText(lblAddNewPayment, "Heading", expHeading);    
+	private By lblNoToken = MobileBy.AccessibilityId("No Token Available");
 
-        }
+	public int verifyCoyniView() {
+		return getElementList(lblCoyni, "Coyni").size();
 
-    public int verifyAddPaymentSize() {
+	}
 
-        return getElementList(lblHeading, "Heading").size();
+	public void verifyMaxlimit(String expTxt) {
 
-    }
+		new CommonFunctions().verifyLabelText(lblMaxLimit, "Max limit", expTxt);
 
-  public void verifyPaymentMethodsHeading(String hdg) {
-	  new CommonFunctions().verifyLabelText(lblPaymentMethods, "PaymentMethods", hdg);
-  }
+	}
 
+	public void verifyAddNewPaymentHeading(String expHeading) {
 
-   
+		new CommonFunctions().verifyLabelText(lblAddNewPayment, "Heading", expHeading);
 
+	}
 
-    
+	public int verifyAddPaymentSize() {
 
-    
-   
+		return getElementList(lblHeading, "Heading").size();
 
-    
+	}
 
-    
+	public void verifyPaymentMethodsHeading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblPaymentMethods, "PaymentMethods", hdg);
+	}
 
 //    public void verifyErrorTextView() {
 //
@@ -108,141 +96,111 @@ public class AddNewPaymentComponent extends MobileFunctions{
 //
 //    }
 
-    
+	public void verifyAddPaymentMethodView() {
 
-   
+		new CommonFunctions().elementView(lblHeading, "Add Payment method");
 
-    
+	}
 
- 
+	public void verifyErrorView() {
 
-   
+		new CommonFunctions().elementView(lblError, "Error");
 
-    
+	}
 
-   
+	public void verifyErrorMessage(String expMessage) {
 
-    
+		new CommonFunctions().verifyLabelText(lblErrorMesg, "Error Message", expMessage);
 
-    
+	}
 
-   
+	public void clickOk() {
 
-    public void verifyAddPaymentMethodView() {
+		click(btnOK, "Ok");
 
-        new CommonFunctions().elementView(lblHeading, "Add Payment method");
+	}
 
-    }
+	public By getNumbersList(String account) {
 
-    
+		return MobileBy
+				.xpath(String.format("//*[@name='%s']/following-sibling::XCUIElementTypeStaticText[1]", account));
 
-    
+	}
 
-    public void verifyErrorView() {
+	public void verifyBankNums() {
 
-        new CommonFunctions().elementView(lblError, "Error");
+		ExtentTestManager.setInfoMessageInReport("Bank Number is " + getText(getNumbersList(("Bank Account"))));
 
-    }
+		// new CommonFunctions().verifyLabelText(getNumbersList("Bank Account"),
+		// "bankNumbers", bankNumbers);
 
-    public void verifyErrorMessage(String expMessage) {
+	}
 
-        new CommonFunctions().verifyLabelText(lblErrorMesg, "Error Message", expMessage);
+	public void verifyCardNums(String cardNums) {
 
-    }
+		new CommonFunctions().verifyLabelText(getNumbersList("Debit Card"), "cardNums", cardNums);
 
-    public void clickOk() {
+	}
 
-        click(btnOK, "Ok");
+	public void verifyCreditCardNums(String cardNums) {
 
-    }
+		new CommonFunctions().verifyLabelText(getNumbersList("Credit Card"), "cardNums", cardNums);
 
-    public By getNumbersList(String account) {
+	}
 
-        return MobileBy.xpath(String.format("//*[@name='%s']/following-sibling::XCUIElementTypeStaticText[1]", account));
+	public void verifyAddPaymentPage() {
 
-    }
+		new CommonFunctions().elementView(lblHeading, "Add Payment Method Page");
 
-    
+	}
 
-    public void verifyBankNums() {
+	public void verifyHeading(String expHeading) {
 
-        ExtentTestManager.setInfoMessageInReport("Bank Number is " + getText(getNumbersList(("Bank Account"))));
+		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 
-    //    new CommonFunctions().verifyLabelText(getNumbersList("Bank Account"), "bankNumbers", bankNumbers);
+	}
 
-    }
+	public void verifyPageText(String expText) {
 
-    public void verifyCardNums(String cardNums) {
+		new CommonFunctions().verifyLabelText(lblPageDes, "Page Description ", expText);
 
-        new CommonFunctions().verifyLabelText(getNumbersList("Debit Card"), "cardNums", cardNums);
+	}
 
-    }
+	public void clickBankAcount() {
 
-    
+		click(btnExternalBank, "External Bank Account");
 
-    public void verifyCreditCardNums(String cardNums) {
+	}
 
-        new CommonFunctions().verifyLabelText(getNumbersList("Credit Card"), "cardNums", cardNums);
+	public void verifyDebitContent(String content) {
 
-    }
+		new CommonFunctions().verifyLabelText(lblDebitContent, "Debit card label", content);
 
-    
+	}
 
-    public void verifyAddPaymentPage() {
+	public void clickDebitCard() throws InterruptedException {
 
-        new CommonFunctions().elementView(lblHeading, "Add Payment Method Page");
+		Thread.sleep(1000);
 
-    }
+		if (getElementList(btnDebitCard, "DebitCard").size() > 0) {
 
-    public void verifyHeading(String expHeading) {
+			click(btnDebitCard, "Debit Card");
 
-        new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
+		}
 
-    }
+	}
 
-    public void verifyPageText(String expText) {
+	public void verifyCreditContent(String content) {
 
-        new CommonFunctions().verifyLabelText(lblPageDes, "Page Description ", expText);
+		new CommonFunctions().verifyLabelText(lblCreditContent, "Credit card label", content);
 
-    }
+	}
 
-    public void clickExternalBankAcount() {
+	public void clickCreditCard() {
 
-        click(btnExternalBank, "External Bank Account");
+		click(btnCreditCard, "Credit Card");
 
-    }
-
-    public void verifyDebitContent(String content) {
-
-        new CommonFunctions().verifyLabelText(lblDebitContent, "Debit card label", content);
-
-    }
-
-    
-
-    public void clickDebitCard() throws InterruptedException {
-
-        Thread.sleep(1000);
-
-        if(getElementList(btnDebitCard, "DebitCard").size()>0) {
-
-        click(btnDebitCard, "Debit Card");
-
-        }
-
-    }
-
-    public void verifyCreditContent(String content) {
-
-        new CommonFunctions().verifyLabelText(lblCreditContent, "Credit card label", content);
-
-    }
-
-    public void clickCreditCard() {
-
-        click(btnCreditCard, "Credit Card");
-
-    }
+	}
 
 //    public AddExternalBankAccountComponent addExternalBankAccountComponent() {
 //
@@ -250,67 +208,64 @@ public class AddNewPaymentComponent extends MobileFunctions{
 //
 //    }
 
-    public void verifyExternalBankView() {
+	public void verifyExternalBankView() {
 
-        new CommonFunctions().elementView(btnExternalBank, "External Bank Account");
+		new CommonFunctions().elementView(btnExternalBank, "External Bank Account");
 
-    }
+	}
 
-    public void verifyExternalBankText(String expBankText) {
+	public void verifyExternalBankText(String expBankText) {
 
-        new CommonFunctions().verifyLabelText(lblBankContent, "Add Bank Description ",expBankText);
+		new CommonFunctions().verifyLabelText(lblBankContent, "Add Bank Description ", expBankText);
 
-    }
+	}
 
-    public void verifyCreditCardView() {
+	public void verifyCreditCardView() {
 
-        new CommonFunctions().elementView(btnCreditCard, "Credit card");
+		new CommonFunctions().elementView(btnCreditCard, "Credit card");
 
-    }
+	}
 
-    public void verifyCreditCardText(String expCreditText) {
+	public void verifyCreditCardText(String expCreditText) {
 
-        new CommonFunctions().verifyLabelText(lblCreditContent, "Credit Card Description ",expCreditText);
+		new CommonFunctions().verifyLabelText(lblCreditContent, "Credit Card Description ", expCreditText);
 
-    }
+	}
 
-    public void verifyDebitCardView() {
+	public void verifyDebitCardView() {
 
-        new CommonFunctions().elementView(btnDebitCard, "Debit Card");
+		new CommonFunctions().elementView(btnDebitCard, "Debit Card");
 
-    }
+	}
 
-    public void verifyDebitCardText(String expDebitText) {
+	public void verifyDebitCardText(String expDebitText) {
 
-        new CommonFunctions().verifyLabelText(lblDebitContent, "Debit Card Description ",expDebitText);
+		new CommonFunctions().verifyLabelText(lblDebitContent, "Debit Card Description ", expDebitText);
 
-    }
+	}
 
-    public NavigationComponent navigationComponent() {
+	public NavigationComponent navigationComponent() {
 
-        return new NavigationComponent();
+		return new NavigationComponent();
 
-    }
+	}
 
-    public void getBankAccountCount() {
+	public void getBankAccountCount() {
 
-        if(getElementList(lblBankCount, "Bank Account Count").size()>0) {
+		if (getElementList(lblBankCount, "Bank Account Count").size() > 0) {
 
-            String count = getAttribute(lblBankCount, "value").replace("(", "").replace(")", "").split("/")[0];
+			String count = getAttribute(lblBankCount, "value").replace("(", "").replace(")", "").split("/")[0];
 
-            
+		}
 
-        }
+	}
 
-    }
+	public AddCardComponent addCardComponent() {
 
-    public AddCardComponent addCardComponent() {
+		return new AddCardComponent();
 
-        return new AddCardComponent();
+	}
 
-    }
- 
-    
 //    
 //    
 //    public void verifyNotOken() {
@@ -404,31 +359,34 @@ public class AddNewPaymentComponent extends MobileFunctions{
 				paymentMethod, last4digits));
 	}
 
-	
 	public int verifyNumofAccounts() {
 		return getElementList(listOfAccounts, "list Of Accounts").size();
-		
+
 	}
-   
+
 	public int verifyNumOfDebitCards() {
 		return getElementList(btnDebitCard, "Debit Card").size();
 	}
+
 	public int verifyNumOfCreditCards() {
 		return getElementList(btnCreditCard, "Credit Card").size();
 	}
+
 	public int verifyNumOfBanks() {
 		return getElementList(btnBank, "Bank").size();
 	}
+
 	public void clickCreditCard(String last4digits) {
-		
+
 		click(getPaymentItems("Credit", last4digits), "Credit");
 	}
+
 	public void clickDebitCards() {
 		click(btnDebitCard, "Debit Card");
 	}
 
 	public void clickDebitCard(String last4digits) {
-		//click(btnDebitCard, "Debit");
+		// click(btnDebitCard, "Debit");
 		click(getPaymentItems("Debit", last4digits), "Debit");
 	}
 
@@ -449,10 +407,13 @@ public class AddNewPaymentComponent extends MobileFunctions{
 	public void getPaymentPages() {
 		if (getElementList(lblHeading, "heading").size() > 0) {
 			clickAddNewPayment();
-		}
-		else {
+		} else {
 			ExtentTestManager.setInfoMessageInReport("no payment methods");
 		}
+	}
+
+	public MXBankComponent mxBankComponent() {
+		return new MXBankComponent();
 	}
 	///////////////////////////////////////////////////////////
 

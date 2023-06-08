@@ -1,22 +1,21 @@
 package coyni_mobile.components;
 
-
-
 import org.openqa.selenium.By;
-
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class SuccessFailureComponent extends MobileFunctions {
 	private By lblAllDone = MobileBy.AccessibilityId("All Done");
-	private By lblAccountCreated  = MobileBy.AccessibilityId("Account Created");
+	private By lblAccountCreated = MobileBy.AccessibilityId("Account Created");
 	private By lblAccountReadyDesc = MobileBy.AccessibilityId("Account is Ready");
 	private By lblCardSucessDesc = MobileBy.AccessibilityId("");
-    private By imgTickMark = MobileBy.AccessibilityId("Success image");
+	private By imgTickMark = MobileBy.AccessibilityId("Success image");
 	private By lblEmailSucess = MobileBy.AccessibilityId("Change Email Successful");
 	private By lblChangeEmailDesc = MobileBy.AccessibilityId("");
 
@@ -26,34 +25,53 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblPwdChanged = MobileBy.AccessibilityId("");
 	private By lblpwdChangedDesc = MobileBy.AccessibilityId("");
 	private By btnDone = MobileBy.AccessibilityId("");
-	
-	
-	
+
+//	Add Bank Successful page
+	private By addBankSuccHeading = MobileBy.AccessibilityId("");
+//	private By lblDescription = MobileBy.xpath("//*[@text='Your bank account(s) has been successfully authorized and added to your payment methods.']");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 80);
+
+	public void verifyBankSucessHeading(String expHeading) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(addBankSuccHeading));
+		new CommonFunctions().verifyLabelText(addBankSuccHeading, "Bank Success Heading", expHeading);
+	}
+
+	public void verifyAddedBankDescription(String description) {
+		By lblDescription = MobileBy.xpath("//*[@text=" + "'" + description + "'" + "]");
+		if (getElement(lblDescription, "Bank Description").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblDescription) + " is displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport(getText(lblDescription) + " is not displayed");
+		}
+	}
+
 	public void verifyPasswordChanged(String hdg) {
 		new CommonFunctions().elementView(imgTickMark, "Tick mark");
 		new CommonFunctions().verifyLabelText(lblPwdChanged, "password changed", hdg);
 	}
-	
+
 	public void verifyPasswordChangedDesc(String hdg) {
 		new CommonFunctions().verifyLabelText(lblpwdChangedDesc, "password changed", hdg);
 	}
-	
+
 	public void verifyAllDone(String allDone) {
 		new CommonFunctions().elementView(imgTickMark, "Tick Mark");
 		new CommonFunctions().verifyLabelText(lblAllDone, "All Done", allDone);
 	}
+
 	public void verifyCardSucessDesc(String desc) {
 		new CommonFunctions().verifyLabelText(lblCardSucessDesc, "description", desc);
 	}
+
 	public void clickDone() {
-		if(getElement(btnDone, "Done").isEnabled()) {
+		if (getElement(btnDone, "Done").isEnabled()) {
 			click(btnDone, "Done");
-		}
-		else {
+		} else {
 			ExtentTestManager.setInfoMessageInReport("Done Button is disabled");
 		}
 	}
-	
+
 //	
 //	private By lblHeading = MobileBy.xpath("(//*[contains(@name,'All Done')])[1]|//*[contains(@name,'Transaction')]");
 //
@@ -215,7 +233,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 //	}
 
 	public void verifyEmailSucess(String expHeading) {
-        new CommonFunctions().elementView(imgTickMark, "sucess image");
+		new CommonFunctions().elementView(imgTickMark, "sucess image");
 		new CommonFunctions().verifyLabelText(lblEmailSucess, "heading", expHeading);
 
 	}
@@ -267,14 +285,14 @@ public class SuccessFailureComponent extends MobileFunctions {
 //	}
 
 	public void clickLogin() {
-     if(getElement(btnLogin, "Login").isEnabled()) {
-		click(btnLogin, "Login");
-     }else {
-    	 ExtentTestManager.setInfoMessageInReport("login button is disabled");
-     }
+		if (getElement(btnLogin, "Login").isEnabled()) {
+			click(btnLogin, "Login");
+		} else {
+			ExtentTestManager.setInfoMessageInReport("login button is disabled");
+		}
 
 	}
-	
+
 	public void verifyChangeEmailDesc(String desc) {
 		new CommonFunctions().verifyLabelText(lblChangeEmailDesc, "desc", desc);
 	}

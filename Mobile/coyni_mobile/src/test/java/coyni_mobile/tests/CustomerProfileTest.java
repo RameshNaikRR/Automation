@@ -736,20 +736,6 @@ public class CustomerProfileTest {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -772,6 +758,47 @@ public class CustomerProfileTest {
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpDesc(data.get("getHelpDesc"));
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
 		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccount(String strParams) throws InterruptedException {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.addNewPaymentComponent().clickBankAcount();
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().addBank(data.get("mxAddBankHeading"),
+					data.get("mxAddBankDescription"), data.get("mxAddBankChkBxDescription"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent()
+					.verifySelectYourInstitution(data.get("institutionHeading"));
+			if (customerProfilePage.addNewPaymentComponent().mxBankComponent()
+					.MXConfirmationScreen(data.get("mxConfirmationHeading")) == 1) {
+				customerProfilePage.addNewPaymentComponent().mxBankComponent().verifyMXConfirmationScreen(
+						data.get("mxConfirmationHeading"), data.get("mxConfirmationDescription"));
+				customerProfilePage.addNewPaymentComponent().mxBankComponent().clickMXContinue();
+			}
+			customerProfilePage.addNewPaymentComponent().mxBankComponent()
+					.verifyCredentialsHeading(data.get("credentialsHeading"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().fillUserName(data.get("mxUsername"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().fillPassword(data.get("mxPassword"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().clickContinue();
+			customerProfilePage.addNewPaymentComponent().mxBankComponent()
+					.VerifyIdentityHeading(data.get("identityHeading"));
+			if (data.get("accountType").equalsIgnoreCase("checking")) {
+				customerProfilePage.addNewPaymentComponent().mxBankComponent().clickChecking();
+			} else {
+				customerProfilePage.addNewPaymentComponent().mxBankComponent().clickSavings();
+			}
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().clickContinue();
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent()
+					.verifyBankSucessHeading(data.get("bankAddedHeading"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent()
+					.verifyAddedBankDescription(data.get("bankAddedDescription"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent().clickDone();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Add Bank Account failed due to Exception " + e);
+		}
 	}
 
 }
