@@ -11,13 +11,13 @@ import io.appium.java_client.MobileBy;
 
 public class AgreementPage extends MobileFunctions {
 
-	private By lblLegal = MobileBy.AccessibilityId("");
-	private By lblLegalDesc = MobileBy.AccessibilityId("");
-	private By arwPrivacyPolicy = MobileBy.AccessibilityId("");
+	private By lblLegal = MobileBy.AccessibilityId("Legal");
+	private By lblLegalDesc = MobileBy.AccessibilityId("Review Privacy and Terms Heading");
+	private By arwPrivacyPolicy = MobileBy.AccessibilityId("Privacy Policy");
 	private By btnDone = MobileBy.AccessibilityId("");
-	private By arwTermsOfService = MobileBy.AccessibilityId("");
-	private By chkBx = MobileBy.AccessibilityId("");
-	private By chkbxDesc = MobileBy.AccessibilityId("");
+	private By arwTermsOfService = MobileBy.AccessibilityId("Terms of service");
+	private By chkBx = MobileBy.AccessibilityId("Agreement Check Box");
+	private By chkbxDesc = MobileBy.AccessibilityId("Check Box Acknowledge");
 	private By btnAgree = MobileBy.AccessibilityId("");
 
 //	Profile Agreements Page

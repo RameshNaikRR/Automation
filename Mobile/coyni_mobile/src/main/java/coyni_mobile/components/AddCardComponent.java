@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -32,7 +33,6 @@ public class AddCardComponent extends MobileFunctions {
 //	private By lblConfirmAddress = MobileBy.xpath("//*[contains(@name,'Please confirm')]");
 	
 	
-	private By btnNext = MobileBy.xpath("(//*[@name='Next'])[1]");
 
 	private By lblPleaseEnter = MobileBy.xpath("//*[contains(@name,'Please enter')]");
 //	private By lblConfirmAddress = MobileBy.xpath("//*[contains(@name,'Please confirm')]");
@@ -84,9 +84,7 @@ public class AddCardComponent extends MobileFunctions {
 		new AndroidCommonFunctions().verifyLabelText(lblAddAddressHeading, "pageHeading", expHeading);
 	}
 	
-	public void clickNext() {
-		click(btnNext, "Next");
-	}
+	
 	public void clickCamera() {
 		click(iconCamera, "Camera");
 	}
@@ -148,12 +146,6 @@ public class AddCardComponent extends MobileFunctions {
 	}
 	
 	
-	public MailingAddressComponent mailingAddressComponent() {
-		return new MailingAddressComponent();
-	}
-	public NavigationComponent navigationComponent() {
-		 return new NavigationComponent();
-	 }
 	
 	/******
 	 * 
@@ -165,18 +157,29 @@ public class AddCardComponent extends MobileFunctions {
 	private By txtCVVorCVC = MobileBy.AccessibilityId("CVV/CVC");
 	private By btnContinue = MobileBy.AccessibilityId("");
 	private By iconCamera = MobileBy.AccessibilityId("");
+	private By imgCard = MobileBy.AccessibilityId("");
+	private By lblAddDebitCard = MobileBy.AccessibilityId("");
+	private By lblAddCardDesc = MobileBy.AccessibilityId("");
+	private By btnNext = MobileBy.AccessibilityId("");
+	private By lblPlsConfirmBillingAdd = MobileBy.AccessibilityId("");
 	
 	
+	public void verifyAddcardDesc(String desc) {
+		new CommonFunctions().verifyLabelText(lblAddCardDesc, "Add Debit Card Desc", desc);
+	}
+	public void verifyPlsConfirmBillingAdd(String desc) {
+		new CommonFunctions().verifyLabelText(lblPlsConfirmBillingAdd, "Please Confirm Billing", desc);
+	}
 	
-	
-	
-	public void verifyAddDebitorCredHeadingView() {
-		new AndroidCommonFunctions().elementView(lblAddCredorDebit, "AddCreditorDebit Card");
+	public void verifyAddDebitorCredHeadingView(String hdg) {
+		new CommonFunctions().verifyLabelText(lblAddDebitCard, "Add Debit Card", hdg);
 	}
 	public void fillNameOnCard(String nameOnCard) {
 		enterText(txtNameOnCard, nameOnCard, "NameOnCard");
 	}
 	public void fillCardNumber(String cardNumber) {
+		new CommonFunctions().elementView(imgCard, "Card Image");
+		new CommonFunctions().elementView(iconCamera, "Camere");
 		click(txtCardNumber, "CardNum");
 		enterText(txtCardNumber, cardNumber, "Card Number");
 	}
@@ -197,6 +200,22 @@ public class AddCardComponent extends MobileFunctions {
 		}
 	}
 	
+	public void clickNext() {
+		if(getElement(btnNext, "Next").isEnabled()) {
+		click(btnNext, "Next");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Next button is disabled");
+		}
+	}
+	public MailingAddressComponent mailingAddressComponent() {
+		return new MailingAddressComponent();
+	}
+	public NavigationComponent navigationComponent() {
+		 return new NavigationComponent();
+	 }
+	public PreAuthorizationComponent preAuthorizationComponent() {
+		 return new PreAuthorizationComponent();
+	 }
 	
 	
 	

@@ -287,6 +287,8 @@ public class MailingAddressComponent extends MobileFunctions{
 	public void clickAddCard() {
 		if(getElement(btnAddCard, "AddCard").isEnabled()) {
 		click(btnAddCard, "Add Card");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Add Card button is disabled");
 		}
 	}
 	
@@ -295,5 +297,8 @@ public class MailingAddressComponent extends MobileFunctions{
 		click(chkbxSaveThisAddress, "SaveThisAddress");
 	}
 	
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
+	}
 	
 }

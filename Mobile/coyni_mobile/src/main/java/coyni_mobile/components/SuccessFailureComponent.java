@@ -13,7 +13,10 @@ import io.appium.java_client.MobileBy;
 
 public class SuccessFailureComponent extends MobileFunctions {
 	private By lblAllDone = MobileBy.AccessibilityId("All Done");
-    private By imgTickMark = MobileBy.AccessibilityId("");
+	private By lblAccountCreated  = MobileBy.AccessibilityId("Account Created");
+	private By lblAccountReadyDesc = MobileBy.AccessibilityId("Account is Ready");
+	private By lblCardSucessDesc = MobileBy.AccessibilityId("");
+    private By imgTickMark = MobileBy.AccessibilityId("Success image");
 	private By lblEmailSucess = MobileBy.AccessibilityId("Change Email Successful");
 	private By lblChangeEmailDesc = MobileBy.AccessibilityId("");
 
@@ -22,6 +25,8 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By btnLogin = MobileBy.AccessibilityId("");
 	private By lblPwdChanged = MobileBy.AccessibilityId("");
 	private By lblpwdChangedDesc = MobileBy.AccessibilityId("");
+	private By btnDone = MobileBy.AccessibilityId("");
+	
 	
 	
 	public void verifyPasswordChanged(String hdg) {
@@ -33,7 +38,21 @@ public class SuccessFailureComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblpwdChangedDesc, "password changed", hdg);
 	}
 	
-	
+	public void verifyAllDone(String allDone) {
+		new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+		new CommonFunctions().verifyLabelText(lblAllDone, "All Done", allDone);
+	}
+	public void verifyCardSucessDesc(String desc) {
+		new CommonFunctions().verifyLabelText(lblCardSucessDesc, "description", desc);
+	}
+	public void clickDone() {
+		if(getElement(btnDone, "Done").isEnabled()) {
+			click(btnDone, "Done");
+		}
+		else {
+			ExtentTestManager.setInfoMessageInReport("Done Button is disabled");
+		}
+	}
 	
 //	
 //	private By lblHeading = MobileBy.xpath("(//*[contains(@name,'All Done')])[1]|//*[contains(@name,'Transaction')]");

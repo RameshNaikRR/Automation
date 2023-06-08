@@ -2,6 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.AndroidCommonFunctions;
@@ -110,6 +111,9 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 	public ChoosePinComponent choosePinComponent() {
 		return new ChoosePinComponent();
+	}
+	public AddNewPaymentComponent addNewPaymentComponent() {
+		return new AddNewPaymentComponent();
 	}
 	
 }

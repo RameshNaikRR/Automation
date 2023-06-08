@@ -243,22 +243,23 @@ public class SignUpPage extends MobileFunctions {
 	/**************
 	 * 
 	 */
-	private By lblPhoneNumber = MobileBy.AccessibilityId("");
-	private By txtPhoneNumbers = MobileBy.AccessibilityId("");
-	private By txtPhoneDesc = MobileBy.AccessibilityId("");
+	private By lblPhoneNumber = MobileBy.AccessibilityId("coyni sub heading");
+	private By txtPhoneNumbers = MobileBy.AccessibilityId("Enter Phone");
+	private By txtPhoneDesc = MobileBy.AccessibilityId("Phone Number");
 	private By drpdwnPhNum = MobileBy.AccessibilityId("");
-	private By txtSearchField = MobileBy.AccessibilityId("");
-	private By btnSearchCross = MobileBy.AccessibilityId("");
-	private By btnContinue = MobileBy.AccessibilityId("");
-	private By lblEmail = MobileBy.AccessibilityId("");
-	private By lblEmailDesc = MobileBy.AccessibilityId("");
-	private By txtEmail = MobileBy.AccessibilityId("");
-	private By lblName = MobileBy.AccessibilityId("");
-	private By lblNameDesc = MobileBy.AccessibilityId("");
-	private By txtFirstName = MobileBy.AccessibilityId("");
-	private By txtLastName = MobileBy.AccessibilityId("");
+	private By iconSearch = MobileBy.AccessibilityId("Country Search Icon");
+	private By txtSearchField = MobileBy.AccessibilityId("Country Search");
+	private By btnSearchCross = MobileBy.AccessibilityId("Clear text");
+	private By btnContinue = MobileBy.AccessibilityId("//XCUIElementTypeStaticText[@name='Continue']");
+	private By lblEmail = MobileBy.AccessibilityId("Email");
+	private By lblEmailDesc = MobileBy.AccessibilityId("Email Verification Text");
+	private By txtEmail = MobileBy.AccessibilityId("Email Address");
+	private By lblName = MobileBy.AccessibilityId("Name");
+	private By lblNameDesc = MobileBy.AccessibilityId("Enter Your Full Name");
+	private By txtFirstName = MobileBy.AccessibilityId("First Name");
+	private By txtLastName = MobileBy.AccessibilityId("Last Name");
 	private By lblPassword = MobileBy.AccessibilityId("");
-	private By lblPasswordDesc = MobileBy.AccessibilityId("");
+	private By lblPasswordDesc = MobileBy.AccessibilityId("Keep Your Account Secure");
 	private By txtPassword = MobileBy.AccessibilityId("");
 	private By btnEye = MobileBy.AccessibilityId("");
 	private By txtPwdErrMSg = MobileBy.AccessibilityId("");

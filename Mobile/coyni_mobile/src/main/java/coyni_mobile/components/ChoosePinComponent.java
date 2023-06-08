@@ -13,10 +13,10 @@ public class ChoosePinComponent extends MobileFunctions {
 	private By lblEnterYourPin = MobileBy.AccessibilityId("");
 	private By btnLogout = MobileBy.AccessibilityId("");
 	private By btnForgotPin = MobileBy.AccessibilityId("");
-	private By lblChoosePinDes = MobileBy.AccessibilityId("");
-	private By lblChooseYourPin = MobileBy.AccessibilityId("");
+	private By lblChoosePinDes = MobileBy.AccessibilityId("Please choose a 6-digit PIN for  two-step authentication.");
+	private By lblChooseYourPin = MobileBy.AccessibilityId("Choose Your PIN");
 	private By txtPin = MobileBy.xpath("//*[contains(@name,'PIN')]/following-sibling::*[1]");
-	private By lblConfirmYourPin = MobileBy.AccessibilityId("");
+	private By lblConfirmYourPin = MobileBy.AccessibilityId("Confirm Your PIN");
 	private By lblPinErr = MobileBy.AccessibilityId("");
 
 	private By getOneNumberOfPin(char num) {

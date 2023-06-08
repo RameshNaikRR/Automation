@@ -11,12 +11,12 @@ import io.appium.java_client.MobileBy;
 
 public class PhoneAndEmailVerificationComponent extends MobileFunctions{
 
-	private By lblPhoneVerification = MobileBy.AccessibilityId("");
-	private By lblPhoneDesc = MobileBy.AccessibilityId("");
+	private By lblPhoneVerification = MobileBy.AccessibilityId("Phone Verification Heading");
+	private By lblPhoneDesc = MobileBy.AccessibilityId("Phone Verification Text");
 	private By txtOtp = MobileBy.AccessibilityId("");
 	private By lnkResend = MobileBy.AccessibilityId("");
-	private By lblEmailVerification = MobileBy.AccessibilityId("");
-	private By lblEmailDesc = MobileBy.AccessibilityId("");
+	private By lblEmailVerification = MobileBy.AccessibilityId("Email Verification Heading");
+	private By lblEmailDesc = MobileBy.AccessibilityId("Email Verification Text");
 	private By lblCurrentEmailVerification = MobileBy.AccessibilityId("");
 	private By currentEmaildesc = MobileBy.AccessibilityId("");
 	private By lblDontHaveAccess = MobileBy.AccessibilityId("");

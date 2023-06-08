@@ -377,9 +377,9 @@ public class CustomerProfileTest {
 		agreementsPage.navigationComponent().clickClose();
 
 	}
-	
+
 	/**
-	 * testAccountLimits Script is to  test Account Limits
+	 * testAccountLimits Script is to test Account Limits
 	 * 
 	 * @param strParams
 	 */
@@ -402,15 +402,14 @@ public class CustomerProfileTest {
 			customerProfilePage.accountLimitsPage().verfiyWithdrawBankView();
 			customerProfilePage.accountLimitsPage().verfiyWithdrawInstantView();
 			customerProfilePage.accountLimitsPage().verfiyWithdrawGiftCardView();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
 		}
 	}
-	
-	
+
 	/**
-	 * testAccountLimits Script is to  test Account Limits
+	 * testAccountLimits Script is to test Account Limits
 	 * 
 	 * @param strParams
 	 */
@@ -437,9 +436,9 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Wallet Fees  failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testResetPincode Script is to  test by resetting pin from previous to new
+	 * testResetPincode Script is to test by resetting pin from previous to new
 	 * 
 	 * @param strParams
 	 */
@@ -457,7 +456,7 @@ public class CustomerProfileTest {
 			customerProfilePage.choosePinComponent().verifyChooseYourPin(data.get("choosePinHeading"));
 			customerProfilePage.choosePinComponent().fillPin(data.get("choosePin"));
 			customerProfilePage.choosePinComponent().verifyConfirmYourPin(data.get("confirmPinHeading"));
-			if(data.get("validateNavigation").equalsIgnoreCase("Yes")) {
+			if (data.get("validateNavigation").equalsIgnoreCase("Yes")) {
 				customerProfilePage.navigationComponent().clickBack();
 				customerProfilePage.choosePinComponent().verifyChooseYourPinView();
 				customerProfilePage.navigationComponent().clickBack();
@@ -467,17 +466,18 @@ public class CustomerProfileTest {
 				customerProfilePage.navigationComponent().clickBack();
 				customerProfilePage.navigationComponent().clickClose();
 			}
-			if(data.get("validateConfirmPin").equalsIgnoreCase("Yes")) {
-			customerProfilePage.choosePinComponent().fillPin(data.get("confirmPin"));
+			if (data.get("validateConfirmPin").equalsIgnoreCase("Yes")) {
+				customerProfilePage.choosePinComponent().fillPin(data.get("confirmPin"));
 			}
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Reset Pincode failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testChangePassword Script is to  test by Changing Password from previous to new
+	 * testChangePassword Script is to test by Changing Password from previous to
+	 * new
 	 * 
 	 * @param strParams
 	 */
@@ -491,28 +491,37 @@ public class CustomerProfileTest {
 			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("expHeading"));
 			customerProfilePage.choosePinComponent().verifyForgotPinView();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().verifyCurrentPassword(data.get("currentPasswordHeading"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().verifyCurrentPasswordDesc(data.get("description"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.verifyCurrentPassword(data.get("currentPasswordHeading"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.verifyCurrentPasswordDesc(data.get("description"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.fillCurrentPassword(data.get("currentPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
-			customerProfilePage.choosePinComponent().createPasswordComponent().verifyNewPasswordHeading(data.get("subHeading"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().verifyNewPasswordDesc(data.get("description"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.verifyNewPasswordHeading(data.get("subHeading"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.verifyNewPasswordDesc(data.get("description"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().fillNewPassword(data.get("newPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
-			customerProfilePage.choosePinComponent().createPasswordComponent().fillConfirmPassword(data.get("ConfirmPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.fillConfirmPassword(data.get("ConfirmPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickSave();
-			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().verifyPasswordChanged(data.get("passwordChangedhdg"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().verifyPasswordChangedDesc(data.get("passwordChangedDesc"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().clickLogin();	
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
+					.verifyPasswordChanged(data.get("passwordChangedhdg"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
+					.verifyPasswordChangedDesc(data.get("passwordChangedDesc"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
-	 * testChangePassword Script is to  test by Changing Password from previous to new
+	 * testChangePassword Script is to test by Changing Password from previous to
+	 * new
 	 * 
 	 * @param strParams
 	 */
@@ -523,46 +532,223 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();
 			customerProfilePage.clickChangePassword();
-		    customerProfilePage.navigationComponent().clickClose();
+			customerProfilePage.navigationComponent().clickClose();
 			customerProfilePage.choosePinComponent().clickForgotPin();
 			customerProfilePage.navigationComponent().clickBack();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().validateCurrentPasswordfield(data.get("validateCurrentPasswords"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.validateCurrentPasswordfield(data.get("validateCurrentPasswords"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.navigationComponent().clickClose();
 			customerProfilePage.clickChangePassword();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
-			customerProfilePage.choosePinComponent().createPasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.fillCurrentPassword(data.get("currentPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
-			customerProfilePage.choosePinComponent().createPasswordComponent().validateNewPasswordfield(data.get("newPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.validateNewPasswordfield(data.get("newPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
-			customerProfilePage.choosePinComponent().createPasswordComponent().validateConfirmPasswordfield(data.get("ConfirmPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+					.validateConfirmPasswordfield(data.get("ConfirmPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
-		    customerProfilePage.navigationComponent().clickClose();
+			customerProfilePage.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
 		}
 	}
+
+	/**
+	 * testAddCreditCardInPaymentMethods script is to test payment method via adding
+	 * Credit card by giving valid card details.
+	 * 
+	 * @param strParams
+	 * @throws InterruptedException
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCreditCardInPaymentMethods(String strParams) throws InterruptedException {
+		dashboardPage.clickProfile();
+		customerProfilePage.clickPaymentMethods();
+		Thread.sleep(1000);
+		customerProfilePage.addNewPaymentComponent().getPaymentPage();
+		testAddCard(strParams, "credit");
+	}
+
+
+	/**
+	 * testAddDebitCardInPaymentMethods script is to test payment method via adding
+	 * Debit card by giving valid card details.
+	 * 
+	 * @param strParams
+	 * @throws InterruptedException
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardInPaymentMethods(String strParams) throws InterruptedException {
+		dashboardPage.clickProfile();
+		customerProfilePage.clickPaymentMethods();
+		Thread.sleep(1000);
+		customerProfilePage.addNewPaymentComponent().getPaymentPage();
+		testAddCard(strParams, "debit");
+	}
+	
 	
 	/**
-	 * testAddCard Script is to  test by Changing Password from previous to new
+	 * testAddCard Script is to test by Adding a card
 	 * 
 	 * @param strParams
 	 */
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddCard(String strParams) {
+	public void testAddCard(String strParams,String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			dashboardPage.clickProfile();
-		    customerProfilePage.clickPaymentMethods();
-		   
-		    
-		    
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.addNewPaymentComponent().verifyCreditContent(data.get("creditContent"));
+				customerProfilePage.addNewPaymentComponent().clickCreditCard();
+			} else {
+				Thread.sleep(2000);
+				customerProfilePage.addNewPaymentComponent().verifyDebitContent(data.get("debitContent"));
+				customerProfilePage.addNewPaymentComponent().clickDebitCard();
+			}
+			if (data.get("validateCard").equalsIgnoreCase("Yes")) {
+				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber1"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().verifyError(data.get("error"));
+			}
+			if (data.get("validateAddress").equalsIgnoreCase("Yes")) {
+			customerProfilePage.addNewPaymentComponent().addCardComponent()
+					.verifyAddDebitorCredHeadingView(data.get("AddCardHeading"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().verifyAddcardDesc(data.get("description"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvvCVC"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
+			customerProfilePage.addNewPaymentComponent().addCardComponent()
+					.verifyAddDebitorCredHeadingView(data.get("AddCardHeading"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent()
+					.verifyPlsConfirmBillingAdd(data.get("billingAddressDesc"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.clickCountryDropdown();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.selectCountry(data.get("Country"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillAddLine1(data.get("addLine1"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillAddLine2(data.get("addLine2"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillCity(data.get("city"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillState(data.get("state"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillZipCode(data.get("zipcode"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddCard();
+			if (data.get("validateExistingCard").equalsIgnoreCase("Yes")) {
+				customerProfilePage.addNewPaymentComponent().verifyErrorView();
+				customerProfilePage.addNewPaymentComponent().verifyErrorMessage(data.get("toastMessage"));
+				customerProfilePage.addNewPaymentComponent().clickOk();
+			}
+			if (data.get("validateAuthorization").equalsIgnoreCase("Yes")) {
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().verifyHeading(data.get("preAuthHeading"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().verifyPageDes(data.get("preAuthDescription"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().fillAmount(data.get("amount"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().clickVerify();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().verifyAllDone(data.get("allDonehdg"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().verifyCardSucessDesc(data.get("sucessDescription"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().clickDone();
+			}
+			}
+			if (data.get("validateCardNums").equalsIgnoreCase("Yes")) {
+				customerProfilePage.addNewPaymentComponent().getPaymentPage();
+				Thread.sleep(3000);
+				if (card.equalsIgnoreCase("credit")) {
+					customerProfilePage.addNewPaymentComponent().verifyCreditCardNums(data.get("cardNumbers"));
+				} else {
+					customerProfilePage.addNewPaymentComponent().verifyCardNums(data.get("cardNumbers"));
+				}
+			}
+			if (data.get("ValidateFifthCard").equalsIgnoreCase("Yes")) {
+				customerProfilePage.addNewPaymentComponent().verifyMaxlimit(data.get("errMsg"));
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
 		}
 	}
+	
+	/**
+	 * testAddCard Script is to test by Adding a card
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCardFieldValidationsandEdit(String strParams,String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.clickPaymentMethods();
+		//	customerProfilePage.addNewPaymentComponent().verify
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.addNewPaymentComponent().clickCreditCard();
+			} else {
+				customerProfilePage.addNewPaymentComponent().clickDebitCard();
+			}
+			
+			
+			customerProfilePage.addNewPaymentComponent().addCardComponent().validateNameOnCard(data.get("nameOnCard"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().validateCardNumber(data.get("cardNumber"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().validateCardExp(data.get("cardExp"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().validateCVVorCVC(data.get("cvvCVC"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.clickCountryDropdown();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.selectCountry(data.get("Country"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.validateAddline1(data.get("addLine1"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.validateAddline2(data.get("addLine2"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.validateCity(data.get("city"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.fillState(data.get("state"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.validateZipCode(data.get("zipcode"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddCard();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().verifyHeading(data.get("preAuthHeading"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().verifyPageDes(data.get("preAuthDescription"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().fillAmount(data.get("amount"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent().clickVerify();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().verifyAllDone(data.get("allDonehdg"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().verifyCardSucessDesc(data.get("sucessDescription"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+					.successFailureComponent().clickDone();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@Test
@@ -587,7 +773,5 @@ public class CustomerProfileTest {
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
 		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
 	}
-	
-	
-	
+
 }

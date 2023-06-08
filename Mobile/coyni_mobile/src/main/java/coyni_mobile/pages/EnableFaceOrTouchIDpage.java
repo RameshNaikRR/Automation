@@ -10,9 +10,9 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class EnableFaceOrTouchIDpage extends MobileFunctions {
-	private By lblEnableFaceId = MobileBy.AccessibilityId("Enable Face ID");
-	private By lblEnableFaceIDText = MobileBy.AccessibilityId("");
-	private By btnEnable = MobileBy.AccessibilityId("");
+	private By lblEnableFaceId = MobileBy.AccessibilityId("Enable Biometric Heading");
+	private By lblEnableFaceIDText = MobileBy.AccessibilityId("Add Another Layer");
+	private By btnEnable = MobileBy.AccessibilityId("Enable ");
 	private By lnkSkip = MobileBy.AccessibilityId("");
 	private By lnkAllow = MobileBy.AccessibilityId("");
 	private By lnkDontAllow = MobileBy.AccessibilityId("");
