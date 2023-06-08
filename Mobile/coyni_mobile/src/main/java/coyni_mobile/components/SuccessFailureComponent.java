@@ -1,9 +1,9 @@
 package coyni_mobile.components;
 
-import javax.security.auth.login.LoginContext;
+
 
 import org.openqa.selenium.By;
-import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
+
 
 
 import coyni_mobile.utilities.CommonFunctions;
@@ -20,6 +20,20 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblPasswordSucess = MobileBy.AccessibilityId("Change Password Successful");
 	private By lblPasswordUpdatedDesc = MobileBy.AccessibilityId("");
 	private By btnLogin = MobileBy.AccessibilityId("");
+	private By lblPwdChanged = MobileBy.AccessibilityId("");
+	private By lblpwdChangedDesc = MobileBy.AccessibilityId("");
+	
+	
+	public void verifyPasswordChanged(String hdg) {
+		new CommonFunctions().elementView(imgTickMark, "Tick mark");
+		new CommonFunctions().verifyLabelText(lblPwdChanged, "password changed", hdg);
+	}
+	
+	public void verifyPasswordChangedDesc(String hdg) {
+		new CommonFunctions().verifyLabelText(lblpwdChangedDesc, "password changed", hdg);
+	}
+	
+	
 	
 //	
 //	private By lblHeading = MobileBy.xpath("(//*[contains(@name,'All Done')])[1]|//*[contains(@name,'Transaction')]");

@@ -2,43 +2,70 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+
 
 public class AccountLimitsPage extends MobileFunctions {
 
-	private By lblAccLimitsHeader = MobileBy.AccessibilityId("");
-	private By lblSendRequestSubHead = MobileBy.AccessibilityId("");
+	private By lblAccountLimits = MobileBy.AccessibilityId("");
+	private By lblSendReqsub = MobileBy.AccessibilityId("");
 	private By lblSendRequest = MobileBy.AccessibilityId("");
-	private By lblBuyTokenSubHead = MobileBy.AccessibilityId("");
-	private By lblBTBankAcc = MobileBy.AccessibilityId("");
-	private By lblBTDebitCredit = MobileBy.AccessibilityId("");
-	private By lblWithdrawSubHead = MobileBy.AccessibilityId("");
-	private By lblWTBankAcc = MobileBy.AccessibilityId("");
-	private By lblWTInstantPay = MobileBy.AccessibilityId("");
-	private By lblWTGiftCard = MobileBy.AccessibilityId("");
-
-	public void verifyAccLimitsHeading(String heading) {
-		new AndroidCommonFunctions().verifyLabelText(lblAccLimitsHeader, "Account Limits", heading);
+	private By lblSendReqAmt = MobileBy.AccessibilityId("");
+	private By lblBuyToken = MobileBy.AccessibilityId("");
+	private By lblBankAccount = MobileBy.AccessibilityId("");
+	private By lblBankAccountAmt = MobileBy.AccessibilityId("");
+	private By lblDebCred = MobileBy.AccessibilityId("");
+	private By lblDebCredAmt = MobileBy.AccessibilityId("");
+	private By lblWithdraw = MobileBy.AccessibilityId("");
+	private By lblWithdrawBankAccount = MobileBy.AccessibilityId("");
+	private By lblWithdrawBankAmt = MobileBy.AccessibilityId("");
+	private By lblWithdrawInstantPay = MobileBy.AccessibilityId("");
+	private By lblWithdrawInstantPayAmt = MobileBy.AccessibilityId("");
+	private By lblWithdrawGiftCard = MobileBy.AccessibilityId("");
+	private By lblWithdrawGiftCardAmt = MobileBy.AccessibilityId("");
+	
+	public void verifyAccountLimitsHeading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblAccountLimits, "AccountLimits", hdg);
 	}
-
-	public void viewSendRequestLimit() {
-		new AndroidCommonFunctions().elementView(lblSendRequestSubHead, "Send Request Sub Heading");
-		new AndroidCommonFunctions().elementView(lblSendRequest, "Send Request Limit");
+	public void verifySendRequestHeading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblSendReqsub, "Send Request", hdg);
 	}
-
-	public void viewBuyTokenLimit() {
-		new AndroidCommonFunctions().elementView(lblBuyTokenSubHead, "Buy Token Sub Heading");
-		new AndroidCommonFunctions().elementView(lblBTBankAcc, "Buy Token Bank Account Limit");
-		new AndroidCommonFunctions().elementView(lblBTDebitCredit, "Buy Token Debit/Credit Limit");
+	
+	public void verifySendRequest() {
+		new CommonFunctions().elementView(lblSendRequest, "Send Request");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblSendRequest));
 	}
-
-	public void viewWithdrawLimits() {
-		new AndroidCommonFunctions().elementView(lblWithdrawSubHead, "Withdraw Sub Heading");
-		new AndroidCommonFunctions().elementView(lblWTBankAcc, "Withdraw Bank Account Limit");
-		new AndroidCommonFunctions().elementView(lblWTInstantPay, "Withdraw Instant Pay Limit");
-		new AndroidCommonFunctions().elementView(lblWTGiftCard, "Withdraw Gift Card Limit");
+	
+	public void verifyBuyToken(String hdg) {
+		new CommonFunctions().verifyLabelText(lblBuyToken, "Buy Token", hdg);
 	}
+	public void verifyBankAccountView() {
+		new CommonFunctions().elementView(lblBankAccount, "Bank Account");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblBankAccountAmt));
+	}
+	
+	public void verifyDebitCredView() {
+		new CommonFunctions().elementView(lblDebCred, "Debit/credit Card");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblDebCredAmt));
+	}
+	public void verifyWithdraw(String hdg) {
+		new CommonFunctions().verifyLabelText(lblWithdraw, "Withdraw", hdg);
+	}
+	public void verfiyWithdrawBankView() {
+		new CommonFunctions().elementView(lblWithdrawBankAccount, "Withdraw Bank Account");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblWithdrawBankAmt));
+	}
+	public void verfiyWithdrawInstantView() {
+		new CommonFunctions().elementView(lblWithdrawInstantPay, "Withdraw Bank Account");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblWithdrawInstantPayAmt));
+	}
+	public void verfiyWithdrawGiftCardView() {
+		new CommonFunctions().elementView(lblWithdrawGiftCard, "Withdraw Bank Account");
+		ExtentTestManager.setInfoMessageInReport("The amount is :" + getText(lblWithdrawGiftCardAmt));
+	}
+	
 
 }

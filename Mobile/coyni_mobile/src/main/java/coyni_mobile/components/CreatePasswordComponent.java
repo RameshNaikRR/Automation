@@ -15,9 +15,43 @@ public class CreatePasswordComponent extends MobileFunctions {
 	private By txtConfirmPassword = MobileBy.AccessibilityId("");
 	private By lblMustHaveErrMsg = MobileBy.AccessibilityId("");
 	private By btnSave = MobileBy.AccessibilityId("");
+	/**
+	 * Change Password
+	 */
+	private By lblCurrentPassword = MobileBy.AccessibilityId("");
+	private By lblCurrentpwdDesc = MobileBy.AccessibilityId("");
+	private By txtCurrentPassword = MobileBy.xpath("");
+	private By btnNext = MobileBy.xpath("");
+	private By lblNewPassword = MobileBy.AccessibilityId("");
+	private By lblNewPasswordDesc = MobileBy.AccessibilityId("");
 	
 	
 	
+	
+	public void verifyCurrentPassword(String password) {
+		new CommonFunctions().verifyLabelText(lblCurrentPassword, "current password", password);
+	}
+	public void verifyCurrentPasswordDesc(String desc) {
+		new CommonFunctions().verifyLabelText(lblCurrentpwdDesc, "current password", desc);
+	}
+	
+	public void fillCurrentPassword(String pwd) {
+		enterText(txtCurrentPassword, pwd, "current Password");
+	}
+	public void clickNext() {
+		if(getElement(txtCurrentPassword, "currentPassword").isEnabled()) {
+			click(btnNext, "Next");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Next button is disabled");
+		}
+	}
+	public void verifyNewPasswordHeading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblNewPassword, "New Password", hdg);
+	}
+	
+	public void verifyNewPasswordDesc(String desc) {
+		new CommonFunctions().verifyLabelText(lblNewPasswordDesc, "Desc", desc);
+	}
 	
 	public void verifyCreateNewPasswordView() {
 		new CommonFunctions().elementView(lblCreateNewPassword, "Create New Password");
@@ -73,5 +107,18 @@ public class CreatePasswordComponent extends MobileFunctions {
 	}
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
+	}
+	/**
+	 * Order - minChar, max, MaxiPlus
+	 * 
+	 * @throws InterruptedException
+	 */
+	public void validateCurrentPasswordfield(String password) {
+		String[] field = password.split(",");
+		for (int i = 0; i < 2; i++) {
+			new CommonFunctions().validateTextFeild(txtConfirmPassword, "password", field[i]);
+//		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
+		}
+		new CommonFunctions().validateFieldMaxichar(txtConfirmPassword, "password", field[2]);
 	}
 }

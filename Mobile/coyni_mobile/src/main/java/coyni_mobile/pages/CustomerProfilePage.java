@@ -2,6 +2,8 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.components.ChoosePinComponent;
+import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -97,10 +99,17 @@ public class CustomerProfilePage extends MobileFunctions {
 		return new AccountLimitsPage();
 	}
 
-	public WalletFeesPage walletFeesPage() {
-		return new WalletFeesPage();
+	public WalletsFeesPage walletsFeesPage() {
+		return new WalletsFeesPage();
 	}
 	public EnableFaceOrTouchIDpage enableFaceOrTouchIDpage() {
 		return new EnableFaceOrTouchIDpage();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
+	}
+	
 }

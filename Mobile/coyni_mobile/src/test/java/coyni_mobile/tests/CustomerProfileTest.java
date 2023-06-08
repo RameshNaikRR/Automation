@@ -377,6 +377,193 @@ public class CustomerProfileTest {
 		agreementsPage.navigationComponent().clickClose();
 
 	}
+	
+	/**
+	 * testAccountLimits Script is to  test Account Limits
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testAccountLimits(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickAccountLimits();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.clickAccountLimits();
+			customerProfilePage.accountLimitsPage().verifyAccountLimitsHeading(data.get("expHeading"));
+			customerProfilePage.accountLimitsPage().verifySendRequestHeading(data.get("sendReqHeading"));
+			customerProfilePage.accountLimitsPage().verifySendRequest();
+			customerProfilePage.accountLimitsPage().verifyBuyToken(data.get("buyTokenHeading"));
+			customerProfilePage.accountLimitsPage().verifyBankAccountView();
+			customerProfilePage.accountLimitsPage().verifyDebitCredView();
+			customerProfilePage.accountLimitsPage().verifyWithdraw(data.get("WithdrawTokenHeading"));
+			customerProfilePage.accountLimitsPage().verfiyWithdrawBankView();
+			customerProfilePage.accountLimitsPage().verfiyWithdrawInstantView();
+			customerProfilePage.accountLimitsPage().verfiyWithdrawGiftCardView();
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
+		}
+	}
+	
+	
+	/**
+	 * testAccountLimits Script is to  test Account Limits
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testWalletFees(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickWalletFees();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.clickWalletFees();
+			customerProfilePage.walletsFeesPage().verifyWalletFees(data.get("expHeading"));
+			customerProfilePage.walletsFeesPage().verifyBuyToken(data.get("buyTokenHeading"));
+			customerProfilePage.walletsFeesPage().verifyBankAccount();
+			customerProfilePage.walletsFeesPage().verifyCreditCard();
+			customerProfilePage.walletsFeesPage().verifyDebitCard();
+			customerProfilePage.walletsFeesPage().verifyWithdraw(data.get("WithdrawTokenHeading"));
+			customerProfilePage.walletsFeesPage().verifyWithdrawBankAccount();
+			customerProfilePage.walletsFeesPage().verifyWithdrawInstantPay();
+			customerProfilePage.walletsFeesPage().verifyWithdrawGiftCard();
+			customerProfilePage.walletsFeesPage().verifyFailedBankWithdraw();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Wallet Fees  failed due to Exception " + e);
+		}
+	}
+	
+	/**
+	 * testResetPincode Script is to  test by resetting pin from previous to new
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testResetPincode(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickResetPinCode();
+			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("expHeading"));
+			customerProfilePage.choosePinComponent().verifyForgotPinView();
+			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
+			customerProfilePage.choosePinComponent().verifyChooseYouPinDes(data.get("description"));
+			customerProfilePage.choosePinComponent().verifyChooseYourPin(data.get("choosePinHeading"));
+			customerProfilePage.choosePinComponent().fillPin(data.get("choosePin"));
+			customerProfilePage.choosePinComponent().verifyConfirmYourPin(data.get("confirmPinHeading"));
+			if(data.get("validateNavigation").equalsIgnoreCase("Yes")) {
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.choosePinComponent().verifyChooseYourPinView();
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.choosePinComponent().verifyEnterYourPinView();
+				customerProfilePage.choosePinComponent().clickForgotPin();
+				customerProfilePage.choosePinComponent().verifyForgotPinView();
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.navigationComponent().clickClose();
+			}
+			if(data.get("validateConfirmPin").equalsIgnoreCase("Yes")) {
+			customerProfilePage.choosePinComponent().fillPin(data.get("confirmPin"));
+			}
+			
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" Reset Pincode failed due to Exception " + e);
+		}
+	}
+	
+	/**
+	 * testChangePassword Script is to  test by Changing Password from previous to new
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("expHeading"));
+			customerProfilePage.choosePinComponent().verifyForgotPinView();
+			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().verifyCurrentPassword(data.get("currentPasswordHeading"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().verifyCurrentPasswordDesc(data.get("description"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
+			customerProfilePage.choosePinComponent().createPasswordComponent().verifyNewPasswordHeading(data.get("subHeading"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().verifyNewPasswordDesc(data.get("description"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().fillNewPassword(data.get("newPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+			customerProfilePage.choosePinComponent().createPasswordComponent().fillConfirmPassword(data.get("ConfirmPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickSave();
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().verifyPasswordChanged(data.get("passwordChangedhdg"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().verifyPasswordChangedDesc(data.get("passwordChangedDesc"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().clickLogin();	
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
+		}
+	}
+	
+	/**
+	 * testChangePassword Script is to  test by Changing Password from previous to new
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testChangePasswordFieldValidations(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickChangePassword();
+		    customerProfilePage.navigationComponent().clickClose();
+			customerProfilePage.choosePinComponent().clickForgotPin();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().validateCurrentPasswordfield(data.get("validateCurrentPasswords"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+			customerProfilePage.navigationComponent().clickClose();
+			customerProfilePage.clickChangePassword();
+			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().fillCurrentPassword(data.get("currentPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
+			customerProfilePage.choosePinComponent().createPasswordComponent().validateNewPasswordfield(data.get("newPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+			customerProfilePage.choosePinComponent().createPasswordComponent().validateConfirmPasswordfield(data.get("ConfirmPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
+		    customerProfilePage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
+		}
+	}
+	
+	/**
+	 * testAddCard Script is to  test by Changing Password from previous to new
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+		    customerProfilePage.clickPaymentMethods();
+		   
+		    
+		    
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
+		}
+	}
+	
 
 	@Test
 	@Parameters({ "strParams" })
@@ -400,4 +587,7 @@ public class CustomerProfileTest {
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
 		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
 	}
+	
+	
+	
 }

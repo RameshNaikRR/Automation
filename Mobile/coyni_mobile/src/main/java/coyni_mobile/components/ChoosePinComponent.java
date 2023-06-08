@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.pages.DashboardPage;
 import coyni_mobile.pages.EnableFaceOrTouchIDpage;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -26,8 +26,11 @@ public class ChoosePinComponent extends MobileFunctions {
 	}
 
 	public void verifyChooseYourPinView() {
-		new AndroidCommonFunctions().elementView(lblChooseYourPin, "Choose Your Pin");
-		ExtentTestManager.setInfoMessageInReport("The Text is :" + getText(lblChoosePinDes));
+		new CommonFunctions().elementView(lblChooseYourPin, "Choose Your Pin");
+	}
+	
+	public void verifyChooseYouPinDes(String desc) {
+		new CommonFunctions().verifyLabelText(lblChoosePinDes, "Desc", desc);
 	}
 
 	public void fillPin(String pin) {
@@ -47,19 +50,29 @@ public class ChoosePinComponent extends MobileFunctions {
 	}
 
 	public void verifyConfirmYourPinView() {
-		new AndroidCommonFunctions().elementView(lblConfirmYourPin, "Confirm Your Pin");
+		new CommonFunctions().elementView(lblConfirmYourPin, "Confirm Your Pin");
 	}
 
 	public void verifyEnterYourPinView() {
-		new AndroidCommonFunctions().elementView(lblEnterYourPin, "Enter Pin");
+		new CommonFunctions().elementView(lblEnterYourPin, "Enter Pin");
 	}
 
+	public void verifyEnterYourPinhdg(String hdg) {
+		new CommonFunctions().verifyLabelText(lblEnterYourPin, "Enter Your Pin", hdg);
+	}
+	public void verifyConfirmYourPin(String hdg) {
+		new CommonFunctions().verifyLabelText(lblConfirmYourPin, "Confirm Your Pin", hdg);
+	}
+	public void verifyChooseYourPin(String hdg) {
+		new CommonFunctions().verifyLabelText(lblChooseYourPin, "Choose Your Pin", hdg);
+	}
+	
 	public void verifyLogoutView() {
-		new AndroidCommonFunctions().elementView(btnLogout, "Logout");
+		new CommonFunctions().elementView(btnLogout, "Logout");
 	}
 
 	public void verifyForgotPinView() {
-		new AndroidCommonFunctions().elementView(btnForgotPin, "Forgot Pin");
+		new CommonFunctions().elementView(btnForgotPin, "Forgot Pin");
 	}
 
 	public void clickLogout() {
@@ -80,5 +93,8 @@ public class ChoosePinComponent extends MobileFunctions {
 	
 	public PhoneAndEmailVerificationComponent  phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
+	}
+	public CreatePasswordComponent createPasswordComponent() {
+		return new CreatePasswordComponent();
 	}
 }
