@@ -3,6 +3,7 @@ package coyni_mobile.tests;
 import java.util.Map;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -16,12 +17,11 @@ public class SignUpTest {
 	SignUpPage signUpPage;
 	LandingPage landingPage;
 
-	@BeforeMethod
+	@BeforeTest
 	public void init() {
 		signUpPage = new SignUpPage();
 		landingPage = new LandingPage();
 	}
-
 
 //	/**
 //	 * testCreateAccountInvalidData script is to test By giving Invalid data in the
@@ -99,41 +99,44 @@ public class SignUpTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testSignUp(String strParams) {
+	public void testSignUp(String strParams) throws InterruptedException {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			String[] phoneHeading = data.get("phoneVerificationHeading").split(",");
 //			if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
-		//	if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
-			landingPage.verifyCoyniView();
-			landingPage.verifyCoyniDesc();
+			// if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
+//			landingPage.verifyCoyniView();
+//			landingPage.verifyCoyniDesc();
 			landingPage.clickSignUp();
 			signUpPage.VerifyPhoneNumberView(data.get("phoneNumDesc"));
 			signUpPage.clickDopdown();
 			signUpPage.fillSearch(data.get("country"));
 			signUpPage.fillPhoneNumbers(data.get("phoneNumber"));
 			signUpPage.clickContinue();
-			signUpPage.phoneAndEmailVerificationComponent().verifyPhoneVerificationView(data.get("phoneDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("Otp"));
-			signUpPage.verifyEmailView(data.get("emailDesc"));
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationView(data.get("phoneVerificationDescription"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("otp"));
+			signUpPage.verifyEmailView(data.get("emailDescription"));
 			signUpPage.fillEmail(data.get("email"));
 			signUpPage.clickContinue();
-			signUpPage.phoneAndEmailVerificationComponent().verifyEmailVerificationView(data.get("emailDescription"));
-			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("Otp"));
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationView(data.get("emailVerificationDescription"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("otp"));
 			signUpPage.verifyNameView(data.get("nameDesc"));
 			signUpPage.fillFirstName(data.get("firstName"));
-			signUpPage.fillLastName(data.get("fillLastName"));
+			signUpPage.fillLastName(data.get("lastName"));
 			signUpPage.clickContinue();
 			signUpPage.verifyPasswordView(data.get("passwordDesc"));
 			signUpPage.fillPassword(data.get("password"));
 			signUpPage.clickEye();
 			signUpPage.clickContinue();
 			signUpPage.phoneAndEmailVerificationComponent().agreementPage().verifyLegalView(data.get("legalDesc"));
-			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickPrivacyPolicy();
-			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickDone();
-			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickTermsOfService();
+//			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickPrivacyPolicy();
+//			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickDone();
+//			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickTermsOfService();
 			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickCheckBox();
 			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickAgree();
+
 //			}if(data.get("validateLogin").equalsIgnoreCase("Yes")) {
 //				landingPage.clickLogin();
 //				signUpPage.loginPage().fillEmail(data.get("email"));
@@ -142,13 +145,15 @@ public class SignUpTest {
 //			}
 //			
 //			
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().verifyChooseYourPinView();
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().fillPin(data.get("pin"));
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().verifyConfirmYourPinView();
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().fillPin(data.get("pin"));
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage()
-//					.verifyEnableFaceIdView();
-//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage().clickSkip();
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().verifyChooseYourPinView();
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().fillPin(data.get("pin"));
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyConfirmYourPin(data.get("confirmPinHeading"));
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().fillPin(data.get("pin"));
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage()
+					.verifyEnableFaceIdView();
+			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage()
+					.clickNotNow();
 //			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage().accountCreatedPage()
 //					.verifyAccountCreatedImageView();
 //			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().enableFaceOrTouchIDpage().accountCreatedPage()
@@ -188,13 +193,9 @@ public class SignUpTest {
 //				Thread.sleep(1000);
 //				signUpPage.addCardComponent().mailingAddressComponent().preAuthorizationComponent()
 //				.successFailureComponent().verifyCardSuccess(data.get("cardDescription"));
-				
-	//		}
-			
-			
-			
-			
-			
+
+			// }
+
 //			if(data.get("validateSkip").equalsIgnoreCase("Yes")) {
 //			  if(signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().VerifyGoToDashboard()==1) {
 //				    signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage().accountCreatedPage().clickGoToDashboard();
@@ -226,8 +227,6 @@ public class SignUpTest {
 //      signUpPage.customerProfilePage().profilePage().editProfilePage().navigationComponent().clickBack();
 //      signUpPage.customerProfilePage().profilePage().editProfilePage().navigationComponent().clickClose();
 //	//		}
-			
-			
 
 //			landingPage.clickGetStarted();
 //			landingPage.chooseAccountPage().clickPersonalAccount();
@@ -426,8 +425,7 @@ public class SignUpTest {
 
 //			signUpPage.phoneAndEmailVerificationComponent().secureAccountPage().choosePinComponent().enableFaceIDpage()
 //			.tokenAccountPage().verifyRegistration();
-        } 
-			catch (Exception e) {
+		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test SignUp Failed due to this Exception" + e);
 		}
 	}
@@ -446,7 +444,7 @@ public class SignUpTest {
 			signUpPage.validateEmail(data.get("email"));
 			signUpPage.clickContinue();
 			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("Otp"));
-            signUpPage.validateFirstNameField(data.get("firstName"));
+			signUpPage.validateFirstNameField(data.get("firstName"));
 			signUpPage.validateLastNameField(data.get("lastName"));
 			signUpPage.clickContinue();
 			signUpPage.CreatePasswordfields(data.get("password"));

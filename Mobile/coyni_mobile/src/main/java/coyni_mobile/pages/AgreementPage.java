@@ -15,10 +15,10 @@ public class AgreementPage extends MobileFunctions {
 	private By lblLegalDesc = MobileBy.AccessibilityId("Review Privacy and Terms Heading");
 	private By arwPrivacyPolicy = MobileBy.AccessibilityId("Privacy Policy");
 	private By btnDone = MobileBy.AccessibilityId("");
-	private By arwTermsOfService = MobileBy.AccessibilityId("Terms of service");
+	private By arwTermsOfService = MobileBy.AccessibilityId("Terms of Services");
 	private By chkBx = MobileBy.AccessibilityId("Agreement Check Box");
 	private By chkbxDesc = MobileBy.AccessibilityId("Check Box Acknowledge");
-	private By btnAgree = MobileBy.AccessibilityId("");
+	private By btnAgree = MobileBy.AccessibilityId("Agree");
 
 //	Profile Agreements Page
 

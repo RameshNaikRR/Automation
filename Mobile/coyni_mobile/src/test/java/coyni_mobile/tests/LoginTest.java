@@ -154,7 +154,7 @@ public class LoginTest {
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
 					.choosePinComponent().fillPin(loginData.get("pin"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.choosePinComponent().verifyConfirmYourPinView();
+					.choosePinComponent().verifyConfirmYourPin(loginData.get("confirmPinHeading"));
 			if(loginData.get("validateNavigation").equalsIgnoreCase("Yes")) {
 				loginPage.navigationComponent().clickBack();
 				loginPage.choosePinComponent().phoneAndEmailVerificationComponent()

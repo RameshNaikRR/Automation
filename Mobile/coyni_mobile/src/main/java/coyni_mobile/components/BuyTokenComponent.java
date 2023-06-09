@@ -76,7 +76,7 @@ import io.appium.java_client.MobileBy;
 	 
 
 	    public void fillAmount(String Amount) {
-	        new ChoosePinComponent().fillPins(Amount);
+	        new ChoosePinComponent().fillPin(Amount);
 	        ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
 	    }
 

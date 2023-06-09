@@ -79,14 +79,13 @@ public class PreAuthorizationComponent extends MobileFunctions{
     }
 
  
-
     public void fillAmount(String amount) {
 
         new AndroidCommonFunctions().elementView(lblDollar, "Dollar");
 
     //    enterText(txtAmount, amount, "amount");
 
-        new ChoosePinComponent().fillPins(amount);
+        new ChoosePinComponent().fillPin(amount);
 
     }
 

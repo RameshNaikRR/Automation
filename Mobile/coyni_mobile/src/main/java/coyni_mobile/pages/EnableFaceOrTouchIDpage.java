@@ -10,15 +10,15 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class EnableFaceOrTouchIDpage extends MobileFunctions {
-	private By lblEnableFaceId = MobileBy.AccessibilityId("Enable Biometric Heading");
+	private By lblEnableFaceId = MobileBy.AccessibilityId("Enable Biometric heading");
 	private By lblEnableFaceIDText = MobileBy.AccessibilityId("Add Another Layer");
-	private By btnEnable = MobileBy.AccessibilityId("Enable ");
+	private By btnEnable = MobileBy.AccessibilityId("Enable Touch ID");
 	private By lnkSkip = MobileBy.AccessibilityId("");
 	private By lnkAllow = MobileBy.AccessibilityId("");
 	private By lnkDontAllow = MobileBy.AccessibilityId("");
-	private By imgFaceID = MobileBy.AccessibilityId("");
-	private By btnNotNow = MobileBy.AccessibilityId("");
-	private By lnkDontRemindMeAgain = MobileBy.AccessibilityId("");
+	private By imgFaceID = MobileBy.AccessibilityId("Enable Face/Thumb Image");
+	private By btnNotNow = MobileBy.AccessibilityId("Not Now");
+	private By lnkDontRemindMeAgain = MobileBy.AccessibilityId("Don’t Remind Me Again");
 	private By lblGetHelpHeading = MobileBy.AccessibilityId("");
 	private By lblGetHelpDesc = MobileBy.AccessibilityId("");
 	private By lblGetHelpName = MobileBy.AccessibilityId("");
@@ -45,9 +45,7 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		}
 	}
 	public void clickNotNow() {
-		if(getElement(btnNotNow, "Not Now").isEnabled()) {
 		click(btnNotNow, "Not Now");
-		}
 	}
 	public void verifyDontRemindButtonView() {
 		new CommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again");
