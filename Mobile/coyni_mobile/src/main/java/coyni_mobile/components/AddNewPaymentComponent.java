@@ -415,6 +415,9 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public MXBankComponent mxBankComponent() {
 		return new MXBankComponent();
 	}
+	public EditCardComponent editCardComponent() {
+		return new EditCardComponent();
+	}
 	///////////////////////////////////////////////////////////
 
 //    public AddManualBankComponent addManualBankComponent() {
