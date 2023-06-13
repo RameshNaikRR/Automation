@@ -89,7 +89,8 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void verifyMouseHoverChangedColor(String expCssProp, String expValue, String expColor) {
-	//	new CommonFunctions().verifyChangedColor(lblFilters, "Filters", expCssProp, expValue, expColor);
+		// new CommonFunctions().verifyChangedColor(lblFilters, "Filters", expCssProp,
+		// expValue, expColor);
 	}
 
 	public void clickFilters() {
@@ -687,12 +688,12 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickOutSide() {
-	//	new CommonFunctions().clickOutSideElement();
+		// new CommonFunctions().clickOutSideElement();
 	}
 
-	//public FilterCalenderComponent filterCalenderComponent() {
-	//	return new FilterCalenderComponent();
-	//}
+	// public FilterCalenderComponent filterCalenderComponent() {
+	// return new FilterCalenderComponent();
+	// }
 
 	public CalenderComponent calenderComponent() {
 		return new CalenderComponent();

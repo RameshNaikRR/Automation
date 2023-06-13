@@ -106,7 +106,7 @@ public class CommissionAccountPage extends BrowserFunctions {
 	public void clickViewFullTransactionHistory() {
 		click(lnkViewFullTransactionHistory, "View Full Transaction History");
 	}
-	
+
 	private By lblTotalCommissionEarned = By
 			.xpath("//h2[contains(text(),'Total Commission Earned')]/../following-sibling::*[1]");
 
@@ -141,8 +141,6 @@ public class CommissionAccountPage extends BrowserFunctions {
 		return text;
 	}
 
-	
-
 	public void getAccountBalance() {
 		ExtentTestManager.setInfoMessageInReport("Account Balance: " + getText(lblAccountBalance, "Account Balance"));
 		verifyElementContainsText(lblAccountBalance, "CYN", "AccountBalance");
@@ -165,15 +163,16 @@ public class CommissionAccountPage extends BrowserFunctions {
 				"Total Commission Earned: " + getText(lblTotalCommissionEarned, "Total Commission Earned"));
 	}
 
-
 	public void clickFullPayOutHistory() {
 		scrollToElement(lblViewFullPayOutHistory, "");
-	//	new CommonFunctions().verifyTextUnderLine(lblViewFullPayOutHistory, "Full PayOut History ");
+		// new CommonFunctions().verifyTextUnderLine(lblViewFullPayOutHistory, "Full
+		// PayOut History ");
 		click(lblViewFullPayOutHistory, "Full PayOut History");
 	}
 
 	public void clickFullTransactionHistory() {
-		//new CommonFunctions().verifyTextUnderLine(lblViewFullTransactionHistory, "Full Transaction History ");
+		// new CommonFunctions().verifyTextUnderLine(lblViewFullTransactionHistory,
+		// "Full Transaction History ");
 		click(lblViewFullTransactionHistory, "Full Transaction History");
 	}
 
@@ -246,15 +245,15 @@ public class CommissionAccountPage extends BrowserFunctions {
 				"(//div[contains(@class,'flex flex-row-reverse justify-center -ml-16 text-sm font-semibold text-cgy4')])[%s]",
 				Type));
 	}
-     
+
 	public TransactionDetailsComponent transactionDetailsComponent() {
-		return new TransactionDetailsComponent(); 
+		return new TransactionDetailsComponent();
 	}
-	
+
 	public TransactionPage transactionPage() {
 		return new TransactionPage();
 	}
-	
+
 	public By getValumeAndCommissionAmountCount(String Type) {
 		return By.xpath(String.format(
 				"(//div[contains(@class,'flex flex-row-reverse text-sm font-semibold mr-9 text-cgy4')])[%s]", Type));
@@ -352,8 +351,8 @@ public class CommissionAccountPage extends BrowserFunctions {
 
 	}
 
+	public TransactionsPage transactionsPage() {
+		return new TransactionsPage();
+	}
+
 }
-
-
-
-

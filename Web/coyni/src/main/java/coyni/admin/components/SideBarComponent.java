@@ -2,8 +2,11 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.pages.AccountingPage;
 import coyni.admin.pages.CommissionAccountPage;
+import coyni.admin.pages.PaymentReviewPage;
 import coyni.admin.pages.TokenAccountPage;
+import coyni.admin.pages.TransactionsPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -178,6 +181,10 @@ public class SideBarComponent extends BrowserFunctions {
 		 return new ExportComponent();
 	 }
 	 
+	 public AccountingPage accountingPage() {
+			return new AccountingPage();
+		}
+	 
 	 public AddMerchantComponent addMerchantComponent() {
 		 return new AddMerchantComponent();
 	 }
@@ -185,6 +192,20 @@ public class SideBarComponent extends BrowserFunctions {
      public ProfileComponent profileComponent() {
     	 return new ProfileComponent(); 
      }
+     
+     public void clickExportedFiles() throws InterruptedException {
+ 		commonFunctions.verifyCursorAction(getSideBarItems("Exported Files"), "Exported Files");
+ 		click(getSideBarItems("Exported Files"), "Exported Files");
+ 		Thread.sleep(4000);
+ 	}
+
+ 	public PaymentReviewPage paymentReviewPage() {
+ 		return new PaymentReviewPage();
+ 	}
+
+ 	public TransactionsPage transactionsPage() {
+ 		return new TransactionsPage();
+ 	}
 
 }
 

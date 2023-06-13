@@ -1,11 +1,15 @@
 package coyni.admin.pages;
 
 import org.openqa.selenium.By;
-import coyni.admin.components.EntriesAndPaginationsComponent;
+
 import ilabs.WebFramework.BrowserFunctions;
 
 public class AccountingPage extends BrowserFunctions {
 
+	private By outGoingPayments = By.xpath("");
+	private By incomingPayments = By.xpath("");
+	private By bankConfiguration = By.xpath("");
+	private By BalanceReport = By.xpath("");
 	private By tabACHs = By.xpath("");
 	private By tabWires = By.xpath("");
 	private By tabMT = By.xpath("");
@@ -14,6 +18,22 @@ public class AccountingPage extends BrowserFunctions {
 	private By txtSearch = By.xpath("");
 
 	public void clickACHsTab() {
+		click(tabACHs, "ACHs");
+	}
+	
+	public void clickOutgoingPayments() {
+		click(tabACHs, "ACHs");
+	}
+	
+	public void clickIncomingPayments() {
+		click(tabACHs, "ACHs");
+	}
+	
+	public void clickBankConfiguration() {
+		click(tabACHs, "ACHs");
+	}
+	
+	public void clickBalanceReport() {
 		click(tabACHs, "ACHs");
 	}
 
@@ -36,4 +56,8 @@ public class AccountingPage extends BrowserFunctions {
 //		enterText(txtSearch, , getCopiedData());
 //		
 //	}
+
+	public OutgoingPaymentsPage outgoingPaymentsPage() {
+		return new OutgoingPaymentsPage();
+	}
 }
