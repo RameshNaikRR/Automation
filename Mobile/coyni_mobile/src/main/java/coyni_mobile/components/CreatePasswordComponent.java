@@ -9,12 +9,12 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileBy;
 
 public class CreatePasswordComponent extends MobileFunctions {
-	private By lblCreateNewPassword = MobileBy.AccessibilityId("");
-	private By txtNewPassword = MobileBy.AccessibilityId("");
+	private By lblCreateNewPassword = MobileBy.AccessibilityId("Create Password");
+	private By txtNewPassword = MobileBy.AccessibilityId("New Password");
 	private By iconEye = MobileBy.AccessibilityId("");
-	private By txtConfirmPassword = MobileBy.AccessibilityId("");
+	private By txtConfirmPassword = MobileBy.AccessibilityId("Confirm Password");
 	private By lblMustHaveErrMsg = MobileBy.AccessibilityId("");
-	private By btnSave = MobileBy.AccessibilityId("");
+	private By btnSave = MobileBy.AccessibilityId("Save");
 	/**
 	 * Change Password
 	 */

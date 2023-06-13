@@ -99,7 +99,7 @@ public class SignUpTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testSignUp(String strParams) throws InterruptedException {
+	public void testSignUp(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			String[] phoneHeading = data.get("phoneVerificationHeading").split(",");

@@ -12,12 +12,12 @@ import coyni_mobile.components.AddNewPaymentComponent;
 
 public class DashboardPage extends MobileFunctions {
 	private By iconProfile = MobileBy.AccessibilityId("");
-	private By btnBuyTokens = MobileBy.AccessibilityId("");
-	private By btnWithdraw = MobileBy.AccessibilityId("");
+	private By btnBuyTokens = MobileBy.AccessibilityId("Buy Tokens");
+	private By btnWithdraw = MobileBy.AccessibilityId("withdraws");
 	private By iconNotifications = MobileBy.AccessibilityId("");
-	private By btnPayReq = MobileBy.AccessibilityId("");
-	private By iconScan = MobileBy.AccessibilityId("");
-	private By iconQRCode = MobileBy.AccessibilityId("");
+	private By btnSendReq = MobileBy.AccessibilityId("Send/Request");
+	private By iconScan = MobileBy.AccessibilityId("Scanner");
+	private By iconQRCode = MobileBy.AccessibilityId("QR Code");
 	private By lblRecentTransactions = MobileBy.AccessibilityId("");
 	private By lblFirstTransaction = MobileBy.AccessibilityId("");
 	private By lblNotificationCount = MobileBy.xpath("//*[@name='notifications_nobadge']/following-sibling::*[1]");
@@ -26,6 +26,12 @@ public class DashboardPage extends MobileFunctions {
 	private By btnAddPayment = MobileBy.AccessibilityId("");
 	private By lblAddAddress = MobileBy.AccessibilityId("");
 	private By lblUserName = MobileBy.AccessibilityId("");
+	private By lblAvailBal = MobileBy.AccessibilityId("");
+
+	public int verifyAvailbleBalance() {
+		int avlBalance = Integer.parseInt(getText(lblAvailBal));
+		return avlBalance;
+	}
 
 	public void viewUserName() {
 		new AndroidCommonFunctions().elementView(lblUserName, "User Name");
@@ -47,8 +53,8 @@ public class DashboardPage extends MobileFunctions {
 		click(iconNotifications, "Notifications");
 	}
 
-	public void clickPayRequest() {
-		click(btnPayReq, "Pay Request");
+	public void clickSendRequest() {
+		click(btnSendReq, "Send Request");
 	}
 
 	public void clickScan() {
@@ -86,7 +92,7 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void verifyDashboard() {
-		new AndroidCommonFunctions().elementView(btnPayReq, "Pay/Request");
+		new AndroidCommonFunctions().elementView(btnSendReq, "Pay/Request");
 	}
 
 	public AddNewPaymentComponent addNewPaymentComponent() {
@@ -99,5 +105,9 @@ public class DashboardPage extends MobileFunctions {
 
 	public NotificationsPage notificationsPage() {
 		return new NotificationsPage();
+	}
+
+	public SendRequestPage sendRequestPage() {
+		return new SendRequestPage();
 	}
 }

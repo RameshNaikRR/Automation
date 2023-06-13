@@ -9,18 +9,18 @@ import coyni_mobile.pages.EnableFaceOrTouchIDpage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ChoosePinComponent extends MobileFunctions {
-	private By lblEnterYourPin = MobileBy.AccessibilityId("");
-	private By btnLogout = MobileBy.AccessibilityId("");
-	private By btnForgotPin = MobileBy.AccessibilityId("");
+	private By lblEnterYourPinHeading = MobileBy.AccessibilityId("Enter Your PIN Heading");
+	private By btnLogout = MobileBy.AccessibilityId("Log Out");
+	private By btnForgotPin = MobileBy.AccessibilityId("Forgot PIN");
 	private By lblChoosePinDes = MobileBy.AccessibilityId("Two-Step Authentication");
 	private By lblChooseYourPin = MobileBy.AccessibilityId("Choose Your PIN Heading");
 	private By txtPin = MobileBy.xpath("//*[contains(@name,'PIN')]/following-sibling::*[1]");
 	private By lblConfirmYourPin = MobileBy.AccessibilityId("Confirm Your PIN Heading");
 	private By lblPinErr = MobileBy.AccessibilityId("");
+	
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -51,11 +51,11 @@ public class ChoosePinComponent extends MobileFunctions {
 //	}
 
 	public void verifyEnterYourPinView() {
-		new CommonFunctions().elementView(lblEnterYourPin, "Enter Pin");
+		new CommonFunctions().elementView(lblEnterYourPinHeading, "Enter Your Pin");
 	}
 
-	public void verifyEnterYourPinhdg(String hdg) {
-		new CommonFunctions().verifyLabelText(lblEnterYourPin, "Enter Your Pin", hdg);
+	public void verifyEnterYourPinheading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblEnterYourPinHeading, "Enter Your Pin", hdg);
 	}
 
 	public void verifyConfirmYourPin(String hdg) {
@@ -96,5 +96,9 @@ public class ChoosePinComponent extends MobileFunctions {
 
 	public CreatePasswordComponent createPasswordComponent() {
 		return new CreatePasswordComponent();
+	}
+	
+	public SuccessFailureComponent successFailureComponent() {
+		return new SuccessFailureComponent();
 	}
 }

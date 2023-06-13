@@ -30,6 +30,24 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By addBankSuccHeading = MobileBy.AccessibilityId("");
 //	private By lblDescription = MobileBy.xpath("//*[@text='Your bank account(s) has been successfully authorized and added to your payment methods.']");
 
+//	Send and Request Success and Failed details
+	private By lblSucessHeadi = MobileBy.AccessibilityId("");
+	private By lblAmount = MobileBy.AccessibilityId("");
+	private By lblReceiptentName = MobileBy.AccessibilityId("");
+
+	public void verifyHeading(String heading) {
+		new CommonFunctions().verifyLabelText(lblSucessHeadi, "Heading", heading);
+	}
+
+	public String verifyReceiptentName() {
+		return getText(lblReceiptentName).replace("to ", "");	
+	}
+	
+	public int verifyAmount() {
+		int amt = Integer.parseInt(getText(lblAmount));
+		return amt;
+	}
+
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 80);
 
 	public void verifyBankSucessHeading(String expHeading) {

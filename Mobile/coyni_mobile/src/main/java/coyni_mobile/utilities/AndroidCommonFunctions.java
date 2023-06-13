@@ -254,6 +254,8 @@ public class AndroidCommonFunctions {
 		System.out.println("clicked on enter");
 	}
 
+	
+
 	public void clickTab() {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.TAB));
 		System.out.println("clicked on tab");

@@ -13,6 +13,9 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import ilabs.mobile.utilities.FileReaderManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class CommonFunctions {
 
@@ -296,5 +299,9 @@ public class CommonFunctions {
      ExtentTestManager.setInfoMessageInReport("clicked outside");
  }
  
+ public void clickBack() {
+		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.BACK));
+		System.out.println("clicked on Back");
+	}
  
 }

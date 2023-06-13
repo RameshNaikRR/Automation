@@ -3,7 +3,8 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -22,20 +23,30 @@ public class NotificationsPage extends MobileFunctions {
 			"(//*[contains(@resource-id,'notificationsRV')]//*[contains(@resource-id,'readStatusCV')])[1]");
 	private By notificationSwipe = MobileBy.AccessibilityId("(//*[contains(@resource-id,'subject')])[1]");
 	private By btnDelete = MobileBy.AccessibilityId("//*[contains(@resource-id,'deleteLL')]");
-//	private By reminderMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
-//	private By denyMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
-//	private By cancelMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
+	private By btnNotifications = MobileBy.AccessibilityId(
+			"//*[contains(@resource-id,'notificationsLL')]|//*[contains(@resource-id,'notificationsTV')]");
+	private By btnRequest = MobileBy.AccessibilityId("//*[contains(@resource-id,'requestsTV')]");
+	private By btnCancel = MobileBy.AccessibilityId("//*[contains(@resource-id,'cancelLL')]");
+	private By btnReminder = MobileBy.AccessibilityId("//*[contains(@resource-id,'remindLL')]");
+	private By btnDeny = MobileBy.AccessibilityId("//*[contains(@resource-id,'denyLL')]");
+	private By btnSend = MobileBy.AccessibilityId("//*[@text='Pay']");
+	private By reminderMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
+	private By denyMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
+	private By cancelMessage = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
+	private By lblReadUnRead = MobileBy
+			.AccessibilityId("//*[@text='READ']|//*[contains(@resource-id,'readStatusTV')]|//*[@text='UNREAD']");
+	private By lblNotifDate = MobileBy.AccessibilityId("//*[contains(@text,'Today')]");
 
 	public void clickNotifications() {
 		click(btnNotificationIcon, "Notifications Icon");
 	}
 
 	public void verifyNotificationHeading(String heading) {
-		new AndroidCommonFunctions().verifyLabelText(lblHeading, "Notifications", heading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Notifications", heading);
 	}
 
 	public void verifyNotifications() {
-		new AndroidCommonFunctions().elementView(lblHeading, "Notification");
+		new CommonFunctions().elementView(lblHeading, "Notification");
 	}
 
 	public void verifyUnRead() throws InterruptedException {
@@ -48,16 +59,15 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public void verifyMessageBody() {
-		new AndroidCommonFunctions().elementView(lblBody, "Body");
+		new CommonFunctions().elementView(lblBody, "Body");
 	}
 
 	public void verifyTime() {
-		new AndroidCommonFunctions().elementView(lblTime, "Time");
+		new CommonFunctions().elementView(lblTime, "Time");
 	}
 
 	public void verifyMesaageTitle() {
-		new AndroidCommonFunctions().elementView(lblTitle, "Title");
-
+		new CommonFunctions().elementView(lblTitle, "Title");
 	}
 
 	public void verifyRead() throws InterruptedException {
@@ -92,8 +102,7 @@ public class NotificationsPage extends MobileFunctions {
 
 	public void viewDots() {
 		scrollDownToElement(viewDot, "view Dot");
-		new AndroidCommonFunctions().elementView(viewDot, "View Dot");
-
+		new CommonFunctions().elementView(viewDot, "View Dot");
 	}
 
 	public void clickDelete() {
@@ -126,5 +135,77 @@ public class NotificationsPage extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+//	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+//
+//	public void clickNotifications() {
+//		click(btnNotifications, "Notification");
+//	}
+
+	public void clickRequest() {
+		click(btnRequest, "Request");
+		new CommonFunctions().elementView(btnRequest, "Request");
+	}
+
+	public void verifyNotifdate() {
+		new CommonFunctions().elementView(btnNotifications, "Notifcations");
+	}
+
+	public void clickReadUnRead() {
+		click(lblReadUnRead, "Read");
+	}
+
+	public void verifyReadUnRead(String expText) {
+		new CommonFunctions().verifyLabelText(lblReadUnRead, "Text", expText);
+	}
+
+	public void viewNotification() {
+		new CommonFunctions().elementView(btnNotifications, "View Notification");
+	}
+
+	public void viewRequest() {
+		new CommonFunctions().elementView(btnRequest, "View Request");
+	}
+
+	public void viewSend() throws InterruptedException {
+		new CommonFunctions().elementView(btnSend, "Send");
+	}
+
+	public void viewDeny() throws InterruptedException {
+		new CommonFunctions().elementView(btnDeny, "Deny");
+	}
+
+	public void verifyDenyMessage(String heading) {
+		new CommonFunctions().verifyLabelText(denyMessage, "Deny Message", heading);
+	}
+
+	public void verifyReminderMessage(String heading) {
+		new CommonFunctions().verifyLabelText(reminderMessage, "Reminder Message", heading);
+	}
+
+	public void verifyCancelMessage(String heading) {
+		new CommonFunctions().verifyLabelText(cancelMessage, "Cancel Message", heading);
+	}
+
+	// Added
+	public void clickSend() {
+		click(btnSend, "Send");
+	}
+
+	public void clickDeny() {
+		click(btnDeny, "Deny");
+	}
+
+	public void clickRemainder() {
+		click(btnReminder, "Reminder");
+	}
+
+	public void clickCancel() {
+		click(btnCancel, "Cancel");
+	}
+
+	public SendRequestPaymentPage sendRequestPaymentPage() {
+		return new SendRequestPaymentPage();
 	}
 }

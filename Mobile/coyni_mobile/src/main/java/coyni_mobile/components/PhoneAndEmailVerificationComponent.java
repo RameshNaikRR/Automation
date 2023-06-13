@@ -14,7 +14,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions{
 	private By lblPhoneVerification = MobileBy.AccessibilityId("Phone Verification Heading");
 	private By lblPhoneDesc = MobileBy.AccessibilityId("Phone Verification Text");
 	private By txtOtp = MobileBy.AccessibilityId("OTP");
-	private By lnkResend = MobileBy.AccessibilityId("");
+	private By lnkResend = MobileBy.AccessibilityId("Resend Code");
 	private By lblEmailVerification = MobileBy.AccessibilityId("Email Verification Heading");
 	private By lblEmailDesc = MobileBy.AccessibilityId("Email Verification Text");
 	private By lblCurrentEmailVerification = MobileBy.AccessibilityId("");
