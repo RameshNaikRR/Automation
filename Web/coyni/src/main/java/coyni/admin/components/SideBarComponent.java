@@ -2,6 +2,8 @@ package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.pages.CommissionAccountPage;
+import coyni.admin.pages.TokenAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -163,5 +165,26 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSideBarItems("Business APIs"), "Business APIs");
 		Thread.sleep(4000);
 	}
+	
+	 public CommissionAccountPage commissionAccountPage() {
+	    	return new CommissionAccountPage();
+	    }
+     
+	 public TokenAccountPage tokenAccountPage() {
+		 return new TokenAccountPage();
+	 }
+	 
+	 public ExportComponent exportComponent() {
+		 return new ExportComponent();
+	 }
+	 
+	 public AddMerchantComponent addMerchantComponent() {
+		 return new AddMerchantComponent();
+	 }
+	 
+     public ProfileComponent profileComponent() {
+    	 return new ProfileComponent(); 
+     }
 
 }
+
