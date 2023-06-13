@@ -1,4 +1,4 @@
-package coyni.business.components;
+package coyni.admin.Paymentcomponents;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import coyni.admin.Paymentspopups.WireCompletedPopup;
-import coyni.business.popups.TransferCompletedPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -154,10 +153,6 @@ public class AuthyComponent extends BrowserFunctions {
 
 	public WireCompletedPopup wireCompletedPopup() {
 		return new WireCompletedPopup();
-	}
-
-	public TransferCompletedPopup transferCompletedPopup() {
-		return new TransferCompletedPopup();
 	}
 
 }
