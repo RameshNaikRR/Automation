@@ -127,7 +127,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().successFailureComponent()
 					.verifyEmailSucess(data.get("sucessHeading"));
 			customerProfilePage.profilePage().editProfilePage().successFailureComponent()
-					.verifyChangeEmailDesc(data.get("changeEmaildesc"));
+					.verifyChangeEmailDesc(data.get("sucessDesc"));
 			customerProfilePage.profilePage().editProfilePage().successFailureComponent().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Edit  Email failed due to Exception " + e);
@@ -157,7 +157,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().navigationComponent().clickClose();
 			customerProfilePage.profilePage().editProfilePage().clickChange();
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().fillPin(data.get("pin"));
-			customerProfilePage.profilePage().editProfilePage().validateEmail(data.get("newEmail"));
+			customerProfilePage.profilePage().editProfilePage().validateEmail(data.get("email"));
 			customerProfilePage.profilePage().editProfilePage().clickSave();
 			customerProfilePage.profilePage().editProfilePage().navigationComponent().clickBack();
 			customerProfilePage.profilePage().editProfilePage().clickSave();
@@ -191,12 +191,12 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().clickEditPhoneNumber();
 			customerProfilePage.profilePage().editProfilePage().verifyPhoneNumberHdg(data.get("heading"));
 			customerProfilePage.profilePage().editProfilePage().verifyCurrentPhoneNumberhdg(data.get("subHeading"));
-			customerProfilePage.profilePage().editProfilePage().verifyExistingPhoneNUmber(data.get("existPhoneNumber"));
+			customerProfilePage.profilePage().editProfilePage().verifyExistingPhoneNUmber(data.get("existingPhoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickChange();
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().verifyEnterYourPinView();
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.profilePage().editProfilePage().verifyEditPhoneNUmber(data.get("editPhoneHeading"));
-			customerProfilePage.profilePage().editProfilePage().verifyCurrentPhoneNUmber(data.get("existPhoneNumber"));
+			customerProfilePage.profilePage().editProfilePage().verifyCurrentPhoneNUmber(data.get("existingPhoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickArrow(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
@@ -252,6 +252,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
 			customerProfilePage.profilePage().navigationComponent().clickBack();
+			customerProfilePage.profilePage().editProfilePage().clickArrow(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().validatePhoneNumber(data.get("phoneNumbers"));
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
@@ -265,7 +266,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
-					.verifyNewEmailVerificationHeading(data.get("newEmailVerificationHeading"));
+			.verifyNewPhoneVerificationHdg(data.get("newPhoneVerificationHeading"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Edit Phone Number Field Validations failed due to Exception " + e);
@@ -293,7 +294,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().verifyEditAddres(data.get("editAddressHeading"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().clickCountryDropdown();
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
-					.selectCountry(data.get("country"));
+			.selectCountry(data.get("fillCountry"));	
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
 					.fillAddLine1(data.get("addline1"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
@@ -332,7 +333,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().verifyEditAddres(data.get("editAddressHeading"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().clickCountryDropdown();
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
-					.selectCountry(data.get("country"));
+					.selectCountry(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
 					.validateAddline1(data.get("addline1"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
@@ -349,31 +350,31 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void verifyPrefernces(String strParams) {
+	public void testPrefernces(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickPreferences();
-		preferencesPage.verifyPreferencesHeading(data.get("preferencesHeading"));
+		preferencesPage.verifyPreferencesHeading(data.get("expHeading"));
 		String[] timeZone = data.get("timeZones").split(",");
 		for (int i = 0; i <= timeZone.length; i++) {
 			preferencesPage.selectTimeZone(timeZone[i]);
-			preferencesPage.toastComponent().verifyToastMsg(data.get("preferencesToastMsg"));
+			preferencesPage.toastComponent().verifyToastMsg(data.get("toastMsg"));
 			preferencesPage.verifyTimeZone(timeZone[i]);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void verifyAgreements(String strParams) {
+	public void testAgreements(String strParams) {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickAgreements();
 		agreementsPage.clickPrivacyPolicy();
 		agreementsPage.clickPrivacyActiveAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+		agreementsPage.verifyDocAgreeHeading(data.get("heading"));
 		agreementsPage.navigationComponent().clickClose();
 		agreementsPage.clickPrivacyPastAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+		agreementsPage.verifyDocAgreeHeading(data.get("heading"));
 		agreementsPage.navigationComponent().clickClose();
 
 	}
@@ -436,6 +437,20 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Wallet Fees  failed due to Exception " + e);
 		}
 	}
+	
+	
+	/**
+	 * testLogOut script to test the logout feature.
+	 */
+	@Test
+	public void testLogOut() {
+		try {
+			dashboardPage.clickProfile();
+			customerProfilePage.clickLogout();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testLogOut failed due to exception " + e);
+		}
+	}
 
 	/**
 	 * testResetPincode Script is to test by resetting pin from previous to new
@@ -449,12 +464,12 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();
 			customerProfilePage.clickResetPinCode();
-			customerProfilePage.choosePinComponent().verifyEnterYourPinheading(data.get("expHeading"));
+			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("pinHeading"));
 			customerProfilePage.choosePinComponent().verifyForgotPinView();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.choosePinComponent().verifyChooseYouPinDes(data.get("description"));
 			customerProfilePage.choosePinComponent().verifyChooseYourPin(data.get("choosePinHeading"));
-			customerProfilePage.choosePinComponent().fillPin(data.get("choosePin"));
+			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.choosePinComponent().verifyConfirmYourPin(data.get("confirmPinHeading"));
 			if (data.get("validateNavigation").equalsIgnoreCase("Yes")) {
 				customerProfilePage.navigationComponent().clickBack();
@@ -467,7 +482,8 @@ public class CustomerProfileTest {
 				customerProfilePage.navigationComponent().clickClose();
 			}
 			if (data.get("validateConfirmPin").equalsIgnoreCase("Yes")) {
-				customerProfilePage.choosePinComponent().fillPin(data.get("confirmPin"));
+				customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
+				customerProfilePage.choosePinComponent().verifyToastMessage(data.get("toastMsg"));
 			}
 
 		} catch (Exception e) {
@@ -488,31 +504,31 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();
 			customerProfilePage.clickChangePassword();
-			customerProfilePage.choosePinComponent().verifyEnterYourPinheading(data.get("expHeading"));
+			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("pinHeading"));
 			customerProfilePage.choosePinComponent().verifyForgotPinView();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.choosePinComponent().createPasswordComponent()
-					.verifyCurrentPassword(data.get("currentPasswordHeading"));
+					.verifyCurrentPassword(data.get("expHeading"));
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.verifyCurrentPasswordDesc(data.get("description"));
 			customerProfilePage.choosePinComponent().createPasswordComponent()
-					.fillCurrentPassword(data.get("currentPassword"));
+					.fillCurrentPassword(data.get("password"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.verifyNewPasswordHeading(data.get("subHeading"));
-			customerProfilePage.choosePinComponent().createPasswordComponent()
-					.verifyNewPasswordDesc(data.get("description"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().fillNewPassword(data.get("newPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.fillConfirmPassword(data.get("ConfirmPassword"));
+			customerProfilePage.choosePinComponent().createPasswordComponent()
+			.verifyNewPasswordDesc(data.get("description"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickSave();
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
-					.verifyPasswordChanged(data.get("passwordChangedhdg"));
+					.verifyPasswordChanged(data.get("sucessHeading"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
-					.verifyPasswordChangedDesc(data.get("passwordChangedDesc"));
+					.verifyPasswordChangedDesc(data.get("sucessDesc"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
@@ -543,7 +559,7 @@ public class CustomerProfileTest {
 			customerProfilePage.clickChangePassword();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.choosePinComponent().createPasswordComponent()
-					.fillCurrentPassword(data.get("currentPassword"));
+					.fillCurrentPassword(data.get("password"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.validateNewPasswordfield(data.get("newPassword"));
@@ -574,6 +590,7 @@ public class CustomerProfileTest {
 		testAddCard(strParams, "credit");
 	}
 
+
 	/**
 	 * testAddDebitCardInPaymentMethods script is to test payment method via adding
 	 * Debit card by giving valid card details.
@@ -590,6 +607,33 @@ public class CustomerProfileTest {
 		Thread.sleep(1000);
 		customerProfilePage.addNewPaymentComponent().getPaymentPage();
 		testAddCard(strParams, "debit");
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCreditCardInBuyTokenss(String strParams) throws InterruptedException {
+		dashboardPage.clickBuyTokens();
+		testAddCard(strParams, "credit");
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardInBuyTokens(String strParams) throws InterruptedException {
+		dashboardPage.clickBuyTokens();
+		testAddCard(strParams, "debit");
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardINwithdrawToUSd(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickWithdraw();
+		dashboardPage.selectWithdrawMethodPage().verifyDebitCardHeading(data.get("addInstantPayHeading"));
+		dashboardPage.selectWithdrawMethodPage().verifyDebitCardDesc(data.get("instantPayDescription"));
+		dashboardPage.selectWithdrawMethodPage().clickDebitCard(data.get("instantPayText"));
+		testAddCard(strParams, "debit");
+	}catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
+	}
 	}
 
 	/**
@@ -686,6 +730,74 @@ public class CustomerProfileTest {
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
+		}
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testExpiredCard(String strParams) {
+		try {
+			 Map<String, String> data = Runner.getKeywordParameters(strParams);
+			 Thread.sleep(1000);
+			 if(data.get("validateBuyTokens").equalsIgnoreCase("Yes")) {
+			dashboardPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.navigationComponent().clickBack();
+			dashboardPage.clickBuyTokens();
+			Thread.sleep(1000);
+			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+			customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteCreditCard();
+			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+			customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteDebitCard();
+			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+			customerProfilePage.addNewPaymentComponent().navigationComponent().clickClose();
+			dashboardPage.clickWithdraw();
+			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+			Thread.sleep(1000);
+			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+			customerProfilePage.addNewPaymentComponent().verifyNotOken();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+			.clickDebitCard(data.get("last4Digits"));
+			dashboardPage.cvvPopup().choosePinComponent().validateCVVorCVC(data.get("cvvCVC1"));
+			dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+			dashboardPage.cvvPopup().clickOk();
+			dashboardPage.buyTokenComponent().clickArrow();
+			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+			Thread.sleep(1000);
+			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+			.clickDebitCard(data.get("last4Digits"));
+			dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+			dashboardPage.cvvPopup().clickOk();
+			Thread.sleep(1000);
+			customerProfilePage.navigationComponent().clickClose();
+			customerProfilePage.navigationComponent().clickClose();
+			 }
+			if(data.get("validateWithdrawToken").equalsIgnoreCase("Yes")) {
+				dashboardPage.clickWithdraw();
+				dashboardPage.selectWithdrawMethodPage().clickInstantPay();
+				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+			//	customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
+				Thread.sleep(1000);
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickArrow();
+			//	customerProfilePage.paymentMethodsPage().verifyDebitCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyWithdrawDebitOOPSCondition();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.navigationComponent().clickClose();	
+			}	
+		//	customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testEditCard failed due to Exception " + e);
 		}
 	}
 
@@ -919,10 +1031,31 @@ public class CustomerProfileTest {
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
 		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testBankAccountINwithdrawToBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+		dashboardPage.clickWithdraw();
+		dashboardPage.selectWithdrawMethodPage().verifyBankAccountHeading(data.get("addBankHeading"));
+		dashboardPage.selectWithdrawMethodPage().verifyBankAccountDesc(data.get("bankDescription"));
+		dashboardPage.selectWithdrawMethodPage().clickBankAccount(data.get("bankText"));
+		testAddBankAccount(strParams, "debit");
+	}catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
+	}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccountInBuyTokens(String strParams) throws InterruptedException {
+		dashboardPage.clickBuyTokens();
+		testAddBankAccount(strParams, "debit");
+	}
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddBankAccount(String strParams) throws InterruptedException {
+	public void testAddBankAccount(String strParams,String card) throws InterruptedException {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();

@@ -9,6 +9,7 @@ import coyni_mobile.pages.EnableFaceOrTouchIDpage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ChoosePinComponent extends MobileFunctions {
@@ -20,6 +21,11 @@ public class ChoosePinComponent extends MobileFunctions {
 	private By txtPin = MobileBy.xpath("//*[contains(@name,'PIN')]/following-sibling::*[1]");
 	private By lblConfirmYourPin = MobileBy.AccessibilityId("Confirm Your PIN Heading");
 	private By lblPinErr = MobileBy.AccessibilityId("");
+    private By lblPinToastMsg = MobileBy.AccessibilityId("");
+    private By txtCvv = MobileBy.AccessibilityId("");
+    private By btnBackSpace = MobileBy.AccessibilityId("");
+	
+	
 	
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
@@ -29,9 +35,13 @@ public class ChoosePinComponent extends MobileFunctions {
 				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 	}
 
+	public void verifyToastMessage(String toastMsg) {
+		new CommonFunctions().verifyLabelText(lblPinToastMsg, "Toast Message", toastMsg);
+	}
 	public void verifyChooseYourPinView() {
 		new CommonFunctions().elementView(lblChooseYourPin, "Choose Your Pin");
 	}
+	
 
 	public void verifyChooseYouPinDes(String desc) {
 		new CommonFunctions().verifyLabelText(lblChoosePinDes, "Desc", desc);
@@ -44,6 +54,45 @@ public class ChoosePinComponent extends MobileFunctions {
 			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
 		}
 
+	}
+	public void fillPins(String pin) {
+		System.out.println(pin.length());
+		for (int i = 0; i < pin.length(); i++) {
+			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
+		}
+	}
+	
+	public void validateCVVorCVC(String pin) {
+		String[] field = pin.split(",");
+		new CommonFunctions().clear(txtCvv);
+		for (int i = 0; i < field[0].length(); i++) {
+			click(getOneNumberOfPin(field[0].charAt(i)), "pin " + field[0].charAt(i));
+		}
+		System.out.println(field[0].length());
+		System.out.println(new CommonFunctions().getTextBoxValue(txtCvv).length());
+		if(field[0].length()== new CommonFunctions().getTextBoxValue(txtCvv).length()) {
+			System.out.println("for loop i");
+			ExtentTestManager.setPassMessageInReport("CVV field is accepting 4 numbers");
+		}else {
+			ExtentTestManager.setFailMessageInReport("CVV field is not accepting 4 numbers");
+		}
+		new CommonFunctions().clear(txtCvv);
+		click(btnBackSpace, "Backspace");
+		for (int j = 0; j < field[1].length(); j++) {	
+			click(getOneNumberOfPin(field[1].charAt(j)), "pin " + field[1].charAt(j));	
+		}
+		System.out.println(field[1].length());
+		System.out.println(new CommonFunctions().getTextBoxValue(txtCvv).length());
+		if(field[1].length()!= new CommonFunctions().getTextBoxValue(txtCvv).length()) {
+			System.out.println("for loop j");
+			ExtentTestManager.setPassMessageInReport("CVV field is not accepting 5 numbers");
+		}else {
+			ExtentTestManager.setFailMessageInReport("CVV field is accepting 5 numbers");
+		}
+		click(btnBackSpace, "Backspace");
+	}
+	public void verifyEnterYourPinhdg(String hdg) {
+		new CommonFunctions().verifyLabelText(lblEnterYourPinHeading, "Enter Your Pin", hdg);
 	}
 
 //	public void verifyConfirmYourPinView() {

@@ -25,14 +25,61 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblPwdChanged = MobileBy.AccessibilityId("");
 	private By lblpwdChangedDesc = MobileBy.AccessibilityId("");
 	private By btnDone = MobileBy.AccessibilityId("");
-
+	//Transaction Complete Screen
+		//BuyTokens and withdraw
+		private By lblPurchaseComplete = MobileBy.AccessibilityId("");
+		private By lblAmount = MobileBy.AccessibilityId("");
+		private By lblCard = MobileBy.AccessibilityId("");
+		private By lblsucessDesc = MobileBy.AccessibilityId("");
+		private By lnkViewTransaction = MobileBy.AccessibilityId("");
+		private By lblWithdrawlComplete = MobileBy.AccessibilityId("");
+		private By lblGiftCardSent = MobileBy.AccessibilityId("");
+		
+		
+		public void verifyGiftCardSent(String hdg) {
+			new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+			new CommonFunctions().verifyLabelText(lblGiftCardSent, "gift Card Sent", hdg);
+		}
+		
+		
+		public void verifyWithdrawlComplete(String hdg) {
+			new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+			new CommonFunctions().verifyLabelText(lblWithdrawlComplete, "withdrawl Complete", hdg);
+		}
+		
+		public void verifyPurchaseComplete(String hdg) {
+			new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+			new CommonFunctions().verifyLabelText(lblPurchaseComplete, "Purchase Complete", hdg);
+		}
+		
+		public void verifygetAmount() {
+			ExtentTestManager.setFailMessageInReport(getText(lblAmount));
+		}
+		public int verifyAmount() {
+			String str = getText(lblAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+			Integer amt=Integer.parseInt(str);
+			return amt;
+			
+		}
+		
+		
+		public void verifyCardName(String cardName) {
+			new CommonFunctions().verifyLabelText(lblCard, "Card", cardName);
+		}
+		public void verifyTransactionSucessDesc(String desc) {
+			new CommonFunctions().verifyLabelText(lblCardSucessDesc, "Transaction sucess desc", desc);
+		}
+		
+		public void clickViewTransaction() {
+			click(lnkViewTransaction, "View Transaction");
+		}
 //	Add Bank Successful page
 	private By addBankSuccHeading = MobileBy.AccessibilityId("");
 //	private By lblDescription = MobileBy.xpath("//*[@text='Your bank account(s) has been successfully authorized and added to your payment methods.']");
 
 //	Send and Request Success and Failed details
 	private By lblSucessHeadi = MobileBy.AccessibilityId("");
-	private By lblAmount = MobileBy.AccessibilityId("");
+
 	private By lblReceiptentName = MobileBy.AccessibilityId("");
 
 	public void verifyHeading(String heading) {
@@ -43,10 +90,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 		return getText(lblReceiptentName).replace("to ", "");	
 	}
 	
-	public int verifyAmount() {
-		int amt = Integer.parseInt(getText(lblAmount));
-		return amt;
-	}
+//	public int verifyAmount() {
+//		int amt = Integer.parseInt(getText(lblAmount));
+//		return amt;
+//	}
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 80);
 

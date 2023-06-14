@@ -439,5 +439,632 @@ public class DashBoardTest {
 			ExtentTestManager.setFailMessageInReport("testSendWithInsufficientFunds  failed due to exception " + e);
 		}
 	}
+	
+
+	public void testBuyToken(String strParams, String method) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			if (data.get("validateExistingAccounts").equalsIgnoreCase("Yes")) {
+				Thread.sleep(2000);
+				dashboardPage.clickBuyTokens();
+				dashboardPage.buyTokenComponent().verifyBuyTokenHeading(data.get("expHeading"));
+				dashboardPage.buyTokenComponent().verifyBuyTokenDesc(data.get("description"));
+				Thread.sleep(2000);
+				if (method.equalsIgnoreCase("bank")) {
+					dashboardPage.addNewPaymentComponent().clickBankAccount(data.get("last4Digits"));
+				} else if (method.equalsIgnoreCase("credit")) {
+					dashboardPage.addNewPaymentComponent().clickCreditCard(data.get("last4Digits"));
+				} else {
+					dashboardPage.addNewPaymentComponent().clickDebitCard(data.get("last4Digits"));
+				}
+				if (!method.equalsIgnoreCase("bank")) {
+					dashboardPage.cvvPopup().verifyPopupHeading(data.get("cvvPopupHeading"));
+					dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+					dashboardPage.cvvPopup().clickOk();
+				}
+			}
+			if (data.get("validateBuyToken").equalsIgnoreCase("Yes")) {
+				Thread.sleep(2000);
+				dashboardPage.buyTokenComponent().verifyBuyTokensHeading(data.get("expHeading"));
+				dashboardPage.buyTokenComponent().verifyPaymentView();
+				dashboardPage.buyTokenComponent().clickChangePaymentView();
+				Thread.sleep(1000);
+				String dailyLimitFee = dashboardPage.buyTokenComponent().orderPreviewPopup().getDailyLimitFeeLabel();
+				dashboardPage.buyTokenComponent().verifyCynView();
+				dashboardPage.buyTokenComponent().fillAmount(data.get("amount"));
+				dashboardPage.buyTokenComponent().clickBuyToken();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().verifyHeading(data.get("popupHeading"));
+				int amount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyEnteredAmount();
+				String purchaseAmount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyPurchaseAmount();
+				String processingFee = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyProcessingFee();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().verifyTotalAmount(dailyLimitFee);
+				String totalAmount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyTotalAmount();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().clickConfirm();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().choosePinComponent()
+						.verifyEnterYourPinhdg(data.get("pinHeading"));
+				dashboardPage.buyTokenComponent().orderPreviewPopup().choosePinComponent().fillPin(data.get("pin"));
+				Thread.sleep(2000);
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyPurchaseComplete(data.get("successHeading"));
+				int amount1 = dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyAmount();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyCardName(data.get("cardName"));
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyTransactionSucessDesc(data.get("sucessDescription"));
+				if (data.get("validateViewTransaction").equalsIgnoreCase("Yes")) {
+					dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+							.clickViewTransaction();
+				}
+				if (data.get("validateDone").equalsIgnoreCase("Yes")) {
+					dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent().clickDone();
+					dashboardPage.verifyRecentTransactionsView();
+					dashboardPage.clickFirstTransaction();
+				}
+				dashboardPage.transactionsDetailsComponent().verifyTransactionDetailsHeadingView();
+				dashboardPage.transactionsDetailsComponent().getTransactionDetails();
+				int amount2 = dashboardPage.transactionsDetailsComponent().verifyTransactionAmount();
+				String purchaseAmount1 = dashboardPage.transactionsDetailsComponent().verifyPurchaseAmount();
+				String processingFee1 = dashboardPage.transactionsDetailsComponent().verifyProcessingFee();
+				String totalAmount1 = dashboardPage.transactionsDetailsComponent().verifyTotalAmount();
+
+				if (amount == amount1 && amount == amount2) {
+					ExtentTestManager.setInfoMessageInReport("The Entered Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The Entered Amount is not Same");
+				}
+				if (totalAmount.equals(totalAmount1)) {
+					ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+				}
+				if (purchaseAmount.equals(purchaseAmount1)) {
+					ExtentTestManager.setInfoMessageInReport("The purchase  Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The purchase Amount is not Same");
+				}
+				if (processingFee.equals(processingFee1)) {
+					ExtentTestManager.setInfoMessageInReport("The processing Fee is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The processing Fee is not Same");
+				}
+				dashboardPage.transactionsDetailsComponent().clickBack();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenCard  failed due to exception " + e);
+		}
+	}
+
+	/**
+	 * testBuyTokenWithBank script is to perform buy token transactions through
+	 * Bank.
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithBank(String strParams) {
+		testBuyToken(strParams, "bank");
+
+	}
+
+	/**
+	 * testBuyTokenWithCreditCard script is to perform buy token transactions
+	 * through Credit Card.
+	 * 
+	 * @param strParams
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithCreditCard(String strParams) {
+		testBuyToken(strParams, "credit");
+	}
+
+	/**
+	 * testBuyTokenWithDebitCard script is to perform buy token transactions through
+	 * Debit Card.
+	 * 
+	 * @param strParams
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenWithDebitCard(String strParams) {
+		testBuyToken(strParams, "debit");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithDebitCard(String strParams) {
+		testWithDrawTOUSDTokens(strParams, "debit");
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenWithBankAccount(String strParams) {
+		testWithDrawTOUSDTokens(strParams, "bank");
+	}
+
+	/**
+	 * testWithDrawTOUSDBank script is to perform transactions via bank through
+	 * withdraw to USD - Bank
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithDrawTOUSDTokens(String strParams, String method) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			if (data.get("validateExistingAccounts").equalsIgnoreCase("Yes")) {
+				dashboardPage.clickWithdraw();
+				dashboardPage.selectWithdrawMethodPage().verifyHeading(data.get("expHeading"));
+				dashboardPage.selectWithdrawMethodPage().verifyWithdrawDesc(data.get("description"));
+				Thread.sleep(1000);
+				if (method.equalsIgnoreCase("bank")) {
+					dashboardPage.selectWithdrawMethodPage().verifyBankDes(data.get("bankDescription"));
+					dashboardPage.selectWithdrawMethodPage().clickExternalBankAccount();
+					dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+							.verifyHeading(data.get("withdrawPopupHeading"));
+					dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+							.clickBankAccount1(data.get("last4Digits"));
+				} else {
+					dashboardPage.selectWithdrawMethodPage().verifyInstantDes(data.get("debitDescription"));
+					dashboardPage.selectWithdrawMethodPage().clickInstantPay();
+					Thread.sleep(1000);
+					dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+							.verifyHeading(data.get("withdrawPopupHeading"));
+					dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+							.clickDebitCard(data.get("last4Digits"));
+				}
+			}
+
+			if (data.get("validateWithdrawToken").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.verifyHeading(data.get("withdrawTokenHeading"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.verifylblWithdrawView();
+				Thread.sleep(4000);
+				String dailyLimitFee = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.withdrawTokenPage().orderPreviewPopup().getDailyLimitFeeLabel1();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().verifyCynView();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.fillAmount(data.get("amount"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickMessageButton();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.fillMessage(data.get("message"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickDone();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickWithdraw();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.verifyHeading(data.get("popupHeading"));
+				int amount = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.orderPreviewPopup().verifyEnteredAmount();
+				String withdrawAmount = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.withdrawTokenPage().orderPreviewPopup().verifyWithdrawAmount();
+				String processingFee = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.withdrawTokenPage().orderPreviewPopup().verifyProcessingFee();
+				String totalAmount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyTotalAmount();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.verifyTotalAmount(dailyLimitFee);
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.clickConfirm();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.choosePinComponent().verifyChooseYourPin(data.get("pinHeading"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.choosePinComponent().fillPin(data.get("pin"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().orderPreviewPopup()
+						.successFailureComponent().verifyWithdrawlComplete(data.get("successHeading"));
+				int amount1 = dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyAmount();
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyCardName(data.get("cardName"));
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+						.verifyTransactionSucessDesc(data.get("sucessDescription"));
+				if (data.get("validateViewTransaction").equalsIgnoreCase("Yes")) {
+					dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+							.clickViewTransaction();
+				}
+				if (data.get("validateDone").equalsIgnoreCase("Yes")) {
+					dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent().clickDone();
+					dashboardPage.verifyRecentTransactionsView();
+					dashboardPage.clickFirstTransaction();
+				}
+				dashboardPage.transactionsDetailsComponent().verifyTransactionDetailsHeadingView();
+				dashboardPage.transactionsDetailsComponent().getTransactionDetails();
+				int amount2 = dashboardPage.transactionsDetailsComponent().verifyTransactionAmount();
+				String withdrawAmount1 = dashboardPage.transactionsDetailsComponent().verifyPurchaseAmount();
+				String processingFee1 = dashboardPage.transactionsDetailsComponent().verifyProcessingFee();
+				String totalAmount1 = dashboardPage.transactionsDetailsComponent().verifyTotalAmount();
+
+				if (amount == amount1 && amount == amount2) {
+					ExtentTestManager.setInfoMessageInReport("The Entered Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The Entered Amount is not Same");
+				}
+				if (totalAmount.equals(totalAmount1)) {
+					ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+				}
+				if (withdrawAmount.equals(withdrawAmount1)) {
+					ExtentTestManager.setInfoMessageInReport("The purchase  Amount is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The purchase Amount is not Same");
+				}
+				if (processingFee.equals(processingFee1)) {
+					ExtentTestManager.setInfoMessageInReport("The processing Fee is Same");
+				} else {
+					ExtentTestManager.setWarningMessageInReport("The processing Fee is not Same");
+				}
+				dashboardPage.transactionsDetailsComponent().clickBack();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithDrawTOUSDBank  failed due to exception " + e);
+		}
+	}
+
+	/**
+	 * testGiftCard script is to test transactions through withdraw to USD - Gift
+	 * Card
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testGiftCard(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickWithdraw();
+			dashboardPage.selectWithdrawMethodPage().verifyHeading(data.get("withdrawMethodHeading"));
+			dashboardPage.selectWithdrawMethodPage().verifyGiftCardDes(data.get("description"));
+			dashboardPage.selectWithdrawMethodPage().clickGiftCard();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage()
+					.verifyPurchaseGiftCardHeading(data.get("purchaseGiftHeading"));
+			Thread.sleep(1000);
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().verifyBrandsView();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().fillSearchBox(data.get("giftCard"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().clickGiftCard(data.get("giftCard"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().verifyHeading(data.get("giftPageHeading"));
+			String dailyLimitFee = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.orderPreviewPopup().getDailyLimitFeeLabel();
+			Thread.sleep(1000);
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().choosePinComponent().fillPins(data.get("amount"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().clickAdd();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().fillFirstName(data.get("firstName"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().fillLastName(data.get("lastName"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().fillEmail(data.get("email"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().verifyGiftCardDesc();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().clickNext();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().orderPreviewPopup()
+					.verifyGiftCardHeading(data.get("popupHeading"));
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().orderPreviewPopup().getGiftCardName();
+			dashboardPage.selectWithdrawMethodPage().giftCardPage().orderPreviewPopup().getEmail();
+			int amount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyEnteredAmount();
+			String purchaseAmount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyPurchaseAmount();
+			String processingFee = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyProcessingFee();
+			dashboardPage.buyTokenComponent().orderPreviewPopup().verifyTotalAmount(dailyLimitFee);
+			String totalAmount = dashboardPage.buyTokenComponent().orderPreviewPopup().verifyTotalAmount();
+			dashboardPage.buyTokenComponent().orderPreviewPopup().clickConfirm();
+			dashboardPage.buyTokenComponent().orderPreviewPopup().choosePinComponent()
+					.verifyEnterYourPinhdg(data.get("pinHeading"));
+			dashboardPage.buyTokenComponent().orderPreviewPopup().choosePinComponent().fillPin(data.get("pin"));
+			Thread.sleep(2000);
+			dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+					.verifyGiftCardSent(data.get("successHeading"));
+			int amount1 = dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+					.verifyAmount();
+			dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+					.verifyCardName(data.get("cardName"));
+			dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent()
+					.verifyTransactionSucessDesc(data.get("sucessDescription"));
+			if (data.get("validateViewTransaction").equalsIgnoreCase("Yes")) {
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent().clickViewTransaction();
+			}
+			if (data.get("validateDone").equalsIgnoreCase("Yes")) {
+				dashboardPage.buyTokenComponent().orderPreviewPopup().successFailureComponent().clickDone();
+				dashboardPage.verifyRecentTransactionsView();
+				dashboardPage.clickFirstTransaction();
+			}
+			dashboardPage.transactionsDetailsComponent().verifyTransactionDetailsHeadingView();
+			dashboardPage.transactionsDetailsComponent().getTransactionDetails();
+			int amount2 = dashboardPage.transactionsDetailsComponent().verifyTransactionAmount();
+			String purchaseAmount1 = dashboardPage.transactionsDetailsComponent().verifyPurchaseAmount();
+			String processingFee1 = dashboardPage.transactionsDetailsComponent().verifyProcessingFee();
+			String totalAmount1 = dashboardPage.transactionsDetailsComponent().verifyTotalAmount();
+
+			if (amount == amount1 && amount == amount2) {
+				ExtentTestManager.setInfoMessageInReport("The Entered Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Entered Amount is not Same");
+			}
+			if (totalAmount.equals(totalAmount1)) {
+				ExtentTestManager.setInfoMessageInReport("The Total Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The Total Amount is not Same");
+			}
+			if (purchaseAmount.equals(purchaseAmount1)) {
+				ExtentTestManager.setInfoMessageInReport("The purchase  Amount is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The purchase Amount is not Same");
+			}
+			if (processingFee.equals(processingFee1)) {
+				ExtentTestManager.setInfoMessageInReport("The processing Fee is Same");
+			} else {
+				ExtentTestManager.setWarningMessageInReport("The processing Fee is not Same");
+			}
+			dashboardPage.transactionsDetailsComponent().clickBack();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testGiftCard  failed due to exception " + e);
+		}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenTransactionErrorMessages(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			String[] errorMsgs = data.get("errMsg").split(",");
+			dashboardPage.clickBuyTokens();
+			if (data.get("validatebanking").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.clickBankAccount(data.get("last4Digits"));
+			}
+			if (data.get("validateDebitCard").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.clickDebitCard(data.get("last4Digits"));
+				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+				dashboardPage.cvvPopup().clickOk();
+			}
+			if (data.get("validateCreditCard").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.clickCreditCard(data.get("last4Digits"));
+				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+				dashboardPage.cvvPopup().clickOk();
+
+			}
+			if(data.get("validateMinimumAmount").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.fillAmount(data.get("amount"));
+			ExtentTestManager.setInfoMessageInReport("<b>Testing with minimum amount : %.2f </b>");
+			new CommonFunctions().validateErrMsg(errorMsgs[0]);
+			}
+		    if(data.get("validateLimits").equalsIgnoreCase("Yes")) {
+			float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+					.withdrawTokenPage().getDailyLimitOrWeeklyLimitAmount();
+			System.out.println(limit);
+			ExtentTestManager.setInfoMessageInReport(
+					String.format("<b>Testing with more than Daily or Weekly Limit : %.2f </b>", limit));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.fillAmount(Float.toString(limit+1));
+			String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage()
+					.withdrawMethodPopup().withdrawTokenPage().getDailyOrWeeklyLimitText();
+				if (dailyOrWeeklyTxt.contains("daily")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[1]);
+				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[2]);
+				} else {
+					new CommonFunctions().validateErrMsg(errorMsgs[3]);
+				}
+		    }
+		    dashboardPage.navigationComponent().clickClose();
+		    dashboardPage.navigationComponent().clickClose();
+	}catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport(
+				"test withdraw amount and message  field validations is failed due to exception " + e);
+	}
+	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void verifyWithdrawTokensWithInvalidAmount(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			String[] errorMsgs = data.get("errMsg").split("-");
+			dashboardPage.clickWithdraw();
+			if (data.get("ValidateBank").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().clickExternalBankAccount();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.clickBankAccount(data.get("last4Digits"));
+			}
+			if (data.get("ValidateInstantPay").equalsIgnoreCase("Yes")) {
+				dashboardPage.selectWithdrawMethodPage().clickInstantPay();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.clickDebitCard(data.get("last4Digits"));
+			}
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.fillAmount(data.get("amount"));
+			ExtentTestManager.setInfoMessageInReport("Testing with Min amount ");
+			new CommonFunctions().validateErrMsg(errorMsgs[0]);
+			Thread.sleep(1000);
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
+			float avaBalance = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+					.withdrawTokenPage().getAvailableBalance();
+			ExtentTestManager.setInfoMessageInReport(
+					String.format("<b>Testing with more than Available Balance : %.2f </b>", avaBalance));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.fillAmount(Float.toString(avaBalance + 1));
+			new CommonFunctions().validateErrMsg(errorMsgs[1]);
+			Thread.sleep(2000);
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
+			ExtentTestManager.setInfoMessageInReport(
+					String.format("<b>Testing with same Available Balance : %.2f </b>", avaBalance));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.fillAmount(Float.toString(avaBalance));
+			new CommonFunctions().validateErrMsg(errorMsgs[2]);
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
+			float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+					.withdrawTokenPage().getDailyLimitOrWeeklyLimitAmount();
+			System.out.println(limit);
+			ExtentTestManager.setInfoMessageInReport(
+					String.format("<b>Testing with same Daily or Weekly Limit : %.2f </b>", limit));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.fillAmount(Float.toString(limit));
+			String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage()
+					.withdrawMethodPopup().withdrawTokenPage().getDailyOrWeeklyLimitText();
+			if(limit<avaBalance) {
+				if (dailyOrWeeklyTxt.contains("daily")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[3]);
+				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[4]);
+				} else {
+					new CommonFunctions().validateErrMsg(errorMsgs[5]);
+				}
+			} else {
+				new CommonFunctions().validateErrMsg(errorMsgs[1]);
+			}
+		
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.fillAmount(Float.toString(limit+1));
+			ExtentTestManager.setInfoMessageInReport(
+					String.format("<b>Testing with more than limit : %.2f </b>", limit));
+			if(limit<avaBalance) {
+				if (dailyOrWeeklyTxt.contains("daily")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[6]);
+				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
+					new CommonFunctions().validateErrMsg(errorMsgs[7]);
+				} else {
+					new CommonFunctions().validateErrMsg(errorMsgs[8]);
+				}
+			} else {
+				new CommonFunctions().validateErrMsg(errorMsgs[1]);
+			}
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();	
+			ExtentTestManager.setInfoMessageInReport("Testing with field validations for amount");
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.validateAmount(data.get("amount1"));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.clickMessageButton();
+			ExtentTestManager.setInfoMessageInReport("Testing with field validations for message");
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+			.fillMessage(data.get("message"));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickDone();
+			dashboardPage.navigationComponent().clickBack();
+	        dashboardPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test Withdraw Transcations WithInvalid Amount is failed due to Exception " + e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * testfilters script is to test the transactions by applying filters.
+	 * 
+	 * @param strParams
+	 */
+	@Test
+	@Parameters({ "strParams" })
+	public void testfilters(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickViewAllTransactions();
+			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			dashboardPage.transactionPage().clickFilters();
+			if(data.get("validateFilterType").equalsIgnoreCase("Yes")) {
+				dashboardPage.transactionPage().filtersPopup().selectFilterPlus(data.get("filterType"));
+			}
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			Thread.sleep(2000);
+			dashboardPage.transactionPage().clickFirstTransaction();
+			dashboardPage.transactionPage().ScrollTransactions();
+			Thread.sleep(1000);
+			dashboardPage.transactionPage().getUITransactionCount();
+			dashboardPage.transactionPage().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+		}
+	}
+
+	/**
+	 * testFilterWithCalendar script is to test the transactions applying filters
+	 * with date.
+	 * 
+	 * @param strParams
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testFilterWithCalendar(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2500);
+			dashboardPage.clickViewAllTransactions();
+			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			dashboardPage.transactionPage().clickfilter();
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType3"));
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType4"));
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));	
+			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+			dashboardPage.transactionPage().filtersPopup().clickCalender();
+			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
+			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			Thread.sleep(2000);
+			dashboardPage.transactionPage().ScrollTransactions();
+			Thread.sleep(2000);
+			dashboardPage.transactionPage().getUITransactionCount();
+			Thread.sleep(2000);
+			dashboardPage.transactionPage().clickfilter();
+			dashboardPage.transactionPage().filtersPopup().clickResetAllFilters();
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			dashboardPage.transactionPage().filtersPopup().navigationComponent().clickClose();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testFilterWithInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2500);
+			dashboardPage.clickViewAllTransactions();
+			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			dashboardPage.transactionPage().clickfilter();
+			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+			// tokenAccountPage.transactionPage().filtersPopup().clickCalender();
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			// tokenAccountPage.transactionPage().filtersPopup();
+			dashboardPage.transactionPage().filtersPopup()
+					.verifyErrorMessage1(data.get("errMsg1"));
+			dashboardPage.transactionPage().filtersPopup().clickOk();
+			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount1"));
+			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount1"));
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			dashboardPage.transactionPage().filtersPopup()
+					.verifyErrorMessage2(data.get("errMsg2"));
+			dashboardPage.transactionPage().filtersPopup().clickOk();
+			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount2"));
+			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount2"));
+			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+			dashboardPage.transactionPage().filtersPopup()
+					.verifyErrorMessage3(data.get("errMsg3"));
+			dashboardPage.transactionPage().filtersPopup().clickOk();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+		}
+	}
 
 }

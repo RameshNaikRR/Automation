@@ -267,7 +267,8 @@ public class SignUpPage extends MobileFunctions {
 	private By txtPassword = MobileBy.AccessibilityId("Password");
 	private By btnEye = MobileBy.AccessibilityId("");
 	private By txtPwdErrMSg = MobileBy.AccessibilityId("");
-
+	private By lblPasswordReq = MobileBy.xpath("//*[contains(@name,'Must')]");
+	
 	public void VerifyPhoneNumberView(String phoneNumDesc) {
 		new CommonFunctions().elementView(lblPhoneNumber, "Phone Number Heading");
 		new CommonFunctions().verifyLabelText(lblPhoneDesc, "Phone Number Description is", phoneNumDesc);
@@ -405,6 +406,11 @@ public class SignUpPage extends MobileFunctions {
 //		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
 		// }
 		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);
+	}
+	public void verifyPasswordREquirementError(String errMSg) {
+		if (getElementList(lblPasswordReq, "Password error").size() > 0) {
+			new CommonFunctions().verifyLabelText(lblPasswordReq, "Password error", errMSg);
+		}
 	}
 
 	public DashboardPage dashboardPage() {

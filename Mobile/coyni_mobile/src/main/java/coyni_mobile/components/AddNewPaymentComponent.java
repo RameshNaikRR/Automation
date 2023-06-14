@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
@@ -154,7 +155,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	public void verifyHeading(String expHeading) {
+	public void verifyHeading1(String expHeading) {
 
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 
@@ -266,89 +267,89 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-//    
-//    
-//    public void verifyNotOken() {
-//    	new CommonFunctions().elementView(lblNoToken, "No Tokens Available");
-//    }
-//    
-//    public void clickClose() {
-//    	click(btnClose, "Close");
-//    }
-//    
-//    public void clickBAck() {
-//    	click(btnBack, "Back");
-//    }
-//    
-//    public void verifyCreditCardExpiry() {
-//    	new CommonFunctions().elementView(lblCreditExpiry, "Credit card Is Expired");
-//    	ExtentTestManager.setInfoMessageInReport("Credit Card is :" + getText(lblCreditExpiry));
-//    }
-//    
-//    public void verifyWithdrawDebitOOPSCondition() {
-//    	click(lblDebitExp, "DebitExpiry");
-//    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-//    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-//    	new CommonFunctions().elementView(btnRemove, "Remove");
-//    	click(btnEdit, "Edit");
-//    	click(btnBack, "Back");
-//    } 
-//    
-//    public void verifyCreditOOPSCondition() {
-//    	click(lblCreditExpiry, "CreditExpiry");
-//    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-//    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-//    	new CommonFunctions().elementView(btnRemove, "Remove");
-//    	click(btnEdit, "Edit");
-//    	click(btnBack, "Back");
-//    }
-//    
-//    public void verifyDebitOOPSCondition() {
-//    	click(lblDEbitEXpiry, "DebitExpiry");
-//    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-//    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-//    	new CommonFunctions().elementView(btnRemove, "Remove");
-//    	click(btnEdit, "Edit");
-//    	click(btnBack, "Back");
-//    }
-//    public void verifyEditAndDeleteCreditCard() {
-//    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
-//    	click(imgEdit, "Edit");
-//    	click(btnBack, "Back");
-//    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
-//    	click(imgDelete, "Delete");
-//    	new CommonFunctions().elementView(lblRemoving, "Removing");
-//    	new CommonFunctions().elementView(btnYes, "Yes");
-//    	click(btnNo, "No");
-//    }
-//    
-//    public void verifyEditAndDeleteDebitCard() {
-//    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
-//    	click(imgEdit, "Edit");
-//    	click(btnBack, "Back");
-//    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
-//    	click(imgDelete, "Delete");
-//    	new CommonFunctions().elementView(lblRemoving, "Removing");
-//    	new CommonFunctions().elementView(btnYes, "Yes");
-//    	click(btnNo, "No");
-//    }
-//    
-//    public void verifyDebitCardExpiry() {
-//    	new CommonFunctions().elementView(lblDEbitEXpiry, "Credit card Is Expired");
-//    	ExtentTestManager.setInfoMessageInReport("Debit Card is :" + getText(lblDEbitEXpiry));
-//    }
-//    
-//    public void selectAccount() {
-//    	click(btnAccountOne, "account");
-//    }
-//    
-//	public void verifyHeading(String expHeading) {
-//		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
-//	}
-//
-//	public void verifyPaymentMethodsPageView() {
-//		new CommonFunctions().elementView(lblHeading, "Payment Methods Page");
-//	}
+    
+    
+    public void verifyNotOken() {
+    	new CommonFunctions().elementView(lblNoToken, "No Tokens Available");
+    }
+    
+    public void clickClose() {
+    	click(btnClose, "Close");
+    }
+    
+    public void clickBAck() {
+    	click(btnBack, "Back");
+    }
+    
+    public void verifyCreditCardExpiry() {
+    	new CommonFunctions().elementView(lblCreditExpiry, "Credit card Is Expired");
+    	ExtentTestManager.setInfoMessageInReport("Credit Card is :" + getText(lblCreditExpiry));
+    }
+    
+    public void verifyWithdrawDebitOOPSCondition() {
+    	click(lblDebitExp, "DebitExpiry");
+    	new CommonFunctions().elementView(lblOOPS, "OOPS");
+    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+    	new CommonFunctions().elementView(btnRemove, "Remove");
+    	click(btnEdit, "Edit");
+    	click(btnBack, "Back");
+    } 
+    
+    public void verifyCreditOOPSCondition() {
+    	click(lblCreditExpiry, "CreditExpiry");
+    	new CommonFunctions().elementView(lblOOPS, "OOPS");
+    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+    	new CommonFunctions().elementView(btnRemove, "Remove");
+    	click(btnEdit, "Edit");
+    	click(btnBack, "Back");
+    }
+    
+    public void verifyDebitOOPSCondition() {
+    	click(lblDEbitEXpiry, "DebitExpiry");
+    	new CommonFunctions().elementView(lblOOPS, "OOPS");
+    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+    	new CommonFunctions().elementView(btnRemove, "Remove");
+    	click(btnEdit, "Edit");
+    	click(btnBack, "Back");
+    }
+    public void verifyEditAndDeleteCreditCard() {
+    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
+    	click(imgEdit, "Edit");
+    	click(btnBack, "Back");
+    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
+    	click(imgDelete, "Delete");
+    	new CommonFunctions().elementView(lblRemoving, "Removing");
+    	new CommonFunctions().elementView(btnYes, "Yes");
+    	click(btnNo, "No");
+    }
+    
+    public void verifyEditAndDeleteDebitCard() {
+    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
+    	click(imgEdit, "Edit");
+    	click(btnBack, "Back");
+    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
+    	click(imgDelete, "Delete");
+    	new CommonFunctions().elementView(lblRemoving, "Removing");
+    	new CommonFunctions().elementView(btnYes, "Yes");
+    	click(btnNo, "No");
+    }
+    
+    public void verifyDebitCardExpiry() {
+    	new CommonFunctions().elementView(lblDEbitEXpiry, "Credit card Is Expired");
+    	ExtentTestManager.setInfoMessageInReport("Debit Card is :" + getText(lblDEbitEXpiry));
+    }
+    
+    public void selectAccount() {
+    	click(btnAccountOne, "account");
+    }
+    
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+	}
+
+	public void verifyPaymentMethodsPageView() {
+		new CommonFunctions().elementView(lblHeading, "Payment Methods Page");
+	}
 
 	public void clickAddNewPayment() {
 		click(btnAddNewPayment, "Add New Payment Method");

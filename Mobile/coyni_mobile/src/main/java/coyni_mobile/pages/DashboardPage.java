@@ -4,11 +4,14 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
+import coyni_mobile.components.TransactionsDetailsComponent;
+import coyni_mobile.popups.cvvPopup;
 import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 import coyni_mobile.components.AddNewPaymentComponent;
+import coyni_mobile.components.BuyTokenComponent;
 
 public class DashboardPage extends MobileFunctions {
 	private By iconProfile = MobileBy.AccessibilityId("");
@@ -21,7 +24,7 @@ public class DashboardPage extends MobileFunctions {
 	private By lblRecentTransactions = MobileBy.AccessibilityId("");
 	private By lblFirstTransaction = MobileBy.AccessibilityId("");
 	private By lblNotificationCount = MobileBy.xpath("//*[@name='notifications_nobadge']/following-sibling::*[1]");
-	private By btnViewMore = MobileBy.xpath("(//*[@name='View More'])[1]");
+	private By btnViewAllTransactions = MobileBy.xpath("(//*[@name='View More'])[1]");
 	private By btnAddAddress = MobileBy.AccessibilityId("");
 	private By btnAddPayment = MobileBy.AccessibilityId("");
 	private By lblAddAddress = MobileBy.AccessibilityId("");
@@ -74,9 +77,9 @@ public class DashboardPage extends MobileFunctions {
 		click(lblFirstTransaction, "FirstTrnsaction");
 	}
 
-	public void clickViewMore() {
-		scrollDownToElement(btnViewMore, "view more");
-		click(btnViewMore, "View More");
+	public void clickViewAllTransactions() {
+		scrollDownToElement(btnViewAllTransactions, "btnViewAllTransactions");
+		click(btnViewAllTransactions, "ViewAllTransactions");
 	}
 
 	public void clickAddAddress() {
@@ -110,4 +113,21 @@ public class DashboardPage extends MobileFunctions {
 	public SendRequestPage sendRequestPage() {
 		return new SendRequestPage();
 	}
+	public BuyTokenComponent buyTokenComponent() {
+		return new BuyTokenComponent();
+	}
+	public SelectWithdrawMethodPage selectWithdrawMethodPage() {
+		return new SelectWithdrawMethodPage();
+	}
+	public TransactionsDetailsComponent transactionsDetailsComponent() {
+		return new TransactionsDetailsComponent();
+	}
+	public TransactionsPage transactionPage() {
+		return new TransactionsPage();
+	}
+	public cvvPopup cvvPopup() {
+		return new cvvPopup();
+	}
+	
+	
 }

@@ -53,7 +53,7 @@ public class LoginPage extends MobileFunctions {
 			"//*[contains(@name,'Either your email or password is incorrect.')] | //*[contains(@name,'User Data')]");
 	private By popUperror = MobileBy
 			.xpath("//*[contains(@resource-id,'design_bottom_sheet')]|(//*[contains(@label,'is incorrect')])[1]/..");
-	private By btnOk = MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]");
+	private By btnOkay= MobileBy.xpath("//*[contains(@resource-id,'okBtn')]|(//*[@name='OK'])[1]");
 
 	public void verifyImageCoyniView() {
 		new CommonFunctions().elementView(imgCoyni, "Coyni");
@@ -72,6 +72,13 @@ public class LoginPage extends MobileFunctions {
 
 	public void clcikPassword() {
 		click(txtPassword, "password");
+	}
+	public void verifyLogin(String email,String password) {
+		if(getElement(imgCoyni, "coyni image").isDisplayed()) {
+			fillEmail(email);
+			fillPassword(password);
+			clickLogin();
+		}
 	}
 
 	public void fillPassword(String password) {
@@ -231,8 +238,15 @@ public class LoginPage extends MobileFunctions {
 	}
 
 	public void minimizePopupByClikingOK() {
-		click(btnOk, "OK button");
+		click(btnOkay, "OK button");
 		minimizePopup();
 	}
+	public void verifyForgotYourPWdHeading(String hdg) {
+		new CommonFunctions().elementView(lblForgotYourPassword, "Forgot Your Password");
+	}
 
+	public void selectCountry(String country) {
+		new SignUpPage().clickDopdown();
+		new SignUpPage().fillSearch(country);
+	}
 }

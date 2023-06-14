@@ -2,6 +2,7 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
+import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.AndroidCommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -13,36 +14,43 @@ import io.appium.java_client.MobileBy;
 
 	 
 
-	    private By lblBuyToken = MobileBy.AccessibilityId("");
-	    private By lblBuyTokenDesc = MobileBy.AccessibilityId("");
-	    private By lblPaymentMethod = MobileBy
-	            .xpath("(//XCUIElementTypeStaticText[@name='Payment Method'])[2]|(//XCUIElementTypeStaticText[@name='Payment Method'])[3]|//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
-	    private By lblDailylimits = MobileBy.xpath("//*[@name ='arrow-right']/following-sibling::*[1]");
-//	    private By btnChangePayment = MobileBy.xpath("//*[@name ='arrow-right']");
-	    private By btnChangePayment = MobileBy.AccessibilityId("arrow-right");
-	    private By txtAmount = MobileBy.xpath("//*[@name ='currency toggle']/preceding-sibling::XCUIElementTypeTextField");
-	    private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]|//*[contains(@resource-id,'keyActionTV')]");
-//	    private By btnConvert = MobileBy.xpath("//XCUIElementTypeButton[@name='currency toggle']");
-	    private By btnConvert = MobileBy.AccessibilityId("currency toggle");
-	    private By lnkAddNewPayment = MobileBy.xpath("(//XCUIElementTypeStaticText[@name='Add New Payment Method'])[2]");
-//	    private By lblCYn = MobileBy.xpath("//XCUIElementTypeStaticText[@name='CYN']");
-	    private By lblCYn = MobileBy.AccessibilityId("CYN");
-//	    private By lblDollar = MobileBy.xpath("//XCUIElementTypeStaticText[@name='$']");
-	    private By lblDollar = MobileBy.AccessibilityId("");
+		 private By lblBuyToken = MobileBy.AccessibilityId("");
+		    private By lblBuyTokenDesc = MobileBy.AccessibilityId("");
+		    private By lblBuyTokensHdg = MobileBy.AccessibilityId("");
+		    private By lblPaymentMethod = MobileBy
+		            .xpath("(//XCUIElementTypeStaticText[@name='Payment Method'])[2]|(//XCUIElementTypeStaticText[@name='Payment Method'])[3]|//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
+		    private By lblDailylimits = MobileBy.xpath("//*[@name ='arrow-right']/following-sibling::*[1]");
+//		    private By btnChangePayment = MobileBy.xpath("//*[@name ='arrow-right']");
+		    private By btnChangePayment = MobileBy.AccessibilityId("arrow-right");
+		    private By txtAmount = MobileBy.xpath("//*[@name ='currency toggle']/preceding-sibling::XCUIElementTypeTextField");
+		    private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]|//*[contains(@resource-id,'keyActionTV')]");
+//		    private By btnConvert = MobileBy.xpath("//XCUIElementTypeButton[@name='currency toggle']");
+		  //  private By btnConvert = MobileBy.AccessibilityId("currency toggle");
+		    private By lnkAddNewPayment = MobileBy.xpath("(//XCUIElementTypeStaticText[@name='Add New Payment Method'])[2]");
+//		    private By lblCYn = MobileBy.xpath("//XCUIElementTypeStaticText[@name='CYN']");
+		    private By lblCYn = MobileBy.AccessibilityId("CYN");
+//		    private By lblDollar = MobileBy.xpath("//XCUIElementTypeStaticText[@name='$']");
+		    private By lblDollar = MobileBy.AccessibilityId("");
 
-	    public void verifyCynView() {
-	        new AndroidCommonFunctions().elementView(lblCYn, "CYN");
-	    }
-	    public void verifyDollarView() {
-	        new AndroidCommonFunctions().elementView(lblDollar, "Dollar");
-	    }
+		    public void verifyCynView() {
+		        new AndroidCommonFunctions().elementView(lblCYn, "CYN");
+		    }
+		    public void verifyDollarView() {
+		        new AndroidCommonFunctions().elementView(lblDollar, "Dollar");
+		    }
 
-	 
+		 
 
-	    public void verifyBuyTokenView(String expDesc) {
-	    	new AndroidCommonFunctions().elementView(lblBuyToken, "Heading");
-	        new AndroidCommonFunctions().verifyLabelText(lblBuyTokenDesc, "Description", expDesc);
-	    }
+		    public void verifyBuyTokenDesc(String expDesc) {
+		        new AndroidCommonFunctions().verifyLabelText(lblBuyTokenDesc, "Description", expDesc);
+		    }
+
+		    public void verifyBuyTokenHeading(String hdg) {
+		        new AndroidCommonFunctions().verifyLabelText(lblBuyToken, "Heading", hdg);
+		    }
+		    public void verifyBuyTokensHeading(String hdg) {
+		        new AndroidCommonFunctions().verifyLabelText(lblBuyTokensHdg, "Heading", hdg);
+		    }
 
 	 
 
@@ -88,16 +96,16 @@ import io.appium.java_client.MobileBy;
 
 	 
 
-	    public void clickConvert() {
-	        click(btnConvert, "convert");
-	    }
+//	    public void clickConvert() {
+//	        click(btnConvert, "convert");
+//	    }
 
 	 
 
 	    
-//	    public OrderPreviewPopup orderPreviewPopup() {
-//	        return new OrderPreviewPopup();
-//	    }
+	    public OrderPreviewPopup orderPreviewPopup() {
+	        return new OrderPreviewPopup();
+	    }
 	    public NavigationComponent navigationComponent() {
 	        return new NavigationComponent();
 	    }
