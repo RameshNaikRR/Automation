@@ -60,6 +60,7 @@ public class SendRequestPage extends MobileFunctions {
 	private By lblAmount = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
 	private By btnDiscard = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
 	private By btnContinue = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
+	private By lblWeeklyLimit = MobileBy.AccessibilityId("");
 
 //	Confirm popup details
 	private By lblAvailBal = MobileBy.AccessibilityId("//*[@name='Oops!']");
@@ -69,8 +70,13 @@ public class SendRequestPage extends MobileFunctions {
 	private By lblReceiptentName = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
 	private By lblMessage = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
 	private By lblNewBalance = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	
-	
+
+	public double verifyWeeklyLimit() {
+		new CommonFunctions().elementView(lblWeeklyLimit, "Weekly Limit");
+		double weeklyLimit = Double.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", ""));
+		return weeklyLimit;
+	}
+
 	public void viewSendHeading() {
 		new CommonFunctions().elementView(lblSend, "Send");
 	}
@@ -82,7 +88,7 @@ public class SendRequestPage extends MobileFunctions {
 	public void clickContinue() {
 		click(btnContinue, "Continue");
 	}
-	
+
 	public void clickScan() {
 		click(btnScan, "Scan");
 	}
@@ -282,7 +288,7 @@ public class SendRequestPage extends MobileFunctions {
 	public void viewNewBalance() {
 		new CommonFunctions().elementView(lblNewBalance, "New Balance");
 	}
-	
+
 	public void clickConfirm() {
 		click(btnConfirm, "Confirm");
 	}

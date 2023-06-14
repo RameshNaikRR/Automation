@@ -69,7 +69,6 @@ public class DashBoardTest {
 				ExtentTestManager
 						.setFailMessageInReport("After Un Reading the notification, the count is not reducing");
 			}
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testNotifications faield due to exception " + e);
 		}
@@ -193,7 +192,7 @@ public class DashBoardTest {
 	public void testSend(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			int avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
+			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
 			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
@@ -395,19 +394,21 @@ public class DashBoardTest {
 	public void testSendWithInsufficientFunds(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			int avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
+			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
 			dashboardPage.sendRequestPage().verifyfirstRecentContact();
 			dashboardPage.sendRequestPage().viewSendHeading();
+			double a=dashboardPage.sendRequestPage().verifyWeeklyLimit();
+			
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickSend();
 			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickReload();
-			if(data.get("WithoutPaymentMethod").equals("yes")) {
+			if (data.get("WithoutPaymentMethod").equals("yes")) {
 				dashboardPage.sendRequestPage().reloadPopup().verifyAddCardReloadHeading(data.get("addCardReloadHead"));
 				dashboardPage.sendRequestPage().reloadPopup().clickAddCreditCard();
-				CustomerProfileTest customerProfileTest=new CustomerProfileTest();
+				CustomerProfileTest customerProfileTest = new CustomerProfileTest();
 				customerProfileTest.testAddCardDetails(strParams);
 				dashboardPage.sendRequestPage().clickSend();
 				dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
@@ -422,15 +423,15 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
 			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.sendRequestPage().viewNewBalance();
-			int loadingAmt=dashboardPage.sendRequestPage().verifyAmount();
-			int afterLoadingAvlBal=dashboardPage.sendRequestPage().verifyAvailbleBalance();
-			if (avlBalDasBoard+loadingAmt == afterLoadingAvlBal) {
+			int loadingAmt = dashboardPage.sendRequestPage().verifyAmount();
+			int afterLoadingAvlBal = dashboardPage.sendRequestPage().verifyAvailbleBalance();
+			if (avlBalDasBoard + loadingAmt == afterLoadingAvlBal) {
 				ExtentTestManager.setPassMessageInReport(
 						"The New Available Balance is showing accurately after loading the CYN'S");
 			} else {
 				ExtentTestManager.setFailMessageInReport(
 						"The New Available Balance is not showing accurately after loading the CYN'S");
-			}	
+			}
 			dashboardPage.sendRequestPage().clickConfirm();
 			dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
 			dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));

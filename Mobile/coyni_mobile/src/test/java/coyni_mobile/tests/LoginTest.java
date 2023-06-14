@@ -182,7 +182,6 @@ public class LoginTest {
 	@Parameters({ "strParams" })
 	public void testForgotPassword(String strParams) {
 		try {
-
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();

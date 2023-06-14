@@ -102,11 +102,6 @@ public class SignUpTest {
 	public void testSignUp(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			String[] phoneHeading = data.get("phoneVerificationHeading").split(",");
-//			if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
-			// if(data.get("validateCreateAccount").equalsIgnoreCase("Yes")) {
-//			landingPage.verifyCoyniView();
-//			landingPage.verifyCoyniDesc();
 			landingPage.clickSignUp();
 			signUpPage.VerifyPhoneNumberView(data.get("phoneNumDesc"));
 			signUpPage.clickDopdown();

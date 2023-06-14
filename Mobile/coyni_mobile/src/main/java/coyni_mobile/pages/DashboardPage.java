@@ -28,8 +28,8 @@ public class DashboardPage extends MobileFunctions {
 	private By lblUserName = MobileBy.AccessibilityId("");
 	private By lblAvailBal = MobileBy.AccessibilityId("");
 
-	public int verifyAvailbleBalance() {
-		int avlBalance = Integer.parseInt(getText(lblAvailBal));
+	public double verifyAvailbleBalance() {
+		double avlBalance = Double.parseDouble(getText(lblAvailBal));
 		return avlBalance;
 	}
 
