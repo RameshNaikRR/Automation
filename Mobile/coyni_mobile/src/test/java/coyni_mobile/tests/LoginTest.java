@@ -36,17 +36,15 @@ public class LoginTest {
 	public void testLogin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-	        loginPage.verifyLogin(loginData.get("email"), loginData.get("password"));
-//			loginPage.fillEmail(loginData.get("email"));
-//			loginPage.fillPassword(loginData.get("password"));
-//			loginPage.clickLogin();
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
 			loginPage.choosePinComponent().verifyEnterYourPinView();
 			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			Thread.sleep(2000);
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyEnableFaceIdView();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
-			
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}

@@ -82,7 +82,7 @@ public class DashBoardTest {
 			dashboardPage.clickNotifications();
 			dashboardPage.notificationsPage().viewSend();
 			dashboardPage.notificationsPage().clickSend();
-			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyHeading(data.get("heading"));
+			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyAmount();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyPreview();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().clickConfirm();
@@ -145,7 +145,7 @@ public class DashBoardTest {
 			dashboardPage.clickNotifications();
 			dashboardPage.notificationsPage().clickRequest();
 			dashboardPage.notificationsPage().clickSend();
-			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyHeading(data.get("heading"));
+			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyAmount();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyPreview();
 			dashboardPage.notificationsPage().sendRequestPaymentPage().verifyLockSwipe();
@@ -175,19 +175,6 @@ public class DashBoardTest {
 	}
 
 	@Test
-	public void testNotificationsDelete() {
-		try {
-			dashboardPage.clickNotifications();
-			dashboardPage.notificationsPage().viewDots();
-			dashboardPage.notificationsPage().swipeNotificationRight();
-			dashboardPage.notificationsPage().clickDelete();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testNotificationsDelete is failed due to Exception " + e);
-		}
-	}
-
-	@Test
 	@Parameters({ "strParams" })
 	public void testSend(String strParams) {
 		try {
@@ -195,8 +182,6 @@ public class DashBoardTest {
 			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
-			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
-			dashboardPage.sendRequestPage().selectUser();
 			if (data.get("chooseSendMethod").equalsIgnoreCase("withName")) {
 				dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 				dashboardPage.sendRequestPage().selectUser();
@@ -220,6 +205,7 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickMessageButton();
 			dashboardPage.sendRequestPage().optionalMessagePopup().fillMessage(data.get("message"));
+			dashboardPage.sendRequestPage().optionalMessagePopup().validateMessageField();
 			dashboardPage.sendRequestPage().optionalMessagePopup().clickDone();
 			dashboardPage.sendRequestPage().clickSend();
 			dashboardPage.sendRequestPage().viewSender();
@@ -253,10 +239,10 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
-			if (data.get("chooseSendMethod").equalsIgnoreCase("withName")) {
+			if (data.get("chooseRequestMethod").equalsIgnoreCase("withName")) {
 				dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 				dashboardPage.sendRequestPage().selectUser();
-			} else if (data.get("chooseSendMethod").equalsIgnoreCase("withAccount")) {
+			} else if (data.get("chooseRequestMethod").equalsIgnoreCase("withAccount")) {
 				dashboardPage.sendRequestPage().fillSearchBx(data.get("accountAddress"));
 				dashboardPage.sendRequestPage().selectUser();
 			} else {
@@ -292,7 +278,7 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
 			dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
-					.verifyHeading(data.get("reuestSuccHeading"));
+					.verifyHeading(data.get("requestSuccHeading"));
 			String ReciptentName = dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
 					.verifyReceiptentName();
 			int Amount = dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().verifyAmount();
@@ -314,8 +300,8 @@ public class DashBoardTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
-			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
-			dashboardPage.sendRequestPage().selectUser();
+			dashboardPage.sendRequestPage().verifyRecentContactListSize();
+			dashboardPage.sendRequestPage().verifyfirstRecentContact();
 			dashboardPage.sendRequestPage().verifyName();
 			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
@@ -352,13 +338,13 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickSend();
-			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
+			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickNewAmount();
 			dashboardPage.sendRequestPage().verifyResetAmount();
 			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickSend();
-			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
+			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickReload();
 			dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickPaymentMethod();
@@ -366,6 +352,10 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().reloadPopup().verifyAddPaymnetHeading(data.get("addPaymentHeading"));
 			dashboardPage.navigationComponent().clickClose();
 			dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
+			dashboardPage.sendRequestPage().reloadPopup().clickProcessingFee();
+			dashboardPage.sendRequestPage().reloadPopup().clickViewFees();
+			dashboardPage.sendRequestPage().reloadPopup().viewWalletFees();
+			dashboardPage.navigationComponent().clickBack();
 			dashboardPage.sendRequestPage().clickNativeKeyBack();
 			dashboardPage.sendRequestPage().viewSendHeading();
 			dashboardPage.sendRequestPage().clickRequest();
@@ -399,23 +389,25 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
 			dashboardPage.sendRequestPage().verifyfirstRecentContact();
 			dashboardPage.sendRequestPage().viewSendHeading();
-			double a=dashboardPage.sendRequestPage().verifyWeeklyLimit();
-			
+			double a = dashboardPage.sendRequestPage().verifyWeeklyLimit();
+
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickSend();
-			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
+			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickReload();
-			if (data.get("WithoutPaymentMethod").equals("yes")) {
+			if (data.get("withoutPaymentMethod").equals("yes")) {
 				dashboardPage.sendRequestPage().reloadPopup().verifyAddCardReloadHeading(data.get("addCardReloadHead"));
 				dashboardPage.sendRequestPage().reloadPopup().clickAddCreditCard();
 				CustomerProfileTest customerProfileTest = new CustomerProfileTest();
 				customerProfileTest.testAddCardDetails(strParams);
 				dashboardPage.sendRequestPage().clickSend();
-				dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("insuffHeading"));
+				dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 				dashboardPage.sendRequestPage().reloadPopup().clickReload();
 			}
 			dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().fillAmount(data.get("amount"));
+			dashboardPage.sendRequestPage().reloadPopup().clickProcessingFee();
+			dashboardPage.sendRequestPage().reloadPopup().validateProcessingFees();
 			dashboardPage.sendRequestPage().reloadPopup().clickLoad();
 			dashboardPage.sendRequestPage().reloadPopup().fillCVV(data.get("cvv"));
 			dashboardPage.sendRequestPage().reloadPopup().clickOk();
@@ -439,7 +431,6 @@ public class DashBoardTest {
 			ExtentTestManager.setFailMessageInReport("testSendWithInsufficientFunds  failed due to exception " + e);
 		}
 	}
-	
 
 	public void testBuyToken(String strParams, String method) {
 		try {
@@ -545,7 +536,6 @@ public class DashBoardTest {
 	@Parameters({ "strParams" })
 	public void testBuyTokenWithBank(String strParams) {
 		testBuyToken(strParams, "bank");
-
 	}
 
 	/**
@@ -799,7 +789,7 @@ public class DashBoardTest {
 			ExtentTestManager.setFailMessageInReport("testGiftCard  failed due to exception " + e);
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBuyTokenTransactionErrorMessages(String strParams) {
@@ -812,34 +802,32 @@ public class DashBoardTest {
 						.clickBankAccount(data.get("last4Digits"));
 			}
 			if (data.get("validateDebitCard").equalsIgnoreCase("Yes")) {
-				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-						.clickDebitCard(data.get("last4Digits"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
 				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
 				dashboardPage.cvvPopup().clickOk();
 			}
 			if (data.get("validateCreditCard").equalsIgnoreCase("Yes")) {
-				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-						.clickCreditCard(data.get("last4Digits"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickCreditCard(data.get("last4Digits"));
 				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
 				dashboardPage.cvvPopup().clickOk();
 
 			}
-			if(data.get("validateMinimumAmount").equalsIgnoreCase("Yes")) {
+			if (data.get("validateMinimumAmount").equalsIgnoreCase("Yes")) {
 				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.fillAmount(data.get("amount"));
-			ExtentTestManager.setInfoMessageInReport("<b>Testing with minimum amount : %.2f </b>");
-			new CommonFunctions().validateErrMsg(errorMsgs[0]);
+						.fillAmount(data.get("amount"));
+				ExtentTestManager.setInfoMessageInReport("<b>Testing with minimum amount : %.2f </b>");
+				new CommonFunctions().validateErrMsg(errorMsgs[0]);
 			}
-		    if(data.get("validateLimits").equalsIgnoreCase("Yes")) {
-			float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-					.withdrawTokenPage().getDailyLimitOrWeeklyLimitAmount();
-			System.out.println(limit);
-			ExtentTestManager.setInfoMessageInReport(
-					String.format("<b>Testing with more than Daily or Weekly Limit : %.2f </b>", limit));
-			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-					.fillAmount(Float.toString(limit+1));
-			String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage()
-					.withdrawMethodPopup().withdrawTokenPage().getDailyOrWeeklyLimitText();
+			if (data.get("validateLimits").equalsIgnoreCase("Yes")) {
+				float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.getDailyLimitOrWeeklyLimitAmount();
+				System.out.println(limit);
+				ExtentTestManager.setInfoMessageInReport(
+						String.format("<b>Testing with more than Daily or Weekly Limit : %.2f </b>", limit));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+						.fillAmount(Float.toString(limit + 1));
+				String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
+						.withdrawTokenPage().getDailyOrWeeklyLimitText();
 				if (dailyOrWeeklyTxt.contains("daily")) {
 					new CommonFunctions().validateErrMsg(errorMsgs[1]);
 				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
@@ -847,15 +835,15 @@ public class DashBoardTest {
 				} else {
 					new CommonFunctions().validateErrMsg(errorMsgs[3]);
 				}
-		    }
-		    dashboardPage.navigationComponent().clickClose();
-		    dashboardPage.navigationComponent().clickClose();
-	}catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport(
-				"test withdraw amount and message  field validations is failed due to exception " + e);
+			}
+			dashboardPage.navigationComponent().clickClose();
+			dashboardPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(
+					"test withdraw amount and message  field validations is failed due to exception " + e);
+		}
 	}
-	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void verifyWithdrawTokensWithInvalidAmount(String strParams) {
@@ -870,18 +858,17 @@ public class DashBoardTest {
 			}
 			if (data.get("ValidateInstantPay").equalsIgnoreCase("Yes")) {
 				dashboardPage.selectWithdrawMethodPage().clickInstantPay();
-				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-						.clickDebitCard(data.get("last4Digits"));
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
 			}
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.fillAmount(data.get("amount"));
+					.fillAmount(data.get("amount"));
 			ExtentTestManager.setInfoMessageInReport("Testing with Min amount ");
 			new CommonFunctions().validateErrMsg(errorMsgs[0]);
 			Thread.sleep(1000);
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
-			float avaBalance = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-					.withdrawTokenPage().getAvailableBalance();
+			float avaBalance = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.getAvailableBalance();
 			ExtentTestManager.setInfoMessageInReport(
 					String.format("<b>Testing with more than Available Balance : %.2f </b>", avaBalance));
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
@@ -893,20 +880,20 @@ public class DashBoardTest {
 			ExtentTestManager.setInfoMessageInReport(
 					String.format("<b>Testing with same Available Balance : %.2f </b>", avaBalance));
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.fillAmount(Float.toString(avaBalance));
+					.fillAmount(Float.toString(avaBalance));
 			new CommonFunctions().validateErrMsg(errorMsgs[2]);
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
-			float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-					.withdrawTokenPage().getDailyLimitOrWeeklyLimitAmount();
+			float limit = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.getDailyLimitOrWeeklyLimitAmount();
 			System.out.println(limit);
 			ExtentTestManager.setInfoMessageInReport(
 					String.format("<b>Testing with same Daily or Weekly Limit : %.2f </b>", limit));
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
 					.fillAmount(Float.toString(limit));
-			String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage()
-					.withdrawMethodPopup().withdrawTokenPage().getDailyOrWeeklyLimitText();
-			if(limit<avaBalance) {
+			String dailyOrWeeklyTxt = dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
+					.getDailyOrWeeklyLimitText();
+			if (limit < avaBalance) {
 				if (dailyOrWeeklyTxt.contains("daily")) {
 					new CommonFunctions().validateErrMsg(errorMsgs[3]);
 				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
@@ -917,14 +904,14 @@ public class DashBoardTest {
 			} else {
 				new CommonFunctions().validateErrMsg(errorMsgs[1]);
 			}
-		
+
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.fillAmount(Float.toString(limit+1));
-			ExtentTestManager.setInfoMessageInReport(
-					String.format("<b>Testing with more than limit : %.2f </b>", limit));
-			if(limit<avaBalance) {
+					.fillAmount(Float.toString(limit + 1));
+			ExtentTestManager
+					.setInfoMessageInReport(String.format("<b>Testing with more than limit : %.2f </b>", limit));
+			if (limit < avaBalance) {
 				if (dailyOrWeeklyTxt.contains("daily")) {
 					new CommonFunctions().validateErrMsg(errorMsgs[6]);
 				} else if (dailyOrWeeklyTxt.contains("Weekly")) {
@@ -936,29 +923,23 @@ public class DashBoardTest {
 				new CommonFunctions().validateErrMsg(errorMsgs[1]);
 			}
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clearText();
-			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();	
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickBackspace();
 			ExtentTestManager.setInfoMessageInReport("Testing with field validations for amount");
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.validateAmount(data.get("amount1"));
-			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.clickMessageButton();
+					.validateAmount(data.get("amount1"));
+			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickMessageButton();
 			ExtentTestManager.setInfoMessageInReport("Testing with field validations for message");
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage()
-			.fillMessage(data.get("message"));
+					.fillMessage(data.get("message"));
 			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().withdrawTokenPage().clickDone();
 			dashboardPage.navigationComponent().clickBack();
-	        dashboardPage.navigationComponent().clickClose();
+			dashboardPage.navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"test Withdraw Transcations WithInvalid Amount is failed due to Exception " + e);
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * testfilters script is to test the transactions by applying filters.
 	 * 
@@ -972,7 +953,7 @@ public class DashBoardTest {
 			dashboardPage.clickViewAllTransactions();
 			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
 			dashboardPage.transactionPage().clickFilters();
-			if(data.get("validateFilterType").equalsIgnoreCase("Yes")) {
+			if (data.get("validateFilterType").equalsIgnoreCase("Yes")) {
 				dashboardPage.transactionPage().filtersPopup().selectFilterPlus(data.get("filterType"));
 			}
 			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
@@ -1010,7 +991,7 @@ public class DashBoardTest {
 			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
 			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType3"));
 			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType4"));
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));	
+			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));
 			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
 			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
 			dashboardPage.transactionPage().filtersPopup().clickCalender();
@@ -1046,20 +1027,17 @@ public class DashBoardTest {
 			// tokenAccountPage.transactionPage().filtersPopup().clickCalender();
 			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
 			// tokenAccountPage.transactionPage().filtersPopup();
-			dashboardPage.transactionPage().filtersPopup()
-					.verifyErrorMessage1(data.get("errMsg1"));
+			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage1(data.get("errMsg1"));
 			dashboardPage.transactionPage().filtersPopup().clickOk();
 			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount1"));
 			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount1"));
 			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			dashboardPage.transactionPage().filtersPopup()
-					.verifyErrorMessage2(data.get("errMsg2"));
+			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage2(data.get("errMsg2"));
 			dashboardPage.transactionPage().filtersPopup().clickOk();
 			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount2"));
 			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount2"));
 			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			dashboardPage.transactionPage().filtersPopup()
-					.verifyErrorMessage3(data.get("errMsg3"));
+			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage3(data.get("errMsg3"));
 			dashboardPage.transactionPage().filtersPopup().clickOk();
 
 		} catch (Exception e) {

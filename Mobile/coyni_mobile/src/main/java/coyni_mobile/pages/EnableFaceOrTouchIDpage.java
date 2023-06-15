@@ -71,5 +71,8 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		return new NavigationComponent();
 	}
 	
+	public DashboardPage dashBoardPage() {
+		return new DashboardPage();
+	}
 
 }

@@ -1,4 +1,6 @@
-package coyni_mobile.components;
+package coyni_mobile.popups;
+
+import java.text.DecimalFormat;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -6,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ReloadPopup extends MobileFunctions {
@@ -22,14 +25,19 @@ public class ReloadPopup extends MobileFunctions {
 	private By btnPaymentMethod = MobileBy.AccessibilityId("//*[contains(@resource-id,'refIDTV')]");
 	private By btnAddPayment = MobileBy.AccessibilityId("");
 	private By lblAddPaymentHeading = MobileBy.AccessibilityId("");
-	private By lblPurchaseAmount = MobileBy.AccessibilityId("//*[contains(@resource-id, 'im_lock')]");
+	private By lblPurchaseAmount = MobileBy.AccessibilityId("");
 	private By lblTotal = MobileBy.AccessibilityId("");
-	private By lblProcessingFee = MobileBy.AccessibilityId("//*[contains(@resource-id,'doneCV')]|//*[@text='Done']");
+	private By lblProcessingFee = MobileBy.AccessibilityId("");
+	private By btnProcessingFee = MobileBy.AccessibilityId("");
+	private By lblProcessingFeePercen = MobileBy.AccessibilityId("");
+	private By lnkViewFees = MobileBy.AccessibilityId("");
 	private By btnLoad = MobileBy.AccessibilityId("");
 	private By txtCVV = MobileBy.AccessibilityId("");
 	private By btnOk = MobileBy.AccessibilityId("");
+	private By lblWalletFees = MobileBy.AccessibilityId("");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	public void verifyInsuffHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblInsuffHeading, "Insufficient Balance Heading", expHeading);
@@ -48,7 +56,7 @@ public class ReloadPopup extends MobileFunctions {
 	public void verifyAddPaymnetHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblAddPaymentHeading, "Add Payment Heading", expHeading);
 	}
-	
+
 	public void clickNewAmount() {
 		click(btnNewAmt, "New Amount");
 	}
@@ -72,11 +80,11 @@ public class ReloadPopup extends MobileFunctions {
 	public void clickPaymentMethod() {
 		click(btnPaymentMethod, "Payment Method");
 	}
-	
+
 	public void clickAddPayment() {
 		click(btnAddPayment, "Add Payment Method");
 	}
-	
+
 	public void clickLoad() {
 		click(btnLoad, "Load");
 	}
@@ -84,9 +92,39 @@ public class ReloadPopup extends MobileFunctions {
 	public void fillCVV(String cvv) {
 		enterText(txtCVV, cvv, "Cvv");
 	}
-	
+
 	public void clickOk() {
 		click(btnOk, "Ok");
 	}
-	
+
+	public void clickProcessingFee() {
+		click(btnProcessingFee, "Processing Fee Details");
+	}
+
+	public void clickViewFees() {
+		click(lnkViewFees, "View Fees");
+	}
+
+	public void viewWalletFees() {
+		new CommonFunctions().elementView(lblWalletFees, "Wallet Fees");
+	}
+
+	public void validateProcessingFees() {
+		double pocessingFee = Double.parseDouble(df.format(getText(lblProcessingFee).replace(" USD", "")));
+		double feePer = Double.parseDouble(
+				df.format(getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "")));
+		double amt = Double.parseDouble(df.format(getText(lblPurchaseAmount).replace(" USD", "")));
+		double fee = (amt / 100) * feePer;
+		double total = Double.parseDouble(getText(lblTotal).replace(" USD", ""));
+		if (fee == pocessingFee && total == fee + amt) {
+			ExtentTestManager.setPassMessageInReport("");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Processing fee or total fee calculation is not correct");
+		}
+	}
+//
+//	public void clickAddCreditCard() {
+//		click(btnAddCredit, "Add Crdit Card");
+//	}
+
 }

@@ -95,7 +95,7 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void verifyDashboard() {
-		new AndroidCommonFunctions().elementView(btnSendReq, "Pay/Request");
+		new AndroidCommonFunctions().elementView(btnSendReq, "Send/Request");
 	}
 
 	public AddNewPaymentComponent addNewPaymentComponent() {

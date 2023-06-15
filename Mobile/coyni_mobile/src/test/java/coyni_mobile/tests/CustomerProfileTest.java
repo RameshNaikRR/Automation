@@ -353,32 +353,39 @@ public class CustomerProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testPrefernces(String strParams) {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickPreferences();
-		preferencesPage.verifyPreferencesHeading(data.get("expHeading"));
+		preferencesPage.verifyPreferencesHeading(data.get("preferencesHeading"));
 		String[] timeZone = data.get("timeZones").split(",");
 		for (int i = 0; i <= timeZone.length; i++) {
 			preferencesPage.selectTimeZone(timeZone[i]);
-			preferencesPage.toastComponent().verifyToastMsg(data.get("toastMsg"));
+			preferencesPage.toastComponent().verifyToastMsg(data.get("preferencesToastMsg"));
 			preferencesPage.verifyTimeZone(timeZone[i]);
+		}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
 		}
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testAgreements(String strParams) {
+		try {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		dashboardPage.clickProfile();
 		customerProfilePage.clickAgreements();
 		agreementsPage.clickPrivacyPolicy();
 		agreementsPage.clickPrivacyActiveAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("heading"));
+		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
 		agreementsPage.navigationComponent().clickClose();
 		agreementsPage.clickPrivacyPastAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("heading"));
+		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
 		agreementsPage.navigationComponent().clickClose();
-
+	} catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
+	}
 	}
 
 	/**

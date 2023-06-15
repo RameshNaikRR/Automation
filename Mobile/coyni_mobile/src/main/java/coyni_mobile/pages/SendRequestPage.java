@@ -1,16 +1,12 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.components.OptionalMessagePopup;
-import coyni_mobile.components.ReloadPopup;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.popups.OptionalMessagePopup;
+import coyni_mobile.popups.ReloadPopup;
 import coyni_mobile.utilities.CommonFunctions;
-import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -44,7 +40,7 @@ public class SendRequestPage extends MobileFunctions {
 
 // Send and Request Account holder details
 	private By lblSend = MobileBy.AccessibilityId("");
-	private By lblName = MobileBy.AccessibilityId("//*[@name='currency toggle']/../preceding-sibling::*[1]/*[2]/*[1]");
+	private By lblName = MobileBy.AccessibilityId("");
 	private By txtAmount = MobileBy.AccessibilityId("//*[@name='currency toggle']/preceding-sibling::*[1]");
 	private By btnSend = MobileBy.AccessibilityId("(//*[@name='Send'])[1]");
 	private By btnRequest = MobileBy.AccessibilityId("(//*[@name='Request'])[1]");
