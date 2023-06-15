@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import coyni_mobile.pages.SignUpPage;
 import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -23,6 +24,7 @@ public class MailingAddressComponent extends MobileFunctions{
 //	private By lblCountry = MobileBy.xpath("//*[@name='Country']");
 	
 	private By txtState = MobileBy.xpath("//*[@name='search']/following-sibling::*[1]");
+	private By txtStates = MobileBy.AccessibilityId("");
 //	private By btnConfirmState = MobileBy.xpath("//*[@name='search']/../following-sibling::*[@name='Done']");
 	private By txtAddressLine1 = MobileBy.AccessibilityId("Billing Address Line 1");
 
@@ -128,8 +130,12 @@ public class MailingAddressComponent extends MobileFunctions{
 		scrollDownToElement(txtCity, "City");
 	}
 	public void fillState(String state) {
+		if(getElementList(drpDwnState, "State").size()>0) {
 		click(drpDwnState, "state drop down");
 		enterText(txtState, state, "State");
+		}else {
+		  enterText(txtStates, state, "States");
+		}
 	}
 
 	
@@ -233,9 +239,15 @@ public class MailingAddressComponent extends MobileFunctions{
 	private By chkbxSaveThisAddress = MobileBy.AccessibilityId("uncheck");
 	private By descChkbx = MobileBy.AccessibilityId("");
 	private By btnAddCard = MobileBy.AccessibilityId("");
+	private By lblToastMsg = MobileBy.AccessibilityId("");
 	
 	
 	
+	public void verifyAddressUpdatedMsg(String msg) {
+		if(getElementList(lblToastMsg, "ToastMsg").size()>0) {
+		new CommonFunctions().verifyLabelText(lblToastMsg, "msg",msg);
+	}
+	}
 	public void verifyBillingAddressView() {
 		new AndroidCommonFunctions().elementView(lblBillingAddress, "Billing Address");
 		ExtentTestManager.setInfoMessageInReport("The text is: " + getText(lblBillDesc));

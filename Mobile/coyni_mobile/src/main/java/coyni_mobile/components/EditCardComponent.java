@@ -50,10 +50,12 @@ public class EditCardComponent extends MobileFunctions{
     	}
     }
     public void clickSave() {
+    	if(getElementList(btnSave, "Save").size()>0) {
     	if(getElement(btnSave, "Save").isEnabled()) {
     		click(btnSave, "Save");
     	}else {
     		ExtentTestManager.setInfoMessageInReport("Save button is disabled");
+    	}
     	}
     }
     

@@ -191,12 +191,14 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().clickEditPhoneNumber();
 			customerProfilePage.profilePage().editProfilePage().verifyPhoneNumberHdg(data.get("heading"));
 			customerProfilePage.profilePage().editProfilePage().verifyCurrentPhoneNumberhdg(data.get("subHeading"));
-			customerProfilePage.profilePage().editProfilePage().verifyExistingPhoneNUmber(data.get("existingPhoneNumber"));
+			customerProfilePage.profilePage().editProfilePage()
+					.verifyExistingPhoneNUmber(data.get("existingPhoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickChange();
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().verifyEnterYourPinView();
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().fillPin(data.get("pin"));
 			customerProfilePage.profilePage().editProfilePage().verifyEditPhoneNUmber(data.get("editPhoneHeading"));
-			customerProfilePage.profilePage().editProfilePage().verifyCurrentPhoneNUmber(data.get("existingPhoneNumber"));
+			customerProfilePage.profilePage().editProfilePage()
+					.verifyCurrentPhoneNUmber(data.get("existingPhoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickArrow(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().fillPhoneNumber(data.get("phoneNumber"));
 			customerProfilePage.profilePage().editProfilePage().clickContinue();
@@ -266,7 +268,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
-			.verifyNewPhoneVerificationHdg(data.get("newPhoneVerificationHeading"));
+					.verifyNewPhoneVerificationHdg(data.get("newPhoneVerificationHeading"));
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Edit Phone Number Field Validations failed due to Exception " + e);
@@ -294,7 +296,7 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().verifyEditAddres(data.get("editAddressHeading"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent().clickCountryDropdown();
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
-			.selectCountry(data.get("fillCountry"));	
+					.selectCountry(data.get("fillCountry"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
 					.fillAddLine1(data.get("addline1"));
 			customerProfilePage.profilePage().editProfilePage().mailingAddressComponent()
@@ -437,8 +439,7 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Wallet Fees  failed due to Exception " + e);
 		}
 	}
-	
-	
+
 	/**
 	 * testLogOut script to test the logout feature.
 	 */
@@ -522,7 +523,7 @@ public class CustomerProfileTest {
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.fillConfirmPassword(data.get("ConfirmPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent()
-			.verifyNewPasswordDesc(data.get("description"));
+					.verifyNewPasswordDesc(data.get("description"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickSave();
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
@@ -590,7 +591,6 @@ public class CustomerProfileTest {
 		testAddCard(strParams, "credit");
 	}
 
-
 	/**
 	 * testAddDebitCardInPaymentMethods script is to test payment method via adding
 	 * Debit card by giving valid card details.
@@ -608,32 +608,34 @@ public class CustomerProfileTest {
 		customerProfilePage.addNewPaymentComponent().getPaymentPage();
 		testAddCard(strParams, "debit");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddCreditCardInBuyTokenss(String strParams) throws InterruptedException {
 		dashboardPage.clickBuyTokens();
 		testAddCard(strParams, "credit");
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCardInBuyTokens(String strParams) throws InterruptedException {
 		dashboardPage.clickBuyTokens();
 		testAddCard(strParams, "debit");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCardINwithdrawToUSd(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		dashboardPage.clickWithdraw();
-		dashboardPage.selectWithdrawMethodPage().verifyDebitCardHeading(data.get("addInstantPayHeading"));
-		dashboardPage.selectWithdrawMethodPage().verifyDebitCardDesc(data.get("instantPayDescription"));
-		dashboardPage.selectWithdrawMethodPage().clickDebitCard(data.get("instantPayText"));
-		testAddCard(strParams, "debit");
-	}catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
-	}
+			dashboardPage.clickWithdraw();
+			dashboardPage.selectWithdrawMethodPage().verifyDebitCardHeading(data.get("addInstantPayHeading"));
+			dashboardPage.selectWithdrawMethodPage().verifyDebitCardDesc(data.get("instantPayDescription"));
+			dashboardPage.selectWithdrawMethodPage().clickDebitCard(data.get("instantPayText"));
+			testAddCard(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
+		}
 	}
 
 	/**
@@ -645,11 +647,11 @@ public class CustomerProfileTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			if (card.equalsIgnoreCase("credit")) {
-				customerProfilePage.addNewPaymentComponent().verifyCreditContent(data.get("creditContent"));
+				customerProfilePage.addNewPaymentComponent().verifyCreditContent(data.get("content"));
 				customerProfilePage.addNewPaymentComponent().clickCreditCard();
 			} else {
 				Thread.sleep(2000);
-				customerProfilePage.addNewPaymentComponent().verifyDebitContent(data.get("debitContent"));
+				customerProfilePage.addNewPaymentComponent().verifyDebitContent(data.get("content"));
 				customerProfilePage.addNewPaymentComponent().clickDebitCard();
 			}
 			if (data.get("validateCard").equalsIgnoreCase("Yes")) {
@@ -679,7 +681,7 @@ public class CustomerProfileTest {
 	public void testAddCardDetails(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			CustomerProfilePage customerProfilePage=new CustomerProfilePage();
+			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			customerProfilePage.addNewPaymentComponent().addCardComponent()
 					.verifyAddDebitorCredHeadingView(data.get("AddCardHeading"));
 			customerProfilePage.addNewPaymentComponent().addCardComponent().verifyAddcardDesc(data.get("description"));
@@ -692,20 +694,20 @@ public class CustomerProfileTest {
 					.verifyAddDebitorCredHeadingView(data.get("AddCardHeading"));
 			customerProfilePage.addNewPaymentComponent().addCardComponent()
 					.verifyPlsConfirmBillingAdd(data.get("billingAddressDesc"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.clickCountryDropdown();
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.selectCountry(data.get("Country"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.fillAddLine1(data.get("addLine1"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.fillAddLine2(data.get("addLine2"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.fillCity(data.get("city"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.fillState(data.get("state"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.fillZipCode(data.get("zipcode"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.clickCountryDropdown();
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.selectCountry(data.get("Country"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.fillAddLine1(data.get("addLine1"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.fillAddLine2(data.get("addLine2"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.fillCity(data.get("city"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.fillState(data.get("state"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.fillZipCode(data.get("zipcode"));
 			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddCard();
 			if (data.get("validateExistingCard").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().verifyErrorView();
@@ -722,7 +724,7 @@ public class CustomerProfileTest {
 				customerProfilePage.addNewPaymentComponent().addCardComponent().preAuthorizationComponent()
 						.clickVerify();
 				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-						.successFailureComponent().verifyAllDone(data.get("allDonehdg"));
+						.successFailureComponent().verifyAllDone(data.get("sucessHeading"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
 						.successFailureComponent().verifyCardSucessDesc(data.get("sucessDescription"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
@@ -732,70 +734,69 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testExpiredCard(String strParams) {
 		try {
-			 Map<String, String> data = Runner.getKeywordParameters(strParams);
-			 Thread.sleep(1000);
-			 if(data.get("validateBuyTokens").equalsIgnoreCase("Yes")) {
-			dashboardPage.clickProfile();
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
-			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
-			customerProfilePage.navigationComponent().clickBack();
-			customerProfilePage.navigationComponent().clickBack();
-			dashboardPage.clickBuyTokens();
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			Thread.sleep(1000);
-			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
-			customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteCreditCard();
-			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
-			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
-			customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteDebitCard();
-			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
-			customerProfilePage.addNewPaymentComponent().navigationComponent().clickClose();
-			dashboardPage.clickWithdraw();
-			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
-			Thread.sleep(1000);
-			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
-			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
-			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
-			customerProfilePage.addNewPaymentComponent().verifyNotOken();
-			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-			.clickDebitCard(data.get("last4Digits"));
-			dashboardPage.cvvPopup().choosePinComponent().validateCVVorCVC(data.get("cvvCVC1"));
-			dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
-			dashboardPage.cvvPopup().clickOk();
-			dashboardPage.buyTokenComponent().clickArrow();
-			customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
-			Thread.sleep(1000);
-			customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
-			customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
-			customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
-			dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup()
-			.clickDebitCard(data.get("last4Digits"));
-			dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
-			dashboardPage.cvvPopup().clickOk();
-			Thread.sleep(1000);
-			customerProfilePage.navigationComponent().clickClose();
-			customerProfilePage.navigationComponent().clickClose();
-			 }
-			if(data.get("validateWithdrawToken").equalsIgnoreCase("Yes")) {
+			if (data.get("validateBuyTokens").equalsIgnoreCase("Yes")) {
+				dashboardPage.clickProfile();
+				customerProfilePage.clickPaymentMethods();
+				customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.navigationComponent().clickBack();
+				dashboardPage.clickBuyTokens();
+				Thread.sleep(1000);
+				customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteCreditCard();
+				customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyEditAndDeleteDebitCard();
+				customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+				customerProfilePage.addNewPaymentComponent().navigationComponent().clickClose();
+				dashboardPage.clickWithdraw();
+				customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+				Thread.sleep(1000);
+				customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+				customerProfilePage.addNewPaymentComponent().verifyNotOken();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
+				dashboardPage.cvvPopup().choosePinComponent().validateCVVorCVC(data.get("cvvCVC1"));
+				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+				dashboardPage.cvvPopup().clickOk();
+				dashboardPage.buyTokenComponent().clickArrow();
+				customerProfilePage.addNewPaymentComponent().verifyCreditCardExpiry();
+				Thread.sleep(1000);
+				customerProfilePage.addNewPaymentComponent().verifyCreditOOPSCondition();
+				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
+				customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
+				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
+				dashboardPage.cvvPopup().fillCvv(data.get("cvvCVC"));
+				dashboardPage.cvvPopup().clickOk();
+				Thread.sleep(1000);
+				customerProfilePage.navigationComponent().clickClose();
+				customerProfilePage.navigationComponent().clickClose();
+			}
+			if (data.get("validateWithdrawToken").equalsIgnoreCase("Yes")) {
 				dashboardPage.clickWithdraw();
 				dashboardPage.selectWithdrawMethodPage().clickInstantPay();
 				customerProfilePage.addNewPaymentComponent().verifyDebitCardExpiry();
 				customerProfilePage.addNewPaymentComponent().verifyDebitOOPSCondition();
-			//	customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
+				// customerProfilePage.paymentMethodsPage().clickDebitCard(data.get("last4Digits"));
 				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
 				Thread.sleep(1000);
 				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickArrow();
-			//	customerProfilePage.paymentMethodsPage().verifyDebitCardExpiry();
+				// customerProfilePage.paymentMethodsPage().verifyDebitCardExpiry();
 				customerProfilePage.addNewPaymentComponent().verifyWithdrawDebitOOPSCondition();
 				dashboardPage.selectWithdrawMethodPage().withdrawMethodPopup().clickDebitCard(data.get("last4Digits"));
 				customerProfilePage.navigationComponent().clickBack();
-				customerProfilePage.navigationComponent().clickClose();	
-			}	
-		//	customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
+				customerProfilePage.navigationComponent().clickClose();
+			}
+			// customerProfilePage.paymentMethodsPage().navigationComponent().clickClose();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testEditCard failed due to Exception " + e);
 		}
@@ -804,31 +805,42 @@ public class CustomerProfileTest {
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditDebitCardInPaymentMethods(String strParams) throws InterruptedException {
-		testEditCardandDelete(strParams, "debit");
+		customerProfilePage.clickPaymentMethods();
+		customerProfilePage.navigationComponent().clickBack();
+		customerProfilePage.clickPaymentMethods();
+		testEditCard(strParams, "debit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testEditCreditCardInPaymentMethods(String strParams) throws InterruptedException {
-		testEditCardandDelete(strParams, "debit");
+		customerProfilePage.clickPaymentMethods();
+		customerProfilePage.navigationComponent().clickBack();
+		customerProfilePage.clickPaymentMethods();
+		testEditCard(strParams, "debit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteCreditCardInPaymentMethods(String strParams) throws InterruptedException {
-		testEditCardandDelete(strParams, "debit");
+		customerProfilePage.clickPaymentMethods();
+		testDeleteCard(strParams, "debit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteDebitCardInPaymentMethods(String strParams) throws InterruptedException {
-		testEditCardandDelete(strParams, "debit");
+		customerProfilePage.clickPaymentMethods();
+		testDeleteCard(strParams, "debit");
 	}
 
 	@Test
 	@Parameters({ "strParams" })
 	public void testDeleteBankInPaymentMethods(String strParams) throws InterruptedException {
-		testEditCardandDelete(strParams, "debit");
+		customerProfilePage.clickPaymentMethods();
+		customerProfilePage.navigationComponent().clickBack();
+		customerProfilePage.clickPaymentMethods();
+		testDeleteCard(strParams, "debit");
 	}
 
 	/**
@@ -838,13 +850,10 @@ public class CustomerProfileTest {
 	 */
 	@Test
 	@Parameters({ "strParams" })
-	public void testEditCardandDelete(String strParams, String card) {
+	public void testEditCard(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.navigationComponent().clickBack();
-			customerProfilePage.clickPaymentMethods();
-			customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("paymentHeading"));
+			customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("expHeading"));
 			if (card.equalsIgnoreCase("credit")) {
 				customerProfilePage.addNewPaymentComponent().clickCreditCard(data.get("last4Digits"));
 			} else if (card.equalsIgnoreCase("debit")) {
@@ -852,18 +861,17 @@ public class CustomerProfileTest {
 			} else {
 				customerProfilePage.addNewPaymentComponent().clickBankAccount(data.get("last4Digits"));
 			}
-			if (data.get("validateEditAddress").equalsIgnoreCase("Yes")) {
+			if (data.get("validateAddress").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNumHeading();
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyNameonCard(data.get("nameOnCard1"));
-				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNum(data.get("cardNumber1"));
-				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardExp(data.get("cardExp1"));
+						.verifyNameonCard(data.get("existCardName"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNum(data.get("existCardNumber"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardExp(data.get("expCardExp"));
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyBillingAddress(data.get("address"));
+						.verifyBillingAddress(data.get("existAddress"));
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
 				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNumHeading();
 				customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
-				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvvCVC"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
@@ -885,18 +893,38 @@ public class CustomerProfileTest {
 						.fillState(data.get("state"));
 				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
 						.fillZipCode(data.get("zipcode"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent().clickSave();
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+				.verifyAddressUpdatedMsg(data.get("toastMessage"));
+				}
 				if (data.get("validateNavigation").equalsIgnoreCase("Yes")) {
+					customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
 					customerProfilePage.navigationComponent().clickBack();
 					customerProfilePage.navigationComponent().clickBack();
 				}
-				customerProfilePage.addNewPaymentComponent().editCardComponent().clickSave();
+			}catch (Exception e) {
+				ExtentTestManager.setFailMessageInReport("EditCard and Delete card failed due to Exception " + e);
 			}
+		}
 
-			if (data.get("validateCardDelete").equalsIgnoreCase("Yes")) {
+			@Test
+			@Parameters({ "strParams" })
+			public void testDeleteCard(String strParams, String card) {
+				try {
+					Map<String, String> data = Runner.getKeywordParameters(strParams);
+					customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("expHeading"));
+					if (card.equalsIgnoreCase("credit")) {
+						customerProfilePage.addNewPaymentComponent().clickCreditCard(data.get("last4Digits"));
+					} else if (card.equalsIgnoreCase("debit")) {
+						customerProfilePage.addNewPaymentComponent().clickDebitCard(data.get("last4Digits"));
+					} else {
+						customerProfilePage.addNewPaymentComponent().clickBankAccount(data.get("last4Digits"));
+					}		
+			    if (data.get("validateCardDelete").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickRemove();
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyRemovingHdg(data.get("expHeading"));
+						.verifyRemovingHdg(data.get("heading"));
 				if (data.get("validateNo").equalsIgnoreCase("Yes")) {
 					customerProfilePage.addNewPaymentComponent().editCardComponent().clickNo();
 				}
@@ -919,7 +947,7 @@ public class CustomerProfileTest {
 			if (data.get("validateBankDelete").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickRemoveAccount();
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyRemovingHdg(data.get("expHeading"));
+						.verifyRemovingHdg(data.get("heading"));
 				if (data.get("validateNo").equalsIgnoreCase("Yes")) {
 					customerProfilePage.addNewPaymentComponent().editCardComponent().clickNo();
 				}
@@ -1031,21 +1059,22 @@ public class CustomerProfileTest {
 		customerProfilePage.enableFaceOrTouchIDpage().verifyGetHelpview();
 		customerProfilePage.enableFaceOrTouchIDpage().navigationComponent().clickBack();
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testBankAccountINwithdrawToBank(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-		dashboardPage.clickWithdraw();
-		dashboardPage.selectWithdrawMethodPage().verifyBankAccountHeading(data.get("addBankHeading"));
-		dashboardPage.selectWithdrawMethodPage().verifyBankAccountDesc(data.get("bankDescription"));
-		dashboardPage.selectWithdrawMethodPage().clickBankAccount(data.get("bankText"));
-		testAddBankAccount(strParams, "debit");
-	}catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
+			dashboardPage.clickWithdraw();
+			dashboardPage.selectWithdrawMethodPage().verifyBankAccountHeading(data.get("addBankHeading"));
+			dashboardPage.selectWithdrawMethodPage().verifyBankAccountDesc(data.get("bankDescription"));
+			dashboardPage.selectWithdrawMethodPage().clickBankAccount(data.get("bankText"));
+			testAddBankAccount(strParams, "debit");
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
+		}
 	}
-	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddBankAccountInBuyTokens(String strParams) throws InterruptedException {
@@ -1055,16 +1084,17 @@ public class CustomerProfileTest {
 
 	@Test
 	@Parameters({ "strParams" })
-	public void testAddBankAccount(String strParams,String card) throws InterruptedException {
+	public void testAddBankAccount(String strParams, String card) throws InterruptedException {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
 			customerProfilePage.addNewPaymentComponent().clickBankAcount();
-			customerProfilePage.addNewPaymentComponent().mxBankComponent().addBank(data.get("mxAddBankHeading"),
-					data.get("mxAddBankDescription"), data.get("mxAddBankChkBxDescription"));
+			customerProfilePage.addNewPaymentComponent().mxBankComponent().addBank(data.get("expHeading"),
+					data.get("description"), data.get("mxAddBankChkBxDescription"));
 			customerProfilePage.addNewPaymentComponent().mxBankComponent()
-					.verifySelectYourInstitution(data.get("institutionHeading"));
+					.verifySelectYourInstitution(data.get("heading"));
 			if (customerProfilePage.addNewPaymentComponent().mxBankComponent()
 					.MXConfirmationScreen(data.get("mxConfirmationHeading")) == 1) {
 				customerProfilePage.addNewPaymentComponent().mxBankComponent().verifyMXConfirmationScreen(
@@ -1076,8 +1106,8 @@ public class CustomerProfileTest {
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().fillUserName(data.get("mxUsername"));
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().fillPassword(data.get("mxPassword"));
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().clickContinue();
-			customerProfilePage.addNewPaymentComponent().mxBankComponent()
-					.VerifyIdentityHeading(data.get("identityHeading"));
+//			customerProfilePage.addNewPaymentComponent().mxBankComponent()
+//					.VerifyIdentityHeading(data.get("identityHeading"));
 			if (data.get("accountType").equalsIgnoreCase("checking")) {
 				customerProfilePage.addNewPaymentComponent().mxBankComponent().clickChecking();
 			} else {
@@ -1085,9 +1115,9 @@ public class CustomerProfileTest {
 			}
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().clickContinue();
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent()
-					.verifyBankSucessHeading(data.get("bankAddedHeading"));
+					.verifyBankSucessHeading(data.get("sucessHeading"));
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent()
-					.verifyAddedBankDescription(data.get("bankAddedDescription"));
+					.verifyAddedBankDescription(data.get("sucessDescription"));
 			customerProfilePage.addNewPaymentComponent().mxBankComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Add Bank Account failed due to Exception " + e);

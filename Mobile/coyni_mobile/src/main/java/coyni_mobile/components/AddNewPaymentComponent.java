@@ -29,7 +29,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblCoyni = MobileBy.AccessibilityId("coyni");
 	private By lblerrorText = MobileBy.AccessibilityId("");
 	private By lblAddNewPayment = MobileBy.AccessibilityId("Add Payment Method");
-	private By btnAddNewPayment = MobileBy.xpath("//*[@name='Add New Payment Method']");
+	private By btnAddNewPaymentPlus = MobileBy.xpath("//*[@name='Add New Payment Method']");
 //	private By btnSignetWalletId = MobileBy.xpath("//*[contains(@name,'Signet')]//following-sibling::*[contains(@name,'••••%s')]");
 
 	private By btnBank = MobileBy.xpath("//*[contains(@name,'BANK')]");
@@ -101,6 +101,14 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 		new CommonFunctions().elementView(lblHeading, "Add Payment method");
 
+	}
+	
+	public void clickAddNewPaymentPlusIcon() {
+		if(getElementList(lblPaymentMethods, "Payment Methods").size()>0) {
+			clickAddNewPayment();
+		}else {
+			ExtentTestManager.setInfoMessageInReport("no payment methods");
+		}
 	}
 
 	public void verifyErrorView() {
@@ -352,7 +360,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickAddNewPayment() {
-		click(btnAddNewPayment, "Add New Payment Method");
+		click(btnAddNewPaymentPlus, "Add New Payment Method");
 	}
 
 	public By getPaymentItems(String paymentMethod, String last4digits) {
@@ -400,13 +408,13 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void getPaymentPage() {
-		if (getElement(lblHeading, "heading").isDisplayed()) {
+		if (getElement(lblPaymentMethods, "heading").isDisplayed()) {
 			clickAddNewPayment();
 		}
 	}
 
 	public void getPaymentPages() {
-		if (getElementList(lblHeading, "heading").size() > 0) {
+		if (getElementList(lblPaymentMethods, "heading").size() > 0) {
 			clickAddNewPayment();
 		} else {
 			ExtentTestManager.setInfoMessageInReport("no payment methods");
