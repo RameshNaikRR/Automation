@@ -24,7 +24,13 @@ public class ChoosePinComponent extends MobileFunctions {
     private By lblPinToastMsg = MobileBy.AccessibilityId("");
     private By txtCvv = MobileBy.AccessibilityId("");
     private By btnBackSpace = MobileBy.AccessibilityId("");
-	
+
+//    Enter your pin screen disabled scenario
+    private By lblDisabled = MobileBy.AccessibilityId("Confirm Your PIN Heading");
+	private By lblDisableDes = MobileBy.AccessibilityId("");
+    private By btnTryAgain = MobileBy.AccessibilityId("");
+    private By lblIncorrectPINHeading = MobileBy.AccessibilityId("");
+    private By lblIncoPINDesc = MobileBy.AccessibilityId("");
 	
 	
 
@@ -129,6 +135,20 @@ public class ChoosePinComponent extends MobileFunctions {
 
 	public void clickForgotPin() {
 		click(btnForgotPin, "forgot Pin");
+	}
+	
+// Enter your pin screen disabled scenario	
+	public void viewDisabledHeading() {
+		new CommonFunctions().elementView(lblDisabled, "Disabled heading");
+		new CommonFunctions().elementView(lblDisableDes, "Disabled description");
+	}
+	public void clickTryAgain() {
+		click(btnTryAgain, "Try Again");
+	}
+	
+	public void viewIncorrectPINHeading() {
+		new CommonFunctions().elementView(lblIncorrectPINHeading, "Incorrect PIN heading");
+		new CommonFunctions().elementView(lblIncoPINDesc, "Incorrect PIN description");
 	}
 
 	public EnableFaceOrTouchIDpage enableFaceOrTouchIDpage() {

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.LoginPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -22,7 +23,9 @@ public class LoginTest {
 	public void init() {
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
+		System.out.println("before test completed************************");
 	}
+
 	/**
 	 * testLogin Script is to test the Login to the application
 	 * 
@@ -32,7 +35,9 @@ public class LoginTest {
 	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
 		try {
+			System.out.println("Login method running");
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			System.out.println(loginData);
 			landingPage.clickLogin();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
@@ -46,8 +51,6 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-
-	
 
 	/**
 	 * testLoginNavigationView script is to test the Navigation flow of Login
@@ -89,7 +92,7 @@ public class LoginTest {
 	}
 
 	/**
-     * testLoginWithInvalidCredentials script is to test by filling invalid email
+	 * testLoginWithInvalidCredentials script is to test by filling invalid email
 	 * and password in the text fields and validating error messages in Login
 	 * feature.
 	 * 
@@ -119,7 +122,8 @@ public class LoginTest {
 				} else {
 //					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
 //							loginData.get("elementName"));
-				}}
+				}
+			}
 			if (!loginData.get("popUpMsg").isEmpty()) {
 				loginPage.verifyPopupDescription(loginData.get("description"));
 				loginPage.minimizePopupByClikingOK();
@@ -142,28 +146,82 @@ public class LoginTest {
 			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
 			Thread.sleep(1000);
 			loginPage.choosePinComponent().clickForgotPin();
-			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().verifyEmailVerificationView(loginData.get("emailDescription"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.fillOtp(loginData.get("code"));
-			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.choosePinComponent().verifyChooseYourPinView();
-			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.choosePinComponent().verifyConfirmYourPin(loginData.get("confirmPinHeading"));
-			if(loginData.get("validateNavigation").equalsIgnoreCase("Yes")) {
+					.verifyEmailVerificationView(loginData.get("emailDescription"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyChooseYourPinView();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyConfirmYourPin(loginData.get("confirmPinHeading"));
+			if (loginData.get("validateNavigation").equalsIgnoreCase("Yes")) {
 				loginPage.navigationComponent().clickBack();
-				loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-				.choosePinComponent().verifyChooseYourPinView();;
+				loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+						.verifyChooseYourPinView();
 				loginPage.navigationComponent().clickBack();
 				loginPage.choosePinComponent().verifyEnterYourPinView();
-				loginPage.navigationComponent().clickClose();	
+				loginPage.navigationComponent().clickClose();
 			}
-			if(loginData.get("validatePin").equalsIgnoreCase("Yes")) {
-			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.choosePinComponent().fillPin(loginData.get("pin"));
+			if (loginData.get("validatePin").equalsIgnoreCase("Yes")) {
+				loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+						.fillPin(loginData.get("pin"));
+				loginPage.toastComponent().verifyToastMsg(loginData.get("toastMsg"));
 			}
 
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPinDisabledScenario(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().viewIncorrectPINHeading();
+			loginPage.choosePinComponent().clickTryAgain();
+			loginPage.choosePinComponent().clickLogout();
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().verifyEnterYourPinView();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().clickForgotPin();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationView(loginData.get("emailDescription"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyChooseYourPinView();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyConfirmYourPin(loginData.get("confirmPinHeading"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.fillPin(loginData.get("pin"));
+			loginPage.toastComponent().verifyToastMsg(loginData.get("toastMsg"));
+			loginPage.verifyImageCoyniView();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().viewIncorrectPINHeading();
+			loginPage.choosePinComponent().clickTryAgain();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().viewDisabledHeading();
+			DriverFactory.getDriver().resetApp();
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.viewDisabledPINPopup();
+			loginPage.clickDisPINOk();
+			loginPage.verifyImageCoyniView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
 		}
@@ -189,15 +247,16 @@ public class LoginTest {
 			loginPage.signUpPage().validateEmail(data.get("emailValidations"));
 			loginPage.clickNext();
 			Thread.sleep(2000);
-			loginPage.phoneAndEmailVerificationComponent()
-					.verifyEmailVerificationView(data.get("emailDescription"));
+			loginPage.phoneAndEmailVerificationComponent().verifyEmailVerificationView(data.get("emailDescription"));
 			loginPage.phoneAndEmailVerificationComponent().verifyResendView();
 			loginPage.navigationComponent().clickBack();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().verifyCreateNewPasswordView();
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().validateNewPasswordfield(data.get("validatePasswords"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().validateConfirmPasswordfield(data.get("validatePasswords"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.validateNewPasswordfield(data.get("validatePasswords"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.validateConfirmPasswordfield(data.get("validatePasswords"));
 			loginPage.navigationComponent().clickBack();
 			loginPage.fillEmail(data.get("email"));
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
@@ -208,10 +267,10 @@ public class LoginTest {
 					.fillConfirmPassword(data.get("password"));
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickEye();
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickSave();
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.successFailureComponent().verifyPasswordUpdatedDesc(data.get("passwordDesc"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.successFailureComponent().clickLogin();
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().successFailureComponent()
+					.verifyPasswordUpdatedDesc(data.get("passwordDesc"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().successFailureComponent()
+					.clickLogin();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotPassword failed due to exception " + e);
 		}
@@ -228,25 +287,24 @@ public class LoginTest {
 	public void testForgotPasswordWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-				landingPage.clickLogin();
-				loginPage.clickForgotPassword();
-				loginPage.fillEmail(data.get("email"));
-				loginPage.clickNext();
-				if(data.get("validatePassword").equalsIgnoreCase("Yes")) {
-					loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-					loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.fillNewPassword(data.get("newPassword"));
-		         	loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.fillConfirmPassword(data.get("confirmPassword"));
-		         	loginPage.signUpPage().verifyPasswordREquirementError(data.get("errMessage"));
-				}
-				Thread.sleep(3000);
-				if(data.get("validateErrorMsg").equalsIgnoreCase("Yes")) {
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.clickNext();
+			if (data.get("validatePassword").equalsIgnoreCase("Yes")) {
+				loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+						.fillNewPassword(data.get("newPassword"));
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+						.fillConfirmPassword(data.get("confirmPassword"));
+				loginPage.signUpPage().verifyPasswordREquirementError(data.get("errMessage"));
+			}
+			Thread.sleep(3000);
+			if (data.get("validateErrorMsg").equalsIgnoreCase("Yes")) {
 				if (!data.get("errMessage").isEmpty()) {
 					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
 				}
-				}
-			
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -282,7 +340,6 @@ public class LoginTest {
 //		}
 //	}
 
-	
 	/**
 	 * testRetrieveEmail script is to test the Retrieve Email feature by filling all
 	 * the text fields.
@@ -328,7 +385,8 @@ public class LoginTest {
 			loginPage.fillFirstName(loginData.get("firstName"));
 			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
-            loginPage.phoneAndEmailVerificationComponent().verifyPhoneVerificationView(loginData.get("PhoneNumberDesc"));
+			loginPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationView(loginData.get("PhoneNumberDesc"));
 			loginPage.phoneAndEmailVerificationComponent().verifyResendView();
 			loginPage.navigationComponent().clickClose();
 			loginPage.clickRetrieveEmail();
@@ -363,12 +421,11 @@ public class LoginTest {
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
 			loginPage.clickRetrieveLogin();
 			loginPage.verifyLoginEmail(loginData.get("email"));
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
 		}
 	}
-
 
 	/**
 	 * testRetrieveEmailWithInvalidCredentials script is to test By giving invalid
@@ -396,7 +453,6 @@ public class LoginTest {
 					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
 		}
 	}
-
 
 ////
 ////	@Test
@@ -859,6 +915,5 @@ public class LoginTest {
 //		}
 //
 //	}
-	
 
 }
