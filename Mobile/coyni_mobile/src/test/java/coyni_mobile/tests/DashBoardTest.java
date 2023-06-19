@@ -390,7 +390,6 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().verifyfirstRecentContact();
 			dashboardPage.sendRequestPage().viewSendHeading();
 			double a = dashboardPage.sendRequestPage().verifyWeeklyLimit();
-
 			dashboardPage.sendRequestPage().fillAmount(data.get("amount"));
 			dashboardPage.sendRequestPage().clickSend();
 			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));

@@ -17,14 +17,11 @@ public class LoginTest {
 
 	LoginPage loginPage;
 	LandingPage landingPage;
-	MobileFunctions mobileFunctions;
 
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
-		mobileFunctions = new MobileFunctions();
-//		DriverFactory.getDriver().removeApp("com.ideyalabstech.coyniqa");
 	}
 	/**
 	 * testLogin Script is to test the Login to the application
