@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.SuccessFailureComponent;
+import coyni_mobile.pages.WalletsFeesPage;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -32,7 +33,11 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lbldailylimitAndFee = MobileBy.xpath("//*[contains(@name,'limit')]");
 	private By lbldailylimitAndFee1 = MobileBy.xpath("//*[contains(@name,  'Fee:')] | //*[contains(@name,'daily limit')] | //*[contains(@name,'per transaction')]");
 	private By lbldailylimitAndFee2 = MobileBy.xpath("//*[contains(@name,  'Fee:')]");
-	
+	private By btnProcessingFee = MobileBy.AccessibilityId("");
+	private By lblProcessingFeeValue = MobileBy.AccessibilityId("");
+	private By lnkViewFees = MobileBy.AccessibilityId("");
+	private By lblMesg = MobileBy.AccessibilityId("");
+
 	
 	
 	
@@ -41,11 +46,32 @@ public class OrderPreviewPopup extends MobileFunctions {
 	private By lblEmail	= MobileBy.xpath("//*[@name='Subtotal']/../preceding-sibling::*[1]/*[2]");
 	
 	
+	
+	public void clickProcessingFee() {
+		click(btnProcessingFee, "Processing Fee");
+	}
+	
+	public String verifyProcessingFeeValue() {
+		String str = getText(btnProcessingFee).trim().replace(" processing fee for this transaction.  ", "").replace(" ", "");
+		return str;
+	}
+	
+	public void clickViewFee() {
+		click(lnkViewFees, "View Fee");
+	}
+	public String verifyfillMessage() {
+		String str = getText(lblMesg).trim().replace('"', ' ');
+		return str;
+	}
+
+	
+	
 	public void verifyGiftCardHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblGiftCardSummary, "Popup Heading", expHeading);
 	}
-	public void getGiftCardName() {
-		ExtentTestManager.setInfoMessageInReport("Gift Card Name:"+getText(lblGiftCardName));
+	public String verifyGiftCardNAme() {
+		String str = getText(lblGiftCardName).trim().replace('"', ' ');
+		return str;
 	}
 	
 	public void getEmail() {
@@ -94,8 +120,11 @@ public class OrderPreviewPopup extends MobileFunctions {
 	
 	
 	
+	
+	
 	public String getDailyLimitFeeLabel() {
-		String text = getText(lbldailylimitAndFee1);
+		String text = getText(lblProcessingFeeValue);
+	//	String text = getText(lbldailylimitAndFee1);
 		System.out.println("Hello");
 		return text;
 	}
@@ -252,4 +281,8 @@ public class OrderPreviewPopup extends MobileFunctions {
 	public ChoosePinComponent choosePinComponent() {
 		return new ChoosePinComponent();
 	}
+	public WalletsFeesPage walletsFeesPage() {
+		return new WalletsFeesPage();
+	}
+
 }

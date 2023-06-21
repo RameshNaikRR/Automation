@@ -7,6 +7,7 @@ import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.TransactionsDetailsComponent;
 import coyni_mobile.popups.cvvPopup;
 import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -87,11 +88,23 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void clickAddPayment() {
+		if(getElementList(btnAddPayment, "AddPayment").size()>0) {
 		click(btnAddPayment, "Add Payment");
+		}
+	}
+	public void verifyAddAddressHdg(String address) {
+		new CommonFunctions().verifyLabelText(lblAddAddress, "Add Address", address);
 	}
 
 	public void verifyAddAddressview() {
 		new AndroidCommonFunctions().elementView(lblAddAddress, "Add Address");
+	}
+	public void verifyBuyTokensView() {
+		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
+	}
+
+	public void verifyAddPaymentView() {
+		new CommonFunctions().elementView(btnAddPayment, "Add Payment");
 	}
 
 	public void verifyDashboard() {

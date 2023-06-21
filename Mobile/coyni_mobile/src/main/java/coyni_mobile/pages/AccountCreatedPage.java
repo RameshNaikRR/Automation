@@ -3,11 +3,12 @@ package coyni_mobile.pages;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class AccountCreatedPage extends MobileFunctions{
+public class AccountCreatedPage extends MobileFunctions {
 //	private By heading = MobileBy.xpath("//*[@name='Your Account Has Been Created']");
 //	private By btnGetStarted =MobileBy.xpath("(//*[@name='Get Started'])[1]");
 //	
@@ -32,13 +33,7 @@ public class AccountCreatedPage extends MobileFunctions{
 //		   return new TokenAccountPage();
 //    }
 //
-//	public int VerifyGoToDashboard() {
-//    return getElementList(btnGoToDashBoard, "btnGoToDashBoard").size();
-//	}
-////	}
-//	public void clickGoToDashboard() {
-//		click(btnGoToDashBoard, "Go to dashboard");
-//	}
+
 //	
 	/****
 	 * 
@@ -47,28 +42,51 @@ public class AccountCreatedPage extends MobileFunctions{
 	private By lblAccountCreatedImg = MobileBy.AccessibilityId("");
 	private By lblAccountCreatedDesc = MobileBy.AccessibilityId("");
 	private By btnAddCreditOrDebit = MobileBy.AccessibilityId("");
-	private By btnSkip =MobileBy.AccessibilityId("");
-	
+	private By btnSkip = MobileBy.AccessibilityId("");
+	private By btnGoToDashBoard = MobileBy.xpath("(//*[@name='Go to Dashboard'])[2]");
+
 	public void verifyAccountCreatedHdgView() {
-		if(getElementList(lblAccountCreatedhdg, "lblAccountCreatedhdg").size()>0) {
-		new AndroidCommonFunctions().elementView(lblAccountCreatedhdg, "Account Created");
+		if (getElementList(lblAccountCreatedhdg, "lblAccountCreatedhdg").size() > 0) {
+			new AndroidCommonFunctions().elementView(lblAccountCreatedhdg, "Account Created");
 		}
 	}
+
 	public void verifyAccountCreatedImageView() {
+		if(getElementList(lblAccountCreatedDesc, "Account Created").size()>0) {
 		new AndroidCommonFunctions().elementView(lblAccountCreatedImg, "Account Created Image");
 		ExtentTestManager.setInfoMessageInReport("the desc is:" + getText(lblAccountCreatedDesc));
 	}
-	
+	}
+
 	public void clickAddCreditOrDebit() {
-		if(getElement(btnAddCreditOrDebit, "AddCreditOrDebit").isEnabled()) {
-		click(btnAddCreditOrDebit, "Add Debit or Credit");
-		
+		if(getElementList(btnAddCreditOrDebit, "AddCreditorDebit").size()>0) {
+		if (getElement(btnAddCreditOrDebit, "AddCreditOrDebit").isEnabled()) {
+			click(btnAddCreditOrDebit, "Add Debit or Credit");
+		}
 		}
 	}
-	public void clickSkip() {
-		if(getElement(btnSkip, "Skip").isEnabled()) {
-		click(btnSkip, "Skip");
+	public void verifyAccountCreatedHdgView(String desc) {
+		if(getElementList(lblAccountCreatedhdg, "lblAccountCreatedhdg").size()>0) {
+		new CommonFunctions().elementView(lblAccountCreatedhdg, "Account Created");
+		new CommonFunctions().verifyLabelText(lblAccountCreatedDesc, "desc", desc);
 		}
 	}
 	
+
+	public void clickSkip() {
+		if(getElementList(btnSkip, "Skip").size()>0) {
+		if (getElement(btnSkip, "Skip").isEnabled()) {
+			click(btnSkip, "Skip");
+		}
+		}
+	}
+
+	public int VerifyGoToDashboard() {
+		return getElementList(btnGoToDashBoard, "btnGoToDashBoard").size();
+	}
+
+	public void clickGoToDashboard() {
+		click(btnGoToDashBoard, "Go to dashboard");
+	}
+
 }

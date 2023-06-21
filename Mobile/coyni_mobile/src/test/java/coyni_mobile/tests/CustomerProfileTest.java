@@ -672,15 +672,43 @@ public class CustomerProfileTest {
 		testAddCard(strParams, "debit");
 	}
 
+	/**
+	 * testAddDebitCardInPaymentMethods script is to test payment method via adding
+	 * Debit card by giving valid card details.
+	 * 
+	 * @param strParams
+	 * @throws InterruptedException
+	 */
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddDebitCardInPaymentMethodsNavigation(String strParams) throws InterruptedException {
+		dashboardPage.clickProfile();
+		customerProfilePage.clickPaymentMethods();
+		Thread.sleep(1000);
+		customerProfilePage.addNewPaymentComponent().getPaymentPage();
+		testAddCardNavigation(strParams, "debit");
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddCreditCardInPaymentMethodsNavigation(String strParams) throws InterruptedException {
+		dashboardPage.clickProfile();
+		customerProfilePage.clickPaymentMethods();
+		Thread.sleep(1000);
+		customerProfilePage.addNewPaymentComponent().getPaymentPage();
+		testAddCardNavigation(strParams, "credit");
+	}
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCardINwithdrawToUSd(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickWithdraw();
+			dashboardPage.selectWithdrawMethodPage().clickInstantPay();
 			dashboardPage.selectWithdrawMethodPage().verifyDebitCardHeading(data.get("addInstantPayHeading"));
 			dashboardPage.selectWithdrawMethodPage().verifyDebitCardDesc(data.get("instantPayDescription"));
-			dashboardPage.selectWithdrawMethodPage().clickDebitCard(data.get("instantPayText"));
+//			dashboardPage.selectWithdrawMethodPage().clickDebitCard(data.get("instantPayText"));
 			testAddCard(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("AddDebitCardINwithdrawToUSd failed due to Exception " + e);
@@ -783,6 +811,33 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Add Card failed due to Exception " + e);
 		}
 	}
+
+	
+	public void testAddCardNavigation(String strParams,String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.addNewPaymentComponent().clickCreditCard();
+			} else {
+				Thread.sleep(2000);
+				customerProfilePage.addNewPaymentComponent().clickDebitCard();
+			}
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().clickCamera();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvvCVC"));
+			customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
+			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddCard();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.navigationComponent().clickBack();
+			customerProfilePage.navigationComponent().clickBack();	
+	} catch (Exception e) {
+		ExtentTestManager.setFailMessageInReport("Add Card Naviagtion failed due to Exception " + e);
+	}
+}
 
 	@Test
 	@Parameters({ "strParams" })

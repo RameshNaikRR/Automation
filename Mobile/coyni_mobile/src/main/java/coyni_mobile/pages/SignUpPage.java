@@ -424,6 +424,9 @@ public class SignUpPage extends MobileFunctions {
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
 	}
+	public NavigationComponent navigationComponent() {
+		return new NavigationComponent();
+	}
 
 	public LoginPage loginPage() {
 		return new LoginPage();

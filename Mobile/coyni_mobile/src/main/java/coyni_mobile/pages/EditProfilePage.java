@@ -116,8 +116,13 @@ public class EditProfilePage extends MobileFunctions{
 	
 	
 	private By btnSave =MobileBy.xpath("(//*[@name='Save'])[1]");
+	public int verifySave() {
+		return getElementList(btnSave, "SaveS").size();
+	}
+	
 	
 	public void clickSave() {
+		
 		if(getElement(btnSave, "Save").isEnabled()) {
 		click(btnSave, "Click Save");
 		}else {

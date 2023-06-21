@@ -187,7 +187,7 @@ public class AddCardComponent extends MobileFunctions {
 	
 	public void fillCardExp(String cardExp) {
 		enterText(txtCardExp, cardExp, "CardExp");
-       click(btnDone, "Done");
+    //   click(btnDone, "Done");
 	}
 	public void fillCVVorCVC(String cVVorCVC) {
 		enterText(txtCVVorCVC, cVVorCVC, "CVVorCVC");

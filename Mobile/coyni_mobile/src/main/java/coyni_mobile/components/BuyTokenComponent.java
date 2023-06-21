@@ -52,7 +52,9 @@ import io.appium.java_client.MobileBy;
 		        new AndroidCommonFunctions().verifyLabelText(lblBuyTokensHdg, "Heading", hdg);
 		    }
 
-	 
+		    public void verifyChangePaymentView() {
+		        new AndroidCommonFunctions().elementView(btnChangePayment, "ChangePayment");
+		    }
 
 	    public void verifyPayment(String expPayment) {
 	        String method = getText(lblPaymentMethod);

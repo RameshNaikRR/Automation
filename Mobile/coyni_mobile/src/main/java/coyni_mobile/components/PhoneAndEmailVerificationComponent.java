@@ -5,6 +5,8 @@ import ilabs.MobileFramework.MobileFunctions;
 
 
 import org.openqa.selenium.By;
+
+import coyni_mobile.pages.AccountCreatedPage;
 import coyni_mobile.pages.AgreementPage;
 import coyni_mobile.utilities.CommonFunctions;
 import io.appium.java_client.MobileBy;
@@ -87,7 +89,9 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions{
 	public void verifyResendView() {
 		new CommonFunctions().elementView(lnkResend, "Resend");
 	}
-	
+	public AccountCreatedPage accountCreatedPage() {
+		return new AccountCreatedPage();
+	}
 	
 	
 	

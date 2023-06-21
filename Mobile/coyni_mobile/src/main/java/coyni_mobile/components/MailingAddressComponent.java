@@ -51,7 +51,9 @@ public class MailingAddressComponent extends MobileFunctions{
 	
 	
 	public void clickAddAddress() {
+		if(getElementList(btnAddCard, "AddAddress").size()>0) {
 		click(btnAddAddress, "Add Address");
+		}
 	}
 	public void verifyAddressAdded() {
 		new AndroidCommonFunctions().elementView(lblAddressAdded, "Adress Added");

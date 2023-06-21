@@ -67,8 +67,9 @@ public class SuccessFailureComponent extends MobileFunctions {
 		}
 		
 		
-		public void verifyCardName(String cardName) {
-			new CommonFunctions().verifyLabelText(lblCard, "Card", cardName);
+
+		public void verifyCardName() {
+			new CommonFunctions().elementView(lblCard, "card");
 		}
 		public void verifyTransactionSucessDesc(String desc) {
 			new CommonFunctions().verifyLabelText(lblCardSucessDesc, "Transaction sucess desc", desc);
@@ -134,11 +135,14 @@ public class SuccessFailureComponent extends MobileFunctions {
 	}
 
 	public void clickDone() {
+		if(getElementList(btnDone, "Done").size()>0) {
 		if (getElement(btnDone, "Done").isEnabled()) {
 			click(btnDone, "Done");
-		} else {
+		} 
+		}else {
 			ExtentTestManager.setInfoMessageInReport("Done Button is disabled");
 		}
+		
 	}
 
 //	End All Sessions

@@ -65,6 +65,11 @@ public class WithdrawTokenPage extends MobileFunctions {
 		public void fillMessage(String message) {
 			enterText(txtMessage, message, "Message");
 		}
+
+		public String verifyfillMessage() {
+			String str = getText(txtMessage).trim().replace('"', ' ');
+			return str;
+		}
 	
 	
 	

@@ -59,14 +59,20 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By btnRemove = MobileBy.xpath("(//*[@name='Remove'])[2]");
 	private By btnEdit = MobileBy.xpath("(//*[@name='Edit'])[2]");
 	private By btnClose = MobileBy.AccessibilityId("close");
-
+	private By lblFee = MobileBy.AccessibilityId("close");
 	private By lblNoToken = MobileBy.AccessibilityId("No Token Available");
 
 	public int verifyCoyniView() {
 		return getElementList(lblCoyni, "Coyni").size();
-
 	}
 
+	
+	public void verifyFee() {
+		if(getElement(lblFee, "Fee").isEnabled()) {
+		new CommonFunctions().elementView(lblFee, "Fee");
+	}
+	}
+	
 	public void verifyMaxlimit(String expTxt) {
 
 		new CommonFunctions().verifyLabelText(lblMaxLimit, "Max limit", expTxt);
@@ -89,13 +95,13 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblPaymentMethods, "PaymentMethods", hdg);
 	}
 
-//    public void verifyErrorTextView() {
-//
-//        new CommonFunctions().elementView(lblerrorText, "ErrorText");
-//
-//        click(btnOK, "Ok");
-//
-//    }
+    public void verifyErrorTextView() {
+
+        new CommonFunctions().elementView(lblerrorText, "ErrorText");
+
+        click(btnOK, "Ok");
+
+    }
 
 	public void verifyAddPaymentMethodView() {
 

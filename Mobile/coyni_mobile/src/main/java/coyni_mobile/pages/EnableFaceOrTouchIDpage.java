@@ -40,12 +40,16 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		click(lnkDontAllow, "Dont Allow");
 	}
 	public void clickSkip() {
+		if(getElementList(lnkSkip, "Skip").size()>0) {
 		if(getElement(lnkSkip, "Skip").isEnabled()) {
 		click(lnkSkip, "Skip");
 		}
+		}
 	}
 	public void clickNotNow() {
+		if(getElementList(btnNotNow, "Not Now").size()>0) {
 		click(btnNotNow, "Not Now");
+		}
 	}
 	public void verifyDontRemindButtonView() {
 		new CommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again");
