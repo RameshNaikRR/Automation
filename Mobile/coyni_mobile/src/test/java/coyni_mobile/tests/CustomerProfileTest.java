@@ -10,6 +10,7 @@ import coyni_mobile.pages.AgreementPage;
 import coyni_mobile.pages.CustomerProfilePage;
 import coyni_mobile.pages.DashboardPage;
 import coyni_mobile.pages.EnableFaceOrTouchIDpage;
+import coyni_mobile.pages.LoginPage;
 import coyni_mobile.pages.PreferencesPage;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
@@ -23,6 +24,7 @@ public class CustomerProfileTest {
 	PreferencesPage preferencesPage;
 	MobileFunctions mobileFunctions;
 	EnableFaceOrTouchIDpage enableFaceOrTouchIDpage;
+	LoginPage loginPage;
 
 	@BeforeTest
 	public void init() {
@@ -32,6 +34,7 @@ public class CustomerProfileTest {
 		dashboardPage = new DashboardPage();
 		mobileFunctions = new MobileFunctions();
 		enableFaceOrTouchIDpage = new EnableFaceOrTouchIDpage();
+		loginPage = new LoginPage();
 	}
 
 	/**
@@ -354,18 +357,18 @@ public class CustomerProfileTest {
 	@Parameters({ "strParams" })
 	public void testPrefernces(String strParams) {
 		try {
-		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		dashboardPage.clickProfile();
-		customerProfilePage.clickPreferences();
-		preferencesPage.verifyPreferencesHeading(data.get("preferencesHeading"));
-		String[] timeZone = data.get("timeZones").split(",");
-		for (int i = 0; i <= timeZone.length; i++) {
-			preferencesPage.selectTimeZone(timeZone[i]);
-			preferencesPage.toastComponent().verifyToastMsg(data.get("preferencesToastMsg"));
-			preferencesPage.verifyTimeZone(timeZone[i]);
-		}
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickPreferences();
+			preferencesPage.verifyPreferencesHeading(data.get("preferencesHeading"));
+			String[] timeZone = data.get("timeZones").split(",");
+			for (int i = 0; i <= timeZone.length; i++) {
+				preferencesPage.selectTimeZone(timeZone[i]);
+				preferencesPage.toastComponent().verifyToastMsg(data.get("preferencesToastMsg"));
+				preferencesPage.verifyTimeZone(timeZone[i]);
+			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
+			ExtentTestManager.setFailMessageInReport("Preferences failed due to Exception " + e);
 		}
 	}
 
@@ -373,19 +376,19 @@ public class CustomerProfileTest {
 	@Parameters({ "strParams" })
 	public void testAgreements(String strParams) {
 		try {
-		Map<String, String> data = Runner.getKeywordParameters(strParams);
-		dashboardPage.clickProfile();
-		customerProfilePage.clickAgreements();
-		agreementsPage.clickPrivacyPolicy();
-		agreementsPage.clickPrivacyActiveAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
-		agreementsPage.navigationComponent().clickClose();
-		agreementsPage.clickPrivacyPastAgreement();
-		agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
-		agreementsPage.navigationComponent().clickClose();
-	} catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("Account Limits failed due to Exception " + e);
-	}
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickAgreements();
+			agreementsPage.clickPrivacyPolicy();
+			agreementsPage.clickPrivacyActiveAgreement();
+			agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+			agreementsPage.navigationComponent().clickClose();
+			agreementsPage.clickPrivacyPastAgreement();
+			agreementsPage.verifyDocAgreeHeading(data.get("AgreeDocHeading"));
+			agreementsPage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Agreements failed due to Exception " + e);
+		}
 	}
 
 	/**
@@ -512,6 +515,15 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.clickProfile();
 			customerProfilePage.clickChangePassword();
+			validateChangePassword(strParams);
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
+		}
+	}
+
+	public void validateChangePassword(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			customerProfilePage.choosePinComponent().verifyEnterYourPinhdg(data.get("pinHeading"));
 			customerProfilePage.choosePinComponent().verifyForgotPinView();
 			customerProfilePage.choosePinComponent().fillPin(data.get("pin"));
@@ -538,6 +550,7 @@ public class CustomerProfileTest {
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent()
 					.verifyPasswordChangedDesc(data.get("sucessDesc"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().successFailureComponent().clickLogin();
+			loginPage.verifyImageCoyniView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
 		}
@@ -576,6 +589,35 @@ public class CustomerProfileTest {
 					.validateConfirmPasswordfield(data.get("ConfirmPassword"));
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickEye();
 			customerProfilePage.navigationComponent().clickClose();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLogInSessions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickLoginSessions();
+			customerProfilePage.logInSessionsPage().viewLogInSessHeader();
+			if (data.get("validateChangePassword").equalsIgnoreCase("button")) {
+				customerProfilePage.logInSessionsPage().clickEndAllSessions();
+				customerProfilePage.logInSessionsPage().clickChangePassword();
+				validateChangePassword(strParams);
+			} else if (data.get("validateChangePassword").equalsIgnoreCase("link")) {
+				customerProfilePage.logInSessionsPage().clickChangePassword();
+				validateChangePassword(strParams);
+			} else {
+				customerProfilePage.logInSessionsPage().clickEndAllSessions();
+				customerProfilePage.logInSessionsPage().clickEndAllSessions();
+				customerProfilePage.logInSessionsPage().successFailureComponent()
+						.verifyEndAllSessions(data.get("endSessnSucessHeading"));
+				customerProfilePage.logInSessionsPage().successFailureComponent().clickLogin();
+				loginPage.verifyImageCoyniView();
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" Change Password failed due to Exception " + e);
 		}
@@ -872,7 +914,8 @@ public class CustomerProfileTest {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNumHeading();
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
 						.verifyNameonCard(data.get("existCardName"));
-				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardNum(data.get("existCardNumber"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent()
+						.verifyCardNum(data.get("existCardNumber"));
 				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyCardExp(data.get("expCardExp"));
 				customerProfilePage.addNewPaymentComponent().editCardComponent()
 						.verifyBillingAddress(data.get("existAddress"));
@@ -902,36 +945,35 @@ public class CustomerProfileTest {
 						.fillZipCode(data.get("zipcode"));
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickSave();
 				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-				.verifyAddressUpdatedMsg(data.get("toastMessage"));
-				}
-				if (data.get("validateNavigation").equalsIgnoreCase("Yes")) {
-					customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
-					customerProfilePage.navigationComponent().clickBack();
-					customerProfilePage.navigationComponent().clickBack();
-				}
-			}catch (Exception e) {
-				ExtentTestManager.setFailMessageInReport("EditCard and Delete card failed due to Exception " + e);
+						.verifyAddressUpdatedMsg(data.get("toastMessage"));
 			}
+			if (data.get("validateNavigation").equalsIgnoreCase("Yes")) {
+				customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
+				customerProfilePage.navigationComponent().clickBack();
+				customerProfilePage.navigationComponent().clickBack();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("EditCard and Delete card failed due to Exception " + e);
 		}
+	}
 
-			@Test
-			@Parameters({ "strParams" })
-			public void testDeleteCard(String strParams, String card) {
-				try {
-					Map<String, String> data = Runner.getKeywordParameters(strParams);
-					customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("expHeading"));
-					if (card.equalsIgnoreCase("credit")) {
-						customerProfilePage.addNewPaymentComponent().clickCreditCard(data.get("last4Digits"));
-					} else if (card.equalsIgnoreCase("debit")) {
-						customerProfilePage.addNewPaymentComponent().clickDebitCard(data.get("last4Digits"));
-					} else {
-						customerProfilePage.addNewPaymentComponent().clickBankAccount(data.get("last4Digits"));
-					}		
-			    if (data.get("validateCardDelete").equalsIgnoreCase("Yes")) {
+	@Test
+	@Parameters({ "strParams" })
+	public void testDeleteCard(String strParams, String card) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("expHeading"));
+			if (card.equalsIgnoreCase("credit")) {
+				customerProfilePage.addNewPaymentComponent().clickCreditCard(data.get("last4Digits"));
+			} else if (card.equalsIgnoreCase("debit")) {
+				customerProfilePage.addNewPaymentComponent().clickDebitCard(data.get("last4Digits"));
+			} else {
+				customerProfilePage.addNewPaymentComponent().clickBankAccount(data.get("last4Digits"));
+			}
+			if (data.get("validateCardDelete").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickEditPaymentMethod();
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickRemove();
-				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyRemovingHdg(data.get("heading"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyRemovingHdg(data.get("heading"));
 				if (data.get("validateNo").equalsIgnoreCase("Yes")) {
 					customerProfilePage.addNewPaymentComponent().editCardComponent().clickNo();
 				}
@@ -953,8 +995,7 @@ public class CustomerProfileTest {
 			}
 			if (data.get("validateBankDelete").equalsIgnoreCase("Yes")) {
 				customerProfilePage.addNewPaymentComponent().editCardComponent().clickRemoveAccount();
-				customerProfilePage.addNewPaymentComponent().editCardComponent()
-						.verifyRemovingHdg(data.get("heading"));
+				customerProfilePage.addNewPaymentComponent().editCardComponent().verifyRemovingHdg(data.get("heading"));
 				if (data.get("validateNo").equalsIgnoreCase("Yes")) {
 					customerProfilePage.addNewPaymentComponent().editCardComponent().clickNo();
 				}

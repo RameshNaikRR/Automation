@@ -115,5 +115,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	public AddNewPaymentComponent addNewPaymentComponent() {
 		return new AddNewPaymentComponent();
 	}
-	
+	public LogInSessionsPage logInSessionsPage() {
+		return new LogInSessionsPage();
+	}
 }

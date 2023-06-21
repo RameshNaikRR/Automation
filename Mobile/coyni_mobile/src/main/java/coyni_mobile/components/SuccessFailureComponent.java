@@ -25,6 +25,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblPwdChanged = MobileBy.AccessibilityId("");
 	private By lblpwdChangedDesc = MobileBy.AccessibilityId("");
 	private By btnDone = MobileBy.AccessibilityId("");
+//	End All Sessions
+	private By lblEndAllSessi = MobileBy.AccessibilityId("");
+	private By lblEndAllSessiDesc = MobileBy.AccessibilityId("");
+	
 	//Transaction Complete Screen
 		//BuyTokens and withdraw
 		private By lblPurchaseComplete = MobileBy.AccessibilityId("");
@@ -137,6 +141,13 @@ public class SuccessFailureComponent extends MobileFunctions {
 		}
 	}
 
+//	End All Sessions
+	public void verifyEndAllSessions(String heading) {
+		new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+		new CommonFunctions().verifyLabelText(lblEndAllSessi, "End All Sessions", heading);
+		new CommonFunctions().elementView(lblEndAllSessiDesc, "End All Sessions Description");
+	}
+	
 //	
 //	private By lblHeading = MobileBy.xpath("(//*[contains(@name,'All Done')])[1]|//*[contains(@name,'Transaction')]");
 //
