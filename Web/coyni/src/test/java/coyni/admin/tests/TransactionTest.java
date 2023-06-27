@@ -939,5 +939,26 @@ public class TransactionTest {
 		}
 		
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testPersonalTransactionListWithSentAndReceive(String strParams) {
+		try {
+			
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			Thread.sleep(2000);
+			sideBarComponent.clickTransactions();
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().clickchkbxPersonal();
+			sideBarComponent.transactionPage().filterComponent().clickchkbkSent();
+			sideBarComponent.transactionPage().filterComponent().clickchkbkReceived();
+			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
+			sideBarComponent.transactionPage().filterComponent().getTotalCustomerCount(data.get("query"));
+			
+			
+		} catch (Exception e) {
+		    ExtentTestManager.setFailMessageInReport("testPersonalTransactionListWithSentAndReceive Failed due to this Exception " + e);
+		}
+		
+	}
 }
 

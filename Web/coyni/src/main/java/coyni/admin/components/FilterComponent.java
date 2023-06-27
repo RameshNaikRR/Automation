@@ -92,7 +92,8 @@ public class FilterComponent extends BrowserFunctions {
 		new CommonFunctions().verifyChangedColor(lblFilters, "Filters", expCssProp, expValue, expColor);
 	}
 
-	public void clickFilters() {
+	public void clickFilters() throws InterruptedException {
+		Thread.sleep(2000);
 		if (getElement(lblFilters, "Enabled").isEnabled()) {
 			click(lblFilters, "Filters");
 			ExtentTestManager.setPassMessageInReport("Filters button is Enabled");
@@ -318,6 +319,14 @@ public class FilterComponent extends BrowserFunctions {
 
 	public void clickchkbxPersonal() {
 		click(getCheckBox("Personal"), "Personal");
+	}
+	
+	public void clickchkbxSent() {
+		click(getCheckBox("Sent"), "Sent");
+	}
+	
+	public void clickchkbxReceive() {
+		click(getCheckBox("Received"), "Received");
 	}
 
 	public void clickchkbxCoyniAdmin() {
@@ -697,5 +706,20 @@ public class FilterComponent extends BrowserFunctions {
 	public CalenderComponent calenderComponent() {
 		return new CalenderComponent();
 	}
-
+	
+	private By lblPhoneNumber=By.cssSelector(".cell-col-3");
+	
+	public void verifyPhoneNumber() {
+		List<WebElement> elementsList = getElementsList(lblPhoneNumber, "Phone Number");
+		for (WebElement webElement : elementsList) {
+			String text = webElement.getText();
+			String substring = text.substring(0,2);
+			if(substring.equals("+1")) {
+				ExtentTestManager.setInfoMessageInReport("User Phone Number is with US Country Code  "+  text);
+			}else {
+				ExtentTestManager.setInfoMessageInReport("User Phone Number is with other Country Code  "+  text);
+			}
+		
+	}
+	}
 }

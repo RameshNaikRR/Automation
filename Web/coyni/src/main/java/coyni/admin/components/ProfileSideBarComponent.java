@@ -135,5 +135,9 @@ public class ProfileSideBarComponent extends BrowserFunctions {
 	public ActivityLogComponent activityLogComponent() {
 		return new ActivityLogComponent();
 	}
+	public FilterComponent filterComponent() {
+		return new FilterComponent();
+	}
+
 
 }

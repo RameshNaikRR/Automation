@@ -2135,6 +2135,38 @@ public class ProfilesTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfilePersonalTransactionWithSentAndReceive(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().accountTableComponent().fillSearchData(data.get("emailData"));;
+			homePage.sideBarComponent().accountTableComponent().clickUser();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().clickTokenAccount();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().clickFilters();
+		//	homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().clickchkbxPersonal();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().clickchkbxSent();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().clickchkbkReceived();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().clickApplyFilters();
+			//homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().filterComponent().getTotalCustomerCount(data.get("query"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Paginations Failed due to this Exception " + e);
+		}
 
+	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfilePersonalPhoneNumbers(String strParams) {
+		try {
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().filterComponent().verifyPhoneNumber();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testProfilePersonalPhoneNumbers Failed due to this Exception " + e);
+		}
 
+	}
 }

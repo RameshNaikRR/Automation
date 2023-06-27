@@ -90,7 +90,7 @@ public class AccountingTest {
 
 	}
 
-	public void testFilters(String strParams) throws AWTException {
+	public void testFilters(String strParams) throws AWTException, InterruptedException {
 		Map<String, String> data = Runner.getKeywordParameters(strParams);
 		// if(
 		// homePage.sideBarComponent().accountTableComponent().batchIDComponent().filterComponent().clickFilters().)

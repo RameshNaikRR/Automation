@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import coyni.admin.popups.ActionsPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class AccountTableComponent extends BrowserFunctions {
@@ -35,6 +36,14 @@ public class AccountTableComponent extends BrowserFunctions {
 	private By lblBatchDetails = By.xpath("//p[@class='breadcrumb--current']");
 	private By btnAction = By.cssSelector("tbody>tr:nth-of-type(2)>td:nth-of-type(6)>div>div>div");
 	private By drpDown = By.xpath("//div[contains(text(),'Entries Per Page')]/parent::div");
+
+	private By fillSearch = By.xpath("//input[@placeholder='Search by Name, Email or Phone']");
+	private By btnSearchIcon = By.xpath("//button[@type='submit']");
+
+	public void fillSearchData(String email) {
+		enterText(fillSearch, email, email);
+		click(btnSearchIcon, "Search Icon");
+	}
 
 	public void clickDropDownId() {
 		click(drpdwnId, "drop down");
@@ -426,7 +435,7 @@ public class AccountTableComponent extends BrowserFunctions {
 		List<String> data = getElementsList(
 				By.cssSelector(String.format(".custom-table-wrapper>tbody>tr>td:nth-child(%d)", columnNum)),
 				"Column " + columnNum + " values").stream().map(WebElement::getText).filter(text -> !text.equals(""))
-						.collect(Collectors.toList());
+				.collect(Collectors.toList());
 		if (data.isEmpty()) {
 			ExtentTestManager.setFailMessageInReport("There is no data in the column");
 		}

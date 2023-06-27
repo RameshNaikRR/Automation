@@ -32,7 +32,7 @@ public class CoyniEmployeeComponent extends BrowserFunctions {
 		return new AddNewEmployeeComponent();
 	}
 	
-	public void clickOnFiltersBtn() {
+	public void clickOnFiltersBtn() throws InterruptedException {
 		new FilterComponent().clickFilters();
 	}
 
