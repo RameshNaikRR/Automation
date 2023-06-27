@@ -950,9 +950,14 @@ public class TransactionTest {
 			sideBarComponent.transactionPage().filterComponent().clickFilters();
 			sideBarComponent.transactionPage().filterComponent().clickchkbxPersonal();
 			sideBarComponent.transactionPage().filterComponent().clickchkbkSent();
-			sideBarComponent.transactionPage().filterComponent().clickchkbkReceived();
 			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
 			sideBarComponent.transactionPage().filterComponent().getTotalCustomerCount(data.get("query"));
+			sideBarComponent.transactionPage().filterComponent().clickFilters();
+			sideBarComponent.transactionPage().filterComponent().clickchkbkSent();
+			sideBarComponent.transactionPage().filterComponent().clickchkbkReceived();
+			sideBarComponent.transactionPage().filterComponent().clickApplyFilters();
+			Thread.sleep(2000);
+			sideBarComponent.transactionPage().filterComponent().getTotalCustomerCount(data.get("query1"));
 			
 			
 		} catch (Exception e) {

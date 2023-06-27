@@ -76,6 +76,18 @@ public class ProfileSideBarComponent extends BrowserFunctions {
 	private By getMenuItems(String elementName) {
 		return By.xpath(String.format("//div[@class='menu-list-container']/a/span[text()='%s']", elementName));
 	}
+	
+	private By lblAccountId=By.cssSelector(".business_heading_profile");
+	
+  public void getCustomerAccountID() {
+	  String text = getText(lblAccountId, "Account ID");
+	  char charAt = text.charAt(3);
+	  if(charAt=='P') {
+		  ExtentTestManager.setInfoMessageInReport("Changed to prefix");
+	  }else {
+		  ExtentTestManager.setInfoMessageInReport("Not Changed to prefix");  
+	  }
+  }
 
 	public void clickUserDetails() {
 		click(getMenuItems("User Details"), "User Details");

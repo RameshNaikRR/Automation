@@ -2169,4 +2169,20 @@ public class ProfilesTest {
 		}
 
 	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testVerifyPersonalID(String strParams) {
+		try {
+			//Map<String, String> data = Runner.getKeywordParameters(strParams);
+			homePage.sideBarComponent().clickProfiles();
+			homePage.sideBarComponent().clickPersonal();
+			homePage.sideBarComponent().accountTableComponent().clickUser();
+			Thread.sleep(2000);
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().clickUserDetails();
+			homePage.sideBarComponent().accountTableComponent().profileSideBarComponent().getCustomerAccountID();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testProfilePersonalPhoneNumbers Failed due to this Exception " + e);
+		}
+
+	}
 }

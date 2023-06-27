@@ -397,11 +397,11 @@ public class FilterComponent extends BrowserFunctions {
 	}
 
 	public void clickchkbkSent() {
-		click(getCheckBox("Sent"), "Sent");
+		click(getCheckBox("Sent"), "Sent(Type)");
 	}
 
 	public void clickchkbkReceived() {
-		click(getCheckBox("Received"), "Received");
+		click(getCheckBox("Received"), "Received(Type)");
 	}
 
 	public void clickchkbkCogent() {
