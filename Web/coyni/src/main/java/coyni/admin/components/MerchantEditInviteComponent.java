@@ -7,7 +7,7 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class MerchantEditInviteComponent extends BrowserFunctions {
 
-	private By lnkEditInvite = By.xpath("//div[text()='Edit Invite']");
+	private By lnkEditInvite = By.xpath("//button[text()='Edit Invite']");
 	private By lblEditHeading = By.xpath("//h1[text()='Edit Merchant Invite']");
 	private By lblContent = By.xpath("//p[contains(@class,'mx-4 mt-6 text-sm text-center text-cgy4')]");
 

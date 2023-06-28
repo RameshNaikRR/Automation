@@ -3,7 +3,6 @@ package coyni.admin.tests;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -1052,6 +1051,7 @@ public class ProfilesTest {
 			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
 			if (Size == 0) {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
+				Thread.sleep(1000);
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.clickAccountLimits();
 				Thread.sleep(4000);
@@ -1117,12 +1117,12 @@ public class ProfilesTest {
 			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
 			if (Size == 0) {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				homePage.sideBarComponent().profileComponent().accountTableComponent().profileSideBarComponent()
 						.clickTokenAccount();
 				int size = homePage.sideBarComponent().profileComponent().accountTableComponent()
 						.profileSideBarComponent().getNoFilterRecSize();
-				if (size == 0) {
+				if (size == 1) {
 					testFilters(strParams);
 					testExportSelectedTransactions(strParams);
 

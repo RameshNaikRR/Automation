@@ -14,12 +14,12 @@ import ilabs.api.utilities.FileHelper;
 
 public class AgreementsComponent extends BrowserFunctions {
 
-	private By heading = By.xpath("//span[contains(text(),'Agreements')]");
+	private By heading = By.xpath("(//span[text()='Agreements'])[2]");
 	private By btnPrivacyPolicy = By
 			.xpath("//button[contains(@class,'w-full agreements-row')]//p[text()='Privacy Policy']");
 	private By btnTermsofServices = By
 			.xpath("//button[contains(@class,'w-full agreements-row')]//p[text()='Terms of Service']");
-	private By lblAgreements = By.xpath("//div[contains(@class,'Agreements_content')]");
+	private By lblAgreements = By.xpath("(//div[contains(@class,'Agreements_pdf_body__Ab4va ')])[2]");
 	private By headingPrivacyPolicy = By.xpath("//span[contains(text(),'Privacy Policy')]");
 	private By headingTermsofService = By.xpath("//span[contains(text(),'Terms of Service')]");
 	private By lblLastUpdateOfTermsOfService = By
@@ -197,7 +197,7 @@ public class AgreementsComponent extends BrowserFunctions {
 	}
 
 	public String verifyHeading() {
-		String str = getText(heading, "Headind is");
+		String str = getText(heading, "Heading is");
 		ExtentTestManager.setInfoMessageInReport("Heading is " + str);
 		return str;
 	}

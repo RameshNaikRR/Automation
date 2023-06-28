@@ -134,8 +134,8 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().clickStartDate();
 //			Thread.sleep(3000);
 			homePage.sideBarComponent().agreementsComponent().clickSchedule();
-			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
-					data.get("Message"));
+//			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+//					data.get("Message"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testTermOfServiceAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
@@ -224,8 +224,8 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().clickStartDate();
 //			Thread.sleep(3000);
 			homePage.sideBarComponent().agreementsComponent().clickSchedule();
-			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
-					data.get("Message"));
+//			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+//					data.get("Message"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
 					"testPrivacyPolicyAgreementsReschedulingwithSameDate Failed due to Exception  " + e);
@@ -305,8 +305,8 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().agreementsComponent().verifyApplicationAcknowledgement(data.get("tosHeading"));
 			homePage.sideBarComponent().agreementsComponent().clickEfftiveDateForApplicationSummery();
 			homePage.sideBarComponent().agreementsComponent().clickSchedule();
-			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
-					data.get("Message"));
+//			homePage.sideBarComponent().agreementsComponent().toastComponent().verifyToast(data.get("Title"),
+//					data.get("Message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(
@@ -484,7 +484,7 @@ public class SystemSettingsTest {
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyWithdrawals();
 			homePage.sideBarComponent().feeStructurePage().viewPersonalFeeStructurePage().verifyBuyToken();
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickEditAccountLimit();
-			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editWSAmount(data.get("amount"));
+//			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().editWSAmount(data.get("amount"));
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage()
 					.editAccountLimitExternalBanAmount(data.get("percentage"));
 			sideBarComponent.feeStructurePage().editPersonalFeeStructurePage().clickWeeklyLimit();

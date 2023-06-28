@@ -315,8 +315,8 @@ public class SideBarComponent extends BrowserFunctions {
 	}
 
 	public void clickMerchant() throws InterruptedException {
-		commonfunctions.verifyCursorAction(getSubMenuItems("Merchant"), "Merchant");
-		click(getSubMenuItems("Merchant"), "Merchant");
+		commonfunctions.verifyCursorAction(getSubMenuItems("Merchants"), "Merchants");
+		click(getSubMenuItems("Merchants"), "Merchants");
 		Thread.sleep(2000);
 	}
 
