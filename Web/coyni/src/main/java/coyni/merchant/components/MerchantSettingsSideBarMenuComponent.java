@@ -9,6 +9,7 @@ import coyni.merchant.pages.CompanyInformationPage;
 import coyni.merchant.pages.DBAInformationPage;
 import coyni.merchant.pages.FeesPage;
 import coyni.merchant.pages.PaymentMethodsPage;
+import coyni.merchant.pages.PointOfSalesMPOSPage;
 import coyni.merchant.pages.PreferencesPage;
 import coyni.merchant.pages.TeamSharedPage;
 import coyni.uitilities.CommonFunctions;
@@ -185,6 +186,10 @@ public class MerchantSettingsSideBarMenuComponent extends BrowserFunctions {
 
 	public FeesPage feesPage() {
 		return new FeesPage();
+	}
+
+	public PointOfSalesMPOSPage pointOfSalesMPOSPage() {
+		return new PointOfSalesMPOSPage();
 	}
 
 	public AccountLimitsPage accountLimitsPage() {

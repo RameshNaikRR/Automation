@@ -2,6 +2,8 @@ package coyni.merchant.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.merchant.popups.AddTerminalPopup;
+import coyni.merchant.popups.TerminalPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -17,12 +19,24 @@ public class PointOfSalesMPOSPage extends BrowserFunctions {
 
 	private By btnTerminal = By.xpath("//div[contains(text(),'Add Terminal')]");
 
+	private By selectTerminal = By.xpath("");
+
+	private By btnEditTerminal = By.xpath("");
+
 	private By dropDownIcon = By.xpath("//button[contains(@class,'icon-arrow-down')]");
 
 	private By btnAddTermianlToLocation = By.xpath("//button[contains(text(),'Add Terminal to Location')]");
 
 	public void clickTerinal() {
 		click(btnTerminal, "Terminal");
+	}
+
+	public void clickOnEditTerminal() {
+		click(btnEditTerminal, "Edit Terminal");
+	}
+
+	public void clickOnSelectedTerminal() {
+		click(selectTerminal, "Select Terminal");
 	}
 
 	public void verifyHeading(String Heading) {
@@ -47,6 +61,14 @@ public class PointOfSalesMPOSPage extends BrowserFunctions {
 
 	public void verifyHeadingForNoTerminalExists(String Heading) {
 		new CommonFunctions().verifyLabelText(lblHeadingNoTerminalExists, "Heading", Heading);
+	}
+
+	public AddTerminalPopup addTerminalPopup() {
+		return new AddTerminalPopup();
+	}
+
+	public TerminalPopup terminalPopup() {
+		return new TerminalPopup();
 	}
 
 }

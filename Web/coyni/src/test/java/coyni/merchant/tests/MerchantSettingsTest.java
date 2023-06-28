@@ -1559,8 +1559,8 @@ public class MerchantSettingsTest {
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().clickAddNewPayment();
 		merchantSettingsSideBarMenuComponent.paymentMethodComponent().verifyPaymentMethodsview();
 		testAddCard(strParams, "debit");
-		//testEditCard(strParams);
-		//	testDeleteCard(strParams);
+		// testEditCard(strParams);
+		// testDeleteCard(strParams);
 	}
 
 	@Test
@@ -2119,4 +2119,164 @@ public class MerchantSettingsTest {
 					.setFailMessageInReport("testMerchantSettingsTeamResetExpiredFilters failed due to Exception " + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsAddTerminal(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.clickDropDownAssigneeTerminalLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnSelectedTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillTerminalName(data.get("terminalName"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickNext();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnCheckBox();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.clickOnCheckBoxTipFormatPercent();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickNext();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillOption1(data.get("option1"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillOption2(data.get("option2"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillOption3(data.get("option3"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickNext();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().verifyTerminalInfoSummary();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().verifyTipsInfoSummary();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnEdit();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.clickDropDownAssigneeTerminalLocationSummary();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillTerminalNameSummary(data.get("terminalSummaryName"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnEdit();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnAddTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLogin();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().completeTerminalSetupPopup()
+					.fillNewPassword(data.get("newPassword"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().completeTerminalSetupPopup()
+					.fillConfirmNewPassword(data.get("confirmPassword"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsAddTerminal failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsAddedTerminal(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.clickDropDownAssigneeTerminalLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickOnSelectedTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup()
+					.fillTerminalName(data.get("terminalName"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().clickNext();
+			if (!data.get("toastMessage").isEmpty()) {
+				merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().addTerminalPopup().toastComponent()
+						.verifyToast(data.get("toastTitle"), data.get("toastMessage"));
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsAddTerminal failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsEditTerminal(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnDropDown();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnSelectedTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnEditTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnToggle();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLocationEdit();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup()
+					.clickDropDownAssigneeTerminalLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickonTips();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLogin();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().verifyTerminalID();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnEyeIcon();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnChange();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().authyComponent()
+					.fillInput(data.get("code1"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsEditTerminal failed due to Exception " + e);
+		}
+	}
+	
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsMovingTerminalToTerminal(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnDropDown();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnSelectedTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnEditTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnToggle();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLocationEdit();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup()
+					.clickDropDownAssigneeTerminalLocation();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickonTips();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnCancel();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnSave();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnLogin();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().verifyTerminalID();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnEyeIcon();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnChange();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().authyComponent()
+					.fillInput(data.get("code1"));
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsEditTerminal failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testMerchantSettingsRemoveTerminal(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().verifyHeading(data.get("heading"));
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickTerinal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnDropDown();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().clickOnSelectedTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnEditTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnToggle();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().clickOnRemoveTerminal();
+			merchantSettingsSideBarMenuComponent.pointOfSalesMPOSPage().terminalPopup().removeTerminalPopup()
+					.clickOnRemove();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testMerchantSettingsRemoveTerminal failed due to Exception " + e);
+		}
+	}
+
 }

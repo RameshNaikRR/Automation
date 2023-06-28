@@ -3,6 +3,7 @@ package coyni.merchant.popups;
 import org.openqa.selenium.By;
 
 import coyni.merchant.components.NavigationComponent;
+import coyni.merchant.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -23,10 +24,35 @@ public class AddTerminalPopup extends BrowserFunctions {
 	private By btnSave = By.xpath("");
 	private By checkboxTipFormatPercent = By.xpath("");
 	private By checkboxFlatCYN = By.xpath("");
+	private By selectTerminal = By.xpath("");
+	private By TipFormatoption1 = By.xpath("");
+	private By TipFormatoption2 = By.xpath("");
+	private By TipFormatoption3 = By.xpath("");
+	private By terminalSummaryNamee = By.xpath("");
 
 	public void verifyTerminalInfoSummary() {
 		String text = getText(lblTerminalInfo, "Terminal Info");
 		ExtentTestManager.setInfoMessageInReport(text + " is displayed");
+	}
+
+	public void verifyHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
+	}
+
+	public void fillOption1(String option1) {
+		enterText(TipFormatoption1, option1, "Option1");
+	}
+
+	public void fillOption2(String option2) {
+		enterText(TipFormatoption2, option2, "Option2");
+	}
+
+	public void fillOption3(String option3) {
+		enterText(TipFormatoption3, option3, "Option3");
+	}
+
+	public void clickOnSelectedTerminal() {
+		click(selectTerminal, "Select Terminal");
 	}
 
 	public void clickOnAddTerminal() {
@@ -36,7 +62,7 @@ public class AddTerminalPopup extends BrowserFunctions {
 	public void clickOnCheckBoxTipFormatPercent() {
 		click(checkboxTipFormatPercent, "CheckBox Tip Format");
 	}
-	
+
 	public void clickOnCancel() {
 		click(btnCancel, "Cancel");
 	}
@@ -49,8 +75,8 @@ public class AddTerminalPopup extends BrowserFunctions {
 		click(drpDownAssigneeTerminalSummary, "Assignee Terminal Location");
 	}
 
-	public void fillTerminalNameSummary() {
-		click(txtTerminalName, "Terminal Name");
+	public void fillTerminalNameSummary(String terminalSummaryName) {
+		enterText(terminalSummaryNamee, terminalSummaryName, "terminalSummaryName");
 	}
 
 	public void clickOnSave() {
@@ -70,8 +96,9 @@ public class AddTerminalPopup extends BrowserFunctions {
 		click(drpDownAssigneeTerminalLocation, "Assignee Terminal Location");
 	}
 
-	public void fillTerminalName() {
-		click(txtTerminalName, "Terminal Name");
+	public void fillTerminalName(String terminalName) {
+		enterText(txtTerminalName, terminalName, "terminalName");
+
 	}
 
 	public void clickNext() {
@@ -82,8 +109,8 @@ public class AddTerminalPopup extends BrowserFunctions {
 		click(chkboxTips, "Check Box");
 	}
 
-	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(heading, "heading", expHeading);
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 
 }
