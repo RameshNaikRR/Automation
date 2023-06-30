@@ -1,13 +1,12 @@
 package coyni_mobile.components;
 
-import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
-
 import org.openqa.selenium.By;
 
 import coyni_mobile.pages.AccountCreatedPage;
 import coyni_mobile.pages.AgreementPage;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class PhoneAndEmailVerificationComponent extends MobileFunctions {
@@ -27,7 +26,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	private By lblDontHaveAccess = MobileBy.xpath("");
 	private By lnkContactUs = MobileBy.xpath("");
 	private By lblNewEmailVerification = MobileBy.xpath("//*[@text='New Email Verification']");
-	private By NewEmailDesc = MobileBy.xpath("com.coyni.mapp:id/description");
+	private By NewEmailDesc = MobileBy.id("com.coyni.mapp:id/description");
 	private By lblCurrentPhoneVerification = MobileBy.xpath("");
 	private By currentPhonedesc = MobileBy.xpath("");
 	private By lblNewPhoneVerification = MobileBy.xpath("");
@@ -90,7 +89,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblNewEmailVerification, "New Email Verification", hdg);
 	}
 
-	public void verifyNewEmailVerificationText(String desc, String email) {
+	public void verifyNewEmailVerificationText(String desc, String email) throws InterruptedException {
 		new CommonFunctions().verifyLabelTextforEmailDescription(NewEmailDesc, "New Email Description", desc, email);
 	}
 

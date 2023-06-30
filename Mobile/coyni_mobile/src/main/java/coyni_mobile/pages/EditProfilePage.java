@@ -54,10 +54,11 @@ public class EditProfilePage extends MobileFunctions {
 	private By lblCurrentEmail = MobileBy.id("com.coyni.mapp:id/titleTV");
 	private By lblExistingEmail = MobileBy.id("com.coyni.mapp:id/contentTV");
 	private By btnChange = MobileBy.xpath("//*[@text='Change']");
-	private By lblEditEmail = MobileBy.id("");
+	private By lblEditEmail = MobileBy.xpath("//*[@text='Edit Email']");
 	private By lblCurrExistingEmail = MobileBy.id("com.coyni.mapp:id/currentET");
 	private By txtEnterNewEmail = MobileBy.id("com.coyni.mapp:id/emailET");
 	private By lblNeedHelp = MobileBy.id("");
+	private By btnSave = MobileBy.id("com.coyni.mapp:id/saveButton");
 
 	public void verifyEditEmailHeading(String hdg) {
 		new CommonFunctions().verifyLabelText(lblEditEmail, "Edit Email", hdg);
@@ -86,11 +87,7 @@ public class EditProfilePage extends MobileFunctions {
 	}
 
 	public void clickChange() {
-		if (getElement(btnChange, "Change").isEnabled()) {
-			click(btnChange, "Change");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("The change button is disabled");
-		}
+		click(btnChange, "Change");
 	}
 
 	public void verifyNeedHelpView() {
@@ -119,14 +116,12 @@ public class EditProfilePage extends MobileFunctions {
 		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", field[1]);
 	}
 
-	private By btnSave = MobileBy.xpath("(//*[@name='Save'])[1]");
-
 	public int verifySave() {
 		return getElementList(btnSave, "SaveS").size();
 	}
 
 	public void clickSave() {
-		new CommonFunctions().clickEnabledElement(btnSave, "Click Save");
+		new CommonFunctions().clickEnabledElement(btnSave, "Save");
 	}
 
 	/***

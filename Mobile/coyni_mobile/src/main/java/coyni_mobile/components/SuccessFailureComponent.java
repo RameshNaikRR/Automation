@@ -18,7 +18,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By lblCardSucessDesc = MobileBy.id("com.coyni.mapp:id/subHeaderTV");
 	private By imgTickMark = MobileBy.id("com.coyni.mapp:id/ivLogo");
 	private By lblEmailSucess = MobileBy.AccessibilityId("Change Email Successful");
-	private By lblChangeEmailDesc = MobileBy.xpath("");
+	private By lblEmailSucessDesc = MobileBy.id("com.coyni.mapp:id/tvDescription");
 	private By btnBuyTokens = MobileBy.xpath("//*[@text='Buy Tokens']");
 	private By lblAddCardHeading = MobileBy.xpath("//*[contains(@text,'Added')]");
 	private By lblAddCardDesc = MobileBy.id("com.coyni.mapp:id/subHeaderTV");
@@ -143,7 +143,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 		click(btnDone, "Done");
 	}
 
-	public void verifyCardAddedHeading(String expHeading,String expDesc) {
+	public void verifyCardAddedHeading(String expHeading, String expDesc) {
 		new CommonFunctions().verifyLabelText(lblAddCardHeading, "Added Card Heading", expHeading);
 		new CommonFunctions().verifyLabelText(lblAddCardDesc, "Added Card Description", expDesc);
 	}
@@ -162,13 +162,10 @@ public class SuccessFailureComponent extends MobileFunctions {
 	public void verifyEmailSucess(String expHeading) {
 		new CommonFunctions().elementView(imgTickMark, "sucess image");
 		new CommonFunctions().verifyLabelText(lblEmailSucess, "heading", expHeading);
-
 	}
 
 	public void verifyPasswordSucess(String expHeading) {
-
 		new CommonFunctions().verifyLabelText(lblPasswordSucess, "heading", expHeading);
-
 	}
 
 	public void verifyPasswordUpdatedDesc(String desc) {
@@ -179,16 +176,11 @@ public class SuccessFailureComponent extends MobileFunctions {
 	}
 
 	public void clickLogin() {
-		if (getElement(btnLogin, "Login").isEnabled()) {
-			click(btnLogin, "Login");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("login button is disabled");
-		}
-
+		click(btnLogin, "Login");
 	}
 
 	public void verifyChangeEmailDesc(String desc) {
-		new CommonFunctions().verifyLabelText(lblChangeEmailDesc, "desc", desc);
+		new CommonFunctions().verifyLabelText(lblEmailSucessDesc, "desc", desc);
 	}
 
 	public BuyTokenComponent buyTokenComponent() {

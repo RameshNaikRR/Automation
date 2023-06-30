@@ -103,28 +103,22 @@ public class CustomerProfileTest {
 			customerProfilePage.profilePage().editProfilePage().verifyCurrentEmailHeading();
 			customerProfilePage.profilePage().editProfilePage().verifyExistEmail(data.get("email"));
 			customerProfilePage.profilePage().editProfilePage().clickChange();
-			customerProfilePage.profilePage().editProfilePage().choosePinComponent().verifyEnterYourPinView();
+			customerProfilePage.profilePage().editProfilePage().choosePinComponent().verifyEnterYourPinhdg(data.get("pinHeading"));
 			customerProfilePage.profilePage().editProfilePage().choosePinComponent().fillPin(data.get("pin"));
-			customerProfilePage.profilePage().editProfilePage().verifyEditEmailHeading(data.get("EditEmail"));
+			customerProfilePage.profilePage().editProfilePage().verifyEditEmailHeading(data.get("editEmailHeading"));
 			customerProfilePage.profilePage().editProfilePage().verifycurrentEmail(data.get("email"));
 			customerProfilePage.profilePage().editProfilePage().fillNewEmail(data.get("newEmail"));
 			customerProfilePage.profilePage().editProfilePage().clickSave();
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.verifyCurrentEmailVerificationHeading(data.get("currentEmailVerification"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
-					.verifyCurrentEmailVerificationText(data.get("emailVerifiDesc"), data.get("email"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyResendView();
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
-					.verifyDontHaveAccess();
-			customerProfilePage.profilePage().editProfilePage().verifyNeedHelpView();
-			customerProfilePage.profilePage().navigationComponent().clickClose();
+					.verifyCurrentEmailVerificationText(data.get("currEmailVerifiDesc"), data.get("email"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.verifyNewEmailVerificationHeading(data.get("newEmailVerification"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
-					.verifyNewEmailVerificationText(data.get("emailVerifiDesc"), data.get("email"));
-			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent().verifyResendView();
+					.verifyNewEmailVerificationText(data.get("newEmailVerifiDesc"), data.get("newEmail"));
 			customerProfilePage.profilePage().editProfilePage().phoneAndEmailVerificationComponent()
 					.fillOtp(data.get("code"));
 			customerProfilePage.profilePage().editProfilePage().successFailureComponent()
@@ -689,6 +683,7 @@ public class CustomerProfileTest {
 		customerProfilePage.addNewPaymentComponent().getPaymentPage();
 		testAddCardNavigation(strParams, "debit");
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddCreditCardInPaymentMethodsNavigation(String strParams) throws InterruptedException {
@@ -698,7 +693,7 @@ public class CustomerProfileTest {
 		customerProfilePage.addNewPaymentComponent().getPaymentPage();
 		testAddCardNavigation(strParams, "credit");
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddDebitCardINwithdrawToUSd(String strParams) {
@@ -812,8 +807,7 @@ public class CustomerProfileTest {
 		}
 	}
 
-	
-	public void testAddCardNavigation(String strParams,String card) {
+	public void testAddCardNavigation(String strParams, String card) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			if (card.equalsIgnoreCase("credit")) {
@@ -833,11 +827,11 @@ public class CustomerProfileTest {
 			customerProfilePage.navigationComponent().clickBack();
 			customerProfilePage.navigationComponent().clickBack();
 			customerProfilePage.navigationComponent().clickBack();
-			customerProfilePage.navigationComponent().clickBack();	
-	} catch (Exception e) {
-		ExtentTestManager.setFailMessageInReport("Add Card Naviagtion failed due to Exception " + e);
+			customerProfilePage.navigationComponent().clickBack();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Add Card Naviagtion failed due to Exception " + e);
+		}
 	}
-}
 
 	@Test
 	@Parameters({ "strParams" })

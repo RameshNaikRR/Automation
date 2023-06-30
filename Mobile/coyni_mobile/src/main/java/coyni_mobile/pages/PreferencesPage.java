@@ -14,13 +14,13 @@ import io.appium.java_client.MobileBy;
 
 public class PreferencesPage extends MobileFunctions {
 
-	private By btnPreferences= MobileBy.AccessibilityId("");
-	private By lblPreferencesHeading = MobileBy.AccessibilityId("");
-	private By drpDwnTimeZone = MobileBy.AccessibilityId("");
-	private By lblTimeZone = MobileBy.AccessibilityId("");
-	private By lblLocalCurrency = MobileBy.AccessibilityId("");
-	private By btnSave = MobileBy.AccessibilityId("");
-	private By btnBack = MobileBy.AccessibilityId("");
+	private By btnPreferences= MobileBy.id("");
+	private By lblPreferencesHeading = MobileBy.id("");
+	private By drpDwnTimeZone = MobileBy.id("");
+	private By lblTimeZone = MobileBy.id("");
+	private By lblLocalCurrency = MobileBy.id("");
+	private By btnSave = MobileBy.id("");
+	private By btnBack = MobileBy.id("");
 
 	public void clickPreferences() {
 		click(btnPreferences, "Preferences");

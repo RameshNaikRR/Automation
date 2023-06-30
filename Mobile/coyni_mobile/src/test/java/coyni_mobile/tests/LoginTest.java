@@ -49,6 +49,19 @@ public class LoginTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testLoginWithPIN(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+	
 	/**
 	 * testLoginNavigationView script is to test the Navigation flow of Login
 	 * Feature.

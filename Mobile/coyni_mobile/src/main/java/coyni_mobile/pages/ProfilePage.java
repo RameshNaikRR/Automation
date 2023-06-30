@@ -24,8 +24,8 @@ public class ProfilePage extends MobileFunctions {
 	private By lblExistPhonenumber = MobileBy.id("com.coyni.mapp:id/userPhoneNumTV");
 	private By lblAddress = MobileBy.id("//*[@text='Address']");
 	private By lblExistAddress = MobileBy.id("");
-	private By lnkEditEmail = MobileBy.id("");
-	private By lnkEditPhoneNumber = MobileBy.id("");
+	private By lnkEditEmail = MobileBy.id("com.coyni.mapp:id/emailLL");
+	private By lnkEditPhoneNumber = MobileBy.id("com.coyni.mapp:id/phoneLL");
 	private By lnkEditAddress = MobileBy.id("com.coyni.mapp:id/addressLL");
 	private By btnChange = MobileBy.id("");
 
