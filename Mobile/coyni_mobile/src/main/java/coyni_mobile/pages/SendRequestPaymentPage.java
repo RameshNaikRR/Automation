@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.ChoosePinComponent;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.Direction;
 import ilabs.MobileFramework.DriverFactory;

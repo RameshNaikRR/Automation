@@ -2,7 +2,7 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import io.appium.java_client.MobileBy;
 
@@ -19,21 +19,21 @@ public class WalletFeesPage extends MobileFunctions{
 	private By lblWTFailedBank = MobileBy.AccessibilityId("");
 
 	public void verifyWalletFeesHeading(String heading) {
-		new AndroidCommonFunctions().verifyLabelText(lblWalletFeesHeader, "Wallet Fees", heading);
+		new CommonFunctions().verifyLabelText(lblWalletFeesHeader, "Wallet Fees", heading);
 	}
 
 	public void viewBuyTokenFees() {
-		new AndroidCommonFunctions().elementView(lblBuyTokenSubHead, "Buy Token Sub Heading");
-		new AndroidCommonFunctions().elementView(lblBTCredit, "Buy Token Bank Account Fees");
-		new AndroidCommonFunctions().elementView(lblBTCredit, "Buy Token Credit Fees");
-		new AndroidCommonFunctions().elementView(lblBTDebit, "Buy Token Debit Fees");
+		new CommonFunctions().elementView(lblBuyTokenSubHead, "Buy Token Sub Heading");
+		new CommonFunctions().elementView(lblBTCredit, "Buy Token Bank Account Fees");
+		new CommonFunctions().elementView(lblBTCredit, "Buy Token Credit Fees");
+		new CommonFunctions().elementView(lblBTDebit, "Buy Token Debit Fees");
 	}
 
 	public void viewWithdrawFees() {
-		new AndroidCommonFunctions().elementView(lblWithdrawSubHead, "Withdraw Sub Heading");
-		new AndroidCommonFunctions().elementView(lblWTBankAcc, "Withdraw Bank Account Fees");
-		new AndroidCommonFunctions().elementView(lblWTInstantPay, "Withdraw Instant Pay Fees");
-		new AndroidCommonFunctions().elementView(lblWTGiftCard, "Withdraw Gift Card Fees");
-		new AndroidCommonFunctions().elementView(lblWTFailedBank, "Buy Token Failed Bank Fees");
+		new CommonFunctions().elementView(lblWithdrawSubHead, "Withdraw Sub Heading");
+		new CommonFunctions().elementView(lblWTBankAcc, "Withdraw Bank Account Fees");
+		new CommonFunctions().elementView(lblWTInstantPay, "Withdraw Instant Pay Fees");
+		new CommonFunctions().elementView(lblWTGiftCard, "Withdraw Gift Card Fees");
+		new CommonFunctions().elementView(lblWTFailedBank, "Buy Token Failed Bank Fees");
 	}
 }

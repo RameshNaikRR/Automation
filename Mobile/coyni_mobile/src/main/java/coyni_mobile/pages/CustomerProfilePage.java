@@ -5,32 +5,32 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class CustomerProfilePage extends MobileFunctions {
-	private By lblUserName = MobileBy.AccessibilityId("");
+	private By lblUserName = MobileBy.id("");
 	private By lblAccountID = MobileBy.xpath("//*[contains(@name,'Account ID')]");
 	private By lblAccountStatus = MobileBy.xpath("//*[contains(@name,'Status')]/preceding-sibling::*[1]");
 	private By imgQRCode = MobileBy.AccessibilityId("qr code");
 	private By lblUserDetails = MobileBy.AccessibilityId("User Details");
-	private By lnkProfile = MobileBy.AccessibilityId("");
-	private By lnkPreferences = MobileBy.AccessibilityId("");
+	private By lnkProfile = MobileBy.id("com.coyni.mapp:id/profileLL");
+	private By lnkPreferences = MobileBy.id("");
 	private By lnkAgreements = MobileBy.AccessibilityId("Agreements");
-	private By lblWalletSettings = MobileBy.AccessibilityId("");
-	private By lblPaymentMethods = MobileBy.AccessibilityId("Payment Methods");
+	private By lblWalletSettings = MobileBy.id("");
+	private By lnkPaymentMethods = MobileBy.id("com.coyni.mapp:id/paymentMethodsLL");
 	private By lnkAccountLimits = MobileBy.xpath("//*[@name='Account Limits']");
-	private By lnkWalletFees = MobileBy.AccessibilityId("");
-	private By lblSecurity = MobileBy.AccessibilityId("");
-	private By lnkLoginSessions = MobileBy.AccessibilityId("");
+	private By lnkWalletFees = MobileBy.id("");
+	private By lblSecurity = MobileBy.id("");
+	private By lnkLoginSessions = MobileBy.id("");
 	private By lnkResetPinCode = MobileBy.AccessibilityId("Reset PIN Code");
-	private By lnkFaceIDtouchID = MobileBy.AccessibilityId("");
+	private By lnkFaceIDtouchID = MobileBy.id("");
 	private By lnkChangePassword = MobileBy.AccessibilityId("Change Password");
-	private By lblSupport = MobileBy.AccessibilityId("");
+	private By lblSupport = MobileBy.id("");
 	private By lnkGetHelp = MobileBy.AccessibilityId("Get Help");
-	private By btnLogOut = MobileBy.AccessibilityId("");
+	private By btnLogOut = MobileBy.id("");
 	
 	public void verifyUserNAmeandStatus() {
 		ExtentTestManager.setInfoMessageInReport("The User Name is :" + getText(lblUserName));
@@ -39,7 +39,7 @@ public class CustomerProfilePage extends MobileFunctions {
 	}
 	
 	public void verifyUserDetailsView() {
-		new AndroidCommonFunctions().elementView(lblUserDetails, "User Details");
+		new CommonFunctions().elementView(lblUserDetails, "User Details");
 	}
 	public void clickimgQRCode() {
 		click(imgQRCode, "QRcode");
@@ -54,10 +54,10 @@ public class CustomerProfilePage extends MobileFunctions {
 		click(lnkAgreements, "Agreements");
 	}
     public void verifyWalletSettingsView() {
-    	new AndroidCommonFunctions().elementView(lblWalletSettings, "Wallet Settings");
+    	new CommonFunctions().elementView(lblWalletSettings, "Wallet Settings");
     }
     public void clickPaymentMethods() {
-		click(lblPaymentMethods, "Payment Methods");
+		click(lnkPaymentMethods, "Payment Methods");
 	}
     public void clickAccountLimits() {
 		click(lnkAccountLimits, "Account Limits");
@@ -66,7 +66,7 @@ public class CustomerProfilePage extends MobileFunctions {
     	click(lnkWalletFees, "Wallet");
     }
     public void verifySecurityView() {
-    	new AndroidCommonFunctions().elementView(lblSecurity, "Security");
+    	new CommonFunctions().elementView(lblSecurity, "Security");
     }
     public void clickLoginSessions() {
     	click(lnkLoginSessions, "Login sessions");

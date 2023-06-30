@@ -9,25 +9,25 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
-	private By lblHeading = MobileBy.AccessibilityId("Add Payment Method");
-	private By lblPaymentMethods = MobileBy.AccessibilityId("");
-	private By lblPageDes = MobileBy.AccessibilityId("");
-	private By btnExternalBank = MobileBy.AccessibilityId("");
-	private By btnDebitCard = MobileBy.AccessibilityId("");
-	private By btnCreditCard = MobileBy.AccessibilityId("");
-	private By lblBankCount = MobileBy.AccessibilityId("");
-	private By lblCreditCardCount = MobileBy.AccessibilityId("");
-	private By lblDebitCardCount = MobileBy.AccessibilityId("");
-	private By lblBankContent = MobileBy.AccessibilityId("");
+	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
+	private By lblPaymentMethods = MobileBy.id("");
+	private By lblPageDes = MobileBy.id("");
+	private By btnExternalBank = MobileBy.id("com.coyni.mapp:id/lyBank");
+	private By btnDebitCard = MobileBy.id("com.coyni.mapp:id/tvDCardMsg");
+	private By btnCreditCard = MobileBy.id("com.coyni.mapp:id/tvCCardMsg");
+	private By lblBankCount = MobileBy.id("");
+	private By lblCreditCardCount = MobileBy.id("");
+	private By lblDebitCardCount = MobileBy.id("");
+	private By lblBankContent = MobileBy.id("");
 	private By lblCreditContent = MobileBy
 			.AccessibilityId("Visa, Mastercard, Discover, and American Express credit cards");
 	private By lblDebitContent = MobileBy.AccessibilityId("Visa or Mastercard debit cards");
-	private By lblError = MobileBy.AccessibilityId("");
-	private By lblErrorMesg = MobileBy.AccessibilityId("");
-	private By btnOK = MobileBy.AccessibilityId("");
+	private By lblError = MobileBy.id("");
+	private By lblErrorMesg = MobileBy.id("");
+	private By btnOK = MobileBy.id("");
 	private By lblMaxLimit = MobileBy.AccessibilityId("This method has reached maximum 4 cards");
 	private By lblCoyni = MobileBy.AccessibilityId("coyni");
-	private By lblerrorText = MobileBy.AccessibilityId("");
+	private By lblerrorText = MobileBy.id("");
 	private By lblAddNewPayment = MobileBy.AccessibilityId("Add Payment Method");
 	private By btnAddNewPaymentPlus = MobileBy.xpath("//*[@name='Add New Payment Method']");
 //	private By btnSignetWalletId = MobileBy.xpath("//*[contains(@name,'Signet')]//following-sibling::*[contains(@name,'••••%s')]");
@@ -61,18 +61,21 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By btnClose = MobileBy.AccessibilityId("close");
 	private By lblFee = MobileBy.AccessibilityId("close");
 	private By lblNoToken = MobileBy.AccessibilityId("No Token Available");
+	private By lblCardView = MobileBy.id("com.coyni.mapp:id/tvCardNumber");
 
 	public int verifyCoyniView() {
 		return getElementList(lblCoyni, "Coyni").size();
 	}
 
-	
-	public void verifyFee() {
-		if(getElement(lblFee, "Fee").isEnabled()) {
-		new CommonFunctions().elementView(lblFee, "Fee");
+	public void viewCard() throws InterruptedException {
+		Thread.sleep(500);
+		if (getElementList(lblCardView, "Fee").size() == 1) {
+			ExtentTestManager.setPassMessageInReport("The Card is added and appeared in Payment Methods");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Card is not added and not appeared in Payment Methods");
+		}
 	}
-	}
-	
+
 	public void verifyMaxlimit(String expTxt) {
 
 		new CommonFunctions().verifyLabelText(lblMaxLimit, "Max limit", expTxt);
@@ -95,24 +98,24 @@ public class AddNewPaymentComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblPaymentMethods, "PaymentMethods", hdg);
 	}
 
-    public void verifyErrorTextView() {
+	public void verifyErrorTextView() {
 
-        new CommonFunctions().elementView(lblerrorText, "ErrorText");
+		new CommonFunctions().elementView(lblerrorText, "ErrorText");
 
-        click(btnOK, "Ok");
+		click(btnOK, "Ok");
 
-    }
+	}
 
 	public void verifyAddPaymentMethodView() {
 
 		new CommonFunctions().elementView(lblHeading, "Add Payment method");
 
 	}
-	
+
 	public void clickAddNewPaymentPlusIcon() {
-		if(getElementList(lblPaymentMethods, "Payment Methods").size()>0) {
+		if (getElementList(lblPaymentMethods, "Payment Methods").size() > 0) {
 			clickAddNewPayment();
-		}else {
+		} else {
 			ExtentTestManager.setInfoMessageInReport("no payment methods");
 		}
 	}
@@ -169,10 +172,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	public void verifyHeading1(String expHeading) {
-
-		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
-
+	public void verifyAddPaymentHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblHeading, "Add Payment Heading", expHeading);
 	}
 
 	public void verifyPageText(String expText) {
@@ -194,15 +195,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickDebitCard() throws InterruptedException {
-
-		Thread.sleep(1000);
-
-		if (getElementList(btnDebitCard, "DebitCard").size() > 0) {
-
-			click(btnDebitCard, "Debit Card");
-
-		}
-
+		click(btnDebitCard, "Debit Card");
 	}
 
 	public void verifyCreditContent(String content) {
@@ -281,82 +274,81 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-    
-    
-    public void verifyNotOken() {
-    	new CommonFunctions().elementView(lblNoToken, "No Tokens Available");
-    }
-    
-    public void clickClose() {
-    	click(btnClose, "Close");
-    }
-    
-    public void clickBAck() {
-    	click(btnBack, "Back");
-    }
-    
-    public void verifyCreditCardExpiry() {
-    	new CommonFunctions().elementView(lblCreditExpiry, "Credit card Is Expired");
-    	ExtentTestManager.setInfoMessageInReport("Credit Card is :" + getText(lblCreditExpiry));
-    }
-    
-    public void verifyWithdrawDebitOOPSCondition() {
-    	click(lblDebitExp, "DebitExpiry");
-    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-    	new CommonFunctions().elementView(btnRemove, "Remove");
-    	click(btnEdit, "Edit");
-    	click(btnBack, "Back");
-    } 
-    
-    public void verifyCreditOOPSCondition() {
-    	click(lblCreditExpiry, "CreditExpiry");
-    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-    	new CommonFunctions().elementView(btnRemove, "Remove");
-    	click(btnEdit, "Edit");
-    	click(btnBack, "Back");
-    }
-    
-    public void verifyDebitOOPSCondition() {
-    	click(lblDEbitEXpiry, "DebitExpiry");
-    	new CommonFunctions().elementView(lblOOPS, "OOPS");
-    	ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
-    	new CommonFunctions().elementView(btnRemove, "Remove");
-    	click(btnEdit, "Edit");
-    	click(btnBack, "Back");
-    }
-    public void verifyEditAndDeleteCreditCard() {
-    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
-    	click(imgEdit, "Edit");
-    	click(btnBack, "Back");
-    	swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
-    	click(imgDelete, "Delete");
-    	new CommonFunctions().elementView(lblRemoving, "Removing");
-    	new CommonFunctions().elementView(btnYes, "Yes");
-    	click(btnNo, "No");
-    }
-    
-    public void verifyEditAndDeleteDebitCard() {
-    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
-    	click(imgEdit, "Edit");
-    	click(btnBack, "Back");
-    	swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
-    	click(imgDelete, "Delete");
-    	new CommonFunctions().elementView(lblRemoving, "Removing");
-    	new CommonFunctions().elementView(btnYes, "Yes");
-    	click(btnNo, "No");
-    }
-    
-    public void verifyDebitCardExpiry() {
-    	new CommonFunctions().elementView(lblDEbitEXpiry, "Credit card Is Expired");
-    	ExtentTestManager.setInfoMessageInReport("Debit Card is :" + getText(lblDEbitEXpiry));
-    }
-    
-    public void selectAccount() {
-    	click(btnAccountOne, "account");
-    }
-    
+	public void verifyNotOken() {
+		new CommonFunctions().elementView(lblNoToken, "No Tokens Available");
+	}
+
+	public void clickClose() {
+		click(btnClose, "Close");
+	}
+
+	public void clickBAck() {
+		click(btnBack, "Back");
+	}
+
+	public void verifyCreditCardExpiry() {
+		new CommonFunctions().elementView(lblCreditExpiry, "Credit card Is Expired");
+		ExtentTestManager.setInfoMessageInReport("Credit Card is :" + getText(lblCreditExpiry));
+	}
+
+	public void verifyWithdrawDebitOOPSCondition() {
+		click(lblDebitExp, "DebitExpiry");
+		new CommonFunctions().elementView(lblOOPS, "OOPS");
+		ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+		new CommonFunctions().elementView(btnRemove, "Remove");
+		click(btnEdit, "Edit");
+		click(btnBack, "Back");
+	}
+
+	public void verifyCreditOOPSCondition() {
+		click(lblCreditExpiry, "CreditExpiry");
+		new CommonFunctions().elementView(lblOOPS, "OOPS");
+		ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+		new CommonFunctions().elementView(btnRemove, "Remove");
+		click(btnEdit, "Edit");
+		click(btnBack, "Back");
+	}
+
+	public void verifyDebitOOPSCondition() {
+		click(lblDEbitEXpiry, "DebitExpiry");
+		new CommonFunctions().elementView(lblOOPS, "OOPS");
+		ExtentTestManager.setInfoMessageInReport("the text is :" + getText(txtOops));
+		new CommonFunctions().elementView(btnRemove, "Remove");
+		click(btnEdit, "Edit");
+		click(btnBack, "Back");
+	}
+
+	public void verifyEditAndDeleteCreditCard() {
+		swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
+		click(imgEdit, "Edit");
+		click(btnBack, "Back");
+		swipeOnElement(lblCreditExpiry, "Credit Card", SwipeDirection.LEFT);
+		click(imgDelete, "Delete");
+		new CommonFunctions().elementView(lblRemoving, "Removing");
+		new CommonFunctions().elementView(btnYes, "Yes");
+		click(btnNo, "No");
+	}
+
+	public void verifyEditAndDeleteDebitCard() {
+		swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
+		click(imgEdit, "Edit");
+		click(btnBack, "Back");
+		swipeOnElement(lblDEbitEXpiry, "Debit Card", SwipeDirection.LEFT);
+		click(imgDelete, "Delete");
+		new CommonFunctions().elementView(lblRemoving, "Removing");
+		new CommonFunctions().elementView(btnYes, "Yes");
+		click(btnNo, "No");
+	}
+
+	public void verifyDebitCardExpiry() {
+		new CommonFunctions().elementView(lblDEbitEXpiry, "Credit card Is Expired");
+		ExtentTestManager.setInfoMessageInReport("Debit Card is :" + getText(lblDEbitEXpiry));
+	}
+
+	public void selectAccount() {
+		click(btnAccountOne, "account");
+	}
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 	}
@@ -430,6 +422,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public MXBankComponent mxBankComponent() {
 		return new MXBankComponent();
 	}
+
 	public EditCardComponent editCardComponent() {
 		return new EditCardComponent();
 	}

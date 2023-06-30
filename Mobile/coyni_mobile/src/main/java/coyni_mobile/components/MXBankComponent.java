@@ -2,7 +2,7 @@ package coyni_mobile.components;
 
 import org.openqa.selenium.By;
 
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -32,7 +32,7 @@ public class MXBankComponent extends MobileFunctions {
 	private By btnSavings = MobileBy.xpath("//*[@text='Savings']");
 
 	public void verifyHeading(String expHeading) {
-		new AndroidCommonFunctions().verifyLabelText(heading, "Bank Heading", expHeading);
+		new CommonFunctions().verifyLabelText(heading, "Bank Heading", expHeading);
 	}
 
 	public void clickheckBox() {
@@ -67,7 +67,7 @@ public class MXBankComponent extends MobileFunctions {
 	}
 
 	public void clickStart() {
-		new AndroidCommonFunctions().clickEnabledElement(btnStart, "Start");
+		new CommonFunctions().clickEnabledElement(btnStart, "Start");
 	}
 
 	public void clickMoreInstitutions() {
@@ -145,7 +145,7 @@ public class MXBankComponent extends MobileFunctions {
 
 // Enter your Credentials screen
 	public void fillUserName(String username) {
-		new AndroidCommonFunctions().verifyAutoFocusElement(txtUsername, "User Name");
+		new CommonFunctions().verifyAutoFocusElement(txtUsername, "User Name");
 		click(txtUsername, "User Name");
 		enterText(txtUsername, username, "User Name");
 	}

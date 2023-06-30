@@ -23,7 +23,8 @@ public class LoginTest {
 	public void init() {
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
-		System.out.println("before test completed************************");
+		DriverFactory.getDriver().resetApp();
+		DriverFactory.getDriver().hideKeyboard();
 	}
 
 	/**
@@ -35,16 +36,12 @@ public class LoginTest {
 	@Parameters({ "strParams" })
 	public void testLogin(String strParams) {
 		try {
-			System.out.println("Login method running");
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			System.out.println(loginData);
 			landingPage.clickLogin();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
-			loginPage.choosePinComponent().verifyEnterYourPinView();
 			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyEnableFaceIdView();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
 		} catch (Exception e) {
@@ -64,40 +61,53 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.verifyLoginView();
+			landingPage.verifyCoyniDesc();
 			landingPage.clickLogin();
 			loginPage.verifyImageCoyniView();
-			loginPage.verifyRememberMeView();
-			loginPage.verifyRetrieveEmailView();
-			loginPage.verifyForgotPasswordView();
-			loginPage.signUpPage().validateEmail(loginData.get("emailValidations"));
+			loginPage.navigationComponent().clickClose();
+			landingPage.verifyCoyniDesc();
+			landingPage.clickLogin();
+			loginPage.verifyLoginScreenView();
+			String[] email = loginData.get("fieldEmail").split(",");
+			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			loginPage.fillEmail(loginData.get("email"));
-			loginPage.validateCreatePasswordfields(loginData.get("validatePasswords"));
+			String[] password = loginData.get("fieldPassword").split(",");
+			loginPage.fieldValidationsComponent().validatePasswordField(password[0], password[1], password[2]);
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
-			loginPage.choosePinComponent().verifyEnterYourPinView();
+			loginPage.choosePinComponent().verifyEnterYourPinheading(loginData.get("pinHeading"));
 			loginPage.choosePinComponent().verifyLogoutView();
 			loginPage.choosePinComponent().clickLogout();
 			landingPage.clickLogin();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
-			loginPage.choosePinComponent().verifyForgotPinView();
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().verifyEnterYourPinheading(loginData.get("pinHeading"));
+			loginPage.choosePinComponent().clickForgotPin();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(loginData.get("emailVerification"));
+			loginPage.navigationComponent().clickClose();
+			loginPage.choosePinComponent().verifyEnterYourPinheading(loginData.get("pinHeading"));
 			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage()
+					.verifyEnableFaceIdHeading(loginData.get("enableFaceIDHeading"));
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyEnableFaceIdView();
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickEnable();
+			loginPage.navigationComponent().clickBack();
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage()
+					.verifyEnableFaceIdHeading(loginData.get("enableFaceIDHeading"));
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyDontRemindButtonView();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
 			loginPage.choosePinComponent().dashboardPage().verifyDashboard();
+			DriverFactory.getDriver().terminateApp("com.coyni.mapp");
+			DriverFactory.getDriver().activateApp("com.coyni.mapp");
+			loginPage.choosePinComponent().verifyEnterYourPinheading(loginData.get("pinHeading"));
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test LoginNavigation view failed due to Exception " + e);
 		}
 	}
 
-	/**
-	 * testLoginWithInvalidCredentials script is to test by filling invalid email
-	 * and password in the text fields and validating error messages in Login
-	 * feature.
-	 * 
-	 * @param strParams
-	 */
 	@Test
 	@Parameters({ "strParams" })
 
@@ -105,28 +115,40 @@ public class LoginTest {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
-			loginPage.fillEmail(loginData.get("email"));
-			loginPage.fillPassword(loginData.get("password"));
-			System.out.println(loginData.get("validatePassword"));
-			if (loginData.get("validatePassword").equalsIgnoreCase("Yes")) {
-				if (loginData.get("password").length() <= 8) {
-					loginPage.clickEmail();
-				}
+			loginPage.verifyImageCoyniView();
+			String[] email = loginData.get("email").split(",");
+			String[] pwd = loginData.get("password").split(",");
+			loginPage.fillPassword(pwd[0]);
+			for (int i = 0; i < 6; i++) {
+				String[] fieldEmail = loginData.get("fieldEmail").split(",");
+				loginPage.clickEmail();
+				loginPage.fillEmail(fieldEmail[i]);
+				loginPage.clcikPassword();
+				String[] emailErrMsg = loginData.get("emailErrorMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(emailErrMsg[i], "Email");
 			}
-			Thread.sleep(1000);
-			loginPage.clickLogin();
-			if (!loginData.get("errMessage").isEmpty()) {
-				if (new CommonFunctions().isPlatformiOS()) {
-					new CommonFunctions().validateFormErrorMessageIOS(loginData.get("errMessage"),
-							loginData.get("elementName"));
+			loginPage.fillEmail(email[0]);
+			for (int i = 0; i < 5; i++) {
+				String[] fieldPwd = loginData.get("fieldPassword").split(",");
+				loginPage.clcikPassword();
+				loginPage.fillPassword(fieldPwd[i]);
+				loginPage.clickEmail();
+				String[] pwdErrMsg = loginData.get("pwdErrorMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(pwdErrMsg[i], "Password");
+			}
+
+			for (int i = 0; i < 2; i++) {
+				loginPage.fillEmail(email[i]);
+				loginPage.fillPassword(pwd[i]);
+				loginPage.clickLogin();
+				if (i == 0) {
+					loginPage.verifyIncorrectPopupDescription(loginData.get("incorrHeading"),
+							loginData.get("incorrDesc"));
+					loginPage.minimizePopupByClikingOK();
 				} else {
-//					new CommonFunctions().validateFormErrorMessage(loginData.get("errMessage"),
-//							loginData.get("elementName"));
+					loginPage.verifyDataNotFoundPopupDescription(loginData.get("dataNotFoundDesc"));
+					loginPage.minimizePopupByClikingOK();
 				}
-			}
-			if (!loginData.get("popUpMsg").isEmpty()) {
-				loginPage.verifyPopupDescription(loginData.get("description"));
-				loginPage.minimizePopupByClikingOK();
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
@@ -143,31 +165,27 @@ public class LoginTest {
 	public void testForgotPin(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
 			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
-			Thread.sleep(1000);
 			loginPage.choosePinComponent().clickForgotPin();
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.verifyEmailVerificationView(loginData.get("emailDescription"));
+					.verifyEmailVerificationHeading(loginData.get("emailVerification"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerifiDesc(loginData.get("emailVerifiDesc"), loginData.get("email"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
-					.verifyChooseYourPinView();
+					.verifyChooseYourPinView(loginData.get("choosePinHeading"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyChooseYouPinDes(loginData.get("choosePinDesc"));
 			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
 					.verifyConfirmYourPin(loginData.get("confirmPinHeading"));
-			if (loginData.get("validateNavigation").equalsIgnoreCase("Yes")) {
-				loginPage.navigationComponent().clickBack();
-				loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
-						.verifyChooseYourPinView();
-				loginPage.navigationComponent().clickBack();
-				loginPage.choosePinComponent().verifyEnterYourPinView();
-				loginPage.navigationComponent().clickClose();
-			}
-			if (loginData.get("validatePin").equalsIgnoreCase("Yes")) {
-				loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
-						.fillPin(loginData.get("pin"));
-				loginPage.toastComponent().verifyToastMsg(loginData.get("toastMsg"));
-			}
-
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.fillPin(loginData.get("pin"));
+			loginPage.toastComponent().verifyToastMsg(loginData.get("toastMsg"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
 		}
@@ -178,9 +196,16 @@ public class LoginTest {
 	public void testForgotPinDisabledScenario(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
 			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+//			Pin taking 2.5 seconds time to refresh the pin field
+			Thread.sleep(2500);
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
 			loginPage.choosePinComponent().viewIncorrectPINHeading();
 			loginPage.choosePinComponent().clickTryAgain();
 			loginPage.choosePinComponent().clickLogout();
@@ -188,15 +213,17 @@ public class LoginTest {
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
-			loginPage.choosePinComponent().verifyEnterYourPinView();
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			Thread.sleep(2500);
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
 			loginPage.choosePinComponent().clickForgotPin();
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
-					.verifyEmailVerificationView(loginData.get("emailDescription"));
+					.verifyEmailVerificationHeading(loginData.get("emailVerification"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
-					.verifyChooseYourPinView();
+					.verifyChooseYourPinView(loginData.get("choosePinHeading"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
 					.fillPin(loginData.get("pin"));
 			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
@@ -208,20 +235,82 @@ public class LoginTest {
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			Thread.sleep(2500);
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
 			loginPage.choosePinComponent().viewIncorrectPINHeading();
 			loginPage.choosePinComponent().clickTryAgain();
-			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
-			loginPage.choosePinComponent().viewDisabledHeading();
-			DriverFactory.getDriver().resetApp();
+			Thread.sleep(1500);
+			loginPage.choosePinComponent().fillPin(loginData.get("inValidPin"));
+			loginPage.choosePinComponent().verifyDisabledHeading(loginData.get("disableHeading"),
+					loginData.get("disableDesc"));
+			loginPage.choosePinComponent().clickLogout();
+			landingPage.verifyLandingPageView();
+			loginPage.choosePinComponent().clickForgotPin();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().verifyEmailVerificationScreen();
+			DriverFactory.getDriver().closeApp();
+			DriverFactory.getDriver().activateApp("com.coyni.mapp");
+			landingPage.verifyLandingPageView();
 			landingPage.clickLogin();
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
 			loginPage.viewDisabledPINPopup();
-			loginPage.clickDisPINOk();
+			loginPage.minimizePopupByClikingOK();
 			loginPage.verifyImageCoyniView();
+//			loginPage.choosePinComponent().verifyDisabledHeading(loginData.get("disableHeading"),
+//					loginData.get("disableDesc"));
+			DriverFactory.getDriver().resetApp();
+			landingPage.verifyLandingPageView();
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.viewDisabledPINPopup();
+			loginPage.minimizePopupByClikingOK();
+			loginPage.verifyImageCoyniView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPinInvalidAndNavigationView(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			loginPage.choosePinComponent().clickForgotPin();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(loginData.get("emailVerification"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("invalidCode"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyInvalidCode(loginData.get("invalidCodeMsg"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().clickResend();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().viewNewCodeSentMsg();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyChooseYourPinView(loginData.get("choosePinHeading"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyConfirmYourPin(loginData.get("confirmPinHeading"));
+			loginPage.navigationComponent().clickBack();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent().choosePinComponent()
+					.verifyChooseYourPinView(loginData.get("choosePinHeading"));
+			loginPage.navigationComponent().clickBack();
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(loginData.get("pinHeading"));
+			loginPage.choosePinComponent().clickForgotPin();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(loginData.get("emailVerification"));
+			loginPage.navigationComponent().clickClose();
+			loginPage.choosePinComponent().clickLogout();
+			landingPage.verifyCoyniView();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test Forgot pin is failed due to Exception " + e);
 		}
@@ -239,37 +328,87 @@ public class LoginTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickForgotPassword();
-			loginPage.verifyForgotYourPWdHeading(data.get("expHeading"));
-			loginPage.verifyForgotYourPasswordview(data.get("description"));
-			loginPage.signUpPage().validateEmail(data.get("emailValidations"));
+			loginPage.verifyForgotYourPWdHeading(data.get("forgotHeading"));
+			loginPage.verifyForgotYourPasswordDesc(data.get("forgotDescription"));
+			loginPage.fillEmail(data.get("email"));
 			loginPage.clickNext();
-			Thread.sleep(2000);
-			loginPage.phoneAndEmailVerificationComponent().verifyEmailVerificationView(data.get("emailDescription"));
-			loginPage.phoneAndEmailVerificationComponent().verifyResendView();
-			loginPage.navigationComponent().clickBack();
-			loginPage.fillEmail(data.get("email"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerifiDesc(data.get("emailVerifiDesc"), data.get("email"));
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().verifyCreateNewPasswordView();
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.validateNewPasswordfield(data.get("validatePasswords"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-					.validateConfirmPasswordfield(data.get("validatePasswords"));
-			loginPage.navigationComponent().clickBack();
-			loginPage.fillEmail(data.get("email"));
-			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+					.verifyCreateNewPasswordHeading(data.get("createPwdHeading"));
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
 					.fillNewPassword(data.get("password"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickEye();
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickNewPassIconEye();
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().viewPasswordStrength();
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
 					.fillConfirmPassword(data.get("password"));
-			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickEye();
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickSave();
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().successFailureComponent()
-					.verifyPasswordUpdatedDesc(data.get("passwordDesc"));
+					.verifyPasswordUpdatedDesc(data.get("sucessPwdDesc"));
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().successFailureComponent()
 					.clickLogin();
+			loginPage.verifyImageCoyniView();
+			loginPage.fillEmail(data.get("email"));
+			loginPage.fillPassword(data.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().verifyEnterYourPinhdg(data.get("pinHeading"));
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testForgotPassword failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testForgotPasswordWithInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickForgotPassword();
+			loginPage.verifyForgotYourPWdHeading(data.get("forgotHeading"));
+			for (int i = 0; i < 6; i++) {
+				String[] fieldEmail = data.get("fieldEmail").split(",");
+				loginPage.fillEmail(fieldEmail[i]);
+				if (i == 0) {
+					loginPage.clickNext();
+					new CommonFunctions().validateFormErrorMessage(data.get("emailErrorMsg"), "Email");
+				} else {
+					loginPage.clickEmail();
+					loginPage.verifyDisabledStateNext();
+				}
+			}
+			loginPage.fillEmail(data.get("email"));
+			loginPage.clickNext();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.verifyCreateNewPasswordHeading(data.get("createPwdHeading"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.fillConfirmPassword(data.get("password"));
+			for (int i = 0; i < 6; i++) {
+				String[] fieldPassword = data.get("fieldPassword").split(",");
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+						.fillNewPassword(fieldPassword[i]);
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickConfirmPassword();
+				String[] newPwdErrMsg = data.get("pwdErrorMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(newPwdErrMsg[i], "New Password Field");
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().verifyDisableStateSave();
+			}
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.fillNewPassword(data.get("password"));
+			for (int i = 0; i < 2; i++) {
+				String[] fieldConfPwd = data.get("fieldConfPwd").split(",");
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+						.fillConfirmPassword(fieldConfPwd[i]);
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickNewPassword();
+				String[] conPwdErrMsg = data.get("confPwdErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(conPwdErrMsg[i], "Confirm Password Field");
+				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().verifyDisableStateSave();
+			}
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testForgotPassword failed due to exception " + e);
 		}
@@ -283,61 +422,43 @@ public class LoginTest {
 	 */
 	@Test
 	@Parameters({ "strParams" })
-	public void testForgotPasswordWithInvalidData(String strParams) {
+	public void testForgotPasswordNavigation(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			landingPage.clickLogin();
 			loginPage.clickForgotPassword();
+			loginPage.verifyForgotYourPWdHeading(data.get("forgotHeading"));
+			String[] email = data.get("fieldEmail").split(",");
+			loginPage.fieldValidationsComponent().validateEmailField(email[0], email[1], email[2]);
 			loginPage.fillEmail(data.get("email"));
 			loginPage.clickNext();
-			if (data.get("validatePassword").equalsIgnoreCase("Yes")) {
-				loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
-				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-						.fillNewPassword(data.get("newPassword"));
-				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
-						.fillConfirmPassword(data.get("confirmPassword"));
-				loginPage.signUpPage().verifyPasswordREquirementError(data.get("errMessage"));
-			}
-			Thread.sleep(3000);
-			if (data.get("validateErrorMsg").equalsIgnoreCase("Yes")) {
-				if (!data.get("errMessage").isEmpty()) {
-					new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-				}
-			}
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("invalidCode"));
+			loginPage.phoneAndEmailVerificationComponent().verifyInvalidCode(data.get("invalidCodeMsg"));
+			loginPage.phoneAndEmailVerificationComponent().clickResend();
+			loginPage.phoneAndEmailVerificationComponent().viewNewCodeSentMsg();
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
+					.verifyCreateNewPasswordHeading(data.get("createPwdHeading"));
+			String[] password = data.get("fieldPassword").split(",");
+			loginPage.fieldValidationsComponent().validateNewPasswordField(password[0], password[1], password[2]);
+			loginPage.fieldValidationsComponent().validateConfirmPasswordField(password[0], password[1], password[2]);
+			loginPage.navigationComponent().clickBack();
+			loginPage.verifyForgotYourPWdHeading(data.get("forgotHeading"));
+			loginPage.clickNext();
+			loginPage.choosePinComponent().phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			loginPage.navigationComponent().clickBack();
+			loginPage.verifyForgotYourPWdHeading(data.get("forgotHeading"));
+			loginPage.navigationComponent().clickClose();
+			loginPage.verifyImageCoyniView();
 
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
 		}
 	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testForgotPasswordInvalidOTPCredentials(String strParams) {
-//		try {
-//			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-//			loginPage.clickForgotPassword();
-//			loginPage.forgotPasswordPage().verifyHeading(loginData.get("forgotHeading"));
-//			loginPage.forgotPasswordPage().verifyContentHeading(loginData.get("forgotContentHeading"));
-//			loginPage.forgotPasswordPage().fillEmail(loginData.get("email"));
-//			loginPage.forgotPasswordPage().clickNext();
-//			loginPage.forgotPasswordPage().verifyEmailComponent()
-//					.verifyEmailOtpHeading(loginData.get("emailOtpHeading"));
-//			Thread.sleep(2000);
-//			// loginPage.forgotPasswordPage().verifyEmailComponent().fillInputBoxes(loginData.get("code"));
-//			for (int i = 0; i <= 4; i++) {
-//				Thread.sleep(5000);
-//				loginPage.forgotPasswordPage().verifyEmailComponent().clickResend();
-////				 loginPage.forgotPasswordPage().verifyEmailComponent()
-////				 .verifyResentMsg(loginData.get("resendMessage"));
-//			}
-//			loginPage.forgotPasswordPage().verifyEmailComponent().clickOk();
-//		} catch (Exception e) {
-//			ExtentTestManager
-//					.setFailMessageInReport("Forgot password faield with invalid Credentials due to exception " + e);
-//		}
-//	}
 
 	/**
 	 * testRetrieveEmail script is to test the Retrieve Email feature by filling all
@@ -350,76 +471,170 @@ public class LoginTest {
 	public void testRetrieveEmail(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
 			loginPage.clickRetrieveEmail();
-			loginPage.verifyRetrievEmailhdgView(loginData.get("description"));
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.signUpPage().validatePhoneNumber(loginData.get("validatePhoneNumber"));
-			loginPage.signUpPage().validateFirstNameField(loginData.get("validateFirstName"));
-			loginPage.signUpPage().validateLastNameField(loginData.get("validateLastName"));
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName1"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-			Thread.sleep(2000);
-			loginPage.verifyNoUserFound(loginData.get("noUserFoundDesc"));
-			loginPage.clickTryAgain();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName1"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickcancel();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName1"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			loginPage.verifyRetrievEmailDesc(loginData.get("retrieveDesc"));
+			loginPage.clickDrpDwPhNum();
 			loginPage.selectCountry(loginData.get("country"));
 			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
 			loginPage.fillFirstName(loginData.get("firstName"));
 			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
 			loginPage.phoneAndEmailVerificationComponent()
-					.verifyPhoneVerificationView(loginData.get("PhoneNumberDesc"));
-			loginPage.phoneAndEmailVerificationComponent().verifyResendView();
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
+					.verifyPhoneVerificationHeading(loginData.get("phNumVerifiHeadi"));
+//			loginPage.phoneAndEmailVerificationComponent()
+//					.verifyLabelTextforPhNumVerifiDesc(loginData.get("phNumVerifiDesc"),loginData.get("phoneNumber"));
 			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
-			loginPage.clickThisisNotMe();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
-			loginPage.navigationComponent().clickClose();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.verifyWeFoundYourAccount(loginData.get("firstName"), loginData.get("lastName"));
+			String retrieveEmail = loginPage.validateRetrieveEmail();
 			loginPage.clickRetrieveLogin();
-			loginPage.verifyLoginEmail(loginData.get("email"));
+			String loginEmail = loginPage.validateLoginEmail();
+			if (retrieveEmail.equals(loginEmail)) {
+				ExtentTestManager.setPassMessageInReport("The Valid email is auto populating in email field");
+			} else {
+				ExtentTestManager.setFailMessageInReport("The Invalid email is auto populating in email field");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailWithInvalidCredentials(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(data.get("retrieveHeading"));
+			loginPage.fillFirstName(data.get("firstName"));
+			for (int i = 0; i < 3; i++) {
+				String[] fieldPhoneNumber = data.get("fieldPhoneNumber").split(",");
+				loginPage.fillPhoneNumber(fieldPhoneNumber[i]);
+				loginPage.clickFirstName();
+				String[] phNumErrMsg = data.get("phNumErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(phNumErrMsg[i], "Phone Number Field");
+				loginPage.verifyDisabledStateNext();
+			}
+			loginPage.fillPhoneNumber(data.get("phoneNumber"));
+			loginPage.fillLastName(data.get("firstName"));
+			for (int i = 0; i < 2; i++) {
+				String[] fieldFirstName = data.get("fieldFirstName").split(",");
+				loginPage.fillFirstName(fieldFirstName[i]);
+				loginPage.clickLastName();
+				String[] fstNameErrMsg = data.get("fstNameErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(fstNameErrMsg[i], "First Name Field");
+				loginPage.verifyDisabledStateNext();
+			}
+			loginPage.fillFirstName(data.get("firstName"));
+			for (int i = 0; i < 2; i++) {
+				String[] fieldLastName = data.get("fieldLastName").split(",");
+				loginPage.fillLastName(fieldLastName[i]);
+				loginPage.clickFirstName();
+				DriverFactory.getDriver().hideKeyboard();
+				String[] lstNameErrMsg = data.get("lstNameErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(lstNameErrMsg[i], "Last Name Field");
+				loginPage.verifyDisabledStateNext();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testForgotPassword failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailFoundAccountNavigationView(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			testRetrieveScreen(strParams);
+			loginPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationHeading(loginData.get("phNumVerifiHeadi"));
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.viewWeFoundYourAccount();
+			loginPage.clickThisisNotMe();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			loginPage.validateThisIsNotMe();
+			testRetrieveScreen(strParams);
+			loginPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationHeading(loginData.get("phNumVerifiHeadi"));
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("code"));
+			loginPage.viewWeFoundYourAccount();
+			loginPage.navigationComponent().clickClose();
+			loginPage.verifyImageCoyniView();
+			String loginEmail = loginPage.validateLoginEmail();
+			if (loginEmail.equals("") || loginEmail.equals("Email")) {
+				ExtentTestManager
+						.setPassMessageInReport("The Email is not auto populating,After clicking on close button");
+			} else {
+				ExtentTestManager.setFailMessageInReport("The Email is auto populating,After clicking on close button");
+			}
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			testRetrieveScreen(strParams);
+			loginPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationHeading(loginData.get("phNumVerifiHeadi"));
+			loginPage.phoneAndEmailVerificationComponent().clickResend();
+			loginPage.phoneAndEmailVerificationComponent().fillOtp(loginData.get("invalidCode"));
+			loginPage.phoneAndEmailVerificationComponent().verifyInvalidCode(loginData.get("invalidCodeMsg"));
+			loginPage.phoneAndEmailVerificationComponent().clickResend();
+			loginPage.phoneAndEmailVerificationComponent().viewNewCodeSentMsg();
+//			here until the "new code message" will disappear, then only it allows to do actions on elements
+			Thread.sleep(1000);
+			loginPage.navigationComponent().clickClose();
+			loginPage.verifyImageCoyniView();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testRetrieveEmailNoUserFoundNavigationView(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			testRetrieveScreen(strParams);
+			loginPage.verifyNoUserFound(loginData.get("noUserDesc"));
+			loginPage.clickTryAgain();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			loginPage.validateThisIsNotMe();
+			testRetrieveScreen(strParams);
+			loginPage.viewNoUserFound();
+			loginPage.clickcancel();
+			loginPage.verifyImageCoyniView();
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			testRetrieveScreen(strParams);
+//			loginPage.viewNoUserFound();
+			loginPage.verifyNoUserFound(loginData.get("noUserDesc"));
+			loginPage.navigationComponent().clickClose();
+			loginPage.verifyImageCoyniView();
+			String loginemail = loginPage.validateLoginEmail();
+			if (loginemail.equals("") || loginemail.equals("Email")) {
+				ExtentTestManager
+						.setPassMessageInReport("The Email is not auto populating,After clicking on close button");
+			} else {
+				ExtentTestManager.setFailMessageInReport("The Email is auto populating,After clicking on close button");
+			}
+			loginPage.clickRetrieveEmail();
+			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
+			loginPage.clickDrpDwPhNum();
+			loginPage.validateSelectCountry(loginData.get("country"));
+			String[] phoneNumber = loginData.get("fieldPhoneNumber").split(",");
+			loginPage.fieldValidationsComponent().validatePhoneNumberField(phoneNumber[0], phoneNumber[1],
+					phoneNumber[2]);
+			String[] firstName = loginData.get("fieldFirstName").split(",");
+			loginPage.fieldValidationsComponent().validateFirstNameField(firstName[0], firstName[1], firstName[2],
+					firstName[3], loginData.get("validateDataType"));
+			String[] lastName = loginData.get("fieldLastName").split(",");
+			loginPage.fieldValidationsComponent().validateLastNameField(lastName[0], lastName[1], lastName[2],
+					lastName[3], loginData.get("validateDataType"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testRetrieveEmail Failed due to exception " + e);
@@ -432,487 +647,19 @@ public class LoginTest {
 	 * 
 	 * @param strParams
 	 */
-	@Test
-	@Parameters({ "strParams" })
-	public void testRetrieveEmailWithInvalidCredentials(String strParams) {
+
+	public void testRetrieveScreen(String strParams) {
 		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			landingPage.clickLogin();
-			loginPage.clickRetrieveEmail();
-			loginPage.selectCountry(data.get("country"));
-			loginPage.fillPhoneNumber(data.get("phoneNumber"));
-			loginPage.fillFirstName(data.get("firstName"));
-			loginPage.fillLastName(data.get("lastName"));
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			loginPage.clickDrpDwPhNum();
+			loginPage.selectCountry(loginData.get("country"));
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
 			loginPage.clickNext();
-			if (!data.get("errMessage").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessageIOS(data.get("errMessage"), data.get("elementName"));
-			}
 		} catch (Exception e) {
 			ExtentTestManager
 					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
 		}
 	}
-
-////
-////	@Test
-////	@Parameters({ "strParams" })
-////	public void testRetrieveEmailWithInvalidOTPCredentials(String strParams) {
-////		try {
-////			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-////			landingPage.clickLogin();
-////			loginPage.clickForgotEmail();
-////			loginPage.retrieveEmailPage().verifyHeading(loginData.get("retrieveEmailHeading"));
-////			loginPage.retrieveEmailPage().fillPhoneNumber(loginData.get("phoneNumber"));
-////			loginPage.retrieveEmailPage().fillFirstName(loginData.get("firstName"));
-////			loginPage.retrieveEmailPage().fillLastName(loginData.get("lastName"));
-////			loginPage.retrieveEmailPage().clickNext();
-//////			loginPage.retrieveEmailPage().verifyErrorMessage();
-//////			loginPage.retrieveEmailPage().clickOk();
-//////			loginPage.retrieveEmailPage().clickNext();
-////			// Thread.sleep(5000);
-////			loginPage.retrieveEmailPage().verifyPhone(loginData.get("phoneHeading"));
-////			for (int i = 0; i <= 4; i++) {
-////				Thread.sleep(5000);
-////				loginPage.retrieveEmailPage().clickResend();
-////			}
-////			// loginPage.retrieveEmailPage().verifyErrorMessage();
-////			loginPage.retrieveEmailPage().clickOk();
-////		} catch (Exception e) {
-////			ExtentTestManager
-////					.setFailMessageInReport("testRetrieveEmailWithInvalidOTPCredentials Failed due to exception " + e);
-////		}
-////	}
-
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testPayRequestScanner(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			if(data.get("validateMenuScan").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.clickMenu();
-//				tokenAccountPage.tokenHomePopUp().clickScan();
-//		//		tokenAccountPage.clickOK();
-//				tokenAccountPage.scanPage().clickScanMe();
-//				tokenAccountPage.scanPage().clickCross();
-//			}
-//			if(data.get("validateDasboardScan").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.clickScan();
-//			}
-//		//	tokenAccountPage.clickOK();
-//			tokenAccountPage.scanPage().clickScanMe();
-//			tokenAccountPage.scanPage().scanMePage().verifyUserNameView();
-//			tokenAccountPage.scanPage().scanMePage().clickShare();
-//			tokenAccountPage.scanPage().scanMePage().clickMsg();
-//			Thread.sleep(2000);
-//			tokenAccountPage.scanPage().scanMePage().clickCopy();
-//			tokenAccountPage.scanPage().scanMePage().verifyPhotosPopup();
-//			Thread.sleep(4000);
-//			tokenAccountPage.scanPage().scanMePage().clickSaveToAlbum();
-//			Thread.sleep(1000);
-//			tokenAccountPage.scanPage().scanMePage().verifyPhotosPopup();
-//			tokenAccountPage.scanPage().scanMePage().clickSetAmount();
-//			if(data.get("validateAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanMePage().setAmountPopup().validatesetAmount(data.get("amount1"));
-//				tokenAccountPage.scanPage().scanMePage().setAmountPopup().clickOK();
-//				tokenAccountPage.scanPage().scanMePage().setAmountPopup().verifyMaxLimitErrorMsg(data.get("errMessage"));
-//				tokenAccountPage.scanPage().scanMePage().setAmountPopup().clickOK();
-//			}
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().clickOK();
-//			Thread.sleep(3000);
-//			tokenAccountPage.scanPage().scanMePage().clickSaveToAlbum();
-//			tokenAccountPage.scanPage().scanMePage().verifyPhotosPopup();
-//			tokenAccountPage.scanPage().scanMePage().clickClearAmount();
-//			tokenAccountPage.scanPage().scanMePage().clickSetAmount();
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().fillAmount(data.get("amount2"));
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().clickOK();
-//			Thread.sleep(3000);
-//			tokenAccountPage.scanPage().scanMePage().clickSaveToAlbum();
-//			tokenAccountPage.scanPage().scanMePage().clickClose();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request Scanner failed due to Exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testPayRequestScanAmount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			if(data.get("validateMenuScan").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.clickMenu();
-//				tokenAccountPage.tokenHomePopUp().clickScan();
-//			}
-//			if(data.get("validateDasboardScan").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.clickScan();
-//			}
-//		//	tokenAccountPage.clickOK();
-//			Thread.sleep(2000);
-//			tokenAccountPage.scanPage().scanCodePage().clickAlbum();
-//			// tokenAccountPage.scanPage().scanCodePage().clickAlbum();
-//			Thread.sleep(5000);
-//			if (data.get("validateSetAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto3();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().fillAmount(data.get("amount"));
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().fillMessage(data.get("errMessage"));
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().clickDone();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().clickPay();
-//				Thread.sleep(2000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getRecipientAdd();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getProcessingFee();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().getTotal();
-//
-//			}
-//			if (data.get("validateWithAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto2();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getRecipientAdd();
-////				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-////						.getProcessingFee();
-//			}
-//			if(data.get("validateTransaction").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().swipeConfirm();
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//					.enterYourPINComponent().fillPin(data.get("pin"));
-//	String ref1 = tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().verifyReferenceId();
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().clickDone();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-//			Thread.sleep(3000);
-//			tokenAccountPage.verifyRecentTransactionsView();
-//    		Thread.sleep(3000);
-//    //		tokenAccountPage.clickFirstTransactions();
-//    		tokenAccountPage.transactionsDetailsComponent().getTransactionDetails();
-//    		 String ref2 = tokenAccountPage.transactionsDetailsComponent().verifyReferenceId();
-//             if(ref1.equals(ref2)) {
-//             	ExtentTestManager.setInfoMessageInReport("reference ID is same");
-//             }else {
-//             	ExtentTestManager.setWarningMessageInReport("reference ID is not same");
-//             }
-//    		tokenAccountPage.transactionsDetailsComponent().clickBack();
-//			}
-//    		if(data.get("validateMoreAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto1();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//				.getRecipientAdd();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().swipeConfirm();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().verifyOOPs();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().clickBuyTokens();
-////				Thread.sleep(1000);
-////				tokenAccountPage.scanPage().clickScanMe();
-////				tokenAccountPage.scanPage().clickScanMe();
-////				tokenAccountPage.scanPage().clickCross();
-//			}
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request Scan Amount failed due to Exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testRequestScannerWithAmount(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			if(data.get("validateMenuScan").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.clickMenu();
-//				Thread.sleep(1000);
-//				tokenAccountPage.tokenHomePopUp().clickScan();
-//			}
-//			if(data.get("validateDasboardScan").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.clickScan();
-//			}
-//		//	tokenAccountPage.clickOK();
-//			Thread.sleep(2000);
-//			tokenAccountPage.scanPage().scanCodePage().clickAlbum();
-//			if (data.get("validateSetAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto3();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().fillAmount(data.get("amount"));
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().fillMessage(data.get("errMessage"));
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().clickDone();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().clickRequest();
-//				Thread.sleep(2000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getRecipientAdd();
-//			}
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().swipeConfirm();
-//			Thread.sleep(1000);
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().clickDone();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test  Request Scan Amount failed due to Exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testPayRequestScannerInMerchant(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickProfile();
-//			Thread.sleep(2000);
-//			tokenAccountPage.userDetailsPage().clickQRCode();
-////			tokenAccountPage.clickScan();
-////			tokenAccountPage.clickOK();
-////			tokenAccountPage.scanPage().clickScanMe();
-//			tokenAccountPage.scanPage().scanMePage().clickShare();
-//			tokenAccountPage.scanPage().scanMePage().clickMsg();
-//			Thread.sleep(2000);
-//			tokenAccountPage.scanPage().scanMePage().clickCopy();
-//			Thread.sleep(6000);
-//			tokenAccountPage.scanPage().scanMePage().clickSaveToAlbum();
-//			tokenAccountPage.scanPage().scanMePage().verifyPhotosPopup();
-//			Thread.sleep(1000);
-//			tokenAccountPage.scanPage().scanMePage().clickSetAmount();
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().fillAmount(data.get("amount"));
-//			tokenAccountPage.scanPage().scanMePage().setAmountPopup().clickOK();
-//			Thread.sleep(3000);
-//			tokenAccountPage.scanPage().scanMePage().clickSaveToAlbum();
-//			tokenAccountPage.scanPage().scanMePage().clickClearAmount();
-//			tokenAccountPage.scanPage().scanMePage().clickClose();
-//		//	tokenAccountPage.customerProfilePage().clickLogOut();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request Scanner failed due to Exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testPayRequestScanAmountInMerchant(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			tokenAccountPage.clickScan();
-//		//	tokenAccountPage.clickOK();
-//			Thread.sleep(2000);
-//			tokenAccountPage.scanPage().scanCodePage().clickAlbum();
-//			Thread.sleep(5000);
-//			if (data.get("validateSetAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto2();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().fillAmount(data.get("amount"));
-//				Thread.sleep(1000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().clickPay();
-//				Thread.sleep(2000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getRecipientAdd();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getPaymentMethod();
-//			}
-//			if (data.get("validateWithAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.scanPage().scanCodePage().clickPhoto1();
-//				Thread.sleep(10000);
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getPaymentMethod();
-//				tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//						.getRecipientAdd();
-//			}
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().swipeConfirm();
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup()
-//					.enterYourPINComponent().fillPin(data.get("pin"));
-//			tokenAccountPage.scanPage().scanCodePage().payRequestComponent().payRequestConfirmPopup().clickDone();
-//			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request Scan Amount failed due to Exception " + e);
-//		}
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testByVerifyingAllLinks(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			landingPage.clickLogin();
-//			loginPage.clickForgotPassword();
-//			loginPage.forgotPasswordPage().verifyForgotPasswordView();
-//			Thread.sleep(1000);
-//			loginPage.clickCross();
-//			loginPage.clickRetrieveEmail();
-//			loginPage.retrieveEmailPage().verifyRetriveEmailView();
-//			// loginPage.retrieveEmailPage().verifyHeading(data.get("retrieveEmailHeading"));
-//			Thread.sleep(1000);
-//			loginPage.clickCross();
-//			loginPage.fillEmail(data.get("email"));
-//			loginPage.fillPassword(data.get("password"));
-//			loginPage.clickLogin();
-//			loginPage.enterYourPINComponent().clickForgotPin();
-//			loginPage.enterYourPINComponent().forgotPinComponent().verifyForgotPinView();
-//			// loginPage.enterYourPINComponent().forgotPinComponent().verifyHeading(data.get("forgotHeading"));
-//			Thread.sleep(1000);
-//			loginPage.enterYourPINComponent().forgotPinComponent().navigationComponent().clickBack();
-//			loginPage.enterYourPINComponent().fillPin(data.get("pin"));
-//			Thread.sleep(2000);
-//			loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-//			tokenAccountPage.clickProfile();
-//			Thread.sleep(1000);
-//		//	tokenAccountPage.customerProfilePage().clickUserDetails();
-//		//	tokenAccountPage.customerProfilePage().userDetailsPage().verifyUserDetailsPageview();
-//			// tokenAccountPage.customerProfilePage().userDetailsPage().verifyHeading(data.get("userDetailsHeading"));
-//			Thread.sleep(1000);
-//			tokenAccountPage.customerProfilePage().userDetailsPage().navigationComponent().clickBack();
-//			tokenAccountPage.customerProfilePage().clickPaymentMethods();
-//			tokenAccountPage.customerProfilePage().addNewPaymentComponent().verifyAddPaymentMethodView();
-//			Thread.sleep(1000);
-//			tokenAccountPage.customerProfilePage().addNewPaymentComponent().clickCross();
-//			tokenAccountPage.customerProfilePage().clickPreferences();
-//			tokenAccountPage.customerProfilePage().preferencesPage().verifyPreferencesView();
-//			// tokenAccountPage.customerProfilePage().preferencesPage().verifyHeading(data.get("preferenceHeading"));
-//			Thread.sleep(1000);
-//			tokenAccountPage.customerProfilePage().preferencesPage().clickBack();
-//			tokenAccountPage.customerProfilePage().clickAccountLimits();
-//			Thread.sleep(1000);
-//			tokenAccountPage.customerProfilePage().accountLimitsPage().verifyAccountLimitsView();
-//			// tokenAccountPage.customerProfilePage().accountLimitsPage().verifyHeading(data.get("accountHeading"));
-//		//	Thread.sleep(1000);
-//			tokenAccountPage.customerProfilePage().accountLimitsPage().navigationComponent().clickBack();
-//			tokenAccountPage.customerProfilePage().clickAgreements();
-//	//		tokenAccountPage.customerProfilePage().verifyAgreementsView();
-//			tokenAccountPage.customerProfilePage().agreementPage().clickBack();
-//			tokenAccountPage.customerProfilePage().clickGetHelp();
-//			tokenAccountPage.customerProfilePage().verifyGetHelpView();
-//			tokenAccountPage.customerProfilePage().navigationComponent().clickBack();
-//			tokenAccountPage.customerProfilePage().clickResetPinCode();
-//			tokenAccountPage.customerProfilePage().enterYourPINComponent().verifyEnterYourPinView();
-//			tokenAccountPage.customerProfilePage().navigationComponent().clickClose();
-//			Thread.sleep(1000);
-//		//	tokenAccountPage.customerProfilePage().clickFaceIDSetting();
-//			tokenAccountPage.customerProfilePage().faceIDPopup().verifyFaceIDPopupView();
-//			tokenAccountPage.customerProfilePage().faceIDPopup().clickNotNow();
-//			tokenAccountPage.customerProfilePage().clickChangePassword();
-//			tokenAccountPage.customerProfilePage().enterYourPINComponent().verifyEnterYourPinView();
-//			tokenAccountPage.customerProfilePage().navigationComponent().clickClose();
-//			tokenAccountPage.customerProfilePage().clickBack();
-//			tokenAccountPage.clickMenu();
-//			tokenAccountPage.tokenHomePopUp().clickScan();
-//	//		tokenAccountPage.clickOK();
-//			tokenAccountPage.scanPage().clickScanMe();
-//			tokenAccountPage.scanPage().clickScanCode();
-//			tokenAccountPage.scanPage().clickCross();
-//			tokenAccountPage.clickMenu();
-//			tokenAccountPage.tokenHomePopUp().clickPayRequest();
-//			Thread.sleep(3000);
-//			tokenAccountPage.payRequestPage().verifyPayRequestPageView();
-//			tokenAccountPage.payRequestPage().navigationComponent().clickClose();
-//			tokenAccountPage.clickMenu();
-//			tokenAccountPage.tokenHomePopUp().clickBuyTokens();
-//			tokenAccountPage.customerProfilePage().addNewPaymentComponent().verifyAddPaymentMethodView();
-//			tokenAccountPage.customerProfilePage().addNewPaymentComponent().clickCross();
-//			tokenAccountPage.clickMenu();
-//			tokenAccountPage.tokenHomePopUp().clickWithdrawToUSD();
-//			tokenAccountPage.tokenHomePopUp().selectWithdrawMethodPage().verifyWithdrawMethodPageView();
-//			tokenAccountPage.tokenHomePopUp().selectWithdrawMethodPage().navigationComponent().clickClose();
-//			tokenAccountPage.clickPayRequest();
-//			tokenAccountPage.payRequestPage().verifyPayRequestPageView();
-//			tokenAccountPage.payRequestPage().navigationComponent().clickClose();
-//			tokenAccountPage.clickScan();
-//		//	tokenAccountPage.clickOK();
-//			tokenAccountPage.scanPage().clickScanMe();
-//			tokenAccountPage.scanPage().clickScanCode();
-//			tokenAccountPage.scanPage().clickCross();
-//			tokenAccountPage.dashboardPage().clickViewMore();
-//			tokenAccountPage.dashboardPage().clickCross();
-//			Thread.sleep(1000);
-//			tokenAccountPage.clickNotificationsIcon();
-//			tokenAccountPage.notificationPage().clickBack();
-//			tokenAccountPage.clickProfile();
-//	//		tokenAccountPage.customerProfilePage().clickLogOut();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request Scan Amount failed due to Exception " + e);
-//		}
-//
-//	}
-//
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testPayRequest(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			if(data.get("validateMenuPayReq").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.clickMenu();
-//				tokenAccountPage.tokenHomePopUp().clickPayRequest();
-//				tokenAccountPage.payRequestPage().clickCross();
-//				Thread.sleep(1000);
-//			}
-//			if(data.get("validateDashboardPayReq").equalsIgnoreCase("Yes")) {
-//				Thread.sleep(1000);	
-//			tokenAccountPage.clickPayRequest();
-//			tokenAccountPage.payRequestPage().navigationComponent().clickClose();
-//			Thread.sleep(2000);
-//			tokenAccountPage.clickPayRequest();
-//			}
-//			if(data.get("validateSearch").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.payRequestPage().clickSearch();
-//			tokenAccountPage.payRequestPage().fillSearchBx(data.get("contactName"));
-//			Thread.sleep(1000);
-//			tokenAccountPage.payRequestPage().verifyOtherPeopleView();
-//			}
-//			if(data.get("validateContactList").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.payRequestPage().verifyRecentContactList();
-//			Thread.sleep(1000);
-//			tokenAccountPage.payRequestPage().verifyRecentContactListSize();
-//			Thread.sleep(1000);
-//			tokenAccountPage.payRequestPage().verifyContactList();
-//			tokenAccountPage.payRequestPage().clickfirstRecentContact();
-//			}
-//			tokenAccountPage.payRequestPage().payRequestComponet().verifyCynView();
-//			if(data.get("validateAmount").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.payRequestPage().payRequestComponet().validateAmount(data.get("amount1"));
-//				tokenAccountPage.payRequestPage().payRequestComponet().clearText();
-//				tokenAccountPage.payRequestPage().payRequestComponet().fillAmount(data.get("amount2"));
-//				tokenAccountPage.payRequestPage().payRequestComponet().verifyMinimumLimitErr(data.get("minError"));
-//				tokenAccountPage.payRequestPage().payRequestComponet().clearText();
-//				tokenAccountPage.payRequestPage().payRequestComponet().fillAmount(data.get("amount3"));
-//				tokenAccountPage.payRequestPage().payRequestComponet().verifyMaxLimitErr(data.get("maxError"));
-//			}
-//			tokenAccountPage.payRequestPage().payRequestComponet().clearText();
-//			tokenAccountPage.payRequestPage().payRequestComponet().fillAmount(data.get("amount"));
-//			tokenAccountPage.payRequestPage().payRequestComponet().clickConverter();
-//			tokenAccountPage.payRequestPage().payRequestComponet().fillMessage(data.get("errMessage"));
-//			tokenAccountPage.payRequestPage().payRequestComponet().clickDone();
-//			if(data.get("ValidatePay").equalsIgnoreCase("Yes")) {
-//			tokenAccountPage.payRequestPage().payRequestComponet().clickPay();
-//			tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().getRecipientAdd();
-//			tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().getProcessingFee();
-//			tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().swipeConfirm();
-//			tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().enterYourPINComponent()
-//					.fillPin(data.get("pin"));
-//			String ref1 = tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().verifyReferenceId();
-//			System.out.println(ref1);
-//	//		tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().verifyTransactionSucessScreen();
-//			tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().clickDone();
-//	    	loginPage.enterYourPINComponent().enableFaceIDpage().clickNotNow();
-//	    	Thread.sleep(4000);
-//	    	tokenAccountPage.verifyRecentTransactionsView();
-//    		Thread.sleep(3000);
-//    	//	tokenAccountPage.clickFirstTransactions();
-//    		tokenAccountPage.transactionsDetailsComponent().getTransactionDetails();
-//            String ref2 = tokenAccountPage.transactionsDetailsComponent().verifyReferenceId();
-//            System.out.println(ref2);
-//            if(ref1.equals(ref2)) {
-//            	ExtentTestManager.setInfoMessageInReport("reference ID is same");
-//            }else {
-//            	ExtentTestManager.setWarningMessageInReport("reference ID is not same");
-//            }
-//    		tokenAccountPage.transactionsDetailsComponent().clickBack();
-//			}
-//			if(data.get("ValidateRequest").equalsIgnoreCase("Yes")) {
-//				tokenAccountPage.payRequestPage().payRequestComponet().clickRequest();
-//				tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().getRecipientAdd();
-//				tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().swipeConfirm();
-//				tokenAccountPage.payRequestPage().payRequestComponet().payRequestConfirmPopup().clickDone();
-//				}
-//			
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("test Pay Request  failed due to Exception " + e);
-//		}
-//
-//	}
-
 }

@@ -13,26 +13,25 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ChoosePinComponent extends MobileFunctions {
+//	Enter Your PIN Details
 	private By lblEnterYourPinHeading = MobileBy.AccessibilityId("Enter Your PIN Heading");
-	private By btnLogout = MobileBy.AccessibilityId("Log Out");
-	private By btnForgotPin = MobileBy.AccessibilityId("Forgot PIN");
+	private By btnLogout = MobileBy.AccessibilityId("logoutLL");
+	private By btnForgotPin = MobileBy.xpath("//*[@text='Forgot PIN']");
+//	Choose Your PIN Details
 	private By lblChoosePinDes = MobileBy.AccessibilityId("Two-Step Authentication");
 	private By lblChooseYourPin = MobileBy.AccessibilityId("Choose Your PIN Heading");
 	private By txtPin = MobileBy.xpath("//*[contains(@name,'PIN')]/following-sibling::*[1]");
 	private By lblConfirmYourPin = MobileBy.AccessibilityId("Confirm Your PIN Heading");
-	private By lblPinErr = MobileBy.AccessibilityId("");
-    private By lblPinToastMsg = MobileBy.AccessibilityId("");
-    private By txtCvv = MobileBy.AccessibilityId("");
-    private By btnBackSpace = MobileBy.AccessibilityId("");
+	private By lblPinErr = MobileBy.xpath("");
+	private By txtCvv = MobileBy.xpath("");
+	private By btnBackSpace = MobileBy.xpath("");
 
 //    Enter your pin screen disabled scenario
-    private By lblDisabled = MobileBy.AccessibilityId("Confirm Your PIN Heading");
-	private By lblDisableDes = MobileBy.AccessibilityId("");
-    private By btnTryAgain = MobileBy.AccessibilityId("");
-    private By lblIncorrectPINHeading = MobileBy.AccessibilityId("");
-    private By lblIncoPINDesc = MobileBy.AccessibilityId("");
-	
-	
+	private By lblDisabled = MobileBy.xpath("//*[@text='Disabled']");
+	private By lblDisableDes = MobileBy.xpath("//*[@text='Please try again in 10 minutes.']");
+	private By btnTryAgain = MobileBy.id("com.coyni.mapp:id/tryAgainTV");
+	private By lblIncorrectPINHeading = MobileBy.xpath("//*[@text='Incorrect PIN']");
+	private By lblIncoPINDesc = MobileBy.xpath("//*[contains(@text,'Sorry,')]");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 
@@ -41,13 +40,9 @@ public class ChoosePinComponent extends MobileFunctions {
 				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 	}
 
-	public void verifyToastMessage(String toastMsg) {
-		new CommonFunctions().verifyLabelText(lblPinToastMsg, "Toast Message", toastMsg);
+	public void verifyChooseYourPinView(String heading) {
+		new CommonFunctions().verifyLabelText(lblChooseYourPin, "Choose Your Pin", heading);
 	}
-	public void verifyChooseYourPinView() {
-		new CommonFunctions().elementView(lblChooseYourPin, "Choose Your Pin");
-	}
-	
 
 	public void verifyChooseYouPinDes(String desc) {
 		new CommonFunctions().verifyLabelText(lblChoosePinDes, "Desc", desc);
@@ -61,42 +56,44 @@ public class ChoosePinComponent extends MobileFunctions {
 		}
 
 	}
+
 	public void fillPins(String pin) {
 		System.out.println(pin.length());
 		for (int i = 0; i < pin.length(); i++) {
 			click(getOneNumberOfPin(pin.charAt(i)), "pin " + pin.charAt(i));
 		}
 	}
-	
+
 	public void validateCVVorCVC(String pin) {
 		String[] field = pin.split(",");
-		new CommonFunctions().clear(txtCvv);
+//		new CommonFunctions().clear(txtCvv);
 		for (int i = 0; i < field[0].length(); i++) {
 			click(getOneNumberOfPin(field[0].charAt(i)), "pin " + field[0].charAt(i));
 		}
 		System.out.println(field[0].length());
 		System.out.println(new CommonFunctions().getTextBoxValue(txtCvv).length());
-		if(field[0].length()== new CommonFunctions().getTextBoxValue(txtCvv).length()) {
+		if (field[0].length() == new CommonFunctions().getTextBoxValue(txtCvv).length()) {
 			System.out.println("for loop i");
 			ExtentTestManager.setPassMessageInReport("CVV field is accepting 4 numbers");
-		}else {
+		} else {
 			ExtentTestManager.setFailMessageInReport("CVV field is not accepting 4 numbers");
 		}
-		new CommonFunctions().clear(txtCvv);
+//		new CommonFunctions().cleart(txtCvv);
 		click(btnBackSpace, "Backspace");
-		for (int j = 0; j < field[1].length(); j++) {	
-			click(getOneNumberOfPin(field[1].charAt(j)), "pin " + field[1].charAt(j));	
+		for (int j = 0; j < field[1].length(); j++) {
+			click(getOneNumberOfPin(field[1].charAt(j)), "pin " + field[1].charAt(j));
 		}
 		System.out.println(field[1].length());
 		System.out.println(new CommonFunctions().getTextBoxValue(txtCvv).length());
-		if(field[1].length()!= new CommonFunctions().getTextBoxValue(txtCvv).length()) {
+		if (field[1].length() != new CommonFunctions().getTextBoxValue(txtCvv).length()) {
 			System.out.println("for loop j");
 			ExtentTestManager.setPassMessageInReport("CVV field is not accepting 5 numbers");
-		}else {
+		} else {
 			ExtentTestManager.setFailMessageInReport("CVV field is accepting 5 numbers");
 		}
 		click(btnBackSpace, "Backspace");
 	}
+
 	public void verifyEnterYourPinhdg(String hdg) {
 		new CommonFunctions().verifyLabelText(lblEnterYourPinHeading, "Enter Your Pin", hdg);
 	}
@@ -134,18 +131,24 @@ public class ChoosePinComponent extends MobileFunctions {
 	}
 
 	public void clickForgotPin() {
-		click(btnForgotPin, "forgot Pin");
+		click(btnForgotPin, "Forgot Pin");
 	}
-	
+
 // Enter your pin screen disabled scenario	
-	public void viewDisabledHeading() {
-		new CommonFunctions().elementView(lblDisabled, "Disabled heading");
-		new CommonFunctions().elementView(lblDisableDes, "Disabled description");
+	public void verifyDisabledHeading(String hdg, String desc) {
+		new CommonFunctions().verifyLabelText(lblDisabled, "Disabled heading", hdg);
+		new CommonFunctions().verifyLabelText(lblDisableDes, "Disabled description", desc);
 	}
+
+	public void validateDisabledState() {
+		clickLogout();
+
+	}
+
 	public void clickTryAgain() {
 		click(btnTryAgain, "Try Again");
 	}
-	
+
 	public void viewIncorrectPINHeading() {
 		new CommonFunctions().elementView(lblIncorrectPINHeading, "Incorrect PIN heading");
 		new CommonFunctions().elementView(lblIncoPINDesc, "Incorrect PIN description");
@@ -166,8 +169,12 @@ public class ChoosePinComponent extends MobileFunctions {
 	public CreatePasswordComponent createPasswordComponent() {
 		return new CreatePasswordComponent();
 	}
-	
+
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
+	}
+
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
 	}
 }

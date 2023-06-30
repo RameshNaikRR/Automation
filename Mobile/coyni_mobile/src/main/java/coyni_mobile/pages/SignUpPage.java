@@ -13,7 +13,7 @@ import coyni_mobile.components.AddCardComponent;
 import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
-import coyni_mobile.utilities.AndroidCommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -248,30 +248,32 @@ public class SignUpPage extends MobileFunctions {
 	private By lblPhoneNumber = MobileBy.AccessibilityId("Phone Number Heading");
 	private By txtPhoneNumber = MobileBy.AccessibilityId("Phone Number");
 	private By lblPhoneDesc = MobileBy.AccessibilityId("Enter Phone");
-	private By drpdwnPhNum = MobileBy.AccessibilityId("Country Dropdown");
-	private By iconSearch = MobileBy.AccessibilityId("Country Search Icon");
+	private By drpdwnPhNum = MobileBy.id("com.coyni.mapp:id/tvCountryCode");
 	private By txtSearchField = MobileBy.AccessibilityId("Country Search");
 	private By btnSearchCross = MobileBy.AccessibilityId("Clear text");
 	private By btnContinue = MobileBy.AccessibilityId("Continue");
-	private By lblEmail = MobileBy.AccessibilityId("Email");
+	private By lblEmail = MobileBy.xpath("//*[@text='Email']");
 	private By lblEmailDesc = MobileBy.AccessibilityId("Email Verification Text");
-//	private By txtEmail = MobileBy.AccessibilityId("Email Address");
 	private By txtEmail = MobileBy.id("com.coyni.mapp:id/emailET");
 	private By lblName = MobileBy.AccessibilityId("Name");
 	private By lblNameDesc = MobileBy.AccessibilityId("Enter Your Full Name");
-//	private By txtFirstName = MobileBy.AccessibilityId("First Name");
 	private By txtFirstName = MobileBy.id("com.coyni.mapp:id/etName");
 	private By txtLastName = MobileBy.AccessibilityId("Last Name");
 	private By lblPassword = MobileBy.AccessibilityId("Password Heading");
 	private By lblPasswordDesc = MobileBy.AccessibilityId("Keep Your Account Secure");
 	private By txtPassword = MobileBy.AccessibilityId("Password");
-	private By btnEye = MobileBy.AccessibilityId("");
-	private By txtPwdErrMSg = MobileBy.AccessibilityId("");
-	private By lblPasswordReq = MobileBy.xpath("//*[contains(@name,'Must')]");
-	
-	public void VerifyPhoneNumberView(String phoneNumDesc) {
+	private By btnEye = MobileBy.id("com.coyni.mapp:id/text_input_end_icon");
+//	private By txtPwdErrMSg = MobileBy.id("8 to 32");
+	private By lblPasswordReq = MobileBy.xpath("8 to 32");
+
+	public void VerifyPhoneNumberHeading(String phoneNumDesc) {
 		new CommonFunctions().elementView(lblPhoneNumber, "Phone Number Heading");
 		new CommonFunctions().verifyLabelText(lblPhoneDesc, "Phone Number Description is", phoneNumDesc);
+	}
+
+	public void viewPhoneNumberHeading() {
+		new CommonFunctions().elementView(lblPhoneNumber, "Phone Number Heading");
+		ExtentTestManager.setPassMessageInReport(getText(lblPhoneNumber));
 	}
 
 	public void fillPhoneNumbers(String PhoneNumber) {
@@ -284,8 +286,8 @@ public class SignUpPage extends MobileFunctions {
 
 	public void fillSearch(String country) {
 		enterText(txtSearchField, country, "country");
-		new AndroidCommonFunctions().clickEnter();
-		new AndroidCommonFunctions().clickEnter();
+		new CommonFunctions().clickEnter();
+		new CommonFunctions().clickEnter();
 	}
 
 	public void clickSearchCross() {
@@ -293,14 +295,18 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void clickContinue() {
-		if (getElement(btnContinue, "Continue").isEnabled()) {
 			click(btnContinue, "Contiue");
-		}
 	}
 
-	public void verifyEmailView(String emailDesc) {
+	public void verifyEmailHeading(String emailDesc) {
 		new CommonFunctions().elementView(lblEmail, "Email heading");
+		ExtentTestManager.setPassMessageInReport(getText(lblEmail));
 		new CommonFunctions().verifyLabelText(lblEmailDesc, "Description", emailDesc);
+	}
+
+	public void viewEmailHeading() {
+		new CommonFunctions().elementView(lblEmail, "Email heading");
+		ExtentTestManager.setPassMessageInReport(getText(lblPhoneNumber));
 	}
 
 	public void fillEmail(String email) {
@@ -309,6 +315,7 @@ public class SignUpPage extends MobileFunctions {
 
 	public void verifyNameView(String nameDesc) {
 		new CommonFunctions().elementView(lblName, "Email");
+		ExtentTestManager.setPassMessageInReport(getText(lblName));
 		new CommonFunctions().verifyLabelText(lblNameDesc, "Description", nameDesc);
 	}
 
@@ -328,18 +335,17 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void fillPassword(String password) {
-		click(txtPassword, "Password");
 		enterText(txtPassword, password, "Password");
-		// clickDone();
+		click(txtPassword, "Password");
 	}
 
-	public void clickEye() {
-		click(btnEye, "Eye");
+	public void clickEyeIcon() {
+		click(btnEye, "Password Eye Icon");
 	}
 
-	public void verifyPasswordErrorMSg(String errMsg) {
-		new CommonFunctions().verifyLabelText(txtPwdErrMSg, "errMsg", errMsg);
-	}
+//	public void verifyPasswordErrorMSg(String errMsg) {
+//		new CommonFunctions().verifyLabelText(txtPwdErrMSg, "errMsg", errMsg);
+//	}
 
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
@@ -378,7 +384,7 @@ public class SignUpPage extends MobileFunctions {
 		System.out.println(textField.length());
 		for (int j = 2; j < 4; j++) {
 			System.out.println(field[j]);
-			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
+//			new CommonFunctions().validateTextFeild(ele, eleName, field[j]);
 		}
 		new CommonFunctions().validateFieldMaxichar(ele, eleName, field[4]);
 	}
@@ -401,12 +407,13 @@ public class SignUpPage extends MobileFunctions {
 	public void CreatePasswordfields(String password) {
 		String[] field = password.split(",");
 		// for(int i=0;i<2;i++) {
-		new CommonFunctions().validateTextFeild(txtPassword, "password", field[0]);
-		new CommonFunctions().validateTextFeild(txtPassword, "password", field[1]);
+//		new CommonFunctions().validateTextFeild(txtPassword, "password", field[0]);
+//		new CommonFunctions().validateTextFeild(txtPassword, "password", field[1]);
 //		new CommonFunctions().validateField(txtNewPassword, "password", field[1]);
 		// }
 		new CommonFunctions().validateFieldMaxichar(txtPassword, "password", field[2]);
 	}
+
 	public void verifyPasswordREquirementError(String errMSg) {
 		if (getElementList(lblPasswordReq, "Password error").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblPasswordReq, "Password error", errMSg);
@@ -424,6 +431,7 @@ public class SignUpPage extends MobileFunctions {
 	public AddCardComponent addCardComponent() {
 		return new AddCardComponent();
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

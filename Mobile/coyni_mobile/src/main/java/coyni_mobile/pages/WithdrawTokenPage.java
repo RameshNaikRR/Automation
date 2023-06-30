@@ -80,7 +80,7 @@ public class WithdrawTokenPage extends MobileFunctions {
 				String.format("(//*[@text='%s' or @name='%s'])", Character.toString(num), Character.toString(num)));
 	}
     public void clearText() {
-    	new CommonFunctions().clear(txtAmount);
+//    	new CommonFunctions().clear(txtAmount);
     }
 	
 	private float getAmountFromtext(By ele) {
@@ -194,7 +194,7 @@ public class WithdrawTokenPage extends MobileFunctions {
 	public void validateAmounts(String pin) {
 		
 		String[] field = pin.split(",");
-		new CommonFunctions().clear(txtAmt);
+//		new CommonFunctions().clear(txtAmt);
 		for (int i = 0; i < field[0].length(); i++) {
 			click(getOneNumberOfPin(field[0].charAt(i)), "pin " + field[0].charAt(i));
 		}
@@ -206,7 +206,7 @@ public class WithdrawTokenPage extends MobileFunctions {
 		}else {
 			ExtentTestManager.setFailMessageInReport("CVV field is not accepting 11 numbers");
 		}
-		new CommonFunctions().clear(txtAmt);
+//		new CommonFunctions().clear(txtAmt);
 		for (int j = 0; j < field[1].length(); j++) {	
 			click(getOneNumberOfPin(field[1].charAt(j)), "pin " + field[1].charAt(j));	
 		}

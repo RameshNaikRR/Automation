@@ -1,13 +1,18 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.gson.annotations.Until;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.TransactionsDetailsComponent;
 import coyni_mobile.popups.cvvPopup;
-import coyni_mobile.utilities.AndroidCommonFunctions;
 import coyni_mobile.utilities.CommonFunctions;
+import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -15,33 +20,41 @@ import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 
 public class DashboardPage extends MobileFunctions {
-	private By iconProfile = MobileBy.AccessibilityId("");
+	private By iconProfile = MobileBy.id("com.coyni.mapp:id/tvUserText");
 	private By btnBuyTokens = MobileBy.AccessibilityId("Buy Tokens");
 	private By btnWithdraw = MobileBy.AccessibilityId("withdraws");
-	private By iconNotifications = MobileBy.AccessibilityId("");
+	private By iconNotifications = MobileBy.xpath("");
 	private By btnSendReq = MobileBy.AccessibilityId("Send/Request");
 	private By iconScan = MobileBy.AccessibilityId("Scanner");
 	private By iconQRCode = MobileBy.AccessibilityId("QR Code");
-	private By lblRecentTransactions = MobileBy.AccessibilityId("");
-	private By lblFirstTransaction = MobileBy.AccessibilityId("");
+	private By lblRecentTransactions = MobileBy.xpath("");
+	private By lblFirstTransaction = MobileBy.xpath("");
 	private By lblNotificationCount = MobileBy.xpath("//*[@name='notifications_nobadge']/following-sibling::*[1]");
 	private By btnViewAllTransactions = MobileBy.xpath("(//*[@name='View More'])[1]");
-	private By btnAddAddress = MobileBy.AccessibilityId("");
-	private By btnAddPayment = MobileBy.AccessibilityId("");
-	private By lblAddAddress = MobileBy.AccessibilityId("");
-	private By lblUserName = MobileBy.AccessibilityId("");
-	private By lblAvailBal = MobileBy.AccessibilityId("");
+	private By btnAddAddress = MobileBy.xpath("//*[contains(@text,'Add an address')]");
+	private By lblAddAddressHeading = MobileBy
+			.xpath("//*[contains(@text,'Please enter your')]/preceding-sibling::android.widget.TextView");
+	private By lblAddresDesc = MobileBy.xpath("//*[contains(@text,'We will need')]");
+	private By lnkAddPayment = MobileBy.AccessibilityId("Add Payment Method");
+	private By lblAddPaymntDesc = MobileBy.xpath("//*[contains(@text,'Get started by')]");
+	private By lblAddPaymntHeading = MobileBy.xpath("//*[@text='Welcome to coyni!']");
+	private By lblAddAddress = MobileBy.xpath("//*[@text='Address Required']");
+	private By lblUserName = MobileBy.id("com.coyni.mapp:id/tvUserName");
+	private By lblAvailBal = MobileBy.xpath("");
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+	
 	public double verifyAvailbleBalance() {
 		double avlBalance = Double.parseDouble(getText(lblAvailBal));
 		return avlBalance;
 	}
 
 	public void viewUserName() {
-		new AndroidCommonFunctions().elementView(lblUserName, "User Name");
+		new CommonFunctions().elementView(lblUserName, "User Name");
 	}
 
 	public void clickProfile() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(iconProfile));
 		click(iconProfile, "Profile ");
 	}
 
@@ -71,7 +84,7 @@ public class DashboardPage extends MobileFunctions {
 
 	public void verifyRecentTransactionsView() {
 		ExtentTestManager.setInfoMessageInReport("Dashboard :" + getText(lblRecentTransactions));
-		new AndroidCommonFunctions().elementView(lblRecentTransactions, "recent Transactions");
+		new CommonFunctions().elementView(lblRecentTransactions, "recent Transactions");
 	}
 
 	public void clickFirstTransaction() {
@@ -88,27 +101,58 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void clickAddPayment() {
-		if(getElementList(btnAddPayment, "AddPayment").size()>0) {
-		click(btnAddPayment, "Add Payment");
+		click(lnkAddPayment, "Add Payment");
+	}
+
+	public void verifyAddPaymntView() {
+		new CommonFunctions().elementView(lblAddPaymntHeading, "Add Payment Heading");
+		ExtentTestManager.setPassMessageInReport(getText(lblAddPaymntHeading));
+		new CommonFunctions().elementView(lblAddPaymntDesc, "Add Payment Description");
+		ExtentTestManager.setFailMessageInReport(getText(lblAddPaymntDesc));
+	}
+
+	public void validateAddPaymntView() throws InterruptedException {
+		Thread.sleep(800);
+		if (getElementList(lblAddPaymntHeading, "").size() == 0 && getElementList(lblAddPaymntDesc, "").size() == 0
+				&& getElementList(lnkAddPayment, "").size() == 0) {
+			ExtentTestManager.setPassMessageInReport(
+					"Add Payment method link not visible,after adding the payment method");
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"Add Payment method link is visible,after adding the payment method");
 		}
 	}
-	public void verifyAddAddressHdg(String address) {
-		new CommonFunctions().verifyLabelText(lblAddAddress, "Add Address", address);
+
+	public void verifyAddAddressHdg() {
+		new CommonFunctions().elementView(lblAddAddressHeading, "Add Address");
+		ExtentTestManager.setPassMessageInReport(getText(lblAddAddressHeading));
 	}
 
 	public void verifyAddAddressview() {
-		new AndroidCommonFunctions().elementView(lblAddAddress, "Add Address");
+		new CommonFunctions().elementView(lblAddAddress, "Add Address");
+		ExtentTestManager.setPassMessageInReport(getText(lblAddAddress));
+		new CommonFunctions().elementView(lblAddresDesc, "Add Address Description");
+		ExtentTestManager.setPassMessageInReport(getText(lblAddresDesc));
 	}
+
+	public void validateAddAddressview() throws InterruptedException {
+		Thread.sleep(800);
+		if (getElementList(lblAddAddress, "").size() == 0 && getElementList(lblAddresDesc, "").size() == 0
+				&& getElementList(btnAddAddress, "").size() == 0) {
+			ExtentTestManager.setPassMessageInReport(
+					"After adding the address form profile,address link is not appeared in dash board page");
+		} else {
+			ExtentTestManager.setPassMessageInReport(
+					"After adding the address form profile,address link is appearing in dash board page");
+		}
+	}
+
 	public void verifyBuyTokensView() {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
 	}
-
-	public void verifyAddPaymentView() {
-		new CommonFunctions().elementView(btnAddPayment, "Add Payment");
-	}
-
+	
 	public void verifyDashboard() {
-		new AndroidCommonFunctions().elementView(btnSendReq, "Send/Request");
+		new CommonFunctions().elementView(btnSendReq, "Send/Request");
 	}
 
 	public AddNewPaymentComponent addNewPaymentComponent() {
@@ -126,21 +170,25 @@ public class DashboardPage extends MobileFunctions {
 	public SendRequestPage sendRequestPage() {
 		return new SendRequestPage();
 	}
+
 	public BuyTokenComponent buyTokenComponent() {
 		return new BuyTokenComponent();
 	}
+
 	public SelectWithdrawMethodPage selectWithdrawMethodPage() {
 		return new SelectWithdrawMethodPage();
 	}
+
 	public TransactionsDetailsComponent transactionsDetailsComponent() {
 		return new TransactionsDetailsComponent();
 	}
+
 	public TransactionsPage transactionPage() {
 		return new TransactionsPage();
 	}
+
 	public cvvPopup cvvPopup() {
 		return new cvvPopup();
 	}
-	
-	
+
 }

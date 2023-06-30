@@ -12,85 +12,91 @@ import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-
-public class EditProfilePage extends MobileFunctions{
+public class EditProfilePage extends MobileFunctions {
 //	private By heading =MobileBy.xpath("//*[@name='Edit Address']");
 //	private By heading =MobileBy.AccessibilityId("Edit Address");
-	
-	private By lblEditAddress = MobileBy.AccessibilityId("");
-//	private By txtCountryDropdown = MobileBy.AccessibilityId("");
-//	private By txtSearch = MobileBy.AccessibilityId("");
+
+	private By lblEditAddress = MobileBy.xpath("//*[@text='Edit Address']");
+//	private By txtCountryDropdown = MobileBy.id("");
+//	private By txtSearch = MobileBy.id("");
 //	
-	
-	
+
 	/****
 	 * Edit Image
 	 */
-	
-	private By btnChooseFromLibrary = MobileBy.AccessibilityId("");
-	private By btnTakeaPhoto = MobileBy.AccessibilityId("");
-	private By img1 = MobileBy.AccessibilityId("");
-	private By btnDone = MobileBy.AccessibilityId("");
-	
-	
+
+	private By btnChooseFromLibrary = MobileBy.id("");
+	private By btnTakeaPhoto = MobileBy.id("");
+	private By img1 = MobileBy.id("");
+	private By btnDone = MobileBy.id("");
+
 	public void clickChooseFromLibrary() {
 		click(btnChooseFromLibrary, "ChooseFrom Library");
 	}
+
 	public void verifyTakeaPhotView() {
 		new CommonFunctions().elementView(btnTakeaPhoto, "Take a photo");
 	}
+
 	public void clickPhoto() {
 		click(img1, "Image");
 	}
+
 	public void clickDone() {
 		click(btnDone, "Done");
 	}
-	
+
 	/***
 	 * Edit Email
 	 */
-	
-	private By lblEmail = MobileBy.AccessibilityId("");
-	private By lblCurrentEmail = MobileBy.AccessibilityId("");
-	private By lblExistingEmail = MobileBy.AccessibilityId("");
-	private By btnChange = MobileBy.AccessibilityId("");
-	private By lblEditEmail = MobileBy.AccessibilityId("");
-	private By txtCurrentEmail = MobileBy.AccessibilityId("");
-	private By txtEnterNewEmail = MobileBy.AccessibilityId("");
-	private By lblNeedHelp = MobileBy.AccessibilityId("");
-	
-	
+
+	private By lblEmail = MobileBy.id("com.coyni.mapp:id/intentNameTV");
+	private By lblCurrentEmail = MobileBy.id("com.coyni.mapp:id/titleTV");
+	private By lblExistingEmail = MobileBy.id("com.coyni.mapp:id/contentTV");
+	private By btnChange = MobileBy.xpath("//*[@text='Change']");
+	private By lblEditEmail = MobileBy.id("");
+	private By lblCurrExistingEmail = MobileBy.id("com.coyni.mapp:id/currentET");
+	private By txtEnterNewEmail = MobileBy.id("com.coyni.mapp:id/emailET");
+	private By lblNeedHelp = MobileBy.id("");
+
 	public void verifyEditEmailHeading(String hdg) {
 		new CommonFunctions().verifyLabelText(lblEditEmail, "Edit Email", hdg);
 	}
+
 	public void verifycurrentEmail(String email) {
-		new CommonFunctions().verifyLabelText(txtCurrentEmail, "Current Email", email);
+		new CommonFunctions().verifyLabelText(lblCurrExistingEmail, "Current Email", email);
 	}
+
 	public void fillNewEmail(String email) {
 		enterText(txtEnterNewEmail, email, "Enter New Email");
 	}
-	
-	public void verifyEmailHeading(String hdg) {
-		new CommonFunctions().verifyLabelText(lblEmail, "Email", hdg);
+
+	public void verifyEmailHeading() {
+		new CommonFunctions().elementView(lblEmail, "Email");
+		ExtentTestManager.setPassMessageInReport(getText(lblEmail));
 	}
-	
-	public void verifyCurrentEmailHeading(String hdg) {
-		new CommonFunctions().verifyLabelText(lblCurrentEmail, "Current Email", hdg);
+
+	public void verifyCurrentEmailHeading() {
+		new CommonFunctions().elementView(lblCurrentEmail, "Current Email");
+		ExtentTestManager.setPassMessageInReport(getText(lblCurrentEmail));
 	}
-	
-	public void verifyExistEmail(String hdg) {
-		new CommonFunctions().verifyLabelText(lblExistingEmail, "Exist Email", hdg);
+
+	public void verifyExistEmail(String email) {
+		new CommonFunctions().verifyLabelText(lblExistingEmail, "Exist Email", email);
 	}
+
 	public void clickChange() {
-		if(getElement(btnChange, "Change").isEnabled()) {
+		if (getElement(btnChange, "Change").isEnabled()) {
 			click(btnChange, "Change");
-		}else {
+		} else {
 			ExtentTestManager.setInfoMessageInReport("The change button is disabled");
 		}
 	}
+
 	public void verifyNeedHelpView() {
 		new CommonFunctions().elementView(lblNeedHelp, "Need Help With Coyni");
 	}
+
 	/**
 	 * Order -minChar, maxChar,maxiPlus
 	 */
@@ -101,7 +107,7 @@ public class EditProfilePage extends MobileFunctions{
 		}
 		new CommonFunctions().validateFieldMaxichar(txtEnterNewEmail, "Email", field[2]);
 	}
-	
+
 	/**
 	 * Order -minChar, MaxiPlus
 	 */
@@ -112,120 +118,129 @@ public class EditProfilePage extends MobileFunctions{
 		}
 		new CommonFunctions().validateFieldMaxichar(txtPhoneNumber, "Phone Number", field[1]);
 	}
-	
-	
-	
-	private By btnSave =MobileBy.xpath("(//*[@name='Save'])[1]");
+
+	private By btnSave = MobileBy.xpath("(//*[@name='Save'])[1]");
+
 	public int verifySave() {
 		return getElementList(btnSave, "SaveS").size();
 	}
-	
-	
+
 	public void clickSave() {
-		
-		if(getElement(btnSave, "Save").isEnabled()) {
-		click(btnSave, "Click Save");
-		}else {
-			ExtentTestManager.setInfoMessageInReport("Save Button is disabled");
-		}
+		new CommonFunctions().clickEnabledElement(btnSave, "Click Save");
 	}
-	
+
 	/***
 	 * Edit Phone Number
+	 * 
 	 * @return
 	 */
-	
-	private By lblPhoneNumber = MobileBy.AccessibilityId("");
-	private By lblCurrentPhoneNumber = MobileBy.AccessibilityId("");
-	private By lblExistingPhoneNumber = MobileBy.AccessibilityId("");
-	private By lblEditPhoneNumber = MobileBy.AccessibilityId("");
-	private By txtCurrentPhoneNumber = MobileBy.AccessibilityId("");
-	private By arwPhoneNumber = MobileBy.AccessibilityId("");
-	private By txtSearch = MobileBy.AccessibilityId("");
-	private By iconSearch = MobileBy.AccessibilityId("");
-	private By txtPhoneNumber = MobileBy.AccessibilityId("");
-	private By btnContinue = MobileBy.AccessibilityId("");
-	
-	
-	
-	
-	
+
+	private By lblPhoneNumber = MobileBy.id("");
+	private By lblCurrentPhoneNumber = MobileBy.id("");
+	private By lblExistingPhoneNumber = MobileBy.id("");
+	private By lblEditPhoneNumber = MobileBy.id("");
+	private By txtCurrentPhoneNumber = MobileBy.id("");
+	private By arwPhoneNumber = MobileBy.id("");
+	private By txtSearch = MobileBy.id("");
+	private By iconSearch = MobileBy.id("");
+	private By txtPhoneNumber = MobileBy.id("");
+	private By btnContinue = MobileBy.id("");
+
 	public void verifyPhoneNumberHdg(String hdg) {
 		new CommonFunctions().verifyLabelText(lblPhoneNumber, "Phone Number", hdg);
 	}
-	
+
 	public void verifyCurrentPhoneNumberhdg(String phNumhdg) {
 		new CommonFunctions().verifyLabelText(lblCurrentPhoneNumber, "Current Phone Number", phNumhdg);
 	}
-	
+
 	public void verifyExistingPhoneNUmber(String phNum) {
 		new CommonFunctions().verifyLabelText(lblExistingPhoneNumber, "Current Phone Number", phNum);
 	}
+
 	public void verifyEditPhoneNUmber(String phNum) {
 		new CommonFunctions().verifyLabelText(lblEditPhoneNumber, "Edit Phone Number", phNum);
 	}
-	
+
 	public void verifyCurrentPhoneNUmber(String phNum) {
 		new CommonFunctions().verifyLabelText(txtCurrentPhoneNumber, "Current Phone Number", phNum);
 	}
-	
+
 	public void clickArrow(String country) {
 		new CommonFunctions().elementView(arwPhoneNumber, "arrow");
 		new CommonFunctions().elementView(iconSearch, "Search icon");
 		enterText(txtSearch, country, "country");
 	}
+
 	public void fillPhoneNumber(String phNum) {
 		enterText(txtPhoneNumber, phNum, "Phone Number");
 	}
+
 	public void clickContinue() {
-		if(getElement(btnContinue, "Continue").isEnabled()) {
+		if (getElement(btnContinue, "Continue").isEnabled()) {
 			click(btnContinue, "Continue");
-		}else {
-			ExtentTestManager.setInfoMessageInReport("Continue button is disabled");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Continue button is disabled");
 		}
 	}
-	
+
 	/**
 	 * 
 	 * Edit Address
+	 * 
 	 * @return
 	 */
-	
-	private By lbladdress = MobileBy.AccessibilityId("");
-	private By lblCurrentAddress = MobileBy.AccessibilityId("");
-	private By lblExistingAddress = MobileBy.AccessibilityId("");
-	private By lblEditAddresshdg = MobileBy.AccessibilityId("");
 
-	
-	
+	private By lbladdress = MobileBy.id("");
+	private By lblCurrentAddress = MobileBy.id("com.coyni.mapp:id/titleTV");
+	private By lblExistingAddress = MobileBy.id("com.coyni.mapp:id/contentTV");
+	private By lblEditAddresshdg = MobileBy.id("");
+
+	public void validateAddress() {
+		if (getElement(lblCurrentAddress, "Current Address").isDisplayed()
+				&& getElement(lblExistingAddress, "Existing Address").isDisplayed()
+				&& getElement(btnChange, "Change").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport("Address added and reflected in Current Address screen");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Address not added and not reflected in Current Address screen");
+		}
+	}
+
 	public void verifyAddressheading(String hdg) {
 		new CommonFunctions().verifyLabelText(lbladdress, "address", hdg);
 	}
+
 	public void verifyCurrentAddres(String hdg) {
 		new CommonFunctions().verifyLabelText(lblCurrentAddress, "address", hdg);
 	}
+
 	public void verifyExistingAddres(String hdg) {
 		new CommonFunctions().verifyLabelText(lblExistingAddress, "address", hdg);
 	}
+
 	public void verifyEditAddres(String hdg) {
 		new CommonFunctions().verifyLabelText(lblEditAddress, "address", hdg);
 	}
-	
+
 //	public void verifyHeading(String expHeading) {
 //		new CommonFunctions().verifyLabelText(heading, "Heading", expHeading);
 //	}
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
+
 	public PhoneAndEmailVerificationComponent phoneAndEmailVerificationComponent() {
 		return new PhoneAndEmailVerificationComponent();
 	}
+
 	public ChoosePinComponent choosePinComponent() {
 		return new ChoosePinComponent();
 	}
+
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}

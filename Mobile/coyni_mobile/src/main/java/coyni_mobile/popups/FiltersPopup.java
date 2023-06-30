@@ -115,13 +115,13 @@ public class FiltersPopup extends MobileFunctions {
 	 	click(txtFromAmount, "fromAmount");
 	// 	new EnterYourPINComponent().fillPins(fromAmount);
 		enterText(txtFromAmount, fromAmount, "From Amount");
-		new CommonFunctions().clickDone();
+//		new CommonFunctions().clickDone();
 	}
 	public void fillToAmount(String toAmount) {
 	   click(txtToAmount, "toAmount");
 	//	new EnterYourPINComponent().fillPins(toAmount);
 		enterText(txtToAmount, toAmount, "To Amount");
-		new CommonFunctions().clickDone();
+//		new CommonFunctions().clickDone();
 	}
 	public void verifyFilters(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblFilters, "Page Heading", expHeading);

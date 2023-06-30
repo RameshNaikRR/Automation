@@ -147,26 +147,26 @@ public class GiftCardPage extends MobileFunctions{
 	}
 	public void fillAmount(String amount) {
 		enterText(txtAmount, amount, "Amount");
-	//	clickReturn();
-		new CommonFunctions().clickDone();
+//	//	clickReturn();
+//		new CommonFunctions().clickDone();
 	}
     public void fillFirstName(String firstName) {
     	scrollDownToElement(txtFirstName, "first Name");
     	enterText(txtFirstName, firstName, "First Name");
-   // 	clickReturn();
-   	   new CommonFunctions().clickDone();
+//   // 	clickReturn();
+//   	   new CommonFunctions().clickDone();
     }
     public void fillLastName(String lastName) {
     	scrollDownToElement(txtLastName, "Last Name");
     	enterText(txtLastName, lastName, "Last Name");
-    //	clickReturn();
-    	new CommonFunctions().clickDone();
+//    //	clickReturn();
+//    	new CommonFunctions().clickDone();
     }
     public void fillEmail(String email) {
     	scrollDownToElement(txtEmail, "Email");
     	enterText(txtEmail, email, "Email");
-   // 	clickReturn();
-     	new CommonFunctions().clickDone();
+//   // 	clickReturn();
+//     	new CommonFunctions().clickDone();
     }
     public void clickNext() {
     	if(getElement(btnNext, "Next").isEnabled()) {
