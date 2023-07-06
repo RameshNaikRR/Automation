@@ -1,6 +1,8 @@
 package coyni.business.components;
 
 import org.openqa.selenium.By;
+
+import coyni.business.pages.CreatePasswordPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -49,6 +51,10 @@ public class EmailVerificationComponent extends BrowserFunctions {
 	public void clickBackArrow() {
 		new CommonFunctions().verifyCursorAction(backArrow, "Back Arrow");
 		click(backArrow, "Back Arrow");
+	}
+
+	public CreatePasswordPage createPasswordPage() {
+		return new CreatePasswordPage();
 	}
 
 }

@@ -1,5 +1,7 @@
 package coyni.business.pages;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
@@ -27,6 +29,85 @@ public class BusinessInformationPage extends BrowserFunctions {
 	private By txtDBAAddressLine2 = By.xpath("");
 	private By lnkExit = By.xpath("");
 	private By btnNext = By.xpath("");
+	private By businessName = By.xpath("");
+	private By businessEntity = By.xpath("");
+	private By startDate = By.xpath("");
+	private By companyEmail = By.xpath("");
+	private By companyPhone = By.xpath("");
+	private By address = By.xpath("");
+	private By lblDBAInfo = By.xpath("");
+	private By dbaName = By.xpath("");
+	private By application = By.xpath("");
+	private By lblBusinessInfo = By.xpath("");
+	private By accountID = By.xpath("");
+	private By status = By.xpath("");
+	private By edit = By.xpath("");
+	private By btnSave=By.xpath("");
+
+	public void verifyBusinessName() {
+		String str = getText(businessName, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyBusinessEntity() {
+		String str = getText(businessEntity, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyStartDate() {
+		String str = getText(startDate, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyCompanyEmail() {
+		String str = getText(companyEmail, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyCompanyPhone() {
+		String str = getText(companyPhone, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyAddress() {
+		String str = getText(address, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyDBAInfo() {
+		String str = getText(lblDBAInfo, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyDBAName() {
+		String str = getText(dbaName, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyApplication() {
+		String str = getText(application, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyBusinessInfo() {
+		String str = getText(lblBusinessInfo, "");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyAccountID() {
+		String str = getText(accountID, "AccountID");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyStatus() {
+		String str = getText(status, "Status");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyEdit() {
+		String str = getText(edit, "Edit");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
@@ -110,6 +191,23 @@ public class BusinessInformationPage extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Next Button is Disabled");
 		}
 	}
+
+	public void clickSaveEnabled() {
+		if (getElement(btnSave, "Save").isEnabled()) {
+			click(btnSave, "Save");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Save button is in disabled mode");
+		}
+	}
+
+	public void clickTab() throws AWTException {
+		new CommonFunctions().clickTab();
+	}
+
+	public void clickOutsideElement() {
+		new CommonFunctions().clickOutSideElement();
+	}
+
 	public AuthorizedSignersPage authorizedSignersPage() {
 		return new AuthorizedSignersPage();
 	}

@@ -15,6 +15,9 @@ public class WalletTransferSummaryPopup extends BrowserFunctions {
 	private By btnConfirm = By.xpath("");
 	private By backArrow = By.xpath("");
 	private By crossClose = By.xpath("");
+	private By transferFrom = By.xpath("");
+	private By transferTo = By.xpath("");
+	private By note = By.xpath("");
 
 	public void verifyWalletTransferHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWalletTransferHedaing, "Wallet Transfer Hedaing is: ", expHeading);
@@ -50,6 +53,15 @@ public class WalletTransferSummaryPopup extends BrowserFunctions {
 	public void clickBackArrow() {
 		new CommonFunctions().verifyCursorAction(backArrow, "Back Arrow");
 		click(backArrow, "Back Arrow");
+	}
+
+	public void transactionDetails() {
+		String transferF = getText(transferFrom, "TransferFrom");
+		ExtentTestManager.setPassMessageInReport(transferF);
+		String transferT = getText(transferTo, "Transfer To");
+		ExtentTestManager.setPassMessageInReport(transferT);
+		String noteSummary = getText(note, "Note");
+		ExtentTestManager.setPassMessageInReport(noteSummary);
 	}
 
 	public AuthyComponent authyComponent() {

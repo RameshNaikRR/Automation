@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.business.pages.ChooseAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -57,6 +58,14 @@ public class PhoneVerificationComponent extends BrowserFunctions {
 
 	public EmailVerificationComponent emailVerificationComponent() {
 		return new EmailVerificationComponent();
+	}
+
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
+	}
+
+	public ChooseAccountPage chooseAccountPage() {
+		return new ChooseAccountPage();
 	}
 
 }

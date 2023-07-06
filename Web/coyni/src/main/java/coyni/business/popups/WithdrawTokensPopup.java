@@ -29,4 +29,12 @@ public class WithdrawTokensPopup extends BrowserFunctions {
 		click(crossClose, "Close");
 	}
 
+	public WithdrawToBankAccountPopup withdrawToBankAccountPopup() {
+		return new WithdrawToBankAccountPopup();
+	}
+
+	public WithdrawToInstantPayPopup withdrawToInstantPayPopup() {
+		return new WithdrawToInstantPayPopup();
+	}
+
 }

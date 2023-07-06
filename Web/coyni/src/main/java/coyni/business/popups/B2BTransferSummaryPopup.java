@@ -34,7 +34,7 @@ public class B2BTransferSummaryPopup extends BrowserFunctions {
 		return precessingFee;
 	}
 
-	public String verifyTotal(String total) {
+	public String verifyTotal() {
 		String totalAmount = getText(lblTotal, "Total");
 		ExtentTestManager.setInfoMessageInReport("Total is: " + totalAmount);
 		return totalAmount;

@@ -2,6 +2,7 @@ package coyni.business.pages;
 
 import org.openqa.selenium.By;
 
+
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -150,7 +151,7 @@ public class AuthorizedSignersPage extends BrowserFunctions {
 	public void selectFinancialorBillingContact() {
 		click(drpdwnFinancialorBillingContact, "Select your Financial/Billing Contact");
 	}
-	public DocumentUploadPage documentUploadPage() {
-		return new DocumentUploadPage();
-	}
+//	public DocumentUploadPage documentUploadPage() {
+//		return new DocumentUploadPage();
+//	}
 }

@@ -12,6 +12,7 @@ public class TransferCompletedPopup extends BrowserFunctions {
 	private By btnDone = By.xpath("");
 	private By lnkViewTransaction = By.xpath("");
 	private By crossClose = By.xpath("");
+	private By status = By.xpath("");
 
 	public void verifyTransferCompletedHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblTransferHeading, "Transfer completed heading is: ", expHeading);
@@ -29,6 +30,11 @@ public class TransferCompletedPopup extends BrowserFunctions {
 
 	public void clickViewTransaction() {
 		click(lnkViewTransaction, "View Transaction");
+	}
+
+	public void viewStatus() {
+		String getStatus = getText(status, "Status");
+		ExtentTestManager.setPassMessageInReport(getStatus);
 	}
 
 	public void clickClose() {

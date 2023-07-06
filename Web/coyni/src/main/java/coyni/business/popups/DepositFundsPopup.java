@@ -41,7 +41,11 @@ public class DepositFundsPopup extends BrowserFunctions {
 
 	public void clickAddBankAccount() {
 		new CommonFunctions().verifyCursorAction(btnAddBankAccount, "Add Bank Account");
-		click(btnAddBankAccount, "Add Bank Account");
+		if (getElement(btnAddBankAccount, "Next").isEnabled()) {
+			click(btnAddBankAccount, "Add Bank Account");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Already Bank Account added proceed with added bank account");
+		}
 	}
 
 	public void clickClose() {
@@ -76,6 +80,7 @@ public class DepositFundsPopup extends BrowserFunctions {
 			ExtentTestManager.setFailMessageInReport("Done Button is Disabled");
 		}
 	}
+
 	public void clickViewTransaction() {
 		click(lnkViewTrnsaction, "View Transaction");
 	}

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -67,6 +68,29 @@ public class CommonFunctions {
 					.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed for " + elementName);
 		}
 		verifyTextBoxBorderColor(expcolour);
+	}
+
+	public void validateFormErrorMessageForForgotPassword(String expErrMsg) {
+		By errorMsgs = By.cssSelector("div[class *='text-crd5']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+	public void verifyPasswordMaskedView(By ele, String eleName) {
+		String attributeValue = objBrowserFunctions.getElement(ele, eleName).getAttribute("type");
+		if (attributeValue.contains("password")) {
+			ExtentTestManager.setInfoMessageInReport("Password Masked with black circles");
+
+		} else {
+			ExtentTestManager.setInfoMessageInReport("Password Not masked with black circles");
+
+		}
 	}
 
 	public void verifyTextBoxBorderColor(String expcolour) {
@@ -154,7 +178,7 @@ public class CommonFunctions {
 			ExtentTestManager.setFailMessageInReport("Border color and Background color is not changed");
 		}
 	}
-	
+
 	public void selectCustomDropDown(String option, String eleName) {
 		try {
 			By options = By.xpath(
@@ -183,4 +207,50 @@ public class CommonFunctions {
 		}
 	}
 
+	public void clickOutSideElement() {
+		// DriverFactory.getDriver().findElement(By.xpath("//html")).click();
+		Actions action = new Actions(DriverFactory.getDriver());
+		action.moveByOffset(10, 10).click().build().perform();
+		ExtentTestManager.setInfoMessageInReport("clicked outside");
+	}
+
+	public void validateField(By ele, String eleName, String enterText) {
+		ExtentTestManager.setInfoMessageInReport("trying to enter " + enterText.length() + "characters in " + eleName);
+		DriverFactory.getDriver().findElement(ele).clear();//
+		objBrowserFunctions.enterText(ele, enterText, eleName);
+		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "")
+				.replace("-", "").replace("(", "").replace(")", "");
+		System.out.println("length " + actualtext.length());
+
+		clickOutSideElement();
+
+		By errorMsgs = By.cssSelector("span.text-crd5");
+		if (enterText.equalsIgnoreCase(actualtext)
+				&& objBrowserFunctions.getElementsList(errorMsgs, "error messages").size() == 0) {
+
+			ExtentTestManager.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
+		} else {
+
+			ExtentTestManager
+					.setInfoMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
+		}
+
+	}
+
+	public void validateFieldMaxichar(By ele, String eleName, String enterText) {
+
+		By errorMsgs = By.cssSelector("span.text-crd5");
+		ExtentTestManager.setInfoMessageInReport("trying to enter " + enterText.length() + "characters  in " + eleName);
+		DriverFactory.getDriver().findElement(ele).clear();//
+		objBrowserFunctions.enterText(ele, enterText, eleName);
+		String actualtext = objBrowserFunctions.getTextBoxValue(ele, eleName).replace(" ", "").replace("/", "")
+				.replace("-", "").replace("(", "").replace(")", "");
+		if (!enterText.equalsIgnoreCase(actualtext)
+				&& objBrowserFunctions.getElementsList(errorMsgs, "error messages").size() == 0) {
+			ExtentTestManager
+					.setPassMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
+		} else {
+			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting " + enterText.length() + " characters");
+		}
+	}
 }

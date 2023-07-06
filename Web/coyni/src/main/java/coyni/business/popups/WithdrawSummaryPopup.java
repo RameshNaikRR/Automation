@@ -2,6 +2,7 @@ package coyni.business.popups;
 
 import org.openqa.selenium.By;
 
+import coyni.admin.popups.WithdrawInProgressPopup;
 import coyni.business.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -11,8 +12,8 @@ public class WithdrawSummaryPopup extends BrowserFunctions {
 
 	private By lblWithdrawSummaryHeading = By.xpath("");
 	private By lblAmount = By.xpath("");
-	private By lblProcessingFee = By.xpath("");
-	private By lblTotal = By.xpath("");
+	private By processingFee = By.xpath("");
+	private By total = By.xpath("");
 	private By btnConfirm = By.xpath("");
 	private By backArrow = By.xpath("");
 	private By crossClose = By.xpath("");
@@ -28,13 +29,13 @@ public class WithdrawSummaryPopup extends BrowserFunctions {
 	}
 
 	public String verifyProcessingFee() {
-		String precessingFee = getText(lblProcessingFee, "Processing Fee");
+		String precessingFee = getText(processingFee, "Processing Fee");
 		ExtentTestManager.setInfoMessageInReport("Processing Fee is: " + precessingFee);
 		return precessingFee;
 	}
 
-	public String verifyTotal(String total) {
-		String totalAmount = getText(lblTotal, "Total");
+	public String verifyTotal() {
+		String totalAmount = getText(total, "Total");
 		ExtentTestManager.setInfoMessageInReport("Total is: " + totalAmount);
 		return totalAmount;
 	}
@@ -61,6 +62,10 @@ public class WithdrawSummaryPopup extends BrowserFunctions {
 
 	public AuthyComponent authyComponent() {
 		return new AuthyComponent();
+	}
+
+	public WithdrawInProgressPopup withdrawInProgressPopup() {
+		return new WithdrawInProgressPopup();
 	}
 
 }

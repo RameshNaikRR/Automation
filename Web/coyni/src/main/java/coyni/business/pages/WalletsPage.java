@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.business.popups.DepositFundsPopup;
 import coyni.business.popups.SelectTransferTypePopup;
+import coyni.business.popups.WithdrawTokensPopup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -17,6 +18,8 @@ public class WalletsPage extends BrowserFunctions {
 	private By lnkTransfer = By.xpath("");
 	private By lnkWithdraw = By.xpath("");
 	private By copyWallet = By.xpath("");
+	private By availableFunds = By.xpath("");
+	private By close = By.xpath("");
 
 	public void verifyWalletsHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblWalletsHeading, "Hedaing is: ", expHeading);
@@ -26,6 +29,16 @@ public class WalletsPage extends BrowserFunctions {
 		String totalWalletBalance = getText(lblTotalWalletBalance, "Total Wallet Balance");
 		ExtentTestManager.setInfoMessageInReport("Total Wallet Balance is" + totalWalletBalance);
 		return totalWalletBalance;
+	}
+
+	public void close() {
+		click(close, "Close");
+	}
+
+	public String verifyAvailableFunds() {
+		String getavailableFunds = getText(availableFunds, "Available Funds");
+		ExtentTestManager.setInfoMessageInReport("Available Funds :" + availableFunds);
+		return getavailableFunds;
 	}
 
 	public void clickNewWallet() {
@@ -64,6 +77,10 @@ public class WalletsPage extends BrowserFunctions {
 
 	public SelectTransferTypePopup selectTransferTypePopup() {
 		return new SelectTransferTypePopup();
+	}
+
+	public WithdrawTokensPopup withdrawTokensPopup() {
+		return new WithdrawTokensPopup();
 	}
 
 }

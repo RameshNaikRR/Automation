@@ -2,6 +2,8 @@ package coyni.business.pages;
 
 import org.openqa.selenium.By;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
@@ -14,6 +16,7 @@ public class AccountFeesAndLimitsPage extends BrowserFunctions {
 	private By lnkBack = By.xpath("");
 	private By lnkExit = By.xpath("");
 	private By chkBox = By.xpath("");
+	private By viewAccountLimits = By.xpath("");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
@@ -31,6 +34,11 @@ public class AccountFeesAndLimitsPage extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Next Button is Disabled");
 		}
+	}
+
+	public void viewFeeLimits() {
+		String getFeeLimits = getText(viewAccountLimits, "Limits");
+		ExtentTestManager.setPassMessageInReport(getFeeLimits);
 	}
 
 	public void clickBack() {

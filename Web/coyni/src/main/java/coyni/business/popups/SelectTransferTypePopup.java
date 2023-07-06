@@ -31,6 +31,10 @@ public class SelectTransferTypePopup extends BrowserFunctions {
 		click(crossClose, "Close");
 	}
 
+	public B2BTransferPopup b2bTransferPopup() {
+		return new B2BTransferPopup();
+	}
+
 	public WalletTransferPopup walletTransferPopup() {
 		return new WalletTransferPopup();
 	}

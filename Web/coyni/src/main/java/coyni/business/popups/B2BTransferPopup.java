@@ -66,4 +66,8 @@ public class B2BTransferPopup extends BrowserFunctions {
 		click(backArrow, "Back Arrow");
 	}
 
+	public B2BTransferSummaryPopup b2bTransferSummaryPopup() {
+		return new B2BTransferSummaryPopup();
+	}
+
 }

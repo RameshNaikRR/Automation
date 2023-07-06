@@ -5,6 +5,7 @@ import java.awt.AWTException;
 import org.openqa.selenium.By;
 
 import coyni.business.components.AuthyComponent;
+import coyni.business.components.PhoneVerificationComponent;
 import coyni.business.components.RetrieveEmailComponent;
 import coyni.business.components.ToastComponent;
 import coyni.uitilities.CommonFunctions;
@@ -53,7 +54,7 @@ public class LoginPage extends BrowserFunctions {
 		}
 	}
 
-	public void clickForgotEmail() {
+	public void clickRetrievemail() {
 		click(lnkRetrieveEmail, "ForgotEmailLink");
 	}
 
@@ -69,7 +70,7 @@ public class LoginPage extends BrowserFunctions {
 		new CommonFunctions().elementView(txtPassword, "Password");
 	}
 
-	public void verifyForgotEmail() {
+	public void verifyRetrieveEmail() {
 		new CommonFunctions().elementView(lnkRetrieveEmail, "ForgotEmail");
 	}
 
@@ -97,6 +98,14 @@ public class LoginPage extends BrowserFunctions {
 
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
+	}
+
+	public ForgotPasswordPage forgotPasswordPage() {
+		return new ForgotPasswordPage();
+	}
+
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
 	}
 
 	public RetrieveEmailComponent retrieveEmailComponent() {
