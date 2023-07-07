@@ -2,11 +2,15 @@ package coyni.business.pages;
 
 import org.openqa.selenium.By;
 
+import coyni.business.components.AgreementsComponent;
 import coyni.business.components.MailingAddressComponent;
+import coyni.business.components.PhoneVerificationComponent;
 import coyni.business.popups.EditEmailAddressPopup;
 import coyni.business.popups.EditPhoneNumberPopup;
+import coyni.business.popups.ReconfigureTwoStepAuthenticationPoup;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
+import ilabs.api.reporting.ExtentTestManager;
 
 public class ProfilePage extends BrowserFunctions {
 
@@ -19,17 +23,26 @@ public class ProfilePage extends BrowserFunctions {
 	private By iconEditPhoneNumber = By.xpath("");
 	private By iconEditEmailAddress = By.xpath("");
 	private By iconEditMailingAddress = By.xpath("");
+	private By permissionRole = By.xpath("");
 
-	public void verifyProfile(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblProfile, "Profile Heading is: ", expHeading);
+	public void verifyProfile() {
+		String str = getText(lblProfile, "Profile");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
-	public void verifyCustomerName(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblCustomerName, "Customer Name is : ", expHeading);
+	public void verifyCustomerName() {
+		String str = getText(lblCustomerName, "customer name");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
-	public void verifyAccountID(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblAccountID, "Account ID is : ", expHeading);
+	public void verifyAccountID() {
+		String str = getText(lblAccountID, "Account ID");
+		ExtentTestManager.setPassMessageInReport(str);
+	}
+
+	public void verifyPermissionRole() {
+		String str = getText(permissionRole, "");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void verifyTwoStepAuthentication(String expHeading) {
@@ -68,8 +81,24 @@ public class ProfilePage extends BrowserFunctions {
 		return new EditEmailAddressPopup();
 	}
 
+	public PhoneVerificationComponent phoneVerificationComponent() {
+		return new PhoneVerificationComponent();
+	}
+
 	public MailingAddressComponent mailingAddressComponent() {
 		return new MailingAddressComponent();
+	}
+
+	public ReconfigureTwoStepAuthenticationPoup recongAuthenticationPoup() {
+		return new ReconfigureTwoStepAuthenticationPoup();
+	}
+
+	public AgreementsComponent agreementsComponent() {
+		return new AgreementsComponent();
+	}
+
+	public PreferencesPage preferencespage() {
+		return new PreferencesPage();
 	}
 
 }

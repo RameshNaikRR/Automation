@@ -14,6 +14,7 @@ public class ReconfigureTwoStepAuthenticationPoup extends BrowserFunctions {
 	private By copiedtoClipboard = By.xpath("");
 	private By lnkScanQRCodeInstead = By.xpath("");
 	private By crossClose = By.xpath("");
+	private By goBack = By.xpath("");
 
 	public void verifyReconfigureTwoStepHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblReconfigureTwoStepHeading, "Heading is: ", expHeading);
@@ -27,6 +28,10 @@ public class ReconfigureTwoStepAuthenticationPoup extends BrowserFunctions {
 	public void clickUseManualEntry() {
 		new CommonFunctions().verifyCursorAction(lnkUseManualEntry, "Use Manual Entry Instead");
 		click(lnkUseManualEntry, "Use Manual Entry Instead");
+	}
+
+	public void clickGoBack() {
+		click(goBack, "Go Back");
 	}
 
 	public void copyToClipboard() {

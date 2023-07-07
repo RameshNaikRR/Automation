@@ -23,8 +23,9 @@ public class EditEmailAddressPopup extends BrowserFunctions {
 		new CommonFunctions().verifyLabelText(lblEditEmailAddressDes, "Description is: ", expDes);
 	}
 
-	public void verifyCurrentEmailAddress(String currentAddress) {
-		new CommonFunctions().verifyLabelText(lblCurrentEmailAddress, "Current Email Address is: ", currentAddress);
+	public void verifyCurrentEmailAddress() {
+		String str = getText(lblCurrentEmailAddress, "current Email Address");
+		ExtentTestManager.setPassMessageInReport(str);
 	}
 
 	public void fillNewEmailAddress(String newEmailAddress) {

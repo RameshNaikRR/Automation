@@ -13,7 +13,7 @@ public class UserDetailsComponent extends BrowserFunctions {
 	private By lblUserDetails = By.cssSelector("");
 	private By lnkLogOut = By.xpath("");
 
-	public void verifyUserDeatils(String expHeading) {
+	public void verifyUserDetails(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblUserDetails, "Heading is: ", expHeading);
 	}
 
