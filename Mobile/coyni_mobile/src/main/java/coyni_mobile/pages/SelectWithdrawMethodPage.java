@@ -11,38 +11,38 @@ import io.appium.java_client.MobileBy;
 public class SelectWithdrawMethodPage extends MobileFunctions{
 	
 //	private By lblHeading =MobileBy.xpath("//*[contains(@name,'Select Withdraw')]");
-	private By lblWithdraw =MobileBy.AccessibilityId("Select Withdraw Method");
-	private By lblWIthdrawDesc = MobileBy.AccessibilityId("");
+	private By lblWithdraw =MobileBy.xpath("//*[@text='Withdraw']");
+	private By lblWIthdrawDesc = MobileBy.id("");
 	private By lblBankDescription =MobileBy.xpath("//*[contains(@name,'External Bank')]/following-sibling::*[1]");
 	private By lblInstantDescription = MobileBy.xpath("//*[@name='Instant Pay']/following-sibling::*[1]");
-	private By lblGiftCardDescription = MobileBy.xpath("//*[contains(@name,'Gift')]/following-sibling::*[1]");
+	private By lblGiftCardDescription = MobileBy.xpath("//*[contains(@text,' gift cards from over')]");
 //	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@name,'External Bank')]");
 	private By btnExternalBankAccount = MobileBy.AccessibilityId("External Bank Account");
 //	private By btnInstantPay = MobileBy.xpath("//*[@name='Instant Pay']	");
 	private By btnInstantPay = MobileBy.AccessibilityId("Instant Pay");
 //	private By btnGiftCard = MobileBy.xpath("//*[@name='Gift Card']");
-	private By btnGiftCard = MobileBy.AccessibilityId("Gift Card");
+	private By btnGiftCard = MobileBy.id("com.coyni.mapp:id/lyGiftCard");
 	private By btnCogentWallet = MobileBy.xpath("//*[@name='Cogent Account']");
-	private By imgGiftCard = MobileBy.xpath("//XCUIElementTypeButton[@name='Gift card']");
-	private By lblBankFee = MobileBy.AccessibilityId("");
-	private By lblInstantFee = MobileBy.AccessibilityId("");
-	private By lblGiftFee = MobileBy.AccessibilityId("");
+	private By imgGiftCard = MobileBy.id("com.coyni.mapp:id/imgGCardLogo");
+	private By lblBankFee = MobileBy.id("");
+	private By lblInstantFee = MobileBy.id("");
+	private By lblGiftFee = MobileBy.id("com.coyni.mapp:id/giftFeeTV");
 	
 	
 	
 	//when no card and accounts
 	
-	private By imgAddBank = MobileBy.AccessibilityId("");
-	private By lblAddBankAccountHdg = MobileBy.AccessibilityId("");
-	private By lblBankAccountdesc = MobileBy.AccessibilityId("");
-	private By lnkBankAccount = MobileBy.AccessibilityId("");
-	private By lblBankdesc = MobileBy.AccessibilityId("");
+	private By imgAddBank = MobileBy.id("");
+	private By lblAddBankAccountHdg = MobileBy.id("");
+	private By lblBankAccountdesc = MobileBy.id("");
+	private By lnkBankAccount = MobileBy.id("");
+	private By lblBankdesc = MobileBy.id("");
 	
-	private By imgAddDebit= MobileBy.AccessibilityId("");
-	private By lblAddInstantPayHdg = MobileBy.AccessibilityId("");
-	private By lblInstantPaydesc = MobileBy.AccessibilityId("");
-	private By lnkDebitCard = MobileBy.AccessibilityId("");
-	private By lblDebitdesc = MobileBy.AccessibilityId("");
+	private By imgAddDebit= MobileBy.id("");
+	private By lblAddInstantPayHdg = MobileBy.id("");
+	private By lblInstantPaydesc = MobileBy.id("");
+	private By lnkDebitCard = MobileBy.id("");
+	private By lblDebitdesc = MobileBy.id("");
 	
 	
 	

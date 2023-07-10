@@ -127,11 +127,20 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void fillAddLine1(String addressLine1) {
+		click(txtAddLine1, "Address Line1");
 		enterText(txtAddLine1, addressLine1, "Address Line1");
 	}
 
 	public void fillAddLine2(String addressLine2) {
 		enterText(txtAddLine2, addressLine2, "Address Line2");
+	}
+
+	public void clickAddLine1() {
+		click(txtAddLine1, "Address Line1");
+	}
+
+	public void clickCity() {
+		click(txtCity, "City");
 	}
 
 	public void scrollToCity() {
@@ -144,7 +153,7 @@ public class MailingAddressComponent extends MobileFunctions {
 		if (getElementList(drpDwnState, "State").size() > 0) {
 			click(drpDwnState, "state drop down");
 			enterText(txtContrySearch, state, "State");
-			click(MobileBy.AccessibilityId(String.format("(//*[@text='%s'])[2]", state)), "state");
+			click(MobileBy.xpath(String.format("(//*[@text='%s'])[2]", state)), "state");
 		} else {
 			enterText(txtState, state, "State");
 		}
@@ -156,6 +165,10 @@ public class MailingAddressComponent extends MobileFunctions {
 
 	public void scrollToZipCode() {
 		scrollDownToElement(txtZipCode, "ZipCode");
+	}
+
+	public void clickZipCode() {
+		click(txtZipCode, "ZipCode");
 	}
 
 	public void verifyCountry(String expCountry) {
@@ -239,7 +252,18 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void fillCity(String city) {
+		click(txtCity, "City");
 		enterText(txtCity, city, "City");
+	}
+
+	public void clearCity() {
+		click(txtCity, "City");
+		new CommonFunctions().clearText(txtCity, "City");
+	}
+
+	public void clearAddLine1() {
+		click(txtAddLine1, "Address Line1");
+		new CommonFunctions().clearText(txtAddLine1, "Address Line1");
 	}
 
 	public void selectState(String state) {
@@ -249,6 +273,8 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void fillZipCode(String zipCode) {
+		DriverFactory.getDriver().hideKeyboard();
+		click(txtZipCode, "Zip Code");
 		DriverFactory.getDriver().hideKeyboard();
 		enterText(txtZipCode, zipCode, "Zip Code");
 	}

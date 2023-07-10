@@ -7,6 +7,7 @@ import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
 import coyni_mobile.components.SuccessFailureComponent;
+import coyni_mobile.components.ToastComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -57,8 +58,9 @@ public class EditProfilePage extends MobileFunctions {
 	private By lblEditEmail = MobileBy.xpath("//*[@text='Edit Email']");
 	private By lblCurrExistingEmail = MobileBy.id("com.coyni.mapp:id/currentET");
 	private By txtEnterNewEmail = MobileBy.id("com.coyni.mapp:id/emailET");
-	private By lblNeedHelp = MobileBy.id("");
+	private By lblNeedHelp = MobileBy.xpath("//*[contains(@text,'with coyni?')]");
 	private By btnSave = MobileBy.id("com.coyni.mapp:id/saveButton");
+	
 
 	public void verifyEditEmailHeading(String hdg) {
 		new CommonFunctions().verifyLabelText(lblEditEmail, "Edit Email", hdg);
@@ -130,16 +132,16 @@ public class EditProfilePage extends MobileFunctions {
 	 * @return
 	 */
 
-	private By lblPhoneNumber = MobileBy.id("");
-	private By lblCurrentPhoneNumber = MobileBy.id("");
-	private By lblExistingPhoneNumber = MobileBy.id("");
-	private By lblEditPhoneNumber = MobileBy.id("");
-	private By txtCurrentPhoneNumber = MobileBy.id("");
-	private By arwPhoneNumber = MobileBy.id("");
-	private By txtSearch = MobileBy.id("");
-	private By iconSearch = MobileBy.id("");
-	private By txtPhoneNumber = MobileBy.id("");
-	private By btnContinue = MobileBy.id("");
+	private By lblPhoneNumber = MobileBy.id("com.coyni.mapp:id/intentNameTV");
+	private By lblCurrentPhoneNumber = MobileBy.id("com.coyni.mapp:id/titleTV");
+	private By lblExistingPhoneNumber = MobileBy.id("com.coyni.mapp:id/contentTV");
+	private By lblEditPhoneNumber = MobileBy.xpath("//*[@text='Edit Phone Number']");
+	private By txtCurrentPhoneNumber = MobileBy.id("com.coyni.mapp:id/currentET");
+	private By drpPhNum = MobileBy.id("com.coyni.mapp:id/tvCountryCode");
+	private By txtCountry = MobileBy.AccessibilityId("Country Search");
+	private By iconSearch = MobileBy.AccessibilityId("Country Search Icon");
+	private By txtPhoneNumber = MobileBy.id("com.coyni.mapp:id/etPhoneNo");
+	private By btnContinue = MobileBy.id("com.coyni.mapp:id/saveButton");
 
 	public void verifyPhoneNumberHdg(String hdg) {
 		new CommonFunctions().verifyLabelText(lblPhoneNumber, "Phone Number", hdg);
@@ -153,6 +155,18 @@ public class EditProfilePage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblExistingPhoneNumber, "Current Phone Number", phNum);
 	}
 
+	public void validateUpdatedPhNum(String newPhNum) {
+		String[] phNum = getText(lblExistingPhoneNumber).split("(");
+		String expNum = phNum[1].replace(")", "").replace(" ", "").replace("-", "");
+		if (expNum.equals(newPhNum)) {
+			ExtentTestManager.setPassMessageInReport(
+					"Phone Number Updated, updated number is : " + getText(lblExistingPhoneNumber));
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("Phone Number not updated,number is : " + getText(lblExistingPhoneNumber));
+		}
+	}
+
 	public void verifyEditPhoneNUmber(String phNum) {
 		new CommonFunctions().verifyLabelText(lblEditPhoneNumber, "Edit Phone Number", phNum);
 	}
@@ -161,10 +175,12 @@ public class EditProfilePage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(txtCurrentPhoneNumber, "Current Phone Number", phNum);
 	}
 
-	public void clickArrow(String country) {
-		new CommonFunctions().elementView(arwPhoneNumber, "arrow");
+	public void selectCountry(String country) {
+		click(drpPhNum, "Drop down");
 		new CommonFunctions().elementView(iconSearch, "Search icon");
-		enterText(txtSearch, country, "country");
+		enterText(txtCountry, country, "country");
+		new CommonFunctions().clickEnter();
+		new CommonFunctions().clickEnter();
 	}
 
 	public void fillPhoneNumber(String phNum) {
@@ -172,13 +188,13 @@ public class EditProfilePage extends MobileFunctions {
 	}
 
 	public void clickContinue() {
-		if (getElement(btnContinue, "Continue").isEnabled()) {
-			click(btnContinue, "Continue");
-		} else {
-			ExtentTestManager.setFailMessageInReport("Continue button is disabled");
-		}
+		new CommonFunctions().clickEnabledElement(btnContinue, "Continue");
 	}
 
+	public void verifyContinue() {
+		new CommonFunctions().verifyDisabledElement(btnContinue, "Continue");
+	}
+	
 	/**
 	 * 
 	 * Edit Address
@@ -186,10 +202,10 @@ public class EditProfilePage extends MobileFunctions {
 	 * @return
 	 */
 
-	private By lbladdress = MobileBy.id("");
+	private By lbladdress = MobileBy.id("com.coyni.mapp:id/intentNameTV");
 	private By lblCurrentAddress = MobileBy.id("com.coyni.mapp:id/titleTV");
 	private By lblExistingAddress = MobileBy.id("com.coyni.mapp:id/contentTV");
-	private By lblEditAddresshdg = MobileBy.id("");
+	private By lblEditAddresshdg = MobileBy.xpath("//*[@text='Edit Address']");
 
 	public void validateAddress() {
 		if (getElement(lblCurrentAddress, "Current Address").isDisplayed()
@@ -240,4 +256,8 @@ public class EditProfilePage extends MobileFunctions {
 		return new SuccessFailureComponent();
 	}
 
+	public ToastComponent toastComponent() {
+		return new ToastComponent();
+	}
+	
 }

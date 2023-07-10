@@ -11,9 +11,9 @@ import io.appium.java_client.MobileBy;
 public class NavigationComponent extends MobileFunctions {
 
 	private By btnBack = MobileBy.xpath(
-			"//*[contains(@resource-id,'closeIV')]|//*[contains(@resource-id,'back')]|//*[contains(@resource-id,'dialogCLoseLL')]|//*[contains(@resource-id,'PayBack')]|//*[contains(@resource-id,'imgBack')]|//*[contains(@resource-id,'ivBack')]|//*[@content-desc='Back']|//*[contains(@resource-id,'Close')]");
+			"//*[contains(@resource-id,'BuyClose')]|//*[contains(@resource-id,'backIV')]|//*[contains(@resource-id,'closeIV')]|//*[contains(@resource-id,'back')]|//*[contains(@resource-id,'dialogCLoseLL')]|//*[contains(@resource-id,'PayBack')]|//*[contains(@resource-id,'imgBack')]|//*[contains(@resource-id,'ivBack')]|//*[@content-desc='Back']|//*[contains(@resource-id,'Close')]");
 	private By btnClose = MobileBy.xpath(
-			"//*[contains(@resource-id,'backBtn')]|//*[contains(@resource-id,'ivBack')]|//*[contains(@resource-id,'ivClose')]|//*[contains(@resource-id,'imgClose')]");
+			"//*[contains(@resource-id,'backIV')]|//*[contains(@resource-id,'backBtn')]|//*[contains(@resource-id,'ivBack')]|//*[contains(@resource-id,'ivClose')]|//*[contains(@resource-id,'imgClose')]|//*[contains(@resource-id,'imgBack')]");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
 

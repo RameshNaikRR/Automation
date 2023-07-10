@@ -8,101 +8,105 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class WalletsFeesPage extends MobileFunctions {
-		private By lblWalletFees = MobileBy.AccessibilityId("");
-		private By lblBuyToken = MobileBy.AccessibilityId("");
-		private By lblWithdraw = MobileBy.AccessibilityId("");
-		private By lblBankAccount = MobileBy.AccessibilityId("");
-		private By lblBankAccountFee = MobileBy.AccessibilityId("");
-		private By lblCreditCard = MobileBy.AccessibilityId("");
-		private By lblCreditCardFee = MobileBy.AccessibilityId("");
-		private By lblDebitCard = MobileBy.AccessibilityId("");
-		private By lblDebitCardFee = MobileBy.AccessibilityId("");
-		private By lblWithdrawBankAccount = MobileBy.AccessibilityId("");
-		private By lblWithdrawBankAccountFee = MobileBy.AccessibilityId("");
-		private By lblWithdrawInstantPay = MobileBy.AccessibilityId("");
-		private By lblWithdrawInstantPayFee = MobileBy.AccessibilityId("");
-		private By lblGiftCard = MobileBy.AccessibilityId("");
-		private By lblGiftCardFee = MobileBy.AccessibilityId("");
-		private By lblFailedBankWithdraw = MobileBy.AccessibilityId("");
-		private By lblFailedBankWithdrawFee = MobileBy.AccessibilityId("");
-		
-		
-		public String verifyBuyTokenBankAccountFee() {
-			String str = getText(lblBankAccountFee).trim().replace(" ", "");
-			return str;
-		}
-		public String verifyBuyTokenDebitCardFee() {
-			String str = getText(lblDebitCardFee).trim().replace(" ", "");
-			return str;
-		}
-		public String verifyBuyTokenCreditCardFee() {
-			String str = getText(lblCreditCardFee).trim().replace(" ", "");
-			return str;
-		}
-		
-		public String verifyWithdrawTokenBankAccountFee() {
-			String str = getText(lblWithdrawBankAccountFee).trim().replace(" ", "");
-			return str;
-		}
-		public String verifyWithdrawTokenInstantFee() {
-			String str = getText(lblWithdrawInstantPayFee).trim().replace(" ", "");
-			return str;
-		}
-//		public String verifyBuyTokenCreditCardFee() {
-//			String str = getText(lblCreditCardFee).trim().replace(" ", "");
-//			return str;
-//		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	private By lblWalletFees = MobileBy.xpath("//*[@text='Wallet Fees']");
+	private By lblBuyToken = MobileBy.xpath("//*[@text='Buy Token']");
+	private By lblWithdraw = MobileBy.xpath("//*[@text='Withdraw']");
+	private By lblBankAccount = MobileBy.id("com.coyni.mapp:id/tvBuyTokenBADoll");
+	private By lblBankAccountFee = MobileBy.id("com.coyni.mapp:id/tvBuyTokenBAPer");
+	private By lblCreditCard = MobileBy.id("com.coyni.mapp:id/tvBuyTokenCreditADoll");
+	private By lblCreditCardFee = MobileBy.id("com.coyni.mapp:id/tvBuyTokenCreditPer");
+	private By lblDebitCard = MobileBy.id("com.coyni.mapp:id/tvBuyTokenDebitDoll");
+	private By lblDebitCardFee = MobileBy.id("com.coyni.mapp:id/tvBuyTokenDebitPer");
+	private By lblWithdrawBankAccount = MobileBy.id("com.coyni.mapp:id/tvWBADoll");
+	private By lblWithdrawBankAccountFee = MobileBy.id("com.coyni.mapp:id/tvWBAPer");
+	private By lblWithdrawInstantPay = MobileBy.id("com.coyni.mapp:id/tvInstantPayDoll");
+	private By lblWithdrawInstantPayFee = MobileBy.id("com.coyni.mapp:id/tvInstantPayPer");
+	private By lblGiftCard = MobileBy.id("com.coyni.mapp:id/giftCardDollTV");
+	private By lblGiftCardFee = MobileBy.id("com.coyni.mapp:id/giftCardPerTV");
+	private By lblFailedBankWithdraw = MobileBy.id("com.coyni.mapp:id/fbwDollTV");
+	private By lblFailedBankWithdrawFee = MobileBy.id("com.coyni.mapp:id/fbwPerTV");
 
-		public void verifyWalletFees(String hdg) {
-			new CommonFunctions().verifyLabelText(lblWalletFees, "WalletFees", hdg);
+	public void verifyBuyTokenBankAccountFee() {
+		String[] str = getText(lblBankAccount).split(" ");
+		String str2 = getText(lblBankAccountFee).replace("%", "");
+		if (str[0].equals("$") && getElement(lblBankAccount, "Buy Token Bank Account").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblBankAccount) + " + " + getText(lblBankAccountFee)
+					+ " is Displayed for Buy Token Bank Account");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Buy Token Bank Account");
 		}
+	}
 
-		public void verifyBuyToken(String hdg) {
-			new CommonFunctions().verifyLabelText(lblBuyToken, "Buy Token", hdg);
+	public void verifyBuyTokenDebitCardFee() {
+		String[] str = getText(lblDebitCard).split(" ");
+		if (str[0].equals("$") && getElement(lblDebitCardFee, "Buy Token Debit Card").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(
+					getText(lblDebitCard) + " + " + getText(lblDebitCardFee) + " is Displayed for Buy Token Debit Card");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Buy Token Debit Card");
 		}
+	}
 
-		public void verifyWithdraw(String hdg) {
-			new CommonFunctions().verifyLabelText(lblWithdraw, "Withdraw", hdg);
+	public void verifyBuyTokenCreditCardFee() {
+		String[] str = getText(lblCreditCard).split(" ");
+		if (str[0].equals("$") && getElement(lblCreditCardFee, "Buy Token Credit Card").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblCreditCard) + " + " + getText(lblCreditCardFee)
+					+ " is Displayed for Buy Token Buy Token Credit Card");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Buy Token Credit Card");
 		}
+	}
 
-		public void verifyBankAccount() {
-			new CommonFunctions().elementView(lblBankAccount, "BankAccount");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblBankAccountFee));
+	public void verifyWithdrawTokenBankAccountFee() {
+		String[] str = getText(lblWithdrawBankAccount).split(" ");
+		if (str[0].equals("$") && getElement(lblWithdrawBankAccountFee, "Withdraw Token Bank Account").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblWithdrawBankAccount) + " + "
+					+ getText(lblWithdrawBankAccountFee) + " is Displayed for Withdraw Token Bank Account");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Withdraw Token Bank Account");
 		}
+	}
 
-		public void verifyCreditCard() {
-			new CommonFunctions().elementView(lblCreditCard, "Credit Card");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblCreditCardFee));
+	public void verifyWithdrawTokenGiftCard() {
+		String[] str = getText(lblGiftCard).split(" ");
+		if (str[0].equals("$") && getElement(lblGiftCardFee, "Withdraw Token Gift Card").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(
+					getText(lblGiftCard) + " + " + getText(lblGiftCardFee) + " is Displayed for Withdraw Token Gift Card");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Withdraw Token Gift Card");
 		}
-		public void verifyDebitCard() {
-			new CommonFunctions().elementView(lblDebitCard, "Debit Card");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblDebitCardFee));
+	}
+
+	public void verifyWithdrawTokenFailedBank() {
+		String[] str = getText(lblFailedBankWithdraw).split(" ");
+		if (str[0].equals("$") && getElement(lblFailedBankWithdrawFee, "Withdraw Token Failed Bank").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblFailedBankWithdraw) + " + "
+					+ getText(lblFailedBankWithdrawFee) + " is Displayed for Withdraw Token Failed Bank");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Withdraw Token Failed Bank");
 		}
-		
-		public void verifyWithdrawBankAccount() {
-			new CommonFunctions().elementView(lblWithdrawBankAccount, "Bank Account");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblWithdrawBankAccountFee));
+	}
+
+	public void verifyWithdrawTokenInstantFee() {
+		String[] str = getText(lblWithdrawInstantPay).split(" ");
+		if (str[0].equals("$") && getElement(lblWithdrawInstantPayFee, "Withdraw Token Instant Pay").isDisplayed()) {
+			ExtentTestManager.setPassMessageInReport(getText(lblWithdrawInstantPay) + " + "
+					+ getText(lblWithdrawInstantPayFee) + " is Displayed for Withdraw Token Instant Pay");
+		} else {
+			ExtentTestManager.setPassMessageInReport(" Fee not displayed for Withdraw Token Instant Pay");
 		}
-		public void verifyWithdrawInstantPay() {
-			new CommonFunctions().elementView(lblWithdrawInstantPay, "InstantPay");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblWithdrawInstantPayFee));
-		}
-		public void verifyWithdrawGiftCard() {
-			new CommonFunctions().elementView(lblGiftCard, "Gift Card");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblGiftCardFee));
-		}
-		public void verifyFailedBankWithdraw() {
-			new CommonFunctions().elementView(lblFailedBankWithdraw, "Failed Banl Withdraw");
-			ExtentTestManager.setInfoMessageInReport("The Fee is: " + getText(lblFailedBankWithdrawFee));
-		}
+	}
+
+	public void verifyWalletFees(String hdg) {
+		new CommonFunctions().verifyLabelText(lblWalletFees, "WalletFees", hdg);
+	}
+
+	public void verifyBuyToken(String hdg) {
+		new CommonFunctions().verifyLabelText(lblBuyToken, "Buy Token", hdg);
+	}
+
+	public void verifyWithdraw(String hdg) {
+		new CommonFunctions().verifyLabelText(lblWithdraw, "Withdraw", hdg);
+	}
 
 }

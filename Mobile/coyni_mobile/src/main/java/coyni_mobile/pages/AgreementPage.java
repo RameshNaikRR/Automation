@@ -13,26 +13,26 @@ public class AgreementPage extends MobileFunctions {
 
 	private By lblLegal = MobileBy.AccessibilityId("Legal");
 	private By lblLegalDesc = MobileBy.AccessibilityId("Review Privacy and Terms Heading");
-	private By arwPrivacyPolicy = MobileBy.AccessibilityId("Privacy Policy");
 	private By btnDone = MobileBy.id("");
-	private By arwTermsOfService = MobileBy.AccessibilityId("Terms of Services");
 	private By chkBx = MobileBy.AccessibilityId("Agreement Check Box");
 	private By chkbxDesc = MobileBy.AccessibilityId("Check Box Acknowledge");
 	private By btnAgree = MobileBy.AccessibilityId("Agree");
 
 //	Profile Agreements Page
-
-	private By lblPrivacyPolicy = MobileBy.id("");
-	private By lblTermsService = MobileBy.id("");
-	private By lblPrivacyActive = MobileBy.id("");
-	private By lblPrivacyPast = MobileBy.id("");
-	private By lnkPrivacyActiveAgree = MobileBy.id("");
-	private By lnkPrivacyPastAgree = MobileBy.id("");
-	private By lblTermsActive = MobileBy.id("");
-	private By lblTermsPast = MobileBy.id("");
-	private By lnkTermsActiveAgree = MobileBy.id("");
-	private By lnkTermsPastAgree = MobileBy.id("");
-	private By lblAgreementDocHeading = MobileBy.id("");
+	private By lblAgreeHeading = MobileBy.xpath("//*[@text='Agreements']");
+	private By lnkPrivacyPolicy = MobileBy.id("com.coyni.mapp:id/privacyPolicyRL");
+	private By lnkTermsService = MobileBy.id("com.coyni.mapp:id/termsOfServiceRL");
+	private By lblPrivacyPolicy = MobileBy.xpath("//*[@text='Privacy Policy']");
+	private By lblTermsService = MobileBy.xpath("//*[@text='Terms of Service']");
+	private By lblActive = MobileBy.xpath("//*[@text='Active']");
+	private By lblPast = MobileBy.xpath("//*[@text='Past']");
+	private By lblActiveAgrmntVersion = MobileBy.xpath("//*[@text='Active']/parent::*/following-sibling::android.widget.LinearLayout[1]/descendant::android.widget.TextView[2]");
+	private By lblActiveAgreeDate = MobileBy.xpath("//*[@text='Active']/parent::*/following-sibling::android.widget.LinearLayout[1]/descendant::android.widget.TextView[3]");
+	private By lblPastAgrmntVersion = MobileBy.xpath("//*[@text='Past']/parent::*/following-sibling::android.widget.LinearLayout[1]/descendant::android.widget.TextView[2]");
+	private By lblPastAgreeDate = MobileBy.xpath("//*[@text='Past']/parent::*/following-sibling::android.widget.LinearLayout[1]/descendant::android.widget.TextView[3]");
+	private By lnkActiveAgree = MobileBy.xpath("//*[@text='Active']/parent::*/following-sibling::android.widget.LinearLayout[1]");
+	private By lnkPastAgree = MobileBy.xpath("//*[@text='Past']/parent::*/following-sibling::android.widget.LinearLayout[1]");
+	private By lblAgreementDocHeading = MobileBy.xpath("//*[@text='Agreement']");
 
 	public void verifyLegalView(String legalDesc) {
 		new CommonFunctions().elementView(lblLegal, "Heading is");
@@ -40,11 +40,11 @@ public class AgreementPage extends MobileFunctions {
 	}
 
 	public void clickPrivacyPolicy() {
-		click(arwPrivacyPolicy, "Privacy Policy");
+		click(lnkPrivacyPolicy, "Privacy Policy");
 	}
 
 	public void clickTermsOfService() {
-		click(arwTermsOfService, "Terms of Service");
+		click(lnkTermsService, "Terms of Service");
 	}
 
 	public void clickCheckBox() {
@@ -63,33 +63,40 @@ public class AgreementPage extends MobileFunctions {
 	}
 
 //	Profile Agreements page
-	public void clickPrivacyActiveAgreement() {
-		new CommonFunctions().elementView(lblPrivacyPolicy, "Privacy Policy Header");
-		new CommonFunctions().elementView(lblPrivacyActive, "Privacy Policy Active Header");
-		click(lnkPrivacyActiveAgree, "Privacy Policy Active Agreement");
+	public void verifyPrivacyAgreement(String expText) {
+		new CommonFunctions().verifyLabelText(lblPrivacyPolicy, "Privacy Policy Header",expText);
 	}
 
-	public void clickPrivacyPastAgreement() {
-		new CommonFunctions().elementView(lblPrivacyPolicy, "Privacy Policy Header");
-		new CommonFunctions().elementView(lblPrivacyPast, "Privacy Policy Past Header");
-		click(lnkPrivacyPastAgree, "Privacy Policy Past Agreement");
+	public void verifyTermsAgreement(String expText) {
+		new CommonFunctions().verifyLabelText(lblTermsService, "Terms of Service Header",expText);
+	}
+	
+	public void verifyAgreements(String expText) {
+		new CommonFunctions().verifyLabelText(lblAgreeHeading, "Agreements",expText);
+	}
+	
+	public void verifyActiveAgreement() {
+		new CommonFunctions().elementView(lblActive, "Active Agreements");		
+		new CommonFunctions().elementView(lblActiveAgrmntVersion, "Active Agreement Version");
+		new CommonFunctions().elementView(lblActiveAgreeDate, "Active Agreement Agreed Date");		
+	}
+	
+	public void verifyPastAgreement() {
+		new CommonFunctions().elementView(lblPast, "Past Agreements");		
+		new CommonFunctions().elementView(lblPastAgrmntVersion, "Past Agreement Version");
+		new CommonFunctions().elementView(lblPastAgreeDate, "Past Agreement Agreed Date");		
+	}
+	
+	public void clickPastAgreement() {
+		click(lnkPastAgree, "Past Agreement");
 	}
 
-	public void clickActiveTermsAgreement() {
-		new CommonFunctions().elementView(lblTermsService, "Terms of Service Header");
-		new CommonFunctions().elementView(lblTermsActive, "Terms of Service Active Header");
-		click(lnkTermsActiveAgree, "Terms of Service Active Agreement");
-	}
-
-	public void clickPastTermsAgreement() {
-		new CommonFunctions().elementView(lblTermsService, "Terms of Service Header");
-		new CommonFunctions().elementView(lblTermsPast, "Terms of Service Past Header");
-		click(lnkTermsPastAgree, "Terms of Service Past Agreement");
+	public void clickActiveAgreement() {
+		click(lnkActiveAgree, "Active Agreement");
 	}
 
 	public void verifyDocAgreeHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblAgreementDocHeading, "Agree Doc Heading", heading);
-		click(lnkTermsPastAgree, "Terms of Service Past Agreement");
 	}
 
 	public NavigationComponent navigationComponent() {

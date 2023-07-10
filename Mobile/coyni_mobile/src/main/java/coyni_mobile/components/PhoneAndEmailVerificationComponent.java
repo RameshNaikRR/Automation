@@ -23,14 +23,14 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 //	Edit Profile Details
 	private By lblCurrentEmailVerification = MobileBy.xpath("//*[@text='Current Email Verification']");
 	private By currentEmaildesc = MobileBy.id("com.coyni.mapp:id/description");
-	private By lblDontHaveAccess = MobileBy.xpath("");
-	private By lnkContactUs = MobileBy.xpath("");
+	private By lblDontHaveAccess = MobileBy.xpath("//*[contains(@text,'Do')]");
+	private By lnkContactUs = MobileBy.id("com.coyni.mapp:id/contactUsTV");
 	private By lblNewEmailVerification = MobileBy.xpath("//*[@text='New Email Verification']");
 	private By NewEmailDesc = MobileBy.id("com.coyni.mapp:id/description");
-	private By lblCurrentPhoneVerification = MobileBy.xpath("");
-	private By currentPhonedesc = MobileBy.xpath("");
-	private By lblNewPhoneVerification = MobileBy.xpath("");
-	private By NewPhoneDesc = MobileBy.xpath("");
+	private By lblCurrentPhoneVerification = MobileBy.xpath("//*[@text='Current Phone Verification']");
+	private By currentPhonedesc = MobileBy.AccessibilityId("Phone Verification Text");
+	private By lblNewPhoneVerification = MobileBy.xpath("//*[@text='New Phone Verification']");
+//	private By NewPhoneDesc = MobileBy.xpath("");
 
 	public void verifyLabelTextforPhNumVerifiDesc(String expText1, String expText2) {
 		String[] actText = getText(lblPhoneDesc).split(":");
@@ -106,7 +106,7 @@ public class PhoneAndEmailVerificationComponent extends MobileFunctions {
 	}
 
 	public void verifyNewPhoneVerificationText(String hdg) {
-		new CommonFunctions().verifyLabelText(NewPhoneDesc, "New Phone Desc", hdg);
+		new CommonFunctions().verifyLabelText(currentPhonedesc, "New Phone Desc", hdg);
 	}
 
 	public void verifyDontHaveAccess() {

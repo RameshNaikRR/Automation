@@ -12,29 +12,37 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ReloadPopup extends MobileFunctions {
-	private By lblInsuffHeading = MobileBy.AccessibilityId("");
-	private By lblInsuffDescription = MobileBy.AccessibilityId(" ");
-	private By btnNewAmt = MobileBy.AccessibilityId("");
-	private By btnReload = MobileBy.AccessibilityId("//*[@text='Paying Method']");
-	private By lblAddCaReloadHeading = MobileBy.AccessibilityId("");
-	private By lblAddCaReDescription = MobileBy.AccessibilityId("");
+	private By lblInsuffHeading = MobileBy.id("");
+	private By lblInsuffDescription = MobileBy.id("");
+	private By btnNewAmt = MobileBy.id("");
+	private By btnReload = MobileBy.xpath("//*[@text='Paying Method']");
+	private By lblAddCaReloadHeading = MobileBy.id("");
+	private By lblAddCaReDescription = MobileBy.id("");
 	private By btnAddDebit = MobileBy.AccessibilityId("//*[contains(@resource-id,'myUserIDTV')]");
 	private By btnAddCredit = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
-	private By lblReloadHeading = MobileBy.AccessibilityId("");
-	private By txtAmount = MobileBy.AccessibilityId("");
+	private By lblReloadHeading = MobileBy.id("");
+	private By txtAmount = MobileBy.id("");
 	private By btnPaymentMethod = MobileBy.AccessibilityId("//*[contains(@resource-id,'refIDTV')]");
-	private By btnAddPayment = MobileBy.AccessibilityId("");
-	private By lblAddPaymentHeading = MobileBy.AccessibilityId("");
-	private By lblPurchaseAmount = MobileBy.AccessibilityId("");
-	private By lblTotal = MobileBy.AccessibilityId("");
-	private By lblProcessingFee = MobileBy.AccessibilityId("");
-	private By btnProcessingFee = MobileBy.AccessibilityId("");
-	private By lblProcessingFeePercen = MobileBy.AccessibilityId("");
-	private By lnkViewFees = MobileBy.AccessibilityId("");
-	private By btnLoad = MobileBy.AccessibilityId("");
-	private By txtCVV = MobileBy.AccessibilityId("");
-	private By btnOk = MobileBy.AccessibilityId("");
-	private By lblWalletFees = MobileBy.AccessibilityId("");
+	private By btnAddPayment = MobileBy.id("");
+	private By lblAddPaymentHeading = MobileBy.id("");
+	private By btnLoad = MobileBy.id("");
+	private By txtCVV = MobileBy.id("");
+	private By btnOk = MobileBy.id("");
+	private By lblWalletFees = MobileBy.id("");
+
+//	You Will Receive Popup details or Order preview details
+
+	private By lblYouWillReceive = MobileBy.xpath("//*[@text='You Will Receive']|//*[contains(@text,'Gift Card')]");
+	private By lblamount = MobileBy.id("com.coyni.mapp:id/tvGet");
+	private By lblPurchaseAmount = MobileBy.id("com.coyni.mapp:id/tvPurchaseAmt");
+	private By lblTotal = MobileBy.id("com.coyni.mapp:id/tvTotal");
+	private By lblPaymentMethod = MobileBy.xpath(
+			"//*[contains(@resource-id,'gcTypeTV')]|//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'tvPayMethod')]");
+	private By lblProcessingFee = MobileBy.id("com.coyni.mapp:id/tvProcessFee");
+	private By btnProsFeeInfo = MobileBy.id("com.coyni.mapp:id/infoImgage");
+	private By lblProcessingFeePercen = MobileBy.id("com.coyni.mapp:id/feePercentageTV");
+	private By lnkViewFees = MobileBy.id("com.coyni.mapp:id/viewFeesDialog");
+	private By btnConfirm = MobileBy.id("com.coyni.mapp:id/cvConfirm");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	DecimalFormat df = new DecimalFormat("#.##");
@@ -63,6 +71,10 @@ public class ReloadPopup extends MobileFunctions {
 
 	public void clickReload() {
 		click(btnReload, "Reload");
+	}
+
+	public void clickConfirm() {
+		click(btnConfirm, "Confirm");
 	}
 
 	public void clickAddDebitCard() {
@@ -98,7 +110,7 @@ public class ReloadPopup extends MobileFunctions {
 	}
 
 	public void clickProcessingFee() {
-		click(btnProcessingFee, "Processing Fee Details");
+		click(btnProsFeeInfo, "Processing Fee Info");
 	}
 
 	public void clickViewFees() {
@@ -109,19 +121,196 @@ public class ReloadPopup extends MobileFunctions {
 		new CommonFunctions().elementView(lblWalletFees, "Wallet Fees");
 	}
 
-	public void validateProcessingFees() {
-		double pocessingFee = Double.parseDouble(df.format(getText(lblProcessingFee).replace(" USD", "")));
-		double feePer = Double.parseDouble(
-				df.format(getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "")));
-		double amt = Double.parseDouble(df.format(getText(lblPurchaseAmount).replace(" USD", "")));
-		double fee = (amt / 100) * feePer;
-		double total = Double.parseDouble(getText(lblTotal).replace(" USD", ""));
-		if (fee == pocessingFee && total == fee + amt) {
-			ExtentTestManager.setPassMessageInReport("");
+	public void verifyYouWillRecveHeading(String expHeading) {
+		new CommonFunctions().verifyLabelText(lblYouWillReceive, "Receive Popup Heading", expHeading);
+		new CommonFunctions().elementView(lblamount, "Amount");
+		new CommonFunctions().elementView(lblPaymentMethod, "Payment Method");
+		ExtentTestManager.setPassMessageInReport(getText(lblPaymentMethod));
+	}
+
+	public double verifyProcessingFee() {
+		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" USD", "").replace(" CYN", ""));
+		return pocessingFee;
+	}
+
+	public void validateWithoutProcessingFee(String amount) {
+		double reqstAmt = Double.parseDouble(amount);
+		double amt = Double.parseDouble(getText(lblamount).replace("$", ""));
+		double purchaseAmt = Double.parseDouble(getText(lblPurchaseAmount).replace(" USD", "").replace(" CYN", ""));
+		double total = Double.parseDouble(getText(lblTotal).replace(" USD", "").replace(" CYN", ""));
+		if (reqstAmt == purchaseAmt && reqstAmt == amt) {
+			ExtentTestManager.setPassMessageInReport("Transaction amount and Purchase amount are same");
 		} else {
-			ExtentTestManager.setFailMessageInReport("The Processing fee or total fee calculation is not correct");
+			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
+		}
+		if (reqstAmt == total) {
+			ExtentTestManager
+					.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("The Total amount is not addition of Purchase amount and Processing Fee");
 		}
 	}
+
+	public void validateProcessingFees(String amount) {
+		double amt = Double.parseDouble(amount);
+		System.out.println("amt" + amt);
+		double purchaseAmt = Double.parseDouble(getText(lblPurchaseAmount).replace(" USD", "").replace(" CYN", ""));
+		System.out.println("purchaseAmt" + purchaseAmt);
+		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" USD", "").replace(" CYN", ""));
+		System.out.println("pocessingFee" + pocessingFee);
+		double total = Double.parseDouble(getText(lblTotal).replace(" USD", "").replace(" CYN", ""));
+		System.out.println("total" + total);
+		if (amt == purchaseAmt) {
+			ExtentTestManager.setPassMessageInReport("Transaction amount and Purchase amount are same");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
+		}
+		if (!getText(lblProcessingFeePercen).contains(getText(lblProcessingFee).replace(" CYN", ""))) {
+			String fee = getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "");
+			System.out.println("fee" + fee);
+			String[] fePer = fee.split("\\+");
+			System.out.println("fePer" + fePer);
+			double percentage = Double.parseDouble(fePer[1]);
+			System.out.println("percentage" + percentage);
+			double feePercentage = (amt / 100) * percentage;
+			System.out.println("feePercentage" + feePercentage);
+			double feeDollars = Double.parseDouble(fePer[0].replace("$", ""));
+			System.out.println("feeDollars" + feeDollars);
+			if (feeDollars + feePercentage == pocessingFee) {
+				ExtentTestManager.setPassMessageInReport("Processing fee calculated as per Condition");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Processing fee not calculated as per Condition");
+			}
+			if (feeDollars + feePercentage + amt == total) {
+				ExtentTestManager
+						.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"The Total amount is not addition of Purchase amount and Processing Fee");
+			}
+		} else {
+			if (total == purchaseAmt + pocessingFee) {
+				ExtentTestManager
+						.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"The Total amount is not addition of Purchase amount and Processing Fee");
+			}
+		}
+	}
+
+//	public void validateProcessingFees(String amount) {
+//		double amt = Double.parseDouble(amount);
+//		System.out.println("amt" + amt);
+//		double purchaseAmt = Double.parseDouble(getText(lblPurchaseAmount).replace(" USD", "").replace(" CYN", ""));
+//		System.out.println("purchaseAmt" + purchaseAmt);
+//		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" USD", "").replace(" CYN", ""));
+//		System.out.println("pocessingFee" + pocessingFee);
+//		String fee = getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "");
+//		System.out.println("fee" + fee);
+//		String[] fePer = fee.split("\\+");
+//		System.out.println("fePer" + fePer);
+//		double percentage = Double.parseDouble(fePer[1]);
+//		System.out.println("percentage" + percentage);
+//		double feePercentage = (amt / 100) * percentage;
+//		System.out.println("feePercentage" + feePercentage);
+//		double feeDollars = Double.parseDouble(fePer[0].replace("$", ""));
+//		System.out.println("feeDollars" + feeDollars);
+//		double total = Double.parseDouble(getText(lblTotal).replace(" USD", "").replace(" CYN", ""));
+//		System.out.println("total" + total);
+//		if (amt == purchaseAmt) {
+//			ExtentTestManager.setPassMessageInReport("Transaction amount and Purchase amount are same");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
+//		}
+//		if (feeDollars + feePercentage == pocessingFee) {
+//			ExtentTestManager.setPassMessageInReport("Processing fee calculated as per Condition");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport("Processing fee not calculated as per Condition");
+//		}
+//		if (feeDollars + feePercentage + amt == total) {
+//			ExtentTestManager
+//					.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+//		} else {
+//			ExtentTestManager
+//					.setFailMessageInReport("The Total amount is not addition of Purchase amount and Processing Fee");
+//		}
+//	}
+
+//	Withdraw processing fee calculation
+	public double verifyWithdrawProcessingFee() {
+		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" CYN", ""));
+		return pocessingFee;
+	}
+
+	public void validateWithdrawWithoutProcessingFee(String amount) {
+		double reqstAmt = Double.parseDouble(amount);
+		double amt = Double.parseDouble(getText(lblamount));
+		double purchaseAmt = Double.parseDouble(getText(lblPurchaseAmount).replace(" CYN", ""));
+		double total = Double.parseDouble(getText(lblTotal).replace(" CYN", ""));
+		if (reqstAmt == purchaseAmt && reqstAmt == amt) {
+			ExtentTestManager.setPassMessageInReport("Transaction amount and Purchase amount are same");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
+		}
+		if (reqstAmt == total) {
+			ExtentTestManager
+					.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("The Total amount is not addition of Purchase amount and Processing Fee");
+		}
+	}
+
+	public void validateWithdrawProcessingFees(String amount) {
+		double amt = Double.parseDouble(amount);
+		System.out.println("amt" + amt);
+		double purchaseAmt = Double.parseDouble(getText(lblPurchaseAmount).replace(" CYN", ""));
+		System.out.println("purchaseAmt" + purchaseAmt);
+		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" CYN", ""));
+		System.out.println("pocessingFee" + pocessingFee);
+		double total = Double.parseDouble(getText(lblTotal).replace(" CYN", ""));
+		System.out.println("total" + total);
+		if (amt == purchaseAmt) {
+			ExtentTestManager.setPassMessageInReport("Transaction amount and Purchase amount are same");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
+		}
+		if (!getText(lblProcessingFeePercen).contains(getText(lblProcessingFee).replace(" CYN", ""))) {
+			String fee = getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "");
+			System.out.println("fee" + fee);
+			String[] fePer = fee.split("\\+");
+			System.out.println("fePer" + fePer);
+			double percentage = Double.parseDouble(fePer[1]);
+			System.out.println("percentage" + percentage);
+			double feePercentage = (amt / 100) * percentage;
+			System.out.println("feePercentage" + feePercentage);
+			double feeDollars = Double.parseDouble(fePer[0].replace("$", ""));
+			System.out.println("feeDollars" + feeDollars);
+			if (feeDollars + feePercentage == pocessingFee) {
+				ExtentTestManager.setPassMessageInReport("Processing fee calculated as per Condition");
+			} else {
+				ExtentTestManager.setFailMessageInReport("Processing fee not calculated as per Condition");
+			}
+			if (feeDollars + feePercentage + amt == total) {
+				ExtentTestManager
+						.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"The Total amount is not addition of Purchase amount and Processing Fee");
+			}
+		} else {
+			if (total == purchaseAmt + pocessingFee) {
+				ExtentTestManager
+						.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"The Total amount is not addition of Purchase amount and Processing Fee");
+			}
+		}
+	}
+
 //
 //	public void clickAddCreditCard() {
 //		click(btnAddCredit, "Add Crdit Card");

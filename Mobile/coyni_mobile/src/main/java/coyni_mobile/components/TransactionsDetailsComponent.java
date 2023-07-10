@@ -9,58 +9,52 @@ import io.appium.java_client.MobileBy;
 
 public class TransactionsDetailsComponent extends MobileFunctions {
 
-	private By lblHeading = MobileBy.AccessibilityId("Transaction Details");
-	private By lblTransaction = MobileBy.AccessibilityId("");
-	private By lblTransactionAmount = MobileBy.AccessibilityId("");
-	private By lblStatus = MobileBy.AccessibilityId("");
-	private By lblDateAndTime = MobileBy.AccessibilityId("");
-	private By lblPurchaseAmount = MobileBy.AccessibilityId("");
-	private By lblProcessingFee = MobileBy.AccessibilityId("");
-	private By lblTotalAmount = MobileBy.AccessibilityId("");
-	
-	
-	private By lblReferenceID = MobileBy.AccessibilityId("");
-	private By lblDepositNumber = MobileBy.AccessibilityId("");
-	//card
-	private By lblCardHolderName = MobileBy.AccessibilityId("");
-	private By varCardHolderName = MobileBy.AccessibilityId("");
-	private By lblCardBrand = MobileBy.AccessibilityId("");
-	private By lblCardNumber = MobileBy.AccessibilityId("");
-	private By lblExpirationDate = MobileBy.AccessibilityId("");
-	private By lblActivityLog = MobileBy.AccessibilityId("");
-	//BAnk Account
-	private By lblNameonBank = MobileBy.AccessibilityId("");
-	private By varNameonBank = MobileBy.AccessibilityId("");
-	private By lblBankName = MobileBy.AccessibilityId("");
-	private By lblBankAccountNumber = MobileBy.AccessibilityId("");
+	private By lblHeading = MobileBy.xpath("//*[@text='Transaction Details']");
+	private By lblTransaction = MobileBy.id("");
+	private By lblTransactionAmount = MobileBy.id("");
+	private By lblStatus = MobileBy.id("");
+	private By lblDateAndTime = MobileBy.id("");
+	private By lblPurchaseAmount = MobileBy.id("");
+	private By lblProcessingFee = MobileBy.id("");
+	private By lblTotalAmount = MobileBy.id("");
+	private By lblReferenceID = MobileBy.id("");
+	private By lblDepositNumber = MobileBy.id("");
+	// card
+	private By lblCardHolderName = MobileBy.id("");
+	private By varCardHolderName = MobileBy.id("");
+	private By lblCardBrand = MobileBy.id("");
+	private By lblCardNumber = MobileBy.id("");
+	private By lblExpirationDate = MobileBy.id("");
+	private By lblActivityLog = MobileBy.id("");
+	// BAnk Account
+	private By lblNameonBank = MobileBy.id("");
+	private By varNameonBank = MobileBy.id("");
+	private By lblBankName = MobileBy.id("");
+	private By lblBankAccountNumber = MobileBy.id("");
 	private By btnCancel = MobileBy.xpath("(//*[@name='Cancel Transaction'])[1]");
-	
-	//withdraw Instant
-	
-	private By lblMsg = MobileBy.AccessibilityId("");
-	private By lblWithdrawlAmount = MobileBy.AccessibilityId("");
-	private By lblWithdrawNumber = MobileBy.AccessibilityId("");
-	
-	
-	
-	//Gift Card
-	
-	private By lblGiftCardName = MobileBy.AccessibilityId("");
-	private By lblGiftCardAmount = MobileBy.AccessibilityId("");
-	private By lblReciepentName = MobileBy.AccessibilityId("");
-	private By lblReciepentEmail = MobileBy.AccessibilityId("");
-	
-	
+
+	// withdraw Instant
+
+	private By lblMsg = MobileBy.id("");
+	private By lblWithdrawlAmount = MobileBy.id("");
+	private By lblWithdrawNumber = MobileBy.id("");
+
+	// Gift Card
+
+	private By lblGiftCardName = MobileBy.id("");
+	private By lblGiftCardAmount = MobileBy.id("");
+	private By lblReciepentName = MobileBy.id("");
+	private By lblReciepentEmail = MobileBy.id("");
+
 	public String verifyfillMessage() {
 		String str = getText(lblMsg).trim().replace('"', ' ');
 		return str;
 	}
-	
-	
-	
+
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}
+
 	public void getTransaction() {
 		ExtentTestManager.setInfoMessageInReport("Transaction label: " + getText(lblTransaction));
 	}
@@ -72,80 +66,103 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	public void getStatus() {
 		ExtentTestManager.setInfoMessageInReport("Status: " + getText(lblStatus));
 	}
+
 	public void getDateTime() {
 		ExtentTestManager.setInfoMessageInReport("Date & Time: " + getText(lblDateAndTime));
 	}
+
 	public String verifyPurchaseAmount() {
-		String str = getText(lblPurchaseAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		String str = getText(lblPurchaseAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+				.replace("CYN", "");
 		return str;
 	}
+
 	public String verifyGiftCardAmount() {
-		String str = getText(lblGiftCardAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		String str = getText(lblGiftCardAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+				.replace("CYN", "");
 		return str;
 	}
+
 	public String verifyWithdrawAmount() {
-		String str = getText(lblWithdrawlAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		String str = getText(lblWithdrawlAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+				.replace("CYN", "");
 		return str;
 	}
+
 	public String verifyProcessingFee() {
-		String str = getText(lblProcessingFee).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+		String str = getText(lblProcessingFee).trim().replace(" ", "").replace("USD", "").replace("$", "")
+				.replace("CYN", "");
 		return str;
 	}
+
 	public String verifyTotalAmount() {
-		String str = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");;
+		String str = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN",
+				"");
+		;
 		return str;
 	}
-	
+
 	public void getReferenceID() {
 		ExtentTestManager.setInfoMessageInReport("Reference ID: " + getText(lblReferenceID));
 	}
-	
+
 	public void getDepositNumber() {
 		ExtentTestManager.setInfoMessageInReport("Deposit Number: " + getText(lblDepositNumber));
 	}
-	
+
 	public void getCardHolderName() {
 		ExtentTestManager.setInfoMessageInReport("CardHolderName: " + getText(lblCardHolderName));
 	}
-	
+
 	public void getCardBrand() {
 		ExtentTestManager.setInfoMessageInReport("CardBrand: " + getText(lblCardBrand));
 	}
+
 	public void getCardNumber() {
 		ExtentTestManager.setInfoMessageInReport("CardNumber: " + getText(lblCardNumber));
 	}
+
 	public void getExpiryDate() {
 		scrollDownToElement(lblExpiryDate, "Expiry Date");
 		ExtentTestManager.setInfoMessageInReport("Expiration Date: " + getText(lblExpiryDate));
 	}
+
 	public void getNameOnBank() {
 		ExtentTestManager.setInfoMessageInReport("Name on Account: " + getText(lblNameOnAccount));
 	}
+
 	public void getBankName() {
 		ExtentTestManager.setInfoMessageInReport("Bank Name: " + getText(lblBankName));
 	}
+
 	public void getBankAccountNumber() {
 		scrollDownToElement(lblBankAccountNumber, "Bank Account Number");
 		ExtentTestManager.setInfoMessageInReport("Bank Account Number: " + getText(lblBankAccountNumber));
 	}
+
 	public void getMessage() {
 		if (getElementList(lblMessage, "").size() > 0) {
 			ExtentTestManager.setInfoMessageInReport("Message: " + getText(lblMessage));
 		}
 	}
+
 	public void getWithdrawNumber() {
 		ExtentTestManager.setInfoMessageInReport("Withdraw Number: " + getText(lblWithdrawNumber));
 	}
+
 	public void getGiftCardName() {
 		ExtentTestManager.setInfoMessageInReport("Gift Card Name: " + getText(lblGiftCardName));
 	}
+
 	public String verifyGiftCardNAme() {
 		String str = getText(lblGiftCardName).trim().replace('"', ' ');
 		return str;
 	}
+
 	public void getGiftCardAmount() {
 		ExtentTestManager.setInfoMessageInReport("Gift Card Amount: " + getText(lblGiftCardAmount));
 	}
+
 	public void getRecipientName() {
 		ExtentTestManager.setInfoMessageInReport("Recipient Name: " + getText(lblRecipientName));
 	}
@@ -153,8 +170,9 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	public void getRecipientEmail() {
 		ExtentTestManager.setInfoMessageInReport("Recipient Email: " + getText(lblRecipientEmail));
 	}
+
 	public void clickCancel() throws InterruptedException {
-		if(getElement(btnCancel, "CnacelTransaction").isEnabled()) {
+		if (getElement(btnCancel, "CnacelTransaction").isEnabled()) {
 			click(btnCancel, "Cancel Transaction");
 			ExtentTestManager.setInfoMessageInReport("Cancel Transaction button is enabled");
 			new CommonFunctions().elementView(lblCnacelTransaction, "Cnacel Transaction Heading");
@@ -163,13 +181,12 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 			click(btnYes, "Yes");
 			Thread.sleep(1000);
 			getStatus();
-		}else {
+		} else {
 			ExtentTestManager.setInfoMessageInReport("Cancel Transaction button is disabled");
 		}
-		
+
 	}
-	
-	
+
 	public void buyTokenBankTransactionDetails() throws InterruptedException {
 		getTransaction();
 		getTransactionAmount();
@@ -182,6 +199,7 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getBankAccountNumber();
 		clickCancel();
 	}
+
 	public void buyTokenCardTransactionDetails() {
 		getTransaction();
 		getTransactionAmount();
@@ -194,29 +212,30 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getCardBrand();
 		getExpiryDate();
 	}
-	
+
 	public void withdrawBankTransactionDetails() throws InterruptedException {
 		getTransaction();
 		getStatus();
 		getDateTime();
 		getReferenceID();
-	    getWithdrawNumber();
-	    getNameOnBank();
+		getWithdrawNumber();
+		getNameOnBank();
 		getBankName();
 		getBankAccountNumber();
 	}
+
 	public void withdrawInstantTransactionsDetails() {
 		getTransaction();
 		getStatus();
 		getDateTime();
 		getReferenceID();
-	    getWithdrawNumber();
+		getWithdrawNumber();
 		getCardHolderName();
 		getCardBrand();
 		getCardNumber();
 		getExpiryDate();
 	}
-	
+
 	public void withdrawGiftCardTransactionsDetails() {
 		getTransaction();
 		getStatus();
@@ -227,11 +246,10 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getRecipientEmail();
 		getRecipientName();
 	}
-	
-	
+
 	public void getTransactionDetails() throws InterruptedException {
 		if (getText(lblTransaction).contains("Buy")) {
-			if (getText(varNameonBank).contains("Name")){
+			if (getText(varNameonBank).contains("Name")) {
 				buyTokenBankTransactionDetails();
 			} else if (getText(varCardHolderName).contains("Cardholder")) {
 				buyTokenCardTransactionDetails();
@@ -248,108 +266,50 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 			withdrawGiftCardTransactionsDetails();
 		} else if (getText(lblTransaction).contains("Paid Order") && getText(lblTransaction).contains("Token")) {
 			paidOrderDetails();
-		} else if(getText(lblTransaction).contains("Pay/Request") && getText(lblTransaction).contains("Sent")) {
+		} else if (getText(lblTransaction).contains("Pay/Request") && getText(lblTransaction).contains("Sent")) {
 			sentTransactionDetails();
-		}
-		else {
+		} else {
 			ExtentTestManager.setFailMessageInReport("Error in Transactions");
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 //	public int verifyTransactionAmount() {
 //		String str = getText(lblTransactionAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
 //		Integer amt=Integer.parseInt(str);
 //		return amt;
 //	}
 //	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	private By lblDescriptorName = MobileBy.AccessibilityId("");
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+//	private By lblDescriptorName = MobileBy.id("");
+
 	private By lblMessage = MobileBy
 			.xpath("(//*[@name='Status']/../preceding-sibling::*[1]/XCUIElementTypeStaticText)[3]");
 
 	private By lblSubTotal = MobileBy.xpath("//*[@name='Sub Total']/following-sibling::*[1]");
-	
+
 	private By lblGrandTotal = MobileBy.xpath("//*[@name='Grand Total']/following-sibling::*[1]");
 	private By lblWithdrawID = MobileBy.xpath("//*[@name='Withdraw ID']/following-sibling::*[1]");
-	
+
 	private By lblRecipientName = MobileBy.xpath("//*[@name='Recipient Name']/following-sibling::*[1]");
 	private By lblRecipientEmail = MobileBy.xpath("//*[@name='Recipient Email']/following-sibling::*[1]");
 
-	
 	private By lblTotalAmount1 = MobileBy.xpath("");
-	
+
 	private By lblAccountBalance = MobileBy.xpath("//*[@name='Account Balance']/following-sibling::*[1]");
 	private By lblDepositID = MobileBy.xpath("//*[@name='Deposit ID']/following-sibling::*[1]");
-	
-	
 
-	
 	private By lblExpiryDate = MobileBy.xpath("//*[@name='Expiration Date']/following-sibling::*[1]");
-	
 
 	private By lblNameOnAccount = MobileBy.xpath("//*[@name='Name on Account']/following-sibling::*[1]");
 
-	
 	private By lblUserName = MobileBy.xpath("//*[@name='User Name']/following-sibling::*[1]");
 	private By lblAccountAddress = MobileBy.xpath("//*[@name='Account Address']/following-sibling::*[1]");
-	
-    private By lblCnacelTransaction = MobileBy.AccessibilityId("Cancel Transaction?");
-    private By btnNo = MobileBy.xpath("(//*[@name='NO'])[1]");
-    private By btnYes = MobileBy.xpath("(//*[@name='Yes'])[1]");
-    
-	
+
+	private By lblCnacelTransaction = MobileBy.AccessibilityId("Cancel Transaction?");
+	private By btnNo = MobileBy.xpath("(//*[@name='NO'])[1]");
+	private By btnYes = MobileBy.xpath("(//*[@name='Yes'])[1]");
+
 	private By lblMerchantAccountId = MobileBy.xpath("//*[@name='Merchant Account ID']/following-sibling::*[1]");
 	private By lblDBAname = MobileBy.xpath("//*[@name='DBA Name']/following-sibling::*[1]");
 	private By lblCustServiceEmail = MobileBy.xpath("//*[@name='Customer Service Email']/following-sibling::*[1]");
@@ -371,15 +331,6 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Merchant Id: " + getText(lblMerchantAccountId));
 	}
 
-	
-
-	
-	
-
-	
-
-	
-
 	public void getSubTotal() {
 		ExtentTestManager.setInfoMessageInReport("Sub Total: " + getText(lblSubTotal));
 	}
@@ -396,16 +347,12 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Withdraw ID: " + getText(lblWithdrawID));
 	}
 
-	
-
-	
-
 	public void getPurchaseAmount() {
 		ExtentTestManager.setInfoMessageInReport("Purchase Amount: " + getText(lblPurchaseAmount));
 	}
 
 	public void getTotalAmount() {
-		 ExtentTestManager.setInfoMessageInReport("Total Amount:	 " +getText(lblTotalAmount));
+		ExtentTestManager.setInfoMessageInReport("Total Amount:	 " + getText(lblTotalAmount));
 	}
 
 	public void getAccountBalance() {
@@ -416,15 +363,6 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Deposit ID: " + getText(lblDepositID));
 	}
 
-	
-	
-
-	
-
-	
-
-	
-
 	public void getUserName() {
 		ExtentTestManager.setInfoMessageInReport("UserName: " + getText(lblUserName));
 	}
@@ -433,7 +371,6 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Account Address: " + getText(lblAccountAddress));
 	}
 
-	
 	public void verifyTransactionDetailsHeadingView() {
 		new CommonFunctions().elementView(lblHeading, "Heading");
 	}
@@ -459,12 +396,12 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		//
 		getStatus();
 		getDateTime();
-	//	getProcessingFee();
-	//    getTotalAmount();
-	//	getAccountBalance();
+		// getProcessingFee();
+		// getTotalAmount();
+		// getAccountBalance();
 		getReferenceID();
 		//
-	//	getUserName();
+		// getUserName();
 		getAccountAddress();
 		getRecipientName();
 	}
@@ -481,22 +418,5 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getUserName();
 		getAccountAddress();
 	}
-
-
-
-	
-	
-	
-	
-
-	
-	
-
-	
-	
-	
-	
-	
-	
 
 }

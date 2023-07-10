@@ -43,7 +43,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	private By txtSearch = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'payoutSearchET')]");
 	private By txtZipCode = MobileBy.xpath(
-			"//*[contains(@resource-id,'etZipcode') or contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
+			"//*[contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 
 	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
@@ -257,7 +257,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtAddressLine1, "Address Line 1", maxDigit);
 		new CommonFunctions().clearText(txtAddressLine1, "Address Line 1");
 		new CommonFunctions().validateFieldMaxichar(txtAddressLine1, "Address Line 1", moreThanMax);
-		new CommonFunctions().clearText(txtAddressLine1, "Address Line 1");
+//		new CommonFunctions().clearText(txtAddressLine1, "Address Line 1");
 	}
 
 	public void validateAddressLine2Field(String singleChar, String maxChar, String moreThanMax) {
@@ -267,7 +267,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtAddressLine2, "Address Line 2", maxChar);
 		new CommonFunctions().clearText(txtAddressLine2, "Address Line 2");
 		new CommonFunctions().validateFieldMaxichar(txtAddressLine2, "Address Line 2", moreThanMax);
-		new CommonFunctions().clearText(txtAddressLine2, "Address Line 2");
+//		new CommonFunctions().clearText(txtAddressLine2, "Address Line 2");
 
 	}
 
@@ -278,7 +278,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtCity, "City", maxChar);
 		new CommonFunctions().clearText(txtCity, "City");
 		new CommonFunctions().validateFieldMaxichar(txtCity, "City", moreThanMax);
-		new CommonFunctions().clearText(txtCity, "City");
+//		new CommonFunctions().clearText(txtCity, "City");
 
 	}
 

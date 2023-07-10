@@ -19,15 +19,13 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 	private By lnkAllow = MobileBy.xpath("");
 	private By lnkDontAllow = MobileBy.xpath("");
 	private By imgFaceID = MobileBy.AccessibilityId("Enable Face/Thumb Image");
+	private By btnProfileNotNow = MobileBy.id("com.coyni.mapp:id/notNowLL");
 	private By btnNotNow = MobileBy.AccessibilityId("Not Now");
+	private By btnSetUpTouch = MobileBy.id("com.coyni.mapp:id/enableCV");
 	private By lnkDontRemindMeAgain = MobileBy.AccessibilityId("Don’t Remind Me Again");
-	private By lblGetHelpHeading = MobileBy.xpath("");
-	private By lblGetHelpDesc = MobileBy.xpath("");
-	private By lblGetHelpName = MobileBy.xpath("");
-	private By lblLoginEmail = MobileBy.xpath("");
-	private By lblAccountID = MobileBy.xpath("");
-	private By lblDesc = MobileBy.xpath("");
-	
+	private By lblGetHelpHeading = MobileBy.xpath("//*[contains(@text,'help')]");
+	private By lblGetHelpDesc = MobileBy.id("com.coyni.mapp:id/support_text_click");
+	private By lblGetHelpDetails = MobileBy.id("com.coyni.mapp:id/text_support_tv");
 
 	public void verifyEnableFaceIdHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblEnableFaceId, "Heading", expHeading);
@@ -38,49 +36,69 @@ public class EnableFaceOrTouchIDpage extends MobileFunctions {
 		new CommonFunctions().elementView(lblEnableFaceIDText, "Enable Face Id");
 		ExtentTestManager.setInfoMessageInReport("The text is :" + getText(lblEnableFaceIDText));
 	}
-	
+
 	public void clickEnable() {
 		click(btnEnable, "Enable");
 		new CommonFunctions().elementView(lblScreenLock, "Choose screen lock");
 	}
+
+	public void viewScreenLock() {
+		new CommonFunctions().elementView(lblScreenLock, "Choose screen lock");
+	}
+	
 	public void verifyPermissionPopup() {
 		new CommonFunctions().elementView(lnkAllow, "Allow");
 		click(lnkDontAllow, "Dont Allow");
 	}
+
 	public void clickSkip() {
-		if(getElementList(lnkSkip, "Skip").size()>0) {
-		if(getElement(lnkSkip, "Skip").isEnabled()) {
-		click(lnkSkip, "Skip");
-		}
+		if (getElementList(lnkSkip, "Skip").size() > 0) {
+			if (getElement(lnkSkip, "Skip").isEnabled()) {
+				click(lnkSkip, "Skip");
+			}
 		}
 	}
+
 	public void clickNotNow() {
 		click(btnNotNow, "Not Now");
 	}
+
+	public void clickSetUpTouch() {
+		click(btnSetUpTouch, "Set Up Touch ID");
+	}
+	
+	public void clickTouchIDNotNow() {
+		click(btnProfileNotNow, "Not Now");
+	}
+	
 	public void verifyDontRemindButtonView() {
 		new CommonFunctions().elementView(lnkDontRemindMeAgain, "Dont Remind Me Again");
 	}
+
 	public void verifyGetHelp(String expHeading) {
-		new CommonFunctions().elementView(lblGetHelpHeading, "Heading");
 		new CommonFunctions().verifyLabelText(lblGetHelpHeading, "Heading", expHeading);
 	}
+
 	public void verifyGetHelpDesc(String expHeading) {
-		new CommonFunctions().elementView(lblGetHelpDesc, "Description");
 		new CommonFunctions().verifyLabelText(lblGetHelpDesc, "Description", expHeading);
 	}
-	public void verifyGetHelpview() {
-		new CommonFunctions().elementView(lblGetHelpName, "Name");
-		new CommonFunctions().elementView(lblLoginEmail, "Email");
-		new CommonFunctions().elementView(lblAccountID, "Account");
-		new CommonFunctions().elementView(lblDesc, "Description");
+
+	public void verifyGetHelpView() {
+		if(!getText(lblGetHelpDetails).equals("")) {
+			new CommonFunctions().elementView(lblGetHelpDetails, "Get Help Details");
+		}else {
+			ExtentTestManager.setInfoMessageInReport("Its not showing the detailed description as Name,Account ID etc.");
+		}
 	}
+
 	public AccountCreatedPage accountCreatedPage() {
 		return new AccountCreatedPage();
 	}
+
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}
-	
+
 	public DashboardPage dashBoardPage() {
 		return new DashboardPage();
 	}

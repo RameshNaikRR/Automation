@@ -190,5 +190,9 @@ public class DashboardPage extends MobileFunctions {
 	public cvvPopup cvvPopup() {
 		return new cvvPopup();
 	}
+	
+	public WithdrawTokenPage withdrawTokenPage() {
+		return new WithdrawTokenPage();
+	}
 
 }

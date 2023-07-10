@@ -17,6 +17,13 @@ public class ChoosePinComponent extends MobileFunctions {
 	private By lblEnterYourPinHeading = MobileBy.AccessibilityId("Enter Your PIN Heading");
 	private By btnLogout = MobileBy.AccessibilityId("logoutLL");
 	private By btnForgotPin = MobileBy.xpath("//*[@text='Forgot PIN']");
+
+//	Forgot PIN Details
+	private By lblForgotPINHeadi = MobileBy.xpath("//*[@text='Forgot Your PIN?']");
+	private By lblForgotDesc = MobileBy.AccessibilityId("Email Verification Text");
+	private By btnNext = MobileBy.id("com.coyni.mapp:id/tvButton");
+	private By txtEmail = MobileBy.id("com.coyni.mapp:id/emailET");
+
 //	Choose Your PIN Details
 	private By lblChoosePinDes = MobileBy.AccessibilityId("Two-Step Authentication");
 	private By lblChooseYourPin = MobileBy.AccessibilityId("Choose Your PIN Heading");
@@ -142,7 +149,6 @@ public class ChoosePinComponent extends MobileFunctions {
 
 	public void validateDisabledState() {
 		clickLogout();
-
 	}
 
 	public void clickTryAgain() {
@@ -152,6 +158,27 @@ public class ChoosePinComponent extends MobileFunctions {
 	public void viewIncorrectPINHeading() {
 		new CommonFunctions().elementView(lblIncorrectPINHeading, "Incorrect PIN heading");
 		new CommonFunctions().elementView(lblIncoPINDesc, "Incorrect PIN description");
+	}
+
+//	Forgot Pin Screen Details
+	public void verifyForgotPINHeading(String hdg) {
+		new CommonFunctions().verifyLabelText(lblForgotPINHeadi, "Forgot PIN heading", hdg);
+	}
+
+	public void verifyForgotPINDesc(String desc) {
+		new CommonFunctions().verifyLabelText(lblForgotDesc, "Forgot PIN description", desc);
+	}
+
+	public void clickNext() {
+		click(btnNext, "Next");
+	}
+
+	public void validateNext() {
+		new CommonFunctions().verifyDisabledElement(btnNext, "Next");
+	}
+
+	public void fillEmail(String email) {
+		enterText(txtEmail, email, "Email");
 	}
 
 	public EnableFaceOrTouchIDpage enableFaceOrTouchIDpage() {

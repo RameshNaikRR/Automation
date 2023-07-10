@@ -5,30 +5,31 @@ import org.openqa.selenium.By;
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
+import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
-public class LogInSessionsPage extends MobileFunctions{
+public class LogInSessionsPage extends MobileFunctions {
 
-	private By lblHeader = MobileBy.AccessibilityId("");
-	private By lblDescription = MobileBy.AccessibilityId("");
-	private By lnkChangePassword = MobileBy.AccessibilityId("");
-	private By lblInactive = MobileBy.AccessibilityId("");
-	private By lblActive = MobileBy.AccessibilityId("");
-	private By btnEndAllSessions = MobileBy.AccessibilityId("");
-	private By lblDeviceName = MobileBy.AccessibilityId("");
-	private By lblDeviceLocation = MobileBy.AccessibilityId("");
-	private By lblDate = MobileBy.AccessibilityId("");
-	private By lblEndSessionHeading = MobileBy.AccessibilityId("");
-	private By lblEndSessionDesc = MobileBy.AccessibilityId("");
-	private By btnChangePassword = MobileBy.AccessibilityId("");
+	private By lblHeader = MobileBy.xpath("//*[@text='Log In Sessions']");
+	private By lblDescription = MobileBy.id("com.coyni.mapp:id/changePasswordTV");
+	private By lblInactive = MobileBy.xpath("(//*[@text='Inactive'])[1]");
+	private By lblActive = MobileBy.xpath("//*[@text='Active Now']");
+	private By btnEndAllSessions = MobileBy.xpath("//*[contains(@resource-id,'AllSessions')]");
+	private By lblDeviceName = MobileBy.id("com.coyni.mapp:id/appNameTV");
+	private By lblDeviceLocation = MobileBy.id("com.coyni.mapp:id/addressTV");
+	private By lblDate = MobileBy.id("com.coyni.mapp:id/dateNtimeTV");
+	private By lblEndSessionHeading = MobileBy
+			.xpath("//*[contains(@text,'All devices will be')]/preceding-sibling::android.widget.TextView");
+	private By lblEndSessionDesc = MobileBy.xpath("//*[contains(@text,'All devices will be')]");
+	private By btnChangePassword = MobileBy.xpath("//*[@text='Change Password']");
 
-	public void viewLogInSessHeader() {
-		new CommonFunctions().elementView(lblHeader, "Sessions Heading");
-		new CommonFunctions().elementView(lblDescription, "Sessions Description");
+	public void viewLogInSessHeader(String expText) {
+		new CommonFunctions().verifyLabelText(lblHeader, "Login Sessions Heading", expText);
+		new CommonFunctions().elementView(lblDescription, "Login Sessions Description");
 	}
 
-	public void clickChangePassword() {
-		click(lnkChangePassword, "Change Password");
+	public void clickLnkChangePassword() {
+		click(lblDescription, "Change Password");
 	}
 
 	public void clickEndAllSessions() {
@@ -38,42 +39,36 @@ public class LogInSessionsPage extends MobileFunctions{
 	public SuccessFailureComponent successFailureComponent() {
 		return new SuccessFailureComponent();
 	}
-//	public void clcikPassword() {
-//		click(txtPassword, "password");
-//	}
-//
-//	public void verifyLogin(String email, String password) {
-//		if (getElement(imgCoyni, "coyni image").isDisplayed()) {
-//			fillEmail(email);
-//			fillPassword(password);
-//			clickLogin();
-//		}
-//	}
-//
-//	public void fillPassword(String password) {
-//		enterText(txtPassword, password, "password ");
-//	}
-//
-//	public void clickRememberMe() {
-//		click(chkBxRememberMe, "Remember");
-//	}
-//
-//	public void verifyRememberMeView() {
-//		new CommonFunctions().elementView(lblRememberMe, "Rememeber Me");
-//	}
-//
-//	public void clickForgotPassword() {
-//		click(lnkForgotPassword, "Forgot Password ");
-//	}
-//
-//	public void clickRetrieveEmail() {
-//		click(lnkRetrieveEmail, "Retrieve Email ");
-//	}
-//
-//	public void verifyRetrieveEmailView() {
-//		new CommonFunctions().elementView(lnkRetrieveEmail, "Retrieve Email");
-//	}
-	
-	
+
+	public void clickChangePassword() {
+		click(btnChangePassword, "Change Password");
+	}
+
+	public void verifyDeviceDetails() {
+		new CommonFunctions().elementView(lblDeviceName, "Device Name");
+		new CommonFunctions().elementView(lblDeviceLocation, "Device Location");
+		new CommonFunctions().elementView(lblDate, "Device Login Date");
+	}
+
+	public void verifyDeviceStatus(String expText) throws InterruptedException {
+		Thread.sleep(500);
+		if (getElementList(lblActive, "Status").size() == 1) {
+			new CommonFunctions().verifyLabelText(lblActive, "Status", expText);
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Active Status not as expected");
+		}
+	}
+
+	public void viewInactiveStatus() {
+		new CommonFunctions().elementView(lblInactive, "Inactive Status");
+	}
+
+	public void verifyEndSessionsHeading(String expText) {
+		new CommonFunctions().verifyLabelText(lblEndSessionHeading, "End Sessions Heading", expText);
+	}
+
+	public void viewEndSessionsDesc() {
+		new CommonFunctions().elementView(lblEndSessionDesc, "End Session Description");
+	}
 
 }

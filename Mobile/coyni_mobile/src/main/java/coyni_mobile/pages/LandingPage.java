@@ -45,7 +45,7 @@ public class LandingPage extends MobileFunctions {
 
 	public void verifyLandingPageView() throws InterruptedException {
 		Thread.sleep(500);
-		if (getElementList(imgCoyni, "Coyni").size()==0) {
+		if (getElementList(imgCoyni, "Coyni").size() == 0) {
 			ExtentTestManager.setPassMessageInReport("Logout button is not clicking,when screen is disabled");
 		} else {
 			ExtentTestManager

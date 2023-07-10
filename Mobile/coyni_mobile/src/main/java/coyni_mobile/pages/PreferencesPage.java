@@ -14,45 +14,40 @@ import io.appium.java_client.MobileBy;
 
 public class PreferencesPage extends MobileFunctions {
 
-	private By btnPreferences= MobileBy.id("");
-	private By lblPreferencesHeading = MobileBy.id("");
-	private By drpDwnTimeZone = MobileBy.id("");
-	private By lblTimeZone = MobileBy.id("");
-	private By lblLocalCurrency = MobileBy.id("");
-	private By btnSave = MobileBy.id("");
-	private By btnBack = MobileBy.id("");
+	private By btnPreferences = MobileBy.id("");
+	private By lblPreferencesHeading = MobileBy.xpath("//*[@text='Preferences']");
+	private By drpDwnTimeZone = MobileBy.id("com.coyni.mapp:id/timeZoneArrow");
+	private By lblTimeZone = MobileBy.id("com.coyni.mapp:id/preferenceTimeZoneET");
+	private By lblLocalCurrency = MobileBy.id("com.coyni.mapp:id/currencyTIL");
+	private By btnSave = MobileBy.id("com.coyni.mapp:id/cvAction");
 
 	public void clickPreferences() {
 		click(btnPreferences, "Preferences");
 	}
-	
+
 	public void verifyPreferencesHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblPreferencesHeading, "Preferences Heading is", heading);
 	}
 
 	public void selectTimeZone(String timeZone) {
 		click(drpDwnTimeZone, "Time Zone DropDown");
-		getElementList(MobileBy.xpath(String.format("//*[@text='%s']", timeZone)), timeZone);
-		ExtentTestManager.setPassMessageInReport("Clicked on Element " + timeZone);
-		new CommonFunctions().clickEnter();
-		new CommonFunctions().clickEnter();
+		click(MobileBy.xpath(String.format("//*[@text='%s']", timeZone)), timeZone);
 		click(btnSave, "Save");
 	}
 
 	public void verifyTimeZone(String timeZone) {
-		new CommonFunctions().verifyLabelText(lblPreferencesHeading, "Preferences Heading is", timeZone);
-	}
-
-	public void getTimeZone() {
-		String preferencesDescription = getText(lblTimeZone);
-		ExtentTestManager.setInfoMessageInReport("Updated Time Zone is : " + preferencesDescription);
+		if (getText(lblTimeZone).equals(timeZone)) {
+			ExtentTestManager.setPassMessageInReport("Time Zone Updated : " + getText(lblTimeZone));
+		} else {
+			ExtentTestManager.setFailMessageInReport("Time Zone not updated in Preferences screen");
+		}
 	}
 
 	public void getLocalCurrency() {
 		new CommonFunctions().elementView(lblLocalCurrency, "Local Currency");
 		ExtentTestManager.setInfoMessageInReport("localCurrency: " + getText(lblLocalCurrency));
 	}
-	
+
 	public void timezones() {
 //		PST
 //		ZoneId pstZone = ZoneId.of("America/Los_Angeles");
@@ -71,7 +66,7 @@ public class PreferencesPage extends MobileFunctions {
 
 //		Hawali(HST)
 //		ZoneId pstZone = ZoneId.of("Pacific/Honolulu");
-	
+
 //		SST
 //		ZoneId pstZone = ZoneId.of("Pacific/Apia");
 
@@ -83,6 +78,7 @@ public class PreferencesPage extends MobileFunctions {
 		String formattedDateTime = currentTime.format(formatter);
 		System.out.println(formattedDateTime);
 	}
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}

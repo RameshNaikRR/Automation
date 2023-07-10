@@ -6,7 +6,6 @@ import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ProfilePage extends MobileFunctions {
@@ -28,6 +27,11 @@ public class ProfilePage extends MobileFunctions {
 	private By lnkEditPhoneNumber = MobileBy.id("com.coyni.mapp:id/phoneLL");
 	private By lnkEditAddress = MobileBy.id("com.coyni.mapp:id/addressLL");
 	private By btnChange = MobileBy.id("");
+	private By btnBack = MobileBy.xpath("//*[contains(@resource-id,'backIV')]");
+
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
 
 	public void clickChange() {
 		if (getElement(btnChange, "Change").isEnabled()) {

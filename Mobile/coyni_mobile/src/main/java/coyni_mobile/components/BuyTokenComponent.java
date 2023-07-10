@@ -3,6 +3,7 @@ package coyni_mobile.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.popups.OrderPreviewPopup;
+import coyni_mobile.popups.ReloadPopup;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -12,28 +13,23 @@ public class BuyTokenComponent extends MobileFunctions {
 
 	private By lblBuyToken = MobileBy.xpath("//*[@text='Buy Tokens']");
 	private By lblBuyTokenDesc = MobileBy.xpath("//*[contains(@text,'Please select a')]");
-	private By lblBuyTokensHdg = MobileBy.id("");
-	private By lblPaymentMethod = MobileBy.xpath(
-			"(//XCUIElementTypeStaticText[@name='Payment Method'])[2]|(//XCUIElementTypeStaticText[@name='Payment Method'])[3]|//*[@name ='arrow-right']/preceding-sibling::*[1]/child::*");
-	private By lblDailylimits = MobileBy.xpath("//*[@name ='arrow-right']/following-sibling::*[1]");
-//		    private By btnChangePayment = MobileBy.xpath("//*[@name ='arrow-right']");
-	private By btnChangePayment = MobileBy.AccessibilityId("arrow-right");
-	private By txtAmount = MobileBy.xpath("//*[@name ='currency toggle']/preceding-sibling::XCUIElementTypeTextField");
-	private By btnBuyToken = MobileBy.xpath("(//*[@name='Buy Token'])[2]|//*[contains(@resource-id,'keyActionTV')]");
-//		    private By btnConvert = MobileBy.xpath("//XCUIElementTypeButton[@name='currency toggle']");
-	// private By btnConvert = MobileBy.AccessibilityId("currency toggle");
-	private By lnkAddNewPayment = MobileBy.id("com.coyni.mapp:id/lyAddPay");
-//		    private By lblCYn = MobileBy.xpath("//XCUIElementTypeStaticText[@name='CYN']");
-	private By lblCYn = MobileBy.AccessibilityId("CYN");
-//		    private By lblDollar = MobileBy.xpath("//XCUIElementTypeStaticText[@name='$']");
-	private By lblDollar = MobileBy.id("");
+	private By lblPmntMethodName = MobileBy.id("com.coyni.mapp:id/tvPayHead");
+	private By lblCYN = MobileBy.id("com.coyni.mapp:id/tvCYN");
+	private By btnDebitCard = MobileBy.xpath("//*[contains(@text,'Instant Pay')]/following-sibling::*/descendant::android.widget.TextView[1]");
+	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]");
+	private By btnBank = MobileBy.xpath("(//*[contains(@text,'Bank')])[1]");
+	private By lblDailylimits = MobileBy.id("com.coyni.mapp:id/tvLimit");
+	private By btnChangePayment = MobileBy.id("com.coyni.mapp:id/imgArrow");
+	private By txtAmount = MobileBy.id("com.coyni.mapp:id/etAmount");
+	private By btnBuyToken = MobileBy.id("com.coyni.mapp:id/keyActionLL");
+	private By lblExchangeValue = MobileBy.id("com.coyni.mapp:id/tvExchange");
 
 	public void verifyCynView() {
-		new CommonFunctions().elementView(lblCYn, "CYN");
-	}
-
-	public void verifyDollarView() {
-		new CommonFunctions().elementView(lblDollar, "Dollar");
+		if (getText(lblCYN).equals(" CYN")) {
+			new CommonFunctions().elementView(lblCYN, "CYN");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Coyni currency not as expected");
+		}
 	}
 
 	public void verifyBuyTokenDesc(String expDesc) {
@@ -44,16 +40,12 @@ public class BuyTokenComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblBuyToken, "Heading", hdg);
 	}
 
-	public void verifyBuyTokensHeading(String hdg) {
-		new CommonFunctions().verifyLabelText(lblBuyTokensHdg, "Heading", hdg);
-	}
-
 	public void verifyChangePaymentView() {
 		new CommonFunctions().elementView(btnChangePayment, "ChangePayment");
 	}
 
 	public void verifyPayment(String expPayment) {
-		String method = getText(lblPaymentMethod);
+		String method = getText(lblPmntMethodName);
 		if (method.contains(expPayment)) {
 			ExtentTestManager.setPassMessageInReport("Payment Method: " + expPayment);
 		} else {
@@ -61,34 +53,33 @@ public class BuyTokenComponent extends MobileFunctions {
 		}
 	}
 
-	public void verifyPaymentView() {
-		new CommonFunctions().elementView(lblPaymentMethod, "payment method heading");
+	public void clickChangePayment() {
+		click(btnChangePayment, "ChangePayment");
 	}
 
-	public void clickChangePaymentView() {
-		new CommonFunctions().elementView(btnChangePayment, "ChangePayment");
-	}
-
-	public void getDailyLimits() {
-		ExtentTestManager.setInfoMessageInReport(getText(lblDailylimits));
-	}
-
-	public void clickArrow() {
-		click(btnChangePayment, "Arrow");
+	public void viewDailyLimits() {
+		new CommonFunctions().elementView(lblDailylimits, getText(lblDailylimits));
 	}
 
 	public void fillAmount(String Amount) {
-		new ChoosePinComponent().fillPin(Amount);
-		ExtentTestManager.setInfoMessageInReport("Entered Amount: " + Amount);
+		enterText(txtAmount, Amount, Amount);
 	}
 
 	public void clickBuyToken() {
 		click(btnBuyToken, "Buy Token");
 	}
 
-//	    public void clickConvert() {
-//	        click(btnConvert, "convert");
-//	    }
+	public void clickDebitCard() {
+		click(btnDebitCard, "Debit Card");
+	}
+
+	public void clickCreditCard() {
+		click(btnCreditCard, "Credit Card");
+	}
+	
+	public void clickBank() {
+		click(btnBank, "Bank");
+	}
 
 	public OrderPreviewPopup orderPreviewPopup() {
 		return new OrderPreviewPopup();
@@ -96,6 +87,14 @@ public class BuyTokenComponent extends MobileFunctions {
 
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
+	}
+
+	public ChoosePinComponent choosePinComponent() {
+		return new ChoosePinComponent();
+	}
+
+	public ReloadPopup reloadPopup() {
+		return new ReloadPopup();
 	}
 
 }

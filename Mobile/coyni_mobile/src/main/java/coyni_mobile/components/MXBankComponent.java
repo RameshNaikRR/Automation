@@ -9,8 +9,9 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class MXBankComponent extends MobileFunctions {
-	private By btncheckBox = MobileBy.xpath("//*[contains(@resource-id,'checkbox')]");
 	private By btnStart = MobileBy.xpath("//*[contains(@resource-id,'cvStart')]");
+	private By lblDescription = MobileBy.xpath("//*[contains(@text,'coyni uses trusted')]");
+	private By lblMXChBXDesc = MobileBy.xpath("//*[contains(@text,'coyni uses trusted')]");
 	private By lblSelectInstitution = MobileBy
 			.xpath("//*[contains(@text,'Select your institution')]|//*[contains(@text,'Search more institutions')]");
 	private By btnMxBank = MobileBy.xpath("//*[@text='Add account with MX Bank']");
@@ -22,6 +23,7 @@ public class MXBankComponent extends MobileFunctions {
 	private By btnClose = MobileBy.xpath("//*[contains(@resource-id,'closeBtn')]");
 	// Enter your Credentials screen
 	private By heading = MobileBy.xpath("//*[@text='Add Bank Account']|//*[@text='Add Bank Checking Account']");
+	private By btncheckBox = MobileBy.xpath("//*[contains(@resource-id,'checkbox')]");
 	private By txtUsername = MobileBy.xpath("//*[@resource-id='LOGIN']");
 	private By txtPassword = MobileBy.xpath("//*[@resource-id='PASSWORD']");
 	private By btnCredentialsContinue = MobileBy.xpath("//*[@text='Continue']");
@@ -40,22 +42,23 @@ public class MXBankComponent extends MobileFunctions {
 	}
 
 	public void verifyBankDescription(String description) {
-		By a = MobileBy.xpath("//*[@text=" + "'" + description + "'" + "]");
-		if (getElement(a, "Bank Description").isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport(getText(a) + " is displayed");
-		} else {
-			ExtentTestManager.setFailMessageInReport(getText(a) + " is not displayed");
-		}
+		new CommonFunctions().verifyLabelText(lblDescription, "MX Description", description);
+//		By a = MobileBy.xpath("//*[@text=" + "'" + description + "'" + "]");
+//		if (getElement(a, "Bank Description").isDisplayed()) {
+//			ExtentTestManager.setPassMessageInReport(getText(a) + " is displayed");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport(getText(a) + " is not displayed");
+//		}
 	}
 
 	public void verifyChkBxDescription(String description) {
-//		String text=xpath;
-		By a = MobileBy.xpath("//*[@text=" + "'" + description + "'" + "]");
-		if (getElement(a, "Bank Description").isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport(getText(a) + " is displayed");
-		} else {
-			ExtentTestManager.setFailMessageInReport(getText(a) + " is not displayed");
-		}
+		new CommonFunctions().verifyLabelText(lblMXChBXDesc, "MX Description", description);
+//		By a = MobileBy.xpath("//*[@text=" + "'" + description + "'" + "]");
+//		if (getElement(a, "Bank Description").isDisplayed()) {
+//			ExtentTestManager.setPassMessageInReport(getText(a) + " is displayed");
+//		} else {
+//			ExtentTestManager.setFailMessageInReport(getText(a) + " is not displayed");
+//		}
 	}
 
 	public void verifyStart() {
@@ -98,7 +101,7 @@ public class MXBankComponent extends MobileFunctions {
 		 */
 		Thread.sleep(1500);
 		By mxHeading = MobileBy.xpath("//*[@text=" + "'" + heading + "'" + "]");
-		return getElementList(mxHeading, "COnfirmstion Screen").size();
+		return getElementList(mxHeading, "Confirmstion Screen").size();
 	}
 
 	public void verifyMXConfirmationScreen(String haeding, String description) {
@@ -119,20 +122,14 @@ public class MXBankComponent extends MobileFunctions {
 	}
 
 	public void verifySelectYourInstitution(String heading) {
-		By institutionHeading = MobileBy.xpath("//*[@text=" + "'" + heading + "'" + "]");
-		if (getElement(institutionHeading, "Select Institution Heading").isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport(getText(institutionHeading) + " is displayed");
-		} else {
-			ExtentTestManager.setFailMessageInReport(getText(institutionHeading) + " is not displayed");
-		}
-
+		By institutionHeading = MobileBy.xpath("//*[@text='Select your institution']");
+		new CommonFunctions().elementView(institutionHeading, "institutionHeading");
 	}
 
 	public void addBank(String expHeading, String bankDescription, String chkbxDescription) {
 		verifyHeading(expHeading);
 		verifyStart();
 		verifyBankDescription(bankDescription);
-		verifyChkBxDescription(chkbxDescription);
 		clickheckBox();
 		clickStart();
 	}
@@ -165,12 +162,8 @@ public class MXBankComponent extends MobileFunctions {
 	}
 
 	public void verifyCredentialsHeading(String heading) {
-		By entercredenHeading = MobileBy.xpath("//*[@text=" + "'" + heading + "'" + "]");
-		if (getElement(entercredenHeading, "Enter Credentilas Heading").isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport(getText(entercredenHeading) + " is displayed");
-		} else {
-			ExtentTestManager.setFailMessageInReport(getText(entercredenHeading) + " is not displayed");
-		}
+		By entercredenHeading = MobileBy.xpath("//*[@text='Enter your credentials']");
+		new CommonFunctions().elementView(entercredenHeading, "Enter Credentilas Heading");
 	}
 
 //	Verify Identity screen
@@ -182,13 +175,9 @@ public class MXBankComponent extends MobileFunctions {
 		click(btnSavings, "savings");
 	}
 
-	public void VerifyIdentityHeading(String heading) {
-		By identityHeading = MobileBy.xpath("//*[@text=" + "'" + heading + "'" + "]");
-		if (getElement(identityHeading, "Enter Credentilas Heading").isDisplayed()) {
-			ExtentTestManager.setPassMessageInReport(getText(identityHeading) + " is displayed");
-		} else {
-			ExtentTestManager.setFailMessageInReport(getText(identityHeading) + " is not displayed");
-		}
+	public void VerifySelectAccountHeading() {
+		By identityHeading = MobileBy.xpath("//*[@text='Select an account']");
+		new CommonFunctions().elementView(identityHeading, "Select an account");
 	}
 
 	public SuccessFailureComponent successFailureComponent() {

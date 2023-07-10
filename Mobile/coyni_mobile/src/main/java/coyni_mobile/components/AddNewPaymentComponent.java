@@ -9,7 +9,7 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
-	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']");
+	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']|//*[@text='Add Instant Pay']|//*[@text='Add Bank Account']");
 	private By lblPaymentMethods = MobileBy.id("");
 	private By lblPageDes = MobileBy.id("");
 	private By btnExternalBank = MobileBy.id("com.coyni.mapp:id/lyBank");
@@ -29,9 +29,8 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblCoyni = MobileBy.AccessibilityId("coyni");
 	private By lblerrorText = MobileBy.id("");
 	private By lblAddNewPayment = MobileBy.AccessibilityId("Add Payment Method");
-	private By btnAddNewPaymentPlus = MobileBy.xpath("//*[@name='Add New Payment Method']");
-//	private By btnSignetWalletId = MobileBy.xpath("//*[contains(@name,'Signet')]//following-sibling::*[contains(@name,'••••%s')]");
-
+	private By btnAddNewPaymentPlus = MobileBy
+			.xpath("//*[contains(@resource-id,'AddPayment')]|//*[contains(@resource-id,'AddPay')]");
 	private By btnBank = MobileBy.xpath("//*[contains(@name,'BANK')]");
 
 	private By btnBankOne = MobileBy.xpath("(//*[contains(@name,'BANK')])[1]");
@@ -112,12 +111,13 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	public void clickAddNewPaymentPlusIcon() {
-		if (getElementList(lblPaymentMethods, "Payment Methods").size() > 0) {
-			clickAddNewPayment();
-		} else {
-			ExtentTestManager.setInfoMessageInReport("no payment methods");
-		}
+	public void clickAddNewPaymentPlusIcon() throws InterruptedException {
+		clickAddNewPayment();
+	}
+
+	public int verifyAddNewPaymentPlusIcon() throws InterruptedException {
+		Thread.sleep(800);
+		return getElementList(btnAddNewPaymentPlus, "Add New Payment Method").size();
 	}
 
 	public void verifyErrorView() {
@@ -183,9 +183,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void clickBankAcount() {
-
-		click(btnExternalBank, "External Bank Account");
-
+		click(btnExternalBank, "Bank Account");
 	}
 
 	public void verifyDebitContent(String content) {

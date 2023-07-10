@@ -3,6 +3,7 @@ package coyni_mobile.components;
 import org.openqa.selenium.By;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -10,10 +11,10 @@ import io.appium.java_client.MobileBy;
 public class CreatePasswordComponent extends MobileFunctions {
 //	Forgot Password
 	private By lblCreateNewPassword = MobileBy.AccessibilityId("Create Password");
-	private By txtNewPassword = MobileBy.AccessibilityId("New Password");
+	private By txtNewPassword = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]");
 	private By newPassIconEye = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]/following-sibling::*");
 	private By confirmIconEye = MobileBy.xpath("//*[contains(@resource-id,'etCPassword')]/following-sibling::*");
-	private By txtConfirmPassword = MobileBy.AccessibilityId("Confirm Password");
+	private By txtConfirmPassword = MobileBy.xpath("//*[contains(@resource-id,'etCPassword')]");
 	private By lblMustHaveErrMsg = MobileBy.AccessibilityId("8 to 32");
 	private By btnSave = MobileBy.AccessibilityId("Save");
 	private By imgPassStrength = MobileBy.xpath("//*[contains(@resource-id,'strength')]");
@@ -21,13 +22,13 @@ public class CreatePasswordComponent extends MobileFunctions {
 	/**
 	 * Change Password
 	 */
-	private By lblCurrentPassword = MobileBy.xpath("");
-	private By lblCurrentpwdDesc = MobileBy.xpath("");
-	private By lblCurrentIconEye = MobileBy.xpath("//*[contains(@resource-id,'etPassword')]/following-sibling::*");
-	private By txtCurrentPassword = MobileBy.xpath("");
-	private By btnNext = MobileBy.xpath("");
-	private By lblNewPassword = MobileBy.xpath("");
-	private By lblNewPasswordDesc = MobileBy.xpath("");
+	private By lblCurrentPassword = MobileBy.AccessibilityId("Password Heading");
+	private By lblCurrentpwdDesc = MobileBy.AccessibilityId("Keep Your Account Secure");
+	private By lblCurrentIconEye = MobileBy.id("com.coyni.mapp:id/text_input_end_icon");
+	private By txtCurrentPassword = MobileBy.AccessibilityId("Password");
+	private By btnNext = MobileBy.AccessibilityId("Continue");
+	private By lblNewPassword = MobileBy.xpath("//*[contains(@resource-id,'Message')]/preceding-sibling::android.widget.TextView");
+	private By lblNewPasswordDesc = MobileBy.id("com.coyni.mapp:id/tvMessageChangePass");
 
 	public void verifyCurrentPassword(String password) {
 		new CommonFunctions().verifyLabelText(lblCurrentPassword, "current password", password);
@@ -42,13 +43,13 @@ public class CreatePasswordComponent extends MobileFunctions {
 	}
 
 	public void clickNext() {
-		if (getElement(txtCurrentPassword, "currentPassword").isEnabled()) {
-			click(btnNext, "Next");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("Next button is disabled");
-		}
+		click(btnNext, "Next");
 	}
 
+	public void validateNext() {
+		new CommonFunctions().verifyDisabledElement(btnNext, "Next");
+	}
+	
 	public void verifyNewPasswordHeading(String hdg) {
 		new CommonFunctions().verifyLabelText(lblNewPassword, "New Password", hdg);
 	}
@@ -67,6 +68,7 @@ public class CreatePasswordComponent extends MobileFunctions {
 	}
 
 	public void fillConfirmPassword(String password) {
+		DriverFactory.getDriver().hideKeyboard();
 		click(txtConfirmPassword, "Confirm Password");
 		enterText(txtConfirmPassword, password, "Confirm Password");
 	}
@@ -145,6 +147,10 @@ public class CreatePasswordComponent extends MobileFunctions {
 		return new SuccessFailureComponent();
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
+	
 	/**
 	 * Order - minChar, max, MaxiPlus
 	 * 

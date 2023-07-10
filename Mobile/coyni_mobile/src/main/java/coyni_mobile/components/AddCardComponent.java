@@ -1,12 +1,7 @@
 package coyni_mobile.components;
 
-import javax.lang.model.element.Element;
-
 import org.openqa.selenium.By;
 
-import coyni_mobile.components.MailingAddressComponent;
-import coyni_mobile.pages.SignUpPage;
-import coyni_mobile.utilities.CommonFunctions;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
