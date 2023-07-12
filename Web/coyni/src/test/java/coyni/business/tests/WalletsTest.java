@@ -2,9 +2,9 @@ package coyni.business.tests;
 
 import java.util.Map;
 
-import org.junit.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import coyni.business.components.SideBarMenuComponent;
 import coyni.business.pages.WalletsPage;

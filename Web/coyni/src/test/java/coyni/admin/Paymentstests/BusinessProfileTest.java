@@ -2,9 +2,9 @@ package coyni.admin.Paymentstests;
 
 import java.util.Map;
 
-import org.junit.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import coyni.admin.Paymentpages.CommissionAccountPage;
 import coyni.admin.Paymentpages.HomePage;
@@ -18,13 +18,13 @@ public class BusinessProfileTest {
 	HomePage homePage;
 	CommissionAccountPage commissionAccountPage;
 	LoginPage loginPage;
-	
+
 	@BeforeMethod
 	public void init() {
 		homePage = new HomePage();
 		loginPage = new LoginPage();
 	}
-	
+
 	static String mail;
 	static String url;
 
@@ -40,7 +40,8 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addMerchantComponent().fillFirstName(data.get("firstName"));
 			homePage.sideBarComponent().addMerchantComponent().fillLastName(data.get("lastName"));
 			mail = homePage.sideBarComponent().addMerchantComponent().getEmail();
-			homePage.sideBarComponent().addMerchantComponent().fillEmail(mail);// this line used for static email (Next time we can change the class name)
+			homePage.sideBarComponent().addMerchantComponent().fillEmail(mail);// this line used for static email (Next
+																				// time we can change the class name)
 			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
 			homePage.sideBarComponent().addMerchantComponent().clickSendInvitation();
@@ -51,10 +52,8 @@ public class BusinessProfileTest {
 //			homePage.sideBarComponent().addMerchantComponent().toastComponent().verifyToast(data.get("title"),
 //					data.get("message"));
 //			homePage.sideBarComponent().addMerchantComponent().verifyMerchantHeading();
-			url = homePage.sideBarComponent().addMerchantComponent()
-					.getUrl();
-			homePage.sideBarComponent().addMerchantComponent()
-					.navigateUrl(url);
+			url = homePage.sideBarComponent().addMerchantComponent().getUrl();
+			homePage.sideBarComponent().addMerchantComponent().navigateUrl(url);
 			// new CommonFunctions().swtichToNewtabUrl(data.get("merchUrl"));
 
 		} catch (Exception e) {
@@ -156,7 +155,7 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addMerchantComponent().fillEmail();
 			homePage.sideBarComponent().addMerchantComponent().fillPartnerName(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().fillCompanyName(data.get("companyName"));
-	//		homePage.sideBarComponent().addMerchantComponent().clickOutside();
+			// homePage.sideBarComponent().addMerchantComponent().clickOutside();
 			if (!data.get("errMessage").isEmpty()) {
 				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
 						data.get("elementName"));
@@ -182,7 +181,7 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addMerchantComponent().fillEmail();
 			homePage.sideBarComponent().addMerchantComponent().validatePartnerNameField(data.get("partnerName"));
 			homePage.sideBarComponent().addMerchantComponent().validateCompantNameField(data.get("companyName"));
-		//	homePage.sideBarComponent().addMerchantComponent().clickOutside();
+			// homePage.sideBarComponent().addMerchantComponent().clickOutside();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
@@ -326,7 +325,7 @@ public class BusinessProfileTest {
 
 		}
 	}
-	
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testProfileMerchantDetailsWithTokenAccount(String strParams) {
@@ -346,7 +345,7 @@ public class BusinessProfileTest {
 				int size = homePage.sideBarComponent().profileComponent().accountTableComponent()
 						.profileSideBarComponent().getNoFilterRecSize();
 				if (size == 0) {
-					//testFilters(strParams);
+					// testFilters(strParams);
 					testExportSelectedTransactions(strParams);
 
 				} else {
@@ -372,7 +371,7 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickchkbxActive();
 			homePage.sideBarComponent().tokenAccountPage().filterComponent().clickApplyFilters();
 			homePage.sideBarComponent().profileComponent().fillSearchForMerchantDetails(data.get("searchText"));
-		//	Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
+			// Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
 			int Size = homePage.sideBarComponent().profileComponent().accountTableComponent().getNoFilterRecSize();
 			if (Size == 0) {
 				homePage.sideBarComponent().profileComponent().accountTableComponent().clickUser();
@@ -394,5 +393,4 @@ public class BusinessProfileTest {
 		}
 	}
 
-	
 }

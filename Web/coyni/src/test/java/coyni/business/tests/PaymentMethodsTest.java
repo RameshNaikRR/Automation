@@ -1,11 +1,12 @@
 package coyni.business.tests;
 
 import java.util.Map;
+
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 

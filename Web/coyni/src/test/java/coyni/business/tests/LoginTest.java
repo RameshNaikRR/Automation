@@ -3,12 +3,10 @@ package coyni.business.tests;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-
+import org.testng.annotations.Test;
 import com.google.common.util.concurrent.Uninterruptibles;
-
 import coyni.business.components.AuthyComponent;
 import coyni.business.pages.ForgotPasswordPage;
 import coyni.business.pages.LoginPage;
@@ -21,9 +19,8 @@ public class LoginTest {
 	LoginPage loginPage;
 	ForgotPasswordPage forgotpasswordpage;
 
-	@BeforeMethod
+	@BeforeTest
 	public void init() {
-
 		loginPage = new LoginPage();
 		forgotpasswordpage = new ForgotPasswordPage();
 
@@ -31,10 +28,72 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testLogin(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// loginPage.verifyHeading(data.get("loginHeading"));
+			loginPage.fillEmail(data.get("businessEmail"));
+			loginPage.fillPassword(data.get("businessPassword"));
+			// loginPage.clickeyeIcon();
+//			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
+			loginPage.clickNext();
+			Thread.sleep(2000);
+			// loginPage.authyComponent().verifyHeading(data.get("authyHeading"));
+			if (data.get("securityKey").equalsIgnoreCase("123456")) {
+				loginPage.authyComponent().fillInput(data.get("securityKey"));
+			} else {
+				loginPage.authyComponent().fillAuthyInput(data.get("securityKey"));
+				ExtentTestManager.setInfoMessageInReport("ok ");
+			}
+			Thread.sleep(2000);
+			if (loginPage.verifyNonMaterialAgrrement() == 0) {
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
+					loginPage.scrollToTermsAgree();
+					loginPage.clickDone();
+				} else {
+					loginPage.verifyWelcomeHeading();
+				}
+				Thread.sleep(3000);
+				if (loginPage.verifyPriacyPolicyHeading() == 1) {
+					loginPage.scrollToPrivacyAgree();
+					loginPage.clickDone();
+				}
+
+				else {
+					loginPage.verifyWelcomeHeading();
+				}
+			} else {
+				Thread.sleep(3000);
+				if (loginPage.verifyPriacyPolicyHeading() == 1) {
+					loginPage.scrollToPrivacyAgree();
+					loginPage.clickDone();
+				}
+
+				else {
+					loginPage.verifyWelcomeHeading();
+				}
+				Thread.sleep(2000);
+				if (loginPage.verifyTermsOfServicesHeading() == 1) {
+					loginPage.scrollToTermsAgree();
+					loginPage.clickDone();
+				}
+
+				else {
+					loginPage.verifyWelcomeHeading();
+				}
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login test failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testAdminLogin(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyPageHeading(data.get("loginHeading"));
+			// loginPage.verifyPageHeading(data.get("loginHeading"));
 			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -58,7 +117,7 @@ public class LoginTest {
 	public void testAdminLoginWithInvalidEmail(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			loginPage.verifyPageHeading(data.get("loginHeading"));
+//			loginPage.verifyPageHeading(data.get("loginHeading"));
 			// loginPage.verifyPageDescription(data.get("loginDescription"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
@@ -76,7 +135,7 @@ public class LoginTest {
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("email"));
 			loginPage.fillPassword(data.get("password"));
-			loginPage.clickOutSide();
+//			loginPage.clickOutSide();
 			loginPage.clickNext();
 			Thread.sleep(4000);
 			if (!data.get("errMessage").isEmpty()) {
@@ -352,8 +411,7 @@ public class LoginTest {
 			loginPage.retrieveEmailComponent().phoneVerificationComponent().authyComponent()
 					.fillInput(data.get("code"));
 			if (!data.get("message").isEmpty()) {
-				loginPage.retrieveEmailComponent().phoneVerificationComponent()
-						.verifyMessage(data.get("message"));
+				loginPage.retrieveEmailComponent().phoneVerificationComponent().verifyMessage(data.get("message"));
 			}
 
 		} catch (Exception e) {
@@ -361,6 +419,7 @@ public class LoginTest {
 
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailNavigationView(String strParams) {
@@ -381,18 +440,17 @@ public class LoginTest {
 			Thread.sleep(1000);
 			loginPage.retrieveEmailComponent().phoneVerificationComponent()
 					.verifyPhoneVerificationHeading(data.get("phoneEmailVerificationHeading"));
-			loginPage.retrieveEmailComponent().phoneVerificationComponent()
-					.fillpin(data.get("code"));
+			loginPage.retrieveEmailComponent().phoneVerificationComponent().fillpin(data.get("code"));
 			Thread.sleep(1000);
 			loginPage.retrieveEmailComponent().phoneVerificationComponent().chooseAccountPage()
 					.verifyPageHeading(data.get("chooseAccountHeading"));
-			loginPage.retrieveEmailComponent().phoneVerificationComponent().chooseAccountPage()
-					.clickReturnToLogin();
+			loginPage.retrieveEmailComponent().phoneVerificationComponent().chooseAccountPage().clickReturnToLogin();
 			// loginPage.verifyPageHeading(data.get("loginHeading"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Retrieve Email test failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailFieldValidations(String strParams) {
@@ -410,6 +468,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Retrieve email test failed due to exception " + e);
 		}
 	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailWithInvalidData(String strParams) {
