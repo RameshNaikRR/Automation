@@ -8,9 +8,9 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RemovePaymentMethodPopup extends BrowserFunctions {
 
-	private By lblRemovePaymentHeading = By.xpath("");
-	private By lblRemovePaymentDes = By.xpath("");
-	private By btnRemove = By.xpath("");
+	private By lblRemovePaymentHeading = By.xpath("//h1[text()='Remove Payment Method']");
+	private By lblRemovePaymentDes = By.xpath("//span[@class='text-cgy4']/following-sibling::span");
+	private By btnRemove = By.xpath("//button[@type='button']");
 	private By backArrow = By.xpath("");
 	private By crossClose = By.xpath("");
 

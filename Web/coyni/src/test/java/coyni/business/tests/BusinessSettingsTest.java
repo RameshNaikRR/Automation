@@ -2,9 +2,9 @@ package coyni.business.tests;
 
 import java.util.Map;
 
-import org.junit.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import coyni.admin.MerchantServicescomponents.AccountLimitsComponent;
 import coyni.business.components.SideBarMenuComponent;
@@ -30,7 +30,15 @@ public class BusinessSettingsTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickAccountFeeLimits();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().viewFeeLimits();
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
+					.verifyHeading(data.get("accountFeeHeading"));
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickViewChange();
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
+					.verifyFeeHeading(data.get("feeHeading"));
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().close();
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickHide();
+			Thread.sleep(3000);
+			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().viewAccountFeeLimits();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("Account Fee and Limits view failed due to Exception " + e);
@@ -180,5 +188,5 @@ public class BusinessSettingsTest {
 			ExtentTestManager.setFailMessageInReport("test Business Information  Failed due to Exception " + e);
 		}
 	}
-	
+
 }

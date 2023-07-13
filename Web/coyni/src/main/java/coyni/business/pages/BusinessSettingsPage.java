@@ -11,9 +11,9 @@ public class BusinessSettingsPage extends BrowserFunctions {
 	private By lblAccountId = By.xpath("");
 	private By lblUserName = By.xpath("");
 	private By wallets = By.xpath("");
-	private By paymentMethods = By.xpath("");
+	private By paymentMethods = By.xpath("//span[@data-ui-auto='payment_method']");
 	private By team = By.xpath("");
-	private By accountFeeLimits = By.xpath("");
+	private By accountFeeLimits = By.xpath("//span[text()='Account Fees / Limits']");
 	private By contactInfo = By.xpath("");
 	private By businessInfo = By.xpath("");
 

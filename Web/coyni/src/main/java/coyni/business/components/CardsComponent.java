@@ -8,7 +8,6 @@ import ilabs.WebFramework.BrowserFunctions;
 
 public class CardsComponent extends BrowserFunctions{
 	private By lblCardNumber = By.cssSelector(".text-base.font-semibold.text-cgy4");
-	private By lblCardBrand = By.cssSelector("");
 	private By lblCardType = By.cssSelector(".icon-mastercard");
 	private By iconEdit = By.cssSelector(".icon-edit.PaymentMethod_action_icon__3z0Dn");
 	private By iconDelete = By.cssSelector(".icon-trash.PaymentMethod_action_icon__3z0Dn");
@@ -17,10 +16,6 @@ public class CardsComponent extends BrowserFunctions{
 
 	public void verifyCardNumber(String last4digts) {
 		new CommonFunctions().verifyLabelText(lblCardNumber, "Last 4 Digits", last4digts);
-	}
-
-	public void verifyCardBrand(String cardBrand) {
-		new CommonFunctions().verifyLabelText(lblCardBrand, "Card Brand", cardBrand);
 	}
 
 	public void verifyCardType(String cardType) {

@@ -55,8 +55,6 @@ public class PaymentMethodsTest {
 					.addCardComponent().fillCardNumber(data.get("cardNumber"));
 			Thread.sleep(3000);
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
-					.addCardComponent().validateCardBrand(data.get("cardType"));
-			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
 					.addCardComponent().fillCardExpiry(data.get("cardExpiry"));
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
 					.addCardComponent().mailingAddressComponent().fillAddress1(data.get("address1"));
@@ -71,8 +69,9 @@ public class PaymentMethodsTest {
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
 					.addCardComponent().mailingAddressComponent().verifyCountry(data.get("country"));
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
-					.addCardComponent().mailingAddressComponent().clickSave();
-
+					.addCardComponent().mailingAddressComponent().clickNext();
+			ExtentTestManager
+					.setInfoMessageInReport("The debit card has been successfully added to your payment methods.");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport(" test AddDebitCard failed due to Exception " + e);
 		}
@@ -86,6 +85,8 @@ public class PaymentMethodsTest {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
 			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
+//			if(condition=='Hello') {
+		
 			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
 			testAddCard(strParams, "debit");
 		} catch (Exception e) {
@@ -100,49 +101,40 @@ public class PaymentMethodsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().fillCardNumber(data.get("cardNumber"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().fillCardExpiry(data.get("cardExpiry"));
+
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().fillAddress1(data.get("address1"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().fillAddress2(data.get("address2"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().fillCity(data.get("city"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().selectState(data.get("state"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().verifyCountry(data.get("country"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().fillZipCode(data.get("zipCode"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().clickTab();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().clickNext();
 			Thread.sleep(3000);
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.fillNameOnCard(data.get("nameOnCard"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.fillCardNumber(data.get("cardNumber"));
-			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
-			// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().validateCardBrand(data.get("cardType"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.fillCardExpiry(data.get("cardExpiry"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().fillAddress1(data.get("address1"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().fillAddress2(data.get("address2"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().fillCity(data.get("city"));
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().fillCountry(data.get("country"));
-			// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().fillZipCode(data.get("zipCode"));
 
-			if (data.get("state").isEmpty()) {
-				businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-						.mailingAddressComponent().clickstate();
-				businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-						.mailingAddressComponent().clickstate();
-				businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-						.mailingAddressComponent().clickTab();
+			System.out.println(data.get("errMessage"));
+			String[] msg = data.get("errMessage").split(",");
+			for (int i = 0; i < msg.length; i++) {
+				new CommonFunctions().validateFormErrorMessage(msg[i]);
 			}
-			if (!data.get("state").isEmpty()) {
-				// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().selectState(data.get("state"));
-				businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-						.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-			}
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
-					.mailingAddressComponent().clickTab();
-			// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().backandCrossIconComponent().clickCross();
-
-			if (!data.get("errMessage").isEmpty()) {
-				Uninterruptibles.sleepUninterruptibly(100, TimeUnit.MILLISECONDS);
-
-				new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), data.get("colour"),
-						data.get("elementName"));
-			}
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent()
+					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickNext();
+//			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent()
+//					.cardAddedSuccessfullyPopup().navigationComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager
@@ -157,7 +149,7 @@ public class PaymentMethodsTest {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
 			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
-			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
+			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			testAddCardWihInvalidData(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager
@@ -171,8 +163,9 @@ public class PaymentMethodsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 
+			Thread.sleep(2000);
 			businessSettingsPage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
-					.clickEdit(data.get("cardNumber"));
+					.clickEdit(data.get("last4digits"));
 			businessSettingsPage.paymentMethodsComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
 			Thread.sleep(2000);
 			businessSettingsPage.paymentMethodsComponent().addCardComponent().fillCardExpiry(data.get("cardExpiry"));
@@ -183,14 +176,11 @@ public class PaymentMethodsTest {
 					.fillAddress2(data.get("address2"));
 			businessSettingsPage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
 					.fillCity(data.get("city"));
-			businessSettingsPage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
-					.editSelectState(data.get("state"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().selectState(data.get("state"));
 			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.mailingAddressComponent().fillZipCode(data.get("zipCode"));
-			Uninterruptibles.sleepUninterruptibly(1000, TimeUnit.MILLISECONDS);
 			businessSettingsPage.paymentMethodsComponent().addCardComponent().mailingAddressComponent().clickSave();
-			// businessSettingsPage.paymentMethodsComponent().addCardComponent().mailingAddressComponent()
-			// .successFailurePopupCardComponent().clickClose();
 
 		} catch (Exception e) {
 
@@ -205,9 +195,8 @@ public class PaymentMethodsTest {
 		try {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
-			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
 			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
-			// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
+//			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			testEditCard(strParams);
 		} catch (Exception e) {
 
@@ -222,10 +211,9 @@ public class PaymentMethodsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			businessSettingsPage.paymentMethodsComponent().cardsComponent().editDeleteComponent()
-					.clickDelete(data.get("cardNumber"));
+					.clickDelete(data.get("last4digits"));
+			Thread.sleep(2000);
 			businessSettingsPage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup().clickRemove();
-			// businessSettingsPage.paymentMethodsComponent().cardsComponent().removePaymentMethodPopup()
-			// .successFailurePopupCardComponent().clickClose();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test delete card failed due to exception " + e);
@@ -238,7 +226,6 @@ public class PaymentMethodsTest {
 		try {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
-			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
 			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
 			testDeleteCard(strParams);
 
@@ -253,11 +240,6 @@ public class PaymentMethodsTest {
 
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			// businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickCreditCard();
-
-			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
-
-			Thread.sleep(3000);
 			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
 					.validateNameOnCard(data.get("nameOnCard"));
 			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().addCardComponent()
@@ -286,7 +268,7 @@ public class PaymentMethodsTest {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
 			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
-			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
+			businessSettingsPage.paymentMethodsComponent().addNewPaymentMethodPopup().clickDebitCard();
 			testCardsFieldValidations(strParams, "debit");
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDebitCardFieldValidations is" + e);

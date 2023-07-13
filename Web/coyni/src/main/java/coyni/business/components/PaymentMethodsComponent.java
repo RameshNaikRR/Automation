@@ -12,9 +12,9 @@ import ilabs.WebFramework.BrowserFunctions;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class PaymentMethodsComponent extends BrowserFunctions {
-	private By btnAddNewPaymentMethod = By.xpath("//span[text()='Add New Payment Method']");
+	private By btnAddNewPaymentMethod = By.xpath("//button[@data-ui-auto='add_payment_method_button']");
 	private By lblNoActivePaymentMethods = By.cssSelector("");
-	private By lblPaymentMethods = By.xpath("//span[contains(@class,'text-base text-cgy4')]");
+	private By lblPaymentMethods = By.xpath("//div[@data-ui-auto='payment_method']");
 	private By lblAddNewPaymentMethods = By.xpath("//h1[text()='Add New Payment Method']");
 	private By lblBankName = By.xpath(" //p[contains(text(),'BANK')]");
 	private By btnDelete = By.xpath("//button[contains(@class,'icon-trash')]");
@@ -22,7 +22,7 @@ public class PaymentMethodsComponent extends BrowserFunctions {
 	private By lblBankList = By.xpath("");
 
 	public void clickAddNewPaymentMethod() {
-		click(btnAddNewPaymentMethod, "Click Add new Payment Method");
+		click(btnAddNewPaymentMethod, "Add Payment Method");
 	}
 
 	/*

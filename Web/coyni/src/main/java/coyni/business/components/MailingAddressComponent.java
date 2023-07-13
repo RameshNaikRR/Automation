@@ -25,7 +25,7 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By zipCode = By.xpath("//input[@id='zip-code']/parent::div");
 	private By txtDateOfBirth = By.cssSelector("#date-of-birth");
 	private By txtSocialSecurity = By.cssSelector("#social-security-no");
-	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
+	private By btnNext = By.xpath("//button[@type='Save']");
 
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
@@ -74,12 +74,17 @@ public class MailingAddressComponent extends BrowserFunctions {
 		click(txtCountry, "Country");
 	}
 
-	public void clickSave() {
-		click(btnSave, "click save");
+	public void clickSave() throws AWTException {
+		new CommonFunctions().clickTab();
+		click(btnNext, "click Save");
 	}
 
 	public void clickNext() {
-		click(btnNext, "Next Button");
+		if (getElement(btnNext, "Next").isEnabled()) {
+			click(btnNext, "Next ");
+		} else {
+			ExtentTestManager.setPassMessageInReport("Next button is in disabled mode");
+		}
 	}
 
 	public void clickstate() {

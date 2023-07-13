@@ -43,6 +43,20 @@ public class CommonFunctions {
 
 	}
 
+	public void validateFormErrorMessage(String expErrMsg) {
+		By errorMsgs = By
+				.cssSelector("div[class *= 'FormField_error'],span[class *='verification_error'],span.text-crd5");
+		;
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
 	public void verifyAutoFocus(By ele, String eleName) {
 		WebElement webele = objBrowserFunctions.getElement(ele, eleName);
 		if (webele.equals(DriverFactory.getDriver().switchTo().activeElement())) {
