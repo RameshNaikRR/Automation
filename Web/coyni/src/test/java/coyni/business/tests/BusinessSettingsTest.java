@@ -23,28 +23,28 @@ public class BusinessSettingsTest {
 		accountLimitsComponent = new AccountLimitsComponent();
 	}
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testAccountFeeAndLimitsView(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			sideBarMenuComponent.clickBusinessSettings();
-			sideBarMenuComponent.businessSettingsPage().clickAccountFeeLimits();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
-					.verifyHeading(data.get("accountFeeHeading"));
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickViewChange();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
-					.verifyFeeHeading(data.get("feeHeading"));
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().close();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickHide();
-			Thread.sleep(3000);
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().viewAccountFeeLimits();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("Account Fee and Limits view failed due to Exception " + e);
-
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAccountFeeAndLimitsView(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			sideBarMenuComponent.clickBusinessSettings();
+//			sideBarMenuComponent.businessSettingsPage().clickAccountFeeLimits();
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
+//					.verifyHeading(data.get("accountFeeHeading"));
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickViewChange();
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
+//					.verifyFeeHeading(data.get("feeHeading"));
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().close();
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickHide();
+//			Thread.sleep(3000);
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().viewAccountFeeLimits();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("Account Fee and Limits view failed due to Exception " + e);
+//
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })

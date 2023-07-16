@@ -1,11 +1,6 @@
 package coyni.business.pages;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.aventstack.extentreports.ExtentTest;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -13,44 +8,20 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AccountFeesAndLimitsPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//span[@data-ui-auto='accountfees_limits']");
-//	private By lblDesc = By.xpath("//div[contains(@class,'grid grid-cols-[60%_minmax(40%,_1fr)]')]");
-	private By btnNext = By.xpath("");
-	private By lnkBack = By.xpath("");
+	private By lblHeading = By.xpath("//h1[@data-ui-auto='account_fees_limits']");
+	private By lblDes = By.xpath("//p[@data-ui-auto='please_review_agree']");
+	private By btnNext = By.xpath("//button[@data-ui-auto='next_button']");
+	private By lnkBack = By.xpath("//button[@data-ui-auto='back_button']");
 	private By lnkExit = By.xpath("");
-	private By chkBox = By.xpath("");
-	private By viewAccountLimits = By.xpath("//div[contains(@class,'grid grid-cols-[60%_minmax(40%,_1fr)]')]");
-	private By viewChange = By.xpath("//button[@data-ui-auto='viewchange_button']");
-	private By hide = By.xpath("//button[text()='Hide']");
-	private By newFeeStructure = By.xpath("//p[@data-ui-auto='newfee_structure']");
-	private By close = By.xpath("//button[@class='self-end']");
+	private By chkBox = By.xpath("//input[@data-ui-auto='checkbox']");
+	private By viewAccountLimits = By.xpath("");
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading: ", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
 	}
 
-	public void verifyFeeHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(newFeeStructure, "Heading: ", expHeading);
-	}
-
-	public void viewAccountFeeLimits() {
-		List<WebElement> rows = getElementsList(viewAccountLimits, "Account Fee Limits");
-		for (WebElement row : rows) {
-			String replace = row.getText().replace("\n", "");
-			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
-		}
-	}
-
-	public void close() {
-		click(close, "close");
-	}
-
-	public void clickViewChange() {
-		click(viewChange, "view change");
-	}
-
-	public void clickHide() {
-		click(hide, "Hide");
+	public void verifyDescription(String expDes) {
+		new CommonFunctions().verifyLabelText(lblDes, "Description is: ", expDes);
 	}
 
 	public void clickNext() {

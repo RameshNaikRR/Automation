@@ -8,14 +8,16 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RetrieveEmailComponent extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("");
-	private By lblDescription = By.xpath("");
-	private By countryCode = By.xpath("");
-	private By txtPhoneNumber = By.xpath("");
-	private By txtFirstName = By.xpath("");
-	private By txtLastName = By.xpath("");
-	private By btnNext = By.xpath("");
-	private By lnkBacktoLogin = By.xpath("");
+	private By lblHeading = By.xpath("//span[@data-ui-auto='retrieve_email']");
+	private By lblDescription = By.xpath("//div[@data-ui-auto='retrieve_email_description']");
+	private By countryCode = By.xpath("//div[@data-ui-auto='country_code']");
+	private By txtPhoneNumber = By.xpath("//input[@data-ui-auto='phon_number']");
+	private By txtFirstName = By.xpath("//input[@data-ui-auto='first_name']");
+	private By txtLastName = By.xpath("//input[@data-ui-auto='last_name']");
+	private By btnNext = By.xpath("//button[@data-ui-auto='next_button']");
+	private By lnkBacktoLogin = By.xpath("//button[@data-ui-auto='back_to_login']");
+	private By txtSearch = By.xpath("(//input[contains(@class,'Input_form_input__yl3pD')])[3]");
+	private By countryCodeUS = By.xpath("//div[@data-ui-auto='US']");
 
 	public void verifyRetieveEmailHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
@@ -26,6 +28,9 @@ public class RetrieveEmailComponent extends BrowserFunctions {
 	}
 
 	public void selectCountryCode() {
+		click(countryCode, "Country Code");
+		click(countryCodeUS, "Country Code US");
+		// enterText(txtSearch, search, "Search country code");
 
 	}
 

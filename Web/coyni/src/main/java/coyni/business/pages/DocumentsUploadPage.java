@@ -8,15 +8,15 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.FileHelper;
 
 public class DocumentsUploadPage extends BrowserFunctions {
-	private By lblHeading = By.xpath("");
+	private By lblHeading = By.xpath("//h1[@data-ui-auto='upload_business_documents']");
 	private By lblDescription = By.xpath("");
 	private By lblArticlesOfCorporation = By.xpath("");
 	private By lblCompanyW = By.xpath("");
 	private By lblEINLetter = By.xpath("");
 	private By lblDbaFiling = By.xpath("");
 	private By lblAdditionalDocuments = By.xpath("");
-	private By btnNext = By.xpath("");
-	private By lnkBack = By.xpath("");
+	private By btnNext = By.xpath("//button[contains(text(),'Next')]");
+	private By lnkBack = By.xpath("//button[@data-ui-auto='back_button']");
 	private By lnkExit = By.xpath("");
 
 	private By lnkUploadImg = By.xpath(
@@ -27,6 +27,26 @@ public class DocumentsUploadPage extends BrowserFunctions {
 
 	public void verifyHeading(String heading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Heading is:", heading);
+	}
+
+	private By getUploadDocumentElement(String num) {
+		return By.xpath(String.format("(//*[contains(@class,'FormFile_form_file__-SKGD')]/input)[%s]", num));
+	}
+
+	public void uploadDocument(String folderName, String fileName, String businessEntity) throws InterruptedException {
+		if (!businessEntity.equalsIgnoreCase("Company W-9")) {
+			for (int i = 1; i <= 3; i++) {
+				String num = Integer.toString(i);
+				getElement(getUploadDocumentElement(num), "select Image" + i)
+						.sendKeys(FileHelper.getFilePath(folderName, fileName));
+				Thread.sleep(6000);
+				ExtentTestManager.setInfoMessageInReport("upload Image" + i);
+			}
+		} else {
+			getElement(getUploadDocumentElement("1"), "select Image")
+					.sendKeys(FileHelper.getFilePath(folderName, fileName));
+			ExtentTestManager.setInfoMessageInReport("upload Image");
+		}
 	}
 
 	public void verifyDescription(String description) {
@@ -77,6 +97,7 @@ public class DocumentsUploadPage extends BrowserFunctions {
 //      getElement(getUploadDocumentElement, "select Image").click();
 		getElement(getUploadDocumentElement, "Upload Image").sendKeys(FileHelper.getFilePath(folderName, fileName));
 	}
+
 	private By getRemoveDocumentElement(String num) {
 		return By.xpath(String.format("(//span[contains(@class,'FormFile_file_cross')])[%s]", num));
 	}

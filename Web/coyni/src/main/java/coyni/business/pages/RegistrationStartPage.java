@@ -8,12 +8,12 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class RegistrationStartPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("//h1");
-	private By lblDescription = By.cssSelector("div[class*=BusinessApplicationBanner_container]>div>p");
+	private By lblHeading = By.xpath("//div[@data-ui-auto='welcome_name']");
+	private By lblDescription = By.xpath("//p[@data-ui-auto='we_excited_activate']");
 	private By lblBusinessApplication = By.xpath("//p[@class='text-xl font-bold leading-5 text-cgy4']");
-	private By btnStartApplication = By.xpath("//button[text()='Start Application']");
-	private By btnContinueApplication = By.xpath("//Button[text()='Continue Application']");
-	private By lblStatus = By.xpath("//p[text()='Status:']/*[1]");
+	private By btnStartApplication = By.xpath("//button[@data-ui-auto='start_app']");
+//	private By btnContinueApplication = By.xpath("//Button[text()='Continue Application']");
+	private By lblStatus = By.xpath("//p[@data-ui-auto='status']");
 	private By twostep = By.xpath("//strong[text()='Activate Two-Step Authentication']");
 
 	public void verifyHeading() {
@@ -33,9 +33,9 @@ public class RegistrationStartPage extends BrowserFunctions {
 		click(btnStartApplication, "Start Application");
 	}
 
-	public void clickContinueApplication() {
-		click(btnContinueApplication, "Continue Application");
-	}
+//	public void clickContinueApplication() {
+//		click(btnContinueApplication, "Continue Application");
+//	}
 
 	public void verifyBusinessApplicationView() {
 		String businessApp = getText(lblBusinessApplication, "Business Application");
@@ -52,6 +52,10 @@ public class RegistrationStartPage extends BrowserFunctions {
 
 	public RegistrationDBAPage registrationDBAPage() {
 		return new RegistrationDBAPage();
+	}
+
+	public AuthorizedSignersPage authorizedSignersPage() {
+		return new AuthorizedSignersPage();
 	}
 
 	public RegistrationBeneficialOwnersPage registrationBeneficialOwnersPage() {
@@ -81,6 +85,7 @@ public class RegistrationStartPage extends BrowserFunctions {
 	public ApplicationDecline applicationDecline() {
 		return new ApplicationDecline();
 	}
+
 	public ActionRequired actionRequired() {
 		return new ActionRequired();
 	}

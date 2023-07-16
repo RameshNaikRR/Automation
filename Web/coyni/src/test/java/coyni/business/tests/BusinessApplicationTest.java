@@ -41,6 +41,144 @@ public class BusinessApplicationTest {
 			ExtentTestManager.setFailMessageInReport("Business Application side bar menu failed due to Exception " + e);
 		}
 	}
+	
+	@Test
+	@Parameters({ "strParams" })
+	public void testBusinessApplication(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			registrationStartPage.verifyHeading();
+			registrationStartPage.verifyPageDescription(data.get("startPageDescription"));
+			registrationStartPage.verifyBusinessApplicationView();
+			registrationStartPage.getStatus();
+			registrationStartPage.clickStartApplication();
+			Thread.sleep(4000);
+			registrationStartPage.registrationCompanyInfoPage().verifyHeading(data.get("companyInfoHeading"));
+			registrationStartPage.registrationCompanyInfoPage()
+					.verifyPageDescription(data.get("companyInfoDescription"));
+			Thread.sleep(2000);
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyName(data.get("companyName"));
+			registrationStartPage.registrationCompanyInfoPage().clickBusinessEntityDropdown();
+			Thread.sleep(500);
+			registrationStartPage.registrationCompanyInfoPage().selectBusinessEntity(data.get("businessEntity"));
+			Thread.sleep(500);
+			registrationStartPage.registrationCompanyInfoPage().fillSSN_EIN_TIN(data.get("ssn_ein_tin"));
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyEmail(data.get("companyEmail"));
+			registrationStartPage.registrationCompanyInfoPage().fillCompanyPhoneNumber(data.get("companyPhoneNumber"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillAddress1(data.get("addressline1"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillAddress2(data.get("addressline2"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent().fillCity(data.get("city"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.selectState(data.get("state"));
+			registrationStartPage.registrationCompanyInfoPage().mailingAddressComponent()
+					.fillZipCode(data.get("zipCode"));
+			registrationStartPage.registrationDBAPage().clickCheckBox();
+
+			registrationStartPage.registrationCompanyInfoPage().clickNext();
+
+			registrationStartPage.authorizedSignersPage().verifyHeading(data.get("authorisedHeading"));
+			registrationStartPage.authorizedSignersPage().clickBeneficialOwners();
+
+			String[] id = data.get("id").split(",");
+			String[] expOwnerlabel = data.get("expOwnerLabels").split(",");
+			String[] ownerName = data.get("ownerName").split(",");
+			String[] ownerShipValue = data.get("ownerShip").split(",");
+			String[] firstName = data.get("firstName").split(",");
+			String[] lastName = data.get("lastName").split(",");
+			String[] ownerShip = data.get("ownerShip").split(",");
+
+			registrationStartPage.authorizedSignersPage().fillFirstName(data.get("firstName"));
+			registrationStartPage.authorizedSignersPage().fillLastName(data.get("lastName"));
+			registrationStartPage.authorizedSignersPage().fillDateofBirth(data.get("dateOfBirth"));
+			registrationStartPage.authorizedSignersPage().fillSSNLast4(data.get("ssnLast4"));
+			registrationStartPage.authorizedSignersPage().fillOwnership(data.get("ownerShip"));
+			registrationStartPage.authorizedSignersPage().fillEmailAddress(data.get("emailAddress"));
+			registrationStartPage.authorizedSignersPage().fillPhoneNumber(data.get("companyPhoneNumber"));
+
+			registrationStartPage.authorizedSignersPage().mailingAddressComponent().fillAddress1(data.get("address1"));
+			registrationStartPage.authorizedSignersPage().mailingAddressComponent().fillAddress2(data.get("address2"));
+			registrationStartPage.authorizedSignersPage().mailingAddressComponent().fillCity(data.get("city"));
+			registrationStartPage.authorizedSignersPage().mailingAddressComponent().selectState(data.get("state"));
+			registrationStartPage.authorizedSignersPage().mailingAddressComponent().fillZipCode(data.get("zipcode"));
+
+			registrationStartPage.authorizedSignersPage().selectID();
+
+			registrationStartPage.authorizedSignersPage().uploadSelectImage(data.get("folderName"),
+					data.get("fileName"));
+
+			registrationStartPage.authorizedSignersPage().clickSave();
+
+			registrationStartPage.authorizedSignersPage().clickPrmaryContact();
+			registrationStartPage.authorizedSignersPage().clickTechnicalContact();
+			registrationStartPage.authorizedSignersPage().clickFinancialContact();
+
+			registrationStartPage.authorizedSignersPage().clickNext();
+
+//
+//			registrationStartPage.authorizedSignersPage().clickNext();
+
+//			registrationStartPage.authorizedSignersPage().selectID();
+//			registrationStartPage.authorizedSignersPage().uploadSelectImage(data.get("folderName"),
+//					data.get("fileName"));
+
+//			
+//			registrationStartPage.authorizedSignersPage().selectPrimaryContact();
+//			registrationStartPage.authorizedSignersPage().selectTechnicalContact();
+//			registrationStartPage.authorizedSignersPage().selectFinancialorBillingContact();
+//
+//			registrationStartPage.authorizedSignersPage().clickNext();
+
+			registrationStartPage.documentsUploadPage().verifyHeading(data.get("documentUploadHeading"));
+//			registrationStartPage.documentsUploadPage().verifyDescription(data.get("description"));
+//			registrationStartPage.documentsUploadPage().verifyArticlesOfCorporation(data.get("articlesOfCorporation"));
+//			registrationStartPage.documentsUploadPage().uploadSelectImage(data.get("folderName"), data.get("fileName"));
+//			registrationStartPage.documentsUploadPage().verifyCompanyW(data.get("company"));
+			registrationStartPage.documentsUploadPage().uploadDocument(data.get("folderName"), data.get("fileName"),
+					data.get("businessEntity"));
+//			registrationStartPage.documentsUploadPage().verifyDbaFiling(data.get("dbafiling"));
+//			registrationStartPage.documentsUploadPage().uploadSelectImage(data.get("folderName"), data.get("fileName"));
+//			registrationStartPage.documentsUploadPage().verifyEINLetter(data.get("einletter"));
+//			registrationStartPage.documentsUploadPage().uploadSelectImage(data.get("folderName"), data.get("fileName"));
+//			registrationStartPage.documentsUploadPage().verifyAdditionalDocument(data.get("additionalDocument"));
+//			registrationStartPage.documentsUploadPage().uploadSelectImage(data.get("folderName"), data.get("fileName"));
+			registrationStartPage.documentsUploadPage().clickNext();
+
+			registrationStartPage.accountFeesAndLimitsPage().viewFeeLimits();
+			registrationStartPage.accountFeesAndLimitsPage().clickCheckBox();
+			registrationStartPage.accountFeesAndLimitsPage().clickNext();
+
+			registrationStartPage.agreementsPage().verifyHeading(data.get("agreementsHeading"));
+//			registrationStartPage.agreementsPage().verifyAgreementsDescription(data.get("description"));
+			registrationStartPage.agreementsPage().clickPrivacyPolicy();
+			registrationStartPage.agreementsPage().scrollDownPrivacyPolicy();
+			registrationStartPage.agreementsPage().clickCheckBox();
+			registrationStartPage.agreementsPage().clickAgree();
+			registrationStartPage.agreementsPage().clickTermsOfServices();
+			registrationStartPage.agreementsPage().scrollDownTermsOfService();
+			registrationStartPage.agreementsPage().clickCheckBox();
+			registrationStartPage.agreementsPage().clickAgree();
+			registrationStartPage.agreementsPage().clickNext();
+
+//
+//			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();
+//			registrationStartPage.applicationSubmissionPage().verifyAppSummary();
+//			registrationStartPage.applicationSubmissionPage().clickCheckBox();
+//			registrationStartPage.applicationSubmissionPage().SignOnSubmission(data.get("signature"));
+//			Thread.sleep(3000);
+//			registrationStartPage.applicationSubmissionPage().clickSubmit();
+//			registrationStartPage.applicationSummaryPage().verifyHeading(data.get("sumHeading"));
+////			registrationStartPage.applicationSummaryPage().verifyDescription(data.get("sumDescription"));
+//			registrationStartPage.applicationSummaryPage().clickDone();
+
+//			registrationStartPage.agreementsPage().acceptAlert();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBusinessApplication failed due to Exception " + e);
+		}
+
+	}
+
 
 	@Test
 	@Parameters({ "strParams" })
@@ -242,7 +380,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			registrationStartPage.clickBusinessApplicationArrow();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
 			registrationStartPage.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
@@ -303,7 +441,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			registrationStartPage.clickBusinessApplicationArrow();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			registrationStartPage.registrationBeneficialOwnersPage().clickBeneficialOwners();
@@ -361,7 +499,7 @@ public class BusinessApplicationTest {
 	public void testBeneficialsOwnersWithNewContact(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			registrationStartPage.registrationBeneficialOwnersPage().verifyPrimaryContact(data.get("primarycontact"));
@@ -383,7 +521,7 @@ public class BusinessApplicationTest {
 	public void testDocumentsUploadView(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			registrationStartPage.documentsUploadPage().verifyHeading(data.get("heading"));
@@ -415,7 +553,7 @@ public class BusinessApplicationTest {
 	public void testDocumentsUpload(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			registrationStartPage.documentsUploadPage().verifyHeading(data.get("heading"));
@@ -443,7 +581,7 @@ public class BusinessApplicationTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationStartPage.accountFeesAndLimitsPage().verifyHeading(data.get("limitsHeading"));
-			registrationStartPage.accountFeesAndLimitsPage().verifyDescription(data.get("description"));
+//			registrationStartPage.accountFeesAndLimitsPage().verifyDescription(data.get("description"));
 			registrationStartPage.accountFeesAndLimitsPage().clickCheckBox();
 			registrationStartPage.accountFeesAndLimitsPage().clickNext();
 
@@ -460,7 +598,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			registrationStartPage.agreementsPage().verifyHeading(data.get("heading"));
 			registrationStartPage.agreementsPage().verifyAgreementsDescription(data.get("description"));
 			registrationStartPage.agreementsPage().clickPrivacyPolicy();
@@ -488,7 +626,7 @@ public class BusinessApplicationTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
 //			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
 			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();

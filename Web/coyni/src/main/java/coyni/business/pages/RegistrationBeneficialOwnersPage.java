@@ -14,12 +14,13 @@ import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.FileHelper;
 
 public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
+
 	private By lblBeneficialOwners = By.xpath("");
 	private By BeneficialOwnersDesc = By.xpath("");
 	private By lblUploadDocumentsHdg = By.xpath("");
 	private By lblSelectIdentification = By.xpath("");
 	private By lnkSelectAnIdentificationType = By.xpath("");
-	private By drpdwn = By.xpath("");
+	private By drpDownState = By.xpath("//div[text()='State']/parent::div");
 	private By btnSave = By.xpath("");
 	private By lnkAddBtn = By.xpath("");
 	private By btnBack = By.xpath("");
@@ -31,6 +32,7 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
 	private By lastName = By.xpath("");
 	private By emailAddress = By.xpath("");
 	private By phoneNumber = By.xpath("");
+	private By txtDateOfBirth = By.name("dateOfBirth");
 	private By lblTechnicalContact = By.xpath("");
 	private By lblFinancialBilling = By.xpath("");
 	private By lnkUploadImg = By.xpath(
@@ -69,6 +71,12 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
 
 	public By getID(String id) {
 		return By.cssSelector(String.format("#%s", id));
+	}
+
+	public void fillDateOfBirth(String dateOfBirth) throws InterruptedException {
+		// clearText(txtDateOfBirth, "Date of Birth");
+		enterText(txtDateOfBirth, dateOfBirth, "Date of Birth");
+		// getTextField(txtDateOfBirth, dateOfBirth, "Date of Birth", i);
 	}
 
 	public void selectID(String id, int num1) {
@@ -124,8 +132,9 @@ public class RegistrationBeneficialOwnersPage extends BrowserFunctions {
 	}
 
 	public void ClickDrpDwn() {
-		click(drpdwn, "beneficial dropdown");
+		click(drpDownState, "beneficial dropdown");
 	}
+
 	public void ClickDrpDown() {
 		click(drpDownContact, "Contact dropdown");
 	}

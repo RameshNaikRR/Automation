@@ -239,7 +239,7 @@ public class BusinessApplicationINRTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			registrationStartPage.clickBusinessApplicationArrow();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
 			registrationStartPage.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
@@ -296,7 +296,7 @@ public class BusinessApplicationINRTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			registrationStartPage.clickBusinessApplicationArrow();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
 			registrationStartPage.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
@@ -343,7 +343,7 @@ public class BusinessApplicationINRTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 //			registrationStartPage.clickBusinessApplicationArrow();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(5000);
 			registrationStartPage.registrationBeneficialOwnersPage().VerifyHeading(data.get("heading"));
@@ -391,7 +391,7 @@ public class BusinessApplicationINRTest {
 	public void testBeneficialsOwnersWithNewContact(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
 			Thread.sleep(1000);
 			registrationStartPage.registrationBeneficialOwnersPage().verifyPrimaryContact(data.get("primarycontact"));
@@ -414,7 +414,7 @@ public class BusinessApplicationINRTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			registrationStartPage.accountFeesAndLimitsPage().verifyHeading(data.get("limitsHeading"));
-			registrationStartPage.accountFeesAndLimitsPage().verifyDescription(data.get("description"));
+//			registrationStartPage.accountFeesAndLimitsPage().verifyDescription(data.get("description"));
 			registrationStartPage.accountFeesAndLimitsPage().clickCheckBox();
 			registrationStartPage.accountFeesAndLimitsPage().clickNext();
 
@@ -431,7 +431,7 @@ public class BusinessApplicationINRTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			registrationStartPage.agreementsPage().verifyHeading(data.get("heading"));
 			registrationStartPage.agreementsPage().verifyAgreementsDescription(data.get("description"));
 			registrationStartPage.agreementsPage().clickPrivacyPolicy();
@@ -459,7 +459,7 @@ public class BusinessApplicationINRTest {
 			registrationStartPage.verifyHeading();
 			registrationStartPage.verifyBusinessApplicationView();
 			registrationStartPage.getStatus();
-			registrationStartPage.clickContinueApplication();
+//			registrationStartPage.clickContinueApplication();
 			registrationStartPage.applicationSubmissionPage().verifyHeading(data.get("heading"));
 //			registrationStartPage.applicationSubmissionPage().verifyDescription(data.get("description"));
 			registrationStartPage.applicationSubmissionPage().verifyAppStepHeading();

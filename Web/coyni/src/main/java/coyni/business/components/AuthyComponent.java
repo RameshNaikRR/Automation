@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.jboss.aerogear.security.otp.Totp;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import coyni.admin.Paymentspopups.WireCompletedPopup;
@@ -20,9 +18,10 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AuthyComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	private By lblHeading = By.cssSelector("div[ui-auto='two_step_authentication']");
-	private By lblDescription = By.xpath("//p[contains(@class,'VerifyYourIdentity_two_step__sub_title__cgHIF')]");
+	private By lblHeading = By.cssSelector(".verify-identity__title");
+	private By lblDescription = By.cssSelector(".verify-identity__sub-title");
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
+	private By sms = By.xpath("//div[@class='text-xs text-left text-cgy3 group-hover:text-cgy4']");
 	private By lnkSmsCode = By.xpath("//div[contains(@class,'text-xs text-left text-cgy3 group-hover:text-cgy4')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");
@@ -51,6 +50,14 @@ public class AuthyComponent extends BrowserFunctions {
 
 	public void verifyAutoFocus() {
 		new CommonFunctions().verifyAutoFocus(txtInput, "Authy Input Box");
+
+	}
+
+	public void clickSms() {
+		if (verifyElementDisplayed(sms, "Sms")) {
+			click(sms, "SMS");
+		}
+		ExtentTestManager.setInfoMessageInReport("SMs not entered in text field");
 
 	}
 

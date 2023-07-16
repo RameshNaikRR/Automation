@@ -33,6 +33,55 @@ public class CommonFunctions {
 		}
 	}
 
+	public void validateFormErrorMessageForForgotPasswordInvalid(String expErrMsg) {
+		By errorMsgs = By.xpath("//span[contains(@class,'FormField_text_xxs__V1JkZ')]");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+	
+	public void validateFormErrorMessageForForgotPasswordChangePassword(String expErrMsg) {
+		By errorMsgs = By.cssSelector("span[class *='FormField_errorGap__Dd3Uk']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
+
+	public void validateFormErrorMessageForForgotPasswordInvalidEmailExists(String expErrMsg) {
+		By errorMsgs = By.xpath("//div[@class='text-crd5 text-[11px] cursor-pointer leading-4 break-words ']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+	
+	public void validateFormErrorMessageForForgotPasswordInvalidPhoneOTP(String expErrMsg) {
+		By errorMsgs = By.cssSelector("span[class *='VerificationInput_code__verification_error__Iocax']");
+		objBrowserFunctions.waitForElement(errorMsgs, BrowserFunctions.waittime, WaitForElement.presence);
+		boolean status = objBrowserFunctions.getElementsList(errorMsgs, "error messages").stream()
+				.map(ele -> ele.getText().toLowerCase()).anyMatch(msg -> msg.contains(expErrMsg.toLowerCase()));
+		if (status) {
+			ExtentTestManager.setPassMessageInReport("Error message '" + expErrMsg + "' displayed");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
+		}
+	}
+
 	public void verifyCursorAction(By ele, String eleName) {
 		String text = objBrowserFunctions.getElement(ele, eleName).getCssValue("cursor");
 		if (text.equalsIgnoreCase("pointer")) {
@@ -55,6 +104,24 @@ public class CommonFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Error message '" + expErrMsg + "' not displayed");
 		}
+	}
+
+	public void verifyChangedColor(By ele, String eleName, String cssProp, String expValue, String expColor) {
+
+		String initialValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+		objBrowserFunctions.moveToElement(ele, eleName);
+		Uninterruptibles.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+		String FinalValue = objBrowserFunctions.getElement(ele, eleName).getCssValue(cssProp);
+		System.out.println(initialValue + " : " + FinalValue);
+		if (FinalValue.equalsIgnoreCase(expValue)) {
+			ExtentTestManager.setPassMessageInReport(
+					String.format("%s element %s css property value changed to ", eleName, cssProp) + "" + expColor);
+		} else {
+			ExtentTestManager.setWarningMessageInReport(
+					String.format("%s element %s css property value not changed to ", eleName, cssProp) + ""
+							+ expColor);
+		}
+
 	}
 
 	public void verifyAutoFocus(By ele, String eleName) {

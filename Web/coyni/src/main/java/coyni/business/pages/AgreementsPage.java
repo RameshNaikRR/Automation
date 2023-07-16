@@ -23,6 +23,7 @@ public class AgreementsPage extends BrowserFunctions {
 	private By lblDesc = By.xpath("//p[contains(text(),'before you submit your')]");
 	private By agreementSign = By.xpath("//div[@contenteditable='true']");
 	private By btnSave = By.xpath("//button[text()='Save']");
+	private By btnView = By.xpath("//button[@data-ui-auto='agreement_view']");
 	private By checkbox = By.xpath("//input[@type='checkbox']");
 	private By btnExit = By.xpath("//strong[text()='Exit']");
 	private By btnAgree = By.xpath("//button[text()='Agree']");
