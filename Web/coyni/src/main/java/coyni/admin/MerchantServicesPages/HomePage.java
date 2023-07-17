@@ -3,8 +3,8 @@ package coyni.admin.MerchantServicesPages;
 import org.openqa.selenium.By;
 
 import coyni.admin.Paymentcomponents.AuthyComponent;
-import coyni.admin.Paymentcomponents.SideBarComponent;
 import coyni.admin.Paymentcomponents.TopBarComponent;
+import coyni.admin.components.SideBarComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;

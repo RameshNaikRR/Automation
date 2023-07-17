@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import coyni.admin.Paymentcomponents.EntriesAndPaginationsComponent;
 import coyni.admin.Paymentcomponents.ExportComponent;
-import coyni.admin.Paymentcomponents.SideBarComponent;
+import coyni.admin.components.SideBarComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 

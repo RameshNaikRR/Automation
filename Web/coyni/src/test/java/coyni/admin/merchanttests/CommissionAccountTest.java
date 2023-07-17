@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 import coyni.admin.Paymentpages.CommissionAccountPage;
-import coyni.admin.Paymentpages.HomePage;
+import coyni.admin.pages.HomePage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;

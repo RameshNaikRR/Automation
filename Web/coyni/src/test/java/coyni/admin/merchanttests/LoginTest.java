@@ -9,8 +9,8 @@ import org.testng.annotations.Parameters;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
-import coyni.admin.Paymentcomponents.SideBarComponent;
 import coyni.admin.Paymentpages.LoginPage;
+import coyni.admin.components.SideBarComponent;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 

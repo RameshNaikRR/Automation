@@ -19,6 +19,8 @@ public class SideBarComponent extends BrowserFunctions {
 				"(//span[(contains(@class,'menu' ) or contains(@class,'label') or contains(@class,'Label'))and text()='%s'])[1]",
 				elementName));
 	}
+	
+	
 
 	public void clickCommissionAccount() throws InterruptedException {
 		commonFunctions.verifyCursorAction(getSideBarItems("Commission Account"), "Commission Account");
@@ -44,11 +46,6 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(4000);
 	}
 
-	public void clickBusinessProfile() throws InterruptedException {
-		commonFunctions.verifyCursorAction(getSideBarItems("Business Profiles"), "Business Profiles");
-		click(getSideBarItems("Business Profiles"), "Business Profiles");
-		Thread.sleep(4000);
-	}
 
 	public void clickProfiles() throws InterruptedException {
 		commonFunctions.verifyCursorAction(getSideBarItems("Profiles"), "Profiles");
@@ -158,11 +155,6 @@ public class SideBarComponent extends BrowserFunctions {
 		Thread.sleep(4000);
 	}
 
-	public void clickPayments() throws InterruptedException {
-		commonFunctions.verifyCursorAction(getSideBarItems("Payments"), "Payments");
-		click(getSideBarItems("Payments"), "Payments");
-		Thread.sleep(4000);
-	}
 
 	public void clickBusinessAPIs() throws InterruptedException {
 		commonFunctions.verifyCursorAction(getSideBarItems("Business APIs"), "Business APIs");
@@ -210,6 +202,7 @@ public class SideBarComponent extends BrowserFunctions {
 
 	// Admin 2.5
 	private By lblMerchantService = By.xpath("//span[text()='Merchant Services']");
+	private By lblPayments=By.xpath("//p[text()='Payments']");
 
 	public void clickMerchantService() {
 		click(lblMerchantService, "MerchantService");
@@ -218,5 +211,23 @@ public class SideBarComponent extends BrowserFunctions {
 	public AddBusinessComponent addBusinessComponent() {
 		return new AddBusinessComponent();
 	}
+	public By getSideBarItemsForPayments(String elementName) {
+		return By.xpath(String.format(
+				"//span[text()='%s']",
+				elementName));
+	}
+	
+
+	public void clickPayments() throws InterruptedException {
+		commonFunctions.verifyCursorAction(lblPayments, "Payments");
+		click(lblPayments, "Payments");
+		Thread.sleep(4000);
+	}
+	public void clickBusinessProfile() throws InterruptedException {
+		commonFunctions.verifyCursorAction(getSideBarItemsForPayments("Business Profiles"), "Business Profiles");
+		click(getSideBarItemsForPayments("Business Profiles"), "Business Profiles");
+		Thread.sleep(4000);
+	}
+
 
 }

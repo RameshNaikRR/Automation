@@ -6,17 +6,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import coyni.admin.Paymentpages.CommissionAccountPage;
-import coyni.admin.Paymentpages.HomePage;
-import coyni.business.pages.LoginPage;
-import coyni.uitilities.CommonFunctions;
+import coyni.admin.pages.HomePage;
+import coyni.admin.pages.LoginPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class BusinessProfileTest {
 
 	HomePage homePage;
-	CommissionAccountPage commissionAccountPage;
+	//CommissionAccountPage commissionAccountPage;
 	LoginPage loginPage;
 
 	@BeforeMethod

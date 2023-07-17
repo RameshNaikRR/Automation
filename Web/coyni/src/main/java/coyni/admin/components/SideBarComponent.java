@@ -1,10 +1,16 @@
-package coyni.admin.Paymentcomponents;
+package coyni.admin.components;
 
 import org.openqa.selenium.By;
 
 import coyni.admin.MerchantServicesPages.BalanceReportPage;
 import coyni.admin.MerchantServicesPages.ReserveManagementPage;
 import coyni.admin.MerchantServicespopups.ExportSelectedTransactionsPopup;
+import coyni.admin.Paymentcomponents.AccountTableComponent;
+import coyni.admin.Paymentcomponents.AddMerchantComponent;
+import coyni.admin.Paymentcomponents.DisputesDetailsComponent;
+import coyni.admin.Paymentcomponents.ExportComponent;
+import coyni.admin.Paymentcomponents.FilterComponent;
+import coyni.admin.Paymentcomponents.ProfileComponent;
 import coyni.admin.Paymentpages.AccountingPage;
 import coyni.admin.Paymentpages.CommissionAccountPage;
 import coyni.admin.Paymentpages.PaymentReviewPage;
