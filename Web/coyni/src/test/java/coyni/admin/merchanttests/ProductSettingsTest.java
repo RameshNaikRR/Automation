@@ -1,4 +1,4 @@
-package coyni.admin.Merchanttests;
+package coyni.admin.merchanttests;
 
 public class ProductSettingsTest {
 

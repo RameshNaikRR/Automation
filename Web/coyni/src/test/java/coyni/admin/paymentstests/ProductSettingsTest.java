@@ -1,4 +1,4 @@
-package coyni.admin.Paymentstests;
+package coyni.admin.paymentstests;
 
 public class ProductSettingsTest {
 

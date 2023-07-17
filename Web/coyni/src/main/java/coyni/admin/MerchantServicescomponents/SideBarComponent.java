@@ -7,6 +7,7 @@ import coyni.admin.MerchantServicesPages.CommissionAccountPage;
 import coyni.admin.MerchantServicesPages.PaymentReviewPage;
 import coyni.admin.MerchantServicesPages.TokenAccountPage;
 import coyni.admin.MerchantServicesPages.TransactionsPage;
+import coyni.admin.components.AddBusinessComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 
@@ -168,44 +169,54 @@ public class SideBarComponent extends BrowserFunctions {
 		click(getSideBarItems("Business APIs"), "Business APIs");
 		Thread.sleep(4000);
 	}
-	
-	 public CommissionAccountPage commissionAccountPage() {
-	    	return new CommissionAccountPage();
-	    }
-     
-	 public TokenAccountPage tokenAccountPage() {
-		 return new TokenAccountPage();
-	 }
-	 
-	 public ExportComponent exportComponent() {
-		 return new ExportComponent();
-	 }
-	 
-	 public AccountingPage accountingPage() {
-			return new AccountingPage();
-		}
-	 
-	 public AddMerchantComponent addMerchantComponent() {
-		 return new AddMerchantComponent();
-	 }
-	 
-     public ProfileComponent profileComponent() {
-    	 return new ProfileComponent(); 
-     }
-     
-     public void clickExportedFiles() throws InterruptedException {
- 		commonFunctions.verifyCursorAction(getSideBarItems("Exported Files"), "Exported Files");
- 		click(getSideBarItems("Exported Files"), "Exported Files");
- 		Thread.sleep(4000);
- 	}
 
- 	public PaymentReviewPage paymentReviewPage() {
- 		return new PaymentReviewPage();
- 	}
+	public CommissionAccountPage commissionAccountPage() {
+		return new CommissionAccountPage();
+	}
 
- 	public TransactionsPage transactionsPage() {
- 		return new TransactionsPage();
- 	}
+	public TokenAccountPage tokenAccountPage() {
+		return new TokenAccountPage();
+	}
+
+	public ExportComponent exportComponent() {
+		return new ExportComponent();
+	}
+
+	public AccountingPage accountingPage() {
+		return new AccountingPage();
+	}
+
+	public AddMerchantComponent addMerchantComponent() {
+		return new AddMerchantComponent();
+	}
+
+	public ProfileComponent profileComponent() {
+		return new ProfileComponent();
+	}
+
+	public void clickExportedFiles() throws InterruptedException {
+		commonFunctions.verifyCursorAction(getSideBarItems("Exported Files"), "Exported Files");
+		click(getSideBarItems("Exported Files"), "Exported Files");
+		Thread.sleep(4000);
+	}
+
+	public PaymentReviewPage paymentReviewPage() {
+		return new PaymentReviewPage();
+	}
+
+	public TransactionsPage transactionsPage() {
+		return new TransactionsPage();
+	}
+
+	// Admin 2.5
+	private By lblMerchantService = By.xpath("//span[text()='Merchant Services']");
+
+	public void clickMerchantService() {
+		click(lblMerchantService, "MerchantService");
+	}
+
+	public AddBusinessComponent addBusinessComponent() {
+		return new AddBusinessComponent();
+	}
 
 }
-

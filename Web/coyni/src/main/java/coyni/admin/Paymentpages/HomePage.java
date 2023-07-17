@@ -2,10 +2,9 @@ package coyni.admin.Paymentpages;
 
 import org.openqa.selenium.By;
 
-
-import coyni.admin.MerchantServicescomponents.AuthyComponent;
 import coyni.admin.MerchantServicescomponents.SideBarComponent;
 import coyni.admin.Paymentcomponents.TopBarComponent;
+import coyni.admin.components.AuthyComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;

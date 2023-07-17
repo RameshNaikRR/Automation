@@ -1,4 +1,4 @@
-package coyni.admin.Merchanttests;
+package coyni.admin.merchanttests;
 
 import java.util.Map;
 import org.testng.annotations.BeforeTest;

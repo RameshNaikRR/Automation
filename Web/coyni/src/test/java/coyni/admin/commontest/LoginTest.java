@@ -1,20 +1,21 @@
-package coyni.admin.Paymentstests;
+package coyni.admin.commontest;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.admin.Paymentcomponents.SideBarComponent;
-import coyni.admin.Paymentpages.LoginPage;
+import coyni.admin.pages.LoginPage;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
 public class LoginTest {
+
 	
 	LoginPage loginPage;
 	SideBarComponent sidebarcomponent;
@@ -25,7 +26,8 @@ public class LoginTest {
 		loginPage = new LoginPage();
 		sidebarcomponent = new SideBarComponent();
 	}
-
+	
+	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAdminLogin(String strParams) {
@@ -50,7 +52,4 @@ public class LoginTest {
 		}
 	}
 	
-	
-	
-
 }

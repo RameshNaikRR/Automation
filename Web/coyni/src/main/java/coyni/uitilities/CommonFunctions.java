@@ -334,4 +334,11 @@ public class CommonFunctions {
 			ExtentTestManager.setInfoMessageInReport(eleName + " is  accepting " + enterText.length() + " characters");
 		}
 	}
+	
+	public void switchtoUrl(String url) throws InterruptedException {
+		DriverFactory.getDriver().navigate().to(url);
+		Thread.sleep(1000);
+
+	}
+
 }

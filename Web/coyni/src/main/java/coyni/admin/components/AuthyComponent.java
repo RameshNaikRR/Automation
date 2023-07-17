@@ -1,4 +1,4 @@
-package coyni.admin.MerchantServicescomponents;
+package coyni.admin.components;
 
 import java.util.HashMap;
 import java.util.List;
