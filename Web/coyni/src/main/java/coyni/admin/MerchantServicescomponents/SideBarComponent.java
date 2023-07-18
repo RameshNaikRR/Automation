@@ -200,7 +200,9 @@ public class SideBarComponent extends BrowserFunctions {
 		return new TransactionsPage();
 	}
 
-	// Admin 2.5
+	// Admin 2.5 ------------------------------------------------------------------------
+	
+	
 	private By lblMerchantService = By.xpath("//span[text()='Merchant Services']");
 	private By lblPayments=By.xpath("//p[text()='Payments']");
 

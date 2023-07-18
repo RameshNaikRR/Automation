@@ -1,17 +1,19 @@
 package coyni.admin.components;
 
+import java.awt.AWTException;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
 import coyni.uitilities.CommonFunctions;
+import coyni.uitilities.YOPMail;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
 import ilabs.api.reporting.ExtentTestManager;
 import ilabs.api.utilities.MailHelper;
 
-public class AddBusinessComponent  extends BrowserFunctions {
+public class AddBusinessComponent extends BrowserFunctions {
 	private By lblHeadingBusiness = By.xpath("//h1[text()='Invite Recipient']");
 	private By txtFirstName = By.xpath("(//input[@ui-auto='labe_text_value'])[1]");
 	private By txtLastName = By.xpath("(//input[@ui-auto='labe_text_value'])[2]");
@@ -97,7 +99,7 @@ public class AddBusinessComponent  extends BrowserFunctions {
 		}
 	}
 
-	public String generateEmail() {
+	public static String generateEmail() {
 		int length = 4;
 		boolean useLetters = true;
 		boolean useNumbers = false;
@@ -135,8 +137,7 @@ public class AddBusinessComponent  extends BrowserFunctions {
 	}
 
 	public String getEmail() {
-		String str = MailHelper.getRandomMailID();
-		return str;
+		return YopMail;
 	}
 
 	public void validateFirstNameField(String firstName) {
@@ -158,5 +159,27 @@ public class AddBusinessComponent  extends BrowserFunctions {
 			}
 		}
 	}
+//	public void clickActivateAccountInYOPMail(String firstname) throws InterruptedException, AWTException {
+//		YOPMail mail = new YOPMail();
+//		mail.openYopMail();
+//		mail.switchToYopmailWindow();
+//		mail.clickActivateAccount(YopMail, firstname);
+//
+//	}
 
+	private static String YopMail = generateEmail();
+
+	public void clickActivateAccountInYOPMail(String firstname) throws InterruptedException, AWTException {
+		YOPMail mail = new YOPMail();
+		mail.openYopMail();
+		mail.switchToYopmailWindow();
+		mail.clickActivateAccount(YopMail, firstname);
+
+	}
+	
+	public BusinessInviteComponent businessInviteComponent() {
+		return new BusinessInviteComponent();
+	}
+	
+	
 }

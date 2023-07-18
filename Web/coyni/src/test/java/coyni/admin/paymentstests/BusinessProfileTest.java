@@ -14,7 +14,7 @@ import ilabs.api.reporting.ExtentTestManager;
 public class BusinessProfileTest {
 
 	HomePage homePage;
-	//CommissionAccountPage commissionAccountPage;
+	// CommissionAccountPage commissionAccountPage;
 	LoginPage loginPage;
 
 	@BeforeMethod
@@ -26,7 +26,6 @@ public class BusinessProfileTest {
 	static String mail;
 	static String url;
 
-	
 	@Test
 	@Parameters({ "strParams" })
 	public void testAddMerchantUser(String strParams) {
@@ -51,15 +50,43 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addBusinessComponent().clickNext();
 			homePage.sideBarComponent().addBusinessComponent().clickNext();
 			homePage.sideBarComponent().addBusinessComponent().clickSend();
-			homePage.sideBarComponent().addBusinessComponent().switchToYopmailWindow();
-//			url = homePage.sideBarComponent().addBusinessComponent().getUrl();
-//			homePage.sideBarComponent().addBusinessComponent().navigateUrl(url);
-//			// new CommonFunctions().swtichToNewtabUrl(data.get("merchUrl"));
-
+			Thread.sleep(6000);
+			homePage.sideBarComponent().addBusinessComponent().clickActivateAccountInYOPMail(data.get("firstName"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+					.verifyInviteHeading(data.get("inviteHeading"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent().clickNewAccount();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+					.verifyCreateAccountHeading(data.get("CreateAccountHeading"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillFirstName(data.get("firstName"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillLastName(data.get("lastName"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillEmail1();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillPhoneNumber();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillCreatePassword();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().fillConfirmPassword();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().clickNext();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().verifyPhoneHeading(data.get("phoneHeading"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().fillpin(data.get("code"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().verifyPageHeading(data.get("emailHeading"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().fillpin(data.get("code"));
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().scrollToTermsAgree();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
+			.activateAccountComponent().phoneEmailVerificationComponent().scrollToPrivacyAgree();
+			
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testAddMerchantUser Failed due to Exception " + e);
 		}
 	}
 
-	
 }
