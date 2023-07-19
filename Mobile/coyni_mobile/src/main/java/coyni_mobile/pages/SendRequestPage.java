@@ -1,23 +1,27 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.ChoosePinComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.popups.OptionalMessagePopup;
 import coyni_mobile.popups.ReloadPopup;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class SendRequestPage extends MobileFunctions {
 // Send and Request select contact page elements
-	private By lblHeading = MobileBy.AccessibilityId("//*[@name='close']/following-sibling::*[1]");
+	private By lblHeading = MobileBy.xpath("//*[@text='Send/Request']");
 	private By iconSearch = MobileBy.AccessibilityId("(//XCUIElementTypeImage[@name='search'])[1]");
-	private By txtSearchBx = MobileBy.AccessibilityId("(//*[@name='search'])[2]/following-sibling::*[1]");
-	private By lblUser = MobileBy.AccessibilityId(
-			"(//*[@name='search']/../../../following-sibling::*[1]/XCUIElementTypeTable/XCUIElementTypeCell)[1]");
+	private By txtSearchBx = MobileBy.id("com.coyni.mapp:id/etSearch");
+	private By lblUser = MobileBy.xpath(
+			"(//*[@text='Recents']/following-sibling::*)[1]|(//*[@text='Other people on coyni']/following-sibling::android.widget.FrameLayout/descendant::android.widget.TextView[contains(@resource-id,'tvUserName')])[1]");
 	private By lblRecentContacts = MobileBy.AccessibilityId("(//*[@name='Recent Contacts'])[1]");
 	private By lblContactList = MobileBy.AccessibilityId("(//*[@name='Contact List'])[1]");
 	private By RecentContactsList = MobileBy
@@ -26,55 +30,66 @@ public class SendRequestPage extends MobileFunctions {
 			.AccessibilityId("(//*[@name='Contact List'])[1]/following-sibling::XCUIElementTypeCell");
 	private By RecentContactList = MobileBy.AccessibilityId(
 			"//*[contains(@name,'invite your friends')]/..)[2]/preceding-sibling::XCUIElementTypeCell");
-	private By firstRecentContact = MobileBy.AccessibilityId("//*[@name='Recent Contacts']/following-sibling::*[1]");
+	private By firstRecentContact = MobileBy.xpath(
+			"(//*[@text='Recents']/following-sibling::*/descendant::android.widget.TextView[contains(@resource-id,'tvUserName')])[1]");
 	private By lblOtherpeopleOnCoyni = MobileBy
 			.AccessibilityId("//XCUIElementTypeOther[@name='Other people on coyni']");
 	private By lblFirstAccount = MobileBy
 			.AccessibilityId("//XCUIElementTypeOther[@name='Other people on coyni']/following-sibling::*[1]");
 	private By btnCross = MobileBy.AccessibilityId("//XCUIElementTypeButton[@name='close']");
-	private By btnScan = MobileBy
-			.AccessibilityId("//XCUIElementTypeOther[@name='Other people on coyni']/following-sibling::*[1]");
-	private By btnMyQRCode = MobileBy.AccessibilityId("//XCUIElementTypeButton[@name='close']");
-	private By lblScanCode = MobileBy.AccessibilityId("");
-	private By lblShare = MobileBy.AccessibilityId("");
+	private By btnScan = MobileBy.id("com.coyni.mapp:id/imgScan");
+	private By btnPermission = MobileBy.xpath("//*[@text='While using the app']");
+	private By btnMyQRCode = MobileBy.id("com.coyni.mapp:id/scanMeTV");
+	private By btnScanCode = MobileBy.id("com.coyni.mapp:id/scanCodeTV");
+	private By lblShare = MobileBy.id("com.coyni.mapp:id/imgShare");
 
 // Send and Request Account holder details
-	private By lblSend = MobileBy.AccessibilityId("");
-	private By lblName = MobileBy.AccessibilityId("");
-	private By txtAmount = MobileBy.AccessibilityId("//*[@name='currency toggle']/preceding-sibling::*[1]");
-	private By btnSend = MobileBy.AccessibilityId("(//*[@name='Send'])[1]");
-	private By btnRequest = MobileBy.AccessibilityId("(//*[@name='Request'])[1]");
-	private By btnMessage = MobileBy.AccessibilityId("(//*[contains(@name,'Optional')])");
-	private By lnkConverter = MobileBy.AccessibilityId("//*[@name='currency toggle']");
-	private By lblAmountInDollars = MobileBy
-			.AccessibilityId("//*[@name='$']/following-sibling:: XCUIElementTypeTextField");
-	private By lblBalance = MobileBy
-			.AccessibilityId("//*[contains(@name,'Optional')]/../preceding-sibling::*[1]/XCUIElementTypeStaticText");
-	private By lblPopupHeading = MobileBy.AccessibilityId("//*[@name='Oops!']");
-	private By lblPopupDes = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	private By btnReload = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
-	private By lblAmount = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
-	private By btnDiscard = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
-	private By btnContinue = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
-	private By lblWeeklyLimit = MobileBy.AccessibilityId("");
+	private By lblSend = MobileBy.xpath("//*[@text='Send / Request']");
+	private By lblConfmSendHeading = MobileBy.xpath("//*[@text='Send']");
+	private By lblName = MobileBy.id("com.coyni.mapp:id/tvName");
+	private By txtAmount = MobileBy.id("com.coyni.mapp:id/payrequestET");
+	private By btnSend = MobileBy.id("com.coyni.mapp:id/tvPay");
+	private By btnRequest = MobileBy.id("com.coyni.mapp:id/tvRequest");
+	private By btnMessage = MobileBy.id("com.coyni.mapp:id/addNoteClickLL");
+	private By lblPopupHeading = MobileBy.id("com.coyni.mapp:id/tvHead");
+	private By lblPopupDes = MobileBy.id("com.coyni.mapp:id/tvMessage");
+	private By btnReload = MobileBy.id("com.coyni.mapp:id/reloadCV");
+	private By btnNewAmount = MobileBy.id("com.coyni.mapp:id/cancelCV");
+//	private By lblAmount = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
+	private By btnDiscard = MobileBy.id("com.coyni.mapp:id/discardLL");
+	private By btnContinue = MobileBy.id("com.coyni.mapp:id/continueLL");
+	private By lblWeeklyLimit = MobileBy.id("com.coyni.mapp:id/limitsTV");
 
 //	Confirm popup details
-	private By lblAvailBal = MobileBy.AccessibilityId("//*[@name='Oops!']");
-	private By lblSenderName = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	private By btnConfirm = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	private By lblRequesting = MobileBy.AccessibilityId("//*[@name='Oops!']");
-	private By lblReceiptentName = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	private By lblMessage = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
-	private By lblNewBalance = MobileBy.AccessibilityId("//*[contains(@name,'Seems')]");
+	private By lblAvailBal = MobileBy.id("com.coyni.mapp:id/tvAvailableBal");
+	private By lblReqstAmount = MobileBy.id("com.coyni.mapp:id/amountPayTV");
+	private By lblSenderName = MobileBy.id("com.coyni.mapp:id/tokenAccountTextview");
+	private By btnConfirm = MobileBy.id("com.coyni.mapp:id/cvConfirm");
+	private By lblRequesting = MobileBy.xpath("//*[@text='Requesting']");
+	private By lblReceiptentName = MobileBy.id("com.coyni.mapp:id/tvContactName");
+	private By lblMessage = MobileBy.id("com.coyni.mapp:id/tvMessage");
+	private By lblNewBalance = MobileBy.id("com.coyni.mapp:id/imgNewBalance");
+	private By lblSendErrMsg = MobileBy.id("com.coyni.mapp:id/tvSendEMsg");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
 	public double verifyWeeklyLimit() {
 		new CommonFunctions().elementView(lblWeeklyLimit, "Weekly Limit");
-		double weeklyLimit = Double.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", ""));
+		double weeklyLimit = Double
+				.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", "").replace(" CYN", ""));
 		return weeklyLimit;
 	}
 
-	public void viewSendHeading() {
-		new CommonFunctions().elementView(lblSend, "Send");
+	public void verifySendHeading(String expText) {
+		new CommonFunctions().verifyLabelText(lblSend, "Send / Request heading", expText);
+	}
+
+	public void verifySendErrMsg(String expText) {
+		new CommonFunctions().verifyLabelText(lblSendErrMsg, "Send Exceed amount error message", expText);
+	}
+
+	public void verifyConfmSendHeading(String expText) {
+		new CommonFunctions().verifyLabelText(lblConfmSendHeading, "Send heading", expText);
 	}
 
 	public void clickDisCard() {
@@ -83,6 +98,13 @@ public class SendRequestPage extends MobileFunctions {
 
 	public void clickContinue() {
 		click(btnContinue, "Continue");
+	}
+
+	public void clickPermission() throws InterruptedException {
+//		Thread.sleep(1000);
+//		if (getElementList(btnPermission, "Permission").size() == 0) {
+		click(btnPermission, "Permission");
+//		}
 	}
 
 	public void clickScan() {
@@ -94,7 +116,7 @@ public class SendRequestPage extends MobileFunctions {
 	}
 
 	public void verifyScanCodePage() {
-		new CommonFunctions().elementView(lblScanCode, "Scan Code");
+		new CommonFunctions().elementView(btnScanCode, "Scan Code");
 	}
 
 	public void clickMyQRCode() {
@@ -123,8 +145,11 @@ public class SendRequestPage extends MobileFunctions {
 	}
 
 	public String verifyfirstRecentContact() {
-		click(firstRecentContact, "contact list");
 		return getText(firstRecentContact);
+	}
+
+	public void clickfstRcntContact() {
+		click(firstRecentContact, "contact list");
 	}
 
 	public void verifyRecentContactListSize() throws InterruptedException {
@@ -174,7 +199,13 @@ public class SendRequestPage extends MobileFunctions {
 	}
 
 	public void selectUser() {
-		click(lblUser, "user");
+		DriverFactory.getDriver().hideKeyboard();
+		if (getElement(lblUser, "User").isDisplayed()) {
+			click(lblUser, "User");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The Search results are not coming accurately/Given invalid data");
+		}
+//		click(MobileBy.xpath(String.format("(//*[@text='%s'])[1]", name)), "user");
 	}
 
 	public void verifyRecentContactslblView() {
@@ -204,15 +235,13 @@ public class SendRequestPage extends MobileFunctions {
 		return getText(lblName);
 	}
 
-	public void clickConverter() {
-		click(lnkConverter, "Converter");
-	}
-
 	public void clickSend() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnSend));
 		click(btnSend, "Send");
 	}
 
 	public void clickRequest() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnRequest));
 		click(btnRequest, "Request");
 	}
 
@@ -220,33 +249,34 @@ public class SendRequestPage extends MobileFunctions {
 		enterText(txtAmount, amount, "amount");
 	}
 
-	public void verifyResetAmount() {
+	public void clickAmount(String amount) {
+		click(txtAmount, "amount");
+	}
+
+	public void verifyResetAmount(String amount) {
 		double amt = Double.parseDouble(getText(txtAmount));
-		if (amt == 0.00) {
+		if (amt == Double.parseDouble(amount)) {
+			new CommonFunctions().verifyAutoFocusElement(txtAmount, "Amount");
 			ExtentTestManager
-					.setPassMessageInReport("After clicked on New Amount button, the amount field is reset to 0");
+					.setPassMessageInReport("After clicked on New Amount button, the same amount is showing in field");
 		} else {
-			ExtentTestManager
-					.setFailMessageInReport("After clicked on New Amount button, the amount field is not reset to 0");
+			ExtentTestManager.setFailMessageInReport(
+					"After clicked on New Amount button, the same amount is not showing in field");
 		}
 	}
 
-	public int verifyAmount() {
-		Integer amt = Integer.parseInt(getText(lblAmount));
+	public double verifyRqstAmount() {
+		double amt = Double.parseDouble(getText(lblReqstAmount));
+		return amt;
+	}
+
+	public double verifySendCnfmAmount() {
+		double amt = Double.parseDouble(getText(txtAmount));
 		return amt;
 	}
 
 	public void clickMessageButton() {
 		click(btnMessage, "Message Button");
-	}
-
-	public void getAmountInDollars() {
-		ExtentTestManager.setInfoMessageInReport(
-				"Amount In Dollars: $" + new CommonFunctions().getTextBoxValue(lblAmountInDollars));
-	}
-
-	public void getBalance() {
-		ExtentTestManager.setInfoMessageInReport(getText(lblBalance));
 	}
 
 	public OptionalMessagePopup optionalMessagePopup() {
@@ -275,9 +305,10 @@ public class SendRequestPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblSenderName, "Sender Name");
 	}
 
-	public int verifyAvailbleBalance() {
-		String avlBal = getText(lblAvailBal).replace("Available Balance:", "").replace(" CYN", "");
-		int avlBalance = Integer.parseInt(avlBal);
+	public double verifyAvailbleBalance() {
+		double avlBalance = Double
+				.parseDouble(getText(lblAvailBal).replace("Available Balance: ", "").replace(" CYN", ""));
+		ExtentTestManager.setPassMessageInReport(getText(lblAvailBal));
 		return avlBalance;
 	}
 
@@ -297,4 +328,7 @@ public class SendRequestPage extends MobileFunctions {
 		return new ReloadPopup();
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 }

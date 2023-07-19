@@ -7,10 +7,10 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class OptionalMessagePopup extends MobileFunctions {
-	private By btnCancel = MobileBy.AccessibilityId("(//*[@name='Cancel'])[1]");
-	private By btnDone = MobileBy.AccessibilityId("(//*[@name='Done'])[1]");
-	private By txtMessage = MobileBy.AccessibilityId("");
-	private By lblCount = MobileBy.AccessibilityId("");
+	private By btnCancel = MobileBy.id("com.coyni.mapp:id/cancelBtn");
+	private By btnDone = MobileBy.id("com.coyni.mapp:id/doneBtn");
+	private By txtMessage =  MobileBy.id("com.coyni.mapp:id/addNoteET");
+	private By lblCount = MobileBy.id("com.coyni.mapp:id/textinput_counter");
 
 	public void clickCancel() {
 		click(btnCancel, "Cancel");

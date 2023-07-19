@@ -12,36 +12,38 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class ReloadPopup extends MobileFunctions {
-	private By lblInsuffHeading = MobileBy.id("");
-	private By lblInsuffDescription = MobileBy.id("");
-	private By btnNewAmt = MobileBy.id("");
-	private By btnReload = MobileBy.xpath("//*[@text='Paying Method']");
-	private By lblAddCaReloadHeading = MobileBy.id("");
-	private By lblAddCaReDescription = MobileBy.id("");
-	private By btnAddDebit = MobileBy.AccessibilityId("//*[contains(@resource-id,'myUserIDTV')]");
-	private By btnAddCredit = MobileBy.AccessibilityId("//*[contains(@resource-id,'messageTV')]");
-	private By lblReloadHeading = MobileBy.id("");
-	private By txtAmount = MobileBy.id("");
-	private By btnPaymentMethod = MobileBy.AccessibilityId("//*[contains(@resource-id,'refIDTV')]");
-	private By btnAddPayment = MobileBy.id("");
-	private By lblAddPaymentHeading = MobileBy.id("");
-	private By btnLoad = MobileBy.id("");
-	private By txtCVV = MobileBy.id("");
-	private By btnOk = MobileBy.id("");
-	private By lblWalletFees = MobileBy.id("");
+	private By lblInsuffHeading = MobileBy.id("com.coyni.mapp:id/tvHead");
+	private By lblInsuffDescription = MobileBy.id("com.coyni.mapp:id/tvMessage");
+	private By btnNewAmt = MobileBy.xpath("//*[@text='New Amount']");
+	private By btnReload = MobileBy.id("com.coyni.mapp:id/reloadCV");
+	private By btnAddDebit = MobileBy.id("com.coyni.mapp:id/lyDebitCard");
+	private By btnAddCredit = MobileBy.id("com.coyni.mapp:id/lyCreditCard");
+	private By lblReloadHeading = MobileBy.xpath("//*[@text='Reload Amount']");
+	private By txtAmount = MobileBy.id("com.coyni.mapp:id/setAmountET");
+	private By btnPaymentMethod = MobileBy.id("com.coyni.mapp:id/payment_method_ll");
+	private By btnAddPayment = MobileBy.xpath("//*[@text='Add New Payment Method']");
+	private By lblAddPaymentHeading = MobileBy.id("com.coyni.mapp:id/tvHeadTop");
+	private By btnLoad = MobileBy.id("com.coyni.mapp:id/keyActionLL");
+	private By txtCVV = MobileBy.id("com.coyni.mapp:id/etCVV");
+	private By btnOk = MobileBy.xpath("//*[@text='OK']");
+	private By lblWalletFees = MobileBy.id("com.coyni.mapp:id/headingTV");
 
 //	You Will Receive Popup details or Order preview details
 
 	private By lblYouWillReceive = MobileBy.xpath("//*[@text='You Will Receive']|//*[contains(@text,'Gift Card')]");
-	private By lblamount = MobileBy.id("com.coyni.mapp:id/tvGet");
-	private By lblPurchaseAmount = MobileBy.id("com.coyni.mapp:id/tvPurchaseAmt");
-	private By lblTotal = MobileBy.id("com.coyni.mapp:id/tvTotal");
+	private By lblamount = MobileBy
+			.xpath("//*[contains(@resource-id,'setAmountET')]|//*[contains(@resource-id,'tvGet')]");
+	private By lblPurchaseAmount = MobileBy.xpath("//*[@text='Purchase Amount']/following-sibling::*|//*[@text='Withdraw Amount']/following-sibling::*");
+	private By lblTotal = MobileBy.xpath(
+			"//*[@text='Total']/following-sibling::*|//*[contains(@resource-id,'tvTotal')]|//*[contains(@resource-id,'total_amount_usd')]");
 	private By lblPaymentMethod = MobileBy.xpath(
-			"//*[contains(@resource-id,'gcTypeTV')]|//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'tvPayMethod')]");
-	private By lblProcessingFee = MobileBy.id("com.coyni.mapp:id/tvProcessFee");
-	private By btnProsFeeInfo = MobileBy.id("com.coyni.mapp:id/infoImgage");
+			"//*[contains(@resource-id,'gcTypeTV')]|//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'tvPayMethod')]|//*[contains(@resource-id,'card_number')]");
+	private By lblProcessingFee = MobileBy.xpath(
+			"//*[contains(@text,'Processing Fee')]/preceding-sibling::*|//*[contains(@resource-id,'tvProcessFee')]");
+	private By btnProsFeeInfo = MobileBy
+			.xpath("//*[contains(@text,'Processing Fee')]/following-sibling::*|//*[contains(@resource-id,'info')]");
 	private By lblProcessingFeePercen = MobileBy.id("com.coyni.mapp:id/feePercentageTV");
-	private By lnkViewFees = MobileBy.id("com.coyni.mapp:id/viewFeesDialog");
+	private By lnkViewFees = MobileBy.xpath("//*[contains(@resource-id,'feePercentageTV')]/following-sibling::*");
 	private By btnConfirm = MobileBy.id("com.coyni.mapp:id/cvConfirm");
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
@@ -53,8 +55,8 @@ public class ReloadPopup extends MobileFunctions {
 	}
 
 	public void verifyAddCardReloadHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblAddCaReloadHeading, "Add Card Reload Heading", expHeading);
-		new CommonFunctions().elementView(lblAddCaReDescription, "Add Card Reload Description");
+		new CommonFunctions().verifyLabelText(lblInsuffHeading, "Add Card Reload Heading", expHeading);
+		new CommonFunctions().elementView(lblInsuffDescription, "Add Card Reload Description");
 	}
 
 	public void verifyReloadHeading(String expHeading) {
@@ -119,6 +121,11 @@ public class ReloadPopup extends MobileFunctions {
 
 	public void viewWalletFees() {
 		new CommonFunctions().elementView(lblWalletFees, "Wallet Fees");
+	}
+
+	public double verifyResetAmount() {
+		double amt = Double.parseDouble(getText(txtAmount));
+		return amt;
 	}
 
 	public void verifyYouWillRecveHeading(String expHeading) {

@@ -15,21 +15,14 @@ public class FieldValidationsComponent extends MobileFunctions {
 	private By txtPassword = MobileBy.AccessibilityId("Password");
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'etPhoneNo')]");
 	private By txtFirstName = MobileBy.xpath(
-			"//*[contains(@resource-id,'etFName')]/descendant::android.widget.EditText");
+			"//*[contains(@resource-id,'firstNameET')]|//*[contains(@resource-id,'etFName')]/descendant::android.widget.EditText");
 	private By txtFirstNameInput = MobileBy
 			.xpath("//*[contains(@resource-id,'etFName')]/descendant::android.widget.EditText");
-
-	private By txtLastName = MobileBy
-			.xpath("//*[contains(@resource-id,'etLName')]/descendant::android.widget.EditText");
-	// Payment Methods - Bank validations
-	private By txtRoutingNumber = MobileBy.xpath("//*[contains(@resource-id,'routingNumberET')]");
-	private By txtConfirmRouting = MobileBy.xpath("//*[contains(@resource-id,'confirmRoutingNumberET')]");
-	private By txtAccNumber = MobileBy.xpath("//*[contains(@resource-id,'checkAccNumberET')]");
-	private By txtConfirmAccNumber = MobileBy.xpath("//*[contains(@resource-id,'confirmAccNumberET')]");
-	private By txtNameOnBank = MobileBy.xpath("//*[contains(@resource-id,'nameOnBankET')]");
-
+	private By txtLastName = MobileBy.xpath(
+			"//*[contains(@resource-id,'lastNameET')]|//*[contains(@resource-id,'etLName')]/descendant::android.widget.EditText");
 	// Payment Methods - Card validations
-
+	private By txtAmount = MobileBy
+			.xpath("//*[contains(@resource-id,'amountET')]|//*[contains(@resource-id,'payrequestET')]");
 	private By txtNameOnCard = MobileBy.xpath("//*[contains(@resource-id,'etName')]");
 	private By txtCardNumber = MobileBy.xpath("//*[contains(@resource-id,'pnET')]");
 	private By txtCardExp = MobileBy.xpath("//*[contains(@resource-id,'etExpiry')]");
@@ -42,12 +35,13 @@ public class FieldValidationsComponent extends MobileFunctions {
 			"//*[contains(@resource-id,'etCity')]|//*[contains(@resource-id,'cityET')]|//*[contains(@resource-id,'cityET')]");
 	private By txtSearch = MobileBy
 			.xpath("//*[contains(@resource-id,'searchET')]|//*[contains(@resource-id,'payoutSearchET')]");
-	private By txtZipCode = MobileBy.xpath(
-			"//*[contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
+	private By txtZipCode = MobileBy
+			.xpath("//*[contains(@resource-id,'etZipCode')]|//*[contains(@resource-id,'zipcodeET')]");
 	private By txtSignetWalletId = MobileBy.xpath("//*[contains(@resource-id,'etWalletId')]");
 
 	public void validateEmailField(String singleChar, String maxChar, String moreThanMax) {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", singleChar);
 		new CommonFunctions().clearText(txtEmail, "Email");
 		new CommonFunctions().validateField(txtEmail, "Email", maxChar);
@@ -122,6 +116,18 @@ public class FieldValidationsComponent extends MobileFunctions {
 //		new CommonFunctions().validateField(txtPassword, "password", currentPassword);
 	}
 
+	public void validateAmountField(String singleDigit, String maxDigit, String moreThanMax)
+			throws InterruptedException {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().enterSpecialKey(txtAmount, txtAmount, "Amount");
+		new CommonFunctions().validateField(txtAmount, "Amount", singleDigit);
+		new CommonFunctions().clearText(txtAmount, "Amount");
+		new CommonFunctions().validateField(txtAmount, "Amount", maxDigit);
+		new CommonFunctions().clearText(txtAmount, "Amount");
+		new CommonFunctions().validateFieldMaxichar(txtAmount, "Phone Number", moreThanMax);
+//		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
+	}
+
 	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax)
 			throws InterruptedException {
 //		DriverFactory.getDriver().hideKeyboard();
@@ -144,7 +150,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtFirstName, "First Name", maxDigit);
 		new CommonFunctions().clearText(txtFirstName, "First Name");
 		new CommonFunctions().validateFieldMaxichar(txtFirstName, "First Name", moreThanMax);
-//		new CommonFunctions().clearText(txtFirstName, "First Name");
+		new CommonFunctions().clearText(txtFirstName, "First Name");
 
 //		
 
@@ -153,6 +159,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	public void validateLastNameField(String singleDigit, String maxDigit, String moreThanMax, String numbers,
 			String keyBoardType) throws InterruptedException {
 		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtLastName, "Last Name");
 		new CommonFunctions().enterKeys(txtLastName, txtFirstNameInput, numbers, keyBoardType, "Last Name");
 //		new CommonFunctions().enterSpecialKey(txtLastName,txtFirstNameInput,"Last Name");
 		new CommonFunctions().validateField(txtLastName, "Last Name", singleDigit);
@@ -160,63 +167,63 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtLastName, "Last Name", maxDigit);
 		new CommonFunctions().clearText(txtLastName, "Last Name");
 		new CommonFunctions().validateFieldMaxichar(txtLastName, "Last Name", moreThanMax);
-//		new CommonFunctions().clearText(txtLastName, "Last Name");
+		new CommonFunctions().clearText(txtLastName, "Last Name");
 	}
 
 	// payment Method Field Validations
 
-	public void validateConfirmAccountNumField(String singleChar, String maxChar, String moreThanMax) {
-		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtConfirmAccNumber, "Confirm Account Number", singleChar);
-		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
-		new CommonFunctions().validateField(txtConfirmAccNumber, "Confirm Account Number", maxChar);
-		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
-		new CommonFunctions().validateFieldMaxichar(txtConfirmAccNumber, "Confirm Account Number", moreThanMax);
-		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
-	}
-
-	public void validateAccountNumField(String singleChar, String maxChar, String moreThanMax) {
-		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtAccNumber, "Account Number", singleChar);
-		new CommonFunctions().clearText(txtAccNumber, "Account Number");
-		new CommonFunctions().validateField(txtAccNumber, "Account Number", maxChar);
-		new CommonFunctions().clearText(txtAccNumber, "Account Number");
-		new CommonFunctions().validateFieldMaxichar(txtAccNumber, "Account Number", moreThanMax);
-		new CommonFunctions().clearText(txtAccNumber, "Account Number");
-	}
-
-	public void validateConfirmRoutingField(String singleDigit, String maxDigit, String moreThanMax) {
-		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtConfirmRouting, "Confirm Routing Number", singleDigit);
-		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing Number");
-		new CommonFunctions().validateField(txtConfirmRouting, "Confirm Routing Number", maxDigit);
-		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing NUmber");
-		new CommonFunctions().validateFieldMaxichar(txtConfirmRouting, "Confirm Routing NUmber", moreThanMax);
-		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing NUmber");
-
-	}
-
-	public void validateNameOnBankField(String singleDigit, String maxDigit, String moreThanMax) {
-		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
-		new CommonFunctions().validateField(txtNameOnBank, "Name On Bank", singleDigit);
-		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
-		new CommonFunctions().validateField(txtNameOnBank, "Name On Bank", maxDigit);
-		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
-		new CommonFunctions().validateFieldMaxichar(txtNameOnBank, "Name On Bank", moreThanMax);
-		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
-
-	}
-
-	public void validateRoutingNumField(String singleDigit, String maxDigit, String moreThanMax) {
-		DriverFactory.getDriver().hideKeyboard();
-		new CommonFunctions().validateField(txtRoutingNumber, "Routing Number", singleDigit);
-		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
-		new CommonFunctions().validateField(txtRoutingNumber, "Routing Number", maxDigit);
-		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
-		new CommonFunctions().validateFieldMaxichar(txtRoutingNumber, "Routing Number", moreThanMax);
-		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
-	}
+//	public void validateConfirmAccountNumField(String singleChar, String maxChar, String moreThanMax) {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().validateField(txtConfirmAccNumber, "Confirm Account Number", singleChar);
+//		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
+//		new CommonFunctions().validateField(txtConfirmAccNumber, "Confirm Account Number", maxChar);
+//		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
+//		new CommonFunctions().validateFieldMaxichar(txtConfirmAccNumber, "Confirm Account Number", moreThanMax);
+//		new CommonFunctions().clearText(txtConfirmAccNumber, "Confirm Account Number");
+//	}
+//
+//	public void validateAccountNumField(String singleChar, String maxChar, String moreThanMax) {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().validateField(txtAccNumber, "Account Number", singleChar);
+//		new CommonFunctions().clearText(txtAccNumber, "Account Number");
+//		new CommonFunctions().validateField(txtAccNumber, "Account Number", maxChar);
+//		new CommonFunctions().clearText(txtAccNumber, "Account Number");
+//		new CommonFunctions().validateFieldMaxichar(txtAccNumber, "Account Number", moreThanMax);
+//		new CommonFunctions().clearText(txtAccNumber, "Account Number");
+//	}
+//
+//	public void validateConfirmRoutingField(String singleDigit, String maxDigit, String moreThanMax) {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().validateField(txtConfirmRouting, "Confirm Routing Number", singleDigit);
+//		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing Number");
+//		new CommonFunctions().validateField(txtConfirmRouting, "Confirm Routing Number", maxDigit);
+//		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing NUmber");
+//		new CommonFunctions().validateFieldMaxichar(txtConfirmRouting, "Confirm Routing NUmber", moreThanMax);
+//		new CommonFunctions().clearText(txtConfirmRouting, "Confirm Routing NUmber");
+//
+//	}
+//
+//	public void validateNameOnBankField(String singleDigit, String maxDigit, String moreThanMax) {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
+//		new CommonFunctions().validateField(txtNameOnBank, "Name On Bank", singleDigit);
+//		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
+//		new CommonFunctions().validateField(txtNameOnBank, "Name On Bank", maxDigit);
+//		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
+//		new CommonFunctions().validateFieldMaxichar(txtNameOnBank, "Name On Bank", moreThanMax);
+//		new CommonFunctions().clearText(txtNameOnBank, "Name On Bank");
+//
+//	}
+//
+//	public void validateRoutingNumField(String singleDigit, String maxDigit, String moreThanMax) {
+//		DriverFactory.getDriver().hideKeyboard();
+//		new CommonFunctions().validateField(txtRoutingNumber, "Routing Number", singleDigit);
+//		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
+//		new CommonFunctions().validateField(txtRoutingNumber, "Routing Number", maxDigit);
+//		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
+//		new CommonFunctions().validateFieldMaxichar(txtRoutingNumber, "Routing Number", moreThanMax);
+//		new CommonFunctions().clearText(txtRoutingNumber, "Routing Number");
+//	}
 
 	// Field Validations of Cards
 

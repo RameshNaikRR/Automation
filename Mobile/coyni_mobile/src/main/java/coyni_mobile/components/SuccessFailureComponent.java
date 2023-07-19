@@ -52,6 +52,8 @@ public class SuccessFailureComponent extends MobileFunctions {
 	private By btnTryagain = MobileBy.id("com.coyni.mapp:id/cvTryAgain");
 	private By lblBuyToken = MobileBy.xpath("//*[@text='Buy Tokens']");
 	private By lblBuyTokenDesc = MobileBy.xpath("//*[contains(@text,'Please select a')]");
+//Send / Request Transaction Status Details
+	private By lblUser = MobileBy.id("com.coyni.mapp:id/tvUserName");
 
 //	Purchase Details
 
@@ -74,6 +76,23 @@ public class SuccessFailureComponent extends MobileFunctions {
 		ExtentTestManager.setPassMessageInReport(getText(lblBankSuccPurchase));
 	}
 
+	public void verifySendRequestPurchase(String hdg) throws InterruptedException {
+		wait.until(ExpectedConditions.presenceOfElementLocated(lblUser));
+		Thread.sleep(800);
+		if (getElementList(lblTransFailed, "Transaction Failed").size() == 0) {
+			new CommonFunctions().verifyLabelText(lblPurchaseComplete, "Purchase Complete", hdg);
+		} else {
+			click(btnTryagain, "Try Again");
+//			new CommonFunctions().elementView(lblBuyToken, "Buy Token");
+			ExtentTestManager.setFailMessageInReport("Transaction Failed");
+		}
+	}
+
+	public void verifySendRequestDesc() {
+		new CommonFunctions().elementView(imgTickMark, "Tick Mark");
+		new CommonFunctions().elementView(lblUser, "User Name");
+	}
+	
 	public void verifyPurchaseComplete(String hdg) throws InterruptedException {
 		wait.until(ExpectedConditions.presenceOfElementLocated(lblPurchaseDesc));
 		Thread.sleep(800);
@@ -93,7 +112,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 
 	public void verifyGiftCardDesc(String firstName, String lastName, String email) {
 		new CommonFunctions().elementView(imgTickMark, "Tick Mark");
-		if (getText(lblPurchaseDesc).equals("Gift card sent to " + firstName + " " + lastName + " at " + email+".")) {
+		if (getText(lblPurchaseDesc).equals("Gift card sent to " + firstName + " " + lastName + " at " + email + ".")) {
 			ExtentTestManager.setPassMessageInReport(
 					"The Gift Card description message is as per expected : " + getText(lblPurchaseDesc));
 		} else {
@@ -112,9 +131,9 @@ public class SuccessFailureComponent extends MobileFunctions {
 		}
 	}
 
-	public int verifyAmount() {
+	public double verifyAmount() {
 		String str = getText(lblAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
-		Integer amt = Integer.parseInt(str);
+		double amt = Double.parseDouble(str);
 		return amt;
 
 	}
@@ -145,7 +164,7 @@ public class SuccessFailureComponent extends MobileFunctions {
 	}
 
 	public String verifyReceiptentName() {
-		return getText(lblReceiptentName).replace("to ", "");
+		return getText(lblUser).replace("to ", "");
 	}
 
 //	public int verifyAmount() {

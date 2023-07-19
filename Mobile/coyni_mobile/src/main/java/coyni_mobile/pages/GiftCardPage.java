@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 
 import coyni_mobile.components.ChoosePinComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.popups.OrderPreviewPopup;
 import coyni_mobile.utilities.CommonFunctions;
@@ -109,6 +110,16 @@ public class GiftCardPage extends MobileFunctions {
 //		DriverFactory.getDriver().hideKeyboard();
 	}
 
+	public void clickLastName() {
+		scrollDownToElement(txtLastName, "Last Name");
+		click(txtLastName, "Last Name");
+	}
+
+	public void clickEmail() {
+		scrollDownToElement(txtEmail, "Email");
+		click(txtEmail, "Email");
+	}
+
 	public void fillEmail(String email) {
 		DriverFactory.getDriver().hideKeyboard();
 		scrollDownToElement(txtEmail, "Email");
@@ -119,17 +130,25 @@ public class GiftCardPage extends MobileFunctions {
 	}
 
 	public void fillAmount(String amount) {
-		DriverFactory.getDriver().hideKeyboard();
-		click(lnkAmount, "Amount");
 		enterText(txtAmount, amount, "Amount");
-		click(btnAdd, "Add");
+	}
 
+	public void clickAmount() {
+		click(lnkAmount, "Amount");
+	}
+
+	public void clickAdd() {
+		click(btnAdd, "Add");
 	}
 
 	public void clickNext() {
 		DriverFactory.getDriver().hideKeyboard();
 		scrollDownToElement(btnNext, "Next");
 		new CommonFunctions().clickEnabledElement(btnNext, "Next");
+	}
+
+	public void validateNext() {
+		new CommonFunctions().verifyDisabledElement(btnNext, "Next");
 	}
 
 	public void clickSearch() {
@@ -164,6 +183,9 @@ public class GiftCardPage extends MobileFunctions {
 		return totalAmount;
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 ////	private By lblHeading =MobileBy.xpath("//*[@name='Withdraw Gift Card']");
 //	private By lblHeading =MobileBy.AccessibilityId("Withdraw Gift Card");
 //	private By pageDes =MobileBy.xpath("//XCUIElementTypeStaticText[@name='Amazon.com']/following-sibling::*[1]");

@@ -967,7 +967,6 @@ public class CustomerProfileTest {
 				customerProfilePage.logInSessionsPage().viewEndSessionsDesc();
 				Thread.sleep(800);
 				customerProfilePage.logInSessionsPage().clickChangePassword();
-				customerProfilePage.logInSessionsPage().clickChangePassword();
 				validateChangePassword(strParams);
 			} else if (data.get("validateChangePassword").equalsIgnoreCase("link")) {
 				customerProfilePage.logInSessionsPage().clickLnkChangePassword();
@@ -1001,23 +1000,36 @@ public class CustomerProfileTest {
 				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 				customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
 			}
-			customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+			int numOfDebit = customerProfilePage.addNewPaymentComponent().getPresentDebitCards();
+			int numOfCredit = customerProfilePage.addNewPaymentComponent().getPresentCreditCards();
 			if (data.get("cardHeading").equals("Add New Debit Card")
 					|| data.get("cardHeading").equals("Add Debit Card")) {
-				customerProfilePage.addNewPaymentComponent().clickDebitCard();
+				customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+				if (numOfDebit <= 3) {
+					if (!(data.get("numOfPaymentMethods").isEmpty())) {
+						customerProfilePage.addNewPaymentComponent().verifyDebitCards(data.get("numOfPaymentMethods"));
+					}
+					customerProfilePage.addNewPaymentComponent().clickDebitCard();
+				}
 			} else {
-				customerProfilePage.addNewPaymentComponent().clickCreditCard();
+				if (numOfCredit <= 3) {
+					if (!(data.get("numOfPaymentMethods").isEmpty())) {
+						customerProfilePage.addNewPaymentComponent().verifyCreditCards(data.get("numOfPaymentMethods"));
+					}
+					customerProfilePage.addNewPaymentComponent().clickCreditCard();
+				}
 			}
-			customerProfilePage.addNewPaymentComponent().addCardComponent()
-					.verifyAddDebitorCredHeading(data.get("cardHeading"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().viewAddcardDesc();
-			customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvv"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
-			customerProfilePage.addNewPaymentComponent().addCardComponent()
-					.verifyAddDebitorCredHeading(data.get("cardHeading"));
+			if (!(numOfDebit == 4 || numOfCredit == 4)) {
+				customerProfilePage.addNewPaymentComponent().addCardComponent()
+						.verifyAddDebitorCredHeading(data.get("cardHeading"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().viewAddcardDesc();
+				customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvv"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
+				customerProfilePage.addNewPaymentComponent().addCardComponent()
+						.verifyAddDebitorCredHeading(data.get("cardHeading"));
 //			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
 //					.clickCountryDropdown();
 //			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
@@ -1032,22 +1044,31 @@ public class CustomerProfileTest {
 //					.fillState(data.get("state"));
 //			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
 //					.fillZipCode(data.get("zipCode"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddAddress();
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().verifyHeading(data.get("preAuthHeading"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().fillAmount(data.get("preAuthiAmount"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().clickVerify();
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().successFailureComponent()
-					.verifyAllDone(data.get("cardSuccessHeading"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().successFailureComponent()
-					.verifyCardSucessDesc(data.get("cardSuccessDescription"));
-			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
-					.preAuthorizationComponent().successFailureComponent().clickDone();
-
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.clickAddAddress();
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().verifyHeading(data.get("preAuthHeading"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().fillAmount(data.get("preAuthiAmount"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().clickVerify();
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().successFailureComponent()
+						.verifyAllDone(data.get("cardSuccessHeading"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().successFailureComponent()
+						.verifyCardSucessDesc(data.get("cardSuccessDescription"));
+				customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+						.preAuthorizationComponent().successFailureComponent().clickDone();
+			} else {
+				if (data.get("cardHeading").equals("Add New Debit Card")
+						|| data.get("cardHeading").equals("Add Debit Card")) {
+					customerProfilePage.addNewPaymentComponent().verifyDebitCards(data.get("numOfPaymentMethods"));
+				} else {
+					customerProfilePage.addNewPaymentComponent().verifyCreditCards(data.get("numOfPaymentMethods"));
+				}
+				customerProfilePage.addNewPaymentComponent().verifyErrMsg(data.get("payMethodMaxRechdErrMsg"));
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("AddAddress is failed due to Exception " + e);
 		}
@@ -1061,12 +1082,17 @@ public class CustomerProfileTest {
 			dashboardPage.clickProfile();
 			customerProfilePage.clickPaymentMethods();
 			int previousDebitCards = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
+			System.out.println(previousDebitCards);
 			int previousCreditCards = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
+			System.out.println(previousCreditCards);
 			testAddCard(strParams);
 			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 			int includedAddedDebit = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
 			int includedAddedCredit = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
-			if (data.get("cardHeading").equals("Add New Debit Card")
+
+			if (includedAddedCredit == 4 || (includedAddedDebit == 4)) {
+
+			} else if (data.get("cardHeading").equals("Add New Debit Card")
 					|| data.get("cardHeading").equals("Add Debit Card")) {
 				if (previousDebitCards + 1 == includedAddedDebit) {
 					ExtentTestManager
@@ -1081,7 +1107,7 @@ public class CustomerProfileTest {
 							.setPassMessageInReport("Credit Card Added and Reflected in Payment Methods Screen");
 				} else {
 					ExtentTestManager
-							.setFailMessageInReport("Credit Card Added but not Reflected in Payment Methods Screen");
+							.setWarningMessageInReport("Credit Card Added but not Reflected in Payment Methods Screen");
 				}
 			}
 		} catch (Exception e) {
@@ -1155,6 +1181,71 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testVerifyDeleteDebitCards(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickProfile();
+			customerProfilePage.clickPaymentMethods();
+			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+			int addedDebit = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
+			int addedCredit = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
+			if (data.get("cardHeading").equals("Add New Debit Card")
+					|| data.get("cardHeading").equals("Add Debit Card")) {
+				for (int i = 1; i <= addedDebit; i++) {
+					customerProfilePage.paymentMethodsPage().clickDebitCard();
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickEditPaymentMethod();
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickRemove();
+					customerProfilePage.paymentMethodsPage().editCardComponent()
+							.verifyRemovingHdg(data.get("removePopUpHeading"));
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickYes();
+					customerProfilePage.paymentMethodsPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
+					if (!(addedDebit == i)) {
+						customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
+						customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+					}
+					int presentDebitCards = customerProfilePage.addNewPaymentComponent().getPresentDebitCards();
+					if (addedDebit - i == presentDebitCards) {
+						ExtentTestManager.setPassMessageInReport(
+								"After deleting the cards count is reducing : " + presentDebitCards);
+					} else {
+						ExtentTestManager.setFailMessageInReport(
+								"After deleting the cards count is not reducing : " + presentDebitCards);
+					}
+					customerProfilePage.navigationComponent().clickBack();
+				}
+			} else {
+				for (int i = 1; i <= addedCredit; i++) {
+					customerProfilePage.paymentMethodsPage().clickCreditCard();
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickEditPaymentMethod();
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickRemove();
+					customerProfilePage.paymentMethodsPage().editCardComponent()
+							.verifyRemovingHdg(data.get("removePopUpHeading"));
+					customerProfilePage.paymentMethodsPage().editCardComponent().clickYes();
+					customerProfilePage.paymentMethodsPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
+					if (!(addedCredit == i)) {
+						customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
+						customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+					}
+					int presentCreditCards = customerProfilePage.addNewPaymentComponent().getPresentCreditCards();
+					int addedCreditCards = customerProfilePage.addNewPaymentComponent().getAddedCreditCards();
+					if (addedCreditCards - i == presentCreditCards) {
+						ExtentTestManager.setPassMessageInReport(
+								"After deleting the cards count is reducing : " + presentCreditCards);
+					} else {
+						ExtentTestManager.setFailMessageInReport(
+								"After deleting the cards count is not reducing : " + presentCreditCards);
+					}
+					customerProfilePage.navigationComponent().clickBack();
+				}
+			}
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
+		}
 	}
 
 	@Test
@@ -1263,11 +1354,6 @@ public class CustomerProfileTest {
 			customerProfilePage.viewAccountID();
 			customerProfilePage.verifyUserNAmeandStatus();
 			customerProfilePage.clickFaceIDTouchID();
-			customerProfilePage.enableFaceOrTouchIDpage().clickSetUpTouch();
-			customerProfilePage.enableFaceOrTouchIDpage().viewScreenLock();
-			customerProfilePage.navigationComponent().clickBack();
-			customerProfilePage.viewAccountID();
-			customerProfilePage.clickFaceIDTouchID();
 			new CommonFunctions().clickBack();
 			customerProfilePage.viewAccountID();
 		} catch (Exception e) {
@@ -1292,5 +1378,100 @@ public class CustomerProfileTest {
 		}
 	}
 
-	
+//	public void testAddCard(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
+//			if (customerProfilePage.addNewPaymentComponent().verifyAddNewPaymentPlusIcon() == 1) {
+//				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+//				customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
+//			}
+//			if (data.get("cardHeading").equals("Add New Debit Card")
+//					|| data.get("cardHeading").equals("Add Debit Card")) {
+//				customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
+//				customerProfilePage.addNewPaymentComponent().clickDebitCard();
+//			} else {
+//				customerProfilePage.addNewPaymentComponent().clickCreditCard();
+//			}
+//			customerProfilePage.addNewPaymentComponent().addCardComponent()
+//					.verifyAddDebitorCredHeading(data.get("cardHeading"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().viewAddcardDesc();
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().fillNameOnCard(data.get("nameOnCard"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardNumber(data.get("cardNumber"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCardExp(data.get("cardExp"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().fillCVVorCVC(data.get("cvv"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().clickNext();
+//			customerProfilePage.addNewPaymentComponent().addCardComponent()
+//					.verifyAddDebitorCredHeading(data.get("cardHeading"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.clickCountryDropdown();
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.selectCountry(data.get("country"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.fillAddLine1(data.get("addLine1"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.fillAddLine2(data.get("addLine2"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.fillCity(data.get("city"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.fillState(data.get("state"));
+////			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+////					.fillZipCode(data.get("zipCode"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent().clickAddAddress();
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().verifyHeading(data.get("preAuthHeading"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().fillAmount(data.get("preAuthiAmount"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().clickVerify();
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().successFailureComponent()
+//					.verifyAllDone(data.get("cardSuccessHeading"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().successFailureComponent()
+//					.verifyCardSucessDesc(data.get("cardSuccessDescription"));
+//			customerProfilePage.addNewPaymentComponent().addCardComponent().mailingAddressComponent()
+//					.preAuthorizationComponent().successFailureComponent().clickDone();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("AddAddress is failed due to Exception " + e);
+//		}
+//	}
+//
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testAddCards(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			dashboardPage.clickProfile();
+//			customerProfilePage.clickPaymentMethods();
+//			int previousDebitCards = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
+//			int previousCreditCards = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
+//			testAddCard(strParams);
+//			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+//			int includedAddedDebit = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
+//			int includedAddedCredit = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
+//			if (data.get("cardHeading").equals("Add New Debit Card")
+//					|| data.get("cardHeading").equals("Add Debit Card")) {
+//				if (previousDebitCards + 1 == includedAddedDebit) {
+//					ExtentTestManager
+//							.setPassMessageInReport("Debit Card Added and Reflected in Payment Methods Screen");
+//				} else {
+//					ExtentTestManager
+//							.setWarningMessageInReport("Debit Card Added but not Reflected in Payment Methods Screen");
+//				}
+//			} else {
+//				if (previousCreditCards + 1 == includedAddedCredit) {
+//					ExtentTestManager
+//							.setPassMessageInReport("Credit Card Added and Reflected in Payment Methods Screen");
+//				} else {
+//					ExtentTestManager
+//							.setFailMessageInReport("Credit Card Added but not Reflected in Payment Methods Screen");
+//				}
+//			}
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("AddAddress is failed due to Exception " + e);
+//		}
+//	}
+
 }

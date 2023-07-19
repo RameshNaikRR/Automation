@@ -9,16 +9,18 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
-	private By lblHeading = MobileBy.xpath("//*[@text='Add Payment Method']|//*[@text='Add Instant Pay']|//*[@text='Add Bank Account']");
+	private By lblHeading = MobileBy
+			.xpath("//*[@text='Add Payment Method']|//*[@text='Add Instant Pay']|//*[@text='Add Bank Account']");
 	private By lblPaymentMethods = MobileBy.id("");
 	private By lblPageDes = MobileBy.id("");
 	private By btnExternalBank = MobileBy.id("com.coyni.mapp:id/lyBank");
 	private By btnDebitCard = MobileBy.id("com.coyni.mapp:id/tvDCardMsg");
 	private By btnCreditCard = MobileBy.id("com.coyni.mapp:id/tvCCardMsg");
-	private By lblBankCount = MobileBy.id("");
-	private By lblCreditCardCount = MobileBy.id("");
-	private By lblDebitCardCount = MobileBy.id("");
-	private By lblBankContent = MobileBy.id("");
+	private By numOfBanks = MobileBy.id("com.coyni.mapp:id/tvExtBankHead");
+	private By numOfCreditCards = MobileBy.id("com.coyni.mapp:id/tvCCardHead");
+	private By numOfDebitCards = MobileBy.id("com.coyni.mapp:id/tvDCardHead");
+	private By methodReachdErrMsg = MobileBy.xpath("//*[contains(@text,'maximum')]");
+	private By lblBankConten = MobileBy.id("");
 	private By lblCreditContent = MobileBy
 			.AccessibilityId("Visa, Mastercard, Discover, and American Express credit cards");
 	private By lblDebitContent = MobileBy.AccessibilityId("Visa or Mastercard debit cards");
@@ -62,6 +64,48 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblNoToken = MobileBy.AccessibilityId("No Token Available");
 	private By lblCardView = MobileBy.id("com.coyni.mapp:id/tvCardNumber");
 
+	public Integer getPresentDebitCards() {
+		String[] str = getText(numOfDebitCards).replace("(", "").replace(")", "").split("/");
+		int num = Integer.parseInt(str[0]);
+		return num;
+	}
+
+	public Integer getPresentCreditCards() {
+		String[] str = getText(numOfCreditCards).replace("(", "").replace(")", "").split("/");
+		int num = Integer.parseInt(str[0]);
+		return num;
+	}
+
+	public Integer getPresentBanks() {
+		String[] str = getText(numOfBanks).replace("(", "").replace(")", "").split("/");
+		int num = Integer.parseInt(str[0]);
+		return num;
+	}
+
+	public Integer getAddedDebitCards() {
+		String[] str = getText(numOfDebitCards).replace("(", "").replace(")", "").split("/");
+		int num = Integer.parseInt(str[1]);
+		return num;
+	}
+
+	public Integer getAddedCreditCards() {
+		String[] str = getText(numOfCreditCards).replace("(", "").replace(")", "").split("/");
+		int num = Integer.parseInt(str[1]);
+		return num;
+	}
+
+	public void verifyErrMsg(String expText) {
+		new CommonFunctions().verifyLabelText(methodReachdErrMsg, "Payment methods Reachd Maximum Err Msg", expText);
+	}
+
+	public void verifyDebitCards(String expText) {
+		new CommonFunctions().verifyLabelText(numOfDebitCards, "Debit Cards", expText);
+	}
+
+	public void verifyCreditCards(String expText) {
+		new CommonFunctions().verifyLabelText(numOfCreditCards, "Credit Cards", expText);
+	}
+
 	public int verifyCoyniView() {
 		return getElementList(lblCoyni, "Coyni").size();
 	}
@@ -82,9 +126,7 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	}
 
 	public void verifyAddNewPaymentHeading(String expHeading) {
-
 		new CommonFunctions().verifyLabelText(lblAddNewPayment, "Heading", expHeading);
-
 	}
 
 	public int verifyAddPaymentSize() {
@@ -220,12 +262,6 @@ public class AddNewPaymentComponent extends MobileFunctions {
 
 	}
 
-	public void verifyExternalBankText(String expBankText) {
-
-		new CommonFunctions().verifyLabelText(lblBankContent, "Add Bank Description ", expBankText);
-
-	}
-
 	public void verifyCreditCardView() {
 
 		new CommonFunctions().elementView(btnCreditCard, "Credit card");
@@ -253,16 +289,6 @@ public class AddNewPaymentComponent extends MobileFunctions {
 	public NavigationComponent navigationComponent() {
 
 		return new NavigationComponent();
-
-	}
-
-	public void getBankAccountCount() {
-
-		if (getElementList(lblBankCount, "Bank Account Count").size() > 0) {
-
-			String count = getAttribute(lblBankCount, "value").replace("(", "").replace(")", "").split("/")[0];
-
-		}
 
 	}
 

@@ -20,15 +20,16 @@ import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 
 public class DashboardPage extends MobileFunctions {
-	private By iconProfile = MobileBy.id("com.coyni.mapp:id/tvUserText");
+	private By iconProfile = MobileBy.id("com.coyni.mapp:id/userProfileCV");
 	private By btnBuyTokens = MobileBy.AccessibilityId("Buy Tokens");
 	private By btnWithdraw = MobileBy.AccessibilityId("withdraws");
-	private By iconNotifications = MobileBy.xpath("");
+	private By iconNotifications = MobileBy.id("com.coyni.mapp:id/notificationIV");
 	private By btnSendReq = MobileBy.AccessibilityId("Send/Request");
 	private By iconScan = MobileBy.AccessibilityId("Scanner");
 	private By iconQRCode = MobileBy.AccessibilityId("QR Code");
 	private By lblRecentTransactions = MobileBy.xpath("");
-	private By lblFirstTransaction = MobileBy.xpath("");
+	private By lblFirstTransaction = MobileBy.xpath(
+			"//*[@text='Recent transactions']/parent::*/following-sibling::*[contains(@resource-id,'rvLatestTrans')]/descendant::*[contains(@resource-id,'latestmessage')][1]");
 	private By lblNotificationCount = MobileBy.xpath("//*[@name='notifications_nobadge']/following-sibling::*[1]");
 	private By btnViewAllTransactions = MobileBy.xpath("(//*[@name='View More'])[1]");
 	private By btnAddAddress = MobileBy.xpath("//*[contains(@text,'Add an address')]");
@@ -40,12 +41,13 @@ public class DashboardPage extends MobileFunctions {
 	private By lblAddPaymntHeading = MobileBy.xpath("//*[@text='Welcome to coyni!']");
 	private By lblAddAddress = MobileBy.xpath("//*[@text='Address Required']");
 	private By lblUserName = MobileBy.id("com.coyni.mapp:id/tvUserName");
-	private By lblAvailBal = MobileBy.xpath("");
+	private By lblAvailBal = MobileBy.id("com.coyni.mapp:id/tvBalance");
 
-	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
-	
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
+
 	public double verifyAvailbleBalance() {
 		double avlBalance = Double.parseDouble(getText(lblAvailBal));
+		ExtentTestManager.setPassMessageInReport("Available Balance : " + getText(lblAvailBal));
 		return avlBalance;
 	}
 
@@ -88,7 +90,11 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void clickFirstTransaction() {
-		click(lblFirstTransaction, "FirstTrnsaction");
+//		String[] pfName = name.split(",");
+//		char fstNameFstCh = pfName[0].charAt(0);
+//		char lstNameFstCh = pfName[1].charAt(0);
+//		if(getText(lblFirstTransaction).equals("Received funds from "))
+		click(lblFirstTransaction, "First Transaction");
 	}
 
 	public void clickViewAllTransactions() {
@@ -115,11 +121,11 @@ public class DashboardPage extends MobileFunctions {
 		Thread.sleep(800);
 		if (getElementList(lblAddPaymntHeading, "").size() == 0 && getElementList(lblAddPaymntDesc, "").size() == 0
 				&& getElementList(lnkAddPayment, "").size() == 0) {
-			ExtentTestManager.setPassMessageInReport(
-					"Add Payment method link not visible,after adding the payment method");
+			ExtentTestManager
+					.setPassMessageInReport("Add Payment method link not visible,after adding the payment method");
 		} else {
-			ExtentTestManager.setFailMessageInReport(
-					"Add Payment method link is visible,after adding the payment method");
+			ExtentTestManager
+					.setFailMessageInReport("Add Payment method link is visible,after adding the payment method");
 		}
 	}
 
@@ -150,7 +156,7 @@ public class DashboardPage extends MobileFunctions {
 	public void verifyBuyTokensView() {
 		new CommonFunctions().elementView(btnBuyTokens, "Buy Tokens");
 	}
-	
+
 	public void verifyDashboard() {
 		new CommonFunctions().elementView(btnSendReq, "Send/Request");
 	}
@@ -190,9 +196,16 @@ public class DashboardPage extends MobileFunctions {
 	public cvvPopup cvvPopup() {
 		return new cvvPopup();
 	}
-	
+
 	public WithdrawTokenPage withdrawTokenPage() {
 		return new WithdrawTokenPage();
 	}
 
+	public ScanPage scanPage() {
+		return new ScanPage();
+	}
+
+	public MyQRCodePage myQRCodePage() {
+		return new MyQRCodePage();
+	}
 }

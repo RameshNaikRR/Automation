@@ -14,13 +14,11 @@ public class PaymentMethodsPage extends MobileFunctions {
 //
 	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit Card')])[1]");
 	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit Card')])[1]");
-	private By numOfDebitCard = MobileBy.xpath("//*[contains(@text,'Debit Card')]");
-	private By numOfCreditCard = MobileBy.xpath("//*[contains(@text,'Credit Card')]");
+	private By numOfDebitCard = MobileBy.xpath("//*[@text='Mastercard Debit Card']");
+	private By numOfCreditCard = MobileBy.xpath("//*[@text='Visa Credit Card']");
 	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']|//*[contains(@resource-id,'Head')]");
-	
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
-
 	private By lnkBank = MobileBy.xpath("//*[contains(@text,'Bank')]");
 	private By btnCogentAcc = MobileBy.xpath("//*[contains(@text,'Cogent Account')]");
 	private By bankAccountBtn = MobileBy.xpath("//*[contains(@resource-id,'lyAddExternal')]");
@@ -30,7 +28,6 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By headingAddAccount = MobileBy.xpath("//*[contains(@text,'Add Accounts')]");
 	private By txtBankName = MobileBy.xpath("//*[contains(@resource-id,'searchbar')]");
 	private By selectBank = MobileBy.xpath("//*[contains(@resource-id,'ul-div-id-2')]");
-
 	private By HeadingBankName = MobileBy.xpath("//*[contains(@resource-id,'selectedBankName')]");
 	private By txtUserName = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt143:0:login_')]");
 	private By txtPassword = MobileBy.xpath("//*[contains(@resource-id,'acctForm:j_idt147:0:password_')]");
@@ -87,7 +84,6 @@ public class PaymentMethodsPage extends MobileFunctions {
 		return getElementList(numOfDebitCard, "Debit Card").size();
 	}
 
-	
 	public int verifyNumOfCreditCard() throws InterruptedException {
 		Thread.sleep(1000);
 		return getElementList(numOfCreditCard, "Credit Card").size();
@@ -179,7 +175,6 @@ public class PaymentMethodsPage extends MobileFunctions {
 				paymentMethod, last4digits));
 	}
 
-
 	public void clickBankAccount() {
 		click(deleteBank, "Delete Bank");
 	}
@@ -191,13 +186,13 @@ public class PaymentMethodsPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblBank, "Bank Account");
 		new CommonFunctions().elementView(lblBankType, "MX Bank");
 	}
-	
+
 	public EditCardComponent editCardComponent() {
 		return new EditCardComponent();
 	}
-	
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}
-	
+
 }

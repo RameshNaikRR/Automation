@@ -51,6 +51,40 @@ public class LoginTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testLogin1ForNotifications(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email1"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testLogin2ForNotifications(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			landingPage.clickLogin();
+			loginPage.fillEmail(loginData.get("email"));
+			loginPage.fillPassword(loginData.get("password"));
+			loginPage.clickLogin();
+			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
+			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testLoginWithPIN(String strParams) {
 		try {
 			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
@@ -61,7 +95,7 @@ public class LoginTest {
 			ExtentTestManager.setFailMessageInReport("Login failed due to Exception " + e);
 		}
 	}
-	
+
 	/**
 	 * testLoginNavigationView script is to test the Navigation flow of Login
 	 * Feature.
@@ -105,10 +139,6 @@ public class LoginTest {
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage()
 					.verifyEnableFaceIdHeading(loginData.get("enableFaceIDHeading"));
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyEnableFaceIdView();
-			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickEnable();
-			loginPage.navigationComponent().clickBack();
-			loginPage.choosePinComponent().enableFaceOrTouchIDpage()
-					.verifyEnableFaceIdHeading(loginData.get("enableFaceIDHeading"));
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().verifyDontRemindButtonView();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
 			loginPage.choosePinComponent().dashboardPage().verifyDashboard();

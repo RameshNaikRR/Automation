@@ -1,6 +1,7 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.FieldValidationsComponent;
@@ -10,9 +11,10 @@ import coyni_mobile.components.ToastComponent;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
-import ilabs.mobile.actions.SwipeDirection;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.imagecomparison.SimilarityMatchingOptions;
+import io.appium.java_client.imagecomparison.SimilarityMatchingResult;
 
 public class LoginPage extends MobileFunctions {
 	private By imgCoyni = MobileBy.AccessibilityId("coyni Logo");
@@ -65,6 +67,9 @@ public class LoginPage extends MobileFunctions {
 
 	public void verifyImageCoyniView() {
 		new CommonFunctions().elementView(imgCoyni, "Coyni");
+//		SimilarityMatchingOptions opts = new SimilarityMatchingOptions();
+//		opts.withEnabledVisualization();
+//		SimilarityMatchingResult res = DriverFactory.getDriver().getImagesSimilarity(baselineImg,  DriverFactory.getDriver().getScreenshotAs(OutputType.FILE), opts);
 	}
 
 	public void verifyLoginEmail(String email) {

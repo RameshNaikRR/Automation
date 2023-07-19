@@ -113,7 +113,7 @@ public class CommonFunctions {
 	public void validateFormErrorMessage(String expErrMsg, String elementName) {
 		try {
 			By errorMsgs = MobileBy.xpath(
-					"//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]|(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]|//*[contains(@resource-id,'TV')]");
+					"//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]|(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]");
 			mobileFunctions.waitForVisibility(errorMsgs);
 			// mobileFunctions.
 			boolean status = mobileFunctions.getElementList(errorMsgs, "error Message").stream()
@@ -267,8 +267,9 @@ public class CommonFunctions {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.LEFT_BRACKET));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.MINUS));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.PLUS));
-		String actualtext = mobileFunctions.getText(ele);// BUTTON_
 //		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
+		String actualtext = mobileFunctions.getText(ele).replace("First Name", "").replace("Last Name", "").replace("0.00", "")
+				.replace(")", "").replace("-", "");
 		if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name")) {
 			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special Charcters");
 		} else {

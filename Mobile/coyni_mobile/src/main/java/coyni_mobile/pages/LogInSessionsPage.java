@@ -1,9 +1,12 @@
 package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.SuccessFailureComponent;
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -23,6 +26,8 @@ public class LogInSessionsPage extends MobileFunctions {
 	private By lblEndSessionDesc = MobileBy.xpath("//*[contains(@text,'All devices will be')]");
 	private By btnChangePassword = MobileBy.xpath("//*[@text='Change Password']");
 
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
+
 	public void viewLogInSessHeader(String expText) {
 		new CommonFunctions().verifyLabelText(lblHeader, "Login Sessions Heading", expText);
 		new CommonFunctions().elementView(lblDescription, "Login Sessions Description");
@@ -41,6 +46,7 @@ public class LogInSessionsPage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(btnChangePassword));
 		click(btnChangePassword, "Change Password");
 	}
 

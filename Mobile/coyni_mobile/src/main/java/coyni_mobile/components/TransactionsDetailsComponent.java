@@ -10,14 +10,14 @@ import io.appium.java_client.MobileBy;
 public class TransactionsDetailsComponent extends MobileFunctions {
 
 	private By lblHeading = MobileBy.xpath("//*[@text='Transaction Details']");
-	private By lblTransaction = MobileBy.id("");
-	private By lblTransactionAmount = MobileBy.id("");
-	private By lblStatus = MobileBy.id("");
-	private By lblDateAndTime = MobileBy.id("");
+	private By lblTransactionType = MobileBy.xpath("//*[@text='Status']/parent::*/preceding-sibling::*[1]");
+	private By lblTransactionTypeAmount = MobileBy.xpath("//*[@text='Status']/parent::*/preceding-sibling::*[2]");
+	private By lblStatus = MobileBy.xpath("//*[@text='Status']/following-sibling::*[1]");
+	private By lblDateAndTime = MobileBy.xpath("//*[@text='Date']/following-sibling::*[1]");
 	private By lblPurchaseAmount = MobileBy.id("");
 	private By lblProcessingFee = MobileBy.id("");
 	private By lblTotalAmount = MobileBy.id("");
-	private By lblReferenceID = MobileBy.id("");
+	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*[1]");
 	private By lblDepositNumber = MobileBy.id("");
 	// card
 	private By lblCardHolderName = MobileBy.id("");
@@ -32,10 +32,11 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	private By lblBankName = MobileBy.id("");
 	private By lblBankAccountNumber = MobileBy.id("");
 	private By btnCancel = MobileBy.xpath("(//*[@name='Cancel Transaction'])[1]");
-
+	private By btnBack = MobileBy.AccessibilityId("Back");
+	
 	// withdraw Instant
 
-	private By lblMsg = MobileBy.id("");
+	private By lblMsg = MobileBy.id("com.coyni.mapp:id/sentReasonTV");
 	private By lblWithdrawlAmount = MobileBy.id("");
 	private By lblWithdrawNumber = MobileBy.id("");
 
@@ -43,8 +44,39 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	private By lblGiftCardName = MobileBy.id("");
 	private By lblGiftCardAmount = MobileBy.id("");
-	private By lblReciepentName = MobileBy.id("");
+	private By lblReciepentName = MobileBy.xpath("//*[@text='Recipient Name']/following-sibling::*[1]");
 	private By lblReciepentEmail = MobileBy.id("");
+
+//	Sent Details 
+	private By lblSubTotal = MobileBy.xpath("//*[@text='Sub Total']/following-sibling::*[1]");
+
+	private By lblGrandTotal = MobileBy.xpath("//*[@text='Grand Total']/following-sibling::*[1]");
+	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*[1]");
+
+	private By lblRecipientName = MobileBy.xpath(
+			"//*[@text='Sender Name']/following-sibling::*[1]|//*[@text='Recipient Name']/following-sibling::*[1]");
+	private By lblRecipientEmail = MobileBy.xpath("//*[@text='Recipient Email']/following-sibling::*[1]");
+
+	private By lblTotalAmount1 = MobileBy.xpath("");
+
+	private By lblAccountBalance = MobileBy.xpath("//*[@text='Account Balance']/following-sibling::*[1]");
+	private By lblDepositID = MobileBy.xpath("//*[@text='Deposit ID']/following-sibling::*[1]");
+
+	private By lblExpiryDate = MobileBy.xpath("//*[@text='Expiration Date']/following-sibling::*[1]");
+
+	private By lblNameOnAccount = MobileBy.xpath("//*[@text='Name on Account']/following-sibling::*[1]");
+
+	private By lblUserName = MobileBy.xpath("//*[@text='User Name']/following-sibling::*[1]");
+	private By lblAccountAddress = MobileBy.xpath("//*[@text='Account Address']/following-sibling::*[1]");
+
+	private By lblCnacelTransaction = MobileBy.AccessibilityId("Cancel Transaction?");
+	private By btnNo = MobileBy.xpath("(//*[@text='NO'])[1]");
+	private By btnYes = MobileBy.xpath("(//*[@text='Yes'])[1]");
+
+	private By lblMerchantAccountId = MobileBy.xpath("//*[@text='Merchant Account ID']/following-sibling::*[1]");
+	private By lblDBAname = MobileBy.xpath("//*[@text='DBA Name']/following-sibling::*[1]");
+	private By lblCustServiceEmail = MobileBy.xpath("//*[@text='Customer Service Email']/following-sibling::*[1]");
+	private By lblCustServicePhone = MobileBy.xpath("//*[@text='Customer Service Phone']/following-sibling::*[1]");
 
 	public String verifyfillMessage() {
 		String str = getText(lblMsg).trim().replace('"', ' ');
@@ -55,12 +87,12 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
 	}
 
-	public void getTransaction() {
-		ExtentTestManager.setInfoMessageInReport("Transaction label: " + getText(lblTransaction));
+	public void getTransaction(String expText) {
+		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type", expText);
 	}
 
 	public void getTransactionAmount() {
-		ExtentTestManager.setInfoMessageInReport("Amount: " + getText(lblTransactionAmount));
+		ExtentTestManager.setInfoMessageInReport("Amount: " + getText(lblTransactionTypeAmount));
 	}
 
 	public void getStatus() {
@@ -140,9 +172,9 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Bank Account Number: " + getText(lblBankAccountNumber));
 	}
 
-	public void getMessage() {
-		if (getElementList(lblMessage, "").size() > 0) {
-			ExtentTestManager.setInfoMessageInReport("Message: " + getText(lblMessage));
+	public void getSentRequestMessage() {
+		if (getElementList(lblMsg, "").size() > 0) {
+			ExtentTestManager.setInfoMessageInReport("Message: " + getText(lblMsg));
 		}
 	}
 
@@ -163,8 +195,19 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setInfoMessageInReport("Gift Card Amount: " + getText(lblGiftCardAmount));
 	}
 
-	public void getRecipientName() {
-		ExtentTestManager.setInfoMessageInReport("Recipient Name: " + getText(lblRecipientName));
+	public void getRecipientName(String name, String amount) {
+//		double Transamt = Double.parseDouble(getText(lblTransactionTypeAmount));
+//		&& Transamt == Double.parseDouble(amount)
+		System.out.println(amount);
+		System.out.println(getText(lblRecipientName));
+		if (getText(lblRecipientName).equals(name)) {
+			ExtentTestManager.setPassMessageInReport(
+					"The Recent Transaction is Reflected and Recipient Name : " + getText(lblRecipientName));
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("The Recent Transaction is not Reflected and Recipient Name is wrong : "
+							+ getText(lblRecipientName));
+		}
 	}
 
 	public void getRecipientEmail() {
@@ -187,8 +230,8 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	}
 
-	public void buyTokenBankTransactionDetails() throws InterruptedException {
-		getTransaction();
+	public void buyTokenBankTransactionDetails(String expText) throws InterruptedException {
+		getTransaction(expText);
 		getTransactionAmount();
 		getStatus();
 		getDateTime();
@@ -200,8 +243,8 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		clickCancel();
 	}
 
-	public void buyTokenCardTransactionDetails() {
-		getTransaction();
+	public void buyTokenCardTransactionDetails(String expText) {
+		getTransaction(expText);
 		getTransactionAmount();
 		getStatus();
 		getDateTime();
@@ -213,8 +256,8 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getExpiryDate();
 	}
 
-	public void withdrawBankTransactionDetails() throws InterruptedException {
-		getTransaction();
+	public void withdrawBankTransactionDetails(String expText) throws InterruptedException {
+		getTransaction(expText);
 		getStatus();
 		getDateTime();
 		getReferenceID();
@@ -224,8 +267,8 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getBankAccountNumber();
 	}
 
-	public void withdrawInstantTransactionsDetails() {
-		getTransaction();
+	public void withdrawInstantTransactionsDetails(String expText) {
+		getTransaction(expText);
 		getStatus();
 		getDateTime();
 		getReferenceID();
@@ -236,38 +279,41 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getExpiryDate();
 	}
 
-	public void withdrawGiftCardTransactionsDetails() {
-		getTransaction();
+	public void withdrawGiftCardTransactionsDetails(String name, String amount, String expText) {
+		getTransaction(expText);
 		getStatus();
 		getDateTime();
 		getGiftCardName();
 		getReferenceID();
 		getWithdrawNumber();
 		getRecipientEmail();
-		getRecipientName();
+		getRecipientName(name, amount);
 	}
 
-	public void getTransactionDetails() throws InterruptedException {
-		if (getText(lblTransaction).contains("Buy")) {
+	public void getTransactionDetails(String name, String amount, String expText) throws InterruptedException {
+		if (getText(lblTransactionType).contains("Buy")) {
 			if (getText(varNameonBank).contains("Name")) {
-				buyTokenBankTransactionDetails();
+				buyTokenBankTransactionDetails(expText);
 			} else if (getText(varCardHolderName).contains("Cardholder")) {
-				buyTokenCardTransactionDetails();
+				buyTokenCardTransactionDetails(expText);
 			}
-		} else if (getText(lblTransaction).contains("Received")) {
-			receivedTransactionDetails();
-		} else if (getText(lblTransaction).contains("Sent")) {
-			sentTransactionDetails();
-		} else if (getText(lblTransaction).contains("Withdraw") && getText(varNameonBank).contains("Name")) {
-			withdrawBankTransactionDetails();
-		} else if (getText(lblTransaction).contains("Withdraw") && getText(lblTransaction).contains("Instant")) {
-			withdrawInstantTransactionsDetails();
-		} else if (getText(lblTransaction).contains("Withdraw") && getText(lblGiftCardName).contains("Gift")) {
-			withdrawGiftCardTransactionsDetails();
-		} else if (getText(lblTransaction).contains("Paid Order") && getText(lblTransaction).contains("Token")) {
-			paidOrderDetails();
-		} else if (getText(lblTransaction).contains("Pay/Request") && getText(lblTransaction).contains("Sent")) {
-			sentTransactionDetails();
+		} else if (getText(lblTransactionType).contains("Received")) {
+			receivedTransactionDetails(name, amount, expText);
+		} else if (getText(lblTransactionType).contains("Sent")) {
+			sentTransactionDetails(name, amount, expText);
+		} else if (getText(lblTransactionType).contains("Withdraw") && getText(varNameonBank).contains("Name")) {
+			withdrawBankTransactionDetails(expText);
+		} else if (getText(lblTransactionType).contains("Withdraw")
+				&& getText(lblTransactionType).contains("Instant")) {
+			withdrawInstantTransactionsDetails(expText);
+		} else if (getText(lblTransactionType).contains("Withdraw") && getText(lblGiftCardName).contains("Gift")) {
+			withdrawGiftCardTransactionsDetails(name, amount, expText);
+		} else if (getText(lblTransactionType).contains("Paid Order")
+				&& getText(lblTransactionType).contains("Token")) {
+			paidOrderDetails(expText);
+		} else if (getText(lblTransactionType).contains("Pay/Request")
+				&& getText(lblTransactionType).contains("Sent")) {
+			sentTransactionDetails(name, amount, expText);
 		} else {
 			ExtentTestManager.setFailMessageInReport("Error in Transactions");
 		}
@@ -275,45 +321,13 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	}
 
 //	public int verifyTransactionAmount() {
-//		String str = getText(lblTransactionAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
+//		String str = getText(lblTransactionTypeAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
 //		Integer amt=Integer.parseInt(str);
 //		return amt;
 //	}
 //	
 
 //	private By lblDescriptorName = MobileBy.id("");
-
-	private By lblMessage = MobileBy
-			.xpath("(//*[@name='Status']/../preceding-sibling::*[1]/XCUIElementTypeStaticText)[3]");
-
-	private By lblSubTotal = MobileBy.xpath("//*[@name='Sub Total']/following-sibling::*[1]");
-
-	private By lblGrandTotal = MobileBy.xpath("//*[@name='Grand Total']/following-sibling::*[1]");
-	private By lblWithdrawID = MobileBy.xpath("//*[@name='Withdraw ID']/following-sibling::*[1]");
-
-	private By lblRecipientName = MobileBy.xpath("//*[@name='Recipient Name']/following-sibling::*[1]");
-	private By lblRecipientEmail = MobileBy.xpath("//*[@name='Recipient Email']/following-sibling::*[1]");
-
-	private By lblTotalAmount1 = MobileBy.xpath("");
-
-	private By lblAccountBalance = MobileBy.xpath("//*[@name='Account Balance']/following-sibling::*[1]");
-	private By lblDepositID = MobileBy.xpath("//*[@name='Deposit ID']/following-sibling::*[1]");
-
-	private By lblExpiryDate = MobileBy.xpath("//*[@name='Expiration Date']/following-sibling::*[1]");
-
-	private By lblNameOnAccount = MobileBy.xpath("//*[@name='Name on Account']/following-sibling::*[1]");
-
-	private By lblUserName = MobileBy.xpath("//*[@name='User Name']/following-sibling::*[1]");
-	private By lblAccountAddress = MobileBy.xpath("//*[@name='Account Address']/following-sibling::*[1]");
-
-	private By lblCnacelTransaction = MobileBy.AccessibilityId("Cancel Transaction?");
-	private By btnNo = MobileBy.xpath("(//*[@name='NO'])[1]");
-	private By btnYes = MobileBy.xpath("(//*[@name='Yes'])[1]");
-
-	private By lblMerchantAccountId = MobileBy.xpath("//*[@name='Merchant Account ID']/following-sibling::*[1]");
-	private By lblDBAname = MobileBy.xpath("//*[@name='DBA Name']/following-sibling::*[1]");
-	private By lblCustServiceEmail = MobileBy.xpath("//*[@name='Customer Service Email']/following-sibling::*[1]");
-	private By lblCustServicePhone = MobileBy.xpath("//*[@name='Customer Service Phone']/following-sibling::*[1]");
 
 	public void getDBAname() {
 		ExtentTestManager.setInfoMessageInReport("DBA Name: " + getText(lblDBAname));
@@ -375,8 +389,12 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		new CommonFunctions().elementView(lblHeading, "Heading");
 	}
 
-	public void paidOrderDetails() {
-		getTransaction();
+	public void clickBack() {
+		click(btnBack, "Back");
+	}
+	
+	public void paidOrderDetails(String expText) {
+		getTransaction(expText);
 		getTransactionAmount();
 		getStatus();
 		getDateTime();
@@ -389,33 +407,25 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	}
 
-	public void sentTransactionDetails() {
-		getTransaction();
+	public void sentTransactionDetails(String name, String amount, String expText) {
+		getRecipientName(name, amount);
+		getTransaction(expText);
 		getTransactionAmount();
-		// getMessage();
-		//
+		getSentRequestMessage();
 		getStatus();
 		getDateTime();
-		// getProcessingFee();
-		// getTotalAmount();
-		// getAccountBalance();
 		getReferenceID();
-		//
-		// getUserName();
 		getAccountAddress();
-		getRecipientName();
 	}
 
-	public void receivedTransactionDetails() {
-		getTransaction();
+	public void receivedTransactionDetails(String name, String amount, String expText) {
+//		getRecipientName(name, amount);
+		getTransaction(expText);
 		getTransactionAmount();
-		getMessage();
-		//
+		getSentRequestMessage();
 		getStatus();
 		getDateTime();
-		getAccountBalance();
 		getReferenceID();
-		getUserName();
 		getAccountAddress();
 	}
 

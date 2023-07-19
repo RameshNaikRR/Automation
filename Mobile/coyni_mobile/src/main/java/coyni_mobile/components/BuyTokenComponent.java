@@ -15,7 +15,8 @@ public class BuyTokenComponent extends MobileFunctions {
 	private By lblBuyTokenDesc = MobileBy.xpath("//*[contains(@text,'Please select a')]");
 	private By lblPmntMethodName = MobileBy.id("com.coyni.mapp:id/tvPayHead");
 	private By lblCYN = MobileBy.id("com.coyni.mapp:id/tvCYN");
-	private By btnDebitCard = MobileBy.xpath("//*[contains(@text,'Instant Pay')]/following-sibling::*/descendant::android.widget.TextView[1]");
+	private By btnInstantDebitCard = MobileBy.xpath("//*[contains(@text,'Instant Pay')]/following-sibling::*/descendant::android.widget.TextView[1]");
+	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
 	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]");
 	private By btnBank = MobileBy.xpath("(//*[contains(@text,'Bank')])[1]");
 	private By lblDailylimits = MobileBy.id("com.coyni.mapp:id/tvLimit");
@@ -73,6 +74,10 @@ public class BuyTokenComponent extends MobileFunctions {
 		click(btnDebitCard, "Debit Card");
 	}
 
+	public void clickInstantPayDebitCard() {
+		click(btnInstantDebitCard, "Debit Card");
+	}
+	
 	public void clickCreditCard() {
 		click(btnCreditCard, "Credit Card");
 	}
