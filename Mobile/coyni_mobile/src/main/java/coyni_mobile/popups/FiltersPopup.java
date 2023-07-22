@@ -11,155 +11,177 @@ import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
 
 public class FiltersPopup extends MobileFunctions {
-	private By lblFilters = MobileBy.xpath("");
-	private By lblTransactionType = MobileBy.AccessibilityId("");
-	private By lblTransactionStatus = MobileBy.xpath("//*[@name='Transactions']");
-	private By txtFromAmount = MobileBy.xpath("//*[@name='To']/following-sibling::*[1]");
-	private By txtToAmount = MobileBy.xpath("//*[@name='To']/preceding-sibling::*[2]");
-	private By btnCalender = MobileBy.xpath("//*[@name='Date']/following-sibling::*[1]");
-	private By btnResetAllFilters = MobileBy.xpath("//XCUIElementTypeButton[@name='Reset all filters']");
-	private By btnApplyfilter = MobileBy.name("Apply Filter");
-	private By lnkSaleOrderPlus = MobileBy.AccessibilityId("");
-	private By lnkRefundPlus = MobileBy.AccessibilityId("");
-	private By lnkBuyTokensPlus = MobileBy.AccessibilityId("");
-	private By lnkWithdrawPlus = MobileBy.AccessibilityId("");
-	// Permission Alert
+	private By lblFilters = MobileBy.xpath("//*[@text='Filter']");
+	private By imgCalendar = MobileBy
+			.xpath("//*[contains(@resource-id,'datePickET')]/following-sibling::android.widget.ImageView");
 
-		private By lblAlertHeading = MobileBy.xpath("Would Like to Access Your");
-		private By lblAlertDes = MobileBy.xpath("(//*[contains(@name,'accessed')])[1]");
-		private By btnDontAllow = MobileBy.xpath("(//*[contains(@name,'Allow')])[1]");
-//		private By btnOk =MobileBy.xpath("(//*[@name='OK'])[1]");
-		private By btnOk = MobileBy.name("OK");
-//		private By lblAlertErrorMsg = MobileBy.xpath("//*[@name='Alert!']/following-sibling::XCUIElementTypeStaticText");
-		private By lblAlertErrorMsg1 = MobileBy.AccessibilityId("Please enter From amount");
-		private By lblAlertErrorMsg2 = MobileBy.AccessibilityId("Please enter To amount");
-		private By lblAlertErrorMsg3 = MobileBy.AccessibilityId("To amount should be greater than From amount");
-		private By lblAlertLessThanAmountErrorMsg = MobileBy
-				.xpath("//XCUIElementTypeStaticText[@name='To amount should be less than From amount']");
-
-	public By getElementPlus(String elementName) {
-		return MobileBy.AccessibilityId(String.format("%s", elementName));
+	public void verifyHeading(String expText) {
+		new CommonFunctions().verifyLabelText(lblFilters, "Filters Heading", expText);
 	}
 
-	public void selectFilterPlus(String type) {
-		scrollDownToElement(getElementPlus(type), type);
-		click(getElementPlus(type), type);
+	public void clickCalendar() {
+		scrollDownToElement(imgCalendar, "Calendar");
+		click(imgCalendar, "Calendar");
 	}
 
-
-	public void verifyErrorMessage1(String errMsg) {
-		new CommonFunctions().verifyLabelText(lblAlertErrorMsg1, "errMsg", errMsg);
+// Transaction Statuses and Id Located elements
+	public By getResourceIDElements(String resourceId) {
+		return MobileBy.id(String.format("%s", resourceId));
 	}
 
-	public void verifyErrorMessage2(String errMsg) {
-		new CommonFunctions().verifyLabelText(lblAlertErrorMsg2, "errMsg", errMsg);
+	public void clickCompletedStatus() {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transStatusCompleted"), "Completed");
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusCompleted"), "Completed");
 	}
 
-	public void verifyErrorMessage3(String errMsg) {
-		new CommonFunctions().verifyLabelText(lblAlertErrorMsg3, "errMsg", errMsg);
+	public void clickInProgress() {
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusInProgress"), "In Progress");
 	}
 
-	public void verifyAlertErrorMessage(String errMsg) {
-		new CommonFunctions().verifyLabelText(lblAlertLessThanAmountErrorMsg, "errMsg", errMsg);
+	public void clickPending() {
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusPending"), "Pending");
 	}
 
-	public void getAlertLabel() {
-		ExtentTestManager.setInfoMessageInReport("Alert Title:" + getText(lblAlertHeading));
+	public void clickFailed() {
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusFailed"), "Failed");
 	}
 
-	public void getAlertDes() {
-		ExtentTestManager.setInfoMessageInReport("Alert Title:" + getText(lblAlertDes));
+	public void clickRefundStatus() {
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusRefund"), "Refund");
 	}
 
-	public void clickOk() {
-		click(btnOk, "Ok");
+	public void clickPartialRefund() {
+		click(getResourceIDElements("com.coyni.mapp:id/transStatusPartialRefund"), "Partial Refund");
 	}
 
-	public void clickDontAllow() {
-		click(btnDontAllow, "Don't Allow");
+	public void fillFromAmount(String amount) {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transAmountStartET"), "From Amount");
+		enterText(getResourceIDElements("com.coyni.mapp:id/transAmountStartET"), amount, "From Amount");
 	}
 
-	public void handlingPopup() {
-		if (getElementList(lblAlertHeading, "").size() > 0) {
-			getAlertLabel();
-			getAlertDes();
-			clickOk();
-		}
+	public void fillToAmount(String amount) {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transAmountEndET"), "To Amount");
+		enterText(getResourceIDElements("com.coyni.mapp:id/transAmountEndET"), amount, "To Amount");
 	}
 
-	public void clickSaleOrderPlus() {
-		click(lnkSaleOrderPlus, "Sale Order plus ");
+	public void clickApplyFilter() {
+		click(getResourceIDElements("com.coyni.mapp:id/applyFilterBtnCV"), "Apply Filters");
+	}
+
+	public void clickResetFilters() {
+		click(getResourceIDElements("com.coyni.mapp:id/resetFiltersTV"), "Reset Filters");
+	}
+
+//	Main Transactions Types
+	public By getTransactionType(String transactionType) {
+		return MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'checkCB')]",
+				transactionType));
+	}
+
+	public void clickSent() {
+		click(getTransactionType("Sent"), "Sent");
+	}
+
+	public void clickReceived() {
+		click(getTransactionType("Received"), "Received");
+	}
+
+	public void clickSaleOrder() {
+		click(getTransactionType("Sale Order"), "Sale Order");
+	}
+
+	public void clickRefund() {
+		click(getTransactionType("Refund"), "Refund");
+	}
+
+	public void clickBuyTokens() {
+		click(getTransactionType("Buy Tokens"), "Buy Tokens");
+	}
+
+	public void clickWithdraw() {
+		click(getTransactionType("Withdraw"), "Withdraw");
+	}
+
+//	Transactions Plus Icon
+	public By getTransactionSubTypePlus(String transactionType) {
+		return MobileBy.xpath(String.format("//*[@text='%s']/following-sibling::*[contains(@resource-id,'plusImage')]",
+				transactionType));
+	}
+
+	public void clickSaleOderPlus() {
+		click(getTransactionSubTypePlus("Sale Order"), "Sale Order");
 	}
 
 	public void clickRefundPlus() {
-		click(lnkRefundPlus, "Refund plus ");
+		click(getTransactionSubTypePlus("Refund"), "Refund");
 	}
 
-	public void clickBuyTokensPlus() {
-		click(lnkBuyTokensPlus, "Buy Tokens plus ");
+	public void clickBuyTokenPlus() {
+		click(getTransactionSubTypePlus("Buy Tokens"), "Buy Tokens");
 	}
 
-	public void clickWithdrawTokensPlus() {
-		click(lnkWithdrawPlus, "Withdraw Tokens plus ");
+	public void clickWithdrawTokenPlus() {
+		click(getTransactionSubTypePlus("Withdraw"), "Withdraw");
 	}
 
-	public void clickApplyfilters() {
-		click(btnApplyfilter, "Apply filters");
+//	Transaction SubTypes
+	public By getTransactionSubTypes(String transactionType) {
+		return MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'chechBoxCB')]",
+				transactionType));
 	}
 
-	public void clickResetAllFilters() {
-		click(btnResetAllFilters, "Reset All Filters");
+	public void clickeCommerseType() {
+		click(getTransactionSubTypes("eCommerce"), "eCommerce");
 	}
 
-	public void clickCalender() {
-		click(btnCalender, "Calender");
+	public void clickRetailMobileType() {
+		click(getTransactionSubTypes("Retail / Mobile"), "Retail / Mobile");
 	}
 
-	public void fillFromAmount(String fromAmount) {
-		click(txtFromAmount, "fromAmount");
-		// new EnterYourPINComponent().fillPins(fromAmount);
-		enterText(txtFromAmount, fromAmount, "From Amount");
-//		new CommonFunctions().clickDone();
+	public void clickFullType() {
+		click(getTransactionSubTypes("Full"), "Full");
 	}
 
-	public void fillToAmount(String toAmount) {
-		click(txtToAmount, "toAmount");
-		// new EnterYourPINComponent().fillPins(toAmount);
-		enterText(txtToAmount, toAmount, "To Amount");
-//		new CommonFunctions().clickDone();
+	public void clickPartialType() {
+		click(getTransactionSubTypes("Partial"), "Partial");
 	}
 
-	public void verifyFilters(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblFilters, "Page Heading", expHeading);
+	public void clickBuyBankAccountType() {
+		click(getTransactionSubTypes("Bank Account"), "Bank Account");
 	}
 
-	public void verifyTransactionType(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTransactionType, "Transaction Type", expHeading);
+	public void clickDebitCardType() {
+		click(getTransactionSubTypes("Debit Card"), "Debit Card");
 	}
 
-	public void verifyTransactionStatus(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblTransactionStatus, "Transaction Status", expHeading);
+	public void clickCreditCardType() {
+		click(getTransactionSubTypes("Credit Card"), "Credit Card");
 	}
 
-//	public By getElement(String elementName) {
-//		return MobileBy.xpath(String.format("//XCUIElementTypeCell/*[@name='%s']", elementName));
-//	}
-	public By getElement(String elementName) {
-		return MobileBy.AccessibilityId(String.format("%s", elementName));
+	public void clickWithdrawBankAccount() {
+		click(getTransactionSubTypes("Bank Account"), "Bank Account");
 	}
 
-	public void selectFilter(String type) {
-		scrollDownToElement(getElement(type), type);
-		click(getElement(type), type);
+	public void clickInstantPayType() {
+		click(getTransactionSubTypes("Instant Pay"), "Instant Pay");
+	}
+
+	public void clickGiftCardType() {
+		click(getTransactionSubTypes("Gift Card"), "Gift Card");
+	}
+
+	public void clickFailedWithdrawType() {
+		click(getTransactionSubTypes("Failed Withdraw"), "Failed Withdraw");
+	}
+
+	public void clickWithdraFailedFee() {
+		click(getTransactionSubTypes("Failed Withdraw Fee"), "Failed Withdraw Fee");
 	}
 
 	public CalendarComponent calendarComponent() {
 		return new CalendarComponent();
 	}
 
-//	public PermissionAlert permissionAlert() {
-//		return new PermissionAlert();
-//	}
 	public NavigationComponent navigationComponent() {
 		return new NavigationComponent();
 	}

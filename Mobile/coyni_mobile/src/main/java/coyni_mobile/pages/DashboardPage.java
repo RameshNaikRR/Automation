@@ -1,5 +1,7 @@
 package coyni_mobile.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +18,9 @@ import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import coyni_mobile.components.AddNewPaymentComponent;
 import coyni_mobile.components.BuyTokenComponent;
 
@@ -31,7 +36,7 @@ public class DashboardPage extends MobileFunctions {
 	private By lblFirstTransaction = MobileBy.xpath(
 			"//*[@text='Recent transactions']/parent::*/following-sibling::*[contains(@resource-id,'rvLatestTrans')]/descendant::*[contains(@resource-id,'latestmessage')][1]");
 	private By lblNotificationCount = MobileBy.xpath("//*[@name='notifications_nobadge']/following-sibling::*[1]");
-	private By btnViewAllTransactions = MobileBy.xpath("(//*[@name='View More'])[1]");
+	private By btnViewAllTransactions = MobileBy.id("com.coyni.mapp:id/viewAllTrans");
 	private By btnAddAddress = MobileBy.xpath("//*[contains(@text,'Add an address')]");
 	private By lblAddAddressHeading = MobileBy
 			.xpath("//*[contains(@text,'Please enter your')]/preceding-sibling::android.widget.TextView");
@@ -98,7 +103,11 @@ public class DashboardPage extends MobileFunctions {
 	}
 
 	public void clickViewAllTransactions() {
-		scrollDownToElement(btnViewAllTransactions, "btnViewAllTransactions");
+		for (int i = 0; i <= 2; i++) {
+			TouchAction touch = new TouchAction(DriverFactory.getDriver());
+			touch.press(PointOption.point(540, 1395)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+					.moveTo(PointOption.point(540, (int) (1000))).release().perform();
+		}
 		click(btnViewAllTransactions, "ViewAllTransactions");
 	}
 

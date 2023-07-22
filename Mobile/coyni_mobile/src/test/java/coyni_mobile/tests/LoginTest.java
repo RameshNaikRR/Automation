@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.LoginPage;
+import coyni_mobile.pages.VisualTestingClass;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
@@ -18,11 +19,13 @@ public class LoginTest {
 
 	LoginPage loginPage;
 	LandingPage landingPage;
+	VisualTestingClass visualTestingClass;
 
 	@BeforeTest
 	public void init() {
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
+		visualTestingClass = new VisualTestingClass();
 		DriverFactory.getDriver().resetApp();
 		DriverFactory.getDriver().hideKeyboard();
 	}
@@ -41,6 +44,7 @@ public class LoginTest {
 			loginPage.fillEmail(loginData.get("email"));
 			loginPage.fillPassword(loginData.get("password"));
 			loginPage.clickLogin();
+//			visualTestingClass.testPinScreen();
 			loginPage.choosePinComponent().fillPin(loginData.get("pin"));
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().clickNotNow();
 			loginPage.choosePinComponent().enableFaceOrTouchIDpage().dashBoardPage().viewUserName();
@@ -585,6 +589,21 @@ public class LoginTest {
 		}
 	}
 
+	public void testRetrieveScreen(String strParams) {
+		try {
+			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
+			loginPage.clickDrpDwPhNum();
+			loginPage.selectCountry(loginData.get("country"));
+			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
+			loginPage.fillFirstName(loginData.get("firstName"));
+			loginPage.fillLastName(loginData.get("lastName"));
+			loginPage.clickNext();
+		} catch (Exception e) {
+			ExtentTestManager
+					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
+		}
+	}
+
 	@Test
 	@Parameters({ "strParams" })
 	public void testRetrieveEmailFoundAccountNavigationView(String strParams) {
@@ -691,18 +710,4 @@ public class LoginTest {
 	 * @param strParams
 	 */
 
-	public void testRetrieveScreen(String strParams) {
-		try {
-			Map<String, String> loginData = Runner.getKeywordParameters(strParams);
-			loginPage.clickDrpDwPhNum();
-			loginPage.selectCountry(loginData.get("country"));
-			loginPage.fillPhoneNumber(loginData.get("phoneNumber"));
-			loginPage.fillFirstName(loginData.get("firstName"));
-			loginPage.fillLastName(loginData.get("lastName"));
-			loginPage.clickNext();
-		} catch (Exception e) {
-			ExtentTestManager
-					.setFailMessageInReport("testRetrieveEmailWithInvalidCredentials Failed due to exception " + e);
-		}
-	}
 }

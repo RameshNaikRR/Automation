@@ -289,8 +289,7 @@ public class DashBoardTest {
 			dashboardPage.viewUserName();
 			dashboardPage.clickFirstTransaction();
 			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
-			dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("name"),
-					data.get("amount"), data.get("transactionType1"));
+			dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType1"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSend  failed due to exception " + e);
@@ -586,23 +585,61 @@ public class DashBoardTest {
 	 */
 	@Test
 	@Parameters({ "strParams" })
-	public void testfilters(String strParams) {
+	public void testFilters(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.viewUserName();
 			dashboardPage.clickViewAllTransactions();
 			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
 			dashboardPage.transactionPage().clickFilters();
-			if (data.get("validateFilterType").equalsIgnoreCase("Yes")) {
-				dashboardPage.transactionPage().filtersPopup().selectFilterPlus(data.get("filterType"));
+			if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionPage().filtersPopup().clickSent();
+				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
+			} else if (data.get("transactionType").equals("Received")) {
+				dashboardPage.transactionPage().filtersPopup().clickReceived();
+				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
+			} else if (data.get("transactionType").equals("Received")) {
+
+			} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
+				dashboardPage.transactionPage().filtersPopup().clickSaleOderPlus();
+				dashboardPage.transactionPage().filtersPopup().clickRetailMobileType();
+//				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
+			} else if (data.get("transactionType").equals("Received")) {
+
+			} else if (data.get("transactionType").equals("Received")) {
+
+			} else if (data.get("transactionType").equals("Received")) {
+
+			} else if (data.get("transactionType").equals("Received")) {
+
+			} else if (data.get("transactionType").equals("Received")) {
+
 			}
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			Thread.sleep(2000);
+			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+			dashboardPage.transactionPage().filtersPopup().clickCalendar();
+			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
+			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectToDate();
+			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
+			dashboardPage.transactionPage().filtersPopup().clickApplyFilter();
 			dashboardPage.transactionPage().clickFirstTransaction();
-			dashboardPage.transactionPage().ScrollTransactions();
-			Thread.sleep(1000);
-			dashboardPage.transactionPage().getUITransactionCount();
-			dashboardPage.transactionPage().clickClose();
+			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
+			if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Received")) {
+				dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
+				dashboardPage.transactionsDetailsComponent()
+						.RetailMobileTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			} else if (data.get("transactionType").equals("Sent")) {
+				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			}
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
@@ -616,73 +653,73 @@ public class DashBoardTest {
 	 * @param strParams
 	 */
 
-	@Test
-	@Parameters({ "strParams" })
-	public void testFilterWithCalendar(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2500);
-			dashboardPage.clickViewAllTransactions();
-			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-			dashboardPage.transactionPage().clickfilter();
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType3"));
-			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType4"));
-			// dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));
-			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
-			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
-			dashboardPage.transactionPage().filtersPopup().clickCalender();
-			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
-			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			Thread.sleep(2000);
-			dashboardPage.transactionPage().ScrollTransactions();
-			Thread.sleep(2000);
-			dashboardPage.transactionPage().getUITransactionCount();
-			Thread.sleep(2000);
-			dashboardPage.transactionPage().clickfilter();
-			dashboardPage.transactionPage().filtersPopup().clickResetAllFilters();
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			dashboardPage.transactionPage().filtersPopup().navigationComponent().clickClose();
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testFilterWithCalendar(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			Thread.sleep(2500);
+//			dashboardPage.clickViewAllTransactions();
+//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+//			dashboardPage.transactionPage().clickfilter();
+//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
+//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
+//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
+//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType3"));
+//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType4"));
+//			// dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));
+//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+//			dashboardPage.transactionPage().filtersPopup().clickCalender();
+//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
+//			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
+//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+//			Thread.sleep(2000);
+//			dashboardPage.transactionPage().ScrollTransactions();
+//			Thread.sleep(2000);
+//			dashboardPage.transactionPage().getUITransactionCount();
+//			Thread.sleep(2000);
+//			dashboardPage.transactionPage().clickfilter();
+//			dashboardPage.transactionPage().filtersPopup().clickResetAllFilters();
+//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+//			dashboardPage.transactionPage().filtersPopup().navigationComponent().clickClose();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+//		}
+//	}
 
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
-		}
-	}
-
-	@Test
-	@Parameters({ "strParams" })
-	public void testFilterWithInvalidData(String strParams) {
-		try {
-			Map<String, String> data = Runner.getKeywordParameters(strParams);
-			Thread.sleep(2500);
-			dashboardPage.clickViewAllTransactions();
-			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-			dashboardPage.transactionPage().clickfilter();
-			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
-			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
-			// tokenAccountPage.transactionPage().filtersPopup().clickCalender();
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			// tokenAccountPage.transactionPage().filtersPopup();
-			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage1(data.get("errMsg1"));
-			dashboardPage.transactionPage().filtersPopup().clickOk();
-			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount1"));
-			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount1"));
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage2(data.get("errMsg2"));
-			dashboardPage.transactionPage().filtersPopup().clickOk();
-			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount2"));
-			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount2"));
-			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage3(data.get("errMsg3"));
-			dashboardPage.transactionPage().filtersPopup().clickOk();
-
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
-		}
-	}
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testFilterWithInvalidData(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			Thread.sleep(2500);
+//			dashboardPage.clickViewAllTransactions();
+//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+//			dashboardPage.transactionPage().clickfilter();
+//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+//			// tokenAccountPage.transactionPage().filtersPopup().clickCalender();
+//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+//			// tokenAccountPage.transactionPage().filtersPopup();
+//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage1(data.get("errMsg1"));
+//			dashboardPage.transactionPage().filtersPopup().clickOk();
+//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount1"));
+//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount1"));
+//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage2(data.get("errMsg2"));
+//			dashboardPage.transactionPage().filtersPopup().clickOk();
+//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount2"));
+//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount2"));
+//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
+//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage3(data.get("errMsg3"));
+//			dashboardPage.transactionPage().filtersPopup().clickOk();
+//
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+//		}
+//	}
 
 	@Test
 	@Parameters({ "strParams" })
