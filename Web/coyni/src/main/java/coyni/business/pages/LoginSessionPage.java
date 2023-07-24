@@ -13,6 +13,7 @@ public class LoginSessionPage extends BrowserFunctions {
 	private By iconEndSession = By.xpath("");
 	private By lnkEndAllSessions = By.xpath("");
 
+
 	public void verifyLoginSessions(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblLoginSessions, "Heading is: ", expHeading);
 	}

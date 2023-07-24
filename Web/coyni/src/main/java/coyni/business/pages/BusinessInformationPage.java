@@ -1,8 +1,10 @@
 package coyni.business.pages;
 
 import java.awt.AWTException;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
@@ -10,13 +12,13 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class BusinessInformationPage extends BrowserFunctions {
 
-	private By lblHeading = By.xpath("");
+	private By lblHeading = By.xpath("(//span[text()='Business Information'])[2]");
 	private By lblDes = By.xpath("");
 	private By txtCompanyName = By.xpath("");
 	private By drpdwnBusinessEntity = By.xpath("");
 	private By txtBusinessStartDate = By.xpath("");
-	private By txtCompanyEmail = By.xpath("");
-	private By txtCompanyPhoneNumber = By.xpath("");
+	private By txtCompanyEmail = By.xpath("//input[@name='email']");
+	private By txtCompanyPhoneNumber = By.xpath("//input[@id='Phone Number']");
 	private By txtCompanyAddressLine1 = By.xpath("");
 	private By txtCompanyAddressLine2 = By.xpath("");
 	private By txtCity = By.xpath("");
@@ -29,92 +31,92 @@ public class BusinessInformationPage extends BrowserFunctions {
 	private By txtDBAAddressLine2 = By.xpath("");
 	private By lnkExit = By.xpath("");
 	private By btnNext = By.xpath("");
-	private By businessName = By.xpath("");
-	private By businessEntity = By.xpath("");
-	private By startDate = By.xpath("");
-	private By companyEmail = By.xpath("");
-	private By companyPhone = By.xpath("");
-	private By address = By.xpath("");
-	private By lblDBAInfo = By.xpath("");
-	private By dbaName = By.xpath("");
-	private By application = By.xpath("");
-	private By lblBusinessInfo = By.xpath("");
-	private By accountID = By.xpath("");
-	private By status = By.xpath("");
-	private By edit = By.xpath("");
-	private By btnSave=By.xpath("");
+	private By btnSave = By.xpath("");
 
+	// Business Settings - Business Information
+	private By businessName = By.xpath("//p[@class='text-xl font-bold text-cgy8']");
+	private By businessEntity = By.xpath("//div[@class='flex flex-row gap-[134px] mt-6'][1]");
+	private By startDate = By.xpath("//div[@class='flex flex-row gap-[134px] mt-6'][2]");
+	private By companyEmail = By.xpath("//div[@class='flex flex-row gap-[134px] mt-6'][3]");
+	private By companyPhone = By.xpath("//div[@class='flex flex-row gap-[134px] mt-6'][4]");
+	private By address = By.xpath("//div[@class='flex flex-row gap-[134px] mt-6'][5]");
+	private By lblDBAInfo = By.xpath("//span[text()='DBA Information']");
+	private By dbaName = By.xpath("//div[@class='flex flex-row gap-[134px] mt-8']");
+	private By application = By.xpath("//button[contains(@class,' BusinessInformation_AgreeCard__tazms')]");
+	private By accountID = By.xpath("//p[@class='text-xs text-cgy3']");
+	private By status = By.xpath("//div[@class='flex flex-wrap items-center gap-2 mt-3']");
+	private By editEmail = By.xpath("(//button[@class='mt-2 text-xs font-bold text-cm3 hover:underline'])[1]");
+	private By editPhone = By.xpath("(//button[@class='mt-2 text-xs font-bold text-cm3 hover:underline'])[2]");
+	
 	public void verifyBusinessName() {
 		String str = getText(businessName, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyBusinessEntity() {
 		String str = getText(businessEntity, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyStartDate() {
 		String str = getText(startDate, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyCompanyEmail() {
 		String str = getText(companyEmail, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
+	public void clickEditEmail() {
+		click(editEmail, "Edit");
 	}
 
 	public void verifyCompanyPhone() {
 		String str = getText(companyPhone, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
+	}
+
+	public void clickEditPhone() {
+		click(editPhone, "Edit Phone");
 	}
 
 	public void verifyAddress() {
 		String str = getText(address, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyDBAInfo() {
 		String str = getText(lblDBAInfo, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyDBAName() {
 		String str = getText(dbaName, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyApplication() {
 		String str = getText(application, "");
-		ExtentTestManager.setPassMessageInReport(str);
-	}
-
-	public void verifyBusinessInfo() {
-		String str = getText(lblBusinessInfo, "");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyAccountID() {
 		String str = getText(accountID, "AccountID");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport(str);
 	}
 
 	public void verifyStatus() {
 		String str = getText(status, "Status");
-		ExtentTestManager.setPassMessageInReport(str);
-	}
-
-	public void verifyEdit() {
-		String str = getText(edit, "Edit");
-		ExtentTestManager.setPassMessageInReport(str);
+		ExtentTestManager.setInfoMessageInReport("Status is " + str);
 	}
 
 	public void verifyHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading ", expHeading);
 	}
 
 	public void verifyDescription(String expDes) {
-		new CommonFunctions().verifyLabelText(lblDes, "Description is: ", expDes);
+		new CommonFunctions().verifyLabelText(lblDes, "Description: ", expDes);
 	}
 
 	public void fillCompanyName(String companyName) {
@@ -189,6 +191,14 @@ public class BusinessInformationPage extends BrowserFunctions {
 			ExtentTestManager.setPassMessageInReport("Next Button is Enabled");
 		} else {
 			ExtentTestManager.setFailMessageInReport("Next Button is Disabled");
+		}
+	}
+
+	public void viewDBAName() {
+		List<WebElement> rows = getElementsList(dbaName, "DBA Name");
+		for (WebElement row : rows) {
+			String replace = row.getText().replace("\n", "");
+			ExtentTestManager.setInfoMessageInReport(replace + " is Displayed");
 		}
 	}
 

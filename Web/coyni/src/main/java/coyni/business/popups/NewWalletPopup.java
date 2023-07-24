@@ -8,14 +8,14 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class NewWalletPopup extends BrowserFunctions {
 
-	private By lblNewWalletHedaing = By.xpath("");
-	private By txtWalletName = By.xpath("");
-	private By btnAdd = By.xpath("");
-	private By crossClose = By.xpath("");
+	private By lblNewWalletHedaing = By.xpath("//h1[text()='New Wallet']");
+	private By txtWalletName = By.xpath("//input[@id='wallet-name']");
+	private By btnAdd = By.xpath("//button[text()='Add']");
+	private By crossClose = By.xpath("//button[@class='self-end']");
 	private By chkBox = By.xpath("");
 
 	public void verifyNewWalletHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblNewWalletHedaing, "New Wallet Hedaing is: ", expHeading);
+		new CommonFunctions().verifyLabelText(lblNewWalletHedaing, "New Wallet Heading is: ", expHeading);
 	}
 
 	public void fillWalletName(String walletName) {

@@ -70,6 +70,7 @@ public class PaymentMethodsTest {
 					.addCardComponent().mailingAddressComponent().verifyCountry(data.get("country"));
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
 					.addCardComponent().mailingAddressComponent().clickNext();
+			Thread.sleep(4000);
 			ExtentTestManager
 					.setInfoMessageInReport("The debit card has been successfully added to your payment methods.");
 		} catch (Exception e) {
@@ -85,8 +86,6 @@ public class PaymentMethodsTest {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
 			businessSettingsPage.paymentMethodsComponent().clickAddNewPaymentMethod();
-//			if(condition=='Hello') {
-		
 			businessSettingsPage.paymentMethodsComponent().verifyPaymentMethodsview();
 			testAddCard(strParams, "debit");
 		} catch (Exception e) {

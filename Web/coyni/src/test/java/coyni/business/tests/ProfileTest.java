@@ -313,4 +313,20 @@ public class ProfileTest {
 		}
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testProfileLoginSessions(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			topBarComponent.clickDropDownUserName();
+			topBarComponent.userDetailsComponent().clickLoginSessions();
+			topBarComponent.userDetailsComponent().loginSessionPage().verifyLoginSessions(data.get("sessionHeading"));
+			topBarComponent.userDetailsComponent().loginSessionPage()
+					.verifyLoginSessionsDescription(data.get("sessionDescription"));
+//			topBarComponent.userDetailsComponent().loginSessionPage().
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testChangePasswordView failed due to exception " + e);
+		}
+	}
 }

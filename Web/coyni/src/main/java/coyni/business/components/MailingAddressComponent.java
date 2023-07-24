@@ -27,6 +27,10 @@ public class MailingAddressComponent extends BrowserFunctions {
 	private By txtSocialSecurity = By.cssSelector("#social-security-no");
 	private By btnNext = By.xpath("//button[@type='Save']");
 
+	public By getElement(String state) {
+		return By.xpath(String.format("//div[text()='%s']", state));
+	}
+
 	public void fillAddress1(String address1) {
 		enterText(txtAddress1, address1, "address line 1");
 	}
@@ -49,11 +53,16 @@ public class MailingAddressComponent extends BrowserFunctions {
 		By stateName = By.xpath(String.format("(//*[text()='%s'])[2]", state));
 		click(stateName, state);
 	}
+//
+//	public void selectState(String state) {
+//		click(drpDwnState, "State DropDown");
+//		By stateName = By.xpath(String.format("(//*[text()='%s'])[1]", state));
+//		click(stateName, state);
+//	}
 
 	public void selectState(String state) {
 		click(drpDwnState, "State DropDown");
-		By stateName = By.xpath(String.format("(//*[text()='%s'])[1]", state));
-		click(stateName, state);
+		click(getElement(state), state);
 	}
 
 	public void fillZipCode(String zipCode) {
