@@ -2,11 +2,12 @@ package coyni.business.pages;
 
 import org.openqa.selenium.By;
 
-import coyni.admin.MerchantServicescomponents.SideBarComponent;
+
 import coyni.admin.Paymentcomponents.TopBarComponent;
 import coyni.admin.Paymentpages.AdminUserDetailsPage;
 import coyni.admin.Paymentpages.LoginPage;
 import coyni.admin.components.AuthyComponent;
+import coyni.business.components.SideMenuBarComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -52,8 +53,8 @@ public class HomePage extends BrowserFunctions {
 	private String PhoneNumber;
 	private String Email;
 
-	public SideBarComponent sideBarComponent() {
-		return new SideBarComponent();
+	public SideMenuBarComponent sideMenuBarComponent() {
+		return new SideMenuBarComponent();
 	}
 
 	public TopBarComponent topBarComponent() {

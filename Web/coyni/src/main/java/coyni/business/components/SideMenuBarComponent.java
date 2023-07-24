@@ -117,7 +117,7 @@ public class SideMenuBarComponent extends BrowserFunctions {
 	public void verifyWallets() {
 		new CommonFunctions().elementView(getDashBoardItems("Wallets"), "Wallets");
 	}
-	
+
 	public void verifyPayments() {
 		new CommonFunctions().elementView(getDashBoardItems("Payments"), "Payments");
 	}
@@ -176,6 +176,11 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void verifyReserveHistory() {
 		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Reserve History"), "Reserve History push button ");
+	}
+
+	public void clickExports() throws InterruptedException {
+		click(getDashBoardItems("Exports"), "Exports");
+		Thread.sleep(4000);
 	}
 
 }

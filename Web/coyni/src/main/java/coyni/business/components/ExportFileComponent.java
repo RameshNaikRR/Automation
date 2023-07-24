@@ -2,18 +2,17 @@ package coyni.business.components;
 
 import org.openqa.selenium.By;
 
-import coyni.business.components.ToastComponent;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.web.actions.WaitForElement;
 
 public class ExportFileComponent extends BrowserFunctions {
-	private By btnDownload = By.xpath("//button[@data-for='Download']");
+	private By btnDownload = By.xpath("//span[@data-for='Download']");
 	private By txtSuccess = By.xpath("//span[text()='Success']");
 	private By chkboxBulkActions = By.xpath("//input[@type='checkbox']");
-	private By btnBulkActions = By.xpath("//div[text()='Bulk Actions']");
 	private By btnBulkAction = By.xpath("//div[text()='Bulk Action']");
+	private By btnBulkActions = By.xpath("//div[text()='Bulk Actions']");
 	private By btnBulkDownload = By.xpath("//data[text()='Download']");
-	private By chkboxFirstExport = By.xpath("(//input[@type='checkbox'])[2]");
+	private By chkboxFirstExport = By.xpath("(//input[@type='checkbox'])[9]");
 	private By chkboxTrash = By.xpath("//data[text()='Trash']");
 	private By btnApply = By.xpath("//div[text()='Apply']");
 
