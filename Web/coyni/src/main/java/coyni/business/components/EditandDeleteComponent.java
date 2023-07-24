@@ -38,6 +38,14 @@ public class EditandDeleteComponent extends BrowserFunctions {
 		Thread.sleep(3000);
 		ExtentTestManager.setInfoMessageInReport("Delete button clicked for card Number (Last Digits) " + (number));
 	}
+	public void clickBankAccountDelete(String number) throws InterruptedException {
+//		moveToElement(By.xpath(String.format("//p[contains(text(),'%s')]", number)), "card");
+		click(By.xpath(String.format(
+				"//div[contains(text(),'%s')]/ancestor::div[@class='flex justify-between items-center']//button[@data-tip='Remove Payment Method']",
+				number)), number);
+		Thread.sleep(3000);
+		ExtentTestManager.setInfoMessageInReport("Delete button clicked for card Number (Last Digits) " + (number));
+	}
 
 	public void clickConfirmDelete() {
 		click(btnConfirmDelete, "Confirm Delete");

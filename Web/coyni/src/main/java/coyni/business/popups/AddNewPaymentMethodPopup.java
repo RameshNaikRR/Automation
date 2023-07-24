@@ -10,10 +10,15 @@ public class AddNewPaymentMethodPopup extends BrowserFunctions {
 	private By btnExternalBankAccount = By.xpath("//span[@data-ui-auto='Bank Account']");
 	private By btnDebitCard = By.xpath("//p[@data-ui-auto='credit_card_details']");
 	private By lblDebitCardCount = By.xpath("//span[@data-ui-auto='count']");
+	private By bank = By.xpath("//span[@data-ui-auto='Bank Account']");
 
 	public void clickaddExternalBankAccount() {
 		click(btnExternalBankAccount, "Click ExternaBankAccount");
 
+	}
+
+	public void clickBankAccount() {
+		click(bank, "Bank Account");
 	}
 
 	public void clickDebitCard() {

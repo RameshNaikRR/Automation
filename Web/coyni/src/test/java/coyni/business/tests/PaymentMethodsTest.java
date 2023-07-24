@@ -2,13 +2,9 @@ package coyni.business.tests;
 
 import java.util.Map;
 
-import java.util.concurrent.TimeUnit;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni.business.components.SideBarMenuComponent;
 import coyni.business.pages.BusinessSettingsPage;
@@ -31,13 +27,66 @@ public class PaymentMethodsTest {
 
 	@Test
 	@Parameters({ "strParams" })
+	public void testAddBank(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.clickBankAccount();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup().verifyHeading();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+					.clickOnMXBankCheckBox();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup().clickNext();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup().clickOnMxBank();
+//			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+//					.enterBankName(data.get("expBankName"));
+			Thread.sleep(3000);
+//			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+//					.clickOnBankName();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+					.clickOnChecking();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup().clickContinue();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+					.enterUserName(data.get("expUserName"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+					.enterPassword(data.get("expPassword"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup().clickNext();
+			Thread.sleep(5000);
+
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addBankAccountPopup()
+					.successFailureComponent().verifyBankAddSuccesfulHeading();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport(" test Bank Account failed due to exception " + e);
+		}
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testAddBankAccount(String strParams) throws InterruptedException {
+		sideBarMenuComponent.clickBusinessSettings();
+		sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
+		sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().clickAddNewPaymentMethod();
+		testAddBank(strParams);
+	}
+
+	@Test
+	@Parameters({ "strParams" })
 	public void testDeleteBankAccount(String strParams) {
 		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickPaymentMethods();
-			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().bankDetails();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().editandDeleteComponent()
+					.clickBankAccountDelete(data.get("last4digits"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().removePaymentMethodPopup()
+					.verifyRemovePaymentHeading(data.get("removeHeading"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().removePaymentMethodPopup()
+					.verifyRemovePayDescription(data.get("removeDescription"));
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().removePaymentMethodPopup()
+					.verifyRemovePaymentDescription(data.get("removeDesc"));
 			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().removePaymentMethodPopup()
 					.clickRemove();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().removePaymentMethodPopup()
+					.toastComponent().verifyToastMessage(data.get("toastMessage"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testDeleteBankAccount is failed due to " + e);
@@ -130,8 +179,8 @@ public class PaymentMethodsTest {
 			for (int i = 0; i < msg.length; i++) {
 				new CommonFunctions().validateFormErrorMessage(msg[i]);
 			}
-			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent()
-					.addNewPaymentMethodPopup().addCardComponent().mailingAddressComponent().clickNext();
+			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent().addNewPaymentMethodPopup()
+					.addCardComponent().mailingAddressComponent().clickNext();
 //			sideBarMenuComponent.businessSettingsPage().paymentMethodsComponent()
 //					.cardAddedSuccessfullyPopup().navigationComponent().clickClose();
 

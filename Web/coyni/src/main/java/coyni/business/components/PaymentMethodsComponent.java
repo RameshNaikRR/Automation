@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import coyni.business.popups.AddBankAccountPopup;
+import coyni.business.popups.AddBankCheckingAccountPopup;
 import coyni.business.popups.AddNewPaymentMethodPopup;
 import coyni.business.popups.RemovePaymentMethodPopup;
 import coyni.uitilities.CommonFunctions;
@@ -88,7 +90,19 @@ public class PaymentMethodsComponent extends BrowserFunctions {
 		return new CardsComponent();
 	}
 
+	public EditandDeleteComponent editandDeleteComponent() {
+		return new EditandDeleteComponent();
+	}
+
 	public RemovePaymentMethodPopup removePaymentMethodPopup() {
 		return new RemovePaymentMethodPopup();
+	}
+
+	public AddBankAccountPopup addBankAccountPopup() {
+		return new AddBankAccountPopup();
+	}
+
+	public AddBankCheckingAccountPopup addBankCheckingAccountPopup() {
+		return new AddBankCheckingAccountPopup();
 	}
 }
