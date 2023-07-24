@@ -50,8 +50,16 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addBusinessComponent().clickNext();
 			homePage.sideBarComponent().addBusinessComponent().clickNext();
 			homePage.sideBarComponent().addBusinessComponent().clickSend();
-			Thread.sleep(6000);
-			homePage.sideBarComponent().addBusinessComponent().clickActivateAccountInYOPMail(data.get("firstName"));
+			
+			Thread.sleep(8000);
+			/*
+			 * if (!data.get("toastMerchantInvitation").isEmpty()) {
+			 * loginPage.toastComponent().verifyToast(data.get("toastTitle1"),
+			 * data.get("toastMerchantInvitation")); } Thread.sleep(2000);
+			 */
+			url = homePage.sideBarComponent().addBusinessComponent().businessInviteComponent().getUrl();
+			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent().navigateUrl(url);
+			Thread.sleep(2000);
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
 					.verifyInviteHeading(data.get("inviteHeading"));
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent().clickNewAccount();
@@ -62,7 +70,7 @@ public class BusinessProfileTest {
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
 			.activateAccountComponent().fillLastName(data.get("lastName"));
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
-			.activateAccountComponent().fillEmail1();
+			.activateAccountComponent().fillEmail1(mail);
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()
 			.activateAccountComponent().fillPhoneNumber();
 			homePage.sideBarComponent().addBusinessComponent().businessInviteComponent()

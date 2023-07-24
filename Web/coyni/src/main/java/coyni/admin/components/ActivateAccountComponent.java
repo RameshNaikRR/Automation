@@ -36,8 +36,8 @@ public class ActivateAccountComponent extends BrowserFunctions {
 		enterText(txtEmail, phoneNum, "Email");
 
 	}
-	public void fillEmail1() {
-		enterText(txtEmail, generateEmail(), "Email");
+	public void fillEmail1(String mail) {
+		enterText(txtEmail, mail, "Email");
 
 	}
 	public static String generateEmail() {

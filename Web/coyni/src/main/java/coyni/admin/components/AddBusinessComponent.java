@@ -137,7 +137,8 @@ public class AddBusinessComponent extends BrowserFunctions {
 	}
 
 	public String getEmail() {
-		return YopMail;
+		String str=MailHelper.getRandomMailID();
+		return str;
 	}
 
 	public void validateFirstNameField(String firstName) {
