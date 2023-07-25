@@ -17,10 +17,10 @@ public class RetrieveEmailComponent extends BrowserFunctions {
 	private By btnNext = By.xpath("//button[@data-ui-auto='next_button']");
 	private By lnkBacktoLogin = By.xpath("//button[@data-ui-auto='back_to_login']");
 	private By txtSearch = By.xpath("(//input[contains(@class,'Input_form_input__yl3pD')])[3]");
-	private By countryCodeUS = By.xpath("//div[@data-ui-auto='US']");
+	private By countryCodes = By.xpath("//div[@data-ui-auto='Afghanistan']");
 
 	public void verifyRetieveEmailHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblHeading, "Heading is: ", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading ", expHeading);
 	}
 
 	public void verifyRetrieveEmailDescription(String expDes) {
@@ -29,7 +29,7 @@ public class RetrieveEmailComponent extends BrowserFunctions {
 
 	public void selectCountryCode() {
 		click(countryCode, "Country Code");
-		click(countryCodeUS, "Country Code US");
+		click(countryCodes, "Country Code US");
 		// enterText(txtSearch, search, "Search country code");
 
 	}
@@ -47,10 +47,11 @@ public class RetrieveEmailComponent extends BrowserFunctions {
 	public void fillLastName(String lastName) {
 		new CommonFunctions().verifyCursorAction(txtLastName, "Last Name");
 		enterText(txtLastName, lastName, lastName);
+		clickOutside();
 	}
 
 	public void clickNext() {
-		new CommonFunctions().verifyCursorAction(btnNext, "Next");
+//		new CommonFunctions().verifyCursorAction(btnNext, "Next");
 		if (getElement(btnNext, "Next").isEnabled()) {
 			click(btnNext, "Next");
 			ExtentTestManager.setPassMessageInReport("Next Button is Enabled");

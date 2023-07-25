@@ -7,6 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import coyni.business.components.SideMenuBarComponent;
+import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.Runner;
 import ilabs.api.reporting.ExtentTestManager;
 
@@ -23,35 +24,25 @@ public class SideMenuBarTest {
 	public void testSideMenuBar(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			sideMenuBarComponent.handSymbolHighlightedTokenAccount(data.get("cssProp"), data.get("value"),
-//					data.get("color"));
 			sideMenuBarComponent.verifyWallets();
-//			sideMenuBarComponent.handSymbolHighlightedExportFiles(data.get("cssProp"), data.get("value"),
-//					data.get("color"));
+			sideMenuBarComponent.clickWallets();
 			sideMenuBarComponent.verifyPayments();
-			sideMenuBarComponent.verifyExportFilesPushBtn();
-//			sideMenuBarComponent.handSymbolHighlightedBusinessSettings(data.get("cssProp"), data.get("value"),
-//					data.get("color"));
-			sideMenuBarComponent.verifyMerchnatSettingsPushBtn();
-//			sideMenuBarComponent.handSymbolHighlightedGetHelp(data.get("cssProp"), data.get("value"),
-//					data.get("color"));
+			Thread.sleep(3000);
+//			sideMenuBarComponent.paymentsDropDown();
+			sideMenuBarComponent.clickACH();
+			sideMenuBarComponent.clickWire();
+			sideMenuBarComponent.approvals();
+			sideMenuBarComponent.payees();
+			sideMenuBarComponent.clickPayments();
+			sideMenuBarComponent.verifyExports();
+			sideMenuBarComponent.clickExports();
+			sideMenuBarComponent.verifyBusinessSettings();
+			sideMenuBarComponent.clickBusinessSettings();
 			sideMenuBarComponent.verifyGetHelpPushBtn();
+			sideMenuBarComponent.clickGetHelp();
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSideMenuBar failed due to " + e);
-		}
-	}
-
-	@Test
-	public void testMerchantActivityDrpDwn() {
-		try {
-			sideMenuBarComponent.clickMerchantActivityDrpDwn();
-			sideMenuBarComponent.verifyDashboard();
-			sideMenuBarComponent.verifyTransactions();
-			sideMenuBarComponent.verifyPayoutHistory();
-			sideMenuBarComponent.verifyReserveHistory();
-		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testMerchantActivityDrpDwn failed due to " + e);
 		}
 	}
 

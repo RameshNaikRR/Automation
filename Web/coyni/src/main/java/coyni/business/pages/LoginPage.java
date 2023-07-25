@@ -16,6 +16,7 @@ import coyni.business.components.ForgotPasswordComponent;
 import coyni.business.components.PhoneVerificationComponent;
 import coyni.business.components.RetrieveEmailComponent;
 import coyni.business.components.ToastComponent;
+import coyni.business.components.WeFoundYourAccountComponent;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
 import ilabs.WebFramework.DriverFactory;
@@ -361,6 +362,10 @@ public class LoginPage extends BrowserFunctions {
 
 	public RetrieveEmailComponent retrieveEmailComponent() {
 		return new RetrieveEmailComponent();
+	}
+
+	public WeFoundYourAccountComponent weFoundYourAccountComponent() {
+		return new WeFoundYourAccountComponent();
 	}
 
 }

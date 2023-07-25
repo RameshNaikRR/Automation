@@ -18,10 +18,10 @@ import ilabs.api.reporting.ExtentTestManager;
 
 public class AuthyComponent extends BrowserFunctions {
 	private By inputBox = By.cssSelector("input[class *= 'verification-input']");
-	private By lblHeading = By.cssSelector(".verify-identity__title");
-	private By lblDescription = By.cssSelector(".verify-identity__sub-title");
+	private By lblHeading = By.xpath("//div[text()='Two-Step Authentication']");
+	private By lblDescription = By.xpath("//p[@data-ui-auto='enter_verification_code']");
 	private By txtInput = By.cssSelector("input[class *= 'verification-input']:nth-of-type(1)");
-	private By sms = By.xpath("//div[@class='text-xs text-left text-cgy3 group-hover:text-cgy4']");
+	private By sms = By.xpath("//span[@data-ui-auto='get_sms_code']");
 	private By lnkSmsCode = By.xpath("//div[contains(@class,'text-xs text-left text-cgy3 group-hover:text-cgy4')]");
 	private By lblMessage = By.cssSelector("span[class*='VerificationInput_code'],span.text-crd5");
 	private By lnkGoBack = By.xpath("//div[text()='Go Back']");

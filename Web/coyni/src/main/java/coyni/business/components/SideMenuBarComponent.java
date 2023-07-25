@@ -18,6 +18,12 @@ public class SideMenuBarComponent extends BrowserFunctions {
 			.xpath("(//button[@class='absolute bg-cwhite UserProfile_QR_main__7Go2P cursor-pointer false'])[1]");
 	private By lblColor = By.xpath("//div[contains(@class,'justify-center rounded-l-full')]");
 	private By lbllColor = By.xpath("//div[@data-tip='merchant-application']//button");
+	private By paymentsDrpDown = By
+			.xpath("//div[@class='icon-small-arrow text-xs mr-3 font-semibold text-cm3 arrowUp ']");
+	private By ACH = By.xpath("//button[text()='ACH Payments']");
+	private By wire = By.xpath("//button[text()='Wire Payments']");
+	private By approvals = By.xpath("//button[text()='Approvals']");
+	private By payees = By.xpath("//button[text()='Payees']");
 //	private By btnMerchantActivityDropDown = By
 //			.xpath("(//div[contains(@class,'icon-small-arrow text-xs mr-3 font-semibold text-cm3 arrowUp ')])[1]");
 
@@ -102,40 +108,60 @@ public class SideMenuBarComponent extends BrowserFunctions {
 		new CommonFunctions().elementView(userNameDrpDwn, "User Name ");
 	}
 
-	public void clickMerchantActivityDrpDwn() {
-		click(getDashBoardItems("Merchant Activity"), "Merchant Activity");
-	}
-
-	public void verifyMerchantActivityDrpDwn() {
-		new CommonFunctions().elementView(getDashBoardItems("Merchant Activity"), "Merchant Activity");
-	}
-
-	public void clickTokenAccount() {
-		click(getDashBoardItems("Token Account"), "Token Account");
-	}
-
 	public void verifyWallets() {
 		new CommonFunctions().elementView(getDashBoardItems("Wallets"), "Wallets");
+//		new CommonFunctions().verifyMouseHoverAction(getDashBoardItems("Wallets"), "Wallets", "", "");
+	}
+
+	public void paymentsDropDown() {
+		click(paymentsDrpDown, "Drop Down");
+	}
+
+	public void clickWallets() {
+		click(getDashBoardItems("Wallets"), "Wallets");
+	}
+
+	public void clickACH() {
+		click(ACH, "ACH Payments");
 	}
 
 	public void verifyPayments() {
 		new CommonFunctions().elementView(getDashBoardItems("Payments"), "Payments");
+//		new CommonFunctions().verifyMouseHoverAction(getDashBoardItems("Payments"), "Payments", "", "");
 	}
 
-	public void clickExportFiles() {
-		click(getDashBoardItems("Export Files"), "Export Files");
+	public void clickWire() {
+		click(wire, "Wire Payments");
 	}
 
-	public void verifyExportFilesPushBtn() {
-		new CommonFunctions().elementView(getDashBoardItems("Export Files"), "Export Files");
+	public void approvals() {
+		click(approvals, "Approvals");
 	}
 
-	public void clickMerchantSettings() {
-		click(getDashBoardItems("Merchant Settings"), "Merchant Settings");
+	public void payees() {
+		click(payees, "Payees");
 	}
 
-	public void verifyMerchnatSettingsPushBtn() {
-		new CommonFunctions().elementView(getDashBoardItems("Merchant Settings"), "Merchant Settings");
+	public void clickPayments() {
+		click(getDashBoardItems("Payments"), "Payments");
+	}
+
+	public void verifyExports() {
+		new CommonFunctions().elementView(getDashBoardItems("Exports"), "Exports");
+//		new CommonFunctions().verifyMouseHoverAction(getDashBoardItems("Exports"), "Exports","","");
+	}
+
+	public void clickExports() {
+		click(getDashBoardItems("Exports"), "Exports");
+	}
+
+	public void verifyBusinessSettings() {
+		new CommonFunctions().elementView(getDashBoardItems("Business Settings"), "Business Settings");
+//		new CommonFunctions().verifyMouseHoverAction(getDashBoardItems("Business Settings"), "Business Settings","","");
+	}
+
+	public void clickBusinessSettings() {
+		click(getDashBoardItems("Business Settings"), "Business Settings");
 	}
 
 	public void clickGetHelp() {
@@ -176,11 +202,6 @@ public class SideMenuBarComponent extends BrowserFunctions {
 
 	public void verifyReserveHistory() {
 		new CommonFunctions().elementView(getMerchantActivityDrpDwn("Reserve History"), "Reserve History push button ");
-	}
-
-	public void clickExports() throws InterruptedException {
-		click(getDashBoardItems("Exports"), "Exports");
-		Thread.sleep(4000);
 	}
 
 }

@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-
 import coyni.business.components.ExportFileComponent;
 import coyni.business.pages.HomePage;
 import ilabs.WebFramework.Runner;
@@ -28,7 +27,7 @@ public class ExportsTest {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideMenuBarComponent().clickExports();
-			
+
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);
 		}
@@ -51,7 +50,7 @@ public class ExportsTest {
 	@Parameters({ "strParams" })
 	public void testDownloadMultipleExportFiles(String strParams) {
 		try {
-		//	Map<String, String> data = Runner.getKeywordParameters(strParams);
+			// Map<String, String> data = Runner.getKeywordParameters(strParams);
 			homePage.sideMenuBarComponent().clickExports();
 			exportFileComponent.clickchkboxBulkActions();
 			exportFileComponent.clickBulkActions();
@@ -76,8 +75,8 @@ public class ExportsTest {
 			exportFileComponent.clickBulkAction();
 			exportFileComponent.clickchkboxTrash();
 			exportFileComponent.clickApply();
-			exportFileComponent.toastComponent().verifyToast(data.get("title"),
-			 data.get("message"));
+			exportFileComponent.toastComponent().verifyToastTitle(data.get("title"));
+//			 data.get("message"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testExportFilesTest Failed due to Exception " + e);

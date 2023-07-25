@@ -58,7 +58,7 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 //	
 
 	public void verifyEmailVerificationHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(emailHeading, "Phone verification Heading", expHeading);
+		new CommonFunctions().verifyLabelText(emailHeading, "Email verification Heading", expHeading);
 	}
 
 	public void verifyEmail(String email) {
@@ -157,5 +157,8 @@ public class ForgotPasswordComponent extends BrowserFunctions {
 		} else {
 			ExtentTestManager.setInfoMessageInReport(password + " not masked with black circles");
 		}
+	}
+	public AuthyComponent authyComponent() {
+		return new AuthyComponent();
 	}
 }

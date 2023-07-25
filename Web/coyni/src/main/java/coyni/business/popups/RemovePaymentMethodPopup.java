@@ -17,7 +17,7 @@ public class RemovePaymentMethodPopup extends BrowserFunctions {
 	private By crossClose = By.xpath("");
 
 	public void verifyRemovePaymentHeading(String expHeading) {
-		new CommonFunctions().verifyLabelText(lblRemovePaymentHeading, "Heading is: ", expHeading);
+		new CommonFunctions().verifyLabelText(lblRemovePaymentHeading, "Heading ", expHeading);
 	}
 
 	public void verifyRemovePayDescription(String expDes) {

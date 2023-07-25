@@ -1,23 +1,19 @@
 package coyni.business.components;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import coyni.business.pages.ChooseAccountPage;
 import coyni.uitilities.CommonFunctions;
 import ilabs.WebFramework.BrowserFunctions;
-import ilabs.api.reporting.ExtentTestManager;
 
 public class PhoneVerificationComponent extends BrowserFunctions {
 
-	private By lblPhoneHeading = By.xpath("");
+	private By lblPhoneHeading = By.xpath("//div[text()='Phone Verification']");
 	private By lblPhoneDescription = By.xpath("");
 	private By lnkResendCode = By.xpath("");
 	private By inputBox = By.cssSelector("");
 	private By lblMessage = By.cssSelector("");
-	private By lnkBacktoLogin = By.xpath("");
+	private By lnkBacktoLogin = By.xpath("//button[@data-ui-auto='back_to_login']");
 	private By backArrow = By.xpath("");
 
 	public void verifyPhoneVerificationHeading(String expHeading) {
