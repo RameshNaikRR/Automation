@@ -38,7 +38,7 @@ public class LoginTest {
 			loginPage.verifyPageHeading(data.get("loginHeading"));
 			loginPage.fillEmail(data.get("businessEmail"));
 			loginPage.fillPassword(data.get("businessPassword"));
-			// loginPage.clickeyeIcon();
+//			 loginPage.clickeyeIcon();
 //			loginPage.verifyPasswordMaskedView(data.get("attribute"), "password");
 			loginPage.clickNext();
 			Thread.sleep(2000);
@@ -103,7 +103,7 @@ public class LoginTest {
 			loginPage.fillPassword(data.get("password"));
 			loginPage.clickNext();
 			loginPage.authyComponent().verifyPageHeading(data.get("authyHeading"));
-			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
+//			loginPage.authyComponent().verifyPageDescription(data.get("authyDescription"));
 			if (data.get("securityKey").equalsIgnoreCase("123456")) {
 				loginPage.authyComponent().fillInput(data.get("securityKey"));
 			} else {

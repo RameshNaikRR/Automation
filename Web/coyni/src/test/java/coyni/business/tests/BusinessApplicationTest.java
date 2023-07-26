@@ -30,7 +30,7 @@ public class BusinessApplicationTest {
 	@Parameters({ "strParams" })
 	public void testBusinessApplicationSideBarMenu(String strParams) {
 		try {
-			sideBarMenuComponent.verifyBusinessApplicationTrackerView();
+			sideBarMenuComponent.verifyBusinessApplicationTrackerView();		
 			sideBarMenuComponent.clickWallets();
 			sideBarMenuComponent.clickPayments();
 			sideBarMenuComponent.clickExports();

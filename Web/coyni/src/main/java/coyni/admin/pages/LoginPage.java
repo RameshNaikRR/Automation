@@ -39,6 +39,7 @@ public class LoginPage extends BrowserFunctions {
 	public void fillPassword(String password) {
 		enterText(txtPassword, password, "Password");
 	}
+	
 
 	public void clickEyeIcon() {
 		click(eyeIcon, "EyeIcon");

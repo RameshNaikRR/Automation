@@ -59,6 +59,7 @@ public class LoginPage extends BrowserFunctions {
 			.xpath("//h1[contains(text(),'Merchant Application Additional Documentation')]");
 	private By lblWelcome = By.xpath("//span[contains(text(),'Welcome to ')]");
 	private By btnClose = By.xpath("//button[@classs='self-end']");
+	
 
 	CommonFunctions commonfunctions = new CommonFunctions();
 
@@ -73,6 +74,7 @@ public class LoginPage extends BrowserFunctions {
 	public void fillEmail(String email) {
 		enterText(txtEmail, email, "Email");
 	}
+
 
 	public void getEmail() {
 		String text = getText(txtEmail, "Email");

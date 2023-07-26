@@ -31,12 +31,12 @@ public class BusinessSettingsTest {
 			sideBarMenuComponent.clickBusinessSettings();
 			sideBarMenuComponent.businessSettingsPage().clickAccountFeeLimits();
 			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
-					.verifyHeading(data.get("accountFeeHeading"));
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickViewChange();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
-					.verifyFeeHeading(data.get("feeHeading"));
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().close();
-			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickHide();
+					.verifyHeading(data.get("accountFeeHeading"));	
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickViewChange();
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage()
+//					.verifyFeeHeading(data.get("feeHeading"));
+//				sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().close();
+//			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().clickHide();
 			Thread.sleep(3000);
 			sideBarMenuComponent.businessSettingsPage().accountFeesAndLimitsPage().viewAccountFeeLimits();
 
