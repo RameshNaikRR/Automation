@@ -235,12 +235,14 @@ public class SendRequestPage extends MobileFunctions {
 		return getText(lblName);
 	}
 
-	public void clickSend() {
+	public void clickSend() throws InterruptedException {
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnSend));
 		click(btnSend, "Send");
 	}
 
-	public void clickRequest() {
+	public void clickRequest() throws InterruptedException {
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnRequest));
 		click(btnRequest, "Request");
 	}

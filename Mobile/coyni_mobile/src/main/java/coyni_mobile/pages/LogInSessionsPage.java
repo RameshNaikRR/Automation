@@ -46,7 +46,7 @@ public class LogInSessionsPage extends MobileFunctions {
 	}
 
 	public void clickChangePassword() {
-		wait.until(ExpectedConditions.presenceOfElementLocated(btnChangePassword));
+		wait.until(ExpectedConditions.elementToBeClickable(btnChangePassword));
 		click(btnChangePassword, "Change Password");
 	}
 

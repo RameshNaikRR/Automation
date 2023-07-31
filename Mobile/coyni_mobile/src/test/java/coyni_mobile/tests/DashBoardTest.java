@@ -289,7 +289,8 @@ public class DashBoardTest {
 			dashboardPage.viewUserName();
 			dashboardPage.clickFirstTransaction();
 			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
-			dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType1"));
+			dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType1"),
+					data.get("transactionStatus"));
 
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSend  failed due to exception " + e);
@@ -375,6 +376,7 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().clickDone();
 			dashboardPage.clickNotifications();
 			dashboardPage.notificationsPage().verifyNotificationHeading(data.get("notificationsHeading"));
+			Thread.sleep(3000);
 			dashboardPage.notificationsPage().clickRequest();
 			dashboardPage.notificationsPage().verifySendSentMessage(data.get("name"), data.get("amount"),
 					data.get("message"));
@@ -583,38 +585,25 @@ public class DashBoardTest {
 	 * 
 	 * @param strParams
 	 */
+
 	@Test
 	@Parameters({ "strParams" })
-	public void testFilters(String strParams) {
+	public void testFiltersWithOneTransactionType(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			dashboardPage.viewUserName();
 			dashboardPage.clickViewAllTransactions();
 			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
 			dashboardPage.transactionPage().clickFilters();
-			if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionPage().filtersPopup().clickSent();
-				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
-			} else if (data.get("transactionType").equals("Received")) {
-				dashboardPage.transactionPage().filtersPopup().clickReceived();
-				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
-			} else if (data.get("transactionType").equals("Received")) {
-
-			} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
-				dashboardPage.transactionPage().filtersPopup().clickSaleOderPlus();
-				dashboardPage.transactionPage().filtersPopup().clickRetailMobileType();
-//				dashboardPage.transactionPage().filtersPopup().clickCompletedStatus();
-			} else if (data.get("transactionType").equals("Received")) {
-
-			} else if (data.get("transactionType").equals("Received")) {
-
-			} else if (data.get("transactionType").equals("Received")) {
-
-			} else if (data.get("transactionType").equals("Received")) {
-
-			} else if (data.get("transactionType").equals("Received")) {
-
+			if (data.get("transactionType").equals("Sent") || data.get("transactionType").equals("Received")) {
+				dashboardPage.transactionPage().filtersPopup().clickTransactionType(data.get("transactionType"));
+			} else {
+				dashboardPage.transactionPage().filtersPopup()
+						.clickTransactionTypePlus(data.get("transactionTypePlus"));
+				dashboardPage.transactionPage().filtersPopup()
+						.clickTransactionSubTypesChkBox(data.get("transactionType1"));
 			}
+			dashboardPage.transactionPage().filtersPopup().clickTransactionStatus(data.get("transactionStatus"));
 			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
 			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
 			dashboardPage.transactionPage().filtersPopup().clickCalendar();
@@ -622,29 +611,87 @@ public class DashBoardTest {
 			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectToDate();
 			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
 			dashboardPage.transactionPage().filtersPopup().clickApplyFilter();
-			dashboardPage.transactionPage().clickFirstTransaction();
-			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
-			if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Received")) {
-				dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
-				dashboardPage.transactionsDetailsComponent()
-						.RetailMobileTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
-			} else if (data.get("transactionType").equals("Sent")) {
-				dashboardPage.transactionsDetailsComponent().filterSentTransactionDetails(data.get("transactionType"));
+			if (dashboardPage.transactionPage().verifyTransactions() == 0) {
+				dashboardPage.transactionPage().clickFirstTransaction();
+				dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
+				if (data.get("transactionType").equals("Sent")) {
+					dashboardPage.transactionsDetailsComponent()
+							.filterSentTransactionDetails(data.get("transactionType"), data.get("transactionStatus"));
+				} else if (data.get("transactionType").equals("Received")) {
+					dashboardPage.transactionsDetailsComponent().receivedTransactionDetails(data.get("transactionType"),
+							data.get("transactionStatus"));
+				} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
+					dashboardPage.transactionsDetailsComponent()
+							.RetailMobileTransactionDetails(data.get("transactionType"));
+				} else if (data.get("transactionTypePlus").equals("Buy Tokens")) {
+					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+							data.get("transactionStatus"), data.get("transactionType1"));
+				} else if (data.get("transactionType1").equals("Gift Card")) {
+					dashboardPage.transactionsDetailsComponent().withdrawGiftCardTransactionsDetails(
+							data.get("transactionType"), data.get("transactionStatus"));
+				} else if (data.get("transactionTypePlus").equals("Withdraw")) {
+					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+							data.get("transactionStatus"), data.get("transactionType1"));
+				}
+			} else {
+				dashboardPage.transactionPage().verifyTransactionsText(data.get("noMoreTrans"));
+				ExtentTestManager.setWarningMessageInReport("You have any transactions to verify details");
 			}
-
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
 		}
 	}
+
+//	@Test
+//	@Parameters({ "strParams" })
+//	public void testFiltersWithMoreTransactionTypes(String strParams) {
+//		try {
+//			Map<String, String> data = Runner.getKeywordParameters(strParams);
+//			dashboardPage.viewUserName();
+//			dashboardPage.clickViewAllTransactions();
+//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+//			dashboardPage.transactionPage().clickFilters();
+//			String[] 
+//			dashboardPage.transactionPage().filtersPopup().clickTransactionTypePlus(data.get("transactionTypePlus"));
+//			dashboardPage.transactionPage().filtersPopup().clickTransactionSubTypesChkBox(data.get("transactionType1"));
+//			dashboardPage.transactionPage().filtersPopup().clickTransactionStatus(data.get("transactionStatus"));
+//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
+//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
+//			dashboardPage.transactionPage().filtersPopup().clickCalendar();
+//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
+//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectToDate();
+//			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
+//			dashboardPage.transactionPage().filtersPopup().clickApplyFilter();
+//			if (dashboardPage.transactionPage().verifyTransactions() == 0) {
+//				dashboardPage.transactionPage().clickFirstTransaction();
+//				dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
+//				if (data.get("transactionType").equals("Sent")) {
+//					dashboardPage.transactionsDetailsComponent()
+//							.filterSentTransactionDetails(data.get("transactionType"));
+//				} else if (data.get("transactionType").equals("Received")) {
+//					dashboardPage.transactionsDetailsComponent()
+//							.receivedTransactionDetails(data.get("transactionType"));
+//				} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
+//					dashboardPage.transactionsDetailsComponent()
+//							.RetailMobileTransactionDetails(data.get("transactionType"));
+//				} else if (data.get("transactionTypePlus").equals("Buy Tokens")) {
+//					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+//							data.get("transactionStatus"), data.get("transactionType1"));
+//				} else if (data.get("transactionType1").equals("Gift Card")) {
+//					dashboardPage.transactionsDetailsComponent().withdrawGiftCardTransactionsDetails(
+//							data.get("transactionType"), data.get("transactionStatus"), data.get("transactionType1"));
+//				} else if (data.get("transactionTypePlus").equals("Withdraw")) {
+//					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+//							data.get("transactionStatus"), data.get("transactionType1"));
+//				}
+//			} else {
+//				dashboardPage.transactionPage().verifyTransactionsText(data.get("noMoreTrans"));
+//				ExtentTestManager.setWarningMessageInReport("You have any transactions to verify details");
+//			}
+//		} catch (Exception e) {
+//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
+//		}
+//	}
 
 	/**
 	 * testFilterWithCalendar script is to test the transactions applying filters
@@ -759,6 +806,10 @@ public class DashBoardTest {
 				}
 			}
 			testBuyTokenProcedure(strParams);
+			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
+			dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+					data.get("transactionStatus"), data.get("transactionType1"));
+			dashboardPage.navigationComponent().clickBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithCards failed due to exception " + e);
 		}
@@ -778,6 +829,10 @@ public class DashBoardTest {
 				dashboardPage.buyTokenComponent().clickBank();
 			}
 			testBuyTokenProcedure(strParams);
+			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
+			dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+					data.get("transactionStatus"), data.get("transactionType1"));
+			dashboardPage.navigationComponent().clickBack();
 //			businessTransactionDetailsTest.testVerifyBuyTokenBankTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
@@ -809,7 +864,7 @@ public class DashBoardTest {
 			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent()
 					.verifyAmount(data.get("amount"));
 //			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
-			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickDone();
+//			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
@@ -847,6 +902,10 @@ public class DashBoardTest {
 				dashboardPage.buyTokenComponent().clickInstantPayDebitCard();
 			}
 			testWithdrawTokenProcedure(strParams);
+			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
+			dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+					data.get("transactionStatus"), data.get("transactionType1"));
+			dashboardPage.navigationComponent().clickBack();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithCards failed due to exception " + e);
 		}
@@ -868,6 +927,10 @@ public class DashBoardTest {
 				dashboardPage.withdrawTokenPage().clickBank();
 			}
 			testWithdrawTokenProcedure(strParams);
+			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
+			dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
+					data.get("transactionStatus"), data.get("transactionType1"));
+			dashboardPage.navigationComponent().clickBack();
 //			businessTransactionDetailsTest.testVerifyBuyTokenBankTransaction(strParams);
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
@@ -900,7 +963,7 @@ public class DashBoardTest {
 			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent()
 					.verifyAmount(data.get("amount"));
 //			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
-			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent().clickDone();
+//			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
@@ -945,6 +1008,8 @@ public class DashBoardTest {
 			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent()
 					.verifyAmount(data.get("amount"));
 			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent().clickViewTransaction();
+			dashboardPage.transactionsDetailsComponent().withdrawGiftCardTransactionsDetails(
+					data.get("transactionType"), data.get("transactionStatus"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawGiftCard  failed due to exception " + e);
 		}
@@ -1119,6 +1184,7 @@ public class DashBoardTest {
 				dashboardPage.myQRCodePage().getRequestedAmount(data.get("amount"));
 			}
 			dashboardPage.myQRCodePage().clickSaveAlbum();
+			dashboardPage.scanPage().clickAllow();
 			dashboardPage.myQRCodePage().toastComponent().verifyToastMsg(data.get("toastMsg"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReceivePaymentView  failed due to exception " + e);

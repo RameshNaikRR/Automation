@@ -2,6 +2,7 @@ package coyni_mobile.tests;
 
 import java.util.Map;
 
+import org.openqa.selenium.ScreenOrientation;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,18 +12,18 @@ import coyni_mobile.pages.LoginPage;
 import coyni_mobile.pages.VisualTestingClass;
 import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
-import ilabs.MobileFramework.MobileFunctions;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
 
 public class LoginTest {
-
 	LoginPage loginPage;
 	LandingPage landingPage;
 	VisualTestingClass visualTestingClass;
 
 	@BeforeTest
 	public void init() {
+		System.out.println("Hello World");
+		DriverFactory.getDriver().rotate(ScreenOrientation.PORTRAIT);
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
 		visualTestingClass = new VisualTestingClass();
@@ -663,6 +664,7 @@ public class LoginTest {
 			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
 			testRetrieveScreen(strParams);
 			loginPage.verifyNoUserFound(loginData.get("noUserDesc"));
+			Thread.sleep(1200);
 			loginPage.clickTryAgain();
 			loginPage.verifyRetrievEmailHeading(loginData.get("retrieveHeading"));
 			loginPage.validateThisIsNotMe();
@@ -675,7 +677,7 @@ public class LoginTest {
 			testRetrieveScreen(strParams);
 //			loginPage.viewNoUserFound();
 			loginPage.verifyNoUserFound(loginData.get("noUserDesc"));
-			loginPage.navigationComponent().clickClose();
+			loginPage.clickClose();
 			loginPage.verifyImageCoyniView();
 			String loginemail = loginPage.validateLoginEmail();
 			if (loginemail.equals("") || loginemail.equals("Email")) {

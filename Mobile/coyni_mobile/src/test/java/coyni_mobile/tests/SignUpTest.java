@@ -87,34 +87,63 @@ public class SignUpTest {
 						.clickSkip();
 				if (signUpPage.phoneAndEmailVerificationComponent().accountCreatedPage().VerifyGoToDashboard() == 1) {
 					signUpPage.phoneAndEmailVerificationComponent().accountCreatedPage().clickGoToDashboard();
+					signUpPage.dashboardPage().clickAddPayment();
+					signUpPage.dashboardPage().addNewPaymentComponent()
+							.verifyAddPaymentHeading(data.get("addPaymentHeading"));
+					signUpPage.dashboardPage().addNewPaymentComponent().clickDebitCard();
+					int errMsgDebit = signUpPage.dashboardPage().addNewPaymentComponent().validateErrorMessage();
+					if (errMsgDebit == 1) {
+						signUpPage.dashboardPage().addNewPaymentComponent().verifyErrorMessage(data.get("errorMsg"));
+						signUpPage.dashboardPage().addNewPaymentComponent().clickOk();
+						signUpPage.dashboardPage().addNewPaymentComponent()
+								.verifyAddPaymentHeading(data.get("addPaymentHeading"));
+					} else {
+						signUpPage.dashboardPage().navigationComponent().clickBack();
+					}
+					signUpPage.dashboardPage().addNewPaymentComponent().clickCreditCard();
+					int errMsgCredit = signUpPage.dashboardPage().addNewPaymentComponent().validateErrorMessage();
+					if (errMsgCredit == 1) {
+						signUpPage.dashboardPage().addNewPaymentComponent().verifyErrorMessage(data.get("errorMsg"));
+						signUpPage.dashboardPage().addNewPaymentComponent().clickOk();
+					} else {
+						signUpPage.dashboardPage().navigationComponent().clickBack();
+					}
+					if (errMsgDebit == 1 || errMsgCredit == 1) {
+						ExtentTestManager
+								.setPassMessageInReport("Feature Control disabled,its not allowing to add cards");
+					} else {
+						ExtentTestManager
+								.setFailMessageInReport("Feature Control disabled then also its allowing to add cards");
+					}
 				} else {
 					signUpPage.phoneAndEmailVerificationComponent().agreementPage().choosePinComponent()
 							.enableFaceOrTouchIDpage().accountCreatedPage().clickSkip();
-				}
 //				Add Address in Dash Board
-				signUpPage.dashboardPage().verifyAddAddressview();
-				signUpPage.dashboardPage().clickAddAddress();
-				signUpPage.dashboardPage().verifyAddAddressHdg();
-				testAddAddress(strParams);
-				signUpPage.customerProfilePage().profilePage().editProfilePage().mailingAddressComponent()
-						.verifyAddressAdded(data.get("addressDesc"));
-				signUpPage.customerProfilePage().profilePage().editProfilePage().mailingAddressComponent().clickDone();
-				signUpPage.dashboardPage().validateAddAddressview();
-				signUpPage.dashboardPage().clickProfile();
-				signUpPage.customerProfilePage().clickProfile();
-				signUpPage.customerProfilePage().profilePage().clickEditAddress();
-				signUpPage.dashboardPage().navigationComponent().clickBack();
-				signUpPage.dashboardPage().navigationComponent().clickClose();
+					signUpPage.dashboardPage().verifyAddAddressview();
+					signUpPage.dashboardPage().clickAddAddress();
+					signUpPage.dashboardPage().verifyAddAddressHdg();
+					testAddAddress(strParams);
+					signUpPage.customerProfilePage().profilePage().editProfilePage().mailingAddressComponent()
+							.verifyAddressAdded(data.get("addressDesc"));
+					signUpPage.customerProfilePage().profilePage().editProfilePage().mailingAddressComponent()
+							.clickDone();
+					signUpPage.dashboardPage().validateAddAddressview();
+					signUpPage.dashboardPage().clickProfile();
+					signUpPage.customerProfilePage().clickProfile();
+					signUpPage.customerProfilePage().profilePage().clickEditAddress();
+					signUpPage.dashboardPage().navigationComponent().clickBack();
+					signUpPage.dashboardPage().navigationComponent().clickClose();
 //				Add Payment in Profile			
-				signUpPage.dashboardPage().clickProfile();
-				signUpPage.customerProfilePage().clickPaymentMethods();
-				signUpPage.dashboardPage().addNewPaymentComponent()
-						.verifyAddPaymentHeading(data.get("addPaymentHeading"));
-				signUpPage.dashboardPage().addNewPaymentComponent().clickCreditCard();
-				testAddCard(strParams);
-				signUpPage.dashboardPage().navigationComponent().clickBack();
-				signUpPage.dashboardPage().navigationComponent().clickClose();
-				signUpPage.dashboardPage().validateAddPaymntView();
+					signUpPage.dashboardPage().clickProfile();
+					signUpPage.customerProfilePage().clickPaymentMethods();
+					signUpPage.dashboardPage().addNewPaymentComponent()
+							.verifyAddPaymentHeading(data.get("addPaymentHeading"));
+					signUpPage.dashboardPage().addNewPaymentComponent().clickCreditCard();
+					testAddCard(strParams);
+					signUpPage.dashboardPage().navigationComponent().clickBack();
+					signUpPage.dashboardPage().navigationComponent().clickClose();
+					signUpPage.dashboardPage().validateAddPaymntView();
+				}
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("test SignUp Failed due to this Exception" + e);

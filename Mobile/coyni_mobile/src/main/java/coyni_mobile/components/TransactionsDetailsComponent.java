@@ -17,23 +17,19 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	private By lblStatus = MobileBy.xpath("//*[@text='Status']/following-sibling::*[1]");
 	private By lblDateAndTime = MobileBy.xpath("//*[@text='Date']/following-sibling::*[1]");
 
-	private By lblPurchaseAmount = MobileBy.id("");
-	private By lblProcessingFee = MobileBy.id("");
-	private By lblTotalAmount = MobileBy.id("");
+	private By lblPurchaseAmount = MobileBy.xpath("//*[contains(@text,'Amount')]/following-sibling::*");
+	private By lblProcessingFee = MobileBy.xpath("//*[contains(@text,'Processing')]/following-sibling::*");
+	private By lblTotalAmount = MobileBy.xpath("//*[@text='Total']/following-sibling::*");
 	private By lblReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*[1]");
-	private By lblDepositNumber = MobileBy.id("");
+	private By lblDepositNumber = MobileBy.xpath(
+			"//*[@text='Deposit Number']/following-sibling::android.widget.TextView|//*[@text='Withdraw Number']/following-sibling::android.widget.TextView");
 	// card
-	private By lblCardHolderName = MobileBy.id("");
-	private By varCardHolderName = MobileBy.id("");
-	private By lblCardBrand = MobileBy.id("");
-	private By lblCardNumber = MobileBy.id("");
-	private By lblExpirationDate = MobileBy.id("");
-	private By lblActivityLog = MobileBy.id("");
+	private By lblCardHolderName = MobileBy.xpath("//*[@text='Cardholder Name']/following-sibling::*");
+	private By lblCardBrand = MobileBy.xpath("(//*[@text='Card Brand']/following-sibling::*)[1]");
+	private By lblCardNumber = MobileBy.xpath("(//*[@text='Card Number']/following-sibling::*)[1]");
 	// BAnk Account
-	private By lblNameonBank = MobileBy.id("");
-	private By varNameonBank = MobileBy.id("");
-	private By lblBankName = MobileBy.id("");
-	private By lblBankAccountNumber = MobileBy.id("");
+	private By lblBankName = MobileBy.xpath("//*[@text='Bank Name']/following-sibling::*[1]");
+	private By lblBankAccountNumber = MobileBy.xpath("//*[contains(@text,'Account Number')]/following-sibling::*");
 	private By btnCancel = MobileBy.xpath("(//*[@name='Cancel Transaction'])[1]");
 	private By btnBack = MobileBy.AccessibilityId("Back");
 
@@ -42,18 +38,21 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	private By lblMsg = MobileBy
 			.xpath("//*[@text='Transaction Details']/../following-sibling::*/descendant::android.widget.TextView[3]");
 	private By lblWithdrawlAmount = MobileBy.id("");
-	private By lblWithdrawNumber = MobileBy.id("");
+	private By lblWithdrawNumber = MobileBy
+			.xpath("//*[@text='Withdraw Number']/following-sibling::android.widget.TextView");
 
 	// Gift Card
 
-	private By lblGiftCardName = MobileBy.id("");
-	private By lblGiftCardAmount = MobileBy.id("");
+	private By lblGiftCardName = MobileBy.xpath("//*[@text='Gift Card Name']/following-sibling::*[1]");
+	private By lblGiftCardAmount = MobileBy.xpath("//*[@text='Gift Card Amount']/following-sibling::*[1]");
 
 //	Sent Details 
 	private By lblSubTotal = MobileBy.xpath("//*[@text='Sub Total']/following-sibling::*[1]");
 	private By lblGrandTotal = MobileBy.xpath("//*[@text='Grand Total']/following-sibling::*[1]");
 	private By lblWithdrawID = MobileBy.xpath("//*[@text='Withdraw ID']/following-sibling::*[1]");
-	private By lblName = MobileBy.xpath("//*[contains(@text,'Name')]/following-sibling::*[1]");
+	private By lblName = MobileBy.xpath(
+			"//*[@text='Recipient Name']/following-sibling::*[1]|//*[contains(@text,'Name')]/following-sibling::*[1]");
+	private By lblRecipientName = MobileBy.xpath("//*[@text='Recipient Name']/following-sibling::*[1]");
 	private By lblTotalAmount1 = MobileBy.xpath("");
 
 	private By lblAccountBalance = MobileBy.xpath("//*[@text='Account Balance']/following-sibling::*[1]");
@@ -61,7 +60,7 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	private By lblExpiryDate = MobileBy.xpath("//*[@text='Expiration Date']/following-sibling::*[1]");
 
-	private By lblNameOnAccount = MobileBy.xpath("//*[@text='Name on Account']/following-sibling::*[1]");
+	private By lblNameOnAccount = MobileBy.xpath("//*[contains(@text,'Name on')]/following-sibling::*[1]");
 
 	private By lblUserName = MobileBy.xpath("//*[@text='User Name']/following-sibling::*[1]");
 	private By lblAccountAddress = MobileBy.xpath("//*[@text='Account Address']/following-sibling::*[1]");
@@ -74,6 +73,60 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	private By lblDBAname = MobileBy.xpath("//*[@text='DBA Name']/following-sibling::*[1]");
 	private By lblEmail = MobileBy.xpath("//*[contains(@text,'Email')]/following-sibling::*[1]");
 	private By lblPhoneNumber = MobileBy.xpath("//*[contains(@text,'Phone')]/following-sibling::*[1]");
+
+//	Activity log
+	private By lblTransSucsfulTime = MobileBy.xpath(
+			"//*[contains(@text,'Successful')]/following-sibling::*|//*[contains(@text,'Failed')]/following-sibling::*|(//*[contains(@text,'Successful')]/../following-sibling::*)[1]");
+	private By lblTransRequestTime = MobileBy.xpath(
+			"//*[contains(@text,'Request')]/following-sibling::*[contains(@resource-id,'Time')]|//*[contains(@text,'Request')]/../following-sibling::*[contains(@resource-id,'Time')]");
+	private By lblTransSucsfulDesc = MobileBy.xpath(
+			"//*[contains(@text,'Successful')]/../following-sibling::*[contains(@resource-id,'message_tv')]|//*[contains(@text,'Failed')]/../following-sibling::*[contains(@resource-id,'message_tv')]");
+	private By lblTransRequestDesc = MobileBy
+			.xpath("//*[contains(@text,'Request')]/../following-sibling::*[contains(@resource-id,'message_tv')]");
+
+//	Activity Log Details of Buy Token 
+	public int viewTransSuccessfulTime() {
+		scrollDownToElement(lblTransSucsfulTime, "Transaction SuccessFul Date & Time");
+		if (getText(lblTransSucsfulTime).contains(" ")) {
+			new CommonFunctions().elementView(lblTransSucsfulTime, "Transaction SuccessFul Date & Time");
+			ExtentTestManager
+					.setPassMessageInReport("Transaction SuccessFul Date & Time : " + getText(lblTransSucsfulTime));
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"Its not showing Date & Time or Its showing invalid formatted Date & Time for successful transaction");
+		}
+		return getElementList(lblTransSucsfulTime, "Transaction SuccessFul Date & Time").size();
+	}
+
+	public int viewTransInProgress() throws InterruptedException {
+		Thread.sleep(600);
+		return getElementList(lblTransSucsfulTime, "Transaction SuccessFul Date & Time").size();
+	}
+
+	public void viewTransRequestTime() {
+		scrollDownToElement(lblTransRequestTime, "Transaction Request Date & Time");
+		if (getText(lblTransRequestTime).contains(" ")) {
+			new CommonFunctions().elementView(lblTransRequestTime, "Transaction Request Date & Time");
+			ExtentTestManager
+					.setPassMessageInReport("Transaction Request Date & Time : " + getText(lblTransRequestTime));
+		} else {
+			ExtentTestManager.setFailMessageInReport(
+					"Its not showing Date & Time or Its showing invalid formatted Date & Time for requested transaction");
+		}
+	}
+
+	public int viewTransSuccessDesc() {
+		scrollDownToElement(lblTransSucsfulDesc, "Successful Desc");
+		new CommonFunctions().elementView(lblTransSucsfulDesc, "Transaction Successful Desc");
+		ExtentTestManager.setPassMessageInReport("Successful Desc : " + getText(lblTransSucsfulDesc));
+		return getElementList(lblTransSucsfulDesc, "Successful Desc").size();
+	}
+
+	public void viewTransRequestDesc() {
+		scrollDownToElement(lblTransRequestDesc, "Request Desc");
+		new CommonFunctions().elementView(lblTransRequestDesc, "Transaction Request Desc");
+		ExtentTestManager.setPassMessageInReport("Request Desc : " + getText(lblTransRequestDesc));
+	}
 
 	public String verifyfillMessage() {
 		String str = getText(lblMsg).trim().replace('"', ' ');
@@ -89,13 +142,25 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	}
 
 	public void getTransactionAmount() {
-		new CommonFunctions().elementView(lblTransactionTypeAmount, "Date And Time");
-		ExtentTestManager.setPassMessageInReport("Date & Time: " + getText(lblTransactionTypeAmount));
+		new CommonFunctions().elementView(lblTransactionTypeAmount, "Transaction Amount");
+		ExtentTestManager.setPassMessageInReport("Transaction Amount" + getText(lblTransactionTypeAmount));
+	}
+
+	public void verifyTransactionAmount() {
+		if (getText(lblTransactionTypeAmount).equals("- -")) {
+			ExtentTestManager.setPassMessageInReport("Its not Showing any transaction amount");
+		} else {
+			ExtentTestManager.setFailMessageInReport("The amount is not as per expcted");
+		}
 	}
 
 	public void getStatus() {
 		new CommonFunctions().elementView(lblStatus, "Status");
 		ExtentTestManager.setPassMessageInReport("Status: " + getText(lblStatus));
+	}
+
+	public void verifyStatus(String expText) {
+		new CommonFunctions().verifyLabelText(lblStatus, "Status", expText);
 	}
 
 	public void getDateTime() {
@@ -108,35 +173,35 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		}
 	}
 
-	public String verifyPurchaseAmount() {
-		String str = getText(lblPurchaseAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
-				.replace("CYN", "");
-		return str;
-	}
-
-	public String verifyGiftCardAmount() {
-		String str = getText(lblGiftCardAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
-				.replace("CYN", "");
-		return str;
-	}
-
-	public String verifyWithdrawAmount() {
-		String str = getText(lblWithdrawlAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
-				.replace("CYN", "");
-		return str;
-	}
-
-	public String verifyProcessingFee() {
-		String str = getText(lblProcessingFee).trim().replace(" ", "").replace("USD", "").replace("$", "")
-				.replace("CYN", "");
-		return str;
-	}
-
-	public String verifyTotalAmount() {
-		String str = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN",
-				"");
-		return str;
-	}
+//	public String verifyPurchaseAmount() {
+//		String str = getText(lblPurchaseAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+//				.replace("CYN", "");
+//		return str;
+//	}
+//
+//	public String verifyGiftCardAmount() {
+//		String str = getText(lblGiftCardAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+//				.replace("CYN", "");
+//		return str;
+//	}
+//
+//	public String verifyWithdrawAmount() {
+//		String str = getText(lblWithdrawlAmount).trim().replace(" ", "").replace("USD", "").replace("$", "")
+//				.replace("CYN", "");
+//		return str;
+//	}
+//
+//	public String verifyProcessingFee() {
+//		String str = getText(lblProcessingFee).trim().replace(" ", "").replace("USD", "").replace("$", "")
+//				.replace("CYN", "");
+//		return str;
+//	}
+//
+//	public String verifyTotalAmount() {
+//		String str = getText(lblTotalAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN",
+//				"");
+//		return str;
+//	}
 
 	public void getReferenceID() {
 		if (getText(lblReferenceID).contains("...")) {
@@ -149,8 +214,8 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	}
 
 	public void getDepositNumber() {
-		new CommonFunctions().elementView(lblDepositNumber, "Deposit Number");
-		ExtentTestManager.setPassMessageInReport("Deposit Number: " + getText(lblDepositNumber));
+		new CommonFunctions().elementView(lblDepositNumber, "ID");
+		ExtentTestManager.setPassMessageInReport("ID : " + getText(lblDepositNumber));
 	}
 
 	public void getCardHolderName() {
@@ -241,6 +306,16 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	}
 
+	public void viewRecipientName() {
+		if (getText(lblRecipientName).contains(" ")) {
+			new CommonFunctions().elementView(lblRecipientName, "Recipient Name");
+			ExtentTestManager.setPassMessageInReport("Recipient Name" + getText(lblRecipientName));
+		} else {
+			ExtentTestManager.setFailMessageInReport("Its not showing any Name or invalid format Name its showing");
+		}
+
+	}
+
 	public void clickCancel() throws InterruptedException {
 		if (getElement(btnCancel, "CnacelTransaction").isEnabled()) {
 			click(btnCancel, "Cancel Transaction");
@@ -257,104 +332,82 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	}
 
-	public void buyTokenBankTransactionDetails(String expText) throws InterruptedException {
+	public void buyTokenTransactionDetails(String expText, String expValue, String type) throws InterruptedException {
 		getTransaction(expText);
-		getTransactionAmount();
-		getStatus();
-		getDateTime();
-		getReferenceID();
-		getDepositNumber();
-		getNameOnBank();
-		getBankName();
-		getBankAccountNumber();
-		clickCancel();
-	}
-
-	public void buyTokenCardTransactionDetails(String expText) {
-		getTransaction(expText);
-		getTransactionAmount();
-		getStatus();
-		getDateTime();
-		getReferenceID();
-		getDepositNumber();
-		getCardHolderName();
-		getCardNumber();
-		getCardBrand();
-		getExpiryDate();
-	}
-
-	public void withdrawBankTransactionDetails(String expText) throws InterruptedException {
-		getTransaction(expText);
-		getStatus();
-		getDateTime();
-		getReferenceID();
-		getWithdrawNumber();
-		getNameOnBank();
-		getBankName();
-		getBankAccountNumber();
-	}
-
-	public void withdrawInstantTransactionsDetails(String expText) {
-		getTransaction(expText);
-		getStatus();
-		getDateTime();
-		getReferenceID();
-		getWithdrawNumber();
-		getCardHolderName();
-		getCardBrand();
-		getCardNumber();
-		getExpiryDate();
-	}
-
-	public void withdrawGiftCardTransactionsDetails(String name, String amount, String expText) {
-		getTransaction(expText);
-		getStatus();
-		getDateTime();
-		getGiftCardName();
-		getReferenceID();
-		getWithdrawNumber();
-		getEmail();
-		getRecipientName(name, amount);
-	}
-
-	public void getTransactionDetails(String name, String amount, String expText) throws InterruptedException {
-		if (getText(lblTransactionType).contains("Buy")) {
-			if (getText(varNameonBank).contains("Name")) {
-				buyTokenBankTransactionDetails(expText);
-			} else if (getText(varCardHolderName).contains("Cardholder")) {
-				buyTokenCardTransactionDetails(expText);
-			}
-		} else if (getText(lblTransactionType).contains("Received")) {
-			receivedTransactionDetails(expText);
-		} else if (getText(lblTransactionType).contains("Sent")) {
-			sentTransactionDetails(name, amount, expText);
-		} else if (getText(lblTransactionType).contains("Withdraw") && getText(varNameonBank).contains("Name")) {
-			withdrawBankTransactionDetails(expText);
-		} else if (getText(lblTransactionType).contains("Withdraw")
-				&& getText(lblTransactionType).contains("Instant")) {
-			withdrawInstantTransactionsDetails(expText);
-		} else if (getText(lblTransactionType).contains("Withdraw") && getText(lblGiftCardName).contains("Gift")) {
-			withdrawGiftCardTransactionsDetails(name, amount, expText);
-		} else if (getText(lblTransactionType).contains("Paid Order")
-				&& getText(lblTransactionType).contains("Token")) {
-			paidOrderDetails(expText);
-		} else if (getText(lblTransactionType).contains("Pay/Request")
-				&& getText(lblTransactionType).contains("Sent")) {
-			sentTransactionDetails(name, amount, expText);
+		if (expValue.equals("Completed")) {
+			getTransactionAmount();
 		} else {
-			ExtentTestManager.setFailMessageInReport("Error in Transactions");
+			verifyTransactionAmount();
+		}
+		verifyStatus(expValue);
+		getDateTime();
+		getPurchaseAmount();
+		getProcessingFee();
+		getTotalAmount();
+		getReferenceID();
+		getDepositNumber();
+		if (type.equals("Bank Account")) {
+			getNameOnBank();
+			getBankName();
+			getBankAccountNumber();
+		} else {
+			getCardHolderName();
+			getCardBrand();
+			getCardNumber();
+			getExpiryDate();
+		}
+		if (expValue.equals("In Progress")) {
+			if (viewTransInProgress() == 0) {
+				viewTransRequestTime();
+				viewTransRequestDesc();
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"Its showing Transaction successful details,when transaction is In Progress");
+			}
+
+		} else {
+			viewTransSuccessfulTime();
+			viewTransSuccessDesc();
+			viewTransRequestTime();
+			viewTransRequestDesc();
 		}
 
 	}
 
-//	public int verifyTransactionAmount() {
-//		String str = getText(lblTransactionTypeAmount).trim().replace(" ", "").replace("USD", "").replace("$", "").replace("CYN", "");
-//		Integer amt=Integer.parseInt(str);
-//		return amt;
-//	}
-//	
+	public void withdrawGiftCardTransactionsDetails(String expText, String expValue)
+			throws InterruptedException {
+		getTransaction(expText);
+		if (expValue.equals("Completed")) {
+			getTransactionAmount();
+		} else {
+			verifyTransactionAmount();
+		}
+		verifyStatus(expValue);
+		getDateTime();
+		getGiftCardName();
+		getGiftCardAmount();
+		getProcessingFee();
+		getTotalAmount();
+		getReferenceID();
+		getWithdrawNumber();
+		viewRecipientName();
+		getEmail();
+		if (expValue.equals("In Progress")) {
+			if (viewTransInProgress() == 0) {
+				viewTransRequestTime();
+				viewTransRequestDesc();
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"Its showing Transaction successful details,when transaction is In Progress");
+			}
 
-//	private By lblDescriptorName = MobileBy.id("");
+		} else {
+			viewTransSuccessfulTime();
+			viewTransSuccessDesc();
+			viewTransRequestTime();
+			viewTransRequestDesc();
+		}
+	}
 
 	public void getDBAname() {
 		new CommonFunctions().elementView(lblDBAname, "DBA name");
@@ -474,9 +527,14 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getAccountAddress();
 	}
 
-	public void filterSentTransactionDetails(String expText) {
+	public void filterSentTransactionDetails(String expText, String expValue) {
 		getTransaction(expText);
-		getTransactionAmount();
+		if (expValue.equals("Completed")) {
+			getTransactionAmount();
+		} else {
+			verifyTransactionAmount();
+		}
+		verifyStatus(expValue);
 		getSentRequestMessage();
 		getStatus();
 		getDateTime();
@@ -485,10 +543,10 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		getAccountAddress();
 	}
 
-	public void receivedTransactionDetails(String expText) {
-//		getRecipientName(name, amount);
+	public void receivedTransactionDetails(String expText, String expValue) {
 		getTransaction(expText);
 		getTransactionAmount();
+		verifyStatus(expValue);
 		getSentRequestMessage();
 		getStatus();
 		getDateTime();

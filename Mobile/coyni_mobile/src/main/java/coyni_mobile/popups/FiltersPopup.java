@@ -29,20 +29,28 @@ public class FiltersPopup extends MobileFunctions {
 		return MobileBy.id(String.format("%s", resourceId));
 	}
 
+	public void clickTransactionStatus(String elementName) {
+		scrollDownToElement(MobileBy.xpath(String.format("//*[@text='%s']", elementName)), elementName);
+		click(MobileBy.xpath(String.format("//*[@text='%s']", elementName)), elementName);
+	}
+
 	public void clickCompletedStatus() {
 		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transStatusCompleted"), "Completed");
 		click(getResourceIDElements("com.coyni.mapp:id/transStatusCompleted"), "Completed");
 	}
 
 	public void clickInProgress() {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transStatusInProgress"), "In Progress");
 		click(getResourceIDElements("com.coyni.mapp:id/transStatusInProgress"), "In Progress");
 	}
 
 	public void clickPending() {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transStatusPending"), "Pending");
 		click(getResourceIDElements("com.coyni.mapp:id/transStatusPending"), "Pending");
 	}
 
 	public void clickFailed() {
+		scrollDownToElement(getResourceIDElements("com.coyni.mapp:id/transStatusFailed"), "Failed");
 		click(getResourceIDElements("com.coyni.mapp:id/transStatusFailed"), "Failed");
 	}
 
@@ -78,6 +86,13 @@ public class FiltersPopup extends MobileFunctions {
 				transactionType));
 	}
 
+	public void clickTransactionType(String transactionType) {
+		scrollDownToElement(MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'checkCB')]",
+				transactionType)), transactionType);
+		click(MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'checkCB')]",
+				transactionType)), transactionType);
+	}
+
 	public void clickSent() {
 		click(getTransactionType("Sent"), "Sent");
 	}
@@ -108,6 +123,13 @@ public class FiltersPopup extends MobileFunctions {
 				transactionType));
 	}
 
+	public void clickTransactionTypePlus(String transactionType) {
+		scrollDownToElement(MobileBy.xpath(String.format("//*[@text='%s']/following-sibling::*[contains(@resource-id,'plusImage')]",
+				transactionType)), transactionType);
+		click(MobileBy.xpath(String.format("//*[@text='%s']/following-sibling::*[contains(@resource-id,'plusImage')]",
+				transactionType)), transactionType);
+	}
+
 	public void clickSaleOderPlus() {
 		click(getTransactionSubTypePlus("Sale Order"), "Sale Order");
 	}
@@ -128,6 +150,13 @@ public class FiltersPopup extends MobileFunctions {
 	public By getTransactionSubTypes(String transactionType) {
 		return MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'chechBoxCB')]",
 				transactionType));
+	}
+
+	public void clickTransactionSubTypesChkBox(String transactionType) {
+		scrollDownToElement(MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'chechBoxCB')]",
+				transactionType)), transactionType);
+		click(MobileBy.xpath(String.format("//*[@text='%s']/preceding-sibling::*[contains(@resource-id,'chechBoxCB')]",
+				transactionType)), transactionType);
 	}
 
 	public void clickeCommerseType() {

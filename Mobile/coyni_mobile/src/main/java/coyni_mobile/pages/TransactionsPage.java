@@ -27,10 +27,8 @@ public class TransactionsPage extends MobileFunctions {
 	private By txtSearch = MobileBy.xpath("(//*[@name='search'])[2]/following-sibling::*[1]");
 	private By btnFilter = MobileBy.id("com.coyni.mapp:id/ivFilterIcon");
 	private By btnfiltericon = MobileBy.xpath("//*[@name='filter'] | (//*[@name='search']/following-sibling::*[2])[2]");
-	private By lblNoMore = MobileBy
-			.xpath("//*[contains(@name,'no more transactions')] | //*[contains(@name,'no transactions')]");
-	private By lblNoRecent = MobileBy
-			.xpath("//*[contains(@name,'no recent transactions')] | //*[contains(@name,'no transactions')]");
+	private By lblNoMore = MobileBy.id("com.coyni.mapp:id/tvNoTxn");
+	private By lblNoRecent = MobileBy.id("com.coyni.mapp:id/tvNoTxn");
 	private By copyIcon = MobileBy.xpath("//XCUIElementTypeStaticText[@name='Reference ID']/following-sibling::*[1]");
 	private By btnBack = MobileBy.xpath("//XCUIElementTypeButton[@name='Button']");
 	private By btnPaste = MobileBy.xpath("//XCUIElementTypeMenuItem[@name='Paste']");
@@ -58,18 +56,15 @@ public class TransactionsPage extends MobileFunctions {
 		click(btnFilter, "Filter");
 	}
 
-	public void ScrollTransactions() {
-		if (getElementList(lblNoRecent, "").size() == 0) {
-			scrollDownToElement(lblNoMore, "You have no more transactions");
-		} else {
-			ExtentTestManager.setInfoMessageInReport("You have no recent transactions");
-		}
+	public int verifyTransactions() throws InterruptedException {
+		Thread.sleep(800);
+		return getElementList(lblNoMore, "").size();
 	}
 
-	public By getElement() {
-		return MobileBy
-				.xpath("//*[@name='Transactions']/../following-sibling::*[1]/XCUIElementTypeTable/XCUIElementTypeCell");
+	public void verifyTransactionsText(String expText) {
+		new CommonFunctions().verifyLabelText(lblNoMore, "No More Transactions text is ", expText);
 	}
+
 
 	public int getUITransactionCount() {
 		if (getElementList(lblNoRecent, "No Recent Transcations").size() > 0) {
@@ -99,13 +94,7 @@ public class TransactionsPage extends MobileFunctions {
 	}
 
 	public void clickFirstTransaction() throws InterruptedException {
-		Thread.sleep(500);
-		if (getElementList(lblNoRecent, "").size() == 0) {
-			click(frstTransaction, "transaction");
-		} else {
-			new CommonFunctions().elementView(lblNoRecent, "No Recent Transactions");
-			ExtentTestManager.setWarningMessageInReport("We have no recent transactions to proceed further");
-		}
+		click(frstTransaction, "transaction");
 	}
 
 	public FiltersPopup filtersPopup() {

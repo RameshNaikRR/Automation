@@ -121,7 +121,8 @@ public class NotificationsPage extends MobileFunctions {
 		new CommonFunctions().elementView(lblTime, "Time of Notification Message");
 	}
 
-	public void verifyMesaageTitle() {
+	public void verifyMesaageTitle() throws InterruptedException {
+		Thread.sleep(1000);
 		new CommonFunctions().elementView(lblTitle, "Title of Notification Message");
 	}
 
@@ -168,7 +169,8 @@ public class NotificationsPage extends MobileFunctions {
 		return new NavigationComponent();
 	}
 
-	public void clickRequest() {
+	public void clickRequest() throws InterruptedException {
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnRequest));
 		click(btnRequest, "Request");
 	}

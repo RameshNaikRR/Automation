@@ -44,9 +44,9 @@ public class PaymentMethodsPage extends MobileFunctions {
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 60);
 
 	public void verifyHeading(String expHeading) {
-		if (getElementList(lblHeading, "Heading").size() > 0) {
+//		if (getElementList(lblHeading, "Heading").size() > 0) {
 			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
-		}
+//		}
 	}
 
 	public void verifyPageHeading(String expHeading) {

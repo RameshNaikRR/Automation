@@ -166,8 +166,8 @@ public class CommonFunctions {
 					.setInfoMessageInReport("trying to enter " + enterText.length() + " characters in " + eleName);
 			mobileFunctions.enterText(ele, enterText, eleName);
 			// clickEnter();
-			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("/", "").replace("(", "")
-					.replace(")", "").replace("-", "");
+			String actualtext = mobileFunctions.getText(ele).replace(" ", "").replace("(", "").replace(")", "")
+					.replace("-", "");
 			System.out.println("length " + actualtext.length());
 //			By errorMsgs = MobileBy
 //					.xpath("(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'tvPasswordInfo')]");
@@ -176,7 +176,6 @@ public class CommonFunctions {
 				ExtentTestManager
 						.setPassMessageInReport(eleName + " is accepting " + enterText.length() + " characters");
 			} else {
-
 				ExtentTestManager
 						.setFailMessageInReport(eleName + " is not accepting " + enterText.length() + " characters");
 			}
@@ -259,7 +258,7 @@ public class CommonFunctions {
 		System.out.println("clicked on tab");
 	}
 
-	public void enterSpecialKey(By ele, By inputPlace, String eleName) {
+	public void enterSpecialKey(By ele, String eleName) {
 		mobileFunctions.click(ele, "Field");
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.AT));
 		ExtentTestManager.setPassMessageInReport("@,(-+ text entered in element " + eleName);
@@ -268,8 +267,8 @@ public class CommonFunctions {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.MINUS));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.PLUS));
 //		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
-		String actualtext = mobileFunctions.getText(ele).replace("First Name", "").replace("Last Name", "").replace("0.00", "")
-				.replace(")", "").replace("-", "");
+		String actualtext = mobileFunctions.getText(ele).replace("First Name", "").replace("Last Name", "").replace("Name on Card", "").replace("Card Number", "")
+				.replace("Expiry Date", "").replace("CVV/CVC", "").replace("0.00", "").replace(")", "").replace("-", "");
 		if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name")) {
 			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special Charcters");
 		} else {
@@ -278,7 +277,7 @@ public class CommonFunctions {
 //		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.SPACE));
 	}
 
-	public void enterKeys(By ele, By inputPlace, String data, String type, String eleName) throws InterruptedException {
+	public void enterKeys(By ele, String data, String type, String eleName) throws InterruptedException {
 		mobileFunctions.click(ele, "Field");
 		String[] keys = data.split("");
 		if (type.equalsIgnoreCase("alphanumeric")) {
@@ -288,7 +287,7 @@ public class CommonFunctions {
 				ExtentTestManager.setPassMessageInReport(key + " text entered in element " + eleName);
 				String actualtext = mobileFunctions.getText(ele);// BUTTON_
 				// Thread.sleep(2000);
-				if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name")) {
+				if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name") || actualtext.equals("Name on Card")) {
 					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
 				} else {
 					ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");

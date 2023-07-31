@@ -2,6 +2,8 @@ package coyni_mobile.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.ChoosePinComponent;
 import coyni_mobile.components.FieldValidationsComponent;
@@ -59,11 +61,14 @@ public class LoginPage extends MobileFunctions {
 	private By lblUserLogo = MobileBy.id("com.coyni.mapp:id/profileIV");
 	private By btnThisisNotMe = MobileBy.xpath("//*[@text='This is not me']");
 	private By btnSearchClearTxt = MobileBy.id("com.coyni.mapp:id/clearTextLL");
+	private By btnReClose = MobileBy.AccessibilityId("Back");
 
 ////	PIN disabled popup
 	private By lblPINDisHead = MobileBy.id("com.coyni.mapp:id/tvHead");
 	private By lblPINDisDes = MobileBy.id("com.coyni.mapp:id/tvMessage");
 	private By btnPINDisOk = MobileBy.id("com.coyni.mapp:id/cvAction");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
 	public void verifyImageCoyniView() {
 		new CommonFunctions().elementView(imgCoyni, "Coyni");
@@ -186,7 +191,7 @@ public class LoginPage extends MobileFunctions {
 		new CommonFunctions().clickEnter();
 		new CommonFunctions().clickEnter();
 	}
-	
+
 	public ToastComponent toastComponent() {
 		return new ToastComponent();
 	}
@@ -329,8 +334,15 @@ public class LoginPage extends MobileFunctions {
 		click(btnTryAgain, "Try Again");
 	}
 
-	public void clickcancel() {
+	public void clickcancel() throws InterruptedException {
+		Thread.sleep(1200);
+//		wait.until(ExpectedConditions.presenceOfElementLocated(btnCancel));
 		click(btnCancel, "Cancel");
+	}
+
+	public void clickClose() throws InterruptedException {
+		Thread.sleep(1200);
+		click(btnReClose, "Close");
 	}
 
 	public void validateClearTextOfSearch() {

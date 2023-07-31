@@ -43,7 +43,7 @@ public class AccountCreatedPage extends MobileFunctions {
 	private By lblAccountCreatedDesc = MobileBy.AccessibilityId("Account is Ready");
 	private By btnAddCreditOrDebit = MobileBy.AccessibilityId("Add Debit or Credit Card");
 	private By btnSkip = MobileBy.AccessibilityId("Skip");
-	private By btnGoToDashBoard = MobileBy.xpath("(//*[@name='Go to Dashboard'])[2]");
+	private By btnGoToDashBoard = MobileBy.AccessibilityId("Go to Dashboard");
 
 	public void verifyAccountCreatedHdgView() {
 		if (getElementList(lblAccountCreatedhdg, "lblAccountCreatedhdg").size() > 0) {
