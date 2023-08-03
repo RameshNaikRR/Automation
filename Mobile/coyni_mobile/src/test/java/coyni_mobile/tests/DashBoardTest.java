@@ -455,7 +455,7 @@ public class DashBoardTest {
 			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
 			dashboardPage.transactionsDetailsComponent().sentTransactionDetails(data.get("name"),
 					Double.toString(avlBalDasBoard + 2), data.get("transactionType"));
-			if (data.get("withoutPaymentMethod").equalsIgnoreCase("yes")) {
+			if (data.get("withoutPaymentMethod").equalsIgnoreCase("")) {
 				dashboardPage.transactionsDetailsComponent().clickBack();
 				dashboardPage.clickProfile();
 				customerProfilePage.clickPaymentMethods();
@@ -472,12 +472,12 @@ public class DashBoardTest {
 	public void testSendWithInvalidData(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
 			dashboardPage.clickSendRequest();
 			dashboardPage.sendRequestPage().verifySendRequestPageView();
 			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 			dashboardPage.sendRequestPage().selectUser();
 			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
-			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
 			double weekLimit = dashboardPage.sendRequestPage().verifyWeeklyLimit();
 			dashboardPage.sendRequestPage().fillAmount(Double.toString(weekLimit + 0.1));
 			for (int i = 0; i < 3; i++) {
@@ -642,131 +642,41 @@ public class DashBoardTest {
 		}
 	}
 
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testFiltersWithMoreTransactionTypes(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			dashboardPage.viewUserName();
-//			dashboardPage.clickViewAllTransactions();
-//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-//			dashboardPage.transactionPage().clickFilters();
-//			String[] 
-//			dashboardPage.transactionPage().filtersPopup().clickTransactionTypePlus(data.get("transactionTypePlus"));
-//			dashboardPage.transactionPage().filtersPopup().clickTransactionSubTypesChkBox(data.get("transactionType1"));
-//			dashboardPage.transactionPage().filtersPopup().clickTransactionStatus(data.get("transactionStatus"));
-//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
-//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
-//			dashboardPage.transactionPage().filtersPopup().clickCalendar();
-//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
-//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectToDate();
-//			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
-//			dashboardPage.transactionPage().filtersPopup().clickApplyFilter();
-//			if (dashboardPage.transactionPage().verifyTransactions() == 0) {
-//				dashboardPage.transactionPage().clickFirstTransaction();
-//				dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
-//				if (data.get("transactionType").equals("Sent")) {
-//					dashboardPage.transactionsDetailsComponent()
-//							.filterSentTransactionDetails(data.get("transactionType"));
-//				} else if (data.get("transactionType").equals("Received")) {
-//					dashboardPage.transactionsDetailsComponent()
-//							.receivedTransactionDetails(data.get("transactionType"));
-//				} else if (data.get("transactionType").equals("Sale Order - Retail / Mobile")) {
-//					dashboardPage.transactionsDetailsComponent()
-//							.RetailMobileTransactionDetails(data.get("transactionType"));
-//				} else if (data.get("transactionTypePlus").equals("Buy Tokens")) {
-//					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
-//							data.get("transactionStatus"), data.get("transactionType1"));
-//				} else if (data.get("transactionType1").equals("Gift Card")) {
-//					dashboardPage.transactionsDetailsComponent().withdrawGiftCardTransactionsDetails(
-//							data.get("transactionType"), data.get("transactionStatus"), data.get("transactionType1"));
-//				} else if (data.get("transactionTypePlus").equals("Withdraw")) {
-//					dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
-//							data.get("transactionStatus"), data.get("transactionType1"));
-//				}
-//			} else {
-//				dashboardPage.transactionPage().verifyTransactionsText(data.get("noMoreTrans"));
-//				ExtentTestManager.setWarningMessageInReport("You have any transactions to verify details");
-//			}
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
-//		}
-//	}
-
-	/**
-	 * testFilterWithCalendar script is to test the transactions applying filters
-	 * with date.
-	 * 
-	 * @param strParams
-	 */
-
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testFilterWithCalendar(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			Thread.sleep(2500);
-//			dashboardPage.clickViewAllTransactions();
-//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-//			dashboardPage.transactionPage().clickfilter();
-//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType"));
-//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType1"));
-//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType2"));
-//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType3"));
-//			dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType4"));
-//			// dashboardPage.transactionPage().filtersPopup().selectFilter(data.get("filterType5"));
-//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
-//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
-//			dashboardPage.transactionPage().filtersPopup().clickCalender();
-//			dashboardPage.transactionPage().filtersPopup().calendarComponent().selectFromDate();
-//			dashboardPage.transactionPage().filtersPopup().calendarComponent().clickDone();
-//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-//			Thread.sleep(2000);
-//			dashboardPage.transactionPage().ScrollTransactions();
-//			Thread.sleep(2000);
-//			dashboardPage.transactionPage().getUITransactionCount();
-//			Thread.sleep(2000);
-//			dashboardPage.transactionPage().clickfilter();
-//			dashboardPage.transactionPage().filtersPopup().clickResetAllFilters();
-//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-//			dashboardPage.transactionPage().filtersPopup().navigationComponent().clickClose();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
-//		}
-//	}
-
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testFilterWithInvalidData(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			Thread.sleep(2500);
-//			dashboardPage.clickViewAllTransactions();
-//			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
-//			dashboardPage.transactionPage().clickfilter();
-//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount"));
-//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount"));
-//			// tokenAccountPage.transactionPage().filtersPopup().clickCalender();
-//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-//			// tokenAccountPage.transactionPage().filtersPopup();
-//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage1(data.get("errMsg1"));
-//			dashboardPage.transactionPage().filtersPopup().clickOk();
-//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount1"));
-//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount1"));
-//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage2(data.get("errMsg2"));
-//			dashboardPage.transactionPage().filtersPopup().clickOk();
-//			dashboardPage.transactionPage().filtersPopup().fillFromAmount(data.get("fromAmount2"));
-//			dashboardPage.transactionPage().filtersPopup().fillToAmount(data.get("toAmount2"));
-//			dashboardPage.transactionPage().filtersPopup().clickApplyfilters();
-//			dashboardPage.transactionPage().filtersPopup().verifyErrorMessage3(data.get("errMsg3"));
-//			dashboardPage.transactionPage().filtersPopup().clickOk();
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("testfilters  failed due to exception " + e);
-//		}
-//	}
+	@Test
+	@Parameters({ "strParams" })
+	public void testTransactionsSearch(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.viewUserName();
+			dashboardPage.clickViewAllTransactions();
+			dashboardPage.transactionPage().verifyHeading(data.get("transactionHeading"));
+			dashboardPage.transactionPage().clickFirstTransaction();
+			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
+			String beforeTransType = dashboardPage.transactionsDetailsComponent().getTransactionType();
+			String beforeTransAmt = dashboardPage.transactionsDetailsComponent().getTransactionAmt();
+			String beforeTransStatus = dashboardPage.transactionsDetailsComponent().getTransactionStatus();
+			String beforeTransDate = dashboardPage.transactionsDetailsComponent().getTransactionDate();
+			dashboardPage.transactionsDetailsComponent().clickReferenceID();
+			dashboardPage.navigationComponent().clickBack();
+			dashboardPage.transactionsDetailsComponent().verifySearch();
+			dashboardPage.transactionPage().getTransactionsCount();
+			dashboardPage.transactionPage().clickFirstTransaction();
+			String afterTransType = dashboardPage.transactionsDetailsComponent().getTransactionType();
+			String afterTransAmt = dashboardPage.transactionsDetailsComponent().getTransactionAmt();
+			String afterTransStatus = dashboardPage.transactionsDetailsComponent().getTransactionStatus();
+			String afterTransDate = dashboardPage.transactionsDetailsComponent().getTransactionDate();
+			if (beforeTransType.equals(afterTransType) && beforeTransAmt.equals(afterTransAmt)
+					&& beforeTransStatus.equals(afterTransStatus) && beforeTransDate.equals(afterTransDate)) {
+				ExtentTestManager.setPassMessageInReport(
+						"Searching a transaction with reference id, its showing accurate transaction details");
+			} else {
+				ExtentTestManager.setFailMessageInReport(
+						"Searching a transaction with reference id, its not showing accurate transaction details");
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testTransactionsSearch  failed due to exception " + e);
+		}
+	}
 
 	@Test
 	@Parameters({ "strParams" })
@@ -810,6 +720,45 @@ public class DashBoardTest {
 			dashboardPage.transactionsDetailsComponent().buyTokenTransactionDetails(data.get("transactionType"),
 					data.get("transactionStatus"), data.get("transactionType1"));
 			dashboardPage.navigationComponent().clickBack();
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testBuyTokenWithCards failed due to exception " + e);
+		}
+
+	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testBuyTokenInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			dashboardPage.clickBuyTokens();
+			if (data.get("accountType").equals("Bank")) {
+				dashboardPage.withdrawTokenPage().clickBank();
+			} else if (data.get("accountType").equals("Debit")) {
+				dashboardPage.buyTokenComponent().clickDebitCard();
+			} else {
+				dashboardPage.buyTokenComponent().clickCreditCard();
+			}
+			if (!data.get("accountType").equals("Bank")) {
+				dashboardPage.cvvPopup().verifyPopupHeading(data.get("cvvHeading"));
+				dashboardPage.cvvPopup().fillCvv(data.get("cvv"));
+				dashboardPage.cvvPopup().clickOk();
+			}
+			dashboardPage.buyTokenComponent().verifyBuyTokenHeading(data.get("tokensHeading"));
+			double transactionLimit = dashboardPage.buyTokenComponent().verifyTransactionLimit();
+			String[] fieldAmount = data.get("fieldAmount").split(",");
+			dashboardPage.buyTokenComponent().fieldValidationsComponent().validateAmountField(fieldAmount[0],
+					fieldAmount[1], fieldAmount[2]);
+			for (int i = 0; i <= 1; i++) {
+				if (i == 0) {
+					dashboardPage.buyTokenComponent().fillAmount(Double.toString(transactionLimit + 0.1));
+				} else {
+					dashboardPage.buyTokenComponent().fillAmount(Double.toString(0.1));
+				}
+				dashboardPage.buyTokenComponent().verifyBuyToken();
+				String[] errMessage = data.get("errMessage").split(",");
+				new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
+			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithCards failed due to exception " + e);
 		}
@@ -938,6 +887,51 @@ public class DashBoardTest {
 
 	}
 
+	@Test
+	@Parameters({ "strParams" })
+	public void testWithdrawTokenInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			double avlBalDasBoard = dashboardPage.verifyAvailbleBalance();
+			dashboardPage.clickWithdraw();
+			dashboardPage.withdrawTokenPage().verifyWithdrawHeading(data.get("heading"));
+			if (data.get("accountType").equals("Bank")) {
+				dashboardPage.withdrawTokenPage().clickBankAccounts();
+				dashboardPage.withdrawTokenPage().clickBank();
+			} else {
+				dashboardPage.withdrawTokenPage().clickInstantPay();
+				dashboardPage.buyTokenComponent().clickInstantPayDebitCard();
+			}
+			dashboardPage.withdrawTokenPage().verifyWithdrawTokenHeading(data.get("tokensHeading"));
+			dashboardPage.withdrawTokenPage().viewDailyLimits();
+			double transactionLimit = dashboardPage.buyTokenComponent().verifyTransactionLimit();
+			String[] fieldAmount = data.get("fieldAmount").split(",");
+			dashboardPage.buyTokenComponent().fieldValidationsComponent().validateAmountField(fieldAmount[0],
+					fieldAmount[1], fieldAmount[2]);
+			String[] errMessage = data.get("errMessage").split(",,");
+			for (int i = 0; i <= 3; i++) {
+				if (i == 0) {
+					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(transactionLimit + 0.1));
+					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
+				} else if (i == 1) {
+					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(0.1));
+					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
+				} else if (transactionLimit > avlBalDasBoard + 0.1) {
+					if (i == 2) {
+						dashboardPage.withdrawTokenPage().fillAmount(Double.toString(avlBalDasBoard));
+					} else {
+						dashboardPage.withdrawTokenPage().fillAmount(Double.toString(avlBalDasBoard + 0.1));
+					}
+					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
+				}
+				dashboardPage.withdrawTokenPage().verifyWithdrawToken();
+			}
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("testWithdrawTokenInvalidData failed due to exception " + e);
+		}
+
+	}
+
 	public void testWithdrawTokenProcedure(String strParams) {
 		try {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
@@ -1008,8 +1002,8 @@ public class DashBoardTest {
 			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent()
 					.verifyAmount(data.get("amount"));
 			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent().clickViewTransaction();
-			dashboardPage.transactionsDetailsComponent().withdrawGiftCardTransactionsDetails(
-					data.get("transactionType"), data.get("transactionStatus"));
+			dashboardPage.transactionsDetailsComponent()
+					.withdrawGiftCardTransactionsDetails(data.get("transactionType"), data.get("transactionStatus"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testWithdrawGiftCard  failed due to exception " + e);
 		}
@@ -1076,7 +1070,8 @@ public class DashBoardTest {
 					DriverFactory.getDriver().hideKeyboard();
 					dashboardPage.selectWithdrawMethodPage().giftCardPage().fillLastName(fieldLastName[i + 3]);
 					dashboardPage.selectWithdrawMethodPage().giftCardPage().clickLastName();
-					dashboardPage.selectWithdrawMethodPage().giftCardPage().clickEmail();
+					Thread.sleep(1200);
+					dashboardPage.selectWithdrawMethodPage().giftCardPage().clickFirstName();
 					DriverFactory.getDriver().hideKeyboard();
 					String[] lstNameErrMsg = data.get("lstNameErrMsg").split(",");
 					new CommonFunctions().validateFormErrorMessage(lstNameErrMsg[i - 1], "Last Name Field");

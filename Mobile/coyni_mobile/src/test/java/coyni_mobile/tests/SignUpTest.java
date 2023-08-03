@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import coyni_mobile.pages.LandingPage;
 import coyni_mobile.pages.SignUpPage;
+import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.Runner;
 import ilabs.mobile.reporting.ExtentTestManager;
@@ -291,4 +292,129 @@ public class SignUpTest {
 			ExtentTestManager.setFailMessageInReport("test SignUp Failed due to this Exception" + e);
 		}
 	}
+
+	@Test
+	@Parameters({ "strParams" })
+	public void testSignupInvalidData(String strParams) {
+		try {
+			Map<String, String> data = Runner.getKeywordParameters(strParams);
+			landingPage.clickSignUp();
+			signUpPage.VerifyPhoneNumberHeading(data.get("phoneNumDesc"));
+			String[] country = data.get("country").split(",");
+			String[] phoneNumber = data.get("phoneNumber").split(",");
+			signUpPage.clickDopdown();
+			signUpPage.fillSearch(country[0]);
+			signUpPage.fillPhoneNumbers(phoneNumber[0]);
+			signUpPage.clickDopdown();
+			signUpPage.fillSearch(country[1]);
+			signUpPage.verifyPhoneNumber();
+			for (int i = 1; i <= 3; i++) {
+				signUpPage.fillPhoneNumbers(phoneNumber[i]);
+				signUpPage.verifyContinue();
+			}
+			String[] fieldPhoneNumber = data.get("fieldPhoneNumber").split(",");
+			signUpPage.fieldValidationsComponent().validatePhoneNumberField(fieldPhoneNumber[0], fieldPhoneNumber[1],
+					fieldPhoneNumber[2]);
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationHeading(data.get("phNumVerifiHeadi"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("invalidCode"));
+			signUpPage.phoneAndEmailVerificationComponent().verifyInvalidCode(data.get("invalidCodeMsg"));
+			signUpPage.phoneAndEmailVerificationComponent().clickResend();
+			signUpPage.phoneAndEmailVerificationComponent().viewNewCodeSentMsg();
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			signUpPage.verifyEmailHeading(data.get("emailDescription"));
+			String[] email = data.get("email").split(",");
+			for (int i = 0; i <= 2; i++) {
+				signUpPage.fillEmail(email[i]);
+				signUpPage.verifyContinue();
+			}
+			String[] fieldEmail = data.get("fieldEmail").split(",");
+			signUpPage.fieldValidationsComponent().validateEmailField(fieldEmail[0], fieldEmail[1], fieldEmail[2]);
+			signUpPage.fillEmail(email[3]);
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("invalidCode"));
+			signUpPage.phoneAndEmailVerificationComponent().verifyInvalidCode(data.get("invalidCodeMsg"));
+			signUpPage.phoneAndEmailVerificationComponent().clickResend();
+			signUpPage.phoneAndEmailVerificationComponent().viewNewCodeSentMsg();
+			signUpPage.phoneAndEmailVerificationComponent().fillOtp(data.get("code"));
+			signUpPage.verifyNameView(data.get("nameDesc"));
+			String[] lastName = data.get("lastName").split(",");
+			String[] firstName = data.get("firstName").split(",");
+			signUpPage.fillLastName(lastName[2]);
+			for (int i = 0; i < 2; i++) {
+				signUpPage.fillFirstName(firstName[i]);
+				signUpPage.clickLastName();
+				String[] fstNameErrMsg = data.get("fstNameErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(fstNameErrMsg[i], "First Name Field");
+				signUpPage.verifyContinue();
+			}
+			String[] fieldFirstName = data.get("fieldFirstName").split(",");
+			signUpPage.fieldValidationsComponent().validateFirstNameField(fieldFirstName[0], fieldFirstName[1],
+					fieldFirstName[2], fieldFirstName[3], data.get("validateDataType"));
+			signUpPage.fillFirstName(firstName[2]);
+			for (int i = 0; i < 2; i++) {
+				signUpPage.fillLastName(lastName[i]);
+				signUpPage.clickFirstName();
+				DriverFactory.getDriver().hideKeyboard();
+				String[] lstNameErrMsg = data.get("lstNameErrMsg").split(",");
+				new CommonFunctions().validateFormErrorMessage(lstNameErrMsg[i], "Last Name Field");
+				signUpPage.verifyContinue();
+			}
+			String[] fieldLastName = data.get("fieldLastName").split(",");
+			signUpPage.fieldValidationsComponent().validateLastNameField(fieldLastName[0], fieldLastName[1],
+					fieldLastName[2], fieldLastName[3], data.get("validateDataType"));
+			signUpPage.fillLastName(lastName[2]);
+			signUpPage.clickContinue();
+			signUpPage.verifyPasswordView(data.get("passwordDesc"));
+			String[] password = data.get("password").split(",");
+			for (int i = 0; i <= 2; i++) {
+				signUpPage.fillPassword(password[i]);
+				signUpPage.verifyContinue();
+			}
+			String[] fieldPassword = data.get("fieldPassword").split(",");
+			signUpPage.fieldValidationsComponent().validatePasswordField(fieldPassword[0], fieldPassword[1],
+					fieldPassword[2]);
+			signUpPage.fillPassword(password[3]);
+			signUpPage.clickEyeIcon();
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().verifyLegalView(data.get("legalDesc"));
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().verifyAgree();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickPrivacyPolicy();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().viewDocAgreeHeading();
+			signUpPage.navigationComponent().clickClose();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().verifyLegalView(data.get("legalDesc"));
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().clickTermsOfService();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().viewDocAgreeHeading();
+			signUpPage.navigationComponent().clickClose();
+			signUpPage.phoneAndEmailVerificationComponent().agreementPage().verifyLegalView(data.get("legalDesc"));
+			Thread.sleep(1000);
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.verifyPasswordView(data.get("passwordDesc"));
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.verifyNameView(data.get("nameDesc"));
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.verifyEmailHeading(data.get("emailDescription"));
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyEmailVerificationHeading(data.get("emailVerification"));
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.verifyEmailHeading(data.get("emailDescription"));
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.VerifyPhoneNumberHeading(data.get("phoneNumDesc"));
+			signUpPage.clickContinue();
+			signUpPage.phoneAndEmailVerificationComponent()
+					.verifyPhoneVerificationHeading(data.get("phNumVerifiHeadi"));
+			signUpPage.navigationComponent().clickBack();
+			signUpPage.VerifyPhoneNumberHeading(data.get("phoneNumDesc"));
+			signUpPage.navigationComponent().clickClose();
+			landingPage.verifyCoyniView();
+
+		} catch (Exception e) {
+			ExtentTestManager.setFailMessageInReport("test SignUp Failed due to this Exception" + e);
+		}
+	}
+
 }

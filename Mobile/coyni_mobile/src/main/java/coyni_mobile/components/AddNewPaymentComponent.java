@@ -10,7 +10,7 @@ import io.appium.java_client.MobileBy;
 
 public class AddNewPaymentComponent extends MobileFunctions {
 	private By lblHeading = MobileBy
-			.xpath("//*[@text='Add Payment Method']|//*[@text='Add Instant Pay']|//*[@text='Add Bank Account']");
+			.xpath("//*[@text='Add Payment Method']|//*[@text='Add Instant Pay']|//*[@text='Add Bank Account']|//*[@text='Add Card to Reload']");
 	private By lblPaymentMethods = MobileBy.id("");
 	private By lblPageDes = MobileBy.id("");
 	private By btnExternalBank = MobileBy.id("com.coyni.mapp:id/lyBank");

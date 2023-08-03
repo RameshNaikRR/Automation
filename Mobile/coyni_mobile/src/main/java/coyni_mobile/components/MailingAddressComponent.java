@@ -132,6 +132,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void fillAddLine2(String addressLine2) {
+		scrollDownToElement(txtAddLine2, "Address Line2");
 		enterText(txtAddLine2, addressLine2, "Address Line2");
 	}
 
@@ -252,6 +253,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void fillCity(String city) {
+		scrollDownToElement(txtCity, "City");
 		click(txtCity, "City");
 		enterText(txtCity, city, "City");
 	}
@@ -267,6 +269,7 @@ public class MailingAddressComponent extends MobileFunctions {
 	}
 
 	public void selectState(String state) {
+		scrollDownToElement(drpDwnState, "State Drop down");
 		click(drpDwnState, "State Drop down");
 		enterText(txtContrySearch, state, "State");
 		click(MobileBy.xpath(String.format("//*[@text='%s']", state)), "state");

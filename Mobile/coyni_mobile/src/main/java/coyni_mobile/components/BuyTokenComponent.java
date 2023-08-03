@@ -15,7 +15,8 @@ public class BuyTokenComponent extends MobileFunctions {
 	private By lblBuyTokenDesc = MobileBy.xpath("//*[contains(@text,'Please select a')]");
 	private By lblPmntMethodName = MobileBy.id("com.coyni.mapp:id/tvPayHead");
 	private By lblCYN = MobileBy.id("com.coyni.mapp:id/tvCYN");
-	private By btnInstantDebitCard = MobileBy.xpath("//*[contains(@text,'Instant Pay')]/following-sibling::*/descendant::android.widget.TextView[1]");
+	private By btnInstantDebitCard = MobileBy
+			.xpath("//*[contains(@text,'Instant Pay')]/following-sibling::*/descendant::android.widget.TextView[1]");
 	private By btnDebitCard = MobileBy.xpath("(//*[contains(@text,'Debit')])[1]");
 	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit')])[1]");
 	private By btnBank = MobileBy.xpath("(//*[contains(@text,'Bank')])[1]");
@@ -24,6 +25,13 @@ public class BuyTokenComponent extends MobileFunctions {
 	private By txtAmount = MobileBy.id("com.coyni.mapp:id/etAmount");
 	private By btnBuyToken = MobileBy.id("com.coyni.mapp:id/keyActionLL");
 	private By lblExchangeValue = MobileBy.id("com.coyni.mapp:id/tvExchange");
+
+	public double verifyTransactionLimit() {
+		new CommonFunctions().elementView(lblDailylimits, "Transaction Limit");
+		double transactionLimit = Double.parseDouble(getText(lblDailylimits).replace("Weekly limit is ", "")
+				.replace("Daily limit is ", "").replace(" CYN", ""));
+		return transactionLimit;
+	}
 
 	public void verifyCynView() {
 		if (getText(lblCYN).equals(" CYN")) {
@@ -63,11 +71,16 @@ public class BuyTokenComponent extends MobileFunctions {
 	}
 
 	public void fillAmount(String Amount) {
-		enterText(txtAmount, Amount, Amount);
+		click(txtAmount, "Amount");
+		enterText(txtAmount, Amount, "Amount");
 	}
 
 	public void clickBuyToken() {
 		click(btnBuyToken, "Buy Token");
+	}
+
+	public void verifyBuyToken() {
+		new CommonFunctions().verifyDisabledElement(btnBuyToken, "Buy Token");
 	}
 
 	public void clickDebitCard() {
@@ -77,11 +90,11 @@ public class BuyTokenComponent extends MobileFunctions {
 	public void clickInstantPayDebitCard() {
 		click(btnInstantDebitCard, "Debit Card");
 	}
-	
+
 	public void clickCreditCard() {
 		click(btnCreditCard, "Credit Card");
 	}
-	
+
 	public void clickBank() {
 		click(btnBank, "Bank");
 	}
@@ -102,4 +115,7 @@ public class BuyTokenComponent extends MobileFunctions {
 		return new ReloadPopup();
 	}
 
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
+	}
 }

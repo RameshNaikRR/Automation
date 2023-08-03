@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.utilities.CommonFunctions;
-import coyni_mobile.utilities.CommonFunctions;
 import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.actions.SwipeDirection;
@@ -28,7 +27,7 @@ public class NotificationsPage extends MobileFunctions {
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
 	private By btnNotifications = MobileBy
 			.xpath("//*[contains(@resource-id,'notificationsLL')]|//*[contains(@resource-id,'notificationsTV')]");
-	private By btnRequest = MobileBy.xpath("//*[contains(@resource-id,'requestsTV')]");
+	private By btnRequest = MobileBy.id("com.coyni.mapp:id/requestsTV");
 	private By btnCancel = MobileBy.xpath(
 			"//*[@text='Today']/following-sibling::*/descendant::android.widget.LinearLayout[contains(@resource-id,'cancelLL')]");
 	private By btnReminder = MobileBy.xpath(
@@ -104,6 +103,7 @@ public class NotificationsPage extends MobileFunctions {
 
 	public void verifyUnRead() throws InterruptedException {
 //		new AndroidCommonFunctions().elementView(lblUnRead, "UNREAD");
+		Thread.sleep(1200);
 		if (getElementList(viewDot, "Dot").size() == 1) {
 			ExtentTestManager.setPassMessageInReport("After Swiping Right the Notification, the dot is visible");
 		} else {
@@ -127,6 +127,7 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public void verifyRead() throws InterruptedException {
+		Thread.sleep(1200);
 		if (getElementList(viewDot, "Dot").size() == 0) {
 			ExtentTestManager.setPassMessageInReport("After Swiping Right the Notification, the dot is not visible");
 		} else {
@@ -149,7 +150,8 @@ public class NotificationsPage extends MobileFunctions {
 		click(btnDelete, "Delete Notification");
 	}
 
-	public void readDot() {
+	public void readDot() throws InterruptedException {
+		Thread.sleep(1200);
 		if (getElementList(viewDot, "read Message").size() > 0) {
 			ExtentTestManager.setInfoMessageInReport("Dot is present");
 		} else {
@@ -170,7 +172,7 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public void clickRequest() throws InterruptedException {
-		Thread.sleep(1000);
+		Thread.sleep(2500);
 		wait.until(ExpectedConditions.presenceOfElementLocated(btnRequest));
 		click(btnRequest, "Request");
 	}

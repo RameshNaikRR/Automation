@@ -120,6 +120,10 @@ public class GiftCardPage extends MobileFunctions {
 		click(txtEmail, "Email");
 	}
 
+	public void clickFirstName() {
+		click(txtFirstName, "First Name");
+	}
+	
 	public void fillEmail(String email) {
 		DriverFactory.getDriver().hideKeyboard();
 		scrollDownToElement(txtEmail, "Email");

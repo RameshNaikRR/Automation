@@ -16,13 +16,11 @@ public class FieldValidationsComponent extends MobileFunctions {
 	private By txtPhoneNumber = MobileBy.xpath("//*[contains(@resource-id,'etPhoneNo')]");
 	private By txtFirstName = MobileBy.xpath(
 			"//*[contains(@resource-id,'firstNameET')]|//*[contains(@resource-id,'etFName')]/descendant::android.widget.EditText");
-	private By txtFirstNameInput = MobileBy
-			.xpath("//*[contains(@resource-id,'etFName')]/descendant::android.widget.EditText");
 	private By txtLastName = MobileBy.xpath(
-			"//*[contains(@resource-id,'lastNameET')]|//*[contains(@resource-id,'etLName')]/descendant::android.widget.EditText");
+			"//*[contains(@resource-id,'lastNameET')]|//*[contains(@resource-id,'etLName')]/descendant::android.widget.EditText|//*[contains(@resource-id,'etLName')]");
 	// Payment Methods - Card validations
-	private By txtAmount = MobileBy
-			.xpath("//*[contains(@resource-id,'amountET')]|//*[contains(@resource-id,'payrequestET')]");
+	private By txtAmount = MobileBy.xpath(
+			"//*[contains(@resource-id,'amountET')]|//*[contains(@resource-id,'payrequestET')]|//*[contains(@resource-id,'etAmount')]");
 	private By txtNameOnCard = MobileBy.id("com.coyni.mapp:id/etName");
 	private By txtCardNumber = MobileBy.id("com.coyni.mapp:id/pnET");
 	private By txtCardExp = MobileBy.id("com.coyni.mapp:id/etExpiry");
@@ -102,13 +100,14 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().clearText(txtAmount, "Amount");
 		new CommonFunctions().validateField(txtAmount, "Amount", maxDigit);
 		new CommonFunctions().clearText(txtAmount, "Amount");
-		new CommonFunctions().validateFieldMaxichar(txtAmount, "Phone Number", moreThanMax);
+		new CommonFunctions().validateFieldMaxichar(txtAmount, "Amount", moreThanMax);
 //		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
 	}
 
 	public void validatePhoneNumberField(String singleDigit, String maxDigit, String moreThanMax)
 			throws InterruptedException {
 //		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
 		new CommonFunctions().enterSpecialKey(txtPhoneNumber, "Phone Number");
 		new CommonFunctions().validateField(txtPhoneNumber, "Phone Number", singleDigit);
 		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
@@ -121,6 +120,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 	public void validateFirstNameField(String singleDigit, String maxDigit, String moreThanMax, String numbers,
 			String keyBoardType) throws InterruptedException {
 //		DriverFactory.getDriver().hideKeyboard();
+		new CommonFunctions().clearText(txtFirstName, "First Name");
 		new CommonFunctions().enterKeys(txtFirstName, numbers, keyBoardType, "First Name");
 		new CommonFunctions().enterSpecialKey(txtFirstName, "First Name");
 		new CommonFunctions().validateField(txtFirstName, "First Name", singleDigit);

@@ -75,8 +75,8 @@ public class SendRequestPage extends MobileFunctions {
 
 	public double verifyWeeklyLimit() {
 		new CommonFunctions().elementView(lblWeeklyLimit, "Weekly Limit");
-		double weeklyLimit = Double
-				.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", "").replace(" CYN", ""));
+		double weeklyLimit = Double.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", "")
+				.replace("Daily limit is ", "").replace(" CYN", ""));
 		return weeklyLimit;
 	}
 

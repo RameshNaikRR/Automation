@@ -22,26 +22,16 @@ public class TransactionsPage extends MobileFunctions {
 	private By lblHeading = MobileBy.xpath("//*[@text='Transactions']");
 	private By frstTransaction = MobileBy.xpath(
 			"//*[@text='In progress']/../../following-sibling::*[1]|//*[@text='Today']/../../following-sibling::*[1]|//*[@text='Past']/../../following-sibling::*[1]");
-
-	private By iconsearch = MobileBy.xpath("com.coyni.mapp:id/searchET");
-	private By txtSearch = MobileBy.xpath("(//*[@name='search'])[2]/following-sibling::*[1]");
 	private By btnFilter = MobileBy.id("com.coyni.mapp:id/ivFilterIcon");
 	private By btnfiltericon = MobileBy.xpath("//*[@name='filter'] | (//*[@name='search']/following-sibling::*[2])[2]");
 	private By lblNoMore = MobileBy.id("com.coyni.mapp:id/tvNoTxn");
 	private By lblNoRecent = MobileBy.id("com.coyni.mapp:id/tvNoTxn");
-	private By copyIcon = MobileBy.xpath("//XCUIElementTypeStaticText[@name='Reference ID']/following-sibling::*[1]");
 	private By btnBack = MobileBy.xpath("//XCUIElementTypeButton[@name='Button']");
-	private By btnPaste = MobileBy.xpath("//XCUIElementTypeMenuItem[@name='Paste']");
-	private By lblTransactions = MobileBy
-			.xpath("//*[@name='Transactions']/../following-sibling::*[1]/XCUIElementTypeTable/XCUIElementTypeCell");
 	private By btnCross = MobileBy.AccessibilityId("close");
+	private By btnTransactions = MobileBy.id("com.coyni.mapp:id/messageTV");
 
 	public void verifyHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblHeading, "Page Heading", expHeading);
-	}
-
-	public void fillReferenceID(String referenceID) {
-		enterText(txtSearch, "Reference ID", referenceID);
 	}
 
 	public void clickfilter() {
@@ -65,20 +55,6 @@ public class TransactionsPage extends MobileFunctions {
 		new CommonFunctions().verifyLabelText(lblNoMore, "No More Transactions text is ", expText);
 	}
 
-
-	public int getUITransactionCount() {
-		if (getElementList(lblNoRecent, "No Recent Transcations").size() > 0) {
-			ExtentTestManager.setInfoMessageInReport("Text is : " + getText(lblNoRecent));
-		} else {
-			if (getElementList(lblTransactions, "").size() > 0) {
-				ExtentTestManager
-						.setInfoMessageInReport("Transaction Count: " + getElementList(lblTransactions, "").size());
-			}
-			return getElementList(lblTransactions, "").size();
-		}
-		return 0;
-	}
-
 	public void clickClose() {
 		click(btnCross, "Close button");
 	}
@@ -95,6 +71,16 @@ public class TransactionsPage extends MobileFunctions {
 
 	public void clickFirstTransaction() throws InterruptedException {
 		click(frstTransaction, "transaction");
+	}
+
+	public void getTransactionsCount() throws InterruptedException {
+		Thread.sleep(1200);
+		if (getElementList(btnTransactions, "Transactions").size() == 1) {
+			ExtentTestManager.setPassMessageInReport("After Search with Reference ID its showing one transaction");
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport("After Search with Reference ID, its showing more than one transaction");
+		}
 	}
 
 	public FiltersPopup filtersPopup() {

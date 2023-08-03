@@ -87,6 +87,7 @@ public class WithdrawTokenPage extends MobileFunctions {
 	}
 
 	public void fillAmount(String Amount) {
+		click(txtAmount, "amount");
 		enterText(txtAmount, Amount, "amount");
 	}
 
@@ -98,6 +99,10 @@ public class WithdrawTokenPage extends MobileFunctions {
 
 	public void clickWithdrawToken() {
 		click(btnWithdrawToken, "Withdraw Token");
+	}
+
+	public void verifyWithdrawToken() {
+		new CommonFunctions().verifyDisabledElement(btnWithdrawToken, "Withdraw Token");
 	}
 
 	public void clickDebitCard() {
@@ -159,6 +164,7 @@ public class WithdrawTokenPage extends MobileFunctions {
 	public ReloadPopup reloadPopup() {
 		return new ReloadPopup();
 	}
+
 	public GiftCardPage giftCardPage() {
 		return new GiftCardPage();
 	}

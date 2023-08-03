@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.google.common.util.concurrent.Uninterruptibles;
 
 import coyni_mobile.components.AddCardComponent;
+import coyni_mobile.components.FieldValidationsComponent;
 import coyni_mobile.components.MailingAddressComponent;
 import coyni_mobile.components.NavigationComponent;
 import coyni_mobile.components.PhoneAndEmailVerificationComponent;
@@ -280,6 +281,14 @@ public class SignUpPage extends MobileFunctions {
 		enterText(txtPhoneNumber, PhoneNumber, "Phone Number");
 	}
 
+	public void verifyPhoneNumber() {
+		if (getText(txtPhoneNumber).equals("")) {
+			ExtentTestManager.setPassMessageInReport("After changing the country Phone Number field is refreshing");
+		} else {
+			ExtentTestManager.setFailMessageInReport("After changing the country Phone Number field is not refreshing");
+		}
+	}
+
 	public void clickDopdown() {
 		click(drpdwnPhNum, "Country Dropdown ");
 	}
@@ -295,7 +304,11 @@ public class SignUpPage extends MobileFunctions {
 	}
 
 	public void clickContinue() {
-			click(btnContinue, "Contiue");
+		click(btnContinue, "Contiue");
+	}
+
+	public void verifyContinue() {
+		new CommonFunctions().verifyDisabledElement(btnContinue, "Contiue");
 	}
 
 	public void verifyEmailHeading(String emailDesc) {
@@ -327,6 +340,14 @@ public class SignUpPage extends MobileFunctions {
 	public void fillLastName(String lastName) {
 		click(txtLastName, "lastName");
 		enterText(txtLastName, lastName, "LastName");
+	}
+
+	public void clickFirstName() {
+		click(txtFirstName, "First Name");
+	}
+
+	public void clickLastName() {
+		click(txtLastName, "Last Name");
 	}
 
 	public void verifyPasswordView(String passwordDesc) {
@@ -438,5 +459,9 @@ public class SignUpPage extends MobileFunctions {
 
 	public LoginPage loginPage() {
 		return new LoginPage();
+	}
+
+	public FieldValidationsComponent fieldValidationsComponent() {
+		return new FieldValidationsComponent();
 	}
 }

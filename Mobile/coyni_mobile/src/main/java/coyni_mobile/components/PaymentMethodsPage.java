@@ -16,7 +16,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 	private By btnCreditCard = MobileBy.xpath("(//*[contains(@text,'Credit Card')])[1]");
 	private By numOfDebitCard = MobileBy.xpath("//*[@text='Mastercard Debit Card']");
 	private By numOfCreditCard = MobileBy.xpath("//*[@text='Visa Credit Card']");
-	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']|//*[contains(@resource-id,'Head')]");
+	private By lblHeading = MobileBy.xpath("//*[@text='Payment Methods']");
 	private By btnAddNewPaymentMethod = MobileBy.xpath("//*[contains(@text,'Add New Payment ')]");
 	private By btnExternalBankAccount = MobileBy.xpath("//*[contains(@resource-id,'tvExtBHead')]");
 	private By lnkBank = MobileBy.xpath("//*[contains(@text,'Bank')]");
@@ -45,7 +45,7 @@ public class PaymentMethodsPage extends MobileFunctions {
 
 	public void verifyHeading(String expHeading) {
 //		if (getElementList(lblHeading, "Heading").size() > 0) {
-			new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
+		new CommonFunctions().verifyLabelText(lblHeading, "Heading", expHeading);
 //		}
 	}
 

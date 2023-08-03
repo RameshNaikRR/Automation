@@ -1,8 +1,11 @@
 package coyni_mobile.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import coyni_mobile.utilities.CommonFunctions;
+import ilabs.MobileFramework.DriverFactory;
 import ilabs.MobileFramework.MobileFunctions;
 import ilabs.mobile.reporting.ExtentTestManager;
 import io.appium.java_client.MobileBy;
@@ -83,6 +86,13 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 			"//*[contains(@text,'Successful')]/../following-sibling::*[contains(@resource-id,'message_tv')]|//*[contains(@text,'Failed')]/../following-sibling::*[contains(@resource-id,'message_tv')]");
 	private By lblTransRequestDesc = MobileBy
 			.xpath("//*[contains(@text,'Request')]/../following-sibling::*[contains(@resource-id,'message_tv')]");
+
+//	Transactions search functionality 
+
+	private By btnReferenceID = MobileBy.xpath("//*[@text='Reference ID']/following-sibling::*[2]");
+	private By txtSearch = MobileBy.id("com.coyni.mapp:id/searchET");
+
+	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
 
 //	Activity Log Details of Buy Token 
 	public int viewTransSuccessfulTime() {
@@ -282,6 +292,10 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 		ExtentTestManager.setPassMessageInReport("Gift Card Amount: " + getText(lblGiftCardAmount));
 	}
 
+	public void clickReferenceID() {
+		click(btnReferenceID, "Reference ID");
+	}
+
 	public void getRecipientName(String name, String amount) {
 //		double Transamt = Double.parseDouble(getText(lblTransactionTypeAmount));
 //		&& Transamt == Double.parseDouble(amount)
@@ -374,8 +388,7 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 
 	}
 
-	public void withdrawGiftCardTransactionsDetails(String expText, String expValue)
-			throws InterruptedException {
+	public void withdrawGiftCardTransactionsDetails(String expText, String expValue) throws InterruptedException {
 		getTransaction(expText);
 		if (expValue.equals("Completed")) {
 			getTransactionAmount();
@@ -500,6 +513,27 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	public void getSaleOrderTransType() {
 		new CommonFunctions().elementView(lblTransactionType, "Transaction Type");
 		ExtentTestManager.setPassMessageInReport("Transaction Type" + getText(lblTransactionType));
+	}
+
+	public String getTransactionType() {
+		return getText(lblTransactionType);
+	}
+
+	public String getTransactionAmt() {
+		return getText(lblTransactionTypeAmount);
+	}
+
+	public String getTransactionStatus() {
+		return getText(lblStatus);
+	}
+
+	public String getTransactionDate() {
+		return getText(lblDateAndTime);
+	}
+
+	public void verifySearch() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(txtSearch));
+		new CommonFunctions().VerifySearchWithPasteOption(txtSearch);
 	}
 
 	public void paidOrderDetails(String expText) {

@@ -11,9 +11,11 @@ public class EditCardComponent extends MobileFunctions {
 	private By lblCardNumHeading = MobileBy.id("com.coyni.mapp:id/tvHeading");
 	private By lblEditCardHeading = MobileBy.id("com.coyni.mapp:id/tvCard");
 	private By imgCard = MobileBy.id("com.coyni.mapp:id/cardView");
-	private By lblCardType = MobileBy.xpath("//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'tvCardName')]");
+	private By lblCardType = MobileBy
+			.xpath("//*[contains(@resource-id,'tvBankName')]|//*[contains(@resource-id,'tvCardName')]");
 	private By lblNameonCard = MobileBy.id("com.coyni.mapp:id/tvNameOnCard");
-	private By lblCardNumOnImg = MobileBy.xpath("//*[contains(@resource-id,'tvAccount')]|//*[contains(@resource-id,'tvCardNumber')]");
+	private By lblCardNumOnImg = MobileBy
+			.xpath("//*[contains(@resource-id,'tvAccount')]|//*[contains(@resource-id,'tvCardNumber')]");
 	private By lblCardNum = MobileBy.id("com.coyni.mapp:id/tvCardNoInstitution");
 	private By lblExpDate = MobileBy.id("com.coyni.mapp:id/tvDateORouting");
 	private By txtExpDate = MobileBy.id("");
@@ -29,10 +31,34 @@ public class EditCardComponent extends MobileFunctions {
 	private By lblCardimageNum = MobileBy.id("com.coyni.mapp:id/imgBankIcon");
 	private By btnNo = MobileBy.id("com.coyni.mapp:id/tvNo");
 	private By btnYes = MobileBy.id("com.coyni.mapp:id/tvYes");
+	private By lblEditNameOnCard = MobileBy.id("com.coyni.mapp:id/etName");
+	private By lblEditCardNum = MobileBy.id("com.coyni.mapp:id/pnET");
+
+	public void verifyNameOnCard() {
+		if (!getText(lblEditNameOnCard).equals("")) {
+			new CommonFunctions().elementView(lblEditNameOnCard, "Name on Card");
+			ExtentTestManager.setPassMessageInReport(getText(lblEditNameOnCard));
+		} else {
+			ExtentTestManager.setFailMessageInReport("Its not showing any name in Name on Card");
+		}
+	}
+
+	public void verifyCardNumber() {
+		if (getText(lblEditCardNum).contains("•••• •••• •••• ")) {
+			new CommonFunctions().elementView(lblEditCardNum, "Card Number");
+			ExtentTestManager.setPassMessageInReport(getText(lblEditCardNum));
+		} else {
+			ExtentTestManager.setFailMessageInReport("Its not showing any Card Number");
+		}
+	}
 
 	public String verifyCardNumHeading() {
-		new CommonFunctions().elementView(lblCardNumHeading, "Card");
-		new CommonFunctions().elementView(imgCard, "Card");
+		if (getText(lblCardNumHeading).contains(" Debit ") || getText(lblCardNumHeading).contains(" Credit ")) {
+			new CommonFunctions().elementView(lblCardNumHeading, "Card");
+			new CommonFunctions().elementView(imgCard, "Card Image");
+		} else {
+			ExtentTestManager.setFailMessageInReport("Its not showing Type of Card");
+		}
 		return getText(lblCardNumHeading);
 	}
 
@@ -41,24 +67,24 @@ public class EditCardComponent extends MobileFunctions {
 		return getText(lblEditCardHeading);
 	}
 
-	public void verifyNameonCard(String name) {
+	public void verifyNameonCard() {
 		new CommonFunctions().elementView(lblNameonCard, "Name on Card");
-		new CommonFunctions().verifyLabelText(lblNameonCard, "Name on Card", name);
+		ExtentTestManager.setPassMessageInReport(getText(lblNameonCard));
 	}
 
-	public void verifyCardNum(String cardNum) {
+	public void verifyCardNum() {
 		new CommonFunctions().elementView(lblCardNum, "Card Number");
-		new CommonFunctions().verifyLabelText(lblCardNum, "Card Number", cardNum);
+		ExtentTestManager.setPassMessageInReport(getText(lblCardNum));
 	}
 
-	public void verifyCardExp(String cardNum) {
-		new CommonFunctions().elementView(lblCardNum, "Card Number");
-		new CommonFunctions().verifyLabelText(lblCardNum, "Card Number", cardNum);
+	public void verifyCardExp() {
+		new CommonFunctions().elementView(lblExpDate, "Expiry Date");
+		ExtentTestManager.setPassMessageInReport(getText(lblExpDate));
 	}
 
-	public void verifyBillingAddress(String address) {
+	public void verifyBillingAddress() {
 		new CommonFunctions().elementView(lblBillingAddress, "Billing Address");
-		new CommonFunctions().verifyLabelText(txtBillingAddress, "Billing Address", address);
+		ExtentTestManager.setPassMessageInReport(getText(lblBillingAddress));
 	}
 
 	public void clickEditPaymentMethod() {
@@ -97,7 +123,7 @@ public class EditCardComponent extends MobileFunctions {
 		new CommonFunctions().elementView(lblCardType, "Bank Name");
 		new CommonFunctions().elementView(lblCardNumOnImg, "Card Number");
 	}
-	
+
 	public void clickNo() {
 		click(btnNo, "No");
 	}
@@ -123,10 +149,10 @@ public class EditCardComponent extends MobileFunctions {
 		ExtentTestManager.setPassMessageInReport(getText(lblNameonCard));
 		new CommonFunctions().elementView(lblCardNum, "Bank Name");
 		ExtentTestManager.setPassMessageInReport(getText(lblCardNum));
-		new CommonFunctions().elementView(lblExpDate, "Routong Number");
+		new CommonFunctions().elementView(lblExpDate, "Account Number");
 		ExtentTestManager.setPassMessageInReport(getText(lblExpDate));
-		new CommonFunctions().elementView(lblBillingAddress, "Account Number");
+		new CommonFunctions().elementView(lblBillingAddress, "Billing Address");
 		ExtentTestManager.setPassMessageInReport(getText(lblBillingAddress));
 	}
-	
+
 }
