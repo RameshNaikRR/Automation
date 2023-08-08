@@ -375,6 +375,7 @@ public class SignUpTest {
 				signUpPage.verifyContinue();
 			}
 			String[] fieldPassword = data.get("fieldPassword").split(",");
+			signUpPage.clickEyeIcon();
 			signUpPage.fieldValidationsComponent().validatePasswordField(fieldPassword[0], fieldPassword[1],
 					fieldPassword[2]);
 			signUpPage.fillPassword(password[3]);

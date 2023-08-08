@@ -111,10 +111,10 @@ public class EditCardComponent extends MobileFunctions {
 	}
 
 	public void verifyRemovingHdg(String hdg) {
-		new CommonFunctions().verifyLabelText(lblRemovingCard, "Removing Card", hdg);
-		new CommonFunctions().elementView(lblCardimageNum, "Card Image Number");
-		new CommonFunctions().elementView(lblCardType, "Card Type");
-		new CommonFunctions().elementView(lblCardNumOnImg, "Card Number");
+		new CommonFunctions().verifyLabelText(lblRemovingCard, "Removing Heading", hdg);
+		new CommonFunctions().elementView(lblCardimageNum, "Number");
+		new CommonFunctions().elementView(lblCardType, "Type");
+		new CommonFunctions().elementView(lblCardNumOnImg, "Image");
 	}
 
 	public void verifyBankRemovingHdg(String hdg) {

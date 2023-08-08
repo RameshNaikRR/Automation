@@ -28,8 +28,9 @@ public class BuyTokenComponent extends MobileFunctions {
 
 	public double verifyTransactionLimit() {
 		new CommonFunctions().elementView(lblDailylimits, "Transaction Limit");
-		double transactionLimit = Double.parseDouble(getText(lblDailylimits).replace("Weekly limit is ", "")
-				.replace("Daily limit is ", "").replace(" CYN", ""));
+		double transactionLimit = Double
+				.parseDouble(getText(lblDailylimits).replace("Weekly limit is ", "").replace("Daily limit is ", "")
+						.replace(" CYN", "").replace(",", "").replace("Per transaction limit is ", ""));
 		return transactionLimit;
 	}
 

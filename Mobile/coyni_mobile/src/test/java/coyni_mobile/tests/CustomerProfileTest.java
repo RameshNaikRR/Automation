@@ -874,6 +874,8 @@ public class CustomerProfileTest {
 			customerProfilePage.choosePinComponent().createPasswordComponent().clickNext();
 			customerProfilePage.choosePinComponent().createPasswordComponent()
 					.verifyNewPasswordHeading(data.get("subHeading"));
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickNewPassIconEye();
+			customerProfilePage.choosePinComponent().createPasswordComponent().clickConfirmPassIconEye();
 			for (int i = 0; i < 6; i++) {
 				String[] fieldPassword = data.get("fieldPassword").split(",");
 				customerProfilePage.choosePinComponent().createPasswordComponent().verifyDisableStateSave();
@@ -1304,72 +1306,6 @@ public class CustomerProfileTest {
 			ExtentTestManager.setFailMessageInReport("Failed due to this Exception" + e);
 		}
 	}
-
-//	@Test
-//	@Parameters({ "strParams" })
-//	public void testVerifyDeleteDebitCards(String strParams) {
-//		try {
-//			Map<String, String> data = Runner.getKeywordParameters(strParams);
-//			dashboardPage.clickProfile();
-//			customerProfilePage.clickPaymentMethods();
-//			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
-//			int addedDebit = customerProfilePage.paymentMethodsPage().verifyNumOfDebitCard();
-//			int addedCredit = customerProfilePage.paymentMethodsPage().verifyNumOfCreditCard();
-//			if (data.get("cardHeading").equals("Add New Debit Card")
-//					|| data.get("cardHeading").equals("Add Debit Card")) {
-//				for (int i = 1; i <= addedDebit; i++) {
-//					customerProfilePage.paymentMethodsPage().clickDebitCard();
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickEditPaymentMethod();
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickRemove();
-//					customerProfilePage.paymentMethodsPage().editCardComponent()
-//							.verifyRemovingHdg(data.get("removePopUpHeading"));
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickYes();
-//					customerProfilePage.paymentMethodsPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
-//					if (!(addedDebit == i)) {
-//						customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
-//						customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
-//					}
-//					int presentDebitCards = customerProfilePage.addNewPaymentComponent().getPresentDebitCards();
-//					if (addedDebit - i == presentDebitCards) {
-//						ExtentTestManager.setPassMessageInReport(
-//								"After deleting the cards count is reducing : " + presentDebitCards);
-//					} else {
-//						ExtentTestManager.setFailMessageInReport(
-//								"After deleting the cards count is not reducing : " + presentDebitCards);
-//					}
-//					customerProfilePage.navigationComponent().clickBack();
-//				}
-//			} else {
-//				for (int i = 1; i <= addedCredit; i++) {
-//					customerProfilePage.paymentMethodsPage().clickCreditCard();
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickEditPaymentMethod();
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickRemove();
-//					customerProfilePage.paymentMethodsPage().editCardComponent()
-//							.verifyRemovingHdg(data.get("removePopUpHeading"));
-//					customerProfilePage.paymentMethodsPage().editCardComponent().clickYes();
-//					customerProfilePage.paymentMethodsPage().toastComponent().verifyToastMsg(data.get("toastMsg"));
-//					if (!(addedCredit == i)) {
-//						customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
-//						customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));
-//					}
-//					int presentCreditCards = customerProfilePage.addNewPaymentComponent().getPresentCreditCards();
-//					int addedCreditCards = customerProfilePage.addNewPaymentComponent().getAddedCreditCards();
-//					if (addedCreditCards - i == presentCreditCards) {
-//						ExtentTestManager.setPassMessageInReport(
-//								"After deleting the cards count is reducing : " + presentCreditCards);
-//					} else {
-//						ExtentTestManager.setFailMessageInReport(
-//								"After deleting the cards count is not reducing : " + presentCreditCards);
-//					}
-//
-//					customerProfilePage.navigationComponent().clickBack();
-//				}
-//			}
-//
-//		} catch (Exception e) {
-//			ExtentTestManager.setFailMessageInReport("failed due to this Exception" + e);
-//		}
-//	}
 
 	@Test
 	@Parameters({ "strParams" })

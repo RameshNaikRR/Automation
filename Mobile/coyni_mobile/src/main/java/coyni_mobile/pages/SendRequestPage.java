@@ -58,10 +58,11 @@ public class SendRequestPage extends MobileFunctions {
 //	private By lblAmount = MobileBy.AccessibilityId("(//*[@name='Buy Tokens'])[1]");
 	private By btnDiscard = MobileBy.id("com.coyni.mapp:id/discardLL");
 	private By btnContinue = MobileBy.id("com.coyni.mapp:id/continueLL");
-	private By lblWeeklyLimit = MobileBy.id("com.coyni.mapp:id/limitsTV");
+	private By lblWeeklyLimit = MobileBy.xpath("//*[contains(@resource-id,'limitsTV')]");
 
 //	Confirm popup details
-	private By lblAvailBal = MobileBy.id("com.coyni.mapp:id/tvAvailableBal");
+	private By lblAvailBal = MobileBy
+			.xpath("// *[contains(@resource-id,'tvAvailableBal')]|// *[contains(@resource-id,'tvErrMessage')]");
 	private By lblReqstAmount = MobileBy.id("com.coyni.mapp:id/amountPayTV");
 	private By lblSenderName = MobileBy.id("com.coyni.mapp:id/tokenAccountTextview");
 	private By btnConfirm = MobileBy.id("com.coyni.mapp:id/cvConfirm");
@@ -73,10 +74,11 @@ public class SendRequestPage extends MobileFunctions {
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
-	public double verifyWeeklyLimit() {
+	public double verifyLimit() {
 		new CommonFunctions().elementView(lblWeeklyLimit, "Weekly Limit");
-		double weeklyLimit = Double.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", "")
-				.replace("Daily limit is ", "").replace(" CYN", ""));
+		double weeklyLimit = Double
+				.parseDouble(getText(lblWeeklyLimit).replace("Weekly limit is ", "").replace("Daily limit is ", "")
+						.replace(" CYN", "").replace(",", "").replace("Per transaction limit is", ""));
 		return weeklyLimit;
 	}
 
@@ -308,8 +310,8 @@ public class SendRequestPage extends MobileFunctions {
 	}
 
 	public double verifyAvailbleBalance() {
-		double avlBalance = Double
-				.parseDouble(getText(lblAvailBal).replace("Available Balance: ", "").replace(" CYN", ""));
+		double avlBalance = Double.parseDouble(getText(lblAvailBal).replace("Available Balance: ", "")
+				.replace(" CYN", "").replace("Insufficient Balance:", ""));
 		ExtentTestManager.setPassMessageInReport(getText(lblAvailBal));
 		return avlBalance;
 	}

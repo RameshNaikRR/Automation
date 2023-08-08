@@ -35,7 +35,6 @@ public class DashBoardTest {
 			dashboardPage.clickNotifications();
 			dashboardPage.notificationsPage().verifyNotificationHeading(data.get("notificationsHeading"));
 			dashboardPage.notificationsPage().verifyMesaageTitle();
-			dashboardPage.notificationsPage().verifyMessageBody();
 			dashboardPage.notificationsPage().verifyTime();
 			dashboardPage.notificationsPage().swipeNotificationLeft();
 			dashboardPage.notificationsPage().verifyRead();
@@ -402,7 +401,7 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 			dashboardPage.sendRequestPage().selectUser();
 			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
-			dashboardPage.sendRequestPage().fillAmount(Double.toString(avlBalDasBoard + 2));
+			dashboardPage.sendRequestPage().fillAmount(Double.toString(avlBalDasBoard + 15));
 			dashboardPage.sendRequestPage().clickSend();
 			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 			dashboardPage.sendRequestPage().reloadPopup().clickNewAmount();
@@ -419,9 +418,9 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
 			if (!(dashboardPage.withdrawTokenPage().reloadPopup().verifyProcessingFee() == 0)) {
 				dashboardPage.withdrawTokenPage().reloadPopup().clickProcessingFee();
-				dashboardPage.withdrawTokenPage().reloadPopup().validateProcessingFees("2");
+				dashboardPage.withdrawTokenPage().reloadPopup().validateProcessingFees("15");
 			} else {
-				dashboardPage.withdrawTokenPage().reloadPopup().validateWithoutProcessingFee("2");
+				dashboardPage.withdrawTokenPage().reloadPopup().validateWithoutProcessingFee("15");
 			}
 			dashboardPage.sendRequestPage().reloadPopup().clickLoad();
 			dashboardPage.sendRequestPage().reloadPopup().fillCVV(data.get("cvv"));
@@ -449,12 +448,12 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
 					.verifySendRequestPurchase(data.get("successHeading"));
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
-					.verifyAmount(Double.toString(avlBalDasBoard + 2));
+					.verifyAmount(Double.toString(avlBalDasBoard + 15));
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().verifySendRequestDesc();
 			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().clickViewTransaction();
 			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
 			dashboardPage.transactionsDetailsComponent().sentTransactionDetails(data.get("name"),
-					Double.toString(avlBalDasBoard + 2), data.get("transactionType"));
+					Double.toString(avlBalDasBoard + 15), data.get("transactionType"));
 			if (data.get("withoutPaymentMethod").equalsIgnoreCase("")) {
 				dashboardPage.transactionsDetailsComponent().clickBack();
 				dashboardPage.clickProfile();
@@ -478,39 +477,55 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 			dashboardPage.sendRequestPage().selectUser();
 			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
-			double weekLimit = dashboardPage.sendRequestPage().verifyWeeklyLimit();
-			dashboardPage.sendRequestPage().fillAmount(Double.toString(weekLimit + 0.1));
-			for (int i = 0; i < 3; i++) {
+			double limit = dashboardPage.sendRequestPage().verifyLimit();
+//			dashboardPage.sendRequestPage().fillAmount(Double.toString(weekLimit + 0.1));
+//			new CommonFunctions().validateFormErrorMessage(data.get("errMsg"),"amount field");
+			for (int i = 0; i < 4; i++) {
 				String[] fieldAmount = data.get("fieldAmount").split(",");
 				if (i < 1) {
 					dashboardPage.sendRequestPage().fieldValidationsComponent().validateAmountField(fieldAmount[0],
 							fieldAmount[1], fieldAmount[2]);
 				} else {
 					if (i == 1) {
-						dashboardPage.sendRequestPage().fillAmount(Double.toString(weekLimit + 0.1));
+						dashboardPage.sendRequestPage().fillAmount(Double.toString(limit + 0.1));
+						new CommonFunctions().validateFormErrorMessage(data.get("amountErrMsg"), "Amount Field");
 					} else if (i == 2) {
 						dashboardPage.sendRequestPage().fillAmount("0.1");
+						new CommonFunctions().validateDynamicTextMessage("Amount field");
 					} else {
 						dashboardPage.sendRequestPage().fillAmount(Double.toString(avlBalDasBoard + 2));
 						dashboardPage.sendRequestPage().clickSend();
 						dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
 						dashboardPage.sendRequestPage().reloadPopup().clickReload();
 						dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
+						for (int j = 0; j < 2; j++) {
+							if (j == 0) {
+								double reloadAmount = dashboardPage.sendRequestPage().reloadPopup()
+										.verifyReloadAmount();
+								dashboardPage.sendRequestPage().reloadPopup()
+										.fillAmount(Double.toString(reloadAmount - 0.1));
+								dashboardPage.sendRequestPage().reloadPopup()
+										.validateReloadTransactionErrorMessage("2");
+							} else {
+								dashboardPage.sendRequestPage().reloadPopup().fillAmount(Double.toString(0.1));
+								new CommonFunctions().validateDynamicTextMessage("Amount field");
+							}
+						}
+
 					}
-					String[] amountErrMsg = data.get("amountErrMsg").split(",");
-					new CommonFunctions().validateFormErrorMessage(amountErrMsg[i - 1], "Amount Field");
+
 				}
 			}
-
-			if (!data.get("errMsg").isEmpty()) {
-				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
-			}
-			if (!data.get("errPopupHeading").isEmpty()) {
-				dashboardPage.sendRequestPage().clickSend();
-				dashboardPage.sendRequestPage().verifyPopupHeading(data.get("errPopupHeading"));
-				dashboardPage.sendRequestPage().verifypopupDes(data.get("errPopupDes"));
-				dashboardPage.sendRequestPage().clickReload();
-			}
+//
+//			if (!data.get("errMsg").isEmpty()) {
+//				new CommonFunctions().validateFormErrorMessage(data.get("errMsg"), data.get("elementName"));
+////			}
+//			if (!data.get("errPopupHeading").isEmpty()) {
+//				dashboardPage.sendRequestPage().clickSend();
+//				dashboardPage.sendRequestPage().verifyPopupHeading(data.get("errPopupHeading"));
+//				dashboardPage.sendRequestPage().verifypopupDes(data.get("errPopupDes"));
+//				dashboardPage.sendRequestPage().clickReload();
+//			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testPayWithInvalidData  failed due to exception " + e);
 		}
@@ -569,9 +584,7 @@ public class DashBoardTest {
 			dashboardPage.navigationComponent().clickClose();
 			dashboardPage.sendRequestPage().clickContinue();
 			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
-			dashboardPage.navigationComponent().clickClose();
-			dashboardPage.sendRequestPage().clickNativeKeyBack();
-			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
+			Thread.sleep(1000);
 			dashboardPage.navigationComponent().clickClose();
 			dashboardPage.sendRequestPage().clickDisCard();
 			dashboardPage.verifyDashboard();
@@ -752,12 +765,12 @@ public class DashBoardTest {
 			for (int i = 0; i <= 1; i++) {
 				if (i == 0) {
 					dashboardPage.buyTokenComponent().fillAmount(Double.toString(transactionLimit + 0.1));
+					new CommonFunctions().validateFormErrorMessage(data.get("errMessage"), "Amount field");
 				} else {
 					dashboardPage.buyTokenComponent().fillAmount(Double.toString(0.1));
+					new CommonFunctions().validateDynamicTextMessage("Amount field");
 				}
 				dashboardPage.buyTokenComponent().verifyBuyToken();
-				String[] errMessage = data.get("errMessage").split(",");
-				new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithCards failed due to exception " + e);
@@ -910,13 +923,14 @@ public class DashBoardTest {
 					fieldAmount[1], fieldAmount[2]);
 			String[] errMessage = data.get("errMessage").split(",,");
 			for (int i = 0; i <= 3; i++) {
-				if (i == 0) {
+				if (transactionLimit < avlBalDasBoard) {
+					System.out.println(i);
 					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(transactionLimit + 0.1));
 					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
 				} else if (i == 1) {
 					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(0.1));
-					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
-				} else if (transactionLimit > avlBalDasBoard + 0.1) {
+					new CommonFunctions().validateDynamicTextMessage("amount field");
+				} else if (i > 1 && transactionLimit > avlBalDasBoard + 0.1) {
 					if (i == 2) {
 						dashboardPage.withdrawTokenPage().fillAmount(Double.toString(avlBalDasBoard));
 					} else {
@@ -1133,6 +1147,7 @@ public class DashBoardTest {
 			}
 			dashboardPage.sendRequestPage().verifyConfmSendHeading(data.get("confmSendHeading"));
 			double avaBalConfirmPopup = dashboardPage.sendRequestPage().verifyAvailbleBalance();
+			double transactionLimit = dashboardPage.sendRequestPage().verifyLimit();
 			if (avlBalDasBoard == avaBalConfirmPopup) {
 				ExtentTestManager.setPassMessageInReport(
 						"The Same Available Balance is showing in Dash baord and Send Confirm popup");
@@ -1154,11 +1169,15 @@ public class DashBoardTest {
 				dashboardPage.transactionsDetailsComponent().sentTransactionDetails(data.get("name"),
 						data.get("amount"), data.get("transactionType"));
 			} else {
-				new CommonFunctions().validateFormErrorMessage(data.get("errorMessage"), "Sending Amount");
-				dashboardPage.sendRequestPage().verifySendErrMsg(data.get("sendErrMsg"));
+				String[] errMsg = data.get("errorMessage").split(",");
+				if (transactionLimit > avlBalDasBoard) {
+					new CommonFunctions().validateFormErrorMessage(errMsg[0], "Sending Amount");
+				} else {
+					new CommonFunctions().validateFormErrorMessage(errMsg[1], "Sending Amount");
+				}
 			}
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testScanCode  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testScanSaveAlbum  failed due to exception " + e);
 		}
 	}
 

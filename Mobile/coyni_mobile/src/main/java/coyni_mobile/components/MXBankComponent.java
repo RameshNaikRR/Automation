@@ -10,7 +10,7 @@ import io.appium.java_client.MobileBy;
 
 public class MXBankComponent extends MobileFunctions {
 	private By btnStart = MobileBy.xpath("//*[contains(@resource-id,'cvStart')]");
-	private By lblDescription = MobileBy.xpath("//*[contains(@text,'coyni uses trusted')]");
+	private By lblDescription = MobileBy.xpath("//*[contains(@text,'coyni uses a trusted')]");
 	private By lblMXChBXDesc = MobileBy.xpath("//*[contains(@text,'coyni uses trusted')]");
 	private By lblSelectInstitution = MobileBy
 			.xpath("//*[contains(@text,'Select your institution')]|//*[contains(@text,'Search more institutions')]");

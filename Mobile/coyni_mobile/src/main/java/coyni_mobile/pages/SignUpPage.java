@@ -252,7 +252,7 @@ public class SignUpPage extends MobileFunctions {
 	private By drpdwnPhNum = MobileBy.id("com.coyni.mapp:id/tvCountryCode");
 	private By txtSearchField = MobileBy.AccessibilityId("Country Search");
 	private By btnSearchCross = MobileBy.AccessibilityId("Clear text");
-	private By btnContinue = MobileBy.AccessibilityId("Continue");
+	private By btnContinue = MobileBy.id("com.coyni.mapp:id/tvButton");
 	private By lblEmail = MobileBy.xpath("//*[@text='Email']");
 	private By lblEmailDesc = MobileBy.AccessibilityId("Email Verification Text");
 	private By txtEmail = MobileBy.id("com.coyni.mapp:id/emailET");

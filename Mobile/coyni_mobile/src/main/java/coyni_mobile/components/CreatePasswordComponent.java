@@ -16,7 +16,7 @@ public class CreatePasswordComponent extends MobileFunctions {
 	private By confirmIconEye = MobileBy.xpath("//*[contains(@resource-id,'etCPassword')]/following-sibling::*");
 	private By txtConfirmPassword = MobileBy.xpath("//*[contains(@resource-id,'etCPassword')]");
 	private By lblMustHaveErrMsg = MobileBy.AccessibilityId("8 to 32");
-	private By btnSave = MobileBy.AccessibilityId("Save");
+	private By btnSave = MobileBy.id("com.coyni.mapp:id/cvSave");
 	private By imgPassStrength = MobileBy.xpath("//*[contains(@resource-id,'strength')]");
 
 	/**
@@ -26,8 +26,9 @@ public class CreatePasswordComponent extends MobileFunctions {
 	private By lblCurrentpwdDesc = MobileBy.AccessibilityId("Keep Your Account Secure");
 	private By lblCurrentIconEye = MobileBy.id("com.coyni.mapp:id/text_input_end_icon");
 	private By txtCurrentPassword = MobileBy.AccessibilityId("Password");
-	private By btnNext = MobileBy.AccessibilityId("Continue");
-	private By lblNewPassword = MobileBy.xpath("//*[contains(@resource-id,'Message')]/preceding-sibling::android.widget.TextView");
+	private By btnNext = MobileBy.id("com.coyni.mapp:id/tvButton");
+	private By lblNewPassword = MobileBy
+			.xpath("//*[contains(@resource-id,'Message')]/preceding-sibling::android.widget.TextView");
 	private By lblNewPasswordDesc = MobileBy.id("com.coyni.mapp:id/tvMessageChangePass");
 
 	public void verifyCurrentPassword(String password) {
@@ -49,7 +50,7 @@ public class CreatePasswordComponent extends MobileFunctions {
 	public void validateNext() {
 		new CommonFunctions().verifyDisabledElement(btnNext, "Next");
 	}
-	
+
 	public void verifyNewPasswordHeading(String hdg) {
 		new CommonFunctions().verifyLabelText(lblNewPassword, "New Password", hdg);
 	}
@@ -108,7 +109,7 @@ public class CreatePasswordComponent extends MobileFunctions {
 	}
 
 	public void clickSave() {
-			click(btnSave, "Save");
+		click(btnSave, "Save");
 	}
 
 	public void verifyDisableStateSave() {
@@ -150,7 +151,7 @@ public class CreatePasswordComponent extends MobileFunctions {
 	public FieldValidationsComponent fieldValidationsComponent() {
 		return new FieldValidationsComponent();
 	}
-	
+
 	/**
 	 * Order - minChar, max, MaxiPlus
 	 * 

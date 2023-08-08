@@ -101,6 +101,7 @@ public class FieldValidationsComponent extends MobileFunctions {
 		new CommonFunctions().validateField(txtAmount, "Amount", maxDigit);
 		new CommonFunctions().clearText(txtAmount, "Amount");
 		new CommonFunctions().validateFieldMaxichar(txtAmount, "Amount", moreThanMax);
+		new CommonFunctions().clearText(txtAmount, "Amount");
 //		new CommonFunctions().clearText(txtPhoneNumber, "Phone Number");
 	}
 

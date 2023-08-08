@@ -22,7 +22,7 @@ public class NotificationsPage extends MobileFunctions {
 //	private By btnPay = MobileBy.id("//*[@text='Pay']");
 	private By countNotification = MobileBy.id("com.coyni.mapp:id/countTV");
 	private By viewDot = MobileBy.xpath(
-			"//*[@text='Past']/following-sibling::*/descendant::android.widget.FrameLayout[contains(@resource-id,'readStatusCV')]");
+			"//*[@text='Today']/following-sibling::*/descendant::android.widget.FrameLayout[contains(@resource-id,'readStatusCV')]");
 	private By notificationSwipe = MobileBy.xpath("(//*[contains(@resource-id,'subject')])[1]");
 	private By btnDelete = MobileBy.xpath("//*[contains(@resource-id,'deleteLL')]");
 	private By btnNotifications = MobileBy
@@ -103,7 +103,7 @@ public class NotificationsPage extends MobileFunctions {
 
 	public void verifyUnRead() throws InterruptedException {
 //		new AndroidCommonFunctions().elementView(lblUnRead, "UNREAD");
-		Thread.sleep(1200);
+		Thread.sleep(2000);
 		if (getElementList(viewDot, "Dot").size() == 1) {
 			ExtentTestManager.setPassMessageInReport("After Swiping Right the Notification, the dot is visible");
 		} else {
@@ -127,7 +127,7 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public void verifyRead() throws InterruptedException {
-		Thread.sleep(1200);
+		Thread.sleep(1600);
 		if (getElementList(viewDot, "Dot").size() == 0) {
 			ExtentTestManager.setPassMessageInReport("After Swiping Right the Notification, the dot is not visible");
 		} else {
@@ -136,6 +136,8 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public int countNotifications() throws InterruptedException {
+//		wait.until(ExpectedConditions.presenceOfElementLocated(countNotification));
+		Thread.sleep(2300);
 		int count = Integer.parseInt(getText(countNotification));
 		ExtentTestManager.setPassMessageInReport("Notification count is " + count);
 		return count;
@@ -151,7 +153,7 @@ public class NotificationsPage extends MobileFunctions {
 	}
 
 	public void readDot() throws InterruptedException {
-		Thread.sleep(1200);
+		Thread.sleep(1600);
 		if (getElementList(viewDot, "read Message").size() > 0) {
 			ExtentTestManager.setInfoMessageInReport("Dot is present");
 		} else {

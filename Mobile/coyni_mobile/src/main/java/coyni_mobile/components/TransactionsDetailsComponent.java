@@ -34,7 +34,7 @@ public class TransactionsDetailsComponent extends MobileFunctions {
 	private By lblBankName = MobileBy.xpath("//*[@text='Bank Name']/following-sibling::*[1]");
 	private By lblBankAccountNumber = MobileBy.xpath("//*[contains(@text,'Account Number')]/following-sibling::*");
 	private By btnCancel = MobileBy.xpath("(//*[@name='Cancel Transaction'])[1]");
-	private By btnBack = MobileBy.AccessibilityId("Back");
+	private By btnBack = MobileBy.id("com.coyni.mapp:id/icback");
 
 	// withdraw Instant
 

@@ -12,7 +12,7 @@ public class LandingPage extends MobileFunctions {
 	private By btnSignUp = MobileBy.AccessibilityId("Sign Up");
 	private By imgCoyni = MobileBy.AccessibilityId("coyni Logo");
 	private By descCoyni = MobileBy.AccessibilityId("coyni sub heading");
-	private By btnLogin = MobileBy.AccessibilityId("Log in");
+	private By btnLogin = MobileBy.AccessibilityId("Log In");
 
 	public void verifyCoyniView() {
 		new CommonFunctions().elementView(imgCoyni, "Coyni");

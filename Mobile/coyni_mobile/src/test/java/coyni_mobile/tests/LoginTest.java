@@ -184,7 +184,6 @@ public class LoginTest {
 				String[] pwdErrMsg = loginData.get("pwdErrorMsg").split(",");
 				new CommonFunctions().validateFormErrorMessage(pwdErrMsg[i], "Password");
 			}
-
 			for (int i = 0; i < 2; i++) {
 				loginPage.fillEmail(email[i]);
 				loginPage.fillPassword(pwd[i]);
@@ -436,6 +435,8 @@ public class LoginTest {
 					.verifyCreateNewPasswordHeading(data.get("createPwdHeading"));
 			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()
 					.fillConfirmPassword(data.get("password"));
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickNewPassIconEye();
+			loginPage.phoneAndEmailVerificationComponent().createPasswordComponent().clickConfirmPassIconEye();
 			for (int i = 0; i < 6; i++) {
 				String[] fieldPassword = data.get("fieldPassword").split(",");
 				loginPage.phoneAndEmailVerificationComponent().createPasswordComponent()

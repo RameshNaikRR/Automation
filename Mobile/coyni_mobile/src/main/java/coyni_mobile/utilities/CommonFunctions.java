@@ -267,8 +267,9 @@ public class CommonFunctions {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.MINUS));
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.PLUS));
 //		ExtentTestManager.setPassMessageInReport(mobileFunctions.getText(ele));
-		String actualtext = mobileFunctions.getText(ele).replace("First Name", "").replace("Last Name", "").replace("Name on Card", "").replace("Card Number", "")
-				.replace("Expiry Date", "").replace("CVV/CVC", "").replace("0.00", "").replace(")", "").replace("-", "");
+		String actualtext = mobileFunctions.getText(ele).replace("First Name", "").replace("Last Name", "")
+				.replace("Name on Card", "").replace("Card Number", "").replace("Expiry Date", "")
+				.replace("CVV/CVC", "").replace("0.00", "").replace(")", "").replace("-", "");
 		if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name")) {
 			ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Special Charcters");
 		} else {
@@ -287,7 +288,8 @@ public class CommonFunctions {
 				ExtentTestManager.setPassMessageInReport(key + " text entered in element " + eleName);
 				String actualtext = mobileFunctions.getText(ele);// BUTTON_
 				// Thread.sleep(2000);
-				if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name") || actualtext.equals("Name on Card")) {
+				if (actualtext.length() == 0 || actualtext.equals("First Name") || actualtext.equals("Last Name")
+						|| actualtext.equals("Name on Card")) {
 					ExtentTestManager.setPassMessageInReport(eleName + " is not accepting Numbers");
 				} else {
 					ExtentTestManager.setFailMessageInReport(eleName + " is accepting Numbers");
@@ -497,5 +499,20 @@ public class CommonFunctions {
 	public void clickBack() {
 		((AndroidDriver) DriverFactory.getDriver()).pressKey(new KeyEvent(AndroidKey.BACK));
 		System.out.println("clicked on Back");
+	}
+
+	public void validateDynamicTextMessage(String eleName) {
+		By errorMsgs = MobileBy.xpath(
+				"//*[contains(@resource-id,'tvPasswordInfo')]|//*[contains(@resource-id,'passwordInfoTV')]|(//*[contains(@resource-id,'Error')])[2]|//*[contains(@resource-id,'Error')]");
+		if ((mobileFunctions.getText(errorMsgs).contains("The minimum is ")
+				&& mobileFunctions.getText(errorMsgs).contains(" CYN"))
+				|| ((mobileFunctions.getText(errorMsgs).contains("Minimum Amount is ")
+						&& mobileFunctions.getText(errorMsgs).contains(" CYN")))) {
+			ExtentTestManager
+					.setPassMessageInReport(mobileFunctions.getText(errorMsgs) + " is displayed for " + eleName);
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport(mobileFunctions.getText(errorMsgs) + " is not displayed for " + eleName);
+		}
 	}
 }

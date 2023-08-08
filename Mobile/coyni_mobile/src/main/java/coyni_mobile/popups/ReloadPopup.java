@@ -27,13 +27,15 @@ public class ReloadPopup extends MobileFunctions {
 	private By txtCVV = MobileBy.id("com.coyni.mapp:id/etCVV");
 	private By btnOk = MobileBy.xpath("//*[@text='OK']");
 	private By lblWalletFees = MobileBy.id("com.coyni.mapp:id/headingTV");
+	private By lblReloadErrorMsg = MobileBy.id("com.coyni.mapp:id/tvError");
 
 //	You Will Receive Popup details or Order preview details
 
 	private By lblYouWillReceive = MobileBy.xpath("//*[@text='You Will Receive']|//*[contains(@text,'Gift Card')]");
 	private By lblamount = MobileBy
 			.xpath("//*[contains(@resource-id,'setAmountET')]|//*[contains(@resource-id,'tvGet')]");
-	private By lblPurchaseAmount = MobileBy.xpath("//*[@text='Purchase Amount']/following-sibling::*|//*[@text='Withdraw Amount']/following-sibling::*");
+	private By lblPurchaseAmount = MobileBy.xpath(
+			"//*[@text='Purchase Amount']/following-sibling::*|//*[@text='Withdraw Amount']/following-sibling::*");
 	private By lblTotal = MobileBy.xpath(
 			"//*[@text='Total']/following-sibling::*|//*[contains(@resource-id,'tvTotal')]|//*[contains(@resource-id,'total_amount_usd')]");
 	private By lblPaymentMethod = MobileBy.xpath(
@@ -49,6 +51,13 @@ public class ReloadPopup extends MobileFunctions {
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 30);
 	DecimalFormat df = new DecimalFormat("#.##");
 
+//	String[] transAmount = getText(lblPurchaseAmount).split(" ");
+//	String[] ProcessingFee = getText(lblProcessingFee).split(" ");
+//	Double total = Double.parseDouble(transAmount[0]) + Double.parseDouble(ProcessingFee[0]);
+//	DecimalFormat df = new DecimalFormat("#.##");
+
+//	System.out.println(feees);
+//	return feees;
 	public void verifyInsuffHeading(String expHeading) {
 		new CommonFunctions().verifyLabelText(lblInsuffHeading, "Insufficient Balance Heading", expHeading);
 		new CommonFunctions().elementView(lblInsuffDescription, "Insufficient Description");
@@ -123,7 +132,7 @@ public class ReloadPopup extends MobileFunctions {
 		new CommonFunctions().elementView(lblWalletFees, "Wallet Fees");
 	}
 
-	public double verifyResetAmount() {
+	public double verifyReloadAmount() {
 		double amt = Double.parseDouble(getText(txtAmount));
 		return amt;
 	}
@@ -138,6 +147,16 @@ public class ReloadPopup extends MobileFunctions {
 	public double verifyProcessingFee() {
 		double pocessingFee = Double.parseDouble(getText(lblProcessingFee).replace(" USD", "").replace(" CYN", ""));
 		return pocessingFee;
+	}
+
+	public void validateReloadTransactionErrorMessage(String amt) {
+		if (getText(lblReloadErrorMsg)
+				.equals("Minimum amount of " + amt + ".00 CYN is required to complete transaction.")) {
+			ExtentTestManager.setPassMessageInReport(getText(lblReloadErrorMsg) + "is displayed for Set Amount field");
+		} else {
+			ExtentTestManager
+					.setFailMessageInReport(getText(lblReloadErrorMsg) + "is not displayed for Set Amount field");
+		}
 	}
 
 	public void validateWithoutProcessingFee(String amount) {
@@ -173,9 +192,17 @@ public class ReloadPopup extends MobileFunctions {
 		} else {
 			ExtentTestManager.setFailMessageInReport("Transaction amount and Purchase amount are not same");
 		}
-		if (!getText(lblProcessingFeePercen).contains(getText(lblProcessingFee).replace(" CYN", ""))) {
+		if (!getText(lblProcessingFeePercen)
+				.contains(getText(lblProcessingFee).replace(" USD", "").replace(" CYN", ""))) {
 			String fee = getText(lblProcessingFeePercen).replace("% processing fee for this transaction.", "");
 			System.out.println("fee" + fee);
+
+//if() {
+//	
+//}else {
+//	
+//}
+
 			String[] fePer = fee.split("\\+");
 			System.out.println("fePer" + fePer);
 			double percentage = Double.parseDouble(fePer[1]);
@@ -183,13 +210,17 @@ public class ReloadPopup extends MobileFunctions {
 			double feePercentage = (amt / 100) * percentage;
 			System.out.println("feePercentage" + feePercentage);
 			double feeDollars = Double.parseDouble(fePer[0].replace("$", ""));
+			double testFee = Double.parseDouble(df.format(feeDollars + feePercentage));
+			double testtotal = Double.parseDouble(df.format(feeDollars + feePercentage + amt));
+			System.out.println("testFee" + testFee);
+			System.out.println("testtotal" + testtotal);
 			System.out.println("feeDollars" + feeDollars);
-			if (feeDollars + feePercentage == pocessingFee) {
+			if (testFee == pocessingFee) {
 				ExtentTestManager.setPassMessageInReport("Processing fee calculated as per Condition");
 			} else {
 				ExtentTestManager.setFailMessageInReport("Processing fee not calculated as per Condition");
 			}
-			if (feeDollars + feePercentage + amt == total) {
+			if (testtotal == total) {
 				ExtentTestManager
 						.setPassMessageInReport("The Total amount is addition of Purchase amount and Processing Fee");
 			} else {
