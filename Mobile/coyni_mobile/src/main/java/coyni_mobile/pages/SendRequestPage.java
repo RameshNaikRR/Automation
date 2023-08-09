@@ -250,10 +250,11 @@ public class SendRequestPage extends MobileFunctions {
 	}
 
 	public void fillAmount(String amount) {
+		click(txtAmount, "amount");
 		enterText(txtAmount, amount, "amount");
 	}
 
-	public void clickAmount(String amount) {
+	public void clickAmount() {
 		click(txtAmount, "amount");
 	}
 

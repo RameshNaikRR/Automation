@@ -489,7 +489,10 @@ public class CommonFunctions {
 		action.longPress(
 				LongPressOptions.longPressOptions().withElement(ElementOption.element(search)).withDuration(duration))
 				.release().perform();
-		action.tap(PointOption.point(120, 350)).perform();
+		String copiedData = mobileFunctions.getCopiedData();
+		mobileFunctions.enterText(ele, copiedData, "Search");
+//		action.tap(PointOption.point(120, 350)).perform();
+//		mobileFunctions.getCopiedData();
 	}
 
 	public String getTextBoxValue(By ele) {

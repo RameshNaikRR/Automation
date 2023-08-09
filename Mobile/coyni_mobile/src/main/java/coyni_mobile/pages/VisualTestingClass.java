@@ -14,7 +14,7 @@ import io.appium.java_client.imagecomparison.SimilarityMatchingResult;
 
 public class VisualTestingClass extends MobileFunctions {
 
-	private final static String Validation_path = "\\Users\\ideyaLabs\\Desktop\\images";
+	private final static String Validation_path = "\\Users\\ideyaLabs\\Desktop\\visualTesingImages";
 	private final static String login_Screen = "login";
 	private final static String pin = "pinn";
 	private final static String BASELINE = "BASELINE_";

@@ -1390,6 +1390,7 @@ public class CustomerProfileTest {
 			customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 			int numOfBank = customerProfilePage.paymentMethodsPage().verifyNumOfBanks();
 			for (int i = 1; i <= numOfBank; i++) {
+				Thread.sleep(2000);
 				customerProfilePage.paymentMethodsPage().clickBankAccount();
 				customerProfilePage.paymentMethodsPage().editCardComponent().verifyRemoveBankAccount();
 				customerProfilePage.paymentMethodsPage().editCardComponent().clickRemoveAccount();

@@ -490,6 +490,7 @@ public class DashBoardTest {
 						dashboardPage.sendRequestPage().fillAmount(Double.toString(limit + 0.1));
 						new CommonFunctions().validateFormErrorMessage(data.get("amountErrMsg"), "Amount Field");
 					} else if (i == 2) {
+						dashboardPage.sendRequestPage().fillAmount("4");
 						dashboardPage.sendRequestPage().fillAmount("0.1");
 						new CommonFunctions().validateDynamicTextMessage("Amount field");
 					} else {
