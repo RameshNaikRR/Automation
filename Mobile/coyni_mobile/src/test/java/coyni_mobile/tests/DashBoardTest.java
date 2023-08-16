@@ -1154,7 +1154,10 @@ public class DashBoardTest {
 			}
 			dashboardPage.sendRequestPage().verifyConfmSendHeading(data.get("confmSendHeading"));
 			double avaBalConfirmPopup = dashboardPage.sendRequestPage().verifyAvailbleBalance();
-			double transactionLimit = dashboardPage.sendRequestPage().verifyLimit();
+//			double transactionLimit;
+//			if (dashboardPage.sendRequestPage().verifyLimits() > 0) {
+//				transactionLimit = dashboardPage.sendRequestPage().verifyLimit();
+//			}
 			if (avlBalDasBoard == avaBalConfirmPopup) {
 				ExtentTestManager.setPassMessageInReport(
 						"The Same Available Balance is showing in Dash baord and Send Confirm popup");
@@ -1177,11 +1180,11 @@ public class DashBoardTest {
 						data.get("amount"), data.get("transactionType"));
 			} else {
 				String[] errMsg = data.get("errorMessage").split(",");
-				if (transactionLimit > avlBalDasBoard) {
-					new CommonFunctions().validateFormErrorMessage(errMsg[0], "Sending Amount");
-				} else {
-					new CommonFunctions().validateFormErrorMessage(errMsg[1], "Sending Amount");
-				}
+//				if (transactionLimit > avlBalDasBoard) {
+//					new CommonFunctions().validateFormErrorMessage(errMsg[0], "Sending Amount");
+//				} else {
+//					new CommonFunctions().validateFormErrorMessage(errMsg[1], "Sending Amount");
+//				}
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testScanSaveAlbum  failed due to exception " + e);

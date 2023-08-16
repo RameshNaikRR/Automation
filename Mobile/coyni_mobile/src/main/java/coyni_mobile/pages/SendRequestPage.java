@@ -74,6 +74,10 @@ public class SendRequestPage extends MobileFunctions {
 
 	WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 20);
 
+	public int verifyLimits() {
+		return getElementList(lblWeeklyLimit, "Weekly Limit").size();
+	}
+
 	public double verifyLimit() {
 		new CommonFunctions().elementView(lblWeeklyLimit, "Weekly Limit");
 		double weeklyLimit = Double

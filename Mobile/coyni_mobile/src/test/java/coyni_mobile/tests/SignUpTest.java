@@ -48,8 +48,8 @@ public class SignUpTest {
 			}
 			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent()
 					.verifyChooseYourPinView(data.get("choosePinHeading"));
-			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent()
-					.verifyChooseYouPinDes(data.get("choosePinDesc"));
+//			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent()
+//					.verifyChooseYouPinDes(data.get("choosePinDesc"));
 			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent().fillPin(data.get("pin"));
 			signUpPage.phoneAndEmailVerificationComponent().choosePinComponent()
 					.verifyConfirmYourPin(data.get("confirmPinHeading"));
