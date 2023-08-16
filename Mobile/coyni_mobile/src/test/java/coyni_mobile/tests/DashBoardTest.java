@@ -401,35 +401,38 @@ public class DashBoardTest {
 			dashboardPage.sendRequestPage().fillSearchBx(data.get("name"));
 			dashboardPage.sendRequestPage().selectUser();
 			dashboardPage.sendRequestPage().verifySendHeading(data.get("sendRequestHeading"));
-			dashboardPage.sendRequestPage().fillAmount(Double.toString(avlBalDasBoard + 15));
-			dashboardPage.sendRequestPage().clickSend();
-			dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
-			dashboardPage.sendRequestPage().reloadPopup().clickNewAmount();
-			dashboardPage.sendRequestPage().clickSend();
-			dashboardPage.sendRequestPage().reloadPopup().clickReload();
-			if (data.get("withoutPaymentMethod").equalsIgnoreCase("yes")) {
-				dashboardPage.sendRequestPage().reloadPopup().verifyAddCardReloadHeading(data.get("addCardReloadHead"));
-				CustomerProfileTest customerProfileTest = new CustomerProfileTest();
-				customerProfileTest.testAddCard(strParams);
+			double limit = dashboardPage.sendRequestPage().verifyLimit();
+			if (limit > avlBalDasBoard) {
+				dashboardPage.sendRequestPage().fillAmount(Double.toString(avlBalDasBoard + 15));
 				dashboardPage.sendRequestPage().clickSend();
 				dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
+				dashboardPage.sendRequestPage().reloadPopup().clickNewAmount();
+				dashboardPage.sendRequestPage().clickSend();
 				dashboardPage.sendRequestPage().reloadPopup().clickReload();
-			}
-			dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
-			if (!(dashboardPage.withdrawTokenPage().reloadPopup().verifyProcessingFee() == 0)) {
-				dashboardPage.withdrawTokenPage().reloadPopup().clickProcessingFee();
-				dashboardPage.withdrawTokenPage().reloadPopup().validateProcessingFees("15");
-			} else {
-				dashboardPage.withdrawTokenPage().reloadPopup().validateWithoutProcessingFee("15");
-			}
-			dashboardPage.sendRequestPage().reloadPopup().clickLoad();
-			dashboardPage.sendRequestPage().reloadPopup().fillCVV(data.get("cvv"));
-			dashboardPage.sendRequestPage().reloadPopup().clickOk();
-			dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
-			dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
-			dashboardPage.sendRequestPage().verifyConfmSendHeading(data.get("confmSendHeading"));
-			double transAmt = dashboardPage.sendRequestPage().verifySendCnfmAmount();
-			double afterLoadingAvlBal = dashboardPage.sendRequestPage().verifyAvailbleBalance();
+				if (data.get("withoutPaymentMethod").equalsIgnoreCase("yes")) {
+					dashboardPage.sendRequestPage().reloadPopup()
+							.verifyAddCardReloadHeading(data.get("addCardReloadHead"));
+					CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+					customerProfileTest.testAddCard(strParams);
+					dashboardPage.sendRequestPage().clickSend();
+					dashboardPage.sendRequestPage().reloadPopup().verifyInsuffHeading(data.get("errPopupHeading"));
+					dashboardPage.sendRequestPage().reloadPopup().clickReload();
+				}
+				dashboardPage.sendRequestPage().reloadPopup().verifyReloadHeading(data.get("reloadAmtHeading"));
+				if (!(dashboardPage.withdrawTokenPage().reloadPopup().verifyProcessingFee() == 0)) {
+					dashboardPage.withdrawTokenPage().reloadPopup().clickProcessingFee();
+					dashboardPage.withdrawTokenPage().reloadPopup().validateProcessingFees("15");
+				} else {
+					dashboardPage.withdrawTokenPage().reloadPopup().validateWithoutProcessingFee("15");
+				}
+				dashboardPage.sendRequestPage().reloadPopup().clickLoad();
+				dashboardPage.sendRequestPage().reloadPopup().fillCVV(data.get("cvv"));
+				dashboardPage.sendRequestPage().reloadPopup().clickOk();
+				dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
+				dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
+				dashboardPage.sendRequestPage().verifyConfmSendHeading(data.get("confmSendHeading"));
+				double transAmt = dashboardPage.sendRequestPage().verifySendCnfmAmount();
+				double afterLoadingAvlBal = dashboardPage.sendRequestPage().verifyAvailbleBalance();
 //			if (avlBalDasBoard + 2 == afterLoadingAvlBal) {
 //				ExtentTestManager.setPassMessageInReport(
 //						"The New Available Balance is showing accurately after loading the CYN'S");
@@ -437,29 +440,33 @@ public class DashBoardTest {
 //				ExtentTestManager.setFailMessageInReport(
 //						"The New Available Balance is not showing accurately after loading the CYN'S");
 //			}
-			if (transAmt == afterLoadingAvlBal) {
-				ExtentTestManager.setPassMessageInReport("Expected Send Amount Reloaded accurately");
+				if (transAmt == afterLoadingAvlBal) {
+					ExtentTestManager.setPassMessageInReport("Expected Send Amount Reloaded accurately");
+				} else {
+					ExtentTestManager.setFailMessageInReport("Expected Send Amount not Reloaded accurately");
+				}
+				dashboardPage.sendRequestPage().clickConfirm();
+				dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
+				dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
+				dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
+						.verifySendRequestPurchase(data.get("successHeading"));
+				dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
+						.verifyAmount(Double.toString(avlBalDasBoard + 15));
+				dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().verifySendRequestDesc();
+				dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().clickViewTransaction();
+				dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
+				dashboardPage.transactionsDetailsComponent().sentTransactionDetails(data.get("name"),
+						Double.toString(avlBalDasBoard + 15), data.get("transactionType"));
+				if (data.get("withoutPaymentMethod").equalsIgnoreCase("")) {
+					dashboardPage.transactionsDetailsComponent().clickBack();
+					dashboardPage.clickProfile();
+					customerProfilePage.clickPaymentMethods();
+					CustomerProfileTest customerProfileTest = new CustomerProfileTest();
+					customerProfileTest.testDeleteDebitCards(strParams);
+				}
 			} else {
-				ExtentTestManager.setFailMessageInReport("Expected Send Amount not Reloaded accurately");
-			}
-			dashboardPage.sendRequestPage().clickConfirm();
-			dashboardPage.sendRequestPage().choosePinComponent().verifyEnterYourPinheading(data.get("pinHeading"));
-			dashboardPage.sendRequestPage().choosePinComponent().fillPin(data.get("pin"));
-			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
-					.verifySendRequestPurchase(data.get("successHeading"));
-			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent()
-					.verifyAmount(Double.toString(avlBalDasBoard + 15));
-			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().verifySendRequestDesc();
-			dashboardPage.sendRequestPage().choosePinComponent().successFailureComponent().clickViewTransaction();
-			dashboardPage.transactionsDetailsComponent().verifyHeading(data.get("transDtlsHeading"));
-			dashboardPage.transactionsDetailsComponent().sentTransactionDetails(data.get("name"),
-					Double.toString(avlBalDasBoard + 15), data.get("transactionType"));
-			if (data.get("withoutPaymentMethod").equalsIgnoreCase("")) {
-				dashboardPage.transactionsDetailsComponent().clickBack();
-				dashboardPage.clickProfile();
-				customerProfilePage.clickPaymentMethods();
-				CustomerProfileTest customerProfileTest = new CustomerProfileTest();
-				customerProfileTest.testDeleteDebitCards(strParams);
+				ExtentTestManager.setFailMessageInReport(
+						"Unabel to Perform Reload Tokens because Available balance is greater than Weekly limit");
 			}
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testSendWithInsufficientFunds  failed due to exception " + e);
@@ -800,7 +807,6 @@ public class DashBoardTest {
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
 		}
-
 	}
 
 	public void testBuyTokenProcedure(String strParams) {
@@ -924,13 +930,13 @@ public class DashBoardTest {
 					fieldAmount[1], fieldAmount[2]);
 			String[] errMessage = data.get("errMessage").split(",,");
 			for (int i = 0; i <= 3; i++) {
-				if (transactionLimit < avlBalDasBoard) {
+				if (i == 1) {
+					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(0.1));
+					new CommonFunctions().validateDynamicTextMessage("amount field");
+				} else if (transactionLimit < avlBalDasBoard) {
 					System.out.println(i);
 					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(transactionLimit + 0.1));
 					new CommonFunctions().validateFormErrorMessage(errMessage[i], "amount field");
-				} else if (i == 1) {
-					dashboardPage.withdrawTokenPage().fillAmount(Double.toString(0.1));
-					new CommonFunctions().validateDynamicTextMessage("amount field");
 				} else if (i > 1 && transactionLimit > avlBalDasBoard + 0.1) {
 					if (i == 2) {
 						dashboardPage.withdrawTokenPage().fillAmount(Double.toString(avlBalDasBoard));
@@ -974,7 +980,7 @@ public class DashBoardTest {
 //			dashboardPage.buyTokenComponent().choosePinComponent().successFailureComponent().clickViewTransaction();
 //			dashboardPage.withdrawTokenPage().choosePinComponent().successFailureComponent().clickDone();
 		} catch (Exception e) {
-			ExtentTestManager.setFailMessageInReport("testBuyTokenWithBankAccount  failed due to exception " + e);
+			ExtentTestManager.setFailMessageInReport("testWithdrawTokenProcedure  failed due to exception " + e);
 		}
 	}
 
@@ -1199,7 +1205,7 @@ public class DashBoardTest {
 				dashboardPage.myQRCodePage().getRequestedAmount(data.get("amount"));
 			}
 			dashboardPage.myQRCodePage().clickSaveAlbum();
-			dashboardPage.scanPage().clickAllow();
+//			dashboardPage.scanPage().clickAllow();
 			dashboardPage.myQRCodePage().toastComponent().verifyToastMsg(data.get("toastMsg"));
 		} catch (Exception e) {
 			ExtentTestManager.setFailMessageInReport("testReceivePaymentView  failed due to exception " + e);

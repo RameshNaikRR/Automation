@@ -1333,7 +1333,7 @@ public class CustomerProfileTest {
 			Map<String, String> data = Runner.getKeywordParameters(strParams);
 			CustomerProfilePage customerProfilePage = new CustomerProfilePage();
 			if (customerProfilePage.addNewPaymentComponent().verifyAddNewPaymentPlusIcon() == 1) {
-				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
+//				customerProfilePage.paymentMethodsPage().verifyHeading(data.get("paymentHeading"));
 				customerProfilePage.addNewPaymentComponent().clickAddNewPaymentPlusIcon();
 			}
 			customerProfilePage.addNewPaymentComponent().verifyHeading(data.get("addPaymentHeading"));

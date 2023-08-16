@@ -22,8 +22,6 @@ public class LoginTest {
 
 	@BeforeTest
 	public void init() {
-		System.out.println("Hello World");
-		DriverFactory.getDriver().rotate(ScreenOrientation.PORTRAIT);
 		loginPage = new LoginPage();
 		landingPage = new LandingPage();
 		visualTestingClass = new VisualTestingClass();
